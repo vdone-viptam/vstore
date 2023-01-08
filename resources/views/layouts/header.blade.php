@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center bg-[#FFF] px-5 xl:px-16 py-4">
         <a href="../../">
             <div class="w-[162px]">
-                <img src="../../images/Logo.png" alt="">
+                <img src="{{asset('asset/images/Logo.png')}}" alt="">
             </div>
         </a>
         <div class="flex justify-start items-center gap-10">
@@ -41,26 +41,28 @@
 
     <div class="md:flex justify-between items-center px-5 xl:px-16 py-3 bg-geekBlue hidden">
         <ul class="nav-menu flex justify-start items-center max-w-[600px] xl:max-w-full flex-wrap xl:flex-nowrap  xl:gap-4">
-            <li><a href="../../" class="flex justify-start items-center gap-2">Tổng quan</a></li>
-            <li class="active"><a href="../san-pham/" class="flex justify-start items-center gap-2">Sản phẩm
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
-                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </a>
-                <ul class="sub-nav">
-                    <li><a href="./danh-sach-thuong-hieu.html">Danh sách thương hiệu</a></li>
-                    <li><a href="./danh-sach-san-pham.html">Danh sách sản phẩm</a></li>
-                    <li><a href="./danh-muc.html">Danh mục</a></li>
-                </ul>
-            </li>
-            <li><a href="../kho-hang/" class="flex justify-start items-center gap-2">Kho hàng</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Bán hàng</a></li>
-            <li><a href="../don-hang.html" class="flex justify-start items-center gap-2">Đơn hàng</a></li>
-            <li><a href="../doanh-nghiep.html" class="flex justify-start items-center gap-2">Doanh nghiệp</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Khuyến mãi</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Cài đặt</a></li>
+            <li><a href="{{route('screens.admin.dashboard.index')}}" class="flex justify-start items-center gap-2">Tổng
+                    quan</a></li>
+            <li><a href="{{route('screens.admin.category.index')}}" class="flex justify-start items-center gap-2">Danh mục</a></li>
+            {{--            <li class="active"><a href="../san-pham/" class="flex justify-start items-center gap-2">Sản phẩm--}}
+            {{--                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+            {{--                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"--}}
+            {{--                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>--}}
+            {{--                    </svg>--}}
+            {{--                </a>--}}
+            {{--                <ul class="sub-nav">--}}
+            {{--                    <li><a href="./danh-sach-thuong-hieu.html">Danh sách thương hiệu</a></li>--}}
+            {{--                    <li><a href="./danh-sach-san-pham.html">Danh sách sản phẩm</a></li>--}}
+            {{--                    <li><a href="./danh-muc.html">Danh mục</a></li>--}}
+            {{--                </ul>--}}
+            {{--            </li>--}}
+            {{--            <li><a href="../kho-hang/" class="flex justify-start items-center gap-2">Kho hàng</a></li>--}}
+            {{--            <li><a href="#" class="flex justify-start items-center gap-2">Bán hàng</a></li>--}}
+            {{--            <li><a href="../don-hang.html" class="flex justify-start items-center gap-2">Đơn hàng</a></li>--}}
+            {{--            <li><a href="../doanh-nghiep.html" class="flex justify-start items-center gap-2">Doanh nghiệp</a></li>--}}
+            {{--            <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo</a></li>--}}
+            {{--            <li><a href="#" class="flex justify-start items-center gap-2">Khuyến mãi</a></li>--}}
+            {{--            <li><a href="#" class="flex justify-start items-center gap-2">Cài đặt</a></li>--}}
         </ul>
         <ul class="flex justify-start items-center gap-3">
             <li title="Ngôn ngữ"><a href="#" class="hover:opacity-70 transition-all duration-500">
