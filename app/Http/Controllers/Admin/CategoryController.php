@@ -20,9 +20,23 @@ class CategoryController extends Controller
         $this->v = [];
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $this->v['categories'] = Category::select('id', 'name', 'img')->where('status', 1)->paginate(10);
+        $limit = $request->limit ?? 10;
+        $this->v['categories'] = Category::select('id', 'name', 'img')->where('status', 1);
+        if (isset($request->id)) {
+            $this->v['categories'] = $this->v['categories']->where('id', $request->id);
+        }
+        if (isset($request->name)) {
+            $this->v['categories'] = $this->v['categories']->where('name', 'like', '%' . $request->name . '%');
+        }
+        $this->v['categories'] = $this->v['categories']->paginate(25);
+
+        if ($request->page > $this->v['categories']->lastPage()) {
+            abort(404);
+        }
+        $this->v['params'] = $request->all();
+        $this->v['sumRecordCategory'] = Category::where('status', 1)->count();
         return view('screens.admin.category.index', $this->v);
     }
 
