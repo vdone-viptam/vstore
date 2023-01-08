@@ -24,6 +24,8 @@ return new class extends Migration {
             $table->string('tax_code')->nullable();
             $table->string('address')->nullable();
             $table->string('id_vdone_diff')->nullable();
+            $table->dateTime('confirm_date')->comment('Ngày tài khoản được duyệt');
+            $table->string('account_code')->comment('Mã tài khoản');
             $table->rememberToken();
             $table->timestamps();
         });

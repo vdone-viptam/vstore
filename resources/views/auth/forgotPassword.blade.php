@@ -55,6 +55,13 @@
 
         <form action="#" method="post" class="w-full" id="form-log">
             @csrf
+            @csrf
+            @if(\Illuminate\Support\Facades\Session::has('success'))
+                <h4 style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</h4>
+            @endif
+            @if(\Illuminate\Support\Facades\Session::has('error'))
+                <h4 style="color: red">{{\Illuminate\Support\Facades\Session::get('error')}}</h4>
+            @endif
             <div class="flex flex-col justify-center items-center gap-6 w-full py-10">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Email </span>

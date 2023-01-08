@@ -71,31 +71,39 @@ class LoginController extends Controller
         return 'Đăng ký thành công';
     }
 
-    public function postLogin(Request $request){
+    public function postLogin(Request $request)
+    {
 
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
+        ],[
+            'email.required' => 'Email bắt buộc nhập',
+            'email.email' => 'Email không đúng định dạng',
+            'password.required' => 'Mật khẩu bắt buộc nhập'
         ]);
 //        return 1;
         $credentials = request(['email', 'password']);
-        if (Auth::attempt($credentials)){
+        if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password])) {
             return 'đăng nhập thành công';
-        }else if(Auth::attempt(['phone_number' => $request->email, 'password' => $request->password])){
-            return 'đăng nhập thành công';
-        }else{
-            return redirect()->route('login')->with('mes','Tài khoản hoặc mật khẩu không chính xác');
-        }
-        ;
+        } else {
+            return redirect()->route('login')->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
+        };
 
     }
-    public function getLogin(){
+
+    public function getLogin()
+    {
         return view('auth.login');
     }
-    public function formForgotPassword(){
+
+    public function formForgotPassword()
+    {
         return view('auth.forgotPassword');
     }
-    public function postForgotPassword(Request $request){
+
+    public function postForgotPassword(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'email' => 'required|exists:users,email|email',
         ], [
@@ -106,23 +114,35 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }
-        $user = User::where('email',$request->email)->first();
-        if ($user){
-            $passwordReset = PasswordReset::where('email',$request->email)->delete();
-            $token = Str::random(10);
-            DB::table('password_resets')->insert(['email'=>$request->email,'token'=>$token,'created_at'=>Carbon::now()]);
-            Mail::send('email.forgot', ['token'=>$token ], function ($message) use ($user) {
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $passwordReset = PasswordReset::where('email', $request->email)->delete();
+            $token = Str::random(32);
+            DB::table('password_resets')->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]);
+            Mail::send('email.forgot', ['token' => $token], function ($message) use ($user) {
                 $message->to($user->email);
-                $message->subject('Thông báo đổi mật khẩu' );
+                $message->subject('Thông báo đổi mật khẩu');
             });
-        }else{
-            return 1;
+
+            return redirect()->route('form_forgot_password')->with('success', 'Đường link đổi mật khẩu đã được gửi vào mail');
+        } else {
+            return redirect()->route('form_forgot_password')->with('error', 'Không tìm thầy tài khoản');
         }
     }
-    public function formResetForgot($token){
+
+    public function formResetForgot($token)
+    {
+        $passwordReset = PasswordReset::where('token', $token)->first();
+
+        if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
+            abort(404);
+        }
+
         return view('auth.formReset');
     }
-    public function postResetForgot(Request $request ,$token){
+
+    public function postResetForgot(Request $request, $token)
+    {
         $validator = Validator::make($request->all(), [
             'password' => 'required|min:6|max:30|confirmed',
             'password_confirmation' => 'required',
@@ -130,19 +150,20 @@ class LoginController extends Controller
             'password.required' => 'Email bắt buộc nhập',
             'password.min' => 'Qúa ít ký tự',
             'password.max' => 'Qúa nhiều ký tự',
-            'password.confirmed'=>'Mật khẩu không trùng khớp',
+            'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
         ]);
 //        password_confirmation
-        $passwordReset = PasswordReset::where('token',$token)->first();
-        if ($passwordReset){
-            $user = User::where('email',$passwordReset->email)->first();
+        $passwordReset = PasswordReset::where('token', $token)->first();
+        if ($passwordReset) {
+            $user = User::where('email', $passwordReset->email)->first();
             $user->password = Hash::make($request->password);
             $user->save();
             $passwordReset->delete();
-        }else{
-            return redirect()->route('login');
+        } else {
+            return redirect()->route('login')->with('error', 'Có lỗi xảy ra vui lòng thử lại sau');
         }
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Đổi mật khâu thành công');
+
     }
 }

@@ -18,12 +18,12 @@ Route::get('/', function () {
 });
 //Route::get()
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getLogin'])->name('login');
-Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'postLogin']);
+Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('postLogin');
 
 
 Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegister'])->name('register');
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
-Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'formForgotPassword']);
+Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'formForgotPassword'])->name('form_forgot_password');
 Route::post('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'postForgotPassword']);
 Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'formResetForgot'])->name('reset_password');
 Route::post('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'postResetForgot']);
@@ -39,6 +39,10 @@ Route::prefix('categories')->group(function () {
     Route::post('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('screens.admin.category.update');
     Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('screens.admin.category.destroy');
 
+});
+Route::prefix('users')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('screens.admin.user.index');
+    Route::get('/confirm/{id}', [\App\Http\Controllers\Admin\UserController::class, 'confirm'])->name('screens.admin.user.confirm');
 });
 Route::prefix('products')->group(function () {
     Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('screens.product.index');

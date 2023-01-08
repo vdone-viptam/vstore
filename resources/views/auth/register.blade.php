@@ -165,7 +165,7 @@
                 class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4"
         >Tiếp tục
         </button>
-        <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="../dang-nhap/"
+        <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login')}}"
                                                                          class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
     </div>
 </form>

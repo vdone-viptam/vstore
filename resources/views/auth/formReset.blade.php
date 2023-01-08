@@ -58,14 +58,14 @@
             <div class="flex flex-col justify-center items-center gap-6 w-full py-10">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mật khẩu mới </span>
-                    <input type="password" name="password" placeholder="Nhập email" class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    <input type="password" name="password" placeholder="Nhập mật khẩu mới" class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('password')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Xác nhận mật khẩu </span>
-                    <input type="password" name="password_confirmation" placeholder="Nhập email" class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    <input type="password" name="password_confirmation" placeholder="Xác nhận mật khẩu mới" class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('password_confirmation')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
