@@ -15,7 +15,7 @@ input[type=number] {
 }
 img{
     max-width: 100%;
-    height: 100%;
+    height: 100% !important;
     object-fit: cover;
 }
 .banner{
@@ -267,6 +267,125 @@ input[type="submit"].active{
     color: #2F54EB;
     transition: 0.5s all;
 }
+.user:hover > .sub-nav-user{
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.5s all;
+    z-index: 10;
+    visibility: visible;
+}
+.sub-nav-user{
+    padding: 10px 0;
+    position: absolute;
+    min-width: 200px;
+    transform:translateY(50px);
+    top: 44px;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #FFFFFF;
+    transition: 0.5s all;
+    border-radius: 2px;
+    box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+.sub-nav-user li{
+    padding: 5px 12px;
+    border-radius: 0;
+}
+
+.sub-nav-user li:hover{
+    background-color: #F5F5F5;
+    transition: 0.5s all;
+}
+.sub-nav-user li a{
+    color: rgba(0, 0, 0, 0.85) !important;
+    transition: 0.5s all;
+}
+.sub-nav-user li:hover a{
+    color: #2F54EB;
+    transition: 0.5s all;
+}
+
+.notify:hover > .sub-nav-notify{
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.5s all;
+    z-index: 10;
+    visibility: visible;
+}
+.sub-nav-notify{
+    padding: 10px 0;
+    position: absolute;
+    min-width: 300px;
+    transform:translateY(50px);
+    top: 50px;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #FFFFFF;
+    transition: 0.5s all;
+    border-radius: 2px;
+    box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+.sub-nav-notify li{
+    padding: 5px 12px;
+    border-radius: 0;
+}
+
+.sub-nav-notify li:hover{
+    background-color: #F5F5F5;
+    transition: 0.5s all;
+}
+.sub-nav-notify li a{
+    color: rgba(0, 0, 0, 0.85) !important;
+    transition: 0.5s all;
+}
+.sub-nav-notify li:hover a{
+    color: #2F54EB;
+    transition: 0.5s all;
+}
+
+.help:hover > .sub-nav-help{
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.5s all;
+    z-index: 10;
+    visibility: visible;
+}
+.sub-nav-help{
+    padding: 10px 0;
+    position: absolute;
+    min-width: 280px;
+    transform:translateY(50px);
+    top: 25px;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #FFFFFF;
+    transition: 0.5s all;
+    border-radius: 2px;
+    box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+.sub-nav-help li{
+    padding: 5px 12px;
+    border-radius: 0;
+}
+
+.sub-nav-help li:hover{
+    background-color: #F5F5F5;
+    transition: 0.5s all;
+}
+.sub-nav-help li a{
+    color: rgba(0, 0, 0, 0.85) !important;
+    transition: 0.5s all;
+}
+.sub-nav-help li:hover a{
+    color: #2F54EB;
+    transition: 0.5s all;
+}
 .select2-container{
     width: 150px!important;
     outline: none !important;
@@ -471,7 +590,26 @@ svg{
     height: 38px !important;
 
 }
-
+.tab-date li{
+    padding: 8px;
+}
+.tab-date li.active{
+    border-bottom: 2px solid #096DD9;
+}
+.tab-sub-user{
+    margin-left: 35px;
+}
+.tab-sub-user li{
+    padding: 3px 0;
+}
+.tab-sub-user li:hover a{
+    color: #096DD9;
+    transition: 0.5s all;
+}
+.tab-sub-user li.active{
+    color: #096DD9;
+    font-weight: 500;
+}
 @media only screen and (max-width: 560px) {
     .tab-register li{
         padding: 8px 36px;

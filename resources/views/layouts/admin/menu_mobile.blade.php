@@ -24,7 +24,7 @@
     </div>
     <div class="flex flex-col justify-start items-start gap-10 w-full">
         <ul class="nav-menu-mb flex flex-col justify-start items-start  gap-4 w-full">
-            <li><a href="../../" class="flex justify-start items-center gap-2 w-full">Tổng quan</a></li>
+            <li><a href="../../.." class="flex justify-start items-center gap-2 w-full">Tổng quan</a></li>
             <li class="active"><a href="../san-pham/" class="flex justify-between items-center gap-2 w-full">Sản phẩm
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"

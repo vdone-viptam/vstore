@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin.main')
 
 @section('content')
     <form action="" method="GET" id="form">
@@ -24,7 +24,7 @@
                 <input type="text" value="{{isset($params['name']) ? $params['name'] : ''}}"
                        name="name" id="name"
                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="Tên danh mục">
+                       placeholder="Tên nhà cung cấp / tên công ty">
                 <button type="button" id="btnSearch"
                         class="cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
                 >Lọc
@@ -81,6 +81,7 @@
                             <th>Địa chỉ</th>
                             <th>Ngày đăng ký</th>
                             <th>Ngày duyệt</th>
+                            <th>Quyền</th>
                             <th>
                                 Hành động
                             </th>
@@ -101,10 +102,19 @@
                                     <td>{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y h:i A')}}</td>
                                     <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y h:i A') : 'Chưa được duyệt'}}</td>
                                     <td>
+                                        @if($user->role_id == 2)
+                                            Nhà cung cấp
+                                        @else
+                                            Vstore
+                                        @endif
+                                    </td>
+                                    <td>
+
                                         @if($user->confirm_date)
                                             <span>Đã duyệt</span>
                                         @else
-                                            <a  href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt tài
+                                            <a href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt
+                                                tài
                                                 khoản</a>
                                         @endif
                                     </td>
@@ -112,7 +122,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="4">Không có dữ liệu phù hợp</td>
+                                <td colspan="12">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>

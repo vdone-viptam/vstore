@@ -26,6 +26,8 @@ return new class extends Migration {
             $table->string('id_vdone_diff')->nullable();
             $table->dateTime('confirm_date')->comment('Ngày tài khoản được duyệt');
             $table->string('account_code')->comment('Mã tài khoản');
+            $table->string('avatar')->nullable()->comment('Ảnh đại diện tài khoản');
+            $table->string('banner')->nullable()->comment('Đường dẫn ảnh banner của tài khoản');
             $table->rememberToken();
             $table->timestamps();
         });

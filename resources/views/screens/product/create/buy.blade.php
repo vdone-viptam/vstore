@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin.main')
 
 @section('content')
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
@@ -49,18 +49,18 @@
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-title font-medium">Hình ảnh giấy tờ liên quan <span
-                            class="text-secondary font-normal ml-2">Đề xuất: Tải lên ít nhất 3 hình ảnh để giúp người mua tìm hiểu thêm</span></span>
+                                class="text-secondary font-normal ml-2">Đề xuất: Tải lên ít nhất 3 hình ảnh để giúp người mua tìm hiểu thêm</span></span>
                     <div class="flex justify-start items-center gap-4 flex-wrap">
                         <div class="file-name flex justify-start items-start gap-4 flex-wrap md:justify-start">
 
                         </div>
                         <div
-                            class="cursor-pointer img-gt-info w-[102px] h-[102px] border-2 border-dashed bg-[#FAFAFA] border-btnGrey flex justify-center flex-col items-center rounded-sm gap-1">
+                                class="cursor-pointer img-gt-info w-[102px] h-[102px] border-2 border-dashed bg-[#FAFAFA] border-btnGrey flex justify-center flex-col items-center rounded-sm gap-1">
                             <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                    d="M7.46838 1.37598H6.53088C6.44755 1.37598 6.40588 1.41764 6.40588 1.50098V6.40723H1.75C1.66667 6.40723 1.625 6.44889 1.625 6.53223V7.46973C1.625 7.55306 1.66667 7.59473 1.75 7.59473H6.40588V12.501C6.40588 12.5843 6.44755 12.626 6.53088 12.626H7.46838C7.55172 12.626 7.59338 12.5843 7.59338 12.501V7.59473H12.25C12.3333 7.59473 12.375 7.55306 12.375 7.46973V6.53223C12.375 6.44889 12.3333 6.40723 12.25 6.40723H7.59338V1.50098C7.59338 1.41764 7.55172 1.37598 7.46838 1.37598Z"
-                                    fill="black" fill-opacity="0.85"/>
+                                        d="M7.46838 1.37598H6.53088C6.44755 1.37598 6.40588 1.41764 6.40588 1.50098V6.40723H1.75C1.66667 6.40723 1.625 6.44889 1.625 6.53223V7.46973C1.625 7.55306 1.66667 7.59473 1.75 7.59473H6.40588V12.501C6.40588 12.5843 6.44755 12.626 6.53088 12.626H7.46838C7.55172 12.626 7.59338 12.5843 7.59338 12.501V7.59473H12.25C12.3333 7.59473 12.375 7.55306 12.375 7.46973V6.53223C12.375 6.44889 12.3333 6.40723 12.25 6.40723H7.59338V1.50098C7.59338 1.41764 7.55172 1.37598 7.46838 1.37598Z"
+                                        fill="black" fill-opacity="0.85"/>
                             </svg>
                             <span class="text-sm text-secondary">Tải hình ảnh</span>
                             <span class="text-sm text-secondary" id="countImage">0/9</span>
@@ -70,15 +70,15 @@
             </div>
             <div class="flex justify-center flex-wrap md:flex-nowrap md:justify-end items-center gap-5 py-10">
                 <button
-                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
+                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
                     Hủy bỏ
                 </button>
                 <button
-                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
+                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
                     Lưu nháp
                 </button>
                 <button
-                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 bg-primary text-[#FFF]">
+                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 bg-primary text-[#FFF]">
                     Tiếp tục
                 </button>
             </div>

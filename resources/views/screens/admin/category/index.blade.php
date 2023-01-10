@@ -1,21 +1,20 @@
-@extends('layouts.main')
+@extends('layouts.admin.main')
 
 @section('content')
     <form action="" method="GET" id="form">
-    <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-        <span class="text-secondary">Danh mục sản phẩm</span>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                  stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <a href="#" class="text-blueMain font-medium">Danh sách danh mục sản phẩm</a>
-    </div>
-    <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
-        <ul class="tab-th flex justify-start items-start">
-            <li class="active"><a href="{{route('screens.admin.category.index')}}">Bộ lọc</a></li>
+        <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
+            <span class="text-secondary">Danh mục sản phẩm</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
+                      stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <a href="#" class="text-blueMain font-medium">Danh sách danh mục sản phẩm</a>
+        </div>
+        <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
+            <ul class="tab-th flex justify-start items-start">
+                <li class="active"><a href="{{route('screens.admin.category.index')}}">Bộ lọc</a></li>
 
-        </ul>
-
+            </ul>
 
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
@@ -139,7 +138,7 @@
             </div>
             <div></div>
 
-    </div>
+        </div>
     </form>
 @endsection
 

@@ -68,7 +68,7 @@
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 
-        <form action="{{route('postLogin')}}" method="post" class="w-full" id="form-log">
+        <form action="{{route('postLogin',['type' => 1])}}" method="post" class="w-full" id="form-log">
             @csrf
             @if(\Illuminate\Support\Facades\Session::has('success'))
                 <h4 style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</h4>
@@ -120,8 +120,6 @@
                 <input type="submit"
                        class=" btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100"
                        value="Đăng nhập">
-                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register')}}"
-                                                                                   class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>
             </div>
 
         </form>

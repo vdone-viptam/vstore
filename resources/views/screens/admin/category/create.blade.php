@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin.main')
 
 @section('content')
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
@@ -40,7 +40,7 @@
                             <option value="0" {{old('parent_id') == 0 ? 'selected' : ''}}>Danh mục không cha</option>
                             @foreach($categories as $category)
                                 <option
-                                    value="{{$category->id}}" {{old('parent_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                        value="{{$category->id}}" {{old('parent_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin.main')
 
 @section('content')
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
@@ -69,8 +69,8 @@
                                     @endforeach
                                 </select>
                                 <span>Thông tin thương hiệu trái phép chỉ được sử dụng cho mục đích thống kê và sẽ không được hiển thị cho khách hàng. Nếu bạn muốn tiết lộ thương hiệu này cho khách hàng, vui lòng đăng ký <a
-                                        href="#"
-                                        class="text-[#1D39C4] font-medium hover:opacity-70 transition-all duration-300">Ủy quyền thương hiệu</a></span>
+                                            href="#"
+                                            class="text-[#1D39C4] font-medium hover:opacity-70 transition-all duration-300">Ủy quyền thương hiệu</a></span>
                             </div>
                             <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span class="text-title font-medium">Xuất xứ <span class="text-secondary font-normal">(Tùy chọn)</span></span>
@@ -92,13 +92,13 @@
                         </div>
                         <div class="w-full pt-6 text-center">
                             <button type="button"
-                                class="show-b-more flex justify-center items-center w-full gap-2 text-secondary outline-none hover:opacity-70 transition-all duration-200">
+                                    class="show-b-more flex justify-center items-center w-full gap-2 text-secondary outline-none hover:opacity-70 transition-all duration-200">
                                 <span>Xem thêm</span>
                                 <svg width="15" height="9" viewBox="0 0 15 9" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M7.5 8.43115C7.70752 8.43115 7.91504 8.34814 8.05615 8.19043L14.481 1.60791C14.6221 1.4668 14.7051 1.28418 14.7051 1.07666C14.7051 0.64502 14.3813 0.312988 13.9497 0.312988C13.7422 0.312988 13.5513 0.395996 13.4102 0.528809L7.5 6.57178L1.58154 0.528809C1.44873 0.395996 1.25781 0.312988 1.04199 0.312988C0.610352 0.312988 0.286621 0.64502 0.286621 1.07666C0.286621 1.28418 0.369629 1.4668 0.510742 1.61621L6.93555 8.19043C7.09326 8.34814 7.28418 8.43115 7.5 8.43115Z"
-                                        fill="black" fill-opacity="0.45"/>
+                                            d="M7.5 8.43115C7.70752 8.43115 7.91504 8.34814 8.05615 8.19043L14.481 1.60791C14.6221 1.4668 14.7051 1.28418 14.7051 1.07666C14.7051 0.64502 14.3813 0.312988 13.9497 0.312988C13.7422 0.312988 13.5513 0.395996 13.4102 0.528809L7.5 6.57178L1.58154 0.528809C1.44873 0.395996 1.25781 0.312988 1.04199 0.312988C0.610352 0.312988 0.286621 0.64502 0.286621 1.07666C0.286621 1.28418 0.369629 1.4668 0.510742 1.61621L6.93555 8.19043C7.09326 8.34814 7.28418 8.43115 7.5 8.43115Z"
+                                            fill="black" fill-opacity="0.45"/>
                                 </svg>
                             </button>
                         </div>
@@ -116,15 +116,15 @@
                 </div>
                 <div class="flex justify-center flex-wrap md:flex-nowrap md:justify-end items-center gap-5 py-10">
                     <button
-                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
+                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
                         Hủy bỏ
                     </button>
                     <button
-                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
+                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
                         Lưu nháp
                     </button>
                     <button type="submit"
-                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 bg-primary text-[#FFF]">
+                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 bg-primary text-[#FFF]">
                         Tiếp tục
                     </button>
                 </div>

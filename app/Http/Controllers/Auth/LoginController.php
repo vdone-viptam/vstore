@@ -18,9 +18,29 @@ class LoginController extends Controller
 {
     //
 
-    public function getFormRegister()
+    public function getFormRegisterVstore()
     {
-        return view('auth.register');
+        return view('auth.Vstore.register_vstore');
+    }
+
+    public function getFormRegisterNCC()
+    {
+        return view('auth.NCC.register_ncc');
+    }
+
+    public function getFormLoginVstore()
+    {
+        return view('auth.Vstore.login_vstore');
+    }
+
+    public function getFormLoginNCC()
+    {
+        return view('auth.NCC.login_ncc');
+    }
+
+    public function getFormLoginAdmin()
+    {
+        return view('auth.admin.login');
     }
 
     public function postFormRegister(Request $request)
@@ -33,8 +53,6 @@ class LoginController extends Controller
             'address' => 'required',
             'phone_number' => 'required',
             'id_vdone' => 'required',
-            'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required'
         ], [
             'email.required' => 'Email bắt buộc nhập',
             'email.unique' => 'Email đã tồn tại',
@@ -45,10 +63,7 @@ class LoginController extends Controller
             'address' => 'Địa chỉ bắt buộc nhập',
             'phone_number' => 'Số điện thoại bất buộc nhập',
             'id_vdone' => 'ID người đại điện bắt buộc nhập',
-            'password.required' => 'Mật khẩu bắt buộc nhập',
-            'password.confirmed' => 'Xác nhận mật khẩu không chính xác',
-            'password.min' => 'Mật khẩu phải dài it nhất 8 kí tự',
-            'password_confirmation' => 'Xác nhận mật khẩu bắt buộc nhập'
+
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
@@ -56,16 +71,16 @@ class LoginController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
         $user->id_vdone = $request->id_vdone;
         $user->company_name = $request->company_name;
+        $user->password = Hash::make(rand(100000, 999999));
         $user->phone_number = $request->phone_number;
         $user->tax_code = $request->tax_code;
         if ($request->id_vdone_diff) {
             $user->id_vdone_diff = $request->id_vdone_diff;
         }
         $user->address = $request->address;
-
+        $user->role_id = $request->role_id;
         $user->save();
 
         return 'Đăng ký thành công';
@@ -75,19 +90,29 @@ class LoginController extends Controller
     {
 
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required'
-        ],[
+        ], [
             'email.required' => 'Email bắt buộc nhập',
-            'email.email' => 'Email không đúng định dạng',
             'password.required' => 'Mật khẩu bắt buộc nhập'
         ]);
 //        return 1;
         $credentials = request(['email', 'password']);
         if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password])) {
-            return 'đăng nhập thành công';
+            if ($request->type == Auth::user()->role_id) {
+                if (Auth::user()->role_id == 1) {
+                    return redirect()->route('screens.admin.dashboard.index');
+                }
+                if (Auth::user()->role_id == 2) {
+
+                    return redirect()->route('screens.manufacture.dashboard.index');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
+
+            }
         } else {
-            return redirect()->route('login')->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
+            return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
         };
 
     }
@@ -161,9 +186,16 @@ class LoginController extends Controller
             $user->save();
             $passwordReset->delete();
         } else {
-            return redirect()->route('login')->with('error', 'Có lỗi xảy ra vui lòng thử lại sau');
+            return redirect('login')->with('error', 'Có lỗi xảy ra vui lòng thử lại sau');
         }
-        return redirect()->route('login')->with('success', 'Đổi mật khâu thành công');
+        return redirect('login')->with('success', 'Đổi mật khâu thành công');
 
+    }
+
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect('login');
     }
 }
