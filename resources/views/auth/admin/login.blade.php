@@ -59,23 +59,32 @@
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl">
         <a href="../" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
             <div>
-                <img src="../../icons/back.png" alt="">
+                <img src="{{asset('asset/icons/back.png')}}" alt="">
             </div>
             <span class="text-title">Quay lại</span>
         </a>
         <div class="w-[162px]">
-            <img src="../../images/Logo.png" alt="">
+            <img src="{{asset('asset/images/Logo.png')}}" alt="">
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 
-        <form action="#" method="post" class="w-full" id="form-log">
-
+        <form action="{{route('postLogin',['type' => 1])}}" method="post" class="w-full" id="form-log">
+            @csrf
+            @if(\Illuminate\Support\Facades\Session::has('success'))
+                <h4 style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</h4>
+            @endif
+            @if(\Illuminate\Support\Facades\Session::has('error'))
+                <h4 style="color: red">{{\Illuminate\Support\Facades\Session::get('error')}}</h4>
+            @endif
             <div class="flex flex-col justify-center items-center gap-6 w-full py-10">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Email hoặc số điện thoại</span>
-                    <input type="text" name="email" id="email" placeholder="Nhập email hoặc số điện thoại"
+                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mã tài khoản</span>
+                    <input type="text" name="email" id="email" placeholder="Nhập mã tài khoản của bạn"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 </div>
+                @error('email')
+                <p style="color: red">{{$message}}</p>
+                @enderror
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mật khẩu</span>
                     <div class="pass w-full relative">
@@ -95,6 +104,9 @@
 
                     </div>
                 </div>
+                @error('password')
+                <p style="color: red">{{$message}}</p>
+                @enderror
             </div>
 
             <div class="flex justify-between items-center w-full">
@@ -102,14 +114,12 @@
                     <input type="checkbox" class="w-4 h-4 accent-primary">
                     <span>Duy trì đăng nhập</span>
                 </div>
-                <a href="#" class="font-medium text-[#096DD9]">Quên mật khẩu?</a>
+                <a href="{{route('form_forgot_password')}}" class="font-medium text-[#096DD9]">Quên mật khẩu?</a>
             </div>
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
                        class=" btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100"
                        value="Đăng nhập">
-                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register')}}"
-                                                                                   class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>
             </div>
 
         </form>

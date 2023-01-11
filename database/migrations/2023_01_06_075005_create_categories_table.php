@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,7 +15,10 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable()->comment('tên danh mục');
-            $table->integer('parrent_id')->nullable()->comment('danh mục cha');
+            $table->integer('parent_id')->nullable()->comment('danh mục cha');
+            $table->string('img')->nullable()->comment('Ảnh mô tả danh mục');
+            $table->string('slug')->nullable()->comment('Đường dẫn danh mục');
+            $table->integer('status')->default(1)->comment('Trạng thái danh mục | 0 đã xóa,1 chưa xóa');
             $table->timestamps();
         });
     }
