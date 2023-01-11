@@ -61,6 +61,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/register-account', [\App\Http\Controllers\Admin\UserController::class, 'getListRegisterAccount'])->name('screens.admin.user.index');
             Route::get('/confirm/{id}', [\App\Http\Controllers\Admin\UserController::class, 'confirm'])->name('screens.admin.user.confirm');
         });
+
+        Route::prefix('account')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\AccountController::class, 'profile'])->name('screens.admin.account.profile');
+            Route::post('/edit/{id}', [\App\Http\Controllers\Admin\AccountController::class, 'editProfile'])->name('screens.admin.account.editPro');
+            Route::post('/upload/{id}', [\App\Http\Controllers\Admin\AccountController::class, 'uploadImage'])->name('screens.admin.account.upload');
+            Route::get('/change-password', [\App\Http\Controllers\Admin\AccountController::class, 'changePassword'])->name('screens.admin.account.changePassword');
+            Route::post('/change-password', [\App\Http\Controllers\Admin\AccountController::class, 'saveChangePassword'])->name('screens.admin.account.saveChangePassword');
+
+        });
     });
     //Quyền nhà cung cấp
     Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {

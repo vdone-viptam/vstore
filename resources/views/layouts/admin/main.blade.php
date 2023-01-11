@@ -11,6 +11,7 @@
 <div class="over-lay-mobile" onclick="$('.menu-mobile').toggleClass('show-menuMB')">
 
 </div>
+@yield('modal')
 @include('layouts.admin.menu_mobile')
 @include('layouts.admin.header')
 @yield('content')
