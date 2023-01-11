@@ -68,6 +68,7 @@
                         <thead>
                         <tr>
                             <th>STT</th>
+                            <th>Mã tài khoản</th>
                             <th>
                                 Họ tên
                             </th>
@@ -88,6 +89,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration}}</td>
+                                    <td>{{$user->account_code}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->id_vdone}}</td>
@@ -98,8 +100,10 @@
                                     <td>
                                         @if($user->role_id == 2)
                                             Nhà cung cấp
+                                        @elseif($user->role_id == 1)
+                                            Admin
                                         @else
-                                            Vstore
+                                           Nhà phân phối
                                         @endif
                                     </td>
                                 </tr>

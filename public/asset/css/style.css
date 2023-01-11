@@ -267,6 +267,7 @@ input[type="submit"].active{
     color: #2F54EB;
     transition: 0.5s all;
 }
+
 .user:hover > .sub-nav-user{
     opacity: 1;
     transform: translateY(0);

@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 <body>
 <!-- modal tk cho duyet -->
@@ -54,9 +54,9 @@
     </div>
 </div>
 
-<div class=" grid grid-cols-1 place-items-center">
+<div class=" grid grid-cols-1 place-items-center translate-y-[4rem]">
     <div
-        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl">
+        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl md:w-[500px]">
         <a href="../" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
             <div>
                 <img src="{{asset('asset/icons/back.png')}}" alt="">
@@ -83,7 +83,7 @@
                     <input type="email" name="email" placeholder="Nhập email"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('email')
-                    <p class="text-danger">{{$message}}</p>
+                    <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
                 {{--                <div class="flex flex-col justify-start items-start gap-2 w-full">--}}

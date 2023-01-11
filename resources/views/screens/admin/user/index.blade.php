@@ -93,7 +93,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration}}</td>
                                     <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
+                                    <td>{{ Str::limit($user->email, 15) }}</td>
                                     <td>{{$user->id_vdone}}</td>
                                     <td>{{$user->company_name}}</td>
                                     <td>{{$user->phone_number}}</td>
@@ -104,8 +104,10 @@
                                     <td>
                                         @if($user->role_id == 2)
                                             Nhà cung cấp
+                                        @elseif($user->role_id == 1)
+                                            Admin
                                         @else
-                                            Vstore
+                                            Nhà phân phối
                                         @endif
                                     </td>
                                     <td>
