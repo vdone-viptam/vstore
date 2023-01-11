@@ -1,9 +1,9 @@
-@extends('layouts.admin.main')
+@extends('layouts.vstore.main')
 
 @section('modal')
     <div class="modal modal-hd @if(\Illuminate\Support\Facades\Session::has('validate')) show-modal @endif">
         <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
-        <form action="{{route('screens.admin.account.editPro',['id' => $infoAccount->id])}}" method="POST">
+        <form action="{{route('screens.vstore.account.editPro',['id' => $infoAccount->id])}}" method="POST">
             <div
                 class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
                 <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
@@ -148,8 +148,8 @@
                             <span class="text-title">Tài khoản</span>
                         </a>
                         <ul class="tab-sub-user">
-                            <li class="active"><a href="{{route('screens.admin.account.profile')}}">Hồ sơ</a></li>
-                            <li><a href="{{route('screens.admin.account.changePassword')}}">Đổi mật khẩu</a></li>
+                            <li class="active"><a href="{{route('screens.vstore.account.profile')}}">Hồ sơ</a></li>
+                            <li><a href="{{route('screens.vstore.account.changePassword')}}">Đổi mật khẩu</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -203,7 +203,7 @@
                             </div>
                         </div>
                         <div class="col-span-4 order-first md:order-last">
-                            <form action="{{route('screens.admin.account.upload',['id' => $infoAccount->id])}}"
+                            <form action="{{route('screens.vstore.account.upload',['id' => $infoAccount->id])}}"
                                   id="form" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div
@@ -221,24 +221,24 @@
                                         Chọn ảnh
                                     </button>
                                     <div id="image"></div>
-                                    {{--                                    <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB--}}
-                                    {{--                                    Định dạng:.JPEG, .PNG</span>--}}
-{{--                                    <div class="flex flex-col justify-center items-center text-center gap-4 w-full p-4">--}}
-{{--                                        <div class="w-full file-banner">--}}
-{{--                                            <div class="w-full h-[100px] rounded-full shadow-xl">--}}
-{{--                                                <img--}}
-{{--                                                    src="{{asset('image/users/'.$infoAccount->banner) ?? asset('asset/images/bannerlg.png')}}"--}}
-{{--                                                    alt="" class="w-full">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <button type="button"--}}
-{{--                                                class="change-bn flex justify-center items-center border-[1px] rounded-sm border-grey px-4 py-2 outline-none hover:bg-primary hover:text-[#FFF] transition-all duration-200">--}}
-{{--                                            Chọn ảnh Banner--}}
-{{--                                        </button>--}}
-{{--                                        <div id="image2"></div>--}}
-{{--                                        --}}{{--                                        <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB--}}
-{{--                                        --}}{{--                                            Định dạng:.JPEG, .PNG</span>--}}
-{{--                                    </div>--}}
+                                                                        <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
+                                                                        Định dạng:.JPEG, .PNG</span>
+                                    <div class="flex flex-col justify-center items-center text-center gap-4 w-full p-4">
+                                        <div class="w-full file-banner">
+                                            <div class="w-full h-[100px] rounded-full shadow-xl">
+                                                <img
+                                                    src="{{asset('image/users/'.$infoAccount->banner) ?? asset('asset/images/bannerlg.png')}}"
+                                                    alt="" class="w-full">
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                                class="change-bn flex justify-center items-center border-[1px] rounded-sm border-grey px-4 py-2 outline-none hover:bg-primary hover:text-[#FFF] transition-all duration-200">
+                                            Chọn ảnh Banner
+                                        </button>
+                                        <div id="image2"></div>
+                                                                                <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
+                                                                                    Định dạng:.JPEG, .PNG</span>
+                                    </div>
                                 </div>
                             </form>
                         </div>
