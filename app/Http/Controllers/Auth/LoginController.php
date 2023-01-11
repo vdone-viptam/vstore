@@ -107,9 +107,12 @@ class LoginController extends Controller
 
                     return redirect()->route('screens.manufacture.dashboard.index');
                 }
+                if (Auth::user()->role_id == 3) {
+
+                    return redirect()->route('screens.vstore.dashboard.index');
+                }
             } else {
                 return redirect()->back()->with('error', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
-
             }
         } else {
             return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
