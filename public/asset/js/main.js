@@ -229,17 +229,17 @@ $(document).ready(function () {
     })
 
     $('.btn-log').prop('disabled', true);
-    $('#form-log').on('change', function (e) {
-        e.preventDefault();
-        if (e.target.value != '' && e.target.checked) {
-            $('.btn-log').prop('disabled', false);
-            $('.btn-log').addClass('active');
-        } else {
-            $('.btn-log').prop('disabled', true);
-            $('.btn-log').removeClass('active');
-        }
-
-    })
+    // $('#form-log').on('change', function (e) {
+    //     e.preventDefault();
+    //     if (e.target.value != '' && e.target.checked) {
+    //         $('.btn-log').prop('disabled', false);
+    //         $('.btn-log').addClass('active');
+    //     } else {
+    //         $('.btn-log').prop('disabled', true);
+    //         $('.btn-log').removeClass('active');
+    //     }
+    //
+    // })
     $('.edit-hs').on('click', function () {
         $('.modal-hd').toggleClass('show-modal');
     })

@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Manufacture;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
-
     public function __construct()
     {
         $this->v = [];
@@ -23,7 +20,7 @@ class AccountController extends Controller
     public function profile()
     {
         $this->v['infoAccount'] = Auth::user();
-        return view('screens.manufacture.account.profile', $this->v);
+        return view('screens.admin.account.profile', $this->v);
 
     }
 
@@ -86,61 +83,10 @@ class AccountController extends Controller
         return redirect()->back();
     }
 
-    public function address()
-    {
-        $this->v['infoAccount'] = User::select('id', 'name', 'avatar')->where('id', Auth::id())->first();
-        return view('screens.manufacture.account.address', $this->v);
-
-    }
-
-    public function saveAddress(Request $request)
-    {
-        $ware = new Warehouses();
-        $ware->name = $request->name;
-        $ware->phone_number = $request->phone_number;
-        $ware->address = $request->address;
-        $ware->user_id = Auth::id();
-
-        $ware->save();
-
-        return redirect()->back();
-
-    }
-
-    public function editAddress(Request $request)
-    {
-        $ware = Warehouses::find($request->id);
-
-        return view('screens.manufacture.account.edit', ['ware' => $ware])->render();
-    }
-
-
-    public function updateAddress(Request $request, $id)
-    {
-        $ware = Warehouses::find($id);
-        $ware->name = $request->name;
-        $ware->phone_number = $request->phone_number;
-        $ware->address = $request->address;
-        $ware->save();
-
-        return redirect()->back();
-    }
-
-    public function getdestroyAddress(Request $request)
-    {
-        return view('screens.manufacture.account.destroy', ['id' => $request->id])->render();
-    }
-
-    public function destroyAddress($id)
-    {
-        Warehouses::destroy($id);
-
-        return redirect()->back();
-    }
 
     public function changePassword()
     {
-        return view('screens.manufacture.account.change_password', $this->v);
+        return view('screens.admin.account.change_password', $this->v);
 
     }
 

@@ -11,7 +11,7 @@
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
+    @vite('resources/css/app.css')
 </head>
 <body>
 <form action="{{route('post_register',['role_id' => 3])}}" id="formRegister-V" method="POST">
@@ -113,10 +113,10 @@
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</div>
+    <div class="text-center my-4"><input type="checkbox" required> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
-                class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4"
+                class="active btn-sub text-center w-full text-grey text-xl font-medium  text-[#FFF] rounded-lg py-4 bg-sky-500/100"
         >Tiếp tục
         </button>
         <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_vstore')}}"
