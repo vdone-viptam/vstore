@@ -104,8 +104,10 @@
                                     <td>
                                         @if($user->role_id == 2)
                                             Nhà cung cấp
+                                        @elseif($user->role_id == 1)
+                                            Admin
                                         @else
-                                            Vstore
+                                            Nhà phân phối
                                         @endif
                                     </td>
                                     <td>
