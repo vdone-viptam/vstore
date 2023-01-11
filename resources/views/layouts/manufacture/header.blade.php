@@ -23,16 +23,25 @@
 
             </div>
             <div class="md:flex justify-start items-center gap-4 hidden">
-                <div class="flex justify-start items-center gap-2">
+                <div class="help flex justify-start items-center gap-2 relative cursor-pointer">
                     <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M12,14a1,1,0,1,0,1,1A1,1,0,0,0,12,14ZM12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,.3-.71,1,1,0,0,0-.3-.7A8,8,0,1,1,12,20ZM12,8a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V9A1,1,0,0,0,12,8Z"/>
                     </svg>
                     <span class="text-title ">Hỗ trợ</span>
+                    <ul class="sub-nav-help">
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Biểu phí</a></li>
+                        <li><a href="#">Chính sách quy định</a></li>
+                    </ul>
                 </div>
 
                 <div class="flex justify-start items-center gap-2">
-                    <span class="text-title font-medium">Aneed - Vstore</span>
+                    <div class="flex flex-col justify-start items-center">
+                        <span class="text-title font-medium">Aneed</span>
+                        <span class="text-secondary text-xs">Nhà cung cấp</span>
+                    </div>
+
                     <div class="user relative">
                         <svg width="48" height="48" class="cursor-pointer hover:opacity-70 transition-all duration-500"
                              viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,8 +54,7 @@
                                 stroke="#2F54EB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <ul class="sub-nav-user">
-                            <li><a href="{{route('screens.manufacture.account.profile')}}"
-                                   class="font-medium flex justify-start items-center gap-2">
+                            <li><a href="./tai-khoan/" class="font-medium flex justify-start items-center gap-2">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -63,8 +71,7 @@
                                             fill="#33363F"/>
                                     </svg>
                                     Cài đặt</a></li>
-                            <li><a href="{{route('logout')}}"
-                                   class="font-medium flex justify-start items-center gap-2 ">
+                            <li><a href="./dang-nhap/" class="font-medium flex justify-start items-center gap-2 ">
                                     <svg fill="#FF4D4F" height="18" width="18" version="1.1" id="Capa_1"
                                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          viewBox="0 0 384.971 384.971" xml:space="preserve">
@@ -105,62 +112,76 @@
     <div class="md:flex justify-between items-center px-5 xl:px-16 py-3 bg-geekBlue hidden">
         <ul class="nav-menu flex justify-start items-center max-w-[600px] xl:max-w-full flex-wrap xl:flex-nowrap  xl:gap-4">
             <li class="active"><a href="../" class="flex justify-start items-center gap-2">Tổng quan</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-1">Hàng hóa
+            <li><a href="#" class="flex justify-start items-center gap-1">Quản lý sản phẩm
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Danh mục</a></li>
-                    <li><a href="#">Thiết lập giá</a></li>
-                    <li><a href="#">Kiểm kho</a></li>
+                    <li><a href="#">Tất cả sản phẩm</a></li>
+                    <li><a href="./san-pham/them-san-pham/">Yêu cầu thêm sản phẩm</a></li>
+                    <li><a href="#">Quản lý yêu cầu thêm sản phẩm</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-1">Giao dịch
+            <li><a href="#" class="flex justify-start items-center gap-1">Kho hàng
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#/">Đặt hàng</a></li>
-                    <li><a href="#">Hóa đơn</a></li>
-                    <li><a href="#">Vận đơn</a></li>
-                    <li><a href="#">Trả hàng</a></li>
-                    <li><a href="#">Nhập hàng</a></li>
-                    <li><a href="#">Trả hàng nhập</a></li>
-                    <li><a href="#">Xuất hủy</a></li>
+                    <li><a href="#">Quản lý kho hàng</a></li>
+                    <li><a href="#">Thêm sản phẩm vào kho</a></li>
+                    <li><a href="#">Quản lý xuất nhập kho</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Đối tác
+            <li><a href="#" class="flex justify-start items-center gap-2">Quản lý V-Store
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Khách hàng</a></li>
-                    <li><a href="#">Nhà cung cấp</a></li>
-                    <li><a href="#">Đối tác giao hàng</a></li>
+                    <li><a href="#">Quản lý hàng tại vstore</a></li>
+                    <li><a href="#">Báo cáo Vstore</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Nhân viên
+            <li><a href="#" class="flex justify-start items-center gap-2">Quản lý đơn hàng
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Nhân viên</a></li>
-                    <li><a href="#">Chấm công</a></li>
-                    <li><a href="#">Bảng tính lương</a></li>
-                    <li><a href="#">Bảng hoa hồng</a></li>
-                    <li><a href="#">Thiết lập chung</a></li>
+                    <li><a href="#">Tất cả đơn hàng</a></li>
+                    <li><a href="#">Đơn hủy</a></li>
+                    <li><a href="#">Trả hàng, hoàn tiền</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Sổ quỹ</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo</a></li>
+            <li><a href="#" class="flex justify-start items-center gap-2">Tài chính
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
+                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+                <ul class="sub-nav">
+                    <li><a href="./tai-chinh/">Ví</a></li>
+                    <li><a href="./tai-chinh/doanh-thu.html">Doanh thu</a></li>
+                    <li><a href="#">Cài đặt thanh toán</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="flex justify-start items-center gap-2">Dữ liệu
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
+                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+                <ul class="sub-nav">
+                    <li><a href="#">Phân tích bán hàng</a></li>
+                    <li><a href="#">Hiệu quả hoạt động</a></li>
+                </ul>
+            </li>
         </ul>
         <ul class="flex justify-start items-center gap-3">
 
