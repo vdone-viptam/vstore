@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->string('phone_number')->comment('Số điện thoại kho hàng');
             $table->string('address')->comment('Địa chỉ chính xác kho hàng');
             $table->integer('user_id')->comment('Id user sở hữu kho hàng');
+            $table->string('city_id');
+            $table->string('district_id');
+            $table->string('ward_id');
             $table->timestamps();
         });
     }

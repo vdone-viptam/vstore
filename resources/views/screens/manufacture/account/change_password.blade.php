@@ -67,7 +67,7 @@
                                                  class="w-full rounded-full">
                                         </div>
                                     </div>
-                                    <span class="text-title">Tài khoản</span>
+                                    <span class="text-title text-lg font-medium">Tài khoản</span>
                                 </a>
                                 <ul class="tab-sub-user">
                                     <li><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>

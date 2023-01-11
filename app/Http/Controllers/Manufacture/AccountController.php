@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use function GuzzleHttp\Promise\all;
 
 class AccountController extends Controller
 {
@@ -95,10 +96,34 @@ class AccountController extends Controller
 
     public function saveAddress(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'ward_id' => 'required',
+            'district_id' => 'required',
+            'address' => 'required',
+            'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
+            'city_id' => 'required',
+
+        ], [
+            'name.required' => 'Tên kho bắt buộc nhập',
+            'ward_id.required' => 'Xã bắt buộc chọn',
+            'district_id.required' => 'Quận huyện bắt buộc chọn',
+            'address.required' => 'Địa chỉ bắt buộc nhập',
+            'phone_number.required' => 'Số điện thoại bất buộc nhập',
+            'phone_number.regex' => 'Số điện thoại không hợp lệ',
+            'city_id.required' => 'Thành phố bắt buộc chọn',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
         $ware = new Warehouses();
         $ware->name = $request->name;
         $ware->phone_number = $request->phone_number;
         $ware->address = $request->address;
+        $ware->district_id = $request->district_id;
+        $ware->ward_id = $request->ward_id;
+        $ware->city_id = $request->city_id;
+
         $ware->user_id = Auth::id();
 
         $ware->save();
@@ -117,10 +142,34 @@ class AccountController extends Controller
 
     public function updateAddress(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'ward_id' => 'required',
+            'district_id' => 'required',
+            'address' => 'required',
+            'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
+            'city_id' => 'required',
+
+        ], [
+            'name.required' => 'Tên kho bắt buộc nhập',
+            'ward_id.required' => 'Xã bắt buộc chọn',
+            'district_id.required' => 'Quận huyện bắt buộc chọn',
+            'address.required' => 'Địa chỉ bắt buộc nhập',
+            'phone_number.required' => 'Số điện thoại bất buộc nhập',
+            'phone_number.regex' => 'Số điện thoại không hợp lệ',
+            'city_id.required' => 'Thành phố bắt buộc chọn',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+
         $ware = Warehouses::find($id);
         $ware->name = $request->name;
         $ware->phone_number = $request->phone_number;
         $ware->address = $request->address;
+        $ware->district_id = $request->district_id;
+        $ware->ward_id = $request->ward_id;
+        $ware->city_id = $request->city_id;
         $ware->save();
 
         return redirect()->back();

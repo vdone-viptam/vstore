@@ -145,7 +145,7 @@
                                          class="w-full rounded-full">
                                 </div>
                             </div>
-                            <span class="text-title">Tài khoản</span>
+                            <span class="text-title text-lg font-medium">Tài khoản</span>
                         </a>
                         <ul class="tab-sub-user">
                             <li class="active"><a href="{{route('screens.vstore.account.profile')}}">Hồ sơ</a></li>

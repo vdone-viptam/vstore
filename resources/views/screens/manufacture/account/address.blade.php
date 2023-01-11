@@ -29,11 +29,35 @@
                                    class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
                                    placeholder="Số điện thoại">
                         </div>
+                        <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
+
+                            <div class="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 w-full">
+                                <select
+                                    class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                    name="city_id" id="city" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn tỉnh thành</option>
+                                </select>
+
+                                <select
+                                    class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                    name="district_id" id="district" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn quận huyện</option>
+                                </select>
+
+                                <select
+                                    class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                    name="ward_id" id="ward" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn phường xã</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="flex justify-start items-center gap-2 w-full">
                         <textarea name="address" placeholder="Địa chỉ cụ thể"
                                   class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>
                         </div>
                     </div>
+
+
                     <div class="flex justify-end items-center gap-4 ">
                         <button type="button"
                                 class=" cursor-pointer outline-none bg-[#FFF] transition-all duration-200 rounded-sm py-2 px-3 text-center text-title hover:opacity-70 border-[1px] border-secondary"
@@ -91,11 +115,12 @@
                                          class="w-full rounded-full">
                                 </div>
                             </div>
-                            <span class="text-title">Tài khoản</span>
+                            <span class="text-title text-lg font-medium">Tài khoản</span>
                         </a>
                         <ul class="tab-sub-user">
                             <li><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>
-                            <li class="active"><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho hàng</a>
+                            <li class="active"><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho
+                                    hàng</a>
                             </li>
                             <li><a href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a></li>
                         </ul>
@@ -211,5 +236,55 @@
         // on('click', function () {
         //     $('.modal-dell').toggleClass('show-modal')
         // })
+    </script>
+    <script !src="">
+        const divCity = document.getElementById('city');
+        const divDistrict = document.getElementById('district');
+        const divWard = document.getElementById('ward');
+        $(function () {
+
+
+            $.ajax({
+                url: "https://provinces.open-api.vn/api/p",
+                type: 'GET',
+                success: function (result) {
+                    divCity.innerHTML +=
+                        `${
+                            result.map(item => `<option value="${item.code}">${item.name}</option>`).join('')
+                        }`;
+                }
+            });
+            divCity.addEventListener('change', (e) => {
+                const id = e.target.value;
+                if (+id !== 0) {
+                    $.ajax({
+                        url: `https://provinces.open-api.vn/api/p/${id}/?depth=2`,
+                        type: 'GET',
+                        success: function (result) {
+                            divDistrict.innerHTML = '<option value="">Lựa chọn huyện</option>' + result.districts.map(districtitem => `<option value="${districtitem.code}">${districtitem.name}</option>`).join('');
+
+                        }
+                    });
+                } else {
+                    divDistrict.innerHTML = '<option value="">Bạn chưa chọn thành phố</option>';
+                }
+
+            })
+            divDistrict.addEventListener('change', (e) => {
+                const id = e.target.value;
+                if (+id !== 0) {
+                    $.ajax({
+                        url: `https://provinces.open-api.vn/api/d/${id}?depth=2`,
+                        type: 'GET',
+                        success: function (result) {
+                            divWard.innerHTML = '<option value="">Lựa chọn phường xã</option>' + result.wards.map(wardItem => `<option value="${wardItem.code}">${wardItem.name}</option>`).join('');
+                        }
+                    });
+                } else {
+                    divWard.innerHTML = '<option value="">Bạn chưa chọn quận huyện</option>';
+                }
+            })
+        });
+
     </script>
 @endsection

@@ -26,6 +26,28 @@
                                class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
                                value="{{$ware->phone_number}}">
                     </div>
+                    <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
+
+                        <div class="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 w-full">
+                            <select
+                                class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                name="city_id" id="city2" aria-label=".form-select-sm">
+                                <option value="" selected>Chọn tỉnh thành</option>
+                            </select>
+
+                            <select
+                                class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                name="district_id" id="district2" aria-label=".form-select-sm">
+                                <option value="" selected>Chọn quận huyện</option>
+                            </select>
+
+                            <select
+                                class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                name="ward_id" id="ward2" aria-label=".form-select-sm">
+                                <option value="" selected>Chọn phường xã</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <textarea name="address"
                                   class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">{{$ware->address}}</textarea>
@@ -46,3 +68,71 @@
     </div>
 
 </form>
+<script>
+    const divCity2 = document.getElementById('city2');
+    const divDistrict2 = document.getElementById('district2');
+    const divWard2 = document.getElementById('ward2');
+    $.ajax({
+        url: "https://provinces.open-api.vn/api/p",
+        type: 'GET',
+        success: function (result) {
+            divCity2.innerHTML +=
+                `${
+                    result.map(item => `<option value="${item.code}" ${item.code === {{$ware->city_id}} ? 'selected' : ''}>${item.name}</option>`).join('')
+                }`;
+            if ({{$ware->city_id}}) {
+                $.ajax({
+                    url: `https://provinces.open-api.vn/api/p/{{$ware->city_id}}/?depth=2`,
+                    type: 'GET',
+                    success: function (result) {
+                        divDistrict2.innerHTML = '<option value="0">Lựa chọn huyện</option>' + result.districts.map(districtitem => `<option value="${districtitem.code}"
+${districtitem.code === {{$ware->district_id}} ? 'selected' : ''}
+>${districtitem.name}</option>`).join('');
+
+                    }
+                });
+                $.ajax({
+                    url: `https://provinces.open-api.vn/api/d/{{$ware->district_id}}?depth=2`,
+                    type: 'GET',
+                    success: function (result) {
+                        divWard2.innerHTML = '<option value="0">Lựa chọn phường xã</option>' + result.wards.map(wardItem => `<option value="${wardItem.code}"
+${wardItem.code === {{$ware->ward_id}} ? 'selected' : ''}
+>${wardItem.name}</option>`).join('');
+                    }
+                });
+            }
+
+        }
+    });
+    divCity2.addEventListener('change', (e) => {
+        const id = e.target.value;
+        if (+id !== 0) {
+            $.ajax({
+                url: `https://provinces.open-api.vn/api/p/${id}/?depth=2`,
+                type: 'GET',
+                success: function (result) {
+                    divDistrict2.innerHTML = '<option value="0">Lựa chọn huyện</option>' + result.districts.map(districtitem => `<option value="${districtitem.code}">${districtitem.name}</option>`).join('');
+
+                }
+            });
+        } else {
+            divDistrict2.innerHTML = '<option value="0">Bạn chưa chọn thành phố</option>';
+        }
+
+    })
+    divDistrict2.addEventListener('change', (e) => {
+        const id = e.target.value;
+        if (+id !== 0) {
+            $.ajax({
+                url: `https://provinces.open-api.vn/api/d/${id}?depth=2`,
+                type: 'GET',
+                success: function (result) {
+                    divWard2.innerHTML = '<option value="0">Lựa chọn phường xã</option>' + result.wards.map(wardItem => `<option value="${wardItem.code}">${wardItem.name}</option>`).join('');
+                }
+            });
+        } else {
+            divWard2.innerHTML = '<option value="0">Bạn chưa chọn quận huyện</option>';
+        }
+    });
+</script>
+
