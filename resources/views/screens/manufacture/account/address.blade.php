@@ -2,7 +2,7 @@
 
 @section('modal')
     <form action="{{route('screens.manufacture.account.saveCreate')}}" method="POST">
-        <div class="modal modal-address">
+        <div class="modal modal-address @if(count($errors->all())) show-modal @endif">
 
             @csrf
             <div class="over-lay-modal" onclick="$('.modal-address').toggleClass('show-modal')"></div>
@@ -19,6 +19,9 @@
                     </svg>
                 </div>
                 <div class="content  max-h-[600px] overflow-y-auto">
+                    @foreach($errors->all() as $error)
+                        <p class="text-red-600">{{$error}}</p>
+                    @endforeach
                     <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
 
                         <div class="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 w-full">
