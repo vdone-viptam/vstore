@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->string('account_code')->nullable()->comment('Mã tài khoản');
             $table->string('avatar')->nullable()->comment('Ảnh đại diện tài khoản');
             $table->string('banner')->nullable()->comment('Đường dẫn ảnh banner của tài khoản');
+            $table->integer('role_id')->nullable()->comment('quyền');
             $table->rememberToken();
             $table->timestamps();
         });

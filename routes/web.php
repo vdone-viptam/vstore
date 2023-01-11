@@ -112,12 +112,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-//Route::prefix('/admin')->group(function () {
-//
-//    Route::prefix('products')->group(function () {
-//        Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('screens.product.index');
-//        Route::get('/create/{type?}', [\App\Http\Controllers\ProductController::class, 'create'])->name('screens.product.create');
-//        Route::post('/create/{type?}', [\App\Http\Controllers\ProductController::class, 'store'])->name('screens.product.store');
-//    });
-//
-//});
+
