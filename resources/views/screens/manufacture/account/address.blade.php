@@ -23,15 +23,15 @@
 
                         <div class="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 w-full">
                             <input type="text" name="name"
-                                   class="text-opa outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                   class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
                                    placeholder="Họ và tên">
                             <input type="text" name="phone_number"
-                                   class="text-opa outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
+                                   class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
                                    placeholder="Số điện thoại">
                         </div>
                         <div class="flex justify-start items-center gap-2 w-full">
                         <textarea name="address" placeholder="Địa chỉ cụ thể"
-                                  class="text-opa outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>
+                                  class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>
                         </div>
                     </div>
                     <div class="flex justify-end items-center gap-4 ">
@@ -159,8 +159,7 @@
                                     </div>
 
                                     <span class="text-secondary">{{$warehouse->address}}</span>
-                                    <span
-                                        class="rounded-sm text-primary border-[1px] border-primary px-2">Mặc định</span>
+
 
                                 </div>
                                 <div class="flex justify-start items-center gap-2">

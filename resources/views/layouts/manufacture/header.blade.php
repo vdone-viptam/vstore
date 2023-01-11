@@ -54,7 +54,8 @@
                                 stroke="#2F54EB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <ul class="sub-nav-user">
-                            <li><a href="./tai-khoan/" class="font-medium flex justify-start items-center gap-2">
+                            <li><a href="{{route('screens.admin.account.profile')}}"
+                                   class="font-medium flex justify-start items-center gap-2">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -71,7 +72,8 @@
                                             fill="#33363F"/>
                                     </svg>
                                     Cài đặt</a></li>
-                            <li><a href="./dang-nhap/" class="font-medium flex justify-start items-center gap-2 ">
+                            <li><a href="{{route('logout')}}"
+                                   class="font-medium flex justify-start items-center gap-2 ">
                                     <svg fill="#FF4D4F" height="18" width="18" version="1.1" id="Capa_1"
                                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          viewBox="0 0 384.971 384.971" xml:space="preserve">
