@@ -78,7 +78,7 @@
 
                                 <tr>
                                     <td>
-                                        {{$product->id}}
+                                        {{$product->sku_id}}
                                     </td>
                                     <td>
                                         {{$product->name}}

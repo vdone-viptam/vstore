@@ -22,13 +22,13 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('products.id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id',  'sku_id','name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
