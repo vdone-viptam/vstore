@@ -121,9 +121,10 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Tất cả sản phẩm</a></li>
-                    <li><a href="./san-pham/them-san-pham/">Yêu cầu thêm sản phẩm</a></li>
-                    <li><a href="#">Quản lý yêu cầu thêm sản phẩm</a></li>
+                    <li><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a></li>
+                    <li><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu thêm sản phẩm</a></li>
+                    <li><a href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu thêm sản phẩm</a>
+                    </li>
                 </ul>
             </li>
             <li><a href="#" class="flex justify-start items-center gap-1">Kho hàng
