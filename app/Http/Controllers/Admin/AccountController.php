@@ -58,7 +58,7 @@ class AccountController extends Controller
         $user->phone_number = trim($request->phone_number);
         $user->save();
 
-        return redirect()->back()->with('success', 'Cập nhật thông tin thành công');
+        return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
     }
 
     public function uploadImage($id, Request $request)
