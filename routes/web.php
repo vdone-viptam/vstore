@@ -72,6 +72,8 @@ Route::middleware('auth')->group(function () {
         });
         Route::prefix('product')->group(function (){
            Route::get('index',[\App\Http\Controllers\Admin\ProductController::class,'index'])->name('screens.admin.product.index');
+            Route::get('/detail', [\App\Http\Controllers\Admin\ProductController::class, 'detail'])->name('screens.admin.product.detail');
+            Route::post('/confirm/{id}}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
         });
 
 

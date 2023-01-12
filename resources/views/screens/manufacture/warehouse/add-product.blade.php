@@ -26,7 +26,7 @@
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                        <select name="product_id" id=""
+                        <select name="product_id" id="product_id"
                                 class="chon_sp th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             <option value="">Chọn sản phẩm</option>
 
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="flex justify-center flex-wrap md:flex-nowrap md:justify-center items-center gap-5  w-full">
-                <button class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">Hủy
+                <button type="button" id=""huy_bo class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">Hủy
                     bỏ</button>
                 <button type="submit" class="bg-[#0d6efd] outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 bg-primary text-[#FFF]">Lưu lại</button>
             </div>
@@ -163,6 +163,9 @@
             $.ajax({
                 url:' {{route('amount')}}',
                 type: 'GET',
+                data: {
+                    product_id: $('#product_id').val(),
+                },
                 dataType: 'json',
                 success:function (data){
                     console.log(data);
@@ -171,5 +174,10 @@
             });
             // alert( a );
         });
+    </script>
+    <script>
+        // $('#huy_bo').click(function (){
+        //     window.location.replace("http://nha_cung_cap.ngo/add-product-warehouse");
+        // })
     </script>
 @endsection
