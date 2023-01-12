@@ -77,12 +77,18 @@
                                     <option value="{{$v_store->id}}">{{$v_store->name}}</option>
                                 @endforeach
                             </select>
+                            @error('vstore_id')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Tên sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" placeholder="Nhập tên sản phẩm" name="name" id="name"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('name')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4">
@@ -93,6 +99,9 @@
                             <input type="number" name="discount" id="discount" min="0" max="99"
                                    placeholder="Nhập mức chiết khấu (%)"
                                    class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('discount')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -105,6 +114,9 @@
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
+                            @error('category_id')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -115,6 +127,9 @@
                     <span class="text-title font-medium">Mô tả sản phẩm<strong class="text-[#FF4D4F]">*</strong></span>
                     <textarea name="description" id="description"
                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"></textarea>
+                    @error('description')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="flex justify-start items-start gap-2 w-full">
                     <span class="text-title font-medium">Hình ảnh sản phẩm<strong
@@ -144,6 +159,9 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" name="brand" id="brand" placeholder="Nhập tên thương hiệu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('brand')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Trọng lượng (Gram)<strong
@@ -151,6 +169,9 @@
                             <input type="number" name="weight" id="weight" min="0" max=""
                                    placeholder="Nhập trọng lượng sản phẩm (Gram)"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('weight')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -162,6 +183,9 @@
                                 <option value="2">Bao</option>
                                 <option value="3">Hộp</option>
                             </select>
+                            @error('packing_type')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
 
@@ -170,12 +194,18 @@
                             <input type="text" id="manufacturer_name" name="manufacturer_name"
                                    placeholder="Nhập tên tổ chức"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('manufacturer_name')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Tên đơn vị chịu trách nhiệm nhập khẩu</span>
                             <input type="text" id="manufacturer_address" name="manufacturer_address"
                                    placeholder="Nhập tên đơn vị"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('manufacturer_address')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4 ">
@@ -183,31 +213,43 @@
                             <span class="text-title font-medium">Xuất xứ </span>
                             <input type="text" name="origin" id="origin" placeholder="Nhập xuất xứ"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('origin')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Kích cỡ (Cm)</span>
                             <div class="flex justify-between items-center w-full gap-6">
-                                <input type="number" min="0" max="" placeholder="Nhập chiều dài (cm)" name="length"
+                                <input required type="number" min="0" max="" placeholder="Nhập chiều dài (cm)" name="length"
                                        id="length"
                                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
+
+                                <input required type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
                                        id="with"
                                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
+                                <input required type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
                                        id="height"
                                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+
                             </div>
+
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Thể tích (Lít)</span>
                             <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('volume')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Địa chỉ tổ chức chịu trách nhiệm sản xuất</span>
                             <input type="text" placeholder="Nhập địa chỉ tổ chức" name="import_unit" id="import_unit"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('import_unit')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -215,6 +257,9 @@
                             <input type="text" placeholder="Nhập tên địa chỉ đơn vị" name="import_address"
                                    id="import_address"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('import_address')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -227,18 +272,27 @@
                             <span class="text-title font-medium">Giá<strong class="text-[#FF4D4F]">*</strong></span>
                             <input type="number" placeholder="Nhập giá sản phẩm" name="price" id="price"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('price')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Mua nhiều giảm giá</span>
                             <input type="text" placeholder="Nhập số sản phẩm mua ít nhất để được giảm giá"
                                    name="amount_product_send_to_discount" id="amount_product_send_to_discount"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('amount_product_send_to_discount')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Phần trăm giảm giá (%)</span>
                             <input type="text" placeholder="Số phần trăm giảm giá" id="percent_discount"
                                    name="percent_discount"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('percent_discount')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                     </div>
@@ -248,6 +302,7 @@
                             <input type="datetime-local" min="2018-01-01" max="2018-12-31"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+
                         </div>
 
 
@@ -257,7 +312,9 @@
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         </div>
 
-
+                        @error('sku_id')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-col justify-start items-start gap-4 w-full">

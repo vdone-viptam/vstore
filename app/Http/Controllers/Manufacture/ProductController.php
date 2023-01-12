@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -68,7 +69,51 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'vstore_id' => 'required',
+            'discount' => 'required',
+            'category_id' => 'required',
+            'description' => 'required',
+            'brand' => 'required',
+            'weight' => 'required',
+            'packing_type' => 'required',
+            'manufacturer_name' => 'required',
+            'manufacturer_address' => 'required',
+            'origin' => 'required',
+            'length' => 'required',
+            'with' => 'required',
+            'height' => 'required',
+            'volume' => 'required',
+            'price' => 'required',
+            'percent_discount' => 'required',
+            'sku_id' => 'required',
+
+        ], [
+            'name.required' => 'Trường này không được trống',
+            'company_name.required' => 'Trường này không được trống',
+            'discount.required' => 'Trường này không được trống',
+            'category_id.required' => 'Trường này không được trống',
+            'description.required' => 'Trường này không được trống',
+            'brand.regex' => 'Trường này không được trống',
+            'weight.required' => 'Trường này không được trống',
+            'packing_type.required' => 'Trường này không được trống',
+            'manufacturer_name.required' => 'Trường này không được trống',
+            'manufacturer_address.required' => 'Trường này không được trống',
+            'origin.required' => 'Trường này không được trống',
+            'length.required' => 'Trường này không được trống',
+            'with.required' => 'Trường này không được trống',
+            'height.required' => 'Trường này không được trống',
+            'volume.required' => 'Trường này không được trống',
+            'price.required' => 'Trường này không được trống',
+            'percent_discount.required' => 'Trường này không được trống',
+            'sku_id.required' => 'Trường này không được trống',
+
+
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
         DB::beginTransaction();
 
         try {
