@@ -46,8 +46,8 @@ class WarehouseController extends Controller
 
         return redirect()->route('screens.manufacture.warehouse.addProduct')->with('message','Thêm Thành Công');
     }
-    public function amount(){
-        $amount =DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = 1) as amount FROM product_warehouses where status = 1 AND product_id = 1"))[0]->amount;
+    public function amount(Request $request){
+        $amount =DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = ".$request->product_id.") as amount FROM product_warehouses where status = 1 AND product_id = ".$request->product_id.""))[0]->amount;
         return $amount;
     }
 }
