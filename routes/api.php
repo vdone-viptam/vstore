@@ -20,3 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //Route::get('login',AuthController::class,'postLogin');
 Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
+
+Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
+    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
+});

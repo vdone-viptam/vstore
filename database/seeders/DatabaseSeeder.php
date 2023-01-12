@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $user->tax_code = '10000';
         $user->address = 'Việt Nam';
         $user->role_id = 1;
+        $user->account_code = '123123';
         $user->save();
 
     }

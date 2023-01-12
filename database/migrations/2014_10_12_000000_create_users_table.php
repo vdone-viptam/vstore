@@ -24,10 +24,12 @@ return new class extends Migration {
             $table->string('tax_code')->nullable();
             $table->string('address')->nullable();
             $table->string('id_vdone_diff')->nullable();
+            $table->integer('status')->default(1);
             $table->dateTime('confirm_date')->nullable()->comment('Ngày tài khoản được duyệt');
             $table->string('account_code')->nullable()->comment('Mã tài khoản');
             $table->string('avatar')->nullable()->comment('Ảnh đại diện tài khoản');
             $table->string('banner')->nullable()->comment('Đường dẫn ảnh banner của tài khoản');
+            $table->integer('role_id')->nullable()->comment('quyền 1 admin 2 nha cung cap 3 nha phan phoi(vstore)');
             $table->rememberToken();
             $table->timestamps();
         });

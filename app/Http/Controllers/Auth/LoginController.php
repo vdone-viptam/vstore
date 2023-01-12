@@ -57,12 +57,12 @@ class LoginController extends Controller
             'email.required' => 'Email bắt buộc nhập',
             'email.unique' => 'Email đã tồn tại',
             'email.email' => 'Email không đúng dịnh dạng',
-            'name' => 'Tên v-store bắt buộc nhập',
-            'company_name' => 'Tên công ty bắt buộc nhập',
-            'tax_code' => 'Mã số thuế bắt buộc nhập',
-            'address' => 'Địa chỉ bắt buộc nhập',
-            'phone_number' => 'Số điện thoại bất buộc nhập',
-            'id_vdone' => 'ID người đại điện bắt buộc nhập',
+            'name.required' => 'Tên v-store bắt buộc nhập',
+            'company_name.required' => 'Tên công ty bắt buộc nhập',
+            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+            'address.required' => 'Địa chỉ bắt buộc nhập',
+            'phone_number.required' => 'Số điện thoại bất buộc nhập',
+            'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 
         ]);
         if ($validator->fails()) {

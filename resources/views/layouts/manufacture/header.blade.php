@@ -135,7 +135,7 @@
                 </a>
                 <ul class="sub-nav">
                     <li><a href="#">Quản lý kho hàng</a></li>
-                    <li><a href="#">Thêm sản phẩm vào kho</a></li>
+                    <li><a href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm sản phẩm vào kho</a></li>
                     <li><a href="#">Quản lý xuất nhập kho</a></li>
                 </ul>
             </li>

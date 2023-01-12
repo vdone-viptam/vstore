@@ -70,12 +70,20 @@ Route::middleware('auth')->group(function () {
             Route::post('/change-password', [\App\Http\Controllers\Admin\AccountController::class, 'saveChangePassword'])->name('screens.admin.account.saveChangePassword');
 
         });
+        Route::prefix('product')->group(function (){
+           Route::get('index',[\App\Http\Controllers\Admin\ProductController::class,'index'])->name('screens.admin.product.index');
+        });
+
+
     });
     //Quyền nhà cung cấp
     Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\DashboardController::class, 'index'])->name('screens.manufacture.dashboard.index');
         });
+        Route::get('/add-product-warehouse',[\App\Http\Controllers\Manufacture\WarehouseController::class,'addProduct'])->name('screens.manufacture.warehouse.addProduct');
+        Route::post('/add-product-warehouse',[\App\Http\Controllers\Manufacture\WarehouseController::class,'postAddProduct']);
+
 //         Cập nhật thông tin tài khoản nhà cung cấp
         Route::prefix('account')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\AccountController::class, 'profile'])->name('screens.manufacture.account.profile');
@@ -127,12 +135,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-//Route::prefix('/admin')->group(function () {
-//
-//    Route::prefix('products')->group(function () {
-//        Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('screens.product.index');
-//        Route::get('/create/{type?}', [\App\Http\Controllers\ProductController::class, 'create'])->name('screens.product.create');
-//        Route::post('/create/{type?}', [\App\Http\Controllers\ProductController::class, 'store'])->name('screens.product.store');
-//    });
-//
-//});
+
