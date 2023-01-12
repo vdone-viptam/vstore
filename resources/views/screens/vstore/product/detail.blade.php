@@ -53,7 +53,10 @@
                         </select>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
-
+                        @if($product->status == 3)
+                            <textarea name="note" placeholder="{{$product->note}}"
+                                      class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>
+                        @endif
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
@@ -63,10 +66,10 @@
                         onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại
                     </button>
                     @if($product->status == 1)
-                    <button
-                        class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
-                        Lưu thay đổi
-                    </button>
+                        <button
+                            class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                            Lưu thay đổi
+                        </button>
                     @endif
 
                 </div>
