@@ -218,7 +218,9 @@
                             </div>
                         </div>
                     @endforeach
-
+                    <div>
+                        @include('layouts.custom.paginator', ['paginator' => $infoAccount->Warehouses()])
+                    </div>
                 </div>
             </div>
         </div>
