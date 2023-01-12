@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function Warehouses()
     {
-        return $this->hasMany(Warehouses::class, 'user_id')->get();
+        return $this->hasMany(Warehouses::class, 'user_id')->paginate(4);
     }
 }

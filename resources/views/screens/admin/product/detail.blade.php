@@ -1,4 +1,4 @@
-<form action="{{route('screens.vstore.product.confirm',['id' => $product->id])}}" method="POST">
+<form action="{{route('screens.admin.product.confirm',['id' => $product->id])}}" method="POST">
     @csrf
     <div class="modal modal-details">
         <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
@@ -44,7 +44,7 @@
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="flex justify-start items-center gap-2 w-full">
 
-                        <select name="status" id="status" @if($product->status ==2 || $product->status ==3) disabled
+                        <select name="status" id="status" @if(($product->status ==2 && $product->admin_confirm_date != null) || $product->status ==3) disabled
                                 @endif
                                 class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                             <option value="0">Chưa xem</option>
@@ -53,10 +53,7 @@
                         </select>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
-                        @if($product->status == 3)
-                            <textarea name="note" placeholder="{{$product->note}}"
-                                      class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>
-                        @endif
+
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
@@ -65,11 +62,11 @@
                         class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"
                         onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại
                     </button>
-                    @if($product->status == 1)
-                        <button
-                            class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
-                            Lưu thay đổi
-                        </button>
+                    @if($product->status == 2 && $product->admin_confirm_date == null)
+                    <button
+                        class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                        Lưu thay đổi
+                    </button>
                     @endif
 
                 </div>

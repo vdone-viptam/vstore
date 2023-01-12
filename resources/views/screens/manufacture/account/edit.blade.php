@@ -54,10 +54,10 @@
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
-                    <button
-                        class=" cursor-pointer outline-none bg-[#FFF] transition-all duration-200 rounded-sm py-2 px-3 text-center text-title hover:opacity-70 border-[1px] border-secondary"
-                        onclick="$('.modal-edit-add').toggleClass('show-modal')">Đóng lại
-                    </button>
+                    <a
+                            class=" cursor-pointer outline-none bg-[#FFF] transition-all duration-200 rounded-sm py-2 px-3 text-center text-title hover:opacity-70 border-[1px] border-secondary"
+                            href="{{route('screens.manufacture.account.address')}}">Đóng lại
+                    </a>
                     <button
                         class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                         Lưu lại
