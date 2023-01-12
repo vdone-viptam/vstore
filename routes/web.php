@@ -94,6 +94,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/change-password', [\App\Http\Controllers\Manufacture\AccountController::class, 'saveChangePassword'])->name('screens.manufacture.account.saveChangePassword');
 
         });
+        Route::prefix('products')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Manufacture\ProductController::class, 'index'])->name('screens.manufacture.product.index');
+            Route::get('/create', [\App\Http\Controllers\Manufacture\ProductController::class, 'create'])->name('screens.manufacture.product.create');
+            Route::post('/create', [\App\Http\Controllers\Manufacture\ProductController::class, 'store'])->name('screens.manufacture.product.store');
+            Route::get('/request', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestProduct'])->name('screens.manufacture.product.request');
+            Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
+
+        });
+
     });
     //Quyền vstore
 
@@ -107,6 +116,12 @@ Route::middleware('auth')->group(function () {
             Route::post('/upload/{id}', [\App\Http\Controllers\Vstore\AccountController::class, 'uploadImage'])->name('screens.vstore.account.upload');
             Route::get('/change-password', [\App\Http\Controllers\Vstore\AccountController::class, 'changePassword'])->name('screens.vstore.account.changePassword');
             Route::post('/change-password', [\App\Http\Controllers\Vstore\AccountController::class, 'saveChangePassword'])->name('screens.vstore.account.saveChangePassword');
+
+        });
+        Route::prefix('products')->group(function () {
+            Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
+            Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
+            Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
 
         });
     });

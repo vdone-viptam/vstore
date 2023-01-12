@@ -50,7 +50,8 @@
                                 stroke="#2F54EB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <ul class="sub-nav-user">
-                            <li><a href="{{route('screens.vstore.account.profile')}}" class="font-medium flex justify-start items-center gap-2">
+                            <li><a href="{{route('screens.vstore.account.profile')}}"
+                                   class="font-medium flex justify-start items-center gap-2">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -59,7 +60,8 @@
                                             stroke-linejoin="round"/>
                                     </svg>
                                     Thông tin tài khoản</a></li>
-                            <li><a href="{{route('screens.vstore.account.profile')}}" class="font-medium flex justify-start items-center gap-2">
+                            <li><a href="{{route('screens.vstore.account.profile')}}"
+                                   class="font-medium flex justify-start items-center gap-2">
                                     <svg width="18" height="18" class="cursor-pointer" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">vstore
                                         <path
@@ -117,7 +119,7 @@
                 </a>
                 <ul class="sub-nav">
                     <li><a href="#">Tất cả sản phẩm</a></li>
-                    <li><a href="#">Yêu cầu thêm sản phẩm</a></li>
+                    <li><a href="{{route('screens.vstore.product.request')}}">Yêu cầu thêm sản phẩm</a></li>
 
                     <li><a href="#">Thiết lập giá</a></li>
                     <li><a href="#">Thiết lập khuyến mãi</a></li>
