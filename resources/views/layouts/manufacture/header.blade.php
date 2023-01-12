@@ -134,9 +134,9 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Quản lý kho hàng</a></li>
+                    <li><a href="{{route('screens.manufacture.warehouse.index')}}">Quản lý kho hàng</a></li>
                     <li><a href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm sản phẩm vào kho</a></li>
-                    <li><a href="#">Quản lý xuất nhập kho</a></li>
+                    <li><a href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý xuất nhập kho</a></li>
                 </ul>
             </li>
             <li><a href="#" class="flex justify-start items-center gap-2">Quản lý V-Store
@@ -146,8 +146,8 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Quản lý hàng tại vstore</a></li>
-                    <li><a href="#">Báo cáo Vstore</a></li>
+                    <li><a href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại vstore</a></li>
+                    <li><a href="{{route('screens.manufacture.partner.report')}}">Báo cáo Vstore</a></li>
                 </ul>
             </li>
             <li><a href="#" class="flex justify-start items-center gap-2">Quản lý đơn hàng
@@ -157,9 +157,9 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Tất cả đơn hàng</a></li>
-                    <li><a href="#">Đơn hủy</a></li>
-                    <li><a href="#">Trả hàng, hoàn tiền</a></li>
+                    <li><a href="{{route('screens.manufacture.order.index')}}">Tất cả đơn hàng</a></li>
+                    <li><a href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a></li>
+                    <li><a href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn tiền</a></li>
                 </ul>
             </li>
             <li><a href="#" class="flex justify-start items-center gap-2">Tài chính
@@ -169,7 +169,7 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="./tai-chinh/">Ví</a></li>
+                    <li><a href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
                     <li><a href="./tai-chinh/doanh-thu.html">Doanh thu</a></li>
                     <li><a href="#">Cài đặt thanh toán</a></li>
                 </ul>

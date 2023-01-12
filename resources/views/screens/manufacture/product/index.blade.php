@@ -22,14 +22,25 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0" selected>Tất cả</option>
-                    <option value="sku_id">Mã sản phẩm</option>
-                    <option value="name">Tên sản phẩm</option>
-                    <option value="brand">Thương hiệu</option>
-                    <option value="3">Ngành hàng</option>
+                    <option value="0">Tất cả</option>
+                    <option
+                        value="sku_id" {{isset($params['condition']) && $params['condition'] == 'sku_id' ? 'selected' : ''}}>
+                        Mã sản phẩm
+                    </option>
+                    <option
+                        value="name" {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                        Tên sản phẩm
+                    </option>
+                    <option
+                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
+                        Thương hiệu
+                    </option>
+                    <option value="3" {{isset($params['condition']) && $params['condition'] == '3' ? 'selected' : ''}}>
+                        Ngành hàng
+                    </option>
                 </select>
 
-                <input type="text" name="key_search"
+                <input type="text" name="key_search" value="{{$params['key_search'] ?? '' }}"
                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Nhập từ khóa">
                 <input type="submit"
@@ -140,13 +151,22 @@
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option value="10">10 hàng / trang</option>
-                            <option value="25">25 hàng / trang</option>
-                            <option value="50">50 hàng / trang</option>
+                            <option
+                                value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>10
+                                hàng / trang
+                            </option>
+                            <option
+                                value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>25
+                                hàng / trang
+                            </option>
+                            <option
+                                value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>50
+                                hàng / trang
+                            </option>
                         </select>
                         <div class="flex justify-start items-center gap-2">
                             <span class="text-title text-sm">Đi đến</span>
-                            <input type="number" value="0" name="page1" id="page1"
+                            <input type="number" value="{{$params['page1'] ?? 0}}" name="page1" id="page1"
                                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"
                             >
                         </div>

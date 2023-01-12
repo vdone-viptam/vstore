@@ -198,17 +198,17 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status')->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status')->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'products.status', 'vstore_id')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'products.status', 'vstore_id', 'vstore_confirm_date', 'admin_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status')->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
-            $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status')->orderBy('id', 'desc')->paginate($limit);
+            $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->orderBy('id', 'desc')->paginate($limit);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
