@@ -3,7 +3,7 @@
     <div id="modal2"></div>
 @endsection
 @section('content')
-    <form>
+    <form id="form">
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
         <span class="text-secondary">Sản phẩm</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,17 +131,17 @@
                 <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>
                 @include('layouts.custom.paginator', ['paginator' => $products])
                 <div class="flex justify-start items-center gap-2 flex-wrap">
-                    <select name=""
+                    <select name="limit"
                             class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                        <option value="">10 hàng / trang</option>
-                        <option value="">25 hàng / trang</option>
-                        <option value="">50 hàng / trang</option>
+                        <option value="10">10 hàng / trang</option>
+                        <option value="25">25 hàng / trang</option>
+                        <option value="50">50 hàng / trang</option>
                     </select>
                     <div class="flex justify-start items-center gap-2">
                         <span class="text-title text-sm">Đi đến</span>
-                        <input type="number"
+                        <input type="number" name="page1" value="0" id="page"
                                class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"
-                               min="1">
+                               >
                     </div>
                 </div>
             </div>
@@ -173,11 +173,19 @@
         });
     </script>
     <script>
-
+        const form = document.getElementById('form');
+        const limit = document.getElementsByName('limit')[0];
+        const page = document.getElementById('page');
+        limit.addEventListener('change', (e) => {
+            form.submit();
+        });
+        page.addEventListener('change', (e) => {
+            form.submit();
+        });
         $( ".cursor-pointer" ).click(function() {
             let search = $('.search').val();
             let select = $('.select-form').val();
-            window.location.href = "{{ route('screens.admin.product.index')}}"+"?option="+select+"&search="+search;
+            form.submit();
         });
         {{--window.location.href = "{{ route('screens.admin.product.index')}}";--}}
     </script>

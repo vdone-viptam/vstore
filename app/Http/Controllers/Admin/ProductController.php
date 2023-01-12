@@ -10,34 +10,51 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    private $v;
+    public function __construct()
+    {
+        $this->v=[];
+    }
+
     public function index(Request $request)
     {
-        $products = Product::where('vstore_confirm_date', '!=', null)
-            ->where('status', 2)
-            ->orderBy('admin_confirm_date', 'asc')
-        ->paginate(10);
+             $limit = $request->limit ?? 10;
+        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
+        if (isset($request->condition) && $request->condition != 0) {
+            $condition = $request->condition;
+            if ($condition == 'sku_id') {
+                $this->v['products'] = Product::select('id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                    ->where('status', 2)
+                    ->orderBy('admin_confirm_date', 'asc')
+                    ->paginate($limit);
+            } else if ($condition == 'name') {
+                $this->v['products'] = Product::select('id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                    ->where('status', 2)
+                    ->orderBy('admin_confirm_date', 'asc')
+                    ->paginate($limit);
+            } else if ($condition == '3') {
+                $this->v['products'] = Product::select('products.id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                    ->where('status', 2)
+                    ->orderBy('admin_confirm_date', 'asc')
+                    ->paginate($limit);
+            } else {
+                $this->v['products'] = Product::select('id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
 
-        if ($request->option && $request->option == 0) {
-            $products = Product::where('name', 'like', '%' . 'platinum update' . '%')
-//                ->orWhere('publish_id', 'like', '%' . $request->search . '%')
-//                ->orWhere('brand', 'like', '%' . $request->search . '%')
+            }
+        } else {
+            $this->v['products'] = Product::where('vstore_confirm_date', '!=', null)
                 ->where('status', 2)
                 ->orderBy('admin_confirm_date', 'asc')
-                ->where('vstore_confirm_date', '!=', null)
                 ->paginate(10);
-        }
-//        elseif ($request->option == 1){
-//            $products= $products->where('name','like','%'.'$request->search'.'%')
-//
-//            ;
-//        }
-//        elseif ($request->option == 2){
-//            $products= $products->where('name','like','%'.'$request->search'.'%')
-//
-//            ;
-//        }
 
-        return view('screens.admin.product.index', compact('products'));
+        }
+        if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
+            abort(404);
+        }
+
+        $this->v['params'] = $request->all();
+
+        return view('screens.admin.product.index', $this->v);
 
     }
 
