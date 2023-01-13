@@ -137,16 +137,16 @@
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option value="10">10 hàng / trang</option>
-                            <option value="25">25 hàng / trang</option>
-                            <option value="50">50 hàng / trang</option>
+                            <option {{Request::get('limit') == 10? 'selected':'' }} value="10">10 hàng / trang</option>
+                            <option  {{Request::get('limit') == 25? 'selected':'' }} value="25">25 hàng / trang</option>
+                            <option {{Request::get('limit') == 50? 'selected':'' }} value="50">501 hàng / trang</option>
                         </select>
-                        <div class="flex justify-start items-center gap-2">
-                            <span class="text-title text-sm">Đi đến</span>
-                            <input type="number" name="page1" id="page" value="0"
-                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"
-                                   min="1">
-                        </div>
+{{--                        <div class="flex justify-start items-center gap-2">--}}
+{{--                            <span class="text-title text-sm">Đi đến</span>--}}
+{{--                            <input type="number" name="page1" id="page" value="0"--}}
+{{--                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
+{{--                                   min="1">--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

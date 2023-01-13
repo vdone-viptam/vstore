@@ -20,7 +20,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //Route::get('login',AuthController::class,'postLogin');
 Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
+Route::prefix('product')->group(function () {
+    Route::get('',[\App\Http\Controllers\Api\ProductController::class,'index']);
+    Route::get('product-by-category/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByCategory']);
+});
+Route::prefix('category')->group(function () {
+    Route::get('',[\App\Http\Controllers\Api\CategoryController::class,'index']);
 
+});
 Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
     Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 });
