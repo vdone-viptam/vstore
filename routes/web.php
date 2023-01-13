@@ -43,7 +43,7 @@ Route::group(['domain' => 'vstore.ngo'], function () {
 
 Route::middleware('auth')->group(function () {
     //Quyền admin
-    Route::group(['domain' => 'admin.ngo', 'middleware' => 'admin'], function () {
+    Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], function () {
 
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('screens.admin.dashboard.index');
@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
 
     });
     //Quyền nhà cung cấp
-    Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
+    Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function () {
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\DashboardController::class, 'index'])->name('screens.manufacture.dashboard.index');
         });
@@ -136,17 +136,17 @@ Route::middleware('auth')->group(function () {
     });
     //Quyền vstore
 
-    Route::group(['domain' => 'vstore.ngo', 'middleware' => 'vStore'], function () {
+    Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], function () {
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [\App\Http\Controllers\Vstore\DashboardController::class, 'index'])->name('screens.vstore.dashboard.index');
         });
-        Route::prefix('finance')->group(function (){
-            Route::get('',[\App\Http\Controllers\Vstore\FinanceController::class,'index'])->name('screens.vstore.finance.index');
-            Route::get('revenue',[\App\Http\Controllers\Vstore\FinanceController::class,'revenue'])->name('screens.vstore.finance.revenue');
+        Route::prefix('finance')->group(function () {
+            Route::get('', [\App\Http\Controllers\Vstore\FinanceController::class, 'index'])->name('screens.vstore.finance.index');
+            Route::get('revenue', [\App\Http\Controllers\Vstore\FinanceController::class, 'revenue'])->name('screens.vstore.finance.revenue');
         });
-        Route::prefix('order')->group(function (){
-            Route::get('',[\App\Http\Controllers\Vstore\OrderController::class,'index'])->name('screens.vstore.order.index');
-            Route::get('new',[\App\Http\Controllers\Vstore\OrderController::class,'new'])->name('screens.vstore.order.new');
+        Route::prefix('order')->group(function () {
+            Route::get('', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
+            Route::get('new', [\App\Http\Controllers\Vstore\OrderController::class, 'new'])->name('screens.vstore.order.new');
         });
         Route::prefix('account')->group(function () {
             Route::get('/', [\App\Http\Controllers\Vstore\AccountController::class, 'profile'])->name('screens.vstore.account.profile');

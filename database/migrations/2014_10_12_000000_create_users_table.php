@@ -30,6 +30,7 @@ return new class extends Migration {
             $table->string('avatar')->nullable()->comment('Ảnh đại diện tài khoản');
             $table->string('banner')->nullable()->comment('Đường dẫn ảnh banner của tài khoản');
             $table->integer('role_id')->nullable()->comment('quyền 1 admin 2 nha cung cap 3 nha phan phoi(vstore)');
+            $table->string('link_website')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

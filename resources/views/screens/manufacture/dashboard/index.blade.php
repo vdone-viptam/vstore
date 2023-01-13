@@ -143,7 +143,8 @@
                                     </div>
                                 @endforeach
                             @else
-                                <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                                <div class="flex justify-start items-start gap-2 w-full"><p>Bạn chưa có thông báo mới
+                                        nào</p></div>
                             @endif
 
                         </div>
