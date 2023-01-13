@@ -57,6 +57,9 @@ $(document).ready(function () {
             $('.password .icon').html(svgHidePass)
         }
     })
+    $('.more-details').on('click', function(){
+        $('.modal-details').toggleClass('show-modal');
+    })
     $('.rePassword .icon').on('click', function () {
         if ($('.rePass input').attr('type') == 'text') {
             $('.rePass input').prop("type", "password")

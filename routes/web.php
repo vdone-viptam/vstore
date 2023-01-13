@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::prefix('finances')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\FinanceController::class, 'index'])->name('screens.manufacture.finance.index');
+            Route::get('/history', [\App\Http\Controllers\Manufacture\FinanceController::class, 'history'])->name('screens.manufacture.finance.history');
 
         });
         Route::prefix('orders')->group(function () {

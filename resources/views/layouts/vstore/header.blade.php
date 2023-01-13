@@ -204,7 +204,7 @@
                               fill="#2F54EB"/>
                     </svg>
                     <span
-                        class="text-center absolute top-[-10px] right-0 rounded-full w-[24px] h-[24px] bg-[#FF4D4F] text-[#FFF] text-sm after:content-['6'] after:text-sm flex justify-center items-center"></span>
+                        class="text-center absolute top-[-10px] right-0 rounded-full w-[24px] h-[24px] bg-[#FF4D4F] text-[#FFF] text-sm after:content-['{{count(Auth::user()->unreadNotifications) ?? 0}}'] after:text-sm flex justify-center items-center"></span>
                 </a>
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
@@ -212,15 +212,18 @@
                         <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
                             cả</a>
                     </div>
-                    <li><a class="flex justify-between items-center w-full text-sm text-title font-bold"><span>Danh sách thương hiệu </span>
-                            <span>10:25 </span></a></li>
-                    <li><a class="flex justify-between items-center w-full text-sm text-title font-bold"><span>Danh sách thương hiệu </span>
-                            <span>9:25 </span></a></li>
+                    @if(count(Auth::user()->unreadNotifications) > 0)
+                        @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                            <li>
+                                <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                   class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                    <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                            </li>
+                        @endforeach
+                    @else
+                        <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                    @endif
 
-                    <li><a class="flex justify-between items-center w-full text-sm text-secondary font-normal"><span>Danh sách thương hiệu </span>
-                            <span>8:25 </span></a></li>
-                    <li><a class="flex justify-between items-center w-full text-sm text-title font-bold"><span>Danh sách thương hiệu </span>
-                            <span>7:25 </span></a></li>
 
                 </ul>
             </li>

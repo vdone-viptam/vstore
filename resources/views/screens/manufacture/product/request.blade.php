@@ -119,7 +119,7 @@
                                     <td>
                                         @if($product->status == 1)
                                             <span class="text-yellow-400 font-medium">Đang chờ duyệt</span>
-                                        @elseif($product->status == 2 && $product->vstore_confirm_date)
+                                        @elseif($product->status == 2 && !$product->admin_confirm_date)
                                             <span class="text-yellow-400 font-medium">Đang chờ duyệt</span>
                                         @elseif($product->status == 2 && $product->admin_confirm_date)
                                             <span class="text-green-600 font-medium">Đã duyệt</span>

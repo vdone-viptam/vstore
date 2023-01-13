@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,17 +30,17 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price','admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price','admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price','admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price','admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
-            $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price')->where('admin_confirm_date', '!=', null)->orderBy('id', 'desc')->paginate($limit);
+            $this->v['products'] = Product::select('id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price','admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->orderBy('id', 'desc')->paginate($limit);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
@@ -87,7 +88,7 @@ class ProductController extends Controller
             'volume' => 'required',
             'price' => 'required',
             'percent_discount' => 'required',
-            'sku_id' => 'required',
+            'sku_id' => 'required|unique:products',
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -112,6 +113,7 @@ class ProductController extends Controller
 
         ]);
         if ($validator->fails()) {
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
@@ -162,11 +164,21 @@ class ProductController extends Controller
             }
             ProductWarehouses::insert($dataInsert);
             Product::where('id', $product->id)->update(['amount_product' => $amount]);
-
+            $userLogin = Auth::user();
+            $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+            $data = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
+                'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                'href' => route('screens.vstore.product.request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
+            ];
+            $user->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
@@ -193,6 +205,9 @@ class ProductController extends Controller
 
     public function requestProduct(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
         $limit = $request->limit ?? 10;
         $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         if (isset($request->condition) && $request->condition != 0) {

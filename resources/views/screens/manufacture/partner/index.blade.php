@@ -18,29 +18,21 @@
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="flex justify-start items-center gap-2 w-full">
-                        <span class="text-title font-medium ">Mã sản phẩm:</span>
+                        <span class="text-title font-medium ">Mã kho hàng:</span>
                         <span class="text-title">VSC1232</span>
                     </div>
 
                     <div class="flex justify-start items-center gap-2 w-full">
-                        <span class="text-title font-medium ">Tên sản phẩm:</span>
-                        <span class="text-title">Sữa</span>
+                        <span class="text-title font-medium ">Tên kho hàng:</span>
+                        <span class="text-title">Nhà Kho Hải Đăng</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
-                        <span class="text-title font-medium ">Nhà cung cấp:</span>
-                        <span class="text-title">30,000</span>
+                        <span class="text-title font-medium ">Địa chỉ: </span>
+                        <span class="text-title">Việt Nam</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
-                        <span class="text-title font-medium ">Giá bán:</span>
-                        <span class="text-title">VSC1232</span>
-                    </div>
-                    <div class="flex justify-start items-center gap-2 w-full">
-                        <span class="text-title font-medium ">Chiết khấu:</span>
-                        <span class="text-title">2%</span>
-                    </div>
-                    <div class="flex justify-start items-center gap-2 w-full">
-                        <span class="text-title font-medium ">Số lượng bán:</span>
-                        <span class="text-title">50</span>
+                        <span class="text-title font-medium ">Tổng sản phẩm trong tồn kho: </span>
+                        <span class="text-title">100</span>
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
@@ -78,7 +70,7 @@
                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                    placeholder="Nhập từ khóa">
             <input type="submit"
-                   class="cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
+                   class="text-blue-700  cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
                    value="Lọc">
         </div>
         <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">

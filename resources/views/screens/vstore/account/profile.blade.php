@@ -114,7 +114,17 @@
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                                    value="{{$infoAccount->id_vdone_diff}}">
                         </div>
-
+                        <div class="flex justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-[280px]">Link Website:</span>
+                            <div class="w-full flex flex-col justify-start items-start gap-2">
+                                <input type="text" name="link_website"
+                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                                       value="{{$infoAccount->link_website ?? 'https://vstore.vdone.vn'}}">
+                                @error('link_website')
+                                <p class="text-red-600">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
 
                     </div>
                     <div class="flex justify-end items-center gap-4 px-6">
@@ -213,7 +223,10 @@
                                     <span class="text-secondary">ID Người đại diện (khác):</span>
                                     <span>{{$infoAccount->id_vdone_diff}}</span>
                                 </div>
-
+                                <div class="flex justify-start items-center gap-4 w-full">
+                                    <span class="text-secondary">Link website: </span>
+                                    <span>{{$infoAccount->link_website ?? 'https://vstore.vdone.vn'}}</span>
+                                </div>
                                 <div class="flex justify-start items-center gap-4 ">
                                     <a href="#"
                                        class="edit-hs cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF] hover:opacity-70">
@@ -241,7 +254,7 @@
                                         Chọn ảnh
                                     </button>
                                     <div id="image"></div>
-                                                                        <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
+                                    <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
                                                                         Định dạng:.JPEG, .PNG</span>
                                     <div class="flex flex-col justify-center items-center text-center gap-4 w-full p-4">
                                         <div class="w-full file-banner">
@@ -256,7 +269,7 @@
                                             Chọn ảnh Banner
                                         </button>
                                         <div id="image2"></div>
-                                                                                <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
+                                        <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
                                                                                     Định dạng:.JPEG, .PNG</span>
                                     </div>
                                 </div>

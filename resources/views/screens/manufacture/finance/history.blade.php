@@ -57,30 +57,29 @@
         <div class="col-span-3">
 
             <div class="p-6">
-
                 <ul class="tab-sub-user">
-                    <li class="active"><a href="{{route('screens.manufacture.finance.index')}}"
-                                          class="flex justify-start items-end gap-2">
+                    <li><a href="{{route('screens.manufacture.finance.index')}}"
+                           class="flex justify-start items-end gap-2">
                             <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink"
                                  width="20" height="20" viewBox="0 0 969.486 969.486"
                                  xml:space="preserve">
-           <g>
-               <g>
-                   <path d="M806.582,235.309L766.137,87.125l-137.434,37.51L571.451,9.072L114.798,235.309H0v725.105h907.137V764.973h62.35v-337.53
-                       h-62.352V235.309H806.582z M718.441,170.63l17.654,64.68h-52.561h-75.887h-126.19l111.159-30.339l66.848-18.245L718.441,170.63z
-                        M839.135,892.414H68V522.062v-129.13v-10.233v-69.787v-9.602h35.181h27.538h101.592h409.025h75.889h37.43h35.242h35.244h13.994
-                       v51.272v72.86h-15.357h-35.244h-87.85H547.508h-55.217v27.356v75.888v8.758v35.244v35.244v155.039h346.846v127.441H839.135z
-                        M901.486,696.973h-28.352h-34H560.291V591.375v-35.244v-35.244v-23.889v-1.555h3.139h90.086h129.129h56.492h34h4.445h23.904
-                       V696.973z M540.707,100.191l21.15,42.688l-238.955,65.218L540.707,100.191z"/>
-                   <polygon
-                       points="614.146,564.57 614.146,576.676 614.146,631.152 680.73,631.152 680.73,564.57 658.498,564.57 		"/>
-               </g>
-           </g>
-           </svg>
+                   <g>
+                       <g>
+                           <path d="M806.582,235.309L766.137,87.125l-137.434,37.51L571.451,9.072L114.798,235.309H0v725.105h907.137V764.973h62.35v-337.53
+                               h-62.352V235.309H806.582z M718.441,170.63l17.654,64.68h-52.561h-75.887h-126.19l111.159-30.339l66.848-18.245L718.441,170.63z
+                                M839.135,892.414H68V522.062v-129.13v-10.233v-69.787v-9.602h35.181h27.538h101.592h409.025h75.889h37.43h35.242h35.244h13.994
+                               v51.272v72.86h-15.357h-35.244h-87.85H547.508h-55.217v27.356v75.888v8.758v35.244v35.244v155.039h346.846v127.441H839.135z
+                                M901.486,696.973h-28.352h-34H560.291V591.375v-35.244v-35.244v-23.889v-1.555h3.139h90.086h129.129h56.492h34h4.445h23.904
+                               V696.973z M540.707,100.191l21.15,42.688l-238.955,65.218L540.707,100.191z"/>
+                           <polygon
+                               points="614.146,564.57 614.146,576.676 614.146,631.152 680.73,631.152 680.73,564.57 658.498,564.57 		"/>
+                       </g>
+                   </g>
+                   </svg>
                             Ví</a></li>
-                    <li><a href="{{route('screens.manufacture.finance.history')}}"
-                           class="flex justify-start items-end gap-2">
+                    <li class="active"><a href="{{route('screens.manufacture.finance.history')}}"
+                                          class="flex justify-start items-end gap-2">
                             <svg width="20" height="20" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
                                 <defs>
@@ -151,6 +150,7 @@
                             Lịch sử thay đổi số dư</a></li>
 
                 </ul>
+                </li>
 
                 </ul>
             </div>
@@ -159,73 +159,144 @@
             <div class="box w-full">
                 <div class="flex flex-col justify-start items-start w-full p-6">
                     <div class="flex flex-col justify-start items-start gap-1 pb-6 border-b-[1px] border-grey w-full">
-                        <h3 class="captilize font-medium text-xl text-title">Ví của tôi</h3>
-                        <div class="flex justify-start item-center gap-2 w-full  flex-wrap md:flex-nowrap">
-                            <span class="text-secondary font-medium text-lg w-[150px]">Số dư tài sản:  </span>
-                            <span class="text-title font-medium text-lg w-full">2.000.000.000 VNĐ</span>
-                        </div>
+                        <h3 class="captilize font-medium text-xl text-title">Lịch sử thay đổi số dư của tôi</h3>
+                        <span class="text-secondary text-sm">Quản lý lịch sử thay đổi số dư của bạn</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-0 pt-6 w-full md:p-6 ">
-                        <div class="col-span-12 order-last md:order-first">
-                            <div class="flex flex-col justify-start items-start gap-6 md:px-6  w-full ">
+                    <div class=" pt-6 w-full md:p-6 ">
+                        <div class="w-full overflow-scroll">
+                            <table class="w-full dsth">
+                                <thead>
+                                <tr>
+                                    <th>Mã giao dịch</th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+                                    <th>
+                                        Số tiền
+                                    </th>
+                                    <th>
+                                        Số dư
+                                    </th>
+                                    <th>
+                                        Nội dung
+                                    </th>
+                                    <th>
+                                        Ngày giao dịch
+                                    </th>
 
-                                <h4 class="text-title text-2xl font-medium">Rút tiền</h4>
-                                <div class="flex justify-start items-center gap-4 w-full">
-                                    <label class="w-full text-title font-medium" for="val-username">Số tiền cần
-                                        rút<strong class="text-[#FF4D4F]">*</strong>
-                                    </label>
-                                    <input type="number"
-                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
-                                           min="1" placeholder="0đ" style="border-radius: 0.25rem">
-                                </div>
-                                <div class="flex justify-start items-start w-full flex-wrap md:flex-nowrap">
-                                    <label class="w-full" for="val-username">Phương thức nhận tiền:
-                                    </label>
-                                    <div class="w-full">
-                                        <div class="flex justify-between items-center w-full"
-                                             style="border: 1px solid #ced4da; border-radius: 0.25rem; padding: 0.375rem 0.75rem;">
-                                            <div class="flex justify-start items-center w-full" style="gap: 10px;">
-                                                <div style="width:30px; height:30px">
-                                                    <img src="{{asset('asset/images/vc.png')}}" alt=""
-                                                         style="max-width:100%; width:100%; height:100%">
-                                                </div>
-                                                <div>
-                                                    <h4 class="m-0">Vietcombank</h4>
-                                                    <span
-                                                        style="font-size: 12px; line-height: 14px">*********8888</span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <img src="{{asset('asset/images/check_24px.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="btn-add-bank">
-                                            <div
-                                                style="border: 1px solid #ced4da; border-radius: 0.25rem; padding: 0.375rem 0.75rem; margin-top: 20px;">
-                                                <div class="flex justify-start items-center w-full" style="gap: 20px;">
-                                                    <div style="width:20px;height:20px">
-                                                        <img src="{{asset('asset/images/plus.png')}}" alt=""
-                                                             style="max-width:100%; width:100%; height:100%">
-                                                    </div>
-                                                    <div>
-                                                        <h4 class="m-0">Thêm ngân hàng</h4>
-                                                        <span style="font-size: 12px; line-height: 14px">Miễn phí nạp, rút tiền</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="flex justify-end items-center gap-4 p-6">
-                                <button
-                                    class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 text-center text-[#FFFFFF] hover:opacity-70">
-                                    Rút tiền
-                                </button>
-                            </div>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>GD-0231</td>
+
+                                    <td class="text-[#52C41A]">
+                                        Thành công
+                                    </td>
+                                    <td>
+                                        10.000.000
+                                    </td>
+                                    <td>
+                                        2.000.000.000
+                                    </td>
+                                    <td>
+                                        Chuyển khoản ra ngoài
+                                    </td>
+
+
+                                    <td>
+                                        10/4/2022
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>GD-0231</td>
+
+                                    <td class="text-[#FF4D4F]">
+                                        Thất bại
+                                    </td>
+                                    <td>
+                                        10.000.000
+                                    </td>
+                                    <td>
+                                        2.000.000.000
+                                    </td>
+                                    <td>
+                                        Chuyển khoản ra ngoài
+                                    </td>
+
+
+                                    <td>
+                                        10/4/2022
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>GD-0231</td>
+
+                                    <td class="text-[#52C41A]">
+                                        Thành công
+                                    </td>
+                                    <td>
+                                        10.000.000
+                                    </td>
+                                    <td>
+                                        2.000.000.000
+                                    </td>
+                                    <td>
+                                        Chuyển khoản ra ngoài
+                                    </td>
+
+
+                                    <td>
+                                        10/4/2022
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>GD-0231</td>
+
+                                    <td class="text-[#52C41A]">
+                                        Thành công
+                                    </td>
+                                    <td>
+                                        10.000.000
+                                    </td>
+                                    <td>
+                                        2.000.000.000
+                                    </td>
+                                    <td>
+                                        Chuyển khoản ra ngoài
+                                    </td>
+
+
+                                    <td>
+                                        10/4/2022
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>GD-0231</td>
+
+                                    <td class="text-[#52C41A]">
+                                        Thành công
+                                    </td>
+                                    <td>
+                                        10.000.000
+                                    </td>
+                                    <td>
+                                        2.000.000.000
+                                    </td>
+                                    <td>
+                                        Chuyển khoản ra ngoài
+                                    </td>
+
+
+                                    <td>
+                                        10/4/2022
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
                         </div>
-
                     </div>
 
                 </div>

@@ -12,6 +12,10 @@ class FinanceController extends Controller
     public function index()
     {
         return view('screens.manufacture.finance.index', []);
+    }
 
+    public function history()
+    {
+        return view('screens.manufacture.finance.history', []);
     }
 }
