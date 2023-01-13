@@ -109,7 +109,7 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <select name="category_id" id="category_id"
                                     class="th choose-vstore text-opa outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="0">Chọn ngành hàng</option>
+                                <option value="">Chọn ngành hàng</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
@@ -218,21 +218,26 @@
                             @enderror
                         </div>
 
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Kích cỡ (Cm)</span>
-                            <div class="flex justify-between items-center w-full gap-6">
-                                <input required type="number" min="0" max="" placeholder="Nhập chiều dài (cm)" name="length"
-                                       id="length"
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <div>
+                            <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span class="text-title font-medium">Kích cỡ (Cm)</span>
 
-                                <input required type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
-                                       id="with"
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <input required type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
-                                       id="height"
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                <div class="flex justify-between items-center w-full gap-6">
+                                    <input type="number" min="0" max="" placeholder="Nhập chiều dài (cm)" name="length"
+                                           id="length"
+                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
-                            </div>
+                                    <input  type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
+                                            id="with"
+                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <input  type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
+                                            id="height"
+                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+
+                                </div>
+
+                        </div>
+
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -299,7 +304,7 @@
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4">
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="datetime-local" min="2018-01-01" max="2018-12-31"
+                            <input type="datetime-local" min="2018-01-01"  name="import_date"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 

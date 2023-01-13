@@ -140,6 +140,14 @@ Route::middleware('auth')->group(function () {
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [\App\Http\Controllers\Vstore\DashboardController::class, 'index'])->name('screens.vstore.dashboard.index');
         });
+        Route::prefix('finance')->group(function (){
+            Route::get('',[\App\Http\Controllers\Vstore\FinanceController::class,'index'])->name('screens.vstore.finance.index');
+            Route::get('revenue',[\App\Http\Controllers\Vstore\FinanceController::class,'revenue'])->name('screens.vstore.finance.revenue');
+        });
+        Route::prefix('order')->group(function (){
+            Route::get('',[\App\Http\Controllers\Vstore\OrderController::class,'index'])->name('screens.vstore.order.index');
+            Route::get('new',[\App\Http\Controllers\Vstore\OrderController::class,'new'])->name('screens.vstore.order.new');
+        });
         Route::prefix('account')->group(function () {
             Route::get('/', [\App\Http\Controllers\Vstore\AccountController::class, 'profile'])->name('screens.vstore.account.profile');
             Route::post('/edit/{id}', [\App\Http\Controllers\Vstore\AccountController::class, 'editProfile'])->name('screens.vstore.account.editPro');

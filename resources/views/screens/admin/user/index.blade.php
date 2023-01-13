@@ -113,9 +113,9 @@
                                     <td>
 
                                         @if($user->confirm_date)
-                                            <span>Đã duyệt</span>
+                                            <span class="text-green-600">Đã duyệt</span>
                                         @else
-                                            <a href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt
+                                            <a class="text-orange-600" href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt
                                                 tài
                                                 khoản</a>
                                         @endif

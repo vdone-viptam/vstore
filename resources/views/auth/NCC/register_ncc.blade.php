@@ -174,7 +174,7 @@
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#" onclick="$('.modal-hd').toggleClass('show-modal')">Xem thêm</a></div>
+    <div class="text-center my-4"><input type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#" onclick="$('.modal-hd').toggleClass('show-modal')" class="underline text-blue-700">Xem thêm</a></div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
                 class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"

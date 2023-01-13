@@ -70,10 +70,11 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+//        dd( $request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'vstore_id' => 'required',
-            'discount' => 'required',
+            'discount' => 'required|max:99|min:0',
             'category_id' => 'required',
             'description' => 'required',
             'brand' => 'required',
@@ -82,9 +83,6 @@ class ProductController extends Controller
             'manufacturer_name' => 'required',
             'manufacturer_address' => 'required',
             'origin' => 'required',
-            'length' => 'required',
-            'with' => 'required',
-            'height' => 'required',
             'volume' => 'required',
             'price' => 'required',
             'percent_discount' => 'required',
@@ -102,9 +100,6 @@ class ProductController extends Controller
             'manufacturer_name.required' => 'Trường này không được trống',
             'manufacturer_address.required' => 'Trường này không được trống',
             'origin.required' => 'Trường này không được trống',
-            'length.required' => 'Trường này không được trống',
-            'with.required' => 'Trường này không được trống',
-            'height.required' => 'Trường này không được trống',
             'volume.required' => 'Trường này không được trống',
             'price.required' => 'Trường này không được trống',
             'percent_discount.required' => 'Trường này không được trống',
@@ -113,7 +108,7 @@ class ProductController extends Controller
 
         ]);
         if ($validator->fails()) {
-            dd($validator->errors());
+
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
@@ -131,10 +126,10 @@ class ProductController extends Controller
             $product->manufacturer_name = $request->manufacturer_name;
             $product->manufacturer_address = $request->manufacturer_address;
             $product->origin = $request->origin;
-            $product->length = $request->length;
-            $product->with = $request->with;
-            $product->height = $request->height;
-            $product->volume = $request->volume;
+            $product->length = $request->length  ?? 0;
+            $product->with = $request->with  ?? 0;
+            $product->height = $request->height  ?? 0;
+            $product->volume = $request->volume  ?? 0;
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->price = $request->price;
@@ -144,6 +139,7 @@ class ProductController extends Controller
             $product->payment_on_delivery = $request->payment_on_delivery ? 1 : 0;
             $product->prepay = $request->prepay ? 1 : 0;
             $product->status = 1;
+            $product->import_date= $request->import_date;
             $photo_gallery = [];
             foreach (json_decode($request->images) as $image) {
                 $photo_gallery[] = $this->saveImgBase64($image, 'products');
@@ -168,7 +164,7 @@ class ProductController extends Controller
             $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'avatar' => $userLogin->avatar ?? '',
                 'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                 'href' => route('screens.vstore.product.request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
@@ -178,7 +174,7 @@ class ProductController extends Controller
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
+
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }

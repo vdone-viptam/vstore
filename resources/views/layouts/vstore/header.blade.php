@@ -132,25 +132,25 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Đơn hàng mới</a></li>
-                    <li><a href="#">Tất cả đơn hàng</a></li>
+                    <li><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
+                    <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Đối tác
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
-                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </a>
-                <ul class="sub-nav">
-                    <li><a href="#">Nhà cung cấp</a></li>
+{{--            <li><a href="#" class="flex justify-start items-center gap-2">Đối tác--}}
+{{--                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"--}}
+{{--                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>--}}
+{{--                    </svg>--}}
+{{--                </a>--}}
+{{--                <ul class="sub-nav">--}}
+{{--                    <li><a href="#">Nhà cung cấp</a></li>--}}
 {{--                    <li><a href="#">Vshop</a></li>--}}
-                    <li><a href="#">Đối tác giao hàng</a></li>
-                </ul>
-            </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Nhân viên
-                </a>
-            </li>
+{{--                    <li><a href="#">Đối tác giao hàng</a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
+{{--            <li><a href="#" class="flex justify-start items-center gap-2">Nhân viên--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li><a href="#" class="flex justify-start items-center gap-2">Tài chính
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
@@ -158,24 +158,24 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="">Ví</a></li>
-                    <li><a href="">Doanh thu</a></li>
+                    <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
+                    <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
-                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </a>
-                <ul class="sub-nav">
-                    <li><a href="#">Báo cáo bán hàng</a></li>
-                    <li><a href="#">Báo cáo hàng hóa</a></li>
-                    <li><a href="#">Báo cáo nhà cung cấp</a></li>
-                    <li><a href="#">Báo cáo Vshop</a></li>
-                    <li><a href="#">Báo cáo Admin</a></li>
-                </ul>
-            </li>
+{{--            <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo--}}
+{{--                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"--}}
+{{--                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>--}}
+{{--                    </svg>--}}
+{{--                </a>--}}
+{{--                <ul class="sub-nav">--}}
+{{--                    <li><a href="#">Báo cáo bán hàng</a></li>--}}
+{{--                    <li><a href="#">Báo cáo hàng hóa</a></li>--}}
+{{--                    <li><a href="#">Báo cáo nhà cung cấp</a></li>--}}
+{{--                    <li><a href="#">Báo cáo Vshop</a></li>--}}
+{{--                    <li><a href="#">Báo cáo Admin</a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
         </ul>
         <ul class="flex justify-start items-center gap-3">
 

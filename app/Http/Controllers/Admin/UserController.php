@@ -20,7 +20,7 @@ class UserController extends Controller
         $this->v = [];
     }
 
-    public function getListRegisterAccount()
+    public function getListRegisterAccount( Request $request)
     {
         $this->v['users'] = User::select();
         $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
