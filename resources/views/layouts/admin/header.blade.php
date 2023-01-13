@@ -106,8 +106,11 @@
         <ul class="nav-menu flex justify-start items-center max-w-[600px] xl:max-w-full flex-wrap xl:flex-nowrap  xl:gap-4">
             <li><a href="{{route('screens.admin.dashboard.index')}}" class="flex justify-start items-center gap-2">Tổng
                     quan</a></li>
-            <li class=""><a href="javascript:void(0)" class="flex justify-start items-center gap-1">Quản lý sản phẩm <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10" stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"></path>
+            <li class="active"><a href="javascript:void(0)" class="flex justify-start items-center gap-1">Quản lý sản
+                    phẩm
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
+                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"></path>
                     </svg>
                 </a>
                 <ul class="sub-nav">
@@ -164,7 +167,8 @@
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a></li>
-            <li title="Thông báo"><a href="#" class="hover:opacity-70 transition-all duration-500 relative">
+            <li title="Thông báo" class="notify relative"><a href="#"
+                                                             class="hover:opacity-70 transition-all duration-500 relative">
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="48" height="48" rx="24" fill="white"/>
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -172,8 +176,28 @@
                               fill="#2F54EB"/>
                     </svg>
                     <span
-                        class="text-center absolute top-[-10px] right-0 rounded-full w-[24px] h-[24px] bg-[#FF4D4F] text-[#FFF] text-sm after:content-['6'] after:text-sm flex justify-center items-center"></span>
+                        class="text-center absolute top-[-10px] right-0 rounded-full w-[24px] h-[24px] bg-[#FF4D4F] text-[#FFF] text-sm after:content-['{{count(Auth::user()->unreadNotifications) ?? 0}}'] after:text-sm flex justify-center items-center"></span>
                 </a>
+                <ul class="sub-nav-notify">
+                    <div class="flex justify-between items-center w-full pb-3 px-3">
+                        <h2 class="text-xl font-normal text-title">Thông báo</h2>
+                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                            cả</a>
+                    </div>
+                    @if(count(Auth::user()->unreadNotifications) > 0)
+                        @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                            <li>
+                                <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                   class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                    <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                            </li>
+                        @endforeach
+                    @else
+                        <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                    @endif
+
+
+                </ul>
             </li>
         </ul>
     </div>

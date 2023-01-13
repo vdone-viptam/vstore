@@ -70,8 +70,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/change-password', [\App\Http\Controllers\Admin\AccountController::class, 'saveChangePassword'])->name('screens.admin.account.saveChangePassword');
 
         });
-        Route::prefix('product')->group(function (){
-           Route::get('index',[\App\Http\Controllers\Admin\ProductController::class,'index'])->name('screens.admin.product.index');
+        Route::prefix('product')->group(function () {
+            Route::get('index', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('screens.admin.product.index');
             Route::get('/detail', [\App\Http\Controllers\Admin\ProductController::class, 'detail'])->name('screens.admin.product.detail');
             Route::post('/confirm/{id}}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
         });
@@ -83,9 +83,29 @@ Route::middleware('auth')->group(function () {
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\DashboardController::class, 'index'])->name('screens.manufacture.dashboard.index');
         });
-        Route::get('/add-product-warehouse',[\App\Http\Controllers\Manufacture\WarehouseController::class,'addProduct'])->name('screens.manufacture.warehouse.addProduct');
-        Route::post('/add-product-warehouse',[\App\Http\Controllers\Manufacture\WarehouseController::class,'postAddProduct']);
+        Route::prefix('warehouses')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'index'])->name('screens.manufacture.warehouse.index');
+            Route::get('/swap', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'swap'])->name('screens.manufacture.warehouse.swap');
 
+            Route::get('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'addProduct'])->name('screens.manufacture.warehouse.addProduct');
+            Route::post('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'postAddProduct']);
+        });
+        Route::prefix('partners')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Manufacture\PartnerController::class, 'index'])->name('screens.manufacture.partner.index');
+            Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
+
+        });
+        Route::prefix('finances')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Manufacture\FinanceController::class, 'index'])->name('screens.manufacture.finance.index');
+            Route::get('/history', [\App\Http\Controllers\Manufacture\FinanceController::class, 'history'])->name('screens.manufacture.finance.history');
+
+        });
+        Route::prefix('orders')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Manufacture\OrderController::class, 'index'])->name('screens.manufacture.order.index');
+            Route::get('/destroy', [\App\Http\Controllers\Manufacture\OrderController::class, 'destroy'])->name('screens.manufacture.order.destroy');
+            Route::get('/pending', [\App\Http\Controllers\Manufacture\OrderController::class, 'pending'])->name('screens.manufacture.order.pending');
+
+        });
 //         Cập nhật thông tin tài khoản nhà cung cấp
         Route::prefix('account')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\AccountController::class, 'profile'])->name('screens.manufacture.account.profile');

@@ -114,7 +114,8 @@
     <div class="md:flex justify-between items-center px-5 xl:px-16 py-3 bg-geekBlue hidden">
         <ul class="nav-menu flex justify-start items-center max-w-[600px] xl:max-w-full flex-wrap xl:flex-nowrap  xl:gap-4">
             <li class="active"><a href="../" class="flex justify-start items-center gap-2">Tổng quan</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-1">Quản lý sản phẩm
+            <li><a href="{{route('screens.manufacture.product.index')}}" class="flex justify-start items-center gap-1">Quản
+                    lý sản phẩm
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
@@ -127,64 +128,68 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-1">Kho hàng
+            <li><a href="{{route('screens.manufacture.warehouse.index')}}"
+                   class="flex justify-start items-center gap-1">Kho hàng
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Quản lý kho hàng</a></li>
+                    <li><a href="{{route('screens.manufacture.warehouse.index')}}">Quản lý kho hàng</a></li>
                     <li><a href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm sản phẩm vào kho</a></li>
-                    <li><a href="#">Quản lý xuất nhập kho</a></li>
+                    <li><a href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý xuất nhập kho</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Quản lý V-Store
+            <li><a href="{{route('screens.manufacture.partner.index')}}" class="flex justify-start items-center gap-2">Quản
+                    lý V-Store
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Quản lý hàng tại vstore</a></li>
-                    <li><a href="#">Báo cáo Vstore</a></li>
+                    <li><a href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại vstore</a></li>
+                    <li><a href="{{route('screens.manufacture.partner.report')}}">Báo cáo Vstore</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Quản lý đơn hàng
+            <li><a href="{{route('screens.manufacture.order.index')}}" class="flex justify-start items-center gap-2">Quản
+                    lý đơn hàng
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Tất cả đơn hàng</a></li>
-                    <li><a href="#">Đơn hủy</a></li>
-                    <li><a href="#">Trả hàng, hoàn tiền</a></li>
+                    <li><a href="{{route('screens.manufacture.order.index')}}">Tất cả đơn hàng</a></li>
+                    <li><a href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a></li>
+                    <li><a href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn tiền</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Tài chính
+            <li><a href="{{route('screens.manufacture.finance.index')}}" class="flex justify-start items-center gap-2">Tài
+                    chính
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
                               stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="./tai-chinh/">Ví</a></li>
-                    <li><a href="./tai-chinh/doanh-thu.html">Doanh thu</a></li>
-                    <li><a href="#">Cài đặt thanh toán</a></li>
+                    <li><a href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
+                    <li><a href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a></li>
+                    {{--                    <li><a href="#">Cài đặt thanh toán</a></li>--}}
                 </ul>
             </li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Dữ liệu
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
-                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </a>
-                <ul class="sub-nav">
-                    <li><a href="#">Phân tích bán hàng</a></li>
-                    <li><a href="#">Hiệu quả hoạt động</a></li>
-                </ul>
-            </li>
+            {{--            <li><a href="#" class="flex justify-start items-center gap-2">Dữ liệu--}}
+            {{--                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+            {{--                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"--}}
+            {{--                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>--}}
+            {{--                    </svg>--}}
+            {{--                </a>--}}
+            {{--                <ul class="sub-nav">--}}
+            {{--                    <li><a href="#">Phân tích bán hàng</a></li>--}}
+            {{--                    <li><a href="#">Hiệu quả hoạt động</a></li>--}}
+            {{--                </ul>--}}
+            {{--            </li>--}}
         </ul>
         <ul class="flex justify-start items-center gap-3">
 
@@ -213,7 +218,7 @@
                               fill="#2F54EB"/>
                     </svg>
                     <span
-                        class="text-center absolute top-[-10px] right-0 rounded-full w-[24px] h-[24px] bg-[#FF4D4F] text-[#FFF] text-sm after:content-['6'] after:text-sm flex justify-center items-center"></span>
+                        class="text-center absolute top-[-10px] right-0 rounded-full w-[24px] h-[24px] bg-[#FF4D4F] text-[#FFF] text-sm after:content-['{{count(Auth::user()->unreadNotifications) ?? 0}}'] after:text-sm flex justify-center items-center"></span>
                 </a>
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
@@ -221,15 +226,18 @@
                         <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
                             cả</a>
                     </div>
-                    <li><a class="flex justify-between items-center w-full text-sm text-title font-bold"><span>Danh sách thương hiệu </span>
-                            <span>10:25 </span></a></li>
-                    <li><a class="flex justify-between items-center w-full text-sm text-title font-bold"><span>Danh sách thương hiệu </span>
-                            <span>9:25 </span></a></li>
+                    @if(count(Auth::user()->unreadNotifications) > 0)
+                        @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                            <li>
+                                <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                   class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                    <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                            </li>
+                        @endforeach
+                    @else
+                        <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                    @endif
 
-                    <li><a class="flex justify-between items-center w-full text-sm text-secondary font-normal"><span>Danh sách thương hiệu </span>
-                            <span>8:25 </span></a></li>
-                    <li><a class="flex justify-between items-center w-full text-sm text-title font-bold"><span>Danh sách thương hiệu </span>
-                            <span>7:25 </span></a></li>
 
                 </ul>
             </li>

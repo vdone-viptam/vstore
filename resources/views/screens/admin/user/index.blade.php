@@ -26,7 +26,7 @@
                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Tên nhà cung cấp / tên công ty">
                 <button type="button" id="btnSearch"
-                        class="cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
+                        class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
                 >Lọc
                 </button>
             </div>
@@ -164,4 +164,24 @@
 
         </div>
     </form>
+@endsection
+
+@section('custom_js')
+    <script>
+        const name = document.getElementById('name');
+        const id = document.getElementById('id');
+        const limit = document.getElementById('limit');
+        const page = document.getElementById('page1');
+        const form = document.getElementById('form');
+        document.getElementById('btnSearch').addEventListener('click', () => {
+                form.submit();
+            }
+        )
+        limit.addEventListener('change', (e) => {
+            form.submit();
+        });
+        page.addEventListener('change', (e) => {
+            form.submit();
+        });
+    </script>
 @endsection

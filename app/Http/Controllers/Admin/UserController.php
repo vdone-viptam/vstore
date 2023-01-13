@@ -22,13 +22,33 @@ class UserController extends Controller
 
     public function getListRegisterAccount()
     {
-        $this->v['users'] = User::select()->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate(10);
+        $this->v['users'] = User::select();
+        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
+        $limit = $request->limit ?? 10;
+        if (isset($request->name)) {
+            $this->v['users'] = $this->v['users']->where('company_name', 'like', '%' . $request->name . '%');
+        }
+        if (isset($request->id)) {
+            $this->v['users'] = $this->v['users']->where('id', $request->id);
+        }
+        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
+        $this->v['params'] = $request->all();
         return view('screens.admin.user.index', $this->v);
     }
 
-    public function getListUser()
+    public function getListUser(Request $request)
     {
-        $this->v['users'] = User::select()->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate(10);
+        $this->v['users'] = User::select();
+        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
+        $limit = $request->limit ?? 10;
+        if (isset($request->name)) {
+            $this->v['users'] = $this->v['users']->where('company_name', 'like', '%' . $request->name . '%');
+        }
+        if (isset($request->id)) {
+            $this->v['users'] = $this->v['users']->where('id', $request->id);
+        }
+        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
+        $this->v['params'] = $request->all();
         return view('screens.admin.user.list_user', $this->v);
     }
 

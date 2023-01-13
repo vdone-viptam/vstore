@@ -37,6 +37,7 @@ class AccountController extends Controller
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
+            'link_website' => 'required|url'
 
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
@@ -46,6 +47,8 @@ class AccountController extends Controller
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+            'link_website.required' => 'Địa chỉ website bắt buộc nhập',
+            'link_website.url' => 'Địa chỉ website không hợp lệ'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');

@@ -101,7 +101,7 @@
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('email')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-red-600">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên V-Store</span>
@@ -109,7 +109,7 @@
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('name')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-red-600">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
@@ -117,7 +117,7 @@
                        class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('company_name')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-red-600">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
@@ -125,7 +125,7 @@
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('tax_code')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-red-600">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
@@ -142,7 +142,7 @@
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('phone_number')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-red-600">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium flex justify-start items-center gap-1"><strong
@@ -163,7 +163,7 @@
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('id_vdone')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-red-600">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"> Đại diện thêm</span>
