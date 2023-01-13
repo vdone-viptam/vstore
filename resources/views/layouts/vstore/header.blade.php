@@ -118,7 +118,7 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="#">Tất cả sản phẩm</a></li>
+                    <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
                     <li><a href="{{route('screens.vstore.product.request')}}">Yêu cầu thêm sản phẩm</a></li>
 
                     <li><a href="#">Thiết lập giá</a></li>
@@ -144,7 +144,7 @@
                 </a>
                 <ul class="sub-nav">
                     <li><a href="#">Nhà cung cấp</a></li>
-                    <li><a href="#">Vshop</a></li>
+{{--                    <li><a href="#">Vshop</a></li>--}}
                     <li><a href="#">Đối tác giao hàng</a></li>
                 </ul>
             </li>
@@ -158,8 +158,8 @@
                     </svg>
                 </a>
                 <ul class="sub-nav">
-                    <li><a href="./tai-chinh/">Ví</a></li>
-                    <li><a href="./tai-chinh/doanh-thu.html">Doanh thu</a></li>
+                    <li><a href="">Ví</a></li>
+                    <li><a href="">Doanh thu</a></li>
                 </ul>
             </li>
             <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo
