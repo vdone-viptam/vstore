@@ -23,6 +23,7 @@ Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
 Route::prefix('product')->group(function () {
     Route::get('',[\App\Http\Controllers\Api\ProductController::class,'index']);
     Route::get('product-by-category/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByCategory']);
+    Route::get('product-by-vstore/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVstore']);
 });
 Route::prefix('category')->group(function () {
     Route::get('',[\App\Http\Controllers\Api\CategoryController::class,'index']);
