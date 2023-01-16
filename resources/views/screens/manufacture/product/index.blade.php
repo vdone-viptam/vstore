@@ -164,12 +164,7 @@
                                 hàng / trang
                             </option>
                         </select>
-                        <div class="flex justify-start items-center gap-2">
-                            <span class="text-title text-sm">Đi đến</span>
-                            <input type="number" value="{{$params['page1'] ?? 0}}" name="page1" id="page1"
-                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"
-                            >
-                        </div>
+
                     </div>
                 </div>
             </div>
