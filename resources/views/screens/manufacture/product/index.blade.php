@@ -146,7 +146,7 @@
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>
+{{--                    <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>--}}
                     @include('layouts.custom.paginator', ['paginator' => $products])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
