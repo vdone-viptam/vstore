@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center bg-[#FFF] px-5 xl:px-16 py-4">
         <a href="../">
             <div class="w-[162px]">
-                <img src="{{asset('asset/images/Logo.png')}}" alt="">
+                <img src="{{asset('asset/images/logo.png')}}" alt="">
             </div>
         </a>
         <div class="flex justify-start items-center gap-10">
