@@ -87,7 +87,7 @@ class ProductController extends Controller
             $product->save();
             $userLogin = Auth::user();
             $user = User::find($product->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $message = 'Quản trị viên  đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
+            $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 2) {
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
             }
@@ -99,6 +99,9 @@ class ProductController extends Controller
                 'href' => route('screens.manufacture.product.request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
             ];
             $user->notify(new AppNotification($data));
+            $userVstore = User::find($product->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+            $data['href'] = route('screens.vstore.product.request', ['condition' => 'sku_id', 'key_search' => $product->sku_id]);
+            $userVstore->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
         } catch (\Exception $e) {

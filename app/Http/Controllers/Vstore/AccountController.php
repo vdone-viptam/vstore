@@ -95,11 +95,13 @@ class AccountController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
-            'password' => 'confirmed|required',
+            'password' => 'confirmed|required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'password_confirmation' => 'required'
         ], [
             'old_password.required' => 'Mật khẩu cũ bắt buộc nhập',
             'password.confirmed' => 'Xác nhận mật khẩu không chính xác',
+            'password.min' => 'Mật khẩu ít nhất 8 kí tự',
+            'password.regex' => 'Mật khẩu không dúng dịnh dạng (ít nhất 1 chữ số,kí tự đặc biệt và 1 ký tự in hoa bất kì)',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
             'password_confirmation.required' => 'Bạn chưa xác nhận mật khảu'
         ]);

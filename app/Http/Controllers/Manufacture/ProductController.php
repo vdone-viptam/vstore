@@ -126,10 +126,10 @@ class ProductController extends Controller
             $product->manufacturer_name = $request->manufacturer_name;
             $product->manufacturer_address = $request->manufacturer_address;
             $product->origin = $request->origin;
-            $product->length = $request->length  ?? 0;
-            $product->with = $request->with  ?? 0;
-            $product->height = $request->height  ?? 0;
-            $product->volume = $request->volume  ?? 0;
+            $product->length = $request->length ?? 0;
+            $product->with = $request->with ?? 0;
+            $product->height = $request->height ?? 0;
+            $product->volume = $request->volume ?? 0;
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->price = $request->price;
@@ -139,7 +139,14 @@ class ProductController extends Controller
             $product->payment_on_delivery = $request->payment_on_delivery ? 1 : 0;
             $product->prepay = $request->prepay ? 1 : 0;
             $product->status = 1;
-            $product->import_date= $request->import_date;
+            $product->import_date = $request->import_date;
+            while (true) {
+                $code = rand(10000000, 99999999);
+                if (!Product::where('code', $code)->first()) {
+                    $product->code = $code;
+                    break;
+                }
+            }
             $photo_gallery = [];
             foreach (json_decode($request->images) as $image) {
                 $photo_gallery[] = $this->saveImgBase64($image, 'products');

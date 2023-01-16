@@ -106,10 +106,14 @@
                                     <td>
                                         @if($product->status == 1)
                                             <span class="text-yellow-400 font-medium">Đang chờ duyệt</span>
-                                        @elseif($product->status === 2)
+                                        @elseif($product->status == 2 && !$product->admin_confirm_date && $product->vstore_confirm_date)
+                                            <span class="text-yellow-400 font-medium">Chờ admin duyệt</span>
+                                        @elseif($product->status == 2 && $product->admin_confirm_date && $product->vstore_confirm_date)
                                             <span class="text-green-600 font-medium">Đã duyệt</span>
-                                        @elseif($product->status === 3)
-                                            <span class="text-red-600 font-medium">Từ chối</span>
+                                        @elseif($product->status == 3 && !$product->admin_confirm_date && $product->vstore_confirm_date)
+                                            <span class="text-red-600 font-medium">Vstore từ chối</span>
+                                        @else
+                                            <span class="text-red-600 font-medium">Admin từ chối</span>
                                         @endif
                                     </td>
                                     <td>
