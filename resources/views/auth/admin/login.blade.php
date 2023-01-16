@@ -121,8 +121,8 @@
                 <input type="submit" disabled
                        class="cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"
                        value="Đăng nhập">
-                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_vstore')}}"
-                                                                                   class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>
+{{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_vstore')}}"--}}
+{{--                                                                                   class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}
             </div>
 
         </form>
