@@ -87,7 +87,7 @@
                                     <td>{{ $loop->iteration}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>
-                                        <img style="margin: auto;height: 125px"
+                                        <img style="margin: auto;width: 125px"
                                              src="{{asset('image/category/'.$category->img)}}" alt="">
                                     </td>
                                     <td><a href="{{route('screens.admin.category.edit',['id' => $category->id])}}"
