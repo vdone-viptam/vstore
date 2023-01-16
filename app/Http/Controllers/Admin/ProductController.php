@@ -30,22 +30,22 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
                     ->where('status', 2)
                     ->orderBy('admin_confirm_date', 'asc')
                     ->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
                     ->where('status', 2)
                     ->orderBy('admin_confirm_date', 'asc')
                     ->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                $this->v['products'] = Product::select('code','products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
                     ->where('products.status', 2)
                     ->orderBy('admin_confirm_date', 'asc')
                     ->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%', 'admin_confirm_date', 'vstore_confirm_date')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%', 'admin_confirm_date', 'vstore_confirm_date')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
