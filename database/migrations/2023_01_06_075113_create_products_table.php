@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -48,6 +47,7 @@ return new class extends Migration
             $table->string('note')->nullable()->comment('Mã sản phẩm');
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }
