@@ -78,7 +78,7 @@
                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                    placeholder="Nhập từ khóa">
             <input type="submit"
-                   class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
+                   class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px]"
                    value="Lọc">
         </div>
         <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
@@ -231,7 +231,7 @@
                             10/01/2022
                         </td>
                         <td>
-                           Chưa xác định
+                            Chưa xác định
                         </td>
                         <td>
                             12.000.000

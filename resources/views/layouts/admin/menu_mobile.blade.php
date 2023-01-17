@@ -24,7 +24,8 @@
     </div>
     <div class="flex flex-col justify-start items-start gap-10 w-full">
         <ul class="nav-menu-mb flex flex-col justify-start items-start  gap-4 w-full">
-            <li><a href="../../.." class="flex justify-start items-center gap-2 w-full">Tổng quan</a></li>
+            <li><a href="{{route('screens.admin.dashboard.index')}}"
+                   class="flex justify-start items-center gap-2 w-full">Tổng quan</a></li>
             <li class="active"><a href="../san-pham/" class="flex justify-between items-center gap-2 w-full">Sản phẩm
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
@@ -32,18 +33,24 @@
                     </svg>
                 </a>
                 <ul class="nav-sub-menu-mb">
-                    <li><a href="../san-pham/danh-sach-thuong-hieu.html">Danh sách thương hiệu</a></li>
-                    <li><a href="../san-pham/danh-sach-san-pham.html">Danh sách sản phẩm</a></li>
-                    <li><a href="../san-pham/danh-sach-thuong-hieu.html">Danh mục</a></li>
+                    <li><a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a></li>
+                    <li><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu thêm sản phẩm</a></li>
                 </ul>
             </li>
-            <li><a href="../kho-hang/" class="flex justify-start items-center gap-2">Kho hàng</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Bán hàng</a></li>
-            <li><a href="../don-hang/" class="flex justify-start items-center gap-2">Đơn hàng</a></li>
-            <li><a href="../doanh-nghiep/" class="flex justify-start items-center gap-2">Doanh nghiệp</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Báo cáo</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Khuyến mãi</a></li>
-            <li><a href="#" class="flex justify-start items-center gap-2">Cài đặt</a></li>
+            <li><a href="{{route('screens.admin.category.index')}}" class="flex justify-start items-center gap-2">Danh
+                    mục</a></li>
+            <li class="active"><a href="{{route('screens.admin.user.list_user')}}"
+                                  class="flex justify-between items-center gap-2 w-full">Tài khoản
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
+                              stroke="#2F54EB" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+                <ul class="nav-sub-menu-mb">
+                    <li><a href="{{route('screens.admin.user.list_user')}}">Danh sách tài khoản</a></li>
+                    <li><a href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng ký tài khoản</a></li>
+                </ul>
+            </li>
         </ul>
         <ul class="flex justify-center items-center gap-3 w-full">
             <li><a href="#" class="hover:opacity-70 transition-all duration-500">

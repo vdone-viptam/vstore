@@ -57,7 +57,7 @@ $(document).ready(function () {
             $('.password .icon').html(svgHidePass)
         }
     })
-    $('.more-details').on('click', function(){
+    $('.more-details').on('click', function () {
         $('.modal-details').toggleClass('show-modal');
     })
     $('.rePassword .icon').on('click', function () {
@@ -248,3 +248,4 @@ $(document).ready(function () {
     })
 
 })
+

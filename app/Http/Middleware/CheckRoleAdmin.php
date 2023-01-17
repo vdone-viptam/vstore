@@ -19,8 +19,8 @@ class CheckRoleAdmin
     public function handle($request, Closure $next)
     {
 
-        if ($request->user() && $request->user()->role_id != 1) {
-            abort(404);
+        if ($request->user() && $request->user()->role_id != 1 || !Auth::user()) {
+            return redirect()->route('login_admin');
         }
         return $next($request);
     }

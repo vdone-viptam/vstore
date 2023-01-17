@@ -79,7 +79,7 @@
     @csrf
     <div class=" grid grid-cols-1 lg:grid-cols-2">
         <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
-            <a href="../dang-ky/"
+            <a href="#"
                class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
                 <div>
                     <img src="{{asset('asset/icons/back.png')}}" alt="">
@@ -174,7 +174,10 @@
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#" onclick="$('.modal-hd').toggleClass('show-modal')" class="underline text-blue-700">Xem thêm</a></div>
+    <div class="text-center my-4"><input type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#"
+                                                                                                              onclick="$('.modal-hd').toggleClass('show-modal')"
+                                                                                                              class="underline text-blue-700">Xem
+            thêm</a></div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
                 class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"

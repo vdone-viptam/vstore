@@ -56,8 +56,8 @@
 
 <div class=" grid grid-cols-1 place-items-center translate-y-[4rem]">
     <div
-        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  md:w-[500px]">
-        <a href="../.." class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
+        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full  md:w-[500px] ">
+        <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
             <div>
                 <img src="{{asset('asset/icons/back.png')}}" alt="">
             </div>
@@ -110,10 +110,10 @@
             </div>
 
             <div class="flex justify-between items-center w-full">
-{{--                <div class="flex justify-start items-center gap-4">--}}
-{{--                    <input type="checkbox" class="w-4 h-4 accent-primary">--}}
-{{--                    <span>Duy trì đăng nhập</span>--}}
-{{--                </div>--}}
+                {{--                <div class="flex justify-start items-center gap-4">--}}
+                {{--                    <input type="checkbox" class="w-4 h-4 accent-primary">--}}
+                {{--                    <span>Duy trì đăng nhập</span>--}}
+                {{--                </div>--}}
                 <a href="{{route('form_forgot_password')}}" class="font-medium text-[#096DD9]">Quên mật khẩu?</a>
             </div>
             {{--            bg-sky-500/100--}}
@@ -121,8 +121,8 @@
                 <input type="submit" disabled
                        class="cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"
                        value="Đăng nhập">
-{{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_vstore')}}"--}}
-{{--                                                                                   class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}
+                {{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_vstore')}}"--}}
+                {{--                                                                                   class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}
             </div>
 
         </form>

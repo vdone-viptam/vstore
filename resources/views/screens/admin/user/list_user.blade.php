@@ -26,7 +26,7 @@
                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Tên nhà cung cấp / tên công ty">
                 <button type="button" id="btnSearch"
-                        class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
+                        class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain px-4 py-[5px]"
                 >Lọc
                 </button>
             </div>

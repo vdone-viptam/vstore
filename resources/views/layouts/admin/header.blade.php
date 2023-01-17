@@ -1,6 +1,6 @@
 <header>
     <div class="flex justify-between items-center bg-[#FFF] px-5 xl:px-16 py-4">
-        <a href="../">
+        <a href="{{route('screens.admin.dashboard.index')}}">
             <div class="w-[162px]">
                 <img src="{{asset('asset/images/logo.png')}}" alt="">
             </div>
@@ -104,9 +104,11 @@
 
     <div class="md:flex justify-between items-center px-5 xl:px-16 py-3 bg-geekBlue hidden">
         <ul class="nav-menu flex justify-start items-center max-w-[600px] xl:max-w-full flex-wrap xl:flex-nowrap  xl:gap-4">
-            <li><a href="{{route('screens.admin.dashboard.index')}}" class="flex justify-start items-center gap-2">Tổng
+            <li data-page="dashboard"><a href="{{route('screens.admin.dashboard.index')}}"
+                                         class="flex justify-start items-center gap-2">Tổng
                     quan</a></li>
-            <li class="active"><a href="javascript:void(0)" class="flex justify-start items-center gap-1">Quản lý sản
+            <li data-page="product"><a href="javascript:void(0)"
+                                       class="flex justify-start items-center gap-1">Quản lý sản
                     phẩm
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 10L12.7071 15.2929C12.3166 15.6834 11.6834 15.6834 11.2929 15.2929L6 10"
@@ -115,13 +117,15 @@
                 </a>
                 <ul class="sub-nav">
                     <li><a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a></li>
-                    <li><a href="{{route('screens.admin.product.index')}}">Danh sách yêu cầu thêm sản phẩm</a></li>
-{{--                    <li><a href="../san-pham/yeu-cau-them-sp.html">Quản lý yêu cầu thêm sản phẩm</a></li>--}}
+                    <li><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu thêm sản phẩm</a></li>
+                    {{--                    <li><a href="../san-pham/yeu-cau-them-sp.html">Quản lý yêu cầu thêm sản phẩm</a></li>--}}
                 </ul>
             </li>
-            <li><a href="{{route('screens.admin.category.index')}}" class="flex justify-start items-center gap-2">Danh
+            <li data-page="category"><a href="{{route('screens.admin.category.index')}}"
+                                        class="flex justify-start items-center gap-2">Danh
                     mục</a></li>
-            <li><a href="{{route('screens.admin.user.index')}}" class="flex justify-start items-center gap-2">Tài
+            <li data-page="account"><a href="{{route('screens.admin.user.index')}}"
+                                       class="flex justify-start items-center gap-2">Tài
                     khoản</a>
                 <ul class="sub-nav">
                     <li><a href="{{route('screens.admin.user.list_user')}}">Danh sách tài khoản</a></li>
@@ -181,8 +185,8 @@
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
                         <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                            cả</a>
+                        {{--                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
+                        {{--                            cả</a>--}}
                     </div>
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)

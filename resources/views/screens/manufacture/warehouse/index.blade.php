@@ -54,7 +54,7 @@
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="./" class="text-blueMain font-medium">Quản lý kho hàng</a>
+        <a href="#" class="text-blueMain font-medium">Quản lý kho hàng</a>
     </div>
     <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -72,7 +72,7 @@
                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                    placeholder="Nhập từ khóa">
             <input type="submit"
-                   class="text-blue-700  cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
+                   class="text-blue-700  cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px]"
                    value="Lọc">
         </div>
         <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">

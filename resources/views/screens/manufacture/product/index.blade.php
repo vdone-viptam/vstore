@@ -44,7 +44,7 @@
                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Nhập từ khóa">
                 <input type="submit"
-                       class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"
+                       class="text-blue-700 cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px]"
                        value="Lọc">
             </div>
             <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
@@ -146,7 +146,7 @@
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-{{--                    <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>--}}
+                    {{--                    <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>--}}
                     @include('layouts.custom.paginator', ['paginator' => $products])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"

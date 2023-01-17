@@ -18,8 +18,8 @@ class CheckRoleNCC
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role_id != 2) {
-            abort(404);
+        if ($request->user() && $request->user()->role_id != 2|| !Auth::user()) {
+            return redirect()->route('login_ncc');
         }
         return $next($request);
     }

@@ -18,8 +18,8 @@ class CheckRoleVstore
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role_id != 3) {
-            abort(404);
+        if ($request->user() && $request->user()->role_id != 3 || !Auth::user()) {
+            return redirect()->route('login_vstore');
         }
         return $next($request);
     }
