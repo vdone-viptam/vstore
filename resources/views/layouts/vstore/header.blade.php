@@ -1,6 +1,6 @@
 <header>
     <div class="flex justify-between items-center bg-[#FFF] px-5 xl:px-16 py-4">
-        <a href="{{route('screens.manufacture.vstore.index')}}">
+        <a href="{{route('screens.vstore.dashboard.index')}}">
             <div class="w-[162px]">
                 <img src="{{asset('asset/images/logo.png')}}" alt="">
             </div>
