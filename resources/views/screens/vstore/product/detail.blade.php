@@ -60,11 +60,11 @@
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
-                    <button
-                        type="button"
-                        class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"
-                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại
-                    </button>
+{{--                    <button--}}
+{{--                        type="button"--}}
+{{--                        class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
+{{--                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
+{{--                    </button>--}}
                     @if($product->status == 1)
                         <button
                             class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
