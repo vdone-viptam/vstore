@@ -47,8 +47,8 @@ class LoginController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|email',
-            'name' => 'required',
-            'company_name' => 'required',
+            'name' => 'required|unique:users',
+            'company_name' => 'required||unique:users',
             'tax_code' => 'required',
             'address' => 'required',
             'phone_number' => 'required',
@@ -57,7 +57,9 @@ class LoginController extends Controller
             'email.required' => 'Email bắt buộc nhập',
             'email.unique' => 'Email đã tồn tại',
             'email.email' => 'Email không đúng dịnh dạng',
-            'name.required' => 'Tên v-store bắt buộc nhập',
+            'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+            'name.unique' => 'tên công ty đã tồn tại',
+            'company_name.unique' => 'tên công ty đã tồn tại',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
             'tax_code.required' => 'Mã số thuế bắt buộc nhập',
             'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -83,6 +85,7 @@ class LoginController extends Controller
             }
             $user->address = $request->address;
             $user->role_id = $request->role_id;
+            $user->slug = Str::slug($request->name);
             $user->save();
             DB::commit();
             return redirect()->back()->with('success', 'true');

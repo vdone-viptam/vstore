@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'SVN-Gilroy';
+}
+img{
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top-bar li{
+    margin: 10px 0;
+    padding: 0 6px;
+}
+.top-bar li a{
+    color: white;
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: 500;
+}
+.nav{
+    background: linear-gradient(112.7deg, #005CB5 -1.64%, #0C83F6 79.17%);
+}
+.box{
+    background: #FFFFFF;
+    box-shadow: -1px 4px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 12px
+}
+
+.content-item .item{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.content-item .item .content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.content-item .item .content h3{
+    margin: 0;
+    font-weight: 600;
+    color: #333333;
+}
+.content-item a{
+    text-decoration: none;
+    border: 0.947115px solid #056DD2;
+    box-shadow: -1.16568px 4.66272px 27.9763px rgba(0, 0, 0, 0.12);
+    border-radius: 13.9882px;
+    color: black;
+    padding: 5px;
+}
+.content-item a:hover{
+    cursor: pointer;
+    box-shadow: 0 0.0625rem 20px 0 rgb(0 0 0 / 5%);
+    -webkit-transform: translateY(-0.0625rem);
+    transform: translateY(-0.0625rem);
+    z-index: 1;
+    transition: 0.5s all;
+}
+.content .discount{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.discount .cost{
+    color: #BDBDBD;
+    text-decoration: line-through;
+    font-size: 13px;
+}
+.discount .real{
+    color: #056DD2;
+}
+.content .has-sell{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.has-sell .rating{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 2px;
+}
+.has-sell .rating svg{
+    width: 10px;
+    fill: #F2C94C;
+}
+.has-sell .rating svg g{
+    stroke: #F2C94C;
+}
+.has-sell .sell{
+    font-size: 14px;
+    color:  #4F4F4F;
+}
+.item-img img{
+    width: 100%;
+}
+.tem{
+    background: url('../images/tem.png') no-repeat center center;
+    background-size: 100% 100%;
+    width: 238px;
+    height: 535px;
+}

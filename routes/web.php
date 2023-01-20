@@ -44,8 +44,9 @@ Route::group(['domain' => config('domain.ncc')], function () {
 Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
+    Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
     Route::get('/', function () {
-        return redirect()->route('register_vstore');
+        return view('screens.vstore.index');
     });
 });
 
