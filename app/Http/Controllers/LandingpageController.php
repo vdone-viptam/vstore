@@ -21,8 +21,9 @@ class LandingpageController extends Controller
         }
         $logo = !empty($user->avatar) ? $user->avatar:'';
     $banner = !empty($user->banner)  ? $user->banner:'';
+    $name = $user->name;
 //    return $logo;
-        return view('screens.landingpage',compact('logo','banner'));
+        return view('screens.landingpage',compact('logo','banner','name'));
 //        return view('screens.landingpage',compact('logo','banner'));
     }
 }

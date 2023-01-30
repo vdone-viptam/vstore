@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="nav">
-        <div class="flex justify-between items-center max-w-[1320px] mx-auto px-6 xl:px-0">
+        <div class="flex justify-between items-center max-w-[1320px] mx-auto px-6 xl:px-0 py-4">
             <div class="w-[301px]">
                 <div class="w-[300px] h-[64px]">
                     @if(!empty($logo))
@@ -95,13 +95,26 @@
 {{--                    <a href="/"><img src="{{asset('landingpage/images/logo.png')}}" alt="" class="w-full"></a>--}}
                 </div>
             </div>
+            <div class="w-[730px] hidden lg:block">
+                <div class="w-[729px] h-[120px]">
+                    <img src=" {{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">
+                </div>
+            </div>
         </div>
 
+
     </div>
+{{--    @if(!empty($banner))--}}
+{{--        <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>--}}
+{{--    @else--}}
+{{--        <div class="w-full h-full">--}}
+{{--            <img src="{{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">--}}
+{{--        </div>--}}
+{{--    @endif--}}
 </header>
 <div class="xl:max-w-[1320px] mx-auto w-full flex flex-col gap-5 px-6 xl:px-0">
     <div class="grid grid-cols-12 gap-4 py-5 w-full">
-        <div class="col-span-8">
+        <div class="col-span-8 h-[265px] ">
             @if(!empty($banner))
                 <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>
             @else
@@ -111,7 +124,7 @@
             @endif
 
         </div>
-        <div class="col-span-4 flex flex-col justify-between items-center">
+        <div class="col-span-4 flex flex-col justify-between items-center h-[265px]">
             <div class="row-span-2 w-full">
                 <div class="w-full h-full">
                     <img src="{{asset('landingpage/images/bn3.jpg')}}" alt="" class="w-full">
@@ -1728,7 +1741,7 @@
 
     </div>
     <div class="flex flex-col justify-center items-center gap-6 py-10">
-        <h2 class="text-sciblue text-3xl font-bold uppercase text-center">ƯU ĐÃI NỔI BẬT CỦA QNUUSTORE </h2>
+        <h2 class="text-sciblue text-3xl font-bold uppercase text-center">ƯU ĐÃI NỔI BẬT CỦA {{$name}} </h2>
         <span class="xl:hidden">Hiện tại chưa có ưu đãi nào!</span>
         <div class="hidden xl:flex justify-between items-center w-full gap-36 ">
             <div class="w-full h-full relative">
@@ -1760,7 +1773,7 @@
     <div class="flex flex-col justify-center items-center gap-6">
         <h2 class="text-sciblue text-3xl font-bold uppercase text-center">Thương hiệu nổi bật</h2>
         <div class="w-full h-full">
-            <img src="../images/th.png" alt="" class="w-full">
+            <img src="{{asset('landingpage/images/th.png')}}" alt="" class="w-full">
         </div>
     </div>
     <div class="flex flex-col justify-center items-center gap-6 py-10">
