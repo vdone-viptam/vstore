@@ -19,16 +19,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //Route::get('login',AuthController::class,'postLogin');
-Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'postLogin']);
 Route::prefix('product')->group(function () {
-    Route::get('',[\App\Http\Controllers\Api\ProductController::class,'index']);
-    Route::get('product-by-category/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByCategory']);
-    Route::get('product-by-vstore/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVstore']);
+    Route::get('', [\App\Http\Controllers\Api\ProductController::class, 'index']);
+    Route::get('product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);
+    Route::get('product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
 });
 Route::prefix('category')->group(function () {
-    Route::get('',[\App\Http\Controllers\Api\CategoryController::class,'index']);
+    Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+
+});
+Route::prefix('vshop')->group(function () {
+    Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'getProductByIdPdone']);
 
 });
 Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
-    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
+    Route::get('amount', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'amount'])->name('amount');
 });
