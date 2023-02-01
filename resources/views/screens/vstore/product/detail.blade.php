@@ -56,7 +56,7 @@
                         </select>
                     </div>
                     <div id="vShop" class="w-full"
-                         @if(!\Illuminate\Support\Facades\Session::get('error')) style="display: none" @endif>
+                         @if(!$product->status ==2) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
                             <input type="text" name="discount_vShop"
