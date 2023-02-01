@@ -91,7 +91,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-6 flex flex-col justify-start items-start gap-4">
+                    <div class="col-span-6 flex flex-col justify-start items-start gap-4 w-full">
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Mức chiết khấu (%)<strong class="text-[#FF4D4F]">*</strong>
@@ -100,7 +100,6 @@
                                 <input type="number" name="discount" id="discount" min="0" max="99"
                                        placeholder="Nhập mức chiết khấu (%)"
                                        class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <span class="muc-chiet-khau">Mức tiền chiết khấu cho vstore</span>
                             </span>
 
                             @error('discount')
@@ -191,8 +190,47 @@
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                            <span class="text-title font-medium">Đơn vị</span>
+                            <select name="unit" id="unit"
+                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                <option value="0">Doanh nghiệp</option>
+                                <option value="1">Hợp tác xã</option>
+                                <option value="2">Hộ kinh doanh cá thể</option>
+                            </select>
+                            @error('unit')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                            <span class="text-title font-medium">Tên đơn vị</span>
+                            <input type="text" id="unit_name" name="unit_name"
+                                   placeholder="Nhập tên tổ chức"
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('unit_name')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                  <span class="text-title font-medium">Ảnh chứng minh<strong
+                                          class="text-[#FF4D4F]">*</strong></span>
+                            <div class="file-sp-1 flex justify-center items-start gap-4 flex-wrap md:justify-start">
 
+                            </div>
+                            <input type="hidden" id="unitImages" name="unitImages">
+                            <div
+                                class="cursor-pointer add-img-Uni w-[104px] h-[104px] border-2 border-dashed bg-[#FAFAFA] border-secondary flex justify-center flex-col items-center rounded-sm gap-1">
+                                <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M7.46838 1.37598H6.53088C6.44755 1.37598 6.40588 1.41764 6.40588 1.50098V6.40723H1.75C1.66667 6.40723 1.625 6.44889 1.625 6.53223V7.46973C1.625 7.55306 1.66667 7.59473 1.75 7.59473H6.40588V12.501C6.40588 12.5843 6.44755 12.626 6.53088 12.626H7.46838C7.55172 12.626 7.59338 12.5843 7.59338 12.501V7.59473H12.25C12.3333 7.59473 12.375 7.55306 12.375 7.46973V6.53223C12.375 6.44889 12.3333 6.40723 12.25 6.40723H7.59338V1.50098C7.59338 1.41764 7.55172 1.37598 7.46838 1.37598Z"
+                                        fill="black" fill-opacity="0.85"/>
+                                </svg>
+                                <span class="text-sm text-secondary">Tải hình ảnh</span>
+                                <span class="text-xs text-secondary" id="countImage1"> 0/5</span>
+                            </div>
 
+                        </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Tên tổ chức chịu trách nhiệm sản xuất</span>
                             <input type="text" id="manufacturer_name" name="manufacturer_name"
@@ -231,16 +269,16 @@
                                            id="length"
                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
-                                    <input  type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
-                                            id="with"
-                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                    <input  type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
-                                            id="height"
-                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
+                                           id="with"
+                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
+                                           id="height"
+                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                                 </div>
 
-                        </div>
+                            </div>
 
 
                         </div>
@@ -278,47 +316,48 @@
 
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Giá(chưa bao gồm VAT)<strong class="text-[#FF4D4F]">*</strong></span>
+                            <span class="text-title font-medium">Giá(chưa bao gồm VAT)<strong
+                                    class="text-[#FF4D4F]">*</strong></span>
                             <input type="number" placeholder="Nhập giá sản phẩm" name="price" id="price"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-{{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
-{{--                            <span class="text-title font-medium">Mua nhiều giảm giá</span>--}}
-{{--                            <input type="text" placeholder="Nhập số sản phẩm mua ít nhất để được giảm giá"--}}
-{{--                                   name="amount_product_send_to_discount" id="amount_product_send_to_discount"--}}
-{{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
-{{--                            @error('amount_product_send_to_discount')--}}
-{{--                            <p class="text-red-600">{{$message}}</p>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
-{{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
-{{--                            <span class="text-title font-medium">Phần trăm giảm giá (%)</span>--}}
-{{--                            <input type="text" placeholder="Số phần trăm giảm giá" id="percent_discount"--}}
-{{--                                   name="percent_discount"--}}
-{{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
-{{--                            @error('percent_discount')--}}
-{{--                            <p class="text-red-600">{{$message}}</p>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
+                        {{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
+                        {{--                            <span class="text-title font-medium">Mua nhiều giảm giá</span>--}}
+                        {{--                            <input type="text" placeholder="Nhập số sản phẩm mua ít nhất để được giảm giá"--}}
+                        {{--                                   name="amount_product_send_to_discount" id="amount_product_send_to_discount"--}}
+                        {{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+                        {{--                            @error('amount_product_send_to_discount')--}}
+                        {{--                            <p class="text-red-600">{{$message}}</p>--}}
+                        {{--                            @enderror--}}
+                        {{--                        </div>--}}
+                        {{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
+                        {{--                            <span class="text-title font-medium">Phần trăm giảm giá (%)</span>--}}
+                        {{--                            <input type="text" placeholder="Số phần trăm giảm giá" id="percent_discount"--}}
+                        {{--                                   name="percent_discount"--}}
+                        {{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+                        {{--                            @error('percent_discount')--}}
+                        {{--                            <p class="text-red-600">{{$message}}</p>--}}
+                        {{--                            @enderror--}}
+                        {{--                        </div>--}}
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="datetime-local" min="2018-01-01"  name="import_date"
+                            <input type="datetime-local" min="2018-01-01" name="import_date"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
                     </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4">
-{{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
-{{--                            <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>--}}
-{{--                            <input type="datetime-local" min="2018-01-01"  name="import_date"--}}
-{{--                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"--}}
-{{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+                        {{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
+                        {{--                            <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>--}}
+                        {{--                            <input type="datetime-local" min="2018-01-01"  name="import_date"--}}
+                        {{--                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"--}}
+                        {{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
 
-{{--                        </div>--}}
+                        {{--                        </div>--}}
 
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -424,6 +463,7 @@
         });
         let i = 1;
         let arrImage = [];
+        let arrUnit = [];
         $('.choose-vstore').select2();
 
         function render(data) {
@@ -452,6 +492,33 @@
             })
         }
 
+        function render2(data) {
+            const html = data.map((item, index) => {
+                return `<div class="item w-[104px] h-[104px] flex justify-center items-center relative">
+                    <div class="over-lay"></div>
+                    <svg width="16" height="16" data-index="${index}" class="deleteImg1 cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
+</svg>
+                <img src="${item}" class="w-full h-full"></img></div>`;
+            }).join("")
+            $('.file-sp-1').html(html);
+            document.getElementById('countImage1').innerHTML = data.length +
+                '/5';
+
+            document.getElementById('unitImages').value = JSON.stringify(data);
+            document.querySelectorAll('.deleteImg1').forEach(item => {
+                const {index} = item.dataset;
+                item.addEventListener('click', () => {
+                    console.log(1)
+                    arrUnit = data.filter((item1, index1) => index1 !== +index);
+                    if (arrUnit.length < 5) {
+                        document.querySelector('.add-img-Uni').classList.remove('hidden');
+                    }
+                    render2(arrUnit);
+                })
+            })
+        }
+
         $('.add-img-SP').on('click', function () {
             let input = document.createElement('input');
             input.type = 'file';
@@ -467,6 +534,28 @@
                             document.querySelector('.add-img-SP').classList.add('hidden');
                         }
                         render(arrImage);
+                    }
+                    reader.readAsDataURL(files[0])
+
+                })
+            };
+            input.click();
+        })
+        $('.add-img-Uni').on('click', function () {
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = _ => {
+                var files = Array.from(input.files);
+                const reader = new FileReader();
+
+                return new Promise(resolve => {
+                    reader.onload = ev => {
+                        resolve(ev.target.result)
+                        arrUnit.push(ev.target.result);
+                        if (arrUnit.length == 5) {
+                            document.querySelector('.add-img-Uni').classList.add('hidden');
+                        }
+                        render2(arrUnit);
                     }
                     reader.readAsDataURL(files[0])
 
@@ -545,14 +634,14 @@
             });
         });
     </script>
-    <script>
-        var price = $("#price").val();
-$("#discount").change(function (){
-    if(price != null){
-        console.log(price);
-        alert(price);
-    }
+{{--    <script>--}}
+{{--        var price = $("#price").val();--}}
+{{--        $("#discount").change(function () {--}}
+{{--            if (price != null) {--}}
+{{--                console.log(price);--}}
+{{--                alert(price);--}}
+{{--            }--}}
 
-})
-    </script>
+{{--        })--}}
+{{--    </script>--}}
 @endsection

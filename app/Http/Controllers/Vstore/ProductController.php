@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function detail(Request $request)
     {
-        $this->v['product'] = Product::select('code', 'id', 'name', 'user_id', 'category_id', 'created_at', 'status', 'discount', 'price', 'note','discount_vShop')->where('id', $request->id)->first();
+        $this->v['product'] = Product::select('code', 'id', 'name', 'user_id', 'category_id', 'created_at', 'status', 'discount', 'price', 'note','discountj_vShop')->where('id', $request->id)->first();
         $this->v['product']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = $request->id) as amount FROM product_warehouses where status = 1 AND product_id = $request->id"))[0]->amount;
         return view('screens.vstore.product.detail', $this->v);
     }
