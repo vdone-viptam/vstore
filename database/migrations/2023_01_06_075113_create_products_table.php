@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('publish_id')->nullable()->comment('Mã sản phẩm admi cấp');
             $table->float('discount')->nullable()->comment('Phần trăm chiết khấu');
+            $table->float('discount_vShop')->nullable()->comment('Phần trăm chiết khấu cho v shop');
             $table->string('name')->nullable()->comment('Tên sản phẩm');
             $table->integer('category_id')->nullable()->comment('giá vốn');
             $table->longText('description')->nullable()->comment('Mô tả sản phẩm');

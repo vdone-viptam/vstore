@@ -189,6 +189,7 @@
                 $.ajax({
                     url: '{{route('screens.manufacture.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
+                        $('#modal5').html('');
                         $('#modal5').append(result);
                         $('.modal-details').toggleClass('show-modal')
                     },

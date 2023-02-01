@@ -169,8 +169,7 @@
                 $.ajax({
                     url: '{{route('screens.admin.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
-                        console.log(result);
-                        $('#modal3').append(result);
+                        $('#modal3').html(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
                 });

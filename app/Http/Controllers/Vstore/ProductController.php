@@ -39,7 +39,7 @@ class ProductController extends Controller
 
             }
         } else {
-            $this->v['products'] = Product::select('code','id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'sku_id','admin_confirm_date','vstore_confirm_date')->orderBy('id', 'desc')->paginate(10);
+            $this->v['products'] = Product::select('code', 'id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'sku_id', 'admin_confirm_date', 'vstore_confirm_date')->orderBy('id', 'desc')->paginate(10);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
@@ -63,6 +63,13 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->status = $request->status;
         $product->vstore_confirm_date = Carbon::now();
+
+        if (isset($request->discount_vShop)) {
+            if ($request->discount_vShop < ($product->discount / 2)) {
+                return redirect()->back()->with('error', 'validated');
+            }
+            $product->discount_vShop = $request->discount_vShop;
+        }
         if (isset($request->note)) {
             $product->note = $request->note;
         }

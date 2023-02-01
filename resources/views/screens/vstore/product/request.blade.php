@@ -168,6 +168,7 @@
                 $.ajax({
                     url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
+                        $('#modal2').html('');
                         $('#modal2').append(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
@@ -180,8 +181,8 @@
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-        page.addEventListener('change', (e) => {
-            form.submit();
-        });
+        // page.addEventListener('change', (e) => {
+        //     form.submit();
+        // });
     </script>
 @endsection

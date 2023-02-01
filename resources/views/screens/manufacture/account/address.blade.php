@@ -239,6 +239,7 @@
                 $.ajax({
                     url: '{{route('screens.manufacture.account.edit')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
+                        $('#edit').html('');
                         $('#edit').append(result);
                         $('.modal-edit-add').toggleClass('show-modal')
                     },
@@ -251,6 +252,7 @@
                 $.ajax({
                     url: '{{route('screens.manufacture.account.destroy')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
+                        $('#delete').html('');
                         $('#delete').append(result);
                         $('.modal-dell').toggleClass('show-modal')
                     },

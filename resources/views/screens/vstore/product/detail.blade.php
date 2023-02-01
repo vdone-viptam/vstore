@@ -35,7 +35,7 @@
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Chiết khấu:</span>
-                        <span class="text-title">{{$product->discount}}%</span>
+                        <span class="text-title" id="discount" data-discount="{{$product->discount}}">{{$product->discount}}%</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Số lượng bán:</span>
@@ -48,26 +48,41 @@
                                 @endif
                                 class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                             <option value="0">Chưa xem</option>
-                            <option value="2" {{$product->status ==2 ? 'selected' : ''}}>Duyệt</option>
+                            <option
+                                value="2" {{$product->status ==2 || \Illuminate\Support\Facades\Session::get('error') ? 'selected' : ''}}>
+                                Duyệt
+                            </option>
                             <option value="3" {{$product->status ==3 ? 'selected' : ''}}>Từ chối</option>
                         </select>
+                    </div>
+                    <div id="vShop" class="w-full"
+                         @if(!\Illuminate\Support\Facades\Session::get('error')) style="display: none" @endif>
+                        <label for="">Phần trăm chiết khấu V-Shop</label>
+                        <div class="flex justify-start items-center gap-2 w-full">
+                            <input type="text" name="discount_vShop"
+                                   class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+
+                        </div>
+                        <p class="text-red-600" style="display: none" id="messageDis">Phần trăm chiết khấu V-shop không
+                            được nhỏ hơn 50% chiết khấu
+                            V-store</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
                         @if($product->status == 3)
                             <textarea name="note" placeholder="{{$product->note}}"
-                                      class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>
+                                      class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"></textarea>
                         @endif
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
-{{--                    <button--}}
-{{--                        type="button"--}}
-{{--                        class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
-{{--                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
-{{--                    </button>--}}
+                    {{--                    <button--}}
+                    {{--                        type="button"--}}
+                    {{--                        class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
+                    {{--                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
+                    {{--                    </button>--}}
                     @if($product->status == 1)
-                        <button
-                            class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                        <button id="btnConfirm"
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                             Lưu thay đổi
                         </button>
                     @endif
@@ -84,8 +99,23 @@
 
             document.querySelector('#note').innerHTML = `  <textarea name="note" placeholder="Lý do từ chối"
                                class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>`
+        } else if (e.target.value == 2) {
+            document.querySelector('#vShop').style.display = 'block'
         } else {
             document.querySelector('#note').innerHTML = ``;
+            document.querySelector('#vShop').style.display = 'none'
+
         }
+    })
+
+    document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
+        if (e.target.value < Number(document.getElementById('discount').dataset.discount) / 2) {
+            document.getElementById('messageDis').style.display = 'block';
+            document.getElementById('btnConfirm').style.display = 'none';
+        } else {
+            document.getElementById('messageDis').style.display = 'none';
+            document.getElementById('btnConfirm').style.display = 'block';
+        }
+
     })
 </script>
