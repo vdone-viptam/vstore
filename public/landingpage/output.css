@@ -563,20 +563,16 @@ video {
     margin-bottom: 2rem;
 }
 
+.mt-6 {
+    margin-top: 1.5rem;
+}
+
 .mt-14 {
     margin-top: 3.5rem;
 }
 
 .ml-8 {
     margin-left: 2rem;
-}
-
-.mt-4 {
-    margin-top: 1rem;
-}
-
-.mt-6 {
-    margin-top: 1.5rem;
 }
 
 .flex {
@@ -597,6 +593,10 @@ video {
 
 .h-\[120px\] {
     height: 120px;
+}
+
+.h-\[265px\] {
+    height: 265px;
 }
 
 .h-full {
@@ -627,24 +627,12 @@ video {
     height: 80px;
 }
 
-.h-\[\] {
-    height: ;
+.h-\[128px\] {
+    height: 128px;
 }
 
-.h-\[400px\] {
-    height: 400px;
-}
-
-.h-\[215px\] {
-    height: 215px;
-}
-
-.h-\[315px\] {
-    height: 315px;
-}
-
-.h-\[265px\] {
-    height: 265px;
+.h-\[128p\[\]\] {
+    height: 128p[];
 }
 
 .w-full {
@@ -829,6 +817,10 @@ video {
 
 .gap-20 {
     gap: 5rem;
+}
+
+.gap-y-4 {
+    row-gap: 1rem;
 }
 
 .rounded-xl {
@@ -1128,6 +1120,10 @@ video {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .md\:grid-cols-12 {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
     .md\:flex-row {
         flex-direction: row;
     }
@@ -1154,6 +1150,10 @@ video {
 
     .md\:gap-9 {
         gap: 2.25rem;
+    }
+
+    .md\:gap-4 {
+        gap: 1rem;
     }
 
     .md\:p-4 {

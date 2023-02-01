@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    @vite('resources/css/app.css')
 </head>
 <body>
 <header>
@@ -100,6 +101,7 @@
                     <img src=" {{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">
                 </div>
             </div>
+
         </div>
 
 
@@ -113,10 +115,16 @@
 {{--    @endif--}}
 </header>
 <div class="xl:max-w-[1320px] mx-auto w-full flex flex-col gap-5 px-6 xl:px-0">
-    <div class="grid grid-cols-12 gap-4 py-5 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-4 py-5 w-full ">
         <div class="col-span-8 h-[265px] ">
+{{--            <div class="w-full h-full">--}}
+{{--                <img src="../images/sp.png" alt="" class="w-full">--}}
+{{--            </div>--}}
+
             @if(!empty($banner))
+                <div class="w-full h-full">
                 <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>
+                </div>
             @else
                 <div class="w-full h-full">
                     <img src="{{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">
@@ -125,18 +133,42 @@
 
         </div>
         <div class="col-span-4 flex flex-col justify-between items-center h-[265px]">
-            <div class="row-span-2 w-full">
+            <div class="row-span-2 w-full h-[128px]">
                 <div class="w-full h-full">
                     <img src="{{asset('landingpage/images/bn3.jpg')}}" alt="" class="w-full">
                 </div>
             </div>
-            <div class="row-span-2 w-full">
+            <div class="row-span-2 w-full h-[128px]">
                 <div class="w-full h-full">
                     <img src="{{asset('landingpage/images/bn2.jpg')}}" alt="" class="w-full">
                 </div>
             </div>
         </div>
     </div>
+{{--    <div class="grid grid-cols-12 gap-4 py-5 w-full">--}}
+{{--        <div class="col-span-8 h-[265px] ">--}}
+{{--            @if(!empty($banner))--}}
+{{--                <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>--}}
+{{--            @else--}}
+{{--                <div class="w-full h-full">--}}
+{{--                    <img src="{{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">--}}
+{{--                </div>--}}
+{{--            @endif--}}
+
+{{--        </div>--}}
+{{--        <div class="col-span-4 flex flex-col justify-between items-center h-[265px]">--}}
+{{--            <div class="row-span-2 w-full">--}}
+{{--                <div class="w-full h-full">--}}
+{{--                    <img src="{{asset('landingpage/images/bn3.jpg')}}" alt="" class="w-full">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row-span-2 w-full">--}}
+{{--                <div class="w-full h-full">--}}
+{{--                    <img src="{{asset('landingpage/images/bn2.jpg')}}" alt="" class="w-full">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div class="box p-4 lg:p-8">
         <div class="flex justfy-center md:justify-between items-center w-full flex-wrap lg:flex-nowrap gap-6">
             <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
