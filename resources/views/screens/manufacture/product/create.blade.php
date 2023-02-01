@@ -54,7 +54,7 @@
         <a href="./them-san-pham.html" class="text-blueMain font-medium">Yêu cầu thêm sản phẩm</a>
     </div>
     <div class="px-5 xl:px-16 py-2">
-        <h2 class="text-4xl text-title font-medium">Yêu cầu thêm sản phẩm</h2>
+        <h2 class="text-4xl text-title font-medium">Yêu cầu xét duyệt sản phẩm</h2>
 
 
     </div>
@@ -96,9 +96,13 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Mức chiết khấu (%)<strong class="text-[#FF4D4F]">*</strong>
                         </span>
-                            <input type="number" name="discount" id="discount" min="0" max="99"
-                                   placeholder="Nhập mức chiết khấu (%)"
-                                   class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <span>
+                                <input type="number" name="discount" id="discount" min="0" max="99"
+                                       placeholder="Nhập mức chiết khấu (%)"
+                                       class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <span class="muc-chiet-khau">Mức tiền chiết khấu cho vstore</span>
+                            </span>
+
                             @error('discount')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
@@ -274,34 +278,31 @@
 
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Giá<strong class="text-[#FF4D4F]">*</strong></span>
+                            <span class="text-title font-medium">Giá(chưa bao gồm VAT)<strong class="text-[#FF4D4F]">*</strong></span>
                             <input type="number" placeholder="Nhập giá sản phẩm" name="price" id="price"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Mua nhiều giảm giá</span>
-                            <input type="text" placeholder="Nhập số sản phẩm mua ít nhất để được giảm giá"
-                                   name="amount_product_send_to_discount" id="amount_product_send_to_discount"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            @error('amount_product_send_to_discount')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div>
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Phần trăm giảm giá (%)</span>
-                            <input type="text" placeholder="Số phần trăm giảm giá" id="percent_discount"
-                                   name="percent_discount"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            @error('percent_discount')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div>
-
-                    </div>
-                    <div class="col-span-6 flex flex-col justify-start items-start gap-4">
+{{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
+{{--                            <span class="text-title font-medium">Mua nhiều giảm giá</span>--}}
+{{--                            <input type="text" placeholder="Nhập số sản phẩm mua ít nhất để được giảm giá"--}}
+{{--                                   name="amount_product_send_to_discount" id="amount_product_send_to_discount"--}}
+{{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+{{--                            @error('amount_product_send_to_discount')--}}
+{{--                            <p class="text-red-600">{{$message}}</p>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
+{{--                            <span class="text-title font-medium">Phần trăm giảm giá (%)</span>--}}
+{{--                            <input type="text" placeholder="Số phần trăm giảm giá" id="percent_discount"--}}
+{{--                                   name="percent_discount"--}}
+{{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+{{--                            @error('percent_discount')--}}
+{{--                            <p class="text-red-600">{{$message}}</p>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
                             <input type="datetime-local" min="2018-01-01"  name="import_date"
@@ -309,6 +310,15 @@
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
+                    </div>
+                    <div class="col-span-6 flex flex-col justify-start items-start gap-4">
+{{--                        <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
+{{--                            <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>--}}
+{{--                            <input type="datetime-local" min="2018-01-01"  name="import_date"--}}
+{{--                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"--}}
+{{--                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+
+{{--                        </div>--}}
 
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -534,5 +544,15 @@
                 $('.choose-adr').append(html);
             });
         });
+    </script>
+    <script>
+        var price = $("#price").val();
+$("#discount").change(function (){
+    if(price != null){
+        console.log(price);
+        alert(price);
+    }
+
+})
     </script>
 @endsection

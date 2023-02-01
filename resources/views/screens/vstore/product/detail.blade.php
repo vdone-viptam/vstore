@@ -56,10 +56,10 @@
                         </select>
                     </div>
                     <div id="vShop" class="w-full"
-                         @if(!$product->status ==2) style="display: none" @endif>
+                         @if($product->status ==1 || $product->status == 3) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
-                            <input type="text" name="discount_vShop"
+                            <input type="text" min="" name="discount_vShop"
                                    @if($product->status == 2) disabled @endif
                                    value="{{$product->status == 2 ? $product->discount_vShop : ''}}"
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
