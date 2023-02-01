@@ -52,6 +52,7 @@ return new class extends Migration {
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');
             $table->string('code')->nullable();
+            $table->string('video')->comment('video sản phẩm');
             $table->timestamps();
         });
     }

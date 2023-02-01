@@ -59,7 +59,7 @@
 
     </div>
 
-    <form action="{{route('screens.manufacture.product.store')}}" method="post">
+    <form action="{{route('screens.manufacture.product.store')}}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="grid grid-cols-1  gap-y-4 lg:gap-4 px-5 xl:px-16 py-4">
@@ -153,7 +153,12 @@
                         <span class="text-xs text-secondary" id="countImage"> 0/5</span>
                     </div>
                 </div>
-
+                <label for="">Video sản phẩm</label>
+                <div class="flex justify-start items-start gap-2 w-full">
+                    <input type="file" accept="video/mp4"
+                           class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                           name="video" id="video">
+                </div>
                 <h4 class="font-medium text-[#141414] text-2xl">Thông tin chi tiết</h4>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 w-full ">
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4">
@@ -634,14 +639,14 @@
             });
         });
     </script>
-{{--    <script>--}}
-{{--        var price = $("#price").val();--}}
-{{--        $("#discount").change(function () {--}}
-{{--            if (price != null) {--}}
-{{--                console.log(price);--}}
-{{--                alert(price);--}}
-{{--            }--}}
+    {{--    <script>--}}
+    {{--        var price = $("#price").val();--}}
+    {{--        $("#discount").change(function () {--}}
+    {{--            if (price != null) {--}}
+    {{--                console.log(price);--}}
+    {{--                alert(price);--}}
+    {{--            }--}}
 
-{{--        })--}}
-{{--    </script>--}}
+    {{--        })--}}
+    {{--    </script>--}}
 @endsection

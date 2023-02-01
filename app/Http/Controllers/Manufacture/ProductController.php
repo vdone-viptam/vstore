@@ -86,6 +86,7 @@ class ProductController extends Controller
             'volume' => 'required',
             'price' => 'required',
             'sku_id' => 'required|unique:products',
+            'video' => 'max:512000',
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -102,7 +103,7 @@ class ProductController extends Controller
             'volume.required' => 'Trường này không được trống',
             'price.required' => 'Trường này không được trống',
             'sku_id.required' => 'Trường này không được trống',
-
+            'video.max' => 'Video vượt quá dung lượng cho phép',
 
         ]);
         if ($validator->fails()) {
@@ -140,6 +141,19 @@ class ProductController extends Controller
             $product->import_date = $request->import_date;
             $product->unit = $request->unit;
             $product->unit_name = $request->unit_name;
+            $filenameWithExt = $request->file('video')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('video')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
+
+            $path = str_replace('public/', '', $path);
+
+            $product->video = $path;
             while (true) {
                 $code = rand(10000000, 99999999);
                 if (!Product::where('code', $code)->first()) {

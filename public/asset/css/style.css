@@ -1,8 +1,9 @@
-body{
+body {
     font-family: 'Roboto';
     margin: 0;
     padding: 0;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -13,85 +14,101 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
-img{
+
+img {
     max-width: 100%;
     height: 100% !important;
     object-fit: cover;
 }
-.banner{
+
+.banner {
     background: url('../images/bannerdk.png') no-repeat center center fixed;
     background-size: 100% 100%;
     height: 100%;
     overflow: hidden;
 }
-.banner-lg-V{
+
+.banner-lg-V {
     background: url('../images/bannerlg.png') no-repeat center center fixed;
     background-size: 100% 100%;
     overflow: hidden;
 }
-.banner-lg-Ncc{
+
+.banner-lg-Ncc {
     background: url('../images/bannerncc.png') no-repeat center center fixed;
     background-size: 100% 100%;
     overflow: hidden;
 }
-.tab-register li{
+
+.tab-register li {
     padding: 8px 60px;
     cursor: pointer;
 }
-.tab-register li.active{
+
+.tab-register li.active {
     background-color: white;
     border-radius: 8px;
     text-align: center;
 }
-.tab-register li a{
+
+.tab-register li a {
     font-weight: 700;
     font-size: 14px;
     line-height: 22px;
 }
-.check-item div.active span{
+
+.check-item div.active span {
     color: #1890FF;
     font-weight: 700;
 }
-.btn-ctn{
+
+.btn-ctn {
     border: 1px solid #D9D9D9;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.016);
 }
-.register a.active{
+
+.register a.active {
     border: 1px solid #1890FF;
     background-color: #1890FF;
     color: white;
 }
-.register-1 a.active{
+
+.register-1 a.active {
     border: 1px solid #1890FF;
     background-color: #1890FF;
     color: white;
 }
-.register span{
+
+.register span {
     text-align: center;
 }
-.login span{
+
+.login span {
     text-align: center;
 }
-input[type="submit"].active{
-    border: 1px solid #1890FF;
-    background-color: #1890FF;
-    color: white;
-    cursor: pointer;
-}
-.btnSign input.active{
-    border: 1px solid #1890FF;
-    background-color: #1890FF;
-    color: white;
-    cursor: pointer;
-}
-.btnSign-V input.active{
+
+input[type="submit"].active {
     border: 1px solid #1890FF;
     background-color: #1890FF;
     color: white;
     cursor: pointer;
 }
 
-.over-lay{
+.btnSign input.active {
+    border: 1px solid #1890FF;
+    background-color: #1890FF;
+    color: white;
+    cursor: pointer;
+}
+
+.btnSign-V input.active {
+    border: 1px solid #1890FF;
+    background-color: #1890FF;
+    color: white;
+    cursor: pointer;
+}
+
+.over-lay {
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
     position: absolute;
@@ -101,7 +118,8 @@ input[type="submit"].active{
     opacity: 0;
     transition: 0.5s all;
 }
-.over-lay-modal{
+
+.over-lay-modal {
     background: rgba(0, 0, 0, 0.5);
     z-index: -1;
     position: absolute;
@@ -110,7 +128,8 @@ input[type="submit"].active{
     height: 100%;
     overflow: hidden;
 }
-.deleteImg{
+
+.deleteImg {
     z-index: 2;
     width: 16px;
     height: 16px;
@@ -118,26 +137,37 @@ input[type="submit"].active{
     opacity: 0;
     transition: 0.5s all;
 }
-.file-name .item:hover .over-lay{
+
+.file-name .item:hover .over-lay {
     opacity: 1;
     transition: 0.5s all;
 }
-.file-name .item:hover .deleteImg{
+
+.file-name .item:hover .deleteImg {
     opacity: 1;
     transition: 0.5s all;
 }
-.file-sp .item:hover .over-lay{
+
+.file-sp .item:hover .over-lay {
     opacity: 1;
     transition: 0.5s all;
 }
-.file-sp .item:hover .deleteImg{
+
+.file-sp .item:hover .deleteImg {
     opacity: 1;
     transition: 0.5s all;
 }
-.error{
+
+.file-video .item:hover .over-lay {
+    opacity: 1;
+    transition: 0.5s all;
+}
+
+.error {
     color: #FF4D4F;
 }
-.modal{
+
+.modal {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -148,106 +178,121 @@ input[type="submit"].active{
     transition: 0.5s all;
     visibility: hidden;
 }
-.show-modal{
+
+.show-modal {
     opacity: 1;
     z-index: 999;
     transform: translateY(0);
     transition: 0.5s all;
     visibility: visible;
 }
-.show-modal .over-lay-modal{
+
+.show-modal .over-lay-modal {
     opacity: 1;
     z-index: 2;
     transition: 0.5s all;
     visibility: visible;
 }
-.show-modal .information{
+
+.show-modal .information {
     opacity: 1;
     z-index: 10;
     transition: 0.5s all;
     visibility: visible;
 }
 
-.information{
+.information {
     position: relative;
     z-index: 1;
 }
 
-.success{
-    background: url('../images/success.png') no-repeat center center fixed ;
+.success {
+    background: url('../images/success.png') no-repeat center center fixed;
     background-size: cover;
 }
 
-.pending{
+.pending {
 
-    background: url('../images/pending.png') no-repeat center center fixed ;
-    background-size: cover;
-}
-.failed{
-    background: url('../images/failed.png') no-repeat center center fixed ;
+    background: url('../images/pending.png') no-repeat center center fixed;
     background-size: cover;
 }
 
-.login input[type="submit"].active{
+.failed {
+    background: url('../images/failed.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.login input[type="submit"].active {
     border: 1px solid #1890FF;
     background-color: #1890FF;
     color: white;
     cursor: pointer;
 }
-.smsXT input[type="button"].disabled{
+
+.smsXT input[type="button"].disabled {
     background-color: #D9D9D9;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.016);
     color: rgba(0, 0, 0, 0.25);
 }
-.nav-menu li{
+
+.nav-menu li {
     padding: 8px 16px;
     border-radius: 8px;
     position: relative;
 }
-.nav-menu li a{
+
+.nav-menu li a {
     color: #2F54EB;
 }
 
-.nav-menu li.active{
+.nav-menu li.active {
     background-color: #2F54EB;
 }
-.nav-menu li.active a{
+
+.nav-menu li.active a {
     color: white;
 }
-.nav-menu li:hover{
+
+.nav-menu li:hover {
     background-color: #2F54EB;
     transition: 0.5s all;
 }
-.nav-menu li a svg{
+
+.nav-menu li a svg {
     transform: rotate(0);
     transition: 0.5s all;
 }
-.nav-menu li.active a svg{
+
+.nav-menu li.active a svg {
     fill: white;
     transform: rotate(0deg);
     transition: 0.5s all;
 }
-.nav-menu li:hover a svg{
+
+.nav-menu li:hover a svg {
     fill: white;
     transform: rotate(180deg);
     transition: 0.5s all;
 }
-.nav-menu li:hover a{
+
+.nav-menu li:hover a {
     color: white;
     transition: 0.5s all;
 }
-.nav-menu li:hover > .sub-nav{
+
+.nav-menu li:hover > .sub-nav {
     opacity: 1;
     transform: translateY(0);
     transition: 0.5s all;
     z-index: 10;
     visibility: visible;
 }
-.sub-nav{
+
+.sub-nav {
     padding: 10px 0;
     position: absolute;
     min-width: 280px;
-    transform:translateY(50px);
+    transform: translateY(50px);
     top: 44px;
     left: 0;
     z-index: -1;
@@ -258,35 +303,40 @@ input[type="submit"].active{
     border-radius: 2px;
     box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
-.sub-nav li{
+
+.sub-nav li {
     padding: 5px 12px;
     border-radius: 0;
 }
 
-.sub-nav li:hover{
+.sub-nav li:hover {
     background-color: #F5F5F5;
     transition: 0.5s all;
 }
-.sub-nav li a{
+
+.sub-nav li a {
     color: rgba(0, 0, 0, 0.85) !important;
     transition: 0.5s all;
 }
-.sub-nav li:hover a{
+
+.sub-nav li:hover a {
     color: #2F54EB;
     transition: 0.5s all;
 }
-.user:hover > .sub-nav-user{
+
+.user:hover > .sub-nav-user {
     opacity: 1;
     transform: translateY(0);
     transition: 0.5s all;
     z-index: 10;
     visibility: visible;
 }
-.sub-nav-user{
+
+.sub-nav-user {
     padding: 10px 0;
     position: absolute;
     min-width: 200px;
-    transform:translateY(50px);
+    transform: translateY(50px);
     top: 44px;
     right: 0;
     z-index: -1;
@@ -297,36 +347,40 @@ input[type="submit"].active{
     border-radius: 2px;
     box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
-.sub-nav-user li{
+
+.sub-nav-user li {
     padding: 5px 12px;
     border-radius: 0;
 }
 
-.sub-nav-user li:hover{
+.sub-nav-user li:hover {
     background-color: #F5F5F5;
     transition: 0.5s all;
 }
-.sub-nav-user li a{
+
+.sub-nav-user li a {
     color: rgba(0, 0, 0, 0.85) !important;
     transition: 0.5s all;
 }
-.sub-nav-user li:hover a{
+
+.sub-nav-user li:hover a {
     color: #2F54EB;
     transition: 0.5s all;
 }
 
-.notify:hover > .sub-nav-notify{
+.notify:hover > .sub-nav-notify {
     opacity: 1;
     transform: translateY(0);
     transition: 0.5s all;
     z-index: 10;
     visibility: visible;
 }
-.sub-nav-notify{
+
+.sub-nav-notify {
     padding: 10px 0;
     position: absolute;
     min-width: 300px;
-    transform:translateY(50px);
+    transform: translateY(50px);
     top: 50px;
     right: 0;
     z-index: -1;
@@ -337,36 +391,40 @@ input[type="submit"].active{
     border-radius: 2px;
     box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
-.sub-nav-notify li{
+
+.sub-nav-notify li {
     padding: 5px 12px;
     border-radius: 0;
 }
 
-.sub-nav-notify li:hover{
+.sub-nav-notify li:hover {
     background-color: #F5F5F5;
     transition: 0.5s all;
 }
-.sub-nav-notify li a{
+
+.sub-nav-notify li a {
     color: rgba(0, 0, 0, 0.85) !important;
     transition: 0.5s all;
 }
-.sub-nav-notify li:hover a{
+
+.sub-nav-notify li:hover a {
     color: #2F54EB;
     transition: 0.5s all;
 }
 
-.help:hover > .sub-nav-help{
+.help:hover > .sub-nav-help {
     opacity: 1;
     transform: translateY(0);
     transition: 0.5s all;
     z-index: 10;
     visibility: visible;
 }
-.sub-nav-help{
+
+.sub-nav-help {
     padding: 10px 0;
     position: absolute;
     min-width: 280px;
-    transform:translateY(50px);
+    transform: translateY(50px);
     top: 25px;
     right: 0;
     z-index: -1;
@@ -377,104 +435,127 @@ input[type="submit"].active{
     border-radius: 2px;
     box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
-.sub-nav-help li{
+
+.sub-nav-help li {
     padding: 5px 12px;
     border-radius: 0;
 }
 
-.sub-nav-help li:hover{
+.sub-nav-help li:hover {
     background-color: #F5F5F5;
     transition: 0.5s all;
 }
-.sub-nav-help li a{
+
+.sub-nav-help li a {
     color: rgba(0, 0, 0, 0.85) !important;
     transition: 0.5s all;
 }
-.sub-nav-help li:hover a{
+
+.sub-nav-help li:hover a {
     color: #2F54EB;
     transition: 0.5s all;
 }
-.select2-container{
-    width: 150px!important;
+
+.select2-container {
+    width: 150px !important;
     outline: none !important;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered{
+.select2-container--default .select2-selection--single .select2-selection__rendered {
     font-weight: 400;
     font-size: 14px;
     line-height: 28px;
     color: #27272A;
 }
-.box{
+
+.box {
     background: #FFFFFF;
     box-shadow: 0px 10px 60px rgba(187, 185, 185, 0.5);
     border-radius: 30px;
 }
+
 table {
     border-collapse: collapse;
     width: 100%;
 }
+
 th,
 td {
     padding: 1rem 2rem;
     text-align: center;
 
 }
-td{
+
+td {
     border-bottom: 1px solid #ddd;
 
 }
-tr:last-child td{
+
+tr:last-child td {
     border-bottom: none;
 }
+
 th {
     font-weight: normal;
     color: #666;
 }
-.dsth th,td{
+
+.dsth th, td {
     padding: 0.5rem 1.5rem;
 }
-.dsth th{
+
+.dsth th {
     background: #F0F5FF;
 }
-.dsth td{
+
+.dsth td {
     border-bottom: none;
 
 }
-.dsth tr:nth-child(even){
+
+.dsth tr:nth-child(even) {
     background: #F5F5F5;
 }
-.char{
+
+.char {
     background: #E6F7FF;
     border-radius: 12px;
 }
-.box-act{
+
+.box-act {
     background: #FAFAFA;
     border-radius: 16px;
 }
-.tab-th li{
+
+.tab-th li {
     padding: 14px 30px;
     border-bottom: 3px solid #F0F0F0;
 }
-.tab-th li.active{
+
+.tab-th li.active {
     border-bottom: 3px solid #2F54EB;
 }
-.tab-th li.active a{
+
+.tab-th li.active a {
     font-weight: 500;
     color: #1D39C4;
 }
-.tab-tbl li{
+
+.tab-tbl li {
     padding: 14px 30px;
     border-bottom: 3px solid #F0F0F0;
 }
-.tab-tbl li.active{
+
+.tab-tbl li.active {
     border-bottom: 3px solid #2F54EB;
 }
-.tab-tbl li.active a{
+
+.tab-tbl li.active a {
     font-weight: 500;
     color: #1D39C4;
 }
-.pagination li{
+
+.pagination li {
     width: 32px;
     height: 32px;
     display: flex;
@@ -483,25 +564,30 @@ th {
     border: 1px solid #D9D9D9;
     border-radius: 2px;
 }
-.pagination li:hover{
+
+.pagination li:hover {
     border: 1px solid #1890FF;
     transition: 0.5s all;
     cursor: pointer;
 }
-.pagination li:hover a{
-    color:  #1890FF;
+
+.pagination li:hover a {
+    color: #1890FF;
     transition: 0.5s all;
 }
-.pagination li.active{
+
+.pagination li.active {
     border: 1px solid #1890FF;
 }
-.pagination li.active a{
+
+.pagination li.active a {
     color: #1890FF;
 }
 
 .toggle-pill input[type="checkbox"] {
     display: none;
 }
+
 .toggle-pill input[type="checkbox"] + label {
     display: block;
     position: relative;
@@ -517,6 +603,7 @@ th {
     -webkit-transition: background 0.1s ease-in-out;
     transition: background 0.1s ease-in-out;
 }
+
 .toggle-pill input[type="checkbox"] + label:before {
     content: "";
     display: block;
@@ -532,34 +619,41 @@ th {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
 .toggle-pill input[type="checkbox"]:checked + label:before {
     box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
     left: 22px;
     -webkit-transform: rotate(295deg);
     transform: rotate(295deg);
 }
+
 .toggle-pill input[type="checkbox"]:checked + label {
     background: #2F54EB;
 }
-.box-more{
+
+.box-more {
     max-height: 0;
     overflow: hidden;
     transition: 0.5s all;
 }
-svg{
+
+svg {
     transform: rotate(0deg);
     transition: 0.5s all;
 }
-.scroll-more{
+
+.scroll-more {
     max-height: 800px;
     overflow-y: auto;
     transition: 0.5s all;
 }
-.rotate{
+
+.rotate {
     transition: 0.5s all;
     transform: rotate(180deg);
 }
-.process::after{
+
+.process::after {
     content: '';
     position: absolute;
     width: 20px;
@@ -567,70 +661,87 @@ svg{
     height: 8px;
     background-color: #2F54EB;
 }
-.tab-side li{
+
+.tab-side li {
     border-left: 4px solid #f5f5f5;
     padding: 12px 0 12px 20px;
 }
-.tab-side li:hover a{
+
+.tab-side li:hover a {
     color: #096DD9;
     transition: 0.5s all;
 }
-.tab-side li a{
+
+.tab-side li a {
     color: rgba(0, 0, 0, 0.85);
 }
-.tab-side li.active{
+
+.tab-side li.active {
     border-color: #096DD9;
 }
-.select2-container{
+
+.select2-container {
     width: 100% !important;
 
 }
-.select2-container .select2-selection--single{
+
+.select2-container .select2-selection--single {
     height: 38px !important;
 }
-.select2-container--default .select2-selection--single .select2-selection__rendered{
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
     font-size: 16px !important;
     padding-top: 4px !important;
 }
-.select2-container--default .select2-selection--single{
+
+.select2-container--default .select2-selection--single {
     border-radius: 2px !important;
-    border-color: #D9D9D9!important;
+    border-color: #D9D9D9 !important;
 }
+
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 38px !important;
 
 }
-.tab-date li{
+
+.tab-date li {
     padding: 8px;
 }
-.tab-date li.active{
+
+.tab-date li.active {
     border-bottom: 2px solid #096DD9;
 }
-.tab-sub-user{
+
+.tab-sub-user {
     margin-left: 50px;
 }
-.tab-sub-user li{
+
+.tab-sub-user li {
     padding: 3px 0;
 }
-.tab-sub-user li:hover a{
+
+.tab-sub-user li:hover a {
     color: #096DD9;
     transition: 0.5s all;
 }
-.tab-sub-user li.active{
+
+.tab-sub-user li.active {
     color: #096DD9;
     font-weight: 500;
 }
 
 @media only screen and (max-width: 560px) {
-    .tab-register li{
+    .tab-register li {
         padding: 8px 36px;
     }
+
     th,
     td {
         padding: 10px 6px !important;
         text-align: center;
     }
-    .menu-mobile{
+
+    .menu-mobile {
         position: fixed;
         background-color: white;
         z-index: 100;
@@ -645,14 +756,16 @@ svg{
         box-shadow: 0 10px 60px rgba(0, 0, 0, 0.2);
         transition: 0.5s all;
     }
-    .show-menuMB{
+
+    .show-menuMB {
         visibility: visible;
         transform: translateX(0);
         transition: 0.5s all;
         opacity: 1;
         z-index: 888;
     }
-    .over-lay-mobile{
+
+    .over-lay-mobile {
         background: rgba(0, 0, 0, 0.2);
         z-index: -1;
         position: fixed;
@@ -662,42 +775,52 @@ svg{
         display: none;
         transition: 0.5s all;
     }
-    .select2-container{
+
+    .select2-container {
         width: 250px !important;
     }
-    .nav-menu-mb{
+
+    .nav-menu-mb {
         color: #2F54EB;
     }
-    .nav-sub-menu-mb{
+
+    .nav-sub-menu-mb {
         display: none;
         transition: 0.5s all;
     }
-    .nav-menu-mb li{
+
+    .nav-menu-mb li {
         width: 100%;
         padding: 5px 12px;
     }
-    .nav-menu-mb li:hover > .nav-sub-menu-mb{
+
+    .nav-menu-mb li:hover > .nav-sub-menu-mb {
         display: block;
         transition: 0.5s all;
     }
-    .nav-menu-mb li:hover{
+
+    .nav-menu-mb li:hover {
         background-color: #F5F5F5;
         transition: 0.5s all;
     }
-    .nav-menu-mb li:hover > .nav-sub-menu-mb{
+
+    .nav-menu-mb li:hover > .nav-sub-menu-mb {
         margin-left: 10px;
-        background-color: unset!important;
+        background-color: unset !important;
     }
-    .nav-menu-mb li a svg{
+
+    .nav-menu-mb li a svg {
         transform: rotate(0deg);
         transition: 0.5s all;
     }
-    .nav-menu-mb li:hover a svg{
+
+    .nav-menu-mb li:hover a svg {
         transform: rotate(180deg);
         transition: 0.5s all;
     }
 }
-.deleteImg1{
+
+.deleteImg1 {
     z-index: 2;
     width: 16px;
     height: 16px;
@@ -705,11 +828,13 @@ svg{
     opacity: 0;
     transition: 0.5s all;
 }
-.file-name .item:hover .over-lay{
+
+.file-name .item:hover .over-lay {
     opacity: 1;
     transition: 0.5s all;
 }
-.file-name .item:hover .deleteImg1{
+
+.file-name .item:hover .deleteImg1 {
     opacity: 1;
     transition: 0.5s all;
 }
