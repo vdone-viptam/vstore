@@ -13,14 +13,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
           integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    {{--    font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{--   fontawesome--}}
     @include('layouts.css')
+    <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
 </head>
 <body>
 @yield('modal')
 @include('layouts.manufacture.menu_mobile')
-@include('layouts.manufacture.header')
-@yield('content')
+{{--@include('layouts.manufacture.header')--}}
+<div class="flex">
+    <div class="min-w-[290px]">
+        @include('layouts.manufacture.menu')
+    </div>
+    <div class="">
+        @yield('content')
+    </div>
+</div>
 @include('layouts.js')
 @yield('custom_js')
 <script>

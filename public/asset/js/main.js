@@ -249,3 +249,63 @@ $(document).ready(function () {
 
 })
 
+// MENU
+const tm = document.getElementsByClassName("tab__menu")
+const tl = document.getElementsByClassName("tab__left")
+const ttm = document.getElementsByClassName("text__menu")
+const svg = document.getElementsByClassName("svg")
+const svg_arr = document.getElementsByClassName("svg_arr")
+const list = document.getElementsByClassName("list")
+
+tm[0].addEventListener("click", () => {
+    tl[0].classList.toggle("tab__left-active")
+    tl[1].classList.toggle("tab__left-active")
+    ttm[0].classList.toggle("text__menu-active")
+    svg[0].classList.toggle("svg-fill")
+})
+tm[1].addEventListener("click", () => {
+    tl[2].classList.toggle("tab__left-active")
+    tl[3].classList.toggle("tab__left-active")
+    ttm[1].classList.toggle("text__menu-active")
+    svg[1].classList.toggle("svg-stroke")
+    svg[2].classList.toggle("svg-stroke")
+    svg[3].classList.toggle("svg-stroke")
+    svg[4].classList.toggle("svg-stroke")
+    svg[5].classList.toggle("svg-stroke")
+    svg_arr[0].classList.toggle("svg-stroke")
+    list[0].classList.toggle("list-show")
+})
+tm[2].addEventListener("click", () => {
+    tl[4].classList.toggle("tab__left-active")
+    tl[5].classList.toggle("tab__left-active")
+    ttm[2].classList.toggle("text__menu-active")
+    svg[6].classList.toggle("svg-fill")
+    svg_arr[1].classList.toggle("svg-fill")
+    list[1].classList.toggle("list-show")
+})
+tm[3].addEventListener("click", () => {
+    tl[6].classList.toggle("tab__left-active")
+    tl[7].classList.toggle("tab__left-active")
+    ttm[3].classList.toggle("text__menu-active")
+    svg[7].classList.toggle("svg-fill")
+    svg[8].classList.toggle("svg-fill")
+    svg_arr[2].classList.toggle("svg-stroke")
+    list[2].classList.toggle("list-show")
+})
+tm[4].addEventListener("click", () => {
+    tl[8].classList.toggle("tab__left-active")
+    tl[9].classList.toggle("tab__left-active")
+    ttm[4].classList.toggle("text__menu-active")
+    svg[9].classList.toggle("svg-fill")
+    svg_arr[3].classList.toggle("svg-stroke")
+    list[3].classList.toggle("list-show")
+})
+tm[5].addEventListener("click", () => {
+    tl[10].classList.toggle("tab__left-active")
+    tl[11].classList.toggle("tab__left-active")
+    ttm[5].classList.toggle("text__menu-active")
+    svg[10].classList.toggle("svg-fill")
+    svg_arr[4].classList.toggle("svg-stroke")
+    list[4].classList.toggle("list-show")
+})
+

@@ -1,0 +1,25 @@
+.tab__left-active{
+    background: #4062FF;
+    border-radius: 0px 16px 16px 0px;
+}
+
+.tab__right-active{
+    background: #4062FF;
+}
+.text__menu-active{
+    color: #FFFFFF !important;
+}
+
+.svg-fill{
+    fill:#fff;
+}
+
+.svg-stroke{
+    stroke: #fff;
+}
+
+.list-show{
+    display: flex !important;
+    height: auto; !important;
+    transition: all 1s;
+}
