@@ -124,8 +124,8 @@
                 </a>
                 <ul class="sub-nav">
                     <li><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a></li>
-                    <li><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu thêm sản phẩm</a></li>
-                    <li><a href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu thêm sản phẩm</a>
+                    <li><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu xét duyệt sản phẩm</a></li>
+                    <li><a href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a>
                     </li>
                 </ul>
             </li>

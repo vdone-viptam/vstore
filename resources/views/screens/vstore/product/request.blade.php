@@ -49,7 +49,7 @@
             </div>
             <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
                 <div class="flex justify-between items-center flex-wrap gap-4">
-                    <h2 class="text-xl md:text-3xl font-medium">Lịch sử yêu cầu thêm sản phẩm</h2>
+                    <h2 class="text-xl md:text-3xl font-medium">Lịch sử yêu cầu xét duyệt sản phẩm</h2>
 
                 </div>
                 <div class="w-full ">
@@ -168,6 +168,7 @@
                 $.ajax({
                     url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
+                        $('#modal2').html('');
                         $('#modal2').append(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
@@ -180,8 +181,8 @@
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-        page.addEventListener('change', (e) => {
-            form.submit();
-        });
+        // page.addEventListener('change', (e) => {
+        //     form.submit();
+        // });
     </script>
 @endsection

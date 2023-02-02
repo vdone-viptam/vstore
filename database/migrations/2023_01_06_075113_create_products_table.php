@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('publish_id')->nullable()->comment('Mã sản phẩm admi cấp');
             $table->float('discount')->nullable()->comment('Phần trăm chiết khấu');
+            $table->float('discount_vShop')->nullable()->comment('Phần trăm chiết khấu cho v shop');
             $table->string('name')->nullable()->comment('Tên sản phẩm');
             $table->integer('category_id')->nullable()->comment('giá vốn');
             $table->longText('description')->nullable()->comment('Mô tả sản phẩm');
@@ -27,6 +28,9 @@ return new class extends Migration {
             $table->integer('packing_type')->nullable()->comment('kiểu đóng gói');
             $table->integer('volume')->nullable()->comment('Số lượng sản phẩm thêm');
             $table->string('manufacturer_name')->nullable()->comment('Tên nhà sản xuất');
+            $table->integer('unit')->nullable()->comment('Loại dơn vị sản xuất');
+            $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
+            $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
             $table->string('manufacturer_address')->nullable()->comment('Địa chỉ nhà sản xuất');
             $table->string('import_unit')->nullable()->comment('Đơn vị nhập khẩu');
             $table->string('import_address')->nullable()->comment('Địa chỉ nơi nhập khẩu');
@@ -48,6 +52,7 @@ return new class extends Migration {
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');
             $table->string('code')->nullable();
+            $table->string('video')->comment('video sản phẩm');
             $table->timestamps();
         });
     }

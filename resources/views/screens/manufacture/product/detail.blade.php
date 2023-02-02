@@ -36,6 +36,10 @@
                     <span class="text-title">{{$product->discount}}%</span>
                 </div>
                 <div class="flex justify-start items-center gap-2 w-full">
+                    <span class="text-title font-medium ">Chiết khấu:</span>
+                    <span class="text-title">{{$product->discount}}%</span>
+                </div>
+                <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Số lượng bán:</span>
                     <span class="text-title">{{$product->amount_product}}</span>
                 </div>

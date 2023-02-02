@@ -30,17 +30,17 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code','products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
-            $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->orderBy('id', 'desc')->paginate($limit);
+            $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->orderBy('id', 'desc')->paginate($limit);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
@@ -85,8 +85,8 @@ class ProductController extends Controller
             'origin' => 'required',
             'volume' => 'required',
             'price' => 'required',
-            'percent_discount' => 'required',
             'sku_id' => 'required|unique:products',
+            'video' => 'max:512000',
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -102,9 +102,9 @@ class ProductController extends Controller
             'origin.required' => 'Trường này không được trống',
             'volume.required' => 'Trường này không được trống',
             'price.required' => 'Trường này không được trống',
-            'percent_discount.required' => 'Trường này không được trống',
+//            'percent_discount.required' => 'Trường này không được trống',
             'sku_id.required' => 'Trường này không được trống',
-
+            'video.max' => 'Video vượt quá dung lượng cho phép',
 
         ]);
         if ($validator->fails()) {
@@ -133,13 +133,28 @@ class ProductController extends Controller
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->price = $request->price;
-            $product->amount_product_send_to_discount = $request->amount_product_send_to_discount;
-            $product->percent_discount = $request->percent_discount;
+//            $product->amount_product_send_to_discount = $request->amount_product_send_to_discount;
+//            $product->percent_discount = $request->percent_discount;
             $product->sku_id = $request->sku_id;
             $product->payment_on_delivery = $request->payment_on_delivery ? 1 : 0;
             $product->prepay = $request->prepay ? 1 : 0;
             $product->status = 1;
             $product->import_date = $request->import_date;
+            $product->unit = $request->unit;
+            $product->unit_name = $request->unit_name;
+            $filenameWithExt = $request->file('video')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('video')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
+
+            $path = str_replace('public/', '', $path);
+
+            $product->video = 'storage/'.$path;
             while (true) {
                 $code = rand(10000000, 99999999);
                 if (!Product::where('code', $code)->first()) {
@@ -149,11 +164,17 @@ class ProductController extends Controller
             }
             $photo_gallery = [];
             foreach (json_decode($request->images) as $image) {
-                $photo_gallery[] = $this->saveImgBase64($image, 'products');
+                $photo_gallery[] = 'storage/products/'. $this->saveImgBase64($image, 'products');
             }
             $product->images = json_encode($photo_gallery);
+            $photo_gallery = [];
+            foreach (json_decode($request->unitImages) as $image) {
+                $photo_gallery[] ='storage/products/'. $this->saveImgBase64($image, 'products') ;
+            }
+            $product->unit_images = json_encode($photo_gallery);
             $product->user_id = Auth::id();
             $product->save();
+
             $dataInsert = [];
             $amount = 0;
             for ($i = 0; $i < count($request->ward_id); $i++) {
@@ -180,9 +201,8 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
-
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
@@ -217,17 +237,17 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code','products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'products.status', 'vstore_id', 'vstore_confirm_date', 'admin_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'products.status', 'vstore_id', 'vstore_confirm_date', 'admin_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
-            $this->v['products'] = Product::select('code','id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->orderBy('id', 'desc')->paginate($limit);
+            $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->orderBy('id', 'desc')->paginate($limit);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {

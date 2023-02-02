@@ -126,6 +126,22 @@ input[type="submit"].active{
     opacity: 1;
     transition: 0.5s all;
 }
+.deleteImg1{
+    z-index: 2;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s all;
+}
+.file-name .item:hover .over-lay{
+    opacity: 1;
+    transition: 0.5s all;
+}
+.file-name .item:hover .deleteImg1{
+    opacity: 1;
+    transition: 0.5s all;
+}
 .error{
     color: #FF4D4F;
 }
