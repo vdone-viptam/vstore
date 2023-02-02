@@ -120,7 +120,7 @@
                 </a>
                 <ul class="sub-nav">
                     <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
-                    <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu thêm sản phẩm</a></li>
+                    <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a></li>
 
                     {{--                    <li><a href="#">Thiết lập giá</a></li>--}}
                     {{--                    <li><a href="#">Thiết lập khuyến mãi</a></li>--}}

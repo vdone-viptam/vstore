@@ -152,6 +152,7 @@
                         <span class="text-sm text-secondary">Tải hình ảnh</span>
                         <span class="text-xs text-secondary" id="countImage"> 0/5</span>
                     </div>
+
                 </div>
                 <label for="">Video sản phẩm</label>
                 <div class="flex justify-start items-start gap-2 w-full">
@@ -397,7 +398,7 @@
                                 <span class="text-title font-medium text-sm w-[250px]">Địa chỉ kho hàng:<strong
                                         class="text-[#FF4D4F]">*</strong></span>
                                     <select name="ward_id[]" id=""
-                                            class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                            class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         <option value="0" selected>Chọn địa chỉ kho hàng</option>
                                         @foreach($wareHouses as $ware)
                                             <option value="{{$ware->id}}">{{$ware->name}}</option>
@@ -582,7 +583,7 @@
                                 <span class="text-title font-medium text-sm w-[250px]">Địa chỉ kho hàng:<strong
                                         class="text-[#FF4D4F]">*</strong></span>
                                     <select name="ward_id[]" id=""
-                                            class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                            class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         <option value="0" selected>Chọn địa chỉ kho hàng</option>
                                         @foreach($wareHouses as $ware)
             <option value="{{$ware->id}}">{{$ware->name}}</option>
@@ -639,14 +640,32 @@
             });
         });
     </script>
-    {{--    <script>--}}
-    {{--        var price = $("#price").val();--}}
-    {{--        $("#discount").change(function () {--}}
-    {{--            if (price != null) {--}}
-    {{--                console.log(price);--}}
-    {{--                alert(price);--}}
-    {{--            }--}}
+    <script>
 
-    {{--        })--}}
-    {{--    </script>--}}
+
+$("#discount").keyup(function (){
+    var price = $("#price").val();
+    var discount = $("#discount").val();
+    var total =0;
+    if(price != null){
+        total = (price/100)*discount;
+        $(".total").html('='+total+'VNĐ');
+
+
+    }
+
+})
+$("#price").keyup(function (){
+    var price = $("#price").val();
+    var discount = $("#discount").val();
+    var total =0;
+    if(discount != null){
+        total = (price/100)*discount;
+        $(".total").html('='+total+'VNĐ');
+
+
+    }
+
+})
+    </script>
 @endsection

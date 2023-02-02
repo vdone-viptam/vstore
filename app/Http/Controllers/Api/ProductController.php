@@ -36,4 +36,13 @@ class ProductController extends Controller
 
         ]);
     }
+    public function productByNcc( Request $request,$id){
+        $limit = $request->limit ?? 10;
+        $products = Product::where('user_id',$id)->paginate($limit);
+        return response()->json([
+            'status_code' => 200,
+            'data' => $products,
+
+        ]);
+    }
 }
