@@ -190,11 +190,7 @@
         });
         const form = document.getElementById('form');
         const limit = document.getElementsByName('limit')[0];
-        const page = document.getElementById('page');
         limit.addEventListener('change', (e) => {
-            form.submit();
-        });
-        page.addEventListener('change', (e) => {
             form.submit();
         });
     </script>

@@ -98,11 +98,11 @@
 <script>
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 3) {
-
+            document.querySelector('#vShop').style.display = 'none'
             document.querySelector('#note').innerHTML = `  <textarea name="note" placeholder="Lý do từ chối"
                                class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>`
         } else if (e.target.value == 2) {
-            document.querySelector('#vShop').style.display = 'block'
+            document.querySelector('#vShop').style.display = 'block';
         } else {
             document.querySelector('#note').innerHTML = ``;
             document.querySelector('#vShop').style.display = 'none'
