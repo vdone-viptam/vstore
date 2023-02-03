@@ -275,3 +275,14 @@ Quản lý hàng tại V-Store</h2>
         <div></div>
     </div>
 @endsection
+
+@section('custom_js')
+    <script>
+        $('.more-details').each(function () {
+            $(this).on('click', function () {
+                // console.log(1)
+                $('.modal-details').toggleClass('show-modal');
+            });
+        })
+    </script>
+@endsection

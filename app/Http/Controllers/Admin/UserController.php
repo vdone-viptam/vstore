@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -56,14 +57,24 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         try {
-            $ID = rand(100000000000, 999999999999);
+            $user = User::find($id);
+            $ID = Str::random(7);
+            if ($user->role_id == 2){
+                $ID = 'vnncc'.$ID;
+            }else {
+                $ID = 'vnnpp'.$ID;
+            }
             $checkUser = User::where('account_code', $ID)->first();
             while ($checkUser) {
-                $ID = rand(100000000000, 999999999999);
+                $ID = Str::random(7);
+                if ($user->role_id == 2){
+                    $ID = 'vnncc'.$ID;
+                }else {
+                    $ID = 'vnnpp'.$ID;
+                }
                 $checkUser = User::where('account_code', $ID)->first();
             }
             $password = rand(1000000, 9999999);
-            $user = User::find($id);
             $user->account_code = $ID;
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();

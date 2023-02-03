@@ -365,7 +365,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                         {{--                        </div>--}}
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="datetime-local" min="2018-01-01" name="import_date"
+                            <input type="datetime-local" min="2018-01-01" name="import_date" 
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 

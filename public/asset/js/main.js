@@ -57,11 +57,12 @@ $(document).ready(function () {
             $('.password .icon').html(svgHidePass)
         }
     })
-    $('.more-details').each(function () {
-        $(this).on('click', function () {
-            $('.modal-details').toggleClass('show-modal');
-        });
-    })
+    // $('.more-details').each(function () {
+    //     $(this).on('click', function () {
+    //         console.log(1)
+    //         $('.modal-details').toggleClass('show-modal');
+    //     });
+    // })
     $('.rePassword .icon').on('click', function () {
         if ($('.rePass input').attr('type') == 'text') {
             $('.rePass input').prop("type", "password")

@@ -8,7 +8,7 @@
 
 @section('content')
 
-                   
+
     <form action="" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
             <span class="text-secondary">Sản phẩm</span>
@@ -104,6 +104,7 @@ Tất cả sản phẩm</h2>
                         <thead>
                         <tr>
                             <th>Mã sản phẩm</th>
+                            <th>Hình ảnh</th>
                             <th>
                                 Tên sản phẩm
                             </th>
@@ -135,12 +136,13 @@ Tất cả sản phẩm</h2>
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{$product->sku_id}}</td>
-                                    <td class="flex justify-start items-center gap-2">
-                                        <div class="w-[48px] h-[48px] rounded">
+                                    <td> <div class="w-[48px] h-[48px] rounded">
                                             <img
-                                                src="{{asset('storage/products/'.json_decode($product->images)[0]) ?? asset('asset/images/sp.png') }}"
+                                                src="{{asset(json_decode($product->images)[0]) ?? asset('asset/images/sp.png') }}"
                                                 alt="">
-                                        </div>
+                                        </div></td>
+                                    <td class="flex justify-start items-center gap-2">
+
                                         <span>{{$product->name}}</span>
                                     </td>
                                     <td>
@@ -207,15 +209,12 @@ Tất cả sản phẩm</h2>
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-        page.addEventListener('change', (e) => {
-            form.submit();
-        });
         $('.more-details').each(function (i, e) {
             $(this).on('click', (o) => {
                 $.ajax({
                     url: '{{route('screens.manufacture.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
-                        $('#modal5').html('');
+                        // $('#modal5').html('');
                         $('#modal5').append(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
