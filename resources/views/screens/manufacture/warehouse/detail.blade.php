@@ -12,16 +12,18 @@
                     fill="black" fill-opacity="0.45"/>
             </svg>
         </div>
-        <div class="content  max-h-[600px] overflow-y-auto">
-            <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                <table class="w-full dsth">
+        <div class="content  max-h-[600px]">
+            <div class="flex flex-col justify-start items-start gap-4 py-3 w-full  overflow-y-auto">
+                <table class="w-full dsth ">
+                    <thead>
                     <tr>
                         <th>
                             Tên sản phẩm
                         </th>
-                       <th>Số hàng có trong kho</th>
+                        <th>Số hàng có trong kho</th>
                     </tr>
-                    <tbody>
+                    </thead>
+                    <tbody >
                     @foreach($products as $product)
                         <tr>
                             <td>{{$product->product_name}}</td>
@@ -31,7 +33,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="flex justify-end items-center gap-4 ">
+            <div class="flex justify-end items-center gap-4 mt-4">
                 <button
                     class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"
                     onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại
