@@ -252,7 +252,7 @@ $(document).ready(function () {
         $('.choose-tab .list').addClass('hidden');
         $(this).children('.list').removeClass('hidden')
         $('.choose-tab .tab__menu').removeClass('active');
-        $(this).addClass('active')
+        $(this).toggleClass('active')
     })
 })
 

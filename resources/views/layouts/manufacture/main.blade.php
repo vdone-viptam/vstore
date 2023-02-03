@@ -45,87 +45,24 @@
     const tm = document.querySelectorAll(".tab__menu")
     const l = document.getElementsByClassName("list")
     const param = url[3];
-    // console.log(param)
-    // console.log(tm)
-
-    // tm.forEach((ele, index1) => {
-    //     ele.addEventListener('click', () => {
-    //         const {index} = ele.dataset;
-    //         tm[index].classList.add('active');
-    //         l[index-1].classList.add('list-show')
-    //         tm.forEach((item,index3)=>{
-    //             if(index3 != index){
-    //                 item.classList.remove('active')
-    //             }
-    //         })
-    //         l.forEach((item,index3)=>{
-    //             if(index3 != index-1){
-    //                 item.classList.remove('list-show')
-    //             }
-    //         })
-    //     })
-    // })
-
-    // if (param === "dashboard") {
-    //     tm[0].classList.toggle("active")
-    // }
-    // if (param === "products") {
-    //     tm[1].classList.toggle("active");
-    //     l[0].classList.toggle("list-show")
-    // }
-    // if (param === "warehouses") {
-    //     tm[2].classList.toggle("active")
-    //     console.log(l[1])
-    //     l[1].classList.toggle("list-show")
-    // }
-    // if (param === "partners") {
-    //     tm[3].classList.toggle("active")
-    //     l[2].classList.toggle("list-show")
-    // }
-    // if (param === "orders") {
-    //     tm[4].classList.toggle("active")
-    //     l[3].classList.toggle("list-show")
-    // }
-    // if (param === "finances") {
-    //     tm[5].classList.toggle("active")
-    //     l[4].classList.toggle("list-show")
-    // }
-    // //
-    // tm[0].addEventListener("click", () => {
-    //     if (param !== 'dashboard') {
-    //         tm[0].classList.toggle("active")
-    //     }
-    // })
-    // tm[1].addEventListener("click", () => {
-    //     if (param !== 'products') {
-    //         tm[1].classList.toggle("active")
-    //         l[0].classList.toggle("list-show")
-    //     }
-    // })
-    // tm[2].addEventListener("click", () => {
-    //     if (param !== 'warehouses') {
-    //         tm[2].classList.toggle("active")
-    //         l[1].classList.toggle("list-show")
-    //     }
-    // })
-    // tm[3].addEventListener("click", () => {
-    //     if (param !== 'partners') {
-    //         tm[3].classList.toggle("active")
-    //         l[2].classList.toggle("list-show")
-    //     }
-    // })
-    // tm[4].addEventListener("click", () => {
-    //     if (param !== 'orders') {
-    //         tm[4].classList.toggle("active")
-    //         l[3].classList.toggle("list-show")
-    //     }
-    // })
-    // tm[5].addEventListener("click", () => {
-    //     if (param !== 'finances') {
-    //         tm[5].classList.toggle("active")
-    //         l[4].classList.toggle("list-show")
-    //     }
-    // })
+    if (param === "dashboard") {
+        tm[0].classList.toggle("active")
+    }
+    if (param === "products") {
+        tm[1].classList.toggle("active");
+                     }
+    if (param === "warehouses") {
+        tm[2].classList.toggle("active")
+    }
+    if (param === "partners") {
+        tm[3].classList.toggle("active")
+    }
+    if (param === "orders") {
+        tm[4].classList.toggle("active")
+    }
+    if (param === "finances") {
+        tm[5].classList.toggle("active")
+    }
 </script>
 </body>
 </html>
