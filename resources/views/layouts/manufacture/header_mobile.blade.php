@@ -35,6 +35,24 @@
     .show .nav_hidden {
         display: none !important;
     }
+
+    /*    */
+    @media (min-width: 320px) and (max-width: 769.99px)  {
+        .sub-nav-help {
+            left: 0;
+            top: 38px;
+        }
+
+        .sub-nav-notify {
+            top: 45px;
+            right: -145px;
+        }
+
+        .sub-nav-user {
+            top: 100px;
+            right: 15px;
+        }
+    }
 </style>
 {{--menu--}}
 <div class="menu md:hidden">
@@ -239,7 +257,7 @@
     <div class="fixed h-full w-full z-10 bg-[#00000066] hidden left-0 top-0 show_bg"></div>
 </div>
 {{--hedder--}}
-<header class="menu block h-[50px] md:hidden ">
+<header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full h-[50px] flex justify-between items-center px-4">
         <a href="">
             <div class="w-[150px]">
@@ -271,8 +289,8 @@
     </div>
     <div class="py-3 px-5">
         <div class="flex justify-between items-center">
-            <div class="lg:hidden flex items-center gap-3 justify-end">
-                <div class="xl:w-[35px] lg:w-[30px] w-[26px]">
+            <div class="help relative flex items-center gap-3 justify-end">
+                <div class="w-[35px]">
                     <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
                         <path
@@ -281,9 +299,14 @@
                     </svg>
                 </div>
                 <p class="text-black font-normal text-sm">Hỗ trợ</p>
+                <ul class="sub-nav-help">
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    <li><a href="#">Biểu phí</a></li>
+                    <li><a href="#">Chính sách quy định</a></li>
+                </ul>
             </div>
             <div class="flex justify-end gap-6 items-center xl:gap-6">
-                <div class="relative cursor-pointer">
+                <div class="notify relative cursor-pointer">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -291,8 +314,28 @@
                             fill="#637381"/>
                     </svg>
                     <div class="w-[10px] h-[10px] bg-[#FF4842] rounded-[50%] absolute top-1.5 right-0"></div>
+                    <ul class="sub-nav-notify">
+                        <div class="flex justify-between items-center w-full pb-3 px-3">
+                            <h2 class="text-xl font-normal text-title">Thông báo</h2>
+                            <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                                cả</a>
+                        </div>
+                        @if(count(Auth::user()->unreadNotifications) > 0)
+                            @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                                <li>
+                                    <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                       class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                        <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                                </li>
+                            @endforeach
+                        @else
+                            <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                        @endif
+
+
+                    </ul>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="user flex items-center gap-2">
                     <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
                          src="{{asset("./home/img/avatar_accout.png")}}" alt="">
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
@@ -302,6 +345,47 @@
                             d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
                             fill="black"/>
                     </svg>
+                    <ul class="sub-nav-user">
+                        <li><a href="{{route('screens.vstore.account.profile')}}"
+                               class="font-medium flex justify-start items-center gap-2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 20C5.33579 17.5226 8.50702 16 12 16C15.493 16 18.6642 17.5226 21 20M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                </svg>
+                                Thông tin tài khoản</a></li>
+                        <li><a href="{{route('logout')}}"
+                               class="font-medium flex justify-start items-center gap-2 ">
+                                <svg fill="#FF4D4F" height="18" width="18" version="1.1" id="Capa_1"
+                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     viewBox="0 0 384.971 384.971" xml:space="preserve">
+                                   <g>
+                                       <g id="Sign_Out">
+                                           <path d="M180.455,360.91H24.061V24.061h156.394c6.641,0,12.03-5.39,12.03-12.03s-5.39-12.03-12.03-12.03H12.03
+                                               C5.39,0.001,0,5.39,0,12.031V372.94c0,6.641,5.39,12.03,12.03,12.03h168.424c6.641,0,12.03-5.39,12.03-12.03
+                                               C192.485,366.299,187.095,360.91,180.455,360.91z"/>
+                                           <path d="M381.481,184.088l-83.009-84.2c-4.704-4.752-12.319-4.74-17.011,0c-4.704,4.74-4.704,12.439,0,17.179l62.558,63.46H96.279
+                                               c-6.641,0-12.03,5.438-12.03,12.151c0,6.713,5.39,12.151,12.03,12.151h247.74l-62.558,63.46c-4.704,4.752-4.704,12.439,0,17.179
+                                               c4.704,4.752,12.319,4.752,17.011,0l82.997-84.2C386.113,196.588,386.161,188.756,381.481,184.088z"/>
+                                       </g>
+                                       <g>
+                                       </g>
+                                       <g>
+                                       </g>
+                                       <g>
+                                       </g>
+                                       <g>
+                                       </g>
+                                       <g>
+                                       </g>
+                                       <g>
+                                       </g>
+                                   </g>
+                                   </svg>
+                                Đăng xuất</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

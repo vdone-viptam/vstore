@@ -37,21 +37,19 @@
     }
 
     /*    */
-    @media (min-width: 320px) and (max-width: 769.99px)  {
-        .sub-nav-help {
-            left: 0;
-            top: 38px;
-        }
+    .sub-nav-help {
+        left: 0;
+        top: 38px;
+    }
 
-        .sub-nav-notify {
-            top: 45px;
-            right: -145px;
-        }
+    .sub-nav-notify {
+        top: 45px;
+        right: -145px;
+    }
 
-        .sub-nav-user {
-            top: 100px;
-            right: 15px;
-        }
+    .sub-nav-user {
+        top: 100px;
+        right: 15px;
     }
 </style>
 {{--menu--}}
