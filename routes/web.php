@@ -98,6 +98,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     Route::prefix('warehouses')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'index'])->name('screens.manufacture.warehouse.index');
         Route::get('/swap', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'swap'])->name('screens.manufacture.warehouse.swap');
+        Route::get('/detail', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'detail'])->name('screens.manufacture.warehouse.detail');
 
         Route::get('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'addProduct'])->name('screens.manufacture.warehouse.addProduct');
         Route::post('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'postAddProduct']);
