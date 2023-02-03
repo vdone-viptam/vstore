@@ -39,7 +39,7 @@ class ProductController extends Controller
 
             }
         } else {
-            $this->v['products'] = Product::select('code','id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'sku_id','admin_confirm_date','vstore_confirm_date')->orderBy('id', 'desc')->paginate(10);
+            $this->v['products'] = Product::select('code', 'id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'sku_id', 'admin_confirm_date', 'vstore_confirm_date')->orderBy('id', 'desc')->paginate(10);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function detail(Request $request)
     {
-        $this->v['product'] = Product::select('code', 'id', 'name', 'user_id', 'category_id', 'created_at', 'status', 'discount', 'price', 'note')->where('id', $request->id)->first();
+        $this->v['product'] = Product::select('code', 'id', 'name', 'user_id', 'category_id', 'created_at', 'status', 'discount', 'price', 'note','discountj_vShop')->where('id', $request->id)->first();
         $this->v['product']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = $request->id) as amount FROM product_warehouses where status = 1 AND product_id = $request->id"))[0]->amount;
         return view('screens.vstore.product.detail', $this->v);
     }
@@ -63,6 +63,13 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->status = $request->status;
         $product->vstore_confirm_date = Carbon::now();
+
+        if (isset($request->discount_vShop)) {
+            if ($request->discount_vShop < ($product->discount / 2)) {
+                return redirect()->back()->with('error', 'validated');
+            }
+            $product->discount_vShop = $request->discount_vShop;
+        }
         if (isset($request->note)) {
             $product->note = $request->note;
         }
