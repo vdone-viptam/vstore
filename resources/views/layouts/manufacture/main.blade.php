@@ -21,16 +21,17 @@
     @include('layouts.css')
     <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
+    @yield('custom_css')
 </head>
 <body>
 @yield('modal')
-@include('layouts.manufacture.menu_mobile')
-{{--@include('layouts.manufacture.header')--}}
 <div class="flex">
-    <div class="xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] min-h-full bg-[#F2F8FF] ">
+    <div class="xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] md:min-h-full bg-[#F2F8FF] md:block hidden">
         @include('layouts.manufacture.menu')
     </div>
     <div class="w-full">
+        @include('layouts.manufacture.header')
+        @include('layouts.manufacture.header_mobile')
         @yield('content')
     </div>
 </div>
@@ -50,7 +51,7 @@
     }
     if (param === "products") {
         tm[1].classList.toggle("active");
-                     }
+    }
     if (param === "warehouses") {
         tm[2].classList.toggle("active")
     }
@@ -63,6 +64,35 @@
     if (param === "finances") {
         tm[5].classList.toggle("active")
     }
+    //
+    const nav = document.getElementById("nav")
+    const menu = document.getElementsByClassName("menu")
+    const bg = document.getElementsByClassName("show_bg")[0]
+    nav.addEventListener("click", () => {
+        console.log(menu[1])
+        menu[0].classList.add("show")
+        menu[1].classList.add("show")
+    })
+    window.onclick = function (event) {
+        if (event.target == bg) {
+            menu[0].classList.remove("show")
+            menu[1].classList.remove("show")
+        }
+    }
+    //    hover menu
+    console.log(1)
+    // const hv = document.getElementsByClassName("choose-tab")[0]
+    // const tm = document.getElementsByClassName("tab__menu")
+    // hv.addEventListener("click", () => {
+    //     console.log(1)
+    //     for (let i = 1; i < tm.length; i++) {
+    //         if (tm[i].classList.contains("active")) {
+    //             tm[i].classList.remove("tab__hover")
+    //         } else {
+    //             tm[i].classList.add("tab__hover")
+    //         }
+    //     }
+    // })
 </script>
 </body>
 </html>

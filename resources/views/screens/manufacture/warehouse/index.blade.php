@@ -102,7 +102,7 @@ Lọc</button>
 </svg>
 
 Quản lý kho hàng</h2>
-          
+
                 <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
                     <button
                         class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
