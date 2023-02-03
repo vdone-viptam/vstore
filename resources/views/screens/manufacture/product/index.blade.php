@@ -207,15 +207,12 @@ Tất cả sản phẩm</h2>
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-        page.addEventListener('change', (e) => {
-            form.submit();
-        });
         $('.more-details').each(function (i, e) {
             $(this).on('click', (o) => {
                 $.ajax({
                     url: '{{route('screens.manufacture.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
-                        $('#modal5').html('');
+                        // $('#modal5').html('');
                         $('#modal5').append(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
