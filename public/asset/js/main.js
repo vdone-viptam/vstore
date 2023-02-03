@@ -244,10 +244,20 @@ $(document).ready(function () {
     //         $('.btn-log').removeClass('active');
     //     }
     //
-    // })
-    $('.edit-hs').on('click', function () {
-        $('.modal-hd').toggleClass('show-modal');
-    })
+    // })    // $('.edit-hs').on('click', function () {
+    //     //     $('.modal-hd').toggleClass('show-modal');
+    //     // })
 
+    $('.choose-tab .tab__menu').on('click', function (){
+        $('.choose-tab .list').addClass('hidden');
+        $(this).children('.list').removeClass('hidden')
+        $('.choose-tab .tab__menu').removeClass('active');
+        $(this).toggleClass('active')
+    })
 })
+
+// MENU
+
+
+
 

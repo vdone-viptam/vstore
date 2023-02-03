@@ -1,0 +1,22 @@
+
+.list-show{
+    display: flex !important;
+    height: auto; !important;
+    transition: all 1s;
+}
+
+.active .tab__left{
+    background: #4062FF;
+}
+.active .text__menu{
+    color: white;
+}
+.active .svgFill{
+    fill: white;
+}
+.active .svg {
+    stroke: white;
+}
+.active .svg_arr{
+    stroke: white;
+}
