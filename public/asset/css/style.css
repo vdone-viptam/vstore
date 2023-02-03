@@ -436,6 +436,7 @@ th,
 td {
     padding: 1rem 2rem;
     text-align: center;
+    white-space: nowrap;
 
 }
 td{
