@@ -26,7 +26,7 @@
 <body>
 @yield('modal')
 <div class="flex">
-    <div class="xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] md:min-h-full bg-[#F2F8FF] md:block hidden">
+    <div class="xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] md:min-h-[100vh] bg-[#F2F8FF] md:block hidden">
         @include('layouts.manufacture.menu')
     </div>
     <div class="w-full">
