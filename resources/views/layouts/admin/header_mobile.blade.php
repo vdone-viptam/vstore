@@ -37,7 +37,7 @@
     }
 
     /*    */
-    @media (min-width: 320px) and (max-width: 769.99px)  {
+    @media (min-width: 320px) and (max-width: 769.99px) {
         .sub-nav-help {
             left: 0;
             top: 38px;
@@ -75,7 +75,7 @@
         <div class="px-4 py-3 box-shadow h-full">
             <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
                 {{--                Tổng quan--}}
-                <a href="{{route('screens.manufacture.dashboard.index')}}">
+                <a href="">
                     <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu">
                         <div class="flex items-center">
                             <div class="tab__left rounded-[16px] p-2">
@@ -132,55 +132,43 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản
+                        <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản
                                 phẩm</a>
                         </li>
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Quản lý
-                                yêu
-                                cầu
+                        <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu
                                 thêm sản
                                 phẩm</a></li>
                     </ul>
                 </div>
                 {{--                Danh mục--}}
-                <div data-index="2" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
-                    <div class="flex items-center">
-                        <div class="tab__left rounded-[16px] p-2">
-                            <div
-                                class="flex items-center gap-3">
-                                <div class="w-[16px]">
-                                    <svg viewBox="0 0 26 26" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path class="svgFill"
-                                              d="M24.7811 8.78146C24.6303 8.78213 24.4813 8.74532 24.3455 8.67384L12.8999 2.3245L1.4543 8.63079C1.21009 8.75638 0.929982 8.77137 0.6756 8.67248C0.421217 8.57359 0.213397 8.36891 0.0978565 8.10348C-0.0176839 7.83804 -0.0314796 7.53359 0.0595038 7.2571C0.150487 6.98061 0.338797 6.75472 0.583007 6.62914L12.8999 0L25.2168 6.62914C25.4764 6.69507 25.7017 6.8695 25.8439 7.11466C25.986 7.35982 26.0336 7.65598 25.9763 7.93901C25.919 8.22203 25.7615 8.46914 25.5378 8.62681C25.3141 8.78449 25.0422 8.84005 24.7811 8.78146ZM7.94938 19.543H2.00876V26H7.94938V19.543ZM15.8702 19.543H9.92958V26H15.8702V19.543ZM23.791 19.543H17.8504V26H23.791V19.543ZM19.8306 10.9338H13.89V17.3907H19.8306V10.9338ZM11.9098 10.9338H5.96917V17.3907H11.9098V10.9338Z"
-                                              fill="#B8BED9"/>
-                                    </svg>
-                                </div>
-                                <div class="flex gap-2 items-center">
-                                    <p class="text-[#B8BED9] text-sm  text__menu">Danh
-                                        mục</p>
-                                    <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
-                                              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                <a href="{{route('screens.admin.category.index')}}">
+                    <div data-index="2" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
+                        <div class="flex items-center">
+                            <div class="tab__left rounded-[16px] p-2">
+                                <div
+                                    class="flex items-center gap-3">
+                                    <div class="w-[16px]">
+                                        <svg viewBox="0 0 26 26" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path class="svgFill"
+                                                  d="M24.7811 8.78146C24.6303 8.78213 24.4813 8.74532 24.3455 8.67384L12.8999 2.3245L1.4543 8.63079C1.21009 8.75638 0.929982 8.77137 0.6756 8.67248C0.421217 8.57359 0.213397 8.36891 0.0978565 8.10348C-0.0176839 7.83804 -0.0314796 7.53359 0.0595038 7.2571C0.150487 6.98061 0.338797 6.75472 0.583007 6.62914L12.8999 0L25.2168 6.62914C25.4764 6.69507 25.7017 6.8695 25.8439 7.11466C25.986 7.35982 26.0336 7.65598 25.9763 7.93901C25.919 8.22203 25.7615 8.46914 25.5378 8.62681C25.3141 8.78449 25.0422 8.84005 24.7811 8.78146ZM7.94938 19.543H2.00876V26H7.94938V19.543ZM15.8702 19.543H9.92958V26H15.8702V19.543ZM23.791 19.543H17.8504V26H23.791V19.543ZM19.8306 10.9338H13.89V17.3907H19.8306V10.9338ZM11.9098 10.9338H5.96917V17.3907H11.9098V10.9338Z"
+                                                  fill="#B8BED9"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex gap-2 items-center">
+                                        <p class="text-[#B8BED9] text-sm  text__menu">Danh
+                                            mục</p>
+                                        <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.index')}}">Quản lý
-                                kho
-                                hàng</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm
-                                sản
-                                phẩm vào kho</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý
-                                xuất
-                                nhập
-                                kho</a></li>
-                    </ul>
-                </div>
+                </a>
                 {{--                Tài khoản--}}
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
@@ -212,13 +200,11 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                tài
+                        <li><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách tài
                                 khoản</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Danh sách
-                                đơn
-                                đăng
-                                ký tài khoản</a>
+                        <li><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
+                                ký tài khoản </a>
+                        </li>
                         </li>
                     </ul>
                 </div>

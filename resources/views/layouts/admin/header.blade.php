@@ -1,4 +1,4 @@
-<header class="flex items-center justify-end gap-11 pt-8 pb-4 px-12 header">
+<header class="hidden md:flex items-center justify-end gap-11 pt-8 pb-4 px-12 header">
     <div class="help relative cursor-pointer lg:flex items-center gap-3 justify-end">
         <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
             <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">

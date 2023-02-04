@@ -37,7 +37,7 @@
     }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0">
-    <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
+    <a href="" class="">
         <div class="min-w-[162px] flex items-center justify-center py-9">
             <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
