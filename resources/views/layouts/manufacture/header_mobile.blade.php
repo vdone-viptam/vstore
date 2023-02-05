@@ -135,11 +135,11 @@
                                 phẩm</a>
                         </li>
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu
-                                thêm sản
+                                xét duyệt
                                 phẩm</a></li>
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.request')}}">Quản lý
                                 yêu cầu
-                                thêm sản phẩm</a></li>
+                                xét duyệt sản phẩm</a></li>
                     </ul>
                 </div>
                 {{--                Kho hàng--}}

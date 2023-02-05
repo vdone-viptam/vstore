@@ -1,6 +1,7 @@
 @extends('layouts.admin.main')
 
 @section('content')
+
     <form action="" method="GET" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
             <span class="text-secondary">Danh mục sản phẩm</span>
@@ -105,7 +106,7 @@ Danh sách danh mục</h2>
                                     <td>{{$category->name}}</td>
                                     <td>
                                         <img style="margin: auto;width: 125px"
-                                             src="{{asset('image/category/'.$category->img)}}" alt="">
+                                             src="{{asset($category->img)}}" alt="">
                                     </td>
                                     <td><a href="{{route('screens.admin.category.edit',['id' => $category->id])}}"
                                            class="">Cập

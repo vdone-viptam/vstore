@@ -106,10 +106,10 @@
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
                 <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a>
                 </li>
-                <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu thêm sản
+                <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu xét duyệt sản
                         phẩm</a></li>
                 <li class="hover:underline"><a href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu
-                        thêm sản phẩm</a></li>
+                        xét duyệt sản phẩm</a></li>
             </ul>
         </div>
         {{--        Kho hàng--}}

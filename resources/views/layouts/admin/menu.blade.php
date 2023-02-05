@@ -107,7 +107,7 @@
                 <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>
                 </li>
                 <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu
-                        thêm sản
+                        xét duyệt
                         phẩm</a></li>
             </ul>
         </div>

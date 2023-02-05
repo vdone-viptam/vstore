@@ -71,7 +71,7 @@ class CategoryController extends Controller
             $file = $request->file('img');
             $filename = date('YmdHi') . $file->getClientOriginalName();
             $file->move(public_path('image/category'), $filename);
-            $category->img = $filename;
+            $category->img = 'image/category/'.$filename;
             $category->save();
             DB::commit();
         } catch (\Exception $e) {

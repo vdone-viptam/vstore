@@ -9,6 +9,12 @@
     @yield('custom_css')
     @vite('resources/css/app.css')
 </head>
+<style>
+    .btnGra{
+        background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%) ;
+
+    }
+</style>
 <body>
 <div class="over-lay-mobile" onclick="$('.menu-mobile').toggleClass('show-menuMB')">
 

@@ -742,7 +742,7 @@ svg{
 }
 
 .btnGra{
-    background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%);
+    background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%) ;
 
 }
 
