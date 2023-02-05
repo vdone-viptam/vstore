@@ -249,7 +249,7 @@
                             <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
                                  src="{{asset("./home/img/avatar_accout.png")}}" alt="">
                             <div class="flex flex-col gap-[3px] justify-center">
-                                <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
+                                <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
                             </div>
                             <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +258,7 @@
                                     fill="black"/>
                             </svg>
                             <ul class="sub-nav-user">
-                                <li><a href="{{route('screens.vstore.account.profile')}}"
+                                <li><a href="{{route('screens.admin.account.profile')}}"
                                        class="font-medium flex justify-start items-center gap-2">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -306,10 +306,33 @@
                     <div class="flex flex-col gap-5">
                         <div class="flex flex-col 2xl:gap-[9px] xl:gap-[5px]">
                             <p class="text-black text-base font-bold">Thông báo</p>
-                            <p class="text-[#919EAB] text-sm font-normal">Chưa có thông báo mới nào</p>
+
                         </div>
                         <div class="noti">
-                            <img src="{{asset("./home/img/bg_notification.png")}}" alt="">
+
+                            <div
+                                class="w-full flex flex-col justify-start items-start gap-4 max-h-[850px] overflow-y-scroll">
+                                @if(count(Auth::user()->unreadNotifications) > 0)
+                                    @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                                        <div class="flex justify-start items-start gap-2 w-full">
+                                            <div class="w-[24px] h-[24px] rounded-full">
+                                                <img
+                                                    src="{{$notification['data']['avatar'] ?? asset('asset/icons/Avatar.png')}}"
+                                                    alt="" class="w-full">
+                                            </div>
+                                            <div class="flex flex-col justify-start items-start">
+                                                <span class="text-sm "><a href="{{$notification['data']['href']}}"
+                                                                          class="font-bold">{{\Illuminate\Support\Str::limit($notification['data']['message'],30,'...')}} </a> mới</span>
+                                                <span
+                                                    class="text-xs text-secondary">{{\Carbon\Carbon::parse($notification['created_at'])->format('d/m/Y')}}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p class="text-[#919EAB] text-sm font-normal">Chưa có thông báo mới nào</p>
+                                    <img src="{{asset("./home/img/bg_notification.png")}}" alt="">
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-col gap-5">

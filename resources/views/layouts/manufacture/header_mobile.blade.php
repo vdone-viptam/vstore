@@ -398,7 +398,8 @@
                 </div>
                 <div class="user flex items-center gap-2">
                     <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
-                         src="{{asset("./home/img/avatar_accout.png")}}" alt="">
+                         src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
+                         alt="">
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -407,7 +408,7 @@
                             fill="black"/>
                     </svg>
                     <ul class="sub-nav-user">
-                        <li><a href="{{route('screens.vstore.account.profile')}}"
+                        <li><a href="{{route('screens.manufacture.account.profile')}}"
                                class="font-medium flex justify-start items-center gap-2">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">

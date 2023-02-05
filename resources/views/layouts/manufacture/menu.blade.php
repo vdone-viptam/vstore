@@ -39,7 +39,9 @@
 <div class="bg-[#F2F8FF] fixed left-0">
     <a href="" class="">
         <div class="min-w-[162px] flex items-center justify-center py-9">
-            <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
+            <img class="w-[200px]"
+                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
+                 alt="">
         </div>
     </a>
     <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
@@ -180,10 +182,8 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
-                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Danh sách tài
-                        khoản</a></li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Danh sách đơn đăng
-                        ký tài khoản</a>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại V-store</a></li>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Báo cáo V-store</a>
                 </li>
             </ul>
         </div>
@@ -221,7 +221,8 @@
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.index')}}">Tất cả đơn hàng</a>
                 </li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a></li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn tiền</a></li>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn
+                        tiền</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn
                         tiền</a></li>
             </ul>
@@ -256,7 +257,8 @@
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a></li>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a>
+                </li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a>
                 </li>
             </ul>

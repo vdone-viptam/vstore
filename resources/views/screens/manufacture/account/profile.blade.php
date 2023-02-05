@@ -152,7 +152,7 @@
                     <div class="flex justify-start items-center gap-6 w-full">
                         <div class="w-[49px]">
                             <div class="w-[48px] h-[48px] rounded-full">
-                                <a href="../tai-khoan/"><img
+                                <a href="{{route('screens.manufacture.account.profile')}}"><img
                                         src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
                                         alt=""
                                         class="w-full rounded-full"></a>

@@ -34,22 +34,22 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
                     ->where('status', 2)
                     ->orderBy('admin_confirm_date', 'asc')
                     ->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
                     ->where('status', 2)
                     ->orderBy('admin_confirm_date', 'asc')
                     ->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
+                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
                     ->where('products.status', 2)
                     ->orderBy('admin_confirm_date', 'asc')
                     ->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%', 'admin_confirm_date', 'vstore_confirm_date')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
@@ -87,14 +87,6 @@ class ProductController extends Controller
                 $product->note = $request->note;
             }
             $product->save();
-            $product->publish_id = 'VN' . Str::random(10);
-            $checkProduct = User::where('publish_id', $product->publish_id)->first();
-            while ($checkProduct) {
-                $product->publish_id = Str::random(7);
-
-                $checkProduct = User::where('publish_id', $product->publish_id)->first();
-            }
-            $product->save();
             $userLogin = Auth::user();
             $user = User::find($product->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
@@ -120,12 +112,36 @@ class ProductController extends Controller
 
         }
     }
-    public function notification($id){
-        $product = Product::find($id);
-        $user = User::find($product->user_id);
-        Mail::send('email.confirmProduct', ['ID' => 'abc', 'password' => 'abc'], function ($message) use ($user) {
-            $message->to($user->email);
-            $message->subject('Đơn đăng ký của bạn đã được duyệt');
-        });
+
+    public function genderCodeProduct($id)
+    {
+        DB::beginTransaction();
+        try {
+            $product = Product::find($id);
+
+            $code = 'VN' . rand(1000000000, 9999999999);
+            $check = true;
+            while ($check) {
+                $checkProduct = Product::where('publish_id', $code)->count();
+                if (!$checkProduct || $checkProduct < 1) {
+                    $check = false;
+                }
+                $code = 'VN' . rand(1000000000, 9999999999);
+            }
+            $product->publish_id = $code;
+            $product->save();
+
+            Mail::send('email.email', ['id' => $code], function ($message) use ($product) {
+                $message->to($product->NCC->email);
+                $message->subject('Hóa đơn cần thanh toán');
+            });
+            DB::commit();
+            return redirect()->back()->with('success', 'Tạo mã sản phẩm thành công');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+
+        }
     }
 }

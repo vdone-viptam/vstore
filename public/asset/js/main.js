@@ -72,10 +72,12 @@ $(document).ready(function () {
             $('.rePassword .icon').html(svgShowPass)
         }
     })
+    $('.edit-hs').on('click', function () {
+        $('.modal-hd').toggleClass('show-modal')
+    })
     $('.btn-add-address').on('click', function () {
         $('.modal-address').toggleClass('show-modal')
     })
-
 
     function checkRegister() {
         if ($('.btn-ctn').hasClass('active')) {
