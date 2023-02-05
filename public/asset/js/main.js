@@ -125,7 +125,6 @@ $(document).ready(function () {
                     <img src="${ev.target.result}" class="w-full h-full"></img></div>`)
                 }
                 reader.readAsDataURL(files[0])
-                console.log($('.deleteImg'))
             })
         };
         input.click();
@@ -249,16 +248,11 @@ $(document).ready(function () {
     //     //     $('.modal-hd').toggleClass('show-modal');
     //     // })
 
-    $('.choose-tab').on('click', function () {
-        $('.choose-tab').removeClass('tab__hover')
-    })
-
-    $('.choose-tab .tab__menu').on('click', function (){
+    $('.choose-tab .tab__menu').on('click', function () {
         $('.choose-tab .list').addClass('hidden');
         $(this).children('.list').removeClass('hidden')
         $('.choose-tab .tab__menu').removeClass('active');
-        console.log($(this))
-       // $(this).toggleClass('active')
+        $(this).addClass('active')
     })
 })
 

@@ -181,7 +181,7 @@
             </ul>
         </div>
         {{--        log out--}}
-        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>

@@ -201,7 +201,7 @@
                     </ul>
                 </div>
                 {{--                log out--}}
-                <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
+                <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
                             <div
