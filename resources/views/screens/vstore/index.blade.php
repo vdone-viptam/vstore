@@ -22,14 +22,14 @@
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full" alt=""></a>
             </div>
 
-            <a href="#" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
+            <a href="{{route('login_vstore')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
         </div>
         <div class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử V-store"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang <strong class="text-[#1E90FF]">tin dùng V-Store.</strong></span>
         </div>
         <div class="max-w-[320px]">
-            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">Đăng ký ngay</button>
+            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
         </div>
         <div class="flex flex-col w-full items-end md:items-start md:mt-[100px] md:max-w-[260px] relative">
             <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/imgb2.png')}}" class="w-full" alt="">
+                <img src="{{asset('home/img/b2.png')}}" class="w-full" alt="">
             </div>
             <h3 class="text-[#1D293F] font-semibold text-2xl">Hoàn thiện hồ sơ</h3>
             <span class="text-[#7C8087] text-right md:text-left">
@@ -108,7 +108,7 @@
         </div>
         <div class="flex flex-col w-full md:mt-[200px]max-w-[190px] md:max-w-[260px]">
             <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/b3.png')}}" class="w-full" alt="">
+                <img src="{{asset('home/img/b3.png')}}" class="w-full" alt="">
             </div>
             <h3 class="text-[#1D293F] font-semibold text-2xl">Bắt đầu sử dụng</h3>
             <span class="text-[#7C8087]">
@@ -231,37 +231,37 @@
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/avt.png')}}" class="w-full rounded-full" alt="">
+                    <img src="{{asset('home/img/avt.png')}}" class="w-full rounded-full" alt="">
                 </div>
                 <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/avt1.png')}}" class="w-full rounded-full" alt="">
+                    <img src="{{asset('home/img/avt1.png')}}" class="w-full rounded-full" alt="">
                 </div>
                 <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF  </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/avt2.png')}}" class="w-full rounded-full" alt="">
+                    <img src="{{asset('home/img/avt2.png')}}" class="w-full rounded-full" alt="">
                 </div>
                 <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/avt3.png')}}" class="w-full rounded-full" alt="">
+                    <img src="{{asset('home/img/avt3.png')}}" class="w-full rounded-full" alt="">
                 </div>
                 <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/avt4.png')}}" class="w-full rounded-full" alt="">
+                    <img src="{{asset('home/img/avt4.png')}}" class="w-full rounded-full" alt="">
                 </div>
                 <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/avt5.png')}}" class="w-full rounded-full" alt="">
+                    <img src="{{asset('home/img/avt5.png')}}" class="w-full rounded-full" alt="">
                 </div>
                 <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF </span>
             </div>
