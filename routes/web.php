@@ -37,7 +37,7 @@ Route::group(['domain' => config('domain.ncc')], function () {
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginNCC'])->name('login_ncc');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterNCC'])->name('register_ncc');
     Route::get('/', function () {
-        return redirect()->route('register_ncc');
+        return redirect()->route('login_ncc');
     });
     Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 });
