@@ -158,13 +158,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                       @if($product->publish_id)
+                                        @if($product->publish_id)
                                             <a href="#" data-id="{{$product->id}}"
                                                class="more-details text-primary underline">
                                                 Chi tiết</a>
                                         @endif
                                         @if(!$product->publish_id)
-
+                                            <a href="{{route('screens.admin.product.code',['id' => $product->id])}}"
+                                               class="more-details text-primary underline">
+                                                Cấp mã</a>
                                         @endif
                                     </td>
                                 </tr>
