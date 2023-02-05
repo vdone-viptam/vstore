@@ -10,6 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
 
 class ProductController extends Controller
 {
@@ -84,7 +87,13 @@ class ProductController extends Controller
                 $product->note = $request->note;
             }
             $product->save();
-            $product->publish_id = $product->id . rand(100000, 999999);
+            $product->publish_id = 'VN' . Str::random(10);
+            $checkProduct = User::where('publish_id', $product->publish_id)->first();
+            while ($checkProduct) {
+                $product->publish_id = Str::random(7);
+
+                $checkProduct = User::where('publish_id', $product->publish_id)->first();
+            }
             $product->save();
             $userLogin = Auth::user();
             $user = User::find($product->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
@@ -110,5 +119,13 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại !');
 
         }
+    }
+    public function notification($id){
+        $product = Product::find($id);
+        $user = User::find($product->user_id);
+        Mail::send('email.confirmProduct', ['ID' => 'abc', 'password' => 'abc'], function ($message) use ($user) {
+            $message->to($user->email);
+            $message->subject('Đơn đăng ký của bạn đã được duyệt');
+        });
     }
 }

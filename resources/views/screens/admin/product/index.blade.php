@@ -88,9 +88,7 @@ Tất cả sản phẩm</h2>
                         <thead>
                         <tr>
 
-                            <th>
-                                Mã yêu cầu
-                            </th>
+
                             <th>
                                 Tên sản phẩm
                             </th>
@@ -116,9 +114,7 @@ Tất cả sản phẩm</h2>
                             @foreach($products as $product)
 
                                 <tr>
-                                    <td>
-                                        {{$product->code}}
-                                    </td>
+
                                     <td>
                                         {{$product->name}}
                                     </td>
