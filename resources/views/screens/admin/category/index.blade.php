@@ -74,7 +74,7 @@ Danh sách danh mục</h2>
                     </div>
 
                 </div>
-                <div class="w-full ">
+                <div class="w-full overflow-scroll">
                     @if(\Illuminate\Support\Facades\Session::has('success'))
                         <p style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</p>
                     @endif

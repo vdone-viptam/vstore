@@ -249,11 +249,16 @@ $(document).ready(function () {
     //     //     $('.modal-hd').toggleClass('show-modal');
     //     // })
 
+    $('.choose-tab').on('click', function () {
+        $('.choose-tab').removeClass('tab__hover')
+    })
+
     $('.choose-tab .tab__menu').on('click', function (){
         $('.choose-tab .list').addClass('hidden');
         $(this).children('.list').removeClass('hidden')
         $('.choose-tab .tab__menu').removeClass('active');
-        $(this).toggleClass('active')
+        console.log($(this))
+       // $(this).toggleClass('active')
     })
 })
 
