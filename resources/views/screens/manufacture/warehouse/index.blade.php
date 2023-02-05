@@ -203,7 +203,7 @@ Quản lý kho hàng</h2>
                     url: '{{route('screens.manufacture.warehouse.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
                         $('#modal8').html(result);
-                        $('.modal-details').toggleClass('show-modal')
+                        // $('.modal-details').toggleClass('show-modal')
                     },
                 });
             });

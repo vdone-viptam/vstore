@@ -87,7 +87,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                                 class="text-[#FF4D4F]">*</strong></span>
                             <select name="vstore_id" id="vstore_id"
                                     class="th choose-vstore text-opa outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="0">Chọn V-Store</option>
+                                <option value="">Chọn V-Store</option>
                                 @foreach($v_stores as $v_store)
                                     <option data-id="{{$v_store->account_code}}" value="{{$v_store->id}}">{{$v_store->name}} </option>
                                 @endforeach
@@ -115,6 +115,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                                 <input type="number" name="discount" id="discount" min="0" max="99"
                                        placeholder="Nhập mức chiết khấu (%)"
                                        class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <span class="total"></span>
                             </span>
 
                             @error('discount')

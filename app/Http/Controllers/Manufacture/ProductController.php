@@ -94,7 +94,7 @@ class ProductController extends Controller
             'discount.required' => 'Trường này không được trống',
             'category_id.required' => 'Trường này không được trống',
             'description.required' => 'Trường này không được trống',
-            'brand.regex' => 'Trường này không được trống',
+            'brand.required' => 'Trường này không được trống',
             'weight.required' => 'Trường này không được trống',
             'packing_type.required' => 'Trường này không được trống',
             'manufacturer_name.required' => 'Trường này không được trống',
@@ -105,7 +105,8 @@ class ProductController extends Controller
 //            'percent_discount.required' => 'Trường này không được trống',
             'sku_id.required' => 'Trường này không được trống',
             'video.max' => 'Video vượt quá dung lượng cho phép',
-
+            'vstore_id.required' => 'Trường này không được trống',
+//            $v_stores
         ]);
         if ($validator->fails()) {
 

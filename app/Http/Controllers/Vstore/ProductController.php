@@ -88,7 +88,8 @@ class ProductController extends Controller
         $user->notify(new AppNotification($data));
 
         if ($request->status == 2) {
-            $user = User::find(1); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+            $admin = User::where('role_id',1)->first();
+            $user = User::find($admin->id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
                 'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
@@ -96,6 +97,7 @@ class ProductController extends Controller
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                 'href' => route('screens.admin.product.index', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
             ];
+
             $user->notify(new AppNotification($data));
         }
 
