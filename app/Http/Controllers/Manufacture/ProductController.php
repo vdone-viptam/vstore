@@ -151,11 +151,14 @@ class ProductController extends Controller
             // Filename to store
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             // Upload Image
-            $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
+            if($request->hasFile('video')){
+                $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
 
-            $path = str_replace('public/', '', $path);
+                $path = str_replace('public/', '', $path);
 
-            $product->video = 'storage/'.$path;
+                $product->video = 'storage/'.$path;
+            }
+
             while (true) {
                 $code = rand(10000000, 99999999);
                 if (!Product::where('code', $code)->first()) {
