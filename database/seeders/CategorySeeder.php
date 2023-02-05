@@ -20,7 +20,6 @@ class CategorySeeder extends Seeder
             'name' => 'Thời trang nữ',
             'created_at'=>Carbon::now(),
         ],
-
         );
         DB::table('categories')->insert([
             'name' => 'Thời trang nam',
@@ -94,6 +93,5 @@ class CategorySeeder extends Seeder
             'name' => 'Gaming & Console',
             'created_at'=>Carbon::now(),
         ]);
-
     }
 }

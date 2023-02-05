@@ -70,7 +70,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
+//        dd( $request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'vstore_id' => 'required',
@@ -102,12 +102,13 @@ class ProductController extends Controller
             'origin.required' => 'Trường này không được trống',
             'volume.required' => 'Trường này không được trống',
             'price.required' => 'Trường này không được trống',
+//            'percent_discount.required' => 'Trường này không được trống',
             'sku_id.required' => 'Trường này không được trống',
             'video.max' => 'Video vượt quá dung lượng cho phép',
 
         ]);
         if ($validator->fails()) {
-            dd($validator->errors());
+
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
@@ -132,8 +133,8 @@ class ProductController extends Controller
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->price = $request->price;
-            $product->amount_product_send_to_discount = $request->amount_product_send_to_discount;
-            $product->percent_discount = $request->percent_discount;
+//            $product->amount_product_send_to_discount = $request->amount_product_send_to_discount;
+//            $product->percent_discount = $request->percent_discount;
             $product->sku_id = $request->sku_id;
             $product->payment_on_delivery = $request->payment_on_delivery ? 1 : 0;
             $product->prepay = $request->prepay ? 1 : 0;
@@ -153,7 +154,7 @@ class ProductController extends Controller
 
             $path = str_replace('public/', '', $path);
 
-            $product->video = $path;
+            $product->video = 'storage/'.$path;
             while (true) {
                 $code = rand(10000000, 99999999);
                 if (!Product::where('code', $code)->first()) {
@@ -163,12 +164,12 @@ class ProductController extends Controller
             }
             $photo_gallery = [];
             foreach (json_decode($request->images) as $image) {
-                $photo_gallery[] = $this->saveImgBase64($image, 'products');
+                $photo_gallery[] = 'storage/products/'. $this->saveImgBase64($image, 'products');
             }
             $product->images = json_encode($photo_gallery);
             $photo_gallery = [];
             foreach (json_decode($request->unitImages) as $image) {
-                $photo_gallery[] = $this->saveImgBase64($image, 'products');
+                $photo_gallery[] ='storage/products/'. $this->saveImgBase64($image, 'products') ;
             }
             $product->unit_images = json_encode($photo_gallery);
             $product->user_id = Auth::id();

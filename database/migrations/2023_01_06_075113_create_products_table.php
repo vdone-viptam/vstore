@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->integer('packing_type')->nullable()->comment('kiểu đóng gói');
             $table->integer('volume')->nullable()->comment('Số lượng sản phẩm thêm');
             $table->string('manufacturer_name')->nullable()->comment('Tên nhà sản xuất');
-            $table->integer('unit')->nullable()->comment('Đơn vị sản xuất');
+            $table->integer('unit')->nullable()->comment('Loại dơn vị sản xuất');
             $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
             $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
             $table->string('manufacturer_address')->nullable()->comment('Địa chỉ nhà sản xuất');

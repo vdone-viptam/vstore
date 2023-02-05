@@ -46,16 +46,31 @@
 
 @section('content')
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-        <span class="text-secondary">Sản phẩm</span>
+        <span class="text-secondary whitespace-nowrap">Sản phẩm</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="./them-san-pham.html" class="text-blueMain font-medium">Yêu cầu thêm sản phẩm</a>
+        <a href="./them-san-pham.html" class="text-blueMain font-medium whitespace-nowrap italic">Yêu cầu thêm sản phẩm</a>
     </div>
     <div class="px-5 xl:px-16 py-2">
-        <h2 class="text-4xl text-title font-medium">Yêu cầu xét duyệt sản phẩm</h2>
-
+        <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4"><svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path opacity="0.4" d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z" fill="url(#paint0_linear_98_611)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z" fill="url(#paint1_linear_98_611)"/>
+<defs>
+<linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449" y2="24.5684" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7280FD"/>
+<stop offset="0.0001" stop-color="#1E90FF"/>
+<stop offset="1" stop-color="#4062FF"/>
+</linearGradient>
+<linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7280FD"/>
+<stop offset="0.0001" stop-color="#1E90FF"/>
+<stop offset="1" stop-color="#4062FF"/>
+</linearGradient>
+</defs>
+</svg>
+Yêu cầu xét duyệt sản phẩm</h2>
 
     </div>
 
@@ -63,7 +78,7 @@
         @csrf
 
         <div class="grid grid-cols-1  gap-y-4 lg:gap-4 px-5 xl:px-16 py-4">
-            <div class="box-act flex flex-col justify-start items-start gap-4 p-5 shadow-lg">
+            <div class=" flex flex-col justify-start items-start gap-4 p-5 ">
                 <h4 class="font-medium text-[#141414] text-2xl">Thông tin cơ bản</h4>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4">
@@ -134,7 +149,7 @@
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="flex justify-start items-start gap-2 w-full">
+                <div class="flex flex-col md:flex-row justify-start items-start gap-2 w-full">
                     <span class="text-title font-medium">Hình ảnh sản phẩm<strong
                             class="text-[#FF4D4F]">*</strong></span>
                     <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start">
@@ -152,6 +167,7 @@
                         <span class="text-sm text-secondary">Tải hình ảnh</span>
                         <span class="text-xs text-secondary" id="countImage"> 0/5</span>
                     </div>
+
                 </div>
                 <label for="">Video sản phẩm</label>
                 <div class="flex justify-start items-start gap-2 w-full">
@@ -349,7 +365,7 @@
                         {{--                        </div>--}}
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="datetime-local" min="2018-01-01" name="import_date"
+                            <input type="datetime-local" min="2018-01-01" name="import_date" 
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
@@ -392,20 +408,20 @@
                                         fill="black" fill-opacity="0.45"/>
                                 </svg>
                             </div>
-                            <div class="content-item grid grid-cols-2 gap-6 w-full">
-                                <div class="flex justify-start items-center gap-2 w-full">
-                                <span class="text-title font-medium text-sm w-[250px]">Địa chỉ kho hàng:<strong
+                            <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
+                                <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
+                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong
                                         class="text-[#FF4D4F]">*</strong></span>
                                     <select name="ward_id[]" id=""
-                                            class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                            class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         <option value="0" selected>Chọn địa chỉ kho hàng</option>
                                         @foreach($wareHouses as $ware)
                                             <option value="{{$ware->id}}">{{$ware->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="flex justify-start items-center gap-2 w-full">
-                                <span class="text-title font-medium text-sm w-[250px]">Số lượng hàng trong kho<strong
+                                <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
+                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Số lượng hàng trong kho<strong
                                         class="text-[#FF4D4F]">*</strong></span>
                                     <input type="number" placeholder="Nhập số lượng hàng trong kho" name="amount[]"
                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -415,9 +431,10 @@
                         <div class="more-ad w-[210px]">
                             <a href="javascript:void(0)"
                                class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200">
-                                <div class="w-[20px] h-[20px]"><img src="{{asset('asset/images/plus.png')}}" alt=""
-                                                                    class="w-full">
-                                </div>
+                               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
+</svg>
+
                                 Thêm địa chỉ mới
                             </a>
                         </div>
@@ -441,14 +458,14 @@
 
                     </div>
                 </div>
-                <div class="flex justify-center flex-wrap md:flex-nowrap md:justify-center items-center gap-5  w-full">
+                <div class="flex justify-center md:justify-center items-center gap-5  w-full">
                     <a href="{{route('screens.manufacture.product.index')}}"
-                       class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 text-title">
+                       class="outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">
                         Hủy
                         bỏ
                     </a>
                     <button
-                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-[15px] py-[6px] transition-all duration-500 hover:opacity-70 bg-primary text-[#FFF]">
+                        class="btnGra outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#FFF]">
                         Đăng
                         ký
                     </button>
@@ -577,20 +594,20 @@
             <svg width="16" height="16" class="remove cursor-pointer hover:opacity-70"  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z" fill="black" fill-opacity="0.45"/>
                 </svg>
-        </div> <div class="content-item grid grid-cols-2 gap-6 w-full">
-                                <div class="flex justify-start items-center gap-2 w-full">
-                                <span class="text-title font-medium text-sm w-[250px]">Địa chỉ kho hàng:<strong
+        </div> <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
+                                <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
+                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong
                                         class="text-[#FF4D4F]">*</strong></span>
                                     <select name="ward_id[]" id=""
-                                            class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                            class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         <option value="0" selected>Chọn địa chỉ kho hàng</option>
                                         @foreach($wareHouses as $ware)
             <option value="{{$ware->id}}">{{$ware->name}}</option>
                                         @endforeach
             </select>
         </div>
-        <div class="flex justify-start items-center gap-2 w-full">
-        <span class="text-title font-medium text-sm w-[250px]">Số lượng hàng trong kho<strong
+        <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
+        <span class="text-title font-medium text-sm w-full md:w-[250px]">Số lượng hàng trong kho<strong
                 class="text-[#FF4D4F]">*</strong></span>
             <input type="number" placeholder="Nhập số lượng hàng trong kho" name="amount[]"
                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -598,7 +615,10 @@
     </div>
     </div>
      <div class="new-more-ad w-[210px]">
-        <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <div class="w-[20px] h-[20px]"><img src="{{asset('asset/images/plus.png')}}" alt="" class="w-full"></div> Thêm địa chỉ mới</a>
+        <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
+</svg>
+ Thêm địa chỉ mới</a>
     </div>
 `;
             $('.choose-adr').append(html);
@@ -614,9 +634,9 @@
                 <path d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z" fill="black" fill-opacity="0.45"/>
                 </svg>
         </div>
-        <div class="content-item grid grid-cols-2 gap-6 w-full">
-            <div class="flex justify-start items-center gap-2 w-full">
-                <span class="text-title font-medium text-sm w-[250px]">Địa chỉ kho hàng:<strong class="text-[#FF4D4F]">*</strong></span>
+        <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
+            <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
+                <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong class="text-[#FF4D4F]">*</strong></span>
                 <select name="ware_id[]" id="ware_id[]"  class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     <option value="0" selected>Chọn địa chỉ kho hàng</option>
                     @foreach($wareHouses as $ware)
@@ -624,14 +644,17 @@
                                     @endforeach
                 </select>
             </div>
-            <div class="flex justify-start items-center gap-2 w-full">
-                <span class="text-title font-medium text-sm w-[250px]">Số lượng hàng trong kho<strong class="text-[#FF4D4F]">*</strong></span>
+            <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
+                <span class="text-title font-medium text-sm w-full md:w-[250px]">Số lượng hàng trong kho<strong class="text-[#FF4D4F]">*</strong></span>
                 <input type="number" id="amount[]" name="amount[]" placeholder="Nhập số lượng hàng trong kho" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
         </div>
     </div>
     <div class="new-more-ad w-[210px]">
-        <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <div class="w-[20px] h-[20px]"><img src="{{asset('asset/images/plus.png')}}" alt="" class="w-full"></div> Thêm địa chỉ mới</a>
+        <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
+</svg>
+Thêm địa chỉ mới</a>
     </div>
 `;
                 $('.new-more-ad').remove();
@@ -639,14 +662,32 @@
             });
         });
     </script>
-    {{--    <script>--}}
-    {{--        var price = $("#price").val();--}}
-    {{--        $("#discount").change(function () {--}}
-    {{--            if (price != null) {--}}
-    {{--                console.log(price);--}}
-    {{--                alert(price);--}}
-    {{--            }--}}
+    <script>
 
-    {{--        })--}}
-    {{--    </script>--}}
+
+$("#discount").keyup(function (){
+    var price = $("#price").val();
+    var discount = $("#discount").val();
+    var total =0;
+    if(price != null){
+        total = (price/100)*discount;
+        $(".total").html('='+total+'VNĐ');
+
+
+    }
+
+})
+$("#price").keyup(function (){
+    var price = $("#price").val();
+    var discount = $("#discount").val();
+    var total =0;
+    if(discount != null){
+        total = (price/100)*discount;
+        $(".total").html('='+total+'VNĐ');
+
+
+    }
+
+})
+    </script>
 @endsection

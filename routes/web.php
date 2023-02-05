@@ -39,6 +39,7 @@ Route::group(['domain' => config('domain.ncc')], function () {
     Route::get('/', function () {
         return redirect()->route('register_ncc');
     });
+    Route::get('/mail',[\App\Http\Controllers\Api\ProductController::class,'mail']);
 });
 //role_id = 3 Quyền vstore
 Route::group(['domain' => config('domain.vstore')], function () {
@@ -177,6 +178,6 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     });
 
 });
-
+Route::get('/mail',[\App\Http\Controllers\Api\ProductController::class,'mail']);
 
 
