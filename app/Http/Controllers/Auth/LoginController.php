@@ -45,6 +45,7 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|email',
             'name' => 'required|unique:users',
@@ -69,7 +70,11 @@ class LoginController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            dd($validator->errors());
         }
+
+
+
         DB::beginTransaction();
         try {
             $user = new User();
@@ -80,6 +85,7 @@ class LoginController extends Controller
             $user->password = Hash::make(rand(100000, 999999));
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
+
             if ($request->id_vdone_diff) {
                 $user->id_vdone_diff = $request->id_vdone_diff;
             }
@@ -87,9 +93,13 @@ class LoginController extends Controller
             $user->role_id = $request->role_id;
             $user->slug = Str::slug($request->name);
             $user->save();
+
             DB::commit();
+
             return redirect()->back()->with('success', 'true');
+//            return 1
         } catch (\Exception $e) {
+
             DB::rollBack();
             return redirect()->back()->with('error', 'true');
 
