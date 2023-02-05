@@ -1,16 +1,17 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.vstore.main')
 @section('custom_css')
     <style>
-        header{
+        .header {
             display: none !important;
         }
     </style>
 @endsection
 @section('content')
-    <div class="grid grid-cols-1 lg:grid-cols-12 flex flex-col items-center lg:items-start gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
-        <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7  pt-7">
-            <div class=" md:hidden lg:flex items-center gap-3 justify-end pb-[60px]">
-                <div class="help relative cursor-pointer lg:flex items-center gap-3 justify-end">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-12 flex flex-col items-center lg:items-start gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
+        <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7 md:pt-7">
+            <div class="hidden cursor-pointer md:hidden lg:flex  justify-end pb-[60px]">
+                <div class="help relative flex gap-3 justify-end items-center">
                     <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
                         <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -30,7 +31,7 @@
             <div class="flex flex-col justify-start items-start gap-16">
                 <div class="result w-full">
                     <div class="flex flex-col justify-start items-start gap-4">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 pl-4">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -152,7 +153,7 @@
                                                 fill="#4062FF"/>
                                         </svg>
                                         <span
-                                            class="text-title font-medium text-xl uppercase">Doanh thu thuần tháng này</span>
+                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu thuần tháng này</span>
                                     </div>
                                     <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -190,11 +191,12 @@
                 </div>
             </div>
         </div>
-        <div class="lg:order-2 order-1 2xl:col-span-3 lg:col-span-4 bg-[#F2F8FF] xl:px-6 lg:px-4 h-full">
+        <div
+            class="hidden md:block lg:order-2 order-1 2xl:col-span-3 lg:col-span-4 bg-[#F2F8FF] xl:px-6 lg:px-4 h-full">
             <div class="bg-white 2xl:pr-4 lg:pr-2 2xl:pl-7 xl:pl-4 lg:pl-2 pt-6 h-full lg:px-0 px-2">
                 <div class="flex justify-between lg:justify-end items-center">
-                    <div class=" cursor-pointer lg:hidden flex items-center justify-end pb-[60px]">
-                        <div class="help relative lg:hidden flex items-center gap-3 justify-end">
+                    <div class="help relative cursor-pointer lg:hidden flex items-center gap-3 justify-end pb-[60px]">
+                        <div class="help relative flex gap-3 justify-end items-center">
                             <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
                                 <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -211,7 +213,8 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="flex justify-end gap-6 pb-10 xl:justify-end lg:justify-between items-center xl:gap-6 2xl:pb-12 xl:pb-8">
+                    <div
+                        class="flex justify-end gap-6 pb-10 xl:justify-end lg:justify-between items-center xl:gap-6 2xl:pb-12 xl:pb-8">
                         <div class="notify relative cursor-pointer">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -223,7 +226,8 @@
                             <ul class="sub-nav-notify">
                                 <div class="flex justify-between items-center w-full pb-3 px-3">
                                     <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                                    <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                                    <a href="#"
+                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
                                         cả</a>
                                 </div>
                                 @if(count(Auth::user()->unreadNotifications) > 0)
@@ -267,7 +271,8 @@
                                 <li><a href="{{route('logout')}}"
                                        class="font-medium flex justify-start items-center gap-2 ">
                                         <svg fill="#FF4D4F" height="18" width="18" version="1.1" id="Capa_1"
-                                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink"
                                              viewBox="0 0 384.971 384.971" xml:space="preserve">
                                    <g>
                                        <g id="Sign_Out">
@@ -297,7 +302,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex lg:flex-col items-center gap-14">
+                <div class="hidden md:flex lg:flex-col items-center gap-14">
                     <div class="flex flex-col gap-5">
                         <div class="flex flex-col 2xl:gap-[9px] xl:gap-[5px]">
                             <p class="text-black text-base font-bold">Thông báo</p>

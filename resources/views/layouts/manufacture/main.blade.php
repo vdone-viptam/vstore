@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    {{--   fontawesome--}}
     @include('layouts.css')
     <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
@@ -25,11 +24,11 @@
 </head>
 <body>
 @yield('modal')
-<div class="flex">
-    <div class="xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] md:min-h-[100vh] bg-[#F2F8FF] md:block hidden">
+<div class="grid grid-cols-12">
+    <div class="md:col-span-2 xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] md:min-h-[100vh] bg-[#F2F8FF] md:block hidden">
         @include('layouts.manufacture.menu')
     </div>
-    <div class="w-full">
+    <div class="w-full md:col-span-10 col-span-12">
         @include('layouts.manufacture.header')
         @include('layouts.manufacture.header_mobile')
         @yield('content')

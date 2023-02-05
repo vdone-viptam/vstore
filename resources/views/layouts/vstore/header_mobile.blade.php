@@ -37,19 +37,21 @@
     }
 
     /*    */
-    .sub-nav-help {
-        left: 0;
-        top: 38px;
-    }
+    @media (min-width: 320px) and (max-width: 769.99px) {
+        .sub-nav-help {
+            left: 0;
+            top: 38px;
+        }
 
-    .sub-nav-notify {
-        top: 45px;
-        right: -145px;
-    }
+        .sub-nav-notify {
+            top: 45px;
+            right: -145px;
+        }
 
-    .sub-nav-user {
-        top: 100px;
-        right: 15px;
+        .sub-nav-user {
+            top: 100px;
+            right: 15px;
+        }
     }
 </style>
 {{--menu--}}
@@ -73,7 +75,7 @@
         <div class="px-4 py-3 box-shadow h-full">
             <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
                 {{--                Tổng quan--}}
-                <a href="{{route('screens.manufacture.dashboard.index')}}">
+                <a href="{{route('screens.vstore.dashboard.index')}}">
                     <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu">
                         <div class="flex items-center">
                             <div class="tab__left rounded-[16px] p-2">
@@ -95,7 +97,7 @@
                         </div>
                     </div>
                 </a>
-                {{--                quan ly sp--}}
+                {{--                Hàng hóa--}}
                 <div data-index="1" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -118,8 +120,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#B8BED9] text-sm  text__menu">Quản lý sản
-                                        phẩm</p>
+                                    <p class="text-[#B8BED9] text-sm  text__menu">Hàng hóa</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -130,17 +131,12 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản
-                                phẩm</a>
+                        <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
+                        <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a>
                         </li>
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Quản lý
-                                yêu
-                                cầu
-                                thêm sản
-                                phẩm</a></li>
                     </ul>
                 </div>
-                {{--                Danh mục--}}
+                {{--                Quản lý đơn hàng--}}
                 <div data-index="2" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -155,8 +151,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#B8BED9] text-sm  text__menu">Danh
-                                        mục</p>
+                                    <p class="text-[#B8BED9] text-sm  text__menu">Quản lý đơn hàng</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -167,19 +162,11 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.index')}}">Quản lý
-                                kho
-                                hàng</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm
-                                sản
-                                phẩm vào kho</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý
-                                xuất
-                                nhập
-                                kho</a></li>
+                        <li><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
+                        <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                     </ul>
                 </div>
-                {{--                Tài khoản--}}
+                {{--                Tài chính--}}
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -197,8 +184,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#B8BED9] text-sm  text__menu">Tài
-                                        khoản</p>
+                                    <p class="text-[#B8BED9] text-sm  text__menu">Tài chính</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -210,14 +196,8 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                tài
-                                khoản</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Danh sách
-                                đơn
-                                đăng
-                                ký tài khoản</a>
-                        </li>
+                        <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
+                        <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
                     </ul>
                 </div>
                 {{--                log out--}}
@@ -238,16 +218,6 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                tài
-                                khoản</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Danh sách
-                                đơn
-                                đăng
-                                ký tài khoản</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

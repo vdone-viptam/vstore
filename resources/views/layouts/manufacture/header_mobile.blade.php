@@ -311,16 +311,6 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                tài
-                                khoản</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Danh sách
-                                đơn
-                                đăng
-                                ký tài khoản</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

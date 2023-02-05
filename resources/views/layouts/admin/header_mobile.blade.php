@@ -158,7 +158,7 @@
                                     <div class="flex gap-2 items-center">
                                         <p class="text-[#B8BED9] text-sm  text__menu">Danh
                                             mục</p>
-                                        <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                        <svg width="0" height="6" viewBox="0 0 11 6" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
                                                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -226,16 +226,6 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                tài
-                                khoản</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Danh sách
-                                đơn
-                                đăng
-                                ký tài khoản</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
