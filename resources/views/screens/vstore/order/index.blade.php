@@ -243,7 +243,7 @@ Chưa giao hàng</div>
 <path d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z" fill="white"/>
 </svg>
 Chưa giao hàng</div>
-                        
+
 </td>
                         <td>10.000.000</td>
                         <td>
@@ -272,7 +272,7 @@ Chưa giao hàng</div>
                 </table>
             </div>
             <div class="flex justify-end items-center gap-4 flex-wrap">
-                <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>
+{{--                <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>--}}
                 <ul class="pagination flex justify-start items-center gap-2 flex-wrap">
                     <li><a href="javascript:void(0)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.66213 2.06646V1.03119C9.66213 0.941456 9.55901 0.891902 9.48936 0.946813L3.45186 5.66244C3.40056 5.70233 3.35906 5.75341 3.3305 5.81179C3.30195 5.87016 3.28711 5.93429 3.28711 5.99927C3.28711 6.06425 3.30195 6.12838 3.3305 6.18675C3.35906 6.24512 3.40056 6.29621 3.45186 6.3361L9.48936 11.0517C9.56034 11.1066 9.66213 11.0571 9.66213 10.9673V9.93208C9.66213 9.86646 9.63133 9.80351 9.58043 9.76333L4.759 5.99994L9.58043 2.23521C9.63133 2.19503 9.66213 2.13208 9.66213 2.06646Z" fill="#D9D9D9"></path>

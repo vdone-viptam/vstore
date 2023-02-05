@@ -89,7 +89,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                                     class="th choose-vstore text-opa outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="0">Chọn V-Store</option>
                                 @foreach($v_stores as $v_store)
-                                    <option value="{{$v_store->id}}">{{$v_store->name}}</option>
+                                    <option data-id="{{$v_store->account_code}}" value="{{$v_store->id}}">{{$v_store->name}} </option>
                                 @endforeach
                             </select>
                             @error('vstore_id')
@@ -365,7 +365,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                         {{--                        </div>--}}
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="datetime-local" min="2018-01-01" name="import_date" 
+                            <input type="datetime-local" min="2018-01-01" name="import_date"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
@@ -465,7 +465,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                         bỏ
                     </a>
                     <button
-                        class="btnGra outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#FFF]">
+                        class="btnGra outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-white">
                         Đăng
                         ký
                     </button>
@@ -689,5 +689,16 @@ $("#price").keyup(function (){
     }
 
 })
+// const chooseVstore = document.getElementById('vstore_id');
+// console.log(chooseVstore);
+// const options = chooseVstore.getElementsByTagName('option');
+// for (var d = 0;d < options.length;d++){
+//    if(d > 0){
+//        const {id} = options[d].dataset;
+//        console.log(id)
+//        options[d].innerHTML+=`<span style="display: none">${id}</span>`;
+//    }
+// }
+
     </script>
 @endsection

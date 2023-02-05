@@ -30,17 +30,17 @@ class ProductController extends Controller
         if (isset($request->condition) && $request->condition != 0) {
             $condition = $request->condition;
             if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
             } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
             } else {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
+                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
 
             }
         } else {
-            $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->orderBy('id', 'desc')->paginate($limit);
+            $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
 
         }
         if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $this->v['v_stores'] = User::select('id', 'name')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
+        $this->v['v_stores'] = User::select('id', 'name','account_code')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
         $this->v['categories'] = Category::select('id', 'name')->orderBy('id', 'desc')->get();
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         return view('screens.manufacture.product.create', $this->v);

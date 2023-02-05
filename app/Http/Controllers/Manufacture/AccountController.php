@@ -18,6 +18,7 @@ class AccountController extends Controller
     public function __construct()
     {
         $this->v = [];
+
     }
 
 
@@ -192,6 +193,7 @@ class AccountController extends Controller
 
     public function changePassword()
     {
+        $this->v['infoAccount'] = Auth::user();
         return view('screens.manufacture.account.change_password', $this->v);
 
     }

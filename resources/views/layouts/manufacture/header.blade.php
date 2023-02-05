@@ -44,8 +44,8 @@
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
                         <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                            cả</a>
+{{--                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
+{{--                            cả</a>--}}
                     </div>
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)
@@ -64,7 +64,8 @@
             </div>
             <div class="user relative flex items-center gap-2">
                 <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
-                     src="{{asset("./home/img/avatar_accout.png")}}" alt="">
+                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
+                     alt="">
                 <div class="flex flex-col gap-[3px] justify-center">
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
                 </div>
@@ -75,7 +76,7 @@
                         fill="black"/>
                 </svg>
                 <ul class="sub-nav-user">
-                    <li><a href="{{route('screens.vstore.account.profile')}}"
+                    <li><a href="{{route('screens.manufacture.account.profile')}}"
                            class="font-medium flex justify-start items-center gap-2">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">

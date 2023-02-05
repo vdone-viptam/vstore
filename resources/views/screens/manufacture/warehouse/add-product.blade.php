@@ -28,7 +28,7 @@
 </defs>
 </svg>
 Thêm sản phẩm vào kho</h2>
-       
+
     </div>
     @if(Session::has('message'))
         <p class="text-green-600 px-5 xl:px-16 py-2">{{Session::get('message')}}</p>
@@ -87,7 +87,7 @@ Thêm sản phẩm vào kho</h2>
                                class="view-amount outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                 <div class="col-span-6 flex flex-col justify-start items-start gap-4">
-                   
+
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Số lượng sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
@@ -100,8 +100,8 @@ Thêm sản phẩm vào kho</h2>
                 </div>
             </div>
             <div class="flex justify-end items-center gap-5  w-full">
-                <button type="button" id=""huy_bo class="outline-none rounded-xl  px-[30px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">Hủy
-                    bỏ</button>
+                <a href="{{route('screens.manufacture.warehouse.index')}}" id=""huy_bo class="outline-none rounded-xl  px-[30px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">Hủy
+                    bỏ</a>
                 <button type="submit" class="btnGra outline-none rounded-xl  px-[30px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#FFF]">Lưu lại</button>
             </div>
             </form>

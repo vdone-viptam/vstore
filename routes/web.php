@@ -39,7 +39,7 @@ Route::group(['domain' => config('domain.ncc')], function () {
     Route::get('/', function () {
         return redirect()->route('register_ncc');
     });
-    Route::get('/mail',[\App\Http\Controllers\Api\ProductController::class,'mail']);
+    Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 });
 //role_id = 3 Quyền vstore
 Route::group(['domain' => config('domain.vstore')], function () {
@@ -84,6 +84,8 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('index', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('screens.admin.product.index');
         Route::get('/detail', [\App\Http\Controllers\Admin\ProductController::class, 'detail'])->name('screens.admin.product.detail');
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
+        Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
+
     });
 
 
@@ -178,6 +180,6 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     });
 
 });
-Route::get('/mail',[\App\Http\Controllers\Api\ProductController::class,'mail']);
+Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 
 

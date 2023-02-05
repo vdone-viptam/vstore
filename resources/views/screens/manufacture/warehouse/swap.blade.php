@@ -49,23 +49,23 @@
 Quản lý xuất - nhập kho</h2>
 
                 <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-                    <button
-                        class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_4_2870)">
-                                <rect width="20" height="20" fill="white" fill-opacity="0.01"/>
-                                <path
-                                    d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"
-                                    fill="white"/>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_4_2870">
-                                    <rect width="20" height="20" fill="white"/>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                        <span>Thêm mới</span>
-                    </button>
+{{--                    <button--}}
+{{--                        class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}
+{{--                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <g clip-path="url(#clip0_4_2870)">--}}
+{{--                                <rect width="20" height="20" fill="white" fill-opacity="0.01"/>--}}
+{{--                                <path--}}
+{{--                                    d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"--}}
+{{--                                    fill="white"/>--}}
+{{--                            </g>--}}
+{{--                            <defs>--}}
+{{--                                <clipPath id="clip0_4_2870">--}}
+{{--                                    <rect width="20" height="20" fill="white"/>--}}
+{{--                                </clipPath>--}}
+{{--                            </defs>--}}
+{{--                        </svg>--}}
+{{--                        <span>Thêm mới</span>--}}
+{{--                    </button>--}}
                     {{--                    <button--}}
                     {{--                        class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-sm py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}
                     {{--                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--}}

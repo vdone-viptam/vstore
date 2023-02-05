@@ -66,12 +66,14 @@
                             <div class="flex justify-start items-center gap-6 w-full">
                                 <div class="w-[49px]">
                                     <div class="w-[48px] h-[48px] rounded-full">
-                                        <a href="../tai-khoan/"><img src="{{asset('asset/images/success.png')}}" alt=""
-                                                                     class="w-full rounded-full"></a>
+                                        <a href="{{route('screens.manufacture.account.profile')}}"><img
+                                                src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
+                                                alt=""
+                                                class="w-full rounded-full"></a>
                                     </div>
                                 </div>
                                 <div class="flex flex-col justify-start items-center gap-1 text-center">
-                                    <span class="text-title font-medium">ttkhoa1999</span>
+                                    <span class="text-title font-medium">{{$infoAccount->account_code}}</span>
                                     <span class="text-sm text-secondary">Sửa hồ sơ</span>
                                 </div>
                             </div>
@@ -91,7 +93,8 @@
                                 </a>
                                 <ul class="tab-sub-user">
                                     <li><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>
-                                    <li class=""><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho hàng</a>
+                                    <li class=""><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho
+                                            hàng</a>
                                     <li class="active"><a
                                             href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật
                                             khẩu</a></li>

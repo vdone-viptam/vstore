@@ -740,5 +740,10 @@ svg{
 .box-shadow{
     box-shadow: 0px 0px 25px rgba(48, 73, 191, 0.07);
 }
-/* admin*/
+
+.btnGra{
+    background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%);
+
+}
+
 
