@@ -143,15 +143,16 @@ class ProductController extends Controller
             $product->import_date = $request->import_date;
             $product->unit = $request->unit;
             $product->unit_name = $request->unit_name;
-            $filenameWithExt = $request->file('video')->getClientOriginalName();
-            //Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('video')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+
             // Upload Image
             if($request->hasFile('video')){
+                $filenameWithExt = $request->file('video')->getClientOriginalName();
+                //Get just filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just ext
+                $extension = $request->file('video')->getClientOriginalExtension();
+                // Filename to store
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
                 $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
 
                 $path = str_replace('public/', '', $path);
