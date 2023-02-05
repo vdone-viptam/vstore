@@ -78,7 +78,7 @@
                 </ul>
                 <ul class="top-bar flex justify-start items-center">
                     <li class="border-r-[1px] border-[#E0E0E0]"><a href="https://vstore.vdone.vn/dang-ky/">Đăng ký</a></li>
-                    <li><a href="https://vstore.vdone.vn/dang-nhap/">Đăng nhập</a></li>
+                    <li><a href="{{route('login_vstore')}}">Đăng nhập</a></li>
 
                 </ul>
             </div>
