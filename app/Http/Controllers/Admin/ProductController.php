@@ -22,6 +22,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }

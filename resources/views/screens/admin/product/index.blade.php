@@ -181,10 +181,10 @@ Tất cả sản phẩm</h2>
 @endsection
 <script>
 
-    // $( ".cursor-pointer" ).click(function() {
-    //     alert( "Handler for .click() called." );
-    // });
-    {{--window.location.href = "{{ route('screens.admin.product.index')}}";--}}
+    $( ".cursor-pointer" ).click(function() {
+        alert( "Handler for .click() called." );
+    });
+    window.location.href = "{{ route('screens.admin.product.index')}}";
 </script>
 @section('custom_js')
     <script>
