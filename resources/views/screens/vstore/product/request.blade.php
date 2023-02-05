@@ -13,8 +13,7 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Lịch sử yêu cầu thêm
-                sản
+            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Yêu cầu xét duyệt
                 phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
@@ -73,7 +72,7 @@ Lọc</button>
 </defs>
 </svg>
 Lịch sử yêu cầu xét duyệt sản phẩm</h2>
-                 
+
 
                 </div>
                 <div class="w-full overflow-scroll">

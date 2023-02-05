@@ -47,7 +47,7 @@ class ProductController extends Controller
         ]);
     }
     public function mail(){
-        $email = 'ttkhoa1999@gmail.com';
+        $email = 'ducanhng2812@gmail.com';
         Mail::send('email.test', ['ID' => '123123123', 'password' => '12121212'], function ($message) use ($email) {
             $message->to( $email);
             $message->subject('Đơn đăng ký của bạn đã được duyệt');

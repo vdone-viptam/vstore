@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $this->v['v_stores'] = User::select('id', 'name')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
+        $this->v['v_stores'] = User::select('id', 'name','account_code')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
         $this->v['categories'] = Category::select('id', 'name')->orderBy('id', 'desc')->get();
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         return view('screens.manufacture.product.create', $this->v);
