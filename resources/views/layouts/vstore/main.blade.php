@@ -69,18 +69,20 @@
         }
     }
     //    hover menu
-    console.log(1)
-    // const hv = document.getElementsByClassName("choose-tab")[0]
-    // const tm = document.getElementsByClassName("tab__menu")
-    // hv.addEventListener("click", () => {
-    //     console.log(1)
-    //     for (let i = 1; i < tm.length; i++) {
-    //         if (tm[i].classList.contains("active")) {
-    //             tm[i].classList.remove("tab__hover")
-    //         } else {
-    //             tm[i].classList.add("tab__hover")
-    //         }
-    //     }
-    // })
+    const hv = document.getElementsByClassName("choose-tab")[0]
+    hv.addEventListener("click", () => {
+        for (let i = 1; i < tm.length; i++) {
+            if (tm[i].classList.contains("active")) {
+                tm[i].classList.remove("tab__hover")
+            } else {
+                tm[i].classList.add("tab__hover")
+            }
+        }
+    })
+    if (tm[0].classList.contains("active")) {
+        tm[0].classList.remove("tab__hover")
+    } else {
+        tm[0].classList.add("tab__hover")
+    }
 </script>
 </html>
