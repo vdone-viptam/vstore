@@ -39,7 +39,7 @@
 <div class="bg-[#F2F8FF] fixed left-0">
     <a href="" class="">
         <div class="min-w-[162px] flex items-center justify-center py-9">
-            <img class="w-[200px] h-[100px]"
+            <img style="height: 100px !important;"
                  src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
                  alt="">
         </div>
@@ -108,7 +108,8 @@
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
                 <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a>
                 </li>
-                <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu xét duyệt sản
+                <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu xét duyệt
+                        sản
                         phẩm</a></li>
                 <li class="hover:underline"><a href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu
                         xét duyệt sản phẩm</a></li>
@@ -182,8 +183,10 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
-                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại V-store</a></li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Báo cáo V-store</a>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại
+                        V-store</a></li>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Báo cáo
+                        V-store</a>
                 </li>
             </ul>
         </div>
