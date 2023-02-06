@@ -83,7 +83,7 @@ Thêm sản phẩm vào kho</h2>
                 <div class="col-span-6 flex flex-col justify-start items-start gap-2 ">
                         <span class="text-title font-medium">Số lượng tồn (sản phẩm):
                         </span>
-                        <input disabled type="number" min="0" max="" value=""
+                        <input disabled type="number"  value=""
                                class="view-amount outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                 <div class="col-span-6 flex flex-col justify-start items-start gap-4">
@@ -102,7 +102,7 @@ Thêm sản phẩm vào kho</h2>
             <div class="flex justify-end items-center gap-5  w-full">
                 <a href="{{route('screens.manufacture.warehouse.index')}}" id=""huy_bo class="outline-none rounded-xl  px-[30px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">Hủy
                     bỏ</a>
-                <button type="submit" class="btnGra outline-none rounded-xl  px-[30px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#FFF]">Lưu lại</button>
+                <button type="submit" style="background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%) ;" class="btnGra outline-none rounded-xl  px-[30px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#FFF]">Lưu lại</button>
             </div>
             </form>
         </div>
@@ -197,5 +197,7 @@ Thêm sản phẩm vào kho</h2>
         // $('#huy_bo').click(function (){
         //     window.location.replace("http://nha_cung_cap.ngo/add-product-warehouse");
         // })
+
+
     </script>
 @endsection
