@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản
                                 phẩm</a>
                         </li>
@@ -199,7 +199,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách tài
                                 khoản</a></li>
                         <li><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng

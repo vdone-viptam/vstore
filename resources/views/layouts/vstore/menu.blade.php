@@ -36,7 +36,7 @@
         stroke: #4062FF;
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0">
+<div class="bg-[#F2F8FF] sticky left-0 h-full">
     <a href="" class="">
         <div class=" flex items-center justify-center py-9">
             <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
+            <ul class=" flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
                 <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
                 <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a></li>
             </ul>

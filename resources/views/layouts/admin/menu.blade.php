@@ -36,7 +36,7 @@
         stroke: #4062FF;
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0">
+<div class="bg-[#F2F8FF] sticky left-0 h-full">
     <a href="" class="">
         <div class=" flex items-center justify-center py-9">
             <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
