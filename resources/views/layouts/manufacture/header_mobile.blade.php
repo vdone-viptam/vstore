@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản
                                 phẩm</a>
                         </li>
@@ -159,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.index')}}">Quản lý
                                 kho
                                 hàng</a></li>
@@ -200,7 +200,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Quản lý
                                 hàng tại
                                 vstore</a></li>
@@ -237,7 +237,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.order.index')}}">Tất cả đơn
                                 hàng</a>
                         </li>
@@ -276,7 +276,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
                                 thu</a></li>
