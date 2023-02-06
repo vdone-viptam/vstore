@@ -314,11 +314,13 @@
 {{--hedder--}}
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full h-[50px] flex justify-between items-center px-4">
-        <a href="">
-            <img class="w-[75px]"
-                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
-                 alt="">
-        </a>
+        <div class="max-w-[75px]">
+            <a href="">
+                <img
+                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
+                     alt="">
+            </a>
+        </div>
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path
