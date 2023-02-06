@@ -262,7 +262,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-:                    </div>
+                    </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4 ">
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Xuất xứ </span>

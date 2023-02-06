@@ -52,8 +52,13 @@ class WarehouseController extends Controller
 
     public function amount(Request $request)
     {
-        $amount = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = " . $request->product_id . ") as amount FROM product_warehouses where status = 1 AND product_id = " . $request->product_id . ""))[0]->amount;
-        return $amount;
+        $amount = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = " . $request->product_id . " AND ware_id =" . $request->ware_id . ") as amount FROM product_warehouses where status = 1 AND product_id = " . $request->product_id . " AND ware_id =" . $request->ware_id . ""))[0]->amount;
+        if ($amount) {
+            return $amount;
+        } else {
+            return 0;
+        }
+//        return $amount;
     }
 
     public function index()
@@ -73,7 +78,7 @@ class WarehouseController extends Controller
 
     public function swap()
     {
-        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->orderBy('product_warehouses.id', 'desc')->paginate(10);
+        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->orderBy('product_warehouses.id', 'desc')->paginate(10);
 
         return view('screens.manufacture.warehouse.swap', ['products' => $products]);
 
@@ -81,11 +86,15 @@ class WarehouseController extends Controller
 
     public function detail(Request $request)
     {
-        $products = DB::table('product_warehouses')->select('products.name as product_name', 'products.id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('ware_id', $request->id)->get();
-        foreach ($products as $wa) {
+
+
+        $products1 = DB::table('product_warehouses')->select('products.name as product_name', 'products.id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->groupBy(['product_name', 'id'])->where('ware_id', $request->id)->get();
+//        return $products1;
+        foreach ($products1 as $wa) {
             $wa->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = " . $wa->id . ") as amount FROM product_warehouses where status = 1 AND product_id = " . $wa->id . ""))[0]->amount ?? 0;
         }
-        return view('screens.manufacture.warehouse.detail', ['products' => $products]);
+//        return $products;
+        return view('screens.manufacture.warehouse.detail', ['products1' => $products1]);
 
     }
 }

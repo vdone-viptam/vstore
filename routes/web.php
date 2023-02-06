@@ -93,7 +93,7 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
 //Quyền nhà cung cấp
 
 Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function () {
-
+    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\DashboardController::class, 'index'])->name('screens.manufacture.dashboard.index');
     });

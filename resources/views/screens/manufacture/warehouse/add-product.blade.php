@@ -65,7 +65,7 @@ Thêm sản phẩm vào kho</h2>
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn kho hàng<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                        <select name="ware_id" id=""
+                        <select name="ware_id" id="ware_id"
                                 class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             <option value="">Chọn kho hàng</option>
 
@@ -91,8 +91,8 @@ Thêm sản phẩm vào kho</h2>
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Số lượng sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                        <input type="number" name="amount" placeholder="Nhập số lượng sản phẩm"
-                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <input type="number" name="amount"  placeholder="Nhập số lượng sản phẩm"
+                               class="amount outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         @error('amount')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -178,23 +178,51 @@ Thêm sản phẩm vào kho</h2>
     <script>
         $(".chon_sp").change(function() {
 
+            var val = $("#ware_id").val();
+            if(val >0){
+                $.ajax({
+                    url:' {{route('amount')}}',
+                    type: 'GET',
+                    data: {
+                        product_id: $('#product_id').val(),
+                        ware_id: $('#ware_id').val()
+                    },
+                    dataType: 'json',
+                    success:function (data){
+
+                        console.log(data);
+                        $('.view-amount').val(data)
+
+                    }
+                });
+            }
+
+
+
+        });
+        $("#ware_id").change(function() {
+
             var val = $(".chon_sp").val();
-            // console.log( $('#product_id').val());
-            $.ajax({
-                url:' {{route('amount')}}',
-                type: 'GET',
-                data: {
-                    product_id: $('#product_id').val(),
-                },
-                dataType: 'json',
-                success:function (data){
+            if(val >0){
+                $.ajax({
+                    url:' {{route('amount')}}',
+                    type: 'GET',
+                    data: {
+                        product_id: $('#product_id').val(),
+                        ware_id: $('#ware_id').val()
+                    },
+                    dataType: 'json',
+                    success:function (data){
 
-                    console.log(data);
-                    $('.view-amount').val(data)
+                        console.log(data);
+                        $('.view-amount').val(data)
 
-                }
-            });
-            // alert( a );
+                    }
+                });
+            }
+
+
+
         });
     </script>
     <script>

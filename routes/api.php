@@ -42,5 +42,5 @@ Route::prefix('vshop')->group(function () {
 
 });
 Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
-    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
+//    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 });

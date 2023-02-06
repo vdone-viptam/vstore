@@ -62,7 +62,7 @@
                                 </svg>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Dashboard</p>
+                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Tổng quan</p>
                             </div>
                         </div>
                     </div>

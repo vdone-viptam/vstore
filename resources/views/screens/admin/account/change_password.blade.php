@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-col justify-start items-center gap-1 text-center">
-                                    <span class="text-title font-medium">ttkhoa1999</span>
+                                    <span class="text-title font-medium">Admin-Vstore</span>
                                     <span class="text-sm text-secondary">Sửa hồ sơ</span>
                                 </div>
                             </div>
