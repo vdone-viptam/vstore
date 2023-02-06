@@ -14,10 +14,10 @@
 <body>
 @yield('modal')
 <div class="grid grid-cols-12">
-    <div class="md:col-span-2 xl:min-w-[310px] lg:min-w-[240px] md:min-w-[200px] md:min-h-[100vh] bg-[#F2F8FF] md:block hidden">
+    <div class="md:col-span-3 2xl:col-span-2 h-[100vh] bg-[#F2F8FF] md:block hidden">
         @include('layouts.vstore.menu')
     </div>
-    <div class="w-full md:col-span-10 col-span-12">
+    <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.vstore.header')
         @include('layouts.vstore.header_mobile')
         @yield('content')

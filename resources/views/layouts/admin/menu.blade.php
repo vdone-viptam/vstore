@@ -38,7 +38,7 @@
 </style>
 <div class="bg-[#F2F8FF] fixed left-0">
     <a href="" class="">
-        <div class="min-w-[162px] flex items-center justify-center py-9">
+        <div class=" flex items-center justify-center py-9">
             <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
     </a>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
                 <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>
                 </li>
                 <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu
@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
                 <li><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách tài
                         khoản</a></li>
                 <li><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
