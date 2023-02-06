@@ -83,7 +83,7 @@ class ProductController extends Controller
             'manufacturer_name' => 'required',
             'manufacturer_address' => 'required',
             'origin' => 'required',
-            'volume' => 'required',
+         //   'volume' => 'required',
             'price' => 'required',
             'sku_id' => 'required|unique:products',
             'video' => 'max:512000',
@@ -100,7 +100,7 @@ class ProductController extends Controller
             'manufacturer_name.required' => 'Trường này không được trống',
             'manufacturer_address.required' => 'Trường này không được trống',
             'origin.required' => 'Trường này không được trống',
-            'volume.required' => 'Trường này không được trống',
+        //    'volume.required' => 'Trường này không được trống',
             'price.required' => 'Trường này không được trống',
 //            'percent_discount.required' => 'Trường này không được trống',
             'sku_id.required' => 'Trường này không được trống',
@@ -109,7 +109,7 @@ class ProductController extends Controller
 //            $v_stores
         ]);
         if ($validator->fails()) {
-
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
