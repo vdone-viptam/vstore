@@ -25,7 +25,7 @@
         <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
         <form action="{{route('screens.vstore.account.editPro',['id' => $infoAccount->id])}}" method="POST">
             <div
-                class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
+                class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px] md:max-h-[500px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
                 <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                     <h2 class="text-base text-title font-medium">Chỉnh sửa hồ sơ</h2>
                     <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
@@ -292,7 +292,7 @@
             let input = document.createElement('input');
             input.type = 'file';
             // input.name = 'img'
-            // input.setAttribute('hidden', 'true')
+            input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'img');
             input.click();
 
@@ -315,13 +315,13 @@
 
 
             };
-            $('#image').append(input);
+            $('#image').html(input);
         })
 
         $('.change-bn').on('click', function () {
             let input = document.createElement('input');
             input.type = 'file';
-
+            input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'banner');
             input.click();
             input.onchange = _ => {

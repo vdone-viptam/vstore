@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<div class=" grid grid-cols-1 place-items-center translate-y-[4rem]">
+<div class=" grid grid-cols-1 place-items-center ">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full  md:w-[500px] ">
         <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">

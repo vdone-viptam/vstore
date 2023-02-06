@@ -64,6 +64,7 @@ class AccountController extends Controller
         $user->id_vdone = trim($request->id_vdone);
         $user->id_vdone_diff = trim($request->id_vdone_diff);
         $user->phone_number = trim($request->phone_number);
+        $user->link_website = trim($request->link_website);
         $user->save();
 
         return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');

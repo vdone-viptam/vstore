@@ -279,7 +279,7 @@
             let input = document.createElement('input');
             input.type = 'file';
             // input.name = 'img'
-            // input.setAttribute('hidden', 'true')
+            input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'img');
             input.click();
 
@@ -302,13 +302,13 @@
 
 
             };
-            $('#image').append(input);
+            $('#image').html(input);
         })
 
         $('.change-bn').on('click', function () {
             let input = document.createElement('input');
             input.type = 'file';
-
+            input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'banner');
             input.click();
             input.onchange = _ => {
