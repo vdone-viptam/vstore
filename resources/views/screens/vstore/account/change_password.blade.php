@@ -112,7 +112,7 @@
 
                             <div class="flex flex-col justify-center items-center pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">
                                 <div class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
-                                    <span class="w-full text-title font-medium">Mật khẩu mới</span>
+                                    <span class="w-full text-title font-medium">Mật khẩu cũ</span>
                                     <input type="password" name="old_password" value="{{old('old_password')}}"
                                            class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                     <div class="w-full">
