@@ -314,9 +314,9 @@
 {{--hedder--}}
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full h-[50px] flex justify-between items-center px-4">
-        <div class="max-w-[75px]">
+        <div>
             <a href="">
-                <img
+                <img style="width: 75px !important;"
                      src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
                      alt="">
             </a>
