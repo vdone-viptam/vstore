@@ -177,7 +177,9 @@ Thêm sản phẩm vào kho</h2>
     </script>
     <script>
         $(".chon_sp").change(function() {
+
             var val = $(".chon_sp").val();
+            // console.log( $('#product_id').val());
             $.ajax({
                 url:' {{route('amount')}}',
                 type: 'GET',
@@ -186,8 +188,10 @@ Thêm sản phẩm vào kho</h2>
                 },
                 dataType: 'json',
                 success:function (data){
+
                     console.log(data);
                     $('.view-amount').val(data)
+
                 }
             });
             // alert( a );
