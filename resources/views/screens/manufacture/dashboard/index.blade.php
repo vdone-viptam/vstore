@@ -402,12 +402,5 @@
                 }
             });
         })
-        $('.choose-tab .tab__menu').on('click', function () {
-            $('.choose-tab .list').addClass('hidden');
-            $(this).children('.list').removeClass('hidden')
-            $('.choose-tab .tab__menu').removeClass('active');
-            // console.log($(this))
-            $(this).toggleClass('active')
-        })
     </script>
 @endsection

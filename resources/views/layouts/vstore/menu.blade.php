@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
                 <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
                 <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a></li>
             </ul>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
                 <li><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
                 <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
             </ul>
@@ -170,7 +170,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[13px] font-medium xl:pl-24 md:pl-16 list-disc list hidden">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden">
                 <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
                 <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
             </ul>
