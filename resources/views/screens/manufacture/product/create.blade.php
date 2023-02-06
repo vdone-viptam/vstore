@@ -262,16 +262,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Tên đơn vị chịu trách nhiệm nhập khẩu</span>
-                            <input type="text" id="manufacturer_address" name="manufacturer_address"
-                                   placeholder="Nhập tên đơn vị"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            @error('manufacturer_address')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div>
-                    </div>
+:                    </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4 ">
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Xuất xứ </span>

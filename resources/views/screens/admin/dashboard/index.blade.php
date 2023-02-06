@@ -247,7 +247,7 @@
                         </div>
                         <div class="user relative flex items-center gap-2">
                             <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
-                                 src="{{asset("./home/img/avatar_accout.png")}}" alt="">
+                                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">
                             <div class="flex flex-col gap-[3px] justify-center">
                                 <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
                             </div>
