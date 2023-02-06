@@ -12,6 +12,7 @@
     <link href="https://fonts.cdnfonts.com/css/svn-gilroy" rel="stylesheet">
 </head>
 <body>
+123
 <div class="bg w-full relative h-auto md:h-[1090px]">
     <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
