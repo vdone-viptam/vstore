@@ -109,7 +109,7 @@ class ProductController extends Controller
 //            $v_stores
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
