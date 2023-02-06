@@ -75,7 +75,6 @@ class LoginController extends Controller
         }
 
 
-
         DB::beginTransaction();
         try {
             $user = new User();
@@ -97,7 +96,12 @@ class LoginController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'true');
+            if ($request->role_id == 2) {
+                return redirect()->route('login_ncc')->with('success', 'true');
+            }
+            if ($request->role_id == 3) {
+                return redirect()->route('login_vstore')->with('success', 'true');
+            }
 //            return 1
         } catch (\Exception $e) {
 
