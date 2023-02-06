@@ -81,7 +81,7 @@ class ProductController extends Controller
             'weight' => 'required',
             'packing_type' => 'required',
             'manufacturer_name' => 'required',
-            'manufacturer_address' => 'required',
+//            'manufacturer_address' => 'required',
             'origin' => 'required',
          //   'volume' => 'required',
             'price' => 'required',
@@ -109,7 +109,7 @@ class ProductController extends Controller
 //            $v_stores
         ]);
         if ($validator->fails()) {
-            dd($validator->errors());
+//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
