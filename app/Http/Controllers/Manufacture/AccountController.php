@@ -214,14 +214,14 @@ class AccountController extends Controller
             'password_confirmation.required' => 'Bạn chưa xác nhận mật khảu'
         ]);
 
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
-
         $user = User::find(Auth::id());
 
         if (!Hash::check($request->old_password, $user->password)) {
-            return redirect()->back()->withErrors(['old_password' => "Mật khẩu cũ không chính xác"])->withInput($request->all())->with('validate', 'failed');
+            $validator->errors()['old_password'] = 'Mật khẩu cũ không chính xác';
         }
 
         $user->password = Hash::make($request->password);
