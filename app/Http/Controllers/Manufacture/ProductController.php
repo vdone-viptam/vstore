@@ -98,7 +98,7 @@ class ProductController extends Controller
             'weight.required' => 'Trường này không được trống',
             'packing_type.required' => 'Trường này không được trống',
             'manufacturer_name.required' => 'Trường này không được trống',
-            'manufacturer_address.required' => 'Trường này không được trống',
+//            'manufacturer_address.required' => 'Trường này không được trống',
             'origin.required' => 'Trường này không được trống',
         //    'volume.required' => 'Trường này không được trống',
             'price.required' => 'Trường này không được trống',
@@ -109,7 +109,7 @@ class ProductController extends Controller
 //            $v_stores
         ]);
         if ($validator->fails()) {
-            dd($validator->errors());
+//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         DB::beginTransaction();
@@ -125,7 +125,7 @@ class ProductController extends Controller
             $product->weight = $request->weight;
             $product->packing_type = $request->packing_type;
             $product->manufacturer_name = $request->manufacturer_name;
-            $product->manufacturer_address = $request->manufacturer_address;
+//            $product->manufacturer_address = $request->manufacturer_address;
             $product->origin = $request->origin;
             $product->length = $request->length ?? 0;
             $product->with = $request->with ?? 0;
