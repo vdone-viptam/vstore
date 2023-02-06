@@ -38,7 +38,7 @@
 </style>
 <div class="bg-[#F2F8FF] fixed left-0">
     <a href="" class="">
-        <div class="min-w-[162px] flex items-center justify-center py-9">
+        <div class=" flex items-center justify-center py-9">
             <img style="height: 100px !important;"
                  src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
                  alt="">
