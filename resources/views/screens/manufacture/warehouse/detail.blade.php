@@ -1,4 +1,4 @@
-<div class="modal modal-details">
+<div class="modal modal-details show-modal">
     <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
     <div
         class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
