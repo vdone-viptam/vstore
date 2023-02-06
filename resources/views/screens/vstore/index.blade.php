@@ -221,7 +221,7 @@
         <a href="#" class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng ký thành viên</a>
     </div>
     <div class="order-first xl:order-last">
-        <img src="{{asset('home/bnn.png')}}" class="w-full" alt="">
+        <img src="{{asset('home/img/bnn.png')}}" class="w-full" alt="">
     </div>
 
 </div>
