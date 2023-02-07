@@ -66,12 +66,12 @@
                             <div class="flex justify-start items-center gap-6 w-full">
                                 <div class="w-[49px]">
                                     <div class="w-[48px] h-[48px] rounded-full">
-                                        <a href="../tai-khoan/"><img src="{{asset('asset/images/success.png')}}" alt=""
+                                        <a href="../tai-khoan/"><img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}" alt=""
                                                                      class="w-full rounded-full"></a>
                                     </div>
                                 </div>
                                 <div class="flex flex-col justify-start items-center gap-1 text-center">
-                                    <span class="text-title font-medium">ttkhoa1999</span>
+                                    <span class="text-title font-medium">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
                                     <span class="text-sm text-secondary">Sửa hồ sơ</span>
                                 </div>
                             </div>
