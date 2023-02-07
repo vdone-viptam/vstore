@@ -274,4 +274,7 @@ class ProductController extends Controller
             dd($e->getMessage());
         }
     }
+    public function createp(){
+        return view('screens.manufacture.product.createp');
+    }
 }
