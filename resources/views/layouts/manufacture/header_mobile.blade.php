@@ -37,7 +37,7 @@
     }
 
     /*    */
-    @media (min-width: 320px) and (max-width: 769.99px) {
+    @media (max-width: 767px) {
         .sub-nav-help {
             left: 0;
             top: 38px;
@@ -45,26 +45,26 @@
 
         .sub-nav-notify {
             top: 45px;
-            right: -145px;
+            right: -160px;
         }
 
         .sub-nav-user {
-            top: 100px;
+            top: 105px;
             right: 15px;
         }
     }
 </style>
 {{--menu--}}
 <div class="menu md:hidden">
-    <div class="h-[100vh] min-w-[200px] absolute -left-[300px] menu_show z-20 bg-[#F2F8FF] ">
-        <div class="flex items-center justify-center py-3 border-b border-b">
-            <div class="w-[110px]">
-                <img class="w-[32px] h-[32px]"
+    <div class="h-full min-w-[200px]  -left-[300px] fixed menu_show z-20 bg-[#F2F8FF] ">
+        <div class="flex items-center justify-center py-3 ">
+            <div class="w-[60px] mx-auto">
+                <img class="w-full"
                      src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
                      alt="">
             </div>
         </div>
-        <div class="px-4 py-3 box-shadow h-full">
+        <div class="px-4 py-3 box-shadow h-full max-w-[250px] ">
             <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
                 {{--                Dashboard--}}
                 <a href="{{route('screens.manufacture.dashboard.index')}}">
@@ -313,7 +313,7 @@
 </div>
 {{--hedder--}}
 <header class="menu block md:hidden ">
-    <div class="bg-[#E6F7FF] w-full h-[50px] flex justify-between items-center px-4">
+    <div class="bg-[#E6F7FF] w-full h-[50px] flex justify-between items-center px-4 shadow-lg">
         <div>
             <a href="">
                 <img style="width: 75px !important;"
@@ -381,9 +381,12 @@
                     </ul>
                 </div>
                 <div class="user flex items-center gap-2">
-                    <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
+                    <div class="w-[40px] h-[40px]">
+                    <img class="w-full rounded-full cursor-pointer"
                          src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
                          alt="">
+                    </div>
+                    
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
