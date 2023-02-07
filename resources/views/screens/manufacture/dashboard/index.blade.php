@@ -10,8 +10,9 @@
     <div
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
         <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7 md:pt-7">
-            <div class="hidden cursor-pointer md:hidden lg:flex  justify-end pb-[60px]">
-                <div class="help relative flex gap-3 justify-end items-center">
+            <div class="hidden cursor-pointer md:hidden lg:flex  justify-end pb-[60px] mb-4 bann">
+                
+                <!-- <div class="help relative flex gap-3 justify-end items-center pr-4">
                     <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
                         <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -26,7 +27,7 @@
                         <li><a href="#">Biểu phí</a></li>
                         <li><a href="#">Chính sách quy định</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div class="flex flex-col justify-start items-start gap-16">
                 <div class="result w-full">
@@ -165,7 +166,7 @@
                                 </div>
                                 <div class="relative ">
                                     <select name=""
-                                            class="outline-none appearance-none rounded-sm border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
+                                            class="outline-none appearance-none  border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
                                         <option value="0">Hôm qua</option>
                                         <option value="1">7 ngày qua</option>
                                         <option value="2" selected>Tháng này</option>
