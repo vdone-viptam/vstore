@@ -14,8 +14,9 @@
 <body>
 @yield('modal')
 <div class="grid grid-cols-12">
-    <div class="md:col-span-3 2xl:col-span-2 h-[100vh] bg-[#F2F8FF] md:block hidden">
-        @include('layouts.vstore.menu')
+    @include('layouts.vstore.menu')
+
+    <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.vstore.header')
