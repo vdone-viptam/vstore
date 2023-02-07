@@ -19,17 +19,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //Route::get('login',AuthController::class,'postLogin');
-Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
-Route::prefix('product')->group(function () {
-    Route::get('/',[\App\Http\Controllers\Api\ProductController::class,'index']);
-    Route::get('product-by-category/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByCategory']);
-    Route::get('product-by-vstore/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVstore']);
-    Route::get('product-by-ncc/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByNcc']);
-});
-Route::prefix('category')->group(function () {
-    //list danh mục
-    Route::get('',[\App\Http\Controllers\Api\CategoryController::class,'index']);
+//Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
 
+Route::group(['domain' => config('domain.api')], function () {
+    Route::prefix('product')->group(function () {
+        Route::get('/',[\App\Http\Controllers\Api\ProductController::class,'index']);
+        Route::get('product-by-category/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByCategory']);
+        Route::get('product-by-vstore/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVstore']);
+        Route::get('product-by-ncc/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByNcc']);
+    });
+    Route::prefix('category')->group(function () {
+        //list danh mục
+        Route::get('',[\App\Http\Controllers\Api\CategoryController::class,'index']);
+
+    });
 });
 Route::prefix('manufacture')->group(function () {
     //list nhà cung cấp
