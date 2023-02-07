@@ -7,7 +7,7 @@
     <title>Trang chủ V-Store</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-{{--    <link rel="stylesheet" href="../../dist/output.css">--}}
+    {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
     <link href="https://fonts.cdnfonts.com/css/svn-gilroy" rel="stylesheet">
     @vite('resources/css/app.css')
@@ -26,7 +26,7 @@
             <a href="{{route('login_vstore')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
         </div>
         <div class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử V-Store"</h2>
+            <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Phát triển thương hiệu của bạn"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang <strong class="text-[#1E90FF]">tin dùng V-Store.</strong></span>
         </div>
         <div class="max-w-[320px]">

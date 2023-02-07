@@ -26,4 +26,10 @@ class LandingpageController extends Controller
         return view('screens.landingpage',compact('logo','banner','name'));
 //        return view('screens.landingpage',compact('logo','banner'));
     }
+    public function ladingpage(){
+        return view('screens.vstore.index');
+    }
+    public function ladingpageNCC(){
+        return view('screens.manufacture.index');
+    }
 }

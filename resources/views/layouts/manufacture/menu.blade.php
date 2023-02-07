@@ -36,7 +36,7 @@
         stroke: #4062FF;
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0 h-full ">
+<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden">
     <a href="" class="">
         <div class=" flex items-center justify-center py-9">
             <img style="height: 100px !important;"
@@ -44,7 +44,7 @@
                  alt="">
         </div>
     </a>
-    <div class=" flex flex-col gap-6 h-full choose-tab w-full max-h-[700px]">
+    <div class="pr-[15px] flex flex-col gap-6 h-full choose-tab w-full max-h-[700px]">
         {{--      Dashboard--}}
         <a href="{{route('screens.manufacture.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden max-w-[230px] ">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px]">
                 <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a>
                 </li>
                 <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu xét duyệt
@@ -142,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden max-w-[230px] ">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.index')}}">Quản lý kho
                         hàng</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm sản
@@ -182,7 +182,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden max-w-[230px] ">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại
                         V-store</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Báo cáo
@@ -220,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden max-w-[230px] ">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.index')}}">Tất cả đơn hàng</a>
                 </li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a></li>
@@ -258,7 +258,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden max-w-[230px] ">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a>
                 </li>

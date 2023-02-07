@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Mail;
 class ProductController extends Controller
 {
     public function index( Request $request){
+
         $limit = $request->limit ?? 10;
-        $products = Product::paginate($limit);
+        $products = Product::where('vstore_id','!=',null)->where('status',3)->where('publish_id','!=',null)->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'data' => $products
         ]);
+
     }
     public function productByCategory( Request $request,$id){
         $limit = $request->limit ?? 10;

@@ -36,9 +36,10 @@ Route::group(['domain' => config('domain.admin')], function () {
 Route::group(['domain' => config('domain.ncc')], function () {
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginNCC'])->name('login_ncc');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterNCC'])->name('register_ncc');
-    Route::get('/', function () {
-        return redirect()->route('login_ncc');
-    });
+    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpageNCC'])->name('landingpagencc');
+//    Route::get('/', function () {
+//        return redirect()->route('login_ncc');
+//    });
     Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 });
 //role_id = 3 Quyền vstore
@@ -46,9 +47,10 @@ Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
     Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
-    Route::get('/', function () {
-        return view('screens.vstore.index');
-    });
+    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpage'])->name('landingpage');
+//    Route::get('/', function () {
+//        return view('screens.vstore.index');
+//    })->name('landing_page');
 });
 
 
@@ -180,6 +182,6 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     });
 
 });
-Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
+//Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 
 
