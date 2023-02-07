@@ -239,15 +239,10 @@ $(document).ready(function () {
 
 
     $('.choose-tab .tab__menu').on('click', function () {
-
-        // $('.choose-tab .list').addClass('hidden');
-        // $(this).children('.list').toggleClass('hidden')
         $('.choose-tab .tab__menu').removeClass('active');
         $(this).addClass('active')
-        if($(this).hasClass('active')){
-            $(this).children('.list').toggleClass('hidden')
-        }
-
+        $('.choose-tab .list').addClass('hidden')
+       $(this).children('.list').removeClass('hidden')
     })
 
     // $('#form-log').on('change', function (e) {

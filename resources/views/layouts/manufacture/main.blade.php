@@ -25,8 +25,8 @@
 <body>
 @yield('modal')
 <div class="grid grid-cols-12">
-    <div class="md:col-span-3 2xl:col-span-2 h-full bg-[#F2F8FF] md:block hidden">
-        @include('layouts.manufacture.menu')
+    @include('layouts.manufacture.menu')
+    <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.manufacture.header')
@@ -68,7 +68,6 @@
     const menu = document.getElementsByClassName("menu")
     const bg = document.getElementsByClassName("show_bg")[0]
     nav.addEventListener("click", () => {
-        console.log(menu[1])
         menu[0].classList.add("show")
         menu[1].classList.add("show")
     })
@@ -81,8 +80,9 @@
     //    hover menu
     const hv = document.getElementsByClassName("choose-tab")[0]
     hv.addEventListener("click", () => {
-        for (let i = 1; i < tm.length; i++) {
+        for (let i = 1; i <= tm.length; i++) {
             if (tm[i].classList.contains("active")) {
+                console.log(tm[i].classList.contains("active"))
                 tm[i].classList.remove("tab__hover")
             } else {
                 tm[i].classList.add("tab__hover")
