@@ -37,3 +37,12 @@ img{
     box-shadow: -1.21831px 4.87324px 29.2394px rgba(143, 43, 96, 0.18);
     border-radius: 24.3662px;
 }
+
+@media only screen and (max-width: 560px) {
+    .bg{
+        background: url('../img/bnmobile.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+}
