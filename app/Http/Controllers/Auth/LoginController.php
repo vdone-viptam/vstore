@@ -30,7 +30,7 @@ class LoginController extends Controller
 
     public function getFormLoginVstore()
     {
-        if (Auth::user()->role_id ==3){
+        if (Auth::user()&& Auth::user()->role_id ==3){
             return redirect()->route('screens.vstore.dashboard.index');
         }
         return view('auth.Vstore.login_vstore');

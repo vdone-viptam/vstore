@@ -34,9 +34,10 @@ Route::group(['domain' => config('domain.admin')], function () {
 });
 //role_id = 2 Quyền nhà cung cấp
 Route::group(['domain' => config('domain.ncc')], function () {
+    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpageNCC'])->name('landingpagencc');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginNCC'])->name('login_ncc');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterNCC'])->name('register_ncc');
-    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpageNCC'])->name('landingpagencc');
+
 //    Route::get('/', function () {
 //        return redirect()->route('login_ncc');
 //    });
@@ -44,10 +45,11 @@ Route::group(['domain' => config('domain.ncc')], function () {
 });
 //role_id = 3 Quyền vstore
 Route::group(['domain' => config('domain.vstore')], function () {
+    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpage'])->name('landingpagevstore');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
     Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
-    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpage'])->name('landingpage');
+
 //    Route::get('/', function () {
 //        return view('screens.vstore.index');
 //    })->name('landing_page');
