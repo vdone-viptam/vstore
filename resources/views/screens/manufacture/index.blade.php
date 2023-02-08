@@ -29,8 +29,8 @@
             <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Phát triển thương hiệu của bạn"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang <strong class="text-[#1E90FF]">tin dùng V-Store.</strong></span>
         </div>
-        <div class="max-w-[320px]">
-            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
+        <div class="max-w-[320px] mx-auto md:mx-0">
+            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] px-[18px] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
         </div>
     </div>
 
@@ -91,7 +91,7 @@
             <div class="w-[97px] h-[97px]">
                 <img src="{{asset('home/img/b2.png')}}" class="w-full" alt="">
             </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Đưa sản phẩm lên V-Store</h3>
+            <h3 class="text-[#1D293F] font-semibold text-2xl whitespace-nowrap">Đưa sản phẩm lên V-Store</h3>
             <span class="text-[#7C8087] text-right md:text-left">
             Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn 
                 </span>
@@ -235,7 +235,7 @@
 </div>
 <div class="bnbot">
     <div class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000+ V-Store thành công</h2>
+        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000+ Nhà cung cấp thành công</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
