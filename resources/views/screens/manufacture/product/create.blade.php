@@ -51,29 +51,38 @@
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="./them-san-pham.html" class="text-blueMain font-medium whitespace-nowrap italic">Yêu cầu xét duyệt sản phẩm</a>
+        <a href="./them-san-pham.html" class="text-blueMain font-medium whitespace-nowrap italic">Yêu cầu xét duyệt sản
+            phẩm</a>
     </div>
     <div class="px-5 xl:px-16 py-2">
-        <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4"><svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path opacity="0.4" d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z" fill="url(#paint0_linear_98_611)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z" fill="url(#paint1_linear_98_611)"/>
-<defs>
-<linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449" y2="24.5684" gradientUnits="userSpaceOnUse">
-<stop stop-color="#7280FD"/>
-<stop offset="0.0001" stop-color="#1E90FF"/>
-<stop offset="1" stop-color="#4062FF"/>
-</linearGradient>
-<linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833" gradientUnits="userSpaceOnUse">
-<stop stop-color="#7280FD"/>
-<stop offset="0.0001" stop-color="#1E90FF"/>
-<stop offset="1" stop-color="#4062FF"/>
-</linearGradient>
-</defs>
-</svg>
-Yêu cầu xét duyệt sản phẩm</h2>
+        <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
+            <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.4"
+                      d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
+                      fill="url(#paint0_linear_98_611)"/>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
+                      fill="url(#paint1_linear_98_611)"/>
+                <defs>
+                    <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449" y2="24.5684"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#7280FD"/>
+                        <stop offset="0.0001" stop-color="#1E90FF"/>
+                        <stop offset="1" stop-color="#4062FF"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#7280FD"/>
+                        <stop offset="0.0001" stop-color="#1E90FF"/>
+                        <stop offset="1" stop-color="#4062FF"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            Yêu cầu xét duyệt sản phẩm
+        </h2>
     </div>
 
-    <form action="{{route('screens.manufacture.product.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('screens.manufacture.product.storeRequest')}}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="grid grid-cols-1  gap-y-4 lg:gap-4 px-5 xl:px-16 py-4">
@@ -88,30 +97,32 @@ Yêu cầu xét duyệt sản phẩm</h2>
                                     class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Chọn V-Store</option>
                                 @foreach($v_stores as $v_store)
-                                    <option data-id="{{$v_store->account_code}}" value="{{$v_store->id}}">{{$v_store->name}} </option>
+                                    <option {{old('vstore_id') == $v_store->id ? 'selected' : ''}}
+                                            value="{{$v_store->id}}">{{$v_store->name}} </option>
                                 @endforeach
                             </select>
                             @error('vstore_id')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-                      
+
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn sản phẩm xét duyệt <strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                            <select name="category_id" id="category_id"
+                            <select name="product_id" id="product_id"
                                     class="th choose-sp text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Chọn sản phẩm cần xét duyệt</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @foreach($products as $product)
+                                    <option
+                                        value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
                                 @endforeach
                             </select>
-                            @error('category_id')
+                            @error('product_id')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-                      
-                        
+
+
                     </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4 w-full">
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -119,6 +130,7 @@ Yêu cầu xét duyệt sản phẩm</h2>
                         </span>
                             <span>
                                 <input type="number" name="discount" id="discount" min="0" max="99"
+                                       value="{{old('discount')}}"
                                        placeholder="Nhập mức chiết khấu (%)"
                                        class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             <span class="total"></span>
@@ -130,48 +142,48 @@ Yêu cầu xét duyệt sản phẩm</h2>
                         </div>
 
                         <div class="flex md:flex-row flex-col items-center gap-8 w-full">
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Giá (đồng)</span>
-                            <input type="number" value="1000000" name="price" id="price" readonly
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
-                            @error('price')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
+                            <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span class="text-title font-medium">Giá (đồng)</span>
+                                <input type="text" value="0 đ" name="price" id="price" readonly
+                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
+                                {{--                            @error('price')--}}
+                                {{--                            <p class="text-red-600">{{$message}}</p>--}}
+                                {{--                            @enderror--}}
+                            </div>
+                            <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Mức chiết khấu (Thành tiền)</span>
+                                <input type="text" value="0 đ" name="money" id="money" readonly
+                                       class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
+                                {{--                            @error('price')--}}
+                                {{--                            <p class="text-red-600">{{$message}}</p>--}}
+                                {{--                            @enderror--}}
+                            </div>
                         </div>
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium whitespace-nowrap">Mức chiết khấu (Thành tiền)</span>
-                            <input type="number" value="1000000" name="price" id="price" readonly
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
-                            @error('price')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div>
-                        </div>
-                      
+
                     </div>
 
                 </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
-              <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Vai trò đối với sản phẩm</span>
-                            <select name="category_id" id="category_id"
-                                    class="th choose-vt text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Chọn vai trò</option>
-                                <option value="1">Nhà sản xuất</option>
-                                <option value="2">Nhà nhập khẩu</option>
-                                <option value="3">Nhà phân phối</option>
-                            </select>
-                        </div>
-              <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-title font-medium">Tài liệu sản phẩm<strong
-                            class="text-[#FF4D4F]">*</strong></span>
-                    <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start"></div>
-                    <input type="file" id="images" name="images" multiple>
+                <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+                    <div class="flex flex-col justify-start items-start gap-2 w-full">
+                            <span class="text-title font-medium">Vai trò đối với sản phẩm<strong
+                                    class="text-[#FF4D4F]">*</strong></span>
+                        <select name="role" id="role"
+                                class="th choose-vt text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <option value="">Chọn vai trò</option>
+                            <option value="1" {{old('role') == 1 ? 'selected' : '' }}>Nhà sản xuất</option>
+                            <option value="2" {{old('role') == 2 ? 'selected' : '' }}>Nhà nhập khẩu</option>
+                            <option value="3" {{old('role') == 3 ? 'selected' : '' }}>Nhà phân phối</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col justify-start items-start gap-2 w-full">
+                        <span class="text-title font-medium">Tài liệu sản phẩm</span>
+                        {{--                        <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start"></div>--}}
+                        <input type="file" id="images[]" name="images[]" multiple>
+                    </div>
+
                 </div>
-           
-              </div>
-         
-               
+
 
                 <div class="flex flex-col justify-start items-start gap-4 w-full">
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -208,13 +220,20 @@ Yêu cầu xét duyệt sản phẩm</h2>
                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 </div>
                             </div>
+
                         </div>
+                        @error('ward_id')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                         <div class="more-ad w-[225px] whitespace-nowrap">
                             <a href="javascript:void(0)"
                                class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200">
-                               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
-</svg>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z"
+                                        fill="#FF9A62"/>
+                                </svg>
                                 Thêm địa điểm mới
                             </a>
                         </div>
@@ -226,16 +245,23 @@ Yêu cầu xét duyệt sản phẩm</h2>
                         class="text-[#FF4D4F]">*</strong></span>
                     <div class="flex justify-start items-center gap-4 flex-wrap">
                         <div>
-                            <input type="checkbox" name="prepay" class="accent-primary w-4 h-4">
+                            <input type="checkbox" name="prepay[]"
+                                   {{isset(old('prepay')[0]) && old('prepay')[0] == 1 ? 'checked' : ''}} value="1"
+                                   class="accent-primary w-4 h-4">
                             <span class="text-secondary">Thanh toán trước</span>
                         </div>
                         <div>
-                            <input type="checkbox" name="payment_on_delivery" class="accent-primary w-4 h-4">
+                            <input type="checkbox" name="prepay[]"
+                                   {{isset(old('prepay')[1]) && old('prepay')[1] == 2 ? 'checked' : ''}} value="2"
+                                   class="accent-primary w-4 h-4">
                             <span class="text-secondary">Thanh toán sau khi nhận hàng</span>
                         </div>
 
                     </div>
                 </div>
+                @error('prepay')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
                 <div class="flex justify-center md:justify-center items-center gap-5  w-full">
                     <a href="{{route('screens.manufacture.product.index')}}"
                        class="outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">
@@ -264,119 +290,22 @@ Yêu cầu xét duyệt sản phẩm</h2>
         let arrImage = [];
         let arrUnit = [];
         $('select').select2();
-        function render(data) {
-            const html = data.map((item, index) => {
-                return `<div class="item w-[104px] h-[104px] flex justify-center items-center relative">
-                    <div class="over-lay"></div>
-                    <svg width="16" height="16" data-index="${index}" class="deleteImg cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
-</svg>
-                <img src="${item}" class="w-full h-full"></img></div>`;
-            }).join("")
-            $('.file-sp').html(html);
-            document.getElementById('countImage').innerHTML = data.length +
-                '/5';
-
-            document.getElementById('images').value = JSON.stringify(data);
-            document.querySelectorAll('.deleteImg').forEach(item => {
-                const {index} = item.dataset;
-                item.addEventListener('click', () => {
-                    arrImage = data.filter((item1, index1) => index1 !== +index);
-                    if (arrImage.length < 5) {
-                        document.querySelector('.add-img-SP').classList.remove('hidden');
-                    }
-                    render(arrImage);
-                })
-            })
-        }
-
-        function render2(data) {
-            const html = data.map((item, index) => {
-                return `<div class="item w-[104px] h-[104px] flex justify-center items-center relative">
-                    <div class="over-lay"></div>
-                    <svg width="16" height="16" data-index="${index}" class="deleteImg1 cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
-</svg>
-                <img src="${item}" class="w-full h-full"></img></div>`;
-            }).join("")
-            $('.file-sp-1').html(html);
-            document.getElementById('countImage1').innerHTML = data.length +
-                '/5';
-
-            document.getElementById('unitImages').value = JSON.stringify(data);
-            document.querySelectorAll('.deleteImg1').forEach(item => {
-                const {index} = item.dataset;
-                item.addEventListener('click', () => {
-                    console.log(1)
-                    arrUnit = data.filter((item1, index1) => index1 !== +index);
-                    if (arrUnit.length < 5) {
-                        document.querySelector('.add-img-Uni').classList.remove('hidden');
-                    }
-                    render2(arrUnit);
-                })
-            })
-        }
-
-        $('.add-img-SP').on('click', function () {
-            let input = document.createElement('input');
-            input.type = 'file';
-            input.onchange = _ => {
-                var files = Array.from(input.files);
-                const reader = new FileReader();
-
-                return new Promise(resolve => {
-                    reader.onload = ev => {
-                        resolve(ev.target.result)
-                        arrImage.push(ev.target.result);
-                        if (arrImage.length == 5) {
-                            document.querySelector('.add-img-SP').classList.add('hidden');
-                        }
-                        render(arrImage);
-                    }
-                    reader.readAsDataURL(files[0])
-
-                })
-            };
-            input.click();
-        })
-        $('.add-img-Uni').on('click', function () {
-            let input = document.createElement('input');
-            input.type = 'file';
-            input.onchange = _ => {
-                var files = Array.from(input.files);
-                const reader = new FileReader();
-
-                return new Promise(resolve => {
-                    reader.onload = ev => {
-                        resolve(ev.target.result)
-                        arrUnit.push(ev.target.result);
-                        if (arrUnit.length == 5) {
-                            document.querySelector('.add-img-Uni').classList.add('hidden');
-                        }
-                        render2(arrUnit);
-                    }
-                    reader.readAsDataURL(files[0])
-
-                })
-            };
-            input.click();
-        })
         $('.more-ad').on('click', function () {
             $('.more-ad').remove();
             i++;
             var html = `       <div class=" char p-4 item flex flex-col justify-start items-start gap-4 w-full ">
         <div class="flex justify-between items-center w-full">
-            <span class="text-title text-lg font-medium">Điểm giao nhận ${i} :</span>
+            <span class="text-title text-lg font-medium">Địa chỉ ${i} :</span>
             <svg width="16" height="16" class="remove cursor-pointer hover:opacity-70"  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z" fill="black" fill-opacity="0.45"/>
                 </svg>
         </div> <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
                                 <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
-                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Điểm giao nhận:<strong
+                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong
                                         class="text-[#FF4D4F]">*</strong></span>
                                     <select name="ward_id[]" id=""
                                             class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                        <option value="0" selected>Chọn điểm giao nhận</option>
+                                        <option value="0" selected>Chọn địa chỉ kho hàng</option>
                                         @foreach($wareHouses as $ware)
             <option value="{{$ware->id}}">{{$ware->name}}</option>
                                         @endforeach
@@ -390,11 +319,11 @@ Yêu cầu xét duyệt sản phẩm</h2>
         </div>
     </div>
     </div>
-     <div class="new-more-ad w-[225px] whitespace-nowrap">
+     <div class="new-more-ad w-[210px]">
         <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
 </svg>
- Thêm địa điểm mới</a>
+ Thêm địa chỉ mới</a>
     </div>
 `;
             $('.choose-adr').append(html);
@@ -405,16 +334,16 @@ Yêu cầu xét duyệt sản phẩm</h2>
                 i++;
                 var html = `   <div class=" char p-4 item flex flex-col justify-start items-start gap-4 w-full ">
         <div class="flex justify-between items-center w-full">
-            <span class="text-title text-lg font-medium">Điểm giao nhận ${i} :</span>
+            <span class="text-title text-lg font-medium">Địa chỉ ${i} :</span>
             <svg width="16" height="16" class="remove cursor-pointer hover:opacity-70"  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z" fill="black" fill-opacity="0.45"/>
                 </svg>
         </div>
         <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
             <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
-                <span class="text-title font-medium text-sm w-full md:w-[250px]">Điểm giao nhận:<strong class="text-[#FF4D4F]">*</strong></span>
+                <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong class="text-[#FF4D4F]">*</strong></span>
                 <select name="ware_id[]" id="ware_id[]"  class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <option value="0" selected>Chọn điểm giao nhận</option>
+                    <option value="0" selected>Chọn địa chỉ kho hàng</option>
                     @foreach($wareHouses as $ware)
                 <option value="{{$ware->id}}">{{$ware->name}}</option>
                                     @endforeach
@@ -426,11 +355,11 @@ Yêu cầu xét duyệt sản phẩm</h2>
             </div>
         </div>
     </div>
-    <div class="new-more-ad w-[225px] whitespace-nowrap">
+    <div class="new-more-ad w-[210px]">
         <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
 </svg>
-Thêm điểm giao nhận</a>
+Thêm địa chỉ mới</a>
     </div>
 `;
                 $('.new-more-ad').remove();
@@ -439,42 +368,40 @@ Thêm điểm giao nhận</a>
         });
     </script>
     <script>
+        let price = 0;
+        let discount = 0;
+        const VND = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+        });
 
+        $('#product_id').on('select2:select', function (e) {
+            // Do something
+            var data = e.params.data;
+            if (data.id) {
+                $.ajax({
+                    url: '{{route('screens.manufacture.product.getDataProduct')}}/?product_id=' + data.id + '&_token={{csrf_token()}}',
+                    success: function (result) {
+                        price = result;
+                        document.getElementById('price').value = VND.format(price);
+                        document.getElementById('money').value = VND.format((discount / 100) * price);
+                    },
+                });
+            } else {
+                price = 0;
+                document.getElementById('price').value = VND.format(price);
+                document.getElementById('money').value = VND.format((discount / 100) * price);
+            }
 
-$("#discount").keyup(function (){
-    var price = $("#price").val();
-    var discount = $("#discount").val();
-    var total =0;
-    if(price != null){
-        total = (price/100)*discount;
-        $(".total").html('='+total+'VNĐ');
-
-
-    }
-
-})
-$("#price").keyup(function (){
-    var price = $("#price").val();
-    var discount = $("#discount").val();
-    var total =0;
-    if(discount != null){
-        total = (price/100)*discount;
-        $(".total").html('='+total+'VNĐ');
-
-
-    }
-
-})
-// const chooseVstore = document.getElementById('vstore_id');
-// console.log(chooseVstore);
-// const options = chooseVstore.getElementsByTagName('option');
-// for (var d = 0;d < options.length;d++){
-//    if(d > 0){
-//        const {id} = options[d].dataset;
-//        console.log(id)
-//        options[d].innerHTML+=`<span style="display: none">${id}</span>`;
-//    }
-// }
+        });
+        document.getElementById('discount').addEventListener('keyup', (e) => {
+            discount = e.target.value;
+            if (discount) {
+                document.getElementById('money').value = VND.format((e.target.value / 100) * price);
+            } else {
+                document.getElementById('money').value = '0 đ';
+            }
+        })
 
     </script>
 @endsection

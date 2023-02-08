@@ -54,23 +54,31 @@
         <a href="./them-san-pham.html" class="text-blueMain font-medium whitespace-nowrap italic">Thêm sản phẩm</a>
     </div>
     <div class="px-5 xl:px-16 py-2">
-        <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4"><svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path opacity="0.4" d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z" fill="url(#paint0_linear_98_611)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z" fill="url(#paint1_linear_98_611)"/>
-<defs>
-<linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449" y2="24.5684" gradientUnits="userSpaceOnUse">
-<stop stop-color="#7280FD"/>
-<stop offset="0.0001" stop-color="#1E90FF"/>
-<stop offset="1" stop-color="#4062FF"/>
-</linearGradient>
-<linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833" gradientUnits="userSpaceOnUse">
-<stop stop-color="#7280FD"/>
-<stop offset="0.0001" stop-color="#1E90FF"/>
-<stop offset="1" stop-color="#4062FF"/>
-</linearGradient>
-</defs>
-</svg>
-Thêm sản phẩm</h2>
+        <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
+            <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.4"
+                      d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
+                      fill="url(#paint0_linear_98_611)"/>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
+                      fill="url(#paint1_linear_98_611)"/>
+                <defs>
+                    <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449" y2="24.5684"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#7280FD"/>
+                        <stop offset="0.0001" stop-color="#1E90FF"/>
+                        <stop offset="1" stop-color="#4062FF"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#7280FD"/>
+                        <stop offset="0.0001" stop-color="#1E90FF"/>
+                        <stop offset="1" stop-color="#4062FF"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            Thêm sản phẩm
+        </h2>
     </div>
 
     <form action="{{route('screens.manufacture.product.store')}}" method="post" enctype="multipart/form-data">
@@ -79,40 +87,56 @@ Thêm sản phẩm</h2>
             <div class=" flex flex-col justify-start items-start gap-4 p-5 ">
                 <h4 class="font-medium text-[#141414] text-2xl">Thông tin cơ bản</h4>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
-                    <div class="col-span-6 flex flex-col justify-start items-start gap-4">
-                     
+                    <div class="col-span-4 flex flex-col justify-start items-start gap-4">
+
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Tên sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" placeholder="Nhập tên sản phẩm" name="name" id="name"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                   value="{{old('name')}}"
+                                   class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('name')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-6 flex flex-col justify-start items-start gap-4 w-full">
+                    <div class="col-span-4 flex flex-col justify-start items-start gap-4 w-full">
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn ngành hàng <strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <select name="category_id" id="category_id"
-                                    class="th choose-vstore text-opa outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    class="h-[42px] choose-vstore text-opa outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Chọn ngành hàng</option>
-                           
+                                @foreach($categories as $category)
+                                    <option
+                                        value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
+                                @endforeach
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
                     </div>
+                    <div class="col-span-4 flex flex-col justify-start items-start gap-4">
 
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                        <span class="text-title font-medium">Giá sản phẩm<strong
+                                class="text-[#FF4D4F]">*</strong></span>
+                            <input type="text" placeholder="Nhập giá sản phẩm" name="price" id="price"
+                                   value="{{old('price')}}"
+                                   class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('price')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-title font-medium">Mô tả sản phẩm</span>
                     <textarea name="description" id="description"
-                              class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"></textarea>
+                              class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{old('description')}}</textarea>
                     @error('description')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
@@ -150,6 +174,7 @@ Thêm sản phẩm</h2>
                         <span class="text-title font-medium">Tên thương hiệu<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" name="brand" id="brand" placeholder="Nhập tên thương hiệu"
+                                   value="{{old('brand')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('brand')
                             <p class="text-red-600">{{$message}}</p>
@@ -157,10 +182,10 @@ Thêm sản phẩm</h2>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Chất liệu</span>
-                            <input type="text" id="unit_name" name="unit_name"
-                                   placeholder="Nhập chất liệu sản phẩm"
+                            <input type="text" id="material" name="material"
+                                   placeholder="Nhập chất liệu sản phẩm" value="{{old('material')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            @error('unit_name')
+                            @error('material')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
@@ -168,14 +193,14 @@ Thêm sản phẩm</h2>
                         <span class="text-title font-medium">Trọng lượng (Gram)<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="number" name="weight" id="weight" min="0" max=""
-                                   placeholder="Nhập trọng lượng sản phẩm (Gram)"
+                                   placeholder="Nhập trọng lượng sản phẩm (Gram)" value="{{old('weight')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('weight')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
 
-                        
+
                         <!-- <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Đơn vị</span>
                             <select name="unit" id="unit"
@@ -185,15 +210,15 @@ Thêm sản phẩm</h2>
                                 <option value="2">Hộ kinh doanh cá thể</option>
                             </select>
                             @error('unit')
-                            <p class="text-red-600">{{$message}}</p>
+                        <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div> -->
-                     
-                   
-                  
+
+
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Tên tổ chức chịu trách nhiệm sản xuất</span>
                             <input type="text" id="manufacturer_name" name="manufacturer_name"
+                                   value="{{old('manufacturer_name')}}"
                                    placeholder="Nhập tên tổ chức"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('manufacturer_name')
@@ -201,9 +226,9 @@ Thêm sản phẩm</h2>
                             @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Tên đơn vị</span>
-                            <input type="text" id="unit_name" name="unit_name"
-                                   placeholder="Nhập tên tổ chức"
+                            <span class="text-title font-medium">Tên đơn vị chịu trách nhiệm nhập khẩu</span>
+                            <input type="text" id="unit_name" name="unit_name" value="{{old('unit_name')}}"
+                                   placeholder="Nhập tên đơn vị"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('unit_name')
                             <p class="text-red-600">{{$message}}</p>
@@ -221,12 +246,13 @@ Thêm sản phẩm</h2>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Xuất xứ </span>
                             <input type="text" name="origin" id="origin" placeholder="Nhập xuất xứ"
+                                   value="{{old('origin')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('origin')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-                       
+
 
                         <div>
                             <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -234,13 +260,16 @@ Thêm sản phẩm</h2>
 
                                 <div class="flex justify-between items-center w-full gap-6">
                                     <input type="number" min="0" max="" placeholder="Nhập chiều dài (cm)" name="length"
+                                           value="{{old('length')}}"
                                            id="length"
                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                                     <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
+                                           value="{{old('with')}}"
                                            id="with"
                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                     <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
+                                           value="{{old('height')}}"
                                            id="height"
                                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
@@ -253,6 +282,7 @@ Thêm sản phẩm</h2>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Thể tích (ml)</span>
                             <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
+                                   value="{{old('volume')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('volume')
                             <p class="text-red-600">{{$message}}</p>
@@ -261,6 +291,7 @@ Thêm sản phẩm</h2>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Địa chỉ tổ chức chịu trách nhiệm sản xuất</span>
                             <input type="text" placeholder="Nhập địa chỉ tổ chức" name="import_unit" id="import_unit"
+                                   value="{{old('import_unit')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('import_unit')
                             <p class="text-red-600">{{$message}}</p>
@@ -270,6 +301,7 @@ Thêm sản phẩm</h2>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu</span>
                             <input type="text" placeholder="Nhập tên địa chỉ đơn vị" name="import_address"
+                                   value="{{old('import_address')}}"
                                    id="import_address"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('import_address')
@@ -281,9 +313,9 @@ Thêm sản phẩm</h2>
                             <select name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
                                     class=" outline-none w-full py-[11px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Lựa chọn kiểu đóng gói</option>
-                                <option value="1">Túi</option>
-                                <option value="2">Bao</option>
-                                <option value="3">Hộp</option>
+                                <option value="1" {{1 == old('packing_type') ? 'selected' : ''}}>Túi</option>
+                                <option value="2" {{2 == old('packing_type') ? 'selected' : ''}}>Bao</option>
+                                <option value="3" {{3 == old('packing_type') ? 'selected' : ''}}>Hộp</option>
                             </select>
                             @error('packing_type')
                             <p class="text-red-600">{{$message}}</p>
@@ -291,8 +323,8 @@ Thêm sản phẩm</h2>
                         </div>
                     </div>
                 </div>
-                
-              
+
+
                 <div class="flex justify-center md:justify-center items-center gap-5  w-full">
                     <a href="{{route('screens.manufacture.product.index')}}"
                        class="outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">
@@ -435,7 +467,7 @@ Thêm sản phẩm</h2>
                                     <select name="ward_id[]" id=""
                                             class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         <option value="0" selected>Chọn địa chỉ kho hàng</option>
-                
+
             </select>
         </div>
         <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
@@ -471,7 +503,7 @@ Thêm sản phẩm</h2>
                 <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong class="text-[#FF4D4F]">*</strong></span>
                 <select name="ware_id[]" id="ware_id[]"  class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     <option value="0" selected>Chọn địa chỉ kho hàng</option>
-               
+
                 </select>
             </div>
             <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
@@ -495,40 +527,40 @@ Thêm địa chỉ mới</a>
     <script>
 
 
-$("#discount").keyup(function (){
-    var price = $("#price").val();
-    var discount = $("#discount").val();
-    var total =0;
-    if(price != null){
-        total = (price/100)*discount;
-        $(".total").html('='+total+'VNĐ');
+        $("#discount").keyup(function () {
+            var price = $("#price").val();
+            var discount = $("#discount").val();
+            var total = 0;
+            if (price != null) {
+                total = (price / 100) * discount;
+                $(".total").html('=' + total + 'VNĐ');
 
 
-    }
+            }
 
-})
-$("#price").keyup(function (){
-    var price = $("#price").val();
-    var discount = $("#discount").val();
-    var total =0;
-    if(discount != null){
-        total = (price/100)*discount;
-        $(".total").html('='+total+'VNĐ');
+        })
+        $("#price").keyup(function () {
+            var price = $("#price").val();
+            var discount = $("#discount").val();
+            var total = 0;
+            if (discount != null) {
+                total = (price / 100) * discount;
+                $(".total").html('=' + total + 'VNĐ');
 
 
-    }
+            }
 
-})
-// const chooseVstore = document.getElementById('vstore_id');
-// console.log(chooseVstore);
-// const options = chooseVstore.getElementsByTagName('option');
-// for (var d = 0;d < options.length;d++){
-//    if(d > 0){
-//        const {id} = options[d].dataset;
-//        console.log(id)
-//        options[d].innerHTML+=`<span style="display: none">${id}</span>`;
-//    }
-// }
+        })
+        // const chooseVstore = document.getElementById('vstore_id');
+        // console.log(chooseVstore);
+        // const options = chooseVstore.getElementsByTagName('option');
+        // for (var d = 0;d < options.length;d++){
+        //    if(d > 0){
+        //        const {id} = options[d].dataset;
+        //        console.log(id)
+        //        options[d].innerHTML+=`<span style="display: none">${id}</span>`;
+        //    }
+        // }
 
     </script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Application;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -25,37 +27,28 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $limit = $request->limit ?? 10;
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
-        if (isset($request->condition) && $request->condition != 0) {
-            $condition = $request->condition;
-            if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('sku_id', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
-            } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('name', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
-            } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'vstore_id', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('admin_confirm_date', '!=', null)->where('categories.name', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
-            } else {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('brand', 'like', '%' . $request->key_search . '%')->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
+        $this->v['products'] = Product::select('id', 'publish_id', 'images', 'name', 'brand', 'category_id', 'price', 'status', 'vstore_id')
+            ->orderBy('id', 'desc')
+            ->where('user_id', Auth::id())
+            ->paginate(10);
 
-            }
-        } else {
-            $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'brand', 'images', 'amount_product', 'price', 'admin_confirm_date', 'vstore_confirm_date')->where('admin_confirm_date', '!=', null)->where('user_id',Auth::id())->orderBy('id', 'desc')->paginate($limit);
-
-        }
-        if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
-            abort(404);
-        }
-
-        $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
     }
 
     public function create()
     {
-        $this->v['v_stores'] = User::select('id', 'name','account_code')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
+        $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
         $this->v['categories'] = Category::select('id', 'name')->orderBy('id', 'desc')->get();
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
+        return view('screens.manufacture.product.createp', $this->v);
+
+    }
+
+    public function createRequest()
+    {
+        $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
+        $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
+        $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
         return view('screens.manufacture.product.create', $this->v);
 
     }
@@ -73,40 +66,21 @@ class ProductController extends Controller
 //        dd( $request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'vstore_id' => 'required',
-            'discount' => 'required|max:99|min:0',
-            'category_id' => 'required',
-            'description' => 'required',
-            'brand' => 'required',
-            'weight' => 'required',
-            'packing_type' => 'required',
-            'manufacturer_name' => 'required',
-//            'manufacturer_address' => 'required',
-            'origin' => 'required',
-         //   'volume' => 'required',
             'price' => 'required',
-            'sku_id' => 'required|unique:products',
+            'brand' => 'required',
+            'category_id' => 'required',
+            'weight' => 'required',
             'video' => 'max:512000',
+            'images' => 'required',
+
 
         ], [
-            'name.required' => 'Trường này không được trống',
-            'company_name.required' => 'Trường này không được trống',
-            'discount.required' => 'Trường này không được trống',
-            'category_id.required' => 'Trường này không được trống',
-            'description.required' => 'Trường này không được trống',
-            'brand.required' => 'Trường này không được trống',
-            'weight.required' => 'Trường này không được trống',
-            'packing_type.required' => 'Trường này không được trống',
-            'manufacturer_name.required' => 'Trường này không được trống',
-//            'manufacturer_address.required' => 'Trường này không được trống',
-            'origin.required' => 'Trường này không được trống',
-        //    'volume.required' => 'Trường này không được trống',
-            'price.required' => 'Trường này không được trống',
-//            'percent_discount.required' => 'Trường này không được trống',
-            'sku_id.required' => 'Trường này không được trống',
-            'video.max' => 'Video vượt quá dung lượng cho phép',
-            'vstore_id.required' => 'Trường này không được trống',
-//            $v_stores
+            'name . required' => 'Trường này không được trống',
+            'price . required' => 'Trường này không được trống',
+            'brand . required' => 'Trường này không được trống',
+            'category_id . required' => 'Trường này không được trống',
+            'weight . required' => 'Trường này không được trống',
+            'video . max' => 'Video vượt quá dung lượng cho phép',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -116,16 +90,16 @@ class ProductController extends Controller
 
         try {
             $product = new Product();
-            $product->vstore_id = $request->vstore_id;
             $product->name = $request->name;
-            $product->discount = (float)$request->discount;
             $product->category_id = $request->category_id;
+            $product->price = $request->price;
             $product->description = $request->description;
             $product->brand = $request->brand;
+            $product->material = $request->material;
             $product->weight = $request->weight;
-            $product->packing_type = $request->packing_type;
             $product->manufacturer_name = $request->manufacturer_name;
-//            $product->manufacturer_address = $request->manufacturer_address;
+            $product->unit_name = $request->unit_name;
+            $product->import_date = $request->import_date;
             $product->origin = $request->origin;
             $product->length = $request->length ?? 0;
             $product->with = $request->with ?? 0;
@@ -133,91 +107,82 @@ class ProductController extends Controller
             $product->volume = $request->volume ?? 0;
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
-            $product->price = $request->price;
-//            $product->amount_product_send_to_discount = $request->amount_product_send_to_discount;
-//            $product->percent_discount = $request->percent_discount;
-            $product->sku_id = $request->sku_id;
-            $product->payment_on_delivery = $request->payment_on_delivery ? 1 : 0;
-            $product->prepay = $request->prepay ? 1 : 0;
+            $product->packing_type = $request->packing_type;
             $product->status = 1;
-            $product->import_date = $request->import_date;
-            $product->unit = $request->unit;
-            $product->unit_name = $request->unit_name;
-
             // Upload Image
-            if($request->hasFile('video')){
+            if ($request->hasFile('video')) {
                 $filenameWithExt = $request->file('video')->getClientOriginalName();
                 //Get just filename
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 // Get just ext
                 $extension = $request->file('video')->getClientOriginalExtension();
                 // Filename to store
-                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $fileNameToStore = $filename . '_' . time() . ' . ' . $extension;
                 $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
 
                 $path = str_replace('public/', '', $path);
 
-                $product->video = 'storage/'.$path;
+                $product->video = 'storage / ' . $path;
             }
 
             while (true) {
-                $code = rand(10000000, 99999999);
-                if (!Product::where('code', $code)->first()) {
-                    $product->code = $code;
+                $code = 'VN - ' . Str::random(10);
+                if (!Product::where('publish_id', $code)->first()) {
+                    $product->publish_id = $code;
                     break;
                 }
             }
             $photo_gallery = [];
             foreach (json_decode($request->images) as $image) {
-                $photo_gallery[] = 'storage/products/'. $this->saveImgBase64($image, 'products');
+                $photo_gallery[] = 'storage / products / ' . $this->saveImgBase64($image, 'products');
             }
             $product->images = json_encode($photo_gallery);
-            $photo_gallery = [];
-            foreach (json_decode($request->unitImages) as $image) {
-                $photo_gallery[] ='storage/products/'. $this->saveImgBase64($image, 'products') ;
-            }
-            $product->unit_images = json_encode($photo_gallery);
+//            $photo_gallery = [];
+//            foreach (json_decode($request->unitImages) as $image) {
+//                $photo_gallery[] = 'storage / products / ' . $this->saveImgBase64($image, 'products');
+//            }
+//            $product->unit_images = json_encode($photo_gallery);
             $product->user_id = Auth::id();
             $product->save();
 
-            $dataInsert = [];
-            $amount = 0;
-            for ($i = 0; $i < count($request->ward_id); $i++) {
-                $dataInsert[] = [
-                    'product_id' => $product->id,
-                    'ware_id' => $request->ward_id[$i],
-                    'amount' => $request->amount[$i],
-                    'created_at' => Carbon::now(),
-                    'status' => 1];
-                $amount += $request->amount[$i];
-            }
-            ProductWarehouses::insert($dataInsert);
-            Product::where('id', $product->id)->update(['amount_product' => $amount]);
-            $userLogin = Auth::user();
-            $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $data = [
-                'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => $userLogin->avatar ?? '',
-                'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
-                'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.vstore.product.request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
-            ];
-            $user->notify(new AppNotification($data));
+//            $dataInsert = [];
+//            $amount = 0;
+//            for ($i = 0; $i < count($request->ward_id); $i++) {
+//                $dataInsert[] = [
+//                    'product_id' => $product->id,
+//                    'ware_id' => $request->ward_id[$i],
+//                    'amount' => $request->amount[$i],
+//                    'created_at' => Carbon::now(),
+//                    'status' => 1];
+//                $amount += $request->amount[$i];
+//            }
+//            ProductWarehouses::insert($dataInsert);
+//            Product::where('id', $product->id)->update(['amount_product' => $amount]);
+//            $userLogin = Auth::user();
+//            $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+//            $data = [
+//                'title' => 'Bạn vừa có 1 thông báo mới',
+//                'avatar' => $userLogin->avatar ?? '',
+//                'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
+//                'created_at' => Carbon::now()->format('h:i A d / m / Y'),
+//                'href' => route('screens . vstore . product . request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
+//            ];
+//            $user->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {
-            DB::rollBack();
             dd($e->getMessage());
-            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra . Vui lòng thử lại');
         }
     }
 
     protected function saveImgBase64($param, $folder)
     {
         list($extension, $content) = explode(';', $param);
-        $tmpExtension = explode('/', $extension);
-        preg_match('/.([0-9]+) /', microtime(), $m);
-        $fileName = sprintf('img%s%s.%s', date('YmdHis'), $m[1], $tmpExtension[1]);
+        $tmpExtension = explode(' / ', $extension);
+        preg_match(' /.([0 - 9] +) / ', microtime(), $m);
+        $fileName = sprintf('img % s % s .%s', date('YmdHis'), $m[1], $tmpExtension[1]);
         $content = explode(',', $content)[1];
         $storage = Storage::disk('public');
 
@@ -227,7 +192,7 @@ class ProductController extends Controller
             $storage->makeDirectory($folder);
         }
 
-        $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
+        $storage->put($folder . ' / ' . $fileName, base64_decode($content), 'public');
 
         return $fileName;
     }
@@ -239,25 +204,12 @@ class ProductController extends Controller
         }
         $limit = $request->limit ?? 10;
         $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
-        if (isset($request->condition) && $request->condition != 0) {
-            $condition = $request->condition;
-            if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('sku_id', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
-            } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
-            } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'products.created_at', 'products.status', 'vstore_id', 'vstore_confirm_date', 'admin_confirm_date')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
-            } else {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->where('brand', 'like', '%' . $request->key_search . '%')->orderBy('id', 'desc')->paginate($limit);
-
-            }
-        } else {
-            $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'vstore_confirm_date', 'admin_confirm_date')->orderBy('id', 'desc')->paginate($limit);
-
-        }
-        if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
-            abort(404);
-        }
+        $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+            ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->join('users', 'requests.vstore_id', '=', 'users.id')
+            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
+            ->orderBy('requests.id', 'desc')
+            ->paginate($limit);
 
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.request', $this->v);
@@ -267,14 +219,112 @@ class ProductController extends Controller
     public function detail(Request $request)
     {
         try {
-            $this->v['product'] = Product::select('id', 'name', 'vstore_id', 'category_id', 'created_at', 'status', 'discount', 'price')->where('id', $request->id)->first();
-            $this->v['product']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = $request->id) as amount FROM product_warehouses where status = 1 AND product_id = $request->id"))[0]->amount;
+            $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+                ->join('requests', 'products.id', '=', 'requests.product_id')
+                ->join('users', 'requests.vstore_id', '=', 'users.id')
+                ->selectRaw('requests.code,products.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name')
+                ->first();
+            $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = $request->id"))[0]->amount;
             return view('screens.manufacture.product.detail', $this->v);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
     }
-    public function createp(){
-        return view('screens.manufacture.product.createp');
+
+    public function createp()
+    {
+        return view('screens . manufacture . product . createp');
+    }
+
+    public function storeRequest(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $validator = Validator::make($request->all(), [
+                'vstore_id' => 'required',
+                'product_id' => 'required',
+                'discount' => 'required',
+                'role' => 'min:1',
+                'prepay' => 'required'
+            ], [
+                'vstore_id.required' => 'V-store bắt buộc chọn',
+                'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
+                'discount.required' => 'Chiết khấu bắt buộc nhập',
+                'role.min' => 'Vai trò với sản phẩm bắt buộc chọn',
+                'prepay.required' => 'Phương thức thanh toán bắt buộc chọn'
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
+            if ($request->ward_id[0] == 0) {
+                return redirect()->back()->withErrors(['ward_id' => 'Thông tin kho hàng bắt buộc nhập'])->withInput()->with('validate', 'failed');
+
+            }
+            $object = new Application();
+            $object->product_id = $request->product_id;
+            $object->discount = $request->discount;
+            $object->role = $request->role;
+            $object->status = 0;
+            $object->vstore_id = $request->vstore_id;
+            $object->user_id = Auth::id();
+            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
+            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
+            $code = rand(100000000000, 999999999999);
+            while (true) {
+                if (Application::where('code', $code)->count() > 0) {
+                    $code = rand(100000000000, 999999999999);
+                } else {
+                    break;
+                }
+
+            }
+            $object->code = $code;
+            $images = [];
+            if ($request->hasFile('images')) {
+                foreach ($request->images as $file) {
+                    $filenameWithExt = $file->getClientOriginalName();
+                    //Get just filename
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $file->getClientOriginalExtension();
+                    // Filename to store
+                    $fileNameToStore = $filename . '_' . time() . ' . ' . $extension;
+                    $path = $file->storeAs('public/products', str_replace(' ', '', $fileNameToStore));
+
+                    $path = str_replace('public/', '', $path);
+
+                    $images[] = 'storage / ' . $path;
+                }
+            }
+            $object->images = json_encode($images);
+            $object->save();
+            $dataInsert = [];
+            for ($i = 0; $i < count($request->ward_id); $i++) {
+                $dataInsert[] = [
+                    'product_id' => $request->product_id,
+                    'ware_id' => $request->ward_id[$i],
+                    'amount' => $request->amount[$i],
+                    'created_at' => Carbon::now(),
+                    'status' => 3];
+            }
+            ProductWarehouses::insert($dataInsert);
+            DB::table('products')->where('id', $request->product_id)->update(['status' => 1]);
+            DB::commit();
+            return redirect()->back()->with('success', 'Thêm mới yêu cầu đăng ký thành công');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Thêm mới yêu cầu đăng ký thất bại');
+
+        }
+
+    }
+
+    public function getDataProduct(Request $request)
+    {
+        $product = Product::select('price')->where('id', $request->product_id)->first();
+
+        return $product->price;
     }
 }

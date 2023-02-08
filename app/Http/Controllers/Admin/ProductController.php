@@ -29,42 +29,11 @@ class ProductController extends Controller
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $limit = $request->limit ?? 10;
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
-        if (isset($request->condition) && $request->condition != 0) {
-            $condition = $request->condition;
-            if ($condition == 'sku_id') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
-                    ->where('status', 2)
-                    ->orderBy('admin_confirm_date', 'asc')
-                    ->paginate($limit);
-            } else if ($condition == 'name') {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->where($condition, 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
-                    ->where('status', 2)
-                    ->orderBy('admin_confirm_date', 'asc')
-                    ->paginate($limit);
-            } else if ($condition == '3') {
-                $this->v['products'] = Product::select('code', 'products.id', 'sku_id', 'products.name', 'categories.name as cate_name', 'user_id', 'products.created_at', 'products.status', 'vstore_id', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->join('categories', 'products.category_id', '=', 'categories.id')->where('categories.name', 'like', '%' . $request->key_search . '%')->where('vstore_confirm_date', '!=', null)
-                    ->where('products.status', 2)
-                    ->orderBy('admin_confirm_date', 'asc')
-                    ->paginate($limit);
-            } else {
-                $this->v['products'] = Product::select('code', 'id', 'sku_id', 'name', 'category_id', 'created_at', 'user_id', 'status', 'user_id')->where($condition, 'like', '%' . $request->key_search . '%', 'admin_confirm_date', 'vstore_confirm_date','publish_id')->orderBy('id', 'desc')->paginate($limit);
-
-            }
-        } else {
-            $this->v['products'] = Product::where('vstore_confirm_date', '!=', null)
-                ->where('status', 2)
-                ->orderBy('admin_confirm_date', 'asc')
-                ->paginate(10);
-
-        }
-        if (isset($request->page) && $request->page > $this->v['products']->lastPage()) {
-            abort(404);
-        }
-
-        $this->v['params'] = $request->all();
-
+        $this->v['products'] = Product::select('id', 'publish_id', 'images', 'name', 'brand', 'category_id', 'price', 'status', 'vstore_id')
+            ->orderBy('id', 'desc')
+            ->where('user_id', Auth::id())
+            ->pagiate(10);
+        dd($this->v['products']);
         return view('screens.admin.product.index', $this->v);
 
     }
@@ -119,7 +88,7 @@ class ProductController extends Controller
         try {
             $product = Product::find($id);
 
-            $code = 'VN' . rand(1000000000, 9999999999);
+            $code = 'VN-' . Str::random(10);
             $check = true;
             while ($check) {
                 $checkProduct = Product::where('publish_id', $code)->count();

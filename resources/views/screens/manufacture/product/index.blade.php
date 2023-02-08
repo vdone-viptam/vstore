@@ -135,13 +135,13 @@ Tất cả sản phẩm</h2>
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{$product->sku_id}}</td>
+                                    <td>{{$product->publish_id}}</td>
                                     <td> <div class="w-[48px] h-[48px] rounded">
                                             <img
                                                 src="{{asset(json_decode($product->images)[0]) ?? asset('asset/images/sp.png') }}"
                                                 alt="">
                                         </div></td>
-                                    <td class="flex justify-start items-center gap-2">
+                                    <td class="">
 
                                         <span>{{$product->name}}</span>
                                     </td>
@@ -155,10 +155,10 @@ Tất cả sản phẩm</h2>
                                         {{$product->price}}
                                     </td>
                                     <td>
-                                        {{$product->vStore->name}}
+                                        {{$product->vStore->name ?? '-'}}
                                     </td>
-                                    <td>{{$product->amount_product ?? 1}}</td>
-                                    <td>0</td>
+                                    <td>{{$product->amount_product ?? '-'}}</td>
+                                    <td>-</td>
                                     <td>
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline"> Chi tiết</a>
@@ -215,7 +215,7 @@ Tất cả sản phẩm</h2>
                     url: '{{route('screens.manufacture.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
                         // $('#modal5').html('');
-                        $('#modal5').append(result);
+                        $('#modal5').html(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
                 });

@@ -15,40 +15,40 @@
         <div class="content  max-h-[600px] overflow-y-auto">
             <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                 <div class="flex justify-start items-center gap-2 w-full">
-                    <span class="text-title font-medium ">Mã sản phẩm:</span>
-                    <span class="text-title">{{$product->id}}</span>
+                    <span class="text-title font-medium ">Mã yêu cầu:</span>
+                    <span class="text-title">{{$request->code}}</span>
                 </div>
 
                 <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Tên sản phẩm:</span>
-                    <span class="text-title">{{$product->name}}</span>
+                    <span class="text-title">{{$request->product_name}}</span>
                 </div>
                 <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Nhà cung cấp:</span>
-                    <span class="text-title">{{$product->vStore->name}}</span>
+                    <span class="text-title">{{$request->user_name ?? ''}}</span>
                 </div>
                 <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Giá bán:</span>
-                    <span class="text-title">{{$product->price}}</span>
+                    <span class="text-title">{{$request->price}}</span>
                 </div>
                 <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Chiết khấu:</span>
-                    <span class="text-title">{{$product->discount}}%</span>
+                    <span class="text-title">{{$request->discount}}%</span>
                 </div>
                 <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Chiết khấu:</span>
-                    <span class="text-title">{{$product->discount}}%</span>
+                    <span class="text-title">{{$request->discount_vshop}}%</span>
                 </div>
                 <div class="flex justify-start items-center gap-2 w-full">
                     <span class="text-title font-medium ">Số lượng bán:</span>
-                    <span class="text-title">{{$product->amount_product}}</span>
+                    <span class="text-title">{{$request->amount_product}}</span>
                 </div>
             </div>
             <div class="flex justify-end items-center gap-4 ">
-{{--                <button--}}
-{{--                    class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
-{{--                    onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
-{{--                </button>--}}
+                {{--                <button--}}
+                {{--                    class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
+                {{--                    onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
+                {{--                </button>--}}
             </div>
         </div>
     </div>
