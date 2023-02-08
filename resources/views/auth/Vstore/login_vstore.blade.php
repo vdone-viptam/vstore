@@ -38,8 +38,8 @@
 <div class=" grid grid-cols-1 place-items-center ">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full  md:w-[500px] ">
-{{--        <a href="{{route('landingpagevstore')}}" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
-            <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
+        <a href="{{route('landingpagevstore')}}" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
+{{--            <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
 {{--            {{asset(route('lading_page'))}}--}}
             <div>
                 <img src="{{asset('asset/icons/back.png')}}" alt="">

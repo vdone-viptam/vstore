@@ -27,7 +27,7 @@ Route::group(['domain' => config('domain.api')], function () {
         Route::get('/product-by-vstore/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVstore']);
         Route::get('/product-by-ncc/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByNcc']);
         Route::post('/vshop-pickup/{id}',[\App\Http\Controllers\Api\ProductController::class,'vshopPickup']);
-        Route::get('/product-by-vshop/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVshop']);
+        Route::get('/ /{id}',[\App\Http\Controllers\Api\ProductController::class,'productByVshop']);
         Route::get('/{id}',[\App\Http\Controllers\Api\ProductController::class,'productById']);
     });
     Route::prefix('cart')->group(function () {
@@ -38,11 +38,9 @@ Route::group(['domain' => config('domain.api')], function () {
 
     });
     Route::prefix('bill')->group(function () {
-        //list danh mục
-        Route::get('/{id}',[\App\Http\Controllers\Api\CartController::class,'index']);
-        Route::post('/add/{id}',[\App\Http\Controllers\Api\CartController::class,'add']);
-        Route::post('/remove/{id}',[\App\Http\Controllers\Api\CartController::class,'remove']);
-        Route::post('/quantity/$id',[\App\Http\Controllers\Api\CartController::class,'quantity']);
+        Route::post('/add',[\App\Http\Controllers\Api\BillController::class,'add']);
+        Route::get('/detail/{id}',[\App\Http\Controllers\Api\BillController::class,'detail']);
+        Route::get('/{id}',[\App\Http\Controllers\Api\BillController::class,'index']);
 
     });
     Route::prefix('category')->group(function () {

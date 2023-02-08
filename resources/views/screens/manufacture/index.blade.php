@@ -23,14 +23,14 @@
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full" alt=""></a>
             </div>
 
-            <a href="{{route('login_vstore')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
+            <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
         </div>
         <div class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Phát triển thương hiệu của bạn"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang <strong class="text-[#1E90FF]">tin dùng V-Store.</strong></span>
         </div>
         <div class="max-w-[320px] mx-auto md:mx-0">
-            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] px-[18px] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
+            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] px-[18px] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_ncc')}}">Đăng ký ngay</a></button>
         </div>
     </div>
 
@@ -93,7 +93,7 @@
             </div>
             <h3 class="text-[#1D293F] font-semibold text-2xl whitespace-nowrap">Đưa sản phẩm lên V-Store</h3>
             <span class="text-[#7C8087] text-right md:text-left">
-            Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn 
+            Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn
                 </span>
             <svg width="160" height="119" class="absolute bottom-[-125px] right-[20px] md:hidden" viewBox="0 0 160 119" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M134.072 2C134.072 2 118.032 78.1465 29.6856 111.152" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
@@ -226,7 +226,7 @@
 
         </div>
 
-        <a href="#" class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng ký thành viên</a>
+        <a href="{{route('register_ncc')}}" class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng ký thành viên</a>
     </div>
     <div class="order-first xl:order-last">
         <img src="{{asset('home/img/bnn.png')}}" class="w-full" alt="">

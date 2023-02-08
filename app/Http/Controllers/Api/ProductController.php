@@ -49,18 +49,42 @@ class ProductController extends Controller
 
 
     }
+    /**
+     * Danh sách sản phẩm vstore
+     *
+     * API này sẽ trả về sách sản phẩm vstore
+     *
+     * @param Request $request
+     * @param $id id của vstore
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @urlParam publish_id mã sản phẩm
+     * @return JsonResponse
+     */
     public function productByVstore(Request $request, $id){
         $limit = $request->limit ?? 10;
-        $products = Product::where('vstore_id',$id)->paginate($limit);
+        $products = Product::where('vstore_id',$id)->where('status',2)->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'data' => $products,
 
         ]);
     }
+    /**
+     * Danh sách sản phẩm nhà cung cấp
+     *
+     * API này sẽ trả về thông tin hiển thị sản phẩm nhà cung cấp
+     *
+     * @param Request $request
+     * @param $id id nhà cung cấp
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @urlParam publish_id mã sản phẩm
+     * @return JsonResponse
+     */
     public function productByNcc( Request $request,$id){
         $limit = $request->limit ?? 10;
-        $products = Product::where('user_id',$id)->paginate($limit);
+        $products = Product::where('user_id',$id)->where('status',2)->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'data' => $products,
@@ -73,10 +97,8 @@ class ProductController extends Controller
      * API dùng để lấy chi tiết 1 sản phẩm
      *
      * @param Request $request
-     * @urlParam page Số trang
-     * @urlParam limit Giới hạn bản ghi trên một trang
-     * @param  id mã sản phẩm
-     * @bodyParam  id_pdone id của pdone
+     * @param  $id mã sản phẩm
+     *
      * @return JsonResponse
      */
     public function productById(Request $request, $id){
@@ -88,7 +110,7 @@ class ProductController extends Controller
                 'status_code' => 400,
                 'data' => 'No product found or unapproved product',
 
-            ]);
+            ],400);
         }
         $products_available= DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =".$product->id." ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
         $product->products_available=$products_available;
@@ -106,7 +128,7 @@ class ProductController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam limit Giới hạn bản ghi trên một trang
-     * @param  id mã sản phẩm
+     * @param  $id mã sản phẩm
      * @bodyParam  id_pdone id của pdone
      * @return JsonResponse
      */
@@ -124,7 +146,7 @@ class ProductController extends Controller
                 'status_code' => 400,
                 'data' => 'No product found or unapproved product',
 
-            ]);
+            ],400);
         }
 
         $checkVshop = Vshop::where('id_pdone',$request->id_pdone)->where('id_product',$product->id)->first();
@@ -132,7 +154,7 @@ class ProductController extends Controller
                 return response()->json([
                     'status_code' => 400,
                     'data' => 'Products that have been added cannot be added again',
-                ]);
+                ],400);
             }
         try {
             $vshop = new Vshop();
@@ -154,10 +176,11 @@ class ProductController extends Controller
     /**
      * sản phẩm Vshop
      *
-     * API lấy danh sách sản phẩm thep vshop
+     * API lấy danh sách sản phẩm theo vshop
      *
      * @param Request $request
-     * @param  id mã sản phẩm
+     * @param  $id mã vshop
+     *
      * @return JsonResponse
      */
     public function productByVshop(Request $request,$id){

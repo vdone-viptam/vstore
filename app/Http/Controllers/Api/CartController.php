@@ -14,10 +14,17 @@ use Illuminate\Support\Facades\Validator;
  */
 class CartController extends Controller
 {
-
+    /**
+     * Cart
+     *
+     * API dùng để xem sản phẩm trong giỏ hàng
+     *
+     * @param Request $request
+     * @param  $id mã sản phẩm
+     * @return JsonResponse
+     */
     public function index($id){
         $cart = Cart::where('user_id',$id)->where('status',1)->get();
-//        return $cart[0]['publish_id'];
         $i=0;
         foreach ($cart as $value){
             $product= Product::where('publish_id',$cart[$i]['publish_id'])->first();
@@ -44,7 +51,7 @@ $i++;
      * API dùng để thêm sản phẩm vào giỏ hàng
      *
      * @param Request $request
-     * @param  id mã sản phẩm
+     * @param  $id mã sản phẩm
      * @bodyParam  user_id mã user của người dùng
      * @urlParam quantity só lượng sản phẩm không có mặc định là 1
      * @return JsonResponse
@@ -65,7 +72,7 @@ $i++;
                 'data' => 'No product found or unapproved product',
             ],400);
         }
-        $quantity = $request->quantity ?? 1;
+
         $checkCart = Cart::where('publish_id',$id)->where('user_id',$request->user_id)->where('status',1)->first();
         if ($checkCart){
            $checkCart->quantity+= 1;
@@ -92,7 +99,7 @@ $i++;
      * API dùng để xóa sản phẩm khỏi giỏ hàng
      *
      * @param Request $request
-     * @param  id mã sản phẩm
+     * @param  $id mã sản phẩm
      * @bodyParam  user_id mã user của người dùng
      * @return JsonResponse
      */
@@ -121,7 +128,7 @@ $i++;
      * API dùng để tăng giảm số lượng sản phẩm trong giỏ hàng
      *
      * @param Request $request
-     * @param  id mã sản phẩm
+     * @param  $id mã sản phẩm
      * @bodyParam  user_id mã user của người dùng
      * @bodyParam quantity số lượng sản phẩm
      * @return JsonResponse
