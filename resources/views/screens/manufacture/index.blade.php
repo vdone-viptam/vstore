@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ V-Store</title>
+    <title>Trang chủ nhà cung cấp V-Store</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
@@ -40,8 +40,8 @@
         <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
     </div>
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-[16px] sm:text-4xl text-[#1D293F]">CỔNG THƯƠNG MẠI ĐIỆN TỬ <strong class="text-[#1E90FF]">V-STORE </strong> LÀ GÌ?</h2>
-        <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội V-Done thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng V-Done. </span>
+        <h2 class="font-semibold text-[16px] sm:text-4xl text-[#1D293F]">NHÀ CUNG CẤP <strong class="text-[#1E90FF]">V-STORE </strong> LÀ GÌ?</h2>
+        <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng V-Done. Tại V-Done, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
     </div>
 </div>
 <div class="banner flex justify-around items-start w-full md:max-w-[1440px] mx-auto  flex-wrap lg:flex-nowrap">
@@ -62,8 +62,8 @@
     </div>
 </div>
 <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Quy trình trở thành V - Store</h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
+    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Quy trình trở thành Nhà cung cấp </h2>
+    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">Quy trình đăng kí Nhà cung cấp đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
     <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
         <img src="{{asset('home/img/circle.png')}}" class="w-full" alt="">
     </div>
@@ -91,9 +91,9 @@
             <div class="w-[97px] h-[97px]">
                 <img src="{{asset('home/img/b2.png')}}" class="w-full" alt="">
             </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Hoàn thiện hồ sơ</h3>
+            <h3 class="text-[#1D293F] font-semibold text-2xl">Đưa sản phẩm lên V-Store</h3>
             <span class="text-[#7C8087] text-right md:text-left">
-                    Hoàn thiện thông tin và hồ sơ được yêu cầu theo hướng dẫn, chỉ mất chưa đến 15p
+            Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn 
                 </span>
             <svg width="160" height="119" class="absolute bottom-[-125px] right-[20px] md:hidden" viewBox="0 0 160 119" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M134.072 2C134.072 2 118.032 78.1465 29.6856 111.152" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
@@ -111,16 +111,16 @@
             <div class="w-[97px] h-[97px]">
                 <img src="{{asset('home/img/b3.png')}}" class="w-full" alt="">
             </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Bắt đầu sử dụng</h3>
+            <h3 class="text-[#1D293F] font-semibold text-2xl">Quản lý bán hàng</h3>
             <span class="text-[#7C8087]">
-                    Hoàn thiện đăng ký và trở thành V - Store sở hữu những quyền lợi mang tới lợi ích kinh doanh lớn
+            Quản lý đơn hàng trên hệ thống và đưa sản phẩm tới người tiêu dùng
                 </span>
         </div>
     </div>
 </div>
 <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Lợi ích tham gia V - Store </h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
+    <h2 class="text-4xl font-bold text-[#1D293F] text-center ">Lợi ích khi trở thành Nhà cung cấp</h2>
+    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Khi trở thành “Nhà cung cấp”  bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ trên cổng V-Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiệp</span>
 
 </div>
 <div class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">

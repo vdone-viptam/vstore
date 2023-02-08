@@ -119,8 +119,8 @@
     </div>
 </div>
 <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Lợi ích tham gia V - Store </h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
+    <h2 class="text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia V - Store </h2>
+    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
 
 </div>
 <div class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
