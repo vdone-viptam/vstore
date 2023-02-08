@@ -72,15 +72,17 @@ class ProductController extends Controller
             'weight' => 'required',
             'video' => 'max:512000',
             'images' => 'required',
-
+            'description' => 'required'
 
         ], [
-            'name . required' => 'Trường này không được trống',
-            'price . required' => 'Trường này không được trống',
-            'brand . required' => 'Trường này không được trống',
-            'category_id . required' => 'Trường này không được trống',
-            'weight . required' => 'Trường này không được trống',
-            'video . max' => 'Video vượt quá dung lượng cho phép',
+            'name.required' => 'Trường này không được trống',
+            'price.required' => 'Trường này không được trống',
+            'brand.required' => 'Trường này không được trống',
+            'category_id.required' => 'Trường này không được trống',
+            'weight.required' => 'Trường này không được trống',
+            'video.max' => 'Video vượt quá dung lượng cho phép',
+            'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
+            'description.required' => 'Mô tả bắt buộc nhập'
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -108,7 +110,7 @@ class ProductController extends Controller
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->packing_type = $request->packing_type;
-            $product->status = 1;
+            $product->status = 0;
             // Upload Image
             if ($request->hasFile('video')) {
                 $filenameWithExt = $request->file('video')->getClientOriginalName();
@@ -133,8 +135,14 @@ class ProductController extends Controller
                 }
             }
             $photo_gallery = [];
+
             foreach (json_decode($request->images) as $image) {
-                $photo_gallery[] = 'storage / products / ' . $this->saveImgBase64($image, 'products');
+
+                try {
+                    $photo_gallery[] = 'storage/products/ ' . $this->saveImgBase64($image, 'products');
+                } catch (\Exception $exception) {
+                    dd($exception->getMessage());
+                }
             }
             $product->images = json_encode($photo_gallery);
 //            $photo_gallery = [];
@@ -180,9 +188,9 @@ class ProductController extends Controller
     protected function saveImgBase64($param, $folder)
     {
         list($extension, $content) = explode(';', $param);
-        $tmpExtension = explode(' / ', $extension);
-        preg_match(' /.([0 - 9] +) / ', microtime(), $m);
-        $fileName = sprintf('img % s % s .%s', date('YmdHis'), $m[1], $tmpExtension[1]);
+        $tmpExtension = explode('/', $extension);
+        preg_match('/.([0-9]+) /', microtime(), $m);
+        $fileName = sprintf('img%s%s.%s', date('YmdHis'), $m[1], $tmpExtension[1]);
         $content = explode(',', $content)[1];
         $storage = Storage::disk('public');
 
