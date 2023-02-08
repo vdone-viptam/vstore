@@ -9,9 +9,19 @@ use Illuminate\Http\Request;
 
 class ManufactureController extends Controller
 {
+    /**
+     * Danh sách nhà cung cấp
+     *
+     * API này sẽ trả về sách Nhà cung cấp
+     *
+     * @param Request $request
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @return JsonResponse
+     */
     public function index(Request $request){
         $limit = $request->limit ?? 10;
-        $user = User::paginate($limit);
+        $user = User::where('role_id',2)->where('account_code','!=',null)->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'data' => $user,

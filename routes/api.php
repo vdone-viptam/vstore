@@ -48,17 +48,24 @@ Route::group(['domain' => config('domain.api')], function () {
         Route::get('',[\App\Http\Controllers\Api\CategoryController::class,'index']);
 
     });
-});
-//Route::prefix('manufacture')->group(function () {
-//    //list nhà cung cấp
-//    Route::get('',[\App\Http\Controllers\Api\ManufactureController::class,'index']);
+    Route::prefix('manufacture')->group(function () {
+        //list nhà cung cấp
+        Route::get('',[\App\Http\Controllers\Api\ManufactureController::class,'index']);
 //    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
-//
-//});
-//Route::prefix('vshop')->group(function () {
-//    Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'getProductByIdPdone']);
-//
-//});
+
+    });
+    Route::prefix('vstore')->group(function () {
+        //list nhà cung cấp
+        Route::get('',[\App\Http\Controllers\Api\VstoreController::class,'index']);
+//    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
+
+    });
+});
+
+Route::prefix('vshop')->group(function () {
+    Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
+
+});
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
 ////    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 //});

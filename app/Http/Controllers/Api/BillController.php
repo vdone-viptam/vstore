@@ -104,11 +104,7 @@ class BillController extends Controller
             return($e->getMessage());
 
         }
-
-
-
     }
-
     public function detail($id){
         $bill = Bill::where('id',$id)->first();
         if ($bill){

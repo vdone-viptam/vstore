@@ -20,7 +20,7 @@ class CartController extends Controller
      * API dùng để xem sản phẩm trong giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã sản phẩm
+     * @param  $id mã tài khoản người dùng
      * @return JsonResponse
      */
     public function index($id){
@@ -51,7 +51,7 @@ $i++;
      * API dùng để thêm sản phẩm vào giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã sản phẩm
+     * @param  $id mã publish_id sản phẩm
      * @bodyParam  user_id mã user của người dùng
      * @urlParam quantity só lượng sản phẩm không có mặc định là 1
      * @return JsonResponse
@@ -100,7 +100,7 @@ $i++;
      *
      * @param Request $request
      * @param  $id mã sản phẩm
-     * @bodyParam  user_id mã user của người dùng
+     * @bodyParam  user_id mã tài khoản của người dùng
      * @return JsonResponse
      */
     public function remove(Request $request,$id){
@@ -128,7 +128,7 @@ $i++;
      * API dùng để tăng giảm số lượng sản phẩm trong giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã sản phẩm
+     * @param  $id mã publish_id sản phẩm
      * @bodyParam  user_id mã user của người dùng
      * @bodyParam quantity số lượng sản phẩm
      * @return JsonResponse
