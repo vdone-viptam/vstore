@@ -1,4 +1,4 @@
-<form action="{{route('screens.vstore.product.confirm',['id' => $product->id])}}" method="POST">
+<form action="{{route('screens.vstore.product.confirm',['id' => $request->id])}}" method="POST">
     @csrf
     <div class="modal modal-details">
         <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
@@ -18,50 +18,49 @@
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Mã sản phẩm:</span>
-                        <span class="text-title">{{$product->id}}</span>
+                        <span class="text-title">{{$request->code}}</span>
                     </div>
 
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Tên sản phẩm:</span>
-                        <span class="text-title">{{$product->name}}</span>
+                        <span class="text-title">{{$request->product_name}}</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Nhà cung cấp:</span>
-                        <span class="text-title">{{$product->NCC->name}}</span>
+                        <span class="text-title">{{$request->user_name}}</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Giá bán:</span>
-                        <span class="text-title">{{$product->price}}</span>
+                        <span class="text-title">{{$request->price}}</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Chiết khấu:</span>
-                        <span class="text-title" id="discount" data-discount="{{$product->discount}}">{{$product->discount}}%</span>
+                        <span class="text-title" id="discount" data-discount="{{$request->discount}}">{{$request->discount}}%</span>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full">
                         <span class="text-title font-medium ">Số lượng bán:</span>
-                        <span class="text-title">{{$product->amount_product}}</span>
+                        <span class="text-title">{{$request->amount_product}}</span>
                     </div>
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="flex justify-start items-center gap-2 w-full">
 
-                        <select name="status" id="status" @if($product->status ==2 || $product->status ==3) disabled
+                        <select name="status" id="status" @if($request->status ==1 || $request->status ==2) disabled
                                 @endif
                                 class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
-                            <option value="0">Chưa xem</option>
                             <option
-                                value="2" {{$product->status ==2 || \Illuminate\Support\Facades\Session::get('error') ? 'selected' : ''}}>
+                                value="1" {{$request->status ==2 || \Illuminate\Support\Facades\Session::get('error') ? 'selected' : ''}}>
                                 Duyệt
                             </option>
-                            <option value="3" {{$product->status ==3 ? 'selected' : ''}}>Từ chối</option>
+                            <option value="2" {{$request->status ==2 ? 'selected' : ''}}>Từ chối</option>
                         </select>
                     </div>
                     <div id="vShop" class="w-full"
-                         @if($product->status ==1 || $product->status == 3) style="display: none" @endif>
+                         @if($request->status ==1 || $request->status == 2) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
                             <input type="text" min="" name="discount_vShop"
-                                   @if($product->status == 2) disabled @endif
-                                   value="{{$product->status == 2 ? $product->discount_vShop : ''}}"
+                                   @if($request->status == 1) disabled @endif
+                                   value="{{$request->status == 1 ? $request->discount_vshop : ''}}"
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
@@ -70,8 +69,8 @@
                             V-store</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
-                        @if($product->status == 3)
-                            <textarea name="note" placeholder="{{$product->note}}"
+                        @if($request->status == 2)
+                            <textarea name="note" placeholder="{{$request->note}}"
                                       class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"></textarea>
                         @endif
                     </div>
@@ -82,7 +81,8 @@
                     {{--                        class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
                     {{--                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
                     {{--                    </button>--}}
-                    @if($product->status == 1)
+
+                    @if($request->status == 0)
                         <button id="btnConfirm"
                                 class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                             Lưu thay đổi
@@ -97,12 +97,14 @@
 
 <script>
     document.querySelector('#status').addEventListener('change', (e) => {
-        if (e.target.value == 3) {
+        if (e.target.value == 2) {
             document.querySelector('#vShop').style.display = 'none'
             document.querySelector('#note').innerHTML = `  <textarea name="note" placeholder="Lý do từ chối"
                                class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>`
-        } else if (e.target.value == 2) {
+        } else if (e.target.value == 1) {
             document.querySelector('#vShop').style.display = 'block';
+            document.querySelector('#note').innerHTML = ``;
+
         } else {
             document.querySelector('#note').innerHTML = ``;
             document.querySelector('#vShop').style.display = 'none'

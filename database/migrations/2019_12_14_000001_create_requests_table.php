@@ -16,14 +16,15 @@ return new class extends Migration {
             $table->id();
             $table->integer('product_id');
             $table->double('discount');
-            $table->integer('role');
-            $table->integer('prepay')->nullable();
-            $table->integer('payment_on_delivery')->nullable();
+            $table->integer('role')->default(0);
+            $table->integer('prepay')->default(0);
+            $table->integer('payment_on_delivery')->default(0);
             $table->longText('images')->nullable();
             $table->integer('status')->default(0);
             $table->integer('user_id');
             $table->integer('vstore_id');
             $table->double('discount_vshop');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
