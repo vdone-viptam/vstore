@@ -9,326 +9,300 @@
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
-    <link href="https://fonts.cdnfonts.com/css/svn-gilroy" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<style>
+    body{
+        font-family: 'Nunito Sans';
+    }
+</style>
     @vite('resources/css/app.css')
 </head>
 <body>
-<div class="bg w-full relative h-auto md:h-[1090px]">
+<div class="bgncc w-full relative h-auto md:h-screen">
     <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-            <div class="w-[83px] h-[25px] md:hidden">
-                <a href="./"> <img src="{{asset('home/img/logomobile.png')}}" class="w-full" alt=""></a>
+            <div class="w-[120px] h-[25px] md:hidden">
+                <a href="./"> <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt=""></a>
             </div>
-            <div class="hidden md:block w-[162px] h-[32px]">
-                <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full" alt=""></a>
+            <div class="hidden md:block w-[234px] h-[59px]">
+                <a href="./"> <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt=""></a>
             </div>
 
-            <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
+            <a href="{{route('login_vstore')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px]  font-semibold text-[#FFF] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
         </div>
-        <div class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Phát triển thương hiệu của bạn"</h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang <strong class="text-[#1E90FF]">tin dùng V-Store.</strong></span>
+        <div class="flex flex-col justify-center w-full md:justify-start gap-14 md:max-w-[650px] text-center md:text-left">
+            <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp V-Done</h2>
+            <span class="text-[#FFF] max-w-[450px]">Đầu tư ngay trên nền tảng thương mại điện tử mang lại doanh thu khủng, quản lý dễ dàng, vận hành đơn giản, tiết kiệm thời gian. Cùng đăng ký ngay</span>
         </div>
-        <div class="max-w-[320px] mx-auto md:mx-0">
-            <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] px-[18px] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_ncc')}}">Đăng ký ngay</a></button>
+        <div class="max-w-[197px] mx-auto md:mx-0">
+            <button class="bg-[#FFF] text-center w-full rounded-[4px] text-[#00A8DB] px-[28px] md:px-0 py-4 font-semibold transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
         </div>
     </div>
 
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] mx-auto md:p-16 my-8 p-4">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] place-items-end mx-auto md:p-16 my-8 p-4">
     <div class="w-full h-full order-last md:order-first">
-        <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
+        <img src="{{asset('home/img/imgncc.png')}}" class="w-full" alt="">
     </div>
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-[16px] sm:text-4xl text-[#1D293F]">NHÀ CUNG CẤP <strong class="text-[#1E90FF]">V-STORE </strong> LÀ GÌ?</h2>
-        <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng V-Done. Tại V-Done, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
+        <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Nhà cung cấp là gì?</h2>
+        <span class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng V-Done. Tại V-Done, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
+        <a href="#" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z" fill="#04AADD"/>
+</svg>
+</a>
     </div>
 </div>
-<div class="banner flex justify-around items-start w-full md:max-w-[1440px] mx-auto  flex-wrap lg:flex-nowrap">
-    <div class="w-[312px]">
-        <div class="w-[311px] h-[316px]">
-            <img src="{{asset('home/img/ql1.png')}}" class="w-full" alt="">
+<div class="relative w-full h-full">
+   <div class="absolute top-[-30px] right-0 bannerncc z-[-1] -rotate-[5deg]">
+
+   </div>
+   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full md:max-w-[1440px] mx-auto place-items-center p-4">
+        <div class="flex flex-col gap-6 max-w-[485px]">
+            <h2 class="text-[#034D82] font-bold text-2xl md:text-4xl tracking-[0.3px] text-center">Quy trình trở thành nhà cung cấp</h2>
+            <span class="font-semibold tracking-[0.3px] text-[#90A3B4]">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
+            <ul class="step">
+                <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div> Bước 1: Tạo tài khoản <span class="text-sm text-[#90A3B4] font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn</span></a></li>
+                <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div>Bước 2: Đưa sản phẩm lên V-Store<span class="text-sm text-[#90A3B4] font-semibold">Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn</span></a></li>
+                <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div>Bước 3: Quản lý bán hàng <span class="text-sm text-[#90A3B4] font-semibold">Quản lý đơn hàng trên hệ thống và đưa sản phẩm tới người tiêu dùng</span></a></li>
+            </ul>
         </div>
-    </div>
-    <div class="w-[256px] md:mt-14">
-        <div class="w-[255px] h-[255px]">
-            <img src="{{asset('home/img/ql2.png')}}" class="w-full" alt="">
+        <div class="order-first md:order-last">
+        <img src="{{asset('home/img/bncom.png')}}" class="w-full" alt="">
         </div>
-    </div>
-    <div class="w-[300px]">
-        <div class="w-[299px] h-[255px]">
-            <img src="{{asset('home/img/ql3.png')}}" class="w-full" alt="">
-        </div>
-    </div>
+   </div>
 </div>
-<div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Quy trình trở thành Nhà cung cấp </h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">Quy trình đăng kí Nhà cung cấp đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
-    <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
-        <img src="{{asset('home/img/circle.png')}}" class="w-full" alt="">
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-16  w-full md:max-w-[1440px] mx-auto md:p-16 my-8 p-4">
+    <div class="w-full h-full grid grid-cols-2 md:grid-cols-3 gap-x-[4px] md:gap-x-[23px] gap-y-[10px]  col-span-8">
+       <div class="text-center boxli w-full p-3 mx-auto">
+            <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                </div>
+            </div>
+            <span class="text-sm font-semibold text-[#034D82] text-center">
+            Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm.
+            </span>
+       </div>
+       <div class="text-center boxli w-full p-3 mx-auto">
+       <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                </div>
+            </div>
+            <span class="text-sm font-semibold text-[#034D82] text-center">
+            Được cung cấp website quản trị riêng cho tính năng quản trị sản phẩm, quản lý bán hàng.
+            </span>
+       </div>
+       <div class="text-center boxli w-full p-3 mx-auto">
+       <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                </div>
+            </div>
+            <span class="text-sm font-semibold text-[#034D82] text-center">
+            Được chủ động đàm phán, điều chỉnh mức giá, chiết khấu sản phẩm.
+            </span>
+       </div>
+       <div class="text-center boxli w-full p-3 mx-auto">
+       <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                </div>
+            </div>
+            <span class="text-sm font-semibold text-[#034D82] text-center">
+            Được hưởng chiết khấu, lợi nhuận trên từng sản phẩm.
+            </span>
+       </div>
+       <div class="text-center boxli w-full p-3 mx-auto">
+       <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                </div>
+            </div>
+            <span class="text-sm font-semibold text-[#034D82] text-center">
+            Được V-Done hỗ trợ kết nối tới các V-Shop.
+            </span>
+       </div>
+       <div class="text-center boxli w-full p-3 mx-auto">
+       <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                </div>
+            </div>
+            <span class="text-sm font-semibold text-[#034D82] text-center">
+            Công nghệ hoàn toàn mới
+            </span>
+       </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-10">
-        <div class="flex flex-col w-full relative max-w-[190px] md:max-w-[260px]">
-            <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/img/b1.png')}}" class="w-full" alt="">
-            </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Tạo tài khoản</h3>
-            <span class="text-[#7C8087]">
-                    Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn
-                </span>
-            <svg width="199" height="176" class="absolute top-[35px] right-[-110px] rotate-[30deg] md:hidden" viewBox="0 0 199 176" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.9761 50.2162C23.9761 50.2162 106.668 41.4523 168.046 123.883" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M164.662 127.879L164.548 125.875L170.013 125.838L169.691 120.171L171.623 120.157L172.002 126.827C172.033 127.38 171.626 127.831 171.093 127.835L164.662 127.879Z" fill="#8C97AC"/>
-            </svg>
-
-            <svg width="224" class="absolute top-[5px] right-[-95px] hidden md:block" height="89" viewBox="0 0 224 89" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 2C2 2 73.0845 93.3555 214.488 81.2422" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M216.984 89L215 87.1718L220.613 82L215 76.8282L216.984 75L223.589 81.0859C224.137 81.5908 224.137 82.4092 223.589 82.9141L216.984 89Z" fill="#8C97AC"/>
-            </svg>
-
-        </div>
-        <div class="flex flex-col w-full items-end md:items-start md:mt-[100px] md:max-w-[260px] relative">
-            <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/img/b2.png')}}" class="w-full" alt="">
-            </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl whitespace-nowrap">Đưa sản phẩm lên V-Store</h3>
-            <span class="text-[#7C8087] text-right md:text-left">
-            Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn
-                </span>
-            <svg width="160" height="119" class="absolute bottom-[-125px] right-[20px] md:hidden" viewBox="0 0 160 119" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M134.072 2C134.072 2 118.032 78.1465 29.6856 111.152" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.2847 116.123L30.9425 114.439L26.0699 112.882L27.9309 108.117L26.2084 107.567L24.0185 113.174C23.8368 113.639 24.0751 114.139 24.5508 114.291L30.2847 116.123Z" fill="#8C97AC"/>
-            </svg>
-
-
-            <svg width="252" height="198" class="absolute top-[-150px] right-[-95px] hidden md:block" viewBox="0 0 252 198" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.6252 70.7864C11.6252 70.7864 122.254 36.7247 231.137 127.753" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M227.704 133.904L226.945 131.315L234.42 129.773L232.273 122.449L234.915 121.904L237.442 130.522C237.652 131.237 237.23 131.939 236.5 132.089L227.704 133.904Z" fill="#8C97AC"/>
-            </svg>
-
-        </div>
-        <div class="flex flex-col w-full md:mt-[200px]max-w-[190px] md:max-w-[260px]">
-            <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/img/b3.png')}}" class="w-full" alt="">
-            </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Quản lý bán hàng</h3>
-            <span class="text-[#7C8087]">
-            Quản lý đơn hàng trên hệ thống và đưa sản phẩm tới người tiêu dùng
-                </span>
-        </div>
-    </div>
-</div>
-<div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center ">Lợi ích khi trở thành Nhà cung cấp</h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Khi trở thành “Nhà cung cấp”  bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ trên cổng V-Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiệp</span>
-
-</div>
-<div class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
-    <div class="flex flex-col justify-start items-center md:items-start gap-8 order-last xl:order-first">
-        <div class="flex flex-col gap-2 md:whitespace-nowrap">
-            <div class="flex justify-center items-start gap-2 ">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-
-                <span class=" text-[#4F4F4F] font-medium ">Hoàn toàn ủy quyền cho 1000+ doanh nghiệp, dễ dàng xác minh nguồn gốc sản phẩm. </span>
-            </div>
-
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Công nghệ hoàn toàn mới. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được cung cấp website quản trị riêng cho tính năng kiểm duyệt, quản trị sản phẩm.  </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được V-Done hỗ trợ kết nối tới các nhà cung cấp. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được đăng ký phụ trách theo tỉnh hoặc quốc gia. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được hưởng chiết khấu, lợi nhuận trên từng sản phẩm. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được chủ động đàm phán, điều chỉnh mức giá, chiết khấu sản phẩm.  </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-                <span class="text-[#4F4F4F] font-medium">Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm. </span>
-            </div>
-
-        </div>
-
-        <a href="{{route('register_ncc')}}" class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng ký thành viên</a>
-    </div>
-    <div class="order-first xl:order-last">
-        <img src="{{asset('home/img/bnn.png')}}" class="w-full" alt="">
-    </div>
-
-</div>
-<div class="bnbot">
-    <div class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000+ Nhà cung cấp thành công</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt1.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF  </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt2.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt3.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt4.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt5.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF </span>
-            </div>
-        </div>
+    <div class="flex flex-col gap-6 text-center md:text-left col-span-4">
+        <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Lợi ích khi trở thành Nhà cung cấp</h2>
+        <span class=" text-[#90A3B4] tracking-[0.3px] ">Khi trở thành “Nhà cung cấp” bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ trên cổng V-Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiêp.</span>
+        <a href="#" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z" fill="#04AADD"/>
+</svg>
+</a>
     </div>
 </div>
 
-<!-- <div class="flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto py-16 xl:px-20 px-[20px]">
-    <h2 class="text-2xl font-bold text-[#4F4F4F] uppercase">NHỮNG CÂU HỎI ĐẶT RA CHO V-STORE </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        <div class="w-full h-full">
-            <img src="./img/quest.png" class="w-full" alt="">
+
+<div class="bg-[#D4F0FF]">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
+        <div class="flex flex-col gap-6">
+            <h2 class="text-[#034D82] font-bold text-4xl">Nhà cung cấp nói gì khi hợp tác với V-Store</h2>
+            <span class="text-[#90A3B4]">V-Store đang hợp tác với hơn 1000 nhà cung cấp ở đa dạng ngành hàng. Phối hợp cung ứng hàng hoá mang lại doanh thu vượt trội so với các nền tảng thương mại điện tử thông thường.</span>
         </div>
-        <ul class="flex flex-col gap-2 w-full">
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">V-Store vận hành như thế nào? <div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
-                <div class="content py-2 ml-8">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Est modi doloremque quis quo ipsa voluptas, neque odit architecto tenetur ad repellendus nobis fuga sit unde obcaecati! Ex consequuntur nesciunt eaque!
+        <div class="slider">
+            <section>
+                <div class="flex relative flex-col gap-6 max-w-[442px] mx-auto">
+                <svg width="122" height="18" viewBox="0 0 122 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.09375 1.5625L6.0625 5.71875L1.46875 6.375C0.65625 6.5 0.34375 7.5 0.9375 8.09375L4.21875 11.3125L3.4375 15.8438C3.3125 16.6562 4.1875 17.2812 4.90625 16.9062L9 14.75L13.0625 16.9062C13.7812 17.2812 14.6562 16.6562 14.5312 15.8438L13.75 11.3125L17.0312 8.09375C17.625 7.5 17.3125 6.5 16.5 6.375L11.9375 5.71875L9.875 1.5625C9.53125 0.84375 8.46875 0.8125 8.09375 1.5625Z" fill="#FAAD13"/>
+                <path d="M34.0938 1.5625L32.0625 5.71875L27.4688 6.375C26.6562 6.5 26.3438 7.5 26.9375 8.09375L30.2188 11.3125L29.4375 15.8438C29.3125 16.6562 30.1875 17.2812 30.9062 16.9062L35 14.75L39.0625 16.9062C39.7812 17.2812 40.6562 16.6562 40.5312 15.8438L39.75 11.3125L43.0312 8.09375C43.625 7.5 43.3125 6.5 42.5 6.375L37.9375 5.71875L35.875 1.5625C35.5312 0.84375 34.4688 0.8125 34.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M60.0938 1.5625L58.0625 5.71875L53.4688 6.375C52.6562 6.5 52.3438 7.5 52.9375 8.09375L56.2188 11.3125L55.4375 15.8438C55.3125 16.6562 56.1875 17.2812 56.9062 16.9062L61 14.75L65.0625 16.9062C65.7812 17.2812 66.6562 16.6562 66.5312 15.8438L65.75 11.3125L69.0312 8.09375C69.625 7.5 69.3125 6.5 68.5 6.375L63.9375 5.71875L61.875 1.5625C61.5312 0.84375 60.4688 0.8125 60.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
+                </svg>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-[57px]">
+                        <div class="w-[56px] h-[56px] rounded-full">
+                        <img src="{{asset('home/img/avtcm.png')}}" class="w-full rounded-full" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-xl text-[#034D82]">Minh Nguyễn</h2>
+                        <span class="text-[#90A3B4]">Giám đốc Cty ABC Việt Nam</span>
+                    </div>
                 </div>
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Làm sao để trở thành thành viên của V-Store <div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
+                <div class="absolute top-[-70px] left-[-55px] text-[130px] text-[#034D82]">
+                    "
+                </div>
+                </div>
 
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Thành viên của V-Store sẽ được hưởng những lợi ích gì? <div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
+            </section>
+            <section>
+                <div class="flex relative flex-col gap-6 max-w-[442px] mx-auto">
+                <svg width="122" height="18" viewBox="0 0 122 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.09375 1.5625L6.0625 5.71875L1.46875 6.375C0.65625 6.5 0.34375 7.5 0.9375 8.09375L4.21875 11.3125L3.4375 15.8438C3.3125 16.6562 4.1875 17.2812 4.90625 16.9062L9 14.75L13.0625 16.9062C13.7812 17.2812 14.6562 16.6562 14.5312 15.8438L13.75 11.3125L17.0312 8.09375C17.625 7.5 17.3125 6.5 16.5 6.375L11.9375 5.71875L9.875 1.5625C9.53125 0.84375 8.46875 0.8125 8.09375 1.5625Z" fill="#FAAD13"/>
+                <path d="M34.0938 1.5625L32.0625 5.71875L27.4688 6.375C26.6562 6.5 26.3438 7.5 26.9375 8.09375L30.2188 11.3125L29.4375 15.8438C29.3125 16.6562 30.1875 17.2812 30.9062 16.9062L35 14.75L39.0625 16.9062C39.7812 17.2812 40.6562 16.6562 40.5312 15.8438L39.75 11.3125L43.0312 8.09375C43.625 7.5 43.3125 6.5 42.5 6.375L37.9375 5.71875L35.875 1.5625C35.5312 0.84375 34.4688 0.8125 34.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M60.0938 1.5625L58.0625 5.71875L53.4688 6.375C52.6562 6.5 52.3438 7.5 52.9375 8.09375L56.2188 11.3125L55.4375 15.8438C55.3125 16.6562 56.1875 17.2812 56.9062 16.9062L61 14.75L65.0625 16.9062C65.7812 17.2812 66.6562 16.6562 66.5312 15.8438L65.75 11.3125L69.0312 8.09375C69.625 7.5 69.3125 6.5 68.5 6.375L63.9375 5.71875L61.875 1.5625C61.5312 0.84375 60.4688 0.8125 60.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
+                </svg>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-[57px]">
+                        <div class="w-[56px] h-[56px] rounded-full">
+                        <img src="{{asset('home/img/avtcm.png')}}" class="w-full rounded-full" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-xl text-[#034D82]">Minh Nguyễn</h2>
+                        <span class="text-[#90A3B4]">Giám đốc Cty ABC Việt Nam</span>
+                    </div>
+                </div>
+                <div class="absolute top-[-70px] left-[-55px] text-[130px] text-[#034D82]">
+                    "
+                </div>
+                </div>
 
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Nhà phát triển V-Store?<div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
+            </section>
+            <section>
+                <div class="flex relative flex-col gap-6 max-w-[442px] mx-auto">
+                <svg width="122" height="18" viewBox="0 0 122 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.09375 1.5625L6.0625 5.71875L1.46875 6.375C0.65625 6.5 0.34375 7.5 0.9375 8.09375L4.21875 11.3125L3.4375 15.8438C3.3125 16.6562 4.1875 17.2812 4.90625 16.9062L9 14.75L13.0625 16.9062C13.7812 17.2812 14.6562 16.6562 14.5312 15.8438L13.75 11.3125L17.0312 8.09375C17.625 7.5 17.3125 6.5 16.5 6.375L11.9375 5.71875L9.875 1.5625C9.53125 0.84375 8.46875 0.8125 8.09375 1.5625Z" fill="#FAAD13"/>
+                <path d="M34.0938 1.5625L32.0625 5.71875L27.4688 6.375C26.6562 6.5 26.3438 7.5 26.9375 8.09375L30.2188 11.3125L29.4375 15.8438C29.3125 16.6562 30.1875 17.2812 30.9062 16.9062L35 14.75L39.0625 16.9062C39.7812 17.2812 40.6562 16.6562 40.5312 15.8438L39.75 11.3125L43.0312 8.09375C43.625 7.5 43.3125 6.5 42.5 6.375L37.9375 5.71875L35.875 1.5625C35.5312 0.84375 34.4688 0.8125 34.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M60.0938 1.5625L58.0625 5.71875L53.4688 6.375C52.6562 6.5 52.3438 7.5 52.9375 8.09375L56.2188 11.3125L55.4375 15.8438C55.3125 16.6562 56.1875 17.2812 56.9062 16.9062L61 14.75L65.0625 16.9062C65.7812 17.2812 66.6562 16.6562 66.5312 15.8438L65.75 11.3125L69.0312 8.09375C69.625 7.5 69.3125 6.5 68.5 6.375L63.9375 5.71875L61.875 1.5625C61.5312 0.84375 60.4688 0.8125 60.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
+                </svg>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-[57px]">
+                        <div class="w-[56px] h-[56px] rounded-full">
+                        <img src="{{asset('home/img/avtcm.png')}}" class="w-full rounded-full" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-xl text-[#034D82]">Minh Nguyễn</h2>
+                        <span class="text-[#90A3B4]">Giám đốc Cty ABC Việt Nam</span>
+                    </div>
+                </div>
+                <div class="absolute top-[-70px] left-[-55px] text-[130px] text-[#034D82]">
+                    "
+                </div>
+                </div>
 
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Đối tác của V-Store?<div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
+            </section>
+            <section>
+                <div class="flex relative flex-col gap-6 max-w-[442px] mx-auto">
+                <svg width="122" height="18" viewBox="0 0 122 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.09375 1.5625L6.0625 5.71875L1.46875 6.375C0.65625 6.5 0.34375 7.5 0.9375 8.09375L4.21875 11.3125L3.4375 15.8438C3.3125 16.6562 4.1875 17.2812 4.90625 16.9062L9 14.75L13.0625 16.9062C13.7812 17.2812 14.6562 16.6562 14.5312 15.8438L13.75 11.3125L17.0312 8.09375C17.625 7.5 17.3125 6.5 16.5 6.375L11.9375 5.71875L9.875 1.5625C9.53125 0.84375 8.46875 0.8125 8.09375 1.5625Z" fill="#FAAD13"/>
+                <path d="M34.0938 1.5625L32.0625 5.71875L27.4688 6.375C26.6562 6.5 26.3438 7.5 26.9375 8.09375L30.2188 11.3125L29.4375 15.8438C29.3125 16.6562 30.1875 17.2812 30.9062 16.9062L35 14.75L39.0625 16.9062C39.7812 17.2812 40.6562 16.6562 40.5312 15.8438L39.75 11.3125L43.0312 8.09375C43.625 7.5 43.3125 6.5 42.5 6.375L37.9375 5.71875L35.875 1.5625C35.5312 0.84375 34.4688 0.8125 34.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M60.0938 1.5625L58.0625 5.71875L53.4688 6.375C52.6562 6.5 52.3438 7.5 52.9375 8.09375L56.2188 11.3125L55.4375 15.8438C55.3125 16.6562 56.1875 17.2812 56.9062 16.9062L61 14.75L65.0625 16.9062C65.7812 17.2812 66.6562 16.6562 66.5312 15.8438L65.75 11.3125L69.0312 8.09375C69.625 7.5 69.3125 6.5 68.5 6.375L63.9375 5.71875L61.875 1.5625C61.5312 0.84375 60.4688 0.8125 60.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
+                </svg>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-[57px]">
+                        <div class="w-[56px] h-[56px] rounded-full">
+                        <img src="{{asset('home/img/avtcm.png')}}" class="w-full rounded-full" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-xl text-[#034D82]">Minh Nguyễn</h2>
+                        <span class="text-[#90A3B4]">Giám đốc Cty ABC Việt Nam</span>
+                    </div>
+                </div>
+                <div class="absolute top-[-70px] left-[-55px] text-[130px] text-[#034D82]">
+                    "
+                </div>
+                </div>
 
-            </li>
-        </ul>
+            </section>
+            <section>
+                <div class="flex relative flex-col gap-6 max-w-[442px] mx-auto">
+                <svg width="122" height="18" viewBox="0 0 122 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.09375 1.5625L6.0625 5.71875L1.46875 6.375C0.65625 6.5 0.34375 7.5 0.9375 8.09375L4.21875 11.3125L3.4375 15.8438C3.3125 16.6562 4.1875 17.2812 4.90625 16.9062L9 14.75L13.0625 16.9062C13.7812 17.2812 14.6562 16.6562 14.5312 15.8438L13.75 11.3125L17.0312 8.09375C17.625 7.5 17.3125 6.5 16.5 6.375L11.9375 5.71875L9.875 1.5625C9.53125 0.84375 8.46875 0.8125 8.09375 1.5625Z" fill="#FAAD13"/>
+                <path d="M34.0938 1.5625L32.0625 5.71875L27.4688 6.375C26.6562 6.5 26.3438 7.5 26.9375 8.09375L30.2188 11.3125L29.4375 15.8438C29.3125 16.6562 30.1875 17.2812 30.9062 16.9062L35 14.75L39.0625 16.9062C39.7812 17.2812 40.6562 16.6562 40.5312 15.8438L39.75 11.3125L43.0312 8.09375C43.625 7.5 43.3125 6.5 42.5 6.375L37.9375 5.71875L35.875 1.5625C35.5312 0.84375 34.4688 0.8125 34.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M60.0938 1.5625L58.0625 5.71875L53.4688 6.375C52.6562 6.5 52.3438 7.5 52.9375 8.09375L56.2188 11.3125L55.4375 15.8438C55.3125 16.6562 56.1875 17.2812 56.9062 16.9062L61 14.75L65.0625 16.9062C65.7812 17.2812 66.6562 16.6562 66.5312 15.8438L65.75 11.3125L69.0312 8.09375C69.625 7.5 69.3125 6.5 68.5 6.375L63.9375 5.71875L61.875 1.5625C61.5312 0.84375 60.4688 0.8125 60.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
+                <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
+                </svg>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-[57px]">
+                        <div class="w-[56px] h-[56px] rounded-full">
+                        <img src="{{asset('home/img/avtcm.png')}}" class="w-full rounded-full" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-xl text-[#034D82]">Minh Nguyễn</h2>
+                        <span class="text-[#90A3B4]">Giám đốc Cty ABC Việt Nam</span>
+                    </div>
+                </div>
+                <div class="absolute top-[-70px] left-[-55px] text-[130px] text-[#034D82]">
+                    "
+                </div>
+                </div>
+
+            </section>
+
+        </div>
     </div>
-</div> -->
+</div>
+
+
 <footer class="bg-[#1E90FF]">
     <div class="grid grid-cols-1 lg:grid-cols-2  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
         <ul class="flex items-center gap-14">
@@ -354,7 +328,16 @@
         <span class="uppercase text-xs text-[#272D4E]">COPYRIGHT V-Store 2023 - TERMS & CONDITIONS  PRIVACY POLICY</span>
     </div>
 </footer>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+<script>
+    $('.slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        // autoplay: true,
+        // autoplaySpeed: 2000,
+        arrows: false,
+        dots: true,
+        });
+</script>
 </body>
 </html>

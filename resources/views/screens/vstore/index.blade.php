@@ -9,7 +9,14 @@
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
 {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
-    <link href="https://fonts.cdnfonts.com/css/svn-gilroy" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -235,7 +242,7 @@
 </div>
 <div class="bnbot">
     <div class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000+ V-Store thành công</h2>
+        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000+ V-Store nổi bật</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
@@ -247,13 +254,13 @@
                 <div class="w-[80px] h-[80px] rounded-full">
                     <img src="{{asset('home/img/avt1.png')}}" class="w-full rounded-full" alt="">
                 </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF  </span>
+                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần Dược liệu  </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
                     <img src="{{asset('home/img/avt2.png')}}" class="w-full rounded-full" alt="">
                 </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF </span>
+                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần Dược liệu </span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
@@ -271,7 +278,7 @@
                 <div class="w-[80px] h-[80px] rounded-full">
                     <img src="{{asset('home/img/avt5.png')}}" class="w-full rounded-full" alt="">
                 </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần và phát triển AHF </span>
+                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần Dược liệu </span>
             </div>
         </div>
     </div>
