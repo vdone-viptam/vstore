@@ -11,7 +11,7 @@
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
         <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7 md:pt-7">
             <div class="hidden cursor-pointer md:hidden lg:flex  justify-end pb-[60px] mb-4 bann">
-                
+
                 <!-- <div class="help relative flex gap-3 justify-end items-center pr-4">
                     <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
                         <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -253,8 +253,8 @@
                                  src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">
                             </div>
                             </div>
-                            
-                           
+
+
 
                             <div class="flex flex-col gap-[3px] justify-center">
                                 <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
@@ -267,7 +267,7 @@
                                     fill="black"/>
                             </svg>
                             </div>
-                            
+
                             <ul class="sub-nav-user">
                                 <li><a href="{{route('screens.manufacture.account.profile')}}"
                                        class="font-medium flex justify-start items-center gap-2">
