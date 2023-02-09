@@ -111,6 +111,7 @@
                                     <option
                                         value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
                                 @endforeach
+                                <option value="0" >khác</option>
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>
@@ -310,7 +311,7 @@
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Kiểu đóng gói</span>
-                            <select name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
+                            <select style="padding: 11px 12px" name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
                                     class=" outline-none w-full py-[11px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Lựa chọn kiểu đóng gói</option>
                                 <option value="1" {{1 == old('packing_type') ? 'selected' : ''}}>Túi</option>

@@ -109,6 +109,15 @@ class BillController extends Controller
 
         }
     }
+    /**
+     * chi tiết hóa đơn
+     *
+     * API này sẽ trả về chi tiết 1 hóa đơn
+     *
+     * @param Request $request
+     * @param $id id của hóa đơn
+     * @return JsonResponse
+     */
     public function detail($id){
         $bill = Bill::where('id',$id)->first();
         if ($bill){
@@ -116,7 +125,6 @@ class BillController extends Controller
                 ->select('products.name','products.publish_id','products.images','bill_product.price','bill_product.quantity')->get();
             $bill->product=$bill_product;
         }
-
         return response()->json([
             'status_code' => 200,
             'message' => 'successfully retrieved information',

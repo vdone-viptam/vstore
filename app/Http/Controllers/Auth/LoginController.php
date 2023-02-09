@@ -25,6 +25,7 @@ class LoginController extends Controller
 
     public function getFormRegisterNCC()
     {
+
         return view('auth.NCC.register_ncc');
     }
 
@@ -38,6 +39,9 @@ class LoginController extends Controller
 
     public function getFormLoginNCC()
     {
+        if (Auth::user()&& Auth::user()->role_id ==2){
+            return redirect()->route('screens.manufacture.dashboard.index');
+        }
         return view('auth.NCC.login_ncc');
     }
 
