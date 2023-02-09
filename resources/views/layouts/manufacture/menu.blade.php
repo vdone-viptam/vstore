@@ -149,6 +149,8 @@
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.index')}}">Quản lý kho
                         hàng</a></li>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.account.address')}}">Danh sách địa chỉ
+                        nhận hàng</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm sản
                         phẩm vào kho</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý xuất nhập

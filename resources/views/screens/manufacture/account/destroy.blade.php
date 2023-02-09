@@ -18,10 +18,10 @@
                 <h2 class="text-title font-medium uppercase"> Bạn có chắc chắn muốn thực hiện không?</h2>
             </div>
             <div class="flex justify-end items-center gap-4 ">
-                <button
+                <a
                     class=" cursor-pointer outline-none bg-[#FFF] transition-all duration-200 rounded-sm py-2 px-3 text-center text-title hover:opacity-70 border-[1px] border-secondary"
                     onclick="$('.modal-dell').toggleClass('show-modal')">Đóng lại
-                </button>
+                </a>
 
                     @csrf
                     <button

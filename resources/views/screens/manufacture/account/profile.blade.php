@@ -180,7 +180,7 @@
                         </a>
                         <ul class="tab-sub-user">
                             <li class="active"><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>
-                            <li class=""><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho hàng</a>
+{{--                            <li class=""><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho hàng</a>--}}
                             <li><a href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a></li>
                         </ul>
                     </li>

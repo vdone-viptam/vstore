@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('page_title')</title>
+    <link rel="icon" type="image/x-icon"  href="{{asset('asset/images/Frame 1321315296.ico')}}">
+
     @include('layouts.css')
     @yield('custom_css')
     @vite('resources/css/app.css')
@@ -21,8 +23,8 @@
 </div>
 @yield('modal')
 <div class="grid grid-cols-12">
-    @include('layouts.admin.menu')
-    <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
+    <div class="md:col-span-3 2xl:col-span-2 h-[100vh] bg-[#F2F8FF] md:block hidden">
+        @include('layouts.admin.menu')
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.admin.header')

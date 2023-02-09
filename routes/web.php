@@ -34,7 +34,7 @@ Route::group(['domain' => config('domain.admin')], function () {
 });
 //role_id = 2 Quyền nhà cung cấp
 Route::group(['domain' => config('domain.ncc')], function () {
-    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpageNCC'])->name('landingpagencc');
+    Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageNCC'])->name('landingpagencc');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginNCC'])->name('login_ncc');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterNCC'])->name('register_ncc');
 
@@ -45,7 +45,7 @@ Route::group(['domain' => config('domain.ncc')], function () {
 });
 //role_id = 3 Quyền vstore
 Route::group(['domain' => config('domain.vstore')], function () {
-    Route::get('/',[\App\Http\Controllers\LandingpageController::class,'ladingpage'])->name('landingpagevstore');
+    Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpage'])->name('landingpagevstore');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
     Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
@@ -108,6 +108,15 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
 
         Route::get('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'addProduct'])->name('screens.manufacture.warehouse.addProduct');
         Route::post('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'postAddProduct']);
+
+// Quản lý kho hàng
+        Route::get('/list', [\App\Http\Controllers\Manufacture\AccountController::class, 'address'])->name('screens.manufacture.account.address');
+        Route::post('/save-create', [\App\Http\Controllers\Manufacture\AccountController::class, 'saveAddress'])->name('screens.manufacture.account.saveCreate');
+        Route::get('/edit', [\App\Http\Controllers\Manufacture\AccountController::class, 'editAddress'])->name('screens.manufacture.account.edit');
+        Route::post('/edit/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'updateAddress'])->name('screens.manufacture.account.update');
+//        Route::get('/destroy', [\App\Http\Controllers\Manufacture\AccountController::class, 'getdestroyAddress'])->name('screens.manufacture.account.destroy');
+//        Route::post('/destroy/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'destroyAddress'])->name('screens.manufacture.account.delete');
+
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\PartnerController::class, 'index'])->name('screens.manufacture.partner.index');
@@ -130,15 +139,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/', [\App\Http\Controllers\Manufacture\AccountController::class, 'profile'])->name('screens.manufacture.account.profile');
         Route::post('/edit/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'editProfile'])->name('screens.manufacture.account.editPro');
         Route::post('/upload/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'uploadImage'])->name('screens.manufacture.account.upload');
-        Route::prefix('address')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Manufacture\AccountController::class, 'address'])->name('screens.manufacture.account.address');
-            Route::post('/save-create', [\App\Http\Controllers\Manufacture\AccountController::class, 'saveAddress'])->name('screens.manufacture.account.saveCreate');
-            Route::get('/edit', [\App\Http\Controllers\Manufacture\AccountController::class, 'editAddress'])->name('screens.manufacture.account.edit');
-            Route::post('/edit/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'updateAddress'])->name('screens.manufacture.account.update');
-            Route::get('/destroy', [\App\Http\Controllers\Manufacture\AccountController::class, 'getdestroyAddress'])->name('screens.manufacture.account.destroy');
-            Route::post('/destroy/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'destroyAddress'])->name('screens.manufacture.account.delete');
 
-        });
         Route::get('/change-password', [\App\Http\Controllers\Manufacture\AccountController::class, 'changePassword'])->name('screens.manufacture.account.changePassword');
         Route::post('/change-password', [\App\Http\Controllers\Manufacture\AccountController::class, 'saveChangePassword'])->name('screens.manufacture.account.saveChangePassword');
 
