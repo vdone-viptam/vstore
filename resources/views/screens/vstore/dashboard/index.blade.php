@@ -119,8 +119,8 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
-                                        <p class="text-[#AEAEAE] text-sm font-normal">Tổng số đơn hàng</p>
-                                        <p class="text-black text-base font-bold">Tăng</p>
+                                        <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng giao thành công</p>
+                                        <p class="text-black text-base font-bold">85</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -154,7 +154,7 @@
                                                 fill="#4062FF"/>
                                         </svg>
                                         <span
-                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu thuần tháng này</span>
+                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span class="date">1 tuần</span></span>
                                     </div>
                                     <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -166,11 +166,11 @@
                                 </div>
                                 <div class="relative ">
                                     <select name=""
-                                            class="outline-none appearance-none rounded-sm border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
-                                        <option value="0">Hôm qua</option>
-                                        <option value="1">7 ngày qua</option>
-                                        <option value="2" selected>Tháng này</option>
-                                        <option value="3">Tháng trước</option>
+                                            class="slect-date outline-none appearance-none rounded-sm border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
+                                        <option value="0" selected>1 tuần</option>
+                                        <option value="1">1 Tháng</option>
+                                        <option value="2" >1 năm</option>
+                                        <option value="3">3 năm</option>
                                     </select>
                                     <svg class="absolute top-2.5 right-2.5 pointer-events-none" width="16" height="16"
                                          viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -404,6 +404,9 @@
                 }
             });
         })
-
+        $('.slect-date').change(function (){
+            $value= $('.slect-date option:selected').text();
+            $('.date').html($value);
+        });
     </script>
 @endsection

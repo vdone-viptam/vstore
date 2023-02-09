@@ -62,7 +62,7 @@
                                 </svg>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Tổng quan</p>
+                                <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tổng quan</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý sản
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý sản
                                 phẩm</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -136,7 +136,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Kho hàng</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Kho hàng</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -177,7 +177,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý V-Store</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý V-Store</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -215,7 +215,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý đơn hàng</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý đơn hàng</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -252,7 +252,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Ví</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Ví</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
