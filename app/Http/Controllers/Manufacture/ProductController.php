@@ -28,10 +28,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $this->v['products'] = Product::select('id', 'publish_id', 'images', 'name', 'brand', 'category_id', 'price', 'status', 'vstore_id')
-            ->orderBy('id', 'desc')
-            ->where('user_id', Auth::id())
-            ->paginate(10);
+            ->orderBy('id', 'desc');
+        $limit = $request->limit ?? 10;
+        if ($request->condition && $request->condition != 0) {
 
+            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
+        }
+
+        $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
+            ->paginate($limit);
+        $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
     }
 
@@ -211,14 +217,18 @@ class ProductController extends Controller
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
         $limit = $request->limit ?? 10;
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.vstore_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
-            ->orderBy('requests.id', 'desc')
-            ->paginate($limit);
+            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name');
+        if ($request->condition && $request->condition != 0) {
 
+            $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
+        }
+
+        $this->v['requests'] = $this->v['requests']->orderBy('requests.id', 'desc')
+            ->paginate($limit);
+//        dd($this->v['requests']);
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.request', $this->v);
 
@@ -330,6 +340,16 @@ class ProductController extends Controller
             }
             ProductWarehouses::insert($dataInsert);
             DB::table('products')->where('id', $request->product_id)->update(['status' => 1]);
+            $userLogin = Auth::user();
+            $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+            $data = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => $userLogin->avatar ?? '',
+                'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
+                'created_at' => Carbon::now()->format('h:i A d / m / Y'),
+                'href' => route('screens.vstore.product.request',)
+            ];
+            $user->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Thêm mới yêu cầu đăng ký thành công');
 

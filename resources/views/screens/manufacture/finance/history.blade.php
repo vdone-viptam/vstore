@@ -1,5 +1,8 @@
 @extends('layouts.manufacture.main')
 
+
+@section('page_title','Lịch sử giao dịch')
+
 @section('modal')
     <div class="modal modal-bank">
         <div class="over-lay-modal" onclick="$('.modal-bank').toggleClass('show-modal')"></div>

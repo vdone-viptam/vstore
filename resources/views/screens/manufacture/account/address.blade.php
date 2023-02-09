@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-
+@section('page_title','Danh sách địa chỉ kho hàng')
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
         <div class="modal modal-success  flex justify-center items-center show-modal">

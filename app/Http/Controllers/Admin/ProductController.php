@@ -30,14 +30,19 @@ class ProductController extends Controller
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
+        $limit = $request->limit ?? 10;
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,price,requests.status,users.name as user_name,requests.created_at')
-            ->whereNotIn('requests.status', [2, 0])
-            ->orderBy('requests.id', 'desc')
-            ->paginate(10);
+            ->whereNotIn('requests.status', [2, 0]);
 
+        if ($request->condition && $request->condition != 0) {
+            $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
+        }
+        $this->v['requests'] = $this->v['requests']->orderBy('requests.id', 'desc')
+            ->paginate($limit);
+        $this->v['params'] = $request->all();
         return view('screens.admin.product.index', $this->v);
 
     }

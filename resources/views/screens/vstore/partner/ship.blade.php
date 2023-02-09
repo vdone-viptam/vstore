@@ -1,11 +1,11 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.vstore.main')
 
 @section('modal')
     <div id="modal5">
 
     </div>
 @endsection
-@section('page_title','Danh sách sản phẩm')
+@section('page_title','Danh sách đơn vị vận chuyển')
 
 @section('content')
 
@@ -16,8 +16,7 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.manufacture.product.index')}}" class="text-blueMain font-medium italic">Tất cả sản
-                phẩm</a>
+            <a href="{{route('screens.vstore.partner.index')}}" class="text-blueMain font-medium italic">Đối tác vận chuyển</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -88,111 +87,223 @@
                             </defs>
                         </svg>
 
-                        Tất cả sản phẩm
+                        Danh sách đối tác vận chuyển
                     </h2>
-                    <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-                        <a href="{{route('screens.manufacture.product.create')}}"
-                           class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_4_2870)">
-                                    <rect width="20" height="20" fill="white" fill-opacity="0.01"/>
-                                    <path
-                                        d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"
-                                        fill="white"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4_2870">
-                                        <rect width="20" height="20" fill="white"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <span>Thêm mới</span>
-                        </a>
 
-                    </div>
 
                 </div>
                 <div class="w-full overflow-scroll">
                     <table class="w-full dsth">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Hình ảnh</th>
                             <th>
                                 Tên sản phẩm
                             </th>
                             <th>
-                                Thương hiệu
+                                Mã hàng
                             </th>
                             <th>
-                                Ngành hàng
+                                Số lượng
                             </th>
                             <th>
                                 Giá bán
                             </th>
                             <th>
-                                V-Store
+                                Giá vốn
                             </th>
                             <th>
-                                Số lượng sản phẩm
+                                Trạng thái
                             </th>
                             <th>
-                                Số lượng đã bán
+                                Cập nhập
                             </th>
                             <th>
-
+                                Hoạt động
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($products) > 0)
-                            @foreach($products as $product)
-                                <tr>
-                                    <td>{{$product->publish_id}}</td>
-                                    <td>
-                                        <div class="w-[48px] h-[48px] rounded">
-                                            <img
-                                                src="{{asset(json_decode($product->images)[0]) ?? asset('asset/images/sp.png') }}"
-                                                alt="">
-                                        </div>
-                                    </td>
-                                    <td class="">
-
-                                        <span>{{$product->name}}</span>
-                                    </td>
-                                    <td>
-                                        {{\Illuminate\Support\Str::limit($product->brand,20,'...')}}
-                                    </td>
-                                    <td>
-                                        {{isset($prams['condition']) && $params['condition'] == 3 ? $product->cate_name : $product->category->name}}
-                                    </td>
-                                    <td>
-                                        {{$product->price}}
-                                    </td>
-                                    <td>
-                                        {{$product->vStore->name ?? '-'}}
-                                    </td>
-                                    <td>{{$product->amount_product ?? '-'}}</td>
-                                    <td>-</td>
-                                    <td>
-                                        <a href="#" data-id="{{$product->id}}"
-                                           class="more-details text-primary underline"> Chi tiết</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td></td>
-                            </tr>
-                        @endif
+                        <tr>
+                            <td class="flex justify-start items-center gap-2">
+                                <div class="w-[48px] h-[48px] rounded">
+                                    <img src="../../images/sp.png" alt="">
+                                </div>
+                                <span>Sữa tươi Vinamilk</span>
+                            </td>
+                            <td>
+                                893 GS1
+                            </td>
+                            <td>
+                                12
+                            </td>
+                            <td>
+                                30,000
+                            </td>
+                            <td>
+                                10,000
+                            </td>
+                            <td class="text-[#52C41A]">
+                                Đã duyệt
+                            </td>
+                            <td>
+                                1 tuần
+                            </td>
+                            <td>
+                                05/12/2022 - 15:30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flex justify-start items-center gap-2">
+                                <div class="w-[48px] h-[48px] rounded">
+                                    <img src="../../images/sp.png" alt="">
+                                </div>
+                                <span>Sữa tươi Vinamilk</span>
+                            </td>
+                            <td>
+                                893 GS1
+                            </td>
+                            <td>
+                                12
+                            </td>
+                            <td>
+                                30,000
+                            </td>
+                            <td>
+                                10,000
+                            </td>
+                            <td class="text-[#52C41A]">
+                                Đã duyệt
+                            </td>
+                            <td>
+                                1 tuần
+                            </td>
+                            <td>
+                                05/12/2022 - 15:30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flex justify-start items-center gap-2">
+                                <div class="w-[48px] h-[48px] rounded">
+                                    <img src="../../images/sp.png" alt="">
+                                </div>
+                                <span>Sữa tươi Vinamilk</span>
+                            </td>
+                            <td>
+                                893 GS1
+                            </td>
+                            <td>
+                                12
+                            </td>
+                            <td>
+                                30,000
+                            </td>
+                            <td>
+                                10,000
+                            </td>
+                            <td class="text-[#52C41A]">
+                                Đã duyệt
+                            </td>
+                            <td>
+                                1 tuần
+                            </td>
+                            <td>
+                                05/12/2022 - 15:30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flex justify-start items-center gap-2">
+                                <div class="w-[48px] h-[48px] rounded">
+                                    <img src="../../images/sp.png" alt="">
+                                </div>
+                                <span>Sữa tươi Vinamilk</span>
+                            </td>
+                            <td>
+                                893 GS1
+                            </td>
+                            <td>
+                                12
+                            </td>
+                            <td>
+                                30,000
+                            </td>
+                            <td>
+                                10,000
+                            </td>
+                            <td class="text-[#FAAD14]">
+                                Chờ duyệt
+                            </td>
+                            <td>
+                                1 tuần
+                            </td>
+                            <td>
+                                05/12/2022 - 15:30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flex justify-start items-center gap-2">
+                                <div class="w-[48px] h-[48px] rounded">
+                                    <img src="../../images/sp.png" alt="">
+                                </div>
+                                <span>Sữa tươi Vinamilk</span>
+                            </td>
+                            <td>
+                                893 GS1
+                            </td>
+                            <td>
+                                12
+                            </td>
+                            <td>
+                                30,000
+                            </td>
+                            <td>
+                                10,000
+                            </td>
+                            <td class="text-[#52C41A]">
+                                Đã duyệt
+                            </td>
+                            <td>
+                                1 tuần
+                            </td>
+                            <td>
+                                05/12/2022 - 15:30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flex justify-start items-center gap-2">
+                                <div class="w-[48px] h-[48px] rounded">
+                                    <img src="../../images/sp.png" alt="">
+                                </div>
+                                <span>Sữa tươi Vinamilk</span>
+                            </td>
+                            <td>
+                                893 GS1
+                            </td>
+                            <td>
+                                12
+                            </td>
+                            <td>
+                                30,000
+                            </td>
+                            <td>
+                                10,000
+                            </td>
+                            <td class="text-[#FF4D4F]">
+                                Thất bại
+                            </td>
+                            <td>
+                                1 tuần
+                            </td>
+                            <td>
+                                05/12/2022 - 15:30
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">{{$products->total()}}</strong></span>
-                    @include('layouts.custom.paginator', ['paginator' => $products])
+                    {{--                    <span class="text-sm text-title">Tổng: <strong--}}
+                    {{--                            class="font-bold">{{$products->total()}}</strong></span>--}}
+                    {{--                    @include('layouts.custom.paginator', ['paginator' => $products])--}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
@@ -222,7 +333,6 @@
     <script>
         const form = document.getElementById('form');
         const limit = document.getElementsByName('limit')[0];
-        const page = document.getElementById('page1');
         limit.addEventListener('change', (e) => {
             form.submit();
         });

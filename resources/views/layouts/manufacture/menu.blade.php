@@ -226,8 +226,7 @@
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn
                         tiền</a></li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng, hoàn
-                        tiền</a></li>
+
             </ul>
         </div>
         {{--        Tài chính--}}
@@ -247,7 +246,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý V-Store</p>
+                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Ví</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -262,8 +261,7 @@
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a>
                 </li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a>
-                </li>
+
             </ul>
         </div>
         {{--        log out--}}

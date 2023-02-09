@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
@@ -26,13 +27,15 @@ class ProductController extends Controller
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
         $limit = $request->limit ?? 10;
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
-            ->where('requests.vstore_id', Auth::id())
-            ->orderBy('requests.id', 'desc')
+            ->where('requests.vstore_id', Auth::id());
+        if ($request->condition && $request->condition != 0) {
+            $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
+        }
+        $this->v['requests'] = $this->v['requests']->orderBy('requests.id', 'desc')
             ->paginate($limit);
 
         $this->v['params'] = $request->all();
@@ -77,7 +80,7 @@ class ProductController extends Controller
             'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
             'message' => $message,
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-            'href' => route('screens.manufacture.product.request', ['condition' => 'sku_id', 'key_search' => $currentRequest->sku_id])
+            'href' => route('screens.manufacture.product.request')
         ];
         $user->notify(new AppNotification($data));
 
@@ -89,7 +92,7 @@ class ProductController extends Controller
                 'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $currentRequest->NCC->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.admin.product.index', ['condition' => 'sku_id', 'key_search' => $currentRequest->sku_id])
+                'href' => route('screens.admin.product.index')
             ];
 
             $user->notify(new AppNotification($data));

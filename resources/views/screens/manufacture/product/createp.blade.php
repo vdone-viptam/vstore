@@ -1,4 +1,5 @@
 @extends('layouts.manufacture.main')
+@section('page_title','Thêm mới sản phẩm')
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
@@ -15,8 +16,7 @@
                 </svg>
 
                 <div class="content pt-3 px-3 text-center pb-2 md:pb-12">
-                    <h2 class="text-title text-2xl font-medium">Yêu cầu thêm sản phẩm đã được gửi đến nhà cung cấp
-                        bạn đăng ký.</h2>
+                    <h2 class="text-title text-2xl font-medium">Thêm sản phẩm thành công</h2>
 
                 </div>
             </div>

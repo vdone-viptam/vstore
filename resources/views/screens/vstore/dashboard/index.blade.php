@@ -6,6 +6,7 @@
         }
     </style>
 @endsection
+@section('page_title','Dashboard')
 @section('content')
     <div
         class="grid grid-cols-1 lg:grid-cols-12 flex flex-col items-center lg:items-start gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
@@ -226,9 +227,9 @@
                             <ul class="sub-nav-notify">
                                 <div class="flex justify-between items-center w-full pb-3 px-3">
                                     <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                                    <a href="#"
-                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                                        cả</a>
+{{--                                    <a href="#"--}}
+{{--                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
+{{--                                        cả</a>--}}
                                 </div>
                                 @if(count(Auth::user()->unreadNotifications) > 0)
                                     @foreach (Auth::user()->unreadNotifications as $index =>$notification)

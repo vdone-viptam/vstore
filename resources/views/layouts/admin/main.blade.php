@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-done</title>
+    <title>@yield('page_title')</title>
     @include('layouts.css')
     @yield('custom_css')
     @vite('resources/css/app.css')
 </head>
 <style>
-    .btnGra{
-        background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%) ;
+    .btnGra {
+        background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%);
 
     }
 </style>

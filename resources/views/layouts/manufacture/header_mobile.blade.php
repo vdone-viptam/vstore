@@ -364,13 +364,13 @@
                     <ul class="sub-nav-notify">
                         <div class="flex justify-between items-center w-full pb-3 px-3">
                             <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                            <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                                cả</a>
+                            {{--                            <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
+                            {{--                                cả</a>--}}
                         </div>
                         @if(count(Auth::user()->unreadNotifications) > 0)
                             @foreach (Auth::user()->unreadNotifications as $index =>$notification)
                                 <li>
-                                    <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                    <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
                                        class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
                                         <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
                                 </li>
@@ -382,11 +382,11 @@
                 </div>
                 <div class="user flex items-center gap-2">
                     <div class="w-[40px] h-[40px]">
-                    <img class="w-full rounded-full cursor-pointer"
-                         src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
-                         alt="">
+                        <img class="w-full rounded-full cursor-pointer"
+                             src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
+                             alt="">
                     </div>
-                    
+
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">

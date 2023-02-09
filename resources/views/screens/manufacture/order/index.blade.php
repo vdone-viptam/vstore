@@ -1,4 +1,5 @@
 @extends('layouts.manufacture.main')
+@section('page_title','Danh sách đơn hàng')
 
 @section('modal')
     <div class="modal modal-details">

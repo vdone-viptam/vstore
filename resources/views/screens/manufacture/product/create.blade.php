@@ -1,4 +1,5 @@
 @extends('layouts.manufacture.main')
+@section('page_title','Thêm mới yêu cầu')
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
