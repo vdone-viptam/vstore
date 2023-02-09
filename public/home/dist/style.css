@@ -1,7 +1,6 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
 }
 
@@ -18,10 +17,25 @@ img{
     background-size: cover;
     height: 1090px;
 }
+.bgncc{
+    background: url('../img/bgncc.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+}
 .banner{
     background: url('../img/banner.png');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.bannerncc{
+    background: url('../img/bannerncc.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+     height: 100%;
 }
 .bnbot{
     background: url('../img/bnbot.png');
@@ -37,10 +51,86 @@ img{
     box-shadow: -1.21831px 4.87324px 29.2394px rgba(143, 43, 96, 0.18);
     border-radius: 24.3662px;
 }
+.boxli{
+    background: #FFF;
+    box-shadow: -1.21831px 4.87324px 29.2394px rgba(143, 43, 96, 0.18);
+    border-radius: 8px;
+}
+.step li{
+    padding: 10px 0;
+}
+.step li a{
+    position: relative;
+    margin-left: 30px;
+}
+.step li:nth-child(1) a:before{
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -23px;
+    border: 1.5px solid #04AADD;
+    height: 70px;
+}
+.step li:nth-child(2) a:before{
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -23px;
+    border: 1.5px solid #04AADD;
+    height: 50px;
+}
+.step li:nth-child(3) a:before{
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -23px;
+    border: none;
+    height: 50px;
+}
+.dot{
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    position: absolute;
+    top: 3px;
+    left: -30px;
+    border: 1px solid #04AADD;
+}
+.step li .dot::after{
+    content: "";
+    background-color: #04AADD;
+    width: 10px;
+    height: 10px;
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 100%;
+}
+.slick-dots{
+    bottom: -50px!important;
+    text-align: left!important; 
+}
+
+.slick-dots li.slick-active button:before{
+    color: #034D82 !important;
+}
+.slick-dots li button:before {
+    font-size: 10px !important;
+    color: #FFF!important;
+    opacity: 1!important;
+}
+
 
 @media only screen and (max-width: 560px) {
     .bg{
         background: url('../img/bnmobile.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+    .bgncc{
+        background: url('../img/bnmobilencc.png');
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
