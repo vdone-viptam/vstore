@@ -36,6 +36,7 @@ class ProductController extends Controller
         }
 
         $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
+            ->where('user_id', Auth::id())
             ->paginate($limit);
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
@@ -226,7 +227,9 @@ class ProductController extends Controller
             $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
         }
 
-        $this->v['requests'] = $this->v['requests']->orderBy('requests.id', 'desc')
+        $this->v['requests'] = $this->v['requests']
+            ->where('requests.user_id', Auth::id())
+            ->orderBy('requests.id', 'desc')
             ->paginate($limit);
 //        dd($this->v['requests']);
         $this->v['params'] = $request->all();
