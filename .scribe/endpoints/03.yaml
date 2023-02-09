@@ -1,0 +1,187 @@
+name: Bill
+description: |-
+
+  Danh sách api liên quan hóa dơn
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/bill/add
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Bill create'
+      description: 'API dùng để tạo hóa đơn'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_id:
+        name: user_id
+        description: 'user của người dùng mua hàng'
+        required: false
+        example: rerum
+        type: mã
+        custom: []
+      name:
+        name: name
+        description: 'người dùng'
+        required: false
+        example: commodi
+        type: tên
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'điện thoại'
+        required: false
+        example: voluptatem
+        type: số
+        custom: []
+      address:
+        name: address
+        description: chỉ
+        required: false
+        example: quia
+        type: địa
+        custom: []
+      specific_address:
+        name: specific_address
+        description: 'chỉ cụ thể'
+        required: false
+        example: vel
+        type: địa
+        custom: []
+      data:
+        name: data
+        description: 'liệu sản phẩm publish_id:mã sản phẩm, vshop_id:mã vshop,quantity:số lượng sản phẩm [{"publish_id":"MSP17621675","vshop_id":"MVS123123","quantity":12},{"publish_id":"MSP17621675","vshop_id":"MVS123123","quantity":12}]'
+        required: false
+        example: commodi
+        type: dữ
+        custom: []
+    cleanBodyParameters:
+      user_id: rerum
+      name: commodi
+      phone_number: voluptatem
+      address: quia
+      specific_address: vel
+      data: commodi
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/bill/detail/{id}'
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the detail.'
+        required: true
+        example: ducimus
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: ducimus
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"message":"successfully retrieved information","data":null}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '52'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/bill/{id}'
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: Bill
+      description: 'API dùng để lấy danh sách hóa đơn của 1 người dùng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the bill.'
+        required: true
+        example: 39
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 39
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"message":"get list of successful invoices","data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '51'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

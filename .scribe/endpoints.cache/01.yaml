@@ -28,27 +28,27 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: eius
+        example: sed
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: facilis
+        example: consequuntur
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'mã sản phẩm'
         required: false
-        example: fuga
+        example: temporibus
         type: string
         custom: []
     cleanUrlParameters:
-      page: eius
-      limit: facilis
-      publish_id: fuga
+      page: sed
+      limit: consequuntur
+      publish_id: temporibus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -57,7 +57,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":17,"publish_id":"17621675","discount":12,"name":"112","category_id":7,"description":"112","images":"[\"storage\\\/products\\\/img2023020502590006972500.jpeg\"]","brand":"112","weight":112,"length":112,"height":112,"packing_type":2,"volume":112,"manufacturer_name":"112","manufacturer_address":"112","import_unit":"112","import_address":"112","price":112,"min_product_sale":null,"prepay":1,"payment_on_delivery":1,"status":2,"admin_confirm_date":"2023-02-05 03:21:47","vstore_confirm_date":"2023-02-05 03:13:58","amount_product_send_to_discount":null,"vstore_id":6,"user_id":2,"origin":"112","with":112,"percent_discount":null,"sku_id":12313,"created_at":"2023-02-05T02:59:00.000000Z","updated_at":"2023-02-05T03:21:47.000000Z","note":null,"amount_product":"123","import_date":"2023-02-06 09:58:00","code":"54869081","discount_vShop":6,"unit":1,"unit_name":"112","unit_images":"[\"storage\\\/products\\\/img2023020502590008873500.jpeg\"]","video":"storage\/products\/8971482296780430562_1675565939.mp4"},{"id":18,"publish_id":"17621676","discount":17621676,"name":"17621676","category_id":7,"description":"17621676","images":"","brand":"17621676","weight":0,"length":null,"height":null,"packing_type":null,"volume":null,"manufacturer_name":null,"manufacturer_address":null,"import_unit":null,"import_address":null,"price":null,"min_product_sale":null,"prepay":null,"payment_on_delivery":null,"status":2,"admin_confirm_date":null,"vstore_confirm_date":null,"amount_product_send_to_discount":null,"vstore_id":6,"user_id":null,"origin":null,"with":null,"percent_discount":null,"sku_id":null,"created_at":null,"updated_at":null,"note":null,"amount_product":null,"import_date":null,"code":null,"discount_vShop":null,"unit":null,"unit_name":null,"unit_images":null,"video":null}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product","per_page":10,"prev_page_url":null,"to":2,"total":2}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":8,"publish_id":"8864577","discount":12,"name":"ducanh","category_id":7,"description":"ducanh","images":"[\"img2023011208593499266800.png\"]","brand":"ducanh","weight":12,"length":12,"height":21,"packing_type":2,"volume":12,"manufacturer_name":"ducanh","manufacturer_address":"ducanh","import_unit":"ducanh","import_address":"ducanh","price":12,"min_product_sale":null,"prepay":1,"payment_on_delivery":1,"status":2,"admin_confirm_date":"2023-01-12 09:53:52","vstore_confirm_date":"0000-00-00 00:00:00","amount_product_send_to_discount":12,"vstore_id":8,"user_id":2,"origin":"ducanh","with":12,"percent_discount":12,"sku_id":null,"created_at":"2023-01-12T08:59:34.000000Z","updated_at":"2023-01-12T09:53:52.000000Z","note":null,"amount_product":null,"import_date":null,"code":null,"discount_vShop":null,"unit":null,"unit_name":null,"unit_images":null,"video":null},{"id":17,"publish_id":"17621675","discount":12,"name":"112","category_id":7,"description":"112","images":"[\"storage\\\/products\\\/img2023020502590006972500.jpeg\"]","brand":"112","weight":112,"length":112,"height":112,"packing_type":2,"volume":112,"manufacturer_name":"112","manufacturer_address":"112","import_unit":"112","import_address":"112","price":112,"min_product_sale":null,"prepay":1,"payment_on_delivery":1,"status":2,"admin_confirm_date":"2023-02-05 03:21:47","vstore_confirm_date":"2023-02-05 03:13:58","amount_product_send_to_discount":null,"vstore_id":6,"user_id":2,"origin":"112","with":112,"percent_discount":null,"sku_id":12313,"created_at":"2023-02-05T02:59:00.000000Z","updated_at":"2023-02-05T03:21:47.000000Z","note":null,"amount_product":"123","import_date":"2023-02-06 09:58:00","code":"54869081","discount_vShop":6,"unit":1,"unit_name":"112","unit_images":"[\"storage\\\/products\\\/img2023020502590008873500.jpeg\"]","video":"storage\/products\/8971482296780430562_1675565939.mp4"},{"id":18,"publish_id":"17621676","discount":17621676,"name":"17621676","category_id":7,"description":"17621676","images":"","brand":"17621676","weight":0,"length":null,"height":null,"packing_type":null,"volume":null,"manufacturer_name":null,"manufacturer_address":null,"import_unit":null,"import_address":null,"price":null,"min_product_sale":null,"prepay":null,"payment_on_delivery":null,"status":2,"admin_confirm_date":null,"vstore_confirm_date":null,"amount_product_send_to_discount":null,"vstore_id":6,"user_id":1,"origin":null,"with":null,"percent_discount":null,"sku_id":null,"created_at":null,"updated_at":null,"note":null,"amount_product":null,"import_date":null,"code":null,"discount_vShop":null,"unit":null,"unit_name":null,"unit_images":null,"video":null}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product","per_page":10,"prev_page_url":null,"to":3,"total":3}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -95,11 +95,11 @@ endpoints:
         name: id
         description: 'The ID of the product by category.'
         required: true
-        example: mollitia
+        example: exercitationem
         type: string
         custom: []
     cleanUrlParameters:
-      id: mollitia
+      id: exercitationem
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -108,7 +108,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/mollitia?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/mollitia?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/mollitia?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/mollitia","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/exercitationem?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/exercitationem?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/exercitationem?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/exercitationem","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -134,8 +134,8 @@ endpoints:
         Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Danh sách sản phẩm vstore'
+      description: 'API này sẽ trả về sách sản phẩm vstore'
       authenticated: false
       custom: []
     headers:
@@ -146,11 +146,35 @@ endpoints:
         name: id
         description: 'The ID of the product by vstore.'
         required: true
-        example: consequuntur
+        example: eius
+        type: string
+        custom: []
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: ducimus
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: facere
+        type: string
+        custom: []
+      publish_id:
+        name: publish_id
+        description: 'mã sản phẩm'
+        required: false
+        example: vero
         type: string
         custom: []
     cleanUrlParameters:
-      id: consequuntur
+      id: eius
+      page: ducimus
+      limit: facere
+      publish_id: vero
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -159,7 +183,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequuntur?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequuntur?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequuntur?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequuntur","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/eius?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/eius?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/eius?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/eius","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -185,8 +209,8 @@ endpoints:
         Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Danh sách sản phẩm nhà cung cấp'
+      description: 'API này sẽ trả về thông tin hiển thị sản phẩm nhà cung cấp'
       authenticated: false
       custom: []
     headers:
@@ -197,11 +221,35 @@ endpoints:
         name: id
         description: 'The ID of the product by ncc.'
         required: true
-        example: totam
+        example: maiores
+        type: string
+        custom: []
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: minus
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: ex
+        type: string
+        custom: []
+      publish_id:
+        name: publish_id
+        description: 'mã sản phẩm'
+        required: false
+        example: iusto
         type: string
         custom: []
     cleanUrlParameters:
-      id: totam
+      id: maiores
+      page: minus
+      limit: ex
+      publish_id: iusto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -210,7 +258,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/totam?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/totam?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/totam?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/totam","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/maiores?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/maiores?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/maiores?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/maiores","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -236,8 +284,8 @@ endpoints:
         Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Vshop thêm sản phẩm'
+      description: 'API dùng để Vshop thêm sản phẩm'
       authenticated: false
       custom: []
     headers:
@@ -248,15 +296,39 @@ endpoints:
         name: id
         description: 'The ID of the vshop pickup.'
         required: true
-        example: similique
+        example: adipisci
+        type: string
+        custom: []
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: aut
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: doloremque
         type: string
         custom: []
     cleanUrlParameters:
-      id: similique
+      id: adipisci
+      page: aut
+      limit: doloremque
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      id_pdone:
+        name: id_pdone
+        description: 'của pdone'
+        required: false
+        example: libero
+        type: id
+        custom: []
+    cleanBodyParameters:
+      id_pdone: libero
     fileParameters: []
     responses: []
     responseFields: []
@@ -268,7 +340,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/product/product-by-vshop/{id}'
+    uri: 'api/product/ /{id}'
     metadata:
       groupName: Product
       groupDescription: |-
@@ -276,8 +348,8 @@ endpoints:
         Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'sản phẩm Vshop'
+      description: 'API lấy danh sách sản phẩm theo vshop'
       authenticated: false
       custom: []
     headers:
@@ -286,13 +358,13 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the product by vshop.'
+        description: 'The ID of the  .'
         required: true
-        example: rerum
+        example: voluptatem
         type: string
         custom: []
     cleanUrlParameters:
-      id: rerum
+      id: voluptatem
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -301,10 +373,10 @@ endpoints:
     responses:
       -
         status: 200
-        content: ''
+        content: '{"status_code":200,"message":"product saved successfully","data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/ \/voluptatem?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/ \/voluptatem?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/ \/voluptatem?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/ \/voluptatem","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
-          content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
+          content-type: application/json
           x-ratelimit-limit: '60'
           x-ratelimit-remaining: '55'
           access-control-allow-origin: '*'
@@ -327,8 +399,8 @@ endpoints:
         Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Chi tiết sản phẩm'
+      description: 'API dùng để lấy chi tiết 1 sản phẩm'
       authenticated: false
       custom: []
     headers:
@@ -351,7 +423,7 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
+        status: 400
         content: '{"status_code":400,"data":"No product found or unapproved product"}'
         headers:
           cache-control: 'no-cache, private'

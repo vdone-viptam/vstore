@@ -73,7 +73,121 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '53'
+          x-ratelimit-remaining: '50'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/manufacture
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Danh sách nhà cung cấp'
+      description: 'API này sẽ trả về sách Nhà cung cấp'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: ut
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: aut
+        type: string
+        custom: []
+    cleanUrlParameters:
+      page: ut
+      limit: aut
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":2,"name":"Hello word 132123","email":"phungtheanh2001@gmail.com","email_verified_at":null,"created_at":"2023-01-10T07:00:28.000000Z","updated_at":"2023-01-11T14:00:04.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"","status":null,"confirm_date":"2023-01-10 07:05:33","role_id":2,"account_code":"911234428248","avatar":"202301110842Screenshot (19).png","banner":"202301110841Screenshot (24).png","slug":null},{"id":10,"name":"anhndph","email":"anhndph12795@fpt.edu.vn","email_verified_at":null,"created_at":"2023-02-02T06:39:55.000000Z","updated_at":"2023-02-02T06:40:48.000000Z","id_vdone":"0813635888","company_name":"anhndph","phone_number":"0813635888","tax_code":"0918809999","address":"65 kh\u00fac th\u1eeba d\u1ee5","id_vdone_diff":"0813635888","status":null,"confirm_date":"2023-02-02 06:40:48","role_id":2,"account_code":"vnncczmyikGJ","avatar":null,"banner":null,"slug":"anhndph"}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/manufacture?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/manufacture?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/manufacture?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/manufacture","per_page":10,"prev_page_url":null,"to":2,"total":2}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '49'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/vstore
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Danh sách nhà vstore'
+      description: 'API này sẽ trả về sách vstore'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: optio
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: dolor
+        type: string
+        custom: []
+    cleanUrlParameters:
+      page: optio
+      limit: dolor
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":3,"name":"Admin 11","email":"phongngo03255@gmail.com","email_verified_at":null,"created_at":"2023-01-11T02:31:11.000000Z","updated_at":"2023-01-20T17:24:30.000000Z","id_vdone":"123123","company_name":"Aneed","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"","status":null,"confirm_date":"2023-01-11 02:32:02","role_id":3,"account_code":"376265803836","avatar":"202301201724pasted image 0.png","banner":"202301111400Screenshot (21).png","slug":null},{"id":4,"name":"platinum update","email":"naruto2003v@gmail.com","email_verified_at":null,"created_at":"2023-01-11T14:03:42.000000Z","updated_at":"2023-01-11T14:06:11.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"1111","status":null,"confirm_date":"2023-01-11 14:06:11","role_id":3,"account_code":"881400726222","avatar":null,"banner":null,"slug":null},{"id":5,"name":"platinum update","email":"admin1@gmail.com","email_verified_at":null,"created_at":"2023-01-11T14:04:27.000000Z","updated_at":"2023-02-05T02:26:49.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"1111","status":null,"confirm_date":"2023-02-05 02:26:49","role_id":3,"account_code":"vnnppTFDVfrw","avatar":null,"banner":null,"slug":null},{"id":6,"name":"platinum update","email":"naruto20031v@gmail.com","email_verified_at":null,"created_at":"2023-01-11T14:05:30.000000Z","updated_at":"2023-01-11T14:06:02.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"1111","status":null,"confirm_date":"2023-01-11 14:06:02","role_id":3,"account_code":"752989806851","avatar":null,"banner":null,"slug":null},{"id":8,"name":"warehousess","email":"ducanhng2813@gmail.com","email_verified_at":null,"created_at":"2023-01-13T03:37:49.000000Z","updated_at":"2023-02-05T03:03:39.000000Z","id_vdone":"0813635868","company_name":"warehousess","phone_number":"0813635868","tax_code":"121212121","address":"warehousess","id_vdone_diff":"0813635868","status":null,"confirm_date":"2023-01-13 03:40:34","role_id":3,"account_code":"511744732139","avatar":"202301201903pasted image 0.png","banner":"202301201913Banner.jpg","slug":"duc-anh21"},{"id":9,"name":"duc anh23","email":"ducanh123@gmail.com","email_verified_at":null,"created_at":"2023-01-20T17:45:34.000000Z","updated_at":"2023-01-20T17:45:34.000000Z","id_vdone":"1212121","company_name":"duc anh23","phone_number":"0813635868","tax_code":"12","address":"1212","id_vdone_diff":"12121212","status":null,"confirm_date":"2023-01-20 01:55:31","role_id":3,"account_code":"511744732138","avatar":"image 0.png","banner":null,"slug":"duc-anh23"}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/vstore","per_page":10,"prev_page_url":null,"to":6,"total":6}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '48'
           access-control-allow-origin: '*'
         description: null
         custom: []

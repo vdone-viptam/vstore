@@ -1,0 +1,208 @@
+name: Cart
+description: |-
+
+  Danh sách api liên quan tới giỏ hàng
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: 'api/cart/{id}'
+    metadata:
+      groupName: Cart
+      groupDescription: |-
+
+        Danh sách api liên quan tới giỏ hàng
+      subgroup: ''
+      subgroupDescription: ''
+      title: Cart
+      description: 'API dùng để xem sản phẩm trong giỏ hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the cart.'
+        required: true
+        example: 6
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 6
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"message":"product saved successfully","data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '53'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/cart/add/{id}'
+    metadata:
+      groupName: Cart
+      groupDescription: |-
+
+        Danh sách api liên quan tới giỏ hàng
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Cart add'
+      description: 'API dùng để thêm sản phẩm vào giỏ hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the add.'
+        required: true
+        example: molestiae
+        type: string
+        custom: []
+      quantity:
+        name: quantity
+        description: 'só lượng sản phẩm không có mặc định là 1'
+        required: false
+        example: qui
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: molestiae
+      quantity: qui
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_id:
+        name: user_id
+        description: 'user của người dùng'
+        required: false
+        example: molestiae
+        type: mã
+        custom: []
+    cleanBodyParameters:
+      user_id: molestiae
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/cart/remove/{id}'
+    metadata:
+      groupName: Cart
+      groupDescription: |-
+
+        Danh sách api liên quan tới giỏ hàng
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Cart remove'
+      description: 'API dùng để xóa sản phẩm khỏi giỏ hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the remove.'
+        required: true
+        example: enim
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: enim
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_id:
+        name: user_id
+        description: 'tài khoản của người dùng'
+        required: false
+        example: nihil
+        type: mã
+        custom: []
+    cleanBodyParameters:
+      user_id: nihil
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/cart/quantity/$id
+    metadata:
+      groupName: Cart
+      groupDescription: |-
+
+        Danh sách api liên quan tới giỏ hàng
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Cart quantity'
+      description: 'API dùng để tăng giảm số lượng sản phẩm trong giỏ hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_id:
+        name: user_id
+        description: 'user của người dùng'
+        required: false
+        example: odio
+        type: mã
+        custom: []
+      quantity:
+        name: quantity
+        description: 'lượng sản phẩm'
+        required: false
+        example: in
+        type: số
+        custom: []
+    cleanBodyParameters:
+      user_id: odio
+      quantity: in
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

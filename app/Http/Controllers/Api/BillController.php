@@ -9,7 +9,11 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+/**
+ * @group Bill
+ *
+ * Danh sách api liên quan hóa dơn
+ */
 class BillController extends Controller
 {
     /**

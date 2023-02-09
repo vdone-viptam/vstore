@@ -10,11 +10,361 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "2f4f1988-5b2b-4564-8e7e-f40ae726442a",
+        "_postman_id": "9be8d00f-b804-4858-af47-d30333ff8a2b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
+        {
+            "name": "Bill",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan h\u00f3a d\u01a1n",
+            "item": [
+                {
+                    "name": "Bill create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/bill\/add",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/bill\/add"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_id\":\"rerum\",\"name\":\"commodi\",\"phone_number\":\"voluptatem\",\"address\":\"quia\",\"specific_address\":\"vel\",\"data\":\"commodi\"}"
+                        },
+                        "description": "API d\u00f9ng \u0111\u1ec3 t\u1ea1o h\u00f3a \u0111\u01a1n",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET api\/bill\/detail\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/bill\/detail\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/bill\/detail\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "ducimus",
+                                    "description": "The ID of the detail."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "52"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"message\":\"successfully retrieved information\",\"data\":null}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Bill",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/bill\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/bill\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "39",
+                                    "description": "The ID of the bill."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API d\u00f9ng \u0111\u1ec3 l\u1ea5y danh s\u00e1ch h\u00f3a \u0111\u01a1n c\u1ee7a 1 ng\u01b0\u1eddi d\u00f9ng",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "51"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"message\":\"get list of successful invoices\",\"data\":[]}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cart",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan t\u1edbi gi\u1ecf h\u00e0ng",
+            "item": [
+                {
+                    "name": "Cart",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "6",
+                                    "description": "The ID of the cart."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API d\u00f9ng \u0111\u1ec3 xem s\u1ea3n ph\u1ea9m trong gi\u1ecf h\u00e0ng",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "53"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"message\":\"product saved successfully\",\"data\":[]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cart add",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/add\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart\/add\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "molestiae",
+                                    "description": "The ID of the add."
+                                },
+                                {
+                                    "id": "quantity",
+                                    "key": "quantity",
+                                    "value": "qui",
+                                    "description": "s\u00f3 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m kh\u00f4ng c\u00f3 m\u1eb7c \u0111\u1ecbnh l\u00e0 1"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_id\":\"molestiae\"}"
+                        },
+                        "description": "API d\u00f9ng \u0111\u1ec3 th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cart remove",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/remove\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart\/remove\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "enim",
+                                    "description": "The ID of the remove."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_id\":\"nihil\"}"
+                        },
+                        "description": "API d\u00f9ng \u0111\u1ec3 x\u00f3a s\u1ea3n ph\u1ea9m kh\u1ecfi gi\u1ecf h\u00e0ng",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cart quantity",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/quantity\/$id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart\/quantity\/$id"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_id\":\"odio\",\"quantity\":\"in\"}"
+                        },
+                        "description": "API d\u00f9ng \u0111\u1ec3 t\u0103ng gi\u1ea3m s\u1ed1 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m trong gi\u1ecf h\u00e0ng",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
         {
             "name": "Endpoints",
             "description": "",
@@ -110,7 +460,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "53"
+                                    "value": "50"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
@@ -119,6 +469,146 @@
                             ],
                             "code": 200,
                             "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":1,\"name\":\"Qu\\u1ea7n \\u00e1o c\\u1eadp nh\\u1eadt\",\"parent_id\":0,\"created_at\":\"2023-01-08T04:25:33.000000Z\",\"updated_at\":\"2023-01-08T04:40:46.000000Z\",\"img\":\"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"quan-ao-cap-nhat\",\"status\":1},{\"id\":2,\"name\":\"\\u00c1o d\\u00e0i\",\"parent_id\":0,\"created_at\":\"2023-01-08T04:25:33.000000Z\",\"updated_at\":\"2023-01-08T04:40:46.000000Z\",\"img\":\"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":null,\"status\":1},{\"id\":5,\"name\":\"Qu\\u1ea7n \\u0111\\u00f9i \\u00e1o c\\u1ed9c\",\"parent_id\":1,\"created_at\":\"2023-01-08T04:25:33.000000Z\",\"updated_at\":\"2023-01-08T04:44:56.000000Z\",\"img\":\"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"quan-dui-ao-coc\",\"status\":0},{\"id\":6,\"name\":\"platinum update\",\"parent_id\":5,\"created_at\":\"2023-01-08T05:19:06.000000Z\",\"updated_at\":\"2023-01-08T05:19:06.000000Z\",\"img\":\"202301080519Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"platinum-update\",\"status\":1},{\"id\":7,\"name\":\"java sc\",\"parent_id\":6,\"created_at\":\"2023-01-08T05:19:58.000000Z\",\"updated_at\":\"2023-01-08T05:19:58.000000Z\",\"img\":\"202301080519Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"java-sc\",\"status\":1},{\"id\":8,\"name\":\"H\\u00e0 N\\u1ed9i\",\"parent_id\":7,\"created_at\":\"2023-02-05T04:19:34.000000Z\",\"updated_at\":\"2023-02-05T04:19:34.000000Z\",\"img\":\"image\\\/category\\\/202302050419aab7f4065358e0a635b3bd5266a0c319.jpg\",\"slug\":\"ha-noi\",\"status\":1}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\",\"per_page\":10,\"prev_page_url\":null,\"to\":6,\"total\":6}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch nh\u00e0 cung c\u1ea5p",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/manufacture",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/manufacture",
+                            "variable": [
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "ut",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "aut",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u00e1ch Nh\u00e0 cung c\u1ea5p",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "49"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":2,\"name\":\"Hello word 132123\",\"email\":\"phungtheanh2001@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-10T07:00:28.000000Z\",\"updated_at\":\"2023-01-11T14:00:04.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"\",\"status\":null,\"confirm_date\":\"2023-01-10 07:05:33\",\"role_id\":2,\"account_code\":\"911234428248\",\"avatar\":\"202301110842Screenshot (19).png\",\"banner\":\"202301110841Screenshot (24).png\",\"slug\":null},{\"id\":10,\"name\":\"anhndph\",\"email\":\"anhndph12795@fpt.edu.vn\",\"email_verified_at\":null,\"created_at\":\"2023-02-02T06:39:55.000000Z\",\"updated_at\":\"2023-02-02T06:40:48.000000Z\",\"id_vdone\":\"0813635888\",\"company_name\":\"anhndph\",\"phone_number\":\"0813635888\",\"tax_code\":\"0918809999\",\"address\":\"65 kh\\u00fac th\\u1eeba d\\u1ee5\",\"id_vdone_diff\":\"0813635888\",\"status\":null,\"confirm_date\":\"2023-02-02 06:40:48\",\"role_id\":2,\"account_code\":\"vnncczmyikGJ\",\"avatar\":null,\"banner\":null,\"slug\":\"anhndph\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture\",\"per_page\":10,\"prev_page_url\":null,\"to\":2,\"total\":2}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch nh\u00e0 vstore",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vstore",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vstore",
+                            "variable": [
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "optio",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "dolor",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u00e1ch vstore",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "48"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":3,\"name\":\"Admin 11\",\"email\":\"phongngo03255@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T02:31:11.000000Z\",\"updated_at\":\"2023-01-20T17:24:30.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Aneed\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"\",\"status\":null,\"confirm_date\":\"2023-01-11 02:32:02\",\"role_id\":3,\"account_code\":\"376265803836\",\"avatar\":\"202301201724pasted image 0.png\",\"banner\":\"202301111400Screenshot (21).png\",\"slug\":null},{\"id\":4,\"name\":\"platinum update\",\"email\":\"naruto2003v@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T14:03:42.000000Z\",\"updated_at\":\"2023-01-11T14:06:11.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"1111\",\"status\":null,\"confirm_date\":\"2023-01-11 14:06:11\",\"role_id\":3,\"account_code\":\"881400726222\",\"avatar\":null,\"banner\":null,\"slug\":null},{\"id\":5,\"name\":\"platinum update\",\"email\":\"admin1@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T14:04:27.000000Z\",\"updated_at\":\"2023-02-05T02:26:49.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"1111\",\"status\":null,\"confirm_date\":\"2023-02-05 02:26:49\",\"role_id\":3,\"account_code\":\"vnnppTFDVfrw\",\"avatar\":null,\"banner\":null,\"slug\":null},{\"id\":6,\"name\":\"platinum update\",\"email\":\"naruto20031v@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T14:05:30.000000Z\",\"updated_at\":\"2023-01-11T14:06:02.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"1111\",\"status\":null,\"confirm_date\":\"2023-01-11 14:06:02\",\"role_id\":3,\"account_code\":\"752989806851\",\"avatar\":null,\"banner\":null,\"slug\":null},{\"id\":8,\"name\":\"warehousess\",\"email\":\"ducanhng2813@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-13T03:37:49.000000Z\",\"updated_at\":\"2023-02-05T03:03:39.000000Z\",\"id_vdone\":\"0813635868\",\"company_name\":\"warehousess\",\"phone_number\":\"0813635868\",\"tax_code\":\"121212121\",\"address\":\"warehousess\",\"id_vdone_diff\":\"0813635868\",\"status\":null,\"confirm_date\":\"2023-01-13 03:40:34\",\"role_id\":3,\"account_code\":\"511744732139\",\"avatar\":\"202301201903pasted image 0.png\",\"banner\":\"202301201913Banner.jpg\",\"slug\":\"duc-anh21\"},{\"id\":9,\"name\":\"duc anh23\",\"email\":\"ducanh123@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-20T17:45:34.000000Z\",\"updated_at\":\"2023-01-20T17:45:34.000000Z\",\"id_vdone\":\"1212121\",\"company_name\":\"duc anh23\",\"phone_number\":\"0813635868\",\"tax_code\":\"12\",\"address\":\"1212\",\"id_vdone_diff\":\"12121212\",\"status\":null,\"confirm_date\":\"2023-01-20 01:55:31\",\"role_id\":3,\"account_code\":\"511744732138\",\"avatar\":\"image 0.png\",\"banner\":null,\"slug\":\"duc-anh23\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\",\"per_page\":10,\"prev_page_url\":null,\"to\":6,\"total\":6}}",
                             "name": ""
                         }
                     ]
@@ -141,19 +631,19 @@
                                 {
                                     "id": "page",
                                     "key": "page",
-                                    "value": "eius",
+                                    "value": "sed",
                                     "description": "S\u1ed1 trang"
                                 },
                                 {
                                     "id": "limit",
                                     "key": "limit",
-                                    "value": "facilis",
+                                    "value": "consequuntur",
                                     "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
                                 },
                                 {
                                     "id": "publish_id",
                                     "key": "publish_id",
-                                    "value": "fuga",
+                                    "value": "temporibus",
                                     "description": "m\u00e3 s\u1ea3n ph\u1ea9m"
                                 }
                             ]
@@ -200,7 +690,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":17,\"publish_id\":\"17621675\",\"discount\":12,\"name\":\"112\",\"category_id\":7,\"description\":\"112\",\"images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023020502590006972500.jpeg\\\"]\",\"brand\":\"112\",\"weight\":112,\"length\":112,\"height\":112,\"packing_type\":2,\"volume\":112,\"manufacturer_name\":\"112\",\"manufacturer_address\":\"112\",\"import_unit\":\"112\",\"import_address\":\"112\",\"price\":112,\"min_product_sale\":null,\"prepay\":1,\"payment_on_delivery\":1,\"status\":2,\"admin_confirm_date\":\"2023-02-05 03:21:47\",\"vstore_confirm_date\":\"2023-02-05 03:13:58\",\"amount_product_send_to_discount\":null,\"vstore_id\":6,\"user_id\":2,\"origin\":\"112\",\"with\":112,\"percent_discount\":null,\"sku_id\":12313,\"created_at\":\"2023-02-05T02:59:00.000000Z\",\"updated_at\":\"2023-02-05T03:21:47.000000Z\",\"note\":null,\"amount_product\":\"123\",\"import_date\":\"2023-02-06 09:58:00\",\"code\":\"54869081\",\"discount_vShop\":6,\"unit\":1,\"unit_name\":\"112\",\"unit_images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023020502590008873500.jpeg\\\"]\",\"video\":\"storage\\\/products\\\/8971482296780430562_1675565939.mp4\"},{\"id\":18,\"publish_id\":\"17621676\",\"discount\":17621676,\"name\":\"17621676\",\"category_id\":7,\"description\":\"17621676\",\"images\":\"\",\"brand\":\"17621676\",\"weight\":0,\"length\":null,\"height\":null,\"packing_type\":null,\"volume\":null,\"manufacturer_name\":null,\"manufacturer_address\":null,\"import_unit\":null,\"import_address\":null,\"price\":null,\"min_product_sale\":null,\"prepay\":null,\"payment_on_delivery\":null,\"status\":2,\"admin_confirm_date\":null,\"vstore_confirm_date\":null,\"amount_product_send_to_discount\":null,\"vstore_id\":6,\"user_id\":null,\"origin\":null,\"with\":null,\"percent_discount\":null,\"sku_id\":null,\"created_at\":null,\"updated_at\":null,\"note\":null,\"amount_product\":null,\"import_date\":null,\"code\":null,\"discount_vShop\":null,\"unit\":null,\"unit_name\":null,\"unit_images\":null,\"video\":null}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\",\"per_page\":10,\"prev_page_url\":null,\"to\":2,\"total\":2}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":8,\"publish_id\":\"8864577\",\"discount\":12,\"name\":\"ducanh\",\"category_id\":7,\"description\":\"ducanh\",\"images\":\"[\\\"img2023011208593499266800.png\\\"]\",\"brand\":\"ducanh\",\"weight\":12,\"length\":12,\"height\":21,\"packing_type\":2,\"volume\":12,\"manufacturer_name\":\"ducanh\",\"manufacturer_address\":\"ducanh\",\"import_unit\":\"ducanh\",\"import_address\":\"ducanh\",\"price\":12,\"min_product_sale\":null,\"prepay\":1,\"payment_on_delivery\":1,\"status\":2,\"admin_confirm_date\":\"2023-01-12 09:53:52\",\"vstore_confirm_date\":\"0000-00-00 00:00:00\",\"amount_product_send_to_discount\":12,\"vstore_id\":8,\"user_id\":2,\"origin\":\"ducanh\",\"with\":12,\"percent_discount\":12,\"sku_id\":null,\"created_at\":\"2023-01-12T08:59:34.000000Z\",\"updated_at\":\"2023-01-12T09:53:52.000000Z\",\"note\":null,\"amount_product\":null,\"import_date\":null,\"code\":null,\"discount_vShop\":null,\"unit\":null,\"unit_name\":null,\"unit_images\":null,\"video\":null},{\"id\":17,\"publish_id\":\"17621675\",\"discount\":12,\"name\":\"112\",\"category_id\":7,\"description\":\"112\",\"images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023020502590006972500.jpeg\\\"]\",\"brand\":\"112\",\"weight\":112,\"length\":112,\"height\":112,\"packing_type\":2,\"volume\":112,\"manufacturer_name\":\"112\",\"manufacturer_address\":\"112\",\"import_unit\":\"112\",\"import_address\":\"112\",\"price\":112,\"min_product_sale\":null,\"prepay\":1,\"payment_on_delivery\":1,\"status\":2,\"admin_confirm_date\":\"2023-02-05 03:21:47\",\"vstore_confirm_date\":\"2023-02-05 03:13:58\",\"amount_product_send_to_discount\":null,\"vstore_id\":6,\"user_id\":2,\"origin\":\"112\",\"with\":112,\"percent_discount\":null,\"sku_id\":12313,\"created_at\":\"2023-02-05T02:59:00.000000Z\",\"updated_at\":\"2023-02-05T03:21:47.000000Z\",\"note\":null,\"amount_product\":\"123\",\"import_date\":\"2023-02-06 09:58:00\",\"code\":\"54869081\",\"discount_vShop\":6,\"unit\":1,\"unit_name\":\"112\",\"unit_images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023020502590008873500.jpeg\\\"]\",\"video\":\"storage\\\/products\\\/8971482296780430562_1675565939.mp4\"},{\"id\":18,\"publish_id\":\"17621676\",\"discount\":17621676,\"name\":\"17621676\",\"category_id\":7,\"description\":\"17621676\",\"images\":\"\",\"brand\":\"17621676\",\"weight\":0,\"length\":null,\"height\":null,\"packing_type\":null,\"volume\":null,\"manufacturer_name\":null,\"manufacturer_address\":null,\"import_unit\":null,\"import_address\":null,\"price\":null,\"min_product_sale\":null,\"prepay\":null,\"payment_on_delivery\":null,\"status\":2,\"admin_confirm_date\":null,\"vstore_confirm_date\":null,\"amount_product_send_to_discount\":null,\"vstore_id\":6,\"user_id\":1,\"origin\":null,\"with\":null,\"percent_discount\":null,\"sku_id\":null,\"created_at\":null,\"updated_at\":null,\"note\":null,\"amount_product\":null,\"import_date\":null,\"code\":null,\"discount_vShop\":null,\"unit\":null,\"unit_name\":null,\"unit_images\":null,\"video\":null}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\",\"per_page\":10,\"prev_page_url\":null,\"to\":3,\"total\":3}}",
                             "name": ""
                         }
                     ]
@@ -217,7 +707,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "mollitia",
+                                    "value": "exercitationem",
                                     "description": "The ID of the product by category."
                                 }
                             ]
@@ -264,13 +754,13 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/mollitia?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/mollitia?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/mollitia?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/mollitia\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "GET api\/product\/product-by-vstore\/{id}",
+                    "name": "Danh s\u00e1ch s\u1ea3n ph\u1ea9m vstore",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -281,8 +771,26 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "consequuntur",
+                                    "value": "eius",
                                     "description": "The ID of the product by vstore."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "ducimus",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "facere",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                },
+                                {
+                                    "id": "publish_id",
+                                    "key": "publish_id",
+                                    "value": "vero",
+                                    "description": "m\u00e3 s\u1ea3n ph\u1ea9m"
                                 }
                             ]
                         },
@@ -298,7 +806,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u00e1ch s\u1ea3n ph\u1ea9m vstore",
                         "auth": {
                             "type": "noauth"
                         }
@@ -328,13 +836,13 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/consequuntur?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/consequuntur?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/consequuntur?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/consequuntur\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "GET api\/product\/product-by-ncc\/{id}",
+                    "name": "Danh s\u00e1ch s\u1ea3n ph\u1ea9m nh\u00e0 cung c\u1ea5p",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -345,8 +853,26 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "totam",
+                                    "value": "maiores",
                                     "description": "The ID of the product by ncc."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "minus",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "ex",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                },
+                                {
+                                    "id": "publish_id",
+                                    "key": "publish_id",
+                                    "value": "iusto",
+                                    "description": "m\u00e3 s\u1ea3n ph\u1ea9m"
                                 }
                             ]
                         },
@@ -362,7 +888,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 th\u00f4ng tin hi\u1ec3n th\u1ecb s\u1ea3n ph\u1ea9m nh\u00e0 cung c\u1ea5p",
                         "auth": {
                             "type": "noauth"
                         }
@@ -392,13 +918,13 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/totam?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/totam?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/totam?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/totam\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "POST api\/product\/vshop-pickup\/{id}",
+                    "name": "Vshop th\u00eam s\u1ea3n ph\u1ea9m",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -409,8 +935,20 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "similique",
+                                    "value": "adipisci",
                                     "description": "The ID of the vshop pickup."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "aut",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "doloremque",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
                                 }
                             ]
                         },
@@ -425,8 +963,11 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
-                        "description": "",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id_pdone\":\"libero\"}"
+                        },
+                        "description": "API d\u00f9ng \u0111\u1ec3 Vshop th\u00eam s\u1ea3n ph\u1ea9m",
                         "auth": {
                             "type": "noauth"
                         }
@@ -434,19 +975,19 @@
                     "response": []
                 },
                 {
-                    "name": "GET api\/product\/product-by-vshop\/{id}",
+                    "name": "s\u1ea3n ph\u1ea9m Vshop",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/product\/product-by-vshop\/:id",
+                            "path": "api\/product\/ \/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/product\/product-by-vshop\/:id",
+                            "raw": "{{baseUrl}}\/api\/product\/ \/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "rerum",
-                                    "description": "The ID of the product by vshop."
+                                    "value": "voluptatem",
+                                    "description": "The ID of the  ."
                                 }
                             ]
                         },
@@ -462,7 +1003,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "API l\u1ea5y danh s\u00e1ch s\u1ea3n ph\u1ea9m theo vshop",
                         "auth": {
                             "type": "noauth"
                         }
@@ -471,12 +1012,12 @@
                         {
                             "header": [
                                 {
-                                    "key": "content-type",
-                                    "value": "text\/html; charset=UTF-8"
-                                },
-                                {
                                     "key": "cache-control",
                                     "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
                                 },
                                 {
                                     "key": "x-ratelimit-limit",
@@ -492,13 +1033,13 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "",
+                            "body": "{\"status_code\":200,\"message\":\"product saved successfully\",\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "GET api\/product\/{id}",
+                    "name": "Chi ti\u1ebft s\u1ea3n ph\u1ea9m",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -526,7 +1067,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "API d\u00f9ng \u0111\u1ec3 l\u1ea5y chi ti\u1ebft 1 s\u1ea3n ph\u1ea9m",
                         "auth": {
                             "type": "noauth"
                         }
@@ -555,7 +1096,7 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 200,
+                            "code": 400,
                             "body": "{\"status_code\":400,\"data\":\"No product found or unapproved product\"}",
                             "name": ""
                         }
