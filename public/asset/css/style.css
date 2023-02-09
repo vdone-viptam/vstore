@@ -643,12 +643,7 @@ svg{
 .scrollb{
     scrollbar-color:#F2F8FF; 
 }
-.bann{
-    background: url('https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/321949557_823712235383207_847710945410794481_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e3f864&_nc_ohc=NMQ-SQfVHo4AX_bNVh-&tn=qAoU72EWnZZywTO4&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfD5I8OYV7k1jZi5Qqz8OL8-h5XYgfczwxbAa03FmF28fA&oe=63E67B5E') no-repeat center center  ;
-    background-size: cover;
-    width: 100%;
-    height: 120px;
-}
+
 @media only screen and (max-width: 560px) {
     .tab-register li{
         padding: 8px 36px;
