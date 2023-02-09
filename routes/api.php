@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-Route::group(['domain' => config('domain.api')], function () {
+Route::get('/',function (){
+    return config('domain.api');
+});
+//Route::group(['domain' => config('domain.api')], function () {
+Route::domain(config('domain.api'))->group(function () {
     Route::prefix('product')->group(function () {
         Route::get('/',[\App\Http\Controllers\Api\ProductController::class,'index']);
         Route::get('/product-by-category/{id}',[\App\Http\Controllers\Api\ProductController::class,'productByCategory']);
