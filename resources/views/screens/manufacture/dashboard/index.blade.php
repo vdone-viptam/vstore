@@ -6,14 +6,13 @@
         }
     </style>
 @endsection
-@section('page_title','Dashboard')
-
 @section('content')
     <div
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
         <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7 md:pt-7">
-            <div class="hidden cursor-pointer md:hidden lg:flex  justify-end pb-[60px]">
-                <div class="help relative flex gap-3 justify-end items-center">
+            <div  class="hidden cursor-pointer md:hidden lg:flex  justify-end pb-[60px] mb-4 bann">
+{{--                <img src="{{asset('/image/users/'. \Illuminate\Support\Facades\Auth::user()->banner)}}">--}}
+                <!-- <div class="help relative flex gap-3 justify-end items-center pr-4">
                     <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
                         <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -28,7 +27,7 @@
                         <li><a href="#">Biểu phí</a></li>
                         <li><a href="#">Chính sách quy định</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div class="flex flex-col justify-start items-start gap-16">
                 <div class="result w-full">
@@ -65,7 +64,13 @@
                                         <p class="text-[#AEAEAE] text-sm font-normal">1</p>
                                     </div>
                                     <div class="flex items-center">
-
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8.754 4.91277C8.79267 4.95044 8.958 5.09267 9.094 5.22516C9.94933 6.00191 11.3493 8.02821 11.7767 9.08877C11.8453 9.24984 11.9907 9.65705 12 9.87461C12 10.0831 11.952 10.2818 11.8547 10.4715C11.7187 10.7079 11.5047 10.8975 11.252 11.0014C11.0767 11.0683 10.552 11.1722 10.5427 11.1722C9.96867 11.2761 9.036 11.3333 8.00533 11.3333C7.02333 11.3333 6.12867 11.2761 5.546 11.1911C5.53667 11.1813 4.88467 11.0774 4.66133 10.9638C4.25333 10.7553 4 10.3481 4 9.91228V9.87461C4.01 9.5908 4.26333 8.99395 4.27267 8.99395C4.70067 7.99054 6.032 6.011 6.91667 5.21542C6.91667 5.21542 7.144 4.99135 7.286 4.89394C7.49 4.74196 7.74267 4.66663 7.99533 4.66663C8.27733 4.66663 8.54 4.7517 8.754 4.91277Z"
+                                                fill="#6DD64D"/>
+                                        </svg>
+                                        <p class="text-[#6DD64D] text-xs font-normal">11,2%</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +96,13 @@
                                         <p class="text-[#AEAEAE] text-sm font-normal">1</p>
                                     </div>
                                     <div class="flex items-center">
-
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
+                                                fill="#FF4842"/>
+                                        </svg>
+                                        <p class="text-[#FF4842] text-xs font-normal">1,2%</p>
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +119,8 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
-                                        <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng đã giao</p>
-                                        <p class="text-black text-base font-bold">85</p>
+                                        <p class="text-[#AEAEAE] text-sm font-normal">Tổng số đơn hàng</p>
+                                        <p class="text-black text-base font-bold">Tăng</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -117,7 +128,13 @@
                                         <p class="text-[#AEAEAE] text-sm font-normal">1</p>
                                     </div>
                                     <div class="flex items-center">
-
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8.754 4.91277C8.79267 4.95044 8.958 5.09267 9.094 5.22516C9.94933 6.00191 11.3493 8.02821 11.7767 9.08877C11.8453 9.24984 11.9907 9.65705 12 9.87461C12 10.0831 11.952 10.2818 11.8547 10.4715C11.7187 10.7079 11.5047 10.8975 11.252 11.0014C11.0767 11.0683 10.552 11.1722 10.5427 11.1722C9.96867 11.2761 9.036 11.3333 8.00533 11.3333C7.02333 11.3333 6.12867 11.2761 5.546 11.1911C5.53667 11.1813 4.88467 11.0774 4.66133 10.9638C4.25333 10.7553 4 10.3481 4 9.91228V9.87461C4.01 9.5908 4.26333 8.99395 4.27267 8.99395C4.70067 7.99054 6.032 6.011 6.91667 5.21542C6.91667 5.21542 7.144 4.99135 7.286 4.89394C7.49 4.74196 7.74267 4.66663 7.99533 4.66663C8.27733 4.66663 8.54 4.7517 8.754 4.91277Z"
+                                                fill="#6DD64D"/>
+                                        </svg>
+                                        <p class="text-[#6DD64D] text-xs font-normal">10,2%</p>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +154,7 @@
                                                 fill="#4062FF"/>
                                         </svg>
                                         <span
-                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span class="date">1 Tuần</span> </span>
+                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu thuần tháng này</span>
                                     </div>
                                     <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -149,11 +166,11 @@
                                 </div>
                                 <div class="relative ">
                                     <select name=""
-                                            class="slect-date outline-none appearance-none rounded-sm border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
-                                        <option value="0">1 Tuần</option>
-                                        <option value="1">1 Tháng</option>
-                                        <option value="2" selected>1 Năm</option>
-                                        <option value="3">3 năm</option>
+                                            class="outline-none appearance-none  border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
+                                        <option value="0">Hôm qua</option>
+                                        <option value="1">7 ngày qua</option>
+                                        <option value="2" selected>Tháng này</option>
+                                        <option value="3">Tháng trước</option>
                                     </select>
                                     <svg class="absolute top-2.5 right-2.5 pointer-events-none" width="16" height="16"
                                          viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,9 +227,9 @@
                             <ul class="sub-nav-notify">
                                 <div class="flex justify-between items-center w-full pb-3 px-3">
                                     <h2 class="text-xl font-normal text-title">Thông báo</h2>
-{{--                                    <a href="#"--}}
-{{--                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
-{{--                                        cả</a>--}}
+                                    <a href="#"
+                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                                        cả</a>
                                 </div>
                                 @if(count(Auth::user()->unreadNotifications) > 0)
                                     @foreach (Auth::user()->unreadNotifications as $index =>$notification)
@@ -231,23 +248,24 @@
                         </div>
                         <div class="user relative flex items-center gap-2">
                             <div class="w-[41px]">
-                                <div class="w-[40px] h-[40px] rounded-full">
-                                    <img class="w-full rounded-full cursor-pointer"
-                                         src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">
-                                </div>
+                            <div class="w-[40px] h-[40px] rounded-full">
+                            <img class="w-full rounded-full cursor-pointer"
+                                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">
                             </div>
+                            </div>
+
 
 
                             <div class="flex flex-col gap-[3px] justify-center">
                                 <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
                             </div>
                             <div class="w-[17px]">
-                                <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
-                                        fill="black"/>
-                                </svg>
+                            <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
+                                    fill="black"/>
+                            </svg>
                             </div>
 
                             <ul class="sub-nav-user">
@@ -395,10 +413,5 @@
                 }
             });
         })
-
-        $('.slect-date').change(function (){
-            $value= $('.slect-date option:selected').text();
-            $('.date').html($value);
-        });
     </script>
 @endsection
