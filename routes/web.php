@@ -167,6 +167,8 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     Route::prefix('finance')->group(function () {
         Route::get('', [\App\Http\Controllers\Vstore\FinanceController::class, 'index'])->name('screens.vstore.finance.index');
         Route::get('revenue', [\App\Http\Controllers\Vstore\FinanceController::class, 'revenue'])->name('screens.vstore.finance.revenue');
+        Route::get('history', [\App\Http\Controllers\Vstore\FinanceController::class, 'history'])->name('screens.vstore.finance.history');
+
     });
     Route::prefix('order')->group(function () {
         Route::get('', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
@@ -186,7 +188,14 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
 
     });
+    Route::prefix('partners')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');
+        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
+        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
+//        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
+
+    });
 });
 //Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 

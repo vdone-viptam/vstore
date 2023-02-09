@@ -1,4 +1,5 @@
 @extends('layouts.manufacture.main')
+@section('page_title','Thông tin tài khoản')
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))

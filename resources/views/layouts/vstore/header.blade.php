@@ -44,13 +44,13 @@
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
                         <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                            cả</a>
+{{--                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
+{{--                            cả</a>--}}
                     </div>
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)
                             <li>
-                                <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
                                    class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
                                     <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
                             </li>

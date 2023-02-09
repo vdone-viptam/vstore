@@ -1,5 +1,7 @@
 @extends('layouts.vstore.main')
 
+@section('page_title','Đổi mật khẩu')
+
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
         <div class="modal modal-success  flex justify-center items-center show-modal">

@@ -50,7 +50,7 @@
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)
                             <li>
-                                <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
                                    class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
                                     <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
                             </li>
@@ -68,7 +68,7 @@
                      src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
                      alt="">
                 </div>
-                
+
                 <div class="flex flex-col gap-[3px] justify-center">
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
                 </div>

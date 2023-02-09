@@ -129,7 +129,7 @@
                                 </svg>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Danh mục</p>
+                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Ngành hàng</p>
                                 <svg width="0" height="6" viewBox="0 0 11 6" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"

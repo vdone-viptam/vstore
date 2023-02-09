@@ -44,7 +44,7 @@
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="flex justify-start items-center gap-2 w-full">
 
-                        <select name="status" id="status" @if($request->status ==1 || $request->status ==2) disabled
+                        <select name="status" id="status" @if($request->status > 0) disabled
                                 @endif
                                 class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                             <option
@@ -55,12 +55,12 @@
                         </select>
                     </div>
                     <div id="vShop" class="w-full"
-                         @if($request->status ==1 || $request->status == 2) style="display: none" @endif>
+                         @if($request->status == 2) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
                             <input type="text" min="" name="discount_vShop"
-                                   @if($request->status == 1) disabled @endif
-                                   value="{{$request->status == 1 ? $request->discount_vshop : ''}}"
+                                   @if($request->status > 0) disabled @endif
+                                   value="{{$request->status > 0 ? $request->discount_vshop : ''}}"
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
