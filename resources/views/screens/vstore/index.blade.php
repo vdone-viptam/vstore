@@ -34,7 +34,7 @@
         </div>
         <div class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử V-Store"</h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang <strong class="text-[#1E90FF]">tin dùng V-Store.</strong></span>
+            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong class="text-[#1E90FF]"> V-Store.</strong></span>
         </div>
         <div class="max-w-[320px]">
             <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
@@ -47,7 +47,7 @@
         <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
     </div>
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-[16px] sm:text-4xl text-[#1D293F]">CỔNG THƯƠNG MẠI ĐIỆN TỬ <strong class="text-[#1E90FF]">V-STORE </strong> LÀ GÌ?</h2>
+        <h2 class="font-semibold text-[16px] sm:text-4xl text-[#1D293F]">CỔNG THƯƠNG MẠI ĐIỆN TỬ <br><strong class="text-[#1E90FF]">V-STORE </strong> LÀ GÌ?</h2>
         <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội V-Done thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng V-Done. </span>
     </div>
 </div>
@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Quy trình trở thành V - Store</h2>
+    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Quy trình trở thành V-Store</h2>
     <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
     <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
         <img src="{{asset('home/img/circle.png')}}" class="w-full" alt="">
@@ -126,7 +126,7 @@
     </div>
 </div>
 <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia V - Store </h2>
+    <h2 class="text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia V-Store </h2>
     <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
 
 </div>
