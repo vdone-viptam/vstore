@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Otp;
 use App\Models\PasswordReset;
 use App\Models\User;
 use Carbon\Carbon;

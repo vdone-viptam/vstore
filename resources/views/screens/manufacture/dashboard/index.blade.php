@@ -11,7 +11,9 @@
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
         <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7 md:pt-7">
             <div  class="hidden cursor-pointer md:hidden lg:flex  justify-end  mb-10 w-full h-[200px]">
-                <img src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/321949557_823712235383207_847710945410794481_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=e3f864&_nc_ohc=NMQ-SQfVHo4AX_bNVh-&tn=qAoU72EWnZZywTO4&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfD5I8OYV7k1jZi5Qqz8OL8-h5XYgfczwxbAa03FmF28fA&oe=63E67B5E" class="w-full" alt="">
+                @if(\Illuminate\Support\Facades\Auth::user()->banner)
+                    <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full" alt="">
+                @endif
 {{--                <img src="{{asset('/image/users/'. \Illuminate\Support\Facades\Auth::user()->banner)}}">--}}
                 <!-- <div class="help relative flex gap-3 justify-end items-center pr-4">
                     <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
@@ -379,7 +381,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Doanh số'
+                        // text: 'Doanh số'
                     }, legend: {
                         display: false
                     },
@@ -409,7 +411,7 @@
                     legend: {display: false},
                     title: {
                         display: true,
-                        text: 'Số đơn hàng'
+                        // text: 'Số đơn hàng'
                     }
                 }
             });

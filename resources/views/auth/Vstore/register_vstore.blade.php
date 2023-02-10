@@ -79,13 +79,13 @@
     @csrf
     <div class=" grid grid-cols-1 lg:grid-cols-2">
         <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
-            <a href="#"
-               class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
-                <div>
-                    <img src="{{asset('asset/icons/back.png')}}" alt="">
-                </div>
-                <span class="text-title">Quay lại</span>
-            </a>
+{{--            <a href="#"--}}
+{{--               class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
+{{--                <div>--}}
+{{--                    <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
+{{--                </div>--}}
+{{--                <span class="text-title">Quay lại</span>--}}
+{{--            </a>--}}
             <div class="w-[162px]">
                 <img src="{{asset('asset/images/Logo.png')}}" alt="">
             </div>

@@ -23,6 +23,28 @@
     @vite('resources/css/app.css')
     @yield('custom_css')
 </head>
+<style>
+
+    .btn-verify.active {
+        background: linear-gradient(91.35deg, #005BB4 3.26%, #0E88FF 99.59%);
+    }
+
+
+    .validate-fail .inpt-vali {
+        border-color: #D90000;
+    }
+
+
+    .validate-fail .text-war {
+        display: block;
+        color: #D90000;
+    }
+
+
+    .validate-fail .input-code li input {
+        border-color: #D90000;
+    }
+</style>
 <body>
 @yield('modal')
 <div class="grid grid-cols-12">

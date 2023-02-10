@@ -97,5 +97,8 @@ class WarehouseController extends Controller
         return view('screens.manufacture.warehouse.detail', ['products1' => $products1]);
 
     }
+    public function test(){
+        return view('screens.vstore.product.test');
+    }
 }
 
