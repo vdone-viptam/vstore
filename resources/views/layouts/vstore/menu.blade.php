@@ -103,7 +103,7 @@
                 </div>
             </div>
             <ul class=" flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
+                <li><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
                 <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a></li>
             </ul>
         </div>

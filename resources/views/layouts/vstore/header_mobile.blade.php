@@ -131,7 +131,7 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
-                        <li><a href="{{route('screens.vstore.product.request')}}">Tất cả sản phẩm</a></li>
+                        <li><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
                         <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a>
                         </li>
                     </ul>
@@ -166,7 +166,7 @@
                         <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                     </ul>
                 </div>
-                {{--                Tài chính--}}
+
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -181,6 +181,35 @@
                                         <path class="svgFill"
                                               d="M16.9553 12.0931C15.5634 12.471 14.1605 11.8152 13.4152 10.5037C13.1083 9.97023 12.8014 9.43674 12.4945 8.89213C11.1464 6.52476 9.79835 4.1685 8.46122 1.80113C7.78169 0.589654 6.77336 -0.010525 5.38142 0.0117039C3.7922 0.0339327 2.21395 0.0117039 0.624727 0.0117039C0.438405 0.0117039 0.252083 0.0117039 0 0.0117039C0.109601 0.222878 0.175362 0.367366 0.263043 0.500739C2.33451 4.14627 4.41693 7.7918 6.4884 11.4373C7.52961 13.2601 8.57082 15.094 9.61203 16.9167C10.1162 17.8059 10.8396 18.3727 11.6177 18.6173C12.9768 19.0396 14.5222 18.4728 15.4099 16.9167C16.4731 15.0606 17.5252 13.1934 18.5884 11.3373C18.5884 11.3373 18.5884 11.3373 18.5884 11.3262C18.0513 11.5818 17.5362 11.9375 16.9553 12.0931Z"
                                               fill="#D2D7ED"/>
+                                    </svg>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <p class="text-[#495057] text-sm  text__menu">Đối tác</p>
+                                    <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                              stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                        <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
+                        <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
+                        <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
+                    </ul>
+                </div>
+                {{--                Tài chính--}}
+                <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
+                    <div class="flex items-center">
+                        <div class="tab__left rounded-[16px] p-2">
+                            <div
+                                class="flex items-center gap-3">
+                                <div class="w-[16px]">
+                                    <svg viewBox="0 0 14 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="svgFill" d="M7.53635 10.8644C4.41454 10.053 3.41061 9.21415 3.41061 7.90766C3.41061 6.40864 4.79961 5.36346 7.12377 5.36346C9.57171 5.36346 10.4794 6.53242 10.5619 8.25147H13.6012C13.5049 5.88605 12.0609 3.71316 9.18664 3.01179V0H5.0609V2.97053C2.39293 3.54813 0.247544 5.28094 0.247544 7.93517C0.247544 11.112 2.87426 12.6935 6.7112 13.6149C10.1493 14.4401 10.8369 15.6503 10.8369 16.9293C10.8369 17.8782 10.1631 19.391 7.12377 19.391C4.29077 19.391 3.17682 18.1257 3.02554 16.5029H0C0.165029 19.5147 2.42043 21.2063 5.0609 21.7701V24.7544H9.18664V21.7976C11.8684 21.2888 14 19.7348 14 16.9155C14 13.0098 10.6582 11.6758 7.53635 10.8644Z" fill="#B8BED9"></path>
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">

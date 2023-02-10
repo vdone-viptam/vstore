@@ -20,7 +20,25 @@ class ProductController extends Controller
     {
         $this->v = [];
     }
+    public function index(Request $request){
+        $limit = $request->limit ?? 10;
+        $this->v['products'] =  DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+            ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->join('users', 'requests.user_id', '=', 'users.id')
+            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
+            ->where('requests.vstore_id', Auth::id())
+            ->where('products.status',2);
 
+        if ($request->condition && $request->condition != 0) {
+            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
+        }
+        $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
+            ->paginate($limit);
+
+        $this->v['params'] = $request->all();
+
+        return view('screens.vstore.product.index', $this->v);
+    }
     public function request(Request $request)
     {
         if (isset($request->noti_id)) {

@@ -191,6 +191,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 
     });
     Route::prefix('products')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
         Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
         Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
