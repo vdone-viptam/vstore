@@ -18,20 +18,20 @@
             </div>
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                    <div class="flex justify-start items-center gap-2 w-full">
+                    <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Mã kho hàng:</span>
                         <span class="text-title">VSC1232</span>
                     </div>
 
-                    <div class="flex justify-start items-center gap-2 w-full">
+                    <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tên kho hàng:</span>
                         <span class="text-title">Nhà Kho Hải Đăng</span>
                     </div>
-                    <div class="flex justify-start items-center gap-2 w-full">
+                    <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Địa chỉ: </span>
                         <span class="text-title">Việt Nam</span>
                     </div>
-                    <div class="flex justify-start items-center gap-2 w-full">
+                    <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tổng sản phẩm trong tồn kho: </span>
                         <span class="text-title">100</span>
                     </div>
