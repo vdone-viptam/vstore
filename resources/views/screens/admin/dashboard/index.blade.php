@@ -236,7 +236,7 @@
                                     @foreach (Auth::user()->unreadNotifications as $index =>$notification)
                                         <li>
                                             <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
-                                               class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                               class="flex justify-between items-center w-full text-sm text-title font-bold">{{$notification['data']['message']}}
                                                 <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
                                         </li>
                                     @endforeach

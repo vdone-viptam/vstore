@@ -11,10 +11,11 @@
     <div
         class="grid grid-cols-1 lg:grid-cols-12 flex flex-col items-center lg:items-start gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
         <div class="lg:oder-1 order-2 2xl:col-span-9 lg:col-span-8 lg:pl-7 md:pt-7">
-        <div  class="hidden cursor-pointer md:hidden lg:flex  justify-end mb-10 w-full h-[200px]">
-            @if(\Illuminate\Support\Facades\Auth::user()->banner)
-                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full" alt="">
-            @endif
+            <div class="hidden cursor-pointer md:hidden lg:flex  justify-end mb-10 w-full h-[200px]">
+                @if(\Illuminate\Support\Facades\Auth::user()->banner)
+                    <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full"
+                         alt="">
+                @endif
             </div>
             <div class="flex flex-col justify-start items-start gap-16">
                 <div class="result w-full">
@@ -141,7 +142,8 @@
                                                 fill="#4062FF"/>
                                         </svg>
                                         <span
-                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span class="date">1 tuần</span></span>
+                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
+                                                class="date">1 tuần</span></span>
                                     </div>
                                     <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +158,7 @@
                                             class="slect-date outline-none appearance-none rounded-sm border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
                                         <option value="0" selected>1 tuần</option>
                                         <option value="1">1 Tháng</option>
-                                        <option value="2" >1 năm</option>
+                                        <option value="2">1 năm</option>
                                         <option value="3">3 năm</option>
                                     </select>
                                     <svg class="absolute top-2.5 right-2.5 pointer-events-none" width="16" height="16"
@@ -214,9 +216,9 @@
                             <ul class="sub-nav-notify">
                                 <div class="flex justify-between items-center w-full pb-3 px-3">
                                     <h2 class="text-xl font-normal text-title">Thông báo</h2>
-{{--                                    <a href="#"--}}
-{{--                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
-{{--                                        cả</a>--}}
+                                    {{--                                    <a href="#"--}}
+                                    {{--                                       class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
+                                    {{--                                        cả</a>--}}
                                 </div>
                                 @if(count(Auth::user()->unreadNotifications) > 0)
                                     @foreach (Auth::user()->unreadNotifications as $index =>$notification)
@@ -311,7 +313,7 @@
                                             </div>
                                             <div class="flex flex-col justify-start items-start">
                                                 <span class="text-sm "><a href="{{$notification['data']['href']}}"
-                                                                          class="font-bold">{{\Illuminate\Support\Str::limit($notification['data']['message'],30,'...')}} </a> mới</span>
+                                                                          class="font-bold">{{$notification['data']['message']}} </a></span>
                                                 <span
                                                     class="text-xs text-secondary">{{\Carbon\Carbon::parse($notification['created_at'])->format('d/m/Y')}}</span>
                                             </div>
@@ -391,8 +393,8 @@
                 }
             });
         })
-        $('.slect-date').change(function (){
-            $value= $('.slect-date option:selected').text();
+        $('.slect-date').change(function () {
+            $value = $('.slect-date option:selected').text();
             $('.date').html($value);
         });
     </script>
