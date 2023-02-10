@@ -140,6 +140,42 @@
             </ul>
         </div>
         {{--        Tài chính--}}
+        <div data-index="4" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+            <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
+                <div
+                    class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
+                <div class="tab__left rounded-[16px]">
+                    <div
+                        class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
+                        <div class="md:w-[16px] lg:w-[20px] xl:w-[25px] ">
+                            <svg viewBox="0 0 25 19" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svgFill" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M24.9999 0.00058515C24.7478 0.00058515 24.5615 0.00058515 24.3752 0.00058515C22.786 0.00058515 21.2077 0.022814 19.6185 0.00058515C18.2266 -0.0216437 17.2182 0.58965 16.5387 1.80112C15.2016 4.16849 13.8535 6.53587 12.5054 8.90324C12.8123 9.43673 13.1191 9.97022 13.426 10.5148C14.1713 11.8263 15.5742 12.4821 16.9661 12.1042C17.5361 11.9486 18.0622 11.5929 18.5882 11.3373C18.5882 11.3373 18.5882 11.3373 18.5882 11.3484C20.6487 7.73622 22.6983 4.12404 24.7588 0.511849C24.8246 0.356247 24.8903 0.211759 24.9999 0.00058515Z"
+                                      fill="#B8BED9"/>
+                                <path class="svgFill"
+                                      d="M16.9553 12.0931C15.5634 12.471 14.1605 11.8152 13.4152 10.5037C13.1083 9.97023 12.8014 9.43674 12.4945 8.89213C11.1464 6.52476 9.79835 4.1685 8.46122 1.80113C7.78169 0.589654 6.77336 -0.010525 5.38142 0.0117039C3.7922 0.0339327 2.21395 0.0117039 0.624727 0.0117039C0.438405 0.0117039 0.252083 0.0117039 0 0.0117039C0.109601 0.222878 0.175362 0.367366 0.263043 0.500739C2.33451 4.14627 4.41693 7.7918 6.4884 11.4373C7.52961 13.2601 8.57082 15.094 9.61203 16.9167C10.1162 17.8059 10.8396 18.3727 11.6177 18.6173C12.9768 19.0396 14.5222 18.4728 15.4099 16.9167C16.4731 15.0606 17.5252 13.1934 18.5884 11.3373C18.5884 11.3373 18.5884 11.3373 18.5884 11.3262C18.0513 11.5818 17.5362 11.9375 16.9553 12.0931Z"
+                                      fill="#D2D7ED"/>
+                            </svg>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Đối tác</p>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[150px]">
+                <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
+                <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
+                <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
+            </ul>
+        </div>
         <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
@@ -176,29 +212,29 @@
                 <li><a href="{{Route('screens.vstore.finance.history')}}">Lịch sử giao dịch</a></li>
             </ul>
         </div>
-{{--        <a href="{{route('screens.vstore.dashboard.index')}}">--}}
-{{--            <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">--}}
-{{--                <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">--}}
-{{--                    <div--}}
-{{--                        class="tab__left rounded-tr-[16px] rounded-br-[16px] xl:min-w-[12px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>--}}
-{{--                    <div class="tab__left rounded-[16px]">--}}
-{{--                        <div--}}
-{{--                            class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">--}}
-{{--                            <div class="md:w-[20px] xl:w-[32px]">--}}
-{{--                                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                    <path class="svgFill"--}}
-{{--                                          d="M12.1799 27.6978V23.6208C12.1799 22.58 13.0297 21.7364 14.0781 21.7364H17.9103C18.4137 21.7364 18.8966 21.9349 19.2525 22.2883C19.6085 22.6417 19.8085 23.121 19.8085 23.6208V27.6978C19.8053 28.1304 19.9762 28.5465 20.2833 28.8535C20.5904 29.1606 21.0082 29.3333 21.4441 29.3333H24.0586C25.2797 29.3364 26.4518 28.8571 27.3164 28.001C28.1809 27.145 28.6668 25.9826 28.6668 24.7704V13.1558C28.6668 12.1766 28.2296 11.2477 27.473 10.6195L18.5789 3.56778C17.0317 2.33137 14.815 2.3713 13.314 3.6626L4.62285 10.6195C3.83048 11.2292 3.3569 12.1608 3.3335 13.1558V24.7585C3.3335 27.2851 5.39667 29.3333 7.94173 29.3333H10.4965C11.4018 29.3333 12.1375 28.6082 12.1441 27.7096L12.1799 27.6978Z"--}}
-{{--                                          fill="#B8BED9"/>--}}
-{{--                                </svg>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex gap-2 items-center">--}}
-{{--                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Nhân viên</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </a>--}}
+        {{--        <a href="{{route('screens.vstore.dashboard.index')}}">--}}
+        {{--            <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">--}}
+        {{--                <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">--}}
+        {{--                    <div--}}
+        {{--                        class="tab__left rounded-tr-[16px] rounded-br-[16px] xl:min-w-[12px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>--}}
+        {{--                    <div class="tab__left rounded-[16px]">--}}
+        {{--                        <div--}}
+        {{--                            class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">--}}
+        {{--                            <div class="md:w-[20px] xl:w-[32px]">--}}
+        {{--                                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+        {{--                                    <path class="svgFill"--}}
+        {{--                                          d="M12.1799 27.6978V23.6208C12.1799 22.58 13.0297 21.7364 14.0781 21.7364H17.9103C18.4137 21.7364 18.8966 21.9349 19.2525 22.2883C19.6085 22.6417 19.8085 23.121 19.8085 23.6208V27.6978C19.8053 28.1304 19.9762 28.5465 20.2833 28.8535C20.5904 29.1606 21.0082 29.3333 21.4441 29.3333H24.0586C25.2797 29.3364 26.4518 28.8571 27.3164 28.001C28.1809 27.145 28.6668 25.9826 28.6668 24.7704V13.1558C28.6668 12.1766 28.2296 11.2477 27.473 10.6195L18.5789 3.56778C17.0317 2.33137 14.815 2.3713 13.314 3.6626L4.62285 10.6195C3.83048 11.2292 3.3569 12.1608 3.3335 13.1558V24.7585C3.3335 27.2851 5.39667 29.3333 7.94173 29.3333H10.4965C11.4018 29.3333 12.1375 28.6082 12.1441 27.7096L12.1799 27.6978Z"--}}
+        {{--                                          fill="#B8BED9"/>--}}
+        {{--                                </svg>--}}
+        {{--                            </div>--}}
+        {{--                            <div class="flex gap-2 items-center">--}}
+        {{--                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Nhân viên</p>--}}
+        {{--                            </div>--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </a>--}}
         {{--        log out--}}
         <div data-index="4" class="flex flex-col gap-3 cursor-pointer select-none ">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
