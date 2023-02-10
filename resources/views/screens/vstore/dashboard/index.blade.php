@@ -134,7 +134,7 @@
                         <div class="flex flex-col gap-4 w-full">
                             <div class="flex justify-between items-center w-full">
                             <h2 class="text-black font-semibold text-lg md:text-2xl">Sản phẩm chờ duyệt</h2>
-                            <a href="#" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
+                            <a href="{{route('screens.vstore.product.request')}}" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
                             </div>
 
                             <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 w-full">
@@ -223,7 +223,7 @@
                         <div class="flex flex-col gap-4 w-full">
                             <div class="flex justify-between items-center w-full">
                             <h2 class="text-black font-semibold text-lg md:text-2xl">Các V-Shop liên kết</h2>
-                            <a href="#" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
+                            <a href="{{Route('screens.vstore.partner.vshop')}}" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
                             </div>
 
                             <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 w-full">
@@ -278,7 +278,7 @@
                         <div class="flex flex-col gap-4 w-full">
                             <div class="flex justify-between items-center w-full">
                                 <h2 class="text-black font-semibold text-lg md:text-2xl">Danh sách các nhà cung cấp</h2>
-                                <a href="#" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
+                                <a href="{{Route('screens.vstore.partner.index')}}" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
                             </div>
 
                             <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 w-full">
@@ -557,7 +557,7 @@
                 options: {
                     title: {
                         display: true,
-                        // text: 'Doanh số'
+                        text: 'Doanh số'
                     }, legend: {
                         display: false
                     },
@@ -587,7 +587,7 @@
                     legend: {display: false},
                     title: {
                         display: true,
-                        // text: 'Số đơn hàng'
+                        text: 'Số đơn hàng'
                     }
                 }
             });
