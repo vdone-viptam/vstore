@@ -18,12 +18,12 @@
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Mã sản phẩm:</span>
-                        <span class="text-title">{{$request->code}}</span>
+                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->code}}</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Tên sản phẩm:</span>
-                        <span class="text-title">{{$request->product_name}}</span>
+                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->product_name}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Nhà cung cấp:</span>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Giá bán:</span>
-                        <span class="text-title">{{$request->price}}</span>
+                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->price}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Chiết khấu:</span>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Số lượng bán:</span>
-                        <span class="text-title">{{$request->amount_product}}</span>
+                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->amount_product}}</span>
                     </div>
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="grid grid-cols-2 gap-4 w-full">
