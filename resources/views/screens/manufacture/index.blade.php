@@ -29,10 +29,10 @@
 <div class="bgncc w-full relative h-auto md:h-screen">
     <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-            <div class="w-[120px] h-[25px] md:hidden">
+            <div class="w-[120px] h-[45px] md:hidden">
                 <a href="./"> <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt=""></a>
             </div>
-            <div class="hidden md:block w-[234px] h-[59px]">
+            <div class="hidden md:block w-[181px] h-[67px]">
                 <a href="./"> <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt=""></a>
             </div>
 

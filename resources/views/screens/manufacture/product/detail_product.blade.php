@@ -14,38 +14,38 @@
         </div>
         <div class="content  max-h-[600px] overflow-y-auto">
             <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Mã sản phẩm:</span>
-                    <span class="text-title">{{$product->publish_id}}</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->publish_id}}</span>
                 </div>
 
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Tên sản phẩm:</span>
-                    <span class="text-title">{{$product->name}}</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->name}}</span>
                 </div>
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Giá bán:</span>
-                    <span class="text-title">{{$product->price}}</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->price}}</span>
                 </div>
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Thương hiệu:</span>
-                    <span class="text-title">{{$product->brand}}</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->brand}}</span>
                 </div>
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Ngành hàng:</span>
-                    <span class="text-title">{{$product->category->name}}</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->category->name}}</span>
                 </div>
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Chiết khấu vstore:</span>
-                    <span class="text-title">{{$product->discount ?? 0}} %</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->discount ?? 0}} %</span>
                 </div>
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Chiết khấu vshop:</span>
-                    <span class="text-title">{{$product->discount_vshop ?? 0}} %</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->discount_vshop ?? 0}} %</span>
                 </div>
-                <div class="flex justify-start items-center gap-2 w-full">
+                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Số lượng bán:</span>
-                    <span class="text-title">{{$product->amount_product ?? 0 }}</span>
+                    <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$product->amount_product ?? 0 }}</span>
                 </div>
             </div>
             <div class="flex justify-end items-center gap-4 ">

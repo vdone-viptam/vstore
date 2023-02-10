@@ -3,11 +3,11 @@
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-        <div class="modal modal-pend flex justify-center items-center show-modal">
-            <div class="over-lay-modal" onclick="$('.modal-pend').toggleClass('show-modal')"></div>
+    <div class="modal modal-success flex justify-center items-center show-modal">
+            <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
-                class="information success flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px] h-[400px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
-                <svg width="24" height="24" viewBox="0 0 24 24" onclick="$('.modal-pend').toggleClass('show-modal')"
+                class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
+                <svg width="24" height="24" viewBox="0 0 24 24" onclick="$('.modal-success').toggleClass('show-modal')"
                      class="cursor-pointer absolute top-[-25px] right-0 hover:opacity-75 transition-all duration-200"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -15,9 +15,11 @@
                         fill="white"/>
                 </svg>
 
-                <div class="content pt-3 px-3 text-center pb-2 md:pb-12">
-                    <h2 class="text-title text-2xl font-medium">Thêm sản phẩm thành công</h2>
-
+                <div class="content pt-3 px-3 text-center flex flex-col gap-6">
+                    <div class="w-[262px] h-[262px] mx-auto">
+                        <img src="{{asset('asset/images/success.gif')}}" class="w-full" alt="">
+                    </div>
+                    <h2 class="text-title text-2xl font-medium">Thêm sản phẩm thành công!</h2>
                 </div>
             </div>
         </div>
@@ -45,6 +47,7 @@
 @endsection
 
 @section('content')
+
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
         <span class="text-secondary whitespace-nowrap">Sản phẩm</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
