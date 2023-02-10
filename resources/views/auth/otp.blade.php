@@ -80,14 +80,15 @@
             @endif
             <div class="flex flex-col justify-center items-center gap-6 w-full py-6">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Nhập otp </span>
+
+                    <span class="text-[15px]"><strong class="text-[#FF4D4F] ">*</strong>Vui lòng nhập mã otp được gửi trong gmail </span>
                     <input type="number" name="otp" placeholder="Nhập otp"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('otp')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div class=md:text-left>Bạn chưa nhận được mã. <a href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại ngay</a></div>
+                <div class=md:text-left>Bạn chưa nhận được mã. <a class="" href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại</a></div>
                 {{--                <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
                 {{--                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mật khẩu</span>--}}
                 {{--                    <div class="pass w-full relative">--}}
