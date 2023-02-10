@@ -23,7 +23,9 @@ Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController
 Route::post('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'postResetForgot']);
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('postLogin');
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'getLogout'])->name('logout');
-
+Route::get('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
+Route::post('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
+Route::get('reOtp',[\App\Http\Controllers\Auth\LoginController::class,'reOtp'])->name('re_otp');
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
@@ -97,7 +99,7 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
 //Quyền nhà cung cấp
 
 Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function () {
-    Route::get('test',[\App\Http\Controllers\Manufacture\WarehouseController::class,'test']);
+    Route::get('test', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'test']);
 
     Route::get('amount', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'amount'])->name('amount');
     Route::prefix('dashboard')->group(function () {

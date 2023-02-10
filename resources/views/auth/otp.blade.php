@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quên mật khẩu V-Store</title>
+    <title>Xác minh tài khoản</title>
     <link rel="stylesheet" href="{{asset('asset/css/forgot.css')}}">
     <link rel="stylesheet" href={{asset('asset/dist/forgot.css')}}>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
@@ -58,19 +58,19 @@
 <div class=" grid grid-cols-1 place-items-center translate-y-[4rem]">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl md:w-[500px]">
-{{--        <a href="../" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
-{{--            <div>--}}
-{{--                <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
-{{--            </div>--}}
-{{--            <span class="text-title">Quay lại</span>--}}
-{{--        </a>--}}
+        {{--        <a href="../" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
+        {{--            <div>--}}
+        {{--                <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
+        {{--            </div>--}}
+        {{--            <span class="text-title">Quay lại</span>--}}
+        {{--        </a>--}}
         <div class="w-[162px]">
             <img src="{{asset('asset/images/Logo.png')}}" alt="">
         </div>
-        <h1 class="text-4xl font-medium max-w-[520px]">Quên mật khẩu</h1>
+        <h1 class="text-4xl font-medium max-w-[520px]">Xác minh tài khoản</h1>
 
-        <form action="#" method="post" class="w-full" id="form-log">
-            @csrf
+        <form action="{{route('post_otp',['token' => $token,'id' => $user_id])}}" method="post" class="w-full"
+              id="form-log">
             @csrf
             @if(\Illuminate\Support\Facades\Session::has('success'))
                 <h4 style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</h4>
@@ -80,13 +80,14 @@
             @endif
             <div class="flex flex-col justify-center items-center gap-6 w-full py-6">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Email </span>
-                    <input type="email" name="email" placeholder="Nhập email"
+                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Nhập otp </span>
+                    <input type="number" name="otp" placeholder="Nhập otp"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    @error('email')
+                    @error('otp')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
+                <div class=md:text-left>Bạn chưa nhận được mã. <a href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại ngay</a></div>
                 {{--                <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
                 {{--                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mật khẩu</span>--}}
                 {{--                    <div class="pass w-full relative">--}}
@@ -102,10 +103,10 @@
                 {{--                </div>--}}
             </div>
 
-            {{--            <div class="flex justify-between items-center w-full">--}}
+            <div class="flex justify-between items-center w-full">
 
-            {{--                <a href="{{route('login')}}" class="font-medium text-[#096DD9]">Đăng nhập</a>--}}
-            {{--            </div>--}}
+                {{--                <a href="{{route('login')}}" class="font-medium text-[#096DD9]">Đăng nhập</a>--}}
+            </div>
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
                        class=" btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
@@ -119,5 +120,6 @@
 
 </div>
 {{--<script src="{{asset('asset/js/main.js')}}"></script>--}}
+
 </body>
 </html>

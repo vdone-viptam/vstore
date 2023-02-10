@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     public function getFormLoginVstore()
     {
-        if (Auth::user()&& Auth::user()->role_id ==3){
+        if (Auth::user() && Auth::user()->role_id == 3) {
             return redirect()->route('screens.vstore.dashboard.index');
         }
         return view('auth.Vstore.login_vstore');
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public function getFormLoginNCC()
     {
-        if (Auth::user()&& Auth::user()->role_id ==2){
+        if (Auth::user() && Auth::user()->role_id == 2) {
             return redirect()->route('screens.manufacture.dashboard.index');
         }
         return view('auth.NCC.login_ncc');
@@ -132,25 +132,43 @@ class LoginController extends Controller
         ]);
 //        return 1;
         $credentials = request(['email', 'password']);
-        if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password])) {
-            if ($request->type == Auth::user()->role_id) {
-                if (Auth::user()->role_id == 1) {
-                    return redirect()->route('screens.admin.dashboard.index');
-                }
-                if (Auth::user()->role_id == 2) {
-
-                    return redirect()->route('screens.manufacture.dashboard.index');
-                }
-                if (Auth::user()->role_id == 3) {
-
-                    return redirect()->route('screens.vstore.dashboard.index');
-                }
+        try {
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password])) {
+                $token = Str::random(32);
+                $userLogin = Auth::user();
+                $login = new Otp();
+                $login->code = rand(100000, 999999);
+                $login->user_code = $userLogin->id;
+                $login->save();
+                Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($userLogin) {
+                    $message->to($userLogin->email);
+                    $message->subject('Bạn vừa có yêu cầu đăng nhập');
+                });
+                Auth::logout();
+                return redirect()->route('otp', ['token' => $token, 'id' => $userLogin->id]);
+//            if ($request->type == Auth::user()->role_id) {
+//                if (Auth::user()->role_id == 1) {
+//                    return redirect()->route('screens.admin.dashboard.index');
+//                }
+//                if (Auth::user()->role_id == 2) {
+//
+//                    return redirect()->route('screens.manufacture.dashboard.index');
+//                }
+//                if (Auth::user()->role_id == 3) {
+//
+//                    return redirect()->route('screens.vstore.dashboard.index');
+//                }
+//            } else {
+//                return redirect()->back()->with('error', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
+//            }
             } else {
-                return redirect()->back()->with('error', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
-            }
-        } else {
-            return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
-        };
+                return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
+            };
+        }
+        catch (\Exception $e){
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+        }
+
 
     }
 
@@ -232,7 +250,58 @@ class LoginController extends Controller
     public function getLogout()
     {
         Auth::logout();
-
+        Auth::hasUser();
         return redirect('login');
+    }
+
+    public function OTP($token, Request $request)
+    {
+
+        return view('auth.otp', [
+            'token' => $token,
+            'user_id' => $request->id
+        ]);
+    }
+
+    public function post_OTP(Request $request, $token)
+    {
+        $otp = Otp::where('user_code',$request->id)->where('code',$request->otp)->first();
+        $now = Carbon::now();
+        if($now->diffInMinutes($otp->created_at)>=1){
+            return redirect()->back()->with('error','Mã xác minh đã hết hạn');
+        }
+        if ($otp){
+            $user = User::find($request->id);
+            Auth::login($user);
+            Otp::where('user_code',$request->id)->delete();
+            $otp->delete();
+                if (Auth::user()->role_id == 1) {
+                    return redirect()->route('screens.admin.dashboard.index');
+                }
+                if (Auth::user()->role_id == 2) {
+
+                    return redirect()->route('screens.manufacture.dashboard.index');
+                }
+                if (Auth::user()->role_id == 3) {
+
+                    return redirect()->route('screens.vstore.dashboard.index');
+                }
+
+        }else{
+            return redirect()->back()->with('error','Mã xác minh không chính xác');
+        }
+
+    }
+    public function reOtp(Request $request){
+        $user = User::find($request->id);
+        $login = new Otp();
+        $login->code = rand(100000, 999999);
+        $login->user_code = $user->id;
+        $login->save();
+        Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($user) {
+            $message->to($user->email);
+            $message->subject('Bạn vừa có yêu cầu gửi lại mã xác minh');
+        });
+        return redirect()->back();
     }
 }
