@@ -44,8 +44,9 @@
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
                         <h2 class="text-xl font-normal text-title">Thông báo</h2>
-{{--                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
-{{--                            cả</a>--}}
+                        <a href="{{route('ncc_all_noti')}}"
+                           class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                            cả</a>
                     </div>
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)
@@ -64,9 +65,9 @@
             </div>
             <div class="user relative flex items-center gap-2">
                 <div class="w-[40px] h-[40px] rounded-full">
-                <img class="w-full rounded-full cursor-pointer"
-                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
-                     alt="">
+                    <img class="w-full rounded-full cursor-pointer"
+                         src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
+                         alt="">
                 </div>
 
                 <div class="flex flex-col gap-[3px] justify-center">

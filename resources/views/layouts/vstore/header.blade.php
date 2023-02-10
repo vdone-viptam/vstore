@@ -44,8 +44,9 @@
                 <ul class="sub-nav-notify">
                     <div class="flex justify-between items-center w-full pb-3 px-3">
                         <h2 class="text-xl font-normal text-title">Thông báo</h2>
-{{--                        <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
-{{--                            cả</a>--}}
+                        <a href="{{route('vstore_all_noti')}}"
+                           class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                            cả</a>
                     </div>
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)

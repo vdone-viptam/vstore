@@ -166,7 +166,7 @@ class LoginController extends Controller
             };
         }
         catch (\Exception $e){
-//            dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 

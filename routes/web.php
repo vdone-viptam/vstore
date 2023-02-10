@@ -25,7 +25,7 @@ Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'postL
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'getLogout'])->name('logout');
 Route::get('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
 Route::post('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
-Route::get('reOtp',[\App\Http\Controllers\Auth\LoginController::class,'reOtp'])->name('re_otp');
+Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
@@ -93,7 +93,9 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
 
     });
-
+    Route::get('/notifications', function () {
+        return view('layouts.admin.all_noti', []);
+    })->name('admin_all_noti');
 
 });
 //Quyền nhà cung cấp
@@ -160,7 +162,9 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
     });
-
+    Route::get('/notifications', function () {
+        return view('layouts.manufacture.all_noti', []);
+    })->name('ncc_all_noti');
 });
 //Quyền vstore
 
@@ -200,6 +204,9 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 //        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
     });
+    Route::get('/notifications', function () {
+        return view('layouts.vstore.all_noti', []);
+    })->name('vstore_all_noti');
 });
 //Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 
