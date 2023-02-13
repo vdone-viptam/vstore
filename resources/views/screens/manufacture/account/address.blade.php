@@ -47,7 +47,7 @@
                         <div class="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 w-full">
                             <input type="text" name="name"
                                    class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
-                                   placeholder="Họ và tên">
+                                   placeholder="Tên">
                             <input type="text" name="phone_number"
                                    class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"
                                    placeholder="Số điện thoại">
