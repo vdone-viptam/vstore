@@ -37,11 +37,15 @@
     }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
-    <a href="{{route('screens.vstore.dashboard.index')}}" class="">
-        <div class="w-[195px] h-[40px] mx-auto my-6">
-            <img class="w-full" src="{{asset('asset/images/logo.png')}}" alt="">
+<a href="{{route('screens.vstore.dashboard.index')}}" class="">
+        <div class=" w-[178px] h-[85px] mx-auto my-6">
+            <!-- <img 
+                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
+                 alt=""> -->
+                 <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
         </div>
     </a>
+
     <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab my-4">
         {{--      Tổng quan--}}
         <a href="{{route('screens.vstore.dashboard.index')}}">
