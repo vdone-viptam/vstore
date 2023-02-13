@@ -36,13 +36,13 @@
         stroke: #4062FF;
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden">
+<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
-        <div class=" flex items-center justify-center py-9">
-            <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
+        <div class="w-[195px] h-[40px] mx-auto my-6">
+            <img class="w-full" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
     </a>
-    <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
+    <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab my-4">
         {{--      Tổng quan--}}
         <a href="{{route('screens.vstore.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
