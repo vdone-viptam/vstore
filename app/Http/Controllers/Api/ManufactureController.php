@@ -7,6 +7,12 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
+/**
+ * @group Manufacture
+ *
+ * Danh sách api liên quan nhà cung cấp
+ */
 class ManufactureController extends Controller
 {
     /**

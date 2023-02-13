@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+/**
+ * @group Vstore
+ *
+ * Danh sách api liên quan nhà phân phối vstore
+ */
 class VstoreController extends Controller
 {
     //
