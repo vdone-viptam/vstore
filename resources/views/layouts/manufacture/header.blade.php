@@ -1,5 +1,5 @@
-<header class="top-0" >
-<div class=" w-full bg-[#F2F8FF] nav py-2"> 
+<header class="top-0 hidden md:block" >
+<div class=" w-full bg-[#F2F8FF] nav py-2 xl:px-12 px-4 fixed top-0 right-0 z-[6]"> 
 <div class="flex justify-end lg:justify-end items-center">
         <div
             class="flex justify-end gap-6 xl:justify-end lg:justify-between items-center xl:gap-6 py-4 md:py-0">
@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div class="hidden cursor-pointer md:hidden lg:flex  justify-end  my-6 w-full h-[180px]">
+<div class="hidden cursor-pointer md:hidden lg:flex  justify-end  my-6 w-full h-[300px]">
     @if(\Illuminate\Support\Facades\Auth::user()->banner)
         <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full"
              alt="">

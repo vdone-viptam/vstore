@@ -36,12 +36,13 @@
         stroke: #4062FF;
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden">
+<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
     <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-        <div class=" flex items-center justify-center py-9">
-            <img style="height: 100px !important;"
+        <div class=" w-[178px] h-[85px] mx-auto my-6">
+            <!-- <img 
                  src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
-                 alt="">
+                 alt=""> -->
+                 <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
         </div>
     </a>
     <div class="pr-[15px] flex flex-col gap-6 h-full choose-tab w-full max-h-[700px]">
