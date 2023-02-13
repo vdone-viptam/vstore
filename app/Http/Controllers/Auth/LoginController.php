@@ -145,7 +145,7 @@ class LoginController extends Controller
                     $message->subject('Bạn vừa có yêu cầu đăng nhập');
                 });
                 Auth::logout();
-                return redirect()->route('otp', ['token' => $token, 'id' => $userLogin->id]);
+                return redirect()->route('otp', ['token1' => $token, 'id' => $userLogin->id]);
 //            if ($request->type == Auth::user()->role_id) {
 //                if (Auth::user()->role_id == 1) {
 //                    return redirect()->route('screens.admin.dashboard.index');
@@ -166,7 +166,7 @@ class LoginController extends Controller
             };
         }
         catch (\Exception $e){
-//            dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 
@@ -255,23 +255,25 @@ class LoginController extends Controller
         return redirect('login');
     }
 
-    public function OTP($token, Request $request)
+    public function OTP($token1, Request $request)
     {
 
         return view('auth.otp', [
-            'token' => $token,
+            'token' => $token1,
             'user_id' => $request->id
         ]);
     }
 
-    public function post_OTP(Request $request, $token)
+    public function post_OTP(Request $request, $token1)
     {
         $otp = Otp::where('user_code',$request->id)->where('code',$request->otp)->first();
         $now = Carbon::now();
-        if($now->diffInMinutes($otp->created_at)>=1){
-            return redirect()->back()->with('error','Mã xác minh đã hết hạn');
-        }
+
+
         if ($otp){
+            if($now->diffInMinutes($otp->created_at)>=1){
+                return redirect()->back()->with('error','Mã xác minh đã hết hạn');
+            }
             $user = User::find($request->id);
             Auth::login($user);
             Otp::where('user_code',$request->id)->delete();

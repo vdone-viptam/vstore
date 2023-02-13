@@ -100,7 +100,7 @@
             </div>
             <h3 class="text-[#1D293F] font-semibold text-2xl">Hoàn thiện hồ sơ</h3>
             <span class="text-[#7C8087] text-right md:text-left">
-                    Hoàn thiện thông tin và hồ sơ được yêu cầu theo hướng dẫn, chỉ mất chưa đến 15p
+                    Hoàn thiện thông tin và hồ sơ được yêu cầu theo hướng dẫn, chỉ mất chưa đến 15 phút
                 </span>
             <svg width="160" height="119" class="absolute bottom-[-125px] right-[20px] md:hidden" viewBox="0 0 160 119" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M134.072 2C134.072 2 118.032 78.1465 29.6856 111.152" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
@@ -358,7 +358,7 @@
 
                 </a></li>
         </ul>
-        <span class="uppercase text-xs text-[#272D4E]">COPYRIGHT V-Store 2023 - TERMS & CONDITIONS  PRIVACY POLICY</span>
+        <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
     </div>
 </footer>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

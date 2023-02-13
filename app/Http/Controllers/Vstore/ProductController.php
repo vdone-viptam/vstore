@@ -20,7 +20,25 @@ class ProductController extends Controller
     {
         $this->v = [];
     }
+    public function index(Request $request){
+        $limit = $request->limit ?? 10;
+        $this->v['products'] =  DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+            ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->join('users', 'requests.user_id', '=', 'users.id')
+            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
+            ->where('requests.vstore_id', Auth::id())
+            ->where('products.status',2);
 
+        if ($request->condition && $request->condition != 0) {
+            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
+        }
+        $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
+            ->paginate($limit);
+
+        $this->v['params'] = $request->all();
+
+        return view('screens.vstore.product.index', $this->v);
+    }
     public function request(Request $request)
     {
         if (isset($request->noti_id)) {
@@ -75,9 +93,10 @@ class ProductController extends Controller
         $userLogin = Auth::user();
         $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
         $message = $request->status == 2 ? $userLogin->name . ' đã đồng yêu cầu niêm yết sản phẩm đến bạn và gửi yêu cầu tời quản trị viên' : $userLogin->name . ' đã từ chối yêu cầu niêm yết sản phẩm của bạn';
+
         $data = [
             'title' => 'Bạn vừa có 1 thông báo mới',
-            'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+            'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
             'message' => $message,
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
             'href' => route('screens.manufacture.product.request')
@@ -89,7 +108,7 @@ class ProductController extends Controller
             $user = User::find($admin->id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $currentRequest->NCC->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                 'href' => route('screens.admin.product.index')

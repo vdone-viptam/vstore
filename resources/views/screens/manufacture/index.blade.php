@@ -55,7 +55,7 @@
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
         <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Nhà cung cấp là gì?</h2>
         <span class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng V-Done. Tại V-Done, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
-        <a href="{{asset('register_ncc')}}" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành Nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="{{route('register_ncc')}}" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành Nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z" fill="#04AADD"/>
 </svg>
 </a>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <span class="text-sm font-semibold text-[#034D82] text-center">
-            Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm.
+            Được quyền hỗ trợ bảo hành nâng cấp hệ thống
             </span>
        </div>
        <div class="text-center boxli w-full p-3 mx-auto">
@@ -325,7 +325,7 @@
 
                 </a></li>
         </ul>
-        <span class="uppercase text-xs text-[#272D4E]">COPYRIGHT V-Store 2023 - TERMS & CONDITIONS  PRIVACY POLICY</span>
+        <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
     </div>
 </footer>
 

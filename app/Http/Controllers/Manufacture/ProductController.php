@@ -345,9 +345,10 @@ class ProductController extends Controller
             DB::table('products')->where('id', $request->product_id)->update(['status' => 1]);
             $userLogin = Auth::user();
             $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => $userLogin->avatar ?? '',
+                'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
                 'href' => route('screens.vstore.product.request',)

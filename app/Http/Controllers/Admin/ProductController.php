@@ -87,7 +87,7 @@ class ProductController extends Controller
             }
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => $userLogin->avatar ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                 'href' => route('screens.manufacture.product.request')

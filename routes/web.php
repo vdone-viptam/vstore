@@ -23,9 +23,10 @@ Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController
 Route::post('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'postResetForgot']);
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('postLogin');
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'getLogout'])->name('logout');
-Route::get('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
-Route::post('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
-Route::get('reOtp',[\App\Http\Controllers\Auth\LoginController::class,'reOtp'])->name('re_otp');
+Route::get('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
+Route::post('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
+Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
+Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
@@ -50,7 +51,6 @@ Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpage'])->name('landingpagevstore');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
-    Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
 
 //    Route::get('/', function () {
 //        return view('screens.vstore.index');
@@ -93,7 +93,9 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
 
     });
-
+    Route::get('/notifications', function () {
+        return view('layouts.admin.all_noti', []);
+    })->name('admin_all_noti');
 
 });
 //Quyền nhà cung cấp
@@ -160,7 +162,9 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
     });
-
+    Route::get('/notifications', function () {
+        return view('layouts.manufacture.all_noti', []);
+    })->name('ncc_all_noti');
 });
 //Quyền vstore
 
@@ -187,6 +191,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 
     });
     Route::prefix('products')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
         Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
         Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
@@ -200,6 +205,9 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 //        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
     });
+    Route::get('/notifications', function () {
+        return view('layouts.vstore.all_noti', []);
+    })->name('vstore_all_noti');
 });
 //Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
 

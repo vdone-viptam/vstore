@@ -37,7 +37,7 @@
     }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden">
-    <a href="" class="">
+    <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
         <div class=" flex items-center justify-center py-9">
             <img style="height: 100px !important;"
                  src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
@@ -252,7 +252,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p style="color: #495057" class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Ví</p>
+                            <p style="" class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tài chính</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"

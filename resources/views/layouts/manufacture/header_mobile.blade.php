@@ -364,8 +364,9 @@
                     <ul class="sub-nav-notify">
                         <div class="flex justify-between items-center w-full pb-3 px-3">
                             <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                            {{--                            <a href="#" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất--}}
-                            {{--                                cả</a>--}}
+                            <a href="{{route('ncc_all_noti')}}"
+                               class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                                cả</a>
                         </div>
                         @if(count(Auth::user()->unreadNotifications) > 0)
                             @foreach (Auth::user()->unreadNotifications as $index =>$notification)
@@ -387,7 +388,7 @@
                              alt="">
                     </div>
 
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{asset(\Illuminate\Support\Facades\Auth::user()->account_code)}}</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
