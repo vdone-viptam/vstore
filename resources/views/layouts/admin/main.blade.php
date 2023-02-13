@@ -62,7 +62,7 @@
     if (param === "finances") {
         tm[5].classList.toggle("active")
     }
-    //
+    // menu mobile
     const nav = document.getElementById("nav")
     const menu = document.getElementsByClassName("menu")
     const bg = document.getElementsByClassName("show_bg")[0]
