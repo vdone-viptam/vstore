@@ -19,23 +19,26 @@
         stroke: white;
     }
 
-    .tab__hover:hover .text__menu {
-        color: #4062FF;
-        font-weight: 600;
+    @media screen and (min-width: 768px) {
+        .tab__hover:hover .text__menu {
+            color: #4062FF;
+            font-weight: 600;
+        }
+
+        .tab__hover:hover .svg {
+            stroke: #4062FF;
+        }
+
+        .tab__hover:hover .svgFill {
+            fill: #4062FF;
+        }
+
+        .tab__hover:hover .svg_arr {
+            stroke: #4062FF;
+        }
     }
 
-    .tab__hover:hover .svg {
-        stroke: #4062FF;
-    }
-
-    .tab__hover:hover .svgFill {
-        fill: #4062FF;
-    }
-
-    .tab__hover:hover .svg_arr {
-        stroke: #4062FF;
-    }
-    .choose-tab::-webkit-scrollbar-track{
+    .choose-tab::-webkit-scrollbar-track {
         background: #F2F8FF;
     }
 </style>
@@ -107,14 +110,15 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list hidden xl:max-w-[230px] md:max-w-[200px]">
-{{--                <li  data-page="index" class="hover:underline">     <a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>--}}
-{{--                </li>--}}
-                <li  data-page="index" class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu
+                {{--                <li  data-page="index" class="hover:underline">     <a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>--}}
+                {{--                </li>--}}
+                <li data-page="index" class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý
+                        yêu cầu
                         xét duyệt
                         phẩm</a></li>
             </ul>
         </div>
-{{--                Danh mục--}}
+        {{--                Danh mục--}}
         <a href="{{route('screens.admin.category.index')}}">
             <div data-index="2" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
                 <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
@@ -164,7 +168,8 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý tài khoản</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý tài
+                                khoản</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -176,9 +181,11 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list hidden xl:max-w-[230px] md:max-w-[200px]">
-                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách tài
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách
+                        tài
                         khoản</a></li>
-                <li data-page="register-account"><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
+                <li data-page="register-account"><a class="hover:underline"
+                                                    href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
                         ký tài khoản </a>
                 </li>
             </ul>
@@ -210,8 +217,11 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
-                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.account.profile')}}">Hồ sơ của tôi</a></li>
-                <li data-page="change-password"><a class="hover:underline" href="{{route('screens.admin.account.changePassword')}}">Đổi mật khẩu</a>
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.account.profile')}}">Hồ sơ của
+                        tôi</a></li>
+                <li data-page="change-password"><a class="hover:underline"
+                                                   href="{{route('screens.admin.account.changePassword')}}">Đổi mật
+                        khẩu</a>
                 </li>
 
             </ul>

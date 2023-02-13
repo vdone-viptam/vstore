@@ -19,24 +19,27 @@
         stroke: white;
     }
 
-    .tab__hover:hover .text__menu {
-        color: #4062FF;
-        font-weight: 600;
-    }
-
-    .tab__hover:hover .svg {
-        stroke: #4062FF;
-    }
-
-    .tab__hover:hover .svgFill {
-        fill: #4062FF;
-    }
-
-    .tab__hover:hover .svg_arr {
-        stroke: #4062FF;
-    }
     .choose-tab::-webkit-scrollbar-track{
         background: #F2F8FF;
+    }
+
+    @media screen and (min-width: 768px) {
+        .tab__hover:hover .text__menu {
+            color: #4062FF;
+            font-weight: 600;
+        }
+
+        .tab__hover:hover .svg {
+            stroke: #4062FF;
+        }
+
+        .tab__hover:hover .svgFill {
+            fill: #4062FF;
+        }
+
+        .tab__hover:hover .svg_arr {
+            stroke: #4062FF;
+        }
     }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
@@ -109,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list  md:max-w-[150px] xl:max-w-[230px]">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px]">
                 <li class="hover:underline" data-page="/"><a href="{{route('screens.manufacture.product.index')}}">Tất
                         cả sản phẩm</a>
                 </li>

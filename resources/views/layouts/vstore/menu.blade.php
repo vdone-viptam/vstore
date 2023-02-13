@@ -19,21 +19,23 @@
         stroke: white;
     }
 
-    .tab__hover:hover .text__menu {
-        color: #4062FF;
-        font-weight: 600;
-    }
+    @media screen and (min-width: 768px) {
+        .tab__hover:hover .text__menu {
+            color: #4062FF;
+            font-weight: 600;
+        }
 
-    .tab__hover:hover .svg {
-        stroke: #4062FF;
-    }
+        .tab__hover:hover .svg {
+            stroke: #4062FF;
+        }
 
-    .tab__hover:hover .svgFill {
-        fill: #4062FF;
-    }
+        .tab__hover:hover .svgFill {
+            fill: #4062FF;
+        }
 
-    .tab__hover:hover .svg_arr {
-        stroke: #4062FF;
+        .tab__hover:hover .svg_arr {
+            stroke: #4062FF;
+        }
     }
     .choose-tab::-webkit-scrollbar-track{
         background: #F2F8FF;

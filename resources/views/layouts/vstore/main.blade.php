@@ -100,24 +100,21 @@
         }
 
         //    hover menu
-        const body = document.getElementById("body")
-        if(body.offsetWidth > 767.99){
-            const hv = document.getElementsByClassName("choose-tab")[0]
-            hv.addEventListener("click", () => {
-                for (let i = 1; i < tm.length; i++) {
-                    if (tm[i].classList.contains("active")) {
-                        tm[i].classList.remove("tab__hover")
-                    } else {
-                        tm[i].classList.add("tab__hover")
-                    }
-                }
-            })
-            for (let i = 0; i < tm.length; i++) {
+        const hv = document.getElementsByClassName("choose-tab")[0]
+        hv.addEventListener("click", () => {
+            for (let i = 1; i < tm.length; i++) {
                 if (tm[i].classList.contains("active")) {
                     tm[i].classList.remove("tab__hover")
                 } else {
                     tm[i].classList.add("tab__hover")
                 }
+            }
+        })
+        for (let i = 0; i < tm.length; i++) {
+            if (tm[i].classList.contains("active")) {
+                tm[i].classList.remove("tab__hover")
+            } else {
+                tm[i].classList.add("tab__hover")
             }
         }
     }
