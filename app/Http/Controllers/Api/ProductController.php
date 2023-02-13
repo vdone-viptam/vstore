@@ -39,6 +39,16 @@ class ProductController extends Controller
         ]);
 
     }
+    /**
+     * Danh sách sản phẩm theo danh mục
+     *
+     * API này sẽ trả về sản phẩm theo danh mục
+     *
+     * @param Request $request
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @return JsonResponse
+     */
     public function productByCategory( Request $request,$id){
         $limit = $request->limit ?? 10;
         $products = Product::where('category_id',$id)->paginate($limit);
