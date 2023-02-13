@@ -242,13 +242,13 @@
 </div>
 <div class="bnbot">
     <div class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000+ V-Store nổi bật</h2>
+        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000 V-Store nổi bật</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">
                     <img src="{{asset('home/img/avt.png')}}" class="w-full rounded-full" alt="">
                 </div>
-                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
+                <span class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED</span>
             </div>
             <div class="box flex flex-col justify-center items-center gap-2 p-5">
                 <div class="w-[80px] h-[80px] rounded-full">

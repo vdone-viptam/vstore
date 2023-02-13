@@ -15,9 +15,12 @@
 </head>
 <body id="body">
 @yield('modal')
-<div class="grid grid-cols-12">
+<div class="absolute w-full h-full bg-transparent screen z-[4] hidden">
+
+</div>
+<div class="grid grid-cols-12" id="boxq">
     @include('layouts.vstore.menu')
-    <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
+    <div class="md:col-span-3 2xl:col-span-2 hidden md:block z-[6]">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.vstore.header')

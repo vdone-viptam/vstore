@@ -242,7 +242,7 @@ $(document).ready(function () {
         $('.choose-tab .tab__menu').removeClass('active');
         $(this).addClass('active')
         $('.choose-tab .list').addClass('hidden')
-       $(this).children('.list').removeClass('hidden')
+        $(this).children('.list').removeClass('hidden')
     })
 
     // $('#form-log').on('change', function (e) {
@@ -259,7 +259,15 @@ $(document).ready(function () {
     //     //     $('.modal-hd').toggleClass('show-modal');
     //     // })
 
+    $('.notify').on('click', function () {
 
+        $('.sub-nav-notify').toggleClass('activeTb')
+        $('.screen').removeClass('hidden')
+    })
+    $('.screen').on('click', function () {
+        $('.sub-nav-notify').toggleClass('activeTb')
+        $(this).addClass('hidden')
+    })
 })
 
 // MENU

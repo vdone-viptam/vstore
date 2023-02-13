@@ -17,10 +17,10 @@
                          alt="">
                 @endif
                 {{--                <img src="{{asset('/image/users/'. \Illuminate\Support\Facades\Auth::user()->banner)}}">--}}
-               
+
             </div>
             <div class="flex justify-end lg:justify-end items-center">
-                
+
                     <div
                         class="flex justify-end gap-6 xl:justify-end lg:justify-between items-center xl:gap-6 py-4 md:py-0">
                         <div class="notify relative cursor-pointer">
@@ -112,8 +112,8 @@
                     </div>
                 </div>
             </div> -->
-        
-          
+
+
             <div class="flex flex-col justify-start items-start gap-16">
                 <div class="result w-full">
                     <div class="flex flex-col justify-start items-start gap-4">
@@ -295,7 +295,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 @endsection
 @section('custom_js')

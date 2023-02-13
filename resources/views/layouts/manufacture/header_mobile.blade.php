@@ -312,14 +312,12 @@
 </div>
 {{--hedder--}}
 <header class="menu block md:hidden ">
-    <div class="bg-[#E6F7FF] w-full h-[50px] flex justify-between items-center px-4 shadow-lg">
-        <div>
-            <a href="">
-                <img style="width: 75px !important;"
-                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
-                     alt="">
-            </a>
+    <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4 shadow-lg">
+    <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
+        <div class="w-[180px] h-[30px]">
+            <img class="w-full" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
+    </a>
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path
@@ -365,19 +363,15 @@
                     </ul>
                 </div>
                 <div class="user flex items-center gap-2">
-                    <div class="w-[40px] h-[40px]">
-                        <img class="w-full rounded-full cursor-pointer"
-                             src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}"
-                             alt="">
+                <div class="w-[51px]">
+                    <div class="w-[50px] h-[65px] ">
+                        <img class="w-full cursor-pointer"
+                             src="{{asset('asset/images/userNCC.png')}}" class="w-full">
                     </div>
+                </div>
 
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
-                    <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
-                            fill="black"/>
-                    </svg>
+              
                     <ul class="sub-nav-user">
                         <li><a href="{{route('screens.manufacture.account.profile')}}"
                                class="font-medium flex justify-start items-center gap-2">

@@ -146,8 +146,18 @@
         } else {
             tm[i].classList.add("tab__hover")
         }
+    })
+
     }
 
+    $('.notify').on('click', function () {
+        $('.sub-nav-notify').toggleClass('activeTb')
+        $('.screen').removeClass('hidden')
+    })
+    $('.screen').on('click', function (){
+        $('.sub-nav-notify').toggleClass('activeTb')
+        $(this).addClass('hidden')
+    })
 </script>
 
 </body>
