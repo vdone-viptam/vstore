@@ -456,9 +456,13 @@
         //
         // })
         $('.notify').on('click', function(){
-            // console.log('tesst')
             $('.sub-nav-notify').toggleClass('activeTb')
+            $('.screen').removeClass('hidden')
+        })
 
+        $('.screen').on('click', function (){
+            $('.sub-nav-notify').toggleClass('active')
+            $(this).addClass('hidden')
         })
 
 

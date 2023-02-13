@@ -41,7 +41,7 @@
                 <div class="content  max-h-[600px] overflow-y-auto">
                     <div class="flex flex-col justify-start items-start gap-6 p-6 w-full ">
                         <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Tên V-Store:</span>
+                            <span class="text-secondary w-[280px]">Tên </span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="name" name="name"
                                        class="w-full outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
@@ -148,7 +148,7 @@
                         <div class="col-span-8 order-last md:order-first">
                             <div class="flex flex-col justify-start items-start gap-6 md:p-6 w-full ">
                                 <div class="flex justify-start items-start gap-4">
-                                    <span class="text-secondary">Tên V-Store:</span>
+                                    <span class="text-secondary">Tên: </span>
                                     <span>{{$infoAccount->name}}</span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
@@ -189,13 +189,13 @@
                                   id="form" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div
-                                    class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey">
-                                    <div class="w-[101px] file-avt">
-                                        <div class="w-[100px] h-[100px] rounded-full shadow-xl">
+                                    class="flex flex-col justify-center items-center pt-6 gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey">
+                                    <div class="w-[200px] file-avt">
+                                        <div class="w-[200px]  max-h-[200px]">
                                             <img
                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
                                                 alt=""
-                                                class="w-full rounded-full">
+                                                class="w-full object-fill">
                                         </div>
                                     </div>
                                     <button type="button"

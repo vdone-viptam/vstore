@@ -44,8 +44,9 @@
         }
 
         .sub-nav-notify {
+            width: 100px;
             top: 45px;
-            right: -145px;
+            right: 0px;
         }
 
         .sub-nav-user {
@@ -294,38 +295,38 @@
                             fill="#637381"/>
                     </svg>
                     <div class="w-[10px] h-[10px] bg-[#FF4842] rounded-[50%] absolute top-1.5 right-0"></div>
-                    <ul class="sub-nav-notify">
-                        <div class="flex justify-between items-center w-full pb-3 px-3">
-                            <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                            <a href="{{route('admin_all_noti')}}"
-                               class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                                cả</a>
-                        </div>
-                        @if(count(Auth::user()->unreadNotifications) > 0)
-                            @foreach (Auth::user()->unreadNotifications as $index =>$notification)
-                                <li>
-                                    <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
-                                       class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
-                                        <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
-                                </li>
-                            @endforeach
-                        @else
-                            <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
-                        @endif
+                        <ul class="sub-nav-notify">
+                            <div class="flex justify-between items-center w-full pb-3 px-3">
+                                <h2 class="text-xl font-normal text-title">Thông báo</h2>
+                                <a href="{{route('admin_all_noti')}}"
+                                   class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                                    cả</a>
+                            </div>
+                            @if(count(Auth::user()->unreadNotifications) > 0)
+                                @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                                    <li>
+                                        <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
+                                           class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                            <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                            @endif
 
 
-                    </ul>
+                        </ul>
                 </div>
                 <div class="user flex items-center gap-2">
-                    <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
-                         src="{{asset("./home/img/avatar_accout.png")}}" alt="">
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
-                    <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
-                            fill="black"/>
-                    </svg>
+{{--                    <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"--}}
+{{--                         src="{{asset("./home/img/avatar_accout.png")}}" alt="">--}}
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Admin</p>
+{{--                    <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"--}}
+{{--                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path--}}
+{{--                            d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"--}}
+{{--                            fill="black"/>--}}
+{{--                    </svg>--}}
                     <ul class="sub-nav-user">
                         <li><a href="{{route('screens.admin.account.profile')}}"
                                class="font-medium flex justify-start items-center gap-2">

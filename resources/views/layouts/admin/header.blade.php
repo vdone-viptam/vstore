@@ -41,34 +41,36 @@
                         fill="#637381"/>
                 </svg>
                 <div class="w-[10px] h-[10px] bg-[#FF4842] rounded-[50%] absolute top-1.5 right-0"></div>
-                <ul class="sub-nav-notify">
-                    <div class="flex justify-between items-center w-full pb-3 px-3">
-                        <h2 class="text-xl font-normal text-title">Thông báo</h2>
-                                                <a href="{{route('admin_all_noti')}}" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
-                                                    cả</a>
-                    </div>
-                    @if(count(Auth::user()->unreadNotifications) > 0)
-                        @foreach (Auth::user()->unreadNotifications as $index =>$notification)
-                            <li>
-                                <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
-                                   class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
-                                    <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
-                            </li>
-                        @endforeach
-                    @else
-                        <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
-                    @endif
+                <div>
+                    <ul class="sub-nav-notify">
+                        <div class="flex justify-between items-center w-full pb-3 px-3">
+                            <h2 class="text-xl font-normal text-title">Thông báo</h2>
+                            <a href="{{route('admin_all_noti')}}" class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                                cả</a>
+                        </div>
+                        @if(count(Auth::user()->unreadNotifications) > 0)
+                            @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                                <li>
+                                    <a href="{{$notification['data']['href']}}?noti_id={{$notification->id}}"
+                                       class="flex justify-between items-center w-full text-sm text-title font-bold"><span>{{$notification['data']['message']}} </span>
+                                        <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                                </li>
+                            @endforeach
+                        @else
+                            <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+                        @endif
 
 
-                </ul>
+                    </ul>
+                </div>
             </div>
             <div class="user relative flex items-center gap-2">
-                <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
-                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">
+{{--                <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"--}}
+{{--                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">--}}
                 <div class="flex flex-col gap-[3px] justify-center">
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
                 </div>
-                
+
                 <ul class="sub-nav-user">
                     <li><a href="{{route('screens.admin.account.profile')}}"
                            class="font-medium flex justify-start items-center gap-2">

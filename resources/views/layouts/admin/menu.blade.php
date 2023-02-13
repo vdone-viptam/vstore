@@ -44,7 +44,7 @@
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
     <a href="{{route('screens.admin.dashboard.index')}}" class="">
-        <div class=" flex items-center justify-center py-9">
+        <div class=" w-[195px] h-[45px] mx-auto my-6">
             <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
     </a>

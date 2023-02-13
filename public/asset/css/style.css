@@ -338,7 +338,7 @@ input[type="submit"].active{
     opacity: 1 !important;
     transform: translateY(0)!important;
     transition: 0.5s all!important;
-    z-index: 10!important;
+    z-index: 16!important;
     visibility: visible!important;
 }
 .sub-nav-notify{

@@ -47,6 +47,10 @@
 </style>
 <body id="body">
 @yield('modal')
+<div class="absolute w-full h-full bg-transparent screen z-[15] hidden">
+
+</div>
+
 <div class="grid grid-cols-12">
     @include('layouts.manufacture.menu')
     <div class="md:col-span-3 2xl:col-span-2 hidden md:block bg-[#F2F8FF] z-[6]">
