@@ -36,6 +36,7 @@
         display: none !important;
     }
 
+    
     /*    */
     @media (min-width: 320px) and (max-width: 769.99px) {
         .sub-nav-help {
@@ -166,7 +167,7 @@
                         <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                     </ul>
                 </div>
-
+{{----}}
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -207,7 +208,7 @@
                         <div class="tab__left rounded-[16px] p-2">
                             <div
                                 class="flex items-center gap-3">
-                                <div class="w-[16px]">
+                                <div class="w-[12px]">
                                     <svg viewBox="0 0 14 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path class="svgFill" d="M7.53635 10.8644C4.41454 10.053 3.41061 9.21415 3.41061 7.90766C3.41061 6.40864 4.79961 5.36346 7.12377 5.36346C9.57171 5.36346 10.4794 6.53242 10.5619 8.25147H13.6012C13.5049 5.88605 12.0609 3.71316 9.18664 3.01179V0H5.0609V2.97053C2.39293 3.54813 0.247544 5.28094 0.247544 7.93517C0.247544 11.112 2.87426 12.6935 6.7112 13.6149C10.1493 14.4401 10.8369 15.6503 10.8369 16.9293C10.8369 17.8782 10.1631 19.391 7.12377 19.391C4.29077 19.391 3.17682 18.1257 3.02554 16.5029H0C0.165029 19.5147 2.42043 21.2063 5.0609 21.7701V24.7544H9.18664V21.7976C11.8684 21.2888 14 19.7348 14 16.9155C14 13.0098 10.6582 11.6758 7.53635 10.8644Z" fill="#B8BED9"></path>
                                     </svg>
@@ -317,7 +318,7 @@
                         <div class="flex justify-between items-center w-full pb-3 px-3">
                             <h2 class="text-xl font-normal text-title">Thông báo</h2>
                             <a href="{{route('vstore_all_noti')}}"
-                               class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
+                               class="duration-200 transition-all text-title font-medium">Tất
                                 cả</a>
                         </div>
                         @if(count(Auth::user()->unreadNotifications) > 0)
