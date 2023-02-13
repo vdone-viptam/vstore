@@ -97,6 +97,11 @@
         l[4].classList.remove("hidden");
         checkUnder(tm[5], a)
     }
+    if (param === "account") {
+        tm[6].classList.toggle("active")
+        l[5].classList.remove("hidden");
+        checkUnder(tm[6], a)
+    }
 
     function checkUnder(element, param) {
         const li = element.querySelectorAll('li');
@@ -124,20 +129,10 @@
         }
     }
     //    hover menu
-    const body = document.getElementById("body")
-    if (body.offsetWidth > 767.99) {
-    console.log(1)
     const hv = document.getElementsByClassName("choose-tab")[0];
+    const body = document.getElementById("body")
     hv.addEventListener("click", () => {
-        for (let i = 1; i <= tm.length; i++) {
-            if (tm[i].classList.contains("active")) {
-                tm[i].classList.remove("tab__hover")
-            } else {
-                tm[i].classList.add("tab__hover")
-            }
-        }
-
-        for (let i = 0; i <= tm.length; i++) {
+        for (let i = 1; i < tm.length; i++) {
             if (tm[i].classList.contains("active")) {
                 tm[i].classList.remove("tab__hover")
             } else {
@@ -145,7 +140,14 @@
             }
         }
     })
+    for (let i = 0; i < tm.length; i++) {
+        if (tm[i].classList.contains("active")) {
+            tm[i].classList.remove("tab__hover")
+        } else {
+            tm[i].classList.add("tab__hover")
+        }
     }
+
 </script>
 
 </body>
