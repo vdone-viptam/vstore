@@ -75,16 +75,10 @@
                                                         </div>
                                                         <div>
                                                             <b>Where
-                                                            </b>: Hanoi Vietnam
+                                                            </b>: Vietnam
                                                         </div>
-                                                        <div>
-                                                            <b>IP Address
-                                                            </b>: 1.52.219.13
-                                                        </div>
-                                                        <div>
-                                                            <b>Device
-                                                            </b>: Chrome 109 (Windows NT)
-                                                        </div>
+
+
                                                         <div>
                                                             <br>
                                                         </div>

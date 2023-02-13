@@ -90,7 +90,7 @@
                 </div>
             </div>
             <span class="text-sm font-semibold text-[#034D82] text-center">
-            Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm.
+            Được quyền hỗ trợ bảo hành nâng cấp hệ thống
             </span>
        </div>
        <div class="text-center boxli w-full p-3 mx-auto">

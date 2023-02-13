@@ -641,7 +641,7 @@ svg{
 }
 
 .scrollb{
-    scrollbar-color:#F2F8FF; 
+    scrollbar-color:#F2F8FF;
 }
 
 @media only screen and (max-width: 560px) {
