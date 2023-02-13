@@ -17,14 +17,14 @@
 
     }
 </style>
-<body>
+<body id="body">
 <div class="over-lay-mobile" onclick="$('.menu-mobile').toggleClass('show-menuMB')">
 
 </div>
 @yield('modal')
 <div class="grid grid-cols-12">
-    <div class="md:col-span-3 2xl:col-span-2 h-[100vh] bg-[#F2F8FF] md:block hidden">
-        @include('layouts.admin.menu')
+    @include('layouts.admin.menu')
+    <div class="md:col-span-3 2xl:col-span-2 md:block hidden">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.admin.header')
@@ -96,22 +96,24 @@
         }
     }
     //    hover menu
-    const hv = document.getElementsByClassName("choose-tab")[0]
-    console.log(tm)
-    hv.addEventListener("click", () => {
-        for (let i = 1; i < tm.length; i++) {
+    const body = document.getElementById("body")
+    if (body.offsetWidth > 767.99) {
+        const hv = document.getElementsByClassName("choose-tab")[0]
+        hv.addEventListener("click", () => {
+            for (let i = 1; i < tm.length; i++) {
+                if (tm[i].classList.contains("active")) {
+                    tm[i].classList.remove("tab__hover")
+                } else {
+                    tm[i].classList.add("tab__hover")
+                }
+            }
+        })
+        for (let i = 0; i < tm.length; i++) {
             if (tm[i].classList.contains("active")) {
                 tm[i].classList.remove("tab__hover")
             } else {
                 tm[i].classList.add("tab__hover")
             }
-        }
-    })
-    for (let i = 0; i < tm.length; i++) {
-        if (tm[i].classList.contains("active")) {
-            tm[i].classList.remove("tab__hover")
-        } else {
-            tm[i].classList.add("tab__hover")
         }
     }
 </script>

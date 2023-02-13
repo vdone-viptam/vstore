@@ -13,11 +13,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     @vite('resources/css/app.css')
 </head>
-<body>
+<body id="body">
 @yield('modal')
 <div class="grid grid-cols-12">
     @include('layouts.vstore.menu')
-
     <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
@@ -99,23 +98,26 @@
                 menu[1].classList.remove("show")
             }
         }
+
         //    hover menu
-        const hv = document.getElementsByClassName("choose-tab")[0]
-        console.log(hv)
-        hv.addEventListener("click", () => {
-            for (let i = 1; i < tm.length; i++) {
+        const body = document.getElementById("body")
+        if(body.offsetWidth > 767.99){
+            const hv = document.getElementsByClassName("choose-tab")[0]
+            hv.addEventListener("click", () => {
+                for (let i = 1; i < tm.length; i++) {
+                    if (tm[i].classList.contains("active")) {
+                        tm[i].classList.remove("tab__hover")
+                    } else {
+                        tm[i].classList.add("tab__hover")
+                    }
+                }
+            })
+            for (let i = 0; i < tm.length; i++) {
                 if (tm[i].classList.contains("active")) {
                     tm[i].classList.remove("tab__hover")
                 } else {
                     tm[i].classList.add("tab__hover")
                 }
-            }
-        })
-        for (let i = 0; i < tm.length; i++) {
-            if (tm[i].classList.contains("active")) {
-                tm[i].classList.remove("tab__hover")
-            } else {
-                tm[i].classList.add("tab__hover")
             }
         }
     }
