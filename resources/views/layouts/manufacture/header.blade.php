@@ -1,5 +1,5 @@
 <header class="hidden md:flex items-center justify-end gap-11 pt-8 pb-4 px-12 header">
-    <div class="help relative cursor-pointer lg:flex items-center gap-3 justify-end">
+    <!-- <div class="help relative cursor-pointer lg:flex items-center gap-3 justify-end">
         <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
             <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -14,9 +14,9 @@
             <li><a href="#">Biểu phí</a></li>
             <li><a href="#">Chính sách quy định</a></li>
         </ul>
-    </div>
+    </div> -->
     <div class="flex justify-between md:gap-2 lg:gap-0 lg:justify-end items-center">
-        <div class="help relative lg:hidden flex items-center gap-3 justify-end">
+        <!-- <div class="help relative lg:hidden flex items-center gap-3 justify-end">
             <div class="xl:w-[35px] lg:w-[30px] md:w-[26px]">
                 <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -31,7 +31,7 @@
                 <li><a href="#">Biểu phí</a></li>
                 <li><a href="#">Chính sách quy định</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class=" flex justify-end gap-6 xl:justify-end lg:justify-between items-center xl:gap-6">
             <div class="notify relative cursor-pointer">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"

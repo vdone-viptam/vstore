@@ -265,7 +265,7 @@
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list-disc list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
-                <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh thu</a>
+                <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi số dư</a>
                 </li>
 
             </ul>
