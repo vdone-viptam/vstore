@@ -333,12 +333,13 @@ input[type="submit"].active{
     transition: 0.5s all;
 }
 
-.notify:hover > .sub-nav-notify{
-    opacity: 1;
-    transform: translateY(0);
-    transition: 0.5s all;
-    z-index: 10;
-    visibility: visible;
+
+.activeTb{
+    opacity: 1 !important;
+    transform: translateY(0)!important;
+    transition: 0.5s all!important;
+    z-index: 10!important;
+    visibility: visible!important;
 }
 .sub-nav-notify{
     padding: 10px 0;

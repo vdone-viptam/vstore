@@ -608,4 +608,19 @@
             $('.date').html($value);
         });
     </script>
+    <script>
+        // $('body').on('click', function(){
+        //     // console.log('tesst')
+        //
+        //     $('.sub-nav-notify').toggleClass('activeTb')
+        //
+        // })
+        $('.notify').on('click', function(){
+            // console.log('tesst')
+            $('.sub-nav-notify').toggleClass('activeTb')
+
+        })
+
+
+    </script>
 @endsection
