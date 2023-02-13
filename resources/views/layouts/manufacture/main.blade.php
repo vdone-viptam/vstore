@@ -109,7 +109,6 @@
         })
     }
 
-
     //
     const nav = document.getElementById("nav")
     const menu = document.getElementsByClassName("menu")
@@ -140,18 +139,11 @@
 
     for (let i = 0; i <= tm.length; i++) {
         if (tm[i].classList.contains("active")) {
-            console.log(i)
             tm[i].classList.remove("tab__hover")
         } else {
             tm[i].classList.add("tab__hover")
         }
     }
-
-    // if (tm[0].classList.contains("active")) {
-    //     tm[0].classList.remove("tab__hover")
-    // } else {
-    //     tm[0].classList.add("tab__hover")
-    // }
 </script>
 
 </body>

@@ -44,7 +44,7 @@
                  alt="">
         </div>
     </a>
-    <div class="pr-[15px] flex flex-col gap-6 h-full choose-tab w-full max-h-[700px]">
+    <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px]">
         {{--      Dashboard--}}
         <a href="{{route('screens.manufacture.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
@@ -211,7 +211,7 @@
                 <div class="tab__left rounded-[16px]">
                     <div
                         class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
-                        <div class="md:w-[18px] lg:w-[22px] md:h-[22px] xl:w-[29px] md:pt-0.5">
+                        <div class="md:w-[18px] lg:w-[22px] md:h-[22px] md:pt-0.5">
                             <svg viewBox="0 0 25 26" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svgFill"
@@ -253,8 +253,8 @@
                 <div class="tab__left rounded-[16px]">
                     <div
                         class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
-                        <div class="md:w-[9px] lg:w-[10px] xl:w-[14px]">
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                        <div class="md:w-[18px] lg:w-[22px] md:h-[22px]">
+                            <svg viewBox="0 0 25 25" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_1_4)">
                                     <path class="svgFill"
@@ -269,7 +269,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Tài chính</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tài chính</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -284,6 +284,39 @@
                 <li data-page="/"><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
                 <li data-page="history"><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi
                         số dư</a>
+                </li>
+
+            </ul>
+        </div>
+        {{--        Tài khoản--}}
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+            <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
+                <div
+                    class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
+                <div class="tab__left rounded-[16px]">
+                    <div
+                        class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
+                        <div class="md:w-[16px] lg:w-[20px] md:h-[22px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path class="svgFill" fill="#B8BED9"
+                                      d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tài khoản</p>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a></li>
+                <li data-page="change-password"><a class="hover:underline" href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
                 </li>
 
             </ul>
@@ -304,7 +337,7 @@
                                     fill="#FF4842"/>
                             </svg>
                             <a href="{{route('logout')}}">
-                                <p class="text-[#FF4842] text-base font-bold a">Logout</p>
+                                <p class="text-[#FF4842] text-base font-bold a">Đăng xuất</p>
                             </a>
                         </div>
                     </div>
