@@ -68,24 +68,47 @@
     const tm = document.querySelectorAll(".tab__menu")
     const l = document.getElementsByClassName("list")
     const param = url[3];
+    const a = url[4] || '/';
     if (param === "dashboard") {
         tm[0].classList.toggle("active")
     }
     if (param === "products") {
         tm[1].classList.toggle("active");
+        l[0].classList.remove("hidden");
+        checkUnder(tm[1],a)
     }
     if (param === "warehouses") {
         tm[2].classList.toggle("active")
+        l[1].classList.remove("hidden");
+        checkUnder(tm[2],a)
     }
     if (param === "partners") {
-        tm[3].classList.toggle("active")
+        tm[3].classList.toggle("active");
+        l[2].classList.remove("hidden");
+        checkUnder(tm[3],a)
     }
     if (param === "orders") {
-        tm[4].classList.toggle("active")
+        tm[4].classList.toggle("active");
+        l[3].classList.remove("hidden");
+        checkUnder(tm[4],a)
     }
     if (param === "finances") {
-        tm[5].classList.toggle("active")
+        tm[5].classList.toggle("active");
+        l[4].classList.remove("hidden");
+        checkUnder(tm[5],a)
     }
+
+    function checkUnder(element, param) {
+        const li = element.querySelectorAll('li');
+        li.forEach(item => {
+            const {page} = item.dataset;
+            if (page == param) {
+                item.classList.add('underline');
+            }
+
+        })
+    }
+
     //
     const nav = document.getElementById("nav")
     const menu = document.getElementsByClassName("menu")
@@ -102,20 +125,24 @@
     }
     //    hover menu
     const hv = document.getElementsByClassName("choose-tab")[0]
+
+
     hv.addEventListener("click", () => {
         for (let i = 1; i <= tm.length; i++) {
             if (tm[i].classList.contains("active")) {
-                console.log(tm[i].classList.contains("active"))
                 tm[i].classList.remove("tab__hover")
             } else {
                 tm[i].classList.add("tab__hover")
             }
         }
     })
-    if (tm[0].classList.contains("active")) {
-        tm[0].classList.remove("tab__hover")
-    } else {
-        tm[0].classList.add("tab__hover")
+
+    for (let i = 0; i <= tm.length; i++) {
+        if (tm[i].classList.contains("active")) {
+            tm[i].classList.remove("tab__hover")
+        } else {
+            tm[i].classList.add("tab__hover")
+        }
     }
 </script>
 

@@ -123,7 +123,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
-                                        <p class="text-[#AEAEAE] text-sm font-normal">Tổng số đơn hàng</p>
+                                        <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng giao thành công</p>
                                         <p class="text-black text-base font-bold">189</p>
                                     </div>
                                 </div>

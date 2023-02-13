@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('page_title')</title>
-    <link rel="icon" type="image/x-icon"  href="{{asset('asset/images/Frame 1321315296.ico')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
 
     @include('layouts.css')
     @yield('custom_css')
@@ -44,25 +44,43 @@
     const tm = document.querySelectorAll(".tab__menu")
     const l = document.getElementsByClassName("list")
     const param = url[3];
+    const a = url[4] || '/';
     if (param === "dashboard") {
         tm[0].classList.toggle("active")
     }
-    if (param === "products") {
+    if (param === "product") {
         tm[1].classList.toggle("active");
+        l[0].classList.remove("hidden");
+        checkUnder(tm[1], a)
     }
-    if (param === "warehouses") {
+    if (param === "categories") {
         tm[2].classList.toggle("active")
+        checkUnder(tm[2], a)
     }
-    if (param === "partners") {
+    if (param === "users") {
         tm[3].classList.toggle("active")
+        l[1].classList.remove("hidden");
+        checkUnder(tm[3], a)
+
     }
-    if (param === "orders") {
+    if (param === "account") {
         tm[4].classList.toggle("active")
+        l[2].classList.remove("hidden");
+        checkUnder(tm[4], a)
     }
-    if (param === "finances") {
-        tm[5].classList.toggle("active")
+
+    function checkUnder(element, param) {
+        const li = element.querySelectorAll('li');
+        li.forEach(item => {
+            const {page} = item.dataset;
+            if (page == param) {
+                item.classList.add('underline');
+            }
+
+        })
     }
-    //
+
+    // menu mobile
     const nav = document.getElementById("nav")
     const menu = document.getElementsByClassName("menu")
     const bg = document.getElementsByClassName("show_bg")[0]
@@ -79,6 +97,7 @@
     }
     //    hover menu
     const hv = document.getElementsByClassName("choose-tab")[0]
+    console.log(tm)
     hv.addEventListener("click", () => {
         for (let i = 1; i < tm.length; i++) {
             if (tm[i].classList.contains("active")) {
@@ -88,10 +107,12 @@
             }
         }
     })
-    if (tm[0].classList.contains("active")) {
-        tm[0].classList.remove("tab__hover")
-    } else {
-        tm[0].classList.add("tab__hover")
+    for (let i = 0; i < tm.length; i++) {
+        if (tm[i].classList.contains("active")) {
+            tm[i].classList.remove("tab__hover")
+        } else {
+            tm[i].classList.add("tab__hover")
+        }
     }
 </script>
 </html>

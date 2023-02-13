@@ -60,7 +60,7 @@
                                 </svg>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Tổng quan</p>
+                                <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tổng quan</p>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý sản
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý sản
                                 phẩm</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -103,10 +103,10 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[200px]">
-                <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>
-                </li>
-                <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list hidden xl:max-w-[230px] md:max-w-[200px]">
+{{--                <li  data-page="index" class="hover:underline">     <a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>--}}
+{{--                </li>--}}
+                <li  data-page="index" class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý yêu cầu
                         xét duyệt
                         phẩm</a></li>
             </ul>
@@ -129,7 +129,7 @@
                                 </svg>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Ngành hàng</p>
+                                <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Ngành hàng</p>
                                 <svg width="0" height="6" viewBox="0 0 11 6" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -141,7 +141,7 @@
                 </div>
             </div>
         </a>
-        {{--        Tài khoản--}}
+        {{--        Quản lý tài khoản--}}
         <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
@@ -161,7 +161,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#B8BED9] xl:text-base lg:text-sm md:text-xs text__menu">Tài khoản</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý tài khoản</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -172,12 +172,45 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[200px]">
-                <li><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách tài
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list hidden xl:max-w-[230px] md:max-w-[200px]">
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.user.list_user')}}">Danh sách tài
                         khoản</a></li>
-                <li><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
+                <li data-page="register-account"><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
                         ký tài khoản </a>
                 </li>
+            </ul>
+        </div>
+        {{--        Tài khoản--}}
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+            <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
+                <div
+                    class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
+                <div class="tab__left rounded-[16px]">
+                    <div
+                        class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
+                        <div class="md:w-[16px] lg:w-[20px] md:h-[22px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path class="svgFill" fill="#B8BED9"
+                                      d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tài khoản</p>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.account.profile')}}">Hồ sơ của tôi</a></li>
+                <li data-page="change-password"><a class="hover:underline" href="{{route('screens.admin.account.changePassword')}}">Đổi mật khẩu</a>
+                </li>
+
             </ul>
         </div>
         {{--        log out--}}
@@ -196,7 +229,7 @@
                                     fill="#FF4842"/>
                             </svg>
                             <a href="{{route('logout')}}">
-                                <p class="text-[#FF4842] text-base font-bold a">Logout</p>
+                                <p class="text-[#FF4842] text-base font-bold a">Đăng xuất</p>
                             </a>
                         </div>
                     </div>

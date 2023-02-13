@@ -224,7 +224,7 @@
                                             fill="#FF4842"/>
                                     </svg>
                                     <a href="{{route('logout')}}">
-                                        <p class="text-[#FF4842] text-sm font-bold a">Logout</p>
+                                        <p class="text-[#FF4842] text-sm font-bold a">Đăng xuất</p>
                                     </a>
                                 </div>
                             </div>

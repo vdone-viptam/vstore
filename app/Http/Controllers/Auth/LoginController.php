@@ -130,10 +130,10 @@ class LoginController extends Controller
             'email.required' => 'Email bắt buộc nhập',
             'password.required' => 'Mật khẩu bắt buộc nhập'
         ]);
-//        return 1;
+
         $credentials = request(['email', 'password']);
         try {
-            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password])) {
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password]) && Auth::user()->role_id == $request->type) {
                 $token = Str::random(32);
                 $userLogin = Auth::user();
                 $login = new Otp();

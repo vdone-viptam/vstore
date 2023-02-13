@@ -103,8 +103,9 @@
                 </div>
             </div>
             <ul class=" flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
-                <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a></li>
+                <li data-page="/"><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
+                <li data-page="request"><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt
+                        sản phẩm</a></li>
             </ul>
         </div>
         {{--       Quản lý đơn hàng--}}
@@ -135,12 +136,12 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
-                <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
+                <li data-page="new"><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
+                <li data-page="/"><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
             </ul>
         </div>
-        {{--        Tài chính--}}
-        <div data-index="4" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        {{--        Đối tác--}}
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -148,14 +149,10 @@
                     <div
                         class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
                         <div class="md:w-[16px] lg:w-[20px] xl:w-[25px] ">
-                            <svg viewBox="0 0 25 19" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path class="svgFill" fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M24.9999 0.00058515C24.7478 0.00058515 24.5615 0.00058515 24.3752 0.00058515C22.786 0.00058515 21.2077 0.022814 19.6185 0.00058515C18.2266 -0.0216437 17.2182 0.58965 16.5387 1.80112C15.2016 4.16849 13.8535 6.53587 12.5054 8.90324C12.8123 9.43673 13.1191 9.97022 13.426 10.5148C14.1713 11.8263 15.5742 12.4821 16.9661 12.1042C17.5361 11.9486 18.0622 11.5929 18.5882 11.3373C18.5882 11.3373 18.5882 11.3373 18.5882 11.3484C20.6487 7.73622 22.6983 4.12404 24.7588 0.511849C24.8246 0.356247 24.8903 0.211759 24.9999 0.00058515Z"
-                                      fill="#B8BED9"/>
-                                <path class="svgFill"
-                                      d="M16.9553 12.0931C15.5634 12.471 14.1605 11.8152 13.4152 10.5037C13.1083 9.97023 12.8014 9.43674 12.4945 8.89213C11.1464 6.52476 9.79835 4.1685 8.46122 1.80113C7.78169 0.589654 6.77336 -0.010525 5.38142 0.0117039C3.7922 0.0339327 2.21395 0.0117039 0.624727 0.0117039C0.438405 0.0117039 0.252083 0.0117039 0 0.0117039C0.109601 0.222878 0.175362 0.367366 0.263043 0.500739C2.33451 4.14627 4.41693 7.7918 6.4884 11.4373C7.52961 13.2601 8.57082 15.094 9.61203 16.9167C10.1162 17.8059 10.8396 18.3727 11.6177 18.6173C12.9768 19.0396 14.5222 18.4728 15.4099 16.9167C16.4731 15.0606 17.5252 13.1934 18.5884 11.3373C18.5884 11.3373 18.5884 11.3373 18.5884 11.3262C18.0513 11.5818 17.5362 11.9375 16.9553 12.0931Z"
-                                      fill="#D2D7ED"/>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                <path class="svgFill" fill="#B8BED9"
+                                      d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"/>
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
@@ -171,21 +168,32 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
-                <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
-                <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
+                <li data-page="/"><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
+                <li data-page="vshop"><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
+                <li data-page="ship"><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
             </ul>
         </div>
-        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        {{--            Tài chính--}}
+        <div data-index="4" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
                 <div class="tab__left rounded-[16px]">
                     <div
                         class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
-                        <div class="md:w-[16px] lg:w-[20px] xl:w-[25px] ">
-                            <svg viewBox="0 0 14 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path class="svgFill" d="M7.53635 10.8644C4.41454 10.053 3.41061 9.21415 3.41061 7.90766C3.41061 6.40864 4.79961 5.36346 7.12377 5.36346C9.57171 5.36346 10.4794 6.53242 10.5619 8.25147H13.6012C13.5049 5.88605 12.0609 3.71316 9.18664 3.01179V0H5.0609V2.97053C2.39293 3.54813 0.247544 5.28094 0.247544 7.93517C0.247544 11.112 2.87426 12.6935 6.7112 13.6149C10.1493 14.4401 10.8369 15.6503 10.8369 16.9293C10.8369 17.8782 10.1631 19.391 7.12377 19.391C4.29077 19.391 3.17682 18.1257 3.02554 16.5029H0C0.165029 19.5147 2.42043 21.2063 5.0609 21.7701V24.7544H9.18664V21.7976C11.8684 21.2888 14 19.7348 14 16.9155C14 13.0098 10.6582 11.6758 7.53635 10.8644Z" fill="#B8BED9"></path>
+                        <div class="md:w-[18px] lg:w-[22px] md:h-[22px]">
+                            <svg viewBox="0 0 25 25" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1_4)">
+                                    <path class="svgFill"
+                                          d="M13.2008 10.9942C8.97531 10.1731 7.61644 9.32417 7.61644 8.00208C7.61644 6.48517 9.49652 5.4275 12.6424 5.4275C15.9558 5.4275 17.1844 6.61042 17.2961 8.35H21.4099C21.2796 5.95633 19.3251 3.7575 15.4346 3.04775V0H9.8502V3.006C6.23895 3.5905 3.33506 5.344 3.33506 8.02992C3.33506 11.2447 6.89047 12.8451 12.084 13.7775C16.7376 14.6125 17.6684 15.8372 17.6684 17.1314C17.6684 18.0917 16.7563 19.6225 12.6424 19.6225C8.80778 19.6225 7.29999 18.3422 7.09523 16.7H3C3.22338 19.7477 6.27618 21.4595 9.8502 22.0301V25.05H15.4346V22.0579C19.0645 21.543 21.9497 19.9704 21.9497 17.1175C21.9497 13.1652 17.4264 11.8152 13.2008 10.9942Z"
+                                          fill="#B8BED9"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1_4">
+                                        <rect width="25" height="25" fill="white"/>
+                                    </clipPath>
+                                </defs>
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
@@ -201,34 +209,71 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list-disc list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
-                <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
-                <li><a href="{{Route('screens.vstore.finance.history')}}">Lịch sử giao dịch</a></li>
+                <li data-page="/"><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
+                <li data-page="revenue"><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
+                <li data-page="history"><a href="{{Route('screens.vstore.finance.history')}}">Lịch sử giao dịch</a></li>
             </ul>
         </div>
-        {{--        <a href="{{route('screens.vstore.dashboard.index')}}">--}}
-        {{--            <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">--}}
-        {{--                <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">--}}
-        {{--                    <div--}}
-        {{--                        class="tab__left rounded-tr-[16px] rounded-br-[16px] xl:min-w-[12px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>--}}
-        {{--                    <div class="tab__left rounded-[16px]">--}}
-        {{--                        <div--}}
-        {{--                            class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">--}}
-        {{--                            <div class="md:w-[20px] xl:w-[32px]">--}}
-        {{--                                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-        {{--                                    <path class="svgFill"--}}
-        {{--                                          d="M12.1799 27.6978V23.6208C12.1799 22.58 13.0297 21.7364 14.0781 21.7364H17.9103C18.4137 21.7364 18.8966 21.9349 19.2525 22.2883C19.6085 22.6417 19.8085 23.121 19.8085 23.6208V27.6978C19.8053 28.1304 19.9762 28.5465 20.2833 28.8535C20.5904 29.1606 21.0082 29.3333 21.4441 29.3333H24.0586C25.2797 29.3364 26.4518 28.8571 27.3164 28.001C28.1809 27.145 28.6668 25.9826 28.6668 24.7704V13.1558C28.6668 12.1766 28.2296 11.2477 27.473 10.6195L18.5789 3.56778C17.0317 2.33137 14.815 2.3713 13.314 3.6626L4.62285 10.6195C3.83048 11.2292 3.3569 12.1608 3.3335 13.1558V24.7585C3.3335 27.2851 5.39667 29.3333 7.94173 29.3333H10.4965C11.4018 29.3333 12.1375 28.6082 12.1441 27.7096L12.1799 27.6978Z"--}}
-        {{--                                          fill="#B8BED9"/>--}}
-        {{--                                </svg>--}}
-        {{--                            </div>--}}
-        {{--                            <div class="flex gap-2 items-center">--}}
-        {{--                                <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Nhân viên</p>--}}
+        {{--        Nhân viên--}}
+        {{--                <a href="{{route('screens.vstore.dashboard.index')}}">--}}
+        {{--                    <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">--}}
+        {{--                        <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">--}}
+        {{--                            <div--}}
+        {{--                                class="tab__left rounded-tr-[16px] rounded-br-[16px] xl:min-w-[12px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>--}}
+        {{--                            <div class="tab__left rounded-[16px]">--}}
+        {{--                                <div--}}
+        {{--                                    class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">--}}
+        {{--                                    <div class="md:w-[20px] xl:w-[32px]">--}}
+        {{--                                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+        {{--                                            <path class="svgFill"--}}
+        {{--                                                  d="M12.1799 27.6978V23.6208C12.1799 22.58 13.0297 21.7364 14.0781 21.7364H17.9103C18.4137 21.7364 18.8966 21.9349 19.2525 22.2883C19.6085 22.6417 19.8085 23.121 19.8085 23.6208V27.6978C19.8053 28.1304 19.9762 28.5465 20.2833 28.8535C20.5904 29.1606 21.0082 29.3333 21.4441 29.3333H24.0586C25.2797 29.3364 26.4518 28.8571 27.3164 28.001C28.1809 27.145 28.6668 25.9826 28.6668 24.7704V13.1558C28.6668 12.1766 28.2296 11.2477 27.473 10.6195L18.5789 3.56778C17.0317 2.33137 14.815 2.3713 13.314 3.6626L4.62285 10.6195C3.83048 11.2292 3.3569 12.1608 3.3335 13.1558V24.7585C3.3335 27.2851 5.39667 29.3333 7.94173 29.3333H10.4965C11.4018 29.3333 12.1375 28.6082 12.1441 27.7096L12.1799 27.6978Z"--}}
+        {{--                                                  fill="#B8BED9"/>--}}
+        {{--                                        </svg>--}}
+        {{--                                    </div>--}}
+        {{--                                    <div class="flex gap-2 items-center">--}}
+        {{--                                        <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Nhân viên</p>--}}
+        {{--                                    </div>--}}
+        {{--                                </div>--}}
         {{--                            </div>--}}
         {{--                        </div>--}}
         {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </a>--}}
+        {{--                </a>--}}
+        {{--        Tài khoản--}}
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+            <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
+                <div
+                    class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
+                <div class="tab__left rounded-[16px]">
+                    <div
+                        class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
+                        <div class="md:w-[16px] lg:w-[20px] md:h-[22px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path class="svgFill" fill="#B8BED9"
+                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                            </svg>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tài khoản</p>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.vstore.account.profile')}}">Hồ sơ
+                        của tôi</a></li>
+                <li data-page="change-password"><a class="hover:underline"
+                                                   href="{{route('screens.vstore.account.changePassword')}}">Đổi mật
+                        khẩu</a>
+                </li>
+
+            </ul>
+        </div>
         {{--        log out--}}
         <div data-index="4" class="flex flex-col gap-3 cursor-pointer select-none ">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
@@ -245,7 +290,7 @@
                                     fill="#FF4842"/>
                             </svg>
                             <a href="{{route('logout')}}">
-                                <p class="text-[#FF4842] text-base font-bold a">Logout</p>
+                                <p class="text-[#FF4842] text-base font-bold a">Đăng xuất</p>
                             </a>
                         </div>
                     </div>

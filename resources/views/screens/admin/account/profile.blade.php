@@ -137,46 +137,7 @@
 @section('content')
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
-        <div class="col-span-3">
-            <div class="p-6 border-b-[1px] border-grey">
-                <div class="flex flex-col justify-start items-start w-full">
-                    <div class="flex justify-start items-center gap-6 w-full">
-                        <div class="w-[49px]">
-                            <div class="w-[48px] h-[48px] rounded-full">
-                                <a href="../tai-khoan/"><img
-                                        src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
-                                        alt=""
-                                        class="w-full rounded-full"></a>
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-start items-center gap-1 text-center">
-                            <span class="text-title font-medium">{{$infoAccount->account_code}}</span>
-                            <span class="text-sm text-secondary">Sửa hồ sơ</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-6">
-                <ul class="tab-side-user flex flex-col justify-start items-start gap-3 w-full">
-
-                    <li><a href="#" class="flex justify-start items-center gap-3">
-                            <div class="w-[21px]">
-                                <div class="w-[20px] h-[20px] rounded-full">
-                                    <img src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" alt=""
-                                         class="w-full rounded-full">
-                                </div>
-                            </div>
-                            <span class="text-title text-lg font-medium">Tài khoản</span>
-                        </a>
-                        <ul class="tab-sub-user">
-                            <li class="active"><a href="{{route('screens.admin.account.profile')}}">Hồ sơ</a></li>
-                            <li><a href="{{route('screens.admin.account.changePassword')}}">Đổi mật khẩu</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-span-9">
+        <div class="col-span-12">
             <div class="box w-full">
                 <div class="flex flex-col justify-start items-start w-full p-6">
                     <div class="flex flex-col justify-start items-start gap-1 pb-6 border-b-[1px] border-grey w-full">
