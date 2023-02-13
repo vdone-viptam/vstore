@@ -260,10 +260,14 @@
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4">
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
-        <div class="w-[180px] h-[30px]">
-            <img class="w-full" src="{{asset('asset/images/logo.png')}}" alt="">
+        <div class=" w-[130px] h-[62px]">
+            <!-- <img 
+                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
+                 alt=""> -->
+                 <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
         </div>
     </a>
+   
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path

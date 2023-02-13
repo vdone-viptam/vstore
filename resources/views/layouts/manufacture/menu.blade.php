@@ -35,20 +35,15 @@
     .tab__hover:hover .svg_arr {
         stroke: #4062FF;
     }
-    .choose-tab::-webkit-scrollbar-track{
-        background: #F2F8FF;
-    }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
+
     <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-        <div class=" w-[178px] h-[85px] mx-auto my-6">
-            <!-- <img
-                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
-                 alt=""> -->
-                 <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
+        <div class="w-[195px] h-[45px] mx-auto my-6">
+            <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
         </div>
     </a>
-    <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] overflow-y-scroll">
+    <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px]">
         {{--      Dashboard--}}
         <a href="{{route('screens.manufacture.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
@@ -74,7 +69,7 @@
             </div>
         </a>
         {{--        quan ly sp--}}
-        <div class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        <div data-index="1" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -109,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list  md:max-w-[150px] xl:max-w-[230px]">
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px]">
                 <li class="hover:underline" data-page="/"><a href="{{route('screens.manufacture.product.index')}}">Tất
                         cả sản phẩm</a>
                 </li>
@@ -124,7 +119,7 @@
             </ul>
         </div>
         {{--        Kho hàng--}}
-        <div class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        <div data-index="2" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -208,7 +203,7 @@
             </ul>
         </div>
         {{--        Quản lý đơn hàng--}}
-        <div class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -250,7 +245,7 @@
             </ul>
         </div>
         {{--        Tài chính--}}
-        <div class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -293,7 +288,7 @@
             </ul>
         </div>
         {{--        Tài khoản--}}
-        <div class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -326,7 +321,7 @@
             </ul>
         </div>
         {{--        log out--}}
-        <div class="flex flex-col gap-3 cursor-pointer select-none">
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
                     class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
@@ -349,5 +344,4 @@
             </div>
         </div>
     </div>
-
 </div>
