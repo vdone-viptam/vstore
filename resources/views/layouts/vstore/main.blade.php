@@ -87,38 +87,39 @@
             }
 
         })
-        const nav = document.getElementById("nav")
-        const menu = document.getElementsByClassName("menu")
-        const bg = document.getElementsByClassName("show_bg")[0]
-        nav.addEventListener("click", () => {
-            console.log(menu[1])
-            menu[0].classList.add("show")
-            menu[1].classList.add("show")
-        })
-        window.onclick = function (event) {
-            if (event.target == bg) {
-                menu[0].classList.remove("show")
-                menu[1].classList.remove("show")
-            }
-        }
+    }
 
-        //    hover menu
-        const hv = document.getElementsByClassName("choose-tab")[0]
-        hv.addEventListener("click", () => {
-            for (let i = 1; i < tm.length; i++) {
-                if (tm[i].classList.contains("active")) {
-                    tm[i].classList.remove("tab__hover")
-                } else {
-                    tm[i].classList.add("tab__hover")
-                }
-            }
-        })
-        for (let i = 0; i < tm.length; i++) {
+    const nav = document.getElementById("nav")
+    const menu = document.getElementsByClassName("menu")
+    const bg = document.getElementsByClassName("show_bg")[0]
+    nav.addEventListener("click", () => {
+        console.log(menu[1])
+        menu[0].classList.add("show")
+        menu[1].classList.add("show")
+    })
+    window.onclick = function (event) {
+        if (event.target == bg) {
+            menu[0].classList.remove("show")
+            menu[1].classList.remove("show")
+        }
+    }
+
+    //    hover menu
+    const hv = document.getElementsByClassName("choose-tab")[0]
+    hv.addEventListener("click", () => {
+        for (let i = 1; i < tm.length; i++) {
             if (tm[i].classList.contains("active")) {
                 tm[i].classList.remove("tab__hover")
             } else {
                 tm[i].classList.add("tab__hover")
             }
+        }
+    })
+    for (let i = 0; i < tm.length; i++) {
+        if (tm[i].classList.contains("active")) {
+            tm[i].classList.remove("tab__hover")
+        } else {
+            tm[i].classList.add("tab__hover")
         }
     }
 </script>
