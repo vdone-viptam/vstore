@@ -35,6 +35,9 @@
     .tab__hover:hover .svg_arr {
         stroke: #4062FF;
     }
+    .choose-tab::-webkit-scrollbar-track{
+        background: #F2F8FF;
+    }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden">
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
@@ -42,7 +45,7 @@
             <img class="" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
     </a>
-    <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
+    <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab w-full max-h-[700px] overflow-y-scroll">
         {{--      Tổng quan--}}
         <a href="{{route('screens.vstore.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
