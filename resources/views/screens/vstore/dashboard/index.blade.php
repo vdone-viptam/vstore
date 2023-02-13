@@ -132,7 +132,7 @@
                             <a href="{{route('screens.vstore.product.request')}}" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
                             </div>
 
-                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 w-full">
+                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
                                 <div class="pro flex flex-col w-full p-[4px] gap-2">
                                     <div class="w-full h-[240px]">
                                         <img src="https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-trang-600x600.jpg" class="w-full rounded-[2px]" alt="">
@@ -221,7 +221,7 @@
                             <a href="{{Route('screens.vstore.partner.vshop')}}" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
                             </div>
 
-                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 w-full">
+                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
                                 <div class="pro flex flex-col w-full p-[4px] gap-2">
                                     <div class="max-w-[120px] mx-auto">
                                     <div class="w-[50px] h-[50px] rounded-full">
@@ -386,7 +386,7 @@
                 </div>
             </div>
         </div>
-    
+
     </div>
 @endsection
 @section('custom_js')

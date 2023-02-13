@@ -15,7 +15,10 @@
 </head>
 <body id="body">
 @yield('modal')
-<div class="grid grid-cols-12">
+<div class="absolute w-full h-full bg-transparent screen z-[4] hidden">
+
+</div>
+<div class="grid grid-cols-12" id="boxq">
     @include('layouts.vstore.menu')
     <div class="md:col-span-3 2xl:col-span-2 hidden md:block z-[6]">
     </div>
@@ -101,7 +104,7 @@
 
         //    hover menu
         const body = document.getElementById("body")
-        if(body.offsetWidth > 767.99){
+        if (body.offsetWidth > 767.99) {
             const hv = document.getElementsByClassName("choose-tab")[0]
             hv.addEventListener("click", () => {
                 for (let i = 1; i < tm.length; i++) {
@@ -121,5 +124,7 @@
             }
         }
     }
+
+
 </script>
 </html>

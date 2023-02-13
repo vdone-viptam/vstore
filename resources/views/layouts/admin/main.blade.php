@@ -22,6 +22,9 @@
 
 </div>
 @yield('modal')
+<div class="absolute w-full h-full bg-transparent screen z-[4] hidden">
+
+</div>
 <div class="grid grid-cols-12">
     @include('layouts.admin.menu')
     <div class="md:col-span-3 2xl:col-span-2 md:block hidden">

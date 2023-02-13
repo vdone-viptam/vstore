@@ -247,12 +247,12 @@
                                 @csrf
                                 <div
                                     class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey pt-6 md:pt-0">
-                                    <div class="w-[101px] file-avt">
-                                        <div class="w-[100px] h-[100px] rounded-full shadow-xl">
+                                    <div class="w-[200px] file-avt">
+                                        <div class="w-full h-[100px]   ">
                                             <img
                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
                                                 alt=""
-                                                class="w-full rounded-full">
+                                                class="w-full object-fill">
                                         </div>
                                     </div>
                                     <button type="button"
