@@ -10,7 +10,7 @@
     <div
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
         <div class="lg:oder-1 order-2 2xl:col-span-12 lg:col-span-12 lg:pl-7 md:pt-7 xl:px-12 px-4">
-            <div class="flex md:justify-end lg:justify-between items-center lg:gap-[30px] xl:gap-[100px] 2xl:gap-[150px]">
+            <!-- <div class="flex md:justify-end lg:justify-between items-center lg:gap-[30px] xl:gap-[100px] 2xl:gap-[150px]">
             <div class="hidden cursor-pointer md:hidden lg:flex  justify-end  my-6 w-full lg:h-[160px] 2xl:h-[200px]">
                 @if(\Illuminate\Support\Facades\Auth::user()->banner)
                     <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full"
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         
           
             <div class="flex flex-col justify-start items-start gap-16">
