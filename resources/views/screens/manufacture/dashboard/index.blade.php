@@ -438,5 +438,8 @@
             $value = $('.slect-date option:selected').text();
             $('.date').html($value);
         });
+
+
     </script>
+
 @endsection

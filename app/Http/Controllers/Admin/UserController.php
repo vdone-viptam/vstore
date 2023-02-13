@@ -58,22 +58,13 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $user = User::find($id);
-            $ID = Str::random(7);
+            $ID = $user->tax_code;
             if ($user->role_id == 2){
                 $ID = 'vnncc'.$ID;
             }else {
                 $ID = 'vnnpp'.$ID;
             }
-            $checkUser = User::where('account_code', $ID)->first();
-            while ($checkUser) {
-                $ID = Str::random(7);
-                if ($user->role_id == 2){
-                    $ID = 'vnncc'.$ID;
-                }else {
-                    $ID = 'vnnpp'.$ID;
-                }
-                $checkUser = User::where('account_code', $ID)->first();
-            }
+
             $password = rand(1000000, 9999999);
             $user->account_code = $ID;
             $user->password = Hash::make($password);
