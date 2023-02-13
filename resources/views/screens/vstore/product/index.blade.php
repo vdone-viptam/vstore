@@ -84,7 +84,7 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        Danh sách sản pẩm
+                        Danh sách sản phẩm
                     </h2>
 
 

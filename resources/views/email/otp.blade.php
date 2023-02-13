@@ -348,8 +348,6 @@
                                                                                     <tr>
                                                                                         <td align="left" style="font-size:0px;padding:5px 5px 5px 5px;word-break:break-word">
                                                                                             <div style="font-family:BinancePlex,Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:11px;line-height:20px;text-align:left;color:#000000">
-                                                                                                <span id="m_-6834089905839291378ipunt">To stay secure, setup your phishing code </span>
-                                                                                                <a href="https://www.binance.com/en/my/security/anti-phishing-code" id="m_-6834089905839291378ijvlnl" style="font-family:BinancePlex,Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;color:#f0b90b" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.binance.com/en/my/security/anti-phishing-code&amp;source=gmail&amp;ust=1676109140726000&amp;usg=AOvVaw3NKvmgRjIqNgxjxYrMo8ot">here</a>
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>
@@ -383,14 +381,7 @@
                                             <tr>
                                                 <td align="left" style="font-size:0px;padding:5px 5px 5px 5px;word-break:break-word">
                                                     <div style="font-family:BinancePlex,Arial,PingFangSC-Regular,'Microsoft YaHei',sans-serif;font-size:11px;line-height:15px;text-align:left;color:#000000">
-                                                        <div>
-                                                            <b>Risk warning:
-                                                            </b> Cryptocurrency trading is subject to high market risk. Binance will make the best efforts to choose high-quality coins, but will not be responsible for your trading losses. Please trade with caution.
-                                                        </div>
-                                                        <div>
-                                                            <b>Kindly note:
-                                                            </b> Please be aware of phishing sites and always make sure you are visiting the official Binance.com website when entering sensitive data.
-                                                        </div>
+
                                                     </div>
                                                 </td>
                                             </tr>

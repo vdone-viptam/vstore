@@ -198,6 +198,10 @@
                         <div class="col-span-8 order-last md:order-first">
                             <div class="flex flex-col justify-start items-start gap-6 md:p-6 w-full ">
                                 <div class="flex justify-start items-start gap-4">
+                                    <span class="text-secondary">ID:</span>
+                                    <span>{{$infoAccount->account_code}}</span>
+                                </div>
+                                <div class="flex justify-start items-start gap-4">
                                     <span class="text-secondary">Tên V-Store:</span>
                                     <span>{{$infoAccount->name}}</span>
                                 </div>

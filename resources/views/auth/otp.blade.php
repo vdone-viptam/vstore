@@ -69,7 +69,7 @@
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Xác minh tài khoản</h1>
 
-        <form action="{{route('post_otp',['token' => $token,'id' => $user_id])}}" method="post" class="w-full"
+        <form action="{{route('post_otp',['token1' => $token,'id' => $user_id])}}" method="post" class="w-full"
               id="form-log">
             @csrf
             @if(\Illuminate\Support\Facades\Session::has('success'))

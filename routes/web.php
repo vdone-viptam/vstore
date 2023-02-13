@@ -23,8 +23,8 @@ Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController
 Route::post('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'postResetForgot']);
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('postLogin');
 Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'getLogout'])->name('logout');
-Route::get('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
-Route::post('/otp/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
+Route::get('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
+Route::post('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
 Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin

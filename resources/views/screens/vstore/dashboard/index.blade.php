@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="result p-4 xl:p-10 w-full bg-white box-shadow rounded-[24px]">
-                    <div class="item flex flex-col justify-start items-start gap-14">
+                    <div class="item flex flex-col justify-start items-start gap-11">
                         <div class="flex flex-col gap-4 w-full">
                             <div class="flex justify-between items-center w-full">
                             <h2 class="text-black font-semibold text-lg md:text-2xl">Sản phẩm chờ duyệt</h2>
@@ -372,6 +372,17 @@
                                 <canvas id="bar-chart-grouped" width="800" height="315"></canvas>
                                 <!-- <canvas id="line-chart" width="800" height="350"></canvas> -->
                             </div>
+                        </div>
+                        <div class="flex items-center gap-[5px]">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M25.7497 6.30054C25.683 6.71721 25.6497 7.13387 25.6497 7.55054C25.6497 11.3005 28.683 14.3322 32.4163 14.3322C32.833 14.3322 33.233 14.2839 33.6497 14.2172V27.6655C33.6497 33.3172 30.3163 36.6672 24.6497 36.6672H12.3347C6.66634 36.6672 3.33301 33.3172 3.33301 27.6655V15.3339C3.33301 9.66721 6.66634 6.30054 12.3347 6.30054H25.7497ZM26.0847 16.4339C25.633 16.3839 25.1847 16.5839 24.9163 16.9505L20.8847 22.1672L16.2663 18.5339C15.983 18.3172 15.6497 18.2322 15.3163 18.2672C14.9847 18.3172 14.6847 18.4989 14.483 18.7655L9.55134 25.1839L9.44967 25.3339C9.16634 25.8655 9.29967 26.5489 9.79967 26.9172C10.033 27.0672 10.283 27.1672 10.5663 27.1672C10.9513 27.1839 11.3163 26.9822 11.5497 26.6672L15.733 21.2822L20.483 24.8505L20.633 24.9489C21.1663 25.2322 21.833 25.1005 22.2163 24.5989L27.033 18.3839L26.9663 18.4172C27.233 18.0505 27.283 17.5839 27.0997 17.1672C26.918 16.7505 26.5163 16.4672 26.0847 16.4339ZM32.6498 3.33337C34.8665 3.33337 36.6665 5.13337 36.6665 7.35004C36.6665 9.56671 34.8665 11.3667 32.6498 11.3667C30.4332 11.3667 28.6332 9.56671 28.6332 7.35004C28.6332 5.13337 30.4332 3.33337 32.6498 3.33337Z"
+                                    fill="#4062FF"/>
+                            </svg>
+                            <span
+                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
+                                    class="date">1 tuần</span></span>
                         </div>
                         <div class="char p-4 xl:p-10 w-full">
                             <canvas id="bar-chart" width="800" height="315"></canvas>
