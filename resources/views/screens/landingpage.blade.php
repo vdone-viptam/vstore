@@ -7,6 +7,7 @@
     <title>Trang chủ</title>
     <link rel="stylesheet" href="{{asset('landingpage/style.css')}}">
     <link rel="stylesheet" href="{{asset('landingpage/output.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
 {{--    <link rel="stylesheet" href="../dist/output.css">--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>

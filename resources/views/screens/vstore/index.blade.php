@@ -358,7 +358,7 @@
 
                 </a></li>
         </ul>
-        <span class="uppercase text-xs text-[#272D4E]">COPYRIGHT V-Store 2023 - TERMS & CONDITIONS  PRIVACY POLICY</span>
+        <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
     </div>
 </footer>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

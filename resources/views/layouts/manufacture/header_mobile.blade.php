@@ -388,7 +388,7 @@
                              alt="">
                     </div>
 
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{asset(\Illuminate\Support\Facades\Auth::user()->account_code)}}</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path

@@ -67,7 +67,7 @@
                 <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
                      src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/success.png')}}">
                 <div class="flex flex-col gap-[3px] justify-center">
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
                 </div>
                 <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">

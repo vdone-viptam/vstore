@@ -338,7 +338,7 @@
                 <div class="user flex items-center gap-2">
                     <img class="w-[32px] h-[32px] rounded-[50%] cursor-pointer"
                          src="{{asset("./home/img/avatar_accout.png")}}" alt="">
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Aneedd</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path

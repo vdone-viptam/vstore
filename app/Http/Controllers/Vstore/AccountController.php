@@ -30,7 +30,7 @@ class AccountController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'company_name' => 'required',
-            'tax_code' => 'required',
+//            'tax_code' => 'required',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
@@ -38,7 +38,7 @@ class AccountController extends Controller
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
-            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+//            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
             'address.required' => 'Địa chỉ bắt buộc nhập',
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
@@ -52,7 +52,7 @@ class AccountController extends Controller
 
         $user->name = trim($request->name);
         $user->company_name = trim($request->company_name);
-        $user->tax_code = trim($request->tax_code);
+//        $user->tax_code = trim($request->tax_code);
         $user->address = trim($request->address);
         $user->id_vdone = trim($request->id_vdone);
         $user->id_vdone_diff = trim($request->id_vdone_diff);

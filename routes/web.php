@@ -26,6 +26,7 @@ Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'getLog
 Route::get('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
 Route::post('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
 Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
+Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
@@ -50,7 +51,6 @@ Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpage'])->name('landingpagevstore');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
-    Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
 
 //    Route::get('/', function () {
 //        return view('screens.vstore.index');
