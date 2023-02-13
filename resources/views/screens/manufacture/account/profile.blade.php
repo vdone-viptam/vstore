@@ -22,11 +22,11 @@
             </div>
         </div>
     @endif
-    <div class="modal modal-hd @if(\Illuminate\Support\Facades\Session::has('validate')) show-modal @endif">
+    <div class="modal modal-hd  @if(\Illuminate\Support\Facades\Session::has('validate')) show-modal @endif">
         <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
         <form action="{{route('screens.manufacture.account.editPro',['id' => $infoAccount->id])}}" method="POST">
             <div
-                class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px] md:max-h-[500px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
+                class="information flex flex-col bg-[#FFFF] w-full max-w-[300px]  md:max-w-[750px] md:max-h-[500px] shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
                 <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                     <h2 class="text-base text-title font-medium">Chỉnh sửa hồ sơ</h2>
                     <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
@@ -39,9 +39,9 @@
                 </div>
                 @csrf
                 <div class="content  max-h-[400px] overflow-y-auto">
-                    <div class="flex flex-col justify-start items-start gap-6 p-6 w-full ">
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Tên V-Store:</span>
+                    <div class="flex flex-col justify-start items-start gap-6 py-2 md:p-6 w-full ">
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Tên V-Store:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="name" name="name"
                                        class="w-full outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
@@ -54,8 +54,8 @@
 
                         </div>
 
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Tên Công ty:</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Tên Công ty:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="company_name" name="company_name"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
@@ -65,8 +65,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Mã số thuế:</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Mã số thuế:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="tax_code" name="tax_code"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
@@ -76,8 +76,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Địa chỉ:</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Địa chỉ:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="address" id="address"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
@@ -87,8 +87,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Số diện thoại:</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Số diện thoại:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="phone_number" name="phone_number"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
@@ -98,8 +98,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">ID người đại diện:</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">ID người đại diện:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="id_vdone" id="id_vdone"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
@@ -109,14 +109,14 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">ID người đại diện (khác):</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">ID người đại diện (khác):</span>
                             <input type="text" name="id_vdone_diff" id="id_vdone_diff"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                                    value="{{$infoAccount->id_vdone_diff}}">
                         </div>
-                        <div class="flex justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-[280px]">Link Website:</span>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Link Website:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="link_website"
                                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
@@ -128,7 +128,7 @@
                         </div>
 
                     </div>
-                    <div class="flex justify-end items-center gap-4 px-6">
+                    <div class="flex justify-center md:justify-end items-center gap-4 px-6 mt-2">
                         <button type="button"
                                 class=" cursor-pointer outline-none bg-[#FFF] transition-all duration-200 rounded-sm py-2 px-3 text-center text-title hover:opacity-70 border-[1px] border-secondary"
                                 onclick="$('.modal-hd').toggleClass('show-modal')">Đóng lại
@@ -147,7 +147,7 @@
 @section('content')
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
-        <div class="col-span-3">
+        <!-- <div class="col-span-3">
             <div class="p-6 border-b-[1px] border-grey">
                 <div class="flex flex-col justify-start items-start w-full">
                     <div class="flex justify-start items-center gap-6 w-full">
@@ -186,17 +186,17 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="col-span-9">
+        </div> -->
+        <div class="col-span-12">
             <div class="box w-full">
                 <div class="flex flex-col justify-start items-start w-full p-6">
                     <div class="flex flex-col justify-start items-start gap-1 pb-6 border-b-[1px] border-grey w-full">
                         <h3 class="captilize font-medium text-xl text-title">Hồ sơ của tôi</h3>
                         <span class="text-secondary text-sm">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-0 w-full md:p-6 ">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-0 w-full md:py-6 lg:p-6 ">
                         <div class="col-span-8 order-last md:order-first">
-                            <div class="flex flex-col justify-start items-start gap-6 md:p-6 w-full ">
+                            <div class="flex flex-col justify-start items-start gap-6  w-full ">
                                 <div class="flex justify-start items-start gap-4">
                                     <span class="text-secondary">ID:</span>
                                     <span>{{$infoAccount->account_code}}</span>
@@ -229,7 +229,7 @@
                                     <span class="text-secondary">ID Người đại diện (khác):</span>
                                     <span>{{$infoAccount->id_vdone_diff}}</span>
                                 </div>
-                                <div class="flex justify-start items-center gap-4 w-full">
+                                <div class="flex flex-wrap lg:flex-nowrap justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Link website: </span>
                                     <span>{{$infoAccount->link_website ?? asset('p/'.$infoAccount->slug)}}</span>
                                 </div>
@@ -246,7 +246,7 @@
                                   id="form" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div
-                                    class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey">
+                                    class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey pt-6 md:pt-0">
                                     <div class="w-[101px] file-avt">
                                         <div class="w-[100px] h-[100px] rounded-full shadow-xl">
                                             <img

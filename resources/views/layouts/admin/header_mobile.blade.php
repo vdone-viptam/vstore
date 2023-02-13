@@ -268,8 +268,8 @@
         </div>
     </div>
     <div class="py-3 px-5">
-        <div class="flex justify-between items-center">
-            <div class="help relative flex items-center gap-3 justify-end">
+        <div class="flex justify-end items-center">
+            <!-- <div class="help relative flex items-center gap-3 justify-end">
                 <div class="w-[35px]">
                     <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -284,7 +284,7 @@
                     <li><a href="#">Biểu phí</a></li>
                     <li><a href="#">Chính sách quy định</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="flex justify-end gap-6 items-center xl:gap-6">
                 <div class="notify relative cursor-pointer">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none"

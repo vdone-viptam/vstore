@@ -278,11 +278,10 @@
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
-                                thu</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi số dư</a></li>
+                        <!-- <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
                                 thu</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 {{--                log out--}}
@@ -335,8 +334,8 @@
         </div>
     </div>
     <div class="py-3 px-5">
-        <div class="flex justify-between items-center">
-            <div class="help relative flex items-center gap-3 justify-end">
+        <div class="flex justify-end items-center flex-wrap md:flex-nowrap gap-4 md:gap-0">
+            <!-- <div class="help relative flex items-center gap-3 justify-end">
                 <div class="w-[35px]">
                     <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="35" height="35" rx="12" fill="#F5F5F5"/>
@@ -351,7 +350,7 @@
                     <li><a href="#">Biểu phí</a></li>
                     <li><a href="#">Chính sách quy định</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="flex justify-end gap-6 items-center xl:gap-6">
                 <div class="notify relative cursor-pointer">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -388,7 +387,7 @@
                              alt="">
                     </div>
 
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{asset(\Illuminate\Support\Facades\Auth::user()->account_code)}}</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
                     <svg class="cursor-pointer" width="16" height="16" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
