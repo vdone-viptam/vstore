@@ -164,8 +164,12 @@
                         <span class="text-sm text-secondary">Tải hình ảnh</span>
                         <span class="text-xs text-secondary" id="countImage"> 0/5</span>
                     </div>
+                    <br>
 
                 </div>
+                @error('images')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
                 <label for="">Video sản phẩm</label>
                 <div class="flex justify-start items-start gap-2 w-full">
                     <input type="file" accept="video/mp4"
