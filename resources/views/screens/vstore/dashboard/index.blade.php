@@ -147,7 +147,7 @@
                                         <div
                                             class="flex justify-between items-center flex-wrap md:flex-nowrap w-full md:px-2">
                                             <span class="text-[#919EAB] font-medium text-sm">Chiết khấu: <span
-                                                    class="text-primary text-lg">{{$a->discount_vshop}}%</span></span>
+                                                    class="text-primary text-lg">{{$a->discount}}%</span></span>
                                             <span class="text-[#F5C002] text-xs">Chờ duyệt</span>
                                         </div>
                                     </div>

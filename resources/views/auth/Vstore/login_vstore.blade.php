@@ -42,12 +42,12 @@
 {{--            <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
 {{--            {{asset(route('lading_page'))}}--}}
             <div>
-                <img src="{{asset('asset/icons/back.png')}}" alt="">
+                <img  src="{{asset('asset/icons/back.png')}}" alt="">
             </div>
             <span class="text-title">Quay lại</span>
         </a>
         <div class="w-[162px]">
-            <img src="{{asset('asset/images/logo.png')}}" alt="">
+            <img style="object-fit: contain;" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 

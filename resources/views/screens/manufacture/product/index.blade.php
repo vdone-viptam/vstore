@@ -168,7 +168,7 @@
                                         {{isset($prams['condition']) && $params['condition'] == 3 ? $product->cate_name : $product->category->name}}
                                     </td>
                                     <td>
-                                        {{$product->price}}
+                                        {{ number_format($product->price,'0','','.')}}
                                     </td>
                                     <td>
                                         {{$product->vStore->name ?? '-'}}

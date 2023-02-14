@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
     <meta property="og:type" content="website" />
-<meta property="og:title" content="Nhà cung cấp" />
+<meta property="og:title" content="Nhà cung cấp " />
 <meta property="og:description" content="" />
 <meta property="og:url" content="https://ncc.vdone.vn/" />
 <meta property="og:image" content="https://ncc.vdone.vn/home/img/logoncc.png" />

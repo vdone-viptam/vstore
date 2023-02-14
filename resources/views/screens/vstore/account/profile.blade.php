@@ -192,7 +192,7 @@
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Link website: </span>
-                                    <span>{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}</span>
+                                    <span><a href="{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}">{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}</a></span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 ">
                                     <a href="#"

@@ -146,26 +146,10 @@ class LoginController extends Controller
                 });
                 Auth::logout();
                 return redirect()->route('otp', ['token1' => $token, 'id' => $userLogin->id]);
-//            if ($request->type == Auth::user()->role_id) {
-//                if (Auth::user()->role_id == 1) {
-//                    return redirect()->route('screens.admin.dashboard.index');
-//                }
-//                if (Auth::user()->role_id == 2) {
-//
-//                    return redirect()->route('screens.manufacture.dashboard.index');
-//                }
-//                if (Auth::user()->role_id == 3) {
-//
-//                    return redirect()->route('screens.vstore.dashboard.index');
-//                }
-//            } else {
-//                return redirect()->back()->with('error', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
-//            }
             } else {
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
@@ -266,36 +250,38 @@ class LoginController extends Controller
 
     public function post_OTP(Request $request, $token1)
     {
-        $otp = Otp::where('user_code',$request->id)->where('code',$request->otp)->first();
+        $otp = Otp::where('user_code', $request->id)->where('code', $request->otp)->first();
         $now = Carbon::now();
 
 
-        if ($otp){
-            if($now->diffInMinutes($otp->created_at)>=1){
-                return redirect()->back()->with('error','Mã xác minh đã hết hạn');
+        if ($otp) {
+            if ($now->diffInMinutes($otp->created_at) >= 1) {
+                return redirect()->back()->with('error', 'Mã xác minh đã hết hạn');
             }
             $user = User::find($request->id);
             Auth::login($user);
-            Otp::where('user_code',$request->id)->delete();
+            Otp::where('user_code', $request->id)->delete();
             $otp->delete();
-                if (Auth::user()->role_id == 1) {
-                    return redirect()->route('screens.admin.dashboard.index');
-                }
-                if (Auth::user()->role_id == 2) {
+            if (Auth::user()->role_id == 1) {
+                return redirect()->route('screens.admin.dashboard.index');
+            }
+            if (Auth::user()->role_id == 2) {
 
-                    return redirect()->route('screens.manufacture.dashboard.index');
-                }
-                if (Auth::user()->role_id == 3) {
+                return redirect()->route('screens.manufacture.dashboard.index');
+            }
+            if (Auth::user()->role_id == 3) {
 
-                    return redirect()->route('screens.vstore.dashboard.index');
-                }
+                return redirect()->route('screens.vstore.dashboard.index');
+            }
 
-        }else{
-            return redirect()->back()->with('error','Mã xác minh không chính xác');
+        } else {
+            return redirect()->back()->with('error', 'Mã xác minh không chính xác');
         }
 
     }
-    public function reOtp(Request $request){
+
+    public function reOtp(Request $request)
+    {
         $user = User::find($request->id);
         $login = new Otp();
         $login->code = rand(100000, 999999);
