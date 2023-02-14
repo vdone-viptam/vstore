@@ -8,7 +8,8 @@
         <div
             class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
             <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
-                <h2 class="text-base text-title font-medium">Thông tin chi tiết</h2>
+                <div></div>
+                <h2 class="text-xl text-title font-semibold">Thông tin chi tiết</h2>
                 <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                      onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -21,20 +22,20 @@
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Mã kho hàng:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">VSC1232</span>
+                        <span class="text-title ">VSC1232</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tên kho hàng:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">Nhà Kho Hải Đăng</span>
+                        <span class="text-title ">Nhà Kho Hải Đăng</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Địa chỉ: </span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">Việt Nam</span>
+                        <span class="text-title ">Việt Nam</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tổng sản phẩm trong tồn kho: </span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">100</span>
+                        <span class="text-title ">100</span>
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">

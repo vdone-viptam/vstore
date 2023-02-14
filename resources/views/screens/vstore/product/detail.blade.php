@@ -5,7 +5,8 @@
         <div
             class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
             <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
-                <h2 class="text-base text-title font-medium">Thông tin chi tiết</h2>
+                <div></div>
+                <h2 class="text-xl text-title font-semibold">Thông tin chi tiết</h2>
                 <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                      onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -18,12 +19,12 @@
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Mã sản phẩm:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->code}}</span>
+                        <span class="text-title ">{{$request->code}}</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Tên sản phẩm:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->product_name}}</span>
+                        <span class="text-title ">{{$request->product_name}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Nhà cung cấp:</span>
@@ -31,7 +32,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Giá bán:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->price}}</span>
+                        <span class="text-title ">{{$request->price}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Chiết khấu:</span>
@@ -39,7 +40,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Số lượng bán:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->amount_product}}</span>
+                        <span class="text-title ">{{$request->amount_product}}</span>
                     </div>
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="grid grid-cols-2 gap-4 w-full">
