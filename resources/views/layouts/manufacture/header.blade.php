@@ -43,7 +43,7 @@
 
 
                 <div class="flex flex-col gap-[3px] justify-center">
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
                 </div>
 
                 <ul class="sub-nav-user">
