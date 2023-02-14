@@ -41,7 +41,7 @@
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Chiết khấu vshop:</span>
-                    <span class="text-title ">{{$product->discount_vshop ?? 0}} %</span>
+                    <span class="text-title ">{{$product->discount_vShop ?? 0}} %</span>
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Số lượng bán:</span>

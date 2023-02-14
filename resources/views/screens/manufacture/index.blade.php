@@ -30,10 +30,10 @@
     <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
             <div class="w-[170px] h-[45px] md:hidden">
-                <a href="./"> <img src="{{asset('home/img/Logoncc.png')}}" class="w-full" alt=""></a>
+                <a href="./"> <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt=""></a>
             </div>
             <div class="hidden md:block w-[234px] h-[67px]">
-                <a href="./"> <img src="{{asset('home/img/Logoncc.png')}}" class="w-full" alt=""></a>
+                <a href="./"> <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt=""></a>
             </div>
 
             <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px]  font-semibold text-[#FFF] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
