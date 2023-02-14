@@ -276,12 +276,44 @@
                             </div>
                         </div>
                     </div>
+
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi số dư</a></li>
                         <!-- <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
                                 thu</a>
                         </li> -->
+                    </ul>
+                </div>
+
+                <div data-index="5" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
+                    <div class="flex items-center">
+                        <div class="tab__left rounded-[16px] p-2">
+                            <div
+                                class="flex items-center gap-3">
+                                <div class="w-[10px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path class="svgFill" fill="#B8BED9"
+                                              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <p class="text-[#495057] text-sm  text__menu">Tài khoản</p>
+                                    <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                              stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
+                        <li data-page="/"><a class="hover:underline" href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a></li>
+                        <li data-page="change-password"><a class="hover:underline" href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
+                        </li>
                     </ul>
                 </div>
                 {{--                log out--}}
