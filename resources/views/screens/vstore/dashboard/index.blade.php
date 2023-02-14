@@ -455,15 +455,15 @@
         //     $('.sub-nav-notify').toggleClass('activeTb')
         //
         // })
-        $('.notify').on('click', function(){
-            $('.sub-nav-notify').toggleClass('activeTb')
-            $('.screen').removeClass('hidden')
-        })
+        // $('.notify').on('click', function(){
+        //     $('.sub-nav-notify').toggleClass('activeTb')
+        //     $('.screen').removeClass('hidden')
+        // })
 
-        $('.screen').on('click', function (){
-            $('.sub-nav-notify').toggleClass('active')
-            $(this).addClass('hidden')
-        })
+        // $('.screen').on('click', function (){
+        //     $('.sub-nav-notify').toggleClass('active')
+        //     $(this).addClass('hidden')
+        // })
 
 
     </script>

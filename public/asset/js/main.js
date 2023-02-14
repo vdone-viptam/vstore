@@ -245,28 +245,14 @@ $(document).ready(function () {
         $(this).children('.list').removeClass('hidden')
     })
 
-    // $('#form-log').on('change', function (e) {
-    //     e.preventDefault();
-    //     if (e.target.value != '' && e.target.checked) {
-    //         $('.btn-log').prop('disabled', false);
-    //         $('.btn-log').addClass('active');
-    //     } else {
-    //         $('.btn-log').prop('disabled', true);
-    //         $('.btn-log').removeClass('active');
-    //     }
-    //
-    // })    // $('.edit-hs').on('click', function () {
-    //     //     $('.modal-hd').toggleClass('show-modal');
-    //     // })
-
     $('.notify').on('click', function () {
-
-        $('.sub-nav-notify').toggleClass('activeTb')
         $('.screen').removeClass('hidden')
+        $('.sub-nav-notify').toggleClass('activeTb')
+       
     })
     $('.screen').on('click', function () {
-        $('.sub-nav-notify').toggleClass('activeTb')
         $(this).addClass('hidden')
+        $('.sub-nav-notify').toggleClass('activeTb')
     })
 })
 

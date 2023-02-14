@@ -15,7 +15,7 @@
 </head>
 <body id="body">
 @yield('modal')
-<div class="absolute w-full h-full bg-transparent screen z-[15] hidden">
+<div class="absolute w-full h-full bg-transparent screen z-[5] hidden">
 
 </div>
 <div class="grid grid-cols-12" id="boxq">

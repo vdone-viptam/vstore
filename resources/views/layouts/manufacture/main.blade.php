@@ -47,7 +47,7 @@
 </style>
 <body id="body">
 @yield('modal')
-<div class="absolute w-full h-full bg-transparent screen z-[15] hidden">
+<div class="absolute w-full h-full bg-transparent screen z-[5] hidden">
 
 </div>
 
@@ -150,18 +150,18 @@
         } else {
             tm[i].classList.add("tab__hover")
         }
-    })
-
     }
 
-    $('.notify').on('click', function () {
-        $('.sub-nav-notify').toggleClass('activeTb')
-        $('.screen').removeClass('hidden')
-    })
-    $('.screen').on('click', function (){
-        $('.sub-nav-notify').toggleClass('activeTb')
-        $(this).addClass('hidden')
-    })
+    
+
+    // $('.notify').on('click', function () {
+    //     $('.sub-nav-notify').toggleClass('activeTb')
+    //     $('.screen').removeClass('hidden')
+    // })
+    // $('.screen').on('click', function (){
+    //     $('.sub-nav-notify').toggleClass('activeTb')
+    //     $(this).addClass('hidden')
+    // })
 </script>
 
 </body>
