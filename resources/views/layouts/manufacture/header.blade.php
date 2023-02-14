@@ -92,10 +92,9 @@
         </div>
     </div>
 </div>
-
-<div class="hidden cursor-pointer md:flex  justify-end  my-6 w-full h-[300px]">
+<div class="hidden cursor-pointer md:flex  justify-end  my-6  max-w-[1240px] h-[300px] mx-auto">
     @if(\Illuminate\Support\Facades\Auth::user()->banner)
-        <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full"
+        <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full object-fill"
              alt="">
     @endif
     {{--                <img src="{{asset('/image/users/'. \Illuminate\Support\Facades\Auth::user()->banner)}}">--}}
