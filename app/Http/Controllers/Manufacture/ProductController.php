@@ -206,7 +206,7 @@ class ProductController extends Controller
             $storage->makeDirectory($folder);
         }
 
-        $storage->put($folder . ' / ' . $fileName, base64_decode($content), 'public');
+        $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
 
         return $fileName;
     }
