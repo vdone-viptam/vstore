@@ -108,7 +108,7 @@
             {{--            </div>--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
-                       class=" btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
+                       class="cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
                        value="Đồng ý"></input>
                 {{--                <button type="submit" class="text-red-300"> Đòng ý</button>--}}
                 {{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register')}}" class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}

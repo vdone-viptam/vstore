@@ -88,7 +88,7 @@
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div class=md:text-left>Bạn chưa nhận được mã. <a class="" href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại</a></div>
+                <div class=md:text-left>Bạn chưa nhận được mã. <a class="text-sky-500/100 hover:underline transition-all duration-200" href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại</a></div>
                 {{--                <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
                 {{--                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mật khẩu</span>--}}
                 {{--                    <div class="pass w-full relative">--}}
@@ -110,7 +110,7 @@
             </div>
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
-                       class=" btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
+                       class="cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
                        value="Đồng ý"></input>
                 {{--                <button type="submit" class="text-red-300"> Đòng ý</button>--}}
                 {{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register')}}" class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}
