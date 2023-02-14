@@ -34,7 +34,7 @@ Thêm sản phẩm vào kho</h2>
         <p class="text-green-600 px-5 xl:px-16 py-2">{{Session::get('message')}}</p>
     @endif
     <div class="grid grid-cols-1 md:grid-cols-12  gap-y-4 lg:gap-4 px-5 xl:px-16 py-4">
-        <div class="flex flex-col justify-start items-start gap-4 p-5 col-span-6">
+        <div class="flex flex-col justify-start items-start gap-4 p-5 col-span-12">
             <h4 class="font-medium text-[#141414] text-2xl">Thông tin cơ bản</h4>
             <form  method="POST" class="w-full flex flex-col justify-start items-start gap-6">
                 @csrf

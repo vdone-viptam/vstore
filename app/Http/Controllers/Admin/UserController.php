@@ -62,7 +62,7 @@ class UserController extends Controller
             if ($user->role_id == 2){
                 $ID = 'vnncc'.$ID;
             }else {
-                $ID = 'vnnpp'.$ID;
+                $ID = 'vnvst'.$ID;
             }
 
             $password = rand(1000000, 9999999);

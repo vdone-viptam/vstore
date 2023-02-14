@@ -42,7 +42,7 @@
         }
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
+<div class="bg-[#F2F8FF] fixed left-0 h-screen md:block hidden z-[7]">
 
     <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
         <div class="w-[195px] h-[45px] mx-auto my-6">

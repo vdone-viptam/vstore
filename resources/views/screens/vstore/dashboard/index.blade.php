@@ -213,6 +213,26 @@
                                         <span class="text-[#F5C002] text-xs">Chờ duyệt</span>
                                     </div>
                                 </div>
+                                <div class="pro flex flex-col w-full p-[4px] gap-2">
+                                    <div class="w-full h-[240px]">
+                                        <img src="https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-trang-600x600.jpg" class="w-full rounded-[2px]" alt="">
+                                    </div>
+                                    <h2 class="line-clamp-2 text-black font-medium md:px-2">Tên sản phẩm Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>
+                                    <div class="flex justify-between items-center flex-wrap md:flex-nowrap w-full md:px-2">
+                                        <span class="text-[#919EAB] font-medium text-sm">Chiết khấu: <span class="text-primary text-lg">10%</span></span>
+                                        <span class="text-[#F5C002] text-xs">Chờ duyệt</span>
+                                    </div>
+                                </div>
+                                <div class="pro flex flex-col w-full p-[4px] gap-2">
+                                    <div class="w-full h-[240px]">
+                                        <img src="https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-trang-600x600.jpg" class="w-full rounded-[2px]" alt="">
+                                    </div>
+                                    <h2 class="line-clamp-2 text-black font-medium md:px-2">Tên sản phẩm Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>
+                                    <div class="flex justify-between items-center flex-wrap md:flex-nowrap w-full md:px-2">
+                                        <span class="text-[#919EAB] font-medium text-sm">Chiết khấu: <span class="text-primary text-lg">10%</span></span>
+                                        <span class="text-[#F5C002] text-xs">Chờ duyệt</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="flex flex-col gap-4 w-full">
@@ -222,6 +242,17 @@
                             </div>
 
                             <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
+                                <div class="pro flex flex-col w-full p-[4px] gap-2">
+                                    <div class="max-w-[120px] mx-auto">
+                                        <div class="w-[50px] h-[50px] rounded-full">
+                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>
+                                </div>
                                 <div class="pro flex flex-col w-full p-[4px] gap-2">
                                     <div class="max-w-[120px] mx-auto">
                                     <div class="w-[50px] h-[50px] rounded-full">
@@ -276,7 +307,18 @@
                                 <a href="{{Route('screens.vstore.partner.index')}}" class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem thêm</a>
                             </div>
 
-                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 w-full">
+                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
+                                <div class="pro flex flex-col w-full p-[4px] gap-2">
+                                    <div class="max-w-[120px] mx-auto">
+                                        <div class="w-[50px] h-[50px] rounded-full">
+                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>
+                                </div>
                                 <div class="pro flex flex-col w-full p-[4px] gap-2">
                                     <div class="max-w-[120px] mx-auto">
                                         <div class="w-[50px] h-[50px] rounded-full">
