@@ -364,6 +364,7 @@
         $('.choose-vstore').select2();
 
         function render(data) {
+            console.log(data)
             const html = data.map((item, index) => {
                 return `<div class="item w-[104px] h-[104px] flex justify-center items-center relative">
                     <div class="over-lay"></div>
@@ -377,6 +378,7 @@
                 '/5';
 
             document.getElementById('images').value = JSON.stringify(data);
+            console.log(data)
             document.querySelectorAll('.deleteImg').forEach(item => {
                 const {index} = item.dataset;
                 item.addEventListener('click', () => {

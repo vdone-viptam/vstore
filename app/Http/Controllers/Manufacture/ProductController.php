@@ -144,7 +144,6 @@ class ProductController extends Controller
             $photo_gallery = [];
 
             foreach (json_decode($request->images) as $image) {
-
                 try {
                     $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
                 } catch (\Exception $exception) {
