@@ -115,6 +115,11 @@ class ProductController extends Controller
             ];
 
             $user->notify(new AppNotification($data));
+        }else{
+            DB::table('products')->where('id', $currentRequest->product_id)->update([
+                'admin_confirm_date' => Carbon::now(),
+                'status' => 0
+            ]);
         }
 
         return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
