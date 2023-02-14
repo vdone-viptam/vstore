@@ -139,7 +139,7 @@
                                     <div class="pro flex flex-col w-full p-[4px] gap-2">
                                         <div class="w-full h-[240px]">
                                             <img
-                                                src="{{asset('storage/products/'.json_decode($a->images)[0])}}"
+                                                src="{{asset(json_decode($a->images)[0])}}"
                                                 class="w-full rounded-[2px]" alt="">
                                         </div>
                                         <h2 class="line-clamp-2 text-black font-medium md:px-2">Tên sản
