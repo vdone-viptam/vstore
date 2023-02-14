@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
+    <meta property="og:type" content="website" />
+<meta property="og:title" content="Niem Vui Lap Trinh" />
+<meta property="og:description" content="Nơi chia sẻ các kiến thức về lập trình" />
+<meta property="og:url" content="https://www.niemvuilaptrinh.com/" />
+<meta property="og:image" content="https://www.niemvuilaptrinh.com/image.png" />
+
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
             integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
