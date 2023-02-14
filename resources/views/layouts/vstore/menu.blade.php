@@ -114,8 +114,8 @@
                 </div>
             </div>
             <ul class=" flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="/"><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
-                <li data-page="request"><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
+                <li data-page="request"><a class="hover:underline" href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt
                         sản phẩm</a></li>
             </ul>
         </div>
@@ -147,8 +147,8 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="new"><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
-                <li data-page="/"><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
+                <li data-page="new"><a class="hover:underline" href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
             </ul>
         </div>
         {{--        Đối tác--}}
@@ -179,9 +179,9 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="/"><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
-                <li data-page="vshop"><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
-                <li data-page="ship"><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
+                <li data-page="vshop"><a class="hover:underline" href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
+                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
             </ul>
         </div>
         {{--            Tài chính--}}
@@ -220,9 +220,9 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="/"><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
-                <li data-page="revenue"><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
-                <li data-page="history"><a href="{{Route('screens.vstore.finance.history')}}">Lịch sử giao dịch</a></li>
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
+                <li data-page="revenue"><a class="hover:underline" href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
+                <li data-page="history"><a class="hover:underline" href="{{Route('screens.vstore.finance.history')}}">Lịch sử giao dịch</a></li>
             </ul>
         </div>
         {{--        Nhân viên--}}
