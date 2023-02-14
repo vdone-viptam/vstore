@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
                         <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a>
                         </li>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
                         <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                     </ul>
@@ -196,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
                         <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
                         <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium list-disc list hidden">
+                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
                         <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
                     </ul>
