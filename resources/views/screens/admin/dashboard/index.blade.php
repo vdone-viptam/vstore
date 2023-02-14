@@ -285,8 +285,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="hidden md:flex lg:flex-col items-center gap-14">
+                    <div class="hidden md:flex lg:flex-col items-center gap-14">
                     <div class="flex flex-col gap-5">
                         <div class="flex flex-col 2xl:gap-[9px] xl:gap-[5px]">
                             <p class="text-black text-base font-bold">Thông báo</p>
@@ -329,6 +328,8 @@
                         </div>
                     </div>
                 </div>
+                </div>
+              
             </div>
         </div>
     </div>
