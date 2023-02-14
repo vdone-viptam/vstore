@@ -131,7 +131,7 @@ class ProductController extends Controller
 
                 $path = str_replace('public/', '', $path);
 
-                $product->video = 'storage / ' . $path;
+                $product->video = 'storage/' . $path;
             }
 
             while (true) {
@@ -146,7 +146,7 @@ class ProductController extends Controller
             foreach (json_decode($request->images) as $image) {
 
                 try {
-                    $photo_gallery[] = 'storage/products/ ' . $this->saveImgBase64($image, 'products');
+                    $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
                 } catch (\Exception $exception) {
                     dd($exception->getMessage());
                 }
