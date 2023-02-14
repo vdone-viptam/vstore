@@ -18,7 +18,7 @@
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium  ">Mã sản phẩm:</span>
+                        <span class="text-title font-medium  ">Mã</span>
                         <span class="text-title ">{{$request->code}}</span>
                     </div>
 
@@ -38,10 +38,10 @@
                         <span class="text-title font-medium  ">Chiết khấu:</span>
                         <span class="text-title" id="discount" data-discount="{{$request->discount}}">{{$request->discount}}%</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium  ">Số lượng bán:</span>
-                        <span class="text-title ">{{$request->amount_product}}</span>
-                    </div>
+{{--                    <div class="grid grid-cols-2 gap-4 w-full">--}}
+{{--                        <span class="text-title font-medium  ">Số lượng bán:</span>--}}
+{{--                        <span class="text-title ">{{$request->amount_product}}</span>--}}
+{{--                    </div>--}}
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="grid grid-cols-2 gap-4 w-full">
 

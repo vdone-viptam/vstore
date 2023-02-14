@@ -126,6 +126,8 @@
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản
                                 phẩm</a>
                         </li>
+                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Thêm sản phẩm</a>
+                        </li>
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu
                                 xét duyệt
                                 phẩm</a></li>

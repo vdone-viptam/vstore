@@ -116,7 +116,7 @@
                 </li>
                 <li class="hover:underline" data-page="create"><a href="{{route('screens.manufacture.product.create')}}">Thêm sản phẩm</a>
                 </li>
-                <li class="hover:underline" data-page="add"><a href="{{route('screens.manufacture.product.createRequest')}}"
+                <li class="hover:underline" data-page="create-request"><a href="{{route('screens.manufacture.product.createRequest')}}"
                     >Yêu cầu xét duyệt
                         sản
                         phẩm</a></li>
