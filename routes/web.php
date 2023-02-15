@@ -101,7 +101,6 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
 //Quyền nhà cung cấp
 
 Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function () {
-    Route::get('test', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'test']);
 
     Route::get('amount', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'amount'])->name('amount');
     Route::prefix('dashboard')->group(function () {
@@ -209,6 +208,6 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         return view('layouts.vstore.all_noti', []);
     })->name('vstore_all_noti');
 });
-//Route::get('/mail', [\App\Http\Controllers\Api\ProductController::class, 'mail']);
+
 
 

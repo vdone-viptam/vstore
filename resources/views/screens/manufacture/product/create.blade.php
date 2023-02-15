@@ -345,7 +345,7 @@
         <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
             <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
                 <span class="text-title font-medium text-sm w-full md:w-[250px]">Địa chỉ kho hàng:<strong class="text-[#FF4D4F]">*</strong></span>
-                <select name="ware_id[]" id="ware_id[]"  class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                <select name="ward_id[]" id="ware_id[]"  class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     <option value="0" selected>Chọn địa chỉ </option>
                     @foreach($wareHouses as $ware)
                 <option value="{{$ware->id}}">{{$ware->name}}</option>
