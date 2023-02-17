@@ -147,7 +147,7 @@
                             <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span class="text-title font-medium">Giá (đồng)</span>
                                 <input type="text" value="0 đ" name="price" id="price" readonly
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
+                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm" {{old('price')}}>
                                 {{--                            @error('price')--}}
                                 {{--                            <p class="text-red-600">{{$message}}</p>--}}
                                 {{--                            @enderror--}}
@@ -156,7 +156,7 @@
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Mức chiết khấu (Thành tiền)</span>
                                 <input type="text" value="0 đ" name="money" id="money" readonly
-                                       class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
+                                       class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm" >
                                 {{--                            @error('price')--}}
                                 {{--                            <p class="text-red-600">{{$message}}</p>--}}
                                 {{--                            @enderror--}}

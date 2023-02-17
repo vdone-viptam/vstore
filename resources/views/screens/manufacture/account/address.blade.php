@@ -185,7 +185,7 @@
                 <div class="flex flex-col justify-start items-start w-full p-6">
                     <div
                         class="flex justify-between items-center pb-6 border-b-[1px] border-grey w-full flex-wrap gap-4 md:flex-nowrap">
-                        <h3 class="captilize font-medium text-xl text-title">Địa chỉ kho hàng</h3>
+                        <h3 class="captilize font-medium text-xl text-title">Địa chỉ nhận hàng</h3>
                         <button
                             class="btn-add-address cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 text-center text-[#FFFFFF] hover:opacity-70 flex justify-start items-center gap-2">
                             <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"
@@ -198,7 +198,7 @@
                     </div>
                     @foreach($infoAccount->Warehouses() as $warehouse)
                         <div class="flex flex-col justify-start items-start pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">
-                            <span class="text-title text-xl font-medium">Kho hàng {{$loop->iteration}} </span>
+                            <span class="text-title text-xl font-medium">Địa chỉ{{$loop->iteration}} </span>
                             <div class="flex justify-between flex-wrap md-flex-nowrap items-start w-full gap-4">
                                 <div class="flex flex-col justify-start items-start gap-2">
                                     <div class="flex justify-start items-center flex-wrap md:flex-nowrap">

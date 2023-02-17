@@ -149,7 +149,7 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{$product->publish_id}}</td>
+                                    <td>{{$product->publish_id??'-'}}</td>
                                     <td>
                                         <div class="w-[48px] h-[48px] rounded">
                                             <img

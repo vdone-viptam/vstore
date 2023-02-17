@@ -26,7 +26,7 @@ Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'getLog
 Route::get('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'OTP'])->name('otp');
 Route::post('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
 Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
-Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('landing_index');
+
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
@@ -40,7 +40,7 @@ Route::group(['domain' => config('domain.ncc')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageNCC'])->name('landingpagencc');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginNCC'])->name('login_ncc');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterNCC'])->name('register_ncc');
-
+    Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'index'])->name('intro');
 //    Route::get('/', function () {
 //        return redirect()->route('login_ncc');
 //    });
@@ -52,12 +52,15 @@ Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
 
-//    Route::get('/', function () {
-//        return view('screens.vstore.index');
-//    })->name('landing_page');
 });
 
-
+////role_id = 4 Quyền kho
+//Route::group(['domain' => config('domain.storage')], function () {
+//    Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('ladingpageStorage');
+//    Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_vstore');
+//    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
+//
+//});
 //Quyền admin
 Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], function () {
 

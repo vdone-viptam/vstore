@@ -30,6 +30,12 @@ class LoginController extends Controller
         return view('auth.NCC.register_ncc');
     }
 
+    public function getFormRegisterVstorage(){
+        return view('auth.storage.register_storage');
+    }
+    public function getFormLoginVstorage(){
+        return view('');
+    }
     public function getFormLoginVstore()
     {
         if (Auth::user() && Auth::user()->role_id == 3) {
