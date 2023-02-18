@@ -168,8 +168,8 @@ class LoginController extends Controller
                 $storage_information = [
                     'floor_area'=>$request->floor_area,
                     'volume'=>$request->volume,
-                    'image_storage'=>$filestorage,
-                    'image_pccc'=>$filepccc,
+                    'image_storage'=>'image/users'.$filestorage,
+                    'image_pccc'=>'image/users'.$filepccc,
                     'cold_storage'=>$cold_storage,
                     'warehouse'=>$warehouse,
                     'normal_storage'=>$normal_storage,
