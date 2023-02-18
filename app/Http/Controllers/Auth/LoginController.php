@@ -59,31 +59,72 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
+        if ($request->role_id !=4){
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'name' => 'required|unique:users',
+                'company_name' => 'required||unique:users',
+                'tax_code' => 'required',
+                'address' => 'required',
+                'phone_number' => 'required',
+                'id_vdone' => 'required',
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'email.unique' => 'Email đã tồn tại',
+                'email.email' => 'Email không đúng dịnh dạng',
+                'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+                'name.unique' => 'tên công ty đã tồn tại',
+                'company_name.unique' => 'tên công ty đã tồn tại',
+                'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'address.required' => 'Địa chỉ bắt buộc nhập',
+                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users|email',
-            'name' => 'required|unique:users',
-            'company_name' => 'required||unique:users',
-            'tax_code' => 'required',
-            'address' => 'required',
-            'phone_number' => 'required',
-            'id_vdone' => 'required',
-        ], [
-            'email.required' => 'Email bắt buộc nhập',
-            'email.unique' => 'Email đã tồn tại',
-            'email.email' => 'Email không đúng dịnh dạng',
-            'name.required' => 'Tên nhà phân phối bắt buộc nhập',
-            'name.unique' => 'tên công ty đã tồn tại',
-            'company_name.unique' => 'tên công ty đã tồn tại',
-            'company_name.required' => 'Tên công ty bắt buộc nhập',
-            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-            'address.required' => 'Địa chỉ bắt buộc nhập',
-            'phone_number.required' => 'Số điện thoại bất buộc nhập',
-            'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+            ]);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'name' => 'required|unique:users',
+                'company_name' => 'required||unique:users',
+                'tax_code' => 'required',
+                'address' => 'required',
+                'phone_number' => 'required',
+                'id_vdone' => 'required',
+                'floor_area'=> 'required',
+                'volume'=>'required',
+                'image_storage'=>'required',
+                'image_pccc'=>'required',
+                'length'=>'required',
+                'with'=>'required',
+                'height'=>'required'
 
-        ]);
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'email.unique' => 'Email đã tồn tại',
+                'email.email' => 'Email không đúng dịnh dạng',
+                'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+                'name.unique' => 'tên công ty đã tồn tại',
+                'company_name.unique' => 'tên công ty đã tồn tại',
+                'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'address.required' => 'Địa chỉ bắt buộc nhập',
+                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+                'floor_area.required'=>'trường này không được trống',
+                'volume.required'=>'trường này không được trống',
+                'image_storage.required'=>'trường này không được trống',
+                'image_pccc.required'=>'trường này không được trống',
+                'length.required'=>'trường này không được trống',
+                'with.required'=>'trường này không được trống',
+                'height.required'=>'trường này không được trống',
+
+
+            ]);
+        }
+
         if ($validator->fails()) {
-
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         }
@@ -106,19 +147,51 @@ class LoginController extends Controller
             $user->address = $request->address;
             $user->role_id = $request->role_id;
             $user->slug = Str::slug($request->name);
+            if ($request->role_id==4){
+                $cold_storage=$request->cold_storage ??'';
+                $warehouse=$request->warehouse ??'';
+                $normal_storage=$request->normal_storage ?? $request->volume;
+                $filestorage='';
+                $filepccc='';
+                if ($request->hasFile('image_storage')) {
+                    $file = $request->file('image_storage');
+                    $filestorage = date('YmdHi') . $file->getClientOriginalName();
+                    $file->move(public_path('image/users'), $filestorage);
+
+                }
+                if ($request->hasFile('image_pccc')) {
+                    $file = $request->file('image_pccc');
+                    $filepccc = date('YmdHi') . $file->getClientOriginalName();
+                    $file->move(public_path('image/users'), $filepccc);
+
+                }
+                $storage_information = [
+                    'floor_area'=>$request->floor_area,
+                    'volume'=>$request->volume,
+                    'image_storage'=>$filestorage,
+                    'image_pccc'=>$filepccc,
+                    'cold_storage'=>$cold_storage,
+                    'warehouse'=>$warehouse,
+                    'normal_storage'=>$normal_storage,
+                ];
+                $user->storage_information = json_encode($storage_information);
+            }
             $user->save();
 
             DB::commit();
 
             if ($request->role_id == 2) {
-                return redirect()->route('login_ncc')->with('success', 'true');
+                return redirect()->route('login_ncc')->with('success', 'Thành công');
             }
             if ($request->role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'true');
+                return redirect()->route('login_vstore')->with('success', 'Thành công');
+            }
+            if ($request->role_id == 4) {
+                return redirect()->route('login_vstore')->with('success', 'Thành công');
             }
 //            return 1
         } catch (\Exception $e) {
-
+            dd($e->getMessage());
             DB::rollBack();
             return redirect()->back()->with('error', 'true');
 
