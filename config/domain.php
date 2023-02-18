@@ -4,4 +4,5 @@ return [
     'ncc' => env('DOMAIN_MAN'),
     'vstore' => env('DOMAIN_VSTORE'),
     'api' => env('DOMAIN_API'),
+    'storage'=> env('DOMAIN_STORAGE')
 ];

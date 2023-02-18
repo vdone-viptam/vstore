@@ -85,7 +85,7 @@
 
                     @if($request->status == 0)
                         <button id="btnConfirm"
-                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70" >
                             Lưu thay đổi
                         </button>
                     @endif
