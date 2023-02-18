@@ -82,8 +82,16 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Kích hoạt tài khoản thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
+    }
+
+    public function detail(Request $request)
+    {
+        $this->v['user'] = User::select('name', 'email', 'id_vdone', 'phone_number', 'tax_code', 'address', 'created_at')->where('id', $request->id)->first();
+        if ($request->role_id != 4) {
+            return view('screens.admin.user.detail', $this->v);
+        }
+        return 1;
     }
 }
