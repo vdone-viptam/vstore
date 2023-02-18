@@ -185,8 +185,5 @@ Danh sách tài khoản</h2>
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-        page.addEventListener('change', (e) => {
-            form.submit();
-        });
     </script>
 @endsection

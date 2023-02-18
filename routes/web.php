@@ -57,8 +57,8 @@ Route::group(['domain' => config('domain.vstore')], function () {
 //role_id = 4 Quyền kho
 Route::group(['domain' => config('domain.storage')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('ladingpageStorage');
-    Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_vstore');
-    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
+    Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
+    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_storage');
 
 });
 //Quyền admin
@@ -79,6 +79,8 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
         Route::get('/register-account', [\App\Http\Controllers\Admin\UserController::class, 'getListRegisterAccount'])->name('screens.admin.user.index');
         Route::get('/confirm/{id}', [\App\Http\Controllers\Admin\UserController::class, 'confirm'])->name('screens.admin.user.confirm');
+        Route::get('/chi-tiet', [\App\Http\Controllers\Admin\UserController::class, 'detail'])->name('screens.admin.user.detail');
+
     });
 
     Route::prefix('account')->group(function () {
