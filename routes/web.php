@@ -57,8 +57,8 @@ Route::group(['domain' => config('domain.vstore')], function () {
 //role_id = 4 Quyền kho
 Route::group(['domain' => config('domain.storage')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('ladingpageStorage');
-    Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_vstore');
-    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
+    Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
+    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_storage');
 
 });
 //Quyền admin

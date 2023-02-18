@@ -139,6 +139,8 @@
                                             Nhà cung cấp
                                         @elseif($user->role_id == 1)
                                             Admin
+                                        @elseif($user->role_id == 4)
+                                            Kho
                                         @else
                                             Nhà phân phối
                                         @endif

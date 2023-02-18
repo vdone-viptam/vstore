@@ -21,7 +21,7 @@ class UserController extends Controller
         $this->v = [];
     }
 
-    public function getListRegisterAccount( Request $request)
+    public function getListRegisterAccount(Request $request)
     {
         $this->v['users'] = User::select();
         $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
@@ -59,10 +59,12 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             $ID = $user->tax_code;
-            if ($user->role_id == 2){
-                $ID = 'vnncc'.$ID;
-            }else {
-                $ID = 'vnvst'.$ID;
+            if ($user->role_id == 2) {
+                $ID = 'vnncc' . $ID;
+            } elseif ($user->role_id == 4) {
+                $ID = 'vnkho' . $ID;
+            } else {
+                $ID = 'vnvst' . $ID;
             }
 
             $password = rand(1000000, 9999999);
