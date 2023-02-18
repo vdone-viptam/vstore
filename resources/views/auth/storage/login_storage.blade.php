@@ -39,9 +39,10 @@
 <div class=" grid grid-cols-1 place-items-center ">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full md:w-[500px] ">
-        <a href="{{route('landingpagencc')}}" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
+        <a href="{{route('landingpagencc')}}"
+           class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
             <div>
-                <img  src="{{asset('asset/icons/back.png')}}" alt="">
+                <img src="{{asset('asset/icons/back.png')}}" alt="">
             </div>
             <span class="text-title">Quay lại</span>
         </a>
@@ -103,7 +104,7 @@
                 <input type="submit" disabled
                        class="cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"
                        value="Đăng nhập">
-                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_ncc')}}"
+                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_storage')}}"
                                                                                    class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>
             </div>
 

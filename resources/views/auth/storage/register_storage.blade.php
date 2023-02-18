@@ -12,10 +12,10 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
-    <meta property="og:title" content="V-Storage " />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="https://ncc.vdone.vn/" />
-    <meta property="og:image" content="https://ncc.vdone.vn/home/img/logoncc.png" />
+    <meta property="og:title" content="V-Storage "/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content="https://ncc.vdone.vn/"/>
+    <meta property="og:image" content="https://ncc.vdone.vn/home/img/logoncc.png"/>
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -80,7 +80,8 @@
         </div>
     </div>
 </div>
-<form action="{{route('post_register',['role_id' => 4])}}" id="formRegister-V" enctype="multipart/form-data" method="POST">
+<form action="{{route('post_register',['role_id' => 4])}}" id="formRegister-V" enctype="multipart/form-data"
+      method="POST">
     @csrf
     <div class=" grid grid-cols-1 lg:grid-cols-2">
         <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
@@ -184,19 +185,23 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Diện tích sàn</span>
-                <input type="text" name="floor_area" id="" placeholder="Nhập địa chỉ thư điện tử" class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                <input type="text" name="floor_area" id="" placeholder="Nhập địa chỉ thư điện tử"
+                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích</span>
-                <input type="text" name="volume" id="" placeholder="Nhập địa chỉ thư điện tử" class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                <input type="text" name="volume" id="" placeholder="Nhập địa chỉ thư điện tử"
+                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Hình ảnh kho </span>
-                <input type="file" name="image_storage" id="" placeholder="Nhập địa chỉ thư điện tử" class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                <input type="file" name="image_storage" id="" placeholder="Nhập địa chỉ thư điện tử"
+                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Giấy chứng nhận PCCC/ Chứng nhận khác </span>
-                <input type="file" name="image_pccc" id="" placeholder="Nhập địa chỉ thư điện tử" class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                <input type="file" name="image_pccc" id="" placeholder="Nhập địa chỉ thư điện tử"
+                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
         </div>
         <div class="flex flex-col justify-start items-start gap-6 w-full">
@@ -205,21 +210,33 @@
                     <span class="text-title font-medium">Kích thước</span>
 
                     <div class="flex justify-between items-center w-full gap-6">
-                        <input type="number" min="0" max="" placeholder="Nhập chiều dài (m)" name="length" value="" id="length" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <input type="number" min="0" max="" placeholder="Nhập chiều rộng (m)" name="with" value="" id="with" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <input type="number" min="0" max="" placeholder="Nhập chiều cao (m)" name="height" value="" id="height" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <input type="number" min="0" max="" placeholder="Nhập chiều dài (m)" name="length" value=""
+                               id="length"
+                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <input type="number" min="0" max="" placeholder="Nhập chiều rộng (m)" name="with" value=""
+                               id="with"
+                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <input type="number" min="0" max="" placeholder="Nhập chiều cao (m)" name="height" value=""
+                               id="height"
+                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
 
-                </div>`
+                </div>
+                `
             </div>
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-title font-medium">Diện tích loại kho</span>
 
                 <div class="flex justify-between items-center w-full gap-6">
-                    <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage" value="" id="length" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value="" id="with" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <input type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value="" id="height" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage" value=""
+                           id="length"
+                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value="" id="with"
+                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    <input type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value=""
+                           id="height"
+                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 </div>
 
             </div>
@@ -227,16 +244,17 @@
 
 
     </div>
-    <div class="text-center my-4"><input name="checkbox" type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#"
-                                                                                                              onclick="$('.modal-hd').toggleClass('show-modal')"
-                                                                                                              class="underline text-blue-700">Xem
+    <div class="text-center my-4"><input name="checkbox" type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng
+        tôi. <a href="#"
+                onclick="$('.modal-hd').toggleClass('show-modal')"
+                class="underline text-blue-700">Xem
             thêm</a></div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
                 class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
         >Tiếp tục
         </button>
-        <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
+        <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_storage')}}"
                                                                          class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
     </div>
 </form>

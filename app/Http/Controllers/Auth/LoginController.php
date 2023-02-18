@@ -30,15 +30,19 @@ class LoginController extends Controller
         return view('auth.NCC.register_ncc');
     }
 
-    public function getFormRegisterVstorage(){
+    public function getFormRegisterVstorage()
+    {
         return view('auth.storage.register_storage');
     }
-    public function getFormLoginVstorage(){
+
+    public function getFormLoginVstorage()
+    {
         if (Auth::user() && Auth::user()->role_id == 4) {
             return redirect()->route('screens.storage.dashboard.index');
         }
         return view('auth.storage.login_storage');
     }
+
     public function getFormLoginVstore()
     {
         if (Auth::user() && Auth::user()->role_id == 3) {
@@ -62,7 +66,7 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
-        if ($request->role_id !=4){
+        if ($request->role_id != 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
@@ -85,7 +89,7 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 
             ]);
-        }else{
+        } else {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
@@ -94,13 +98,13 @@ class LoginController extends Controller
                 'address' => 'required',
                 'phone_number' => 'required',
                 'id_vdone' => 'required',
-                'floor_area'=> 'required',
-                'volume'=>'required',
-                'image_storage'=>'required',
-                'image_pccc'=>'required',
-                'length'=>'required',
-                'with'=>'required',
-                'height'=>'required'
+                'floor_area' => 'required',
+                'volume' => 'required',
+                'image_storage' => 'required',
+                'image_pccc' => 'required',
+                'length' => 'required',
+                'with' => 'required',
+                'height' => 'required'
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
@@ -114,13 +118,13 @@ class LoginController extends Controller
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-                'floor_area.required'=>'trường này không được trống',
-                'volume.required'=>'trường này không được trống',
-                'image_storage.required'=>'trường này không được trống',
-                'image_pccc.required'=>'trường này không được trống',
-                'length.required'=>'trường này không được trống',
-                'with.required'=>'trường này không được trống',
-                'height.required'=>'trường này không được trống',
+                'floor_area.required' => 'trường này không được trống',
+                'volume.required' => 'trường này không được trống',
+                'image_storage.required' => 'trường này không được trống',
+                'image_pccc.required' => 'trường này không được trống',
+                'length.required' => 'trường này không được trống',
+                'with.required' => 'trường này không được trống',
+                'height.required' => 'trường này không được trống',
 
 
             ]);
@@ -150,12 +154,12 @@ class LoginController extends Controller
             $user->address = $request->address;
             $user->role_id = $request->role_id;
             $user->slug = Str::slug($request->name);
-            if ($request->role_id==4){
-                $cold_storage=$request->cold_storage ??'';
-                $warehouse=$request->warehouse ??'';
-                $normal_storage=$request->normal_storage ?? $request->volume;
-                $filestorage='';
-                $filepccc='';
+            if ($request->role_id == 4) {
+                $cold_storage = $request->cold_storage ?? '';
+                $warehouse = $request->warehouse ?? '';
+                $normal_storage = $request->normal_storage ?? $request->volume;
+                $filestorage = '';
+                $filepccc = '';
                 if ($request->hasFile('image_storage')) {
                     $file = $request->file('image_storage');
                     $filestorage = date('YmdHi') . $file->getClientOriginalName();
@@ -169,13 +173,13 @@ class LoginController extends Controller
 
                 }
                 $storage_information = [
-                    'floor_area'=>$request->floor_area,
-                    'volume'=>$request->volume,
-                    'image_storage'=>'image/users'.$filestorage,
-                    'image_pccc'=>'image/users'.$filepccc,
-                    'cold_storage'=>$cold_storage,
-                    'warehouse'=>$warehouse,
-                    'normal_storage'=>$normal_storage,
+                    'floor_area' => $request->floor_area,
+                    'volume' => $request->volume,
+                    'image_storage' => 'image/users' . $filestorage,
+                    'image_pccc' => 'image/users' . $filepccc,
+                    'cold_storage' => $cold_storage,
+                    'warehouse' => $warehouse,
+                    'normal_storage' => $normal_storage,
                 ];
                 $user->storage_information = json_encode($storage_information);
             }
@@ -357,7 +361,7 @@ class LoginController extends Controller
             }
             if (Auth::user()->role_id == 4) {
 
-                return redirect()->route('screens.vstore.dashboard.index');
+                return redirect()->route('screens.storage.dashboard.index');
             }
         } else {
             return redirect()->back()->with('error', 'Mã xác minh không chính xác');

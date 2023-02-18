@@ -56,11 +56,19 @@ Route::group(['domain' => config('domain.vstore')], function () {
 
 //role_id = 4 Quyền kho
 Route::group(['domain' => config('domain.storage')], function () {
-    Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('ladingpageStorage');
+    Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('screens.storage.index');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstorage'])->name('login_storage');
+});
+
+Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
+    });
+    Route::prefix('products')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
+        Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
+
     });
 });
 //Quyền admin
