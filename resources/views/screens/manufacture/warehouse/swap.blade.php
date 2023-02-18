@@ -119,7 +119,7 @@ Quản lý xuất - nhập kho</h2>
                             <td>
                                 @if($product->status == 1)
                                     Đã nhập
-                                @else
+                                @elseif($product->status == 2)
                                     Đã xuất
                                 @endif
                             </td>

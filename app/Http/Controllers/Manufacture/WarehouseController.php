@@ -78,7 +78,7 @@ class WarehouseController extends Controller
 
     public function swap()
     {
-        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->orderBy('product_warehouses.id', 'desc')->paginate(10);
+        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->where('product_warehouses.status','!=',3)->orderBy('product_warehouses.id', 'desc')->paginate(10);
 
         return view('screens.manufacture.warehouse.swap', ['products' => $products]);
 

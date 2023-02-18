@@ -76,13 +76,16 @@ class ProductController extends Controller
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
-                    'status' => 2
+                    'status' => 2,
+                    'discount'=>$currentRequest->discount,
+                    'discount_vShop'=>$currentRequest->discount_vshop,
                 ]);
                 DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
-                    'status' => 0
+                    'status' => 0,
+                    'vstore_id'=>null
                 ]);
             }
             $data = [

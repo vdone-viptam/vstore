@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta property="og:type" content="website" />
+<meta property="og:title" content="Vstore" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="https://vstore.vdone.vn/" />
+<meta property="og:image" content="https://vstore.vdone.vn/home/img/Logo.png" />
+
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
 
     <title>@yield('page_title')</title>

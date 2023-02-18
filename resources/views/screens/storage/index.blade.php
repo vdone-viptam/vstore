@@ -10,11 +10,11 @@
     <meta property="og:title" content="Vstore" />
     <meta property="og:url" content="https://vstore.vdone.vn/" />
     <meta property="og:image" content="https://vstore.vdone.vn/home/img/logo-06.png" />
-{{--    <link rel="stylesheet" href="../../dist/output.css">--}}
+    {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body{
             font-family: 'Inter', sans-serif;

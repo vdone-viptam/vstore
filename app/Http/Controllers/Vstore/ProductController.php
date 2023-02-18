@@ -57,7 +57,6 @@ class ProductController extends Controller
             ->paginate($limit);
 
         $this->v['params'] = $request->all();
-
         return view('screens.vstore.product.request', $this->v);
     }
 
@@ -103,7 +102,7 @@ class ProductController extends Controller
         ];
         $user->notify(new AppNotification($data));
 
-        if ($request->status == 2) {
+        if ($request->status == 1) {
             $admin = User::where('role_id', 1)->first();
             $user = User::find($admin->id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $data = [
@@ -117,8 +116,8 @@ class ProductController extends Controller
             $user->notify(new AppNotification($data));
         }else{
             DB::table('products')->where('id', $currentRequest->product_id)->update([
-                'admin_confirm_date' => Carbon::now(),
-                'status' => 0
+                'status' => 0,
+                'vstore_id'=>null
             ]);
         }
 
