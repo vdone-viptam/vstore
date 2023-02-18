@@ -58,7 +58,7 @@ class WarehouseController extends Controller
         } else {
             return 0;
         }
-//        return $amount;
+//        return $amount;h
     }
 
     public function index()
