@@ -88,10 +88,12 @@ class UserController extends Controller
 
     public function detail(Request $request)
     {
-        $this->v['user'] = User::select('name', 'email', 'id_vdone', 'phone_number', 'tax_code', 'address', 'created_at')->where('id', $request->id)->first();
+        $user = User::select('name', 'email', 'id_vdone', 'phone_number', 'tax_code', 'address', 'created_at', 'storage_information')->where('id', $request->id)->first();
         if ($request->role_id != 4) {
-            return view('screens.admin.user.detail', $this->v);
+            return view('screens.admin.user.detail', ['user' => $user]);
         }
-        return 1;
+        $this->v['user'] = json_decode($user->storage_information);
+        $this->v['user']->created_at = $user->created_at;
+        return view('screens.admin.user.detail_kho', $this->v);
     }
 }
