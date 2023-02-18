@@ -114,7 +114,7 @@
                 <li class="hover:underline" data-page="/"><a href="{{route('screens.manufacture.product.index')}}">Tất
                         cả sản phẩm</a>
                 </li>
-                <li class="hover:underline" data-page="create-request"><a href="{{route('screens.manufacture.product.createRequest')}}"
+                <li class="hover:underline" data-page="create-request"><a href="{{route('screens.manufacture.product.createRequest')}}">
                     Yêu cầu gửi sản phẩm</a></li>
             </ul>
         </div>
