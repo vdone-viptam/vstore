@@ -13,7 +13,6 @@ class DashboardController extends Controller
 
     public function index()
     {
-        Auth::login(User::find(2));
         return view('screens.storage.dashboard.index', []);
     }
 }

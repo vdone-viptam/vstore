@@ -58,7 +58,7 @@ Route::group(['domain' => config('domain.vstore')], function () {
 Route::group(['domain' => config('domain.storage')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('ladingpageStorage');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
-    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_storage');
+    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstorage'])->name('login_storage');
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
     });

@@ -34,7 +34,10 @@ class LoginController extends Controller
         return view('auth.storage.register_storage');
     }
     public function getFormLoginVstorage(){
-        return view('');
+        if (Auth::user() && Auth::user()->role_id == 4) {
+            return redirect()->route('screens.storage.dashboard.index');
+        }
+        return view('auth.storage.login_storage');
     }
     public function getFormLoginVstore()
     {
@@ -352,7 +355,10 @@ class LoginController extends Controller
 
                 return redirect()->route('screens.vstore.dashboard.index');
             }
+            if (Auth::user()->role_id == 4) {
 
+                return redirect()->route('screens.vstore.dashboard.index');
+            }
         } else {
             return redirect()->back()->with('error', 'Mã xác minh không chính xác');
         }
