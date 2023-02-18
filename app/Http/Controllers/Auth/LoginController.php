@@ -194,7 +194,7 @@ class LoginController extends Controller
                 return redirect()->route('login_vstore')->with('success', 'Thành công');
             }
             if ($request->role_id == 4) {
-                return redirect()->route('login_vstore')->with('success', 'Thành công');
+                return redirect()->route('login_storage')->with('success', 'Thành công');
             }
 //            return 1
         } catch (\Exception $e) {
@@ -361,7 +361,7 @@ class LoginController extends Controller
             }
             if (Auth::user()->role_id == 4) {
 
-                return redirect()->route('screens.storage.dashboard.index');
+                return redirect()->route('screens.vstore.dashboard.index');
             }
         } else {
             return redirect()->back()->with('error', 'Mã xác minh không chính xác');
