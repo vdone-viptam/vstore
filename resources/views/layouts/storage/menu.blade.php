@@ -145,10 +145,10 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
-                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.account.profile')}}">Hồ sơ của
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.storage.account.profile')}}">Hồ sơ của
                         tôi</a></li>
                 <li data-page="change-password"><a class="hover:underline"
-                                                   href="{{route('screens.admin.account.changePassword')}}">Đổi mật
+                                                   href="{{route('screens.storage.account.changePassword')}}">Đổi mật
                         khẩu</a>
                 </li>
 
