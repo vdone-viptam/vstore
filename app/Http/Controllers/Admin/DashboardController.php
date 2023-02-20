@@ -12,6 +12,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+
         return view('screens.admin.dashboard.index', []);
     }
 }

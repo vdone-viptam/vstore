@@ -149,7 +149,7 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{$product->publish_id}}</td>
+                                    <td>{{$product->publish_id??'-'}}</td>
                                     <td>
                                         <div class="w-[48px] h-[48px] rounded">
                                             <img
@@ -168,7 +168,7 @@
                                         {{isset($prams['condition']) && $params['condition'] == 3 ? $product->cate_name : $product->category->name}}
                                     </td>
                                     <td>
-                                        {{$product->price}}
+                                        {{ number_format($product->price,'0','','.')}}
                                     </td>
                                     <td>
                                         {{$product->vStore->name ?? '-'}}

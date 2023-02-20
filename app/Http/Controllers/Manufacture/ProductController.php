@@ -131,7 +131,7 @@ class ProductController extends Controller
 
                 $path = str_replace('public/', '', $path);
 
-                $product->video = 'storage / ' . $path;
+                $product->video = 'storage/' . $path;
             }
 
             while (true) {
@@ -144,9 +144,8 @@ class ProductController extends Controller
             $photo_gallery = [];
 
             foreach (json_decode($request->images) as $image) {
-
                 try {
-                    $photo_gallery[] = 'storage/products/ ' . $this->saveImgBase64($image, 'products');
+                    $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
                 } catch (\Exception $exception) {
                     dd($exception->getMessage());
                 }
@@ -207,7 +206,7 @@ class ProductController extends Controller
             $storage->makeDirectory($folder);
         }
 
-        $storage->put($folder . ' / ' . $fileName, base64_decode($content), 'public');
+        $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
 
         return $fileName;
     }
@@ -304,6 +303,7 @@ class ProductController extends Controller
             $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
             $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
             $code = rand(100000000000, 999999999999);
+
             while (true) {
                 if (Application::where('code', $code)->count() > 0) {
                     $code = rand(100000000000, 999999999999);
@@ -332,6 +332,12 @@ class ProductController extends Controller
             }
             $object->images = json_encode($images);
             $object->save();
+            $product = Product::find($request->product_id);
+            if ($product){
+                $product->vstore_id = $request->vstore_id;
+                $product->save();
+//                return $product;
+            }
             $dataInsert = [];
             for ($i = 0; $i < count($request->ward_id); $i++) {
                 $dataInsert[] = [

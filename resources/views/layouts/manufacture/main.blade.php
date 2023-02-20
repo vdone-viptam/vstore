@@ -8,10 +8,10 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
     <meta property="og:type" content="website" />
-<meta property="og:title" content="Niem Vui Lap Trinh" />
-<meta property="og:description" content="Nơi chia sẻ các kiến thức về lập trình" />
-<meta property="og:url" content="https://www.niemvuilaptrinh.com/" />
-<meta property="og:image" content="https://www.niemvuilaptrinh.com/image.png" />
+<meta property="og:title" content="Nhà cung cấp " />
+<meta property="og:description" content="" />
+<meta property="og:url" content="https://ncc.vdone.vn/" />
+<meta property="og:image" content="https://ncc.vdone.vn/home/img/logoncc.png" />
 
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"

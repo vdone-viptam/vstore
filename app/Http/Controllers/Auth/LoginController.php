@@ -30,6 +30,19 @@ class LoginController extends Controller
         return view('auth.NCC.register_ncc');
     }
 
+    public function getFormRegisterVstorage()
+    {
+        return view('auth.storage.register_storage');
+    }
+
+    public function getFormLoginVstorage()
+    {
+        if (Auth::user() && Auth::user()->role_id == 4) {
+            return redirect()->route('screens.storage.dashboard.index');
+        }
+        return view('auth.storage.login_storage');
+    }
+
     public function getFormLoginVstore()
     {
         if (Auth::user() && Auth::user()->role_id == 3) {
@@ -53,31 +66,72 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
+        if ($request->role_id != 4) {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'name' => 'required|unique:users',
+                'company_name' => 'required||unique:users',
+                'tax_code' => 'required',
+                'address' => 'required',
+                'phone_number' => 'required',
+                'id_vdone' => 'required',
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'email.unique' => 'Email đã tồn tại',
+                'email.email' => 'Email không đúng dịnh dạng',
+                'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+                'name.unique' => 'tên công ty đã tồn tại',
+                'company_name.unique' => 'tên công ty đã tồn tại',
+                'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'address.required' => 'Địa chỉ bắt buộc nhập',
+                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users|email',
-            'name' => 'required|unique:users',
-            'company_name' => 'required||unique:users',
-            'tax_code' => 'required',
-            'address' => 'required',
-            'phone_number' => 'required',
-            'id_vdone' => 'required',
-        ], [
-            'email.required' => 'Email bắt buộc nhập',
-            'email.unique' => 'Email đã tồn tại',
-            'email.email' => 'Email không đúng dịnh dạng',
-            'name.required' => 'Tên nhà phân phối bắt buộc nhập',
-            'name.unique' => 'tên công ty đã tồn tại',
-            'company_name.unique' => 'tên công ty đã tồn tại',
-            'company_name.required' => 'Tên công ty bắt buộc nhập',
-            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-            'address.required' => 'Địa chỉ bắt buộc nhập',
-            'phone_number.required' => 'Số điện thoại bất buộc nhập',
-            'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'name' => 'required|unique:users',
+                'company_name' => 'required||unique:users',
+                'tax_code' => 'required',
+                'address' => 'required',
+                'phone_number' => 'required',
+                'id_vdone' => 'required',
+                'floor_area' => 'required',
+                'volume' => 'required',
+                'image_storage' => 'required',
+                'image_pccc' => 'required',
+                'length' => 'required',
+                'with' => 'required',
+                'height' => 'required'
 
-        ]);
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'email.unique' => 'Email đã tồn tại',
+                'email.email' => 'Email không đúng dịnh dạng',
+                'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+                'name.unique' => 'tên công ty đã tồn tại',
+                'company_name.unique' => 'tên công ty đã tồn tại',
+                'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'address.required' => 'Địa chỉ bắt buộc nhập',
+                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+                'floor_area.required' => 'trường này không được trống',
+                'volume.required' => 'trường này không được trống',
+                'image_storage.required' => 'trường này không được trống',
+                'image_pccc.required' => 'trường này không được trống',
+                'length.required' => 'trường này không được trống',
+                'with.required' => 'trường này không được trống',
+                'height.required' => 'trường này không được trống',
+
+
+            ]);
+        }
+
         if ($validator->fails()) {
-
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         }
@@ -100,19 +154,52 @@ class LoginController extends Controller
             $user->address = $request->address;
             $user->role_id = $request->role_id;
             $user->slug = Str::slug($request->name);
+            if ($request->role_id == 4) {
+                $cold_storage = $request->cold_storage ?? '';
+                $warehouse = $request->warehouse ?? '';
+                $normal_storage = $request->normal_storage ?? $request->volume;
+                $filestorage = '';
+                $filepccc = '';
+                if ($request->hasFile('image_storage')) {
+                    $file = $request->file('image_storage');
+                    $filestorage = date('YmdHi') . $file->getClientOriginalName();
+                    $file->move(public_path('image/users'), $filestorage);
+
+                }
+                if ($request->hasFile('image_pccc')) {
+                    $file = $request->file('image_pccc');
+                    $filepccc = date('YmdHi') . $file->getClientOriginalName();
+                    $file->move(public_path('image/users'), $filepccc);
+
+                }
+                $storage_information = [
+                    'floor_area' => $request->floor_area,
+                    'volume' => $request->volume,
+                    'image_storage' => 'image/users' . $filestorage,
+                    'image_pccc' => 'image/users' . $filepccc,
+                    'cold_storage' => $cold_storage,
+                    'warehouse' => $warehouse,
+                    'normal_storage' => $normal_storage,
+                ];
+                $user->storage_information = json_encode($storage_information);
+            }
             $user->save();
 
             DB::commit();
 
             if ($request->role_id == 2) {
-                return redirect()->route('login_ncc')->with('success', 'true');
+              
+                return redirect()->route('login_ncc')->with('success', 'Thành công');
             }
             if ($request->role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'true');
+                return redirect()->route('login_vstore')->with('success', 'Thành công');
+            }
+            if ($request->role_id == 4) {
+                return redirect()->route('login_storage')->with('success', 'Thành công');
             }
 //            return 1
         } catch (\Exception $e) {
-
+            dd($e->getMessage());
             DB::rollBack();
             return redirect()->back()->with('error', 'true');
 
@@ -146,26 +233,10 @@ class LoginController extends Controller
                 });
                 Auth::logout();
                 return redirect()->route('otp', ['token1' => $token, 'id' => $userLogin->id]);
-//            if ($request->type == Auth::user()->role_id) {
-//                if (Auth::user()->role_id == 1) {
-//                    return redirect()->route('screens.admin.dashboard.index');
-//                }
-//                if (Auth::user()->role_id == 2) {
-//
-//                    return redirect()->route('screens.manufacture.dashboard.index');
-//                }
-//                if (Auth::user()->role_id == 3) {
-//
-//                    return redirect()->route('screens.vstore.dashboard.index');
-//                }
-//            } else {
-//                return redirect()->back()->with('error', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
-//            }
             } else {
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
@@ -266,36 +337,41 @@ class LoginController extends Controller
 
     public function post_OTP(Request $request, $token1)
     {
-        $otp = Otp::where('user_code',$request->id)->where('code',$request->otp)->first();
+        $otp = Otp::where('user_code', $request->id)->where('code', $request->otp)->first();
         $now = Carbon::now();
 
 
-        if ($otp){
-            if($now->diffInMinutes($otp->created_at)>=1){
-                return redirect()->back()->with('error','Mã xác minh đã hết hạn');
+        if ($otp) {
+            if ($now->diffInMinutes($otp->created_at) >= 1) {
+                return redirect()->back()->with('error', 'Mã xác minh đã hết hạn');
             }
             $user = User::find($request->id);
             Auth::login($user);
-            Otp::where('user_code',$request->id)->delete();
+            Otp::where('user_code', $request->id)->delete();
             $otp->delete();
-                if (Auth::user()->role_id == 1) {
-                    return redirect()->route('screens.admin.dashboard.index');
-                }
-                if (Auth::user()->role_id == 2) {
+            if (Auth::user()->role_id == 1) {
+                return redirect()->route('screens.admin.dashboard.index');
+            }
+            if (Auth::user()->role_id == 2) {
+                // dd(1);
+                return redirect()->route('screens.manufacture.dashboard.index');
+            }
+            if (Auth::user()->role_id == 3) {
 
-                    return redirect()->route('screens.manufacture.dashboard.index');
-                }
-                if (Auth::user()->role_id == 3) {
+                return redirect()->route('screens.vstore.dashboard.index');
+            }
+            if (Auth::user()->role_id == 4) {
 
-                    return redirect()->route('screens.vstore.dashboard.index');
-                }
-
-        }else{
-            return redirect()->back()->with('error','Mã xác minh không chính xác');
+                return redirect()->route('screens.storage.dashboard.index');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Mã xác minh không chính xác');
         }
 
     }
-    public function reOtp(Request $request){
+
+    public function reOtp(Request $request)
+    {
         $user = User::find($request->id);
         $login = new Otp();
         $login->code = rand(100000, 999999);

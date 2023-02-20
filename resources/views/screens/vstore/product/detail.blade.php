@@ -18,7 +18,7 @@
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium  ">Mã sản phẩm:</span>
+                        <span class="text-title font-medium  ">Mã</span>
                         <span class="text-title ">{{$request->code}}</span>
                     </div>
 
@@ -38,10 +38,10 @@
                         <span class="text-title font-medium  ">Chiết khấu:</span>
                         <span class="text-title" id="discount" data-discount="{{$request->discount}}">{{$request->discount}}%</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium  ">Số lượng bán:</span>
-                        <span class="text-title ">{{$request->amount_product}}</span>
-                    </div>
+                    {{--                    <div class="grid grid-cols-2 gap-4 w-full">--}}
+                    {{--                        <span class="text-title font-medium  ">Số lượng bán:</span>--}}
+                    {{--                        <span class="text-title ">{{$request->amount_product}}</span>--}}
+                    {{--                    </div>--}}
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="grid grid-cols-2 gap-4 w-full">
 
@@ -59,7 +59,7 @@
                          @if($request->status == 2) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
-                            <input type="text" min="" name="discount_vShop"
+                            <input type="number " min="" name="discount_vShop"
                                    @if($request->status > 0) disabled @endif
                                    value="{{$request->status > 0 ? $request->discount_vshop : ''}}"
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -85,7 +85,7 @@
 
                     @if($request->status == 0)
                         <button id="btnConfirm"
-                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70" >
                             Lưu thay đổi
                         </button>
                     @endif
@@ -97,6 +97,14 @@
 </form>
 
 <script>
+    document.getElementById('btnConfirm').style.display = 'none';
+    // document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
+    //     if (e.target.value) {
+    //         document.getElementById('btnConfirm').style.display = 'none';
+    //     } else {
+    //         document.getElementById('messageDis').style.display = 'block';
+    //     }
+    // })
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 2) {
             document.querySelector('#vShop').style.display = 'none'
@@ -105,7 +113,7 @@
         } else if (e.target.value == 1) {
             document.querySelector('#vShop').style.display = 'block';
             document.querySelector('#note').innerHTML = ``;
-
+            document.getElementById('btnConfirm').style.display = 'none';
         } else {
             document.querySelector('#note').innerHTML = ``;
             document.querySelector('#vShop').style.display = 'none'

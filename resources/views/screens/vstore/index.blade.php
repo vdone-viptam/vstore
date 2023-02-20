@@ -7,6 +7,9 @@
     <title>Trang chủ V-Store</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
+    <meta property="og:title" content="Vstore" />
+    <meta property="og:url" content="https://vstore.vdone.vn/" />
+    <meta property="og:image" content="https://vstore.vdone.vn/home/img/logo-06.png" />
 {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

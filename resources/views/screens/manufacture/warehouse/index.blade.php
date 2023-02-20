@@ -143,7 +143,7 @@ Quản lý kho hàng</h2>
                                 {{$ware->amount_product}}
                             </td>
                             <td>
-                                <a href="#" data-id="{{$ware->id}}" class="more-details text-primary underline"> Chi
+                                <a href="#" data-id="{{$ware->id}}" data-kho="" class="more-details text-primary underline"> Chi
                                     tiết</a>
                             </td>
 

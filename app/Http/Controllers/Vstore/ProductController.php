@@ -57,7 +57,6 @@ class ProductController extends Controller
             ->paginate($limit);
 
         $this->v['params'] = $request->all();
-
         return view('screens.vstore.product.request', $this->v);
     }
 
@@ -92,7 +91,7 @@ class ProductController extends Controller
         DB::table('products')->where('id', $currentRequest->product_id)->update(['vstore_confirm_date' => Carbon::now()]);
         $userLogin = Auth::user();
         $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-        $message = $request->status == 2 ? $userLogin->name . ' đã đồng yêu cầu niêm yết sản phẩm đến bạn và gửi yêu cầu tời quản trị viên' : $userLogin->name . ' đã từ chối yêu cầu niêm yết sản phẩm của bạn';
+        $message = $request->status == 2 ? $userLogin->name . ' đã đồng yêu cầu niêm yết sản phẩm đến bạn và gửi yêu cầu tới quản trị viên' : $userLogin->name . ' đã từ chối yêu cầu niêm yết sản phẩm của bạn';
 
         $data = [
             'title' => 'Bạn vừa có 1 thông báo mới',
@@ -103,7 +102,7 @@ class ProductController extends Controller
         ];
         $user->notify(new AppNotification($data));
 
-        if ($request->status == 2) {
+        if ($request->status == 1) {
             $admin = User::where('role_id', 1)->first();
             $user = User::find($admin->id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $data = [
@@ -115,6 +114,11 @@ class ProductController extends Controller
             ];
 
             $user->notify(new AppNotification($data));
+        }else{
+            DB::table('products')->where('id', $currentRequest->product_id)->update([
+                'status' => 0,
+                'vstore_id'=>null
+            ]);
         }
 
         return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
