@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        dd(1);
+        // dd(1);
         return view('screens.manufacture.dashboard.index', []);
     }
 }
