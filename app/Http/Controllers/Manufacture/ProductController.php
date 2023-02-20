@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\BuyMoreDiscount;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
@@ -271,6 +272,7 @@ class ProductController extends Controller
 
     public function storeRequest(Request $request)
     {
+
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
@@ -336,6 +338,34 @@ class ProductController extends Controller
             if ($product){
                 $product->vstore_id = $request->vstore_id;
                 $product->save();
+                $sl=[];
+                foreach ($request->sl as $value){
+                    if ($value !== null){
+                        $sl[] = $value;
+                    }
+                }
+                $moneyv=[];
+                foreach ($request->moneyv as $value){
+                    if ($value !== null){
+                        $moneyv[] = $value;
+                    }
+                }
+//                return $sl;
+                for($i=0;$i<count($sl);$i++){
+                    $start = $sl[$i];
+                    if (array_key_exists($i+1,$sl)){
+                        $end = $sl[$i+1];
+                    }else{
+                        $end=0;
+                    }
+//                   $end = $sl[$i+1]??0;
+                    DB::table('buy_more_discount')->insert([
+                        'start'=>$start,
+                        'end'=>$end,
+                        'price'=>$moneyv[$i],
+                        'product_id'=>$product->id
+                    ]);
+                }
 //                return $product;
             }
             $dataInsert = [];

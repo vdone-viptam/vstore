@@ -241,6 +241,60 @@
                         </div>
                     </div>
                 </div>
+                <div class="  items-center gap-8 w-full">
+                    <span>Chiết khấu hàng nhập sẵn</span>
+                    <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
+
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+
+                            <span class="text-title font-medium">Số lượng sản phẩm</span>
+                            <input type="number" value="" name="sl[]" id=""
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm" >
+
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
+                            <input type="text" value="" name="moneyv[]" id=""
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
+
+                        </div>
+                    </div>
+                    <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
+
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+
+                            <span class="text-title font-medium">Số lượng sản phẩm</span>
+                            <input type="number" value="" name="sl[]" id=""
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm" >
+
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
+                            <input type="text" value="" name="moneyv[]" id=""
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
+
+                        </div>
+                    </div>
+                    <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
+
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+
+                            <span class="text-title font-medium">Số lượng sản phẩm</span>
+                            <input type="number" value="" name="sl[]" id=""
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm" >
+
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
+                            <input type="text" value="" name="moneyv[]" id=""
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
+
+                        </div>
+                    </div>
+                </div>
                 <h4 class="font-medium text-[#141414] text-2xl">Thanh toán</h4>
                 <div class="flex flex-col justify-start items-start gap-4">
                 <span class="text-title font-medium">Phương thức thanh toán<strong
@@ -264,6 +318,8 @@
                 @error('prepay')
                 <p class="text-red-600">{{$message}}</p>
                 @enderror
+
+
                 <div class="flex justify-center md:justify-center items-center gap-5  w-full">
                     <a href="{{route('screens.manufacture.product.index')}}"
                        class="outline-none rounded-xl  px-[20px] md:px-[45px] py-2 transition-all duration-500 hover:opacity-70 text-[#1D1D1D] bg-[#C6E6FF]">
