@@ -361,7 +361,7 @@ class LoginController extends Controller
             }
             if (Auth::user()->role_id == 4) {
 
-                return redirect()->route('screens.vstore.dashboard.index');
+                return redirect()->route('screens.storage.dashboard.index');
             }
         } else {
             return redirect()->back()->with('error', 'Mã xác minh không chính xác');

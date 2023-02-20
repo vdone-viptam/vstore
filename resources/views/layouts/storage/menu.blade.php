@@ -119,6 +119,81 @@
                         Yêu cầu gửi sản phẩm</a></li>
             </ul>
         </div>
+        {{-- Đối tác --}}
+        <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+            <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
+                <div
+                    class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
+                <div class="tab__left rounded-[16px]">
+                    <div
+                        class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
+                        <div class="md:w-[16px] lg:w-[20px] xl:w-[25px] ">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                <path class="svgFill" fill="#B8BED9"
+                                      d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"/>
+                            </svg>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Đối tác</p>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.storage.partner.index')}}">Danh sách nhà cung cấp</a></li>
+
+            </ul>
+        </div>
+        {{-- Tài chính --}}
+        <div class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
+            <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
+                <div
+                    class="tab__left xl:min-w-[12px] rounded-tr-[16px] rounded-br-[16px] lg:min-w-[8px] md:min-w-[3px] xl:min-h-[58px] lg:min-h-[40px] md:min-h-[30px]"></div>
+                <div class="tab__left rounded-[16px]">
+                    <div
+                        class="xl:py-5 lg:py-3 md:py-2 xl:px-6 lg:px-4 md:px-2 flex items-center gap-5 xl:min-w-[250px] lg:min-w-[200px] md:min-w-[180px]">
+                        <div class="md:w-[18px] lg:w-[22px] md:h-[22px]">
+                            <svg viewBox="0 0 25 25" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1_4)">
+                                    <path class="svgFill"
+                                          d="M13.2008 10.9942C8.97531 10.1731 7.61644 9.32417 7.61644 8.00208C7.61644 6.48517 9.49652 5.4275 12.6424 5.4275C15.9558 5.4275 17.1844 6.61042 17.2961 8.35H21.4099C21.2796 5.95633 19.3251 3.7575 15.4346 3.04775V0H9.8502V3.006C6.23895 3.5905 3.33506 5.344 3.33506 8.02992C3.33506 11.2447 6.89047 12.8451 12.084 13.7775C16.7376 14.6125 17.6684 15.8372 17.6684 17.1314C17.6684 18.0917 16.7563 19.6225 12.6424 19.6225C8.80778 19.6225 7.29999 18.3422 7.09523 16.7H3C3.22338 19.7477 6.27618 21.4595 9.8502 22.0301V25.05H15.4346V22.0579C19.0645 21.543 21.9497 19.9704 21.9497 17.1175C21.9497 13.1652 17.4264 11.8152 13.2008 10.9942Z"
+                                          fill="#B8BED9"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1_4">
+                                        <rect width="25" height="25" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Tài chính</p>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.storage.finance.index')}}">Ví</a></li>
+                <li data-page="history"><a class="hover:underline" href="{{route('screens.storage.finance.history')}}">Lịch sử thay đổi
+                        số dư</a>
+                </li>
+
+            </ul>
+        </div>
         <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu tab__hover">
             <div class="flex xl:gap-4 lg:gap-2 md:gap-1 items-center">
                 <div
@@ -154,6 +229,7 @@
 
             </ul>
         </div>
+
         {{--        Kho hàng--}}
     </div>
 

@@ -78,6 +78,19 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::post('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'saveChangePassword'])->name('screens.storage.account.saveChangePassword');
 
     });
+    Route::prefix('finances')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\FinanceController::class, 'index'])->name('screens.storage.finance.index');
+        Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
+
+    });
+    Route::prefix('partners')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.storage.partner.index');
+//        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
+//        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
+
+//        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
+
+    });
 });
 //Quyền admin
 Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], function () {
