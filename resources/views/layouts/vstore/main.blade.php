@@ -9,7 +9,7 @@
 <meta property="og:title" content="Niem Vui Lap Trinh" />
 <meta property="og:description" content="Nơi chia sẻ các kiến thức về lập trình" />
 <meta property="og:url" content="https://www.niemvuilaptrinh.com/" />
-<meta property="og:image" content="https://www.niemvuilaptrinh.com/image.png" />
+<meta property="og:image" content="https://vstore.vdone.vn/home/img/logo-06.png" />
 
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
 
