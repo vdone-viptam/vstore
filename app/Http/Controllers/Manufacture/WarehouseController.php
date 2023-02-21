@@ -19,7 +19,7 @@ class WarehouseController extends Controller
             ->where('admin_confirm_date', '!=', null)
             ->where('vstore_confirm_date', '!=', null)
             ->get();
-        $warehouses = Warehouses::where('user_id', Auth::id())->get();
+        $warehouses = Warehouses::all();
 
         return view('screens.manufacture.warehouse.add-product', compact('products', 'warehouses'));
     }
@@ -44,7 +44,7 @@ class WarehouseController extends Controller
         }
         $model = new ProductWarehouses();
         $model->fill($request->only('product_id', 'ware_id', 'amount'));
-        $model->status = 1;
+        $model->status = 3;
         $model->save();
 
         return redirect()->route('screens.manufacture.warehouse.addProduct')->with('message', 'Thêm Thành Công');
@@ -78,8 +78,13 @@ class WarehouseController extends Controller
 
     public function swap()
     {
-        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->where('product_warehouses.status','!=',3)->orderBy('product_warehouses.id', 'desc')->paginate(10);
-
+//        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->where('product_warehouses.status','!=',3)->orderBy('product_warehouses.id', 'desc')->paginate(10);
+            $products = Product::join('product_warehouses','products.id','=','product_warehouses.product_id')
+                                ->join('warehouses','product_warehouses.ware_id','=','warehouses.id')
+                                ->select('warehouses.name as ware_name','products.name','product_warehouses.status','product_warehouses.amount','product_warehouses.created_at')
+                                ->paginate(10)
+            ;
+//        $products = Product::where('user_id',Auth::user()->id)->paginate(10);
         return view('screens.manufacture.warehouse.swap', ['products' => $products]);
 
     }

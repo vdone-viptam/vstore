@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Warehouses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +73,14 @@ class UserController extends Controller
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();
             $user->save();
+            if ($user->role_id==4){
+                $warehouses = new Warehouses();
+                $warehouses->name = $user->name;
+                $warehouses->phone_number=$user->phone_number;
+                $warehouses->address = $user->address;
+                $warehouses->user_id= $user->id;
+                $warehouses->save();
+            }
 
             Mail::send('email.confirm', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                 $message->to($user->email);

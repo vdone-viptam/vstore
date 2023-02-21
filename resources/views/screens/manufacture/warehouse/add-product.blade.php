@@ -80,12 +80,12 @@ Thêm sản phẩm vào kho</h2>
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 flex flex-col justify-start items-start gap-2 ">
-                        <span class="text-title font-medium">Số lượng tồn (sản phẩm):
-                        </span>
-                        <input disabled type="number"  value=""
-                               class="view-amount outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    </div>
+{{--                <div class="col-span-6 flex flex-col justify-start items-start gap-2 ">--}}
+{{--                        <span class="text-title font-medium">Số lượng tồn (sản phẩm):--}}
+{{--                        </span>--}}
+{{--                        <input disabled type="number"  value=""--}}
+{{--                               class="view-amount outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
+{{--                    </div>--}}
                 <div class="col-span-6 flex flex-col justify-start items-start gap-4">
 
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
