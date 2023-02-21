@@ -68,6 +68,7 @@ Route::prefix('vshop')->group(function () {
     Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
 
 });
+Route::get('/test',[\App\Http\Controllers\TestController::class,'index']);
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
 ////    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 //});

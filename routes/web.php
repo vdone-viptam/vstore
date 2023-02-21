@@ -55,11 +55,11 @@ Route::group(['domain' => config('domain.vstore')], function () {
 });
 
 //role_id = 4 Quyền kho
-// Route::group(['domain' => config('domain.storage')], function () {
-//     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('screens.storage.index');
-//     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
-//     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstorage'])->name('login_storage');
-// });
+ Route::group(['domain' => config('domain.storage')], function () {
+     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('screens.storage.index');
+     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
+     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstorage'])->name('login_storage');
+ });
 
 // Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], function () {
 //     Route::prefix('dashboard')->group(function () {
@@ -77,10 +77,10 @@ Route::group(['domain' => config('domain.vstore')], function () {
 //         Route::get('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'changePassword'])->name('screens.storage.account.changePassword');
 //         Route::post('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'saveChangePassword'])->name('screens.storage.account.saveChangePassword');
 
-//     });
-//     Route::prefix('finances')->group(function () {
-//         Route::get('/', [\App\Http\Controllers\Storage\FinanceController::class, 'index'])->name('screens.storage.finance.index');
-//         Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
+     });
+     Route::prefix('finances')->group(function () {
+         Route::get('/', [\App\Http\Controllers\Storage\FinanceController::class, 'index'])->name('screens.storage.finance.index');
+         Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
 
     // });
     // Route::prefix('partners')->group(function () {
@@ -90,8 +90,8 @@ Route::group(['domain' => config('domain.vstore')], function () {
 
 // //        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
-//     });
-// });
+     });
+ });
 //Quyền admin
 Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], function () {
 
@@ -244,6 +244,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         return view('layouts.vstore.all_noti', []);
     })->name('vstore_all_noti');
 });
+
 
 
 

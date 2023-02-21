@@ -119,6 +119,9 @@
                         </tr>
                         </thead>
                         <tbody>
+{{--                        @foreach($products as $value)--}}
+
+{{--                        @endforeach--}}
                         <tr>
                             <td>VN001</td>
                             <td><img style="height: 50px !important;"
@@ -131,42 +134,7 @@
                             <td>200.000</td>
                             <td><a href="">Chi tiết</a></td>
                         </tr>
-                        <tr>
-                            <td>VN002</td>
-                            <td><img style="height: 50px !important;"
-                                    src="https://fptshop.com.vn/Uploads/Originals/2020/9/29/637369735917636373_huong-dan-cach-cai-dat-hinh-nen-may-tinh-win-10-don-gian-8.jpg"
-                                    alt=""></td>
-                            <td>Acer Nitro 2023</td>
-                            <td>Acer</td>
-                            <td>Đồ điện tử</td>
-                            <td>19.000.000 đ</td>
-                            <td>200.000</td>
-                            <td><a href="">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>VN003</td>
-                            <td><img style="height: 50px !important;"
-                                    src="https://fptshop.com.vn/Uploads/Originals/2020/9/29/637369735917636373_huong-dan-cach-cai-dat-hinh-nen-may-tinh-win-10-don-gian-8.jpg"
-                                    alt=""></td>
-                            <td>Acer Nitro 2023</td>
-                            <td>Acer</td>
-                            <td>Đồ điện tử</td>
-                            <td>19.000.000 đ</td>
-                            <td>200.000</td>
-                            <td><a href="">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>VN004</td>
-                            <td><img style="height: 50px !important;"
-                                    src="https://fptshop.com.vn/Uploads/Originals/2020/9/29/637369735917636373_huong-dan-cach-cai-dat-hinh-nen-may-tinh-win-10-don-gian-8.jpg"
-                                    alt=""></td>
-                            <td>Acer Nitro 2023</td>
-                            <td>Acer</td>
-                            <td>Đồ điện tử</td>
-                            <td>19.000.000 đ</td>
-                            <td>200.000</td>
-                            <td><a href="">Chi tiết</a></td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
