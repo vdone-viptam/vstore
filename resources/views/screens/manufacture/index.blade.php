@@ -65,7 +65,7 @@
     </div>
 </div>
 <div class="relative w-full h-full">
-   <div class="absolute top-[-30px] right-0 bannerncc z-[-1] -rotate-[5deg]">
+   <div class="absolute top-[-30px] right-0 bannerncc z-[-1] md:-rotate-[5deg]">
 
    </div>
    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full md:max-w-[1440px] mx-auto place-items-center p-4">

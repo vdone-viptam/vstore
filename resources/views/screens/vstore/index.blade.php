@@ -86,7 +86,7 @@
             <span class="text-[#7C8087]">
                     Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn
                 </span>
-            <svg width="199" height="176" class="absolute top-[35px] right-[-110px] rotate-[30deg] md:hidden" viewBox="0 0 199 176" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="199" height="176" class="absolute top-[5px] right-[-75px] rotate-[30deg] md:hidden" viewBox="0 0 199 176" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.9761 50.2162C23.9761 50.2162 106.668 41.4523 168.046 123.883" stroke="#8C97AC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M164.662 127.879L164.548 125.875L170.013 125.838L169.691 120.171L171.623 120.157L172.002 126.827C172.033 127.38 171.626 127.831 171.093 127.835L164.662 127.879Z" fill="#8C97AC"/>
             </svg>

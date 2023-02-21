@@ -97,7 +97,7 @@
             <span class="text-[#7C8087]">
                     Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn
                 </span>
-            <svg width="199" height="176" class="absolute top-[35px] right-[-110px] rotate-[30deg] md:hidden"
+            <svg width="199" height="176" class="absolute top-[5px] right-[-75px] rotate-[30deg] md:hidden"
                  viewBox="0 0 199 176" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.9761 50.2162C23.9761 50.2162 106.668 41.4523 168.046 123.883" stroke="#8C97AC"
                       stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
