@@ -368,16 +368,16 @@ class ProductController extends Controller
                 }
 //                return $product;
             }
-            $dataInsert = [];
-            for ($i = 0; $i < count($request->ward_id); $i++) {
-                $dataInsert[] = [
-                    'product_id' => $request->product_id,
-                    'ware_id' => $request->ward_id[$i],
-                    'amount' => $request->amount[$i],
-                    'created_at' => Carbon::now(),
-                    'status' => 3];
-            }
-            ProductWarehouses::insert($dataInsert);
+//            $dataInsert = [];
+//            for ($i = 0; $i < count($request->ward_id); $i++) {
+//                $dataInsert[] = [
+//                    'product_id' => $request->product_id,
+//                    'ware_id' => $request->ward_id[$i],
+//                    'amount' => $request->amount[$i],
+//                    'created_at' => Carbon::now(),
+//                    'status' => 3];
+//            }
+//            ProductWarehouses::insert($dataInsert);
             DB::table('products')->where('id', $request->product_id)->update(['status' => 1]);
             $userLogin = Auth::user();
             $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo

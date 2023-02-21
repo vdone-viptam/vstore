@@ -292,7 +292,6 @@
                 </table>
             </div>
             <div class="flex justify-end items-center gap-4 flex-wrap">
-                <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>
                 <ul class="pagination flex justify-start items-center gap-2 flex-wrap">
                     <li><a href="javascript:void(0)">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"

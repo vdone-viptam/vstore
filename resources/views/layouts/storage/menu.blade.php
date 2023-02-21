@@ -117,6 +117,7 @@
                 <li class="hover:underline" data-page="create-request"><a
                         href="{{route('screens.storage.product.request')}}">
                         Yêu cầu gửi sản phẩm</a></li>
+                <li class="hover:underline" data-page="create-request"><a href="{{route('screens.storage.product.requestOut')}}">Yêu cầu xuất kho</a></li>
             </ul>
         </div>
         {{-- Đối tác --}}

@@ -68,7 +68,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
-
+        Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
     });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
@@ -84,7 +84,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
 
     });
     Route::prefix('partners')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.storage.partner.index');
+        Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
 //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
 //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
