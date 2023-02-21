@@ -110,7 +110,7 @@ class LoginController extends Controller
                 'email.required' => 'Email bắt buộc nhập',
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
-                'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+                'name.required' => 'Tên bắt buộc nhập',
                 'name.unique' => 'tên công ty đã tồn tại',
                 'company_name.unique' => 'tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
@@ -131,7 +131,7 @@ class LoginController extends Controller
         }
 
         if ($validator->fails()) {
-            dd($validator->errors());
+//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         }
@@ -188,7 +188,7 @@ class LoginController extends Controller
             DB::commit();
 
             if ($request->role_id == 2) {
-              
+
                 return redirect()->route('login_ncc')->with('success', 'Thành công');
             }
             if ($request->role_id == 3) {

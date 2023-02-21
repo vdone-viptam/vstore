@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký V-Store</title>
+    <title>Đăng ký V-Ncc</title>
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
@@ -102,7 +102,7 @@
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('email')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-danger text-red-500 text-red-500">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên nhà cung cấp</span>
@@ -110,7 +110,7 @@
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('name')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
@@ -118,7 +118,7 @@
                        class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('company_name')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
@@ -126,14 +126,16 @@
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('tax_code')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
                 <input type="text" name="address" id="address" placeholder="Nhập địa chỉ"
                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
-
+            @error('address')
+            <p class="text-danger text-red-500">{{$message}}</p>
+            @enderror
 
         </div>
         <div class="flex flex-col justify-start items-start gap-6 w-full">
@@ -143,7 +145,7 @@
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('phone_number')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium flex justify-start items-center gap-1"><strong
@@ -164,7 +166,7 @@
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('id_vdone')
-            <p class="text-danger">{{$message}}</p>
+            <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"> Đại diện thêm</span>
@@ -175,7 +177,7 @@
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#"
+    <div class="text-center my-4"><input type="checkbox" required> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#"
                                                                                                               onclick="$('.modal-hd').toggleClass('show-modal')"
                                                                                                               class="underline text-blue-700">Xem
             thêm</a></div>
