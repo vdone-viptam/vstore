@@ -28,7 +28,8 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $this->v['products'] = Product::select('id', 'publish_id', 'images', 'name', 'brand', 'category_id', 'price', 'status', 'vstore_id')
+        $this->v['products'] = Product::select('products.id', 'publish_id', 'images', 'products.name', 'brand', 'category_id', 'price', 'products.status', 'vstore_id')
+            ->join("categories", 'products.category_id', '=', 'categories.id')
             ->orderBy('id', 'desc');
         $limit = $request->limit ?? 10;
         if ($request->condition && $request->condition != 0) {
@@ -245,7 +246,7 @@ class ProductController extends Controller
             if ($request->product) {
 
                 $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id','discount','discount_vShop')
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);
@@ -335,35 +336,35 @@ class ProductController extends Controller
             $object->images = json_encode($images);
             $object->save();
             $product = Product::find($request->product_id);
-            if ($product){
+            if ($product) {
                 $product->vstore_id = $request->vstore_id;
                 $product->save();
-                $sl=[];
-                foreach ($request->sl as $value){
-                    if ($value !== null){
+                $sl = [];
+                foreach ($request->sl as $value) {
+                    if ($value !== null) {
                         $sl[] = $value;
                     }
                 }
-                $moneyv=[];
-                foreach ($request->moneyv as $value){
-                    if ($value !== null){
+                $moneyv = [];
+                foreach ($request->moneyv as $value) {
+                    if ($value !== null) {
                         $moneyv[] = $value;
                     }
                 }
 //                return $sl;
-                for($i=0;$i<count($sl);$i++){
+                for ($i = 0; $i < count($sl); $i++) {
                     $start = $sl[$i];
-                    if (array_key_exists($i+1,$sl)){
-                        $end = $sl[$i+1];
-                    }else{
-                        $end=0;
+                    if (array_key_exists($i + 1, $sl)) {
+                        $end = $sl[$i + 1];
+                    } else {
+                        $end = 0;
                     }
 //                   $end = $sl[$i+1]??0;
                     DB::table('buy_more_discount')->insert([
-                        'start'=>$start,
-                        'end'=>$end,
-                        'price'=>$moneyv[$i],
-                        'product_id'=>$product->id
+                        'start' => $start,
+                        'end' => $end,
+                        'price' => $moneyv[$i],
+                        'product_id' => $product->id
                     ]);
                 }
 //                return $product;
@@ -384,7 +385,7 @@ class ProductController extends Controller
 
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
                 'href' => route('screens.vstore.product.request',)

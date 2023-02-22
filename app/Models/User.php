@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Warehouses::class, 'user_id')->paginate(4);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id');
+    }
 }
