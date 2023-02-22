@@ -66,7 +66,7 @@ Route::domain(config('domain.api'))->group(function () {
 
 Route::prefix('vshop')->group(function () {
     Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
-
+    Route::get('get-discount',[\App\Http\Controllers\Api\VShopController::class,'getDiscountByTotalProduct']);
 });
 Route::get('/test',[\App\Http\Controllers\TestController::class,'index']);
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
