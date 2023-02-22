@@ -20,14 +20,16 @@ class ProductController extends Controller
     {
         $this->v = [];
     }
-    public function index(Request $request){
+
+    public function index(Request $request)
+    {
         $limit = $request->limit ?? 10;
-        $this->v['products'] =  DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+        $this->v['products'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
             ->where('requests.vstore_id', Auth::id())
-            ->where('products.status',2);
+            ->where('products.status', 2);
 
         if ($request->condition && $request->condition != 0) {
             $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
@@ -39,6 +41,7 @@ class ProductController extends Controller
 
         return view('screens.vstore.product.index', $this->v);
     }
+
     public function request(Request $request)
     {
         if (isset($request->noti_id)) {
@@ -95,7 +98,7 @@ class ProductController extends Controller
 
         $data = [
             'title' => 'Bạn vừa có 1 thông báo mới',
-            'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+            'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
             'message' => $message,
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
             'href' => route('screens.manufacture.product.request')
@@ -107,21 +110,32 @@ class ProductController extends Controller
             $user = User::find($admin->id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $currentRequest->NCC->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                 'href' => route('screens.admin.product.index')
             ];
 
             $user->notify(new AppNotification($data));
-        }else{
+        } else {
             DB::table('products')->where('id', $currentRequest->product_id)->update([
                 'status' => 0,
-                'vstore_id'=>null
+                'vstore_id' => null
             ]);
         }
 
         return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
     }
 
+    public function discount()
+    {
+        return view('screens.vstore.product.discount', $this->v);
+
+    }
+
+    public function createDis()
+    {
+        return view('screens.vstore.product.createDis', $this->v);
+
+    }
 }

@@ -152,7 +152,7 @@ class  VShopController extends Controller
                 $data['lat'] = $lat;
                 $data['long'] = $long;
             }
-
+c
 
             $address = DB::table('vshop')->where('id_pdone', $request->id_pdone)->update($data);
             return response()->json([
