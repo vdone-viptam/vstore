@@ -233,6 +233,11 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
         Route::get('/discount', [\App\Http\Controllers\Vstore\ProductController::class, 'discount'])->name('screens.vstore.product.discount');
         Route::get('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'createDis'])->name('screens.vstore.product.createDis');
+        Route::get('/choose-product', [\App\Http\Controllers\Vstore\ProductController::class, 'chooseProduct'])->name('screens.vstore.product.chooseProduct');
+        Route::post('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'storeDis'])->name('screens.vstore.product.storeDis');
+        Route::get('/edit-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'editDis'])->name('screens.vstore.product.editDis');
+        Route::post('/update-discount/{id}', [\App\Http\Controllers\Vstore\ProductController::class, 'updateDis'])->name('screens.vstore.product.updateDis');
+
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');

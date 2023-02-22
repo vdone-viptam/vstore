@@ -126,6 +126,8 @@
                             <th>
                                 Phần trăm giảm giá
                             </th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
                             <th>
                                 Ngày tạo
                             </th>
@@ -135,9 +137,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(false)
-
-
+                        @if(count($discounts) > 0)
+                            @foreach($discounts as $discount)
+                                <tr>
+                                    <td>{{$discount->id}}</td>
+                                    <td>{{$discount->name}}</td>
+                                    <td>{{$discount->discount}}</td>
+                                    <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
+                                    <td><a href="#" data-id="{{$discount->id}}"
+                                           class="text-blue-700 more-details">Sửa</a></td>
+                                </tr>
+                            @endforeach
                         @else
                             <tr>
                                 <td colspan="5">Không có dữ liệu phù hợp</td>
@@ -181,10 +193,9 @@
         $('.more-details').each(function (i, e) {
             $(this).on('click', (o) => {
                 $.ajax({
-                    url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
+                    url: '{{route('screens.vstore.product.editDis')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
-                        $('#modal2').html('');
-                        $('#modal2').append(result);
+                        $('#modal2').html(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
                 });
