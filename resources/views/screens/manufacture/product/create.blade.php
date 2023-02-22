@@ -242,7 +242,7 @@
 {{--                    </div>--}}
 {{--                </div>--}}
                 <div class="  items-center gap-8 w-full">
-                    <span class="text-title font-medium">Chiết khấu hàng nhập sẵn</span>
+                    <span class="text-title font-med">Chiết khấu hàng nhập sẵn</span>
                     <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">

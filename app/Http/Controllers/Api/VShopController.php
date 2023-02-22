@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class VShopController extends Controller
+class  VShopController extends Controller
 {
 
 
@@ -24,7 +25,7 @@ class VShopController extends Controller
     public function getDiscountByTotalProduct(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'publish_id' => 'required',
+            'id' => 'required|exists:products,id',
             'total' => 'required|numeric',
 
         ], [
@@ -39,17 +40,17 @@ class VShopController extends Controller
             ]);
         }
 
-        $discount = DB::table('buy_more_discount')->select('price')
+        $discount = DB::table('buy_more_discount')->select('discount')
                 ->where('start', '<=', $request->total)
                 ->where('end', '>', $request->total)
-                ->where('product_id', $request->publish_id)
-                ->first()->price ?? 0;
-
-        if ($discount > 0) {
-            $discount = DB::table('buy_more_discount')->select('price')
+                ->where('product_id', $request->id)
+                ->first()->discount ?? 0;
+//        return $discount;
+        if ($discount == 0) {
+            $discount = DB::table('buy_more_discount')->select('discount')
                 ->where('end', 0)
-                ->where('product_id', $request->publish_id)
-                ->first()->price;
+                ->where('product_id', $request->id)
+                ->first()->discount;
         }
         return response()->json([
             'status_code' => 200,

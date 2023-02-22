@@ -292,10 +292,11 @@ class ProductController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
             }
-            if ($request->ward_id[0] == 0) {
-                return redirect()->back()->withErrors(['ward_id' => 'Thông tin kho hàng bắt buộc nhập'])->withInput()->with('validate', 'failed');
+//            if ($request->ward_id[0] == 0) {
+//                return redirect()->back()->withErrors(['ward_id' => 'Thông tin kho hàng bắt buộc nhập'])->withInput()->with('validate', 'failed');
+//
+//            }
 
-            }
             $object = new Application();
             $object->product_id = $request->product_id;
             $object->discount = $request->discount;
@@ -340,33 +341,34 @@ class ProductController extends Controller
                 $product->vstore_id = $request->vstore_id;
                 $product->save();
                 $sl = [];
-                foreach ($request->sl as $value) {
-                    if ($value !== null) {
-                        $sl[] = $value;
+
+                for ($i = 0; $i < 3; $i++) {
+
+                    if (strlen($request->sl[$i]) > 0 && strlen($request->moneyv[$i]) > 0) {
+                        $sl[] = [
+                            'start' => $request->sl[$i],
+                            'discount' => $request->moneyv[$i],
+                            'product_id' => $product->id
+                        ];
                     }
+
                 }
-                $moneyv = [];
-                foreach ($request->moneyv as $value) {
-                    if ($value !== null) {
-                        $moneyv[] = $value;
-                    }
-                }
+//                dd($sl);
+
+
 //                return $sl;
                 for ($i = 0; $i < count($sl); $i++) {
                     $start = $sl[$i];
                     if (array_key_exists($i + 1, $sl)) {
-                        $end = $sl[$i + 1];
+                        $sl[$i]['end'] = $sl[$i + 1]['start'];
                     } else {
-                        $end = 0;
+                        $sl[$i]['end'] = 0;
                     }
 //                   $end = $sl[$i+1]??0;
-                    DB::table('buy_more_discount')->insert([
-                        'start' => $start,
-                        'end' => $end,
-                        'price' => $moneyv[$i],
-                        'product_id' => $product->id
-                    ]);
+
                 }
+                DB::table('buy_more_discount')->insert($sl);
+
 //                return $product;
             }
 //            $dataInsert = [];

@@ -10,12 +10,13 @@ class TestController extends Controller
 {
     public function index()
     {
-        $res = Http::get('https://maps.googleapis.com/maps/api/place/textsearch/json?query=Minh+Khôi+Nông+Cống+Thanh+Hóa&opennow&key='.env('GOOGLE_MAPS_API_KEY'));
-//        return env('GOOGLE_MAPS_API_KEY');
-        return $res;
-//        $googlePlaces = new PlacesApi('opennow&key=AIzaSyB0PEB_6e5ROdUO9eW7PhNpLgwO0CEt-og');
-//        $response = $googlePlaces->placeAutocomplete('Huế'); # line 2
-//        return $response;
+
+        $address = "hà nội";
+        $result = app('geocoder')->geocode($address)->get();
+        $coordinates = $result[0]->getCoordinates();
+        $lat = $coordinates->getLatitude();
+        $long = $coordinates->getLongitude();
+        return $lat.','.$long;
     }
 
     public function haversineGreatCircleDistance(
