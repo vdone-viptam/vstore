@@ -72,6 +72,7 @@ class AccountController extends Controller
 
     public function uploadImage($id, Request $request)
     {
+
         $user = User::find($id);
         if ($request->hasFile('img')) {
             $file = $request->file('img');

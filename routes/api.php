@@ -70,8 +70,8 @@ Route::prefix('vshop')->group(function () {
 
     Route::prefix('address')->group(function () {
         Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
-        Route::get('/edit-address', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
-        Route::put('/update-address', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
+        Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
+        Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
     });
 
 });

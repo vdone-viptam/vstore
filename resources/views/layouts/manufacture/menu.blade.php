@@ -124,6 +124,9 @@
                         href="{{route('screens.manufacture.product.request')}}"
                     >Quản lý yêu cầu
                         xét duyệt sản phẩm</a></li>
+                <li class="hover:underline" data-page="request"><a
+                        href="{{route('screens.manufacture.discount.index')}}"
+                    >Mã giảm giá</a></li>
 
             </ul>
         </div>
