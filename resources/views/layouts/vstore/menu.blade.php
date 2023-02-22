@@ -39,13 +39,14 @@
     }
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
-<a href="{{route('screens.vstore.dashboard.index')}}" class="">
+    <a href="{{route('screens.vstore.dashboard.index')}}" class="">
         <div class=" w-[178px] h-[85px] mx-auto my-6">
             <!-- <img
                  src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
                  alt=""> -->
             @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
-                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full" alt="">
+                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
+                     alt="">
             @else
                 <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
             @endif
@@ -114,9 +115,13 @@
                 </div>
             </div>
             <ul class=" flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="/"><a class="hover:underline" href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
-                <li data-page="request"><a class="hover:underline" href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt
+                <li data-page="/"><a class="hover:underline" href="{{route('screens.vstore.product.index')}}">Tất cả sản
+                        phẩm</a></li>
+                <li data-page="request"><a class="hover:underline" href="{{route('screens.vstore.product.request')}}">Quản
+                        lý yêu cầu xét duyệt
                         sản phẩm</a></li>
+                <li data-page="discount"><a class="hover:underline" href="{{route('screens.vstore.product.discount')}}">Mã
+                        giảm giá</a></li>
             </ul>
         </div>
         {{--       Quản lý đơn hàng--}}
@@ -147,8 +152,10 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="new"><a class="hover:underline" href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
-                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
+                <li data-page="new"><a class="hover:underline" href="{{Route('screens.vstore.order.new')}}">Đơn hàng
+                        mới</a></li>
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.order.index')}}">Tất cả đơn
+                        hàng</a></li>
             </ul>
         </div>
         {{--        Đối tác--}}
@@ -179,9 +186,12 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
-                <li data-page="vshop"><a class="hover:underline" href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
-                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.partner.index')}}">Danh sách
+                        nhà cung cấp</a></li>
+                <li data-page="vshop"><a class="hover:underline" href="{{Route('screens.vstore.partner.vshop')}}">Danh
+                        sách V-Shop</a></li>
+                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác
+                        giao hàng</a></li>
             </ul>
         </div>
         {{--            Tài chính--}}
@@ -220,9 +230,12 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
-                <li data-page="revenue"><a class="hover:underline" href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
-                <li data-page="history"><a class="hover:underline" href="{{Route('screens.vstore.finance.history')}}">Lịch sử giao dịch</a></li>
+                <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.finance.index')}}">Ví</a>
+                </li>
+                <li data-page="revenue"><a class="hover:underline" href="{{Route('screens.vstore.finance.revenue')}}">Doanh
+                        thu</a></li>
+                <li data-page="history"><a class="hover:underline" href="{{Route('screens.vstore.finance.history')}}">Lịch
+                        sử giao dịch</a></li>
             </ul>
         </div>
         {{--        Nhân viên--}}
@@ -260,7 +273,7 @@
                         <div class="md:w-[16px] lg:w-[20px] md:h-[22px]">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 <path class="svgFill" fill="#B8BED9"
-                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                      d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
