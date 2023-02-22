@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\AppNotification;
@@ -87,6 +88,7 @@ class ProductController extends Controller
                     'status' => 0,
                     'vstore_id'=>null
                 ]);
+                $deleteByMore = BuyMoreDiscount::where('product_id',$currentRequest->product_id)->delete();
             }
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
