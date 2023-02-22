@@ -51,6 +51,7 @@ Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpage'])->name('landingpagevstore');
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
+    Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'vstore'])->name('intro_vstore');
 
 });
 

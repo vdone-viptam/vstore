@@ -50,4 +50,42 @@ class LandingpageController extends Controller
     {
         return view('screens.storage.index');
     }
+
+    public function vstore($slug){
+        $user = User::where('slug', $slug)
+            ->where('role_id', 3)
+            ->first();
+
+        if ($user) {
+
+            $logo = !empty($user->avatar) ? $user->avatar : '';
+            $banner = !empty($user->banner) ? $user->banner : '';
+            $name = $user->name ?? '';
+
+            $category = $user->vstoreProducts()->select("category_id")->where('status',2)->groupBy('category_id')->get();
+            $arrCategory = [];
+            foreach ($category as $cate) {
+                $arrCategory[] = $cate->category_id;
+            }
+            $arrCategory = Category::whereIn('id', $arrCategory)->get();
+
+            $user_id = $user->vstoreProducts()->select("user_id")->where('status',2)->groupBy('user_id')->get();
+            $arrUser = [];
+            foreach ($user_id as $cate) {
+                $arrUser[] = $cate->user_id;
+            }
+            $arrUser = User::whereIn('id', $arrUser)->get();
+         
+//            if ()
+        } else {
+            return redirect(route('landingpagevstore'));
+        }
+
+
+//    return $logo;
+
+        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','arrUser'));
+//        return view('screens.landingpage',compact('logo','banner'));
+
+    }
 }
