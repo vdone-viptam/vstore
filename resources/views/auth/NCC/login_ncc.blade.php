@@ -116,6 +116,7 @@
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const btn = document.querySelector('.btn-ctn')
+
     email.addEventListener('keyup', (e) => {
         if (e.target.value && password.value) {
             btn.classList.add('bg-sky-500/100');
@@ -140,7 +141,9 @@
             btn.setAttribute('disabled', 'true')
         }
     })
-
+    $('#form-log').submit(function (){
+        btn.setAttribute('disabled', 'true');
+    })
 </script>
 </body>
 </html>
