@@ -95,20 +95,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $value)
-                            <tr>
-                                <td>{{$value->publish_id}}</td>
-                                <td><img style="height: 50px !important;"
-                                         src="{{asset(json_decode($value->images)[0])}}"
-                                         alt=""></td>
-                                <td>{{$value->name}}</td>
+                        @if(count($products) > 0)
+                            @foreach($products as $value)
+                                <tr>
+                                    <td>{{$value->publish_id}}</td>
+                                    <td><img style="height: 50px !important;"
+                                             src="{{asset(json_decode($value->images)[0])}}"
+                                             alt=""></td>
+                                    <td>{{$value->name}}</td>
 
-                                <td>{{$value->cate_name}}</td>
-                                <td>{{number_format($value->price,0,',','.') }} đ</td>
-                                <td>{{$value->amount_product}}</td>
-                                {{--                                <td><a href="">Chi tiết</a></td>--}}
+                                    <td>{{$value->cate_name}}</td>
+                                    <td>{{number_format($value->price,0,',','.') }} đ</td>
+                                    <td>{{$value->amount_product}}</td>
+                                    {{--                                <td><a href="">Chi tiết</a></td>--}}
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="6">Không có dữ liệu phù hợp</td>
                             </tr>
-                        @endforeach
+                        @endif
 
 
                         </tbody>

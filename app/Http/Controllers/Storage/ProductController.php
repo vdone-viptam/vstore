@@ -30,9 +30,10 @@ class ProductController extends Controller
 
 //        return Auth::user();
 
-        if ($request->condition) {
-            $this->v['requests'] = $this->v['requests']->where('products.publish_id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
-                ->where('products.name', 'like', '%' . str_replace('YC', '', $request->key_search) . '%');
+        if ($request->key_search) {
+
+            $products = $products->where('products.publish_id', 'like', '%' . $request->key_search . '%')
+                ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
         }
         $products = $products->where('warehouses.user_id', Auth::id())
             ->where('product_warehouses.status', '!=', 3)
@@ -53,7 +54,7 @@ class ProductController extends Controller
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
         if ($request->key_search) {
             $this->v['requests'] = $this->v['requests']->where('product_warehouses.id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
-                ->where('products.name', 'like', '%' . str_replace('YC', '', $request->key_search) . '%');
+                ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
         }
         $this->v['requests'] = $this->v['requests']->where('warehouses.user_id', Auth::id())->paginate($limit);
 

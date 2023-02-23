@@ -193,6 +193,10 @@
                                     </td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr>
+                                <td colspan="8">Không có dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
