@@ -22,17 +22,6 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                <select name="condition" id=""
-                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option
-                        value="products.publish_id" {{isset($params['condition']) && $params['condition'] == 'product_warehouses.id' ? 'selected' : ''}}>
-                        Mã sản phẩm
-                    </option>
-                    <option
-                        value="products.name" {{isset($params['condition']) && $params['condition'] == 'products.name' ? 'selected' : ''}}>
-                        Tên sản phẩm
-                    </option>
-                </select>
 
                 <input type="text" name="key_search" value="{{$params['key_search'] ?? '' }}"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
