@@ -230,7 +230,6 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id_pdone' => 'required',
-            'id' => 'required|exists:products,id'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -247,6 +246,7 @@ class ProductController extends Controller
             DB::table('vshop_products')->insert([
                 'id_pdone' => $request->id_pdone,
                 'product_id' => $id,
+                'status'=>1,
                 'created_at' => Carbon::now()
             ]);
             return response()->json([
