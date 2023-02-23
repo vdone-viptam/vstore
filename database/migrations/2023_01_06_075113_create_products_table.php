@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->integer('status')->nullable()->comment('Trạng thái sản phẩm');
             $table->dateTime('admin_confirm_date')->nullable()->comment('Ngày admin duyệt đơn đăng ký sản phẩm');
             $table->dateTime('vstore_confirm_date')->nullable()->comment('Ngày nhà phân phối duyệt đơn đăng ký sản phẩm');
-            $table->integer('amount_product_send_to_discount')->nullable()->comment('Số sản phẩm đã bán');
+            $table->integer('amount_product_sold')->nullable()->comment('Số sản phẩm đã bán');
             $table->integer('vstore_id')->nullable()->comment('Id nhà phẩn phối');
             $table->integer('user_id')->nullable()->comment('Id sở hữu sản phẩm');
             $table->string('origin')->nullable()->comment('Xuất sứ');

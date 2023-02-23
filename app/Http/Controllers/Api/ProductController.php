@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
@@ -68,12 +69,53 @@ class ProductController extends Controller
      * @param $id id của vstore
      * @urlParam page Số trang
      * @urlParam limit Giới hạn bản ghi trên một trang
-     * @urlParam publish_id mã sản phẩm
+     * @urlParam publish_id tìm kiếm theo mã sản phẩm mã sản phẩm
+     * @urlParam category_id tìm kiếm theo danh mục
+     * @urlParam order_by_price sắp xếp theo giá
+     * @urlParam order_by_id sắp xếp theo id
+     * @urlParam order_by_sold sắp xếp theo sl đã bán
+     * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
      * @return JsonResponse
      */
     public function productByVstore(Request $request, $id){
         $limit = $request->limit ?? 10;
-        $products = Product::where('vstore_id',$id)->where('status',2)->paginate($limit);
+
+        $products = Product::where('vstore_id',$id)->where('status',2)
+        ->select('id','publish_id','discount','name','category_id','description','images','brand','weight','length','height','volume','price','amount_product_sold','prepay','payment_on_delivery','vstore_id','user_id','discount_vShop')
+        ;
+            if ($request->publish_id){
+                $products = $products->where('publish_id','like'.$request->publish_id.'%');
+            }
+        if ($request->category_id){
+            $products = $products->where('category_id',$request->category_id);
+        }
+        if ($request->order_by_id){
+            $products = $products->orderBy('id',$request->order_by_id);
+        }
+        if ($request->order_by_sold){
+            $products = $products->orderBy('amount_product_sold',$request->order_by_sold);
+        }
+        if ($request->order_by_price){
+            $products = $products->orderBy('price',$request->order_by_price);
+        }
+        if ($request->payments == 1){
+            $products = $products->where('prepay',1);
+        }elseif ($request->payments == 2){
+            $products = $products->where('payment_on_delivery',1);
+        }
+        $products= $products->paginate($limit);
+        foreach ($products as $value){
+            $img =  json_decode($value->images);
+            $value->images = asset($img[0]);
+            $available_discount = BuyMoreDiscount::where('product_id',$value->id)->orderBy('id','desc')->first();
+            if ($available_discount){
+                $value->available_discount = $available_discount->discount;
+            }
+
+//            return $available_discount;
+//            available discount
+        }
+
         return response()->json([
             'status_code' => 200,
             'data' => $products,
@@ -89,12 +131,45 @@ class ProductController extends Controller
      * @param $id id nhà cung cấp
      * @urlParam page Số trang
      * @urlParam limit Giới hạn bản ghi trên một trang
-     * @urlParam publish_id mã sản phẩm
+     * @urlParam publish_id tìm kiếm theo mã sản phẩm mã sản phẩm
+     * @urlParam category_id tìm kiếm theo danh mục
+     * @urlParam order_by_price sắp xếp theo giá
+     * @urlParam order_by_id sắp xếp theo id
+     * @urlParam order_by_sold sắp xếp theo sl đã bán
+     * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
      * @return JsonResponse
      */
     public function productByNcc( Request $request,$id){
         $limit = $request->limit ?? 10;
-        $products = Product::where('user_id',$id)->where('status',2)->paginate($limit);
+        $products = Product::where('user_id',$id)->where('status',2)
+            ->select('id','publish_id','discount','name','category_id','images','vstore_id','user_id')
+        ;
+        if ($request->publish_id){
+            $products = $products->where('publish_id','like'.$request->publish_id.'%');
+        }
+        if ($request->category_id){
+            $products = $products->where('category_id',$request->category_id);
+        }
+        if ($request->order_by_id){
+            $products = $products->orderBy('id',$request->order_by_id);
+        }
+        if ($request->order_by_sold){
+            $products = $products->orderBy('amount_product_sold',$request->order_by_sold);
+        }
+        if ($request->order_by_price){
+            $products = $products->orderBy('price',$request->order_by_price);
+        }
+        if ($request->payments == 1){
+            $products = $products->where('prepay',1);
+        }elseif ($request->payments == 2){
+            $products = $products->where('payment_on_delivery',1);
+        }
+        $products= $products->paginate($limit);
+        foreach ($products as $value){
+
+            $value->images = asset(json_decode($value->images)[0]);
+        }
+
         return response()->json([
             'status_code' => 200,
             'data' => $products,
@@ -106,12 +181,11 @@ class ProductController extends Controller
      *
      * API dùng để lấy chi tiết 1 sản phẩm
      *
-     * @param Request $request
      * @param  $id mã sản phẩm
      *
      * @return JsonResponse
      */
-    public function productById(Request $request, $id){
+    public function productById( $id){
 
         $product = Product::where('publish_id',$id)->select('publish_id','id','name','images','price','discount_vShop','video')->first();
 

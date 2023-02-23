@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->integer('role_id')->nullable()->comment('quyền 1 admin 2 nhà cung cấp 3 nhà phan phối(vstore),4 kho(storage) ');
             $table->string('link_website')->nullable();
             $table->string('slug')->nullable();
-            $table->integer('branch')->nullable()->comment('ngành vstore, 0 thường, 1 địa phương');
+            $table->integer('branch')->default(0)->comment('ngành vstore, 0 thường, 1 địa phương');
             $table->rememberToken();
             $table->timestamps();
         });

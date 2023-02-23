@@ -17,7 +17,7 @@ class DiscountController extends Controller
     /**
      * Bill
      *
-     * API dùng trả về % giảm giá dựa trên số lượng sản phẩm
+     * API dùng trả về % giảm giá dựa trên số lượng sản phẩm V-Shop lấy hàng sẵn
      *
      * @param Request $request
      * @bodyParam   id id sản phẩm

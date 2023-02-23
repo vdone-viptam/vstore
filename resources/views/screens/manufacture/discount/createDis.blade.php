@@ -98,7 +98,7 @@
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = o.target.value;
 
-                        if (value < (Number(result.discount - result.discount_vShop))) {
+                        if (value < 100- (Number(result.discount + result.discount_vShop))) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
