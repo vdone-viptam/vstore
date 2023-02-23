@@ -139,6 +139,7 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('/register-account', [\App\Http\Controllers\Admin\UserController::class, 'getListRegisterAccount'])->name('screens.admin.user.index');
         Route::get('/confirm/{id}', [\App\Http\Controllers\Admin\UserController::class, 'confirm'])->name('screens.admin.user.confirm');
         Route::get('/chi-tiet', [\App\Http\Controllers\Admin\UserController::class, 'detail'])->name('screens.admin.user.detail');
+        Route::get('/up/{id}', [\App\Http\Controllers\Admin\UserController::class, 'up'])->name('screens.admin.user.up');
 
     });
 
@@ -225,6 +226,15 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
     });
+    Route::prefix('discount')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
+        Route::get('/create-discount',[\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
+        Route::get('/choose-product',[\App\Http\Controllers\Manufacture\DiscountController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
+        Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
+        Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
+        Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
+    });
+//    screens.manufacture.product.discount
     Route::get('/notifications', function () {
         return view('layouts.manufacture.all_noti', []);
     })->name('ncc_all_noti');

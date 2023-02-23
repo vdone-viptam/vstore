@@ -1,11 +1,11 @@
-<form action="{{route('screens.manufacture.product.storeDis')}}" method="POST">
+<form action="{{route('screens.manufacture.product.updateDis',['id' => $discount->id])}}" method="POST">
     <div class="modal modal-details ">
         <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
         <div
             class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
             <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                 <div></div>
-                <h2 class=" text-title font-semibold text-xl">Thêm mới mã giảm giá</h2>
+                <h2 class=" text-title font-semibold text-xl">Cập nhật mã giảm giá</h2>
                 <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                      onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,8 @@
                         <span class="text-title font-medium w-[150px]">Lựa chọn sản phẩm tạo mã:</span>
                         <select name="product_id" id="product_id"
                                 class="h-[42px] choose-product  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <option value="">Chọn sản phẩm</option>
+
+                            <option value="{{$product1->id}}" selected>{{$product1->name}}</option>
                             @foreach($products as $product)
                                 <option value="{{$product->id}}">{{$product->name}}</option>
                             @endforeach
@@ -29,34 +30,34 @@
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Giá sản phẩm:</span>
-                        <input disabled name="price" id="price"
+                        <input disabled name="price" id="price" value="{{$product1->price}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
-                        <input disabled name="discount_ncc" id="discount_ncc"
+                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>
-                        <input disabled name="discount_vshop" id="discount_vshop"
+                        <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
-                        <input name="discount" id="discount"
+                        <input name="discount" id="discount" value="{{$discount->discount}}"
                                class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
-                            <input type="date" name="start_date"
+                            <input type="date" name="start_date" value="{{$discount->start_date}}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="date" name="end_date"
+                            <input type="date" name="end_date" value="{{$discount->end_date}}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         </div>
 
@@ -67,7 +68,7 @@
                 <div class="flex justify-end items-center gap-4 ">
                     <button
                         class="btnSubmit cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3  text-center text-[#FFFFFF] hover:opacity-70"
-                    >Thêm mới
+                    >Lưu thay đổi
                     </button>
                     <a
                         class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"
@@ -82,6 +83,21 @@
 
 <script>
     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+    document.getElementById('discount').addEventListener('keyup', (o) => {
+        const value = o.target.value;
+        console.log(value)
+        if (document.getElementById('discount').value <
+            Number(document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value)){
+            document.querySelector('.btnSubmit').removeAttribute('disabled');
+            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+
+
+        } else {
+            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+        }
+
+    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
@@ -92,13 +108,14 @@
                 console.log(result)
                 if (result) {
                     document.querySelector('#price').value = result.price + ' đ'
-                    document.querySelector('#discount_vshop').value = result.discount_vShop + ' %'
-                    document.querySelector('#discount_ncc').value = result.discount + ' %'
+                    document.querySelector('#discount_vshop').value = result.discount_vShop
+                    document.querySelector('#discount_ncc').value = result.discount
 
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = o.target.value;
 
-                        if (value < (Number(result.discount - result.discount_vShop))) {
+                        if (value < Number(result.discount - result.discount_vShop)
+                            || document.getElementById('discount').value < Number(result.discount - result.discount_vShop)){
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
