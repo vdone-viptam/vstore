@@ -83,6 +83,10 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     });
     Route::prefix('finances')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\FinanceController::class, 'index'])->name('screens.storage.finance.index');
+        Route::post('/store-wallet', [\App\Http\Controllers\Storage\FinanceController::class, 'storeWall'])->name('screens.storage.finance.storeWall');
+        Route::post('/update-wallet/{id}', [\App\Http\Controllers\Storage\FinanceController::class, 'updateWall'])->name('screens.storage.finance.updateWall');
+        Route::post('/create-deposit', [\App\Http\Controllers\Storage\FinanceController::class, 'deposit'])->name('screens.storage.finance.deposit');
+
         Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
 
     });
@@ -201,8 +205,8 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     });
     Route::prefix('discount')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
-        Route::get('/create-discount',[\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
-        Route::get('/choose-product',[\App\Http\Controllers\Manufacture\DiscounthController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
+        Route::get('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
+        Route::get('/choose-product', [\App\Http\Controllers\Manufacture\DiscounthController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
         Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
         Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
         Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
