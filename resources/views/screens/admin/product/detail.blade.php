@@ -16,39 +16,39 @@
             </div>
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Mã sản phẩm:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->publish_id}}</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Mã sản phẩm:</span>
+                        <span class="text-title ">{{$request->publish_id}}</span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Tên sản phẩm:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->product_name}}</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Tên sản phẩm:</span>
+                        <span class="text-title ">{{$request->product_name}}</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Nhà cung cấp:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->user_name}}</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Nhà cung cấp:</span>
+                        <span class="text-title ">{{$request->user_name}}</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Giá bán:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->price}}</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Giá bán:</span>
+                        <span class="text-title ">{{$request->price}}</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Chiết khấu:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->discount}}%</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Chiết khấu:</span>
+                        <span class="text-title ">{{$request->discount}}%</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Chiết khấu v-shop:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->discount_vshop}}%</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Chiết khấu v-shop:</span>
+                        <span class="text-title ">{{$request->discount_vshop}}%</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Số lượng hàng trong kho:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">{{$request->amount_product}}</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Số lượng hàng trong kho:</span>
+                        <span class="text-title ">{{$request->amount_product}}</span>
                     </div>
                     <label for="">Trạng thái đơn đăng ký</label>
-                    <div class="grid grid-cols-2 gap-4 w-full">
+                    <div class="flex items-center gap-4 w-full">
 
-                        <select name="status" id="status" @if($request->status ==3  || $request->status ==4) disabled
+               <select name="status" id="status" @if($request->status ==3  || $request->status ==4) disabled
                                 @endif
                                 class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                             <option value="3" {{$request->status ==3 ? 'selected' : ''}}>Duyệt</option>

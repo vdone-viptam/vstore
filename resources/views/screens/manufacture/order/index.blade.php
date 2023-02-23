@@ -18,30 +18,30 @@
             </div>
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Mã sản phẩm:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">VSC1232</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Mã sản phẩm:</span>
+                        <span class="text-title ">VSC1232</span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Tên sản phẩm:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">Sữa</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Tên sản phẩm:</span>
+                        <span class="text-title ">Sữa</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Nhà cung cấp:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">30,000</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Nhà cung cấp:</span>
+                        <span class="text-title ">30,000</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Giá bán:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">VSC1232</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Giá bán:</span>
+                        <span class="text-title ">VSC1232</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Chiết khấu:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">2%</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Chiết khấu:</span>
+                        <span class="text-title ">2%</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Số lượng bán:</span>
-                        <span class="text-title border-b-[1px] pb-1 border-[#1890FF]">50</span>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Số lượng bán:</span>
+                        <span class="text-title ">50</span>
                     </div>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
