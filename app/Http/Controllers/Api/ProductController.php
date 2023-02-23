@@ -267,12 +267,15 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @param  $id  id_pdone
+     * @urlParam orderBy  id Mới nhất | amount_product_sold Bán chạy | price Giá
+     * urlParam type  asc|desc Mặc định asc
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function productByVshop(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
+        $type = $request->type ?? 'asc';
         $vshop = DB::table('vshop_products')
             ->select('name', 'publish_id', 'price', 'images', 'products.id', 'category_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
@@ -286,7 +289,11 @@ class ProductController extends Controller
             $category[] = DB::table('categories')->select('name')->where('id', $a->category_id)->first()->name;
         }
         $data['info']['categories'] = implode(', ', array_unique($category));
-        $data['products'] = $vshop->paginate($limit);;
+        $data['products'] = $vshop;
+        if ($request->orderBy) {
+            $data['products'] = $data['products']->orderBy($request->orderBy, $type);
+        }
+        $data['products'] = $data['products']->paginate($limit);
         foreach ($data['products'] as $v) {
             $v->discount = DB::table('discounts')->selectRaw('SUM(discount) as dis')->where('end_date', '>=', Carbon::now())->where('product_id', $v->id)->first()->dis ?? 0;
             $v->image = asset(json_decode($v->images)[0]);
