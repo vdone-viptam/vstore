@@ -22,17 +22,6 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                <select name="condition" id=""
-                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option
-                        value="products.publish_id" {{isset($params['condition']) && $params['condition'] == 'product_warehouses.id' ? 'selected' : ''}}>
-                        Mã sản phẩm
-                    </option>
-                    <option
-                        value="products.name" {{isset($params['condition']) && $params['condition'] == 'products.name' ? 'selected' : ''}}>
-                        Tên sản phẩm
-                    </option>
-                </select>
 
                 <input type="text" name="key_search" value="{{$params['key_search'] ?? '' }}"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
@@ -106,20 +95,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $value)
-                            <tr>
-                                <td>{{$value->publish_id}}</td>
-                                <td><img style="height: 50px !important;"
-                                         src="{{asset(json_decode($value->images)[0])}}"
-                                         alt=""></td>
-                                <td>{{$value->name}}</td>
+                        @if(count($products) > 0)
+                            @foreach($products as $value)
+                                <tr>
+                                    <td>{{$value->publish_id}}</td>
+                                    <td><img style="height: 50px !important;"
+                                             src="{{asset(json_decode($value->images)[0])}}"
+                                             alt=""></td>
+                                    <td>{{$value->name}}</td>
 
-                                <td>{{$value->cate_name}}</td>
-                                <td>{{number_format($value->price,0,',','.') }} đ</td>
-                                <td>{{$value->amount_product}}</td>
-                                {{--                                <td><a href="">Chi tiết</a></td>--}}
+                                    <td>{{$value->cate_name}}</td>
+                                    <td>{{number_format($value->price,0,',','.') }} đ</td>
+                                    <td>{{$value->amount_product}}</td>
+                                    {{--                                <td><a href="">Chi tiết</a></td>--}}
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="6">Không có dữ liệu phù hợp</td>
                             </tr>
-                        @endforeach
+                        @endif
 
 
                         </tbody>
