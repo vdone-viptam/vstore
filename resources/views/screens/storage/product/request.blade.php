@@ -23,22 +23,13 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0">Tất cả</option>
                     <option
-                        value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
+                        value="product_warehouses.id" {{isset($params['condition']) && $params['condition'] == 'product_warehouses.id' ? 'selected' : ''}}>
                         Mã sản phẩm
                     </option>
                     <option
-                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                        value="products.name" {{isset($params['condition']) && $params['condition'] == 'products.name' ? 'selected' : ''}}>
                         Tên sản phẩm
-                    </option>
-                    <option
-                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
-                        Thương hiệu
-                    </option>
-                    <option
-                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
-                        Ngành hàng
                     </option>
                 </select>
 
@@ -188,13 +179,13 @@
                                         @if($request->status == 0)
                                             <a href="{{route('screens.storage.product.updateRequest',['status' => 1,'id' => $request->id])}}">
                                                 <button type="button"
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                                     Đồng ý
                                                 </button>
                                             </a>
                                             <a href="{{route('screens.storage.product.updateRequest',['status' => 3,'id' => $request->id])}}">
                                                 <button type="button"
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                                     Từ chối
                                                 </button>
                                             </a>
@@ -218,8 +209,8 @@
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">Tổng: 5</span>
-                    {{--                    @include('layouts.custom.paginator', ['paginator' => $requests])--}}
+                    <span class="text-sm text-title">Tổng: {{$requests->total()}}</span>
+                    @include('layouts.custom.paginator', ['paginator' => $requests])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
