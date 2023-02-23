@@ -69,6 +69,8 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
+        Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
+
         Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
     });
     Route::prefix('account')->group(function () {
@@ -229,7 +231,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     Route::prefix('discount')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
         Route::get('/create-discount',[\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
-        Route::get('/choose-product',[\App\Http\Controllers\Manufacture\DiscountController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
+        Route::get('/choose-product',[\App\Http\Controllers\Manufacture\DiscounthController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
         Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
         Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
         Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');

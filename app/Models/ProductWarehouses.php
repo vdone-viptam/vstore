@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductWarehouses extends Model
 {
     use HasFactory;
+
     protected $table = 'product_warehouses';
     protected $fillable = [
         'product_id',
@@ -15,4 +16,9 @@ class ProductWarehouses extends Model
         'amount',
         'status'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }
