@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Vstore;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\AppNotification;
@@ -122,6 +123,7 @@ class ProductController extends Controller
                 'status' => 0,
                 'vstore_id' => null
             ]);
+            $deleteByMore = BuyMoreDiscount::where('product_id',$currentRequest->product_id)->delete();
         }
 
         return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');

@@ -70,11 +70,16 @@ Route::prefix('vshop')->group(function () {
 
     Route::prefix('address')->group(function () {
         Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
-        Route::get('/edit-address', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
-        Route::put('/update-address', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
+        Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
+        Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
     });
+
 });
-Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+Route::prefix('discount')->group(function (){
+    Route::get('get-discount',[\App\Http\Controllers\Api\DiscountController::class,'getDiscountByTotalProduct']);
+    Route::get('available-discount/{id}',[\App\Http\Controllers\Api\DiscountController::class,'availableDiscount']);
+});
+Route::get('/test',[\App\Http\Controllers\TestController::class,'index']);
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
 ////    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 //});

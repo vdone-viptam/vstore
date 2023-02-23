@@ -51,6 +51,7 @@ class UserController extends Controller
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
+//        return  $this->v['users'];
         return view('screens.admin.user.list_user', $this->v);
     }
 
@@ -104,5 +105,13 @@ class UserController extends Controller
         $this->v['user'] = json_decode($user->storage_information);
         $this->v['user']->created_at = $user->created_at;
         return view('screens.admin.user.detail_kho', $this->v);
+    }
+    public function up($id){
+        $user = User::find($id);
+        if ($user && $user->role_id==3){
+            $user->branch=1;
+            $user->save();
+        }
+        return redirect()->route('screens.admin.user.list_user');
     }
 }

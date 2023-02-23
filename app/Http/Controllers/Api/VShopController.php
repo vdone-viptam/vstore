@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\BuyMoreDiscount;
+use App\Models\Product;
+use App\Models\User;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -102,11 +105,11 @@ class  VShopController extends Controller
         }
     }
 
-    public function editAddressReceive(Request $request)
+    public function editAddressReceive(Request $request,$id)
     {
 
         try {
-            $address = DB::table('vshop')->select('name', 'address', 'address', 'phone_number', 'id')->where('id_pdone', $request->id_pdone)->first();
+            $address = DB::table('vshop')->select('name', 'address', 'address', 'phone_number', 'id')->where('id_pdone', $id)->first();
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
@@ -120,10 +123,10 @@ class  VShopController extends Controller
 
     }
 
-    public function updateAddressReceive(Request $request)
+    public function updateAddressReceive(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
-            'id_pdone' => 'required|max:255',
+
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
@@ -137,12 +140,12 @@ class  VShopController extends Controller
         }
         try {
             $data = [
-                'id_pdone' => $request->id_pdone,
+                'id_pdone' => $id,
                 'name' => $request->name,
                 'phone_number' => $request->phone_number,
                 'updated_at' => Carbon::now()
             ];
-            if (DB::table('vshop')->where('address', $request->address)->where('id_pdone', $request->id_pdone)->count() > 0) {
+            if (DB::table('vshop')->where('address', $request->address)->where('id_pdone', $id)->count() == 0) {
                 $data['address'] = $request->address;
                 $address = $request->address;
                 $result = app('geocoder')->geocode($address)->get();
@@ -153,7 +156,7 @@ class  VShopController extends Controller
                 $data['long'] = $long;
             }
 
-            $address = DB::table('vshop')->where('id_pdone', $request->id_pdone)->update($data);
+            $address = DB::table('vshop')->where('id_pdone', $id)->update($data);
             return response()->json([
                 'status_code' => 201,
                 'data' => 'Cập nhật địa chỉ thành công',
