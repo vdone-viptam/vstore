@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\BuyMoreDiscount;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -29,17 +31,19 @@ class ProductController extends Controller
      * @urlParam publish_id mã sản phẩm
      * @return JsonResponse
      */
-    public function index( Request $request){
+    public function index(Request $request)
+    {
 
         $limit = $request->limit ?? 10;
-        $publish_id =$request->publish_id ??  '';
-            $products = Product::where('vstore_id','!=',null)->where('status',2)->where('publish_id','!=',null)->where('publish_id','like','%'.$publish_id.'%')->paginate($limit);
+        $publish_id = $request->publish_id ?? '';
+        $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)->where('publish_id', 'like', '%' . $publish_id . '%')->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'data' => $products
         ]);
 
     }
+
     /**
      * Danh sách sản phẩm theo danh mục
      *
@@ -50,16 +54,18 @@ class ProductController extends Controller
      * @urlParam limit Giới hạn bản ghi trên một trang
      * @return JsonResponse
      */
-    public function productByCategory( Request $request,$id){
+    public function productByCategory(Request $request, $id)
+    {
         $limit = $request->limit ?? 10;
-        $products = Product::where('category_id',$id)->paginate($limit);
-            return response()->json([
-                'status_code' => 200,
-                'data' => $products,
-            ]);
+        $products = Product::where('category_id', $id)->paginate($limit);
+        return response()->json([
+            'status_code' => 200,
+            'data' => $products,
+        ]);
 
 
     }
+
     /**
      * Danh sách sản phẩm vstore
      *
@@ -77,38 +83,38 @@ class ProductController extends Controller
      * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
      * @return JsonResponse
      */
-    public function productByVstore(Request $request, $id){
+    public function productByVstore(Request $request, $id)
+    {
         $limit = $request->limit ?? 10;
 
-        $products = Product::where('vstore_id',$id)->where('status',2)
-        ->select('id','publish_id','discount','name','category_id','description','images','brand','weight','length','height','volume','price','amount_product_sold','prepay','payment_on_delivery','vstore_id','user_id','discount_vShop')
-        ;
-            if ($request->publish_id){
-                $products = $products->where('publish_id','like'.$request->publish_id.'%');
-            }
-        if ($request->category_id){
-            $products = $products->where('category_id',$request->category_id);
+        $products = Product::where('vstore_id', $id)->where('status', 2)
+            ->select('id', 'publish_id', 'discount', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length', 'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id', 'user_id', 'discount_vShop');
+        if ($request->publish_id) {
+            $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
         }
-        if ($request->order_by_id){
-            $products = $products->orderBy('id',$request->order_by_id);
+        if ($request->category_id) {
+            $products = $products->where('category_id', $request->category_id);
         }
-        if ($request->order_by_sold){
-            $products = $products->orderBy('amount_product_sold',$request->order_by_sold);
+        if ($request->order_by_id) {
+            $products = $products->orderBy('id', $request->order_by_id);
         }
-        if ($request->order_by_price){
-            $products = $products->orderBy('price',$request->order_by_price);
+        if ($request->order_by_sold) {
+            $products = $products->orderBy('amount_product_sold', $request->order_by_sold);
         }
-        if ($request->payments == 1){
-            $products = $products->where('prepay',1);
-        }elseif ($request->payments == 2){
-            $products = $products->where('payment_on_delivery',1);
+        if ($request->order_by_price) {
+            $products = $products->orderBy('price', $request->order_by_price);
         }
-        $products= $products->paginate($limit);
-        foreach ($products as $value){
-            $img =  json_decode($value->images);
+        if ($request->payments == 1) {
+            $products = $products->where('prepay', 1);
+        } elseif ($request->payments == 2) {
+            $products = $products->where('payment_on_delivery', 1);
+        }
+        $products = $products->paginate($limit);
+        foreach ($products as $value) {
+            $img = json_decode($value->images);
             $value->images = asset($img[0]);
-            $available_discount = BuyMoreDiscount::where('product_id',$value->id)->orderBy('id','desc')->first();
-            if ($available_discount){
+            $available_discount = BuyMoreDiscount::where('product_id', $value->id)->orderBy('id', 'desc')->first();
+            if ($available_discount) {
                 $value->available_discount = $available_discount->discount;
             }
 
@@ -122,6 +128,7 @@ class ProductController extends Controller
 
         ]);
     }
+
     /**
      * Danh sách sản phẩm nhà cung cấp
      *
@@ -139,33 +146,33 @@ class ProductController extends Controller
      * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
      * @return JsonResponse
      */
-    public function productByNcc( Request $request,$id){
+    public function productByNcc(Request $request, $id)
+    {
         $limit = $request->limit ?? 10;
-        $products = Product::where('user_id',$id)->where('status',2)
-            ->select('id','publish_id','discount','name','category_id','images','vstore_id','user_id')
-        ;
-        if ($request->publish_id){
-            $products = $products->where('publish_id','like'.$request->publish_id.'%');
+        $products = Product::where('user_id', $id)->where('status', 2)
+            ->select('id', 'publish_id', 'discount', 'name', 'category_id', 'images', 'vstore_id', 'user_id');
+        if ($request->publish_id) {
+            $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
         }
-        if ($request->category_id){
-            $products = $products->where('category_id',$request->category_id);
+        if ($request->category_id) {
+            $products = $products->where('category_id', $request->category_id);
         }
-        if ($request->order_by_id){
-            $products = $products->orderBy('id',$request->order_by_id);
+        if ($request->order_by_id) {
+            $products = $products->orderBy('id', $request->order_by_id);
         }
-        if ($request->order_by_sold){
-            $products = $products->orderBy('amount_product_sold',$request->order_by_sold);
+        if ($request->order_by_sold) {
+            $products = $products->orderBy('amount_product_sold', $request->order_by_sold);
         }
-        if ($request->order_by_price){
-            $products = $products->orderBy('price',$request->order_by_price);
+        if ($request->order_by_price) {
+            $products = $products->orderBy('price', $request->order_by_price);
         }
-        if ($request->payments == 1){
-            $products = $products->where('prepay',1);
-        }elseif ($request->payments == 2){
-            $products = $products->where('payment_on_delivery',1);
+        if ($request->payments == 1) {
+            $products = $products->where('prepay', 1);
+        } elseif ($request->payments == 2) {
+            $products = $products->where('payment_on_delivery', 1);
         }
-        $products= $products->paginate($limit);
-        foreach ($products as $value){
+        $products = $products->paginate($limit);
+        foreach ($products as $value) {
 
             $value->images = asset(json_decode($value->images)[0]);
         }
@@ -176,6 +183,7 @@ class ProductController extends Controller
 
         ]);
     }
+
     /**
      * Chi tiết sản phẩm
      *
@@ -185,25 +193,27 @@ class ProductController extends Controller
      *
      * @return JsonResponse
      */
-    public function productById( $id){
+    public function productById($id)
+    {
 
-        $product = Product::where('publish_id',$id)->select('publish_id','id','name','images','price','discount_vShop','video')->first();
+        $product = Product::where('publish_id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop', 'video')->first();
 
-        if (!$product){
+        if (!$product) {
             return response()->json([
                 'status_code' => 400,
                 'data' => 'No product found or unapproved product',
 
-            ],400);
+            ], 400);
         }
-        $products_available= DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =".$product->id." ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
-        $product->products_available=$products_available;
+        $products_available = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =" . $product->id . " ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
+        $product->products_available = $products_available;
         return response()->json([
             'status_code' => 200,
             'data' => $product,
 
         ]);
     }
+
     /**
      * Vshop thêm sản phẩm
      *
@@ -214,83 +224,86 @@ class ProductController extends Controller
      * @urlParam limit Giới hạn bản ghi trên một trang
      * @param  $id mã sản phẩm
      * @bodyParam  id_pdone id của pdone
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function vshopPickup(Request $request,$id){
+    public function vshopPickup(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
             'id_pdone' => 'required',
+            'id' => 'required|exists:products,id'
         ]);
-        if($validator->fails())
-        {
-            return $validator->errors();
-        }
-        $product = Product::where('publish_id',$id)->first();
-        if (!$product){
+        if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
-                'data' => 'No product found or unapproved product',
-
-            ],400);
+                'messageError' => $validator->errors(),
+            ], 401);
         }
-
-        $checkVshop = Vshop::where('id_pdone',$request->id_pdone)->where('id_product',$product->id)->first();
-            if ($checkVshop){
-                return response()->json([
-                    'status_code' => 400,
-                    'data' => 'Products that have been added cannot be added again',
-                ],400);
-            }
+        $checkVshop = DB::table('vshop_products')->where('id_pdone', $request->id_pdone)->where('product_id', $id)->first();
+        if ($checkVshop) {
+            return response()->json([
+                'message' => 'Sản phẩm đã được đăng ký tiếp thị',
+            ], 401);
+        }
         try {
-            $vshop = new Vshop();
-            $vshop->id_pdone= $request->id_pdone;
-            $vshop->id_product= $product->id;
-            $vshop->id_category= $product->category_id;
-            $vshop->id_ncc= $product->user_id;
-            $vshop->id_npp= $product->vstore_id;
-            $vshop->save();
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'product saved successfully',
+            DB::table('vshop_products')->insert([
+                'id_pdone' => $request->id_pdone,
+                'product_id' => $id,
+                'created_at' => Carbon::now()
             ]);
-        }catch (\Exception $e) {
-            return $e->getMessage();
+            return response()->json([
+                'message' => 'Tiếp thị sản phẩm thành công',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
         }
 
     }
+
     /**
      * sản phẩm Vshop
      *
      * API lấy danh sách sản phẩm theo vshop
      *
      * @param Request $request
-     * @param  $id mã vshop
+     * @param  $id  id_pdone
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function productByVshop(Request $request,$id){
+    public function productByVshop(Request $request, $id)
+    {
         $limit = $request->limit ?? 10;
-        $vshop = Vshop::where('id_pdone',$id)->get();
-        $product_id=[];
-        foreach ($vshop as $value){
-            $product_id[]= $value->id_product;
+        $vshop = DB::table('vshop_products')
+            ->select('name', 'publish_id', 'price', 'images', 'products.id', 'category_id')
+            ->join('products', 'vshop_products.product_id', '=', 'products.id')
+            ->where('id_pdone', $id);
+        $data = [];
+        $category = [];
 
+
+        $data['info']['total_product'] = $vshop->count();
+        foreach ($vshop->groupBy(['name', 'publish_id', 'price', 'images', 'products.id', 'category_id'])->get() as $a) {
+            $category[] = DB::table('categories')->select('name')->where('id', $a->category_id)->first()->name;
         }
-        $products = Product::whereIn('id',$product_id)->select('id','name','images','price','discount_vShop')->paginate($limit);
-        foreach ($products as $value){
-            $products_available= DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =".$value->id." ) as amount FROM product_warehouses where status = 1 AND product_id = " . $value->id . ""))[0]->amount ?? 0;
-            $value['products_available']=$products_available;
-            $value['discount']=$value->price;
+        $data['info']['categories'] = implode(', ', array_unique($category));
+        $data['products'] = $vshop->paginate($limit);;
+        foreach ($data['products'] as $v) {
+            $v->discount = DB::table('discounts')->selectRaw('SUM(discount) as dis')->where('end_date', '>=', Carbon::now())->where('product_id', $v->id)->first()->dis ?? 0;
+            $v->image = asset(json_decode($v->images)[0]);
+            unset($v->images);
+            unset($v->category_id);
         }
+
         return response()->json([
-            'status_code' => 200,
-            'message' => 'product saved successfully',
-            'data'=>$products
-        ]);
+            'data' => $data
+        ], 200);
     }
-    public function mail(){
+
+    public function mail()
+    {
         $email = 'phungtheanh2001@gmail.com';
         Mail::send('email.email', ['ID' => '123123123', 'password' => '12121212'], function ($message) use ($email) {
-            $message->to( $email);
+            $message->to($email);
             $message->subject('Đơn đăng ký của bạn đã được duyệt');
 
         });
