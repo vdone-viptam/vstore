@@ -88,7 +88,7 @@
                             </defs>
                         </svg>
 
-                        Danh sách nhà cung cấp
+                        Danh sách đối tác
                     </h2>
 
 
@@ -104,113 +104,31 @@
                             <th>
                                 Số điện thoại
                             </th>
-
-                            <th>
-                                Số sản phẩm liên kết
-                            </th>
-                            <th>
-                                Chi tiết
-                            </th>
+                            <th>Tên công ty</th>
+                            <th>Mã số thuế</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Ane-123</td>
-                            <td>
-                                Aneed
-                            </td>
-                            <td>
-                                0123523235
-                            </td>
-
-                            <td>
-                                150
-                            </td>
-
-                            <td>
-
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Ane-123</td>
-                            <td>
-                                Aneed
-                            </td>
-                            <td>
-                                0123523235
-                            </td>
-
-                            <td>
-                                150
-                            </td>
-
-                            <td>
-
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Ane-123</td>
-                            <td>
-                                Aneed
-                            </td>
-                            <td>
-                                0123523235
-                            </td>
-
-                            <td>
-                                150
-                            </td>
-
-                            <td>
-
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Ane-123</td>
-                            <td>
-                                Aneed
-                            </td>
-                            <td>
-                                0123523235
-                            </td>
-
-                            <td>
-                                150
-                            </td>
-
-                            <td>
-
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Ane-123</td>
-                            <td>
-                                Aneed
-                            </td>
-                            <td>
-                                0123523235
-                            </td>
-
-                            <td>
-                                150
-                            </td>
-
-                            <td>
-
-                            </td>
-
-                        </tr>
+                        @foreach($ncc as $nc)
+                            <tr>
+                                <td>{{$nc->account_code}}</td>
+                                <td>
+                                    {{$nc->name}}
+                                </td>
+                                <td>
+                                    {{$nc->phone_number}}
+                                </td>
+                                <td>{{$nc->company_name}}</td>
+                                <td>{{$nc->tax_code}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    {{--                    <span class="text-sm text-title">Tổng: <strong--}}
-                    {{--                            class="font-bold">{{$products->total()}}</strong></span>--}}
-                    {{--                    @include('layouts.custom.paginator', ['paginator' => $products])--}}
+                                        <span class="text-sm text-title">Tổng: <strong
+                                                class="font-bold">{{$ncc->total()}}</strong></span>
+                                        @include('layouts.custom.paginator', ['paginator' => $ncc])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">

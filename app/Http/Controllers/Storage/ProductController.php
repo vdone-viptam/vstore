@@ -26,28 +26,36 @@ class ProductController extends Controller
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->groupBy('products.id')
-            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id', 'product_warehouses.amount')
-            ->where('warehouses.user_id', Auth::id())
+            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id', 'product_warehouses.amount');
+
+//        return Auth::user();
+
+        if ($request->condition) {
+            $products = $products->where($request->condition, 'like', '%' . str_replace('YC', '', $request->key_search) . '%');
+        }
+        $products = $products->where('warehouses.user_id', Auth::id())
             ->where('product_warehouses.status', '!=', 3)
             ->paginate($limit);
-//        return Auth::user();
         foreach ($products as $pro) {
             $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ""))[0]->amount ?? 0;
-//            return $pro;
         }
-//        return $products;
-        return view('screens.storage.product.index', compact('products'));
+        $this->v['products'] = $products;
+        $this->v['params'] = $request->all();
+        return view('screens.storage.product.index', $this->v);
     }
 
-    public function request()
+    public function request(Request $request)
     {
+        $limit = $request->limit ?? 10;
         $this->v['requests'] = Product::select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
             ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
-            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
-            ->where('warehouses.user_id', Auth::id())
-            ->paginate(10);
+            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
+        if ($request->condition) {
+            $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . str_replace('YC', '', $request->key_search) . '%');
+        }
+        $this->v['requests'] = $this->v['requests']->where('warehouses.user_id', Auth::id())->paginate($limit);
 
-
+        $this->v['params'] = $request->all();
         return view('screens.storage.product.request', $this->v);
 
     }
