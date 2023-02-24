@@ -10,4 +10,5 @@ class Warehouses extends Model
     use HasFactory;
 
     protected $table = 'warehouses';
+
 }

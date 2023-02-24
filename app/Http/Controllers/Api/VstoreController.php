@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 /**
  * @group Vstore
  *
@@ -21,14 +23,92 @@ class VstoreController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam limit Giới hạn bản ghi trên một trang
+     * @urlParam branch 0 là vstore thường, 1 là vstore cấp 1 (địa phương)
+     * @urlParam account_code tìm kiếm mã vstore
+     * @urlParam name tìm kiếm mã name
+     * @urlParam company_name tìm kiếm mã tên công ty
      * @return JsonResponse
      */
-    public function index(){
+    public function index(Request $request){
+        $validator = Validator::make($request->all(), [
+
+            'branch' => 'numeric|min:0|max:1',
+
+        ], []);
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
         $limit = $request->limit ?? 10;
-        $user = User::where('role_id',3)->where('account_code','!=',null)->paginate($limit);
+        if ($request->branch){
+            $user = User::where('role_id',3)->where('account_code','!=',null)
+                ->where('branch',$request->branch)
+                ->select('id','name','company_name','phone_number','tax_code','address','account_code','avatar','branch');
+            if($request->account_code){
+                $user = $user->where('account_code','like','%'.$request->account_code.'%');
+            }
+            if($request->name){
+                $user = $user->where('name','like','%'.$request->name.'%');
+            }
+            if($request->company_name){
+                $user = $user->where('company_name','like','%'.$request->company_name.'%');
+            }
+           $user= $user->paginate($limit);
+
+
+        }else{
+
+            $user = User::where('role_id',3)->where('account_code','!=',null)
+                ->select('id','name','company_name','phone_number','tax_code','address','account_code','avatar','branch');
+                  if($request->account_code){
+                      $user = $user->where('account_code','like','%'.$request->account_code.'%');
+                  }
+            if($request->name){
+                $user = $user->where('name','like','%'.$request->name.'%');
+            }
+            if($request->company_name){
+                $user = $user->where('company_name','like','%'.$request->company_name.'%');
+            }
+            $user= $user->paginate($limit);
+        }
+        if ($user){
+            foreach ($user as $value){
+                $value->avatar = asset($value->avatar);
+            }
+        }
         return response()->json([
             'status_code' => 200,
             'data' => $user,
+
+        ]);
+
+    }
+
+    /**
+     * Danh sách vstore danh mục
+     *
+     * API này sẽ trả về sách vstore có sản phẩm trong danh mục
+     *
+     * @param Request $request
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @return JsonResponse
+     */
+    public function listByCategory(Request $request, $id){
+        $limit = $request->limit ??10;
+        $vstores = User::join('products','users.id','=','products.vstore_id')
+            ->join('categories','products.category_id','=','categories.id')
+            ->where('categories.id',$id)
+            ->select('users.id','users.name','users.avatar')
+            ->paginate($limit);
+        foreach ($vstores as $value){
+            $value->avatar=asset('image/users/'.$value->avatar);
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $vstores,
 
         ]);
     }

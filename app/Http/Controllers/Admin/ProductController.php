@@ -80,6 +80,8 @@ class ProductController extends Controller
                     'status' => 2,
                     'discount'=>$currentRequest->discount,
                     'discount_vShop'=>$currentRequest->discount_vshop,
+                    'prepay'=>$currentRequest->prepay,
+                    'payment_on_delivery'=>$currentRequest->payment_on_delivery
                 ]);
                 DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {

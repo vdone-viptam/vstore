@@ -29,7 +29,8 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
         Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
         Route::post('/vshop-pickup/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopPickup']);
-        Route::get('/ /{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::post('/vshop-ready-stock/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopReadyStock']);
+        Route::get('/vshop/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
     });
     Route::prefix('cart')->group(function () {
@@ -48,18 +49,20 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('category')->group(function () {
         //list danh mục
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\CategoryController::class, 'detail']);
 
     });
     Route::prefix('manufacture')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\ManufactureController::class, 'index']);
-//    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\ManufactureController::class, 'detail']);
 
     });
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
 //    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
+        Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });
 });
@@ -75,11 +78,11 @@ Route::prefix('vshop')->group(function () {
     });
 
 });
-Route::prefix('discount')->group(function (){
-    Route::get('get-discount',[\App\Http\Controllers\Api\DiscountController::class,'getDiscountByTotalProduct']);
-    Route::get('available-discount/{id}',[\App\Http\Controllers\Api\DiscountController::class,'availableDiscount']);
+Route::prefix('discount')->group(function () {
+    Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
+    Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
 });
-Route::get('/test',[\App\Http\Controllers\TestController::class,'index']);
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
 ////    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 //});

@@ -141,101 +141,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Vcx12x3</td>
-                        <td>
-                            Xe máy
-                        </td>
-                        <td>10.000.000</td>
-                        <td>
-                            Aneed V-store
-                        </td>
-                        <td>
-                            15%
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            <a href="#" class="more-details text-primary underline"> Chi tiết</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vcx12x3</td>
-                        <td>
-                            Xe máy
-                        </td>
-                        <td>10.000.000</td>
-                        <td>
-                            Aneed V-store
-                        </td>
-                        <td>
-                            15%
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            <a href="#" class="more-details text-primary underline"> Chi tiết</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vcx12x3</td>
-                        <td>
-                            Xe máy
-                        </td>
-                        <td>10.000.000</td>
-                        <td>
-                            Aneed V-store
-                        </td>
-                        <td>
-                            15%
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            <a href="#" class="more-details text-primary underline"> Chi tiết</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vcx12x3</td>
-                        <td>
-                            Xe máy
-                        </td>
-                        <td>10.000.000</td>
-                        <td>
-                            Aneed V-store
-                        </td>
-                        <td>
-                            15%
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            <a href="#" class="more-details text-primary underline"> Chi tiết</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vcx12x3</td>
-                        <td>
-                            Xe máy
-                        </td>
-                        <td>10.000.000</td>
-                        <td>
-                            Aneed V-store
-                        </td>
-                        <td>
-                            15%
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            <a href="#" class="more-details text-primary underline"> Chi tiết</a>
-                        </td>
-                    </tr>
+
+
+
+
 
                     </tbody>
                 </table>

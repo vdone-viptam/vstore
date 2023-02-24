@@ -27,15 +27,38 @@ class ManufactureController extends Controller
      */
     public function index(Request $request){
         $limit = $request->limit ?? 10;
-        $user = User::where('role_id',2)->where('account_code','!=',null)->paginate($limit);
+        $user = User::where('role_id',2)->where('account_code','!=',null)
+            ->select('id','name','email','company_name','phone_number','address','avatar','banner')
+            ->paginate($limit);
+        if ($user){
+            foreach ($user as $value){
+                $value->avatar=asset($value->avatar);
+                $value->banner=asset($value->banner);
+            }
+        }
         return response()->json([
             'status_code' => 200,
             'data' => $user,
 
         ]);
     }
-    public function detail(Request $request,$id){
-        $user = User::find($id);
+    /**
+     * Danh sách nhà cung cấp
+     *
+     * API này sẽ trả về chi tiết nhà cung cấp
+     *
+     * @param $id id user
+     * @return JsonResponse
+     */
+    public function detail($id){
+
+        $user = User::where('id',$id)
+            ->select('id','name','avatar','banner','account_code','address','phone_number','company_name')
+            ->first();
+        if ($user){
+            $user->avatar=asset('image/users/'.$user->avatar) ;
+            $user->banner=asset('image/users/'.$user->banner) ;
+        }
         return response()->json([
             'status_code' => 200,
             'data' => $user,

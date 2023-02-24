@@ -152,15 +152,14 @@
                                     <td>
 
                                         @if($user->confirm_date)
-                                            <span class="text-green-600">Đã duyệt</span>
+                                            <span class="min-w-[94px] inline-block min-w-[94px] bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Đã duyệt</span>
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
                                                class="more-details text-primary underline ml-4">
                                                 Chi tiết</a>
                                         @else
-                                            <a class="text-orange-600"
+                                            <a class="min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
                                                href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt
-                                                tài
-                                                khoản</a>
+                                                </a>
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
                                                class="more-details text-primary underline ml-4">
                                                 Chi tiết</a>
