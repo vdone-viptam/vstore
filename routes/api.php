@@ -33,10 +33,10 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
     });
     Route::prefix('cart')->group(function () {
-        Route::get('/{id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
+        Route::get('/{pdone_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
         Route::post('/add/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-        Route::post('/remove/{id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
-        Route::post('/quantity/$id', [\App\Http\Controllers\Api\CartController::class, 'quantity']);
+        Route::delete('/remove/{cart_id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
+        Route::post('/add-quantity/{cart_id}/{type}', [\App\Http\Controllers\Api\CartController::class, 'quantity']);
 
     });
     Route::prefix('bill')->group(function () {
