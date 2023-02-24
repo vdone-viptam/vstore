@@ -9,9 +9,15 @@ use App\Models\User;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Vshop
+ *
+ * Danh sách api liên quan V-shop
+ */
 class  VShopController extends Controller
 {
 
@@ -105,7 +111,7 @@ class  VShopController extends Controller
         }
     }
 
-    public function editAddressReceive(Request $request,$id)
+    public function editAddressReceive(Request $request, $id)
     {
 
         try {
@@ -123,7 +129,73 @@ class  VShopController extends Controller
 
     }
 
-    public function updateAddressReceive(Request $request,$id)
+    /**
+     * Lưu mới mã giảm giá
+     *
+     * API này sẽ lưu mới mã giảm giá
+     *
+     * @param Request $request
+     * @bodyParam id_pdone Mã p done required
+     * @bodyParam product_id Mã sản phẩm required exits:products
+     * @bodyParam start_date Ngày bắt đầu required date_format:Y/m/d after:Today
+     * @bodyParam end_date Ngày kết thúc required date_format:Y/m/d after:start_date
+     * @urlParam discount Phần trăm giảm giá required max:discount_vShop
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function createDiscount(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id_pdone' => 'required',
+            'product_id' => 'required|exists:products,id',
+            'start_date' => 'required|date_format:Y/m/d|after:' . Carbon::now(),
+            'end_date' => 'required|date_format:Y/m/d|after:start_date',
+            "discount" => 'required|max:100'
+
+        ], []);
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+        $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
+
+        if (DB::table('discounts')->where('user_id', $request->id_pdone)->where('product_id', $request->product_id)->count() > 0) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => 'Mã giảm giá đã tồn tại',
+            ]);
+        }
+        if ($discount == 0) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => 'Sản phẩm chưa niêm yết',
+            ]);
+        } elseif ($request->discount > $discount) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount,
+            ]);
+        } else {
+            DB::table('discounts')->insert([
+                'product_id' => $request->product_id,
+                'discount' => $request->discount,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'type' => 3,
+                'user_id' => $request->id_pdone
+            ]);
+            return response()->json([
+                'status_code' => 201,
+                'message' => 'Tạo mã giảm giá thành công'
+            ]);
+        }
+
+
+    }
+
+    public function updateAddressReceive(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
 
