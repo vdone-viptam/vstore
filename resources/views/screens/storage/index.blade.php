@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ V-Store</title>
+    <title>Trang chủ V-Kho</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
     <meta property="og:title" content="Vstore"/>
@@ -24,393 +24,233 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<div class="bg w-full relative h-auto md:h-[1090px]">
+<div class="bg-kho w-full relative h-auto ">
     <div
         class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
             <div class="w-[168px] h-[36px] md:hidden">
-                <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full" alt=""></a>
+                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full" alt=""></a>
             </div>
-            <div class="hidden md:block w-[270px] h-[59px]">
-                <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full" alt=""></a>
+            <div class="hidden md:block w-[190px] h-[52px]">
+                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full" alt=""></a>
             </div>
 
             <a href="{{route('login_storage')}}"
-               class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng
+               class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[4px] md:py-[10px] md:px-10 font-semibold text-[#258AFF] border-[#258AFF] border-[1px] hover:text-[#FFF]">Đăng
                 nhập</a>
         </div>
         <div
             class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử
-                V-Store"</h2>
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử
+                <strong class="text-[#1E90FF] font-bold">V-KHO</strong>"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
                     class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
-                    class="text-[#1E90FF]"> V-Store.</strong></span>
+                    class="text-[#1E90FF]"> V-KHO.</strong></span>
         </div>
         <div class="max-w-[320px]">
             <button
-                class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
+                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
                 <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
         </div>
     </div>
 
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] mx-auto md:p-16 my-8 p-4">
+<div class="bg-gra">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4">
     <div class="w-full h-full order-last md:order-first">
-        <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
+        <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
     </div>
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-[16px] sm:text-4xl text-[#1D293F]">CỔNG THƯƠNG MẠI ĐIỆN TỬ <br><strong
-                class="text-[#1E90FF]">V-STORE </strong> LÀ GÌ?</h2>
-        <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội V-Done thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng V-Done. </span>
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Cổng thương mại điện tử <br><strong
+                class="text-[#1E90FF] font-semibold">V-KHO </strong> là gì?</h2>
+        <div class="flex flex-col gap-4">
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
+
+            </div>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là địa điểm cất giữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
+        </div>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
+
+            </div>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho gồm có 3 loại: Kho thường, Kho lạnh, Kho bãi. </span>
+        </div>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
+
+            </div>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là mắt xích quan trọng đối với chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
+        </div>
+        </div>
+        
     </div>
 </div>
-<div class="banner flex justify-around items-start w-full md:max-w-[1440px] mx-auto  flex-wrap lg:flex-nowrap">
-    <div class="w-[312px]">
-        <div class="w-[311px] h-[316px]">
-            <img src="{{asset('home/img/ql1.png')}}" class="w-full" alt="">
-        </div>
-    </div>
-    <div class="w-[256px] md:mt-14">
-        <div class="w-[255px] h-[255px]">
-            <img src="{{asset('home/img/ql2.png')}}" class="w-full" alt="">
-        </div>
-    </div>
-    <div class="w-[300px]">
-        <div class="w-[299px] h-[255px]">
-            <img src="{{asset('home/img/ql3.png')}}" class="w-full" alt="">
-        </div>
-    </div>
 </div>
-<div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">Quy trình trở thành V-Store</h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center md:text-left">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
-    <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
-        <img src="{{asset('home/img/circle.png')}}" class="w-full" alt="">
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-10">
-        <div class="flex flex-col w-full relative max-w-[190px] md:max-w-[260px]">
-            <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/img/b1.png')}}" class="w-full" alt="">
-            </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Tạo tài khoản</h3>
-            <span class="text-[#7C8087]">
-                    Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn
-                </span>
-            <svg width="199" height="176" class="absolute top-[5px] right-[-75px] rotate-[30deg] md:hidden"
-                 viewBox="0 0 199 176" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.9761 50.2162C23.9761 50.2162 106.668 41.4523 168.046 123.883" stroke="#8C97AC"
-                      stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M164.662 127.879L164.548 125.875L170.013 125.838L169.691 120.171L171.623 120.157L172.002 126.827C172.033 127.38 171.626 127.831 171.093 127.835L164.662 127.879Z"
-                      fill="#8C97AC"/>
-            </svg>
-
-            <svg width="224" class="absolute top-[5px] right-[-95px] hidden md:block" height="89" viewBox="0 0 224 89"
-                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 2C2 2 73.0845 93.3555 214.488 81.2422" stroke="#8C97AC" stroke-width="3"
-                      stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M216.984 89L215 87.1718L220.613 82L215 76.8282L216.984 75L223.589 81.0859C224.137 81.5908 224.137 82.4092 223.589 82.9141L216.984 89Z"
-                      fill="#8C97AC"/>
-            </svg>
-
-        </div>
-        <div class="flex flex-col w-full items-end md:items-start md:mt-[100px] md:max-w-[260px] relative">
-            <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/img/b2.png')}}" class="w-full" alt="">
-            </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Hoàn thiện hồ sơ</h3>
-            <span class="text-[#7C8087] text-right md:text-left">
-                    Hoàn thiện thông tin và hồ sơ được yêu cầu theo hướng dẫn, chỉ mất chưa đến 15 phút
-                </span>
-            <svg width="160" height="119" class="absolute bottom-[-125px] right-[20px] md:hidden" viewBox="0 0 160 119"
-                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M134.072 2C134.072 2 118.032 78.1465 29.6856 111.152" stroke="#8C97AC" stroke-width="3"
-                      stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M30.2847 116.123L30.9425 114.439L26.0699 112.882L27.9309 108.117L26.2084 107.567L24.0185 113.174C23.8368 113.639 24.0751 114.139 24.5508 114.291L30.2847 116.123Z"
-                      fill="#8C97AC"/>
-            </svg>
-
-
-            <svg width="252" height="198" class="absolute top-[-150px] right-[-95px] hidden md:block"
-                 viewBox="0 0 252 198" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.6252 70.7864C11.6252 70.7864 122.254 36.7247 231.137 127.753" stroke="#8C97AC"
-                      stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 11"/>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M227.704 133.904L226.945 131.315L234.42 129.773L232.273 122.449L234.915 121.904L237.442 130.522C237.652 131.237 237.23 131.939 236.5 132.089L227.704 133.904Z"
-                      fill="#8C97AC"/>
-            </svg>
-
-        </div>
-        <div class="flex flex-col w-full md:mt-[200px]max-w-[190px] md:max-w-[260px]">
-            <div class="w-[97px] h-[97px]">
-                <img src="{{asset('home/img/b3.png')}}" class="w-full" alt="">
-            </div>
-            <h3 class="text-[#1D293F] font-semibold text-2xl">Bắt đầu sử dụng</h3>
-            <span class="text-[#7C8087]">
-                    Hoàn thiện đăng ký và trở thành V - Store sở hữu những quyền lợi mang tới lợi ích kinh doanh lớn
-                </span>
-        </div>
-    </div>
-</div>
-<div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
-    <h2 class="text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia V-Store </h2>
-    <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
-
-</div>
-<div
-    class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
-    <div class="flex flex-col justify-start items-center md:items-start gap-8 order-last xl:order-first">
-        <div class="flex flex-col gap-2 md:whitespace-nowrap">
-            <div class="flex justify-center items-start gap-2 ">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
+<div class="max-w-[1440px] w-full mx-auto my-10">
+    <div class="flex flex-col items-center gap-4 px-4">
+        <h2 class="text-lg lg:text-3xl xl:text-4xl text-[#343434] font-semibold text-center">Quy trình trở thành V-Kho</h2>
+        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký V-Kho đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] xl:gap-[30px] max-w-[650px] lg:max-w-[900px] xl:max-w-[1167px] mx-auto">
+            <div class="item-qt flex flex-col items-center gap-[30px] p-3">
+                <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
+                    1
                 </div>
-
-
-                <span class=" text-[#4F4F4F] font-medium ">Hoàn toàn ủy quyền cho 1000+ doanh nghiệp, dễ dàng xác minh nguồn gốc sản phẩm. </span>
-            </div>
-
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
+                <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tạo tài khoản</h2>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin chỉ với 2 bước sau:</span>
+                <div class="flex items-center gap-3">
+                    <div class="bg-[#FFBA49] text-[#FFF] py-[6px] px-[10px] rounded-[5px] text-sm xl:text-xl font-semibold max-w-[80px] whitespace-nowrap">Bước 1</div>
+                    <span class="text-[#525252] text-sm xl:text-lg font-medium">Cung cấp thông tin Người/Cơ quan quản lý kho.</span>
                 </div>
-
-                <span class="text-[#4F4F4F] font-medium">Công nghệ hoàn toàn mới. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
+                <div class="flex items-center gap-3">
+                    <div class="bg-[#FFBA49] text-[#FFF] py-[6px] px-[10px] rounded-[5px] text-sm xl:text-xl font-semibold max-w-[80px] whitespace-nowrap">Bước 2</div>
+                    <span class="text-[#525252] text-sm xl:text-lg font-medium">Cung cấp thông tin chi tiết về kho hàng.</span>
                 </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được cung cấp website quản trị riêng cho tính năng kiểm duyệt, quản trị sản phẩm.  </span>
             </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
+            <div class="item-qt flex flex-col items-center gap-[30px] p-3">
+                <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
+                   2
                 </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được V-Done hỗ trợ kết nối tới các nhà cung cấp. </span>
+                <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tiếp nhận hàng hóa từ Nhà cung cấp V-Store</h2>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng V-Kho của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
+          
             </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
+            <div class="item-qt flex flex-col items-center gap-[30px] p-3">
+                <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
+                   3
                 </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được đăng ký phụ trách theo tỉnh hoặc quốc gia. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được hưởng chiết khấu, lợi nhuận trên từng sản phẩm. </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-
-                <span class="text-[#4F4F4F] font-medium">Được chủ động đàm phán, điều chỉnh mức giá, chiết khấu sản phẩm.  </span>
-            </div>
-            <div class="flex justify-start items-start gap-2">
-                <div class="w-[21px]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                        <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                        <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                        <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                    </svg>
-                </div>
-                <span class="text-[#4F4F4F] font-medium">Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm. </span>
-            </div>
-
-        </div>
-
-        <a href="{{route('register_storage')}}"
-           class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng
-            ký thành viên</a>
-    </div>
-    <div class="order-first xl:order-last">
-        <img src="{{asset('home/img/bnn.png')}}" class="w-full" alt="">
-    </div>
-
-</div>
-<div class="bnbot">
-    <div
-        class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-        <h2 class="text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000 V-Store nổi bật</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span
-                    class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED</span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt1.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span
-                    class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần Dược liệu  </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt2.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span
-                    class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần Dược liệu </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt3.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span
-                    class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt4.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span
-                    class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
-            </div>
-            <div class="box flex flex-col justify-center items-center gap-2 p-5">
-                <div class="w-[80px] h-[80px] rounded-full">
-                    <img src="{{asset('home/img/avt5.png')}}" class="w-full rounded-full" alt="">
-                </div>
-                <span
-                    class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần Dược liệu </span>
+                <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Chuyển giao sản phẩm cho Đối tác vận chuyển</h2>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin chỉ với 2 bước sau:</span>
+               
             </div>
         </div>
     </div>
 </div>
+<div class="bg-gra">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 place-items-center w-full md:max-w-[1440px] mx-auto md:p-16 p-4">
+    <div class="flex flex-col gap-6 order-last md:order-first text-center md:text-left">
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Lợi ích tham gia <strong
+                class="text-[#1E90FF] font-semibold">V-KHO </strong></h2>
+        <div class="flex flex-col gap-4">
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
-<!-- <div class="flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto py-16 xl:px-20 px-[20px]">
-    <h2 class="text-2xl font-bold text-[#4F4F4F] uppercase">NHỮNG CÂU HỎI ĐẶT RA CHO V-STORE </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        <div class="w-full h-full">
-            <img src="./img/quest.png" class="w-full" alt="">
+            </div>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia vào hệ thống thương mại điện tử V-Store</span>
         </div>
-        <ul class="flex flex-col gap-2 w-full">
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">V-Store vận hành như thế nào? <div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
-                <div class="content py-2 ml-8">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Est modi doloremque quis quo ipsa voluptas, neque odit architecto tenetur ad repellendus nobis fuga sit unde obcaecati! Ex consequuntur nesciunt eaque!
-                </div>
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Làm sao để trở thành thành viên của V-Store <div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
-            </div>
-                </a>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Thành viên của V-Store sẽ được hưởng những lợi ích gì? <div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
             </div>
-                </a>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Được cung cấp website quản trị riêng cho tính năng quản lý kho. </span>
+        </div>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Nhà phát triển V-Store?<div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
             </div>
-                </a>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Hàng nghìn Nhà cung cấp của V-Store đang chờ gửi hàng vào V-Kho.</span>
+        </div>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
-            </li>
-            <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Đối tác của V-Store?<div class="w-[25px]">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
-                    </svg>
             </div>
-                </a>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Được hưởng chiết khấu, lợi nhuận trên từng sản phẩm.</span>
+        </div>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
-            </li>
-        </ul>
+            </div>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tối ưu chi phí củng cố hiệu quả kinh tế.- Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống VDONE, V-Store.</span>
+        </div>
+        </div>
+        
     </div>
-</div> -->
+    <div class="max-w-[421px] h-auto md:h-[478px] order-first md:order-last">
+        <img src="{{asset('home/img/loikho.png')}}" class="w-full" alt="">
+    </div>
+</div>
+
+</div>
+
+
 <footer class="bg-[#1E90FF]">
-    <div class="grid grid-cols-1 lg:grid-cols-2  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
+    <div class="flex flex-col md:flex-row items-center justify-between  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
         <ul class="flex items-center gap-14">
             <li><a href="#">
-                    <svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M24.6183 2.37575C23.713 2.76628 22.7278 3.04735 21.713 3.15682C22.7666 2.53089 23.5556 1.54202 23.9319 0.375752C22.9433 0.963885 21.8602 1.37629 20.7308 1.59469C20.2587 1.09003 19.6878 0.687999 19.0535 0.413643C18.4193 0.139287 17.7354 -0.00151415 17.0444 1.22793e-05C14.2485 1.22793e-05 12 2.26628 12 5.04735C12 5.43788 12.0473 5.82841 12.1243 6.20415C7.93786 5.98522 4.20414 3.98522 1.72189 0.923089C1.2696 1.69562 1.03258 2.57524 1.0355 3.47042C1.0355 5.2219 1.92603 6.76628 3.28402 7.67456C2.48374 7.64305 1.7022 7.42308 1.00296 7.03255V7.09468C1.00296 9.54734 2.73668 11.5799 5.04733 12.0473C4.61348 12.16 4.16718 12.2177 3.71893 12.2189C3.39053 12.2189 3.07988 12.1864 2.76627 12.142C3.40532 14.142 5.26627 15.5947 7.48224 15.642C5.74852 17 3.57692 17.7988 1.21893 17.7988C0.795858 17.7988 0.405325 17.784 0 17.7367C2.23668 19.1716 4.89053 20 7.74852 20C17.0266 20 22.1035 12.3136 22.1035 5.64202C22.1035 5.42309 22.1035 5.20415 22.0887 4.98522C23.071 4.26628 23.9319 3.37575 24.6183 2.37575Z"
-                            fill="#272D4E"/>
-                    </svg>
+            <svg width="25" height="21" viewBox="0 0 25 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24.6183 2.54128C23.713 2.93181 22.7278 3.21288 21.713 3.32234C22.7666 2.69641 23.5556 1.70755 23.9319 0.541279C22.9433 1.12941 21.8602 1.54182 20.7308 1.76021C20.2587 1.25556 19.6878 0.853527 19.0535 0.579171C18.4193 0.304815 17.7354 0.164013 17.0444 0.16554C14.2485 0.16554 12 2.43181 12 5.21287C12 5.60341 12.0473 5.99394 12.1243 6.36968C7.93786 6.15074 4.20414 4.15074 1.72189 1.08862C1.2696 1.86115 1.03258 2.74076 1.0355 3.63595C1.0355 5.38743 1.92603 6.93181 3.28402 7.84009C2.48374 7.80857 1.7022 7.58861 1.00296 7.19808V7.26021C1.00296 9.71287 2.73668 11.7454 5.04733 12.2129C4.61348 12.3256 4.16718 12.3832 3.71893 12.3845C3.39053 12.3845 3.07988 12.3519 2.76627 12.3075C3.40532 14.3075 5.26627 15.7602 7.48224 15.8075C5.74852 17.1655 3.57692 17.9643 1.21893 17.9643C0.795858 17.9643 0.405325 17.9496 0 17.9022C2.23668 19.3371 4.89053 20.1655 7.74852 20.1655C17.0266 20.1655 22.1035 12.4791 22.1035 5.80755C22.1035 5.58861 22.1035 5.36968 22.0887 5.15074C23.071 4.43181 23.9319 3.54128 24.6183 2.54128Z" fill="white"/>
+</svg>
                 </a></li>
             <li><a href="#">
-                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.6172 0C5.09516 0 0.618164 4.477 0.618164 9.999C0.618164 14.989 4.27416 19.125 9.05516 19.878V12.89H6.51516V9.999H9.05516V7.796C9.05516 5.288 10.5482 3.905 12.8312 3.905C13.9252 3.905 15.0712 4.1 15.0712 4.1V6.559H13.8072C12.5672 6.559 12.1792 7.331 12.1792 8.122V9.997H14.9502L14.5072 12.888H12.1792V19.876C16.9602 19.127 20.6162 14.99 20.6162 9.999C20.6162 4.477 16.1392 0 10.6172 0Z"
-                            fill="#272D4E"/>
-                    </svg>
-                </a></li>
-            <li><a href="#">
-                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2.63925 0C12.5911 0 20.6905 8.07576 20.7327 18.0176V18.0182H20.7342V19.0701H20.7224C20.6961 19.3033 20.5917 19.5209 20.4262 19.6874C20.2607 19.8539 20.0439 19.9596 19.8108 19.9875V19.9999H17.9405V19.9978C17.6875 19.9925 17.445 19.8955 17.2582 19.7247C17.0714 19.554 16.953 19.3213 16.925 19.0698H16.9132V18.0179H16.9238C16.8816 10.1756 10.4909 3.80861 2.63895 3.80861C2.63149 3.80861 2.62404 3.80807 2.61659 3.80752C2.61037 3.80707 2.60416 3.80662 2.59795 3.80648V3.82106H1.54604V3.80922C1.31275 3.78293 1.09519 3.67858 0.928667 3.5131C0.76214 3.34762 0.65642 3.13072 0.628661 2.8976H0.616211V1.02731H0.618337C0.62363 0.774312 0.720661 0.531853 0.891372 0.345054C1.06208 0.158255 1.29485 0.0398392 1.54635 0.0118429V0H2.59825V0.00212567C2.60443 0.00198836 2.61055 0.00154061 2.61669 0.00109124C2.62413 0.000546809 2.6316 0 2.63925 0ZM2.63925 7.20619C2.6316 7.20619 2.62413 7.20674 2.61669 7.20728L2.61668 7.20728C2.61054 7.20773 2.60443 7.20818 2.59825 7.20832V7.20619H1.54635V7.21804C1.29485 7.24603 1.06208 7.36445 0.891372 7.55125C0.720661 7.73805 0.62363 7.9805 0.618337 8.2335H0.616211V10.1038H0.628661C0.656472 10.3369 0.762209 10.5538 0.928726 10.7192C1.09524 10.8847 1.31277 10.9891 1.54604 11.0154V11.0273H2.59795V11.0127C2.60416 11.0128 2.61037 11.0133 2.61658 11.0137C2.62404 11.0143 2.63149 11.0148 2.63895 11.0148C6.5174 11.0148 9.67585 14.149 9.71776 18.0177H9.70774V19.0696H9.71958C9.74758 19.3211 9.86599 19.5539 10.0528 19.7246C10.2396 19.8953 10.482 19.9923 10.735 19.9976V19.9997H12.605V19.9873C12.8381 19.9595 13.055 19.8537 13.2205 19.6872C13.3859 19.5207 13.4903 19.3032 13.5166 19.0699H13.5285V18.018H13.5267C13.4851 12.0488 8.61757 7.20619 2.63925 7.20619ZM3.46569 14.5393C3.11545 14.5393 2.76865 14.6083 2.44509 14.7424C2.12154 14.8764 1.82756 15.0729 1.57996 15.3207C1.33237 15.5684 1.136 15.8624 1.00208 16.186C0.868166 16.5097 0.79932 16.8565 0.79948 17.2067C0.79948 17.5569 0.868459 17.9037 1.00248 18.2273C1.1365 18.5508 1.33294 18.8448 1.58057 19.0925C1.82821 19.3401 2.1222 19.5365 2.44575 19.6705C2.7693 19.8046 3.11608 19.8735 3.4663 19.8735C3.81651 19.8735 4.16329 19.8046 4.48684 19.6705C4.81039 19.5365 5.10438 19.3401 5.35202 19.0925C5.59965 18.8448 5.79609 18.5508 5.93011 18.2273C6.06413 17.9037 6.13311 17.5569 6.13311 17.2067C6.13327 16.8564 6.06438 16.5095 5.93039 16.1858C5.7964 15.8621 5.59992 15.5679 5.3522 15.3202C5.10447 15.0725 4.81035 14.876 4.48666 14.742C4.16296 14.608 3.81602 14.5391 3.46569 14.5393Z"
-                              fill="#272D4E"/>
-                    </svg>
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6172 0.165527C5.09516 0.165527 0.618164 4.64253 0.618164 10.1645C0.618164 15.1545 4.27416 19.2905 9.05516 20.0435V13.0555H6.51516V10.1645H9.05516V7.96153C9.05516 5.45353 10.5482 4.07053 12.8312 4.07053C13.9252 4.07053 15.0712 4.26553 15.0712 4.26553V6.72453H13.8072C12.5672 6.72453 12.1792 7.49653 12.1792 8.28753V10.1625H14.9502L14.5072 13.0535H12.1792V20.0415C16.9602 19.2925 20.6162 15.1555 20.6162 10.1645C20.6162 4.64253 16.1392 0.165527 10.6172 0.165527Z" fill="white"/>
+</svg>
 
                 </a></li>
             <li><a href="#">
-                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.7319 6.66525C8.89563 6.66525 7.39712 8.16376 7.39712 10C7.39712 11.8362 8.89563 13.3348 10.7319 13.3348C12.5681 13.3348 14.0666 11.8362 14.0666 10C14.0666 8.16376 12.5681 6.66525 10.7319 6.66525ZM20.7336 10C20.7336 8.61907 20.7461 7.25064 20.6686 5.87221C20.591 4.27113 20.2258 2.85017 19.055 1.67938C17.8817 0.506085 16.4632 0.14334 14.8622 0.065788C13.4812 -0.0117644 12.1128 0.000744113 10.7344 0.000744113C9.35344 0.000744113 7.98502 -0.0117644 6.60659 0.065788C5.0055 0.14334 3.58454 0.508587 2.41375 1.67938C1.24046 2.85267 0.877715 4.27113 0.800163 5.87221C0.722611 7.25314 0.735119 8.62157 0.735119 10C0.735119 11.3784 0.722611 12.7494 0.800163 14.1278C0.877715 15.7289 1.24296 17.1498 2.41375 18.3206C3.58705 19.4939 5.0055 19.8567 6.60659 19.9342C7.98752 20.0118 9.35594 19.9993 10.7344 19.9993C12.1153 19.9993 13.4837 20.0118 14.8622 19.9342C16.4632 19.8567 17.8842 19.4914 19.055 18.3206C20.2283 17.1473 20.591 15.7289 20.6686 14.1278C20.7486 12.7494 20.7336 11.3809 20.7336 10ZM10.7319 15.131C7.89245 15.131 5.60091 12.8394 5.60091 10C5.60091 7.16058 7.89245 4.86903 10.7319 4.86903C13.5713 4.86903 15.8628 7.16058 15.8628 10C15.8628 12.8394 13.5713 15.131 10.7319 15.131ZM16.073 5.8572C15.41 5.8572 14.8747 5.32184 14.8747 4.65889C14.8747 3.99594 15.41 3.46058 16.073 3.46058C16.7359 3.46058 17.2713 3.99594 17.2713 4.65889C17.2715 4.81631 17.2406 4.97222 17.1805 5.1177C17.1203 5.26317 17.0321 5.39535 16.9208 5.50666C16.8094 5.61798 16.6773 5.70624 16.5318 5.76639C16.3863 5.82654 16.2304 5.8574 16.073 5.8572Z"
-                            fill="#272D4E"/>
-                    </svg>
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.63925 0.165527C12.5911 0.165527 20.6905 8.24128 20.7327 18.1831V18.1837H20.7342V19.2356H20.7224C20.6961 19.4689 20.5917 19.6864 20.4262 19.8529C20.2607 20.0194 20.0439 20.1252 19.8108 20.153V20.1654H17.9405V20.1633C17.6875 20.158 17.445 20.061 17.2582 19.8903C17.0714 19.7196 16.953 19.4868 16.925 19.2353H16.9132V18.1834H16.9238C16.8816 10.3411 10.4909 3.97414 2.63895 3.97414C2.63149 3.97414 2.62404 3.97359 2.61659 3.97305C2.61037 3.9726 2.60416 3.97215 2.59795 3.97201V3.98659H1.54604V3.97474C1.31275 3.94846 1.09519 3.84411 0.928667 3.67863C0.76214 3.51315 0.65642 3.29625 0.628661 3.06313H0.616211V1.19284H0.618337C0.62363 0.939839 0.720661 0.69738 0.891372 0.510581C1.06208 0.323782 1.29485 0.205367 1.54635 0.17737V0.165527H2.59825V0.167653C2.60443 0.167516 2.61055 0.167068 2.61669 0.166619C2.62413 0.166074 2.6316 0.165527 2.63925 0.165527ZM2.63925 7.37172C2.6316 7.37172 2.62413 7.37227 2.61669 7.37281L2.61668 7.37281C2.61054 7.37326 2.60443 7.37371 2.59825 7.37385V7.37172H1.54635V7.38356C1.29485 7.41156 1.06208 7.52997 0.891372 7.71677C0.720661 7.90357 0.62363 8.14603 0.618337 8.39903H0.616211V10.2693H0.628661C0.656472 10.5024 0.762209 10.7193 0.928726 10.8848C1.09524 11.0502 1.31277 11.1546 1.54604 11.1809V11.1928H2.59795V11.1782C2.60416 11.1783 2.61037 11.1788 2.61658 11.1792C2.62404 11.1798 2.63149 11.1803 2.63895 11.1803C6.5174 11.1803 9.67585 14.3145 9.71776 18.1832H9.70774V19.2351H9.71958C9.74758 19.4866 9.86599 19.7194 10.0528 19.8901C10.2396 20.0608 10.482 20.1578 10.735 20.1631V20.1653H12.605V20.1528C12.8381 20.125 13.055 20.0193 13.2205 19.8528C13.3859 19.6862 13.4903 19.4687 13.5166 19.2354H13.5285V18.1835H13.5267C13.4851 12.2143 8.61757 7.37172 2.63925 7.37172ZM3.46569 14.7048C3.11545 14.7048 2.76865 14.7738 2.44509 14.9079C2.12154 15.042 1.82756 15.2385 1.57996 15.4862C1.33237 15.7339 1.136 16.028 1.00208 16.3516C0.868166 16.6752 0.79932 17.022 0.79948 17.3723C0.79948 17.7225 0.868459 18.0693 1.00248 18.3928C1.1365 18.7164 1.33294 19.0103 1.58057 19.258C1.82821 19.5056 2.1222 19.7021 2.44575 19.8361C2.7693 19.9701 3.11608 20.0391 3.4663 20.0391C3.81651 20.0391 4.16329 19.9701 4.48684 19.8361C4.81039 19.7021 5.10438 19.5056 5.35202 19.258C5.59965 19.0103 5.79609 18.7164 5.93011 18.3928C6.06413 18.0693 6.13311 17.7225 6.13311 17.3723C6.13327 17.0219 6.06438 16.675 5.93039 16.3513C5.7964 16.0276 5.59992 15.7335 5.3522 15.4857C5.10447 15.238 4.81035 15.0415 4.48666 14.9076C4.16296 14.7736 3.81602 14.7047 3.46569 14.7048Z" fill="white"/>
+</svg>
+
+
+                </a></li>
+            <li><a href="#">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.7319 6.83077C8.89563 6.83077 7.39712 8.32929 7.39712 10.1655C7.39712 12.0018 8.89563 13.5003 10.7319 13.5003C12.5681 13.5003 14.0666 12.0018 14.0666 10.1655C14.0666 8.32929 12.5681 6.83077 10.7319 6.83077ZM20.7336 10.1655C20.7336 8.78459 20.7461 7.41617 20.6686 6.03774C20.591 4.43666 20.2258 3.0157 19.055 1.84491C17.8817 0.671613 16.4632 0.308868 14.8622 0.231315C13.4812 0.153763 12.1128 0.166271 10.7344 0.166271C9.35344 0.166271 7.98502 0.153763 6.60659 0.231315C5.0055 0.308868 3.58454 0.674114 2.41375 1.84491C1.24046 3.0182 0.877715 4.43666 0.800163 6.03774C0.722611 7.41867 0.735119 8.7871 0.735119 10.1655C0.735119 11.544 0.722611 12.9149 0.800163 14.2933C0.877715 15.8944 1.24296 17.3154 2.41375 18.4861C3.58705 19.6594 5.0055 20.0222 6.60659 20.0997C7.98752 20.1773 9.35594 20.1648 10.7344 20.1648C12.1153 20.1648 13.4837 20.1773 14.8622 20.0997C16.4632 20.0222 17.8842 19.6569 19.055 18.4861C20.2283 17.3129 20.591 15.8944 20.6686 14.2933C20.7486 12.9149 20.7336 11.5465 20.7336 10.1655ZM10.7319 15.2965C7.89245 15.2965 5.60091 13.0049 5.60091 10.1655C5.60091 7.32611 7.89245 5.03456 10.7319 5.03456C13.5713 5.03456 15.8628 7.32611 15.8628 10.1655C15.8628 13.0049 13.5713 15.2965 10.7319 15.2965ZM16.073 6.02273C15.41 6.02273 14.8747 5.48737 14.8747 4.82442C14.8747 4.16147 15.41 3.62611 16.073 3.62611C16.7359 3.62611 17.2713 4.16147 17.2713 4.82442C17.2715 4.98184 17.2406 5.13775 17.1805 5.28323C17.1203 5.4287 17.0321 5.56088 16.9208 5.67219C16.8094 5.7835 16.6773 5.87176 16.5318 5.93191C16.3863 5.99207 16.2304 6.02293 16.073 6.02273Z" fill="white"/>
+</svg>
+
 
                 </a></li>
         </ul>
-        <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
+        <span class="uppercase text-xs text-[#FFF]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
     </div>
 </footer>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

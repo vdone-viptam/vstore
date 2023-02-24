@@ -4,6 +4,15 @@ body{
     overflow-x: hidden;
 }
 
+.bg-gra{
+    background: linear-gradient(180deg, #FFFFFF 0%, #EEF7FF 49.48%, rgba(237, 247, 255, 0.19) 100%), #FFFFFF;
+}
+.item-qt{
+    background: conic-gradient(from 180deg at 50.14% 29.55%, #FFFFFF 0deg, #DBEEFF 178.12deg, #FFFFFF 360deg);
+border-top: 5px solid rgba(37, 138, 255, 0.5);
+box-shadow: 0px 2px 10px rgba(41, 170, 243, 0.2);
+border-radius: 20px;
+}
 img{
     max-width: 100% !important;
     height: 100% !important;
@@ -120,7 +129,13 @@ img{
     color: #FFF!important;
     opacity: 1!important;
 }
-
+.bg-kho{
+    background: url('../img/bnkho.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: screen;
+}
 
 @media only screen and (max-width: 560px) {
     .bg{
@@ -134,5 +149,12 @@ img{
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
+    }
+    .bg-kho{
+        background: url('../img/bnmobile.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+
     }
 }
