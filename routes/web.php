@@ -95,7 +95,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
 //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
 //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
-});
+    });
 });
 //Quyền admin
 Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], function () {
@@ -135,6 +135,11 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
 
     });
+    Route::prefix('finances')->group(function () {
+        Route::get('/request-deposit', [\App\Http\Controllers\Admin\FinanceController::class, 'index'])->name('screens.admin.finance.index');
+        Route::get('/export-deposit', [\App\Http\Controllers\Admin\FinanceController::class, 'exportDeposits'])->name('screens.admin.finance.exportDeposits');
+
+    });
     Route::get('/notifications', function () {
         return view('layouts.admin.all_noti', []);
     })->name('admin_all_noti');
@@ -172,6 +177,9 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     });
     Route::prefix('finances')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\FinanceController::class, 'index'])->name('screens.manufacture.finance.index');
+        Route::post('/store-wallet', [\App\Http\Controllers\Manufacture\FinanceController::class, 'storeWall'])->name('screens.manufacture.finance.storeWall');
+        Route::post('/update-wallet/{id}', [\App\Http\Controllers\Manufacture\FinanceController::class, 'updateWall'])->name('screens.manufacture.finance.updateWall');
+        Route::post('/create-deposit', [\App\Http\Controllers\Manufacture\FinanceController::class, 'deposit'])->name('screens.manufacture.finance.deposit');
         Route::get('/history', [\App\Http\Controllers\Manufacture\FinanceController::class, 'history'])->name('screens.manufacture.finance.history');
 
     });
@@ -206,7 +214,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     Route::prefix('discount')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
         Route::get('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
-        Route::get('/choose-product', [\App\Http\Controllers\Manufacture\DiscounthController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
+        Route::get('/choose-product', [\App\Http\Controllers\Manufacture\DiscountController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
         Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
         Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
         Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
@@ -224,6 +232,9 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     });
     Route::prefix('finance')->group(function () {
         Route::get('', [\App\Http\Controllers\Vstore\FinanceController::class, 'index'])->name('screens.vstore.finance.index');
+        Route::post('/store-wallet', [\App\Http\Controllers\Vstore\FinanceController::class, 'storeWall'])->name('screens.vstore.finance.storeWall');
+        Route::post('/update-wallet/{id}', [\App\Http\Controllers\Vstore\FinanceController::class, 'updateWall'])->name('screens.vstore.finance.updateWall');
+        Route::post('/create-deposit', [\App\Http\Controllers\Vstore\FinanceController::class, 'deposit'])->name('screens.vstore.finance.deposit');
         Route::get('revenue', [\App\Http\Controllers\Vstore\FinanceController::class, 'revenue'])->name('screens.vstore.finance.revenue');
         Route::get('history', [\App\Http\Controllers\Vstore\FinanceController::class, 'history'])->name('screens.vstore.finance.history');
 
