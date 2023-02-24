@@ -70,7 +70,7 @@ Route::domain(config('domain.api'))->group(function () {
 Route::prefix('vshop')->group(function () {
     Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
     Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
-
+    Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
     Route::prefix('address')->group(function () {
         Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
         Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);

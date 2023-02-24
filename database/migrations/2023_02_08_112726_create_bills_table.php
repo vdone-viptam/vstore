@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->float('total')->nullable();
             $table->string('specific_address')->nullable();
-            $table->string('user_id')->nullable();
+            $table->string('id_pdone')->nullable();
             $table->string('address')->nullable();
             $table->timestamps();
         });

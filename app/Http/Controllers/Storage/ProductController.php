@@ -72,12 +72,9 @@ class ProductController extends Controller
                     ->join('categories','products.category_id','=','categories.id')
             ->whereIn('product_warehouses.status',[2,3,4])
            ->where('warehouses.user_id',Auth::id())
-           ->select('product_warehouses.id','product_warehouses.code','product_warehouses.status as status','products.name as product_name','categories.name as category_name','product_warehouses.created_at','product_warehouses.status');
-           if ($request->key_search) {
-
-           }
-
-//           ->paginate($limit);
+           ->select('product_warehouses.id','product_warehouses.code','product_warehouses.status as status','products.name as product_name','categories.name as category_name','product_warehouses.created_at','product_warehouses.status')
+           ->paginate($limit)
+       ;
 
         $count = count($product);
         return view('screens.storage.product.requestOut', compact('product','count'));

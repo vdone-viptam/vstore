@@ -37,9 +37,13 @@ class DiscountController extends Controller
     public function chooseProduct(Request $request)
     {
         $pro = DB::table('products')->select('price', 'discount', 'discount_vShop')->where('id', $request->product_id)->first();
+        $discount = DB::table('discounts')->select('discount')->where('product_id', $request->product_id)->orderBy('discount', 'desc')->first()->discount ?? 0;
         if ($pro) {
             $pro->price = number_format($pro->price, 0, '.', '.') ?? 0;
-            return $pro;
+            return response()->json([
+                'pro' => $pro,
+                'discount' => $discount
+            ]);
         } else {
             return null;
         }

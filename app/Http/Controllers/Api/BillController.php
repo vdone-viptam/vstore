@@ -47,21 +47,19 @@ class BillController extends Controller
      *
      * @param Request $request
      * @param  $id mã sản phẩm
-     * @bodyParam  user_id mã user của người dùng mua hàng
+     * @bodyParam  id_pdone mã user của người dùng mua hàng
      * @bodyParam name tên người dùng
      * @bodyParam phone_number số điện thoại
      * @bodyParam address địa chỉ
-     * @bodyParam specific_address địa chỉ cụ thể
      * @bodyParam data dữ liệu sản phẩm publish_id:mã sản phẩm, vshop_id:mã vshop,quantity:số lượng sản phẩm [{"publish_id":"MSP17621675","vshop_id":"MVS123123","quantity":12},{"publish_id":"MSP17621675","vshop_id":"MVS123123","quantity":12}]
      * @return JsonResponse
      */
     public function add(Request $request){
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+            'id_pdone' => 'required',
             'name'=> 'required',
             'phone_number'=>'required',
             'address'=>'required',
-            'specific_address'=>'required',
             'data'=>'required'
         ]);
         if($validator->fails())
@@ -72,10 +70,9 @@ class BillController extends Controller
         try {
             $bill = new Bill();
             $bill->name=$request->name;
-            $bill->user_id=$request->user_id;
+            $bill->id_pdone=$request->id_pdone;
             $bill->phone_number=$request->phone_number;
             $bill->address=$request->address;
-            $bill->specific_address=$request->specific_address;
             $bill->save();
             $total = 0;
             foreach ($request->data as $value){
