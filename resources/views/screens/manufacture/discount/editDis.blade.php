@@ -39,8 +39,9 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>
-                        <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
+{{--                                                <span class="text-title font-medium  ">Phần trăm chiết khấu bán s:</span>--}}
+                        <input disabled name="discount_vshop" type="hidden" id="discount_vshop"
+                               value="{{$product1->discount_vShop}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
@@ -86,8 +87,8 @@
     document.getElementById('discount').addEventListener('keyup', (o) => {
         const value = o.target.value;
         console.log(value)
-        if (document.getElementById('discount').value < 100 -
-            Number(document.querySelector('#discount_ncc').value + document.querySelector('#discount_vshop').value)){
+        if (document.getElementById('discount').value <
+            Number(document.querySelector('#discount_ncc').value + document.querySelector('#discount_vshop').value)) {
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
@@ -107,15 +108,15 @@
             success: function (result) {
                 console.log(result)
                 if (result) {
-                    document.querySelector('#price').value = result.price + ' đ'
-                    document.querySelector('#discount_vshop').value = result.discount_vShop
-                    document.querySelector('#discount_ncc').value = result.discount
+                    document.querySelector('#price').value = result.pro.price + ' đ'
+                    document.querySelector('#discount_vshop').value = result.discount
+                    document.querySelector('#discount_ncc').value = result.pro.discount
 
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = o.target.value;
 
-                        if (value < 100- Number(result.discount + result.discount_vShop)
-                            || document.getElementById('discount').value < Number(result.discount - result.discount_vShop)){
+                        if (value < Number(result.pro.discount + result.discount)
+                            || document.getElementById('discount').value < Number(result.pro.discount - result.discount)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
