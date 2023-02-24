@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
 /**
  * @group Cart
  *
@@ -20,143 +22,157 @@ class CartController extends Controller
      * API dùng để xem sản phẩm trong giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã tài khoản người dùng
-     * @return JsonResponse
+     * @param  $pdone_id mã tài khoản người dùng pdone
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index($id){
-        $cart = Cart::where('user_id',$id)->where('status',1)->get();
-        $i=0;
-        foreach ($cart as $value){
-            $product= Product::where('publish_id',$cart[$i]['publish_id'])->first();
-            if ($product){
-                $value['name']=$product->name;
-                $value['price']=$product->price;
-                $value['images']=$product->images;
-            }else{
-                $value['name']='';
-                $value['price']='';
+    public function index($pdone_id)
+    {
+        $cart = Cart::where('pdone_id', $pdone_id)->select('quantity', 'products.id as product_id', 'images', 'products.name', 'price', 'carts.id as cart_id', 'vshop_id')->join('products', 'carts.product_id', '=', 'products.id')->get();
+
+
+        $cart = $this->_group_by($cart, 'vshop_id');
+        $data = [];
+
+        foreach ($cart as $index => $val) {
+            $arr['vshop_id'] = $index;
+            foreach ($val as $a) {
+                $a->image = asset(json_decode($a->images)[0]);
+                unset($a->images);
+                unset($a->vshop_id);
+                $a->discount = DB::table('discounts')->selectRaw('SUM(discount) as sum')
+                        ->where('product_id', $a->product_id)
+                        ->first()->sum ?? 0;
             }
-$i++;
+            $arr['products'] = $val;
+            $data[] = $arr;
         }
 
         return response()->json([
             'status_code' => 200,
-            'message' => 'product saved successfully',
-            'data'=>$cart
+            'data' => $data
         ]);
     }
+
+    public
+    function _group_by($array, $key)
+    {
+        $return = array();
+        foreach ($array as $val) {
+            $return[$val->{$key}][] = $val;
+        }
+        return $return;
+    }
+
     /**
      * Cart add
      *
      * API dùng để thêm sản phẩm vào giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã publish_id sản phẩm
-     * @bodyParam  user_id mã user của người dùng
-     * @urlParam quantity só lượng sản phẩm không có mặc định là 1
-     * @return JsonResponse
+     * @param  $id mã sản phẩm
+     * @bodyParam  pdone_id required mã user của người dùng
+     * @bodyParam  quantity required|numeric|min:1 Số sản phẩm mua
+     * @bodyParam  vshop_id required mã v-shop
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function add(Request $request,$id){
+    public
+    function add(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+            'pdone_id' => 'required',
+            'quantity' => 'required|numeric|min:1',
+            'vshop_id' => 'required',
         ]);
-        if($validator->fails())
-        {
-            return $validator->errors();
-        }
-        $product = Product::where('publish_id',$id)->first();
 
-        if (!$product){
+        if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
-                'data' => 'No product found or unapproved product',
-            ],400);
-        }
-
-        $checkCart = Cart::where('publish_id',$id)->where('user_id',$request->user_id)->where('status',1)->first();
-        if ($checkCart){
-           $checkCart->quantity+= 1;
-           $checkCart->save();
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'Product added to cart successfully',
+                'status_code' => 401,
+                'errors' => $validator->errors()
             ]);
         }
-        $cart = new Cart();
-        $cart->user_id= $request->user_id;
-        $cart->publish_id=$id;
-        $cart->status=1;
-        $cart->quantity=1;
-        $cart->save();
+
+        if (DB::table('products')->where('id', $id)->where('status', 2)->count() == 0) {
+            return response()->json([
+                'status_code' => 401,
+                'errors' => 'Sản phẩm chưa niêm yết'
+            ]);
+        }
+
+        $cart = Cart::where('vshop_id', $request->vshop_id)->where('product_id', $id)->first();
+
+        if (!$cart) {
+            $cart = new Cart();
+            $cart->vshop_id = $request->vshop_id;
+            $cart->pdone_id = $request->pdone_id;
+            $cart->quantity = $request->quantity;
+            $cart->product_id = $id;
+            $cart->save();
+        } else {
+            $cart->quantity += $request->quantity;
+            $cart->save();
+        }
         return response()->json([
-            'status_code' => 200,
-            'message' => 'Product added to cart successfully',
-        ]);
+            'status_code' => 201,
+            'message' => 'Thêm sản phẩm vào giỏ hàng thành công',
+        ], 201);
     }
+
     /**
      * Cart remove
      *
      * API dùng để xóa sản phẩm khỏi giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã sản phẩm
-     * @bodyParam  user_id mã tài khoản của người dùng
-     * @return JsonResponse
+     * @param  $cart_id Mã giỏ hàng
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function remove(Request $request,$id){
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+    public
+    function remove(Request $request, $cart_id)
+    {
+        Cart::destroy($cart_id);
+        return response()->json([
+            'status_code' => 201,
+            'message' => 'Xóa sản phẩm khỏi giỏ hàng thành công',
         ]);
-        if($validator->fails())
-        {
-            return $validator->errors();
-        }
-        $cart = Cart::where('publish_id',$id)->where('user_id',$request->user_id)->where('status',1)->first();
-        if ($cart){
-            $cart->status=0;
-            $cart->save();
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'Product removed from cart successfully',
-            ]);
-        }
     }
 
     /**
      * Cart quantity
      *
-     * API dùng để tăng giảm số lượng sản phẩm trong giỏ hàng
+     * API dùng để tăng giảm 1 đơn vị sản phẩm trong giỏ hàng
      *
      * @param Request $request
-     * @param  $id mã publish_id sản phẩm
-     * @bodyParam  user_id mã user của người dùng
-     * @bodyParam quantity số lượng sản phẩm
-     * @return JsonResponse
+     * @param  $cart_id Mã giỏ hàng
+     * @param  $type 1 tăng sản phẩm | 2 giảm sản phẩm
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function quantity(Request $request,$id){
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+    public
+    function quantity(Request $request, $cart_id, $type)
+    {
+        $cart = Cart::where('id', $cart_id)->first();
+        if (!$cart) {
+            return response()->json([
+                'status_code' => 401,
+                'message' => 'Giỏ hàng không tồn tại'
+            ]);
+        }
+        if ($type == 1) {
+            $cart->quantity += 1;
+
+        } else {
+            $cart->quantity -= 1;
+        }
+
+        $cart->save();
+        if ($cart->quantity == 0) {
+            Cart::destroy($cart_id);
+            return response()->json([
+                'status_code' => 201,
+                'message' => 'Xóa sản phẩm khỏi giỏ hàng thành công']);
+        }
+        return response()->json([
+            'status_code' => 201,
+            'message' => 'Thay đổi số lượng sản phẩm thành công'
         ]);
-        if($validator->fails())
-        {
-            return $validator->errors();
-        }
-        $cart = Cart::where('publish_id',$id)->where('user_id',$request->user_id)->where('status',1)->first();
-        if ($cart && $request->quantity >0){
-            $cart->quantity = $request->quantity;
-            $cart->save();
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'Update the number of products successfully',
-            ]);
-        }elseif ($cart && $request->quantity <=0){
-            $cart->quantity = $request->quantity;
-            $cart->status =0;
-            $cart->save();
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'Product removed from cart successfully',
-            ]);
-        }
     }
 }
