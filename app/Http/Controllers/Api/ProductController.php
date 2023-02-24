@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bill;
+use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductWarehouses;
 use App\Models\Vshop;
+use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 /**
  * @group Product
@@ -149,7 +154,7 @@ class ProductController extends Controller
     public function productByNcc(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
-        $products = Product::where('user_id', $id)->where('status', 2)
+        $products = Product::where('user_id',)->where('status', 2)
             ->select('id', 'publish_id', 'discount', 'name', 'category_id', 'images', 'vstore_id', 'user_id');
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
@@ -246,7 +251,7 @@ class ProductController extends Controller
             DB::table('vshop_products')->insert([
                 'id_pdone' => $request->id_pdone,
                 'product_id' => $id,
-                'status'=>1,
+                'status' => 1,
                 'created_at' => Carbon::now()
             ]);
             return response()->json([
@@ -316,4 +321,160 @@ class ProductController extends Controller
         });
     }
 
+    /**
+     * Vshop Nhập hàng sẵn
+     *
+     * API dùng để Vshop nhập hàng sẵn
+     *
+     * @param Request $request
+     * @param  $id mã sản phẩm
+     * @bodyParam amount số lượng sản phẩm
+     * @bodyParam  id_pdone id của pdone
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function vshopReadyStock(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'id_pdone' => 'required',
+            'amount' => 'required|integer|min:1'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json([
+                'status_code' => 400,
+                'data' => 'Không tìm thấy sản phẩm',
+
+            ], 400);
+        }
+
+        $vshop = Vshop::where('id_pdone', $request->id_pdone)->first();
+        if (!$vshop) {
+            return response()->json([
+                'status_code' => 400,
+                'data' => 'id_pdone chưa đăng ký thông tin nhận hàng',
+
+            ], 400);
+        }
+        $bill = new Bill();
+        $bill->name = $vshop->name;
+        $bill->phone_number = $vshop->phone_number;
+        $bill->user_id = $vshop->id_pdone;
+        $bill->address = $vshop->address;
+            $bill->save();
+
+
+        $productWh = ProductWarehouses::where('product_id', $product->id)->groupBy('ware_id')->get();
+        if (count($productWh)==0){
+            return response()->json([
+                'status_code' => 400,
+                'data' => 'sẩn phẩm đã hết',
+
+            ], 400);
+        }
+//        return $productWh;
+        $ware_id = [];
+        foreach ($productWh as $value) {
+            $ware_id[] = $value->ware_id;
+
+        }
+        $warehouses = Warehouses::whereIn('id', $ware_id)->get();
+
+        $address = $bill->address;
+        $result = app('geocoder')->geocode($address)->get();
+        $coordinates = $result[0]->getCoordinates();
+        $lat = $coordinates->getLatitude();
+        $long = $coordinates->getLongitude();
+
+        foreach ($warehouses as $value) {
+            $addressb = $value->address;
+            $resultb = app('geocoder')->geocode($addressb)->get();
+            $coordinatesb = $resultb[0]->getCoordinates();
+            $latb = $coordinatesb->getLatitude();
+            $longb = $coordinatesb->getLongitude();
+            $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
+        }
+//            $warehouses= $warehouses->sortBy('distance','desc');
+        $min = $warehouses[0];
+        for ($i = 1; $i < count($warehouses); $i++) {
+            if ($min->distance > $warehouses[$i]->distance) {
+                $min = $warehouses[$i];
+            }
+        }
+        $buy_more = BuyMoreDiscount::where('start','<=',$request->amount)
+        ->where('end','>=',$request->amount)
+            ->orWhere('end',0)
+            ->first();
+        ;
+        if($buy_more){
+            $price = $product->price - ($product->price /100 * $buy_more->discount);
+        }else{
+            $price = $product->price;
+        }
+        $bill_product = new BillProduct();
+        while (true) {
+            $code = 'bill-' . Str::random(10);
+            if (!BillProduct::where('code', $code)->first()) {
+                $bill_product->code = $code;
+                break;
+            }
+        }
+        $bill_product->publish_id=$product->publish_id;
+        $bill_product->vshop_id = null;
+        $bill_product->quantity = $request->amount;
+        $bill_product->price = $price;
+        $bill_product->bill_id = $bill->id;
+        $bill_product->vstore_id = $product->vstore_id;
+        $bill_product->user_id = $product->user_id;
+        $bill_product->product_id = $product->id;
+        $bill_product->ware_id = $min->id;
+        $bill_product->status = 1;
+        $bill_product->save();
+
+        $bill->total = $bill_product->price *$bill_product->quantity;
+
+
+        $bill->product = [
+            'name'=>$product->name,
+            'amount'=>$bill_product->quantity,
+
+        ];
+
+        $newProductWh = new ProductWarehouses();
+        $newProductWh->code = $bill_product->code;
+        $newProductWh->ware_id = $min->id;
+        $newProductWh->product_id = $product->id;
+        $newProductWh->status = 3;
+        $newProductWh->amount = $request->amount ;
+        $newProductWh->bill_product_id = $bill_product->id;
+        $newProductWh->save();
+        return response()->json([
+            'status_code' => 200,
+            'data' => $bill
+        ]);
+//        return $min;
+
+
+    }
+
+    public function haversineGreatCircleDistance(
+        $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+    {
+        // convert from degrees to radians
+        $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+                cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $angle * $earthRadius;
+    }
 }

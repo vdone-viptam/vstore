@@ -139,7 +139,7 @@
                                                 </svg>
                                                 Đang chờ xét duyệt
                                             </div>
-                                        @elseif($request->status == 3)
+                                        @elseif($request->status == 5)
                                             <div
                                                 class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -172,13 +172,13 @@
                                                     Đồng ý
                                                 </button>
                                             </a>
-                                            <a href="{{route('screens.storage.product.updateRequest',['status' => 3,'id' => $request->id])}}">
+                                            <a href="{{route('screens.storage.product.updateRequest',['status' => 5,'id' => $request->id])}}">
                                                 <button type="button"
                                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                                     Từ chối
                                                 </button>
                                             </a>
-                                        @elseif($request->status == 3)
+                                        @elseif($request->status == 5)
                                             <button
                                                 class="bg-red-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">
                                                 Từ chối

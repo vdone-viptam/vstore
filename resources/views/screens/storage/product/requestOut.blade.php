@@ -87,7 +87,7 @@
                             </defs>
                         </svg>
 
-                        Quản lý yêu cầu gửi sản phẩm
+                        Quản lý yêu cầu xuất kho
                     </h2>
                     {{--                    <a href="{{route('screens.manufacture.product.create')}}"--}}
                     {{--                       class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}
@@ -124,82 +124,83 @@
                             <th>
                                 Ngày yêu cầu
                             </th>
-                            <th>
-                                NCC yêu cầu
-                            </th>
+
                             <th>
                                 Trạng thái yêu cầu
                             </th>
-                            <th>
-                                Chi tiết
-                            </th>
+                            <th></th>
+
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>YC001</td>
-                            <td>Lenovo 2023</td>
-                            <td>Đồ điện tử</td>
-                            <td>26/11/2022 16:59:02</td>
-                            <td>Minh Như</td>
-                            <td>
-                                <div
-                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                            fill="white"/>
-                                    </svg>
-                                    Đang chờ xét duyệt
-                                </div>
-                            </td>
-                            <td><a href="">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>YC002</td>
-                            <td>Lenovo 2023</td>
-                            <td>Đồ điện tử</td>
-                            <td>26/11/2022 16:59:02</td>
-                            <td>Minh Như</td>
-                            <td>
-                                <div
-                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-                                            fill="white"/>
-                                    </svg>
-                                    Từ chối
-                                </div>
-                            </td>
-                            <td><a href="">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>YC003</td>
-                            <td>Lenovo 2023</td>
-                            <td>Đồ điện tử</td>
-                            <td>26/11/2022 16:59:02</td>
-                            <td>Minh Như</td>
-                            <td>
-                                <div
-                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                    <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
-                                              stroke-linecap="round"/>
-                                    </svg>
-                                    Đồng ý
-                                </div>
-                            </td>
-                            <td><a href="">Chi tiết</a></td>
-                        </tr>
+                        @foreach($product as $value)
+                            <tr>
+                                <td>{{$value->code}}</td>
+                                <td>{{$value->product_name}}</td>
+                                <td>{{$value->category_name}}</td>
+                                <td>{{$value->created_at}}</td>
+
+                                <td>
+
+                                    @if($value->status ==3)
+                                        <div
+                                            class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
+                                                    fill="white"/>
+                                            </svg>
+                                            Đang chờ xét duyệt
+                                        </div>
+                                    @elseif($value->status == 2)
+                                        <div
+                                            class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                            <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
+                                                      stroke-linecap="round"/>
+                                            </svg>
+                                            Đồng ý
+                                        </div>
+                                    @elseif($value->status == 4)
+                                        <div
+                                            class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                            <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
+                                                      stroke-linecap="round"/>
+                                            </svg>
+                                            Từ chối
+                                        </div>
+                                    @endif
+
+                                </td>
+                                <td>
+                                        @if($value->status==3)
+                                        <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
+                                            <button type="button"
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                Đồng ý
+                                            </button>
+                                        </a>
+                                        <a href="{{route('screens.storage.product.updateRequestOut',['status'=>4,'id' => $value->id])}}">
+                                            <button type="button"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                Từ chối
+                                            </button>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">Tổng: 5</span>
+                    <span class="text-sm text-title">{{$count}}</span>
                     {{--                    @include('layouts.custom.paginator', ['paginator' => $requests])--}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
@@ -227,5 +228,12 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        const form = document.getElementById('form');
+        const limit = document.getElementsByName('limit')[0];
+        limit.addEventListener('change', (e) => {
+            form.submit();
+        });
 
+    </script>
 @endsection

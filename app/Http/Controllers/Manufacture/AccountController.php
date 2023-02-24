@@ -72,20 +72,17 @@ class AccountController extends Controller
 
     public function uploadImage($id, Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'img' => 'size:20000',
-            'banner' => 'size:20000',
-
-        ], [
-            'img.size' => 'Qúa kíc cỡ',
-            'banner.banner' => 'Qúa kíc cỡ',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status_code' => 401,
-                'error' => $validator->errors(),
-            ]);
-        }
+//        $validator = Validator::make($request->all(), [
+//            'img' => 'size:20000000',
+//            'banner' => 'size:20000000',
+//
+//        ], [
+//            'img.size' => 'Qúa kíc cỡ',
+//            'banner.banner' => 'Qúa kíc cỡ',
+//        ]);
+//        if ($validator->fails()) {
+//            return redirect()->back();
+//        }
         $user = User::find($id);
         if ($request->hasFile('img')) {
             $file = $request->file('img');

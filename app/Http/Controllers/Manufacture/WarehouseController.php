@@ -44,7 +44,7 @@ class WarehouseController extends Controller
         }
         $model = new ProductWarehouses();
         $model->fill($request->only('product_id', 'ware_id', 'amount'));
-        $model->status = 3;
+        $model->status = 0;
         $model->save();
 
         return redirect()->route('screens.manufacture.warehouse.addProduct')->with('message', 'Thêm Thành Công');

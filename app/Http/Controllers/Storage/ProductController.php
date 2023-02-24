@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductWarehouses;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,16 +57,30 @@ class ProductController extends Controller
             $this->v['requests'] = $this->v['requests']->where('product_warehouses.id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
                 ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
         }
-        $this->v['requests'] = $this->v['requests']->where('warehouses.user_id', Auth::id())->paginate($limit);
+        $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status',[0,1,5])->where('warehouses.user_id', Auth::id())->paginate($limit);
 
         $this->v['params'] = $request->all();
         return view('screens.storage.product.request', $this->v);
 
     }
 
-    public function requestOut()
+    public function requestOut(Request $request)
     {
-        return view('screens.storage.product.requestOut', []);
+        $limit = $request->limit ?? 10;
+       $product = Warehouses::join('product_warehouses','warehouses.id','=','product_warehouses.ware_id')
+                    ->join('products','product_warehouses.product_id','=','products.id')
+                    ->join('categories','products.category_id','=','categories.id')
+            ->whereIn('product_warehouses.status',[2,3,4])
+           ->where('warehouses.user_id',Auth::id())
+           ->select('product_warehouses.id','product_warehouses.code','product_warehouses.status as status','products.name as product_name','categories.name as category_name','product_warehouses.created_at','product_warehouses.status');
+           if ($request->key_search) {
+
+           }
+
+//           ->paginate($limit);
+
+        $count = count($product);
+        return view('screens.storage.product.requestOut', compact('product','count'));
     }
 
     public function updateRequest($status, Request $request)
@@ -74,5 +89,15 @@ class ProductController extends Controller
 
 
         return redirect()->back()->with('success', 'Cập nhật đơn gửi hàng thành công');
+    }
+    public function updateRequestOut($status,Request $request){
+        if ($status != 2 || $status !=4){
+            return redirect()->back();
+        }
+        $product_warehouses =
+        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
+
+
+        return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
     }
 }
