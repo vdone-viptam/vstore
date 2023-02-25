@@ -237,7 +237,7 @@ class ProductController extends Controller
                 'messageError' => $validator->errors(),
             ], 401);
         }
-        $vshop = Vshop::select('id')->where('id_pdone', $request->id_pdone)->first();
+        $vshop = Vshop::select('id_pdone')->where('id_pdone', $request->id_pdone)->first();
 
         if (!$vshop) {
             $vshop = new Vshop();
