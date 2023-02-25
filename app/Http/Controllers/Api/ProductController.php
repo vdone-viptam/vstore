@@ -244,15 +244,23 @@ class ProductController extends Controller
                 'messageError' => $validator->errors(),
             ], 401);
         }
-        $checkVshop = DB::table('vshop_products')->where('id_pdone', $request->id_pdone)->where('product_id', $id)->first();
-        if ($checkVshop) {
+        $vshop = Vshop::select('id_pdone')->where('id_pdone', $request->id_pdone)->first();
+
+        if (!$vshop) {
+            $vshop = new Vshop();
+            $vshop->id_pdone = $request->id_pdone;
+            $vshop->save();
+        }
+
+        $checkVshop = DB::table('vshop_products')->select('id')->where('id_pdone', $vshop->id)->where('product_id', $id)->count();
+        if ($checkVshop > 0) {
             return response()->json([
                 'message' => 'Sản phẩm đã được đăng ký tiếp thị',
             ], 401);
         }
         try {
             DB::table('vshop_products')->insert([
-                'id_pdone' => $request->id_pdone,
+                'vshop_id' => $vshop->id,
                 'product_id' => $id,
                 'status' => 1,
                 'created_at' => Carbon::now()
