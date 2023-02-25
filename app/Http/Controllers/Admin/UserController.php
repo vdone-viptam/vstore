@@ -62,22 +62,28 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             $ID = $user->tax_code;
+
             if ($user->role_id == 2) {
                 $ID = 'vnncc' . $ID;
 
             } elseif ($user->role_id == 4) {
-                $index = 1;
-                $ID = 'vnkho'.$index.'-' .$user->tax_code;
-                $check = true;
-                while ($check) {
-                    $checkId = User::where('account_code', $ID)->count();
-                    if ($checkId == 0) {
-                        $check = false;
-                        break;
-                    }
-                    $ID = 'vnkho'.++$index.'-' . $user->tax_code;
+                $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+                $number = User::where('account_code', 'like' . '%' . $user->tax_code . '%')->count();
+                if ($number == 0) {
+                    $ID = 'vnk' . '01' . '-' . $user->tax_code;
+                } elseif ($number < 10) {
+                    $ID = 'vnk' . '0' . $number . '-' . $user->tax_code;
+                } elseif ($number > 10) {
+                    $ID = 'vnk' . $number . '-' . $user->tax_code;
                 }
-
+//                elseif ($number > 99) {
+//                    for ($i = 0; $i < count($arr); $i++) {
+//                        $a = User::where('account_code', '=', 'vnk' . $arr[round($number % 100 / 10)] . '%' . '-' . $user->tax_code)->count();
+//                        if ($a < 8) {
+//                            $ID = 'vnk' . $arr[round($number % 1000)] . $a + 1 . '-' . $user->tax_code;
+//                        }
+//                    }
+//                }
             } else {
                 $ID = 'vnvst' . $ID;
             }
@@ -87,12 +93,12 @@ class UserController extends Controller
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();
             $user->save();
-            if ($user->role_id==4){
+            if ($user->role_id == 4) {
                 $warehouses = new Warehouses();
                 $warehouses->name = $user->name;
-                $warehouses->phone_number=$user->phone_number;
+                $warehouses->phone_number = $user->phone_number;
                 $warehouses->address = $user->address;
-                $warehouses->user_id= $user->id;
+                $warehouses->user_id = $user->id;
                 $warehouses->save();
             }
 
@@ -119,10 +125,12 @@ class UserController extends Controller
         $this->v['user']->created_at = $user->created_at;
         return view('screens.admin.user.detail_kho', $this->v);
     }
-    public function up($id){
+
+    public function up($id)
+    {
         $user = User::find($id);
-        if ($user && $user->role_id==3){
-            $user->branch=1;
+        if ($user && $user->role_id == 3) {
+            $user->branch = 1;
             $user->save();
         }
         return redirect()->route('screens.admin.user.list_user');
