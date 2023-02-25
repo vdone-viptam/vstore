@@ -245,7 +245,7 @@ class ProductController extends Controller
             $vshop->save();
         }
 
-        $checkVshop = DB::table('vshop_products')->select('id')->where('id_pdone', $vshop->id_pdone)->where('product_id', $id)->count();
+        $checkVshop = DB::table('vshop_products')->select('id')->where('vshop_id', $vshop->id_pdone)->where('product_id', $id)->count();
         if ($checkVshop > 0) {
             return response()->json([
                 'message' => 'Sản phẩm đã được đăng ký tiếp thị',
@@ -253,7 +253,7 @@ class ProductController extends Controller
         }
         try {
             DB::table('vshop_products')->insert([
-                'id_pdone' => $vshop->id_pdone,
+                'vshop_id' => $vshop->id_pdone,
                 'product_id' => $id,
                 'created_at' => Carbon::now()
             ]);
