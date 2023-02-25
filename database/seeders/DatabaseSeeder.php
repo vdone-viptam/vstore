@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 //         ]);
         $user = new User();
         $user->name = 'Admin';
-        $user->email = 'contact@gmail.com';
+        $user->email = 'system@vdone.vn';
         $user->password = Hash::make('123456');
         $user->id_vdone = '123';
         $user->company_name = 'Công ty Aneed';

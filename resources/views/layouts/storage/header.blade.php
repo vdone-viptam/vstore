@@ -37,7 +37,7 @@
                 <div class="w-[51px]">
                     <div class="w-[50px] h-[65px] ">
                         <img class="w-full cursor-pointer"
-                             src="{{asset('asset/images/userNCC.png')}}" class="w-full">
+                             src="{{asset('asset/images/userKho.png')}}" class="w-full">
                     </div>
                 </div>
 
