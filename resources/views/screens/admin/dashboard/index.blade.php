@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Doanh thu</p>
-                                        <p class="text-black text-base font-bold">7.210.000đ</p>
+                                        <p class="text-black text-base font-bold">-</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng</p>
-                                        <p class="text-black text-base font-bold">1.039</p>
+                                        <p class="text-black text-base font-bold">-</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng giao thành công</p>
-                                        <p class="text-black text-base font-bold">1099</p>
+                                        <p class="text-black text-base font-bold">-</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -162,7 +162,7 @@
                 </div>
             </div>
         </div>
-       
+
 
         </div>
     </div>
@@ -186,7 +186,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Doanh số'
+                        text: '-'
                     }, legend: {
                         display: false
                     },

@@ -46,7 +46,7 @@
 
     <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
         <div class="w-[195px] h-[45px] mx-auto my-6">
-            <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+            <img class="w-full" src="{{asset('asset/images/logokho.png')}}" alt="">
         </div>
     </a>
     <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] ">

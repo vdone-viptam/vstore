@@ -27,6 +27,7 @@ class LoginController extends Controller
     public function getFormRegisterNCC()
     {
 
+
         return view('auth.NCC.register_ncc');
     }
 
@@ -89,7 +90,46 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 
             ]);
-        } else {
+        } elseif ($request->role_id == 3) {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'name' => 'required|unique:users',
+                'company_name' => 'required||unique:users',
+                'tax_code' => 'required|unique:users',
+                'address' => 'required',
+                'phone_number' => 'required',
+                'id_vdone' => 'required',
+                'floor_area' => 'required',
+                'volume' => 'required',
+                'image_storage' => 'required',
+                'image_pccc' => 'required',
+                'length' => 'required',
+                'with' => 'required',
+                'height' => 'required'
+
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'email.unique' => 'Email đã tồn tại',
+                'email.email' => 'Email không đúng dịnh dạng',
+                'name.required' => 'Tên bắt buộc nhập',
+                'name.unique' => 'tên công ty đã tồn tại',
+                'company_name.unique' => 'tên công ty đã tồn tại',
+                'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'address.required' => 'Địa chỉ bắt buộc nhập',
+                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+                'floor_area.required' => 'trường này không được trống',
+                'volume.required' => 'trường này không được trống',
+                'image_storage.required' => 'trường này không được trống',
+                'image_pccc.required' => 'trường này không được trống',
+                'length.required' => 'trường này không được trống',
+                'with.required' => 'trường này không được trống',
+                'height.required' => 'trường này không được trống',
+
+
+            ]);
+        }elseif ($request->role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
@@ -139,6 +179,15 @@ class LoginController extends Controller
 
         DB::beginTransaction();
         try {
+            if($request->role_id ==2){
+                $checkUs= User::where('tax_code',$request->tax_code)
+                    ->Where('role_id',2)
+                    ->first()
+                ;
+                if ($checkUs){
+                    return redirect()->back()->with('tax_code','Mã số thuế đã đang ký');
+                }
+            }
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Warehouses;
 use Carbon\Carbon;
@@ -63,8 +64,20 @@ class UserController extends Controller
             $ID = $user->tax_code;
             if ($user->role_id == 2) {
                 $ID = 'vnncc' . $ID;
+
             } elseif ($user->role_id == 4) {
-                $ID = 'vnkho' . $ID;
+                $index = 1;
+                $ID = 'vnkho'.$index.'-' .$user->tax_code;
+                $check = true;
+                while ($check) {
+                    $checkId = User::where('account_code', $ID)->count();
+                    if ($checkId == 0) {
+                        $check = false;
+                        break;
+                    }
+                    $ID = 'vnkho'.++$index.'-' . $user->tax_code;
+                }
+
             } else {
                 $ID = 'vnvst' . $ID;
             }

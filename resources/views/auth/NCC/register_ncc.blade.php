@@ -94,7 +94,10 @@
 
         </div>
     </div>
+
+
     <div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
+
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
@@ -125,6 +128,9 @@
                 <input type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
+            @if(\Illuminate\Support\Facades\Session::has('tax_code'))
+                <p class="text-danger text-red-500 text-red-500">Mã số thuế đã đăng ký hoặc lỗi</p>
+            @endif
             @error('tax_code')
             <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
