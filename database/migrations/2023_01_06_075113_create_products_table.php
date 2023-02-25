@@ -28,13 +28,10 @@ return new class extends Migration {
             $table->integer('packing_type')->nullable()->comment('kiểu đóng gói');
             $table->integer('volume')->nullable()->comment('Số lượng sản phẩm thêm');
             $table->string('manufacturer_name')->nullable()->comment('Tên nhà sản xuất');
-            $table->integer('unit')->nullable()->comment('Loại dơn vị sản xuất');
-            $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
-            $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
             $table->string('manufacturer_address')->nullable()->comment('Địa chỉ nhà sản xuất');
             $table->string('import_unit')->nullable()->comment('Đơn vị nhập khẩu');
-            $table->string('import_address')->nullable()->comment('Địa chỉ nơi nhập khẩu');
             $table->float('price')->nullable()->comment('Giá bán sản phẩm');
+            $table->integer('unit')->nullable()->comment('Loại dơn vị sản xuất');
             $table->integer('min_product_sale')->nullable()->comment('Số sản phẩm mua ít nhất để giảm giá');
             $table->integer('prepay')->nullable()->comment('Thanh toán trước');
             $table->integer('payment_on_delivery')->nullable()->comment('Thanh toán khi nhận hàng');
@@ -46,14 +43,19 @@ return new class extends Migration {
             $table->integer('user_id')->nullable()->comment('Id sở hữu sản phẩm');
             $table->string('origin')->nullable()->comment('Xuất sứ');
             $table->float('with')->nullable()->comment('Chiều rộng');
-            $table->float('percent_discount')->nullable()->comment('Số phần trăm giảm giá');
             $table->integer('sku_id')->nullable()->comment('Mã sản phẩm');
             $table->string('note')->nullable()->comment('Mã sản phẩm');
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');
             $table->string('code')->nullable();
+            $table->float('discount_vShop', 11, 2)->nullable();
+            $table->integer('unit')->default(0);
+            $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
+            $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
             $table->string('video')->comment('video sản phẩm');
             $table->string('material')->nullable();
+            $table->float('percent_discount')->nullable()->comment('Số phần trăm giảm giá');
+            $table->string('import_address')->nullable()->comment('Địa chỉ nơi nhập khẩu');
             $table->timestamps();
         });
     }

@@ -12,15 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('bills', function (Blueprint $table) {
+        Schema::create('vshop_products', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable();
-            $table->string('name')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->float('total')->nullable();
-            $table->string('specific_address')->nullable();
-            $table->string('id_pdone')->nullable();
-            $table->string('address')->nullable();
+            $table->string('id_pdone');
+            $table->integer('product_id');
+            $table->integer('status')->nullable();
+            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('vshop_products');
     }
 };
