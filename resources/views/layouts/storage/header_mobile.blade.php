@@ -303,8 +303,8 @@
 {{--hedder--}}
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4 shadow-lg">
-        <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-            <div class="w-[180px] h-[30px]">
+        <a href="{{route('screens.storage.dashboard.index')}}" class="">
+            <div class="w-[180px] h-[36px]">
                 <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
             </div>
         </a>
@@ -356,7 +356,7 @@
                     <div class="w-[51px]">
                         <div class="w-[50px] h-[65px] ">
                             <img class="w-full cursor-pointer"
-                                 src="{{asset('asset/images/userNCC.png')}}" class="w-full">
+                                 src="{{asset('asset/images/userkho.png')}}" class="w-full">
                         </div>
                     </div>
 

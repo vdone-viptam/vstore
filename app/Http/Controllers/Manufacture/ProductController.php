@@ -268,7 +268,7 @@ class ProductController extends Controller
 
     public function createp()
     {
-        return view('screens . manufacture . product . createp');
+        return view('screens.manufacture.product.createp');
     }
 
     public function storeRequest(Request $request)

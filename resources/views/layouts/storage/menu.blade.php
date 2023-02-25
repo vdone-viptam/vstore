@@ -44,7 +44,7 @@
 </style>
 <div class="bg-[#F2F8FF] fixed left-0 h-screen md:block hidden z-[7]">
 
-    <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
+    <a href="{{route('screens.storage.dashboard.index')}}" class="">
         <div class="w-[195px] h-[45px] mx-auto my-6">
             <img class="w-full" src="{{asset('asset/images/logokho.png')}}" alt="">
         </div>

@@ -115,12 +115,12 @@ class BillController extends Controller
                     $long = $coordinates->getLongitude();
 
                     foreach ($warehouses as $value) {
-                        $addressb = $value->address;
-                        $resultb = app('geocoder')->geocode($addressb)->get();
-                        $coordinatesb = $resultb[0]->getCoordinates();
-                        $latb = $coordinatesb->getLatitude();
-                        $longb = $coordinatesb->getLongitude();
-                        $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
+//                        $addressb = $value->address;
+//                        $resultb = app('geocoder')->geocode($addressb)->get();
+//                        $coordinatesb = $resultb[0]->getCoordinates();
+//                        $latb = $coordinatesb->getLatitude();
+//                        $longb = $coordinatesb->getLongitude();
+//                        $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
                     }
 
 //            $warehouses= $warehouses->sortBy('distance','desc');
