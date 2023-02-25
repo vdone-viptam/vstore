@@ -65,6 +65,7 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });
+    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
 
 Route::prefix('vshop')->group(function () {
@@ -82,7 +83,7 @@ Route::prefix('discount')->group(function () {
     Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
     Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
 });
-Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
 ////    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');
 //});

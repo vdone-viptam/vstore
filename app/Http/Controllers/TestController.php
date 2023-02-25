@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\BuyMoreDiscount;
+use App\Models\VshopProduct;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -11,12 +13,15 @@ class TestController extends Controller
     public function index()
     {
 
-        $address = "hà nội";
-        $result = app('geocoder')->geocode($address)->get();
-        $coordinates = $result[0]->getCoordinates();
-        $lat = $coordinates->getLatitude();
-        $long = $coordinates->getLongitude();
-        return $lat.','.$long;
+//        $address = "hà nội";
+//        $result = app('geocoder')->geocode($address)->get();
+//        $coordinates = $result[0]->getCoordinates();
+//        $lat = $coordinates->getLatitude();
+//        $long = $coordinates->getLongitude();
+//        return $lat.','.$long;
+        $vshop_product = VshopProduct::where('id_pdone',11212)
+            ->where('product_id',25)->first();
+        return $vshop_product;
     }
 
     public function haversineGreatCircleDistance(

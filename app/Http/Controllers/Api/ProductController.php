@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use PHPUnit\Exception;
 
 /**
  * @group Product
@@ -343,119 +346,156 @@ class ProductController extends Controller
                 'messageError' => $validator->errors(),
             ], 401);
         }
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json([
-                'status_code' => 400,
-                'data' => 'Không tìm thấy sản phẩm',
+        DB::beginTransaction();
+        try{
+            $product = Product::where('id',$id)->where('status',2)->first();
+            if (!$product) {
+                return response()->json([
+                    'status_code' => 400,
+                    'data' => 'Không tìm thấy sản phẩm',
 
-            ], 400);
-        }
+                ], 400);
+            }
 
-        $vshop = Vshop::where('id_pdone', $request->id_pdone)->first();
-        if (!$vshop) {
-            return response()->json([
-                'status_code' => 400,
-                'data' => 'id_pdone chưa đăng ký thông tin nhận hàng',
+            $vshop = Vshop::where('id_pdone', $request->id_pdone)->first();
+            if (!$vshop) {
+                return response()->json([
+                    'status_code' => 400,
+                    'data' => 'id_pdone chưa đăng ký thông tin nhận hàng',
 
-            ], 400);
-        }
-        $bill = new Bill();
-        $bill->name = $vshop->name;
-        $bill->phone_number = $vshop->phone_number;
-        $bill->user_id = $vshop->id_pdone;
-        $bill->address = $vshop->address;
+                ], 400);
+            }
+
+            $bill = new Bill();
+            $bill->name = $vshop->name;
+            $bill->phone_number = $vshop->phone_number;
+            $bill->id_pdone = $vshop->id_pdone;
+            $bill->address = $vshop->address;
             $bill->save();
 
 
-        $productWh = ProductWarehouses::where('product_id', $product->id)->groupBy('ware_id')->get();
-        if (count($productWh)==0){
-            return response()->json([
-                'status_code' => 400,
-                'data' => 'sẩn phẩm đã hết',
+            $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ware_id')->get();
+            if (count($productWh)==0){
+                return response()->json([
+                    'status_code' => 400,
+                    'data' => 'sẩn phẩm đã hết',
 
-            ], 400);
-        }
+                ], 400);
+            }
 //        return $productWh;
-        $ware_id = [];
-        foreach ($productWh as $value) {
-            $ware_id[] = $value->ware_id;
+            $ware_id = [];
+            foreach ($productWh as $value) {
+                $ware_id[] = $value->ware_id;
 
-        }
-        $warehouses = Warehouses::whereIn('id', $ware_id)->get();
+            }
+            $warehouses = Warehouses::whereIn('id', $ware_id)->get();
 
-        $address = $bill->address;
-        $result = app('geocoder')->geocode($address)->get();
-        $coordinates = $result[0]->getCoordinates();
-        $lat = $coordinates->getLatitude();
-        $long = $coordinates->getLongitude();
+            $address = $bill->address;
+            $result = app('geocoder')->geocode($address)->get();
+            $coordinates = $result[0]->getCoordinates();
+            $lat = $coordinates->getLatitude();
+            $long = $coordinates->getLongitude();
 
-        foreach ($warehouses as $value) {
-            $addressb = $value->address;
-            $resultb = app('geocoder')->geocode($addressb)->get();
-            $coordinatesb = $resultb[0]->getCoordinates();
-            $latb = $coordinatesb->getLatitude();
-            $longb = $coordinatesb->getLongitude();
-            $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
-        }
+            foreach ($warehouses as $value) {
+                $addressb = $value->address;
+                $resultb = app('geocoder')->geocode($addressb)->get();
+                $coordinatesb = $resultb[0]->getCoordinates();
+                $latb = $coordinatesb->getLatitude();
+                $longb = $coordinatesb->getLongitude();
+                $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
+            }
 //            $warehouses= $warehouses->sortBy('distance','desc');
-        $min = $warehouses[0];
-        for ($i = 1; $i < count($warehouses); $i++) {
-            if ($min->distance > $warehouses[$i]->distance) {
-                $min = $warehouses[$i];
+            $min = $warehouses[0];
+            for ($i = 1; $i < count($warehouses); $i++) {
+                if ($min->distance > $warehouses[$i]->distance) {
+                    $min = $warehouses[$i];
+                }
             }
-        }
-        $buy_more = BuyMoreDiscount::where('start','<=',$request->amount)
-        ->where('end','>=',$request->amount)
-            ->orWhere('end',0)
-            ->first();
-        ;
-        if($buy_more){
-            $price = $product->price - ($product->price /100 * $buy_more->discount);
-        }else{
-            $price = $product->price;
-        }
-        $bill_product = new BillProduct();
-        while (true) {
-            $code = 'bill-' . Str::random(10);
-            if (!BillProduct::where('code', $code)->first()) {
-                $bill_product->code = $code;
-                break;
+            $buy_more = BuyMoreDiscount::where('start','<=',$request->amount)
+                ->where('end','>',$request->amount)
+                ->orWhere('end',0)
+                ->first();
+            ;
+            if($buy_more){
+                $price = $product->price - ($product->price /100 * $buy_more->discount);
+            }else{
+                $price = $product->price;
             }
-        }
-        $bill_product->publish_id=$product->publish_id;
-        $bill_product->vshop_id = null;
-        $bill_product->quantity = $request->amount;
-        $bill_product->price = $price;
-        $bill_product->bill_id = $bill->id;
-        $bill_product->vstore_id = $product->vstore_id;
-        $bill_product->user_id = $product->user_id;
-        $bill_product->product_id = $product->id;
-        $bill_product->ware_id = $min->id;
-        $bill_product->status = 1;
-        $bill_product->save();
-
-        $bill->total = $bill_product->price *$bill_product->quantity;
 
 
-        $bill->product = [
-            'name'=>$product->name,
-            'amount'=>$bill_product->quantity,
+            $bill_detail = new BillDetail();
+            while (true) {
+                $codeBillDetail = 'vn-' . Str::random(12);
+                if (!BillDetail::where('code', $codeBillDetail)->first()) {
+                    $bill_detail->code = $codeBillDetail;
+                    break;
+                }
+            }
+            $bill_detail->bill_id= $bill->id;
+            $bill_detail->ware_id=$min->id;
+            $bill_detail->address=$vshop->address;
+            $bill_detail->total = $price *$request->amount;
+            $bill_detail->pick_up_address = $min->address;
+            $bill_detail->save();
+            $bill_product = new BillProduct();
+            while (true) {
+                $code = 'bill-' . Str::random(10);
+                if (!BillProduct::where('code', $code)->first()) {
+                    $bill_product->code = $code;
+                    break;
+                }
+            }
 
-        ];
+            $bill_product->publish_id=$product->publish_id;
+            $bill_product->vshop_id = null;
+            $bill_product->quantity = $request->amount;
+            $bill_product->price = $price;
+            $bill_product->bill_detail_id = $bill_detail->id;
+            $bill_product->vstore_id = $product->vstore_id;
+            $bill_product->user_id = $product->user_id;
+            $bill_product->product_id = $product->id;
+            $bill_product->ware_id = $min->id;
+            $bill_product->status = 1;
+            $bill_product->save();
 
-        $newProductWh = new ProductWarehouses();
-        $newProductWh->code = $bill_product->code;
-        $newProductWh->ware_id = $min->id;
-        $newProductWh->product_id = $product->id;
-        $newProductWh->status = 3;
-        $newProductWh->amount = $request->amount ;
-        $newProductWh->bill_product_id = $bill_product->id;
-        $newProductWh->save();
-        return response()->json([
-            'status_code' => 200,
-            'data' => $bill
-        ]);
+            $bill->total = $bill_product->price *$bill_product->quantity;
+            $bill->save();
+
+
+
+            $newProductWh = new ProductWarehouses();
+            $newProductWh->code = $bill_product->code;
+            $newProductWh->ware_id = $min->id;
+            $newProductWh->product_id = $product->id;
+            $newProductWh->status = 3;
+            $newProductWh->amount = $request->amount ;
+            $newProductWh->bill_product_id = $bill_product->id;
+            $newProductWh->save();
+            $vshop_product = VshopProduct::where('id_pdone',$request->id_pdone)
+                ->where('product_id',$id)->first();
+            if ($vshop_product){
+
+                $vshop_product->status = 2;
+                $vshop_product->amount +=$request->amount;
+                $vshop_product->save();
+            }else{
+                $newVshop_product = new VshopProduct();
+                $newVshop_product->status=2;
+                $newVshop_product->amount= (int)$request->amount;
+                $newVshop_product->id_pdone= $vshop->id;
+                $newVshop_product->product_id=$id;
+                $newVshop_product->save();
+            }
+            DB::commit();
+            return response()->json([
+                'status_code' => 200,
+                'data' => $bill
+            ]);
+        }catch (Exception $e){
+            DB::rollBack();
+            return($e->getMessage());
+        };
+
 //        return $min;
 
 
