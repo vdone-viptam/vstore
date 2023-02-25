@@ -12,15 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('bills', function (Blueprint $table) {
+        Schema::create('bill_more_discount', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable();
-            $table->string('name')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->float('total')->nullable();
-            $table->string('specific_address')->nullable();
-            $table->string('id_pdone')->nullable();
-            $table->string('address')->nullable();
+            $table->integer('start')->default(0);
+            $table->integer('end')->default(0);
+            $table->float('discount', 11, 2);
+            $table->integer('product_id')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('bill_more_discount');
     }
 };
