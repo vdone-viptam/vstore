@@ -108,7 +108,7 @@
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
-                                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="screens.vstore.product.discountround"/>
                             </svg>
                         </div>
                     </div>
@@ -190,8 +190,8 @@
                         nhà cung cấp</a></li>
                 <li data-page="vshop"><a class="hover:underline" href="{{Route('screens.vstore.partner.vshop')}}">Danh
                         sách V-Shop</a></li>
-                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác
-                        giao hàng</a></li>
+{{--                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác--}}
+{{--                        giao hàng</a></li>--}}
             </ul>
         </div>
         {{--            Tài chính--}}

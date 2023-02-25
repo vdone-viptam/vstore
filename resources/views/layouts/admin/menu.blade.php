@@ -120,8 +120,9 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list hidden xl:max-w-[230px] md:max-w-[200px]">
-                {{--                <li  data-page="index" class="hover:underline">     <a href="{{route('screens.admin.product.index')}}">Tất cả sản phẩm</a>--}}
-                {{--                </li>--}}
+                <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản
+                        phẩm</a>
+                </li>
                 <li data-page="index" class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý
                         yêu cầu
                         xét duyệt

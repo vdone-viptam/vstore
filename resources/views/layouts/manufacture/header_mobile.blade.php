@@ -126,7 +126,8 @@
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản
                                 phẩm</a>
                         </li>
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Thêm sản phẩm</a>
+                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Thêm sản
+                                phẩm</a>
                         </li>
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu
                                 xét duyệt
@@ -134,6 +135,8 @@
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.request')}}">Quản lý
                                 yêu cầu
                                 xét duyệt sản phẩm</a></li>
+                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.request')}}">Quản lý
+                                Mã giảm giá</a></li>
                     </ul>
                 </div>
                 {{--                Kho hàng--}}
@@ -168,6 +171,8 @@
                         <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm
                                 sản
                                 phẩm vào kho</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.account.address')}}">Danh
+                                sách địa chỉ nhận hàng</a></li>
                         <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý
                                 xuất nhập
                                 kho</a></li>
@@ -281,7 +286,8 @@
 
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi số dư</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử
+                                thay đổi số dư</a></li>
                         <!-- <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
                                 thu</a>
                         </li> -->
@@ -313,8 +319,12 @@
                     </div>
 
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li data-page="/"><a class="hover:underline" href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a></li>
-                        <li data-page="change-password"><a class="hover:underline" href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
+                        <li data-page="/"><a class="hover:underline"
+                                             href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a>
+                        </li>
+                        <li data-page="change-password"><a class="hover:underline"
+                                                           href="{{route('screens.manufacture.account.changePassword')}}">Đổi
+                                mật khẩu</a>
                         </li>
                     </ul>
                 </div>
@@ -347,11 +357,11 @@
 {{--hedder--}}
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4 shadow-lg">
-    <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-        <div class="w-[180px] h-[30px]">
-            <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
-        </div>
-    </a>
+        <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
+            <div class="w-[180px] h-[30px]">
+                <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+            </div>
+        </a>
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path
@@ -397,14 +407,15 @@
                     </ul>
                 </div>
                 <div class="user flex items-center gap-2">
-                <div class="w-[51px]">
-                    <div class="w-[50px] h-[65px] ">
-                        <img class="w-full cursor-pointer"
-                             src="{{asset('asset/images/userNCC.png')}}" class="w-full">
+                    <div class="w-[51px]">
+                        <div class="w-[50px] h-[65px] ">
+                            <img class="w-full cursor-pointer"
+                                 src="{{asset('asset/images/userNCC.png')}}" class="w-full">
+                        </div>
                     </div>
-                </div>
 
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">
+                        ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
 
                     <ul class="sub-nav-user">
                         <li><a href="{{route('screens.manufacture.account.profile')}}"
