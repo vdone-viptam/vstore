@@ -14,12 +14,12 @@ return new class extends Migration {
     {
         Schema::create('bill_vshop', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pdone');
-            $table->string('name');
-            $table->string('address');
-            $table->string('phone_number');
-            $table->string('lat');
-            $table->string('long');
+            $table->string('id_pdone')->nullable();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
             $table->timestamps();
         });
     }

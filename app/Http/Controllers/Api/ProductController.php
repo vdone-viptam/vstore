@@ -482,7 +482,6 @@ class ProductController extends Controller
             $vshop_product = VshopProduct::where('id_pdone',$request->id_pdone)
                 ->where('product_id',$id)->first();
             if ($vshop_product){
-
                 $vshop_product->status = 2;
                 $vshop_product->amount +=$request->amount;
                 $vshop_product->save();
@@ -490,7 +489,7 @@ class ProductController extends Controller
                 $newVshop_product = new VshopProduct();
                 $newVshop_product->status=2;
                 $newVshop_product->amount= (int)$request->amount;
-                $newVshop_product->id_pdone= $vshop->id;
+                $newVshop_product->id_pdone= $request->id_pdone;
                 $newVshop_product->product_id=$id;
                 $newVshop_product->save();
             }

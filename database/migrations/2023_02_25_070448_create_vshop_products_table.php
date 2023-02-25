@@ -14,10 +14,10 @@ return new class extends Migration {
     {
         Schema::create('vshop_products', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pdone');
-            $table->integer('product_id');
+            $table->string('id_pdone')->nullable();
+            $table->integer('product_id')->nullable();
             $table->integer('status')->nullable();
-            $table->integer('amount');
+            $table->integer('amount')->default(0);
             $table->timestamps();
         });
     }

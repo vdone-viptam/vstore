@@ -14,12 +14,12 @@ return new class extends Migration {
     {
         Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->integer('bill_id');
-            $table->integer('ware_id');
-            $table->string('address');
+            $table->string('code')->nullable();
+            $table->integer('bill_id')->nullable();
+            $table->integer('ware_id')->nullable();
+            $table->string('address')->nullable();
             $table->double('total', 20, 2);
-            $table->string('pick_up_address');
+            $table->string('pick_up_address')->nullable();
             $table->timestamps();
         });
     }
