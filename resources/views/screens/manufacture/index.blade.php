@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
     <meta property="og:title" content="Nhà cung cấp " />
+    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-ncc."/>
     <meta property="og:description" content="" />
     <meta property="og:url" content="{{asset('')}}" />
 {{--    <meta property="og:image" content="https://ncc.vdone.vn/home/img/logo-05.png" />--}}

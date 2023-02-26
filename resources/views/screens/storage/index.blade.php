@@ -7,7 +7,9 @@
     <title>Trang chủ V-Kho</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-    <meta property="og:title" content="Vstore"/>
+    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-06.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
