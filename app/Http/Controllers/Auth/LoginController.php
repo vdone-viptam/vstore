@@ -232,7 +232,7 @@ class LoginController extends Controller
             }
 //            return 1
         } catch (\Exception $e) {
-            dd($e->getMessage());
+//            dd($e->getMessage());
             DB::rollBack();
             return redirect()->back()->with('error', 'true');
 
@@ -270,7 +270,7 @@ class LoginController extends Controller
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
         } catch (\Exception $e) {
-            dd($e->getMessage());
+
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 

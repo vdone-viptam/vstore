@@ -149,7 +149,8 @@ class ProductController extends Controller
                 try {
                     $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
                 } catch (\Exception $exception) {
-                    dd($exception->getMessage());
+                    return redirect()->back();
+//                    dd($exception->getMessage());
                 }
             }
             $product->images = json_encode($photo_gallery);
@@ -187,7 +188,7 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {
-            dd($e->getMessage());
+
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra . Vui lòng thử lại');
         }
@@ -262,7 +263,8 @@ class ProductController extends Controller
                 return view('screens.manufacture.product.detail', $this->v);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back();
+//            dd($e->getMessage());
         }
     }
 
