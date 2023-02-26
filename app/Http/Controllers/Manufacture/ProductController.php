@@ -281,14 +281,23 @@ class ProductController extends Controller
                 'product_id' => 'required',
                 'discount' => 'required',
                 'role' => 'min:1',
-                'prepay' => 'required'
+                'prepay' => 'required',
+                'vat' => 'required|min:1|max:99'
+
             ], [
                 'vstore_id.required' => 'V-store bắt buộc chọn',
                 'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
                 'discount.required' => 'Chiết khấu bắt buộc nhập',
                 'role.min' => 'Vai trò với sản phẩm bắt buộc chọn',
-                'prepay.required' => 'Phương thức thanh toán bắt buộc chọn'
+                'prepay.required' => 'Phương thức thanh toán bắt buộc chọn',
+                'vat.required' => 'VAT bắt buộc nhâp',
+                'vat.min' => 'VAT nhỏ nhất 1',
+                'vat.max' => 'VAT lớn nhất 99',
+
             ]);
+            if ($request->sl[0] == '' ||$request->moneyv[0] ==''){
+                return redirect()->back()->withErrors(['sl'=>'Vui lòng nhập chiết khấu hàng nhập sẵn']);
+            }
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
             }
@@ -303,6 +312,7 @@ class ProductController extends Controller
             $object->role = $request->role;
             $object->status = 0;
             $object->vstore_id = $request->vstore_id;
+            $object->vat = $request->vat;
             $object->user_id = Auth::id();
             $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
             $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;

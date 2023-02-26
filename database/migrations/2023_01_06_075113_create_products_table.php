@@ -47,9 +47,8 @@ return new class extends Migration {
             $table->string('note')->nullable()->comment('Mã sản phẩm');
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');
+            $table->float('vat')->nullable();
             $table->string('code')->nullable();
-            $table->float('discount_vShop', 11, 2)->nullable();
-            $table->integer('unit')->default(0);
             $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
             $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
             $table->string('video')->comment('video sản phẩm');

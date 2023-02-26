@@ -127,8 +127,21 @@
 
                     </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4 w-full">
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                        <span class="text-title font-medium">Mức chiết khấu (%)<strong class="text-[#FF4D4F]">*</strong>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full ">
+                        <span class="text-title font-medium">VAT (%)<strong class="text-[#FF4D4F]">*</strong>
+                        </span>
+                            <span>
+                                <input type="number" name="vat" id="discount" min="0" max="99"
+                                       value="{{old('vat')}}"
+                                       placeholder="Nhập VAT (%)"
+                                       class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <span class="total"></span>
+                            </span>
+
+                            @error('vat')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
+                            <span class="text-title font-medium">Mức chiết khấu (%)<strong class="text-[#FF4D4F]">*</strong>
                         </span>
                             <span>
                                 <input type="number" name="discount" id="discount" min="0" max="99"
@@ -293,7 +306,11 @@
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
 
                         </div>
+
                     </div>
+                    @error('sl')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
                 </div>
                 <h4 class="font-medium text-[#141414] text-2xl">Thanh toán</h4>
                 <div class="flex flex-col justify-start items-start gap-4">

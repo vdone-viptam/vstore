@@ -78,6 +78,7 @@ class ProductController extends Controller
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
                     'status' => 2,
+                    'vat' => $currentRequest->vat,
                     'discount'=>$currentRequest->discount,
                     'discount_vShop'=>$currentRequest->discount_vshop,
                     'prepay'=>$currentRequest->prepay,
