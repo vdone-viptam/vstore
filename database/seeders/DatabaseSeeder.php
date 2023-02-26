@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
                 'name'=>'Thiết bị âm thanh',
                 'created_at'=>Carbon::now(),
             ],[
-                'name'=>'Thực phầm vào đồ uống',
+                'name'=>'Thực phầm và đồ uống',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Chăm sóc thú cưng',
