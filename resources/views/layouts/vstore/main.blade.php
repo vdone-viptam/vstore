@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta property="og:type" content="website" />
-<meta property="og:title" content="Vstore" />
-<meta property="og:description" content="" />
-<meta property="og:url" content="https://vstore.vdone.vn/" />
-<meta property="og:image" content="https://vstore.vdone.vn/home/img/Logo.png" />
+    <meta property="og:title" content="V-store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
+    <meta property="og:url" content="{{asset('')}}" />
+    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}" />
 
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
 
