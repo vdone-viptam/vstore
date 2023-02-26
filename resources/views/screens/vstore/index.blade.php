@@ -10,6 +10,7 @@
     <meta property="og:title" content="Vstore" />
     <meta property="og:url" content="https://vstore.vdone.vn/" />
     <meta property="og:image" content="https://vstore.vdone.vn/home/img/logo-06.png" />
+    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
 {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

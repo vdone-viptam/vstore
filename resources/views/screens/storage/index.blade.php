@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
     <meta property="og:title" content="Vstore"/>
-    <meta property="og:url" content="https://vstore.vdone.vn/"/>
-    <meta property="og:image" content="https://vstore.vdone.vn/home/img/logo-06.png"/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}"/>
+    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,7 +103,7 @@
             <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là mắt xích quan trọng đối với chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
         </div>
         </div>
-        
+
     </div>
 </div>
 </div>
@@ -132,7 +133,7 @@
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tiếp nhận hàng hóa từ Nhà cung cấp V-Store</h2>
                 <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng V-Kho của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
-          
+
             </div>
             <div class="item-qt flex flex-col items-center gap-[30px] p-3 py-10">
                 <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
@@ -140,7 +141,7 @@
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Chuyển giao sản phẩm cho Đối tác vận chuyển</h2>
                 <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin chỉ với 2 bước sau:</span>
-               
+
             </div>
         </div>
     </div>
@@ -225,7 +226,7 @@
             <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống VDONE, V-Store.</span>
         </div>
         </div>
-        
+
     </div>
     <div class="max-w-[421px] h-auto md:h-[478px] order-first md:order-last">
         <img src="{{asset('home/img/loikho.png')}}" class="w-full" alt="">

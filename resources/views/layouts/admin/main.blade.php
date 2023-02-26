@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('page_title')</title>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
-
+    <meta property="og:title" content="Vstore"/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     @include('layouts.css')
     @yield('custom_css')
     @vite('resources/css/app.css')
