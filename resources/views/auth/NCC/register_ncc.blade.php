@@ -11,6 +11,12 @@
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <meta property="og:title" content="V-ncc" />
+    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="{{asset('')}}" />
+    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     @vite('resources/css/app.css')
 </head>
