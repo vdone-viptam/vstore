@@ -269,7 +269,7 @@
                     <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
                          alt="">
                 @else
-                    <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
+                    <img src="{{asset('home/img/logo-06.png')}}" class="w-full" alt="">
                 @endif
             </div>
         </a>
