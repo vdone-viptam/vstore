@@ -62,7 +62,7 @@
                 <img class="w-full " src="{{asset('asset/images/Logoncc.png')}}" alt="">
             </div>
         </div>
-        <div class="px-4 py-3 box-shadow h-full max-w-[250px] ">
+        <div class="px-4 py-3 box-shadow h-full w-[250px] md:w-full max-w-[250px] ">
             <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
                 {{--                Dashboard--}}
                 <a href="{{route('screens.manufacture.dashboard.index')}}">
