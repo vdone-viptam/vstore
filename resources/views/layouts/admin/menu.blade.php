@@ -48,7 +48,6 @@
         <div class="w-[195px] h-[45px]">
         <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-contain" alt="">
         </div>
-        </div>
     </a>
     <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"> <img class="w-full" src="{{asset('asset/images/iconmenu.png')}}" alt=""></div>
     </div>

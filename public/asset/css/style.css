@@ -765,9 +765,9 @@ z-index: 5;
     transition: 0.5s all;
 }
 .small-menu{
-    max-width: 90px;
+    max-width: 92px;
     transition: 0.5s all;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {

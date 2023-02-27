@@ -52,7 +52,7 @@
     </a>
     <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"> <img class="w-full" src="{{asset('asset/images/iconmenu.png')}}" alt=""></div>
     </div>
-   <div class="w-full h-full bg-[#F2F8FF] side-bar-tab">
+   <div class="w-full h-full bg-[#F2F8FF] side-bar-tab overflow-hidden">
     <div class="pr-[7px] flex flex-col  h-full choose-tab my-4 max-h-[700px]  w-full overflow-x-hidden">
         {{--      Tổng quan--}}
         <a href="{{route('screens.vstore.dashboard.index')}}">
