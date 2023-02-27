@@ -30,7 +30,7 @@
     <div
         class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-            <div class="w-[168px] h-[36px] md:hidden">
+            <div class="w-[120px] h-[30px] md:hidden">
                 <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full" alt=""></a>
             </div>
             <div class="hidden md:block w-[190px] h-[52px]">
@@ -59,7 +59,7 @@
 
 </div>
 <div class="bg-gra">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4 py-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4 md:py-10 xl:py-24">
     <div class="w-full h-full order-last md:order-first">
         <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
     </div>
@@ -108,8 +108,8 @@
     </div>
 </div>
 </div>
-<div class="md:max-w-[1440px] py-4 px-[20px] md:px-20 w-full mx-auto my-24">
-    <div class="flex flex-col items-center gap-10 ">
+<div class="md:max-w-[1440px] py-4 px-[20px] md:px-20 w-full mx-auto md:my-10 xl:my-24">
+    <div class="flex flex-col items-center gap-6 md:gap-10 ">
         <h2 class="text-lg lg:text-3xl xl:text-4xl text-[#343434] font-semibold text-center">Quy trình trở thành <strong class="text-[#1E90FF] font-bold">V-Kho</strong></h2>
         <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký V-Kho đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] xl:gap-[30px] max-w-[650px] lg:max-w-[900px] xl:max-w-[1440px] mx-auto">
@@ -148,7 +148,7 @@
     </div>
 </div>
 <div class="bg-gra">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 place-items-center w-full md:max-w-[1440px] mx-auto md:p-16 p-4">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto md:p-16 p-4">
     <div class="flex flex-col gap-6 order-last md:order-first text-center md:text-left">
         <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Lợi ích tham gia <strong
                 class="text-[#1E90FF] font-semibold">V-Kho </strong></h2>
