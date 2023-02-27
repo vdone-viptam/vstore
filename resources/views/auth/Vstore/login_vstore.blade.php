@@ -41,7 +41,7 @@
 {{--@endif--}}
 <div class=" grid grid-cols-1 place-items-center ">
     <div
-        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full  md:w-[500px] ">
+        class="login flex flex-col justify-start items-start gap-6 md:gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full  md:w-[500px] ">
         <a href="{{route('landingpagevstore')}}" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
 {{--            <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
 {{--            {{asset(route('lading_page'))}}--}}
@@ -63,7 +63,7 @@
             @if(\Illuminate\Support\Facades\Session::has('error'))
                 <h4 style="color: red">{{\Illuminate\Support\Facades\Session::get('error')}}</h4>
             @endif
-            <div class="flex flex-col justify-center items-center gap-6 w-full py-10">
+            <div class="flex flex-col justify-center items-center gap-6 w-full py-4 md:py-10">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mã tài khoản</span>
                     <input type="text" name="email" id="email" placeholder="Nhập mã tài khoản của bạn"
