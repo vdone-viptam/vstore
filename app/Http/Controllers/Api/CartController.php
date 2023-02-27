@@ -27,7 +27,7 @@ class CartController extends Controller
      */
     public function index($pdone_id)
     {
-        $cart = Cart::where('pdone_id', $pdone_id)->select('quantity', 'products.id as product_id', 'images', 'products.name', 'price', 'carts.id as cart_id', 'vshop_id')->join('products', 'carts.product_id', '=', 'products.id')->get();
+        $cart = Cart::where('pdone_id', $pdone_id)->select('quantity', 'products.id as product_id', 'images', 'products.name', 'price', 'carts.id as cart_id', 'vshop_id','products.vat')->join('products', 'carts.product_id', '=', 'products.id')->get();
 
 
         $cart = $this->_group_by($cart, 'vshop_id');
