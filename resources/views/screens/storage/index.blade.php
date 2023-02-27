@@ -42,13 +42,13 @@
                 nhập</a>
         </div>
         <div
-            class="flex flex-col justify-center w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
+            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử
                 <strong class="text-[#1E90FF] font-bold">V-Kho</strong>"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
                     class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
                     class="text-[#1E90FF]"> V-Kho.</strong></span>
-                    <div class="max-w-[320px]">
+                    <div class="max-w-[320px] w-full">
             <button
                 class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
                 <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
