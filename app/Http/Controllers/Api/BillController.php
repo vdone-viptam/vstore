@@ -79,81 +79,15 @@ class BillController extends Controller
             $bill->address=$request->address;
             $bill->save();
             $total = 0;
-            $array =[];
-            foreach ($request->data as $value){
-                $product = Product::where('id',$value['id'])->where('status',2)->first();
+            foreach ($request->data as $value) {
+                $product = Product::where('id', $value['id'])->where('status', 2)->first();
                 if (!$product) {
                     return response()->json([
                         'status_code' => 400,
                         'data' => 'Không tìm thấy sản phẩm',
                     ], 400);
                 }
-                $vshop = Vshop::where('id_pdone',$value['vshop_id'])->first();
-                $vshop_product = VshopProduct::where('id_pdone',$vshop->id)->where('product_id',$value['id'])
-                ->where('status',2)->first()
-                ;
-                if (!$vshop_product){
-                    $productWh = ProductWarehouses::where('product_id', $value['id'])->where('status', 1)->groupBy('ware_id')->get();
-                    if (count($productWh)==0){
-                        return response()->json([
-                            'status_code' => 400,
-                            'data' => 'sẩn phẩm đã hết',
-
-                        ], 400);
-                    }
-
-                    $ware_id = [];
-                    foreach ($productWh as $value) {
-                        $ware_id[] = $value->ware_id;
-
-                    }
-                    $address = $bill->address;
-                    $warehouses = Warehouses::whereIn('id', $ware_id)->get();
-                    $result = app('geocoder')->geocode($address)->get();
-                    $coordinates = $result[0]->getCoordinates();
-                    $lat = $coordinates->getLatitude();
-                    $long = $coordinates->getLongitude();
-
-                    foreach ($warehouses as $value) {
-//                        $addressb = $value->address;
-//                        $resultb = app('geocoder')->geocode($addressb)->get();
-//                        $coordinatesb = $resultb[0]->getCoordinates();
-//                        $latb = $coordinatesb->getLatitude();
-//                        $longb = $coordinatesb->getLongitude();
-//                        $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
-                    }
-
-//            $warehouses= $warehouses->sortBy('distance','desc');
-                    $min = $warehouses[0];
-                    for ($i = 1; $i < count($warehouses); $i++) {
-                        if ($min->distance > $warehouses[$i]->distance) {
-                            $min = $warehouses[$i];
-                        }
-                    }
-
-
-//                    $result = isset($arr['abc']) ? $arr['abc'] : null;
-                }
-
-
-//                $product = Product::where('publish_id',$value['publish_id'])->first();
-//                $bill_product = new BillProduct();
-//                $bill_product->publish_id =$value['publish_id'];
-//                $bill_product->vshop_id =$value['vshop_id'];
-//                $bill_product->quantity =$value['quantity'];
-//                $bill_product->user_id =$product->user_id;
-//                $bill_product->vshop_id =$request->user_id;
-//                $bill_product->price =$product->price;
-//                $bill_product->bill_id = $bill->id;
-//                $bill_product->product_id = $product->id;
-//                $bill_product->vstore_id= $product->vstore_id;
-//
-//                $bill_product->save();
-////                return $bill_product;
-//                $total += $bill_product->quantity =$value['quantity'] * $product->price ;
             }
-            $bill->total = $total;
-            $bill->save();
             DB::commit();
 
             return response()->json([
