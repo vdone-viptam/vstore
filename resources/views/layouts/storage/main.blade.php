@@ -8,10 +8,10 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="Nhà cung cấp "/>
-    <meta property="og:description" content=""/>
-    <meta property="og:url" content="https://ncc.vdone.vn/"/>
-    <meta property="og:image" content="https://ncc.vdone.vn/home/img/logoncc.png"/>
+    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}"/>
 
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"

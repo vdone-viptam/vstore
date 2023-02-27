@@ -41,14 +41,12 @@
 <div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
         <div class=" w-[178px] h-[85px] mx-auto my-6">
-            <!-- <img
-                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
-                 alt=""> -->
+
             @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
                 <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
                      alt="">
             @else
-                <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
+                <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-fill" alt="">
             @endif
 
         </div>
@@ -108,7 +106,7 @@
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
-                                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="screens.vstore.product.discountround"/>
                             </svg>
                         </div>
                     </div>
@@ -190,8 +188,8 @@
                         nhà cung cấp</a></li>
                 <li data-page="vshop"><a class="hover:underline" href="{{Route('screens.vstore.partner.vshop')}}">Danh
                         sách V-Shop</a></li>
-                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác
-                        giao hàng</a></li>
+{{--                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác--}}
+{{--                        giao hàng</a></li>--}}
             </ul>
         </div>
         {{--            Tài chính--}}

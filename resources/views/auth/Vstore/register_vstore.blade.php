@@ -12,6 +12,10 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
+    <meta property="og:title" content="V-store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
+    <meta property="og:url" content="{{asset('')}}" />
+    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}" />
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -52,27 +56,11 @@
             </svg>
         </div>
         <div class="content pt-3 px-3 border-r-[1px] border-l-[1px] border-grey max-h-[500px] overflow-y-auto">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae est commodi eum amet voluptatum sint
-            culpa dolore, provident nisi nobis, animi facere dignissimos modi voluptatem assumenda. Consectetur,
-            praesentium aperiam!
+            VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng như phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng dụng, dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi nêu rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam, Inc. cung cấp cho bạn. <br>
+            Bạn không mất phí sử dụng các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của những Điều khoản này, trừ khi chúng tôi có quy định khác. Thay vào đó, doanh nghiệp, tổ chức và những cá nhân khác sẽ phải trả tiền cho chúng tôi để hiển thị quảng cáo về sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của chúng tôi, bạn đồng ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng có thể phù hợp với bạn và sở thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để xác định những quảng cáo được cá nhân hóa sẽ hiển thị cho bạn. <br>
+            Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo, cũng không chia sẻ thông tin trực tiếp nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu đối tượng mà họ muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người có thể quan tâm. <br>
+            Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những đơn vị này nắm được cách mọi người tương tác với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá nhân hóa trên Sản phẩm của VDONE theo các điều khoản này.
+            Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được mô tả bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào để xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
         </div>
     </div>
 </div>
@@ -98,7 +86,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
-                <input type="text" name="email" id="email" placeholder="Nhập địa chỉ thư điện tử"
+                <input type="text" name="email" id="email" placeholder="Nhập email"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('email')

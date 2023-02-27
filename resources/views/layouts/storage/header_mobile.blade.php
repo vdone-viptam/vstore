@@ -67,7 +67,7 @@
         <div class="px-4 py-3 box-shadow h-full max-w-[250px] ">
             <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab">
                 {{--                Dashboard--}}
-                <a href="{{route('screens.manufacture.dashboard.index')}}">
+                <a href="{{route('screens.storage.dashboard.index')}}">
                     <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu">
                         <div class="flex items-center">
                             <div class="tab__left rounded-[16px] p-2">
@@ -123,17 +123,14 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.index')}}">Tất cả sản
-                                phẩm</a>
+                        <li class="hover:underline" data-page="/"><a href="{{route('screens.storage.product.index')}}">Tất
+                                cả sản phẩm</a>
                         </li>
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Thêm sản phẩm</a>
-                        </li>
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.create')}}">Yêu cầu
-                                xét duyệt
-                                phẩm</a></li>
-                        <li class="hover:underline"><a href="{{route('screens.manufacture.product.request')}}">Quản lý
-                                yêu cầu
-                                xét duyệt sản phẩm</a></li>
+                        <li class="hover:underline" data-page="create-request"><a
+                                href="{{route('screens.storage.product.request')}}">
+                                Yêu cầu gửi sản phẩm</a></li>
+                        <li class="hover:underline" data-page="create-request"><a
+                                href="{{route('screens.storage.product.requestOut')}}">Yêu cầu xuất kho</a></li>
                     </ul>
                 </div>
                 {{--                Kho hàng--}}
@@ -151,7 +148,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#495057] text-sm  text__menu">Kho hàng</p>
+                                    <p class="text-[#495057] text-sm  text__menu">Đối tác</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -162,15 +159,8 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.index')}}">Quản lý
-                                kho
-                                hàng</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm
-                                sản
-                                phẩm vào kho</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý
-                                xuất nhập
-                                kho</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.storage.partner.index')}}">Danh sách nhà
+                                cung cấp</a></li>
                     </ul>
                 </div>
                 {{--                Quản lý V-Store--}}
@@ -191,7 +181,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#495057] text-sm  text__menu">Quản lý V-Store</p>
+                                    <p class="text-[#495057] text-sm  text__menu">Tài chính</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -203,45 +193,11 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.index')}}">Quản lý
-                                hàng tại
-                                vstore</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.partner.report')}}">Báo cáo
-                                Vstore</a>
+                        <li data-page="/"><a class="hover:underline" href="{{route('screens.storage.finance.index')}}">Ví</a>
                         </li>
-                    </ul>
-                </div>
-                {{--                Quản lý đơn hàng--}}
-                <div data-index="4" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
-                    <div class="flex items-center">
-                        <div class="tab__left rounded-[16px] p-2">
-                            <div
-                                class="flex items-center gap-3">
-                                <div class="w-[16px]">
-                                    <svg viewBox="0 0 25 26" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path class="svgFill"
-                                              d="M9.37501 10.63H12.5C12.8315 10.63 13.1495 10.4983 13.3839 10.2638C13.6183 10.0294 13.75 9.71148 13.75 9.37996C13.75 9.04844 13.6183 8.7305 13.3839 8.49608C13.1495 8.26166 12.8315 8.12996 12.5 8.12996H11.25V7.50497C11.25 7.17344 11.1183 6.8555 10.8839 6.62108C10.6495 6.38666 10.3315 6.25497 10 6.25497C9.66849 6.25497 9.35054 6.38666 9.11612 6.62108C8.8817 6.8555 8.75001 7.17344 8.75001 7.50497V8.19246C7.99054 8.34668 7.31546 8.77759 6.85583 9.40154C6.3962 10.0255 6.18481 10.798 6.26269 11.569C6.34057 12.3401 6.70217 13.0547 7.2773 13.5741C7.85242 14.0935 8.60004 14.3807 9.37501 14.38H10.625C10.7908 14.38 10.9497 14.4458 11.0669 14.563C11.1842 14.6802 11.25 14.8392 11.25 15.005C11.25 15.1707 11.1842 15.3297 11.0669 15.4469C10.9497 15.5641 10.7908 15.63 10.625 15.63H7.50001C7.16849 15.63 6.85054 15.7617 6.61612 15.9961C6.3817 16.2305 6.25001 16.5484 6.25001 16.88C6.25001 17.2115 6.3817 17.5294 6.61612 17.7638C6.85054 17.9983 7.16849 18.13 7.50001 18.13H8.75001V18.755C8.75001 19.0865 8.8817 19.4044 9.11612 19.6388C9.35054 19.8733 9.66849 20.005 10 20.005C10.3315 20.005 10.6495 19.8733 10.8839 19.6388C11.1183 19.4044 11.25 19.0865 11.25 18.755V18.0675C12.0095 17.9132 12.6846 17.4823 13.1442 16.8584C13.6038 16.2344 13.8152 15.4619 13.7373 14.6909C13.6594 13.9199 13.2978 13.2053 12.7227 12.6858C12.1476 12.1664 11.4 11.8792 10.625 11.88H9.37501C9.20925 11.88 9.05027 11.8141 8.93306 11.6969C8.81585 11.5797 8.75001 11.4207 8.75001 11.255C8.75001 11.0892 8.81585 10.9302 8.93306 10.813C9.05027 10.6958 9.20925 10.63 9.37501 10.63ZM23.75 12.505H20V1.25497C20.0009 1.03471 19.9435 0.818123 19.8338 0.62715C19.724 0.436178 19.5658 0.277599 19.375 0.167468C19.185 0.0577579 18.9694 0 18.75 0C18.5306 0 18.315 0.0577579 18.125 0.167468L14.375 2.31747L10.625 0.167468C10.435 0.0577579 10.2194 0 10 0C9.78059 0 9.56503 0.0577579 9.37501 0.167468L5.62501 2.31747L1.87501 0.167468C1.68499 0.0577579 1.46943 0 1.25001 0C1.03059 0 0.815034 0.0577579 0.62501 0.167468C0.434254 0.277599 0.275987 0.436178 0.166233 0.62715C0.0564785 0.818123 -0.000864605 1.03471 9.8536e-06 1.25497V21.255C9.8536e-06 22.2495 0.395098 23.2034 1.09836 23.9066C1.80162 24.6099 2.75545 25.005 3.75001 25.005H21.25C22.2446 25.005 23.1984 24.6099 23.9017 23.9066C24.6049 23.2034 25 22.2495 25 21.255V13.755C25 13.4234 24.8683 13.1055 24.6339 12.8711C24.3995 12.6367 24.0815 12.505 23.75 12.505ZM3.75001 22.505C3.41849 22.505 3.10055 22.3733 2.86613 22.1388C2.63171 21.9044 2.50001 21.5865 2.50001 21.255V3.41747L5.00001 4.84247C5.19293 4.94323 5.40736 4.99586 5.62501 4.99586C5.84266 4.99586 6.05709 4.94323 6.25001 4.84247L10 2.69247L13.75 4.84247C13.9429 4.94323 14.1574 4.99586 14.375 4.99586C14.5927 4.99586 14.8071 4.94323 15 4.84247L17.5 3.41747V21.255C17.5034 21.6814 17.5795 22.1041 17.725 22.505H3.75001ZM22.5 21.255C22.5 21.5865 22.3683 21.9044 22.1339 22.1388C21.8995 22.3733 21.5815 22.505 21.25 22.505C20.9185 22.505 20.6005 22.3733 20.3661 22.1388C20.1317 21.9044 20 21.5865 20 21.255V15.005H22.5V21.255Z"
-                                              fill="#B8BED9"/>
-                                    </svg>
-                                    </svg>
-                                    </svg>
-                                </div>
-                                <div class="flex gap-2 items-center">
-                                    <p class="text-[#495057] text-sm  text__menu">Quản lý đơn hàng</p>
-                                    <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
-                                              stroke-width="1.5"
-                                              stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.index')}}">Tất cả đơn
-                                hàng</a>
+                        <li data-page="history"><a class="hover:underline"
+                                                   href="{{route('screens.storage.finance.history')}}">Lịch sử thay đổi
+                                số dư</a>
                         </li>
                         <li><a class="hover:underline" href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a>
                         </li>
@@ -347,11 +303,11 @@
 {{--hedder--}}
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4 shadow-lg">
-    <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-        <div class="w-[180px] h-[30px]">
-            <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
-        </div>
-    </a>
+        <a href="{{route('screens.storage.dashboard.index')}}" class="">
+            <div class="w-[180px] h-[36px]">
+                <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+            </div>
+        </a>
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path
@@ -397,14 +353,15 @@
                     </ul>
                 </div>
                 <div class="user flex items-center gap-2">
-                <div class="w-[51px]">
-                    <div class="w-[50px] h-[65px] ">
-                        <img class="w-full cursor-pointer"
-                             src="{{asset('asset/images/userNCC.png')}}" class="w-full">
+                    <div class="w-[51px]">
+                        <div class="w-[50px] h-[65px] ">
+                            <img class="w-full cursor-pointer"
+                                 src="{{asset('asset/images/userkho.png')}}" class="w-full">
+                        </div>
                     </div>
-                </div>
 
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">
+                        ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
 
                     <ul class="sub-nav-user">
                         <li><a href="{{route('screens.manufacture.account.profile')}}"

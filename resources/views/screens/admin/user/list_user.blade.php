@@ -146,7 +146,7 @@ Danh sách tài khoản</h2>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
                             class="font-bold">10</strong></span>
-                    {{$users->withQueryString()->links()}}
+                    @include('layouts.custom.paginator', ['paginator' => $users])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">

@@ -30,8 +30,8 @@ return new class extends Migration {
             $table->string('avatar')->nullable()->comment('Ảnh đại diện tài khoản');
             $table->string('banner')->nullable()->comment('Đường dẫn ảnh banner của tài khoản');
             $table->integer('role_id')->nullable()->comment('quyền 1 admin 2 nhà cung cấp 3 nhà phan phối(vstore),4 kho(storage) ');
-            $table->string('link_website')->nullable();
             $table->string('slug')->nullable();
+            $table->longText('storage_information')->nullable();
             $table->integer('branch')->default(0)->comment('ngành vstore, 0 thường, 1 địa phương');
             $table->rememberToken();
             $table->timestamps();

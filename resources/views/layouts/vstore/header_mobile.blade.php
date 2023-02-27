@@ -134,7 +134,7 @@
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
                         <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a>
-                        </li>
+                        <li><a href="{{route('screens.vstore.product.discount')}}">Mã giảm giá</a>
                     </ul>
                 </div>
                 {{--                Quản lý đơn hàng--}}
@@ -167,7 +167,7 @@
                         <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                     </ul>
                 </div>
-{{----}}
+                {{----}}
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -199,7 +199,7 @@
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
                         <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
-                        <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>
+{{--                        <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>--}}
                     </ul>
                 </div>
                 {{--                Tài chính--}}
@@ -210,7 +210,9 @@
                                 class="flex items-center gap-3">
                                 <div class="w-[12px]">
                                     <svg viewBox="0 0 14 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path class="svgFill" d="M7.53635 10.8644C4.41454 10.053 3.41061 9.21415 3.41061 7.90766C3.41061 6.40864 4.79961 5.36346 7.12377 5.36346C9.57171 5.36346 10.4794 6.53242 10.5619 8.25147H13.6012C13.5049 5.88605 12.0609 3.71316 9.18664 3.01179V0H5.0609V2.97053C2.39293 3.54813 0.247544 5.28094 0.247544 7.93517C0.247544 11.112 2.87426 12.6935 6.7112 13.6149C10.1493 14.4401 10.8369 15.6503 10.8369 16.9293C10.8369 17.8782 10.1631 19.391 7.12377 19.391C4.29077 19.391 3.17682 18.1257 3.02554 16.5029H0C0.165029 19.5147 2.42043 21.2063 5.0609 21.7701V24.7544H9.18664V21.7976C11.8684 21.2888 14 19.7348 14 16.9155C14 13.0098 10.6582 11.6758 7.53635 10.8644Z" fill="#B8BED9"></path>
+                                        <path class="svgFill"
+                                              d="M7.53635 10.8644C4.41454 10.053 3.41061 9.21415 3.41061 7.90766C3.41061 6.40864 4.79961 5.36346 7.12377 5.36346C9.57171 5.36346 10.4794 6.53242 10.5619 8.25147H13.6012C13.5049 5.88605 12.0609 3.71316 9.18664 3.01179V0H5.0609V2.97053C2.39293 3.54813 0.247544 5.28094 0.247544 7.93517C0.247544 11.112 2.87426 12.6935 6.7112 13.6149C10.1493 14.4401 10.8369 15.6503 10.8369 16.9293C10.8369 17.8782 10.1631 19.391 7.12377 19.391C4.29077 19.391 3.17682 18.1257 3.02554 16.5029H0C0.165029 19.5147 2.42043 21.2063 5.0609 21.7701V24.7544H9.18664V21.7976C11.8684 21.2888 14 19.7348 14 16.9155C14 13.0098 10.6582 11.6758 7.53635 10.8644Z"
+                                              fill="#B8BED9"></path>
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
@@ -228,6 +230,8 @@
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
                         <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
+                        <li><a href="{{Route('screens.vstore.finance.history')}}">Lịch
+                                sử giao dịch
                     </ul>
                 </div>
                 {{--                log out--}}
@@ -259,14 +263,16 @@
 {{--hedder--}}
 <header class="menu block md:hidden ">
     <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4">
-    <a href="{{route('screens.vstore.dashboard.index')}}" class="">
-        <div class=" w-[130px] h-[62px]">
-            <!-- <img
-                 src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar) ?? asset('asset/images/logo.png')}}"
-                 alt=""> -->
-                 <img src="{{asset('asset/images/V-Store HaiPhong.png')}}" class="w-full" alt="">
-        </div>
-    </a>
+        <a href="{{route('screens.vstore.dashboard.index')}}" class="">
+            <div class=" w-[130px] h-[62px]">
+                @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
+                    <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
+                         alt="">
+                @else
+                    <img src="{{asset('home/img/logo-06.png')}}" class="w-full" alt="">
+                @endif
+            </div>
+        </a>
 
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -331,13 +337,14 @@
                     </ul>
                 </div>
                 <div class="user flex items-center gap-2">
-                <div class="w-[51px]">
-                    <div class="w-[50px] h-[65px] ">
-                        <img class="w-full cursor-pointer"
-                             src="{{asset('asset/images/userVstore.png')}}" class="w-full">
+                    <div class="w-[51px]">
+                        <div class="w-[50px] h-[65px] ">
+                            <img class="w-full cursor-pointer"
+                                 src="{{asset('asset/images/userVstore.png')}}">
+                        </div>
                     </div>
-                </div>
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">
+                        ID:{{\Illuminate\Support\Facades\Auth::user()->account_code}}</p>
                     <ul class="sub-nav-user">
                         <li><a href="{{route('screens.vstore.account.profile')}}"
                                class="font-medium flex justify-start items-center gap-2">

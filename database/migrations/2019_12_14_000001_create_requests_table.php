@@ -22,10 +22,11 @@ return new class extends Migration {
             $table->longText('images')->nullable();
             $table->integer('status')->default(0);
             $table->integer('user_id');
-            $table->string('code');
-            $table->integer('vstore_id');
+            $table->integer('vstore_id')->nullable();
             $table->double('discount_vshop');
             $table->string('note')->nullable();
+            $table->string('code');
+            $table->float('vat');
             $table->timestamps();
         });
     }

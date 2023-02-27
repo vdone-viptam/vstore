@@ -27,6 +27,7 @@ class LoginController extends Controller
     public function getFormRegisterNCC()
     {
 
+
         return view('auth.NCC.register_ncc');
     }
 
@@ -66,11 +67,11 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
-        if ($request->role_id != 4) {
+        if ($request->role_id == 3) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
-                'company_name' => 'required||unique:users',
+                'company_name' => 'required',
                 'tax_code' => 'required',
                 'address' => 'required',
                 'phone_number' => 'required',
@@ -81,7 +82,6 @@ class LoginController extends Controller
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà phân phối bắt buộc nhập',
                 'name.unique' => 'Tên công ty đã tồn tại',
-                'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -89,7 +89,7 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 
             ]);
-        } else {
+        } elseif ($request->role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
@@ -128,10 +128,34 @@ class LoginController extends Controller
 
 
             ]);
+        }elseif ($request->role_id == 2) {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|unique:users|email',
+                'name' => 'required|unique:users',
+                'company_name' => 'required||unique:users',
+                'tax_code' => 'required',
+                'address' => 'required',
+                'phone_number' => 'required',
+                'id_vdone' => 'required',
+
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'email.unique' => 'Email đã tồn tại',
+                'email.email' => 'Email không đúng dịnh dạng',
+                'name.required' => 'Tên bắt buộc nhập',
+                'name.unique' => 'tên công ty đã tồn tại',
+                'company_name.unique' => 'tên công ty đã tồn tại',
+                'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'address.required' => 'Địa chỉ bắt buộc nhập',
+                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+
+            ]);
         }
 
         if ($validator->fails()) {
-//            dd($validator->errors());
+
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         }
@@ -139,6 +163,15 @@ class LoginController extends Controller
 
         DB::beginTransaction();
         try {
+            if($request->role_id ==2){
+                $checkUs= User::where('tax_code',$request->tax_code)
+                    ->Where('role_id',2)
+                    ->first()
+                ;
+                if ($checkUs){
+                    return redirect()->back()->with('tax_code','Mã số thuế đã đang ký');
+                }
+            }
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
@@ -199,7 +232,7 @@ class LoginController extends Controller
             }
 //            return 1
         } catch (\Exception $e) {
-            dd($e->getMessage());
+//            dd($e->getMessage());
             DB::rollBack();
             return redirect()->back()->with('error', 'true');
 
@@ -237,7 +270,7 @@ class LoginController extends Controller
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
         } catch (\Exception $e) {
-            dd($e->getMessage());
+
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 

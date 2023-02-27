@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\BillProduct;
 use App\Models\Product;
+use App\Models\ProductWarehouses;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
+use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -51,7 +55,7 @@ class BillController extends Controller
      * @bodyParam name tên người dùng
      * @bodyParam phone_number số điện thoại
      * @bodyParam address địa chỉ
-     * @bodyParam data dữ liệu sản phẩm publish_id:mã sản phẩm, vshop_id:mã vshop,quantity:số lượng sản phẩm [{"publish_id":"MSP17621675","vshop_id":"MVS123123","quantity":12},{"publish_id":"MSP17621675","vshop_id":"MVS123123","quantity":12}]
+     * @bodyParam data dữ liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]
      * @return JsonResponse
      */
     public function add(Request $request){
@@ -75,22 +79,78 @@ class BillController extends Controller
             $bill->address=$request->address;
             $bill->save();
             $total = 0;
+            $array =[];
             foreach ($request->data as $value){
-                $product = Product::where('publish_id',$value['publish_id'])->first();
-                $bill_product = new BillProduct();
-                $bill_product->publish_id =$value['publish_id'];
-                $bill_product->vshop_id =$value['vshop_id'];
-                $bill_product->quantity =$value['quantity'];
-                $bill_product->user_id =$product->user_id;
-                $bill_product->vshop_id =$request->user_id;
-                $bill_product->price =$product->price;
-                $bill_product->bill_id = $bill->id;
-                $bill_product->product_id = $product->id;
-                $bill_product->vstore_id= $product->vstore_id;
+                $product = Product::where('id',$value['id'])->where('status',2)->first();
+                if (!$product) {
+                    return response()->json([
+                        'status_code' => 400,
+                        'data' => 'Không tìm thấy sản phẩm',
+                    ], 400);
+                }
+                $vshop = Vshop::where('id_pdone',$value['vshop_id'])->first();
+                $vshop_product = VshopProduct::where('id_pdone',$vshop->id)->where('product_id',$value['id'])
+                ->where('status',2)->first()
+                ;
+                if (!$vshop_product){
+                    $productWh = ProductWarehouses::where('product_id', $value['id'])->where('status', 1)->groupBy('ware_id')->get();
+                    if (count($productWh)==0){
+                        return response()->json([
+                            'status_code' => 400,
+                            'data' => 'sẩn phẩm đã hết',
 
-                $bill_product->save();
-//                return $bill_product;
-                $total += $bill_product->quantity =$value['quantity'] * $product->price ;
+                        ], 400);
+                    }
+
+                    $ware_id = [];
+                    foreach ($productWh as $value) {
+                        $ware_id[] = $value->ware_id;
+
+                    }
+                    $address = $bill->address;
+                    $warehouses = Warehouses::whereIn('id', $ware_id)->get();
+                    $result = app('geocoder')->geocode($address)->get();
+                    $coordinates = $result[0]->getCoordinates();
+                    $lat = $coordinates->getLatitude();
+                    $long = $coordinates->getLongitude();
+
+                    foreach ($warehouses as $value) {
+//                        $addressb = $value->address;
+//                        $resultb = app('geocoder')->geocode($addressb)->get();
+//                        $coordinatesb = $resultb[0]->getCoordinates();
+//                        $latb = $coordinatesb->getLatitude();
+//                        $longb = $coordinatesb->getLongitude();
+//                        $value->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
+                    }
+
+//            $warehouses= $warehouses->sortBy('distance','desc');
+                    $min = $warehouses[0];
+                    for ($i = 1; $i < count($warehouses); $i++) {
+                        if ($min->distance > $warehouses[$i]->distance) {
+                            $min = $warehouses[$i];
+                        }
+                    }
+
+
+//                    $result = isset($arr['abc']) ? $arr['abc'] : null;
+                }
+
+
+//                $product = Product::where('publish_id',$value['publish_id'])->first();
+//                $bill_product = new BillProduct();
+//                $bill_product->publish_id =$value['publish_id'];
+//                $bill_product->vshop_id =$value['vshop_id'];
+//                $bill_product->quantity =$value['quantity'];
+//                $bill_product->user_id =$product->user_id;
+//                $bill_product->vshop_id =$request->user_id;
+//                $bill_product->price =$product->price;
+//                $bill_product->bill_id = $bill->id;
+//                $bill_product->product_id = $product->id;
+//                $bill_product->vstore_id= $product->vstore_id;
+//
+//                $bill_product->save();
+////                return $bill_product;
+//                $total += $bill_product->quantity =$value['quantity'] * $product->price ;
             }
             $bill->total = $total;
             $bill->save();
@@ -127,5 +187,21 @@ class BillController extends Controller
             'message' => 'successfully retrieved information',
             'data'=>$bill
         ]);
+    }
+    public function haversineGreatCircleDistance(
+        $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+    {
+        // convert from degrees to radians
+        $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+                cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $angle * $earthRadius;
     }
 }

@@ -14,10 +14,12 @@ return new class extends Migration {
     {
         Schema::create('product_warehouses', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
             $table->integer('ware_id');
             $table->integer('product_id');
-            $table->integer('status');
+            $table->integer('status')->comment('0 cho nhap,1 nhap,2 xuat,3 cho xuat,4 tu choi xuat');
             $table->integer('amount');
+            $table->integer('bill_product_id');
             $table->timestamps();
         });
     }

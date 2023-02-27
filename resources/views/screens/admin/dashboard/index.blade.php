@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Doanh thu</p>
-                                        <p class="text-black text-base font-bold">7.210.000đ</p>
+                                        <p class="text-black text-base font-bold">-</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng</p>
-                                        <p class="text-black text-base font-bold">1.039</p>
+                                        <p class="text-black text-base font-bold">-</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng giao thành công</p>
-                                        <p class="text-black text-base font-bold">1099</p>
+                                        <p class="text-black text-base font-bold">-</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -122,7 +122,7 @@
                                             d="M9 17.4736C13.6318 17.4736 17.4668 13.6304 17.4668 9.00684C17.4668 4.375 13.6235 0.540039 8.9917 0.540039C4.36816 0.540039 0.533203 4.375 0.533203 9.00684C0.533203 13.6304 4.37646 17.4736 9 17.4736ZM9 13.896C8.76758 13.896 8.59326 13.73 8.59326 13.4893V12.875C7.44775 12.7671 6.49316 12.1362 6.25244 11.1484C6.22754 11.0654 6.21094 10.9741 6.21094 10.8828C6.21094 10.584 6.41846 10.3765 6.70898 10.3765C6.96631 10.3765 7.14062 10.5093 7.24023 10.8081C7.38135 11.3726 7.82959 11.8042 8.59326 11.9121V9.38867L8.53516 9.37207C7.10742 9.03174 6.36865 8.38428 6.36865 7.29688C6.36865 6.12646 7.29834 5.31299 8.59326 5.17188V4.58252C8.59326 4.3418 8.76758 4.17578 9 4.17578C9.23242 4.17578 9.40674 4.3418 9.40674 4.58252V5.17188C10.5024 5.29639 11.3823 5.93555 11.6064 6.85693C11.623 6.94824 11.6479 7.03955 11.6479 7.12256C11.6479 7.42139 11.4321 7.62891 11.1416 7.62891C10.8677 7.62891 10.7017 7.46289 10.6187 7.20557C10.4443 6.63281 10.021 6.26758 9.40674 6.15967V8.54199L9.52295 8.56689C11.0088 8.83252 11.7642 9.53809 11.7642 10.7002C11.7642 11.9951 10.7266 12.7671 9.40674 12.8916V13.4893C9.40674 13.73 9.23242 13.896 9 13.896ZM8.59326 8.32617V6.15967C7.87109 6.28418 7.43115 6.72412 7.43115 7.23877C7.43115 7.74512 7.77148 8.08545 8.53516 8.30957L8.59326 8.32617ZM9.40674 9.58789V11.9121C10.2783 11.8125 10.7017 11.356 10.7017 10.7583C10.7017 10.2188 10.4194 9.86182 9.58936 9.6377L9.40674 9.58789Z"
                                             fill="#FAAD14"/>
                                     </svg>
-                                    <span class="text-primary font-medium">159,243,900</span>
+                                    <span class="text-primary font-medium">-</span>
                                 </div>
                                 <div class="relative ">
                                     <select name=""
@@ -162,7 +162,7 @@
                 </div>
             </div>
         </div>
-       
+
 
         </div>
     </div>
@@ -186,7 +186,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Doanh số'
+                        text: '-'
                     }, legend: {
                         display: false
                     },
@@ -216,7 +216,7 @@
                     legend: {display: false},
                     title: {
                         display: true,
-                        text: 'Số đơn hàng'
+                        text: '-'
                     }
                 }
             });
