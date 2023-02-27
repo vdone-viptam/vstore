@@ -59,9 +59,7 @@
     <div class="h-full min-w-[200px]  -left-[300px] fixed menu_show z-20 bg-[#F2F8FF] ">
         <div class="flex items-center justify-center py-3 ">
             <div class="w-[60px] mx-auto">
-                <img class="w-full"
-                     src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
-                     alt="">
+                <img class="w-full " src="{{asset('asset/images/Logoncc.png')}}" alt="">
             </div>
         </div>
         <div class="px-4 py-3 box-shadow h-full max-w-[250px] ">

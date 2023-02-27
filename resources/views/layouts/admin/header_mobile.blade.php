@@ -57,7 +57,7 @@
 </style>
 {{--menu--}}
 <div class="menu md:hidden">
-    <div class="h-[100vh] min-w-[200px] absolute -left-[300px] menu_show z-20 bg-[#F2F8FF] ">
+    <div class="h-[100vh] min-w-[200px] fixed -left-[300px] menu_show z-20 bg-[#F2F8FF] ">
         <div class="flex items-center justify-center py-3 border-b border-b">
             <div class="w-[110px]">
                 <a href="{{route('screens.admin.dashboard.index')}}" class="">
