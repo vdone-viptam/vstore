@@ -42,14 +42,18 @@
         }
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0 h-screen md:block hidden z-[7]">
+<div class=" fixed left-0 h-screen md:block hidden z-[7] ">
 
+    <div class="flex  justify-center items-center my-4 gap-10 w-[305px]">
     <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-        <div class="w-[195px] h-[45px] mx-auto my-6">
+        <div class="w-[195px] h-[45px] ">
             <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
         </div>
     </a>
-    <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] overflow-y-scroll">
+    <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"> <img class="w-full" src="{{asset('asset/images/iconmenu.png')}}" alt=""></div>
+    </div>
+   <div class="w-full h-full bg-[#F2F8FF] side-bar-tab">
+   <div class="pr-[7px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] overflow-y-scroll overflow-x-hidden  ">
         {{--      Dashboard--}}
         <a href="{{route('screens.manufacture.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
@@ -356,5 +360,7 @@
             </div>
         </div>
     </div>
+   </div>
+    
 
 </div>

@@ -14,10 +14,6 @@
                              src="{{asset('asset/images/userNCC.png')}}" class="w-full">
                     </div>
                 </div>
-
-
-              
-
                 <ul class="sub-nav-user">
                     <li><a href="{{route('screens.manufacture.account.profile')}}"
                            class="font-medium flex justify-start items-center gap-2">

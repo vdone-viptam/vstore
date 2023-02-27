@@ -60,8 +60,9 @@
 </div>
 
 <div class="grid grid-cols-12">
+   
+    <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
     @include('layouts.manufacture.menu')
-    <div class="md:col-span-3 2xl:col-span-2 hidden md:block  z-[6]">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.manufacture.header')

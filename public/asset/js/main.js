@@ -241,8 +241,12 @@ $(document).ready(function () {
     $('.choose-tab .tab__menu').on('click', function () {
         $('.choose-tab .tab__menu').removeClass('active');
         $(this).addClass('active')
-        $('.choose-tab .list').addClass('hidden')
-        $(this).children('.list').removeClass('hidden')
+        if($(this).hasClass('active')){
+            $('.side-bar-tab').removeClass('small-menu')
+        }
+        // $('.choose-tab .list').addClass('hidden')
+        $(this).children('.list').toggleClass('hidden')
+       
     })
 
     $('.notify').on('click', function () {
@@ -253,6 +257,11 @@ $(document).ready(function () {
     $('.screen').on('click', function () {
         $(this).addClass('hidden')
         $('.sub-nav-notify').toggleClass('activeTb')
+    })
+
+    $('.btn-small-menu').on('click', function () {
+        $('.side-bar-tab').toggleClass('small-menu')
+     
     })
 })
 

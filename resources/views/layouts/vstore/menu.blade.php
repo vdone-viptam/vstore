@@ -38,21 +38,22 @@
         }
     }
 </style>
-<div class="bg-[#F2F8FF] fixed left-0 h-full md:block hidden z-[7]">
+<div class=" fixed left-0 h-full md:block hidden z-[7]">
+    <div class="flex  justify-center items-center my-4 gap-10 w-[305px]">
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
-        <div class=" w-[178px] h-[85px] mx-auto my-6">
-
-            @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
+        <div class="w-[195px] h-[45px] ">
+        @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
                 <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full object-contain"
                      alt="">
             @else
                 <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-fill" alt="">
             @endif
-
         </div>
     </a>
-
-    <div class="pr-[7px] flex flex-col  h-full choose-tab my-4 max-h-[700px] overflow-y-scroll w-full">
+    <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"> <img class="w-full" src="{{asset('asset/images/iconmenu.png')}}" alt=""></div>
+    </div>
+   <div class="w-full h-full bg-[#F2F8FF] side-bar-tab">
+    <div class="pr-[7px] flex flex-col  h-full choose-tab my-4 max-h-[700px]  w-full overflow-x-hidden">
         {{--      Tổng quan--}}
         <a href="{{route('screens.vstore.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
@@ -319,5 +320,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
