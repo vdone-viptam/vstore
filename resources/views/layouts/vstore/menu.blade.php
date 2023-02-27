@@ -43,7 +43,7 @@
         <div class=" w-[178px] h-[85px] mx-auto my-6">
 
             @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
-                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
+                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full object-contain"
                      alt="">
             @else
                 <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-fill" alt="">
@@ -52,7 +52,7 @@
         </div>
     </a>
 
-    <div class="pr-[7px] flex flex-col gap-6 h-full choose-tab my-4">
+    <div class="pr-[7px] flex flex-col  h-full choose-tab my-4 max-h-[700px] overflow-y-scroll w-full">
         {{--      Tổng quan--}}
         <a href="{{route('screens.vstore.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
