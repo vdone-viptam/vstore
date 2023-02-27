@@ -31,10 +31,10 @@
         class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
             <div class="w-[120px] h-[30px] md:hidden">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full" alt=""></a>
+                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
             </div>
             <div class="hidden md:block w-[190px] h-[52px]">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full" alt=""></a>
+                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
             </div>
 
             <a href="{{route('login_storage')}}"

@@ -38,14 +38,14 @@
 
             <div class="w-[170px] h-[45px] md:hidden">
                 <a href="./">
-                 <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt="">
+                 <img src="{{asset('home/img/logoncc.png')}}" class="w-full object-contain" alt="">
         </a>
             </div>
 
 
             <div class="hidden md:block w-[234px] h-[67px]">
                 <a href="./">
-                <img src="{{asset('home/img/logoncc.png')}}" class="w-full" alt="">
+                <img src="{{asset('home/img/logoncc.png')}}" class="w-full object-contain" alt="">
                 </a>
             </div>
 
