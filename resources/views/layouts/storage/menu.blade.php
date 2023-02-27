@@ -49,7 +49,7 @@
             <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
         </div>
     </a>
-    <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] ">
+    <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] overflow-y-scroll">
         {{--      Dashboard--}}
         <a href="{{route('screens.storage.dashboard.index')}}">
             <div class="flex flex-col gap-3 select-none cursor-pointer tab__menu tab__hover">
