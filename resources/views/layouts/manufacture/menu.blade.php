@@ -46,7 +46,7 @@
 
     <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
         <div class="w-[195px] h-[45px] mx-auto my-6">
-            <img class="w-full" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+            <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
         </div>
     </a>
     <div class="pr-[15px] flex flex-col gap-2 h-full choose-tab w-full max-h-[700px] overflow-y-scroll">
@@ -207,10 +207,10 @@
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
                 <li data-page="/"><a class="hover:underline" data-page="/"
                                      href="{{route('screens.manufacture.partner.index')}}">Quản lý hàng tại
-                        V-store</a></li>
+                        <br> V-Store</a></li>
                 <li data-page="report"><a class="hover:underline" data-page="report"
                                           href="{{route('screens.manufacture.partner.report')}}">Báo cáo
-                        V-store</a>
+                        V-Store</a>
                 </li>
             </ul>
         </div>
