@@ -160,6 +160,9 @@
             btn.setAttribute('disabled', 'true')
         }
     })
+    $('#form-log').submit(function (){
+        btn.setAttribute('disabled', 'true');
+    })
 </script>
 </body>
 </html>

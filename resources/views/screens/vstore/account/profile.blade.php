@@ -215,7 +215,7 @@
                                             <img
                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
                                                 alt=""
-                                                class="w-full  ">
+                                                class="w-full object-fill ">
                                         </div>
                                     </div>
                                     <button type="button"
