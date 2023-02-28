@@ -65,7 +65,7 @@ class BillController extends Controller
             "phone_number" : "0325500080",
              "total": 100000000,
               "address": "Tốt Động, Chương Mỹ, Hà Nội",
-               "city_id": 1,
+               "province": 1,
                 "district_id": 2,
                 }
       }
@@ -82,6 +82,7 @@ class BillController extends Controller
             'name'=> 'required',
             'phone_number'=>'required',
             'address'=>'required',
+            'province'=>'required|numberic|min:1',
             'data'=>'required'
         ]);
         if($validator->fails())

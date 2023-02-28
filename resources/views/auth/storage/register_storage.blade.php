@@ -375,5 +375,44 @@
         }
     });
 </script>
+<script !src="">
+    const divCity = document.getElementById('city_id');
+    const divDistrict = document.getElementById('district_id');
+    $(function () {
+
+
+        $.ajax({
+            url: "https://partner.viettelpost.vn/v2/categories/listProvince",
+            type: 'GET',
+            crossDomain: true,
+            success: function (result) {
+                console.log(result);
+                divCity.innerHTML +=
+                    `${
+                        result.map(item => `<option value="${item.code}">${item.name}</option>`).join('')
+                    }`;
+            }
+        });
+        divCity.addEventListener('change', (e) => {
+            const id = e.target.value;
+            if (+id !== 0) {
+                $.ajax({
+                    url: `https://provinces.open-api.vn/api/p/${id}/?depth=2`,
+                    type: 'GET',
+                    success: function (result) {
+                        divDistrict.innerHTML = '<option value="">Lựa chọn huyện</option>' + result.districts.map(districtitem => `<option value="${districtitem.code}">${districtitem.name}</option>`).join('');
+                        // $('#district_id').select2();
+
+                    }
+                });
+            } else {
+                divDistrict.innerHTML = '<option value="">Bạn chưa chọn thành phố</option>';
+            }
+
+        })
+    });
+    // $('#city_id').select2();
+
+</script>
 </body>
 </html>
