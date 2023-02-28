@@ -12,7 +12,8 @@
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
-
+    <meta property="og:image:width" content="120">
+    <meta property="og:image:height" content="100">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
             integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="

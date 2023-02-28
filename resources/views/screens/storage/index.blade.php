@@ -12,6 +12,8 @@
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
+    <meta property="og:image:width" content="120">
+    <meta property="og:image:height" content="100">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -14,7 +14,8 @@
     <meta property="og:description" content="" />
     <meta property="og:url" content="{{asset('')}}" />
     <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
-
+    <meta property="og:image:width" content="120">
+    <meta property="og:image:height" content="100">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
             integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
@@ -60,7 +61,7 @@
 </div>
 
 <div class="grid grid-cols-12">
-   
+
     <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
     @include('layouts.manufacture.menu')
     </div>

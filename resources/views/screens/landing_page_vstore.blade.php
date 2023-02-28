@@ -7,12 +7,19 @@
     <title>Trang chủ</title>
     <link rel="stylesheet" href="{{asset('landingpage/style.css')}}">
     <link rel="stylesheet" href="{{asset('landingpage/output.css')}}">
+    <meta property="og:title" content="V-store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
+    <meta property="og:url" content="{{asset('')}}" />
+    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}" />
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
+    <meta property="og:image:width" content="120">
+    <meta property="og:image:height" content="100">
 {{--    <link rel="stylesheet" href="../dist/output.css">--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
     @vite('resources/css/app.css')
 </head>
 <body>

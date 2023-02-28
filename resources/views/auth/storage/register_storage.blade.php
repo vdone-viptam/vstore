@@ -16,6 +16,8 @@
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
+    <meta property="og:image:width" content="120">
+    <meta property="og:image:height" content="100">
     @vite('resources/css/app.css')
 </head>
 <body>
