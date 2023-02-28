@@ -58,6 +58,24 @@ class BillController extends Controller
      * @bodyParam data dữ liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]
      * @return JsonResponse
      */
+
+    /*{
+        "info":{
+            "name" : "Ngô Văn Phong",
+            "phone_number" : "0325500080",
+             "total": 100000000,
+              "address": "Tốt Động, Chương Mỹ, Hà Nội",
+               "city_id": 1,
+                "district_id": 2,
+                }
+      }
+     *
+     *
+     *
+     *
+     */
+
+
     public function add(Request $request){
         $validator = Validator::make($request->all(), [
             'id_pdone' => 'required',

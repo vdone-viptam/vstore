@@ -94,17 +94,19 @@ class LoginController extends Controller
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
                 'company_name' => 'required||unique:users',
-                'tax_code' => 'required',
-                'address' => 'required',
-                'phone_number' => 'required',
-                'id_vdone' => 'required',
+                'tax_code' => 'required|max:255',
+                'address' => 'required|max:255',
+                'phone_number' => 'required|max:255',
+                'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
                 'image_storage' => 'required',
                 'image_pccc' => 'required',
                 'length' => 'required',
                 'with' => 'required',
-                'height' => 'required'
+                'height' => 'required',
+                'city_id' => 'required',
+                'district_id' => 'required'
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
@@ -125,10 +127,10 @@ class LoginController extends Controller
                 'length.required' => 'trường này không được trống',
                 'with.required' => 'trường này không được trống',
                 'height.required' => 'trường này không được trống',
-
-
+                'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
+                'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
-        }elseif ($request->role_id == 2) {
+        } elseif ($request->role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
@@ -163,13 +165,12 @@ class LoginController extends Controller
 
         DB::beginTransaction();
         try {
-            if($request->role_id ==2){
-                $checkUs= User::where('tax_code',$request->tax_code)
-                    ->Where('role_id',2)
-                    ->first()
-                ;
-                if ($checkUs){
-                    return redirect()->back()->with('tax_code','Mã số thuế đã đăng ký');
+            if ($request->role_id == 2) {
+                $checkUs = User::where('tax_code', $request->tax_code)
+                    ->Where('role_id', 2)
+                    ->first();
+                if ($checkUs) {
+                    return redirect()->back()->with('tax_code', 'Mã số thuế đã đang ký');
                 }
             }
             $user = new User();
