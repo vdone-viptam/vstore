@@ -52,7 +52,7 @@
             <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold text-[#FFF] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
         </div>
         <div class="flex flex-col justify-center w-full md:justify-start gap-14 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp <br> V-Done</h2>
+            <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp V-Done</h2>
             <span class="text-[#FFF] max-w-[450px]">Đầu tư ngay trên nền tảng thương mại điện tử mang lại doanh thu khủng, quản lý dễ dàng, vận hành đơn giản, tiết kiệm thời gian. Cùng đăng ký ngay</span>
         </div>
         <div class="max-w-[197px] mx-auto md:mx-0">

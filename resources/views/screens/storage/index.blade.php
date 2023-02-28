@@ -10,7 +10,7 @@
     <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
-    <meta property="og:image" content="{{asset('home/img/logokho.png')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
 
@@ -43,7 +43,7 @@
         </div>
         <div
             class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Cổng thương mại điện tử
                 <strong class="text-[#1E90FF] font-bold">V-Kho</strong>"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
                     class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
