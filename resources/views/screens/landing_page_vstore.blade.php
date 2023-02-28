@@ -88,9 +88,9 @@
     <div class="nav">
         <div class="flex justify-between items-center max-w-[1320px] mx-auto px-6 xl:px-0 py-4">
             <div class="w-[301px]">
-                <div class="w-[300px] h-[64px]">
+                <div class=" w-[300px] h-[64px]">
                     @if(!empty($logo))
-                        <a href="/"><img src="{{asset('/image/users/'.$logo)}}" alt="" class="w-[300px] h-[64px]"></a>
+                        <a href="/"><img src="{{asset('/image/users/'.$logo)}}" alt="" class="object-contain"></a>
                     @else
                         <a href="/"><img src="{{asset('landingpage/images/logo.png')}}" alt="" class="w-[300px] h-[64px]"></a>
                     @endif
@@ -299,7 +299,7 @@
                             </div>
                             <div class="has-sell">
                                 <span class="rating">
-                                  @php 
+                                  @php
                                     $random_star = rand(1,5);
                                   @endphp
                                       @for($i = 1; $i < 6;$i++ )
@@ -331,8 +331,8 @@
                                         @endif
 
                                       @endfor
-                         
-                      
+
+
                                 </span>
                                 <span class="sell">Đã bán 426</span>
                             </div>
@@ -366,7 +366,7 @@
                             </div>
                             <div class="has-sell">
                                 <span class="rating">
-                                  @php 
+                                  @php
                                     $random_star = rand(1,5);
                                   @endphp
                                       @for($i = 1; $i < 6;$i++ )
@@ -398,8 +398,8 @@
                                         @endif
 
                                       @endfor
-                         
-                      
+
+
                                 </span>
                                 <span class="sell">Đã bán 426</span>
                             </div>
@@ -432,7 +432,7 @@
                             </div>
                             <div class="has-sell">
                                 <span class="rating">
-                                  @php 
+                                  @php
                                     $random_star = rand(1,5);
                                   @endphp
                                       @for($i = 1; $i < 6;$i++ )
@@ -464,8 +464,8 @@
                                         @endif
 
                                       @endfor
-                         
-                      
+
+
                                 </span>
                                 <span class="sell">Đã bán 426</span>
                             </div>
@@ -491,7 +491,7 @@
     <div class="flex flex-col justify-center items-center gap-6 py-10">
         <h2 class="text-sciblue text-3xl font-bold uppercase text-center">Gợi ý hôm nay</h2>
         <div class="content-item grid grid-cols- md:grid-cols-3 lg:grid-cols-6 gap-2">
- 
+
         @foreach($user->vstoreProducts()->where('status',2)->orderBy('id','desc')->limit(18)->get() as $pro)
                 <a href="#">
                     <div class="item">
@@ -510,7 +510,7 @@
                             </div>
                             <div class="has-sell">
                                 <span class="rating">
-                                  @php 
+                                  @php
                                     $random_star = rand(1,5);
                                   @endphp
                                       @for($i = 1; $i < 6;$i++ )
@@ -542,8 +542,8 @@
                                         @endif
 
                                       @endfor
-                         
-                      
+
+
                                 </span>
                                 <span class="sell">Đã bán 426</span>
                             </div>

@@ -423,4 +423,12 @@ class ProductController extends Controller
 
         return $product->price;
     }
+    public function edit($id){
+        $categories = Category::all();
+        $product = Product::find($id);
+        if (!$product){
+            return redirect()->back();
+        }
+        return view('screens.manufacture.product.edit',compact('categories','product'));
+    }
 }

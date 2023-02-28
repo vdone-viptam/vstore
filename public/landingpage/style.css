@@ -20,7 +20,8 @@ img{
     font-weight: 500;
 }
 .nav{
-    background: linear-gradient(112.7deg, #005CB5 -1.64%, #0C83F6 79.17%);
+    /*background: linear-gradient(112.7deg, #005CB5 -1.64%, #0C83F6 79.17%);*/
+    background: linear-gradient(112.7deg, #c3e1ff -1.64%, #0C83F6 79.17%);
 }
 .box{
     background: #FFFFFF;
