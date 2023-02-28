@@ -246,13 +246,13 @@ $(document).ready(function () {
         }
         // $('.choose-tab .list').addClass('hidden')
         $(this).children('.list').toggleClass('hidden')
-       
+
     })
 
     $('.notify').on('click', function () {
         $('.screen').removeClass('hidden')
         $('.sub-nav-notify').toggleClass('activeTb')
-       
+
     })
     $('.screen').on('click', function () {
         $(this).addClass('hidden')
@@ -261,7 +261,6 @@ $(document).ready(function () {
 
     $('.btn-small-menu').on('click', function () {
         $('.side-bar-tab').toggleClass('small-menu')
-     
     })
 })
 

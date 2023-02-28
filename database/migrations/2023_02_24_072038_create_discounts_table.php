@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->double('discount', 10, 2);
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('user_id');
+            $table->string('user_id');
             $table->timestamps();
         });
     }
