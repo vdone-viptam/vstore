@@ -108,4 +108,7 @@ img{
     width: 238px;
     height: 535px;
 }
+.zthumb-t2 .thumb-zsharing img{
+    object-fit: contain !important;
+}
 

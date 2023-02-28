@@ -780,5 +780,8 @@ z-index: 5;
         max-width: 58px;
     }
 }
+.zthumb-t2 .thumb-zsharing img{
+    object-fit: contain !important;
+}
 
 
