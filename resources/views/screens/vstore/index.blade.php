@@ -35,7 +35,7 @@
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt=""></a>
             </div>
 
-            <a href="{{route('login_vstore')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[6px] md:py-[10px] md:px-10 font-semibold text-[#6A6A6A] border-[#6A6A6A] border-[1px] hover:text-[#FFF]">Đăng nhập</a>
+            <a href="{{route('login_vstore')}}" class="btn-register text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[6px] md:py-[10px] md:px-10 font-semibold text-[#FFF]  hover:opacity-70">Đăng nhập</a>
         </div>
         <div class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[70px] md:leading-[90px] text-lg ">"Cổng thương mại điện tử <br> <strong class="text-[#1e65ff] font-semibold">V-Store"</strong></h2>
