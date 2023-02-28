@@ -40,6 +40,9 @@ Route::domain(config('domain.api'))->group(function () {
         Route::post('/add-quantity/{cart_id}/{type}', [\App\Http\Controllers\Api\CartController::class, 'quantity']);
 
     });
+    Route::prefix('banners')->group(function () {
+        Route::get('/get-banner', [\App\Http\Controllers\Api\BannerController::class, 'getBannerHomePage']);
+    });
     Route::prefix('bill')->group(function () {
         Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
         Route::get('/detail/{id}', [\App\Http\Controllers\Api\BillController::class, 'detail']);

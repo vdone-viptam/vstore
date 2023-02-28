@@ -83,7 +83,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <a href="{{route('screens.admin.category.create')}}">Thêm mới</a>
+                            <a href="{{route('screens.admin.banner.create')}}">Thêm mới</a>
                         </button>
 
                     </div>
@@ -112,7 +112,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(false)
+                        @if(count($banners) > 0)
+                            @foreach($banners as $banner)
+                                <tr>
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{$banner->name}}</td>
+                                    <td><img src="{{asset($banner->img)}}" style="height: 125px !important;margin: auto"
+                                             alt=""></td>
+                                    <td><a href="{{route('screens.admin.banner.edit',['id' => $banner->id])}}"
+                                           class="">Cập
+                                            nhật</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @else
                             <tr>
                                 <td colspan="4">Không có dữ liệu phù hợp</td>
@@ -122,9 +134,9 @@
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-{{--                    <span class="text-sm text-title">Tổng: <strong--}}
-{{--                            class="font-bold">{{$sumRecordCategory}}</strong></span>--}}
-{{--                    {{$categories->withQueryString()->links()}}--}}
+                    {{--                    <span class="text-sm text-title">Tổng: <strong--}}
+                    {{--                            class="font-bold">{{$sumRecordCategory}}</strong></span>--}}
+                    {{--                    {{$categories->withQueryString()->links()}}--}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
