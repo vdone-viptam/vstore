@@ -61,7 +61,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
-//    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
+    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });

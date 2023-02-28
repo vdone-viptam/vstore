@@ -169,7 +169,7 @@ class LoginController extends Controller
                     ->first()
                 ;
                 if ($checkUs){
-                    return redirect()->back()->with('tax_code','Mã số thuế đã đang ký');
+                    return redirect()->back()->with('tax_code','Mã số thuế đã đăng ký');
                 }
             }
             $user = new User();
@@ -180,7 +180,9 @@ class LoginController extends Controller
             $user->password = Hash::make(rand(100000, 999999));
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
-
+            if ($request->role_id ==3 ){
+                $user->branch = 1;
+            }
             if ($request->id_vdone_diff) {
                 $user->id_vdone_diff = $request->id_vdone_diff;
             }

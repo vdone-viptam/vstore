@@ -130,7 +130,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user && $user->role_id == 3) {
-            $user->branch = 1;
+            $user->branch = 2;
             $user->save();
         }
         return redirect()->route('screens.admin.user.list_user');
