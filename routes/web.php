@@ -112,6 +112,15 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::post('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('screens.admin.category.update');
         Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('screens.admin.category.destroy');
     });
+    Route::prefix('banners')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\BannerController::class, 'index'])->name('screens.admin.banner.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\BannerController::class, 'create'])->name('screens.admin.banner.create');
+        Route::post('/store', [\App\Http\Controllers\Admin\BannerController::class, 'store'])->name('screens.admin.banner.store');
+        Route::get('/edit/{id}', [\App\Http\Controllers\Admin\BannerController::class, 'edit'])->name('screens.admin.banner.edit');
+        Route::post('/update/{id}', [\App\Http\Controllers\Admin\BannerController::class, 'update'])->name('screens.admin.banner.update');
+
+
+    });
     Route::prefix('users')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
         Route::get('/register-account', [\App\Http\Controllers\Admin\UserController::class, 'getListRegisterAccount'])->name('screens.admin.user.index');
