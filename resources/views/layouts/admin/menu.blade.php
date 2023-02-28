@@ -49,8 +49,10 @@
         <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-contain" alt="">
         </div>
     </a>
+
     <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"> <img class="w-full" src="{{asset('asset/images/iconmenu.png')}}" alt=""></div>
     </div>
+
    <div class="w-full h-full bg-[#F2F8FF] side-bar-tab">
     <div class="pr-[7px] flex flex-col  h-full choose-tab my-4 w-full max-h-[700px] overflow-y-scroll overflow-x-hidden">
         {{--      Tổng quan--}}
