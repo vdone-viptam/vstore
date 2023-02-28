@@ -23,7 +23,7 @@ class VstoreController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam limit Giới hạn bản ghi trên một trang
-     * @urlParam branch 0 là vstore thường, 1 là vstore cấp 1 (địa phương)
+     * @urlParam branch 1 là vstore thường, 2 là vstore cấp 1 (địa phương)
      * @urlParam account_code tìm kiếm mã vstore
      * @urlParam name tìm kiếm mã name
      * @urlParam company_name tìm kiếm mã tên công ty
@@ -32,7 +32,7 @@ class VstoreController extends Controller
     public function index(Request $request){
         $validator = Validator::make($request->all(), [
 
-            'branch' => 'numeric|min:0|max:1',
+            'branch' => 'numeric|min:1|max:2',
 
         ], []);
         if ($validator->fails()) {
