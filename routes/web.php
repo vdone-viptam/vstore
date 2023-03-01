@@ -221,6 +221,8 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
         Route::get('/edit/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
+        Route::post('/update/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'update'])->name('screens.manufacture.product.update');
+
     });
     Route::prefix('discount')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');

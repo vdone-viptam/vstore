@@ -297,16 +297,12 @@ class ProductController extends Controller
                 'vat.max' => 'VAT lớn nhất 99',
 
             ]);
-            if ($request->sl[0] == '' ||$request->moneyv[0] ==''){
-                return redirect()->back()->withErrors(['sl'=>'Vui lòng nhập chiết khấu hàng nhập sẵn']);
+            if ($request->sl[0] == '' || $request->moneyv[0] == '') {
+                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn']);
             }
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
             }
-//            if ($request->ward_id[0] == 0) {
-//                return redirect()->back()->withErrors(['ward_id' => 'Thông tin kho hàng bắt buộc nhập'])->withInput()->with('validate', 'failed');
-//
-//            }
 
             $object = new Application();
             $object->product_id = $request->product_id;
@@ -423,12 +419,104 @@ class ProductController extends Controller
 
         return $product->price;
     }
-    public function edit($id){
+
+    public function edit($id)
+    {
         $categories = Category::all();
         $product = Product::find($id);
-        if (!$product){
+        $images = [];
+        foreach (json_decode($product->images) as $image) {
+            $images[] = asset($image);
+        }
+        $images = json_encode($images);
+        if (!$product) {
             return redirect()->back();
         }
-        return view('screens.manufacture.product.edit',compact('categories','product'));
+        return view('screens.manufacture.product.edit', compact('categories', 'product', 'images'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'price' => 'required',
+            'brand' => 'required',
+            'category_id' => 'required',
+            'weight' => 'required',
+            'images' => 'required',
+            'description' => 'required'
+
+        ], [
+            'name.required' => 'Trường này không được trống',
+            'price.required' => 'Trường này không được trống',
+            'brand.required' => 'Trường này không được trống',
+            'category_id.required' => 'Trường này không được trống',
+            'weight.required' => 'Trường này không được trống',
+            'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
+            'description.required' => 'Mô tả bắt buộc nhập'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+        try {
+
+            $product = Product::find($id);
+            $product->name = $request->name;
+            $product->category_id = $request->category_id;
+            $product->price = $request->price;
+            $product->description = $request->description;
+            $product->brand = $request->brand;
+            $product->material = $request->material;
+            $product->weight = $request->weight;
+            $product->manufacturer_name = $request->manufacturer_name;
+            $product->unit_name = $request->unit_name;
+            $product->import_date = $request->import_date;
+            $product->origin = $request->origin;
+            $product->length = $request->length ?? 0;
+            $product->with = $request->with ?? 0;
+            $product->height = $request->height ?? 0;
+            $product->volume = $request->volume ?? 0;
+            $product->import_unit = $request->import_unit ?? '';
+            $product->import_address = $request->import_address ?? '';
+            $product->packing_type = $request->packing_type;
+            $product->status = 0;
+            // Upload Image
+            if ($request->hasFile('video')) {
+                $filenameWithExt = $request->file('video')->getClientOriginalName();
+                //Get just filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just ext
+                $extension = $request->file('video')->getClientOriginalExtension();
+                // Filename to store
+                $fileNameToStore = $filename . '_' . time() . ' . ' . $extension;
+                $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
+
+                $path = str_replace('public/', '', $path);
+
+                $product->video = 'storage/' . $path;
+            }
+            $photo_gallery = [];
+
+            foreach (json_decode($request->images) as $image) {
+                try {
+                    if (strpos($image, 'storage/products') !== false) {
+                        $photo_gallery[] = explode(config('domain.ncc') . "/", $image)[1];
+                    } else {
+                        $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
+
+                    }
+                } catch (\Exception $exception) {
+                    return redirect()->back();
+                }
+            }
+            $product->images = json_encode($photo_gallery);
+            $product->save();
+
+            return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
     }
 }
