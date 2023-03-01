@@ -15,10 +15,11 @@ return new class extends Migration {
         Schema::create('vshop', function (Blueprint $table) {
             $table->id();
             $table->string('id_pdone')->comment('Id pdone');
-            $table->integer('id_product')->comment('id sản phẩm');
-            $table->integer('id_category')->comment('id danh mục sản phẩm');
-            $table->string('id_ncc')->comment('id nhà cung cấp');
-            $table->string('id_npp')->comment('id nhà phân phối');
+            $table->string('name')->comment('tên vshop');
+            $table->string('name_adress')->comment('tên địa chỉ');
+            $table->string('phone_number')->comment('số điện thoại');
+            $table->string('district')->comment('quận,huyện');
+            $table->integer('province')->comment('tỉnh thành');
             $table->timestamps();
         });
     }

@@ -228,8 +228,6 @@ class ProductController extends Controller
      * API dùng để Vshop thêm sản phẩm
      *
      * @param Request $request
-     * @urlParam page Số trang
-     * @urlParam limit Giới hạn bản ghi trên một trang
      * @param  $id mã sản phẩm
      * @bodyParam  id_pdone id của pdone
      * @return \Illuminate\Http\JsonResponse
@@ -260,7 +258,7 @@ class ProductController extends Controller
         }
         try {
             DB::table('vshop_products')->insert([
-                'vshop_id' => $vshop->id,
+                'id_pdone' => $vshop->id_pdone,
                 'product_id' => $id,
                 'status' => 1,
                 'created_at' => Carbon::now()

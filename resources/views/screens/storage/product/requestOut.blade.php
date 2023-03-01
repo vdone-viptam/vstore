@@ -1,11 +1,11 @@
 @extends('layouts.storage.main')
 
 @section('modal')
-    <div id="modal1">
+    <div id="modal5">
 
     </div>
 @endsection
-@section('page_title','Danh sách đơn yêu cầu')
+@section('page_title','Yêu cầu xuât kho')
 
 @section('content')
     <form action="" id="form">
@@ -116,33 +116,34 @@
                                 Mã yêu cầu
                             </th>
                             <th>
-                                Tên sản phẩm
+                                địa chỉ
                             </th>
                             <th>
-                                Ngành hàng
+                                tổng tiền tiền
                             </th>
                             <th>
                                 Ngày yêu cầu
                             </th>
-
+                            <th>Chi tiêt</th>
                             <th>
                                 Trạng thái yêu cầu
                             </th>
-                            <th></th>
+                            <th>Xét duyệt</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($product as $value)
+                        @foreach($bill_detai as $value)
                             <tr>
                                 <td>{{$value->code}}</td>
-                                <td>{{$value->product_name}}</td>
-                                <td>{{$value->category_name}}</td>
-                                <td>{{$value->created_at}}</td>
-
+                                <td>{{$value->address}}</td>
+                                <td>{{$value->total}}</td>
+                                <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d-m-Y')}}</td>
+                                <td> <a href="#" data-id="{{$value->id}}"
+                                        class="more-details text-primary underline"> Xem</a></td>
                                 <td>
 
-                                    @if($value->status ==3)
+                                    @if($value->export_status ==0)
                                         <div
                                             class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -153,7 +154,8 @@
                                             </svg>
                                             Đang chờ xét duyệt
                                         </div>
-                                    @elseif($value->status == 2)
+                                    @elseif($value->export_status == 1)
+
                                         <div
                                             class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                             <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
@@ -163,7 +165,8 @@
                                             </svg>
                                             Đồng ý
                                         </div>
-                                    @elseif($value->status == 4)
+
+                                    @elseif($value->export_status == 2)
                                         <div
                                             class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                             <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
@@ -177,14 +180,14 @@
 
                                 </td>
                                 <td>
-                                        @if($value->status==3)
-                                        <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
+                                        @if($value->export_status==0)
+                                        <a href="{{route('screens.storage.product.updateRequestOut',['status'=>1,'id' => $value->id])}}">
                                             <button type="button"
                                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                                 Đồng ý
                                             </button>
                                         </a>
-                                        <a href="{{route('screens.storage.product.updateRequestOut',['status'=>4,'id' => $value->id])}}">
+                                        <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
                                             <button type="button"
                                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                                 Từ chối
@@ -235,5 +238,19 @@
             form.submit();
         });
 
+    </script>
+    <script>
+        $('.more-details').each(function (i, e) {
+            $(this).on('click', (o) => {
+                $.ajax({
+                    url: '{{route('screens.storage.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&product=abc',
+                    success: function (result) {
+                        // $('#modal5').html('');
+                        $('#modal5').html(result);
+                        $('.modal-details').toggleClass('show-modal')
+                    },
+                });
+            });
+        });
     </script>
 @endsection

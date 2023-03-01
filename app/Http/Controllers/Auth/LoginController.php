@@ -262,6 +262,7 @@ class LoginController extends Controller
                 $login = new Otp();
                 $login->code = rand(100000, 999999);
                 $login->user_code = $userLogin->id;
+                $login->number = 0;
                 $login->save();
                 Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($userLogin) {
                     $message->to($userLogin->email);
@@ -374,11 +375,12 @@ class LoginController extends Controller
     public function post_OTP(Request $request, $token1)
     {
         $otp = Otp::where('user_code', $request->id)->where('code', $request->otp)->first();
+
         $now = Carbon::now();
 
 
         if ($otp) {
-            if ($now->diffInMinutes($otp->created_at) >= 1) {
+            if ($now->diffInMinutes($otp->created_at) >= 3) {
                 return redirect()->back()->with('error', 'Mã xác minh đã hết hạn');
             }
             $user = User::find($request->id);
@@ -401,6 +403,15 @@ class LoginController extends Controller
                 return redirect()->route('screens.storage.dashboard.index');
             }
         } else {
+            $checkOtpNumber = Otp::where('user_code',$request->id)->where('number',4)->first();
+            if ($checkOtpNumber){
+                $removeOtp = Otp::where('user_code',$request->id)->delete();
+                return redirect()->back()->with('error', 'Mã xác đã nhập sai vượt quá 5 lần vui lòng gửi lại mã');
+            }
+
+            $otp = Otp::where('user_code', $request->id)->update([
+                'number'=>DB::raw('number+1')
+            ]);
             return redirect()->back()->with('error', 'Mã xác minh không chính xác');
         }
 
@@ -409,6 +420,7 @@ class LoginController extends Controller
     public function reOtp(Request $request)
     {
         $user = User::find($request->id);
+        $otp = Otp::where('user_code',$user->id)->delete();
         $login = new Otp();
         $login->code = rand(100000, 999999);
         $login->user_code = $user->id;

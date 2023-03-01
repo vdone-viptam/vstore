@@ -21,7 +21,14 @@ use Illuminate\Support\Facades\Validator;
 class  VShopController extends Controller
 {
 
-
+    public function index(){
+        $vshop = Vshop::all();
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'Lấy thông tin thành công',
+            'data'=>$vshop
+        ]);
+    }
     public function getProductByIdPdone(Request $request)
     {
         $limit = $request->limit ?? 10;

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the "api" middleware group. Enjoy building your API!
 |
 */
 
@@ -68,24 +69,25 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });
+    Route::prefix('vshop')->group(function () {
+        Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
+        Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
+        Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
+        Route::prefix('address')->group(function () {
+            Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
+            Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
+            Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
+        });
+
+    });
+    Route::prefix('discount')->group(function () {
+        Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
+        Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
+    });
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
 
-Route::prefix('vshop')->group(function () {
-    Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
-    Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
-    Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
-    Route::prefix('address')->group(function () {
-        Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
-        Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
-        Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
-    });
 
-});
-Route::prefix('discount')->group(function () {
-    Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
-    Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
-});
 
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {
 ////    Route::get('amount',[\App\Http\Controllers\Manufacture\WarehouseController::class,'amount'])->name('amount');

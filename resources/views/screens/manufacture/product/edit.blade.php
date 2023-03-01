@@ -196,7 +196,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Chất liệu</span>
                             <input type="text" id="material" name="material"
-                                   placeholder="Nhập chất liệu sản phẩm" value="{{$product->material}}}"
+                                   placeholder="Nhập chất liệu sản phẩm" value="{{$product->material}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('material')
                             <p class="text-red-600">{{$message}}</p>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\BillDetail;
+use App\Models\BillProduct;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
@@ -67,17 +69,20 @@ class ProductController extends Controller
     public function requestOut(Request $request)
     {
         $limit = $request->limit ?? 10;
-       $product = Warehouses::join('product_warehouses','warehouses.id','=','product_warehouses.ware_id')
-                    ->join('products','product_warehouses.product_id','=','products.id')
-                    ->join('categories','products.category_id','=','categories.id')
-            ->whereIn('product_warehouses.status',[2,3,4])
-           ->where('warehouses.user_id',Auth::id())
-           ->select('product_warehouses.id','product_warehouses.code','product_warehouses.status as status','products.name as product_name','categories.name as category_name','product_warehouses.created_at','product_warehouses.status')
-           ->paginate($limit)
-       ;
-
-        $count = count($product);
-        return view('screens.storage.product.requestOut', compact('product','count'));
+//       $product = Warehouses::join('product_warehouses','warehouses.id','=','product_warehouses.ware_id')
+//                    ->join('products','product_warehouses.product_id','=','products.id')
+//                    ->join('categories','products.category_id','=','categories.id')
+//            ->whereIn('product_warehouses.status',[2,3,4])
+//           ->where('warehouses.user_id',Auth::id())
+//           ->select('product_warehouses.id','product_warehouses.code','product_warehouses.status as status','products.name as product_name','categories.name as category_name','product_warehouses.created_at','product_warehouses.status')
+//           ->paginate($limit)
+//       ;
+//
+//        $count = count($product);
+        $count = 123;
+        $warehouses = Warehouses::where('user_id',Auth::id())->first();
+        $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc')->paginate($limit);
+        return view('screens.storage.product.requestOut', compact('bill_detai','count'));
     }
 
     public function updateRequest($status, Request $request)
@@ -88,13 +93,27 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Cập nhật đơn gửi hàng thành công');
     }
     public function updateRequestOut($status,Request $request){
-        if ($status != 2 || $status !=4){
-            return redirect()->back();
-        }
-        $product_warehouses =
-        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
+//        return 1;
+//        if ($status != 1 || $status !=2){
+//            return redirect()->back();
+//        }
+//        return $status;
+
+        DB::table('bill_details')->where('id', $request->id)->update(['export_status' => $status]);
 
 
         return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
+    }
+    public function detail(Request $request)
+    {
+        $bill_detail = BillDetail::where('id',$request->id)->first();
+
+        $products = BillProduct::join('products','bill_product.product_id','=','products.id')->where('bill_detail_id',$bill_detail->id)
+            ->select('bill_product.code as code','bill_product.quantity','products.name as name')
+
+            ->get();
+        $total = $bill_detail->total;
+        return view('screens.storage.product.detailOut',compact('products','total'));
+
     }
 }

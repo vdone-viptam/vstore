@@ -19,9 +19,83 @@ class TestController extends Controller
 //        $lat = $coordinates->getLatitude();
 //        $long = $coordinates->getLongitude();
 //        return $lat.','.$long;
-        $vshop_product = VshopProduct::where('id_pdone',11212)
-            ->where('product_id',25)->first();
-        return $vshop_product;
+
+        $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+            'USERNAME' => '0813635868',
+            'PASSWORD' => 'Ducanh6629417!',
+        ]);
+//        return $login['data']['token'];
+        $loginLong = Http::withHeaders(
+            [
+                'Content-Type'=>' application/json',
+                'Token'=>$login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/user/ownerconnect', [
+            'USERNAME' => '0813635868',
+            'PASSWORD' => 'Ducanh6629417!',
+        ] );
+//        return $loginLong['data'];
+        // lấy danh sách phù hợp với hành chình
+
+        $get_list = Http::withHeaders(
+            [
+                'Content-Type'=>' application/json',
+                'Token'=>$login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
+            'SENDER_DISTRICT'=>12,
+            'SENDER_PROVINCE'=>1,
+            'RECEIVER_DISTRICT'=>12,
+            'RECEIVER_PROVINCE'=>1,
+            'PRODUCT_TYPE'=>'HH',
+            'PRODUCT_WEIGHT'=>100000,
+            'PRODUCT_PRICE'=>500000,
+            'MONEY_COLLECTION'=>"500000",
+            'TYPE'=>1,
+            "LIST_ITEM"=>[
+
+            ]
+        ] );
+//            return json_decode($get_list);
+            // tính cước
+        $tinh_cuoc = Http::withHeaders(
+            [
+                'Content-Type'=>' application/json',
+                'Token'=>$login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/getPrice' ,[
+            "PRODUCT_WEIGHT"=>100,
+            "PRODUCT_PRICE"=>96000,
+            "MONEY_COLLECTION"=>0,
+            "ORDER_SERVICE_ADD"=>"",
+            "ORDER_SERVICE"=>"VCBO",
+            "SENDER_DISTRICT"=>12,
+            "SENDER_PROVINCE"=>1,
+            "RECEIVER_DISTRICT"=>12,
+            "RECEIVER_PROVINCE"=>1,
+            "PRODUCT_TYPE"=>"HH",
+            "NATIONAL_TYPE"=>1
+        ]);
+//        return json_decode($tinh_cuoc) ;
+        // tạo đơn
+        $create = Http::withHeaders(
+            [
+                'Content-Type'=>' application/json',
+                'Token'=>$login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' );
+//        return $create;
+        $tinh_thanh = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
+        foreach ($tinh_thanh['data'] as $va){
+            if ($va['PROVINCE_ID'] ==4){
+                return $va;
+            }
+        }
+        return $tinh_thanh['data'];
+
+//            $b = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=1');
+//            return $b['data'];
+
     }
 
     public function haversineGreatCircleDistance(

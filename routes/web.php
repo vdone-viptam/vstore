@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//dd(1);
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
 Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'formForgotPassword'])->name('form_forgot_password');
 Route::post('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'postForgotPassword']);
@@ -73,6 +74,7 @@ Route::group(['domain' => config('domain.vstore')], function () {
 
          Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
          Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
+         Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detail'])->name('screens.storage.product.detail');
      });
      Route::prefix('account')->group(function () {
          Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');

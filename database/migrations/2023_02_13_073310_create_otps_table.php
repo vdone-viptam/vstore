@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('code');
             $table->string('user_code');
+            $table->integer('number')->default(0);
             $table->timestamps();
         });
     }

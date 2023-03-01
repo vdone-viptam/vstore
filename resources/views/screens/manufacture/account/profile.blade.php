@@ -120,9 +120,16 @@
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Link Website:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
-                                <input type="text" name="link_website"
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->link_website ?? asset('p/'.$infoAccount->slug)}}">
+                                @if($infoAccount->link_web =='')
+                                    <input type="text" name="link_website"
+                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm"
+                                           value="{{$infoAccount->link_website ?? asset('p/'.$infoAccount->slug)}}">
+                                @else
+                                    <input type="text" name="link_website"
+                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
+                                           value="{{$infoAccount->link_web }}">
+                                @endif
+
                                 @error('link_website')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
@@ -233,7 +240,14 @@
                                 </div>
                                 <div class="flex flex-wrap lg:flex-nowrap justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Link website: </span>
-                                    <span><a class="underline" href="{{$infoAccount->link_website ?? asset('p/'.$infoAccount->slug)}}">{{$infoAccount->link_website ?? asset('p/'.$infoAccount->slug)}}</a></span>
+
+                                    <span>
+                                        @if($infoAccount->link_web == '')
+                                            <a class="underline" href="{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}">{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}</a>
+                                        @else
+                                            <a class="underline" href="{{$infoAccount->link_web}}">{{$infoAccount->link_web}}</a>
+                                        @endif
+                                    </span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 ">
                                     <a href="#"
