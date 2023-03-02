@@ -219,7 +219,7 @@ class LoginController extends Controller
                     'normal_storage' => $normal_storage,
                 ];
                 $user->storage_information = json_encode($storage_information);
-                $user->city_id = $request->city_id;
+                $user->provinceId = $request->city_id;
                 $user->district_id = $request->district_id;
             }
             $user->save();
