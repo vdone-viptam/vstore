@@ -11,12 +11,13 @@
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <meta property="og:title" content="V-ncc" />
+    <meta property="og:title" content="V-ncc"/>
     <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="{{asset('')}}" />
-    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
@@ -60,11 +61,29 @@
             </svg>
         </div>
         <div class="content pt-3 px-3 border-r-[1px] border-l-[1px] border-grey max-h-[500px] overflow-y-auto">
-            VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng như phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng dụng, dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi nêu rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam, Inc. cung cấp cho bạn. <br>
-            Bạn không mất phí sử dụng các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của những Điều khoản này, trừ khi chúng tôi có quy định khác. Thay vào đó, doanh nghiệp, tổ chức và những cá nhân khác sẽ phải trả tiền cho chúng tôi để hiển thị quảng cáo về sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của chúng tôi, bạn đồng ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng có thể phù hợp với bạn và sở thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để xác định những quảng cáo được cá nhân hóa sẽ hiển thị cho bạn. <br>
-            Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo, cũng không chia sẻ thông tin trực tiếp nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu đối tượng mà họ muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người có thể quan tâm. <br>
-            Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những đơn vị này nắm được cách mọi người tương tác với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá nhân hóa trên Sản phẩm của VDONE theo các điều khoản này.
-            Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được mô tả bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào để xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
+            VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng như
+            phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng dụng,
+            dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi nêu
+            rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam, Inc.
+            cung cấp cho bạn. <br>
+            Bạn không mất phí sử dụng các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của những Điều khoản này,
+            trừ khi chúng tôi có quy định khác. Thay vào đó, doanh nghiệp, tổ chức và những cá nhân khác sẽ phải trả
+            tiền cho chúng tôi để hiển thị quảng cáo về sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của
+            chúng tôi, bạn đồng ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng có thể phù hợp với bạn và sở
+            thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để xác định những quảng cáo được cá nhân hóa sẽ
+            hiển thị cho bạn. <br>
+            Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo, cũng không chia sẻ thông tin trực tiếp
+            nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi
+            được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu đối
+            tượng mà họ muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người có thể quan
+            tâm. <br>
+            Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những đơn vị này nắm được cách mọi người tương tác
+            với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá nhân
+            hóa trên Sản phẩm của VDONE theo các điều khoản này.
+            Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân của
+            bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được mô tả
+            bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào để
+            xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
         </div>
     </div>
 </div>
@@ -72,13 +91,13 @@
     @csrf
     <div class=" grid grid-cols-1 lg:grid-cols-2">
         <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
-{{--            <a href="{{route('login_ncc')}}}"--}}
-{{--               class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
-{{--                <div>--}}
-{{--                    <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
-{{--                </div>--}}
-{{--                <span class="text-title">Quay lại</span>--}}
-{{--            </a>--}}
+            {{--            <a href="{{route('login_ncc')}}}"--}}
+            {{--               class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
+            {{--                <div>--}}
+            {{--                    <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
+            {{--                </div>--}}
+            {{--                <span class="text-title">Quay lại</span>--}}
+            {{--            </a>--}}
             <div class="w-[162px]">
                 <img src="{{asset('asset/images/logoncc.png')}}" alt="">
             </div>
@@ -93,7 +112,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
-                <input type="text" name="email" id="email" placeholder="Nhập email"
+                <input type="text" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('email')
@@ -101,7 +120,7 @@
             @enderror
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên nhà cung cấp</span>
-                <input type="text" name="name" id="name" placeholder="Nhập tên nhà cung cấp"
+                <input type="text" name="name" id="name" placeholder="Nhập tên nhà cung cấp" value="{{old('name')}}"
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('name')
@@ -110,6 +129,7 @@
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
                 <input type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
+                       value="{{old('company_name')}}"
                        class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('company_name')
@@ -118,6 +138,7 @@
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
                 <input type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                       value="{{old('tax_code')}}"
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @if(\Illuminate\Support\Facades\Session::has('tax_code'))
@@ -126,9 +147,31 @@
             @error('tax_code')
             <p class="text-danger text-red-500">{{$message}}</p>
             @enderror
+            <div class="grid grid-cols-2 gap-2 w-full">
+                <div>
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
+                    <select name="city_id" id="city_id"
+                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <option value="">Lựa chọn tỉnh (thành phố)</option>
+                    </select>
+                    @error('city_id')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div>
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
+                    <select name="district_id" id="district_id"
+                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <option value="">Lựa chọn quận (huyện)</option>
+                    </select>
+                    @error('district_id')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+            </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
-                <input type="text" name="address" id="address" placeholder="Nhập địa chỉ"
+                <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('address')
@@ -139,7 +182,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
-                <input type="text" name="phone_number" placeholder="Nhập số điện thoại"
+                <input type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('phone_number')
@@ -160,7 +203,7 @@
                             fill="black" fill-opacity="0.45"/>
                         </svg>
                         </span>
-                <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện"
+                <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_phone')}}"
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
             @error('id_vdone')
@@ -169,15 +212,17 @@
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"> Đại diện thêm</span>
                 <input type="text" name="id_vdone_diff" placeholder="Nhập ID đại diện thêm"
+                       value="{{old('id_vdone_diff')}}"
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
             </div>
 
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox" required> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a href="#"
-                                                                                                              onclick="$('.modal-hd').toggleClass('show-modal')"
-                                                                                                              class="underline text-blue-700">Xem
+    <div class="text-center my-4"><input type="checkbox" required> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a
+            href="#"
+            onclick="$('.modal-hd').toggleClass('show-modal')"
+            class="underline text-blue-700">Xem
             thêm</a></div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
@@ -258,6 +303,34 @@
             form.submit();
         }
     });
+</script>
+<script !src="">
+    const divCity = document.getElementById('city_id');
+    const divDistrict = document.getElementById('district_id');
+
+    fetch('{{route('get_city')}}', {
+        mode: 'no-cors',
+
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById('city_id').innerHTML += data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+        })
+        .catch(console.error);
+
+    divCity.addEventListener('change', (e) => {
+        fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                divDistrict.innerHTML += data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+            })
+            .catch(console.error);
+    });
+
 </script>
 </body>
 </html>

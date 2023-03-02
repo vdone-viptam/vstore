@@ -19,7 +19,7 @@
                     <div class="w-[262px] h-[262px] mx-auto">
                         <img src="{{asset('asset/images/success.gif')}}" class="w-full" alt="">
                     </div>
-                    <h2 class="text-title text-2xl font-medium">Thêm sản phẩm thành công!</h2>
+                    <h2 class="text-title text-2xl font-medium">Gửi yêu cầu niêm yết sản phẩm thành công!</h2>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="./them-san-pham.html" class="text-blueMain font-medium whitespace-nowrap italic">Yêu cầu xét duyệt sản
+        <a href="" class="text-blueMain font-medium whitespace-nowrap italic">Yêu cầu xét duyệt sản
             phẩm</a>
     </div>
     <div class="px-5 xl:px-16 py-2">
@@ -95,17 +95,28 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn V-Store<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                            <select name="vstore_id" id="vstore_id"
-                                    class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Chọn V-Store</option>
-                                @foreach($v_stores as $v_store)
-                                    <option {{old('vstore_id') == $v_store->id ? 'selected' : ''}}
-                                            value="{{$v_store->id}}">{{$v_store->name}} </option>
-                                @endforeach
-                            </select>
-                            @error('vstore_id')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
+
+                            <div class="w-full">
+                                <div id="boxHid">
+                                </div>
+                                <div id="vstore">
+                                    <select disabled
+                                            class="th choose-vstore  outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
+                                        <option value="{{$vstore->id}}">{{$vstore->name}}</option>
+
+                                    </select>
+                                    @error('vstore_id')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
+                                    <button type="button" id="btnAc"
+                                            class="p-2 bg-blue-600 text-white mt-2">Thay đổi
+                                    </button>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -141,7 +152,8 @@
                             @error('vat')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
-                            <span class="text-title font-medium">Mức chiết khấu (%)<strong class="text-[#FF4D4F]">*</strong>
+                            <span class="text-title font-medium">Mức chiết khấu (%)<strong
+                                    class="text-[#FF4D4F]">*</strong>
                         </span>
                             <span>
                                 <input type="number" name="discount" id="discount" min="0" max="99"
@@ -169,7 +181,7 @@
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Mức chiết khấu (Thành tiền)</span>
                                 <input type="text" value="0 đ" name="money" id="money" readonly
-                                       class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm" >
+                                       class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
                                 {{--                            @error('price')--}}
                                 {{--                            <p class="text-red-600">{{$message}}</p>--}}
                                 {{--                            @enderror--}}
@@ -200,60 +212,6 @@
                 </div>
 
 
-{{--                <div class="flex flex-col justify-start items-start gap-4 w-full">--}}
-{{--                    <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
-{{--                    <span class="text-title font-medium">Điểm giao nhận hàng<strong--}}
-{{--                            class="text-[#FF4D4F]">*</strong></span>--}}
-{{--                    </div>--}}
-{{--                    <div class=" choose-adr choose-adr grid grid-cols-1 gap-4 w-full ">--}}
-{{--                        <div class=" char p-4 item flex flex-col justify-start items-start gap-4 w-full ">--}}
-{{--                            <div class="flex justify-between items-center w-full">--}}
-{{--                                <span class="text-title text-lg font-medium">Điểm giao nhận hàng :</span>--}}
-{{--                                <svg width="16" height="16" class="cursor-pointer hover:opacity-70" viewBox="0 0 16 16"--}}
-{{--                                     fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                    <path--}}
-{{--                                        d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"--}}
-{{--                                        fill="black" fill-opacity="0.45"/>--}}
-{{--                                </svg>--}}
-{{--                            </div>--}}
-{{--                            <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">--}}
-{{--                                <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">--}}
-{{--                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Điểm giao nhận:<strong--}}
-{{--                                        class="text-[#FF4D4F]">*</strong></span>--}}
-{{--                                    <select name="ward_id[]" id=""--}}
-{{--                                            class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
-{{--                                        <option value="0" selected>Chọn địa chỉ</option>--}}
-{{--                                        @foreach($wareHouses as $ware)--}}
-{{--                                            <option value="{{$ware->id}}">{{$ware->name}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">--}}
-{{--                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Số lượng hàng trong kho<strong--}}
-{{--                                        class="text-[#FF4D4F]">*</strong></span>--}}
-{{--                                    <input type="number" placeholder="Nhập số lượng hàng trong kho" name="amount[]"--}}
-{{--                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                        </div>--}}
-{{--                        @error('ward_id')--}}
-{{--                        <p class="text-red-600">{{$message}}</p>--}}
-{{--                        @enderror--}}
-{{--                        <div class="more-ad w-[225px] whitespace-nowrap">--}}
-{{--                            <a href="javascript:void(0)"--}}
-{{--                               class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200">--}}
-{{--                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"--}}
-{{--                                     xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                    <path--}}
-{{--                                        d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z"--}}
-{{--                                        fill="#FF9A62"/>--}}
-{{--                                </svg>--}}
-{{--                                Thêm địa điểm mới--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
                 <div class="  items-center gap-8 w-full">
                     <span class="text-title font-med">Chiết khấu hàng nhập sẵn</span>
                     <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
@@ -262,14 +220,14 @@
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
                             <input type="number" value="" name="sl[]" id=""
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm" >
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
                             <input type="text" value="" name="moneyv[]" id=""
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
                     </div>
@@ -279,14 +237,14 @@
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
                             <input type="number" value="" name="sl[]" id=""
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm" >
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
                             <input type="text" value="" name="moneyv[]" id=""
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
                     </div>
@@ -296,14 +254,14 @@
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
                             <input type="number" value="" name="sl[]" id=""
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm" >
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
                             <input type="text" value="" name="moneyv[]" id=""
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm" >
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
 
@@ -403,7 +361,7 @@
 `;
             $('.choose-adr').append(html);
             $(document).on("click", ".remove", function () {
-                i-=1;
+                i -= 1;
                 $(this).parent().parent().remove()
             });
             $(document).on("click", ".new-more-ad", function () {
@@ -479,5 +437,48 @@ Thêm địa chỉ mới</a>
             }
         })
 
+        function abc() {
+            document.getElementById('btnAc').addEventListener('click', () => {
+                document.getElementById('boxHid').innerHTML = `
+                                               <select name="vstore_id" id="vstore_id"
+                                                                       class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                                                                                    <option value="">Chọn V-Store</option>
+                                                                                                    @foreach($v_stores as $v_store)
+                <option
+{{old('vstore_id') == $v_store->id ? 'selected' : ''}}
+                value="{{$v_store->id}}">{{$v_store->name}} </option>
+                                                                   @endforeach
+                </select>
+                                             <button type="button" id="btnRe" class="p-2 bg-blue-600 text-white mt-2">Bỏ chọn</button>
+
+@error('vstore_id')
+                <p class="text-red-600">{{$message}}</p>
+                                                                                                @enderror
+                `;
+
+                document.getElementById('vstore').innerHTML = '';
+
+                document.getElementById('btnRe').addEventListener('click', () => {
+                    document.getElementById('boxHid').innerHTML = '';
+                    document.getElementById('vstore').innerHTML = `
+                   <select disabled
+                                            class="th choose-vstore  outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
+                                        <option value="{{$vstore->id}}">{{$vstore->name}}</option>
+
+                                    </select>
+                                    @error('vstore_id')
+                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                    <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
+                                    <button type="button" id="btnAc"
+                                            class="p-2 bg-blue-600 text-white mt-2">Thay đổi
+                                    </button>
+                `;
+                    abc();
+                });
+            })
+        }
+
+        abc();
     </script>
 @endsection

@@ -55,9 +55,14 @@ class ProductController extends Controller
 
     public function createRequest()
     {
-        $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('role_id', 3)->orderBy('id', 'desc')->get();
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
+        $this->v['vstore'] = User::select('id', 'name')->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
+        if (!$this->v['vstore']) {
+            $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
+        }
+        $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
+
         return view('screens.manufacture.product.create', $this->v);
 
     }

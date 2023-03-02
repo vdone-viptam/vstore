@@ -77,6 +77,9 @@ class LoginController extends Controller
                 'address' => 'required',
                 'phone_number' => 'required',
                 'id_vdone' => 'required',
+                'city_id' => 'required',
+                'district_id' => 'required'
+
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.unique' => 'Email đã tồn tại',
@@ -88,7 +91,8 @@ class LoginController extends Controller
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-
+                'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
+                'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
         } elseif ($request->role_id == 4) {
             $validator = Validator::make($request->all(), [
@@ -114,8 +118,8 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
-                'name.unique' => 'tên công ty đã tồn tại',
-                'company_name.unique' => 'tên công ty đã tồn tại',
+                'name.unique' => 'Tên công ty đã tồn tại',
+                'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -135,25 +139,27 @@ class LoginController extends Controller
             $validator = Validator::make($request->all(), [
                 'email' => 'required|unique:users|email',
                 'name' => 'required|unique:users',
-                'company_name' => 'required||unique:users',
+                'company_name' => 'required|unique:users',
                 'tax_code' => 'required',
                 'address' => 'required',
                 'phone_number' => 'required',
                 'id_vdone' => 'required',
-
+                'city_id' => 'required',
+                'district_id' => 'required'
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
-                'name.required' => 'Tên bắt buộc nhập',
-                'name.unique' => 'tên công ty đã tồn tại',
-                'company_name.unique' => 'tên công ty đã tồn tại',
+                'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
+                'name.unique' => 'Tên nhà cung cấp đã tồn tại',
+                'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-
+                'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
+                'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
         }
 
@@ -168,10 +174,14 @@ class LoginController extends Controller
         try {
             if ($request->role_id == 2) {
                 $checkUs = User::where('tax_code', $request->tax_code)
-                    ->Where('role_id', 2)
-                    ->first();
-                if ($checkUs) {
-                    return redirect()->back()->with('tax_code', 'Mã số thuế đã đang ký');
+                    ->where('role_id', 2)
+                    ->count();
+                $checkUs1 = User::where('tax_code', $request->tax_code)
+                    ->where('role_id', 3)
+                    ->count();
+                if ($checkUs > 0 || $checkUs1 == 1) {
+
+                    return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
                 }
             }
             $user = new User();
@@ -219,22 +229,22 @@ class LoginController extends Controller
                     'normal_storage' => $normal_storage,
                 ];
                 $user->storage_information = json_encode($storage_information);
-                $user->provinceId = $request->city_id;
-                $user->district_id = $request->district_id;
             }
+            $user->provinceId = $request->city_id;
+            $user->district_id = $request->district_id;
             $user->save();
 
             DB::commit();
 
             if ($request->role_id == 2) {
 
-                return redirect()->route('login_ncc')->with('success', 'Thành công');
+                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công');
             }
             if ($request->role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'Thành công');
+                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công');
             }
             if ($request->role_id == 4) {
-                return redirect()->route('login_storage')->with('success', 'Thành công');
+                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công');
             }
 //            return 1
         } catch (\Exception $e) {
