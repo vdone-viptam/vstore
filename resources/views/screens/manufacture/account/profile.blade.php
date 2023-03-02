@@ -3,7 +3,7 @@
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success flex justify-center items-center show-modal">
+        <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
@@ -118,6 +118,12 @@
                                    value="{{$infoAccount->id_vdone_diff}}">
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Giới thiệu</span>
+                            <textarea type="text" name="description" id="description" rows="5"
+                                      class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                            >{{$infoAccount->description}}</textarea>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Link Website:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 @if($infoAccount->link_web =='')
@@ -190,7 +196,7 @@
                         <ul class="tab-sub-user">
                             <li class="active"><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>
 {{--                            <li class=""><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho hàng</a>--}}
-                            <li><a href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a></li>
+        <li><a href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -243,9 +249,11 @@
 
                                     <span>
                                         @if($infoAccount->link_web == '')
-                                            <a class="underline" href="{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}">{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}</a>
+                                            <a class="underline"
+                                               href="{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}">{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}</a>
                                         @else
-                                            <a class="underline" href="{{$infoAccount->link_web}}">{{$infoAccount->link_web}}</a>
+                                            <a class="underline"
+                                               href="{{$infoAccount->link_web}}">{{$infoAccount->link_web}}</a>
                                         @endif
                                     </span>
                                 </div>

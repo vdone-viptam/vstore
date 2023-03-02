@@ -34,6 +34,8 @@ return new class extends Migration {
             $table->integer('district_id')->nullable();
             $table->integer('provinceId')->nullable();
             $table->longText('storage_information')->nullable();
+            $table->string('link_web')->nullable();
+            $table->longText('description')->nullable();
             $table->integer('branch')->default(0)->comment('ngành vstore, 0 thường, 1 địa phương');
             $table->rememberToken();
             $table->timestamps();

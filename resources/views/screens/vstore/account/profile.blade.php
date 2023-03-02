@@ -4,7 +4,7 @@
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success flex justify-center items-center show-modal">
+        <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
@@ -119,6 +119,12 @@
                                    value="{{$infoAccount->id_vdone_diff}}">
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Giới thiệu</span>
+                            <textarea type="text" name="description" id="description" rows="5"
+                                      class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                            >{{$infoAccount->description}}</textarea>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Link Website:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="link_website"
@@ -194,7 +200,8 @@
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Link website: </span>
-                                    <span><a href="{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}">{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}</a></span>
+                                    <span><a
+                                            href="{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}">{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}</a></span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 ">
                                     <a href="#"
