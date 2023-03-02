@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -181,7 +182,7 @@ class LoginController extends Controller
             $user->password = Hash::make(rand(100000, 999999));
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
-            if ($request->role_id ==3 ){
+            if ($request->role_id == 3) {
                 $user->branch = 1;
             }
             if ($request->id_vdone_diff) {
@@ -218,6 +219,8 @@ class LoginController extends Controller
                     'normal_storage' => $normal_storage,
                 ];
                 $user->storage_information = json_encode($storage_information);
+                $user->city_id = $request->city_id;
+                $user->district_id = $request->district_id;
             }
             $user->save();
 
@@ -403,14 +406,14 @@ class LoginController extends Controller
                 return redirect()->route('screens.storage.dashboard.index');
             }
         } else {
-            $checkOtpNumber = Otp::where('user_code',$request->id)->where('number',4)->first();
-            if ($checkOtpNumber){
-                $removeOtp = Otp::where('user_code',$request->id)->delete();
+            $checkOtpNumber = Otp::where('user_code', $request->id)->where('number', 4)->first();
+            if ($checkOtpNumber) {
+                $removeOtp = Otp::where('user_code', $request->id)->delete();
                 return redirect()->back()->with('error', 'Mã xác đã nhập sai vượt quá 5 lần vui lòng gửi lại mã');
             }
 
             $otp = Otp::where('user_code', $request->id)->update([
-                'number'=>DB::raw('number+1')
+                'number' => DB::raw('number+1')
             ]);
             return redirect()->back()->with('error', 'Mã xác minh không chính xác');
         }
@@ -420,7 +423,7 @@ class LoginController extends Controller
     public function reOtp(Request $request)
     {
         $user = User::find($request->id);
-        $otp = Otp::where('user_code',$user->id)->delete();
+        $otp = Otp::where('user_code', $user->id)->delete();
         $login = new Otp();
         $login->code = rand(100000, 999999);
         $login->user_code = $user->id;
@@ -430,5 +433,17 @@ class LoginController extends Controller
             $message->subject('Bạn vừa có yêu cầu gửi lại mã xác minh');
         });
         return redirect()->back();
+    }
+
+
+    public function getCity(Request $request)
+    {
+        if ($request->type == 2) {
+            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
+        } else {
+            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
+
+        }
+        return $response->json()['data'];
     }
 }

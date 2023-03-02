@@ -98,6 +98,8 @@ class UserController extends Controller
                 $warehouses->name = $user->name;
                 $warehouses->phone_number = $user->phone_number;
                 $warehouses->address = $user->address;
+                $warehouses->city_id = $user->city_id;
+                $warehouses->district_id = $user->district_id;
                 $warehouses->user_id = $user->id;
                 $warehouses->save();
             }

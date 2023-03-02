@@ -65,7 +65,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
-    Route::get('/{id}',[\App\Http\Controllers\Api\ManufactureController::class,'detail']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\ManufactureController::class, 'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });
@@ -87,6 +87,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
 
+Route::get('/get-city', [\App\Http\Controllers\Auth\LoginController::class, 'getCity'])->name('get_city');
 
 
 //Route::group(['domain' => 'nha_cung_cap.ngo', 'middleware' => 'NCC'], function () {

@@ -13,7 +13,8 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <meta property="og:image:width" content="120">
@@ -378,40 +379,29 @@
 <script !src="">
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
-    $(function () {
 
+    fetch('{{route('get_city')}}', {
+        mode: 'no-cors',
 
-        $.ajax({
-            url: "https://partner.viettelpost.vn/v2/categories/listProvince",
-            type: 'GET',
-            crossDomain: true,
-            success: function (result) {
-                console.log(result);
-                divCity.innerHTML +=
-                    `${
-                        result.map(item => `<option value="${item.code}">${item.name}</option>`).join('')
-                    }`;
-            }
-        });
-        divCity.addEventListener('change', (e) => {
-            const id = e.target.value;
-            if (+id !== 0) {
-                $.ajax({
-                    url: `https://provinces.open-api.vn/api/p/${id}/?depth=2`,
-                    type: 'GET',
-                    success: function (result) {
-                        divDistrict.innerHTML = '<option value="">Lựa chọn huyện</option>' + result.districts.map(districtitem => `<option value="${districtitem.code}">${districtitem.name}</option>`).join('');
-                        // $('#district_id').select2();
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById('city_id').innerHTML += data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+        })
+        .catch(console.error);
 
-                    }
-                });
-            } else {
-                divDistrict.innerHTML = '<option value="">Bạn chưa chọn thành phố</option>';
-            }
+    divCity.addEventListener('change', (e) => {
+        fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
+            mode: 'no-cors',
 
         })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                divDistrict.innerHTML += data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+            })
+            .catch(console.error);
     });
-    // $('#city_id').select2();
 
 </script>
 </body>
