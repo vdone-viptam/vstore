@@ -61,6 +61,9 @@ Route::domain(config('domain.api'))->group(function () {
         Route::post('/add-quantity/{cart_id}/{type}', [\App\Http\Controllers\Api\CartController::class, 'quantity']);
 
     });
+    Route::prefix('product-sales')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'productSale']);
+    });
     Route::prefix('banners')->group(function () {
         Route::get('/get-banner', [\App\Http\Controllers\Api\BannerController::class, 'getBannerHomePage']);
     });

@@ -559,4 +559,43 @@ class ProductController extends Controller
                 cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
         return $angle * $earthRadius;
     }
+
+    /**
+     * Danh sách sản phẩm giảm giá siêu tốc
+     *
+     * API dùng để lấy danh sách sản phẩm giảm giá siêu tốc
+     *
+     * @param Request $request
+     * @urlParam  limit Số lượng bản ghi 1 trang Mặc định 12
+     * @urlParam  page Trang hiện tại hiển thị
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function productSale(Request $request)
+    {
+        try {
+            $limit = $request->limit ?? 12;
+            $products = DB::table('products')
+                ->selectRaw('images ,name, publish_id,price,products.id')
+                ->join('discounts', 'products.id', '=', 'discounts.product_id')
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '<=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->paginate($limit);
+            foreach ($products as $pr) {
+                $pr->sum_discount = DB::table('discounts')
+                    ->selectRaw('SUM(discount) as sum')
+                    ->where('product_id', $pr->id)
+                    ->first()
+                    ->sum;
+                $pr->image = asset(json_decode($pr->images)[0]);
+                unset($pr->images);
+            }
+            return response()->json(['status' => 200, 'data' => $products], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['status' => 400, 'message' => $e->getMessage()], 400);
+
+        }
+    }
 }
