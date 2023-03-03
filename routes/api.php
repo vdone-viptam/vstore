@@ -16,25 +16,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('callback-viettel-post', function (Request $req) {
-    $all = $req->all();
-
-    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
-    return response()->json([
-        "status" => true,
-        "req" => $req
-    ]);
-});
-
-Route::any('callback-viettel-post', function (Request $req) {
-    $all = $req->all();
-
-    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
-    return response()->json([
-        "status" => true,
-        "req" => $req
-    ]);
-});
+//Route::post('callback-viettel-post', function (Request $req) {
+//    return $req->all();
+//    $all = $req->all();
+//
+//    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
+//    return response()->json([
+//        "status" => true,
+//        "req" => $req
+//    ]);
+//});
+//
+//Route::any('callback-viettel-post', function (Request $req) {
+//    $all = $req->all();
+//
+//    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
+//    return response()->json([
+//        "status" => true,
+//        "req" => $req
+//    ]);
+//});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -91,7 +92,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'detail']);
+    Route::get('/{id}',[\App\Http\Controllers\Api\VstoreController::class,'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });
