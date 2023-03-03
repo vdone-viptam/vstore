@@ -36,9 +36,13 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @urlParam page Số trang
-     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @urlParam category_id id danh mục sản phẩm
+     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán
+     * @urlParam option 1 asc | 2 desc
+     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
+     * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @urlParam publish_id mã sản phẩm
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -46,14 +50,37 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $publish_id = $request->publish_id ?? '';
         $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)->where('publish_id', 'like', '%' . $publish_id . '%')
-            ->select('id','name','publish_id','images','price','discount_vShop as discount_vstore')
-            ->paginate($limit);
+            ->select('id', 'name', 'publish_id', 'images', 'price', 'discount_vShop as discount_vstore');
+        if ($request->category_id) {
+            $products = $products->where('category_id', $request->category_id);
+        }
+        if ($request->order_by == 1) {
+            $order_by = $request->option == 1 ? 'asc' : 'desc';
+            $products = $products->orderBy('id', $order_by);
+        }
+        if ($request->order_by == 2) {
+            $order_by_price = $request->option == 1 ? 'asc' : 'desc';
+            $products = $products->orderBy('price', $order_by_price);
+        }
+        if ($request->order_by == 3) {
+            $order_by_sold = $request->option == 1 ? 'asc' : 'desc';
+            $products = $products->orderBy('amount_product_sold', $order_by_sold);
+        }
+        if ($request->payment) {
+            if ($request->payment == 1) {
+                $products = $products->where('payment_on_delivery', 1);
 
-        foreach ($products as $pro){
-            $pro->images= asset(json_decode($pro->images)[0]);
-            $pro->price_discount= $pro->price - ($pro->price /100 * $pro->discount_vstore);
-            $pro->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type','!=',3)
-                ->first()->sum ?? 0;
+            } else {
+                $products = $products->where('prepay', 1);
+            }
+        }
+        $products = $products->paginate($limit);
+
+        foreach ($products as $pro) {
+            $pro->images = asset(json_decode($pro->images)[0]);
+            $pro->price_discount = $pro->price - ($pro->price / 100 * $pro->discount_vstore);
+            $pro->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
+                    ->first()->sum ?? 0;
 
 //
         }
@@ -365,8 +392,8 @@ class ProductController extends Controller
             ], 401);
         }
         DB::beginTransaction();
-        try{
-            $product = Product::where('id',$id)->where('status',2)->first();
+        try {
+            $product = Product::where('id', $id)->where('status', 2)->first();
             if (!$product) {
                 return response()->json([
                     'status_code' => 400,
@@ -393,7 +420,7 @@ class ProductController extends Controller
 
 
             $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ware_id')->get();
-            if (count($productWh)==0){
+            if (count($productWh) == 0) {
                 return response()->json([
                     'status_code' => 400,
                     'data' => 'sẩn phẩm đã hết',
@@ -429,14 +456,13 @@ class ProductController extends Controller
                     $min = $warehouses[$i];
                 }
             }
-            $buy_more = BuyMoreDiscount::where('start','<=',$request->amount)
-                ->where('end','>',$request->amount)
-                ->orWhere('end',0)
-                ->first();
-            ;
-            if($buy_more){
-                $price = $product->price - ($product->price /100 * $buy_more->discount);
-            }else{
+            $buy_more = BuyMoreDiscount::where('start', '<=', $request->amount)
+                ->where('end', '>', $request->amount)
+                ->orWhere('end', 0)
+                ->first();;
+            if ($buy_more) {
+                $price = $product->price - ($product->price / 100 * $buy_more->discount);
+            } else {
                 $price = $product->price;
             }
 
@@ -449,10 +475,10 @@ class ProductController extends Controller
                     break;
                 }
             }
-            $bill_detail->bill_id= $bill->id;
-            $bill_detail->ware_id=$min->id;
-            $bill_detail->address=$vshop->address;
-            $bill_detail->total = $price *$request->amount;
+            $bill_detail->bill_id = $bill->id;
+            $bill_detail->ware_id = $min->id;
+            $bill_detail->address = $vshop->address;
+            $bill_detail->total = $price * $request->amount;
             $bill_detail->pick_up_address = $min->address;
             $bill_detail->save();
             $bill_product = new BillProduct();
@@ -464,7 +490,7 @@ class ProductController extends Controller
                 }
             }
 
-            $bill_product->publish_id=$product->publish_id;
+            $bill_product->publish_id = $product->publish_id;
             $bill_product->vshop_id = null;
             $bill_product->quantity = $request->amount;
             $bill_product->price = $price;
@@ -476,9 +502,8 @@ class ProductController extends Controller
             $bill_product->status = 1;
             $bill_product->save();
 
-            $bill->total = $bill_product->price *$bill_product->quantity;
+            $bill->total = $bill_product->price * $bill_product->quantity;
             $bill->save();
-
 
 
             $newProductWh = new ProductWarehouses();
@@ -486,21 +511,21 @@ class ProductController extends Controller
             $newProductWh->ware_id = $min->id;
             $newProductWh->product_id = $product->id;
             $newProductWh->status = 3;
-            $newProductWh->amount = $request->amount ;
+            $newProductWh->amount = $request->amount;
             $newProductWh->bill_product_id = $bill_product->id;
             $newProductWh->save();
-            $vshop_product = VshopProduct::where('id_pdone',$request->id_pdone)
-                ->where('product_id',$id)->first();
-            if ($vshop_product){
+            $vshop_product = VshopProduct::where('id_pdone', $request->id_pdone)
+                ->where('product_id', $id)->first();
+            if ($vshop_product) {
                 $vshop_product->status = 2;
-                $vshop_product->amount +=$request->amount;
+                $vshop_product->amount += $request->amount;
                 $vshop_product->save();
-            }else{
+            } else {
                 $newVshop_product = new VshopProduct();
-                $newVshop_product->status=2;
-                $newVshop_product->amount= (int)$request->amount;
-                $newVshop_product->id_pdone= $request->id_pdone;
-                $newVshop_product->product_id=$id;
+                $newVshop_product->status = 2;
+                $newVshop_product->amount = (int)$request->amount;
+                $newVshop_product->id_pdone = $request->id_pdone;
+                $newVshop_product->product_id = $id;
                 $newVshop_product->save();
             }
             DB::commit();
@@ -508,9 +533,9 @@ class ProductController extends Controller
                 'status_code' => 200,
                 'data' => $bill
             ]);
-        }catch (Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
-            return($e->getMessage());
+            return ($e->getMessage());
         };
 
 //        return $min;
