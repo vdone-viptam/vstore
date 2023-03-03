@@ -14,6 +14,7 @@ use App\Models\Warehouses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -106,6 +107,7 @@ class BillController extends Controller
         DB::beginTransaction();
         try {
             $bill = new Bill();
+            $bill->code = Str::random('11');
             $bill->name = $request->name;
             $bill->id_pdone = $request->id_pdone;
             $bill->phone_number = $request->phone_number;
@@ -172,12 +174,14 @@ class BillController extends Controller
                 $bill_detail = BillDetail::where('bill_id', $bill->id)->where('ware_id', $min->id)->first();
                 if (!$bill_detail) {
                     $bill_detail = new BillDetail();
-                    $bill_detail->code = Str::random('11');
+//                    $bill_detail->code = Str::random('11');
                     $bill_detail->bill_id = $bill->id;
                     $bill_detail->ware_id = $min->id;
                     $bill_detail->address = $request->address;
                     $bill_detail->district = $request->district;
                     $bill_detail->province = $request->province;
+                    $bill_detail->ware_district = $min->district_id;
+                    $bill_detail->ware_province = $min->city_id;
                     $bill_detail->save();
 
                 }
@@ -193,7 +197,7 @@ class BillController extends Controller
                     ->sum;
 //                return $sum;
                 $bill_product = new BillProduct();
-                $bill_product->code = $bill_detail->code;
+//                $bill_product->code = $bill_detail->code;
                 $bill_product->publish_id = $product->publish_id;
                 $bill_product->vshop_id = $value['id_vshop'];
                 $bill_product->quantity = $value['quantity'];
@@ -203,14 +207,125 @@ class BillController extends Controller
                 $bill_product->product_id = $product->id;
                 $bill_product->ware_id = $min->id;
                 $bill_product->status = 1;
+                $bill_product->weight = $product->weight * $value['quantity'];
                 $bill_product->save();
 
                 $bill->total +=$bill_product->price;
                 $bill_detail->total += $bill_product->price;
+                $bill_detail->weight += $bill_product->weight;
                 $bill->save();
                 $bill_detail->save();
             }
-            return $bill_product ;
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => env('TK_VAN_CHUYEN'),
+                'PASSWORD' => env('MK_VAN_CHUYEN'),
+            ]);
+//
+                $createBillDetail = BillDetail::where('bill_id',$bill->id)->get();
+                foreach ($createBillDetail as $createBdt){
+                    $createWare = Warehouses::find($createBdt->ware_id);
+                    $createPro = BillDetail::join('bill_product','bill_details.id','=','bill_product.bill_detail_id')
+                        ->join('products','bill_product.product_id','=','products.id')
+                        ->where('bill_product.bill_detail_id',$createBdt->id)
+                        ->select('bill_product.quantity as quantity','bill_product.price as billProductPrice','products.name','bill_product.weight')
+                        ->get();
+
+                $list_item = [];
+                foreach ($createPro as $cp){
+                    $list_item[] =[
+                        'PRODUCT_NAME'=>$cp->name,
+                        'PRODUCT_QUANTITY'=>$cp->quantity,
+                        'PRODUCT_PRICE'=>$cp->billProductPrice,
+                        'PRODUCT_WEIGHT'=>$cp->weight
+                        ];
+
+
+
+                }
+//                return $list_item;
+//                    return $createPro;
+                    $get_list = Http::withHeaders(
+                        [
+                            'Content-Type'=>' application/json',
+                            'Token'=>$login['data']['token']
+                        ]
+                    )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
+                        'SENDER_DISTRICT'=>$createBdt->ware_district,
+                        'SENDER_PROVINCE'=>$createBdt->ware_province,
+                        'RECEIVER_DISTRICT'=>$request->district,
+                        'RECEIVER_PROVINCE'=>$request->province,
+                        'PRODUCT_TYPE'=>'HH',
+                        'PRODUCT_WEIGHT'=>$createBdt->weight,
+                        'PRODUCT_PRICE'=>$createBdt->price,
+                        'MONEY_COLLECTION'=>0,
+                        'TYPE'=>1,
+                    ] );
+//            return $get_list[0]['MA_DV_CHINH'];
+
+
+                    $tinh_thanh = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
+                    foreach ($tinh_thanh['data'] as $tt){
+                        if ($tt['PROVINCE_ID'] ==$createBdt->ware_province){
+                            $tinh_thanh_gui =  $tt['PROVINCE_NAME'];
+                            $quan_huyen = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId='. $tt['PROVINCE_ID']);
+//                            return $quan_huyen['data'];
+                            foreach ($quan_huyen['data'] as $qh){
+                                if ($qh['DISTRICT_ID']== $createBdt->ware_district){
+                                    $quan_huyen_gui = $qh['DISTRICT_NAME'];
+                                }
+
+                            }
+                        }
+                        if ($tt['PROVINCE_ID'] == $request->province){
+                            $tinh_thanh_nhan =  $tt['PROVINCE_NAME'];
+                            $quan_huyen_n = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId='. $tt['PROVINCE_ID']);
+                            foreach ($quan_huyen_n['data'] as $qhn){
+                                if ($qhn['DISTRICT_ID']== $request->district){
+                                    $quan_huyen_nhan = $qhn['DISTRICT_NAME'];
+                                }
+
+                            }
+                        }
+                    }
+
+                    $taodon = Http::withHeaders(
+                        [
+                            'Content-Type'=>' application/json',
+                            'Token'=>$login['data']['token']
+                        ]
+                    )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
+                        "ORDER_NUMBER"=>'',
+                        "SENDER_FULLNAME"=>$createWare->name,
+                        "SENDER_ADDRESS"=>" ".$quan_huyen_gui.', '.$tinh_thanh_gui,
+                        "SENDER_PHONE"=>$createWare->phone_number,
+                        "RECEIVER_FULLNAME"=>$request->name,
+                        "RECEIVER_ADDRESS"=>$request->address. ", ".$quan_huyen_nhan.', ' . $tinh_thanh_nhan,
+                        "RECEIVER_PHONE"=>$request->phone_number,
+                        "PRODUCT_NAME"=>"hàng test",
+                        "PRODUCT_DESCRIPTION"=>"",
+                        "PRODUCT_QUANTITY"=>1,
+                        "PRODUCT_PRICE"=>$createBdt->total,
+                        "PRODUCT_WEIGHT"=>$createBdt->weight,
+                        "PRODUCT_LENGTH"=>0,
+                        "PRODUCT_WIDTH"=>0,
+                        "PRODUCT_HEIGHT"=>0,
+                        "ORDER_PAYMENT"=>1,
+                        "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
+                        "ORDER_SERVICE_ADD"=>null,
+                        "ORDER_NOTE"=>"",
+                        "MONEY_COLLECTION"=>0,
+                        "LIST_ITEM"=>$list_item,
+                    ]);
+//                    return $list_item;
+                    $createBdt->code = $taodon['data']['ORDER_NUMBER'];
+                    $createBdt->transport_fee=
+                    $createBdt->save();
+                    $saveBillProduct = BillProduct::where('bill_detail_id',$createBdt->id)->update(['code'=>$taodon['data']['ORDER_NUMBER']]);
+//                    return $taodon['data']['ORDER_NUMBER'];
+
+//                    return $createBdt . $tinh_thanh_gui . $quan_huyen_gui.$tinh_thanh_nhan .$quan_huyen_nhan;
+                }
+
             DB::commit();
 
             return response()->json([
