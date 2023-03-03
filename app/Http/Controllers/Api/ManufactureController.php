@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Psy\CodeCleaner\UseStatementPass;
 
 
 /**
@@ -46,26 +49,39 @@ class ManufactureController extends Controller
     /**
      * chi tiết nhà cung cấp
      *
-     * API này sẽ trả về chi tiết nhà cung cấp
+     * API này sẽ trả về thông tin nhà cung cấp
      *
-     * @param $id id user
-     * @return JsonResponse
+     * @param $ncc_id id nhà cung cấp
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function detail($id)
+    public function profileNCC($ncc_id)
     {
 
-        $user = User::where('id', $id)
-            ->where('reole_id', 2)
-            ->select('id', 'name', 'avatar', 'banner', 'account_code', 'address', 'phone_number', 'company_name')
-            ->first();
-        if ($user) {
-            $user->avatar = asset('image/users/' . $user->avatar);
-            $user->banner = asset('image/users/' . $user->banner);
-        }
-        return response()->json([
-            'status_code' => 200,
-            'data' => $user,
+        try {
+            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('id', $ncc_id)->first();
+            $user->total_product = $user->products()->where('status', 2)->count();
+            $cate = Category::select('categories.name')
+                ->join('products', 'categories.id', '=', 'products.category_id')
+                ->where('user_id', $ncc_id)
+                ->groupBy('categories.name')
+                ->get();
+            $data = [];
+            foreach ($cate as $c) {
+                $data[] = $c->name;
+            }
 
-        ]);
+            $user->categories = implode(', ', $data);
+
+            return response()->json([
+                'status' => 200,
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 }

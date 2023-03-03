@@ -82,7 +82,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('manufactures')->group(function () {
         //list nhà cung cấp
         Route::get('/get-list', [\App\Http\Controllers\Api\ManufactureController::class, 'index']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\ManufactureController::class, 'detail']);
+        Route::get('/profile/{ncc_id}', [\App\Http\Controllers\Api\ManufactureController::class, 'profileNCC']);
 
     });
     Route::prefix('vstore')->group(function () {
