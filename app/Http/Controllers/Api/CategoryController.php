@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @group Categories
@@ -21,44 +22,100 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @urlParam page Số trang
-     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 100
-     * @urlParam name Tìm kiếm theo name
-     * @return JsonResponse
+     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 48
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
-        $limit = $request->limit ?? 100;
-        if ($request->name) {
-            $categories = Category::where('name', 'like', '%' . $request->name . '%')->paginate($limit);
-        } else {
-            $categories = Category::paginate($limit);
-        }
-        if ($categories) {
-            foreach ($categories as $value) {
-                $value->img = asset($value->img);
+        $limit = $request->limit ?? 48;
+        try {
+            $categories = Category::select('id', 'name', 'img')->paginate($limit);
+            if ($categories) {
+                foreach ($categories as $value) {
+                    $value->img = asset($value->img);
+                }
             }
+            return response()->json([
+                'status_code' => 200,
+                'data' => $categories
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $e->getMessage()
+            ], 400);
         }
-        return response()->json([
-            'status_code' => 200,
-            'data' => $categories
-        ]);
     }
 
-    public function getCategoryByVstore($vstore_id)
+    /**
+     * Danh sách danh mục theo V-Store
+     *
+     * API này sẽ trả về danh sách danh mục
+     *
+     * @param Request $request
+     * @urlParam limit Giới hạn bản ghi  Mặc định 100
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCategoryByVstore($vstore_id, Request $request)
     {
-        $products = Product::select('category_id')->where('status', 2)->where('vstore_id', $vstore_id)->get();
-        $data = [];
+        try {
+            $limit = $request->limit ?? 100;
+            $products = Product::select('category_id')->where('status', 2)->where('vstore_id', $vstore_id)->get();
+            $data = [];
 
-        foreach ($products as $pr) {
-            $data[] = $pr->category_id;
-        }
-        $category = Category::select('id', 'name', 'img')->whereIn('id', $data)->where('status', 1)->get();
-        if ($category) {
-            foreach ($category as $value) {
-                $value->img = asset($value->img);
+            foreach ($products as $pr) {
+                $data[] = $pr->category_id;
             }
+            $category = Category::select('id', 'name', 'img')->whereIn('id', $data)->where('status', 1)->limit($limit)->get();
+            if ($category) {
+                foreach ($category as $value) {
+                    $value->img = asset($value->img);
+                }
+            }
+            return response()->json(['status' => 200, 'data' => $category]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 400, 'error' => $e->getMessage()], 400);
+
         }
-        return $category;
+
+
+    }
+
+    /**
+     * Danh sách sản phẩm theo danh mục
+     *
+     * API này sẽ trả về danh sách sản phẩm
+     *
+     * @param Request $request
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 8
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getProductByCategory($category_id)
+    {
+        try {
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
+                ->where('category_id', $category_id)
+                ->where('status', 2)
+                ->paginate(8);
+
+
+            foreach ($product as $pr) {
+                $pr->discount = DB::table('discounts')
+                        ->selectRaw('SUM(discount) as sum')
+                        ->where('product_id', $pr->id)
+                        ->whereIn('type', [1, 2])
+                        ->first()->sum ?? 0;
+
+                $pr->image = asset(json_decode($pr->images)[0]);
+                unset($pr->images);
+            }
+
+            return response()->json(['status' => 200, 'data' => $product]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 400, 'error' => $e->getMessage()], 400);
+
+        }
 
     }
 
