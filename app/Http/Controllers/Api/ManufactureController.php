@@ -22,18 +22,18 @@ class ManufactureController extends Controller
      *
      * @param Request $request
      * @urlParam page Số trang
-     * @urlParam limit Giới hạn bản ghi trên một trang
+     * @urlParam limit Giới hạn bản ghi trên một trang | Mặc định 100 bản ghi
      * @return JsonResponse
      */
-    public function index(Request $request){
-        $limit = $request->limit ?? 10;
-        $user = User::where('role_id',2)->where('account_code','!=',null)
-            ->select('id','name','email','company_name','phone_number','address','avatar','banner')
+    public function index(Request $request)
+    {
+        $limit = $request->limit ?? 100;
+        $user = User::where('role_id', 2)->where('account_code', '!=', null)
+            ->select('id', 'name', 'avatar')
             ->paginate($limit);
-        if ($user){
-            foreach ($user as $value){
-                $value->avatar=asset($value->avatar);
-                $value->banner=asset($value->banner);
+        if ($user) {
+            foreach ($user as $value) {
+                $value->avatar = strlen($value->avatar) == 0 ? asset('image/Rectangle 44.png') : asset('image/users/' . $value->avatar);
             }
         }
         return response()->json([
@@ -42,6 +42,7 @@ class ManufactureController extends Controller
 
         ]);
     }
+
     /**
      * chi tiết nhà cung cấp
      *
@@ -50,15 +51,16 @@ class ManufactureController extends Controller
      * @param $id id user
      * @return JsonResponse
      */
-    public function detail($id){
+    public function detail($id)
+    {
 
-        $user = User::where('id',$id)
-            ->where('reole_id',2)
-            ->select('id','name','avatar','banner','account_code','address','phone_number','company_name')
+        $user = User::where('id', $id)
+            ->where('reole_id', 2)
+            ->select('id', 'name', 'avatar', 'banner', 'account_code', 'address', 'phone_number', 'company_name')
             ->first();
-        if ($user){
-            $user->avatar=asset('image/users/'.$user->avatar) ;
-            $user->banner=asset('image/users/'.$user->banner) ;
+        if ($user) {
+            $user->avatar = asset('image/users/' . $user->avatar);
+            $user->banner = asset('image/users/' . $user->banner);
         }
         return response()->json([
             'status_code' => 200,
