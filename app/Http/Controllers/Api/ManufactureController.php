@@ -43,7 +43,7 @@ class ManufactureController extends Controller
         ]);
     }
     /**
-     * Danh sách nhà cung cấp
+     * chi tiết nhà cung cấp
      *
      * API này sẽ trả về chi tiết nhà cung cấp
      *
@@ -53,6 +53,7 @@ class ManufactureController extends Controller
     public function detail($id){
 
         $user = User::where('id',$id)
+            ->where('reole_id',2)
             ->select('id','name','avatar','banner','account_code','address','phone_number','company_name')
             ->first();
         if ($user){

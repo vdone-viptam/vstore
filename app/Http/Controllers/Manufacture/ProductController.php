@@ -139,7 +139,7 @@ class ProductController extends Controller
             }
 
             while (true) {
-                $code = 'VN  - ' . Str::random(10);
+                $code = 'VN-' . Str::random(10);
                 if (!Product::where('publish_id', $code)->first()) {
                     $product->publish_id = $code;
                     break;

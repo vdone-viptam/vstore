@@ -8,6 +8,7 @@ use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Vshop;
@@ -44,7 +45,18 @@ class ProductController extends Controller
 
         $limit = $request->limit ?? 10;
         $publish_id = $request->publish_id ?? '';
-        $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)->where('publish_id', 'like', '%' . $publish_id . '%')->paginate($limit);
+        $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)->where('publish_id', 'like', '%' . $publish_id . '%')
+            ->select('id','name','publish_id','images','price','discount_vShop as discount_vstore')
+            ->paginate($limit);
+
+        foreach ($products as $pro){
+            $pro->images= asset(json_decode($pro->images)[0]);
+            $pro->price_discount= $pro->price - ($pro->price /100 * $pro->discount_vstore);
+            $pro->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type','!=',3)
+                ->first()->sum ?? 0;
+
+//
+        }
         return response()->json([
             'status_code' => 200,
             'data' => $products

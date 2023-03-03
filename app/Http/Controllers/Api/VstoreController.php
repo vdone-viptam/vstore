@@ -112,4 +112,33 @@ class VstoreController extends Controller
 
         ]);
     }
+
+    /**
+     * chi tiết vstore
+     *
+     * API này sẽ trả về chi tiết vstore
+     *
+     * @param $id id user
+     * @return JsonResponse
+     */
+    public function detail($id){
+
+        $user = User::where('id',$id)
+            ->where('role_id',3)
+            ->select('id','name','avatar','banner','account_code','address','phone_number','company_name')
+            ->first();
+        if ($user){
+            $user->avatar=asset('image/users/'.$user->avatar) ;
+            $user->banner=asset('image/users/'.$user->banner) ;
+
+                $user->description='Chúng tôi làm việc chuyên nghiệp, uy tín, nhanh chóng, đặt quyền lợi của bạn lên hàng đầu. Với tiêu chí khách hàng là trên hết. Shop chúng tôi mang lại sản phẩm với chất lượng tốt nhất đến tay khách ';
+
+
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $user,
+
+        ]);
+    }
 }
