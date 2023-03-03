@@ -58,7 +58,7 @@ class ManufactureController extends Controller
     {
 
         try {
-            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('id', $ncc_id)->first();
+            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
             $user->total_product = $user->products()->where('status', 2)->count();
             $cate = Category::select('categories.name')
                 ->join('products', 'categories.id', '=', 'products.category_id')
