@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 //    return $req->all();
 
 
-    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
+//    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
 //    return response()->json([
 //        "status" => true,
 //        "req" => $req
@@ -80,8 +80,9 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
         Route::get('get-category-by-vstore/{vstore_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getCategoryByVstore']);
         Route::get('get-product-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getProductByCategory']);
-
+        Route::get('get-vstore-by-category/{id}',[\App\Http\Controllers\Api\CategoryController::class,'getVstoreByCategory']);
         Route::get('/{id}', [\App\Http\Controllers\Api\CategoryController::class, 'detail']);
+
 
     });
     Route::prefix('manufactures')->group(function () {

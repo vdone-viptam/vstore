@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vstore;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
@@ -124,4 +125,5 @@ class AccountController extends Controller
 
         return redirect()->back()->with('success', 'Thay đổi mật khẩu thành công');
     }
+
 }

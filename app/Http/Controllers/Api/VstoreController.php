@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -121,24 +122,34 @@ class VstoreController extends Controller
      * @param $id id user
      * @return JsonResponse
      */
-    public function detail($id){
+    public function detail($id)
+    {
 
-        $user = User::where('id',$id)
-            ->where('role_id',3)
-            ->select('id','name','avatar','banner','account_code','address','phone_number','company_name')
-            ->first();
-        if ($user){
-            $user->avatar=asset('image/users/'.$user->avatar) ;
-            $user->banner=asset('image/users/'.$user->banner) ;
+        try {
+            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 3)->where('id', $id)->first();
+            $user->total_product = $user->products()->where('status', 2)->count();
+            $cate = Category::select('categories.name')
+                ->join('products', 'categories.id', '=', 'products.category_id')
+                ->where('vstore_id', $id)
+                ->groupBy('categories.name')
+                ->get();
+            $data = [];
+            foreach ($cate as $c) {
+                $data[] = $c->name;
+            }
 
-                $user->description='Chúng tôi làm việc chuyên nghiệp, uy tín, nhanh chóng, đặt quyền lợi của bạn lên hàng đầu. Với tiêu chí khách hàng là trên hết. Shop chúng tôi mang lại sản phẩm với chất lượng tốt nhất đến tay khách ';
+            $user->categories = implode(', ', $data);
 
+            return response()->json([
+                'status' => 200,
+                'data' => $user
+            ]);
+        } catch (\Exception $e) {
 
+            return response()->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+            ], 400);
         }
-        return response()->json([
-            'status_code' => 200,
-            'data' => $user,
-
-        ]);
     }
 }

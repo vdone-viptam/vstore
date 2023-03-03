@@ -143,4 +143,33 @@ class CategoryController extends Controller
             ], 400);
         }
     }
+
+
+
+    public function getVstoreByCategory($id){
+        $vstore= Category::join('products','categories.id','=','products.category_id')
+                            ->join('users','products.vstore_id','users.id')
+                            ->where('categories.id',$id)
+                            ->select('users.id','users.name','users.avatar')
+                            ->get();
+
+        if (count($vstore)>0){
+            foreach ($vstore as $value){
+                $value->avatar=asset('image/users/'.$value->avatar);
+            }
+            return response()->json([
+                'status_code' => 200,
+                'data' => $vstore
+            ]);
+        }else{
+            return response()->json([
+                'status_code' => 400,
+                'message' => 'không tìm thấy'
+            ]);
+        }
+
+
+
+    }
+
 }
