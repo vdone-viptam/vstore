@@ -73,6 +73,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('category')->group(function () {
         //list danh mục
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+        Route::get('get-category-by-vstore/{vstore_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getCategoryByVstore']);
         Route::get('/{id}', [\App\Http\Controllers\Api\CategoryController::class, 'detail']);
 
     });
