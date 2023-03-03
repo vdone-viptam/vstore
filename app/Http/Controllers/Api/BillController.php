@@ -163,14 +163,17 @@ class BillController extends Controller
                     $val->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
 
                 }
+
 //                return $warehouses;
 //            $warehouses= $warehouses ->sortBy('distance','desc');
+
                 $min = $warehouses[0];
                 for ($i = 1; $i < count($warehouses); $i++) {
                     if ($min->distance > $warehouses[$i]->distance) {
                         $min = $warehouses[$i];
                     }
                 }
+
                 $bill_detail = BillDetail::where('bill_id', $bill->id)->where('ware_id', $min->id)->first();
                 if (!$bill_detail) {
                     $bill_detail = new BillDetail();
@@ -185,6 +188,7 @@ class BillController extends Controller
                     $bill_detail->save();
 
                 }
+//                return $warehouses;
                 $sum =  DB::table('discounts')->selectRaw("SUM(discount) + (select IFNULL(SUM(discount),0)
                 from discounts where type = 3 and product_id = " . $product->id . " and user_id = '".$value['id_vshop']."'
                 )

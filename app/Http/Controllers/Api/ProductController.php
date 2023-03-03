@@ -583,7 +583,7 @@ class ProductController extends Controller
                 ->selectRaw('images ,name, publish_id,price,products.id')
                 ->join('discounts', 'products.id', '=', 'discounts.product_id')
                 ->where('start_date', '<=', Carbon::now())
-                ->where('end_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
                 ->whereIn('type', [1, 2])
                 ->paginate($limit);
             foreach ($products as $pr) {

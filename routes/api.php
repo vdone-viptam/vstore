@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::post('callback-viettel-post', function (Request $req) {
-//    return $req->all();
-//    $all = $req->all();
-//
-//    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
+Route::post('callback-viettel-post', function (Request $req) {
+
+    return $req->all();
+
+
+    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
 //    return response()->json([
 //        "status" => true,
 //        "req" => $req
 //    ]);
-//});
+});
 //
 //Route::any('callback-viettel-post', function (Request $req) {
 //    $all = $req->all();
