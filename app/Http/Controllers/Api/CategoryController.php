@@ -91,13 +91,14 @@ class CategoryController extends Controller
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 8
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProductByCategory($category_id)
+    public function getProductByCategory(Request $request, $category_id)
     {
         try {
+            $limit =$request->limit??8;
             $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
                 ->where('category_id', $category_id)
                 ->where('status', 2)
-                ->paginate(8);
+                ->paginate($limit);
 
 
             foreach ($product as $pr) {
@@ -144,14 +145,24 @@ class CategoryController extends Controller
         }
     }
 
+    /**
+     * Danh sách vstore theo danh mục
+     *
+     * API này sẽ trả về danh sách vstore theo danh mucj
+     *
+     * @param Request $request
+     * @urlParam page Số trang
+     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
+     * @return \Illuminate\Http\JsonResponse
+     */
 
-
-    public function getVstoreByCategory($id){
+    public function getVstoreByCategory(Request $request, $id){
+        $limit = $request->limit??10;
         $vstore= Category::join('products','categories.id','=','products.category_id')
                             ->join('users','products.vstore_id','users.id')
                             ->where('categories.id',$id)
                             ->select('users.id','users.name','users.avatar')
-                            ->get();
+                            ->paginate($limit);
 
         if (count($vstore)>0){
             foreach ($vstore as $value){
