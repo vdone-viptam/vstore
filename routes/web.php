@@ -224,16 +224,16 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
         Route::get('/edit/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
         Route::post('/update/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'update'])->name('screens.manufacture.product.update');
+        Route::prefix('discount')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
+            Route::get('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
+            Route::get('/choose-product', [\App\Http\Controllers\Manufacture\DiscountController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
+            Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
+            Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
+            Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
+        });
+    });
 
-    });
-    Route::prefix('discount')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
-        Route::get('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'createDis'])->name('screens.manufacture.product.createDis');
-        Route::get('/choose-product', [\App\Http\Controllers\Manufacture\DiscountController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
-        Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
-        Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
-        Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
-    });
 //    screens.manufacture.product.discount
     Route::get('/notifications', function () {
         return view('layouts.manufacture.all_noti', []);

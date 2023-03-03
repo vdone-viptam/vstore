@@ -89,6 +89,7 @@
     if (param === "products") {
         tm[1].classList.toggle("active");
         l[0].classList.remove("hidden");
+
         checkUnder(tm[1], a)
     }
     if (param === "warehouses") {
@@ -161,17 +162,6 @@
             tm[i].classList.add("tab__hover")
         }
     }
-
-
-
-    // $('.notify').on('click', function () {
-    //     $('.sub-nav-notify').toggleClass('activeTb')
-    //     $('.screen').removeClass('hidden')
-    // })
-    // $('.screen').on('click', function (){
-    //     $('.sub-nav-notify').toggleClass('activeTb')
-    //     $(this).addClass('hidden')
-    // })
 </script>
 
 </body>
