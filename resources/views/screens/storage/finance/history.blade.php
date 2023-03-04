@@ -113,6 +113,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="9">Không tìm thấy dữ liệu phù hợp</td>
+                                    </tr>
                                 @endif
 
 

@@ -88,30 +88,20 @@
         l[0].classList.remove("hidden");
         checkUnder(tm[1], a)
     }
-    if (param === "warehouses") {
-        tm[2].classList.toggle("active")
+    if (param === "partners") {
+        tm[2].classList.toggle("active");
         l[1].classList.remove("hidden");
         checkUnder(tm[2], a)
     }
-    if (param === "partners") {
+    if (param === "finances") {
         tm[3].classList.toggle("active");
         l[2].classList.remove("hidden");
         checkUnder(tm[3], a)
     }
-    if (param === "orders") {
-        tm[4].classList.toggle("active");
+    if (param === "account") {
+        tm[4].classList.toggle("active")
         l[3].classList.remove("hidden");
         checkUnder(tm[4], a)
-    }
-    if (param === "finances") {
-        tm[5].classList.toggle("active");
-        l[4].classList.remove("hidden");
-        checkUnder(tm[5], a)
-    }
-    if (param === "account") {
-        tm[6].classList.toggle("active")
-        l[5].classList.remove("hidden");
-        checkUnder(tm[6], a)
     }
 
     function checkUnder(element, param) {
