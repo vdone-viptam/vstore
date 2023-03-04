@@ -46,6 +46,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //});
 //Route::group(['domain' => config('domain.api')], function () {
 Route::domain(config('domain.api'))->group(function () {
+    Route::post('callback-viettel-post',[\App\Http\Controllers\ViettelpostController::class,'index']);
+
     Route::prefix('product')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
         Route::get('/product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);

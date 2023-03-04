@@ -16,7 +16,7 @@
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
             <a href="" class="text-blueMain font-medium italic">Quản lý
-                yêu cầu gửi sản phẩm</a>
+                yêu cầu xuất kho</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -204,7 +204,7 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">{{$count}}</span>
-                    {{--                    @include('layouts.custom.paginator', ['paginator' => $requests])--}}
+                                        @include('layouts.custom.paginator', ['paginator' => $bill_detai])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">

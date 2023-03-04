@@ -79,9 +79,16 @@ class ProductController extends Controller
 //       ;
 //
 //        $count = count($product);
-        $count = 123;
+
         $warehouses = Warehouses::where('user_id',Auth::id())->first();
-        $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc')->paginate($limit);
+        $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc');
+        if ($request->key_search  ){
+            $bill_detai = $bill_detai->where('code','like','%'.$request->key_search.'%');
+
+        }
+        $bill_detai=$bill_detai->paginate($limit);
+        $count = count($bill_detai);
+
         return view('screens.storage.product.requestOut', compact('bill_detai','count'));
     }
 
@@ -100,7 +107,16 @@ class ProductController extends Controller
 //        return $status;
 
         DB::table('bill_details')->where('id', $request->id)->update(['export_status' => $status]);
+        $billProduct = BillProduct::where('bill_detail_id',$request->id)->get();
 
+        foreach ($billProduct as $value){
+            $productW = new ProductWarehouses();
+            $productW->product_id = $value->product_id;
+            $productW->ware_id = $value->ware_id;
+            $productW->status = 2;
+            $productW->amount = $value->quantity;
+            $productW->save();
+        }
 
         return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
     }
