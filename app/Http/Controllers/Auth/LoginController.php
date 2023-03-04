@@ -414,7 +414,7 @@ class LoginController extends Controller
             abort(404);
         }
 
-        return view('auth.formReset');
+        return view('auth.formReset',['role_id' => $role_id]);
     }
 
     public function postResetForgot(Request $request, $token)

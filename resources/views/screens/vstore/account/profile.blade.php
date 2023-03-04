@@ -165,9 +165,17 @@
                             <span class="text-secondary text-sm">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
                         </div>
                         <div class="p-3 text-xl">
-                            Thời hạn sử dụng tài khoản của bạn còn là : <span
-                                class="text-red-600 font-bold">{{\Carbon\Carbon::parse($infoAccount->expiration_date)->diffInDays(\Illuminate\Support\Carbon::now())}}</span>
-                            ngày
+                            <table>
+                                <tr>
+                                    <td>Ngày kích hoạt</td>
+                                    <td>{{\Illuminate\Support\Carbon::parse($infoAccount->confirm_date)->format('d/m/Y')}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày hết hạn</td>
+                                    <td class="text-red-600 font-bold">{{\Illuminate\Support\Carbon::parse($infoAccount->expiration_date)->format('d/m/Y')}}</td>
+                                </tr>
+                            </table>
+
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-0 w-full md:p-6 ">
@@ -210,10 +218,14 @@
                                     <span><a
                                             href="{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}">{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}</a></span>
                                 </div>
-                                <div class="flex justify-start items-center gap-4 ">
+                                <div class="flex justify-start items-center gap-4 w-full">
                                     <a href="#"
-                                       class="edit-hs cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF] hover:opacity-70">
+                                       class="w-1/4 edit-hs cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF] hover:opacity-70">
                                         Chỉnh sửa thông tin
+                                    </a>
+                                    <a href="{{route('screens.vstore.account.editTaxCode')}}"
+                                       class="w-1/4 cursor-pointer outline-none bg-green-600 transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF] hover:opacity-70">
+                                        Cập nhật mã số thuế
                                     </a>
                                 </div>
                             </div>
