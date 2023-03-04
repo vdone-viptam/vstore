@@ -142,7 +142,7 @@
                         <span class="text-title font-medium">VAT (%)<strong class="text-[#FF4D4F]">*</strong>
                         </span>
                             <span>
-                                <input type="number" name="vat" id="discount" min="0" max="99"
+                                <input type="number"  min="0" max="99" name="vat"
                                        value="{{old('vat')}}"
                                        placeholder="Nhập VAT (%)"
                                        class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">

@@ -151,6 +151,10 @@ class AccountController extends Controller
         }
 
         try {
+            if (DB::table('users')->where('tax_code', $request->tax_code)->count() > 0) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đang ký'])->withInput($request->all());
+
+            }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),
                 'tax_code' => $request->tax_code,
