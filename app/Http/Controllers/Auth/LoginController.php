@@ -301,6 +301,9 @@ class LoginController extends Controller
             }
 
             if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
+                if (Auth::user()->status == 4) {
+                    return redirect()->back()->with('error', 'Tài khoản đã hết hạn sử dụng.Liên hệ quản trị viên để gia hạn tài khoản');
+                }
                 $token = Str::random(32);
                 $userLogin = Auth::user();
                 $login = new Otp();

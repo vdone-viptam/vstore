@@ -37,6 +37,7 @@ return new class extends Migration {
             $table->longText('description')->nullable();
             $table->integer('branch')->default(0)->comment('ngành vstore, 0 thường, 1 địa phương');
             $table->string('link_web')->nullable();
+            $table->date('expiration_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

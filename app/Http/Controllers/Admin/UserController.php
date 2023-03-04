@@ -92,6 +92,7 @@ class UserController extends Controller
             $user->account_code = $ID;
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();
+            $user->expiration_date = Carbon::now()->addDays(365);
             $user->save();
             if ($user->role_id == 4) {
                 $warehouses = new Warehouses();

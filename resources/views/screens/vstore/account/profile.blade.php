@@ -159,9 +159,16 @@
         <div class="col-span-12">
             <div class="box w-full">
                 <div class="flex flex-col justify-start items-start w-full p-6">
-                    <div class="flex flex-col justify-start items-start gap-1 pb-6 border-b-[1px] border-grey w-full">
-                        <h3 class="captilize font-medium text-xl text-title">Hồ sơ của tôi</h3>
-                        <span class="text-secondary text-sm">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+                    <div class="flex justify-between  gap-1 pb-6 border-b-[1px] border-grey w-full">
+                        <div class="p-3 ">
+                            <h3 class="captilize font-medium text-xl text-title">Hồ sơ của tôi</h3>
+                            <span class="text-secondary text-sm">Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+                        </div>
+                        <div class="p-3 text-xl">
+                            Thời hạn sử dụng tài khoản của bạn còn là : <span
+                                class="text-red-600 font-bold">{{\Carbon\Carbon::parse($infoAccount->expiration_date)->diffInDays(\Illuminate\Support\Carbon::now())}}</span>
+                            ngày
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-0 w-full md:p-6 ">
                         <div class="col-span-8 order-last md:order-first">
