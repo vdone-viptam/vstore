@@ -95,26 +95,39 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn V-Store<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-
                             <div class="w-full">
-                                <div id="boxHid">
-                                </div>
-                                <div id="vstore">
-                                    <select disabled
-                                            class="th choose-vstore  outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
-                                        <option value="{{$vstore->id}}">{{$vstore->name}}</option>
+                                @if(isset($vstore->id))
+                                    <div id="boxHid">
+                                    </div>
+                                    <div id="vstore">
+                                        <select disabled
+                                                class="th choose-vstore  outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
+                                            <option value="{{$vstore->id}}">{{$vstore->name}}</option>
 
+                                        </select>
+                                        @error('vstore_id')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
+                                        <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
+                                        <button type="button" id="btnAc"
+                                                class="p-2 bg-blue-600 text-white mt-2">Thay đổi
+                                        </button>
+
+                                    </div>
+                                @else
+                                    <select name="vstore_id" id="vstore_id"
+                                            class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                        <option value="">Chọn V-Store</option>
+                                        @foreach($v_stores as $v_store)
+                                            <option
+                                                {{old('vstore_id') == $v_store->id ? 'selected' : ''}}
+                                                value="{{$v_store->id}}">{{$v_store->name}} </option>
+                                        @endforeach
                                     </select>
                                     @error('vstore_id')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
-                                    <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
-                                    <button type="button" id="btnAc"
-                                            class="p-2 bg-blue-600 text-white mt-2">Thay đổi
-                                    </button>
-
-                                </div>
-
+                                @endif
                             </div>
 
                         </div>
