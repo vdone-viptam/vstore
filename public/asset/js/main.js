@@ -244,7 +244,7 @@ $(document).ready(function () {
         if($(this).hasClass('active')){
             $('.side-bar-tab').removeClass('small-menu')
         }
-        // $('.choose-tab .list').addClass('hidden')
+        $('.choose-tab .list').addClass('hidden')
         $(this).children('.list').toggleClass('hidden')
 
     })

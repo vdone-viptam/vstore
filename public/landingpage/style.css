@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css');
+
 body{
     margin: 0;
     padding: 0;
-    font-family: 'SVN-Gilroy';
+    font-family: 'Inter';
 }
 img{
     max-width: 100% !important;
@@ -9,19 +12,102 @@ img{
     object-fit: cover;
 }
 
-.top-bar li{
-    margin: 10px 0;
-    padding: 0 6px;
+.nav-menu li:hover a{
+    color: #258AFF;
+    transition: 0.5s all;
 }
-.top-bar li a{
-    color: white;
-    font-size: 12px;
-    line-height: 13px;
-    font-weight: 500;
+.nav-menu li.active a{
+    color: #258AFF;
+    font-weight: 600;
 }
-.nav{
-    /*background: linear-gradient(112.7deg, #005CB5 -1.64%, #0C83F6 79.17%);*/
-    background: linear-gradient(112.7deg, #c3e1ff -1.64%, #0C83F6 79.17%);
+
+.center-ab{
+    bottom: -35%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.tab-cate li a:hover{
+    box-shadow: 0px 2px 10px rgba(41, 170, 243, 0.2);
+    transition: 0.5s all;
+}
+
+.tab-cate li a:hover span{
+    color: #258AFF;
+    font-weight: 600;
+    transition: 0.5s all;
+}
+
+.sales{
+    background: url('./images/bnsales.png') no-repeat center center;
+    background-size: 100% 100%;
+
+}
+
+.rating { 
+    border: none;
+    float: left;
+  }
+  
+  .rating > input { display: none; } 
+  .rating > label:before { 
+    margin: 5px;
+    font-size: 1em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+    
+  }
+  
+  .rating > .half:before { 
+    content: "\f089";
+    position: absolute;
+  
+  }
+  
+  .rating > label { 
+    color:#FFA800; 
+  }
+  
+  /***** CSS Magic to Highlight Stars on Hover *****/
+  
+  /* .rating > input:checked ~ label, 
+  .rating:not(:checked) > label:hover, 
+  .rating:not(:checked) > label:hover ~ label { color: #FFA800;  } 
+  
+  .rating > input:checked + label:hover, 
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label, 
+  .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }  */
+.pagination li a{
+    color: #3A57E8;
+    padding: 8px 12px;
+    border: 1px solid #DEE2E6;
+    background:#FFF;
+}
+.pagination li a:hover{
+    background-color: #3A57E8;
+    color: #FFF;
+    transition: 0.5s all;
+}
+.pagination li.active a{
+    background-color: #3A57E8;
+    color: #FFF;
+}
+.nav-menu-mb{
+    box-shadow: 0px 0px 2px rgba(145, 158, 171, 0.24), -20px 20px 40px -4px rgba(145, 158, 171, 0.24);
+    z-index: -1;
+    opacity: 0;
+    transform: translateY(-4px);
+    visibility: hidden;
+    transition: 0.5s all;
+}
+.show-menu{
+    z-index: 4;
+    opacity: 1;
+    transform: translateY(0px);
+    visibility: visible;
+    transition: 0.5s all;
 }
 .box{
     background: #FFFFFF;
@@ -29,86 +115,16 @@ img{
     border-radius: 12px
 }
 
-.content-item .item{
-    display: flex;
-    flex-direction: column;
-    position: relative;
+@media only screen and (max-width: 768px) {
+    .center-ab{
+        bottom: -65%;  
+   
+    }
+    .sales{
+        background: url('./images/bg-mb.png') no-repeat center center;
+    }
+    .rating > label:before { 
+        font-size: 0.7em;
+        margin: 1px;
+      }
 }
-.content-item .item .content{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.content-item .item .content h3{
-    margin: 0;
-    font-weight: 600;
-    color: #333333;
-}
-.content-item a{
-    text-decoration: none;
-    border: 0.947115px solid #056DD2;
-    box-shadow: -1.16568px 4.66272px 27.9763px rgba(0, 0, 0, 0.12);
-    border-radius: 13.9882px;
-    color: black;
-    padding: 5px;
-}
-.content-item a:hover{
-    cursor: pointer;
-    box-shadow: 0 0.0625rem 20px 0 rgb(0 0 0 / 5%);
-    -webkit-transform: translateY(-0.0625rem);
-    transform: translateY(-0.0625rem);
-    z-index: 1;
-    transition: 0.5s all;
-}
-.content .discount{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-.discount .cost{
-    color: #BDBDBD;
-    text-decoration: line-through;
-    font-size: 13px;
-}
-.discount .real{
-    color: #056DD2;
-}
-.content .has-sell{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-.has-sell .rating{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 2px;
-}
-.has-sell .rating svg{
-    width: 10px;
-    fill: #F2C94C;
-}
-.has-sell .rating svg g{
-    stroke: #F2C94C;
-}
-.has-sell .sell{
-    font-size: 14px;
-    color:  #4F4F4F;
-}
-.item-img img{
-    width: 100%;
-}
-.tem{
-    background: url('../images/tem.png') no-repeat center center;
-    background-size: 100% 100%;
-    width: 238px;
-    height: 535px;
-}
-.zthumb-t2 .thumb-zsharing img{
-    object-fit: contain !important;
-}
-
