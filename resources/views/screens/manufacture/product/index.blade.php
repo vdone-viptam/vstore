@@ -143,9 +143,7 @@
                             <th>
 
                             </th>
-                            <th>
 
-                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -181,8 +179,6 @@
                                     <td>
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline"> Chi tiết</a>
-                                    </td>
-                                    <td>
                                         @if($product->status ==0 && $product->vstore_id =='' )
                                             <a href="{{route('screens.manufacture.product.edit',['id'=>$product->id])}}" class="bg-transparent hover:bg-blue-500 text-primary  hover:text-white py-2 px-4 border border-primary hover:border-transparent rounded">Sửa</a>
                                         @endif

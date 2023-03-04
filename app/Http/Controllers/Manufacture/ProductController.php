@@ -408,7 +408,7 @@ class ProductController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-//            dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Thêm mới yêu cầu đăng ký thất bại');
 
         }
