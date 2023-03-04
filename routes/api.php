@@ -16,25 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('callback-viettel-post', function (Request $req) {
-    $all = $req->all();
+//Route::post('callback-viettel-post', function (Request $req) {
+//
+//    return $req->all();
 
-    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
-    return response()->json([
-        "status" => true,
-        "req" => $req
-    ]);
-});
 
-Route::any('callback-viettel-post', function (Request $req) {
-    $all = $req->all();
-
-    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
-    return response()->json([
-        "status" => true,
-        "req" => $req
-    ]);
-});
+//    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
+//    return response()->json([
+//        "status" => true,
+//        "req" => $req
+//    ]);
+//});
+//
+//Route::any('callback-viettel-post', function (Request $req) {
+//    $all = $req->all();
+//
+//    \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
+//    return response()->json([
+//        "status" => true,
+//        "req" => $req
+//    ]);
+//});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -78,8 +80,9 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
         Route::get('get-category-by-vstore/{vstore_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getCategoryByVstore']);
         Route::get('get-product-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getProductByCategory']);
-
+        Route::get('get-vstore-by-category/{id}',[\App\Http\Controllers\Api\CategoryController::class,'getVstoreByCategory']);
         Route::get('/{id}', [\App\Http\Controllers\Api\CategoryController::class, 'detail']);
+
 
     });
     Route::prefix('manufactures')->group(function () {
@@ -91,7 +94,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'detail']);
+    Route::get('/{id}',[\App\Http\Controllers\Api\VstoreController::class,'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });

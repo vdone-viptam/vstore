@@ -196,8 +196,8 @@ class ProductController extends Controller
     public function productByNcc(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
-        $products = Product::where('user_id',)->where('status', 2)
-            ->select('id', 'publish_id', 'discount', 'name', 'category_id', 'images', 'vstore_id', 'user_id');
+        $products = Product::where('user_id',$id)->where('status', 2)
+            ->select('id','price', 'publish_id','category_id', 'name', 'images','discount_vShop as discount_vstore');
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
         }
@@ -222,6 +222,10 @@ class ProductController extends Controller
         foreach ($products as $value) {
 
             $value->images = asset(json_decode($value->images)[0]);
+            $value->price_discount = $value->price -($value->price/100 * $value->discount_vstore);
+            $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
+                ->first()->sum ?? 0;
+
         }
 
         return response()->json([
@@ -243,7 +247,7 @@ class ProductController extends Controller
     public function productById($id)
     {
 
-        $product = Product::where('publish_id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop', 'video')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop', 'video')->first();
 
         if (!$product) {
             return response()->json([
@@ -579,7 +583,7 @@ class ProductController extends Controller
                 ->selectRaw('images ,name, publish_id,price,products.id')
                 ->join('discounts', 'products.id', '=', 'discounts.product_id')
                 ->where('start_date', '<=', Carbon::now())
-                ->where('end_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
                 ->whereIn('type', [1, 2])
                 ->paginate($limit);
             foreach ($products as $pr) {

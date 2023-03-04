@@ -39,11 +39,12 @@
     }
 </style>
 <div class=" fixed left-0 h-full md:block hidden z-[7]">
-    <div class="flex  justify-center items-center my-4 gap-10 w-[305px]">
+    <div class="flex  justify-between items-center gap-10 w-[305px]">
+        <div></div>
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
-        <div class="w-[195px] h-[45px] ">
+        <div class="w-[80px] h-[80px] ">
         @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
-                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full object-contain"
+                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
                      alt="">
             @else
                 <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-fill" alt="">
