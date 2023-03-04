@@ -452,48 +452,54 @@ Thêm địa chỉ mới</a>
             }
         })
 
-        function abc() {
-            document.getElementById('btnAc').addEventListener('click', () => {
-                document.getElementById('boxHid').innerHTML = `
+    </script>
+
+    @if(isset($vstore->id))
+        <script>
+
+            function abc() {
+                document.getElementById('btnAc').addEventListener('click', () => {
+                    document.getElementById('boxHid').innerHTML = `
                                                <select name="vstore_id" id="vstore_id"
                                                                        class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                                                                                     <option value="">Chọn V-Store</option>
                                                                                                     @foreach($v_stores as $v_store)
-                <option
+                    <option
 {{old('vstore_id') == $v_store->id ? 'selected' : ''}}
-                value="{{$v_store->id}}">{{$v_store->name}} </option>
+                    value="{{$v_store->id}}">{{$v_store->name}} </option>
                                                                    @endforeach
-                </select>
-                                             <button type="button" id="btnRe" class="p-2 bg-blue-600 text-white mt-2">Bỏ chọn</button>
+                    </select>
+                                                 <button type="button" id="btnRe" class="p-2 bg-blue-600 text-white mt-2">Bỏ chọn</button>
 
 @error('vstore_id')
-                <p class="text-red-600">{{$message}}</p>
+                    <p class="text-red-600">{{$message}}</p>
                                                                                                 @enderror
-                `;
+                    `;
 
-                document.getElementById('vstore').innerHTML = '';
+                    document.getElementById('vstore').innerHTML = '';
 
-                document.getElementById('btnRe').addEventListener('click', () => {
-                    document.getElementById('boxHid').innerHTML = '';
-                    document.getElementById('vstore').innerHTML = `
+                    document.getElementById('btnRe').addEventListener('click', () => {
+                        document.getElementById('boxHid').innerHTML = '';
+                        document.getElementById('vstore').innerHTML = `
                    <select disabled
                                             class="th choose-vstore  outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
                                         <option value="{{$vstore->id}}">{{$vstore->name}}</option>
 
                                     </select>
                                     @error('vstore_id')
-                    <p class="text-red-600">{{$message}}</p>
+                        <p class="text-red-600">{{$message}}</p>
                                     @enderror
-                    <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
+                        <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
                                     <button type="button" id="btnAc"
                                             class="p-2 bg-blue-600 text-white mt-2">Thay đổi
                                     </button>
                 `;
-                    abc();
-                });
-            })
-        }
+                        abc();
+                    });
+                })
+            }
 
-        abc();
-    </script>
+            abc();
+        </script>
+    @endif
 @endsection

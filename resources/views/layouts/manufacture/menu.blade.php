@@ -171,10 +171,6 @@
                                          href="{{route('screens.manufacture.warehouse.index')}}">Quản
                             lý kho
                             hàng</a></li>
-                    <li data-page="list"><a class="hover:underline"
-                                            href="{{route('screens.manufacture.account.address')}}">Danh
-                            sách địa chỉ
-                            nhận hàng</a></li>
                     <li data-page="add-product-warehouse"><a class="hover:underline"
                                                              href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm
                             sản

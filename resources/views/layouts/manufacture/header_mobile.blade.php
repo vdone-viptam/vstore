@@ -169,8 +169,6 @@
                         <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.addProduct')}}">Thêm
                                 sản
                                 phẩm vào kho</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.account.address')}}">Danh
-                                sách địa chỉ nhận hàng</a></li>
                         <li><a class="hover:underline" href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý
                                 xuất nhập
                                 kho</a></li>
