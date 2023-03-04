@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\RequestChangeTaxCode;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +94,7 @@ class UserController extends Controller
             $user->account_code = $ID;
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();
+            $user->expiration_date = Carbon::now()->addDays(365);
             $user->save();
             if ($user->role_id == 4) {
                 $warehouses = new Warehouses();
@@ -136,5 +139,56 @@ class UserController extends Controller
             $user->save();
         }
         return redirect()->route('screens.admin.user.list_user');
+    }
+
+    public function requestChangeTaxCode()
+    {
+        $this->v['requests'] = RequestChangeTaxCode::select('id', 'user_id', 'tax_code', 'status')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return view('screens.admin.user.request', $this->v);
+    }
+
+    public function confirmRequest(Request $request, $id, $status)
+    {
+        DB::beginTransaction();
+        try {
+            $request = RequestChangeTaxCode::where('id', $id)->first();
+            $user = User::where('id', $request->user_id)->first();
+            if ($status == 1) {
+                $user->tax_code = $request->tax_code;
+                $user->save();
+                $request->status = 1;
+                $message = 'Yêu cầu cập nhật mã số thuế của bạn đã được đồng ý';
+            } else {
+                $message = 'Yêu cầu cập nhật mã số thuế của bạn đã bị từ chối';
+
+                $request->status = 2;
+            }
+            $request->save();
+            if ($user->role_id == 2) {
+                $href = route('screens.manufacture.account.profile');
+            }
+            if ($user->role_id == 3) {
+                $href = route('screens.vstore.account.profile');
+            }
+            if ($user->role_id == 4) {
+                $href = route('screens.storage.account.profile');
+            }
+            $data = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'message' => $message,
+                'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                'href' => $href . '?'
+            ];
+
+            $user->notify(new AppNotification($data));
+            DB::commit();
+            return redirect()->back()->with('success', 'Cập nhật yêu cầu cập nhật mã số thuế thành công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+        }
     }
 }

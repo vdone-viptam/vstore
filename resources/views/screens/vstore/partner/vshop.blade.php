@@ -121,108 +121,39 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>NL123</td>
-                            <td>
-                                Nguyenlinh123
-                            </td>
-                            <td>
-                                0432123321
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                10
-                            </td>
-                            <td>10.000.000</td>
-                            <td>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NL123</td>
-                            <td>
-                                Nguyenlinh123
-                            </td>
-                            <td>
-                                0432123321
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                10
-                            </td>
-                            <td>10.000.000</td>
-                            <td>
+                       @foreach( $vshop as $val)
+                           <tr>
+                               <td>{{$val->id_pdone}}</td>
+                               <td>
+                                   {{$val->name!= '' ? $val->name  :'-'}}
+                               </td>
+                               <td>
+                                   {{$val->phone_number!= '' ? $val->phone_number  :'-'}}
+                               </td>
+                               <td>
+                                   {{$val->count != '' ? $val->count  :'-'}}
+                               </td>
+                               <td>
+                                  -
+                               </td>
+                               <td>-</td>
+                               <td>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NL123</td>
-                            <td>
-                                Nguyenlinh123
-                            </td>
-                            <td>
-                                0432123321
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                10
-                            </td>
-                            <td>10.000.000</td>
-                            <td>
+                               </td>
+                           </tr>
+                       @endforeach
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NL123</td>
-                            <td>
-                                Nguyenlinh123
-                            </td>
-                            <td>
-                                0432123321
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                10
-                            </td>
-                            <td>10.000.000</td>
-                            <td>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NL123</td>
-                            <td>
-                                Nguyenlinh123
-                            </td>
-                            <td>
-                                0432123321
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                10
-                            </td>
-                            <td>10.000.000</td>
-                            <td>
-
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
+                    @if(count($vshop) ==0)
+                        <p class="text-sm"> Không tìm thấy kết quả phù hợp</p>
+                    @endif
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    {{--                    <span class="text-sm text-title">Tổng: <strong--}}
-                    {{--                            class="font-bold">{{$products->total()}}</strong></span>--}}
-                    {{--                    @include('layouts.custom.paginator', ['paginator' => $products])--}}
+                                        <span class="text-sm text-title">Tổng: <strong
+                                                class="font-bold">{{$count}}</strong></span>
+                                        @include('layouts.custom.paginator', ['paginator' => $vshop])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">

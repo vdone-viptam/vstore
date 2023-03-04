@@ -57,15 +57,17 @@
 
 <div class=" grid grid-cols-1 place-items-center translate-y-[4rem]">
     <div
-        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl md:w-[500px]">
-{{--        <a href="../" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
-{{--            <div>--}}
-{{--                <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
-{{--            </div>--}}
-{{--            <span class="text-title">Quay lại</span>--}}
-{{--        </a>--}}
+        class="login flex flex-col justify-start items-start gap-6 md:gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full  md:w-[500px] ">
         <div class="w-[162px]">
-            <img src="{{asset('asset/images/Logo.png')}}" alt="">
+            @if($role_id == 3)
+                <img src="{{asset('asset/images/Logo.png')}}" alt="">
+            @elseif($role_id == 2)
+                <img src="{{asset('asset/images/Logoncc.png')}}" alt="">
+            @elseif($role_id == 4)
+                <img src="{{asset('asset/images/logokho.png')}}" alt="">
+            @elseif($role_id == 1)
+                <img src="{{asset('asset/images/Logo.png')}}" alt="">
+            @endif
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Quên mật khẩu</h1>
 
@@ -81,6 +83,7 @@
             <div class="flex flex-col justify-center items-center gap-6 w-full py-6">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Email </span>
+                    <input type="hidden" name="role_id" value="{{$role_id}}">
                     <input type="email" name="email" placeholder="Nhập email"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('email')

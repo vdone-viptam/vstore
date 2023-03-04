@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Warehouses;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,6 +22,9 @@ class AccountController extends Controller
 
     public function profile()
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
         $this->v['infoAccount'] = Auth::user();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
         return view('screens.storage.account.profile', $this->v);
@@ -138,5 +143,43 @@ class AccountController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Thay đổi mật khẩu thành công');
+    }
+
+    public function editTaxCode()
+    {
+        return view('screens.storage.account.edit_tax_code');
+    }
+
+    public function saveChangeTaxCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tax_code' => 'required|digits:10',
+        ], [
+            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+            'tax_code.digits' => 'Mã số thuế không hợp lệ'
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+
+        try {
+            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', Auth::id())->count() > 0) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đang ký'])->withInput($request->all());
+
+            }
+            DB::table('request_change_taxcode')->insert([
+                'user_id' => Auth::id(),
+                'tax_code' => $request->tax_code,
+                'status' => 0,
+                'created_at' => Carbon::now()
+            ]);
+            return redirect()->back()->with('success', 'Gửi yêu cầu thay đổi mã số thuế thành công');
+
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại');
+        }
     }
 }

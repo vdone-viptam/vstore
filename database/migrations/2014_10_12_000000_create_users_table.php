@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('id_vdone')->nullable();
@@ -37,6 +37,7 @@ return new class extends Migration {
             $table->longText('description')->nullable();
             $table->integer('branch')->default(0)->comment('ngành vstore, 0 thường, 1 địa phương');
             $table->string('link_web')->nullable();
+            $table->date('expiration_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

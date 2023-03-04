@@ -57,49 +57,50 @@ Route::group(['domain' => config('domain.vstore')], function () {
 });
 
 //role_id = 4 Quyền kho
- Route::group(['domain' => config('domain.storage')], function () {
-     Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('screens.storage.index');
-     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
-     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstorage'])->name('login_storage');
- });
+Route::group(['domain' => config('domain.storage')], function () {
+    Route::get('/', [\App\Http\Controllers\LandingpageController::class, 'ladingpageStorage'])->name('screens.storage.index');
+    Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstorage'])->name('register_storage');
+    Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstorage'])->name('login_storage');
+});
 
- Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], function () {
-     Route::prefix('dashboard')->group(function () {
-         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
-     });
-     Route::prefix('products')->group(function () {
-         Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
-         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
-         Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
+Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], function () {
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
+    });
+    Route::prefix('products')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
+        Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
+        Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
 
-         Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
-         Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
-         Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detail'])->name('screens.storage.product.detail');
-     });
-     Route::prefix('account')->group(function () {
-         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
-         Route::post('/edit/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'editProfile'])->name('screens.storage.account.editPro');
-         Route::post('/upload/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'uploadImage'])->name('screens.storage.account.upload');
-         Route::get('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'changePassword'])->name('screens.storage.account.changePassword');
-         Route::post('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'saveChangePassword'])->name('screens.storage.account.saveChangePassword');
+        Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
+        Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
+        Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detail'])->name('screens.storage.product.detail');
+    });
+    Route::prefix('account')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
+        Route::post('/edit/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'editProfile'])->name('screens.storage.account.editPro');
+        Route::post('/upload/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'uploadImage'])->name('screens.storage.account.upload');
+        Route::get('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'changePassword'])->name('screens.storage.account.changePassword');
+        Route::post('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'saveChangePassword'])->name('screens.storage.account.saveChangePassword');
+        Route::get('/edit-tax-code', [\App\Http\Controllers\Storage\AccountController::class, 'editTaxCode'])->name('screens.storage.account.editTaxCode');
+        Route::post('/save-tax-code', [\App\Http\Controllers\Storage\AccountController::class, 'saveChangeTaxCode'])->name('screens.storage.account.saveChangeTaxCode');
+    });
+    Route::prefix('finances')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\FinanceController::class, 'index'])->name('screens.storage.finance.index');
+        Route::post('/store-wallet', [\App\Http\Controllers\Storage\FinanceController::class, 'storeWall'])->name('screens.storage.finance.storeWall');
+        Route::post('/update-wallet/{id}', [\App\Http\Controllers\Storage\FinanceController::class, 'updateWall'])->name('screens.storage.finance.updateWall');
+        Route::post('/create-deposit', [\App\Http\Controllers\Storage\FinanceController::class, 'deposit'])->name('screens.storage.finance.deposit');
 
-     });
-     Route::prefix('finances')->group(function () {
-         Route::get('/', [\App\Http\Controllers\Storage\FinanceController::class, 'index'])->name('screens.storage.finance.index');
-         Route::post('/store-wallet', [\App\Http\Controllers\Storage\FinanceController::class, 'storeWall'])->name('screens.storage.finance.storeWall');
-         Route::post('/update-wallet/{id}', [\App\Http\Controllers\Storage\FinanceController::class, 'updateWall'])->name('screens.storage.finance.updateWall');
-         Route::post('/create-deposit', [\App\Http\Controllers\Storage\FinanceController::class, 'deposit'])->name('screens.storage.finance.deposit');
+        Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
 
-         Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
+    });
+    Route::prefix('partners')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
+        //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
+        //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
-     });
-     Route::prefix('partners')->group(function () {
-         Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
- //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
- //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
-
-     });
- });
+    });
+});
 //Quyền admin
 Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], function () {
 
@@ -129,6 +130,8 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('/confirm/{id}', [\App\Http\Controllers\Admin\UserController::class, 'confirm'])->name('screens.admin.user.confirm');
         Route::get('/chi-tiet', [\App\Http\Controllers\Admin\UserController::class, 'detail'])->name('screens.admin.user.detail');
         Route::get('/up/{id}', [\App\Http\Controllers\Admin\UserController::class, 'up'])->name('screens.admin.user.up');
+        Route::get('request-change-tax-code', [\App\Http\Controllers\Admin\UserController::class, 'requestChangeTaxCode'])->name('screens.admin.user.tax_code');
+        Route::get('request-change-tax-code/{id}/{status}', [\App\Http\Controllers\Admin\UserController::class, 'confirmRequest'])->name('screens.admin.user.confirm1');
 
     });
 
@@ -206,7 +209,8 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/', [\App\Http\Controllers\Manufacture\AccountController::class, 'profile'])->name('screens.manufacture.account.profile');
         Route::post('/edit/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'editProfile'])->name('screens.manufacture.account.editPro');
         Route::post('/upload/{id}', [\App\Http\Controllers\Manufacture\AccountController::class, 'uploadImage'])->name('screens.manufacture.account.upload');
-
+        Route::get('/edit-tax-code', [\App\Http\Controllers\Manufacture\AccountController::class, 'editTaxCode'])->name('screens.manufacture.account.editTaxCode');
+        Route::post('/save-tax-code', [\App\Http\Controllers\Manufacture\AccountController::class, 'saveChangeTaxCode'])->name('screens.manufacture.account.saveChangeTaxCode');
         Route::get('/change-password', [\App\Http\Controllers\Manufacture\AccountController::class, 'changePassword'])->name('screens.manufacture.account.changePassword');
         Route::post('/change-password', [\App\Http\Controllers\Manufacture\AccountController::class, 'saveChangePassword'])->name('screens.manufacture.account.saveChangePassword');
 
@@ -264,7 +268,8 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::post('/upload/{id}', [\App\Http\Controllers\Vstore\AccountController::class, 'uploadImage'])->name('screens.vstore.account.upload');
         Route::get('/change-password', [\App\Http\Controllers\Vstore\AccountController::class, 'changePassword'])->name('screens.vstore.account.changePassword');
         Route::post('/change-password', [\App\Http\Controllers\Vstore\AccountController::class, 'saveChangePassword'])->name('screens.vstore.account.saveChangePassword');
-
+        Route::get('/edit-tax-code', [\App\Http\Controllers\Vstore\AccountController::class, 'editTaxCode'])->name('screens.vstore.account.editTaxCode');
+        Route::post('/save-tax-code', [\App\Http\Controllers\Vstore\AccountController::class, 'saveChangeTaxCode'])->name('screens.vstore.account.saveChangeTaxCode');
     });
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');

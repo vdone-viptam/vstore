@@ -70,7 +70,7 @@ class LoginController extends Controller
     {
         if ($request->role_id == 3) {
             $validator = Validator::make($request->all(), [
-                'email' => 'required|unique:users|email',
+                'email' => 'required|email',
                 'name' => 'required|unique:users',
                 'company_name' => 'required',
                 'tax_code' => 'required',
@@ -96,7 +96,7 @@ class LoginController extends Controller
             ]);
         } elseif ($request->role_id == 4) {
             $validator = Validator::make($request->all(), [
-                'email' => 'required|unique:users|email',
+                'email' => 'required|email',
                 'name' => 'required|unique:users',
                 'company_name' => 'required||unique:users',
                 'tax_code' => 'required|max:255',
@@ -137,7 +137,7 @@ class LoginController extends Controller
             ]);
         } elseif ($request->role_id == 2) {
             $validator = Validator::make($request->all(), [
-                'email' => 'required|unique:users|email',
+                'email' => 'required|email',
                 'name' => 'required|unique:users',
                 'company_name' => 'required|unique:users',
                 'tax_code' => 'required',
@@ -162,27 +162,43 @@ class LoginController extends Controller
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
         }
-
-        if ($validator->fails()) {
-
-            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
-
-        }
-
-
-        DB::beginTransaction();
         try {
-            if ($request->role_id == 2) {
-                $checkUs = User::where('tax_code', $request->tax_code)
-                    ->where('role_id', 2)
-                    ->count();
-                $checkUs1 = User::where('tax_code', $request->tax_code)
-                    ->where('role_id', 3)
-                    ->count();
-                if ($checkUs > 0 || $checkUs1 == 1) {
+            if ($validator->fails()) {
 
-                    return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
-                }
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
+            }
+
+
+            DB::beginTransaction();
+            $domain = $request->getHttpHost();
+            if ($domain == config('domain.admin')) {
+                $role_id = 1;
+            }
+            if ($domain == config('domain.ncc')) {
+                $role_id = 2;
+            }
+            if ($domain == config('domain.vstore')) {
+                $role_id = 3;
+            }
+            if ($domain == config('domain.storage')) {
+                $role_id = 4;
+            }
+            $checkEmail = DB::table('users')
+                ->where('email', $request->email)
+                ->where('role_id', $request->role_id)
+                ->count();
+
+            if ($checkEmail > 0) {
+                return redirect()->back()->withErrors(['email' => 'Email đã được đăng ký.'])->withInput($request->all());
+            }
+
+            $checkTax = DB::table('users')
+                ->where('tax_code', $request->tax_code)
+                ->where('role_id', $role_id)
+                ->count();
+            if ($checkTax > 0) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
             }
             $user = new User();
             $user->name = $request->name;
@@ -192,16 +208,16 @@ class LoginController extends Controller
             $user->password = Hash::make(rand(100000, 999999));
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
-            if ($request->role_id == 3) {
+            if ($role_id == 3) {
                 $user->branch = 1;
             }
             if ($request->id_vdone_diff) {
                 $user->id_vdone_diff = $request->id_vdone_diff;
             }
             $user->address = $request->address;
-            $user->role_id = $request->role_id;
+            $user->role_id = $role_id;
             $user->slug = Str::slug($request->name);
-            if ($request->role_id == 4) {
+            if ($role_id == 4) {
                 $cold_storage = $request->cold_storage ?? '';
                 $warehouse = $request->warehouse ?? '';
                 $normal_storage = $request->normal_storage ?? $request->volume;
@@ -236,14 +252,14 @@ class LoginController extends Controller
 
             DB::commit();
 
-            if ($request->role_id == 2) {
+            if ($role_id == 2) {
 
                 return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công');
             }
-            if ($request->role_id == 3) {
+            if ($role_id == 3) {
                 return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công');
             }
-            if ($request->role_id == 4) {
+            if ($role_id == 4) {
                 return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công');
             }
 //            return 1
@@ -268,8 +284,26 @@ class LoginController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
+
         try {
-            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password]) && Auth::user()->role_id == $request->type) {
+            $domain = $request->getHttpHost();
+            if ($domain == config('domain.admin')) {
+                $role_id = 1;
+            }
+            if ($domain == config('domain.ncc')) {
+                $role_id = 2;
+            }
+            if ($domain == config('domain.vstore')) {
+                $role_id = 3;
+            }
+            if ($domain == config('domain.storage')) {
+                $role_id = 4;
+            }
+
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
+                if (Auth::user()->status == 4) {
+                    return redirect()->back()->with('error', 'Tài khoản đã hết hạn sử dụng.Liên hệ quản trị viên để gia hạn tài khoản');
+                }
                 $token = Str::random(32);
                 $userLogin = Auth::user();
                 $login = new Otp();
@@ -287,7 +321,6 @@ class LoginController extends Controller
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
         } catch (\Exception $e) {
-
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 
@@ -299,15 +332,29 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function formForgotPassword()
+    public function formForgotPassword(Request $request)
     {
-        return view('auth.forgotPassword');
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
+        return view('auth.forgotPassword', ['role_id' => $role_id]);
     }
 
     public function postForgotPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|exists:users,email|email',
+            'role_id' => 'required'
         ], [
             'email.required' => 'Email bắt buộc nhập',
             'email.exists' => 'Email không tồn tại',
@@ -316,12 +363,26 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }
-        $user = User::where('email', $request->email)->first();
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
+        $user = User::where('email', $request->email)->where('role_id', $role_id)->where('account_code', '!=', null)->first();
         if ($user) {
-            $passwordReset = PasswordReset::where('email', $request->email)->delete();
+            $passwordReset = PasswordReset::where('email', $request->email)->where('role_id', $role_id)->delete();
             $token = Str::random(32);
-            DB::table('password_resets')->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]);
-            Mail::send('email.forgot', ['token' => $token], function ($message) use ($user) {
+            DB::table('password_resets')
+                ->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now(), 'role_id' => $role_id]);
+            Mail::send('email.forgot', ['token' => $token, 'role_id' => $role_id], function ($message) use ($user) {
                 $message->to($user->email);
                 $message->subject('Thông báo đổi mật khẩu');
             });
@@ -332,15 +393,28 @@ class LoginController extends Controller
         }
     }
 
-    public function formResetForgot($token)
+    public function formResetForgot($token, Request $request)
     {
-        $passwordReset = PasswordReset::where('token', $token)->first();
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
+        $passwordReset = PasswordReset::where('token', $token)->where('role_id', $role_id)->first();
 
         if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
             abort(404);
         }
 
-        return view('auth.formReset');
+        return view('auth.formReset',['role_id' => $role_id]);
     }
 
     public function postResetForgot(Request $request, $token)
@@ -348,6 +422,7 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'password' => 'required|min:6|max:30|confirmed',
             'password_confirmation' => 'required',
+            'role_id' => 'required',
         ], [
             'password.required' => 'Email bắt buộc nhập',
             'password.min' => 'Qúa ít ký tự',
@@ -355,10 +430,22 @@ class LoginController extends Controller
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
         ]);
-//        password_confirmation
-        $passwordReset = PasswordReset::where('token', $token)->first();
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
+        $passwordReset = PasswordReset::where('token', $token)->where('role_id', $role_id)->first();
         if ($passwordReset) {
-            $user = User::where('email', $passwordReset->email)->first();
+            $user = User::where('email', $passwordReset->email)->where('role_id', $role_id)->first();
             $user->password = Hash::make($request->password);
             $user->save();
             $passwordReset->delete();
