@@ -10,12 +10,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <meta property="og:title" content="V-ncc" />
+    <meta property="og:title" content="V-ncc"/>
     <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="{{asset('')}}" />
-    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
@@ -25,9 +26,10 @@
 <div class=" grid grid-cols-1 place-items-center ">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full md:w-[500px] ">
-        <a href="{{route('landingpagencc')}}" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
+        <a href="{{route('landingpagencc')}}"
+           class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
             <div>
-                <img  src="{{asset('asset/icons/back.png')}}" alt="">
+                <img src="{{asset('asset/icons/back.png')}}" alt="">
             </div>
             <span class="text-title">Quay lại</span>
         </a>
@@ -82,7 +84,8 @@
                 {{--                    <input type="checkbox" class="w-4 h-4 accent-primary">--}}
                 {{--                    <span>Duy trì đăng nhập</span>--}}
                 {{--                </div>--}}
-                <a href="{{route('form_forgot_password')}}" class="font-medium text-[#096DD9]">Quên mật khẩu?</a>
+                <a href="{{route('form_forgot_password',['type' => 2])}}" class="font-medium text-[#096DD9]">Quên mật
+                    khẩu?</a>
             </div>
             {{--            bg-sky-500/100--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
@@ -127,7 +130,7 @@
             btn.setAttribute('disabled', 'true')
         }
     })
-    $('#form-log').submit(function (){
+    $('#form-log').submit(function () {
         btn.setAttribute('disabled', 'true');
     })
 </script>

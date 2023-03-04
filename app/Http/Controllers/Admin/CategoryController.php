@@ -132,7 +132,7 @@ class CategoryController extends Controller
         try {
             $category = Category::where('id', $id)->update(['status' => 0]);
             DB::commit();
-            return redirect()->back()->with('success', 'Chuyển danh mục sản phẩm vào thùng rác thành công');
+            return redirect()->back()->with('success', 'Xóa danh mục thành công');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
