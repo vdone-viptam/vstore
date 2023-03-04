@@ -95,6 +95,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn V-Store<strong
                                 class="text-[#FF4D4F]">*</strong></span>
+
                             <div class="w-full">
                                 @if(isset($vstore->id))
                                     <div id="boxHid">
@@ -128,6 +129,7 @@
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
                                 @endif
+
                             </div>
 
                         </div>
@@ -155,7 +157,7 @@
                         <span class="text-title font-medium">VAT (%)<strong class="text-[#FF4D4F]">*</strong>
                         </span>
                             <span>
-                                <input type="number"  min="0" max="99" name="vat"
+                                <input type="number" min="0" max="99" name="vat"
                                        value="{{old('vat')}}"
                                        placeholder="Nhập VAT (%)"
                                        class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
