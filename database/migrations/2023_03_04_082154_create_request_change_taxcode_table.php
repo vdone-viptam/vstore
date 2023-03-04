@@ -12,12 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::create('request_change_taxcode', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->string('token');
-            $table->integer('role_id');
-            $table->timestamp('created_at')->nullable();
+            $table->string('tax_code');
+            $table->integer('user_id');
+            $table->integer('status')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('request_change_taxcode');
     }
 };

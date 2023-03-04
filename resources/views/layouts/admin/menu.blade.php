@@ -200,6 +200,8 @@
                 <li data-page="register-account"><a class="hover:underline"
                                                     href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
                         ký tài khoản </a>
+                <li data-page="request-change-tax-code"><a class="hover:underline"
+                                                    href="{{route('screens.admin.user.tax_code')}}">Yêu cầu cập nhật mã số thuế</a>
                 </li>
             </ul>
         </div>

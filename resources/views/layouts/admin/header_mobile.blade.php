@@ -208,6 +208,8 @@
                         <li><a class="hover:underline" href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
                                 ký tài khoản </a>
                         </li>
+                        <li><a class="hover:underline"
+                               href="{{route('screens.admin.user.tax_code')}}">Yêu cầu cập nhật mã số thuế</a>
                         </li>
                     </ul>
                 </div>
@@ -241,7 +243,8 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.admin.finance.index')}}">Yêu cầu rút tiền</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.admin.finance.index')}}">Yêu cầu rút
+                                tiền</a></li>
                     </ul>
                 </div>
                 {{--                log out--}}
