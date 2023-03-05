@@ -39,9 +39,8 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        {{--                                                <span class="text-title font-medium  ">Phần trăm chiết khấu bán s:</span>--}}
-                        <input disabled name="discount_vshop" type="hidden" id="discount_vshop"
-                               value="{{$product1->discount_vShop}}"
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều:</span>
+                        <input disabled name="buy_more" id="buy_more" value="{{$products->buy_more ?? 0}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
@@ -63,7 +62,8 @@
                         </div>
 
                     </div>
-                    <p class="text-red-600" id="message">Phần trăm giảm giá không được vượt quá của V-Store</p>
+                    <p class="text-red-600" id="message">Phần trăm giảm giá không được vượt quá phần còn lại của tổng
+                        chiết khấu V-Store và chiết khấu mua nhiều</p>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     <button
@@ -85,9 +85,10 @@
     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
     document.getElementById('discount').addEventListener('keyup', (o) => {
         const value = o.target.value;
-        console.log(value)
-        if (document.getElementById('discount').value <
-            Number(document.querySelector('#discount_ncc').value + document.querySelector('#discount_vshop').value)) {
+
+        if (value <=
+            100 - Number(document.querySelector('#discount_ncc').value) + Number(document.querySelector('#buy_more').value)) {
+
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
@@ -110,12 +111,12 @@
                     document.querySelector('#price').value = result.pro.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.discount
                     document.querySelector('#discount_ncc').value = result.pro.discount
-
+                    document.querySelector('#buy_more').value = result.pro.buy_more + ' %'
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = o.target.value;
 
-                        if (value < Number(result.pro.discount + result.discount)
-                            || document.getElementById('discount').value < Number(result.pro.discount + result.discount)) {
+                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more)
+                            || document.getElementById('discount').value <= Number(result.pro.discount + result.pro.buy_more)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 

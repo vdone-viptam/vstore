@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,8 @@ class DiscountController extends Controller
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->where('discounts.user_id', Auth::id())
             ->paginate(10);
+
+
         return view('screens.manufacture.discount.discount', $this->v);
 
     }
@@ -30,19 +33,22 @@ class DiscountController extends Controller
             }
         }
         $this->v['products'] = $data;
+
         return view('screens.manufacture.discount.createDis', $this->v);
 
     }
 
     public function chooseProduct(Request $request)
     {
-        $pro = DB::table('products')->select('price', 'discount', 'discount_vShop')->where('id', $request->product_id)->first();
-        $discount = DB::table('discounts')->select('discount')->where('product_id', $request->product_id)->orderBy('discount', 'desc')->first()->discount ?? 0;
+        $pro = DB::table('products')->select('id', 'price', 'discount', 'discount_vShop')->where('status', 2)->where('id', $request->product_id)->first();
         if ($pro) {
+            $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $pro->id)->first();
+//return $buy_more;
             $pro->price = number_format($pro->price, 0, '.', '.') ?? 0;
+            $pro->buy_more = $buy_more->discount ?? 0;
             return response()->json([
                 'pro' => $pro,
-                'discount' => $discount
+
             ]);
         } else {
             return null;
@@ -78,6 +84,10 @@ class DiscountController extends Controller
         $this->v['products'] = $data;
         $this->v['discount'] = DB::table('discounts')->select('id', 'product_id', 'start_date', 'end_date', 'start_date', 'discount')->where('id', $request->id)->first();
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
+        $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['discount']->product_id)->first();
+
+        $this->v['product1']->buy_more = $buy_more->discount ?? 0;
+
         return view('screens.manufacture.discount.editDis', $this->v);
 
     }

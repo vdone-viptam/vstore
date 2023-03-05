@@ -38,6 +38,11 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều:</span>
+                        <input disabled name="buy_more" id="buy_more"
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    </div>
+                    <div class="gap-4 w-full">
                         {{--                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>--}}
                         <input disabled name="discount_vshop" id="discount_vshop" type="hidden"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -93,10 +98,10 @@
                     document.querySelector('#price').value = result.pro.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.pro.discount_vShop + ' %'
                     document.querySelector('#discount_ncc').value = result.pro.discount + ' %'
-
+                    document.querySelector('#buy_more').value = result.pro.buy_more + ' %'
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = o.target.value;
-                        if (value < Number(result.pro.discount + result.discount)) {
+                        if (value <= 100 - Number(result.pro.discount  + result.pro.buy_more)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                         } else {
