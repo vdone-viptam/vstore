@@ -63,8 +63,7 @@
                         </div>
 
                     </div>
-                    <p class="text-red-600" id="message">Phần trăm chiết khẩu không được vượt quá của nhà cung cấp và
-                        v-shop</p>
+                    <p class="text-red-600" id="message">Phần trăm giảm giá không được vượt quá của V-Store</p>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     <button
