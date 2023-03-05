@@ -158,7 +158,7 @@
                                                class="more-details text-primary underline ml-4">
                                                 Chi tiết</a>
                                         @else
-                                            <a class="min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                            <a class="duyet min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
                                                href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt
                                             </a>
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
@@ -207,6 +207,8 @@
 
 @section('custom_js')
     <script>
+
+
         const name = document.getElementById('name');
         const id = document.getElementById('id');
         const limit = document.getElementById('limit');
