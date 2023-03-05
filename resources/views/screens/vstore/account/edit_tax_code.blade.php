@@ -87,7 +87,7 @@
                                 <div class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
                                     <span class="w-full text-title font-medium">Mã số thuế mới</span>
                                     <input type="text" name="tax_code" value="{{old('tax_code')}}"
-
+                                           pattern="[0-9]{10}"
                                            class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                     <div class="w-full">
                                         @error('tax_code')
