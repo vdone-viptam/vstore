@@ -178,6 +178,7 @@ class LoginController extends Controller
             DB::beginTransaction();
             $checkEmail = DB::table('users')
                 ->where('email', $request->email)
+                ->where('account_code', '!=', null)
                 ->where('role_id', $role_id)
                 ->count();
 
@@ -187,11 +188,20 @@ class LoginController extends Controller
             if ($role_id != 4) {
                 $checkTax = DB::table('users')
                     ->where('tax_code', $request->tax_code)
+                    ->where('account_code', '!=', null)
                     ->where('role_id', $role_id)
                     ->count();
                 if ($checkTax > 0) {
                     return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
                 }
+            }
+            $checkTax2 = DB::table('users')
+                ->where('name', $request->name)
+                ->where('account_code', '!=', null)
+                ->where('role_id', $role_id)
+                ->count();
+            if ($checkTax2 > 0) {
+                return redirect()->back()->withErrors(['name' => 'Tên đã tồn tại.'])->withInput($request->all());
             }
             $user = new User();
             $user->name = $request->name;
