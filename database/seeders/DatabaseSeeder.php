@@ -41,84 +41,111 @@ class DatabaseSeeder extends Seeder
 
         DB::table('categories')->insert([[
                 'name' => 'Thời trang nữ',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Thời trang nam',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Sắc đẹp',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ], [
                     'name'=>'Sức khỏe',
+                    'img'=>'image/category/',
                     'created_at'=>Carbon::now(),
             ], [
                     'name'=>'Phụ kiện thời trang',
+                'img'=>'image/category/',
                     'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Thiết bị điện gia dụng',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Giày dép nam',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Điện thoại & phụ kiện',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Du lịch & Hành lý',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Túi ví nữ',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ], [
                 'name'=>'Túi ví nam',
+                'img'=>'image/category/',
                     'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Đồng hồ',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Thiết bị âm thanh',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Thực phầm và đồ uống',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Chăm sóc thú cưng',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Mẹ & Bé',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Thời trang trẻ em & trẻ sơ sinh',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Gaming & Console',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Cameras & Flycam',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Nhà cửa & Đời sống',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Thể Thao & Dã Ngoại',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Văn Phòng Phẩm',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Ô tô',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Mô tô, xe máy',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Sách',
+                'img'=>'image/category/',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Máy tính & Laptop',
+                'img'=>'image/category/may_tinh_laptop.png',
                 'created_at'=>Carbon::now(),
             ],[
                 'name'=>'Bất động sản',
+                'img'=>'image/category/nha_cua_doi_song.png',
                 'created_at'=>Carbon::now(),
             ],
 

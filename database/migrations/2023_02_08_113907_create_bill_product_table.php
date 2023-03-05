@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('publish_id')->nullable();
             $table->string('vshop_id')->nullable();
             $table->integer('quantity')->nullable();
-            $table->float('price')->nullable();
+            $table->float('price',20,2)->nullable();
             $table->integer('bill_detail_id')->nullable();
             $table->integer('vstore_id')->nullable();
             $table->integer('user_id')->nullable();

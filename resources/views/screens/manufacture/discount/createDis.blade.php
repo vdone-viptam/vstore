@@ -71,7 +71,7 @@
                         </div>
 
                     </div>
-                    <p class="text-red-600" id="message">Phần trăm giảm giá không được vượt quá của V-Store</p>
+                    <p class="text-red-600" id="message">Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu</p>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     <button
