@@ -115,7 +115,7 @@
                             <th class="w-[200px]">
                                 Giá bán (đ)
                             </th>
-                            <th>Chiết khấu (đ)</th>
+                            <th>Chiết khấu (%)</th>
 {{--                            <th>--}}
 {{--                                Chi tiết--}}
 {{--                            </th>--}}
