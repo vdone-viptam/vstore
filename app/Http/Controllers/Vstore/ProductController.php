@@ -24,20 +24,18 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+//        return 1;
         $limit = $request->limit ?? 10;
-        $this->v['products'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
-            ->join('requests', 'products.id', '=', 'requests.product_id')
-            ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
-            ->where('requests.vstore_id', Auth::id())
-            ->where('products.status', 2);
+        $this->v['products'] = Product::join('users','products.user_id','=','users.id')->join('categories','products.category_id','=','categories.id')->where('products.status',2)->where('vstore_id',Auth::id())
+        ->select('products.publish_id','products.name as name','users.name as user_name','products.price','categories.name as cate_name','products.discount as discount')
+        ;
 
         if ($request->condition && $request->condition != 0) {
             $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
         }
-        $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
+        $this->v['products'] = $this->v['products']->orderBy('products.id', 'desc')
             ->paginate($limit);
-
+//return  $this->v['products'];
         $this->v['params'] = $request->all();
 
         return view('screens.vstore.product.index', $this->v);

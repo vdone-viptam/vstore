@@ -296,7 +296,7 @@
 
 
     </div>
-    <div class="text-center my-4"><input name="checkbox" type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng
+    <div class="text-center my-4"><input name="checkbox" type="checkbox" readonly> Bạn đồng ý với điều khoản sử dụng của chúng
         tôi. <a href="#"
                 onclick="$('.modal-hd').toggleClass('show-modal')"
                 class="underline text-blue-700">Xem

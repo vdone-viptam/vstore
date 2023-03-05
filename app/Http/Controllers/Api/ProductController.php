@@ -247,7 +247,7 @@ class ProductController extends Controller
     public function productById($id)
     {
 
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop', 'video')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop', 'video','description')->first();
 
         if (!$product) {
             return response()->json([

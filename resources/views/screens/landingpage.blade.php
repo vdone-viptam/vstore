@@ -65,10 +65,10 @@
         </div>
         <ul class="nav-menu lg:flex items-center gap-10 ">
                 <li class="active"><a href="#" class="text-lg text-[#2C2C37] ">Trang chủ</a></li>
-                <li><a href="#" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
-                <li><a href="#" class="text-lg text-[#2C2C37] ">Sales</a></li>
-                <li><a href="#" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
-                <li><a href="#" class="text-lg text-[#2C2C37] ">Nhà cung cấp</a></li>
+                <li><a href="{{asset('#gioi_thieu')}}" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
+                <li><a href="{{asset('#sale')}}" class="text-lg text-[#2C2C37] ">Sales</a></li>
+                <li><a href="{{asset('#noi_bat')}}" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
+                <li><a href="{{asset('#nha_cung_cap')}}" class="text-lg text-[#2C2C37] ">Nhà cung cấp</a></li>
             </ul>
     </div>
     <div class="max-w-[1320px] flex justify-between items-center px-[15px] xl:px-0 lg:hidden relative">
@@ -150,1094 +150,208 @@
             </div>
         </div>
         <div class="flex flex-col gap-[30px] md:mt-[100px] lg:my-16">
-            <h2 class="text-[#258AFF] text-xl md:text-4xl font-semibold">Giới thiệu</h2>
+            <h2 id="gioi_thieu" class="text-[#258AFF] text-xl md:text-4xl font-semibold">Giới thiệu</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-[50px] lg:gap-[105px] px-[20px] py-[40px] bg-[#FFF] rounded-[20px]">
                 <div class="flex items-start gap-6">
                     <div class="max-w-[222px]">
                         <img src="{{asset('landingpage/images/HPlogo.png')}}" class="w-full object-contain" alt="">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <span class="text-[#696984] text-xl"><strong class="font-semibold">ID:</strong> 234938192832</span>
-                        <span class="text-[#696984] text-xl"><strong class="font-semibold">Liên hệ:</strong> 034 829 3921</span>
+                        <span class="text-[#696984] text-xl"><strong class="font-semibold">ID:</strong> {{$user->account_code}}</span>
+                        <span class="text-[#696984] text-xl"><strong class="font-semibold">Liên hệ:</strong> {{$user->phone_number}}</span>
 
-                        <span class="text-[#696984] text-xl"><strong class="font-semibold">Số sản phẩm:</strong>  1.903</span>
+                        <span class="text-[#696984] text-xl"><strong class="font-semibold">Số sản phẩm:</strong>  {{$count_products}}</span>
 
-                        <span class="text-[#696984] text-xl"><strong class="font-semibold">Danh mục: </strong>Quần áo, Thú cưng, Chó mèo</span>
+                        <span class="text-[#696984] text-xl"><strong class="font-semibold">Danh mục: </strong>@foreach($arrCategory as $val) {{$val->name}}, @endforeach...</span>
                     </div>
                 </div>
                 <div class="flex flex-col gap-2">
                     <span class="font-semibold text-xl text-[#696984]"> Giới thiệu</span>
-                    <span class="line-clamp-3 text-[#696984] text-xl">Chúng tôi làm việc chuyên nghiệp, uy tín, nhanh chóng, đặt quyền lợi của bạn lên hàng đầu. Với tiêu chí khách hàng là trên hết. Shop chúng tôi mang lại sản phẩm với chất lượng tốt nhất đến tay khách </span>
-                    <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
-                        <div class="max-w-[118px]">
-                            <img src="{{asset('landingpage/images/int.png')}}" class="w-full object-contain" alt="">
-                        </div>
-                        <div class="max-w-[118px]">
-                            <img src="{{asset('landingpage/images/int.png')}}" class="w-full object-contain" alt="">
-                        </div>
-                        <div class="max-w-[118px]">
-                            <img src="{{asset('landingpage/images/int.png')}}" class="w-full object-contain" alt="">
-                        </div>
-                        <div class="max-w-[118px]">
-                            <img src="{{asset('landingpage/images/int.png')}}" class="w-full object-contain" alt="">
-                        </div>
-                        <div class="max-w-[118px]">
-                            <img src="{{asset('landingpage/images/int.png')}}" class="w-full object-contain" alt="">
-                        </div>
-                        <div class="max-w-[118px]">
-                            <img src="{{asset('landingpage/images/int.png')}}" class="w-full object-contain" alt="">
-                        </div>
-                    </div>
+                    <span class="line-clamp-3 text-[#696984] text-xl">{{$user->description != null ? $user->description : 'Chưa có thông tin mô tả'}} </span>
+
                 </div>
             </div>
         </div>
         <div class="flex flex-col gap-[30px] ">
             <h2 class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Danh mục</h2>
-            <div class="slider-cate">
-                <section>
-                    <ul class="tab-cate grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
+            <div class="">
+                <section class="">
+                    <ul class="slider-cate tab-cate    gap-3">
+                        @foreach($arrCategory as $cate)
+                            <li>
+                                <a href="#" class="w-full h-[210px] p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+                                    <div class="max-w-[120px]">
+                                        @if($cate->img !=null)
+                                            <img src="{{asset($cate->img)}}" class="w-full object-contain" alt="">
+                                        @else
+                                            <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
+{{--                                            http://vstore.ngo/landingpage/images/wm.png--}}
+                                        @endif
+
+                                    </div>
+                                    <span class="text-[#2C2C37] text-center">{{$cate->name}}</span>
+                                </a>
+                            </li>
+                        @endforeach
+{{--                        <li>--}}
+{{--                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">--}}
+{{--                                <div class="max-w-[120px]">--}}
+{{--                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">--}}
+{{--                                </div>--}}
+{{--                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+
+
+
                     </ul>
                 </section>
-                <section>
-                    <ul class="tab-cate grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <ul class="tab-cate grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <ul class="tab-cate grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                <div class="max-w-[120px]">
-                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
-                                </div>
-                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
+
             </div>
-            <div class=" sales grid grid-cols-2 xl:grid-cols-4 gap-2 lg:gap-6 p-[15px] md:pt-[250px] xl:pt-[200px] py-[60px] md:px-[48px] md:my-16">
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
+            <div id="sale" class=" sales grid grid-cols-2 xl:grid-cols-4 gap-2 lg:gap-6 p-[15px] md:pt-[250px] xl:pt-[200px] py-[60px] md:px-[48px] md:my-16">
+                @foreach($product_super as $ps)
+                    <div class="product-item  bg-[#FFF] rounded-[20px]">
+                        <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+                            <img src="{{asset(json_decode($ps->images)[0])}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
                         </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        <div class=" p-[10px] md:p-[20px]">
+                            <div class="flex flex-col">
+                                <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">{{$ps->name}}</h2>
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                </fieldset>
                             </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                                    <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{$ps->gia_khuyen_mai}}</span>
+                                    <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{$ps->price}}</span>
+                                </div>
+                                <span class="text-[#696984] text-xs md:text-lg">{{$ps->amount_product_sold}}</span>
                             </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
                         </div>
                     </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
             <div class="flex flex-col gap-[30px]">
-            <h2 class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Sản phẩm nổi bật</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 xl:gap-6">
-            <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
+            <h2 id="noi_bat" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Sản phẩm nổi bật</h2>
+            <div class=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 xl:gap-6">
+                @foreach($products as $pro)
+{{--                    {{ json_decode($pro->images)[0]}}--}}
+                    <div class="product-item  bg-[#FFF] rounded-[20px]">
+                        <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+
+                            <img src="{{asset(json_decode($pro->images)[0])}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
+
                         </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        <div class=" p-[10px] md:p-[20px]">
+                            <div class="flex flex-col">
+                                <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                </fieldset>
                             </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                                    @if($pro->price_discount)
+                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ $pro->price_discount }}</span>
+                                        <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{$pro->price}}</span>
+                                    @else
+                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ $pro->price }}</span>
+                                    @endif
+
+                                </div>
+                                <span class="text-[#696984] text-xs md:text-lg">Đã bán {{$pro->amount_product_sold}}</span>
                             </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
                         </div>
                     </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+
+{{--                <div class="product-item  bg-[#FFF] rounded-[20px]">--}}
+{{--                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">--}}
+{{--                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">--}}
+{{--                    </div>--}}
+{{--                    <div class=" p-[10px] md:p-[20px]">--}}
+{{--                        <div class="flex flex-col">--}}
+{{--                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>--}}
+{{--                            <fieldset class="rating">--}}
+{{--                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>--}}
+{{--                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>--}}
+{{--                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>--}}
+{{--                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>--}}
+{{--                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>--}}
+{{--                            </fieldset>--}}
+{{--                        </div>--}}
+{{--                        <div class="flex flex-col gap-3">--}}
+{{--                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">--}}
+{{--                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>--}}
+{{--                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>--}}
+{{--                            </div>--}}
+{{--                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
 
             </div>
-            <ul class="pagination flex items-center justify-end">
-                    <li><div class="cursor-pointer"><svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M59.9993 0.5H8.86768C4.72554 0.5 1.36768 3.85786 1.36768 8V30C1.36768 34.1421 4.72555 37.5 8.86768 37.5H59.9993V0.5Z" fill="white"/>
-<path d="M33.4468 16.6308L31.755 18.6044L33.4468 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M30.4016 16.6308L28.7099 18.6044L30.4016 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M59.9993 0.5H8.86768C4.72554 0.5 1.36768 3.85786 1.36768 8V30C1.36768 34.1421 4.72555 37.5 8.86768 37.5H59.9993V0.5Z" stroke="#DEE2E6"/>
-</svg>
-</div></li>
-<li class="active"><a href="#">1</a></li>
-<li><a href="#">2</a></li>
-<li><a href="#">3</a></li>
-<li><a href="#">4</a></li>
-<li><a href="#">5</a></li>
-<li><div  class="cursor-pointer"><svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.36841 0.5H52.5C56.6421 0.5 60 3.85786 60 8V30C60 34.1421 56.6421 37.5 52.5 37.5H1.36841V0.5Z" fill="white"/>
-<path d="M27.9209 16.6308L29.6126 18.6044L27.9209 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M30.9661 16.6308L32.6578 18.6044L30.9661 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M1.36841 0.5H52.5C56.6421 0.5 60 3.85786 60 8V30C60 34.1421 56.6421 37.5 52.5 37.5H1.36841V0.5Z" stroke="#DEE2E6"/>
-</svg>
+{{--            <ul class="pagination flex items-center justify-end">--}}
+{{--                    <li><div class="cursor-pointer"><svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--<path d="M59.9993 0.5H8.86768C4.72554 0.5 1.36768 3.85786 1.36768 8V30C1.36768 34.1421 4.72555 37.5 8.86768 37.5H59.9993V0.5Z" fill="white"/>--}}
+{{--<path d="M33.4468 16.6308L31.755 18.6044L33.4468 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--<path d="M30.4016 16.6308L28.7099 18.6044L30.4016 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--<path d="M59.9993 0.5H8.86768C4.72554 0.5 1.36768 3.85786 1.36768 8V30C1.36768 34.1421 4.72555 37.5 8.86768 37.5H59.9993V0.5Z" stroke="#DEE2E6"/>--}}
+{{--</svg>--}}
+{{--</div></li>--}}
+{{--<li class="active"><a href="#">1</a></li>--}}
+{{--<li><a href="#">2</a></li>--}}
+{{--<li><a href="#">3</a></li>--}}
+{{--<li><a href="#">4</a></li>--}}
+{{--<li><a href="#">5</a></li>--}}
+{{--<li><div  class="cursor-pointer"><svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--<path d="M1.36841 0.5H52.5C56.6421 0.5 60 3.85786 60 8V30C60 34.1421 56.6421 37.5 52.5 37.5H1.36841V0.5Z" fill="white"/>--}}
+{{--<path d="M27.9209 16.6308L29.6126 18.6044L27.9209 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--<path d="M30.9661 16.6308L32.6578 18.6044L30.9661 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--<path d="M1.36841 0.5H52.5C56.6421 0.5 60 3.85786 60 8V30C60 34.1421 56.6421 37.5 52.5 37.5H1.36841V0.5Z" stroke="#DEE2E6"/>--}}
+{{--</svg>--}}
 
-</div></li>
-                </ul>
+{{--</div></li>--}}
+{{--                </ul>--}}
         </div>
-          
+
             <div class="flex flex-col gap-[30px] my-16">
-            <h2 class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Nhà cung cấp</h2>
-                <div class="slider-cate">
+            <h2 id="nha_cung_cap" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Nhà cung cấp</h2>
+                <div class="">
                     <section>
-                        <ul class="tab-ncc grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        <ul class="tab-ncc grid grid-cols-4 xl:grid-cols-8 gap-3">
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        <ul class="tab-ncc grid grid-cols-4 xl:grid-cols-8 gap-3">
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        <ul class="tab-ncc grid grid-cols-4 xl:grid-cols-8 gap-3">
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
-                                    <div class="max-w-[120px]">
-                                        <img src="{{asset('landingpage/images/ncc.png')}}" class="w-full object-contain" alt="">
-                                    </div>
-                                    <span class="text-[#2C2C37] text-center">NCC Hải Phòng</span>
-                                </a>
-                            </li>
+                        <ul class="slider-cate tab-ncc  gap-3">
+                            @foreach($vstore as $vsto)
+                                <li>
+                                    <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+                                        <div class="max-w-[120px]">
+                                            <img src="{{asset('image/users/'. $vsto->avatar)}}" class="w-full object-contain" alt="">
+                                        </div>
+                                        <span class="text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,15,'...')}}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+
+
                         </ul>
                     </section>
 
+
                 </div>
-               
+
             </div>
-            
+
         </div>
     </div>
     <footer>
@@ -1275,6 +389,10 @@
         </div>
     </footer>
 <script>
+    var slide = 6;
+    if (window.matchMedia('screen and (max-width: 768px)').matches) {
+        slide=2;
+    }
     $(document).ready(function(){
         $('.btn-menu').on('click',function(){
             $('.nav-menu-mb').toggleClass('show-menu')
@@ -1287,8 +405,8 @@
 //   autoplay: true,
 //   autoplaySpeed: 2000,
   speed: 300,
-  slidesToShow: 1,
-  slidesToScroll: 1,
+  slidesToShow: slide,
+  slidesToScroll: slide,
 //   responsive: [
 //     {
 //       breakpoint: 1024,
@@ -1318,6 +436,9 @@
 //     // instead of a settings object
  // ]
 });
+    if (window.matchMedia('screen and (max-width: 768px)').matches) {
+        console.log(1);
+    }
 </script>
 
 </body>

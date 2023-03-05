@@ -34,7 +34,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            Lịch sử thay đổi số dư của tôi
+                            Lịch sử thay đổi số dư
                         </h3>
                         <span class="text-secondary text-sm">Quản lý lịch sử thay đổi số dư của bạn</span>
                     </div>

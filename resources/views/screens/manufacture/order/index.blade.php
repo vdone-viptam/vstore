@@ -2,6 +2,7 @@
 @section('page_title','Danh sách đơn hàng')
 
 @section('modal')
+    <form action="" id="form">
     <div class="modal modal-details">
         <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
         <div
@@ -146,64 +147,110 @@ Tất cả các đơn hàng</h2>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($bills as $value)
                         <tr>
-                            <td colspan="12">Bạn chưa có đơn hàng nào</td>
+                            <td>{{$value->code}}</td>
+                            <td>
+                              {{$value->name}}
+                            </td>
+                            @if($value->delivery_status == 2)
+                            <td class="text-green-600 font-bold whitespace-nowrap">
+
+                                Đã giao hàng
+                            </td>
+                            @elseif($value->delivery_status == 1)
+                                <td class="text-green-600 font-bold whitespace-nowrap">
+
+                                    đang giao hàng
+                                </td>
+                                @elseif($value->delivery_status == 3)
+                                <td class="text-green-600 font-bold whitespace-nowrap">
+
+                                    đã hủy
+                                </td>
+                            @else
+                                <td class="text-green-600 font-bold whitespace-nowrap">
+                                    đang xư lý
+                                </td>
+                            @endif
+                            <td>{{$value->price}}</td>
+
+                            <td>
+                                {{$value->quantity}}
+                            </td>
+                            <td>Kho hàng C</td>
+                            <td>
+                               {{date("d/m/Y",strtotime($value->created_at))}}
+                            </td>
+                            <td>
+                                @if($value->success_day !=null)
+                                {{date("d/m/Y",strtotime($value->success_day))}}
+                                @else
+                                -
+                                @endif
+                            </td>
+                            <td>
+                                {{$value->total}}
+                            </td>
+                            <td>
+                                {{$value->vshop_id}}
+                            </td>
+                            <td>
+                               {{$value->price_after_discount}}
+                            </td>
+                            <td>
+{{--                                <a href="#" class="more-details text-primary underline whitespace-nowrap"> Chi tiết</a>--}}
+                            </td>
                         </tr>
+                    @endforeach
+
+
 
                     </tbody>
                 </table>
             </div>
-{{--            <div class="flex justify-end items-center gap-4 flex-wrap">--}}
+            <div class="flex justify-end items-center gap-4 flex-wrap">
 {{--                <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>--}}
-{{--                <ul class="pagination flex justify-start items-center gap-2 flex-wrap">--}}
-{{--                    <li><a href="javascript:void(0)">--}}
-{{--                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"--}}
-{{--                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                <path--}}
-{{--                                    d="M9.66213 2.06646V1.03119C9.66213 0.941456 9.55901 0.891902 9.48936 0.946813L3.45186 5.66244C3.40056 5.70233 3.35906 5.75341 3.3305 5.81179C3.30195 5.87016 3.28711 5.93429 3.28711 5.99927C3.28711 6.06425 3.30195 6.12838 3.3305 6.18675C3.35906 6.24512 3.40056 6.29621 3.45186 6.3361L9.48936 11.0517C9.56034 11.1066 9.66213 11.0571 9.66213 10.9673V9.93208C9.66213 9.86646 9.63133 9.80351 9.58043 9.76333L4.759 5.99994L9.58043 2.23521C9.63133 2.19503 9.66213 2.13208 9.66213 2.06646Z"--}}
-{{--                                    fill="#D9D9D9"/>--}}
-{{--                            </svg>--}}
-{{--                        </a></li>--}}
-{{--                    <li><a href="javascript:void(0)">1</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">...</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">4</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">5</a></li>--}}
-{{--                    <li class="active"><a href="">6</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">7</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">8</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">...</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">50</a></li>--}}
-{{--                    <li><a href="javascript:void(0)">--}}
-{{--                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"--}}
-{{--                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                <path--}}
-{{--                                    d="M10.22 5.66281L4.18253 0.947189C4.16676 0.934768 4.1478 0.92705 4.12783 0.924919C4.10787 0.922788 4.08771 0.926332 4.06966 0.935143C4.05162 0.943955 4.03643 0.957676 4.02584 0.974732C4.01524 0.991787 4.00967 1.01149 4.00977 1.03156V2.06683C4.00977 2.13246 4.04057 2.1954 4.09146 2.23558L8.91289 6.00031L4.09146 9.76505C4.03923 9.80522 4.00977 9.86817 4.00977 9.9338V10.9691C4.00977 11.0588 4.11289 11.1083 4.18253 11.0534L10.22 6.33781C10.2714 6.29779 10.3129 6.24658 10.3414 6.1881C10.37 6.12962 10.3848 6.06539 10.3848 6.00031C10.3848 5.93523 10.37 5.87101 10.3414 5.81253C10.3129 5.75404 10.2714 5.70284 10.22 5.66281Z"--}}
-{{--                                    fill="black" fill-opacity="0.85"/>--}}
-{{--                            </svg>--}}
-{{--                        </a></li>--}}
-{{--                </ul>--}}
-{{--                <div class="flex justify-start items-center gap-2 flex-wrap">--}}
-{{--                    <select name=""--}}
-{{--                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">--}}
-{{--                        <option value="">10 hàng / trang</option>--}}
-{{--                        <option value="">25 hàng / trang</option>--}}
-{{--                        <option value="">50 hàng / trang</option>--}}
-{{--                    </select>--}}
-{{--                    <div class="flex justify-start items-center gap-2">--}}
-{{--                        <span class="text-title text-sm">Đi đến</span>--}}
-{{--                        <input type="number"--}}
-{{--                               class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
-{{--                               min="1">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                @include('layouts.custom.paginator', ['paginator' => $bills])
+                <div class="flex justify-start items-center gap-2 flex-wrap">
+                    <select name="limit"
+                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
+                        <option
+{{--                            value="10" {{isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>10--}}
+{{--                            hàng / trang--}}
+                                value="10" @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >10
+                            hàng / trang
+{{--                            {{ app('request')->input('limit') }}--}}
+                        </option>
+                        <option
+{{--                            value="25" {{isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>25--}}
+{{--                            hàng / trang--}}
+                                value="25" @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >25
+                            hàng / trang
+                        </option>
+                        <option
+                            value="50" @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >50
+                            hàng / trang
+                        </option>
+                    </select>
+
+                </div>
+            </div>
         </div>
         <div></div>
     </div>
+    </form>
 @endsection
 
 @section('custom_js')
     <script>
+        const form = document.getElementById('form');
+        const limit = document.getElementsByName('limit')[0];
+        const page = document.getElementById('page1');
+        limit.addEventListener('change', (e) => {
+            form.submit();
+        });
+
         $('.more-details').each(function () {
             $(this).on('click', function () {
                 // console.log(1)
