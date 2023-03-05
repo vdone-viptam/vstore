@@ -65,7 +65,15 @@
         {{--            <span class="text-title">Quay lại</span>--}}
         {{--        </a>--}}
         <div class="w-[162px]">
-            <img src="{{asset('asset/images/Logo.png')}}" alt="">
+            @if($role_id == 3)
+                <a href="{{route('login_vstore')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
+            @elseif($role_id == 2)
+                <a href="{{route('login_ncc')}}"> <img src="{{asset('asset/images/Logoncc.png')}}" alt=""></a>
+            @elseif($role_id == 4)
+                <a href="{{route('login_storage')}}"> <img src="{{asset('asset/images/logokho.png')}}" alt=""></a>
+            @elseif($role_id == 1)
+                <a href="{{route('login_admin')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
+            @endif
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Xác minh tài khoản</h1>
 
@@ -88,7 +96,9 @@
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div class=md:text-left>Bạn chưa nhận được mã. <a class="text-sky-500/100 hover:underline transition-all duration-200" href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại</a></div>
+                <div class=md:text-left>Bạn chưa nhận được mã. <a
+                        class="text-sky-500/100 hover:underline transition-all duration-200"
+                        href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại</a></div>
                 {{--                <div class="flex flex-col justify-start items-start gap-2 w-full">--}}
                 {{--                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Mật khẩu</span>--}}
                 {{--                    <div class="pass w-full relative">--}}

@@ -60,13 +60,13 @@
         class="login flex flex-col justify-start items-start gap-6 md:gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full  md:w-[500px] ">
         <div class="w-[162px]">
             @if($role_id == 3)
-                <img src="{{asset('asset/images/Logo.png')}}" alt="">
+                <a href="{{route('login_vstore')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
             @elseif($role_id == 2)
-                <img src="{{asset('asset/images/Logoncc.png')}}" alt="">
+                <a href="{{route('login_ncc')}}"> <img src="{{asset('asset/images/Logoncc.png')}}" alt=""></a>
             @elseif($role_id == 4)
-                <img src="{{asset('asset/images/logokho.png')}}" alt="">
+                <a href="{{route('login_storage')}}"> <img src="{{asset('asset/images/logokho.png')}}" alt=""></a>
             @elseif($role_id == 1)
-                <img src="{{asset('asset/images/Logo.png')}}" alt="">
+                <a href="{{route('login_admin')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
             @endif
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Quên mật khẩu</h1>

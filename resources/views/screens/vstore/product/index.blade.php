@@ -113,9 +113,9 @@
                                 Nhà cung cấp
                             </th>
                             <th class="w-[200px]">
-                                Giá bán
+                                Giá bán (đ)
                             </th>
-                            <th>chiết khấu</th>
+                            <th>Chiết khấu (đ)</th>
 {{--                            <th>--}}
 {{--                                Chi tiết--}}
 {{--                            </th>--}}
@@ -142,7 +142,7 @@
                                         {{$product->user_name}}
                                     </td>
                                     <td class="w-[200px]">
-                                       {{$product->price}}
+                                       {{number_format($product->price,0,',',',')}} đ
                                     </td>
                                     <td>
 

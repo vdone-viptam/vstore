@@ -466,10 +466,24 @@ class LoginController extends Controller
 
     public function OTP($token1, Request $request)
     {
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
 
         return view('auth.otp', [
             'token' => $token1,
-            'user_id' => $request->id
+            'user_id' => $request->id,
+            'role_id' => $role_id
         ]);
     }
 
