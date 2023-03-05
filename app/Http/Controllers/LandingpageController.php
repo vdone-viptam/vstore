@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LandingpageController extends Controller
 {
     public function index($slug)
     {
+//        return 1;
         $user = User::where('slug', $slug)
             ->where('role_id', 2)
             ->first();
@@ -20,19 +23,41 @@ class LandingpageController extends Controller
             $banner = !empty($user->banner) ? $user->banner : '';
             $name = $user->name ?? '';
             $category = $user->products()->select("category_id")->groupBy('category_id')->get();
+//            $category= Category::all();
+//            return $category;
             $arrCategory = [];
             foreach ($category as $cate) {
                 $arrCategory[] = $cate->category_id;
             }
             $arrCategory = Category::whereIn('id', $arrCategory)->get();
-//            if ()
+            $count_products = Product::where('status',2)->where('user_id',$user->id)->count();
         } else {
             return redirect(route('landingpagencc'));
         }
+        $products = Product::where('status',2)->where('user_id',$user->id)->get();
+        foreach ($products as $pro){
+            $discount = Discount::where('product_id',$pro->id)
+            ->where('start_date','<=',Carbon::now())
+                ->where('end_date','>=', Carbon::now())
+                ->sum('discount')
+            ;
+            if ($discount>0){
+                $pro->price_discount = $pro->price - ($pro->price /100 * $discount);
+            }
 
+        }
 
-//    return $logo;
-        return view('screens.landingpage', compact('logo', 'banner', 'name', 'user', 'arrCategory'));
+        $vstore= User::join('products','users.id','=','products.vstore_id')
+        ->where('products.user_id',$user->id)
+            ->groupBy('products.vstore_id')
+            ->select('users.name','users.avatar')
+            ->get();
+//         $vstore;
+
+//return $products;
+//    return $category;
+//        return $user;
+        return view('screens.landingpage', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','vstore'));
 //        return view('screens.landingpage',compact('logo','banner'));
     }
 
@@ -55,36 +80,51 @@ class LandingpageController extends Controller
         $user = User::where('slug', $slug)
             ->where('role_id', 3)
             ->first();
-
         if ($user) {
 
             $logo = !empty($user->avatar) ? $user->avatar : '';
             $banner = !empty($user->banner) ? $user->banner : '';
             $name = $user->name ?? '';
-
-            $category = $user->vstoreProducts()->select("category_id")->where('status',2)->groupBy('category_id')->get();
+//            $category = $user->products()->select("category_id")->groupBy('category_id')->get();
+            $category= Product::join('categories','products.category_id','=','categories.id')
+                ->where('products.vstore_id',$user->id)
+                ->groupBy('products.category_id')
+                ->select('categories.id','categories.name','categories.img')
+                ->get();
+//
+//            return $category;
             $arrCategory = [];
             foreach ($category as $cate) {
-                $arrCategory[] = $cate->category_id;
+                $arrCategory[] = $cate->id;
             }
             $arrCategory = Category::whereIn('id', $arrCategory)->get();
-
-            $user_id = $user->vstoreProducts()->select("user_id")->where('status',2)->groupBy('user_id')->get();
-            $arrUser = [];
-            foreach ($user_id as $cate) {
-                $arrUser[] = $cate->user_id;
-            }
-            $arrUser = User::whereIn('id', $arrUser)->get();
-         
-//            if ()
+            $count_products = Product::where('status',2)->where('user_id',$user->id)->count();
         } else {
-            return redirect(route('landingpagevstore'));
+            return redirect(route('intro_vstore'));
+        }
+        $products = Product::where('status',2)->where('vstore_id',$user->id)->get();
+        foreach ($products as $pro){
+            $discount = Discount::where('product_id',$pro->id)
+                ->where('start_date','<=',Carbon::now())
+                ->where('end_date','>=', Carbon::now())
+                ->sum('discount')
+            ;
+            if ($discount>0){
+                $pro->price_discount = $pro->price - ($pro->price /100 * $discount);
+            }
+
         }
 
+        $ncc= User::join('products','users.id','=','products.vstore_id')
+            ->where('products.vstore_id',$user->id)
+            ->groupBy('products.user_id')
+            ->select('users.name','users.avatar')
+            ->get();
+//         $vstore;
 
-//    return $logo;
+        $product_super= Product::join('discounts','products.id','=','discounts.product_id');
 
-        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','arrUser'));
+        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','ncc'));
 //        return view('screens.landingpage',compact('logo','banner'));
 
     }

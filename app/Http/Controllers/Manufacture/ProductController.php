@@ -249,7 +249,7 @@ class ProductController extends Controller
             if ($request->product) {
 
                 $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop')
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop','description')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);

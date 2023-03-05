@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,561 +8,507 @@
     <title>Trang chủ</title>
     <link rel="stylesheet" href="{{asset('landingpage/style.css')}}">
     <link rel="stylesheet" href="{{asset('landingpage/output.css')}}">
-    <meta property="og:title" content="V-store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
-    <meta property="og:url" content="{{asset('')}}" />
-    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}" />
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
+    {{--    <link rel="stylesheet" href="../dist/output.css">--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <meta property="og:title" content="V-Ncc" />
+    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="{{asset('')}}" />
+    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
-{{--    <link rel="stylesheet" href="../dist/output.css">--}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
     @vite('resources/css/app.css')
+    <style>
+        .slick-dots {
+            bottom: -40px;
+        }
+        .slick-dots li button:before{
+            font-size: 8px;
+            color:#258AFF;
+        }
+        .slick-dots li.slick-active button:before{
+            opacity: 1;
+            color:#258AFF;
+
+        }
+        .slick-dots li.slick-active button:before{
+            top:-5px;
+        }
+        .slick-dots li.slick-active button {
+            width: 18px;
+            height: 8px;
+            padding: 4px;
+            cursor: pointer;
+            background: #258AFF;
+            border-radius:4px;
+        }
+        .slick-dots li button:before{
+            top:2px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#F2F9FF]">
 <header>
-    <div class=" w-full bg-shark">
-        <div class="hidden lg:flex justify-between items-center xl:max-w-[1320px] mx-auto px-6 xl:px-0">
-            <ul class="top-bar flex justify-start items-center">
-                <li class="border-r-[1px] border-[#E0E0E0]"><a href="#">Trang chủ</a></li>
-                <li class="border-r-[1px] border-[#E0E0E0]"><a href="#">Trở thành người bán</a></li>
-                <li class="border-r-[1px] border-[#E0E0E0]"><a href="#">Tải ứng dụng</a></li>
-                <li><a href="#">Kết nối</a></li>
-                <div class="flex justify-start gap-2">
-                    <a href="#">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="20" height="20" rx="10" fill="#337FFF"/>
-                            <path d="M12.4451 10.6511L12.73 8.84053H10.9747V7.66368C10.9747 7.16861 11.2198 6.68486 12.0034 6.68486H12.8127V5.14307C12.3414 5.06791 11.8652 5.02726 11.3879 5.02142C9.94313 5.02142 8.99991 5.88992 8.99991 7.45999V8.84053H7.39844V10.6511H8.99991V15.0303H10.9747V10.6511H12.4451Z" fill="white"/>
-                        </svg>
-
-                    </a>
-                    <a href="#">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="20" height="20" rx="10" fill="url(#paint0_linear_348_1253)"/>
-                            <path d="M8.3356 10.0256C8.3356 9.10437 9.08201 8.35734 10.003 8.35734C10.924 8.35734 11.6708 9.10437 11.6708 10.0256C11.6708 10.9469 10.924 11.6939 10.003 11.6939C9.08201 11.6939 8.3356 10.9469 8.3356 10.0256ZM7.43402 10.0256C7.43402 11.4449 8.58415 12.5953 10.003 12.5953C11.4219 12.5953 12.572 11.4449 12.572 10.0256C12.572 8.60636 11.4219 7.4559 10.003 7.4559C8.58415 7.4559 7.43402 8.60636 7.43402 10.0256ZM12.0733 7.35401C12.0733 7.47279 12.1084 7.58891 12.1744 7.68769C12.2403 7.78647 12.334 7.86348 12.4437 7.90898C12.5534 7.95448 12.6741 7.96642 12.7906 7.94329C12.907 7.92017 13.014 7.86301 13.098 7.77906C13.182 7.69511 13.2392 7.58813 13.2625 7.47164C13.2857 7.35516 13.2738 7.23441 13.2284 7.12466C13.183 7.01491 13.1061 6.92109 13.0074 6.85506C12.9087 6.78903 12.7927 6.75377 12.6739 6.75372H12.6737C12.5145 6.75379 12.3619 6.81705 12.2493 6.92961C12.1368 7.04216 12.0735 7.1948 12.0733 7.35401ZM7.98179 14.0991C7.49402 14.0769 7.2289 13.9956 7.05271 13.927C6.81913 13.836 6.65247 13.7277 6.47725 13.5526C6.30202 13.3776 6.19356 13.2111 6.10302 12.9774C6.03434 12.8012 5.95309 12.536 5.93092 12.0481C5.90666 11.5206 5.90182 11.3621 5.90182 10.0257C5.90182 8.68924 5.90706 8.53122 5.93092 8.00327C5.95313 7.51535 6.03498 7.2506 6.10302 7.07392C6.19396 6.84027 6.30226 6.67357 6.47725 6.49829C6.65223 6.32302 6.81873 6.21452 7.05271 6.12396C7.22882 6.05526 7.49402 5.97399 7.98179 5.95181C8.50914 5.92754 8.66756 5.9227 10.003 5.9227C11.3384 5.9227 11.497 5.92794 12.0248 5.95181C12.5126 5.97403 12.7773 6.0559 12.9539 6.12396C13.1875 6.21452 13.3541 6.32326 13.5294 6.49829C13.7046 6.67333 13.8126 6.84027 13.9036 7.07392C13.9723 7.25008 14.0535 7.51535 14.0757 8.00327C14.0999 8.53122 14.1048 8.68924 14.1048 10.0257C14.1048 11.3621 14.0999 11.5201 14.0757 12.0481C14.0535 12.536 13.9718 12.8012 13.9036 12.9774C13.8126 13.2111 13.7043 13.3778 13.5294 13.5526C13.3544 13.7275 13.1875 13.836 12.9539 13.927C12.7778 13.9957 12.5126 14.0769 12.0248 14.0991C11.4975 14.1234 11.339 14.1282 10.003 14.1282C8.66696 14.1282 8.50898 14.1234 7.98179 14.0991ZM7.94036 5.05149C7.40776 5.07575 7.04383 5.16022 6.72599 5.28393C6.39684 5.41169 6.11819 5.58308 5.83974 5.86117C5.5613 6.13925 5.39039 6.41842 5.26268 6.74767C5.139 7.06579 5.05455 7.42964 5.0303 7.96239C5.00564 8.49599 5 8.66658 5 10.0256C5 11.3847 5.00564 11.5553 5.0303 12.0889C5.05455 12.6216 5.139 12.9855 5.26268 13.3036C5.39039 13.6326 5.56134 13.9121 5.83974 14.1901C6.11815 14.468 6.39684 14.6392 6.72599 14.7673C7.04443 14.891 7.40776 14.9755 7.94036 14.9998C8.47408 15.024 8.64435 15.0301 10.003 15.0301C11.3617 15.0301 11.5322 15.0244 12.0656 14.9998C12.5983 14.9755 12.962 14.891 13.28 14.7673C13.609 14.6392 13.8878 14.4682 14.1663 14.1901C14.4447 13.912 14.6152 13.6326 14.7433 13.3036C14.867 12.9855 14.9518 12.6216 14.9757 12.0889C15 11.5549 15.0056 11.3847 15.0056 10.0256C15.0056 8.66658 15 8.49599 14.9757 7.96239C14.9514 7.4296 14.867 7.06559 14.7433 6.74767C14.6152 6.41862 14.4443 6.13969 14.1663 5.86117C13.8882 5.58264 13.609 5.41169 13.2804 5.28393C12.962 5.16022 12.5982 5.07535 12.066 5.05149C11.5326 5.02722 11.3621 5.02118 10.0034 5.02118C8.64475 5.02118 8.47408 5.02682 7.94036 5.05149Z" fill="white"/>
-                            <defs>
-                                <linearGradient id="paint0_linear_348_1253" x1="19.6156" y1="20" x2="-0.384399" y2="-5.38344e-07" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#FBE18A"/>
-                                    <stop offset="0.21" stop-color="#FCBB45"/>
-                                    <stop offset="0.38" stop-color="#F75274"/>
-                                    <stop offset="0.52" stop-color="#D53692"/>
-                                    <stop offset="0.74" stop-color="#8F39CE"/>
-                                    <stop offset="1" stop-color="#5B4FE9"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </a>
-
-                </div>
-            </ul>
-            <div class="flex justify-end items-center gap-8">
-                <ul class="top-bar flex justify-start items-center gap-2">
-                    <li><a href="#" class="flex justify-start items-center gap-1"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.8889 6.00964C12.8889 4.7694 12.3738 3.57996 11.457 2.70298C10.5401 1.826 9.29661 1.33331 8 1.33331C6.70339 1.33331 5.45988 1.826 4.54303 2.70298C3.62619 3.57996 3.11111 4.7694 3.11111 6.00964C3.11111 9.60408 1.76067 11.507 0.839241 12.387C0.648546 12.5691 0.793366 13.0241 1.05706 13.0241H4.94806C5.06503 13.0241 5.16696 13.1041 5.20392 13.2151C5.38817 13.7684 6.07913 15.3333 8 15.3333C9.92088 15.3333 10.6118 13.7684 10.7961 13.2151C10.833 13.1041 10.935 13.0241 11.0519 13.0241H14.9429C15.2066 13.0241 15.3515 12.5691 15.1608 12.387C14.2393 11.507 12.8889 9.60408 12.8889 6.00964Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Thông báo
-                        </a></li>
-                    <li><a href="#" class="flex justify-start items-center gap-1"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8.0013" cy="8.00002" r="7.33333" stroke="white"/>
-                                <path d="M8 9.33334V9.33334C8 8.37631 8.79514 7.62356 9.4839 6.95909C9.8485 6.60735 10.108 6.08944 10 5.33331C9.71429 3.33329 7 4.33331 7 4.33331" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8 11.3333V11.6666" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Hỗ trợ
-                        </a></li>
-                    <li><a href="#" class="flex justify-start items-center"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8.0013" cy="8.00002" r="7.33333" stroke="white"/>
-                                <path d="M0.667969 8H15.3346" stroke="white"/>
-                                <path d="M8 0.666687C8 0.666687 5.33333 2.13335 5.33333 8.00002C5.33333 13.8667 8 15.3334 8 15.3334" stroke="white"/>
-                                <path d="M8 0.666687C8 0.666687 10.6667 2.13335 10.6667 8.00002C10.6667 13.8667 8 15.3334 8 15.3334" stroke="white"/>
-                            </svg>
-                            <select name="" id="" class="outline-none px-2 bg-shark">
-                                <option value="0">Tiếng Việt</option>
-                                <option value="1">Tiếng Anh</option>
-                            </select>
-                        </a></li>
-                </ul>
-                <ul class="top-bar flex justify-start items-center">
-                    <li class="border-r-[1px] border-[#E0E0E0]"><a href="https://vstore.vdone.vn/dang-ky/">Đăng ký</a></li>
-                    <li><a href="{{route('login_vstore')}}">Đăng nhập</a></li>
-
-                </ul>
+    <div class="max-w-[1320px] lg:flex justify-between items-center mx-auto w-full px-[15px] xl:px-0 hidden">
+        <div class="max-w-[118px]">
+            <div class="w-full h-[118px]">
+                <a href="#"><img src="{{asset('landingpage/images/HPlogo.png')}}" class="w-full " alt=""></a>
             </div>
         </div>
+        <ul class="nav-menu lg:flex items-center gap-10 ">
+            <li class="active"><a href="#" class="text-lg text-[#2C2C37] ">Trang chủ</a></li>
+            <li><a href="{{asset('#gioi_thieu')}}" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
+            <li><a href="{{asset('#sale')}}" class="text-lg text-[#2C2C37] ">Sales</a></li>
+            <li><a href="{{asset('#noi_bat')}}" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
+            <li><a href="{{asset('#nha_cung_cap')}}" class="text-lg text-[#2C2C37] ">Nhà cung cấp</a></li>
+        </ul>
     </div>
-    <div class="nav">
-        <div class="flex justify-between items-center max-w-[1320px] mx-auto px-6 xl:px-0 py-4">
-            <div class="w-[301px]">
-                <div class=" w-[300px] h-[64px]">
-                    @if(!empty($logo))
-                        <a href="/"><img src="{{asset('/image/users/'.$logo)}}" alt="" class="object-contain"></a>
-                    @else
-                        <a href="/"><img src="{{asset('landingpage/images/logo.png')}}" alt="" class="w-[300px] h-[64px]"></a>
-                    @endif
-{{--                    <a href="/"><img src="{{asset('landingpage/images/logo.png')}}" alt="" class="w-full"></a>--}}
-                </div>
+    <div class="max-w-[1320px] flex justify-between items-center px-[15px] xl:px-0 lg:hidden relative">
+        <div class="max-w-[83px]">
+            <div class="w-full h-[83px]">
+                <a href="#"><img src="{{asset('landingpage/images/HPlogo.png')}}" class="w-full " alt=""></a>
             </div>
-            <div class="w-[730px] hidden lg:block">
-                <div class="w-[729px] h-[120px]">
-                    <img src=" {{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">
-                </div>
-            </div>
+        </div>
+        <ul class="nav-menu-mb flex flex-col gap-4 right-[15px] top-[60px] bg-[#FFF] absolute min-w-[172px] text-center rounded-[10px] p-[30px]">
+            <li class="active"><a href="#" class="text-lg text-[#2C2C37] ">Trang chủ</a></li>
+            <li><a href="#" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
+            <li><a href="#" class="text-lg text-[#2C2C37] ">Sales</a></li>
+            <li><a href="#" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
+            <li><a href="#" class="text-lg text-[#2C2C37] ">Nhà cung cấp</a></li>
+        </ul>
+        <div class="w-[24px] btn-menu">
+            <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20.75 6.5C20.75 6.91421 20.4142 7.25 20 7.25L4 7.25C3.58579 7.25 3.25 6.91421 3.25 6.5C3.25 6.08579 3.58579 5.75 4 5.75L20 5.75C20.4142 5.75 20.75 6.08579 20.75 6.5Z" fill="#258AFF"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20.75 12.5C20.75 12.9142 20.4142 13.25 20 13.25L4 13.25C3.58579 13.25 3.25 12.9142 3.25 12.5C3.25 12.0858 3.58579 11.75 4 11.75L20 11.75C20.4142 11.75 20.75 12.0858 20.75 12.5Z" fill="#258AFF"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20.75 18.5C20.75 18.9142 20.4142 19.25 20 19.25H4C3.58579 19.25 3.25 18.9142 3.25 18.5C3.25 18.0858 3.58579 17.75 4 17.75H20C20.4142 17.75 20.75 18.0858 20.75 18.5Z" fill="#258AFF"/>
+            </svg>
 
         </div>
-
-
     </div>
-{{--    @if(!empty($banner))--}}
-{{--        <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>--}}
-{{--    @else--}}
-{{--        <div class="w-full h-full">--}}
-{{--            <img src="{{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">--}}
-{{--        </div>--}}
-{{--    @endif--}}
 </header>
-<div class="xl:max-w-[1320px] mx-auto w-full flex flex-col gap-5 px-6 xl:px-0">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-4 py-5 w-full ">
-        <div class="col-span-8 h-[265px] ">
-{{--            <div class="w-full h-full">--}}
-{{--                <img src="../images/sp.png" alt="" class="w-full">--}}
-{{--            </div>--}}
+<div class="max-w-[1320px] mx-auto w-full flex flex-col gap-5 px-[15px] xl:px-0">
+    <div class="md:max-w-[1320px] w-full h-auto md:h-[320px] md:rounded-[20px] relative">
+        <img src="{{asset('landingpage/images/bg.png')}}" class="w-full rounded-[20px] object-contain md:object-cover" alt="">
+        <div class="box p-4 xl:p-8 absolute w-full hidden md:block center-ab max-w-[640px] lg:max-w-[960px] xl:max-w-[1124px]">
+            <div class="flex justfy-center md:justify-between items-center w-full flex-wrap lg:flex-nowrap gap-6">
+                <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
+                    <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" width="60" height="60" rx="30" fill="#258AFF"/>
+                        <g clip-path="url(#clip0_102_2404)">
+                            <path d="M15.5 20.6113C15.6455 20.0596 15.8753 19.5578 16.368 19.2107C17.0526 18.7279 17.7971 18.6328 18.5648 18.961C19.3325 19.2891 19.7738 19.8848 19.8496 20.7064C19.8814 21.0465 19.8594 21.3913 19.8802 21.7337C19.8973 22.0191 20.0159 22.075 20.2359 21.8919C20.4254 21.7337 20.588 21.5423 20.7445 21.3521C22.3961 19.3391 24.4523 17.8599 26.9242 16.9396C29.1565 16.1085 31.4682 15.7946 33.8325 16.1371C39.4413 16.9503 43.4315 19.9098 45.4597 25.0463C47.4584 30.1091 46.5391 34.858 43.0073 39.0564C40.9095 41.5498 38.1626 43.0919 34.9108 43.7245C33.9792 43.9052 33.0159 43.973 32.0636 43.9991C30.8472 44.0324 29.8655 43.2298 29.6002 42.0967C29.3484 41.023 29.9059 39.8816 30.9914 39.406C31.39 39.2312 31.8631 39.1646 32.3068 39.1468C35.0966 39.0326 37.4169 37.959 39.2127 35.8948C41.0183 33.8188 41.7176 31.3968 41.3264 28.699C41 26.4446 39.9169 24.5778 38.1528 23.0904C36.7555 21.9121 35.1345 21.1725 33.2971 20.9728C29.5122 20.5614 26.5073 21.9038 24.2738 24.8929C24.1577 25.0487 24.0648 25.2306 24.0049 25.4137C23.8716 25.8239 24.0587 26.0475 24.4976 26.0724C24.9572 26.0974 25.4328 26.0831 25.8704 26.1973C26.8802 26.4636 27.4597 27.4148 27.3447 28.5016C27.2494 29.4064 26.3998 30.2732 25.4291 30.2875C22.7714 30.3255 20.1125 30.322 17.4535 30.2899C16.5685 30.2792 15.835 29.6038 15.5795 28.737C15.555 28.6538 15.5269 28.5705 15.5 28.4885C15.5 25.862 15.5 23.2366 15.5 20.6113Z" fill="white"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_102_2404">
+                                <rect width="31" height="28" fill="white" transform="translate(15.5 16)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
 
-            @if(!empty($banner))
-                <div class="w-full h-full">
-                <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>
-                </div>
-            @else
-                <div class="w-full h-full">
-                    <img src="{{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">
-                </div>
-            @endif
+                    <div class="flex flex-col justify-start items-center md:items-start text-center md:text-left ">
+                        <span class="font-semibold text-lg text-text">7 ngày miễn phí trả hàng </span>
+                        <span class="text-tGrey text-sm">Trả hàng miễn phí trong 7 ngày </span>
+                    </div>
 
-        </div>
-        <div class="col-span-4 flex flex-col justify-between items-center h-[265px]">
-            <div class="row-span-2 w-full h-[128px]">
-                <div class="w-full h-full">
-                    <img src="{{asset('landingpage/images/bn3.jpg')}}" alt="" class="w-full">
                 </div>
-            </div>
-            <div class="row-span-2 w-full h-[128px]">
-                <div class="w-full h-full">
-                    <img src="{{asset('landingpage/images/bn2.jpg')}}" alt="" class="w-full">
+                <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
+                    <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" width="60" height="60" rx="30" fill="#258AFF"/>
+                        <g clip-path="url(#clip0_102_2405)">
+                            <path d="M39.7083 20.0834H37.5833V19.3751C37.5833 18.06 37.0609 16.7989 36.1311 15.869C35.2012 14.9391 33.94 14.4167 32.625 14.4167H18.4583C17.1433 14.4167 15.8821 14.9391 14.9523 15.869C14.0224 16.7989 13.5 18.06 13.5 19.3751V41.3334H17.8322C17.7803 41.566 17.7527 41.8034 17.75 42.0417C17.75 42.9811 18.1231 43.8819 18.7873 44.5461C19.4515 45.2103 20.3524 45.5834 21.2917 45.5834C22.231 45.5834 23.1318 45.2103 23.796 44.5461C24.4602 43.8819 24.8333 42.9811 24.8333 42.0417C24.8306 41.8034 24.8031 41.566 24.7512 41.3334H36.2488C36.1969 41.566 36.1694 41.8034 36.1667 42.0417C36.1667 42.9811 36.5398 43.8819 37.204 44.5461C37.8682 45.2103 38.769 45.5834 39.7083 45.5834C40.6476 45.5834 41.5485 45.2103 42.2127 44.5461C42.8769 43.8819 43.25 42.9811 43.25 42.0417C43.2473 41.8034 43.2197 41.566 43.1678 41.3334H47.5V27.8751C47.4974 25.8094 46.6756 23.8291 45.215 22.3684C43.7543 20.9078 41.774 20.086 39.7083 20.0834ZM33.3333 37.0834H17.75V19.3751C17.75 19.1872 17.8246 19.0071 17.9575 18.8742C18.0903 18.7414 18.2705 18.6667 18.4583 18.6667H32.625C32.8129 18.6667 32.993 18.7414 33.1259 18.8742C33.2587 19.0071 33.3333 19.1872 33.3333 19.3751V37.0834ZM39.7083 24.3334C40.6476 24.3334 41.5485 24.7066 42.2127 25.3707C42.8769 26.0349 43.25 26.9358 43.25 27.8751V31.4167H37.5833V24.3334H39.7083Z" fill="white"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_102_2405">
+                                <rect width="34" height="34" fill="white" transform="translate(13.5 13)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <div class="flex flex-col justify-start items-center md:items-start text-center md:text-left">
+                        <span class="font-semibold text-lg text-text">Hàng chính hãng 100% </span>
+                        <span class="text-tGrey text-sm">Đảm bảo hàng chính hãng hoặc hoàn tiền gấp đôi</span>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
+                    <svg width="52" height="56" viewBox="0 0 52 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.512801 17.6841C0.512801 15.6148 0.479374 13.544 0.520759 11.4764C0.592387 7.89338 2.93063 4.95188 6.41173 4.15443C12.3584 2.79191 18.321 1.49784 24.274 0.16557C25.8164 -0.179834 27.311 0.0668828 28.8168 0.407512C34.321 1.65224 39.8363 2.85081 45.3373 4.10986C49.1049 4.97257 51.4193 7.89179 51.4368 11.7469C51.4527 15.4875 51.5291 19.2328 51.4081 22.9702C51.0643 33.6459 46.7858 42.4879 38.7364 49.4931C35.8634 51.9937 32.6115 53.8989 29.0906 55.3506C27.0373 56.1974 25.0062 56.2324 22.9513 55.357C12.0194 50.706 4.92346 42.6678 1.68908 31.244C0.778618 28.0287 0.455499 24.7259 0.504842 21.3864C0.522351 20.1528 0.508025 18.9192 0.508025 17.6857C0.509617 17.6841 0.511209 17.6841 0.512801 17.6841ZM24.0369 28.9503C23.8634 28.7847 23.7201 28.6495 23.5801 28.5126C22.3863 27.3426 21.2132 26.1504 19.9939 25.0092C18.5566 23.6642 16.3138 24.2579 15.7822 26.1138C15.4877 27.1437 15.7933 28.0255 16.5574 28.772C18.3512 30.5213 20.1372 32.2802 21.9263 34.0358C23.3636 35.4461 24.6895 35.4509 26.1236 34.0422C29.7002 30.5293 33.2752 27.0148 36.8502 23.5002C37.2052 23.1516 37.5331 22.7712 37.9183 22.4608C39.05 21.5488 39.1933 19.9905 38.2159 18.9001C37.2195 17.7891 35.5769 17.7509 34.4499 18.8428C31.1646 22.0263 27.8888 25.2209 24.6083 28.4107C24.4253 28.589 24.2374 28.7625 24.0369 28.9503Z" fill="#258AFF"/>
+                    </svg>
+
+                    <div class="flex flex-col justify-start items-center md:items-start text-center md:text-left">
+                        <span class="font-semibold text-lg text-text">Miễn phí vận chuyển </span>
+                        <span class="text-tGrey text-sm">Giao hàng miễn phí toàn quốc </span>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-{{--    <div class="grid grid-cols-12 gap-4 py-5 w-full">--}}
-{{--        <div class="col-span-8 h-[265px] ">--}}
-{{--            @if(!empty($banner))--}}
-{{--                <a href="/"><img src="{{asset('/image/users/'.$banner)}}" alt="" class="w-full"></a>--}}
-{{--            @else--}}
-{{--                <div class="w-full h-full">--}}
-{{--                    <img src="{{asset('landingpage/images/bn.jpg')}}" alt="" class="w-full">--}}
-{{--                </div>--}}
-{{--            @endif--}}
-
-{{--        </div>--}}
-{{--        <div class="col-span-4 flex flex-col justify-between items-center h-[265px]">--}}
-{{--            <div class="row-span-2 w-full">--}}
-{{--                <div class="w-full h-full">--}}
-{{--                    <img src="{{asset('landingpage/images/bn3.jpg')}}" alt="" class="w-full">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="row-span-2 w-full">--}}
-{{--                <div class="w-full h-full">--}}
-{{--                    <img src="{{asset('landingpage/images/bn2.jpg')}}" alt="" class="w-full">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-    <div class="box p-4 lg:p-8">
-        <div class="flex justfy-center md:justify-between items-center w-full flex-wrap lg:flex-nowrap gap-6">
-            <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
-                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="26" cy="26" r="26" fill="#056DD2"/>
-                    <path d="M33.5003 22.25H19.1153L21.0653 20.315C21.3478 20.0325 21.5065 19.6495 21.5065 19.25C21.5065 18.8506 21.3478 18.4675 21.0653 18.185C20.7829 17.9025 20.3998 17.7439 20.0003 17.7439C19.6009 17.7439 19.2178 17.9025 18.9353 18.185L14.4353 22.685C14.2988 22.8277 14.1917 22.9959 14.1203 23.18C13.9703 23.5452 13.9703 23.9548 14.1203 24.32C14.1917 24.5041 14.2988 24.6723 14.4353 24.815L18.9353 29.315C19.0748 29.4556 19.2407 29.5672 19.4235 29.6433C19.6063 29.7195 19.8023 29.7587 20.0003 29.7587C20.1984 29.7587 20.3944 29.7195 20.5772 29.6433C20.76 29.5672 20.9259 29.4556 21.0653 29.315C21.2059 29.1756 21.3175 29.0097 21.3937 28.8269C21.4698 28.6441 21.509 28.448 21.509 28.25C21.509 28.052 21.4698 27.8559 21.3937 27.6731C21.3175 27.4904 21.2059 27.3244 21.0653 27.185L19.1153 25.25H33.5003C33.8982 25.25 34.2797 25.408 34.561 25.6893C34.8423 25.9706 35.0003 26.3522 35.0003 26.75V32.75C35.0003 33.1478 35.1584 33.5294 35.4397 33.8107C35.721 34.092 36.1025 34.25 36.5003 34.25C36.8982 34.25 37.2797 34.092 37.561 33.8107C37.8423 33.5294 38.0003 33.1478 38.0003 32.75V26.75C38.0003 25.5565 37.5262 24.4119 36.6823 23.568C35.8384 22.7241 34.6938 22.25 33.5003 22.25Z" fill="white"/>
-                </svg>
-                <div class="flex flex-col justify-start items-center md:items-start text-center ">
-                    <span class="font-semibold text-lg text-text">7 ngày miễn phí trả hàng </span>
-                    <span class="text-tGrey text-sm">Trả hàng miễn phí trong 7 ngày </span>
+    <div class="flex flex-col gap-[30px] md:mt-[100px] lg:my-16">
+        <h2 id="gioi_thieu" class="text-[#258AFF] text-xl md:text-4xl font-semibold">Giới thiệu</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-[50px] lg:gap-[105px] px-[20px] py-[40px] bg-[#FFF] rounded-[20px]">
+            <div class="flex items-start gap-6">
+                <div class="max-w-[222px]">
+                    <img src="{{asset('landingpage/images/HPlogo.png')}}" class="w-full object-contain" alt="">
                 </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-[#696984] text-xl"><strong class="font-semibold">ID:</strong> {{$user->account_code}}</span>
+                    <span class="text-[#696984] text-xl"><strong class="font-semibold">Liên hệ:</strong> {{$user->phone_number}}</span>
 
+                    <span class="text-[#696984] text-xl"><strong class="font-semibold">Số sản phẩm:</strong>  {{$count_products}}</span>
+
+                    <span class="text-[#696984] text-xl"><strong class="font-semibold">Danh mục: </strong>@foreach($arrCategory as $val) {{$val->name}}, @endforeach...</span>
+                </div>
             </div>
-            <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
-                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6.50514 8.66666L25.9998 2.16666L45.4949 8.66666C45.4949 8.66666 45.5 15.1667 45.5 28.1667C45.5 41.1667 25.9998 49.8333 25.9998 49.8333C25.9998 49.8333 6.50004 41.1667 6.50002 28.1667C6.5 15.1667 6.50514 8.66666 6.50514 8.66666Z" fill="#056DD2" stroke="#056DD2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M18 23.3137L23.6569 28.9706L34.9706 17.6569" stroke="white" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-
-                <div class="flex flex-col justify-start items-center md:items-start text-center">
-                    <span class="font-semibold text-lg text-text">Hàng chính hãng 100% </span>
-                    <span class="text-tGrey text-sm">Đảm bảo hàng chính hãng hoặc hoàn tiền gấp đôi</span>
-                </div>
-
-            </div>
-            <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
-                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="26" cy="26" r="26" fill="#056DD2"/>
-                    <rect x="13.168" y="15.5" width="16.3333" height="15.1667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M29.5 21.3333H34.1667L38.8333 26V30.6667H29.5V21.3333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="18.4167" cy="33.5833" r="2.91667" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="32.4167" cy="33.5833" r="2.91667" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <div class="flex flex-col justify-start items-center md:items-start text-center">
-                    <span class="font-semibold text-lg text-text">Miễn phí vận chuyển </span>
-                    <span class="text-tGrey text-sm">Giao hàng miễn phí toàn quốc </span>
-                </div>
+            <div class="flex flex-col gap-2">
+                <span class="font-semibold text-xl text-[#696984]"> Giới thiệu</span>
+                <span class="line-clamp-3 text-[#696984] text-xl">{{$user->description != null ? $user->description : 'Chưa có thông tin mô tả'}} </span>
 
             </div>
         </div>
     </div>
-    <div class="box p-2 md:p-4 lg:p-8">
-        <div class="flex flex-col justify-center items-center gap-6">
-            <h3 class="text-lg font-bold text-text uppercase">DANH MỤC</h3>
+    <div class="flex flex-col gap-[30px] ">
+        <h2 class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Danh mục</h2>
+        <div class="">
+            <section class="">
+                <ul class="slider-cate tab-cate    gap-3">
+                    @foreach($arrCategory as $cate)
+                        <li>
+                            <a href="#" class="w-full h-[210px] p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+                                <div class="max-w-[120px]">
+                                    @if($cate->img !=null)
+                                        <img src="{{asset($cate->img)}}" class="w-full object-contain" alt="">
+                                    @else
+                                        <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">
+                                        {{--                                            http://vstore.ngo/landingpage/images/wm.png--}}
+                                    @endif
+
+                                </div>
+                                <span class="text-[#2C2C37] text-center">{{$cate->name}}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                    {{--                        <li>--}}
+                    {{--                            <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">--}}
+                    {{--                                <div class="max-w-[120px]">--}}
+                    {{--                                    <img src="{{asset('landingpage/images/wm.png')}}" class="w-full object-contain" alt="">--}}
+                    {{--                                </div>--}}
+                    {{--                                <span class="text-[#2C2C37] text-center">Thời trang nữ</span>--}}
+                    {{--                            </a>--}}
+                    {{--                        </li>--}}
+
+
+
+                </ul>
+            </section>
+
+        </div>
+        <div id="sale" class=" sales grid grid-cols-2 xl:grid-cols-4 gap-2 lg:gap-6 p-[15px] md:pt-[250px] xl:pt-[200px] py-[60px] md:px-[48px] md:my-16">
+            <div class="product-item  bg-[#FFF] rounded-[20px]">
+                <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+                    <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
+                </div>
+                <div class=" p-[10px] md:p-[20px]">
+                    <div class="flex flex-col">
+                        <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        </fieldset>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                            <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
+                            <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        </div>
+                        <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item  bg-[#FFF] rounded-[20px]">
+                <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+                    <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
+                </div>
+                <div class=" p-[10px] md:p-[20px]">
+                    <div class="flex flex-col">
+                        <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        </fieldset>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                            <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
+                            <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        </div>
+                        <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item  bg-[#FFF] rounded-[20px]">
+                <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+                    <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
+                </div>
+                <div class=" p-[10px] md:p-[20px]">
+                    <div class="flex flex-col">
+                        <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        </fieldset>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                            <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
+                            <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        </div>
+                        <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item  bg-[#FFF] rounded-[20px]">
+                <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+                    <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
+                </div>
+                <div class=" p-[10px] md:p-[20px]">
+                    <div class="flex flex-col">
+                        <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        </fieldset>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                            <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
+                            <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        </div>
+                        <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-[30px]">
+            <h2 id="noi_bat" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Sản phẩm nổi bật</h2>
+            <div class=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 xl:gap-6">
+                @foreach($products as $pro)
+                    {{--                    {{ json_decode($pro->images)[0]}}--}}
+                    <div class="product-item  bg-[#FFF] rounded-[20px]">
+                        <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+
+                            <img src="{{asset(json_decode($pro->images)[0])}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
+
+                        </div>
+                        <div class=" p-[10px] md:p-[20px]">
+                            <div class="flex flex-col">
+                                <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                </fieldset>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                                    @if($pro->price_discount)
+                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ $pro->price_discount }}</span>
+                                        <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{$pro->price}}</span>
+                                    @else
+                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ $pro->price }}</span>
+                                    @endif
+
+                                </div>
+                                <span class="text-[#696984] text-xs md:text-lg">Đã bán {{$pro->amount_product_sold}}</span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+
+                {{--                <div class="product-item  bg-[#FFF] rounded-[20px]">--}}
+                {{--                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">--}}
+                {{--                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">--}}
+                {{--                    </div>--}}
+                {{--                    <div class=" p-[10px] md:p-[20px]">--}}
+                {{--                        <div class="flex flex-col">--}}
+                {{--                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>--}}
+                {{--                            <fieldset class="rating">--}}
+                {{--                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>--}}
+                {{--                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>--}}
+                {{--                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>--}}
+                {{--                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>--}}
+                {{--                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>--}}
+                {{--                            </fieldset>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="flex flex-col gap-3">--}}
+                {{--                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">--}}
+                {{--                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>--}}
+                {{--                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>--}}
+                {{--                            </div>--}}
+                {{--                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+
+
+            </div>
+            {{--            <ul class="pagination flex items-center justify-end">--}}
+            {{--                    <li><div class="cursor-pointer"><svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+            {{--<path d="M59.9993 0.5H8.86768C4.72554 0.5 1.36768 3.85786 1.36768 8V30C1.36768 34.1421 4.72555 37.5 8.86768 37.5H59.9993V0.5Z" fill="white"/>--}}
+            {{--<path d="M33.4468 16.6308L31.755 18.6044L33.4468 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+            {{--<path d="M30.4016 16.6308L28.7099 18.6044L30.4016 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+            {{--<path d="M59.9993 0.5H8.86768C4.72554 0.5 1.36768 3.85786 1.36768 8V30C1.36768 34.1421 4.72555 37.5 8.86768 37.5H59.9993V0.5Z" stroke="#DEE2E6"/>--}}
+            {{--</svg>--}}
+            {{--</div></li>--}}
+            {{--<li class="active"><a href="#">1</a></li>--}}
+            {{--<li><a href="#">2</a></li>--}}
+            {{--<li><a href="#">3</a></li>--}}
+            {{--<li><a href="#">4</a></li>--}}
+            {{--<li><a href="#">5</a></li>--}}
+            {{--<li><div  class="cursor-pointer"><svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+            {{--<path d="M1.36841 0.5H52.5C56.6421 0.5 60 3.85786 60 8V30C60 34.1421 56.6421 37.5 52.5 37.5H1.36841V0.5Z" fill="white"/>--}}
+            {{--<path d="M27.9209 16.6308L29.6126 18.6044L27.9209 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+            {{--<path d="M30.9661 16.6308L32.6578 18.6044L30.9661 20.5781" stroke="#3A57E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>--}}
+            {{--<path d="M1.36841 0.5H52.5C56.6421 0.5 60 3.85786 60 8V30C60 34.1421 56.6421 37.5 52.5 37.5H1.36841V0.5Z" stroke="#DEE2E6"/>--}}
+            {{--</svg>--}}
+
+            {{--</div></li>--}}
+            {{--                </ul>--}}
+        </div>
+
+        <div class="flex flex-col gap-[30px] my-16">
+            <h2 id="nha_cung_cap" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Nhà cung cấp</h2>
             <div class="">
                 <section>
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-8">
-                        @foreach($arrCategory as $cate)
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">{{$cate->name}}</span>
-                        </div>
+                    <ul class="slider-cate tab-ncc  gap-3">
+                        @foreach($ncc as $nc)
+                            <li>
+                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+                                    <div class="max-w-[120px]">
+                                        <img src="{{asset('image/users/'. $nc->avatar)}}" class="w-full object-contain" alt="">
+                                    </div>
+                                    <span class="text-[#2C2C37] text-center">{{ mb_strimwidth($nc->name,0,15,'...')}}</span>
+                                </a>
+                            </li>
                         @endforeach
-                    </div>
 
+
+                    </ul>
                 </section>
-                <!-- <section>
-                    <div class="grid grid-cols-8 gap-8">
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy </span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy </span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy </span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy</span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy </span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy </span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy </span>
-                        </div>
-                        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]">
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">Ô tô - xe đạp - xe máy</span>
-                        </div>
-                    </div>
-                </section> -->
+
+
             </div>
 
         </div>
-    </div>
-    <div class="flex flex-col justify-center items-center gap-6 py-10">
-        <h2 class="text-sciblue text-3xl font-bold uppercase text-center">Thương hiệu nổi bật</h2>
-        <div class="w-full h-full">
-            <img src="{{asset('landingpage/images/bnbg.jpg')}}" alt="" class="w-full">
-        </div>
-        <div class="content-item grid grid-cols- md:grid-cols-3 lg:grid-cols-6 gap-2">
-            @foreach($user->vstoreProducts()->where('status',2)->orderBy('id','desc')->limit(6)->get() as $pro)
-                <a href="#">
-                    <div class="item">
-                        <div class="item-img" style="height: 150px;">
-                            <img src="{{asset(json_decode($pro->images)[0])}}" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>{{$pro->name}} </h3>
-                            <div class="discount">
-                                <span class="cost">₫{{number_format($pro->price,0,'.','.')}}</span>
-                                <span class="real">₫{{number_format($pro->price - ($pro->price * ($pro->discount_vShop / 100)),0,'.','.')}}</span>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.832031 10.4167V14.5833C0.832031 14.8044 0.919829 15.0163 1.07611 15.1726C1.23239 15.3289 1.44435 15.4167 1.66536 15.4167H2.4987C2.4987 16.0797 2.76209 16.7156 3.23093 17.1844C3.69977 17.6533 4.33566 17.9167 4.9987 17.9167C5.66174 17.9167 6.29762 17.6533 6.76647 17.1844C7.23531 16.7156 7.4987 16.0797 7.4987 15.4167H12.4987C12.4987 16.0797 12.7621 16.7156 13.2309 17.1844C13.6998 17.6533 14.3357 17.9167 14.9987 17.9167C15.6617 17.9167 16.2976 17.6533 16.7665 17.1844C17.2353 16.7156 17.4987 16.0797 17.4987 15.4167H18.332C18.553 15.4167 18.765 15.3289 18.9213 15.1726C19.0776 15.0163 19.1654 14.8044 19.1654 14.5833V4.58334C19.1654 3.9203 18.902 3.28442 18.4331 2.81558C17.9643 2.34674 17.3284 2.08334 16.6654 2.08334H9.16537C8.50232 2.08334 7.86644 2.34674 7.3976 2.81558C6.92876 3.28442 6.66536 3.9203 6.66536 4.58334V6.25001H4.9987C4.61059 6.25001 4.2278 6.34037 3.88066 6.51394C3.53353 6.68751 3.23157 6.93952 2.9987 7.25001L0.998698 9.91668C0.974324 9.9529 0.954718 9.99211 0.940365 10.0333L0.890365 10.125C0.853586 10.2179 0.833827 10.3167 0.832031 10.4167ZM14.1654 15.4167C14.1654 15.2519 14.2142 15.0907 14.3058 14.9537C14.3974 14.8167 14.5275 14.7099 14.6798 14.6468C14.8321 14.5837 14.9996 14.5672 15.1613 14.5994C15.3229 14.6315 15.4714 14.7109 15.588 14.8274C15.7045 14.944 15.7839 15.0924 15.816 15.2541C15.8482 15.4158 15.8317 15.5833 15.7686 15.7356C15.7055 15.8879 15.5987 16.018 15.4617 16.1096C15.3246 16.2011 15.1635 16.25 14.9987 16.25C14.7777 16.25 14.5657 16.1622 14.4094 16.0059C14.2532 15.8497 14.1654 15.6377 14.1654 15.4167ZM8.33203 4.58334C8.33203 4.36233 8.41983 4.15037 8.57611 3.99409C8.73239 3.83781 8.94435 3.75001 9.16537 3.75001H16.6654C16.8864 3.75001 17.0983 3.83781 17.2546 3.99409C17.4109 4.15037 17.4987 4.36233 17.4987 4.58334V13.75H16.8487C16.6144 13.4922 16.3288 13.2862 16.0102 13.1453C15.6916 13.0043 15.3471 12.9315 14.9987 12.9315C14.6503 12.9315 14.3058 13.0043 13.9872 13.1453C13.6686 13.2862 13.383 13.4922 13.1487 13.75H8.33203V4.58334ZM6.66536 9.58334H3.33203L4.33203 8.25001C4.40965 8.14651 4.51031 8.06251 4.62602 8.00465C4.74173 7.9468 4.86933 7.91668 4.9987 7.91668H6.66536V9.58334ZM4.16536 15.4167C4.16536 15.2519 4.21424 15.0907 4.30581 14.9537C4.39737 14.8167 4.52752 14.7099 4.6798 14.6468C4.83207 14.5837 4.99962 14.5672 5.16127 14.5994C5.32292 14.6315 5.47141 14.7109 5.58795 14.8274C5.7045 14.944 5.78386 15.0924 5.81602 15.2541C5.84817 15.4158 5.83167 15.5833 5.7686 15.7356C5.70552 15.8879 5.59871 16.018 5.46167 16.1096C5.32463 16.2011 5.16352 16.25 4.9987 16.25C4.77768 16.25 4.56572 16.1622 4.40944 16.0059C4.25316 15.8497 4.16536 15.6377 4.16536 15.4167ZM2.4987 11.25H6.66536V13.5667C6.17356 13.1271 5.52798 12.8998 4.86928 12.9341C4.21057 12.9685 3.59213 13.2617 3.1487 13.75H2.4987V11.25Z" fill="#219653"/>
-                                </svg>
 
-                            </div>
-                            <div class="has-sell">
-                                <span class="rating">
-                                  @php
-                                    $random_star = rand(1,5);
-                                  @endphp
-                                      @for($i = 1; $i < 6;$i++ )
-                                        @if($i <  $random_star)
-                                        <svg  viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                        <title>star-solid</title>
-                                        <g id="Layer_2" data-name="Layer 2">
-                                          <g id="invisible_box" data-name="invisible box">
-                                            <rect width="48" height="48" fill="none"/>
-                                          </g>
-                                          <g id="icons_Q2" data-name="icons Q2">
-                                            <path d="M24,3a2.1,2.1,0,0,0-1.8,1.1L16.5,15.7,3.7,17.5A2.1,2.1,0,0,0,2.6,21l9.2,8.9L9.7,42.7A2,2,0,0,0,11.6,45l1-.2,11.4-6,11.4,6,1,.2a2,2,0,0,0,1.9-2.3L36.2,29.9,45.4,21a2.1,2.1,0,0,0-1.1-3.5L31.5,15.7,25.8,4.1A2.1,2.1,0,0,0,24,3Z"/>
-                                          </g>
-                                        </g>
-                                      </svg>
-                                      @else
-              <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <title>action / 11 - action, favorite, favourite, like, rating, star icon</title>
-                                        <g id="Free-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                            <g transform="translate(-303.000000, -156.000000)" id="Group" stroke="#000000" stroke-width="2">
-                                                <g transform="translate(301.000000, 154.000000)" id="Shape">
-                                                    <polygon points="11.9999754 3 15 9.00030843 21.0006915 9.00030843 16 14 18 21 12.0003457 17.5 6 21 8 14 3 9.00030843 9 9.00030843">
-
-                                    </polygon>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                        @endif
-
-                                      @endfor
-
-
-                                </span>
-                                <span class="sell">Đã bán 426</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-    </div>
-    <div class="flex flex-col justify-center items-center gap-16">
-        <div>
-            <div class="w-full h-full">
-                <img src="{{asset('landingpage/images/bnbg1.png')}}" alt="" class="w-full">
-            </div>
-            <div class="content-item grid grid-cols- md:grid-cols-3 lg:grid-cols-6 gap-2">
-            @foreach($user->vstoreProducts()->where('status',2)->orderBy('id','asc')->limit(6)->get() as $pro)
-                <a href="#">
-                    <div class="item">
-                        <div class="item-img" style="height: 150px;">
-                            <img src="{{asset(json_decode($pro->images)[0])}}" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>{{$pro->name}} </h3>
-                            <div class="discount">
-                            <span class="cost">₫{{number_format($pro->price,0,'.','.')}}</span>
-                                <span class="real">₫{{number_format($pro->price - ($pro->price * ($pro->discount_vShop / 100 ?? 0)),0,'.','.')}}</span>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.832031 10.4167V14.5833C0.832031 14.8044 0.919829 15.0163 1.07611 15.1726C1.23239 15.3289 1.44435 15.4167 1.66536 15.4167H2.4987C2.4987 16.0797 2.76209 16.7156 3.23093 17.1844C3.69977 17.6533 4.33566 17.9167 4.9987 17.9167C5.66174 17.9167 6.29762 17.6533 6.76647 17.1844C7.23531 16.7156 7.4987 16.0797 7.4987 15.4167H12.4987C12.4987 16.0797 12.7621 16.7156 13.2309 17.1844C13.6998 17.6533 14.3357 17.9167 14.9987 17.9167C15.6617 17.9167 16.2976 17.6533 16.7665 17.1844C17.2353 16.7156 17.4987 16.0797 17.4987 15.4167H18.332C18.553 15.4167 18.765 15.3289 18.9213 15.1726C19.0776 15.0163 19.1654 14.8044 19.1654 14.5833V4.58334C19.1654 3.9203 18.902 3.28442 18.4331 2.81558C17.9643 2.34674 17.3284 2.08334 16.6654 2.08334H9.16537C8.50232 2.08334 7.86644 2.34674 7.3976 2.81558C6.92876 3.28442 6.66536 3.9203 6.66536 4.58334V6.25001H4.9987C4.61059 6.25001 4.2278 6.34037 3.88066 6.51394C3.53353 6.68751 3.23157 6.93952 2.9987 7.25001L0.998698 9.91668C0.974324 9.9529 0.954718 9.99211 0.940365 10.0333L0.890365 10.125C0.853586 10.2179 0.833827 10.3167 0.832031 10.4167ZM14.1654 15.4167C14.1654 15.2519 14.2142 15.0907 14.3058 14.9537C14.3974 14.8167 14.5275 14.7099 14.6798 14.6468C14.8321 14.5837 14.9996 14.5672 15.1613 14.5994C15.3229 14.6315 15.4714 14.7109 15.588 14.8274C15.7045 14.944 15.7839 15.0924 15.816 15.2541C15.8482 15.4158 15.8317 15.5833 15.7686 15.7356C15.7055 15.8879 15.5987 16.018 15.4617 16.1096C15.3246 16.2011 15.1635 16.25 14.9987 16.25C14.7777 16.25 14.5657 16.1622 14.4094 16.0059C14.2532 15.8497 14.1654 15.6377 14.1654 15.4167ZM8.33203 4.58334C8.33203 4.36233 8.41983 4.15037 8.57611 3.99409C8.73239 3.83781 8.94435 3.75001 9.16537 3.75001H16.6654C16.8864 3.75001 17.0983 3.83781 17.2546 3.99409C17.4109 4.15037 17.4987 4.36233 17.4987 4.58334V13.75H16.8487C16.6144 13.4922 16.3288 13.2862 16.0102 13.1453C15.6916 13.0043 15.3471 12.9315 14.9987 12.9315C14.6503 12.9315 14.3058 13.0043 13.9872 13.1453C13.6686 13.2862 13.383 13.4922 13.1487 13.75H8.33203V4.58334ZM6.66536 9.58334H3.33203L4.33203 8.25001C4.40965 8.14651 4.51031 8.06251 4.62602 8.00465C4.74173 7.9468 4.86933 7.91668 4.9987 7.91668H6.66536V9.58334ZM4.16536 15.4167C4.16536 15.2519 4.21424 15.0907 4.30581 14.9537C4.39737 14.8167 4.52752 14.7099 4.6798 14.6468C4.83207 14.5837 4.99962 14.5672 5.16127 14.5994C5.32292 14.6315 5.47141 14.7109 5.58795 14.8274C5.7045 14.944 5.78386 15.0924 5.81602 15.2541C5.84817 15.4158 5.83167 15.5833 5.7686 15.7356C5.70552 15.8879 5.59871 16.018 5.46167 16.1096C5.32463 16.2011 5.16352 16.25 4.9987 16.25C4.77768 16.25 4.56572 16.1622 4.40944 16.0059C4.25316 15.8497 4.16536 15.6377 4.16536 15.4167ZM2.4987 11.25H6.66536V13.5667C6.17356 13.1271 5.52798 12.8998 4.86928 12.9341C4.21057 12.9685 3.59213 13.2617 3.1487 13.75H2.4987V11.25Z" fill="#219653"/>
-                                </svg>
-
-                            </div>
-                            <div class="has-sell">
-                                <span class="rating">
-                                  @php
-                                    $random_star = rand(1,5);
-                                  @endphp
-                                      @for($i = 1; $i < 6;$i++ )
-                                        @if($i <  $random_star)
-                                        <svg  viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                        <title>star-solid</title>
-                                        <g id="Layer_2" data-name="Layer 2">
-                                          <g id="invisible_box" data-name="invisible box">
-                                            <rect width="48" height="48" fill="none"/>
-                                          </g>
-                                          <g id="icons_Q2" data-name="icons Q2">
-                                            <path d="M24,3a2.1,2.1,0,0,0-1.8,1.1L16.5,15.7,3.7,17.5A2.1,2.1,0,0,0,2.6,21l9.2,8.9L9.7,42.7A2,2,0,0,0,11.6,45l1-.2,11.4-6,11.4,6,1,.2a2,2,0,0,0,1.9-2.3L36.2,29.9,45.4,21a2.1,2.1,0,0,0-1.1-3.5L31.5,15.7,25.8,4.1A2.1,2.1,0,0,0,24,3Z"/>
-                                          </g>
-                                        </g>
-                                      </svg>
-                                      @else
-              <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <title>action / 11 - action, favorite, favourite, like, rating, star icon</title>
-                                        <g id="Free-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                            <g transform="translate(-303.000000, -156.000000)" id="Group" stroke="#000000" stroke-width="2">
-                                                <g transform="translate(301.000000, 154.000000)" id="Shape">
-                                                    <polygon points="11.9999754 3 15 9.00030843 21.0006915 9.00030843 16 14 18 21 12.0003457 17.5 6 21 8 14 3 9.00030843 9 9.00030843">
-
-                                    </polygon>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                        @endif
-
-                                      @endfor
-
-
-                                </span>
-                                <span class="sell">Đã bán 426</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-            </div>
-        </div>
-        <div>
-            <div class="w-full h-full py-2">
-                <img src="{{asset('landingpage/images/bnbg.jpg')}}" alt="" class="w-full">
-            </div>
-            <div class="content-item grid grid-cols- md:grid-cols-3 lg:grid-cols-6 gap-2">
-            @foreach($user->vstoreProducts()->where('status',2)->orderBy('id','desc')->limit(6)->get() as $pro)
-                <a href="#">
-                    <div class="item">
-                        <div class="item-img" style="height: 150px;">
-                            <img src="{{asset(json_decode($pro->images)[0])}}" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>{{$pro->name}} </h3>
-                            <div class="discount">
-                            <span class="cost">₫{{number_format($pro->price,0,'.','.')}}</span>
-                                <span class="real">₫{{number_format($pro->price - ($pro->price * ($pro->discount_vShop / 100)),0,'.','.')}}</span>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.832031 10.4167V14.5833C0.832031 14.8044 0.919829 15.0163 1.07611 15.1726C1.23239 15.3289 1.44435 15.4167 1.66536 15.4167H2.4987C2.4987 16.0797 2.76209 16.7156 3.23093 17.1844C3.69977 17.6533 4.33566 17.9167 4.9987 17.9167C5.66174 17.9167 6.29762 17.6533 6.76647 17.1844C7.23531 16.7156 7.4987 16.0797 7.4987 15.4167H12.4987C12.4987 16.0797 12.7621 16.7156 13.2309 17.1844C13.6998 17.6533 14.3357 17.9167 14.9987 17.9167C15.6617 17.9167 16.2976 17.6533 16.7665 17.1844C17.2353 16.7156 17.4987 16.0797 17.4987 15.4167H18.332C18.553 15.4167 18.765 15.3289 18.9213 15.1726C19.0776 15.0163 19.1654 14.8044 19.1654 14.5833V4.58334C19.1654 3.9203 18.902 3.28442 18.4331 2.81558C17.9643 2.34674 17.3284 2.08334 16.6654 2.08334H9.16537C8.50232 2.08334 7.86644 2.34674 7.3976 2.81558C6.92876 3.28442 6.66536 3.9203 6.66536 4.58334V6.25001H4.9987C4.61059 6.25001 4.2278 6.34037 3.88066 6.51394C3.53353 6.68751 3.23157 6.93952 2.9987 7.25001L0.998698 9.91668C0.974324 9.9529 0.954718 9.99211 0.940365 10.0333L0.890365 10.125C0.853586 10.2179 0.833827 10.3167 0.832031 10.4167ZM14.1654 15.4167C14.1654 15.2519 14.2142 15.0907 14.3058 14.9537C14.3974 14.8167 14.5275 14.7099 14.6798 14.6468C14.8321 14.5837 14.9996 14.5672 15.1613 14.5994C15.3229 14.6315 15.4714 14.7109 15.588 14.8274C15.7045 14.944 15.7839 15.0924 15.816 15.2541C15.8482 15.4158 15.8317 15.5833 15.7686 15.7356C15.7055 15.8879 15.5987 16.018 15.4617 16.1096C15.3246 16.2011 15.1635 16.25 14.9987 16.25C14.7777 16.25 14.5657 16.1622 14.4094 16.0059C14.2532 15.8497 14.1654 15.6377 14.1654 15.4167ZM8.33203 4.58334C8.33203 4.36233 8.41983 4.15037 8.57611 3.99409C8.73239 3.83781 8.94435 3.75001 9.16537 3.75001H16.6654C16.8864 3.75001 17.0983 3.83781 17.2546 3.99409C17.4109 4.15037 17.4987 4.36233 17.4987 4.58334V13.75H16.8487C16.6144 13.4922 16.3288 13.2862 16.0102 13.1453C15.6916 13.0043 15.3471 12.9315 14.9987 12.9315C14.6503 12.9315 14.3058 13.0043 13.9872 13.1453C13.6686 13.2862 13.383 13.4922 13.1487 13.75H8.33203V4.58334ZM6.66536 9.58334H3.33203L4.33203 8.25001C4.40965 8.14651 4.51031 8.06251 4.62602 8.00465C4.74173 7.9468 4.86933 7.91668 4.9987 7.91668H6.66536V9.58334ZM4.16536 15.4167C4.16536 15.2519 4.21424 15.0907 4.30581 14.9537C4.39737 14.8167 4.52752 14.7099 4.6798 14.6468C4.83207 14.5837 4.99962 14.5672 5.16127 14.5994C5.32292 14.6315 5.47141 14.7109 5.58795 14.8274C5.7045 14.944 5.78386 15.0924 5.81602 15.2541C5.84817 15.4158 5.83167 15.5833 5.7686 15.7356C5.70552 15.8879 5.59871 16.018 5.46167 16.1096C5.32463 16.2011 5.16352 16.25 4.9987 16.25C4.77768 16.25 4.56572 16.1622 4.40944 16.0059C4.25316 15.8497 4.16536 15.6377 4.16536 15.4167ZM2.4987 11.25H6.66536V13.5667C6.17356 13.1271 5.52798 12.8998 4.86928 12.9341C4.21057 12.9685 3.59213 13.2617 3.1487 13.75H2.4987V11.25Z" fill="#219653"/>
-                                </svg>
-
-                            </div>
-                            <div class="has-sell">
-                                <span class="rating">
-                                  @php
-                                    $random_star = rand(1,5);
-                                  @endphp
-                                      @for($i = 1; $i < 6;$i++ )
-                                        @if($i <  $random_star)
-                                        <svg  viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                        <title>star-solid</title>
-                                        <g id="Layer_2" data-name="Layer 2">
-                                          <g id="invisible_box" data-name="invisible box">
-                                            <rect width="48" height="48" fill="none"/>
-                                          </g>
-                                          <g id="icons_Q2" data-name="icons Q2">
-                                            <path d="M24,3a2.1,2.1,0,0,0-1.8,1.1L16.5,15.7,3.7,17.5A2.1,2.1,0,0,0,2.6,21l9.2,8.9L9.7,42.7A2,2,0,0,0,11.6,45l1-.2,11.4-6,11.4,6,1,.2a2,2,0,0,0,1.9-2.3L36.2,29.9,45.4,21a2.1,2.1,0,0,0-1.1-3.5L31.5,15.7,25.8,4.1A2.1,2.1,0,0,0,24,3Z"/>
-                                          </g>
-                                        </g>
-                                      </svg>
-                                      @else
-              <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <title>action / 11 - action, favorite, favourite, like, rating, star icon</title>
-                                        <g id="Free-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                            <g transform="translate(-303.000000, -156.000000)" id="Group" stroke="#000000" stroke-width="2">
-                                                <g transform="translate(301.000000, 154.000000)" id="Shape">
-                                                    <polygon points="11.9999754 3 15 9.00030843 21.0006915 9.00030843 16 14 18 21 12.0003457 17.5 6 21 8 14 3 9.00030843 9 9.00030843">
-
-                                    </polygon>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                        @endif
-
-                                      @endfor
-
-
-                                </span>
-                                <span class="sell">Đã bán 426</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-            </div>
-        </div>
-
-    </div>
-Ưu đã
-    <div class="flex flex-col justify-center items-center gap-6">
-        <h2 class="text-s ciblue text-3xl font-bold uppercase text-center">Thương hiệu nổi bật</h2>
-        @foreach($arrUser as $user1)
-        <div class="flex flex-col justify-center items-center gap-3 text-center">
-                            <div class="bg-botti rounded-xl w-[115px] h-[115px]" style=>
-                            </div>
-                            <span class="text-sm font-semibold text-emperor max-w-[100px]">{{$user1->name}}</span>
-                        </div>
-                        @endforeach
-    </div>
-    <div class="flex flex-col justify-center items-center gap-6 py-10">
-        <h2 class="text-sciblue text-3xl font-bold uppercase text-center">Gợi ý hôm nay</h2>
-        <div class="content-item grid grid-cols- md:grid-cols-3 lg:grid-cols-6 gap-2">
-
-        @foreach($user->vstoreProducts()->where('status',2)->orderBy('id','desc')->limit(18)->get() as $pro)
-                <a href="#">
-                    <div class="item">
-                        <div class="item-img" style="height: 150px;">
-                            <img src="{{asset(json_decode($pro->images)[0])}}" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>{{$pro->name}} </h3>
-                            <div class="discount">
-                            <span class="cost">₫{{number_format($pro->price,0,'.','.')}}</span>
-                                <span class="real">₫{{number_format($pro->price - ($pro->price * ($pro->discount_vShop / 100)),0,'.','.')}}</span>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.832031 10.4167V14.5833C0.832031 14.8044 0.919829 15.0163 1.07611 15.1726C1.23239 15.3289 1.44435 15.4167 1.66536 15.4167H2.4987C2.4987 16.0797 2.76209 16.7156 3.23093 17.1844C3.69977 17.6533 4.33566 17.9167 4.9987 17.9167C5.66174 17.9167 6.29762 17.6533 6.76647 17.1844C7.23531 16.7156 7.4987 16.0797 7.4987 15.4167H12.4987C12.4987 16.0797 12.7621 16.7156 13.2309 17.1844C13.6998 17.6533 14.3357 17.9167 14.9987 17.9167C15.6617 17.9167 16.2976 17.6533 16.7665 17.1844C17.2353 16.7156 17.4987 16.0797 17.4987 15.4167H18.332C18.553 15.4167 18.765 15.3289 18.9213 15.1726C19.0776 15.0163 19.1654 14.8044 19.1654 14.5833V4.58334C19.1654 3.9203 18.902 3.28442 18.4331 2.81558C17.9643 2.34674 17.3284 2.08334 16.6654 2.08334H9.16537C8.50232 2.08334 7.86644 2.34674 7.3976 2.81558C6.92876 3.28442 6.66536 3.9203 6.66536 4.58334V6.25001H4.9987C4.61059 6.25001 4.2278 6.34037 3.88066 6.51394C3.53353 6.68751 3.23157 6.93952 2.9987 7.25001L0.998698 9.91668C0.974324 9.9529 0.954718 9.99211 0.940365 10.0333L0.890365 10.125C0.853586 10.2179 0.833827 10.3167 0.832031 10.4167ZM14.1654 15.4167C14.1654 15.2519 14.2142 15.0907 14.3058 14.9537C14.3974 14.8167 14.5275 14.7099 14.6798 14.6468C14.8321 14.5837 14.9996 14.5672 15.1613 14.5994C15.3229 14.6315 15.4714 14.7109 15.588 14.8274C15.7045 14.944 15.7839 15.0924 15.816 15.2541C15.8482 15.4158 15.8317 15.5833 15.7686 15.7356C15.7055 15.8879 15.5987 16.018 15.4617 16.1096C15.3246 16.2011 15.1635 16.25 14.9987 16.25C14.7777 16.25 14.5657 16.1622 14.4094 16.0059C14.2532 15.8497 14.1654 15.6377 14.1654 15.4167ZM8.33203 4.58334C8.33203 4.36233 8.41983 4.15037 8.57611 3.99409C8.73239 3.83781 8.94435 3.75001 9.16537 3.75001H16.6654C16.8864 3.75001 17.0983 3.83781 17.2546 3.99409C17.4109 4.15037 17.4987 4.36233 17.4987 4.58334V13.75H16.8487C16.6144 13.4922 16.3288 13.2862 16.0102 13.1453C15.6916 13.0043 15.3471 12.9315 14.9987 12.9315C14.6503 12.9315 14.3058 13.0043 13.9872 13.1453C13.6686 13.2862 13.383 13.4922 13.1487 13.75H8.33203V4.58334ZM6.66536 9.58334H3.33203L4.33203 8.25001C4.40965 8.14651 4.51031 8.06251 4.62602 8.00465C4.74173 7.9468 4.86933 7.91668 4.9987 7.91668H6.66536V9.58334ZM4.16536 15.4167C4.16536 15.2519 4.21424 15.0907 4.30581 14.9537C4.39737 14.8167 4.52752 14.7099 4.6798 14.6468C4.83207 14.5837 4.99962 14.5672 5.16127 14.5994C5.32292 14.6315 5.47141 14.7109 5.58795 14.8274C5.7045 14.944 5.78386 15.0924 5.81602 15.2541C5.84817 15.4158 5.83167 15.5833 5.7686 15.7356C5.70552 15.8879 5.59871 16.018 5.46167 16.1096C5.32463 16.2011 5.16352 16.25 4.9987 16.25C4.77768 16.25 4.56572 16.1622 4.40944 16.0059C4.25316 15.8497 4.16536 15.6377 4.16536 15.4167ZM2.4987 11.25H6.66536V13.5667C6.17356 13.1271 5.52798 12.8998 4.86928 12.9341C4.21057 12.9685 3.59213 13.2617 3.1487 13.75H2.4987V11.25Z" fill="#219653"/>
-                                </svg>
-
-                            </div>
-                            <div class="has-sell">
-                                <span class="rating">
-                                  @php
-                                    $random_star = rand(1,5);
-                                  @endphp
-                                      @for($i = 1; $i < 6;$i++ )
-                                        @if($i <  $random_star)
-                                        <svg  viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                        <title>star-solid</title>
-                                        <g id="Layer_2" data-name="Layer 2">
-                                          <g id="invisible_box" data-name="invisible box">
-                                            <rect width="48" height="48" fill="none"/>
-                                          </g>
-                                          <g id="icons_Q2" data-name="icons Q2">
-                                            <path d="M24,3a2.1,2.1,0,0,0-1.8,1.1L16.5,15.7,3.7,17.5A2.1,2.1,0,0,0,2.6,21l9.2,8.9L9.7,42.7A2,2,0,0,0,11.6,45l1-.2,11.4-6,11.4,6,1,.2a2,2,0,0,0,1.9-2.3L36.2,29.9,45.4,21a2.1,2.1,0,0,0-1.1-3.5L31.5,15.7,25.8,4.1A2.1,2.1,0,0,0,24,3Z"/>
-                                          </g>
-                                        </g>
-                                      </svg>
-                                      @else
-              <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <title>action / 11 - action, favorite, favourite, like, rating, star icon</title>
-                                        <g id="Free-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                            <g transform="translate(-303.000000, -156.000000)" id="Group" stroke="#000000" stroke-width="2">
-                                                <g transform="translate(301.000000, 154.000000)" id="Shape">
-                                                    <polygon points="11.9999754 3 15 9.00030843 21.0006915 9.00030843 16 14 18 21 12.0003457 17.5 6 21 8 14 3 9.00030843 9 9.00030843">
-
-                                    </polygon>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                        @endif
-
-                                      @endfor
-
-
-                                </span>
-                                <span class="sell">Đã bán 426</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-        </div>
     </div>
 </div>
-</div>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<footer>
+    <div class="bg-[#258AFF] py-3 ">
+        <div class="max-w-[1320px] flex justify-between items-center flex-col gap-4 md:flex-row mx-auto px-[15px] xl:px-0">
+            <ul class="flex items-center gap-14">
+                <li><a href="#">
+                        <svg width="25" height="21" viewBox="0 0 25 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.6183 2.54128C23.713 2.93181 22.7278 3.21288 21.713 3.32234C22.7666 2.69641 23.5556 1.70755 23.9319 0.541279C22.9433 1.12941 21.8602 1.54182 20.7308 1.76021C20.2587 1.25556 19.6878 0.853527 19.0535 0.579171C18.4193 0.304815 17.7354 0.164013 17.0444 0.16554C14.2485 0.16554 12 2.43181 12 5.21287C12 5.60341 12.0473 5.99394 12.1243 6.36968C7.93786 6.15074 4.20414 4.15074 1.72189 1.08862C1.2696 1.86115 1.03258 2.74076 1.0355 3.63595C1.0355 5.38743 1.92603 6.93181 3.28402 7.84009C2.48374 7.80857 1.7022 7.58861 1.00296 7.19808V7.26021C1.00296 9.71287 2.73668 11.7454 5.04733 12.2129C4.61348 12.3256 4.16718 12.3832 3.71893 12.3845C3.39053 12.3845 3.07988 12.3519 2.76627 12.3075C3.40532 14.3075 5.26627 15.7602 7.48224 15.8075C5.74852 17.1655 3.57692 17.9643 1.21893 17.9643C0.795858 17.9643 0.405325 17.9496 0 17.9022C2.23668 19.3371 4.89053 20.1655 7.74852 20.1655C17.0266 20.1655 22.1035 12.4791 22.1035 5.80755C22.1035 5.58861 22.1035 5.36968 22.0887 5.15074C23.071 4.43181 23.9319 3.54128 24.6183 2.54128Z" fill="white"/>
+                        </svg>
+                    </a></li>
+                <li><a href="#">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.6172 0.165527C5.09516 0.165527 0.618164 4.64253 0.618164 10.1645C0.618164 15.1545 4.27416 19.2905 9.05516 20.0435V13.0555H6.51516V10.1645H9.05516V7.96153C9.05516 5.45353 10.5482 4.07053 12.8312 4.07053C13.9252 4.07053 15.0712 4.26553 15.0712 4.26553V6.72453H13.8072C12.5672 6.72453 12.1792 7.49653 12.1792 8.28753V10.1625H14.9502L14.5072 13.0535H12.1792V20.0415C16.9602 19.2925 20.6162 15.1555 20.6162 10.1645C20.6162 4.64253 16.1392 0.165527 10.6172 0.165527Z" fill="white"/>
+                        </svg>
+
+                    </a></li>
+                <li><a href="#">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.63925 0.165527C12.5911 0.165527 20.6905 8.24128 20.7327 18.1831V18.1837H20.7342V19.2356H20.7224C20.6961 19.4689 20.5917 19.6864 20.4262 19.8529C20.2607 20.0194 20.0439 20.1252 19.8108 20.153V20.1654H17.9405V20.1633C17.6875 20.158 17.445 20.061 17.2582 19.8903C17.0714 19.7196 16.953 19.4868 16.925 19.2353H16.9132V18.1834H16.9238C16.8816 10.3411 10.4909 3.97414 2.63895 3.97414C2.63149 3.97414 2.62404 3.97359 2.61659 3.97305C2.61037 3.9726 2.60416 3.97215 2.59795 3.97201V3.98659H1.54604V3.97474C1.31275 3.94846 1.09519 3.84411 0.928667 3.67863C0.76214 3.51315 0.65642 3.29625 0.628661 3.06313H0.616211V1.19284H0.618337C0.62363 0.939839 0.720661 0.69738 0.891372 0.510581C1.06208 0.323782 1.29485 0.205367 1.54635 0.17737V0.165527H2.59825V0.167653C2.60443 0.167516 2.61055 0.167068 2.61669 0.166619C2.62413 0.166074 2.6316 0.165527 2.63925 0.165527ZM2.63925 7.37172C2.6316 7.37172 2.62413 7.37227 2.61669 7.37281L2.61668 7.37281C2.61054 7.37326 2.60443 7.37371 2.59825 7.37385V7.37172H1.54635V7.38356C1.29485 7.41156 1.06208 7.52997 0.891372 7.71677C0.720661 7.90357 0.62363 8.14603 0.618337 8.39903H0.616211V10.2693H0.628661C0.656472 10.5024 0.762209 10.7193 0.928726 10.8848C1.09524 11.0502 1.31277 11.1546 1.54604 11.1809V11.1928H2.59795V11.1782C2.60416 11.1783 2.61037 11.1788 2.61658 11.1792C2.62404 11.1798 2.63149 11.1803 2.63895 11.1803C6.5174 11.1803 9.67585 14.3145 9.71776 18.1832H9.70774V19.2351H9.71958C9.74758 19.4866 9.86599 19.7194 10.0528 19.8901C10.2396 20.0608 10.482 20.1578 10.735 20.1631V20.1653H12.605V20.1528C12.8381 20.125 13.055 20.0193 13.2205 19.8528C13.3859 19.6862 13.4903 19.4687 13.5166 19.2354H13.5285V18.1835H13.5267C13.4851 12.2143 8.61757 7.37172 2.63925 7.37172ZM3.46569 14.7048C3.11545 14.7048 2.76865 14.7738 2.44509 14.9079C2.12154 15.042 1.82756 15.2385 1.57996 15.4862C1.33237 15.7339 1.136 16.028 1.00208 16.3516C0.868166 16.6752 0.79932 17.022 0.79948 17.3723C0.79948 17.7225 0.868459 18.0693 1.00248 18.3928C1.1365 18.7164 1.33294 19.0103 1.58057 19.258C1.82821 19.5056 2.1222 19.7021 2.44575 19.8361C2.7693 19.9701 3.11608 20.0391 3.4663 20.0391C3.81651 20.0391 4.16329 19.9701 4.48684 19.8361C4.81039 19.7021 5.10438 19.5056 5.35202 19.258C5.59965 19.0103 5.79609 18.7164 5.93011 18.3928C6.06413 18.0693 6.13311 17.7225 6.13311 17.3723C6.13327 17.0219 6.06438 16.675 5.93039 16.3513C5.7964 16.0276 5.59992 15.7335 5.3522 15.4857C5.10447 15.238 4.81035 15.0415 4.48666 14.9076C4.16296 14.7736 3.81602 14.7047 3.46569 14.7048Z" fill="white"/>
+                        </svg>
+
+
+                    </a></li>
+                <li><a href="#">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.7319 6.83077C8.89563 6.83077 7.39712 8.32929 7.39712 10.1655C7.39712 12.0018 8.89563 13.5003 10.7319 13.5003C12.5681 13.5003 14.0666 12.0018 14.0666 10.1655C14.0666 8.32929 12.5681 6.83077 10.7319 6.83077ZM20.7336 10.1655C20.7336 8.78459 20.7461 7.41617 20.6686 6.03774C20.591 4.43666 20.2258 3.0157 19.055 1.84491C17.8817 0.671613 16.4632 0.308868 14.8622 0.231315C13.4812 0.153763 12.1128 0.166271 10.7344 0.166271C9.35344 0.166271 7.98502 0.153763 6.60659 0.231315C5.0055 0.308868 3.58454 0.674114 2.41375 1.84491C1.24046 3.0182 0.877715 4.43666 0.800163 6.03774C0.722611 7.41867 0.735119 8.7871 0.735119 10.1655C0.735119 11.544 0.722611 12.9149 0.800163 14.2933C0.877715 15.8944 1.24296 17.3154 2.41375 18.4861C3.58705 19.6594 5.0055 20.0222 6.60659 20.0997C7.98752 20.1773 9.35594 20.1648 10.7344 20.1648C12.1153 20.1648 13.4837 20.1773 14.8622 20.0997C16.4632 20.0222 17.8842 19.6569 19.055 18.4861C20.2283 17.3129 20.591 15.8944 20.6686 14.2933C20.7486 12.9149 20.7336 11.5465 20.7336 10.1655ZM10.7319 15.2965C7.89245 15.2965 5.60091 13.0049 5.60091 10.1655C5.60091 7.32611 7.89245 5.03456 10.7319 5.03456C13.5713 5.03456 15.8628 7.32611 15.8628 10.1655C15.8628 13.0049 13.5713 15.2965 10.7319 15.2965ZM16.073 6.02273C15.41 6.02273 14.8747 5.48737 14.8747 4.82442C14.8747 4.16147 15.41 3.62611 16.073 3.62611C16.7359 3.62611 17.2713 4.16147 17.2713 4.82442C17.2715 4.98184 17.2406 5.13775 17.1805 5.28323C17.1203 5.4287 17.0321 5.56088 16.9208 5.67219C16.8094 5.7835 16.6773 5.87176 16.5318 5.93191C16.3863 5.99207 16.2304 6.02293 16.073 6.02273Z" fill="white"/>
+                        </svg>
+
+
+                    </a></li>
+            </ul>
+            <span class="uppercase text-xs text-[#FFF]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
+        </div>
+    </div>
+</footer>
+<script>
+    var slide = 6;
+    if (window.matchMedia('screen and (max-width: 768px)').matches) {
+        slide=2;
+    }
+    $(document).ready(function(){
+        $('.btn-menu').on('click',function(){
+            $('.nav-menu-mb').toggleClass('show-menu')
+        })
+    })
+    $('.slider-cate').slick({
+        dots: true,
+        infinite: false,
+        arrows:false,
+//   autoplay: true,
+//   autoplaySpeed: 2000,
+        speed: 300,
+        slidesToShow: slide,
+        slidesToScroll: slide,
+//   responsive: [
+//     {
+//       breakpoint: 1024,
+//       settings: {
+//         slidesToShow: 3,
+//         slidesToScroll: 3,
+//         infinite: true,
+//         dots: true
+//       }
+//     },
+//     {
+//       breakpoint: 600,
+//       settings: {
+//         slidesToShow: 2,
+//         slidesToScroll: 2
+//       }
+//     },
+//     {
+//       breakpoint: 480,
+//       settings: {
+//         slidesToShow: 1,
+//         slidesToScroll: 1
+//       }
+//     }
+//     // You can unslick at a given breakpoint now by adding:
+//     // settings: "unslick"
+//     // instead of a settings object
+        // ]
+    });
+    if (window.matchMedia('screen and (max-width: 768px)').matches) {
+        console.log(1);
+    }
+</script>
+
 </body>
 </html>

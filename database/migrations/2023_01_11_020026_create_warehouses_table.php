@@ -14,10 +14,10 @@ return new class extends Migration {
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('Tên kho hàng');
-            $table->string('phone_number')->comment('Số điện thoại kho hàng');
-            $table->string('address')->comment('Địa chỉ chính xác kho hàng');
-            $table->integer('user_id')->comment('Id user sở hữu kho hàng');
+            $table->string('name')->nullable()->comment('Tên kho hàng');
+            $table->string('phone_number')->nullable()->comment('Số điện thoại kho hàng');
+            $table->string('address')->nullable()->comment('Địa chỉ chính xác kho hàng');
+            $table->integer('user_id')->nullable()->comment('Id user sở hữu kho hàng');
             $table->string('city_id')->nullable();
             $table->string('district_id')->nullable();
             $table->string('ward_id')->nullable();

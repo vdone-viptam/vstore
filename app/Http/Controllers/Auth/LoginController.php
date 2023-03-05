@@ -118,7 +118,7 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
-                'name.unique' => 'Tên công ty đã tồn tại',
+                'name.unique' => 'Tên kho đã tồn tại',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
@@ -300,10 +300,11 @@ class LoginController extends Controller
                 $role_id = 4;
             }
 
-            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id]) || Auth::attempt(['code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
                 if (Auth::user()->status == 4) {
                     return redirect()->back()->with('error', 'Tài khoản đã hết hạn sử dụng.Liên hệ quản trị viên để gia hạn tài khoản');
                 }
+//                return Auth::user();
                 $token = Str::random(32);
                 $userLogin = Auth::user();
                 $login = new Otp();

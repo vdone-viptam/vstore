@@ -292,11 +292,11 @@
                                 <div
                                     class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey pt-6 md:pt-0">
                                     <div class="w-[200px] file-avt">
-                                        <div class="w-full h-[100px]   ">
-                                            <img
+                                        <div style="" class="w-full h-[100px]  text-center ">
+                                            <img style=""
                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
                                                 alt=""
-                                                class="w-full object-fill">
+                                                class="w-[100px] m-auto  object-contain">
                                         </div>
                                     </div>
                                     <button type="button"

@@ -44,10 +44,12 @@
 </style>
 <div class=" fixed left-0 h-screen md:block hidden z-[7] ">
 
-    <div class="flex  justify-center items-center my-4 gap-10 w-[305px]">
+    <div class="flex  justify-between items-center gap-10 w-[305px]">
+        <div></div>
         <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
-            <div class="w-[195px] h-[45px] ">
-                <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+            <div class="w-[80px] h-[80px] ">
+{{--                <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">--}}
+                <img class="w-full object-contain" src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
             </div>
         </a>
         <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"><img

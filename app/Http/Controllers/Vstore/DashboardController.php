@@ -14,7 +14,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $data = Product::select('products.images', 'name', 'product_id', 'requests.discount')->join('requests', 'products.id', '=', 'requests.product_id')->where('requests.status', 0)->groupBy(['products.images', 'name', 'product_id', 'requests.discount'])->limit(10)->get();
+        $data = Product::select('products.images', 'name', 'product_id', 'requests.discount')->join('requests', 'products.id', '=', 'requests.product_id')->where('requests.status', 0)->groupBy(['products.images', 'name', 'product_id', 'requests.discount'])
+            ->where('products.vstore_id',Auth::id())
+            ->limit(10)->get();
 //        $vshop = Vshop::where('id_npp',Auth::id())->groupBy('id_pdone')->paginate(5);
                 $vshop  = [];
 //        return $vshop;
