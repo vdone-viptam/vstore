@@ -38,7 +38,7 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Shop:</span>
                         <input disabled name="discount_vshop" id="discount_vshop"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -105,7 +105,7 @@
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = o.target.value;
 
-                        if (value < (Number(result.discount - result.discount_vShop))) {
+                        if (value <= (Number(result.discount - result.discount_vShop))) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 

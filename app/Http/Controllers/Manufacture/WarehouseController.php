@@ -71,12 +71,15 @@ class WarehouseController extends Controller
 //        dd($products);
         $ware = DB::table('warehouses')
             ->selectRaw('warehouses.name as ware_name,warehouses.id,phone_number,address,COUNT(products.id) as amount')
+//            ->selectRaw('warehouses.name as ware_name,warehouses.id,phone_number,address,')
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+//            ->groupBy('product_warehouses.product_id')
             ->where('products.user_id', Auth::id())->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
 //        $ware = User::join('products','')
 //         return $ware;
         foreach ($ware as $wa) {
+
             $wa->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND ware_id = " . $wa->id . ") as amount FROM product_warehouses where status = 1 AND ware_id = " . $wa->id . ""))[0]->amount ?? 0;
         }
 //        return $ware;
