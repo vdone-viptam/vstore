@@ -84,7 +84,7 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                       Mã giảm giá
+                        Mã giảm giá
                     </h2>
                     <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
                         <a href="#"
@@ -159,9 +159,9 @@
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    {{--                    <span class="text-sm text-title">Tổng: <strong--}}
-                    {{--                            class="font-bold">{{$requests->total()}}</strong></span>--}}
-                    {{--                    @include('layouts.custom.paginator', ['paginator' => $requests])--}}
+                                        <span class="text-sm text-title">Tổng: <strong
+                                                class="font-bold">{{$discounts->total()}}</strong></span>
+                    @include('layouts.custom.paginator', ['paginator' => $discounts])
 
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"

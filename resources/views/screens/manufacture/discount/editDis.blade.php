@@ -34,12 +34,12 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
-                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store:</span>
+                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount ?? 0}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-{{--                                                <span class="text-title font-medium  ">Phần trăm chiết khấu bán s:</span>--}}
+                        {{--                                                <span class="text-title font-medium  ">Phần trăm chiết khấu bán s:</span>--}}
                         <input disabled name="discount_vshop" type="hidden" id="discount_vshop"
                                value="{{$product1->discount_vShop}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">

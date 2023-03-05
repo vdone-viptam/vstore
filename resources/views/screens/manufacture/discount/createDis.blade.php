@@ -33,12 +33,12 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store:</span>
                         <input disabled name="discount_ncc" id="discount_ncc"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-{{--                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>--}}
+                        {{--                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>--}}
                         <input disabled name="discount_vshop" id="discount_vshop" type="hidden"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
