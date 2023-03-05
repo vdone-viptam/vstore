@@ -169,7 +169,7 @@
                                         {{isset($prams['condition']) && $params['condition'] == 3 ? $product->cate_name : $product->category->name}}
                                     </td>
                                     <td>
-                                        {{ number_format($product->price,'0','','.')}}
+                                        {{ number_format($product->price,0,'','.')}}
                                     </td>
                                     <td>
                                         {{$product->vStore->name ?? '-'}}
@@ -180,7 +180,8 @@
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline"> Chi tiết</a>
                                         @if($product->status ==0 && $product->vstore_id =='' )
-                                            <a href="{{route('screens.manufacture.product.edit',['id'=>$product->id])}}" class="bg-transparent hover:bg-blue-500 text-primary  hover:text-white py-2 px-4 border border-primary hover:border-transparent rounded">Sửa</a>
+                                            <a href="{{route('screens.manufacture.product.edit',['id'=>$product->id])}}"
+                                               class="bg-transparent hover:bg-blue-500 text-primary  hover:text-white py-2 px-4 border border-primary hover:border-transparent rounded">Sửa</a>
                                         @endif
                                     </td>
                                 </tr>

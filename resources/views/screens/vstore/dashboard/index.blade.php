@@ -134,7 +134,7 @@
                                     thêm</a>
                             </div>
                             @if(count($data)>=1)
-                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
+                                <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
 
                                     @foreach($data as $a)
                                         <div class="pro flex flex-col w-full p-[4px] gap-2">
@@ -155,233 +155,231 @@
                                     @endforeach
 
 
-                            </div>
+                                </div>
                             @else
-                                <p class="text-lg  font-medium flex items-center gap-4 text-gray-600">Chưa có thông tin sản phẩm chờ duyệt</p>
+                                <p class="text-lg  font-medium flex items-center gap-4 text-gray-600">Chưa có thông tin
+                                    sản phẩm chờ duyệt</p>
                             @endif
                         </div>
                         <div class="flex flex-col gap-4 w-full">
-{{--                            <div class="flex justify-between items-center w-full">--}}
-{{--                                <h2 class="text-black font-medium text-lg md:text-2xl">Các V-Shop liên kết</h2>--}}
-{{--                                <a href="{{Route('screens.vstore.partner.vshop')}}"--}}
-{{--                                   class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem--}}
-{{--                                    thêm</a>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="flex justify-between items-center w-full">--}}
+                            {{--                                <h2 class="text-black font-medium text-lg md:text-2xl">Các V-Shop liên kết</h2>--}}
+                            {{--                                <a href="{{Route('screens.vstore.partner.vshop')}}"--}}
+                            {{--                                   class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem--}}
+                            {{--                                    thêm</a>--}}
+                            {{--                            </div>--}}
 
 
 
-{{--                                @if(count($vshop)>=1)--}}
-{{--                                <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">--}}
-{{--                                    @foreach($vshop as $v)--}}
-{{--                                        <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
-{{--                                            <div class="max-w-[120px] mx-auto">--}}
-{{--                                                <div class="w-[50px] h-[50px] rounded-full">--}}
-{{--                                                    <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
-{{--                                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                        <path--}}
-{{--                                                            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
-{{--                                                            stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                            stroke-linejoin="round"/>--}}
-{{--                                                        <path--}}
-{{--                                                            d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
-{{--                                                            stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                            stroke-linejoin="round"/>--}}
-{{--                                                    </svg>--}}
-{{--                                                </div>--}}
+                            {{--                                @if(count($vshop)>=1)--}}
+                            {{--                                <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">--}}
+                            {{--                                    @foreach($vshop as $v)--}}
+                            {{--                                        <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
+                            {{--                                            <div class="max-w-[120px] mx-auto">--}}
+                            {{--                                                <div class="w-[50px] h-[50px] rounded-full">--}}
+                            {{--                                                    <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
+                            {{--                                                         xmlns="http://www.w3.org/2000/svg">--}}
+                            {{--                                                        <path--}}
+                            {{--                                                            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
+                            {{--                                                            stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                            {{--                                                            stroke-linejoin="round"/>--}}
+                            {{--                                                        <path--}}
+                            {{--                                                            d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
+                            {{--                                                            stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                            {{--                                                            stroke-linejoin="round"/>--}}
+                            {{--                                                    </svg>--}}
+                            {{--                                                </div>--}}
 
-{{--                                            </div>--}}
-{{--                                            <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">ID:{{$v->id_pdone}}</h2>--}}
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
-{{--                                </div>--}}
-{{--                                @else--}}
-{{--                                    <p class="text-lg  font-medium flex items-center gap-4 text-gray-600">Chưa có thông tin V-shop liên kết</p>--}}
-{{--                                @endif--}}
-
-
-
+                            {{--                                            </div>--}}
+                            {{--                                            <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">ID:{{$v->id_pdone}}</h2>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    @endforeach--}}
+                            {{--                                </div>--}}
+                            {{--                                @else--}}
+                            {{--                                    <p class="text-lg  font-medium flex items-center gap-4 text-gray-600">Chưa có thông tin V-shop liên kết</p>--}}
+                            {{--                                @endif--}}
 
 
                         </div>
-{{--                        <div class="flex flex-col gap-4 w-full">--}}
-{{--                            <div class="flex justify-between items-center w-full">--}}
-{{--                                <h2 class="text-black font-medium text-lg md:text-2xl">Danh sách các nhà cung cấp</h2>--}}
-{{--                                <a href="{{Route('screens.vstore.partner.index')}}"--}}
-{{--                                   class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem--}}
-{{--                                    thêm</a>--}}
-{{--                            </div>--}}
+                        {{--                        <div class="flex flex-col gap-4 w-full">--}}
+                        {{--                            <div class="flex justify-between items-center w-full">--}}
+                        {{--                                <h2 class="text-black font-medium text-lg md:text-2xl">Danh sách các nhà cung cấp</h2>--}}
+                        {{--                                <a href="{{Route('screens.vstore.partner.index')}}"--}}
+                        {{--                                   class="text-[#2B3674] font-medium md:text-lg underline hover:opacity-70 transition-all duration-200">Xem--}}
+                        {{--                                    thêm</a>--}}
+                        {{--                            </div>--}}
 
-{{--                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">--}}
-{{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
-{{--                                    <div class="max-w-[120px] mx-auto">--}}
-{{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
-{{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
-{{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                <path--}}
-{{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                                <path--}}
-{{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                            </svg>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
-{{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
-{{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
-{{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
-{{--                                </div>--}}
-{{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
-{{--                                    <div class="max-w-[120px] mx-auto">--}}
-{{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
-{{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
-{{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                <path--}}
-{{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                                <path--}}
-{{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                            </svg>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
-{{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
-{{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
-{{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
-{{--                                </div>--}}
-{{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
-{{--                                    <div class="max-w-[120px] mx-auto">--}}
-{{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
-{{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
-{{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                <path--}}
-{{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                                <path--}}
-{{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                            </svg>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
-{{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
-{{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
-{{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
-{{--                                </div>--}}
-{{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
-{{--                                    <div class="max-w-[120px] mx-auto">--}}
-{{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
-{{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
-{{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                <path--}}
-{{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                                <path--}}
-{{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                            </svg>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
-{{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
-{{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
-{{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
-{{--                                </div>--}}
-{{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
-{{--                                    <div class="max-w-[120px] mx-auto">--}}
-{{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
-{{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
-{{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                <path--}}
-{{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                                <path--}}
-{{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
-{{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
-{{--                                                    stroke-linejoin="round"/>--}}
-{{--                                            </svg>--}}
-{{--                                        </div>--}}
+                        {{--                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">--}}
+                        {{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
+                        {{--                                    <div class="max-w-[120px] mx-auto">--}}
+                        {{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
+                        {{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
+                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                            </svg>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
+                        {{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
+                        {{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
+                        {{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
+                        {{--                                    <div class="max-w-[120px] mx-auto">--}}
+                        {{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
+                        {{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
+                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                            </svg>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
+                        {{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
+                        {{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
+                        {{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
+                        {{--                                    <div class="max-w-[120px] mx-auto">--}}
+                        {{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
+                        {{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
+                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                            </svg>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
+                        {{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
+                        {{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
+                        {{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
+                        {{--                                    <div class="max-w-[120px] mx-auto">--}}
+                        {{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
+                        {{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
+                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                            </svg>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
+                        {{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
+                        {{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
+                        {{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="pro flex flex-col w-full p-[4px] gap-2">--}}
+                        {{--                                    <div class="max-w-[120px] mx-auto">--}}
+                        {{--                                        <div class="w-[50px] h-[50px] rounded-full">--}}
+                        {{--                                            <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"--}}
+                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                                <path--}}
+                        {{--                                                    d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22"--}}
+                        {{--                                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"--}}
+                        {{--                                                    stroke-linejoin="round"/>--}}
+                        {{--                                            </svg>--}}
+                        {{--                                        </div>--}}
 
-{{--                                    </div>--}}
-{{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
-{{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
-{{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
-{{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
-{{--                                </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">Tên sản phẩm--}}
+                        {{--                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quos ipsum--}}
+                        {{--                                        consequuntur repudiandae quis aut dignissimos nisi? Pariatur suscipit expedita--}}
+                        {{--                                        modi laborum, obcaecati, est vel numquam quam autem impedit unde.</h2>--}}
+                        {{--                                </div>--}}
 
-{{--                            </div>--}}
-                        </div>
-                        <div class="flex flex-col justify-start items-start gap-4 w-full">
-                            <div class="flex justify-between items-center  w-full flex-wrap gap-4 md:flex-nowrap">
-                                <div class="flex justify-start items-center gap-2 flex-wrap">
-                                    <div class="flex items-center gap-[5px]">
-                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M25.7497 6.30054C25.683 6.71721 25.6497 7.13387 25.6497 7.55054C25.6497 11.3005 28.683 14.3322 32.4163 14.3322C32.833 14.3322 33.233 14.2839 33.6497 14.2172V27.6655C33.6497 33.3172 30.3163 36.6672 24.6497 36.6672H12.3347C6.66634 36.6672 3.33301 33.3172 3.33301 27.6655V15.3339C3.33301 9.66721 6.66634 6.30054 12.3347 6.30054H25.7497ZM26.0847 16.4339C25.633 16.3839 25.1847 16.5839 24.9163 16.9505L20.8847 22.1672L16.2663 18.5339C15.983 18.3172 15.6497 18.2322 15.3163 18.2672C14.9847 18.3172 14.6847 18.4989 14.483 18.7655L9.55134 25.1839L9.44967 25.3339C9.16634 25.8655 9.29967 26.5489 9.79967 26.9172C10.033 27.0672 10.283 27.1672 10.5663 27.1672C10.9513 27.1839 11.3163 26.9822 11.5497 26.6672L15.733 21.2822L20.483 24.8505L20.633 24.9489C21.1663 25.2322 21.833 25.1005 22.2163 24.5989L27.033 18.3839L26.9663 18.4172C27.233 18.0505 27.283 17.5839 27.0997 17.1672C26.918 16.7505 26.5163 16.4672 26.0847 16.4339ZM32.6498 3.33337C34.8665 3.33337 36.6665 5.13337 36.6665 7.35004C36.6665 9.56671 34.8665 11.3667 32.6498 11.3667C30.4332 11.3667 28.6332 9.56671 28.6332 7.35004C28.6332 5.13337 30.4332 3.33337 32.6498 3.33337Z"
-                                                fill="#4062FF"/>
-                                        </svg>
-                                        <span
-                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
-                                                class="date">1 tuần</span></span>
-                                    </div>
-{{--                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M9 17.4736C13.6318 17.4736 17.4668 13.6304 17.4668 9.00684C17.4668 4.375 13.6235 0.540039 8.9917 0.540039C4.36816 0.540039 0.533203 4.375 0.533203 9.00684C0.533203 13.6304 4.37646 17.4736 9 17.4736ZM9 13.896C8.76758 13.896 8.59326 13.73 8.59326 13.4893V12.875C7.44775 12.7671 6.49316 12.1362 6.25244 11.1484C6.22754 11.0654 6.21094 10.9741 6.21094 10.8828C6.21094 10.584 6.41846 10.3765 6.70898 10.3765C6.96631 10.3765 7.14062 10.5093 7.24023 10.8081C7.38135 11.3726 7.82959 11.8042 8.59326 11.9121V9.38867L8.53516 9.37207C7.10742 9.03174 6.36865 8.38428 6.36865 7.29688C6.36865 6.12646 7.29834 5.31299 8.59326 5.17188V4.58252C8.59326 4.3418 8.76758 4.17578 9 4.17578C9.23242 4.17578 9.40674 4.3418 9.40674 4.58252V5.17188C10.5024 5.29639 11.3823 5.93555 11.6064 6.85693C11.623 6.94824 11.6479 7.03955 11.6479 7.12256C11.6479 7.42139 11.4321 7.62891 11.1416 7.62891C10.8677 7.62891 10.7017 7.46289 10.6187 7.20557C10.4443 6.63281 10.021 6.26758 9.40674 6.15967V8.54199L9.52295 8.56689C11.0088 8.83252 11.7642 9.53809 11.7642 10.7002C11.7642 11.9951 10.7266 12.7671 9.40674 12.8916V13.4893C9.40674 13.73 9.23242 13.896 9 13.896ZM8.59326 8.32617V6.15967C7.87109 6.28418 7.43115 6.72412 7.43115 7.23877C7.43115 7.74512 7.77148 8.08545 8.53516 8.30957L8.59326 8.32617ZM9.40674 9.58789V11.9121C10.2783 11.8125 10.7017 11.356 10.7017 10.7583C10.7017 10.2188 10.4194 9.86182 9.58936 9.6377L9.40674 9.58789Z"--}}
-{{--                                            fill="#FAAD14"/>--}}
-{{--                                    </svg>--}}
-{{--                                    <span class="text-primary font-medium">159,243,900</span>--}}
-                                </div>
-                                <div class="relative ">
-                                    <select name=""
-                                            class="slect-date outline-none appearance-none  border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
-                                        <option value="0" selected>1 tuần</option>
-                                        <option value="1">1 Tháng</option>
-                                        <option value="2">1 năm</option>
-                                        <option value="3">3 năm</option>
-                                    </select>
-                                    <svg class="absolute top-2.5 right-2.5 pointer-events-none" width="16" height="16"
-                                         viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {{--                            </div>--}}
+                    </div>
+                    <div class="flex flex-col justify-start items-start gap-4 w-full">
+                        <div class="flex justify-between items-center  w-full flex-wrap gap-4 md:flex-nowrap">
+                            <div class="flex justify-start items-center gap-2 flex-wrap">
+                                <div class="flex items-center gap-[5px]">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
-                                            d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
-                                            fill="#919EAB"/>
+                                            d="M25.7497 6.30054C25.683 6.71721 25.6497 7.13387 25.6497 7.55054C25.6497 11.3005 28.683 14.3322 32.4163 14.3322C32.833 14.3322 33.233 14.2839 33.6497 14.2172V27.6655C33.6497 33.3172 30.3163 36.6672 24.6497 36.6672H12.3347C6.66634 36.6672 3.33301 33.3172 3.33301 27.6655V15.3339C3.33301 9.66721 6.66634 6.30054 12.3347 6.30054H25.7497ZM26.0847 16.4339C25.633 16.3839 25.1847 16.5839 24.9163 16.9505L20.8847 22.1672L16.2663 18.5339C15.983 18.3172 15.6497 18.2322 15.3163 18.2672C14.9847 18.3172 14.6847 18.4989 14.483 18.7655L9.55134 25.1839L9.44967 25.3339C9.16634 25.8655 9.29967 26.5489 9.79967 26.9172C10.033 27.0672 10.283 27.1672 10.5663 27.1672C10.9513 27.1839 11.3163 26.9822 11.5497 26.6672L15.733 21.2822L20.483 24.8505L20.633 24.9489C21.1663 25.2322 21.833 25.1005 22.2163 24.5989L27.033 18.3839L26.9663 18.4172C27.233 18.0505 27.283 17.5839 27.0997 17.1672C26.918 16.7505 26.5163 16.4672 26.0847 16.4339ZM32.6498 3.33337C34.8665 3.33337 36.6665 5.13337 36.6665 7.35004C36.6665 9.56671 34.8665 11.3667 32.6498 11.3667C30.4332 11.3667 28.6332 9.56671 28.6332 7.35004C28.6332 5.13337 30.4332 3.33337 32.6498 3.33337Z"
+                                            fill="#4062FF"/>
                                     </svg>
+                                    <span
+                                        class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
+                                            class="date">1 tuần</span></span>
                                 </div>
+                                {{--                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none"--}}
+                                {{--                                         xmlns="http://www.w3.org/2000/svg">--}}
+                                {{--                                        <path--}}
+                                {{--                                            d="M9 17.4736C13.6318 17.4736 17.4668 13.6304 17.4668 9.00684C17.4668 4.375 13.6235 0.540039 8.9917 0.540039C4.36816 0.540039 0.533203 4.375 0.533203 9.00684C0.533203 13.6304 4.37646 17.4736 9 17.4736ZM9 13.896C8.76758 13.896 8.59326 13.73 8.59326 13.4893V12.875C7.44775 12.7671 6.49316 12.1362 6.25244 11.1484C6.22754 11.0654 6.21094 10.9741 6.21094 10.8828C6.21094 10.584 6.41846 10.3765 6.70898 10.3765C6.96631 10.3765 7.14062 10.5093 7.24023 10.8081C7.38135 11.3726 7.82959 11.8042 8.59326 11.9121V9.38867L8.53516 9.37207C7.10742 9.03174 6.36865 8.38428 6.36865 7.29688C6.36865 6.12646 7.29834 5.31299 8.59326 5.17188V4.58252C8.59326 4.3418 8.76758 4.17578 9 4.17578C9.23242 4.17578 9.40674 4.3418 9.40674 4.58252V5.17188C10.5024 5.29639 11.3823 5.93555 11.6064 6.85693C11.623 6.94824 11.6479 7.03955 11.6479 7.12256C11.6479 7.42139 11.4321 7.62891 11.1416 7.62891C10.8677 7.62891 10.7017 7.46289 10.6187 7.20557C10.4443 6.63281 10.021 6.26758 9.40674 6.15967V8.54199L9.52295 8.56689C11.0088 8.83252 11.7642 9.53809 11.7642 10.7002C11.7642 11.9951 10.7266 12.7671 9.40674 12.8916V13.4893C9.40674 13.73 9.23242 13.896 9 13.896ZM8.59326 8.32617V6.15967C7.87109 6.28418 7.43115 6.72412 7.43115 7.23877C7.43115 7.74512 7.77148 8.08545 8.53516 8.30957L8.59326 8.32617ZM9.40674 9.58789V11.9121C10.2783 11.8125 10.7017 11.356 10.7017 10.7583C10.7017 10.2188 10.4194 9.86182 9.58936 9.6377L9.40674 9.58789Z"--}}
+                                {{--                                            fill="#FAAD14"/>--}}
+                                {{--                                    </svg>--}}
+                                {{--                                    <span class="text-primary font-medium">159,243,900</span>--}}
                             </div>
-                            <div class="char p-4 xl:p-10 w-full">
-                                <canvas id="bar-chart-grouped" width="800" height="315"></canvas>
-                                <!-- <canvas id="line-chart" width="800" height="350"></canvas> -->
+                            <div class="relative ">
+                                <select name=""
+                                        class="slect-date outline-none appearance-none  border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
+                                    <option value="0" selected>1 tuần</option>
+                                    <option value="1">1 Tháng</option>
+                                    <option value="2">1 năm</option>
+                                    <option value="3">3 năm</option>
+                                </select>
+                                <svg class="absolute top-2.5 right-2.5 pointer-events-none" width="16" height="16"
+                                     viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M7.246 11.0871C7.20733 11.0495 7.042 10.9072 6.906 10.7748C6.05067 9.99801 4.65067 7.97171 4.22333 6.91115C4.15467 6.75008 4.00933 6.34287 4 6.1253C4 5.91683 4.048 5.7181 4.14533 5.52845C4.28133 5.29205 4.49533 5.10241 4.748 4.9985C4.92333 4.9316 5.448 4.82769 5.45733 4.82769C6.03133 4.72378 6.964 4.66663 7.99467 4.66663C8.97667 4.66663 9.87133 4.72378 10.454 4.80886C10.4633 4.8186 11.1153 4.92251 11.3387 5.03617C11.7467 5.24464 12 5.65185 12 6.08764V6.1253C11.99 6.40912 11.7367 7.00597 11.7273 7.00597C11.2993 8.00938 9.968 9.98892 9.08333 10.7845C9.08333 10.7845 8.856 11.0086 8.714 11.106C8.51 11.258 8.25733 11.3333 8.00467 11.3333C7.72267 11.3333 7.46 11.2482 7.246 11.0871Z"
+                                        fill="#919EAB"/>
+                                </svg>
                             </div>
-                        </div>
-                        <div class="flex items-center gap-[5px]">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M25.7497 6.30054C25.683 6.71721 25.6497 7.13387 25.6497 7.55054C25.6497 11.3005 28.683 14.3322 32.4163 14.3322C32.833 14.3322 33.233 14.2839 33.6497 14.2172V27.6655C33.6497 33.3172 30.3163 36.6672 24.6497 36.6672H12.3347C6.66634 36.6672 3.33301 33.3172 3.33301 27.6655V15.3339C3.33301 9.66721 6.66634 6.30054 12.3347 6.30054H25.7497ZM26.0847 16.4339C25.633 16.3839 25.1847 16.5839 24.9163 16.9505L20.8847 22.1672L16.2663 18.5339C15.983 18.3172 15.6497 18.2322 15.3163 18.2672C14.9847 18.3172 14.6847 18.4989 14.483 18.7655L9.55134 25.1839L9.44967 25.3339C9.16634 25.8655 9.29967 26.5489 9.79967 26.9172C10.033 27.0672 10.283 27.1672 10.5663 27.1672C10.9513 27.1839 11.3163 26.9822 11.5497 26.6672L15.733 21.2822L20.483 24.8505L20.633 24.9489C21.1663 25.2322 21.833 25.1005 22.2163 24.5989L27.033 18.3839L26.9663 18.4172C27.233 18.0505 27.283 17.5839 27.0997 17.1672C26.918 16.7505 26.5163 16.4672 26.0847 16.4339ZM32.6498 3.33337C34.8665 3.33337 36.6665 5.13337 36.6665 7.35004C36.6665 9.56671 34.8665 11.3667 32.6498 11.3667C30.4332 11.3667 28.6332 9.56671 28.6332 7.35004C28.6332 5.13337 30.4332 3.33337 32.6498 3.33337Z"
-                                    fill="#4062FF"/>
-                            </svg>
-                            <span
-                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
-                                    class="date">1 tuần</span></span>
                         </div>
                         <div class="char p-4 xl:p-10 w-full">
-                            <canvas id="bar-chart" width="800" height="315"></canvas>
+                            <canvas id="bar-chart-grouped" width="800" height="315"></canvas>
+                            <!-- <canvas id="line-chart" width="800" height="350"></canvas> -->
                         </div>
+                    </div>
+                    <div class="flex items-center gap-[5px]">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M25.7497 6.30054C25.683 6.71721 25.6497 7.13387 25.6497 7.55054C25.6497 11.3005 28.683 14.3322 32.4163 14.3322C32.833 14.3322 33.233 14.2839 33.6497 14.2172V27.6655C33.6497 33.3172 30.3163 36.6672 24.6497 36.6672H12.3347C6.66634 36.6672 3.33301 33.3172 3.33301 27.6655V15.3339C3.33301 9.66721 6.66634 6.30054 12.3347 6.30054H25.7497ZM26.0847 16.4339C25.633 16.3839 25.1847 16.5839 24.9163 16.9505L20.8847 22.1672L16.2663 18.5339C15.983 18.3172 15.6497 18.2322 15.3163 18.2672C14.9847 18.3172 14.6847 18.4989 14.483 18.7655L9.55134 25.1839L9.44967 25.3339C9.16634 25.8655 9.29967 26.5489 9.79967 26.9172C10.033 27.0672 10.283 27.1672 10.5663 27.1672C10.9513 27.1839 11.3163 26.9822 11.5497 26.6672L15.733 21.2822L20.483 24.8505L20.633 24.9489C21.1663 25.2322 21.833 25.1005 22.2163 24.5989L27.033 18.3839L26.9663 18.4172C27.233 18.0505 27.283 17.5839 27.0997 17.1672C26.918 16.7505 26.5163 16.4672 26.0847 16.4339ZM32.6498 3.33337C34.8665 3.33337 36.6665 5.13337 36.6665 7.35004C36.6665 9.56671 34.8665 11.3667 32.6498 11.3667C30.4332 11.3667 28.6332 9.56671 28.6332 7.35004C28.6332 5.13337 30.4332 3.33337 32.6498 3.33337Z"
+                                fill="#4062FF"/>
+                        </svg>
+                        <span
+                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
+                                class="date">1 tuần</span></span>
+                    </div>
+                    <div class="char p-4 xl:p-10 w-full">
+                        <canvas id="bar-chart" width="800" height="315"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 @endsection
@@ -392,12 +390,12 @@
             new Chart(document.getElementById("bar-chart-grouped"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
+                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
                     datasets: [
                         {
                             label: "Africa",
                             backgroundColor: "#3e95cd",
-                            data: ['110000', '120000', '140000', '125000', '160000', '180000', '160000', '150000', '200000', '210000', '190000', '220000',]
+                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
                         }
                     ]
                 },
@@ -421,12 +419,12 @@
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
+                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
                     datasets: [
                         {
                             label: "Population (millions)",
                             backgroundColor: "#3e95cd",
-                            data: [426, 434, 468, 523, 584, 596, 524, 612, 618, 694, 648, 688]
+                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                         }
                     ]
                 },
