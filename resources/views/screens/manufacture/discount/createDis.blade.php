@@ -68,6 +68,7 @@
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
+
                         </div>
 
                     </div>
