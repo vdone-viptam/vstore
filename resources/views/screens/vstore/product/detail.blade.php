@@ -85,7 +85,7 @@
 
                     @if($request->status == 0)
                         <button id="btnConfirm"
-                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70" >
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                             Lưu thay đổi
                         </button>
                     @endif
@@ -123,15 +123,14 @@
     })
 
     document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-        if (e.target.value < Number(document.getElementById('discount').dataset.discount) / 2) {
+        if (+e.target.value === 0 || e.target.value < Number(document.getElementById('discount').dataset.discount) / 2) {
             document.getElementById('messageDis').style.display = 'block';
             document.getElementById('btnConfirm').style.display = 'none';
         }
-        if (e.target.value > Number(document.getElementById('discount').dataset.discount)) {
+        if (+e.target.value === 0 || e.target.value > Number(document.getElementById('discount').dataset.discount)) {
             document.getElementById('messageDis').style.display = 'block';
             document.getElementById('btnConfirm').style.display = 'none';
-        }
-        else {
+        } else {
             document.getElementById('messageDis').style.display = 'none';
             document.getElementById('btnConfirm').style.display = 'block';
         }
