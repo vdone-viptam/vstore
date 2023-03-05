@@ -90,7 +90,7 @@ Danh sách tài khoản</h2>
                             <th>STT</th>
                             <th>Mã tài khoản</th>
                             <th>
-                                Họ tên
+                                Tên
                             </th>
                             <th>
                                 Email
