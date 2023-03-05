@@ -30,7 +30,7 @@ class DiscountController extends Controller
         $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
         $data = [];
         foreach ($product as $pr) {
-            if (DB::table('discounts')->where('product_id', $pr->id)->count() == 0) {
+            if (DB::table('discounts')->where('user_id', Auth::id())->where('product_id', $pr->id)->count() == 0) {
                 $data[] = $pr;
             }
         }
@@ -79,7 +79,7 @@ class DiscountController extends Controller
         $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
         $data = [];
         foreach ($product as $pr) {
-            if (DB::table('discounts')->where('product_id', $pr->id)->count() == 0) {
+            if (DB::table('discounts')->where('user_id', Auth::id())->where('product_id', $pr->id)->count() == 0) {
                 $data[] = $pr;
             }
         }
