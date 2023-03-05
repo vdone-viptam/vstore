@@ -92,7 +92,7 @@
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-
+        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
         $.ajax({
             url: '{{route('screens.vstore.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
