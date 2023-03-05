@@ -35,7 +35,7 @@
                         <span class="text-title ">{{$request->price}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium  ">Chiết khấu:</span>
+                        <span class="text-title font-medium  ">Chiết khấu cho V-Store:</span>
                         <span class="text-title" id="discount" data-discount="{{$request->discount}}">{{$request->discount}}%</span>
                     </div>
                     {{--                    <div class="grid grid-cols-2 gap-4 w-full">--}}
@@ -59,7 +59,7 @@
                          @if($request->status == 2) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
-                            <input type="number " min="" name="discount_vShop"
+                            <input type="number" min="" name="discount_vShop"
                                    @if($request->status > 0) disabled @endif
                                    value="{{$request->status > 0 ? $request->discount_vshop : ''}}"
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
