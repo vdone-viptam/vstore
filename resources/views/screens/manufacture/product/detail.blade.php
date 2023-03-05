@@ -25,7 +25,7 @@
                     <span class="text-title">{{$request->product_name}}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
-                    <span class="text-title font-medium ">Nhà cung cấp:</span>
+                    <span class="text-title font-medium ">V-Store:</span>
                     <span class="text-title">{{$request->user_name ?? ''}}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
@@ -33,11 +33,11 @@
                     <span class="text-title">{{$request->price}}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
-                    <span class="text-title font-medium ">Chiết khấu:</span>
+                    <span class="text-title font-medium ">Chiết khấu V-Store:</span>
                     <span class="text-title">{{$request->discount}}%</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
-                    <span class="text-title font-medium ">Chiết khấu:</span>
+                    <span class="text-title font-medium ">Chiết khấu V-Shop:</span>
                     <span class="text-title">{{$request->discount_vshop}}%</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
