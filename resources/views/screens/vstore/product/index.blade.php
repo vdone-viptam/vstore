@@ -115,10 +115,10 @@
                             <th class="w-[200px]">
                                 Giá bán
                             </th>
-                            <th>chiết khâu</th>
-                            <th>
-                                Chi tiết
-                            </th>
+                            <th>chiết khấu</th>
+{{--                            <th>--}}
+{{--                                Chi tiết--}}
+{{--                            </th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -147,9 +147,9 @@
                                     <td>
 
                                         {{$product->discount}}
-                                        <a href="#" data-id="{{$product->id}}"
-                                           class="more-details text-primary underline">
-                                            Chi tiết</a>
+{{--                                        <a href="#" data-id="{{$product->id}}"--}}
+{{--                                           class="more-details text-primary underline">--}}
+{{--                                            Chi tiết</a>--}}
                                     </td>
                                 </tr>
                             @endforeach

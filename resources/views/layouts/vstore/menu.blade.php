@@ -152,8 +152,7 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="new"><a class="hover:underline" href="{{Route('screens.vstore.order.new')}}">Đơn hàng
-                        mới</a></li>
+
                 <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.order.index')}}">Tất cả đơn
                         hàng</a></li>
             </ul>

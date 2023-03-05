@@ -19,13 +19,15 @@ class OrderController extends Controller
             ->where('products.user_id',Auth::id())
             ->select('products.publish_id','products.name','bill_details.code','bill_details.status','bill_product.price',
                 'bill_product.quantity','bill_details.success_day','products.price as cost_price','bill_product.vshop_id',
-                'bill_product.created_at','bill_details.success_day','products.id','products.discount','products.discount_vShop')
+                'bill_product.created_at','products.id','products.discount','products.discount_vShop')
+//            ->groupBy('bill_product.id')
+                ->orderBy('bill_product.created_at','desc')
             ->paginate($limit);
 
         //trang thái giao hàng 1 đang giao, 2 thành công ,3 hủy, đơn đang được xư lý vận chuyển chưa lấy hàng
-        $being_transported = ["200" ,"202" ,"300" ,"320", "400"];
-        $canceled = ["107", "201"];
-        $successful_delivery = ["501"];
+        $being_transported = [200 ,202 ,300 ,320, 400];
+        $canceled = [107, 201];
+        $successful_delivery = [501];
         foreach ($bills as $value){
             if (in_array($value->status,$being_transported))
             {
@@ -41,6 +43,7 @@ class OrderController extends Controller
             $discount = Discount::where('product_id',$value->id)
             ->where('start_date','<=',$value->created_at)
             ->where('end_date','>=',$value->created_at)
+                ->where('type',1)
             ->first();
             ;
             $discount_code = $discount->discount ?? 0;
