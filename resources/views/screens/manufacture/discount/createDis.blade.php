@@ -56,6 +56,7 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
                             <input type="date" name="start_date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                                   required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -63,7 +64,7 @@
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="date" name="end_date"
+                            <input type="date" name="end_date" required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -72,7 +73,8 @@
                         </div>
 
                     </div>
-                    <p class="text-red-600" id="message">Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu</p>
+                    <p class="text-red-600" id="message">Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết
+                        khấu</p>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     <button
@@ -109,8 +111,8 @@
                     document.querySelector('#discount_ncc').value = result.pro.discount + ' %'
                     document.querySelector('#buy_more').value = result.pro.buy_more + ' %'
                     document.getElementById('discount').addEventListener('keyup', (o) => {
-                        const value = o.target.value;
-                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more)) {
+                        const value = +o.target.value;
+                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                         } else {

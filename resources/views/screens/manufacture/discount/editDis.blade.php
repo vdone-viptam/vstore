@@ -52,7 +52,7 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
                             <input type="date" name="start_date" value="{{$discount->start_date}}"
-                                   min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                                   min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -61,7 +61,7 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
                             <input type="date" name="end_date" value="{{$discount->end_date}}"
-                                   min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d') }}"
+                                   min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d') }}" required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -93,9 +93,9 @@
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
     document.getElementById('discount').addEventListener('keyup', (o) => {
-        const value = o.target.value;
+        const value = +o.target.value;
 
-        if (value <=
+        if (value > 0 && value <=
             100 - Number(document.querySelector('#discount_ncc').value) + Number(document.querySelector('#buy_more').value)) {
 
             document.querySelector('.btnSubmit').removeAttribute('disabled');
@@ -122,9 +122,9 @@
                     document.querySelector('#discount_ncc').value = result.pro.discount
                     document.querySelector('#buy_more').value = result.pro.buy_more + ' %'
                     document.getElementById('discount').addEventListener('keyup', (o) => {
-                        const value = o.target.value;
+                        const value = +o.target.value;
 
-                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more)
+                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more && value > 0)
                             || document.getElementById('discount').value <= Number(result.pro.discount + result.pro.buy_more)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
