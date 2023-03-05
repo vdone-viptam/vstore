@@ -271,6 +271,7 @@
                                 </div>
                                 <span class="text-[#696984] text-xs md:text-lg">Đã bán {{$pro->amount_product_sold}}</span>
                             </div>
+
                         </div>
                     </div>
                 @endforeach

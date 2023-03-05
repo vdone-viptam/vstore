@@ -129,7 +129,7 @@ Danh sách tài khoản</h2>
                                         @endif
                                     </td>
                                     <td>
-                                        @if($user->role_id==3 && ($user->branch==1 || $user->branch==0))
+                                        @if($user->role_id==3 && $user->branch !=2 )
                                             <a class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>
