@@ -299,7 +299,7 @@
 
 
     </div>
-    <div class="text-center my-4"><input name="checkbox" required type="checkbox" readonly> Bạn đồng ý với điều khoản sử
+    <div class="text-center my-4"><input name="checkbox" required type="checkbox"> Bạn đồng ý với điều khoản sử
         dụng của
         chúng
         tôi. <a href="#"
