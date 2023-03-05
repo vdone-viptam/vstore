@@ -88,7 +88,7 @@ class ProductController extends Controller
         }
         $bill_detai=$bill_detai->paginate($limit);
         $count = count($bill_detai);
-
+//        return $bill_detai;
         return view('screens.storage.product.requestOut', compact('bill_detai','count'));
     }
 
