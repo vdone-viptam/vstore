@@ -115,7 +115,7 @@
                         const value = o.target.value;
 
                         if (value < Number(result.pro.discount + result.discount)
-                            || document.getElementById('discount').value < Number(result.pro.discount - result.discount)) {
+                            || document.getElementById('discount').value < Number(result.pro.discount + result.discount)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
