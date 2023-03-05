@@ -133,6 +133,10 @@
                                         Đã xuất
                                     @elseif($product->status == 3)
                                         Chờ duyệt
+                                    @elseif($product->status == 5 )
+                                        Từ chối nhập
+                                    @elseif($product->status == 0 )
+                                        Chờ nhập
                                     @endif
                                 </td>
                                 <td>
