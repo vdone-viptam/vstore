@@ -134,7 +134,7 @@
                                     thêm</a>
                             </div>
                             @if(count($data)>=1)
-                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
+                                <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
 
                                     @foreach($data as $a)
                                         <div class="pro flex flex-col w-full p-[4px] gap-2">
@@ -392,12 +392,12 @@
             new Chart(document.getElementById("bar-chart-grouped"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
+                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
                     datasets: [
                         {
                             label: "Africa",
                             backgroundColor: "#3e95cd",
-                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',]
+                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
                         }
                     ]
                 },
@@ -421,7 +421,7 @@
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
+                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
                     datasets: [
                         {
                             label: "Population (millions)",
