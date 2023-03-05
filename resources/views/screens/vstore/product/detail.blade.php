@@ -123,16 +123,13 @@
     })
 
     document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-        if (+e.target.value === 0 || e.target.value > Number(document.getElementById('discount').dataset.discount) / 2) {
-            document.getElementById('messageDis').style.display = 'block';
-            document.getElementById('btnConfirm').style.display = 'none';
-        }
-        if (+e.target.value === 0 || e.target.value > Number(document.getElementById('discount').dataset.discount)) {
-            document.getElementById('messageDis').style.display = 'block';
-            document.getElementById('btnConfirm').style.display = 'none';
-        } else {
+        if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value > Number(document.getElementById('discount').dataset.discount) / 2) {
             document.getElementById('messageDis').style.display = 'none';
             document.getElementById('btnConfirm').style.display = 'block';
+
+        } else {
+            document.getElementById('messageDis').style.display = 'block';
+            document.getElementById('btnConfirm').style.display = 'none';
         }
 
     })
