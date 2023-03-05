@@ -62,8 +62,8 @@
                         </div>
 
                     </div>
-                    <p class="text-red-600" id="message">Phần trăm chiết khẩu không được vượt quá của nhà cung cấp và
-                        V-Shop</p>
+                    <p class="text-red-600" id="message">Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết
+                        khấu</p>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     <button
@@ -87,7 +87,7 @@
         const value = o.target.value;
         console.log(value)
         if (document.getElementById('discount').value <
-            Number(document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value)){
+            Number(document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value)) {
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
@@ -115,7 +115,7 @@
                         const value = o.target.value;
 
                         if (value < Number(result.discount - result.discount_vShop)
-                            || document.getElementById('discount').value < Number(result.discount - result.discount_vShop)){
+                            || document.getElementById('discount').value < Number(result.discount - result.discount_vShop)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
