@@ -329,7 +329,7 @@
         </div>
 
             <div class="flex flex-col gap-[30px] my-16">
-            <h2 id="nha_cung_cap" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Nhà cung cấp</h2>
+            <h2 id="nha_cung_cap" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">V-store liên kết</h2>
                 <div class="">
                     <section>
                         <ul class="slider-cate tab-ncc  gap-3">

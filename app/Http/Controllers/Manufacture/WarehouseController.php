@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manufacture;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,7 @@ class WarehouseController extends Controller
 
     public function index()
     {
+//        return 1;
 //        $products = DB::table('warehouses')->selectRaw('name,address,phone_number,SUM(amount) as amount_product,count(product_id) as amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->groupByRaw('name,address,phone_number')->paginate(10);
 //        foreach ($products as $product) {
 //        }
@@ -72,7 +74,8 @@ class WarehouseController extends Controller
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
             ->where('warehouses.user_id', Auth::id())->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
-//        dd($ware);
+//        $ware = User::join('products','')
+//         return $ware;
         foreach ($ware as $wa) {
             $wa->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND ware_id = " . $wa->id . ") as amount FROM product_warehouses where status = 1 AND ware_id = " . $wa->id . ""))[0]->amount ?? 0;
         }
