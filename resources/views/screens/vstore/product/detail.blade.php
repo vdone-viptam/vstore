@@ -65,8 +65,8 @@
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
-                        <p class="text-red-600" style="display: none" id="messageDis">Phần trăm chiết khấu V-shop không
-                            được nhỏ hơn 50% chiết khấu
+                        <p class="text-red-600" style="display: none" id="messageDis">Phần trăm chiết khấu V-Shop không
+                            được nhỏ hơn 50% chiết khấu và chiết khấu V-Store
                             V-store</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
