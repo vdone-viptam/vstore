@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -26,9 +27,8 @@ class ProductController extends Controller
     {
 //        return 1;
         $limit = $request->limit ?? 10;
-        $this->v['products'] = Product::join('users','products.user_id','=','users.id')->join('categories','products.category_id','=','categories.id')->where('products.status',2)->where('vstore_id',Auth::id())
-        ->select('products.publish_id','products.name as name','users.name as user_name','products.price','categories.name as cate_name','products.discount as discount')
-        ;
+        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')->join('categories', 'products.category_id', '=', 'categories.id')->where('products.status', 2)->where('vstore_id', Auth::id())
+            ->select('products.publish_id', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount');
 
         if ($request->condition && $request->condition != 0) {
             $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
@@ -121,7 +121,7 @@ class ProductController extends Controller
                 'status' => 0,
                 'vstore_id' => null
             ]);
-            $deleteByMore = BuyMoreDiscount::where('product_id',$currentRequest->product_id)->delete();
+            $deleteByMore = BuyMoreDiscount::where('product_id', $currentRequest->product_id)->delete();
         }
 
         return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
@@ -165,6 +165,8 @@ class ProductController extends Controller
 
     public function storeDis(Request $request)
     {
+
+
         DB::table('discounts')->insert([
             'product_id' => $request->product_id,
             'discount' => $request->discount,
@@ -197,6 +199,8 @@ class ProductController extends Controller
 
     public function updateDis($id, Request $request)
     {
+
+
         DB::table('discounts')
             ->where('id', $id)
             ->update([

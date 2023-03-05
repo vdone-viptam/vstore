@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DiscountController extends Controller
 {
@@ -58,6 +60,7 @@ class DiscountController extends Controller
 
     public function storeDis(Request $request)
     {
+
         DB::table('discounts')->insert([
             'product_id' => $request->product_id,
             'discount' => $request->discount,
@@ -84,7 +87,7 @@ class DiscountController extends Controller
         $this->v['products'] = $data;
         $this->v['discount'] = DB::table('discounts')->select('id', 'product_id', 'start_date', 'end_date', 'start_date', 'discount')->where('id', $request->id)->first();
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
-        $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['discount']->product_id)->first();
+        $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['product1']->product_id)->first();
 
         $this->v['product1']->buy_more = $buy_more->discount ?? 0;
 
@@ -94,6 +97,7 @@ class DiscountController extends Controller
 
     public function updateDis($id, Request $request)
     {
+
         DB::table('discounts')
             ->where('id', $id)
             ->update([

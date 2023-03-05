@@ -52,13 +52,20 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
                             <input type="date" name="start_date" value="{{$discount->start_date}}"
+                                   min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-
+                            @error('start_date')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
                             <input type="date" name="end_date" value="{{$discount->end_date}}"
+                                   min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('end_date')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                     </div>
@@ -82,7 +89,9 @@
 </form>
 
 <script>
-    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+    document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
+        document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
+    });
     document.getElementById('discount').addEventListener('keyup', (o) => {
         const value = o.target.value;
 
@@ -106,7 +115,7 @@
         $.ajax({
             url: '{{route('screens.manufacture.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
-                console.log(result)
+
                 if (result) {
                     document.querySelector('#price').value = result.pro.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.discount
