@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li><a href="{{Route('screens.vstore.order.new')}}">Đơn hàng mới</a></li>
+
                         <li><a href="{{Route('screens.vstore.order.index')}}">Tất cả đơn hàng</a></li>
                     </ul>
                 </div>
@@ -267,7 +267,7 @@
                 </li>
                     </ul>
                 </div>
-           
+
                 {{--                log out--}}
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none">
                     <div class="flex items-center">

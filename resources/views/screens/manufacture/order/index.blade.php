@@ -157,7 +157,7 @@ Tất cả các đơn hàng</h2>
                             @if($value->delivery_status == 2)
                             <td class="text-green-600 font-bold whitespace-nowrap">
 
-                                Đã giao hàng
+                               thành công
                             </td>
                             @elseif($value->delivery_status == 1)
                                 <td class="text-green-600 font-bold whitespace-nowrap">
