@@ -116,10 +116,10 @@
                                 Mã yêu cầu
                             </th>
                             <th>
-                                địa chỉ
+                                Địa chỉ
                             </th>
                             <th>
-                                tổng tiền tiền
+                                Tổng tiền đơn hàng
                             </th>
                             <th>
                                 Ngày yêu cầu

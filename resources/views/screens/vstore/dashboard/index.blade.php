@@ -372,7 +372,7 @@
                                     fill="#4062FF"/>
                             </svg>
                             <span
-                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
+                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Đơn hàng trong <span
                                     class="date">1 tuần</span></span>
                         </div>
                         <div class="char p-4 xl:p-10 w-full">

@@ -214,9 +214,10 @@ class BillController extends Controller
                 $bill_product->weight = $product->weight * $value['quantity'];
                 $bill_product->save();
 
-                $bill->total +=$bill_product->price;
-                $bill_detail->total += $bill_product->price;
+
+                $bill_detail->total += $bill_product->price * $bill_product->quantity;
                 $bill_detail->weight += $bill_product->weight;
+                $bill->total += $bill_detail->total ;
                 $bill->save();
                 $bill_detail->save();
             }

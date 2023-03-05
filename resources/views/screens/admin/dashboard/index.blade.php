@@ -11,7 +11,7 @@
 @section('content')
     <div
         class="grid grid-cols-1 lg:grid-cols-12 flex flex-col items-center lg:items-start gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
-        <div class="lg:oder-1 order-2 2xl:col-span-12 lg:col-span-12 lg:pl-7 md:pt-7">
+        <div class="lg:oder-1 order-2 2xl:col-span-12 lg:col-span-12 lg:pl-7 md:pt-7 xl:px-12 px-4">
             <div class="flex flex-col justify-start items-start gap-16 md:mt-[60px]">
                 <div class="result w-full">
                     <div class="flex flex-col justify-start items-start gap-4">
@@ -165,7 +165,7 @@
 
 
         </div>
-    </div>
+
 @endsection
 @section('custom_js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
