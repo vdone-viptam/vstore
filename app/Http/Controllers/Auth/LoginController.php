@@ -193,6 +193,16 @@ class LoginController extends Controller
                     return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
                 }
             }
+            if ($role_id != 4 || $role_id != 1) {
+                $checkTax = DB::table('users')
+                    ->where('company_name', $request->company_name)
+                    ->where('role_id', $role_id)
+                    ->count();
+                if ($checkTax > 0) {
+                    return redirect()->back()->withErrors(['company_name' => 'Tên công ty đã được đăng ký.'])->withInput($request->all());
+                }
+            }
+
             $checkTax2 = DB::table('users')
                 ->where('name', $request->name)
                 ->where('role_id', $role_id)
