@@ -70,13 +70,13 @@ class UserController extends Controller
 
             } elseif ($user->role_id == 4) {
                 $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-                $number = User::where('account_code', 'like' . '%' . $user->tax_code . '%')->count();
+                $number = User::where('account_code', 'like' . '%' . $user->tax_code . '%')->where('role_id',4)->count();
                 if ($number == 0) {
-                    $ID = 'vnk' . '01' . '-' . $user->tax_code;
+                    $ID = 'vnk' . '01' . $user->tax_code;
                 } elseif ($number < 10) {
-                    $ID = 'vnk' . '0' . $number . '-' . $user->tax_code;
-                } elseif ($number > 10) {
-                    $ID = 'vnk' . $number . '-' . $user->tax_code;
+                    $ID = 'vnk' . '0' . $number  . $user->tax_code;
+                } elseif ($number >= 10) {
+                    $ID = 'vnk' . $number  . $user->tax_code;
                 }
 //                elseif ($number > 99) {
 //                    for ($i = 0; $i < count($arr); $i++) {
