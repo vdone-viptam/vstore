@@ -65,8 +65,8 @@
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
-                        <p class="text-red-600" style="display: none" id="messageDis">Phần trăm chiết khấu V-shop không
-                            được nhỏ hơn 50% chiết khấu
+                        <p class="text-red-600" style="display: none" id="messageDis">Phần trăm chiết khấu V-Shop không
+                            được nhỏ hơn 50% chiết khấu và chiết khấu V-Store
                             V-store</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
@@ -85,7 +85,7 @@
 
                     @if($request->status == 0)
                         <button id="btnConfirm"
-                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70" >
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                             Lưu thay đổi
                         </button>
                     @endif
@@ -123,17 +123,13 @@
     })
 
     document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-        if (e.target.value < Number(document.getElementById('discount').dataset.discount) / 2) {
-            document.getElementById('messageDis').style.display = 'block';
-            document.getElementById('btnConfirm').style.display = 'none';
-        }
-        if (e.target.value > Number(document.getElementById('discount').dataset.discount)) {
-            document.getElementById('messageDis').style.display = 'block';
-            document.getElementById('btnConfirm').style.display = 'none';
-        }
-        else {
+        if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value > Number(document.getElementById('discount').dataset.discount) / 2) {
             document.getElementById('messageDis').style.display = 'none';
             document.getElementById('btnConfirm').style.display = 'block';
+
+        } else {
+            document.getElementById('messageDis').style.display = 'block';
+            document.getElementById('btnConfirm').style.display = 'none';
         }
 
     })
