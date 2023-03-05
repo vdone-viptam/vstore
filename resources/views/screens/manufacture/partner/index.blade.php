@@ -132,7 +132,7 @@
                             Tên V-Store
                         </th>
                         <th>
-                            Chiết khấu (%)
+                            Chiết khấu cho V-Store(%)
                         </th>
                         <th>
                             Số lượng đã bán
@@ -142,20 +142,16 @@
                     </thead>
                     <tbody>
 
-                        @foreach($products as $value)
-                            <tr>
-                                <td>{{$value->publish_id}}</td>
-                                <td>{{$value->name}}</td>
-                                <td>{{$value->price}}</td>
-                                <td>{{$value->user_name}}</td>
-                                <td>{{$value->discount}}</td>
-                                <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
-                            </tr>
-                        @endforeach
-
-
-
-
+                    @foreach($products as $value)
+                        <tr>
+                            <td>{{$value->publish_id}}</td>
+                            <td>{{$value->name}}</td>
+                            <td>{{$value->price}}</td>
+                            <td>{{$value->user_name}}</td>
+                            <td>{{$value->discount}}</td>
+                            <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                        </tr>
+                    @endforeach
 
 
                     </tbody>
@@ -170,35 +166,41 @@
                         <option
                             {{--                            value="10" {{isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>10--}}
                             {{--                            hàng / trang--}}
-                            value="10" @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >10
+                            value="10"
+                            @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >
+                            10
                             hàng / trang
                             {{--                            {{ app('request')->input('limit') }}--}}
                         </option>
                         <option
                             {{--                            value="25" {{isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>25--}}
                             {{--                            hàng / trang--}}
-                            value="25" @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >25
+                            value="25"
+                            @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >
+                            25
                             hàng / trang
                         </option>
                         <option
-                            value="50" @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >50
+                            value="50"
+                            @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >
+                            50
                             hàng / trang
                         </option>
                     </select>
 
                 </div>
             </div>
-        <div></div>
-    </div>
-@endsection
+            <div></div>
+        </div>
+        @endsection
 
-@section('custom_js')
-    <script>
-        $('.more-details').each(function () {
-            $(this).on('click', function () {
-                // console.log(1)
-                $('.modal-details').toggleClass('show-modal');
-            });
-        })
-    </script>
+        @section('custom_js')
+            <script>
+                $('.more-details').each(function () {
+                    $(this).on('click', function () {
+                        // console.log(1)
+                        $('.modal-details').toggleClass('show-modal');
+                    });
+                })
+            </script>
 @endsection
