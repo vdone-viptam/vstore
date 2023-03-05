@@ -1,6 +1,6 @@
 @extends('layouts.vstore.main')
 
-@section('page_title','Thông tin tài khoản')
+@section('page_title','Hồ sơ của tôi')
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))

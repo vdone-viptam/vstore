@@ -5,7 +5,7 @@
 
     </div>
 @endsection
-@section('page_title','Danh sách sản phẩm')
+@section('page_title','Tất cả sản phẩm')
 
 @section('content')
 

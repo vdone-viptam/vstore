@@ -1,5 +1,5 @@
 @extends('layouts.admin.main')
-@section('page_title','Danh sách đơn cấp mã')
+@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
@@ -34,14 +34,13 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="" class="text-blueMain font-medium">Tất cả sản phẩm</a>
+            <a href="" class="text-blueMain font-medium">Quản lý yêu cầu xét duyệt sản phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0" selected="">Tất cả</option>
                     <option value="publish_id">Mã sản phẩm</option>
                     <option value="name">Tên sản phẩm</option>
                     <option value="brand">Thương hiệu</option>
@@ -93,7 +92,7 @@
                             </defs>
                         </svg>
 
-                        Quản lý yêu cầu kiểm duyệt
+                        Quản lý yêu cầu xét duyệt sản phẩm
                     </h2>
 
                 </div>

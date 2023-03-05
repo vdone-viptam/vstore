@@ -6,7 +6,7 @@
         }
     </style>
 @endsection
-@section('page_title','Dashboard')
+@section('page_title','Tổng quan')
 @section('content')
     <div
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">

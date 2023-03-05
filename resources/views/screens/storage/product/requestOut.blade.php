@@ -87,7 +87,7 @@
                             </defs>
                         </svg>
 
-                        Quản lý yêu cầu xuất kho
+                        Yêu cầu xuất kho
                     </h2>
                     {{--                    <a href="{{route('screens.manufacture.product.create')}}"--}}
                     {{--                       class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}

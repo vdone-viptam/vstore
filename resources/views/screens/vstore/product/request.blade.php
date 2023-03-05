@@ -4,12 +4,12 @@
     <div id="modal2"></div>
 @endsection
 
-@section('page_title','Danh sách đơn xét duyệt')
+@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
 
 @section('content')
     <form action="" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Hàng hóa</span>
+            <span class="text-secondary">Sản phẩm</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>

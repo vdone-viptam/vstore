@@ -70,7 +70,6 @@
                             <div
                                 class="flex flex-col justify-start items-start pb-6 border-b-[1px] border-grey w-full gap-2">
                                 <h3 class="captilize font-medium text-xl text-title">Cập nhật mã số thuế</h3>
-                                <span class="text-secondary">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
                             </div>
 
                             <div class="flex flex-col justify-center items-center pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">

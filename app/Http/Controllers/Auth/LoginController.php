@@ -214,21 +214,21 @@ class LoginController extends Controller
                 $cold_storage = $request->cold_storage ?? '';
                 $warehouse = $request->warehouse ?? '';
                 $normal_storage = $request->normal_storage ?? $request->volume;
-                $filestorage = '';
-                $filepccc = '';
+                $file = [];
                 if ($request->hasFile('image_storage')) {
-                    $file = [];
+
 
                     foreach ($request->file('image_storage') as $img) {
                         $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                        $file->move(public_path('image/users'), $filestorage);
+                        $img->move(public_path('image/users'), $filestorage);
                         $file[] = 'image/users' . $filestorage;
                     }
 
 
                 }
+                $file1 = [];
                 if ($request->hasFile('image_pccc')) {
-                    $file1 = [];
+
                     foreach ($request->file('image_pccc') as $img) {
                         $filepccc = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filepccc);

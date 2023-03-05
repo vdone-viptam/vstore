@@ -179,7 +179,7 @@
                             phẩm vào kho</a></li>
                     <li data-page="swap"><a class="hover:underline"
                                             href="{{route('screens.manufacture.warehouse.swap')}}">Quản
-                            lý xuất nhập
+                            lý xuất - nhập
                             kho</a></li>
                 </ul>
             </div>

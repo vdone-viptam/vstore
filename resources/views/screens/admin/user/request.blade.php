@@ -1,4 +1,5 @@
 @extends('layouts.admin.main')
+@section('page_title','Yêu cầu cập nhật mã số thuế')
 
 @section('content')
     <form action="" method="GET" id="form">
@@ -62,7 +63,7 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        Danh sách yêu cầu cập nhật mã số thuế
+                        Yêu cầu cập nhật mã số thuế
                     </h2>
                     <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
 

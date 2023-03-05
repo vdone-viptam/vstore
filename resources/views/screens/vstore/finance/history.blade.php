@@ -7,6 +7,16 @@
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
         <div class="col-span-12 ">
+            <div class="brc flex justify-start items-center gap-2 py-4">
+                <span class="text-secondary">Tài chính</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18"
+                          stroke="black"
+                          stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <a href="" class="text-blueMain font-medium italic">Lịch sử giao dịch</a>
+            </div>
+
             <div class="box w-full">
                 <div class="flex flex-col justify-start items-start w-full p-6">
                     <div class="flex flex-col justify-start items-start gap-1 pb-6 border-b-[1px] border-grey w-full">
@@ -34,9 +44,8 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            Lịch sử thay đổi số dư
+                            Lịch sử giao dịch
                         </h3>
-                        <span class="text-secondary text-sm">Quản lý lịch sử thay đổi số dư của bạn</span>
                     </div>
                     <div class=" pt-6 w-full md:p-6 ">
                         <div class="w-full overflow-scroll">

@@ -6,7 +6,7 @@
         }
     </style>
 @endsection
-@section('page_title','Dashboard')
+@section('page_title','Tổng quan')
 
 @section('content')
     <div

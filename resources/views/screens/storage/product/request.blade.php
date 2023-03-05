@@ -15,8 +15,7 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="" class="text-blueMain font-medium italic">Quản lý
-                yêu cầu gửi sản phẩm</a>
+            <a href="" class="text-blueMain font-medium italic">Yêu cầu gửi sản phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -67,7 +66,7 @@
                             </defs>
                         </svg>
 
-                        Quản lý yêu cầu gửi sản phẩm
+                        Yêu cầu gửi sản phẩm
                     </h2>
                     {{--                    <a href="{{route('screens.manufacture.product.create')}}"--}}
                     {{--                       class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}

@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Danh sách đơn hàng')
+@section('page_title','Tất cả đơn hàng')
 
 @section('modal')
     <form action="" id="form">

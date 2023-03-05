@@ -1,4 +1,4 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.storage.main')
 @section('page_title','Tất cả thông báo')
 
 @section('content')
