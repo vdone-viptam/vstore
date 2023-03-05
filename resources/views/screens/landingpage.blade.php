@@ -209,102 +209,33 @@
 
             </div>
             <div id="sale" class=" sales grid grid-cols-2 xl:grid-cols-4 gap-2 lg:gap-6 p-[15px] md:pt-[250px] xl:pt-[200px] py-[60px] md:px-[48px] md:my-16">
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
+                @foreach($product_super as $ps)
+                    <div class="product-item  bg-[#FFF] rounded-[20px]">
+                        <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
+                            <img src="{{asset(json_decode($ps->images)[0])}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
                         </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                        <div class=" p-[10px] md:p-[20px]">
+                            <div class="flex flex-col">
+                                <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">{{$ps->name}}</h2>
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                </fieldset>
                             </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center gap-1 md:gap-2 flex-wrap">
+                                    <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{$ps->gia_khuyen_mai}}</span>
+                                    <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{$ps->price}}</span>
+                                </div>
+                                <span class="text-[#696984] text-xs md:text-lg">{{$ps->amount_product_sold}}</span>
                             </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
                         </div>
                     </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item  bg-[#FFF] rounded-[20px]">
-                    <div class="w-full h-[114px] md:h-[242px] rounded-tl-[20px] rounded-tr-[20px]">
-                        <img src="{{asset('landingpage/images/bn2.jpg')}}" class="w-full rounded-tl-[20px] rounded-tr-[20px] " alt="">
-                    </div>
-                    <div class=" p-[10px] md:p-[20px]">
-                        <div class="flex flex-col">
-                            <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                                <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ 20.000</span>
-                                <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ 20.000</span>
-                            </div>
-                           <span class="text-[#696984] text-xs md:text-lg">Đã bán 426</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
             <div class="flex flex-col gap-[30px]">
             <h2 id="noi_bat" class="text-[#258AFF] text-xl lg:text-4xl font-semibold uppercase">Sản phẩm nổi bật</h2>

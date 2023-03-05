@@ -71,7 +71,7 @@ class LoginController extends Controller
         if ($request->role_id == 3) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required|unique:users',
+                'name' => 'required',
                 'company_name' => 'required',
                 'tax_code' => 'required',
                 'address' => 'required',
@@ -85,7 +85,6 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà phân phối bắt buộc nhập',
-                'name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -97,8 +96,8 @@ class LoginController extends Controller
         } elseif ($request->role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required|unique:users',
-                'company_name' => 'required||unique:users',
+                'name' => 'required',
+                'company_name' => 'required',
                 'tax_code' => 'required|max:255',
                 'address' => 'required|max:255',
                 'phone_number' => 'required|max:255',
@@ -118,8 +117,6 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
-                'name.unique' => 'Tên kho đã tồn tại',
-                'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -138,7 +135,7 @@ class LoginController extends Controller
         } elseif ($request->role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required|unique:users',
+                'name' => 'required',
                 'company_name' => 'required|unique:users',
                 'tax_code' => 'required',
                 'address' => 'required',
@@ -151,7 +148,6 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
-                'name.unique' => 'Tên nhà cung cấp đã tồn tại',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
@@ -162,6 +158,7 @@ class LoginController extends Controller
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
         }
+
         try {
             if ($validator->fails()) {
 
@@ -264,7 +261,8 @@ class LoginController extends Controller
             }
 //            return 1
         } catch (\Exception $e) {
-//            dd($e->getMessage());
+            return $e->getMessage();
+//            dd();
             DB::rollBack();
             return redirect()->back()->with('error', 'true');
 

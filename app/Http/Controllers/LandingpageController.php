@@ -52,12 +52,24 @@ class LandingpageController extends Controller
             ->groupBy('products.vstore_id')
             ->select('users.name','users.avatar')
             ->get();
-//         $vstore;
 
-//return $products;
-//    return $category;
-//        return $user;
-        return view('screens.landingpage', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','vstore'));
+        $product_super= Product::join('discounts','products.id','=','discounts.product_id')
+            ->where('products.user_id',$user->id)
+            ->where('discounts.start_date','<=',Carbon::now())
+            ->where('discounts.end_date','>=',Carbon::now())
+            ->groupBy('products.id')
+            ->paginate(4)
+        ;
+        foreach ($product_super as $ps){
+            $sum = Discount::where('product_id',$ps->id)
+                ->where('discounts.start_date','<=',Carbon::now())
+                ->where('discounts.end_date','>=',Carbon::now())
+                ->sum('discount');
+            $ps->gia_khuyen_mai = $ps->price - ($ps->price/100 * $sum);
+//            return $sum;
+
+        }
+        return view('screens.landingpage', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','vstore','product_super'));
 //        return view('screens.landingpage',compact('logo','banner'));
     }
 
@@ -122,9 +134,24 @@ class LandingpageController extends Controller
             ->get();
 //         $vstore;
 
-        $product_super= Product::join('discounts','products.id','=','discounts.product_id');
+        $product_super= Product::join('discounts','products.id','=','discounts.product_id')
+        ->where('products.vstore_id',$user->id)
+            ->where('discounts.start_date','<=',Carbon::now())
+            ->where('discounts.end_date','>=',Carbon::now())
+            ->groupBy('products.id')
+            ->paginate(4)
+        ;
+        foreach ($product_super as $ps){
+            $sum = Discount::where('product_id',$ps->id)
+                ->where('discounts.start_date','<=',Carbon::now())
+                ->where('discounts.end_date','>=',Carbon::now())
+                ->sum('discount');
+            $ps->gia_khuyen_mai = $ps->price - ($ps->price/100 * $sum);
+//            return $sum;
 
-        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','ncc'));
+        }
+//        return $product_super;
+        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','ncc','product_super'));
 //        return view('screens.landingpage',compact('logo','banner'));
 
     }
