@@ -96,7 +96,7 @@ class UserController extends Controller
             $user->confirm_date = Carbon::now();
             $user->expiration_date = Carbon::now()->addDays(365);
             $user->save();
-            return $user;
+
             if ($user->role_id == 4) {
                 $warehouses = new Warehouses();
                 $warehouses->name = $user->name;

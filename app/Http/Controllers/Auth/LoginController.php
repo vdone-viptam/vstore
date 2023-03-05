@@ -68,7 +68,21 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
-        if ($request->role_id == 3) {
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
+
+        if ($role_id == 3) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
@@ -93,7 +107,7 @@ class LoginController extends Controller
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
-        } elseif ($request->role_id == 4) {
+        } elseif ($role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
@@ -106,9 +120,6 @@ class LoginController extends Controller
                 'volume' => 'required',
                 'image_storage' => 'required',
                 'image_pccc' => 'required',
-                'length' => 'required',
-                'with' => 'required',
-                'height' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required'
 
@@ -122,17 +133,14 @@ class LoginController extends Controller
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-                'floor_area.required' => 'trường này không được trống',
-                'volume.required' => 'trường này không được trống',
-                'image_storage.required' => 'trường này không được trống',
-                'image_pccc.required' => 'trường này không được trống',
-                'length.required' => 'trường này không được trống',
-                'with.required' => 'trường này không được trống',
-                'height.required' => 'trường này không được trống',
+                'floor_area.required' => 'Diện tích kho bắt buộc nhập',
+                'volume.required' => 'Thể tích kho bắt buộc nhập',
+                'image_storage.required' => 'Ảnh kho bắt buộc nhập',
+                'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
-        } elseif ($request->role_id == 2) {
+        } elseif ($role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
@@ -168,34 +176,22 @@ class LoginController extends Controller
 
 
             DB::beginTransaction();
-            $domain = $request->getHttpHost();
-            if ($domain == config('domain.admin')) {
-                $role_id = 1;
-            }
-            if ($domain == config('domain.ncc')) {
-                $role_id = 2;
-            }
-            if ($domain == config('domain.vstore')) {
-                $role_id = 3;
-            }
-            if ($domain == config('domain.storage')) {
-                $role_id = 4;
-            }
             $checkEmail = DB::table('users')
                 ->where('email', $request->email)
-                ->where('role_id', $request->role_id)
+                ->where('role_id', $role_id)
                 ->count();
 
             if ($checkEmail > 0) {
                 return redirect()->back()->withErrors(['email' => 'Email đã được đăng ký.'])->withInput($request->all());
             }
-
-            $checkTax = DB::table('users')
-                ->where('tax_code', $request->tax_code)
-                ->where('role_id', $role_id)
-                ->count();
-            if ($checkTax > 0) {
-                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
+            if ($role_id != 4) {
+                $checkTax = DB::table('users')
+                    ->where('tax_code', $request->tax_code)
+                    ->where('role_id', $role_id)
+                    ->count();
+                if ($checkTax > 0) {
+                    return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
+                }
             }
             $user = new User();
             $user->name = $request->name;
@@ -221,22 +217,29 @@ class LoginController extends Controller
                 $filestorage = '';
                 $filepccc = '';
                 if ($request->hasFile('image_storage')) {
-                    $file = $request->file('image_storage');
-                    $filestorage = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('image/users'), $filestorage);
+                    $file = [];
+
+                    foreach ($request->file('image_storage') as $img) {
+                        $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                        $file->move(public_path('image/users'), $filestorage);
+                        $file[] = 'image/users' . $filestorage;
+                    }
+
 
                 }
                 if ($request->hasFile('image_pccc')) {
-                    $file = $request->file('image_pccc');
-                    $filepccc = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('image/users'), $filepccc);
-
+                    $file1 = [];
+                    foreach ($request->file('image_pccc') as $img) {
+                        $filepccc = date('YmdHi') . $img->getClientOriginalName();
+                        $img->move(public_path('image/users'), $filepccc);
+                        $file1[] = 'image/users' . $filepccc;
+                    }
                 }
                 $storage_information = [
                     'floor_area' => $request->floor_area,
                     'volume' => $request->volume,
-                    'image_storage' => 'image/users' . $filestorage,
-                    'image_pccc' => 'image/users' . $filepccc,
+                    'image_storage' => json_encode($file),
+                    'image_pccc' => json_encode($file1),
                     'cold_storage' => $cold_storage,
                     'warehouse' => $warehouse,
                     'normal_storage' => $normal_storage,
@@ -261,10 +264,8 @@ class LoginController extends Controller
             }
 //            return 1
         } catch (\Exception $e) {
-            return $e->getMessage();
-//            dd();
             DB::rollBack();
-            return redirect()->back()->with('error', 'true');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
 
         }
 
@@ -320,6 +321,7 @@ class LoginController extends Controller
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 
@@ -413,7 +415,7 @@ class LoginController extends Controller
             abort(404);
         }
 
-        return view('auth.formReset',['role_id' => $role_id]);
+        return view('auth.formReset', ['role_id' => $role_id]);
     }
 
     public function postResetForgot(Request $request, $token)
