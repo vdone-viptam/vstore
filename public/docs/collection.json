@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "9be8d00f-b804-4858-af47-d30333ff8a2b",
+        "_postman_id": "5af65aa1-994f-471c-a0ab-dcdcc9e4ea6e",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_id\":\"rerum\",\"name\":\"commodi\",\"phone_number\":\"voluptatem\",\"address\":\"quia\",\"specific_address\":\"vel\",\"data\":\"commodi\"}"
+                            "raw": "{\"id_pdone\":\"at\",\"name\":\"voluptates\",\"phone_number\":\"aliquid\",\"address\":\"commodi\",\"province\":57,\"data\":\"qui\",\"district\":69,\"id_vshop\":\"molestias\"}"
                         },
                         "description": "API d\u00f9ng \u0111\u1ec3 t\u1ea1o h\u00f3a \u0111\u01a1n",
                         "auth": {
@@ -51,7 +51,7 @@
                     "response": []
                 },
                 {
-                    "name": "GET api\/bill\/detail\/{id}",
+                    "name": "chi ti\u1ebft h\u00f3a \u0111\u01a1n",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -62,7 +62,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ducimus",
+                                    "value": "veniam",
                                     "description": "The ID of the detail."
                                 }
                             ]
@@ -79,7 +79,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 chi ti\u1ebft 1 h\u00f3a \u0111\u01a1n",
                         "auth": {
                             "type": "noauth"
                         }
@@ -101,7 +101,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "52"
+                                    "value": "50"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
@@ -126,7 +126,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "39",
+                                    "value": "1",
                                     "description": "The ID of the bill."
                                 }
                             ]
@@ -165,15 +165,15 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "51"
+                                    "value": "49"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
                                     "value": "*"
                                 }
                             ],
-                            "code": 200,
-                            "body": "{\"status_code\":200,\"message\":\"get list of successful invoices\",\"data\":[]}",
+                            "code": 500,
+                            "body": "{\n    \"message\": \"SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause' (SQL: select * from `bills` where `user_id` = 1)\",\n    \"exception\": \"Illuminate\\\\Database\\\\QueryException\",\n    \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Connection.php\",\n    \"line\": 760,\n    \"trace\": [\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Connection.php\",\n            \"line\": 720,\n            \"function\": \"runQueryCallback\",\n            \"class\": \"Illuminate\\\\Database\\\\Connection\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Connection.php\",\n            \"line\": 422,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Database\\\\Connection\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Query\\\\Builder.php\",\n            \"line\": 2706,\n            \"function\": \"select\",\n            \"class\": \"Illuminate\\\\Database\\\\Connection\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Query\\\\Builder.php\",\n            \"line\": 2694,\n            \"function\": \"runSelect\",\n            \"class\": \"Illuminate\\\\Database\\\\Query\\\\Builder\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Query\\\\Builder.php\",\n            \"line\": 3230,\n            \"function\": \"Illuminate\\\\Database\\\\Query\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Database\\\\Query\\\\Builder\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Query\\\\Builder.php\",\n            \"line\": 2695,\n            \"function\": \"onceWithColumns\",\n            \"class\": \"Illuminate\\\\Database\\\\Query\\\\Builder\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Eloquent\\\\Builder.php\",\n            \"line\": 710,\n            \"function\": \"get\",\n            \"class\": \"Illuminate\\\\Database\\\\Query\\\\Builder\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Database\\\\Eloquent\\\\Builder.php\",\n            \"line\": 694,\n            \"function\": \"getModels\",\n            \"class\": \"Illuminate\\\\Database\\\\Eloquent\\\\Builder\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\BillController.php\",\n            \"line\": 39,\n            \"function\": \"get\",\n            \"class\": \"Illuminate\\\\Database\\\\Eloquent\\\\Builder\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Controller.php\",\n            \"line\": 54,\n            \"function\": \"index\",\n            \"class\": \"App\\\\Http\\\\Controllers\\\\Api\\\\BillController\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\ControllerDispatcher.php\",\n            \"line\": 43,\n            \"function\": \"callAction\",\n            \"class\": \"Illuminate\\\\Routing\\\\Controller\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Route.php\",\n            \"line\": 260,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\ControllerDispatcher\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Route.php\",\n            \"line\": 205,\n            \"function\": \"runController\",\n            \"class\": \"Illuminate\\\\Routing\\\\Route\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 798,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Routing\\\\Route\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Routing\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings.php\",\n            \"line\": 50,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 126,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 102,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 54,\n            \"function\": \"handleRequestUsingNamedLimiter\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 799,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 776,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 740,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 729,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 190,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Foundation\\\\Http\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings.php\",\n            \"line\": 40,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance.php\",\n            \"line\": 86,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\TrustProxies.php\",\n            \"line\": 39,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 165,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 134,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 299,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 287,\n            \"function\": \"callLaravelOrLumenRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 92,\n            \"function\": \"makeApiCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 45,\n            \"function\": \"makeResponseCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 35,\n            \"function\": \"makeResponseCallIfConditionsPass\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 209,\n            \"function\": \"__invoke\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 166,\n            \"function\": \"iterateThroughStrategies\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 95,\n            \"function\": \"fetchResponses\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 124,\n            \"function\": \"processRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 71,\n            \"function\": \"extractEndpointsInfoFromLaravelApp\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 49,\n            \"function\": \"extractEndpointsInfoAndWriteToDisk\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Commands\\\\GenerateDocumentation.php\",\n            \"line\": 51,\n            \"function\": \"get\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 36,\n            \"function\": \"handle\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Commands\\\\GenerateDocumentation\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Util.php\",\n            \"line\": 41,\n            \"function\": \"Illuminate\\\\Container\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 93,\n            \"function\": \"unwrapIfClosure\",\n            \"class\": \"Illuminate\\\\Container\\\\Util\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 37,\n            \"function\": \"callBoundMethod\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php\",\n            \"line\": 661,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Command.php\",\n            \"line\": 183,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\Container\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Command\\\\Command.php\",\n            \"line\": 312,\n            \"function\": \"execute\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Command.php\",\n            \"line\": 153,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Command\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 1022,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 314,\n            \"function\": \"doRunCommand\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 168,\n            \"function\": \"doRun\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Application.php\",\n            \"line\": 102,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Console\\\\Kernel.php\",\n            \"line\": 155,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\artisan\",\n            \"line\": 37,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Console\\\\Kernel\",\n            \"type\": \"->\"\n        }\n    ]\n}",
                             "name": ""
                         }
                     ]
@@ -189,15 +189,15 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/cart\/:id",
+                            "path": "api\/cart\/:pdone_id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/cart\/:id",
+                            "raw": "{{baseUrl}}\/api\/cart\/:pdone_id",
                             "variable": [
                                 {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "6",
-                                    "description": "The ID of the cart."
+                                    "id": "pdone_id",
+                                    "key": "pdone_id",
+                                    "value": "20",
+                                    "description": "The ID of the pdone."
                                 }
                             ]
                         },
@@ -243,7 +243,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"message\":\"product saved successfully\",\"data\":[]}",
+                            "body": "{\"status_code\":200,\"data\":[]}",
                             "name": ""
                         }
                     ]
@@ -260,14 +260,8 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "molestiae",
+                                    "value": "consequatur",
                                     "description": "The ID of the add."
-                                },
-                                {
-                                    "id": "quantity",
-                                    "key": "quantity",
-                                    "value": "qui",
-                                    "description": "s\u00f3 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m kh\u00f4ng c\u00f3 m\u1eb7c \u0111\u1ecbnh l\u00e0 1"
                                 }
                             ]
                         },
@@ -284,7 +278,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_id\":\"molestiae\"}"
+                            "raw": "{\"pdone_id\":\"rerum\",\"quantity\":\"accusantium\",\"vshop_id\":\"a\"}"
                         },
                         "description": "API d\u00f9ng \u0111\u1ec3 th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng",
                         "auth": {
@@ -298,15 +292,57 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/cart\/remove\/:id",
+                            "path": "api\/cart\/remove\/:cart_id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/cart\/remove\/:id",
+                            "raw": "{{baseUrl}}\/api\/cart\/remove\/:cart_id",
                             "variable": [
                                 {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "enim",
-                                    "description": "The ID of the remove."
+                                    "id": "cart_id",
+                                    "key": "cart_id",
+                                    "value": "ullam",
+                                    "description": "The ID of the cart."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API d\u00f9ng \u0111\u1ec3 x\u00f3a s\u1ea3n ph\u1ea9m kh\u1ecfi gi\u1ecf h\u00e0ng",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Cart quantity",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/add-quantity\/:cart_id\/:type",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart\/add-quantity\/:cart_id\/:type",
+                            "variable": [
+                                {
+                                    "id": "cart_id",
+                                    "key": "cart_id",
+                                    "value": "ab",
+                                    "description": "The ID of the cart."
+                                },
+                                {
+                                    "id": "type",
+                                    "key": "type",
+                                    "value": "nemo",
+                                    "description": ""
                                 }
                             ]
                         },
@@ -321,11 +357,8 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"user_id\":\"nihil\"}"
-                        },
-                        "description": "API d\u00f9ng \u0111\u1ec3 x\u00f3a s\u1ea3n ph\u1ea9m kh\u1ecfi gi\u1ecf h\u00e0ng",
+                        "body": null,
+                        "description": "API d\u00f9ng \u0111\u1ec3 t\u0103ng gi\u1ea3m 1 \u0111\u01a1n v\u1ecb s\u1ea3n ph\u1ea9m trong gi\u1ecf h\u00e0ng",
                         "auth": {
                             "type": "noauth"
                         }
@@ -333,15 +366,439 @@
                     "response": []
                 },
                 {
-                    "name": "Cart quantity",
+                    "name": "L\u1ea5y banner \u1edf trang ch\u1ee7",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/cart\/quantity\/$id",
+                            "path": "api\/banners\/get-banner",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/cart\/quantity\/$id"
+                            "raw": "{{baseUrl}}\/api\/banners\/get-banner"
                         },
-                        "method": "POST",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API d\u00f9ng \u0111\u1ec3 l\u1ea5y \u1ea3nh banner",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "51"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":\"http:\\\/\\\/localhost\\\/image\\\/banners\\\/202302280824z4144487384401_e7bbf4534854b22b37712fe0bf9dfbde.jpg\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Categories",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan t\u1edbi danh m\u1ee5c",
+            "item": [
+                {
+                    "name": "Danh s\u00e1ch danh m\u1ee5c",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category",
+                            "variable": [
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "at",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "non",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang M\u1eb7c \u0111\u1ecbnh 48"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 danh s\u00e1ch danh m\u1ee5c",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "48"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":1,\"name\":\"Th\\u1eddi trang n\\u1eef\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":2,\"name\":\"Th\\u1eddi trang nam\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":3,\"name\":\"S\\u1eafc \\u0111\\u1eb9p\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":4,\"name\":\"S\\u1ee9c kh\\u1ecfe\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":5,\"name\":\"Ph\\u1ee5 ki\\u1ec7n th\\u1eddi trang\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":6,\"name\":\"Thi\\u1ebft b\\u1ecb \\u0111i\\u1ec7n gia d\\u1ee5ng\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":7,\"name\":\"Gi\\u00e0y d\\u00e9p nam\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":8,\"name\":\"\\u0110i\\u1ec7n tho\\u1ea1i & ph\\u1ee5 ki\\u1ec7n\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":9,\"name\":\"Du l\\u1ecbch & H\\u00e0nh l\\u00fd\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":10,\"name\":\"T\\u00fai v\\u00ed n\\u1eef\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":11,\"name\":\"T\\u00fai v\\u00ed nam\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":12,\"name\":\"\\u0110\\u1ed3ng h\\u1ed3\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":13,\"name\":\"Thi\\u1ebft b\\u1ecb \\u00e2m thanh\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":14,\"name\":\"Th\\u1ef1c ph\\u1ea7m v\\u00e0 \\u0111\\u1ed3 u\\u1ed1ng\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":15,\"name\":\"Ch\\u0103m s\\u00f3c th\\u00fa c\\u01b0ng\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":16,\"name\":\"M\\u1eb9 & B\\u00e9\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":17,\"name\":\"Th\\u1eddi trang tr\\u1ebb em & tr\\u1ebb s\\u01a1 sinh\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":18,\"name\":\"Gaming & Console\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":19,\"name\":\"Cameras & Flycam\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":20,\"name\":\"Nh\\u00e0 c\\u1eeda & \\u0110\\u1eddi s\\u1ed1ng\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":21,\"name\":\"Th\\u1ec3 Thao & D\\u00e3 Ngo\\u1ea1i\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":22,\"name\":\"V\\u0103n Ph\\u00f2ng Ph\\u1ea9m\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":23,\"name\":\"\\u00d4 t\\u00f4\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":24,\"name\":\"M\\u00f4 t\\u00f4, xe m\\u00e1y\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":25,\"name\":\"S\\u00e1ch\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":26,\"name\":\"M\\u00e1y t\\u00ednh & Laptop\",\"img\":\"http:\\\/\\\/localhost\\\/\"},{\"id\":27,\"name\":\"B\\u1ea5t \\u0111\\u1ed9ng s\\u1ea3n\",\"img\":\"http:\\\/\\\/localhost\\\/\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\",\"per_page\":48,\"prev_page_url\":null,\"to\":27,\"total\":27}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch danh m\u1ee5c theo V-Store",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/get-category-by-vstore\/:vstore_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/get-category-by-vstore\/:vstore_id",
+                            "variable": [
+                                {
+                                    "id": "vstore_id",
+                                    "key": "vstore_id",
+                                    "value": "id",
+                                    "description": "The ID of the vstore."
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "iusto",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi  M\u1eb7c \u0111\u1ecbnh 100"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 danh s\u00e1ch danh m\u1ee5c",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "47"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":200,\"data\":[]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch s\u1ea3n ph\u1ea9m theo danh m\u1ee5c",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/get-product-by-category\/:category_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/get-product-by-category\/:category_id",
+                            "variable": [
+                                {
+                                    "id": "category_id",
+                                    "key": "category_id",
+                                    "value": "laboriosam",
+                                    "description": "The ID of the category."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "id",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "consequatur",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang M\u1eb7c \u0111\u1ecbnh 8"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 danh s\u00e1ch s\u1ea3n ph\u1ea9m",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "46"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\\\/get-product-by-category\\\/laboriosam?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\\\/get-product-by-category\\\/laboriosam?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\\\/get-product-by-category\\\/laboriosam?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\\\/get-product-by-category\\\/laboriosam\",\"per_page\":8,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch vstore theo danh m\u1ee5c",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/get-vstore-by-category\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/get-vstore-by-category\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "sed",
+                                    "description": "The ID of the get vstore by category."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "perspiciatis",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "qui",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang M\u1eb7c \u0111\u1ecbnh 10"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 danh s\u00e1ch vstore theo danh mucj",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "45"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":400,\"message\":\"kh\\u00f4ng t\\u00ecm th\\u1ea5y\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "chi ti\u1ebft danh m\u1ee5c",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 chi ti\u1ebft danh m\u1ee5c",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "44"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"id\":1,\"name\":\"Th\\u1eddi trang n\\u1eef\",\"parent_id\":null,\"img\":null,\"slug\":null,\"status\":1,\"created_at\":\"2023-02-26T02:41:19.000000Z\",\"updated_at\":null}}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Discount",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan t\u1edbi m\u00e3 gi\u1ea3m gi\u00e1",
+            "item": [
+                {
+                    "name": "Bill",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/discount\/get-discount",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/discount\/get-discount"
+                        },
+                        "method": "GET",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -354,14 +811,106 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_id\":\"odio\",\"quantity\":\"in\"}"
+                            "raw": "{\"id\":\"similique\",\"total\":\"iste\"}"
                         },
-                        "description": "API d\u00f9ng \u0111\u1ec3 t\u0103ng gi\u1ea3m s\u1ed1 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m trong gi\u1ecf h\u00e0ng",
+                        "description": "API d\u00f9ng tr\u1ea3 v\u1ec1 % gi\u1ea3m gi\u00e1 d\u1ef1a tr\u00ean s\u1ed1 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m V-Shop l\u1ea5y h\u00e0ng s\u1eb5n",
                         "auth": {
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "35"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":401,\"error\":{\"id\":[\"The selected id is invalid.\"],\"total\":[\"S\\u1ed1 l\\u01b0\\u1ee3ng s\\u1ea3n ph\\u1ea9m ph\\u1ea3i l\\u00e0 s\\u1ed1\"]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Bill",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/discount\/available-discount\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/discount\/available-discount\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "aliquam",
+                                    "description": "id s\u1ea3n ph\u1ea9m"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API d\u00f9ng tr\u1ea3 v\u1ec1 % gi\u1ea3m gi\u00e1 d\u1ef1a tr\u00ean s\u1ed1 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "34"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "[]",
+                            "name": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -418,13 +967,69 @@
                     ]
                 },
                 {
-                    "name": "GET api\/category",
+                    "name": "GET api\/test",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/category",
+                            "path": "api\/test",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/category"
+                            "raw": "{{baseUrl}}\/api\/test"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "content-type",
+                                    "value": "text\/html; charset=UTF-8"
+                                },
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "33"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "1",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/get-city",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/get-city",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/get-city"
                         },
                         "method": "GET",
                         "header": [
@@ -460,7 +1065,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "50"
+                                    "value": "32"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
@@ -468,31 +1073,37 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":1,\"name\":\"Qu\\u1ea7n \\u00e1o c\\u1eadp nh\\u1eadt\",\"parent_id\":0,\"created_at\":\"2023-01-08T04:25:33.000000Z\",\"updated_at\":\"2023-01-08T04:40:46.000000Z\",\"img\":\"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"quan-ao-cap-nhat\",\"status\":1},{\"id\":2,\"name\":\"\\u00c1o d\\u00e0i\",\"parent_id\":0,\"created_at\":\"2023-01-08T04:25:33.000000Z\",\"updated_at\":\"2023-01-08T04:40:46.000000Z\",\"img\":\"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":null,\"status\":1},{\"id\":5,\"name\":\"Qu\\u1ea7n \\u0111\\u00f9i \\u00e1o c\\u1ed9c\",\"parent_id\":1,\"created_at\":\"2023-01-08T04:25:33.000000Z\",\"updated_at\":\"2023-01-08T04:44:56.000000Z\",\"img\":\"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"quan-dui-ao-coc\",\"status\":0},{\"id\":6,\"name\":\"platinum update\",\"parent_id\":5,\"created_at\":\"2023-01-08T05:19:06.000000Z\",\"updated_at\":\"2023-01-08T05:19:06.000000Z\",\"img\":\"202301080519Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"platinum-update\",\"status\":1},{\"id\":7,\"name\":\"java sc\",\"parent_id\":6,\"created_at\":\"2023-01-08T05:19:58.000000Z\",\"updated_at\":\"2023-01-08T05:19:58.000000Z\",\"img\":\"202301080519Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif\",\"slug\":\"java-sc\",\"status\":1},{\"id\":8,\"name\":\"H\\u00e0 N\\u1ed9i\",\"parent_id\":7,\"created_at\":\"2023-02-05T04:19:34.000000Z\",\"updated_at\":\"2023-02-05T04:19:34.000000Z\",\"img\":\"image\\\/category\\\/202302050419aab7f4065358e0a635b3bd5266a0c319.jpg\",\"slug\":\"ha-noi\",\"status\":1}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/category\",\"per_page\":10,\"prev_page_url\":null,\"to\":6,\"total\":6}}",
+                            "body": "[{\"PROVINCE_ID\":1,\"PROVINCE_CODE\":\"HNI\",\"PROVINCE_NAME\":\"H\\u00e0 N\\u1ed9i\"},{\"PROVINCE_ID\":2,\"PROVINCE_CODE\":\"HCM\",\"PROVINCE_NAME\":\"H\\u1ed3 Ch\\u00ed Minh\"},{\"PROVINCE_ID\":3,\"PROVINCE_CODE\":\"HPG\",\"PROVINCE_NAME\":\"H\\u1ea3i Ph\\u00f2ng\"},{\"PROVINCE_ID\":4,\"PROVINCE_CODE\":\"DNG\",\"PROVINCE_NAME\":\"\\u0110\\u00e0 N\\u1eb5ng\"},{\"PROVINCE_ID\":5,\"PROVINCE_CODE\":\"CTO\",\"PROVINCE_NAME\":\"C\\u1ea7n Th\\u01a1\"},{\"PROVINCE_ID\":6,\"PROVINCE_CODE\":\"TGG\",\"PROVINCE_NAME\":\"Ti\\u1ec1n Giang\"},{\"PROVINCE_ID\":8,\"PROVINCE_CODE\":\"HUG\",\"PROVINCE_NAME\":\"H\\u1eadu Giang\"},{\"PROVINCE_ID\":9,\"PROVINCE_CODE\":\"DKG\",\"PROVINCE_NAME\":\"\\u0110\\u0103k N\\u00f4ng\"},{\"PROVINCE_ID\":10,\"PROVINCE_CODE\":\"VPC\",\"PROVINCE_NAME\":\"V\\u0129nh Ph\\u00fac\"},{\"PROVINCE_ID\":11,\"PROVINCE_CODE\":\"BNH\",\"PROVINCE_NAME\":\"B\\u1eafc Ninh\"},{\"PROVINCE_ID\":12,\"PROVINCE_CODE\":\"HDG\",\"PROVINCE_NAME\":\"H\\u1ea3i D\\u01b0\\u01a1ng\"},{\"PROVINCE_ID\":13,\"PROVINCE_CODE\":\"HYN\",\"PROVINCE_NAME\":\"H\\u01b0ng Y\\u00ean\"},{\"PROVINCE_ID\":14,\"PROVINCE_CODE\":\"HNM\",\"PROVINCE_NAME\":\"H\\u00e0 Nam\"},{\"PROVINCE_ID\":15,\"PROVINCE_CODE\":\"NDH\",\"PROVINCE_NAME\":\"Nam \\u00d0\\u1ecbnh\"},{\"PROVINCE_ID\":16,\"PROVINCE_CODE\":\"TBH\",\"PROVINCE_NAME\":\"Th\\u00e1i B\\u00ecnh\"},{\"PROVINCE_ID\":17,\"PROVINCE_CODE\":\"NBH\",\"PROVINCE_NAME\":\"Ninh B\\u00ecnh\"},{\"PROVINCE_ID\":18,\"PROVINCE_CODE\":\"HGG\",\"PROVINCE_NAME\":\"H\\u00e0 Giang\"},{\"PROVINCE_ID\":19,\"PROVINCE_CODE\":\"CBG\",\"PROVINCE_NAME\":\"Cao B\\u1eb1ng\"},{\"PROVINCE_ID\":20,\"PROVINCE_CODE\":\"LCI\",\"PROVINCE_NAME\":\"L\\u00e0o Cai\"},{\"PROVINCE_ID\":21,\"PROVINCE_CODE\":\"BKN\",\"PROVINCE_NAME\":\"B\\u1eafc K\\u1ea1n\"},{\"PROVINCE_ID\":22,\"PROVINCE_CODE\":\"LSN\",\"PROVINCE_NAME\":\"L\\u1ea1ng S\\u01a1n\"},{\"PROVINCE_ID\":23,\"PROVINCE_CODE\":\"TQG\",\"PROVINCE_NAME\":\"Tuy\\u00ean Quang\"},{\"PROVINCE_ID\":24,\"PROVINCE_CODE\":\"YBN\",\"PROVINCE_NAME\":\"Y\\u00ean B\\u00e1i\"},{\"PROVINCE_ID\":25,\"PROVINCE_CODE\":\"TNN\",\"PROVINCE_NAME\":\"Th\\u00e1i Nguy\\u00ean\"},{\"PROVINCE_ID\":26,\"PROVINCE_CODE\":\"PHO\",\"PROVINCE_NAME\":\"Ph\\u00fa Th\\u1ecd\"},{\"PROVINCE_ID\":27,\"PROVINCE_CODE\":\"BGG\",\"PROVINCE_NAME\":\"B\\u1eafc Giang\"},{\"PROVINCE_ID\":28,\"PROVINCE_CODE\":\"QNH\",\"PROVINCE_NAME\":\"Qu\\u1ea3ng Ninh\"},{\"PROVINCE_ID\":29,\"PROVINCE_CODE\":\"LCU\",\"PROVINCE_NAME\":\"Lai Ch\\u00e2u\"},{\"PROVINCE_ID\":30,\"PROVINCE_CODE\":\"SLA\",\"PROVINCE_NAME\":\"S\\u01a1n La\"},{\"PROVINCE_ID\":31,\"PROVINCE_CODE\":\"HBH\",\"PROVINCE_NAME\":\"H\\u00f2a B\\u00ecnh\"},{\"PROVINCE_ID\":32,\"PROVINCE_CODE\":\"THA\",\"PROVINCE_NAME\":\"Thanh H\\u00f3a\"},{\"PROVINCE_ID\":33,\"PROVINCE_CODE\":\"NAN\",\"PROVINCE_NAME\":\"Ngh\\u1ec7 An\"},{\"PROVINCE_ID\":34,\"PROVINCE_CODE\":\"HTH\",\"PROVINCE_NAME\":\"H\\u00e0 T\\u0129nh\"},{\"PROVINCE_ID\":35,\"PROVINCE_CODE\":\"QBH\",\"PROVINCE_NAME\":\"Qu\\u1ea3ng B\\u00ecnh\"},{\"PROVINCE_ID\":36,\"PROVINCE_CODE\":\"QTI\",\"PROVINCE_NAME\":\"Qu\\u1ea3ng Tr\\u1ecb\"},{\"PROVINCE_ID\":37,\"PROVINCE_CODE\":\"HUE\",\"PROVINCE_NAME\":\"Th\\u1eeba Thi\\u00ean - Hu\\u1ebf\"},{\"PROVINCE_ID\":38,\"PROVINCE_CODE\":\"QNM\",\"PROVINCE_NAME\":\"Qu\\u1ea3ng Nam\"},{\"PROVINCE_ID\":39,\"PROVINCE_CODE\":\"QNI\",\"PROVINCE_NAME\":\"Qu\\u1ea3ng Ng\\u00e3i\"},{\"PROVINCE_ID\":40,\"PROVINCE_CODE\":\"BDH\",\"PROVINCE_NAME\":\"B\\u00ecnh \\u00d0\\u1ecbnh\"},{\"PROVINCE_ID\":41,\"PROVINCE_CODE\":\"PYN\",\"PROVINCE_NAME\":\"Ph\\u00fa Y\\u00ean\"},{\"PROVINCE_ID\":42,\"PROVINCE_CODE\":\"KHA\",\"PROVINCE_NAME\":\"Kh\\u00e1nh H\\u00f2a\"},{\"PROVINCE_ID\":43,\"PROVINCE_CODE\":\"KTM\",\"PROVINCE_NAME\":\"Kon Tum\"},{\"PROVINCE_ID\":44,\"PROVINCE_CODE\":\"GLI\",\"PROVINCE_NAME\":\"Gia Lai\"},{\"PROVINCE_ID\":45,\"PROVINCE_CODE\":\"DLK\",\"PROVINCE_NAME\":\"\\u0110\\u0103k L\\u0103k\"},{\"PROVINCE_ID\":46,\"PROVINCE_CODE\":\"LDG\",\"PROVINCE_NAME\":\"L\\u00e2m \\u00d0\\u1ed3ng\"},{\"PROVINCE_ID\":47,\"PROVINCE_CODE\":\"NTN\",\"PROVINCE_NAME\":\"Ninh Thu\\u1eadn\"},{\"PROVINCE_ID\":48,\"PROVINCE_CODE\":\"BPC\",\"PROVINCE_NAME\":\"B\\u00ecnh Ph\\u01b0\\u1edbc\"},{\"PROVINCE_ID\":49,\"PROVINCE_CODE\":\"TNH\",\"PROVINCE_NAME\":\"T\\u00e2y Ninh\"},{\"PROVINCE_ID\":50,\"PROVINCE_CODE\":\"BDG\",\"PROVINCE_NAME\":\"B\\u00ecnh D\\u01b0\\u01a1ng\"},{\"PROVINCE_ID\":51,\"PROVINCE_CODE\":\"DNI\",\"PROVINCE_NAME\":\"\\u0110\\u1ed3ng Nai\"},{\"PROVINCE_ID\":52,\"PROVINCE_CODE\":\"BTN\",\"PROVINCE_NAME\":\"B\\u00ecnh Thu\\u1eadn\"},{\"PROVINCE_ID\":53,\"PROVINCE_CODE\":\"VTU\",\"PROVINCE_NAME\":\"B\\u00e0 r\\u1ecba - V\\u0169ng t\\u00e0u\"},{\"PROVINCE_ID\":54,\"PROVINCE_CODE\":\"LAN\",\"PROVINCE_NAME\":\"Long An\"},{\"PROVINCE_ID\":55,\"PROVINCE_CODE\":\"DTP\",\"PROVINCE_NAME\":\"\\u0110\\u1ed3ng Th\\u00e1p\"},{\"PROVINCE_ID\":56,\"PROVINCE_CODE\":\"AGG\",\"PROVINCE_NAME\":\"An Giang\"},{\"PROVINCE_ID\":57,\"PROVINCE_CODE\":\"VLG\",\"PROVINCE_NAME\":\"V\\u0129nh Long\"},{\"PROVINCE_ID\":58,\"PROVINCE_CODE\":\"BTE\",\"PROVINCE_NAME\":\"B\\u1ebfn Tre\"},{\"PROVINCE_ID\":59,\"PROVINCE_CODE\":\"KGG\",\"PROVINCE_NAME\":\"Ki\\u00ean Giang\"},{\"PROVINCE_ID\":60,\"PROVINCE_CODE\":\"TVH\",\"PROVINCE_NAME\":\"Tr\\u00e0 Vinh\"},{\"PROVINCE_ID\":61,\"PROVINCE_CODE\":\"STG\",\"PROVINCE_NAME\":\"S\\u00f3c Tr\\u0103ng\"},{\"PROVINCE_ID\":62,\"PROVINCE_CODE\":\"BLU\",\"PROVINCE_NAME\":\"B\\u1ea1c Li\\u00eau\"},{\"PROVINCE_ID\":63,\"PROVINCE_CODE\":\"CMU\",\"PROVINCE_NAME\":\"C\\u00e0 Mau\"},{\"PROVINCE_ID\":64,\"PROVINCE_CODE\":\"DBN\",\"PROVINCE_NAME\":\"\\u0110i\\u1ec7n Bi\\u00ean\"}]",
                             "name": ""
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "name": "Manufacture",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan nh\u00e0 cung c\u1ea5p",
+            "item": [
                 {
                     "name": "Danh s\u00e1ch nh\u00e0 cung c\u1ea5p",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/manufacture",
+                            "path": "api\/manufactures\/get-list",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/manufacture",
+                            "raw": "{{baseUrl}}\/api\/manufactures\/get-list",
                             "variable": [
                                 {
                                     "id": "page",
                                     "key": "page",
-                                    "value": "ut",
+                                    "value": "fuga",
                                     "description": "S\u1ed1 trang"
                                 },
                                 {
                                     "id": "limit",
                                     "key": "limit",
-                                    "value": "aut",
-                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                    "value": "rerum",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang | M\u1eb7c \u0111\u1ecbnh 100 b\u1ea3n ghi"
                                 }
                             ]
                         },
@@ -530,7 +1141,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "49"
+                                    "value": "43"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
@@ -538,31 +1149,25 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":2,\"name\":\"Hello word 132123\",\"email\":\"phungtheanh2001@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-10T07:00:28.000000Z\",\"updated_at\":\"2023-01-11T14:00:04.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"\",\"status\":null,\"confirm_date\":\"2023-01-10 07:05:33\",\"role_id\":2,\"account_code\":\"911234428248\",\"avatar\":\"202301110842Screenshot (19).png\",\"banner\":\"202301110841Screenshot (24).png\",\"slug\":null},{\"id\":10,\"name\":\"anhndph\",\"email\":\"anhndph12795@fpt.edu.vn\",\"email_verified_at\":null,\"created_at\":\"2023-02-02T06:39:55.000000Z\",\"updated_at\":\"2023-02-02T06:40:48.000000Z\",\"id_vdone\":\"0813635888\",\"company_name\":\"anhndph\",\"phone_number\":\"0813635888\",\"tax_code\":\"0918809999\",\"address\":\"65 kh\\u00fac th\\u1eeba d\\u1ee5\",\"id_vdone_diff\":\"0813635888\",\"status\":null,\"confirm_date\":\"2023-02-02 06:40:48\",\"role_id\":2,\"account_code\":\"vnncczmyikGJ\",\"avatar\":null,\"banner\":null,\"slug\":\"anhndph\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufacture\",\"per_page\":10,\"prev_page_url\":null,\"to\":2,\"total\":2}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":8,\"name\":\"nhacungcap\",\"avatar\":\"http:\\\/\\\/localhost\\\/image\\\/Rectangle 44.png\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufactures\\\/get-list?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufactures\\\/get-list?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufactures\\\/get-list?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/manufactures\\\/get-list\",\"per_page\":100,\"prev_page_url\":null,\"to\":1,\"total\":1}}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "Danh s\u00e1ch nh\u00e0 vstore",
+                    "name": "chi ti\u1ebft nh\u00e0 cung c\u1ea5p",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/vstore",
+                            "path": "api\/manufactures\/profile\/:ncc_id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/vstore",
+                            "raw": "{{baseUrl}}\/api\/manufactures\/profile\/:ncc_id",
                             "variable": [
                                 {
-                                    "id": "page",
-                                    "key": "page",
-                                    "value": "optio",
-                                    "description": "S\u1ed1 trang"
-                                },
-                                {
-                                    "id": "limit",
-                                    "key": "limit",
-                                    "value": "dolor",
-                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                    "id": "ncc_id",
+                                    "key": "ncc_id",
+                                    "value": "voluptate",
+                                    "description": "The ID of the ncc."
                                 }
                             ]
                         },
@@ -578,7 +1183,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u00e1ch vstore",
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 th\u00f4ng tin nh\u00e0 cung c\u1ea5p",
                         "auth": {
                             "type": "noauth"
                         }
@@ -600,15 +1205,15 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "48"
+                                    "value": "42"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
                                     "value": "*"
                                 }
                             ],
-                            "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":3,\"name\":\"Admin 11\",\"email\":\"phongngo03255@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T02:31:11.000000Z\",\"updated_at\":\"2023-01-20T17:24:30.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Aneed\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"\",\"status\":null,\"confirm_date\":\"2023-01-11 02:32:02\",\"role_id\":3,\"account_code\":\"376265803836\",\"avatar\":\"202301201724pasted image 0.png\",\"banner\":\"202301111400Screenshot (21).png\",\"slug\":null},{\"id\":4,\"name\":\"platinum update\",\"email\":\"naruto2003v@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T14:03:42.000000Z\",\"updated_at\":\"2023-01-11T14:06:11.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"1111\",\"status\":null,\"confirm_date\":\"2023-01-11 14:06:11\",\"role_id\":3,\"account_code\":\"881400726222\",\"avatar\":null,\"banner\":null,\"slug\":null},{\"id\":5,\"name\":\"platinum update\",\"email\":\"admin1@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T14:04:27.000000Z\",\"updated_at\":\"2023-02-05T02:26:49.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"1111\",\"status\":null,\"confirm_date\":\"2023-02-05 02:26:49\",\"role_id\":3,\"account_code\":\"vnnppTFDVfrw\",\"avatar\":null,\"banner\":null,\"slug\":null},{\"id\":6,\"name\":\"platinum update\",\"email\":\"naruto20031v@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-11T14:05:30.000000Z\",\"updated_at\":\"2023-01-11T14:06:02.000000Z\",\"id_vdone\":\"123123\",\"company_name\":\"Sao V\\u00e0ng\",\"phone_number\":\"0325500080\",\"tax_code\":\"123123\",\"address\":\"H\\u00e0 N\\u1ed9i\",\"id_vdone_diff\":\"1111\",\"status\":null,\"confirm_date\":\"2023-01-11 14:06:02\",\"role_id\":3,\"account_code\":\"752989806851\",\"avatar\":null,\"banner\":null,\"slug\":null},{\"id\":8,\"name\":\"warehousess\",\"email\":\"ducanhng2813@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-13T03:37:49.000000Z\",\"updated_at\":\"2023-02-05T03:03:39.000000Z\",\"id_vdone\":\"0813635868\",\"company_name\":\"warehousess\",\"phone_number\":\"0813635868\",\"tax_code\":\"121212121\",\"address\":\"warehousess\",\"id_vdone_diff\":\"0813635868\",\"status\":null,\"confirm_date\":\"2023-01-13 03:40:34\",\"role_id\":3,\"account_code\":\"511744732139\",\"avatar\":\"202301201903pasted image 0.png\",\"banner\":\"202301201913Banner.jpg\",\"slug\":\"duc-anh21\"},{\"id\":9,\"name\":\"duc anh23\",\"email\":\"ducanh123@gmail.com\",\"email_verified_at\":null,\"created_at\":\"2023-01-20T17:45:34.000000Z\",\"updated_at\":\"2023-01-20T17:45:34.000000Z\",\"id_vdone\":\"1212121\",\"company_name\":\"duc anh23\",\"phone_number\":\"0813635868\",\"tax_code\":\"12\",\"address\":\"1212\",\"id_vdone_diff\":\"12121212\",\"status\":null,\"confirm_date\":\"2023-01-20 01:55:31\",\"role_id\":3,\"account_code\":\"511744732138\",\"avatar\":\"image 0.png\",\"banner\":null,\"slug\":\"duc-anh23\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\",\"per_page\":10,\"prev_page_url\":null,\"to\":6,\"total\":6}}",
+                            "code": 500,
+                            "body": "{\n    \"message\": \"Call to a member function products() on null\",\n    \"exception\": \"Error\",\n    \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\ManufactureController.php\",\n    \"line\": 62,\n    \"trace\": [\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Controller.php\",\n            \"line\": 54,\n            \"function\": \"profileNCC\",\n            \"class\": \"App\\\\Http\\\\Controllers\\\\Api\\\\ManufactureController\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\ControllerDispatcher.php\",\n            \"line\": 43,\n            \"function\": \"callAction\",\n            \"class\": \"Illuminate\\\\Routing\\\\Controller\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Route.php\",\n            \"line\": 260,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\ControllerDispatcher\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Route.php\",\n            \"line\": 205,\n            \"function\": \"runController\",\n            \"class\": \"Illuminate\\\\Routing\\\\Route\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 798,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Routing\\\\Route\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Routing\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings.php\",\n            \"line\": 50,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 126,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 102,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 54,\n            \"function\": \"handleRequestUsingNamedLimiter\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 799,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 776,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 740,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 729,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 190,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Foundation\\\\Http\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings.php\",\n            \"line\": 40,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance.php\",\n            \"line\": 86,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\TrustProxies.php\",\n            \"line\": 39,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 165,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 134,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 299,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 287,\n            \"function\": \"callLaravelOrLumenRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 92,\n            \"function\": \"makeApiCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 45,\n            \"function\": \"makeResponseCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 35,\n            \"function\": \"makeResponseCallIfConditionsPass\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 209,\n            \"function\": \"__invoke\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 166,\n            \"function\": \"iterateThroughStrategies\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 95,\n            \"function\": \"fetchResponses\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 124,\n            \"function\": \"processRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 71,\n            \"function\": \"extractEndpointsInfoFromLaravelApp\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 49,\n            \"function\": \"extractEndpointsInfoAndWriteToDisk\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Commands\\\\GenerateDocumentation.php\",\n            \"line\": 51,\n            \"function\": \"get\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 36,\n            \"function\": \"handle\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Commands\\\\GenerateDocumentation\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Util.php\",\n            \"line\": 41,\n            \"function\": \"Illuminate\\\\Container\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 93,\n            \"function\": \"unwrapIfClosure\",\n            \"class\": \"Illuminate\\\\Container\\\\Util\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 37,\n            \"function\": \"callBoundMethod\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php\",\n            \"line\": 661,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Command.php\",\n            \"line\": 183,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\Container\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Command\\\\Command.php\",\n            \"line\": 312,\n            \"function\": \"execute\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Command.php\",\n            \"line\": 153,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Command\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 1022,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 314,\n            \"function\": \"doRunCommand\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 168,\n            \"function\": \"doRun\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Application.php\",\n            \"line\": 102,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Console\\\\Kernel.php\",\n            \"line\": 155,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\artisan\",\n            \"line\": 37,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Console\\\\Kernel\",\n            \"type\": \"->\"\n        }\n    ]\n}",
                             "name": ""
                         }
                     ]
@@ -631,19 +1236,43 @@
                                 {
                                     "id": "page",
                                     "key": "page",
-                                    "value": "sed",
+                                    "value": "impedit",
                                     "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "category_id",
+                                    "key": "category_id",
+                                    "value": "tenetur",
+                                    "description": "id danh m\u1ee5c s\u1ea3n ph\u1ea9m"
+                                },
+                                {
+                                    "id": "order_by",
+                                    "key": "order_by",
+                                    "value": "voluptatem",
+                                    "description": "| 1 S\u1eafp x\u1ebfp m\u1edbi nh\u1ea5t | 2 S\u1eafp x\u1ebfp theo gi\u00e1 | 3 S\u1ed1 s\u1ea3n ph\u1ea9m \u0111\u00e3 b\u00e1n"
+                                },
+                                {
+                                    "id": "option",
+                                    "key": "option",
+                                    "value": "sit",
+                                    "description": "1 asc | 2 desc"
                                 },
                                 {
                                     "id": "limit",
                                     "key": "limit",
-                                    "value": "consequuntur",
-                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                    "value": "temporibus",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang M\u1eb7c \u0111\u1ecbnh 10"
+                                },
+                                {
+                                    "id": "payment",
+                                    "key": "payment",
+                                    "value": "eum",
+                                    "description": "Ph\u01b0\u01a1ng th\u1ee9c thanh to\u00e1n 1 COD | 2 Chuy\u1ec3n kho\u1ea3n"
                                 },
                                 {
                                     "id": "publish_id",
                                     "key": "publish_id",
-                                    "value": "temporibus",
+                                    "value": "harum",
                                     "description": "m\u00e3 s\u1ea3n ph\u1ea9m"
                                 }
                             ]
@@ -690,13 +1319,13 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":8,\"publish_id\":\"8864577\",\"discount\":12,\"name\":\"ducanh\",\"category_id\":7,\"description\":\"ducanh\",\"images\":\"[\\\"img2023011208593499266800.png\\\"]\",\"brand\":\"ducanh\",\"weight\":12,\"length\":12,\"height\":21,\"packing_type\":2,\"volume\":12,\"manufacturer_name\":\"ducanh\",\"manufacturer_address\":\"ducanh\",\"import_unit\":\"ducanh\",\"import_address\":\"ducanh\",\"price\":12,\"min_product_sale\":null,\"prepay\":1,\"payment_on_delivery\":1,\"status\":2,\"admin_confirm_date\":\"2023-01-12 09:53:52\",\"vstore_confirm_date\":\"0000-00-00 00:00:00\",\"amount_product_send_to_discount\":12,\"vstore_id\":8,\"user_id\":2,\"origin\":\"ducanh\",\"with\":12,\"percent_discount\":12,\"sku_id\":null,\"created_at\":\"2023-01-12T08:59:34.000000Z\",\"updated_at\":\"2023-01-12T09:53:52.000000Z\",\"note\":null,\"amount_product\":null,\"import_date\":null,\"code\":null,\"discount_vShop\":null,\"unit\":null,\"unit_name\":null,\"unit_images\":null,\"video\":null},{\"id\":17,\"publish_id\":\"17621675\",\"discount\":12,\"name\":\"112\",\"category_id\":7,\"description\":\"112\",\"images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023020502590006972500.jpeg\\\"]\",\"brand\":\"112\",\"weight\":112,\"length\":112,\"height\":112,\"packing_type\":2,\"volume\":112,\"manufacturer_name\":\"112\",\"manufacturer_address\":\"112\",\"import_unit\":\"112\",\"import_address\":\"112\",\"price\":112,\"min_product_sale\":null,\"prepay\":1,\"payment_on_delivery\":1,\"status\":2,\"admin_confirm_date\":\"2023-02-05 03:21:47\",\"vstore_confirm_date\":\"2023-02-05 03:13:58\",\"amount_product_send_to_discount\":null,\"vstore_id\":6,\"user_id\":2,\"origin\":\"112\",\"with\":112,\"percent_discount\":null,\"sku_id\":12313,\"created_at\":\"2023-02-05T02:59:00.000000Z\",\"updated_at\":\"2023-02-05T03:21:47.000000Z\",\"note\":null,\"amount_product\":\"123\",\"import_date\":\"2023-02-06 09:58:00\",\"code\":\"54869081\",\"discount_vShop\":6,\"unit\":1,\"unit_name\":\"112\",\"unit_images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023020502590008873500.jpeg\\\"]\",\"video\":\"storage\\\/products\\\/8971482296780430562_1675565939.mp4\"},{\"id\":18,\"publish_id\":\"17621676\",\"discount\":17621676,\"name\":\"17621676\",\"category_id\":7,\"description\":\"17621676\",\"images\":\"\",\"brand\":\"17621676\",\"weight\":0,\"length\":null,\"height\":null,\"packing_type\":null,\"volume\":null,\"manufacturer_name\":null,\"manufacturer_address\":null,\"import_unit\":null,\"import_address\":null,\"price\":null,\"min_product_sale\":null,\"prepay\":null,\"payment_on_delivery\":null,\"status\":2,\"admin_confirm_date\":null,\"vstore_confirm_date\":null,\"amount_product_send_to_discount\":null,\"vstore_id\":6,\"user_id\":1,\"origin\":null,\"with\":null,\"percent_discount\":null,\"sku_id\":null,\"created_at\":null,\"updated_at\":null,\"note\":null,\"amount_product\":null,\"import_date\":null,\"code\":null,\"discount_vShop\":null,\"unit\":null,\"unit_name\":null,\"unit_images\":null,\"video\":null}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\",\"per_page\":10,\"prev_page_url\":null,\"to\":3,\"total\":3}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[{\"id\":1,\"name\":\"s\\u1ea3n ph\\u1ea9m\",\"publish_id\":\"VN  - aMyIBmBE1F\",\"images\":\"http:\\\/\\\/localhost\\\/storage\\\/products\\\/img2023022602592770906700.jpeg\",\"price\":100000,\"discount_vstore\":5,\"price_discount\":95000,\"available_discount\":10},{\"id\":2,\"name\":\"s\\u1ea3n ph\\u1ea9m 1\",\"publish_id\":\"VN  - GKrmNxHaoC\",\"images\":\"http:\\\/\\\/localhost\\\/storage\\\/products\\\/img2023022603230435375000.jpeg\",\"price\":100000,\"discount_vstore\":5,\"price_discount\":95000,\"available_discount\":10},{\"id\":3,\"name\":\"s\\u1ea3n ph\\u1ea9m 2\",\"publish_id\":\"VN  - 3dlHYROO27\",\"images\":\"http:\\\/\\\/localhost\\\/storage\\\/products\\\/img2023030103010863736800.jpeg\",\"price\":12,\"discount_vstore\":5,\"price_discount\":11.4,\"available_discount\":10},{\"id\":4,\"name\":\"S\\u1ea3n ph\\u1ea9m test\",\"publish_id\":\"VN  - IbiFP7YGGk\",\"images\":\"http:\\\/\\\/localhost\\\/storage\\\/products\\\/img2023030106261919958900.png\",\"price\":120000,\"discount_vstore\":5,\"price_discount\":114000,\"available_discount\":10}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\",\"per_page\":10,\"prev_page_url\":null,\"to\":4,\"total\":4}}",
                             "name": ""
                         }
                     ]
                 },
                 {
-                    "name": "GET api\/product\/product-by-category\/{id}",
+                    "name": "Danh s\u00e1ch s\u1ea3n ph\u1ea9m theo danh m\u1ee5c",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -707,8 +1336,20 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "exercitationem",
+                                    "value": "in",
                                     "description": "The ID of the product by category."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "consequuntur",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "libero",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
                                 }
                             ]
                         },
@@ -724,7 +1365,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u1ea3n ph\u1ea9m theo danh m\u1ee5c",
                         "auth": {
                             "type": "noauth"
                         }
@@ -754,7 +1395,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/exercitationem\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/in?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/in?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/in?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-category\\\/in\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
@@ -771,26 +1412,56 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eius",
+                                    "value": "nobis",
                                     "description": "The ID of the product by vstore."
                                 },
                                 {
                                     "id": "page",
                                     "key": "page",
-                                    "value": "ducimus",
+                                    "value": "blanditiis",
                                     "description": "S\u1ed1 trang"
                                 },
                                 {
                                     "id": "limit",
                                     "key": "limit",
-                                    "value": "facere",
+                                    "value": "sapiente",
                                     "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
                                 },
                                 {
                                     "id": "publish_id",
                                     "key": "publish_id",
-                                    "value": "vero",
-                                    "description": "m\u00e3 s\u1ea3n ph\u1ea9m"
+                                    "value": "aspernatur",
+                                    "description": "t\u00ecm ki\u1ebfm theo m\u00e3 s\u1ea3n ph\u1ea9m m\u00e3 s\u1ea3n ph\u1ea9m"
+                                },
+                                {
+                                    "id": "category_id",
+                                    "key": "category_id",
+                                    "value": "consequatur",
+                                    "description": "t\u00ecm ki\u1ebfm theo danh m\u1ee5c"
+                                },
+                                {
+                                    "id": "order_by_price",
+                                    "key": "order_by_price",
+                                    "value": "sit",
+                                    "description": "s\u1eafp x\u1ebfp theo gi\u00e1"
+                                },
+                                {
+                                    "id": "order_by_id",
+                                    "key": "order_by_id",
+                                    "value": "voluptas",
+                                    "description": "s\u1eafp x\u1ebfp theo id"
+                                },
+                                {
+                                    "id": "order_by_sold",
+                                    "key": "order_by_sold",
+                                    "value": "consequuntur",
+                                    "description": "s\u1eafp x\u1ebfp theo sl \u0111\u00e3 b\u00e1n"
+                                },
+                                {
+                                    "id": "payments",
+                                    "key": "payments",
+                                    "value": "dolorum",
+                                    "description": "s\u1eafp x\u1ebfp theo h\u00ecnh th\u1ee9c thanh to\u00e1n 1 l\u00e0 COD 2 l\u00e0 tr\u1ea3 tr\u01b0\u1edbc"
                                 }
                             ]
                         },
@@ -836,7 +1507,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/eius\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/nobis?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/nobis?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/nobis?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-vstore\\\/nobis\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
@@ -853,26 +1524,56 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "maiores",
+                                    "value": "rem",
                                     "description": "The ID of the product by ncc."
                                 },
                                 {
                                     "id": "page",
                                     "key": "page",
-                                    "value": "minus",
+                                    "value": "magnam",
                                     "description": "S\u1ed1 trang"
                                 },
                                 {
                                     "id": "limit",
                                     "key": "limit",
-                                    "value": "ex",
+                                    "value": "voluptatem",
                                     "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
                                 },
                                 {
                                     "id": "publish_id",
                                     "key": "publish_id",
-                                    "value": "iusto",
-                                    "description": "m\u00e3 s\u1ea3n ph\u1ea9m"
+                                    "value": "quia",
+                                    "description": "t\u00ecm ki\u1ebfm theo m\u00e3 s\u1ea3n ph\u1ea9m m\u00e3 s\u1ea3n ph\u1ea9m"
+                                },
+                                {
+                                    "id": "category_id",
+                                    "key": "category_id",
+                                    "value": "eaque",
+                                    "description": "t\u00ecm ki\u1ebfm theo danh m\u1ee5c"
+                                },
+                                {
+                                    "id": "order_by_price",
+                                    "key": "order_by_price",
+                                    "value": "sit",
+                                    "description": "s\u1eafp x\u1ebfp theo gi\u00e1"
+                                },
+                                {
+                                    "id": "order_by_id",
+                                    "key": "order_by_id",
+                                    "value": "fugit",
+                                    "description": "s\u1eafp x\u1ebfp theo id"
+                                },
+                                {
+                                    "id": "order_by_sold",
+                                    "key": "order_by_sold",
+                                    "value": "praesentium",
+                                    "description": "s\u1eafp x\u1ebfp theo sl \u0111\u00e3 b\u00e1n"
+                                },
+                                {
+                                    "id": "payments",
+                                    "key": "payments",
+                                    "value": "nihil",
+                                    "description": "s\u1eafp x\u1ebfp theo h\u00ecnh th\u1ee9c thanh to\u00e1n 1 l\u00e0 COD 2 l\u00e0 tr\u1ea3 tr\u01b0\u1edbc"
                                 }
                             ]
                         },
@@ -918,7 +1619,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/maiores\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/rem?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/rem?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/rem?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/product-by-ncc\\\/rem\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]
@@ -935,20 +1636,8 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "adipisci",
+                                    "value": "exercitationem",
                                     "description": "The ID of the vshop pickup."
-                                },
-                                {
-                                    "id": "page",
-                                    "key": "page",
-                                    "value": "aut",
-                                    "description": "S\u1ed1 trang"
-                                },
-                                {
-                                    "id": "limit",
-                                    "key": "limit",
-                                    "value": "doloremque",
-                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
                                 }
                             ]
                         },
@@ -965,9 +1654,48 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id_pdone\":\"libero\"}"
+                            "raw": "{\"id_pdone\":\"dolor\"}"
                         },
                         "description": "API d\u00f9ng \u0111\u1ec3 Vshop th\u00eam s\u1ea3n ph\u1ea9m",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Vshop Nh\u1eadp h\u00e0ng s\u1eb5n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product\/vshop-ready-stock\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product\/vshop-ready-stock\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "sapiente",
+                                    "description": "The ID of the vshop ready stock."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id_pdone\":\"aspernatur\",\"amount\":\"nulla\"}"
+                        },
+                        "description": "API d\u00f9ng \u0111\u1ec3 Vshop nh\u1eadp h\u00e0ng s\u1eb5n",
                         "auth": {
                             "type": "noauth"
                         }
@@ -979,15 +1707,21 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/product\/ \/:id",
+                            "path": "api\/product\/vshop\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/product\/ \/:id",
+                            "raw": "{{baseUrl}}\/api\/product\/vshop\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
-                                    "description": "The ID of the  ."
+                                    "value": "1",
+                                    "description": "The ID of the vshop."
+                                },
+                                {
+                                    "id": "orderBy",
+                                    "key": "orderBy",
+                                    "value": "beatae",
+                                    "description": "id M\u1edbi nh\u1ea5t | amount_product_sold B\u00e1n ch\u1ea1y | price Gi\u00e1\nurlParam type  asc|desc M\u1eb7c \u0111\u1ecbnh asc"
                                 }
                             ]
                         },
@@ -1033,7 +1767,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"message\":\"product saved successfully\",\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/ \\\/voluptatem\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "body": "{\"data\":{\"info\":{\"total_product\":0,\"categories\":\"\"},\"products\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/vshop\\\/1?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/vshop\\\/1?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/vshop\\\/1?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product\\\/vshop\\\/1\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}}",
                             "name": ""
                         }
                     ]
@@ -1050,7 +1784,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "6",
+                                    "value": "1",
                                     "description": "The ID of the product."
                                 }
                             ]
@@ -1096,8 +1830,615 @@
                                     "value": "*"
                                 }
                             ],
-                            "code": 400,
-                            "body": "{\"status_code\":400,\"data\":\"No product found or unapproved product\"}",
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"publish_id\":\"VN  - aMyIBmBE1F\",\"id\":1,\"name\":\"s\\u1ea3n ph\\u1ea9m\",\"images\":\"[\\\"storage\\\\\\\/products\\\\\\\/img2023022602592770906700.jpeg\\\"]\",\"price\":100000,\"discount_vShop\":5,\"video\":\"storage\\\/products\\\/8971482296780430562_1677380367 . mp4\",\"products_available\":\"200\"}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch s\u1ea3n ph\u1ea9m gi\u1ea3m gi\u00e1 si\u00eau t\u1ed1c",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product-sales",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product-sales",
+                            "variable": [
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "totam",
+                                    "description": "S\u1ed1 l\u01b0\u1ee3ng b\u1ea3n ghi 1 trang M\u1eb7c \u0111\u1ecbnh 12"
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "quidem",
+                                    "description": "Trang hi\u1ec7n t\u1ea1i hi\u1ec3n th\u1ecb"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API d\u00f9ng \u0111\u1ec3 l\u1ea5y danh s\u00e1ch s\u1ea3n ph\u1ea9m gi\u1ea3m gi\u00e1 si\u00eau t\u1ed1c",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "52"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":200,\"data\":{\"current_page\":1,\"data\":[{\"name\":\"s\\u1ea3n ph\\u1ea9m\",\"publish_id\":\"VN  - aMyIBmBE1F\",\"price\":100000,\"id\":1,\"sum_discount\":10,\"image\":\"http:\\\/\\\/localhost\\\/storage\\\/products\\\/img2023022602592770906700.jpeg\"}],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product-sales?page=1\",\"from\":1,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product-sales?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product-sales?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/product-sales\",\"per_page\":12,\"prev_page_url\":null,\"to\":1,\"total\":1}}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Vshop",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan V-shop",
+            "item": [
+                {
+                    "name": "GET api\/vshop",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vshop",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vshop"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "38"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"message\":\"L\\u1ea5y th\\u00f4ng tin th\\u00e0nh c\\u00f4ng\",\"data\":[{\"id\":1,\"id_pdone\":\"pdone123\",\"name\":\"\",\"name_adress\":null,\"address\":0,\"phone_number\":\"\",\"district\":null,\"province\":null,\"lat\":\"\",\"long\":null,\"products_sold\":null,\"created_at\":\"2023-02-28T17:49:10.000000Z\",\"updated_at\":\"2023-02-28T17:49:10.000000Z\"}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/vshop\/get-discount",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vshop\/get-discount",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vshop\/get-discount"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"et\",\"total\":550.38809949}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "37"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":401,\"error\":{\"id\":[\"The selected id is invalid.\"]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "L\u01b0u m\u1edbi m\u00e3 gi\u1ea3m gi\u00e1",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vshop\/create-discount",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vshop\/create-discount",
+                            "variable": [
+                                {
+                                    "id": "discount",
+                                    "key": "discount",
+                                    "value": "10",
+                                    "description": "Ph\u1ea7n tr\u0103m gi\u1ea3m gi\u00e1 required max:discount_vShop"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id_pdone\":\"quas\",\"product_id\":\"quia\",\"start_date\":\"iste\",\"end_date\":\"dolorem\",\"discount\":\"ywbp\"}"
+                        },
+                        "description": "API n\u00e0y s\u1ebd l\u01b0u m\u1edbi m\u00e3 gi\u1ea3m gi\u00e1",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/vshop\/address\/store",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vshop\/address\/store",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vshop\/address\/store"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id_pdone\":\"ocqtqprzuvnouihaftav\",\"name\":\"jynkgj\",\"address\":\"nubcidhjgqnkiwpixfvqb\",\"phone_number\":\"hburvjizqngffetsgcuogirm\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET api\/vshop\/address\/edit-address\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vshop\/address\/edit-address\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vshop\/address\/edit-address\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "perspiciatis",
+                                    "description": "The ID of the edit address."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "36"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":null}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PUT api\/vshop\/address\/update-address\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vshop\/address\/update-address\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vshop\/address\/update-address\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "aut",
+                                    "description": "The ID of the update address."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"vbvxgkpymibtvpwse\",\"address\":\"uyfcqllmcctagrvsngt\",\"phone_number\":\"rygtv\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Vstore",
+            "description": "\nDanh s\u00e1ch api li\u00ean quan nh\u00e0 ph\u00e2n ph\u1ed1i vstore",
+            "item": [
+                {
+                    "name": "Danh s\u00e1ch nh\u00e0 vstore",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vstore",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vstore",
+                            "variable": [
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "aliquid",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "consequatur",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                },
+                                {
+                                    "id": "branch",
+                                    "key": "branch",
+                                    "value": "sint",
+                                    "description": "1 l\u00e0 vstore th\u01b0\u1eddng, 2 l\u00e0 vstore c\u1ea5p 1 (\u0111\u1ecba ph\u01b0\u01a1ng)"
+                                },
+                                {
+                                    "id": "account_code",
+                                    "key": "account_code",
+                                    "value": "tenetur",
+                                    "description": "t\u00ecm ki\u1ebfm m\u00e3 vstore"
+                                },
+                                {
+                                    "id": "name",
+                                    "key": "name",
+                                    "value": "veritatis",
+                                    "description": "t\u00ecm ki\u1ebfm m\u00e3 name"
+                                },
+                                {
+                                    "id": "company_name",
+                                    "key": "company_name",
+                                    "value": "architecto",
+                                    "description": "t\u00ecm ki\u1ebfm m\u00e3 t\u00ean c\u00f4ng ty"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"branch\":1}"
+                        },
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u00e1ch vstore",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "41"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "chi ti\u1ebft vstore",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vstore\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vstore\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "rerum",
+                                    "description": "The ID of the vstore."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 chi ti\u1ebft vstore",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "40"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 500,
+                            "body": "{\n    \"message\": \"Call to a member function products() on null\",\n    \"exception\": \"Error\",\n    \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\app\\\\Http\\\\Controllers\\\\Api\\\\VstoreController.php\",\n    \"line\": 130,\n    \"trace\": [\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Controller.php\",\n            \"line\": 54,\n            \"function\": \"detail\",\n            \"class\": \"App\\\\Http\\\\Controllers\\\\Api\\\\VstoreController\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\ControllerDispatcher.php\",\n            \"line\": 43,\n            \"function\": \"callAction\",\n            \"class\": \"Illuminate\\\\Routing\\\\Controller\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Route.php\",\n            \"line\": 260,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\ControllerDispatcher\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Route.php\",\n            \"line\": 205,\n            \"function\": \"runController\",\n            \"class\": \"Illuminate\\\\Routing\\\\Route\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 798,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Routing\\\\Route\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Routing\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings.php\",\n            \"line\": 50,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 126,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 102,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests.php\",\n            \"line\": 54,\n            \"function\": \"handleRequestUsingNamedLimiter\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\ThrottleRequests\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 799,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 776,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 740,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 729,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 190,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 141,\n            \"function\": \"Illuminate\\\\Foundation\\\\Http\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings.php\",\n            \"line\": 40,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance.php\",\n            \"line\": 86,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\HandleCors.php\",\n            \"line\": 62,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\TrustProxies.php\",\n            \"line\": 39,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 180,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 116,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 165,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 134,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 299,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 287,\n            \"function\": \"callLaravelOrLumenRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 92,\n            \"function\": \"makeApiCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 45,\n            \"function\": \"makeResponseCall\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls.php\",\n            \"line\": 35,\n            \"function\": \"makeResponseCallIfConditionsPass\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 209,\n            \"function\": \"__invoke\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Strategies\\\\Responses\\\\ResponseCalls\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 166,\n            \"function\": \"iterateThroughStrategies\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Extracting\\\\Extractor.php\",\n            \"line\": 95,\n            \"function\": \"fetchResponses\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 124,\n            \"function\": \"processRoute\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Extracting\\\\Extractor\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 71,\n            \"function\": \"extractEndpointsInfoFromLaravelApp\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp.php\",\n            \"line\": 49,\n            \"function\": \"extractEndpointsInfoAndWriteToDisk\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\knuckleswtf\\\\scribe\\\\src\\\\Commands\\\\GenerateDocumentation.php\",\n            \"line\": 51,\n            \"function\": \"get\",\n            \"class\": \"Knuckles\\\\Scribe\\\\GroupedEndpoints\\\\GroupedEndpointsFromApp\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 36,\n            \"function\": \"handle\",\n            \"class\": \"Knuckles\\\\Scribe\\\\Commands\\\\GenerateDocumentation\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Util.php\",\n            \"line\": 41,\n            \"function\": \"Illuminate\\\\Container\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 93,\n            \"function\": \"unwrapIfClosure\",\n            \"class\": \"Illuminate\\\\Container\\\\Util\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\BoundMethod.php\",\n            \"line\": 37,\n            \"function\": \"callBoundMethod\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php\",\n            \"line\": 661,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\BoundMethod\",\n            \"type\": \"::\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Command.php\",\n            \"line\": 183,\n            \"function\": \"call\",\n            \"class\": \"Illuminate\\\\Container\\\\Container\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Command\\\\Command.php\",\n            \"line\": 312,\n            \"function\": \"execute\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Command.php\",\n            \"line\": 153,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Command\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 1022,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Command\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 314,\n            \"function\": \"doRunCommand\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\symfony\\\\console\\\\Application.php\",\n            \"line\": 168,\n            \"function\": \"doRun\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Console\\\\Application.php\",\n            \"line\": 102,\n            \"function\": \"run\",\n            \"class\": \"Symfony\\\\Component\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Console\\\\Kernel.php\",\n            \"line\": 155,\n            \"function\": \"run\",\n            \"class\": \"Illuminate\\\\Console\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"D:\\\\vvstore\\\\vstore-backend\\\\artisan\",\n            \"line\": 37,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Console\\\\Kernel\",\n            \"type\": \"->\"\n        }\n    ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Danh s\u00e1ch vstore danh m\u1ee5c",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vstore\/category\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vstore\/category\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                },
+                                {
+                                    "id": "page",
+                                    "key": "page",
+                                    "value": "error",
+                                    "description": "S\u1ed1 trang"
+                                },
+                                {
+                                    "id": "limit",
+                                    "key": "limit",
+                                    "value": "minima",
+                                    "description": "Gi\u1edbi h\u1ea1n b\u1ea3n ghi tr\u00ean m\u1ed9t trang"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API n\u00e0y s\u1ebd tr\u1ea3 v\u1ec1 s\u00e1ch vstore c\u00f3 s\u1ea3n ph\u1ea9m trong danh m\u1ee5c",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "39"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status_code\":200,\"data\":{\"current_page\":1,\"data\":[],\"first_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\\\/category\\\/1?page=1\",\"from\":null,\"last_page\":1,\"last_page_url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\\\/category\\\/1?page=1\",\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\\\/category\\\/1?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"next_page_url\":null,\"path\":\"http:\\\/\\\/api-vstore.ngo\\\/api\\\/vstore\\\/category\\\/1\",\"per_page\":10,\"prev_page_url\":null,\"to\":null,\"total\":0}}",
                             "name": ""
                         }
                     ]

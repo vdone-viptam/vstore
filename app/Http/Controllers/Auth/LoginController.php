@@ -144,7 +144,7 @@ class LoginController extends Controller
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
-                'company_name' => 'required|unique:users',
+                'company_name' => 'required',
                 'tax_code' => 'required',
                 'address' => 'required',
                 'phone_number' => 'required',
