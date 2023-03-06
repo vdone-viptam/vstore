@@ -70,13 +70,13 @@ class UserController extends Controller
 
             } elseif ($user->role_id == 4) {
                 $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-                $number = User::where('tax_code', $user->tax_code )->where('role_id',4)->count();
+                $number = User::where('tax_code', $user->tax_code)->where('role_id', 4)->count();
                 if ($number == 0) {
                     $ID = 'vnk' . '01' . $user->tax_code;
                 } elseif ($number < 10) {
-                    $ID = 'vnk' . '0' . $number  . $user->tax_code;
+                    $ID = 'vnk' . '0' . $number . $user->tax_code;
                 } elseif ($number >= 10) {
-                    $ID = 'vnk' . $number  . $user->tax_code;
+                    $ID = 'vnk' . $number . $user->tax_code;
                 }
 //                elseif ($number > 99) {
 //                    for ($i = 0; $i < count($arr); $i++) {
@@ -157,6 +157,31 @@ class UserController extends Controller
             $request = RequestChangeTaxCode::where('id', $id)->first();
             $user = User::where('id', $request->user_id)->first();
             if ($status == 1) {
+                if ($user->role_id == 3) {
+                    $user->account_code = str_replace($user->tax_code, $request->tax_code, $user->account_code);
+                    $ncc = User::where('tax_code', $user->tax_code)->where('role_id', 2)->get();
+
+                    foreach ($ncc as $nc) {
+                        $nc->account_code = str_replace($nc->tax_code, $request->tax_code, $nc->account_code);
+                        $nc->save();
+                    }
+
+                    $vkho = User::where('tax_code', $user->tax_code)->where('role_id', 4)->get();
+
+                    foreach ($vkho as $vkh) {
+                        $vkh->account_code = str_replace($vkh->tax_code, $request->tax_code, $vkh->account_code);
+                        $vkh->save();
+                    }
+                } elseif ($user->role_id == 2) {
+                    $user->account_code = str_replace($user->tax_code, $request->tax_code, $user->account_code);
+                    $vkho = User::where('tax_code', $user->tax_code)->where('role_id', 4)->get();
+                    foreach ($vkho as $vkh) {
+                        $vkh->account_code = str_replace($vkh->tax_code, $request->tax_code, $vkh->account_code);
+                        $vkh->save();
+                    }
+                } else {
+                    $user->account_code = str_replace($user->tax_code, $request->tax_code, $user->account_code);
+                }
                 $user->tax_code = $request->tax_code;
                 $user->save();
                 $request->status = 1;
