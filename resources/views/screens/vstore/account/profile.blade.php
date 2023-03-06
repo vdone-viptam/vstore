@@ -123,13 +123,17 @@
                             <textarea type="text" name="description" id="description" rows="5"
                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                             >{{$infoAccount->description}}</textarea>
+                            @error('description')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
+
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-full md:w-[280px]">Link Website:</span>
+                            <span class="text-secondary w-full md:w-[280px]">Slug:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="link_website"
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}">
+                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm"
+                                       value="{{$infoAccount->slug}}">
                                 @error('link_website')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
@@ -214,9 +218,9 @@
                                     <span>{{$infoAccount->id_vdone_diff}}</span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
-                                    <span class="text-secondary">Link website: </span>
+                                    <span class="text-secondary">Slug: </span>
                                     <span><a
-                                            href="{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}">{{$infoAccount->link_website ?? asset('/p/'.$infoAccount->slug)}}</a></span>
+                                            href="{{route('intro_vstore',['slug'=> $infoAccount->slug])}}">{{config('domain.vstore')}}/{{$infoAccount->slug}}</a></span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <a href="#"
