@@ -6,7 +6,7 @@
 
             <div class="user relative flex items-center gap-2">
             <div class="flex flex-col gap-[3px] justify-center">
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Xin chào, {{\Illuminate\Support\Facades\Auth::user()->account_code}}!</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Xin chào, {{strtoupper(\Illuminate\Support\Facades\Auth::user()->account_code) }}!</p>
                 </div>
                 <div class="w-[51px]">
                     <div class="w-[50px] h-[65px] ">
