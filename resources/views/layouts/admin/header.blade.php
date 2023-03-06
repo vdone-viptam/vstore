@@ -3,10 +3,10 @@
 <div class="flex justify-end lg:justify-end items-center">
         <div
             class="flex justify-end gap-6 xl:justify-end lg:justify-between items-center xl:gap-6 py-4 md:py-0">
-            
+
             <div class="user relative flex items-center gap-2">
             <div class="flex flex-col gap-[3px] justify-center">
-                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Xin chào, {{\Illuminate\Support\Facades\Auth::user()->account_code}}!</p>
+                    <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Xin chào, {{strtoupper(\Illuminate\Support\Facades\Auth::user()->account_code) }}!</p>
                 </div>
                 <div class="w-[51px]">
                     <div class="w-[50px] h-[65px] ">
@@ -16,7 +16,7 @@
                 </div>
 
 
-              
+
 
                 <ul class="sub-nav-user">
                     <li><a href="{{route('screens.manufacture.account.profile')}}"

@@ -271,13 +271,13 @@ class LoginController extends Controller
 
             if ($role_id == 2) {
 
-                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công');
+                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công chờ xét duyệt');
             }
             if ($role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công');
+                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công chờ xét duyệt');
             }
             if ($role_id == 4) {
-                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công');
+                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công chờ xét duyệt');
             }
 //            return 1
         } catch (\Exception $e) {
