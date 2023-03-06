@@ -238,7 +238,7 @@ class LoginController extends Controller
                     foreach ($request->file('image_storage') as $img) {
                         $filestorage = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filestorage);
-                        $file[] = 'image/users' . $filestorage;
+                        $file[] = 'image/users/' . $filestorage;
                     }
 
 
@@ -249,7 +249,7 @@ class LoginController extends Controller
                     foreach ($request->file('image_pccc') as $img) {
                         $filepccc = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filepccc);
-                        $file1[] = 'image/users' . $filepccc;
+                        $file1[] = 'image/users/' . $filepccc;
                     }
                 }
                 $storage_information = [
