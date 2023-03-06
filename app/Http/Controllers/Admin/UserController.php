@@ -163,6 +163,7 @@ class UserController extends Controller
 
                     foreach ($ncc as $nc) {
                         $nc->account_code = str_replace($nc->tax_code, $request->tax_code, $nc->account_code);
+                        $nc->tax_code = $request->tax_code;
                         $nc->save();
                     }
 
@@ -170,6 +171,7 @@ class UserController extends Controller
 
                     foreach ($vkho as $vkh) {
                         $vkh->account_code = str_replace($vkh->tax_code, $request->tax_code, $vkh->account_code);
+                        $vkh->tax_code = $request->tax_code;
                         $vkh->save();
                     }
                 } elseif ($user->role_id == 2) {
@@ -177,6 +179,7 @@ class UserController extends Controller
                     $vkho = User::where('tax_code', $user->tax_code)->where('role_id', 4)->get();
                     foreach ($vkho as $vkh) {
                         $vkh->account_code = str_replace($vkh->tax_code, $request->tax_code, $vkh->account_code);
+                        $vkh->tax_code = $request->tax_code;
                         $vkh->save();
                     }
                 } else {
