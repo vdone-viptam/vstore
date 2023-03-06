@@ -6,6 +6,9 @@ body{
     padding: 0;
     font-family: 'Inter';
 }
+html {
+    scroll-behavior: smooth;
+}
 img{
     max-width: 100% !important;
     height: 100% !important;
@@ -22,8 +25,8 @@ img{
 }
 
 .center-ab{
-    bottom: -35%;  
-    left: 50%; 
+    bottom: -35%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -44,40 +47,40 @@ img{
 
 }
 
-.rating { 
+.rating {
     border: none;
     float: left;
   }
-  
-  .rating > input { display: none; } 
-  .rating > label:before { 
+
+  .rating > input { display: none; }
+  .rating > label:before {
     margin: 5px;
     font-size: 1em;
     font-family: FontAwesome;
     display: inline-block;
     content: "\f005";
-    
+
   }
-  
-  .rating > .half:before { 
+
+  .rating > .half:before {
     content: "\f089";
     position: absolute;
-  
+
   }
-  
-  .rating > label { 
-    color:#FFA800; 
+
+  .rating > label {
+    color:#FFA800;
   }
-  
+
   /***** CSS Magic to Highlight Stars on Hover *****/
-  
-  /* .rating > input:checked ~ label, 
-  .rating:not(:checked) > label:hover, 
-  .rating:not(:checked) > label:hover ~ label { color: #FFA800;  } 
-  
-  .rating > input:checked + label:hover, 
+
+  /* .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label { color: #FFA800;  }
+
+  .rating > input:checked + label:hover,
   .rating > input:checked ~ label:hover,
-  .rating > label:hover ~ input:checked ~ label, 
+  .rating > label:hover ~ input:checked ~ label,
   .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }  */
 .pagination li a{
     color: #3A57E8;
@@ -117,13 +120,13 @@ img{
 
 @media only screen and (max-width: 768px) {
     .center-ab{
-        bottom: -65%;  
-   
+        bottom: -65%;
+
     }
     .sales{
         background: url('./images/bg-mb.png') no-repeat center center;
     }
-    .rating > label:before { 
+    .rating > label:before {
         font-size: 0.7em;
         margin: 1px;
       }
