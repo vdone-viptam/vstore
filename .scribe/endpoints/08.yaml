@@ -1,0 +1,115 @@
+name: Discount
+description: |-
+
+  Danh sách api liên quan tới mã giảm giá
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/discount/get-discount
+    metadata:
+      groupName: Discount
+      groupDescription: |-
+
+        Danh sách api liên quan tới mã giảm giá
+      subgroup: ''
+      subgroupDescription: ''
+      title: Bill
+      description: 'API dùng trả về % giảm giá dựa trên số lượng sản phẩm V-Shop lấy hàng sẵn'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      id:
+        name: id
+        description: 'sản phẩm'
+        required: false
+        example: similique
+        type: id
+        custom: []
+      total:
+        name: total
+        description: 'lượng sản phẩm'
+        required: false
+        example: iste
+        type: số
+        custom: []
+    cleanBodyParameters:
+      id: similique
+      total: iste
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":401,"error":{"id":["The selected id is invalid."],"total":["S\u1ed1 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m ph\u1ea3i l\u00e0 s\u1ed1"]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '35'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/discount/available-discount/{id}'
+    metadata:
+      groupName: Discount
+      groupDescription: |-
+
+        Danh sách api liên quan tới mã giảm giá
+      subgroup: ''
+      subgroupDescription: ''
+      title: Bill
+      description: 'API dùng trả về % giảm giá dựa trên số lượng sản phẩm'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'id sản phẩm'
+        required: false
+        example: aliquam
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: aliquam
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '[]'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '34'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

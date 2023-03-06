@@ -45,7 +45,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/category
+    uri: api/test
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -68,12 +68,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":1,"name":"Qu\u1ea7n \u00e1o c\u1eadp nh\u1eadt","parent_id":0,"created_at":"2023-01-08T04:25:33.000000Z","updated_at":"2023-01-08T04:40:46.000000Z","img":"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif","slug":"quan-ao-cap-nhat","status":1},{"id":2,"name":"\u00c1o d\u00e0i","parent_id":0,"created_at":"2023-01-08T04:25:33.000000Z","updated_at":"2023-01-08T04:40:46.000000Z","img":"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif","slug":null,"status":1},{"id":5,"name":"Qu\u1ea7n \u0111\u00f9i \u00e1o c\u1ed9c","parent_id":1,"created_at":"2023-01-08T04:25:33.000000Z","updated_at":"2023-01-08T04:44:56.000000Z","img":"202301080425Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif","slug":"quan-dui-ao-coc","status":0},{"id":6,"name":"platinum update","parent_id":5,"created_at":"2023-01-08T05:19:06.000000Z","updated_at":"2023-01-08T05:19:06.000000Z","img":"202301080519Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif","slug":"platinum-update","status":1},{"id":7,"name":"java sc","parent_id":6,"created_at":"2023-01-08T05:19:58.000000Z","updated_at":"2023-01-08T05:19:58.000000Z","img":"202301080519Download-them-anh-nen-dong-Anime-cho-may-tinh-doc-dao.gif","slug":"java-sc","status":1},{"id":8,"name":"H\u00e0 N\u1ed9i","parent_id":7,"created_at":"2023-02-05T04:19:34.000000Z","updated_at":"2023-02-05T04:19:34.000000Z","img":"image\/category\/202302050419aab7f4065358e0a635b3bd5266a0c319.jpg","slug":"ha-noi","status":1}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/category?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/category?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/category?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/category","per_page":10,"prev_page_url":null,"to":6,"total":6}}'
+        content: '1'
         headers:
+          content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
-          content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '50'
+          x-ratelimit-remaining: '33'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -86,37 +86,21 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/manufacture
+    uri: api/get-city
     metadata:
       groupName: Endpoints
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Danh sách nhà cung cấp'
-      description: 'API này sẽ trả về sách Nhà cung cấp'
+      title: ''
+      description: ''
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      page:
-        name: page
-        description: 'Số trang'
-        required: false
-        example: ut
-        type: string
-        custom: []
-      limit:
-        name: limit
-        description: 'Giới hạn bản ghi trên một trang'
-        required: false
-        example: aut
-        type: string
-        custom: []
-    cleanUrlParameters:
-      page: ut
-      limit: aut
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -125,69 +109,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":2,"name":"Hello word 132123","email":"phungtheanh2001@gmail.com","email_verified_at":null,"created_at":"2023-01-10T07:00:28.000000Z","updated_at":"2023-01-11T14:00:04.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"","status":null,"confirm_date":"2023-01-10 07:05:33","role_id":2,"account_code":"911234428248","avatar":"202301110842Screenshot (19).png","banner":"202301110841Screenshot (24).png","slug":null},{"id":10,"name":"anhndph","email":"anhndph12795@fpt.edu.vn","email_verified_at":null,"created_at":"2023-02-02T06:39:55.000000Z","updated_at":"2023-02-02T06:40:48.000000Z","id_vdone":"0813635888","company_name":"anhndph","phone_number":"0813635888","tax_code":"0918809999","address":"65 kh\u00fac th\u1eeba d\u1ee5","id_vdone_diff":"0813635888","status":null,"confirm_date":"2023-02-02 06:40:48","role_id":2,"account_code":"vnncczmyikGJ","avatar":null,"banner":null,"slug":"anhndph"}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/manufacture?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/manufacture?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/manufacture?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/manufacture","per_page":10,"prev_page_url":null,"to":2,"total":2}}'
+        content: '[{"PROVINCE_ID":1,"PROVINCE_CODE":"HNI","PROVINCE_NAME":"H\u00e0 N\u1ed9i"},{"PROVINCE_ID":2,"PROVINCE_CODE":"HCM","PROVINCE_NAME":"H\u1ed3 Ch\u00ed Minh"},{"PROVINCE_ID":3,"PROVINCE_CODE":"HPG","PROVINCE_NAME":"H\u1ea3i Ph\u00f2ng"},{"PROVINCE_ID":4,"PROVINCE_CODE":"DNG","PROVINCE_NAME":"\u0110\u00e0 N\u1eb5ng"},{"PROVINCE_ID":5,"PROVINCE_CODE":"CTO","PROVINCE_NAME":"C\u1ea7n Th\u01a1"},{"PROVINCE_ID":6,"PROVINCE_CODE":"TGG","PROVINCE_NAME":"Ti\u1ec1n Giang"},{"PROVINCE_ID":8,"PROVINCE_CODE":"HUG","PROVINCE_NAME":"H\u1eadu Giang"},{"PROVINCE_ID":9,"PROVINCE_CODE":"DKG","PROVINCE_NAME":"\u0110\u0103k N\u00f4ng"},{"PROVINCE_ID":10,"PROVINCE_CODE":"VPC","PROVINCE_NAME":"V\u0129nh Ph\u00fac"},{"PROVINCE_ID":11,"PROVINCE_CODE":"BNH","PROVINCE_NAME":"B\u1eafc Ninh"},{"PROVINCE_ID":12,"PROVINCE_CODE":"HDG","PROVINCE_NAME":"H\u1ea3i D\u01b0\u01a1ng"},{"PROVINCE_ID":13,"PROVINCE_CODE":"HYN","PROVINCE_NAME":"H\u01b0ng Y\u00ean"},{"PROVINCE_ID":14,"PROVINCE_CODE":"HNM","PROVINCE_NAME":"H\u00e0 Nam"},{"PROVINCE_ID":15,"PROVINCE_CODE":"NDH","PROVINCE_NAME":"Nam \u00d0\u1ecbnh"},{"PROVINCE_ID":16,"PROVINCE_CODE":"TBH","PROVINCE_NAME":"Th\u00e1i B\u00ecnh"},{"PROVINCE_ID":17,"PROVINCE_CODE":"NBH","PROVINCE_NAME":"Ninh B\u00ecnh"},{"PROVINCE_ID":18,"PROVINCE_CODE":"HGG","PROVINCE_NAME":"H\u00e0 Giang"},{"PROVINCE_ID":19,"PROVINCE_CODE":"CBG","PROVINCE_NAME":"Cao B\u1eb1ng"},{"PROVINCE_ID":20,"PROVINCE_CODE":"LCI","PROVINCE_NAME":"L\u00e0o Cai"},{"PROVINCE_ID":21,"PROVINCE_CODE":"BKN","PROVINCE_NAME":"B\u1eafc K\u1ea1n"},{"PROVINCE_ID":22,"PROVINCE_CODE":"LSN","PROVINCE_NAME":"L\u1ea1ng S\u01a1n"},{"PROVINCE_ID":23,"PROVINCE_CODE":"TQG","PROVINCE_NAME":"Tuy\u00ean Quang"},{"PROVINCE_ID":24,"PROVINCE_CODE":"YBN","PROVINCE_NAME":"Y\u00ean B\u00e1i"},{"PROVINCE_ID":25,"PROVINCE_CODE":"TNN","PROVINCE_NAME":"Th\u00e1i Nguy\u00ean"},{"PROVINCE_ID":26,"PROVINCE_CODE":"PHO","PROVINCE_NAME":"Ph\u00fa Th\u1ecd"},{"PROVINCE_ID":27,"PROVINCE_CODE":"BGG","PROVINCE_NAME":"B\u1eafc Giang"},{"PROVINCE_ID":28,"PROVINCE_CODE":"QNH","PROVINCE_NAME":"Qu\u1ea3ng Ninh"},{"PROVINCE_ID":29,"PROVINCE_CODE":"LCU","PROVINCE_NAME":"Lai Ch\u00e2u"},{"PROVINCE_ID":30,"PROVINCE_CODE":"SLA","PROVINCE_NAME":"S\u01a1n La"},{"PROVINCE_ID":31,"PROVINCE_CODE":"HBH","PROVINCE_NAME":"H\u00f2a B\u00ecnh"},{"PROVINCE_ID":32,"PROVINCE_CODE":"THA","PROVINCE_NAME":"Thanh H\u00f3a"},{"PROVINCE_ID":33,"PROVINCE_CODE":"NAN","PROVINCE_NAME":"Ngh\u1ec7 An"},{"PROVINCE_ID":34,"PROVINCE_CODE":"HTH","PROVINCE_NAME":"H\u00e0 T\u0129nh"},{"PROVINCE_ID":35,"PROVINCE_CODE":"QBH","PROVINCE_NAME":"Qu\u1ea3ng B\u00ecnh"},{"PROVINCE_ID":36,"PROVINCE_CODE":"QTI","PROVINCE_NAME":"Qu\u1ea3ng Tr\u1ecb"},{"PROVINCE_ID":37,"PROVINCE_CODE":"HUE","PROVINCE_NAME":"Th\u1eeba Thi\u00ean - Hu\u1ebf"},{"PROVINCE_ID":38,"PROVINCE_CODE":"QNM","PROVINCE_NAME":"Qu\u1ea3ng Nam"},{"PROVINCE_ID":39,"PROVINCE_CODE":"QNI","PROVINCE_NAME":"Qu\u1ea3ng Ng\u00e3i"},{"PROVINCE_ID":40,"PROVINCE_CODE":"BDH","PROVINCE_NAME":"B\u00ecnh \u00d0\u1ecbnh"},{"PROVINCE_ID":41,"PROVINCE_CODE":"PYN","PROVINCE_NAME":"Ph\u00fa Y\u00ean"},{"PROVINCE_ID":42,"PROVINCE_CODE":"KHA","PROVINCE_NAME":"Kh\u00e1nh H\u00f2a"},{"PROVINCE_ID":43,"PROVINCE_CODE":"KTM","PROVINCE_NAME":"Kon Tum"},{"PROVINCE_ID":44,"PROVINCE_CODE":"GLI","PROVINCE_NAME":"Gia Lai"},{"PROVINCE_ID":45,"PROVINCE_CODE":"DLK","PROVINCE_NAME":"\u0110\u0103k L\u0103k"},{"PROVINCE_ID":46,"PROVINCE_CODE":"LDG","PROVINCE_NAME":"L\u00e2m \u00d0\u1ed3ng"},{"PROVINCE_ID":47,"PROVINCE_CODE":"NTN","PROVINCE_NAME":"Ninh Thu\u1eadn"},{"PROVINCE_ID":48,"PROVINCE_CODE":"BPC","PROVINCE_NAME":"B\u00ecnh Ph\u01b0\u1edbc"},{"PROVINCE_ID":49,"PROVINCE_CODE":"TNH","PROVINCE_NAME":"T\u00e2y Ninh"},{"PROVINCE_ID":50,"PROVINCE_CODE":"BDG","PROVINCE_NAME":"B\u00ecnh D\u01b0\u01a1ng"},{"PROVINCE_ID":51,"PROVINCE_CODE":"DNI","PROVINCE_NAME":"\u0110\u1ed3ng Nai"},{"PROVINCE_ID":52,"PROVINCE_CODE":"BTN","PROVINCE_NAME":"B\u00ecnh Thu\u1eadn"},{"PROVINCE_ID":53,"PROVINCE_CODE":"VTU","PROVINCE_NAME":"B\u00e0 r\u1ecba - V\u0169ng t\u00e0u"},{"PROVINCE_ID":54,"PROVINCE_CODE":"LAN","PROVINCE_NAME":"Long An"},{"PROVINCE_ID":55,"PROVINCE_CODE":"DTP","PROVINCE_NAME":"\u0110\u1ed3ng Th\u00e1p"},{"PROVINCE_ID":56,"PROVINCE_CODE":"AGG","PROVINCE_NAME":"An Giang"},{"PROVINCE_ID":57,"PROVINCE_CODE":"VLG","PROVINCE_NAME":"V\u0129nh Long"},{"PROVINCE_ID":58,"PROVINCE_CODE":"BTE","PROVINCE_NAME":"B\u1ebfn Tre"},{"PROVINCE_ID":59,"PROVINCE_CODE":"KGG","PROVINCE_NAME":"Ki\u00ean Giang"},{"PROVINCE_ID":60,"PROVINCE_CODE":"TVH","PROVINCE_NAME":"Tr\u00e0 Vinh"},{"PROVINCE_ID":61,"PROVINCE_CODE":"STG","PROVINCE_NAME":"S\u00f3c Tr\u0103ng"},{"PROVINCE_ID":62,"PROVINCE_CODE":"BLU","PROVINCE_NAME":"B\u1ea1c Li\u00eau"},{"PROVINCE_ID":63,"PROVINCE_CODE":"CMU","PROVINCE_NAME":"C\u00e0 Mau"},{"PROVINCE_ID":64,"PROVINCE_CODE":"DBN","PROVINCE_NAME":"\u0110i\u1ec7n Bi\u00ean"}]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '49'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/vstore
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Danh sách nhà vstore'
-      description: 'API này sẽ trả về sách vstore'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      page:
-        name: page
-        description: 'Số trang'
-        required: false
-        example: optio
-        type: string
-        custom: []
-      limit:
-        name: limit
-        description: 'Giới hạn bản ghi trên một trang'
-        required: false
-        example: dolor
-        type: string
-        custom: []
-    cleanUrlParameters:
-      page: optio
-      limit: dolor
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":3,"name":"Admin 11","email":"phongngo03255@gmail.com","email_verified_at":null,"created_at":"2023-01-11T02:31:11.000000Z","updated_at":"2023-01-20T17:24:30.000000Z","id_vdone":"123123","company_name":"Aneed","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"","status":null,"confirm_date":"2023-01-11 02:32:02","role_id":3,"account_code":"376265803836","avatar":"202301201724pasted image 0.png","banner":"202301111400Screenshot (21).png","slug":null},{"id":4,"name":"platinum update","email":"naruto2003v@gmail.com","email_verified_at":null,"created_at":"2023-01-11T14:03:42.000000Z","updated_at":"2023-01-11T14:06:11.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"1111","status":null,"confirm_date":"2023-01-11 14:06:11","role_id":3,"account_code":"881400726222","avatar":null,"banner":null,"slug":null},{"id":5,"name":"platinum update","email":"admin1@gmail.com","email_verified_at":null,"created_at":"2023-01-11T14:04:27.000000Z","updated_at":"2023-02-05T02:26:49.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"1111","status":null,"confirm_date":"2023-02-05 02:26:49","role_id":3,"account_code":"vnnppTFDVfrw","avatar":null,"banner":null,"slug":null},{"id":6,"name":"platinum update","email":"naruto20031v@gmail.com","email_verified_at":null,"created_at":"2023-01-11T14:05:30.000000Z","updated_at":"2023-01-11T14:06:02.000000Z","id_vdone":"123123","company_name":"Sao V\u00e0ng","phone_number":"0325500080","tax_code":"123123","address":"H\u00e0 N\u1ed9i","id_vdone_diff":"1111","status":null,"confirm_date":"2023-01-11 14:06:02","role_id":3,"account_code":"752989806851","avatar":null,"banner":null,"slug":null},{"id":8,"name":"warehousess","email":"ducanhng2813@gmail.com","email_verified_at":null,"created_at":"2023-01-13T03:37:49.000000Z","updated_at":"2023-02-05T03:03:39.000000Z","id_vdone":"0813635868","company_name":"warehousess","phone_number":"0813635868","tax_code":"121212121","address":"warehousess","id_vdone_diff":"0813635868","status":null,"confirm_date":"2023-01-13 03:40:34","role_id":3,"account_code":"511744732139","avatar":"202301201903pasted image 0.png","banner":"202301201913Banner.jpg","slug":"duc-anh21"},{"id":9,"name":"duc anh23","email":"ducanh123@gmail.com","email_verified_at":null,"created_at":"2023-01-20T17:45:34.000000Z","updated_at":"2023-01-20T17:45:34.000000Z","id_vdone":"1212121","company_name":"duc anh23","phone_number":"0813635868","tax_code":"12","address":"1212","id_vdone_diff":"12121212","status":null,"confirm_date":"2023-01-20 01:55:31","role_id":3,"account_code":"511744732138","avatar":"image 0.png","banner":null,"slug":"duc-anh23"}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/vstore","per_page":10,"prev_page_url":null,"to":6,"total":6}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '48'
+          x-ratelimit-remaining: '32'
           access-control-allow-origin: '*'
         description: null
         custom: []
