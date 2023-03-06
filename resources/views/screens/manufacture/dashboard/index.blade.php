@@ -1,4 +1,6 @@
 @extends('layouts.manufacture.main')
+@section('page_title','Tổng quan')
+
 @section('custom_css')
     <style>
         .header {
@@ -13,10 +15,12 @@
             <!-- <div class="flex md:justify-end lg:justify-between items-center lg:gap-[30px] xl:gap-[100px] 2xl:gap-[150px]">
             <div class="hidden cursor-pointer md:hidden lg:flex  justify-end  my-6 w-full lg:h-[160px] 2xl:h-[200px]">
                 @if(\Illuminate\Support\Facades\Auth::user()->banner)
-                    <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full"
+                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->banner)}}" class="w-full"
                          alt="">
-                @endif
-                {{--                <img src="{{asset('/image/users/'. \Illuminate\Support\Facades\Auth::user()->banner)}}">--}}
+
+
+            @endif
+            {{--                <img src="{{asset('/image/users/'. \Illuminate\Support\Facades\Auth::user()->banner)}}">--}}
 
             </div>
             <div class="flex justify-end lg:justify-end items-center">
@@ -39,22 +43,26 @@
                                         cả</a>
                                 </div>
                                 @if(count(Auth::user()->unreadNotifications) > 0)
-                                    @foreach (Auth::user()->unreadNotifications as $index =>$notification)
-                                        <li>
-                                            <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                @foreach (Auth::user()->unreadNotifications as $index =>$notification)
+                    <li>
+                        <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
                                                class="flex justify-between items-center w-full text-sm text-title font-bold">{{$notification['data']['message']}}
-                                                <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
+                    <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('h:i A')}} </span></a>
                                         </li>
-                                    @endforeach
-                                @else
-                                    <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
-                                @endif
 
 
-                            </ul>
-                        </div>
-                        <div class="user relative flex items-center gap-2">
-                            <div class="w-[51px]">
+                @endforeach
+            @else
+                <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
+
+
+            @endif
+
+
+            </ul>
+        </div>
+        <div class="user relative flex items-center gap-2">
+            <div class="w-[51px]">
                                 <div class="w-[50px] h-[65px] ">
                                     <img class="w-full cursor-pointer"
                                          src="{{asset('asset/images/userNCC.png')}}" class="w-full">
@@ -305,12 +313,12 @@
             new Chart(document.getElementById("bar-chart-grouped"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
+                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
                     datasets: [
                         {
                             label: "Africa",
                             backgroundColor: "#3e95cd",
-                            data: ['110000', '120000', '140000', '125000', '160000', '180000', '160000', '150000', '200000', '210000', '190000', '220000',]
+                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',]
                         }
                     ]
                 },
@@ -339,7 +347,7 @@
                         {
                             label: "Population (millions)",
                             backgroundColor: "#3e95cd",
-                            data: [426, 434, 468, 523, 584, 596, 524, 612, 618, 694, 648, 688]
+                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                         }
                     ]
                 },

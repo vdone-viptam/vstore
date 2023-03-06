@@ -5,6 +5,7 @@
 
     </div>
 @endsection
+@section('page_title','Quản lý kho hàng')
 
 
 @section('content')

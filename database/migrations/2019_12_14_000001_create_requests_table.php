@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->double('discount_vshop');
             $table->string('note')->nullable();
             $table->string('code');
-            $table->float('vat');
+            $table->float('vat',20,2);
             $table->timestamps();
         });
     }

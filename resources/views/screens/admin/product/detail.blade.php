@@ -34,11 +34,11 @@
                         <span class="text-title ">{{$request->price}}</span>
                     </div>
                     <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Chiết khấu:</span>
+                        <span class="text-title font-medium w-[200px]">Chiết khấu cho V-Store:</span>
                         <span class="text-title ">{{$request->discount}}%</span>
                     </div>
                     <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Chiết khấu v-shop:</span>
+                        <span class="text-title font-medium w-[200px]">Chiết khấu V-Shop:</span>
                         <span class="text-title ">{{$request->discount_vshop}}%</span>
                     </div>
                     <div class="flex items-center gap-4 w-full">
@@ -48,7 +48,7 @@
                     <label for="">Trạng thái đơn đăng ký</label>
                     <div class="flex items-center gap-4 w-full">
 
-               <select name="status" id="status" @if($request->status ==3  || $request->status ==4) disabled
+                        <select name="status" id="status" @if($request->status ==3  || $request->status ==4) disabled
                                 @endif
                                 class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                             <option value="3" {{$request->status ==3 ? 'selected' : ''}}>Duyệt</option>

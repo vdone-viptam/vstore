@@ -1,9 +1,10 @@
 @extends('layouts.admin.main')
+@section('page_title','Danh sách tài khoản')
 
 @section('content')
     <form action="" method="GET" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Tài khoản</span>
+            <span class="text-secondary">Quản lý tài khoản</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
@@ -89,7 +90,7 @@ Danh sách tài khoản</h2>
                             <th>STT</th>
                             <th>Mã tài khoản</th>
                             <th>
-                                Họ tên
+                                Tên
                             </th>
                             <th>
                                 Email
@@ -128,7 +129,7 @@ Danh sách tài khoản</h2>
                                         @endif
                                     </td>
                                     <td>
-                                        @if($user->role_id==3 && ($user->branch==1 || $user->branch==0))
+                                        @if($user->role_id==3 && $user->branch !=2 )
                                             <a class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>

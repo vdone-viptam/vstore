@@ -1,6 +1,6 @@
 @extends('layouts.vstore.main')
 
-@section('page_title','Thông tin tài khoản')
+@section('page_title','Hồ sơ của tôi')
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
@@ -241,7 +241,7 @@
                                             <img
                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
                                                 alt=""
-                                                class="w-full object-fill ">
+                                                class="w-[100px] mx-auto  object-contain ">
                                         </div>
                                     </div>
                                     <button type="button"

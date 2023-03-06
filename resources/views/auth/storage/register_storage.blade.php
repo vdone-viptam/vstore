@@ -112,7 +112,7 @@
                 <input type="text" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('email')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-red-600">{{$message}}</p>
                 @enderror
             </div>
 
@@ -121,7 +121,7 @@
                 <input type="text" name="name" id="name" placeholder="Nhập tên V-kho" value="{{old('name')}}"
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('name')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-red-600">{{$message}}</p>
                 @enderror
             </div>
 
@@ -131,7 +131,7 @@
                        value="{{old('company_name')}}"
                        class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('company_name')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-red-600">{{$message}}</p>
                 @enderror
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -140,20 +140,19 @@
                        value="{{old('tax_code')}}"
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('tax_code')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-red-600">{{$message}}</p>
                 @enderror
             </div>
-            @error('tax_code')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
+
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
                 <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                @error('address')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
             </div>
-            @error('address')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
+
             <div class="grid grid-cols-2 gap-2 w-full">
                 <div>
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
@@ -185,7 +184,7 @@
                 <input type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('phone_number')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-red-600">{{$message}}</p>
                 @enderror
             </div>
 
@@ -207,7 +206,7 @@
                 <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('id_vdone')
-                <p class="text-danger">{{$message}}</p>
+                <p class="text-red-600">{{$message}}</p>
                 @enderror
             </div>
 
@@ -220,41 +219,45 @@
 
         </div>
     </div>
-    <hr>
+
     <div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Diện tích sàn (m2)</span>
                 <input type="text" name="floor_area" id="" placeholder="Nhập diện tích"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                @error('floor_area')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
             </div>
-            @error('floor_area')
-            <p class="text-red-600">{{$message}}</p>
-            @enderror
+
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích(m3)</span>
                 <input type="text" name="volume" id="" placeholder="Nhập thể tích"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                @error('volume')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
             </div>
-            @error('volume')
-            <p class="text-red-600">{{$message}}</p>
-            @enderror
+
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Hình ảnh kho </span>
-                <input type="file" name="image_storage" id="" placeholder="Nhập địa chỉ thư điện tử"
+                <input type="file" multiple name="image_storage[]" id="" placeholder="Nhập địa chỉ thư điện tử"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                @error('image_storage')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
             </div>
-            @error('image_storage')
-            <p class="text-red-600">{{$message}}</p>
-            @enderror
+
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Giấy chứng nhận PCCC/ Chứng nhận khác </span>
-                <input type="file" name="image_pccc" id="" placeholder="Nhập địa chỉ thư điện tử"
+                <input type="file" multiple name="image_pccc[]" id="" placeholder="Nhập địa chỉ thư điện tử"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                @error('image_pccc')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
             </div>
-            @error('image_pccc')
-            <p class="text-red-600">{{$message}}</p>
-            @enderror
+
         </div>
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="w-full">
@@ -274,7 +277,7 @@
                     </div>
 
                 </div>
-                `
+
             </div>
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -296,7 +299,9 @@
 
 
     </div>
-    <div class="text-center my-4"><input name="checkbox" type="checkbox"> Bạn đồng ý với điều khoản sử dụng của chúng
+    <div class="text-center my-4"><input name="checkbox" required type="checkbox"> Bạn đồng ý với điều khoản sử
+        dụng của
+        chúng
         tôi. <a href="#"
                 onclick="$('.modal-hd').toggleClass('show-modal')"
                 class="underline text-blue-700">Xem
@@ -313,80 +318,70 @@
 
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script>
-    $('#formRegister-V').validate({
-        rules: {
-            name: {
-                required: true,
-            },
-            id_vdone: {
-                required: true,
-            },
-            email: {
-                required: true,
-            },
-            company_name: {
-                required: true,
-            },
-            tax_code: {
-                required: true,
-            },
-            address: {
-                required: true,
-            },
-            phone_number: {
-                required: true,
-            },
-            password: {
-                required: true,
-
-            },
-            password_confirmation: {
-                required: true,
-                equalTo: '#password'
-            },
-            // checkbox:{
-            //     required: true,
-            // }
-
-        },
-        messages: {
-            name: {
-                required: 'Bạn cần nhập tên V-Store'
-            },
-            id_vdone: {
-                required: 'Bạn cần nhập ID người đại diện'
-            },
-            email: {
-                required: 'Bạn cần nhập địa chỉ Email'
-            },
-            company_name: {
-                required: 'Bạn cần nhập tên công ty'
-            },
-            tax_code: {
-                required: 'Bạn cần nhập mã số thuế'
-            },
-            address: {
-                required: 'Bạn cần nhập địa chỉ'
-            },
-            password: {
-                required: 'Bạn phải nhập mật khẩu',
-
-            },
-            password_confirmation: {
-                required: 'Bạn phải nhập lại mật khẩu',
-                equalTo: 'Mật khẩu không khớp'
-            },
-            phone_number: {
-                required: 'Số điện thoại bắt buộc nhập',
-            },
-            // checkbox: {
-            //     required: 'Bạn chưa đồng ý với điều khoản của chúng tôi',
-            // },
-        },
-        submitHandler: function (form) {
-            form.submit();
-        }
-    });
+    // $('#formRegister-V').validate({
+    //     rules: {
+    //         name: {
+    //             required: true,
+    //         },
+    //         id_vdone: {
+    //             required: true,
+    //         },
+    //         email: {
+    //             required: true,
+    //         },
+    //         company_name: {
+    //             required: true,
+    //         },
+    //         tax_code: {
+    //             required: true,
+    //         },
+    //         address: {
+    //             required: true,
+    //         },
+    //         phone_number: {
+    //             required: true,
+    //         },
+    //         password: {
+    //             required: true,
+    //
+    //         },
+    //         password_confirmation: {
+    //             required: true,
+    //             equalTo: '#password'
+    //         },
+    //
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: 'Bạn cần nhập tên V-Kho'
+    //         },
+    //         id_vdone: {
+    //             required: 'Bạn cần nhập ID người đại diện'
+    //         },
+    //         email: {
+    //             required: 'Bạn cần nhập địa chỉ Email'
+    //         },
+    //         company_name: {
+    //             required: 'Bạn cần nhập tên công ty'
+    //         },
+    //         tax_code: {
+    //             required: 'Bạn cần nhập mã số thuế'
+    //         },
+    //         address: {
+    //             required: 'Bạn cần nhập địa chỉ'
+    //         },
+    //         password: {
+    //             required: 'Bạn phải nhập mật khẩu',
+    //
+    //         },
+    //         phone_number: {
+    //             required: 'Số điện thoại bắt buộc nhập',
+    //         },
+    //     },
+    //     submitHandler: function (form) {
+    //         form.submit();
+    //     }
+    // });
 </script>
 <script !src="">
     const divCity = document.getElementById('city_id');

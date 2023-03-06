@@ -25,11 +25,19 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Ảnh kho hàng:</span>
-                    <span class="text-title"><img style="width: 100%;height: 250px" src="{{asset($user->image_storage) ?? ''}}" alt=""></span>
+                    <span class="text-title">
+                        @foreach(json_decode($user->image_storage) as $img)
+                            <img style="width: 100%;height: 250px" src="{{asset($img) ?? ''}}" alt="">
+                        @endforeach
+                    </span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Ảnh chứng nhận PCCC:</span>
-                    <span class="text-title"><img style="width: 100%;height: 250px" src="{{asset($user->image_pccc) ?? ''}}" alt=""></span>
+                    <span class="text-title">
+                                    @foreach(json_decode($user->image_pccc) as $img)
+                            <img style="width: 100%;height: 250px" src="{{asset($img) ?? ''}}" alt="">
+                        @endforeach
+
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Diện tích kho lạnh:</span>

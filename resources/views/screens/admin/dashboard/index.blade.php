@@ -11,7 +11,7 @@
 @section('content')
     <div
         class="grid grid-cols-1 lg:grid-cols-12 flex flex-col items-center lg:items-start gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
-        <div class="lg:oder-1 order-2 2xl:col-span-12 lg:col-span-12 lg:pl-7 md:pt-7">
+        <div class="lg:oder-1 order-2 2xl:col-span-12 lg:col-span-12 lg:pl-7 md:pt-7 xl:px-12 px-4">
             <div class="flex flex-col justify-start items-start gap-16 md:mt-[60px]">
                 <div class="result w-full">
                     <div class="flex flex-col justify-start items-start gap-4">
@@ -165,7 +165,7 @@
 
 
         </div>
-    </div>
+
 @endsection
 @section('custom_js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -174,12 +174,12 @@
             new Chart(document.getElementById("bar-chart-grouped"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
+                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
                     datasets: [
                         {
                             label: "Africa",
                             backgroundColor: "#3e95cd",
-                            data: ['110000', '120000', '140000', '125000', '160000', '180000', '160000', '150000', '200000', '210000', '190000', '220000',]
+                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',]
                         }
                     ]
                 },
@@ -203,12 +203,12 @@
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
+                    labels: ["01/2023", "02/2023", "03/2023", "04/2023", "05/2023", "06/2023", "07/2023", "08/2023", "09/2023", "10/2023", "11/2023", "12/2023"],
                     datasets: [
                         {
                             label: "Population (millions)",
                             backgroundColor: "#3e95cd",
-                            data: [426, 434, 468, 523, 584, 596, 524, 612, 618, 694, 648, 688]
+                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                         }
                     ]
                 },

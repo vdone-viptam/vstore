@@ -111,7 +111,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#495057] text-sm  text__menu">Quản lý sản
+                                    <p class="text-[#495057] text-sm  text__menu">Sản
                                         phẩm</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">

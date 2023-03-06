@@ -34,14 +34,13 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
-                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store:</span>
+                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount ?? 0}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-{{--                                                <span class="text-title font-medium  ">Phần trăm chiết khấu bán s:</span>--}}
-                        <input disabled name="discount_vshop" type="hidden" id="discount_vshop"
-                               value="{{$product1->discount_vShop}}"
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều:</span>
+                        <input disabled name="buy_more" id="buy_more" value="{{$products->buy_more ?? 0}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
@@ -53,18 +52,25 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
                             <input type="date" name="start_date" value="{{$discount->start_date}}"
+                                   min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-
+                            @error('start_date')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
                             <input type="date" name="end_date" value="{{$discount->end_date}}"
+                                   min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d') }}" required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            @error('end_date')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
 
                     </div>
-                    <p class="text-red-600" id="message">Phần trăm chiết khẩu không được vượt quá của nhà cung cấp và
-                        v-shop</p>
+                    <p class="text-red-600" id="message">Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết
+                        khấu</p>
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     <button
@@ -83,12 +89,15 @@
 </form>
 
 <script>
-    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+    document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
+        document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
+    });
     document.getElementById('discount').addEventListener('keyup', (o) => {
-        const value = o.target.value;
-        console.log(value)
-        if (document.getElementById('discount').value <
-            Number(document.querySelector('#discount_ncc').value + document.querySelector('#discount_vshop').value)) {
+        const value = +o.target.value;
+
+        if (value > 0 && value <=
+            100 - Number(document.querySelector('#discount_ncc').value) + Number(document.querySelector('#buy_more').value)) {
+
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
@@ -106,17 +115,17 @@
         $.ajax({
             url: '{{route('screens.manufacture.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
-                console.log(result)
+
                 if (result) {
                     document.querySelector('#price').value = result.pro.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.discount
                     document.querySelector('#discount_ncc').value = result.pro.discount
-
+                    document.querySelector('#buy_more').value = result.pro.buy_more + ' %'
                     document.getElementById('discount').addEventListener('keyup', (o) => {
-                        const value = o.target.value;
+                        const value = +o.target.value;
 
-                        if (value < Number(result.pro.discount + result.discount)
-                            || document.getElementById('discount').value < Number(result.pro.discount - result.discount)) {
+                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more && value > 0)
+                            || document.getElementById('discount').value <= Number(result.pro.discount + result.pro.buy_more)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 

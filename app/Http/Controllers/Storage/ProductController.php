@@ -81,14 +81,14 @@ class ProductController extends Controller
 //        $count = count($product);
 
         $warehouses = Warehouses::where('user_id',Auth::id())->first();
-        $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc');
+        $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc')->orderBy('id','desc');
         if ($request->key_search  ){
             $bill_detai = $bill_detai->where('code','like','%'.$request->key_search.'%');
 
         }
         $bill_detai=$bill_detai->paginate($limit);
         $count = count($bill_detai);
-
+//        return $bill_detai;
         return view('screens.storage.product.requestOut', compact('bill_detai','count'));
     }
 

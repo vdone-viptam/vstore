@@ -14,10 +14,12 @@ return new class extends Migration {
     {
         Schema::create('bill_more_discount', function (Blueprint $table) {
             $table->id();
+            $table->string('pdone_id')->default(0);
             $table->integer('start')->default(0);
             $table->integer('end')->default(0);
             $table->float('discount', 11, 2);
             $table->integer('product_id')->default(0);
+
             $table->timestamps();
         });
     }

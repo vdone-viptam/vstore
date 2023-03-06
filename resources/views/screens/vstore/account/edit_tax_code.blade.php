@@ -70,7 +70,6 @@
                             <div
                                 class="flex flex-col justify-start items-start pb-6 border-b-[1px] border-grey w-full gap-2">
                                 <h3 class="captilize font-medium text-xl text-title">Cập nhật mã số thuế</h3>
-                                <span class="text-secondary">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
                             </div>
 
                             <div class="flex flex-col justify-center items-center pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">
@@ -88,7 +87,7 @@
                                 <div class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
                                     <span class="w-full text-title font-medium">Mã số thuế mới</span>
                                     <input type="text" name="tax_code" value="{{old('tax_code')}}"
-
+                                           pattern="[0-9]{10}"
                                            class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                     <div class="w-full">
                                         @error('tax_code')

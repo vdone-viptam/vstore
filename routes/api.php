@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Route;
 //        "req" => $req
 //    ]);
 //});
+Route::post('callback-viettel-post',[\App\Http\Controllers\ViettelpostController::class,'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -46,7 +47,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //});
 //Route::group(['domain' => config('domain.api')], function () {
 Route::domain(config('domain.api'))->group(function () {
-    Route::post('callback-viettel-post',[\App\Http\Controllers\ViettelpostController::class,'index']);
+
 
     Route::prefix('product')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);

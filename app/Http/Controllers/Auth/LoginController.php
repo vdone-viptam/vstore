@@ -68,10 +68,24 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request)
     {
-        if ($request->role_id == 3) {
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
+
+        if ($role_id == 3) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required|unique:users',
+                'name' => 'required',
                 'company_name' => 'required',
                 'tax_code' => 'required',
                 'address' => 'required',
@@ -85,7 +99,6 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà phân phối bắt buộc nhập',
-                'name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -94,11 +107,11 @@ class LoginController extends Controller
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
-        } elseif ($request->role_id == 4) {
+        } elseif ($role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required|unique:users',
-                'company_name' => 'required||unique:users',
+                'name' => 'required',
+                'company_name' => 'required',
                 'tax_code' => 'required|max:255',
                 'address' => 'required|max:255',
                 'phone_number' => 'required|max:255',
@@ -107,9 +120,6 @@ class LoginController extends Controller
                 'volume' => 'required',
                 'image_storage' => 'required',
                 'image_pccc' => 'required',
-                'length' => 'required',
-                'with' => 'required',
-                'height' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required'
 
@@ -118,27 +128,22 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
-                'name.unique' => 'Tên công ty đã tồn tại',
-                'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-                'floor_area.required' => 'trường này không được trống',
-                'volume.required' => 'trường này không được trống',
-                'image_storage.required' => 'trường này không được trống',
-                'image_pccc.required' => 'trường này không được trống',
-                'length.required' => 'trường này không được trống',
-                'with.required' => 'trường này không được trống',
-                'height.required' => 'trường này không được trống',
+                'floor_area.required' => 'Diện tích kho bắt buộc nhập',
+                'volume.required' => 'Thể tích kho bắt buộc nhập',
+                'image_storage.required' => 'Ảnh kho bắt buộc nhập',
+                'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
-        } elseif ($request->role_id == 2) {
+        } elseif ($role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required|unique:users',
+                'name' => 'required',
                 'company_name' => 'required|unique:users',
                 'tax_code' => 'required',
                 'address' => 'required',
@@ -151,7 +156,6 @@ class LoginController extends Controller
                 'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
-                'name.unique' => 'Tên nhà cung cấp đã tồn tại',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
@@ -162,6 +166,7 @@ class LoginController extends Controller
                 'district_id' => 'Quận (huyện) bắt buộc chọn'
             ]);
         }
+
         try {
             if ($validator->fails()) {
 
@@ -171,34 +176,29 @@ class LoginController extends Controller
 
 
             DB::beginTransaction();
-            $domain = $request->getHttpHost();
-            if ($domain == config('domain.admin')) {
-                $role_id = 1;
-            }
-            if ($domain == config('domain.ncc')) {
-                $role_id = 2;
-            }
-            if ($domain == config('domain.vstore')) {
-                $role_id = 3;
-            }
-            if ($domain == config('domain.storage')) {
-                $role_id = 4;
-            }
             $checkEmail = DB::table('users')
                 ->where('email', $request->email)
-                ->where('role_id', $request->role_id)
+                ->where('role_id', $role_id)
                 ->count();
 
             if ($checkEmail > 0) {
                 return redirect()->back()->withErrors(['email' => 'Email đã được đăng ký.'])->withInput($request->all());
             }
-
-            $checkTax = DB::table('users')
-                ->where('tax_code', $request->tax_code)
+            if ($role_id != 4) {
+                $checkTax = DB::table('users')
+                    ->where('tax_code', $request->tax_code)
+                    ->where('role_id', $role_id)
+                    ->count();
+                if ($checkTax > 0) {
+                    return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
+                }
+            }
+            $checkTax2 = DB::table('users')
+                ->where('name', $request->name)
                 ->where('role_id', $role_id)
                 ->count();
-            if ($checkTax > 0) {
-                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
+            if ($checkTax2 > 0) {
+                return redirect()->back()->withErrors(['name' => 'Tên đã tồn tại.'])->withInput($request->all());
             }
             $user = new User();
             $user->name = $request->name;
@@ -221,25 +221,32 @@ class LoginController extends Controller
                 $cold_storage = $request->cold_storage ?? '';
                 $warehouse = $request->warehouse ?? '';
                 $normal_storage = $request->normal_storage ?? $request->volume;
-                $filestorage = '';
-                $filepccc = '';
+                $file = [];
                 if ($request->hasFile('image_storage')) {
-                    $file = $request->file('image_storage');
-                    $filestorage = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('image/users'), $filestorage);
+
+
+                    foreach ($request->file('image_storage') as $img) {
+                        $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                        $img->move(public_path('image/users'), $filestorage);
+                        $file[] = 'image/users' . $filestorage;
+                    }
+
 
                 }
+                $file1 = [];
                 if ($request->hasFile('image_pccc')) {
-                    $file = $request->file('image_pccc');
-                    $filepccc = date('YmdHi') . $file->getClientOriginalName();
-                    $file->move(public_path('image/users'), $filepccc);
 
+                    foreach ($request->file('image_pccc') as $img) {
+                        $filepccc = date('YmdHi') . $img->getClientOriginalName();
+                        $img->move(public_path('image/users'), $filepccc);
+                        $file1[] = 'image/users' . $filepccc;
+                    }
                 }
                 $storage_information = [
                     'floor_area' => $request->floor_area,
                     'volume' => $request->volume,
-                    'image_storage' => 'image/users' . $filestorage,
-                    'image_pccc' => 'image/users' . $filepccc,
+                    'image_storage' => json_encode($file),
+                    'image_pccc' => json_encode($file1),
                     'cold_storage' => $cold_storage,
                     'warehouse' => $warehouse,
                     'normal_storage' => $normal_storage,
@@ -264,9 +271,8 @@ class LoginController extends Controller
             }
 //            return 1
         } catch (\Exception $e) {
-//            dd($e->getMessage());
             DB::rollBack();
-            return redirect()->back()->with('error', 'true');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
 
         }
 
@@ -300,10 +306,11 @@ class LoginController extends Controller
                 $role_id = 4;
             }
 
-            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id]) || Auth::attempt(['code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
                 if (Auth::user()->status == 4) {
                     return redirect()->back()->with('error', 'Tài khoản đã hết hạn sử dụng.Liên hệ quản trị viên để gia hạn tài khoản');
                 }
+//                return Auth::user();
                 $token = Str::random(32);
                 $userLogin = Auth::user();
                 $login = new Otp();
@@ -321,6 +328,7 @@ class LoginController extends Controller
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 
@@ -414,7 +422,7 @@ class LoginController extends Controller
             abort(404);
         }
 
-        return view('auth.formReset',['role_id' => $role_id]);
+        return view('auth.formReset', ['role_id' => $role_id]);
     }
 
     public function postResetForgot(Request $request, $token)
@@ -465,10 +473,24 @@ class LoginController extends Controller
 
     public function OTP($token1, Request $request)
     {
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
 
         return view('auth.otp', [
             'token' => $token1,
-            'user_id' => $request->id
+            'user_id' => $request->id,
+            'role_id' => $role_id
         ]);
     }
 

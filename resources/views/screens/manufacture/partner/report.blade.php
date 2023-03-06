@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Báo cáo')
+@section('page_title','Báo cáo V-Store')
 
 @section('modal')
     <div class="modal modal-details">

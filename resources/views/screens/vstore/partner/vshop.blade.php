@@ -16,7 +16,7 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.vstore.partner.vshop')}}" class="text-blueMain font-medium italic">V-Shop</a>
+            <a href="{{route('screens.vstore.partner.vshop')}}" class="text-blueMain font-medium italic">Danh sách V-Shop</a>
 
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
@@ -121,39 +121,43 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @if(count($vshop) ==0)
+                            <tr>
+                                <td colspan="7">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
+                        @else
+                            @foreach( $vshop as $val)
+                                <tr>
+                                    <td>{{$val->id_pdone}}</td>
+                                    <td>
+                                        {{$val->name!= '' ? $val->name  :'-'}}
+                                    </td>
+                                    <td>
+                                        {{$val->phone_number!= '' ? $val->phone_number  :'-'}}
+                                    </td>
+                                    <td>
+                                        {{$val->count != '' ? $val->count  :'-'}}
+                                    </td>
+                                    <td>
+                                        -
+                                    </td>
+                                    <td>-</td>
+                                    <td>
 
-                       @foreach( $vshop as $val)
-                           <tr>
-                               <td>{{$val->id_pdone}}</td>
-                               <td>
-                                   {{$val->name!= '' ? $val->name  :'-'}}
-                               </td>
-                               <td>
-                                   {{$val->phone_number!= '' ? $val->phone_number  :'-'}}
-                               </td>
-                               <td>
-                                   {{$val->count != '' ? $val->count  :'-'}}
-                               </td>
-                               <td>
-                                  -
-                               </td>
-                               <td>-</td>
-                               <td>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
 
-                               </td>
-                           </tr>
-                       @endforeach
 
                         </tbody>
                     </table>
-                    @if(count($vshop) ==0)
-                        <p class="text-sm"> Không tìm thấy kết quả phù hợp</p>
-                    @endif
+
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                                         <span class="text-sm text-title">Tổng: <strong
                                                 class="font-bold">{{$count}}</strong></span>
-                                        @include('layouts.custom.paginator', ['paginator' => $vshop])
+                    @include('layouts.custom.paginator', ['paginator' => $vshop])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">

@@ -5,13 +5,13 @@
 
     </div>
 @endsection
-@section('page_title','Danh sách sản phẩm')
+@section('page_title','Tất cả sản phẩm')
 
 @section('content')
 
     <form action="" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Sản phẩm</span>
+            <span class="text-secondary">Quản lý sản phẩm</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
@@ -143,7 +143,9 @@
                             <th>
 
                             </th>
+                            <th>
 
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -169,7 +171,7 @@
                                         {{isset($prams['condition']) && $params['condition'] == 3 ? $product->cate_name : $product->category->name}}
                                     </td>
                                     <td>
-                                        {{ number_format($product->price,'0','','.')}}
+                                        {{ number_format($product->price,0,'','.')}}
                                     </td>
                                     <td>
                                         {{$product->vStore->name ?? '-'}}
@@ -179,10 +181,12 @@
                                     <td>
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline"> Chi tiết</a>
-                                        @if($product->status ==0 && $product->vstore_id =='' )
-                                            <a href="{{route('screens.manufacture.product.edit',['id'=>$product->id])}}" class="bg-transparent hover:bg-blue-500 text-primary  hover:text-white py-2 px-4 border border-primary hover:border-transparent rounded">Sửa</a>
-                                        @endif
+
                                     </td>
+                                    <td> @if($product->status ==0 && $product->vstore_id =='' )
+                                            <a href="{{route('screens.manufacture.product.edit',['id'=>$product->id])}}"
+                                               class="bg-transparent hover:bg-blue-500 text-primary  hover:text-white py-2 px-4 border border-primary hover:border-transparent rounded">Sửa</a>
+                                        @endif</td>
                                 </tr>
                             @endforeach
                         @else

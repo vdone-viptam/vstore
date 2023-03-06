@@ -130,7 +130,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                            <input type="number" placeholder="Nhập giá sản phẩm" name="price" id="price"
+                            <input type="text" placeholder="Nhập giá sản phẩm" name="price" id="price"
                                    value="{{$product->price}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')

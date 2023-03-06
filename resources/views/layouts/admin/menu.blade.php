@@ -110,7 +110,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý sản
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Sản
                                 phẩm</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -122,9 +122,7 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16 list hidden xl:max-w-[230px] md:max-w-[200px]">
-                <li class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Tất cả sản
-                        phẩm</a>
-                </li>
+
                 <li data-page="index" class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý
                         yêu cầu
                         xét duyệt
@@ -201,7 +199,8 @@
                                                     href="{{route('screens.admin.user.index')}}">Danh sách đơn đăng
                         ký tài khoản </a>
                 <li data-page="request-change-tax-code"><a class="hover:underline"
-                                                    href="{{route('screens.admin.user.tax_code')}}">Yêu cầu cập nhật mã số thuế</a>
+                                                           href="{{route('screens.admin.user.tax_code')}}">Yêu cầu cập
+                        nhật mã số thuế</a>
                 </li>
             </ul>
         </div>
@@ -241,8 +240,8 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
-                <li data-page="history"><a class="hover:underline"
-                                           href="{{route('screens.admin.finance.index')}}">Yêu cầu rút tiền</a>
+                <li data-page="request-deposit"><a class="hover:underline"
+                                                   href="{{route('screens.admin.finance.index')}}">Yêu cầu rút tiền</a>
                 </li>
 
             </ul>
@@ -280,7 +279,8 @@
                                                    href="{{route('screens.admin.account.changePassword')}}">Đổi mật
                         khẩu</a>
                 </li>
-                <li data-page="/"><a class="hover:underline" href="{{route('screens.admin.banner.index')}}">Quản lý banner</a></li>
+                <li data-page="banners"><a class="hover:underline" href="{{route('screens.admin.banner.index')}}">Quản
+                        lý banner</a></li>
 
             </ul>
         </div>

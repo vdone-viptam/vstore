@@ -104,7 +104,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Hàng hóa</p>
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Sản phẩm</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"
@@ -152,8 +152,7 @@
                 </div>
             </div>
             <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
-                <li data-page="new"><a class="hover:underline" href="{{Route('screens.vstore.order.new')}}">Đơn hàng
-                        mới</a></li>
+
                 <li data-page="/"><a class="hover:underline" href="{{Route('screens.vstore.order.index')}}">Tất cả đơn
                         hàng</a></li>
             </ul>

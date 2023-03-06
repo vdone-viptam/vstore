@@ -12,7 +12,7 @@
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
-    <meta property="og:image:width" content="120">
+    <meta property="og:image:width" content="130">
     <meta property="og:image:height" content="100">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
@@ -88,30 +88,20 @@
         l[0].classList.remove("hidden");
         checkUnder(tm[1], a)
     }
-    if (param === "warehouses") {
-        tm[2].classList.toggle("active")
+    if (param === "partners") {
+        tm[2].classList.toggle("active");
         l[1].classList.remove("hidden");
         checkUnder(tm[2], a)
     }
-    if (param === "partners") {
+    if (param === "finances") {
         tm[3].classList.toggle("active");
         l[2].classList.remove("hidden");
         checkUnder(tm[3], a)
     }
-    if (param === "orders") {
-        tm[4].classList.toggle("active");
+    if (param === "account") {
+        tm[4].classList.toggle("active")
         l[3].classList.remove("hidden");
         checkUnder(tm[4], a)
-    }
-    if (param === "finances") {
-        tm[5].classList.toggle("active");
-        l[4].classList.remove("hidden");
-        checkUnder(tm[5], a)
-    }
-    if (param === "account") {
-        tm[6].classList.toggle("active")
-        l[5].classList.remove("hidden");
-        checkUnder(tm[6], a)
     }
 
     function checkUnder(element, param) {

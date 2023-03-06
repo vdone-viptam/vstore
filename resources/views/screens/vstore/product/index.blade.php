@@ -4,17 +4,17 @@
     <div id="modal2"></div>
 @endsection
 
-@section('page_title','Danh sách sản phẩm')
+@section('page_title','Tất cả sản phẩm')
 
 @section('content')
     <form action="" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Hàng hóa</span>
+            <span class="text-secondary">Sản phẩm</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Danh sách sản phẩm</a>
+            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Tất cả sản phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -24,7 +24,7 @@
                     <option value="0">Tất cả</option>
                     <option
                         value="requests.code" {{isset($params['condition']) && $params['condition'] == 'requests.code' ? 'selected' : ''}}>
-                        Mã yêu cầu
+                        Mã sản phẩm
                     </option>
                     <option
                         value="products.name" {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
@@ -84,7 +84,7 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        Danh sách sản phẩm
+                        Tất cả sản phẩm
                     </h2>
 
 
@@ -110,14 +110,15 @@
                                 Ngày yêu cầu
                             </th>
                             <th>
-                                Nhà cung cấp yêu cầu
+                                Nhà cung cấp
                             </th>
                             <th class="w-[200px]">
-                                Trạng thái yêu cầu
+                                Giá bán (đ)
                             </th>
-                            <th>
-                                Chi tiết
-                            </th>
+                            <th>Chiết khấu (%)</th>
+{{--                            <th>--}}
+{{--                                Chi tiết--}}
+{{--                            </th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -126,13 +127,13 @@
 
                                 <tr>
                                     <td>
-                                        {{$product->code}}
-                                    </td>
-                                    <td>
-                                        {{$product->product_name}}
+                                        {{$product->publish_id}}
                                     </td>
                                     <td>
                                         {{$product->name}}
+                                    </td>
+                                    <td>
+                                        {{$product->cate_name}}
                                     </td>
                                     <td>
                                         {{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}
@@ -141,69 +142,18 @@
                                         {{$product->user_name}}
                                     </td>
                                     <td class="w-[200px]">
-                                        @if($product->status == 0)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                                        fill="white"/>
-                                                </svg>
-                                                Đang chờ duyệt
-                                            </div>
-                                        @elseif($product->status == 1)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                                        fill="white"/>
-                                                </svg>
-                                                Đã duyệt - chờ hệ thống duyệt
-                                            </div>
-                                        @elseif($product->status == 2)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap"> <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                                                                                                                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-                                                        fill="white"/>
-                                                </svg>
-                                                Từ chối
-                                            </div>
-                                        @elseif($product->status == 3)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                Hệ thống đồng ý
-                                            </div>
-                                        @else
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-                                                        fill="white"/>
-                                                </svg>
-                                                Hệ thống từ chối
-                                            </div>
-                                        @endif
+                                       {{number_format($product->price,0,',',',')}} đ
                                     </td>
                                     <td>
-                                        <a href="#" data-id="{{$product->id}}"
-                                           class="more-details text-primary underline">
-                                            Chi tiết</a>
+
+                                        {{$product->discount}}
+{{--                                        <a href="#" data-id="{{$product->id}}"--}}
+{{--                                           class="more-details text-primary underline">--}}
+{{--                                            Chi tiết</a>--}}
                                     </td>
                                 </tr>
                             @endforeach
-
+{{--                            nhh.hoang90@gmail.com--}}
                         @else
                             <tr>
                                 <td colspan="7">Không có dữ liệu phù hợp</td>

@@ -102,7 +102,7 @@
                             </svg>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Quản lý sản
+                            <p class="text-[#495057] xl:text-base lg:text-sm md:text-xs text__menu">Sản
                                 phẩm</p>
                             <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -117,10 +117,10 @@
                 <li class="hover:underline" data-page="/"><a href="{{route('screens.storage.product.index')}}">Tất
                         cả sản phẩm</a>
                 </li>
-                <li class="hover:underline" data-page="create-request"><a
+                <li class="hover:underline" data-page="request"><a
                         href="{{route('screens.storage.product.request')}}">
                         Yêu cầu gửi sản phẩm</a></li>
-                <li class="hover:underline" data-page="create-request"><a href="{{route('screens.storage.product.requestOut')}}">Yêu cầu xuất kho</a></li>
+                <li class="hover:underline" data-page="requestOut"><a href="{{route('screens.storage.product.requestOut')}}">Yêu cầu xuất kho</a></li>
             </ul>
         </div>
         {{-- Đối tác --}}

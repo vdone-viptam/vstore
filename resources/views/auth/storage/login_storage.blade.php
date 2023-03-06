@@ -107,7 +107,7 @@
                     khẩu?</a>            </div>
             {{--            bg-sky-500/100--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
-                <input type="submit" disabled
+                <input type="submit"
                        class="cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"
                        value="Đăng nhập">
                 <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_storage')}}"

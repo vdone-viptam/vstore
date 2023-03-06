@@ -35,7 +35,7 @@
                         <span class="text-title ">{{$request->price}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium  ">Chiết khấu:</span>
+                        <span class="text-title font-medium  ">Chiết khấu cho V-Store:</span>
                         <span class="text-title" id="discount" data-discount="{{$request->discount}}">{{$request->discount}}%</span>
                     </div>
                     {{--                    <div class="grid grid-cols-2 gap-4 w-full">--}}
@@ -59,15 +59,14 @@
                          @if($request->status == 2) style="display: none" @endif>
                         <label for="">Phần trăm chiết khấu V-Shop</label>
                         <div class="flex justify-start items-center gap-2 w-full">
-                            <input type="number " min="" name="discount_vShop"
+                            <input type="number" min="" name="discount_vShop"
                                    @if($request->status > 0) disabled @endif
                                    value="{{$request->status > 0 ? $request->discount_vshop : ''}}"
                                    class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
                         </div>
-                        <p class="text-red-600" style="display: none" id="messageDis">Phần trăm chiết khấu V-shop không
-                            được nhỏ hơn 50% chiết khấu
-                            V-store</p>
+                        <p class="text-red-600" style="display: none" id="messageDis">
+                            Phần trăm chiết khấu V-shop không được nhỏ hơn 50% chiết khấu V-Store và không lớn hơn 100% chiết khấu V-store</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
                         @if($request->status == 2)
@@ -85,8 +84,8 @@
 
                     @if($request->status == 0)
                         <button id="btnConfirm"
-                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70" >
-                            Lưu thay đổi
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                         Cập nhật
                         </button>
                     @endif
 
@@ -123,12 +122,13 @@
     })
 
     document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-        if (e.target.value < Number(document.getElementById('discount').dataset.discount) / 2) {
-            document.getElementById('messageDis').style.display = 'block';
-            document.getElementById('btnConfirm').style.display = 'none';
-        } else {
+        if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value > Number(document.getElementById('discount').dataset.discount) / 2) {
             document.getElementById('messageDis').style.display = 'none';
             document.getElementById('btnConfirm').style.display = 'block';
+
+        } else {
+            document.getElementById('messageDis').style.display = 'block';
+            document.getElementById('btnConfirm').style.display = 'none';
         }
 
     })

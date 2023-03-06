@@ -6,7 +6,7 @@
         }
     </style>
 @endsection
-@section('page_title','Dashboard')
+@section('page_title','Tổng quan')
 @section('content')
     <div
         class="grid grid-cols-1 lg:grid-cols-12  gap-y-4 xl:gap-10 pb-4 md:px-4 lg:px-0 bg-[#f9fbfe]">
@@ -134,7 +134,7 @@
                                     thêm</a>
                             </div>
                             @if(count($data)>=1)
-                            <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
+                                <div class="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-2 md:gap-4 w-full">
 
                                     @foreach($data as $a)
                                         <div class="pro flex flex-col w-full p-[4px] gap-2">
@@ -372,7 +372,7 @@
                                     fill="#4062FF"/>
                             </svg>
                             <span
-                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
+                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Đơn hàng trong <span
                                     class="date">1 tuần</span></span>
                         </div>
                         <div class="char p-4 xl:p-10 w-full">
@@ -397,7 +397,7 @@
                         {
                             label: "Africa",
                             backgroundColor: "#3e95cd",
-                            data: ['110000', '120000', '140000', '125000', '160000', '180000', '160000', '150000', '200000', '210000', '190000', '220000',]
+                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
                         }
                     ]
                 },
@@ -426,7 +426,7 @@
                         {
                             label: "Population (millions)",
                             backgroundColor: "#3e95cd",
-                            data: [426, 434, 468, 523, 584, 596, 524, 612, 618, 694, 648, 688]
+                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                         }
                     ]
                 },

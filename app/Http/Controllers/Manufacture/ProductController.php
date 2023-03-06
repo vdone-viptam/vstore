@@ -28,13 +28,14 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+//        return 1;
         $this->v['products'] = Product::select('products.id', 'publish_id', 'images', 'products.name', 'brand', 'category_id', 'price', 'products.status', 'vstore_id')
             ->join("categories", 'products.category_id', '=', 'categories.id')
             ->orderBy('id', 'desc');
         $limit = $request->limit ?? 10;
         if ($request->condition && $request->condition != 0) {
 
-            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
+            $this->v['products'] = $this->v['products']->where( ''. $request->condition.'', 'like', '%' . $request->key_search . '%');
         }
 
         $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
@@ -249,7 +250,7 @@ class ProductController extends Controller
             if ($request->product) {
 
                 $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop')
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop','description')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);

@@ -68,10 +68,15 @@
         checkUnder(tm[3], a)
 
     }
-    if (param === "account") {
+    if (param === "finances") {
         tm[4].classList.toggle("active")
         l[2].classList.remove("hidden");
         checkUnder(tm[4], a)
+    }
+    if (param === "account") {
+        tm[5].classList.toggle("active")
+        l[3].classList.remove("hidden");
+        checkUnder(tm[5], a)
     }
 
     function checkUnder(element, param) {

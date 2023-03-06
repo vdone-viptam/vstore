@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('code')->nullable();
             $table->string('name')->nullable();
             $table->string('phone_number')->nullable();
-            $table->float('total')->nullable();
+            $table->float('total',20,2)->nullable();
             $table->string('specific_address')->nullable();
             $table->string('id_pdone')->nullable();
             $table->string('address')->nullable();
