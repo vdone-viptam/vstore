@@ -320,19 +320,10 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML = data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option>Lựa chọn tỉnh (phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
         })
         .catch(console.error);
-    fetch('{{route('get_city')}}?type=2&value=' + 1, {
-        mode: 'no-cors',
 
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            divDistrict.innerHTML = data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
-        })
-        .catch(console.error);
     divCity.addEventListener('change', (e) => {
         fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
             mode: 'no-cors',
@@ -341,9 +332,16 @@
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                divDistrict.innerHTML = data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+                if (data.length > 0) {
+                    divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>`;
+                }
             })
-            .catch(console.error);
+            .catch(() => divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>`
+            )
+        ;
     });
 
 </script>

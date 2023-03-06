@@ -144,7 +144,7 @@ class LoginController extends Controller
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
-                'company_name' => 'required|unique:users',
+                'company_name' => 'required',
                 'tax_code' => 'required',
                 'address' => 'required',
                 'phone_number' => 'required',
@@ -271,13 +271,16 @@ class LoginController extends Controller
 
             if ($role_id == 2) {
 
-                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công chờ xét duyệt');
+                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
+Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
             if ($role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công chờ xét duyệt');
+                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
+Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
             if ($role_id == 4) {
-                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công chờ xét duyệt');
+                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
+Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
 //            return 1
         } catch (\Exception $e) {
