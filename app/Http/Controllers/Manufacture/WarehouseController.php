@@ -109,7 +109,7 @@ class WarehouseController extends Controller
 
         foreach ($kho as $wa) {
 //            return DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ""));
-            $wa->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ""))[0];
+            $wa->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ""))[0]->amount;
 
         }
 
