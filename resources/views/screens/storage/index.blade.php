@@ -189,7 +189,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Hàng nghìn Nhà cung cấp của V-Store đang chờ gửi hàng vào V-Kho.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Hàng nghìn Nhà cung cấp của V-Store đang chờ gửi hàng vào <br> V-Kho.</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
