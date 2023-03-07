@@ -14,6 +14,7 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
 
+
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <input type="text" value="{{isset($params['keyword']) ? $params['keyword'] : ''}}"
                        name="Tìm kiếm" id="Tìm kiếm"
