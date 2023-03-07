@@ -28,8 +28,9 @@
 
 </div>
 <div class="grid grid-cols-12">
+<div class="md:col-span-3 2xl:col-span-2 md:block hidden bg-[#F2F8FF]">
     @include('layouts.admin.menu')
-    <div class="md:col-span-3 2xl:col-span-2 md:block hidden">
+   
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.admin.header')
