@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DepositExport;
+use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\RequestChangeTaxCode;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -219,5 +222,10 @@ class UserController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
+    }
+
+    public function exportUser()
+    {
+        return Excel::download(new UserExport, Carbon::now()->format('d-m-Y') . ' -danh_sach_tai_khoan' . '.xlsx');
     }
 }
