@@ -3,7 +3,7 @@
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success flex justify-center items-center show-modal">
+        <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
@@ -39,17 +39,9 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                <select name="condition" id=""
-                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="publish_id">Mã sản phẩm</option>
-                    <option value="name">Tên sản phẩm</option>
-                    <option value="brand">Thương hiệu</option>
-                    <option value="3">Ngành hàng</option>
-                </select>
-
-                <input type="text" name="key_search"
+                <input type="text" name="keyword"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
-                       placeholder="Nhập từ khóa">
+                       placeholder="Tìm kiếm">
                 <button type="submit"
                         class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
@@ -147,18 +139,8 @@
                                         {{$request->publish_id}}
                                     </td>
                                     <td class="w-[200px]">
-                                        @if($request->status == 0)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                                        fill="white"/>
-                                                </svg>
-                                                Đang chờ duyệt
-                                            </div>
-                                        @elseif($request->status == 1)
+
+                                        @if($request->status == 1)
                                             <div
                                                 class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -177,9 +159,9 @@
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                Hệ thông đã duyệt
+                                                Hệ thống đã duyệt
                                             </div>
-                                        @else
+                                        @elseif($request->status == 4)
                                             <div
                                                 class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -211,7 +193,7 @@
 
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">{{$requests->total()}}</strong></span>
+                            class="font-bold">{{isset($total) ? $total :  $requests->total()}}</strong></span>
                     @include('layouts.custom.paginator', ['paginator' => $requests])
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"

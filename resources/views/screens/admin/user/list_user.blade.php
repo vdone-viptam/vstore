@@ -15,13 +15,10 @@
 
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                <input type="text" id="id" name="id" value="{{isset($params['id']) ? $params['id'] : ''}}"
-                       class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="ID">
-                <input type="text" value="{{isset($params['name']) ? $params['name'] : ''}}"
-                       name="name" id="name"
+                <input type="text" value="{{isset($params['keyword']) ? $params['keyword'] : ''}}"
+                       name="Tìm kiếm" id="Tìm kiếm"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="Tên nhà cung cấp / tên công ty">
+                >
                 <button type="submit"
                         class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
@@ -177,13 +174,13 @@
                                 hàng / trang
                             </option>
                         </select>
-                        <div class="flex justify-start items-center gap-2">
-                            <span class="text-title text-sm">Đi đến</span>
-                            <input type="number" name="page1" id="page"
-                                   value="{{isset($params['page1']) && $params['page1'] ? $params['page1'] : ''}}"
-                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"
-                            >
-                        </div>
+{{--                        <div class="flex justify-start items-center gap-2">--}}
+{{--                            <span class="text-title text-sm">Đi đến</span>--}}
+{{--                            <input type="number" name="page1" id="page"--}}
+{{--                                   value="{{isset($params['page1']) && $params['page1'] ? $params['page1'] : ''}}"--}}
+{{--                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
+{{--                            >--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
