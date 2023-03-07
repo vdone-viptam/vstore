@@ -2,7 +2,7 @@
 @section('page_title','Danh sách địa chỉ kho hàng')
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success flex justify-center items-center show-modal">
+        <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
@@ -112,76 +112,76 @@
 
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
-{{--        <div class="col-span-3">--}}
-{{--            <div class="p-6 border-b-[1px] border-grey">--}}
-{{--                <div class="flex flex-col justify-start items-start w-full">--}}
-{{--                    <div class="flex justify-start items-center gap-6 w-full">--}}
-{{--                        <div class="w-[49px]">--}}
-{{--                            <div class="w-[48px] h-[48px] rounded-full">--}}
-{{--                                <a href="{{route('screens.manufacture.account.profile')}}"><img--}}
-{{--                                        src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"--}}
-{{--                                        alt=""--}}
-{{--                                        class="w-full rounded-full"></a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="flex flex-col justify-start items-center gap-1 text-center">--}}
-{{--                            <span class="text-title font-medium">{{$infoAccount->account_code}}</span>--}}
-{{--                            <span class="text-sm text-secondary">Sửa hồ sơ</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="p-6">--}}
-{{--                <ul class="tab-side-user flex flex-col justify-start items-start gap-3 w-full">--}}
+        {{--        <div class="col-span-3">--}}
+        {{--            <div class="p-6 border-b-[1px] border-grey">--}}
+        {{--                <div class="flex flex-col justify-start items-start w-full">--}}
+        {{--                    <div class="flex justify-start items-center gap-6 w-full">--}}
+        {{--                        <div class="w-[49px]">--}}
+        {{--                            <div class="w-[48px] h-[48px] rounded-full">--}}
+        {{--                                <a href="{{route('screens.manufacture.account.profile')}}"><img--}}
+        {{--                                        src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"--}}
+        {{--                                        alt=""--}}
+        {{--                                        class="w-full rounded-full"></a>--}}
+        {{--                            </div>--}}
+        {{--                        </div>--}}
+        {{--                        <div class="flex flex-col justify-start items-center gap-1 text-center">--}}
+        {{--                            <span class="text-title font-medium">{{$infoAccount->account_code}}</span>--}}
+        {{--                            <span class="text-sm text-secondary">Sửa hồ sơ</span>--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--            <div class="p-6">--}}
+        {{--                <ul class="tab-side-user flex flex-col justify-start items-start gap-3 w-full">--}}
 
-{{--                    <li><a href="#" class="flex justify-start items-center gap-3">--}}
-{{--                            <div class="w-[21px]">--}}
-{{--                                <div class="w-[20px] h-[20px] rounded-full">--}}
-{{--                                    <img src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" alt=""--}}
-{{--                                         class="w-full rounded-full">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <span class="text-title text-lg font-medium">Tài khoản</span>--}}
-{{--                        </a>--}}
-{{--                        <ul class="tab-sub-user">--}}
-{{--                            <li><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>--}}
-{{--                            <li class="active"><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho--}}
-{{--                                    hàng</a>--}}
-{{--                            </li>--}}
-{{--                            <li><a href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-{{--                    <!-- <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
-{{--                        <div class="w-[20px] h-[20px] rounded-full">--}}
-{{--                            <img src="https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078" alt="" class="w-full rounded-full">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <span class="text-title">Đơn mua</span>--}}
-{{--                </a></li>--}}
-{{--                <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
-{{--                    <div class="w-[20px] h-[20px] rounded-full">--}}
-{{--                        <img src="https://cf.shopee.vn/file/e10a43b53ec8605f4829da5618e0717c" alt="" class="w-full rounded-full">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <span class="text-title">Thông báo</span>--}}
-{{--            </a></li>--}}
-{{--            <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
-{{--                <div class="w-[20px] h-[20px] rounded-full">--}}
-{{--                    <img src="https://cf.shopee.vn/file/84feaa363ce325071c0a66d3c9a88748" alt="" class="w-full rounded-full">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <span class="text-title">Kho Voucher</span>--}}
-{{--            </a></li>--}}
-{{--            <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
-{{--                <div class="w-[20px] h-[20px] rounded-full">--}}
-{{--                    <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" class="w-full rounded-full">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <span class="text-title">Shoppe Xu</span>--}}
-{{--            </a></li> -->--}}
-{{--                </ul>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--                    <li><a href="#" class="flex justify-start items-center gap-3">--}}
+        {{--                            <div class="w-[21px]">--}}
+        {{--                                <div class="w-[20px] h-[20px] rounded-full">--}}
+        {{--                                    <img src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" alt=""--}}
+        {{--                                         class="w-full rounded-full">--}}
+        {{--                                </div>--}}
+        {{--                            </div>--}}
+        {{--                            <span class="text-title text-lg font-medium">Tài khoản</span>--}}
+        {{--                        </a>--}}
+        {{--                        <ul class="tab-sub-user">--}}
+        {{--                            <li><a href="{{route('screens.manufacture.account.profile')}}">Hồ sơ</a></li>--}}
+        {{--                            <li class="active"><a href="{{route('screens.manufacture.account.address')}}">Địa chỉ kho--}}
+        {{--                                    hàng</a>--}}
+        {{--                            </li>--}}
+        {{--                            <li><a href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a></li>--}}
+        {{--                        </ul>--}}
+        {{--                    </li>--}}
+        {{--                    <!-- <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
+        {{--                        <div class="w-[20px] h-[20px] rounded-full">--}}
+        {{--                            <img src="https://cf.shopee.vn/file/f0049e9df4e536bc3e7f140d071e9078" alt="" class="w-full rounded-full">--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                    <span class="text-title">Đơn mua</span>--}}
+        {{--                </a></li>--}}
+        {{--                <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
+        {{--                    <div class="w-[20px] h-[20px] rounded-full">--}}
+        {{--                        <img src="https://cf.shopee.vn/file/e10a43b53ec8605f4829da5618e0717c" alt="" class="w-full rounded-full">--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--                <span class="text-title">Thông báo</span>--}}
+        {{--            </a></li>--}}
+        {{--            <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
+        {{--                <div class="w-[20px] h-[20px] rounded-full">--}}
+        {{--                    <img src="https://cf.shopee.vn/file/84feaa363ce325071c0a66d3c9a88748" alt="" class="w-full rounded-full">--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--            <span class="text-title">Kho Voucher</span>--}}
+        {{--            </a></li>--}}
+        {{--            <li><a href="#" class="flex justify-start items-center gap-3"><div class="w-[21px]">--}}
+        {{--                <div class="w-[20px] h-[20px] rounded-full">--}}
+        {{--                    <img src="https://cf.shopee.vn/file/a0ef4bd8e16e481b4253bd0eb563f784" alt="" class="w-full rounded-full">--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--            <span class="text-title">Shoppe Xu</span>--}}
+        {{--            </a></li> -->--}}
+        {{--                </ul>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
         <div class="col-span-12 ">
             <div class="box w-full">
                 <div class="flex flex-col justify-start items-start w-full p-6">
@@ -217,14 +217,15 @@
                                     <a href="#" data-id="{{$warehouse->id}}"
                                        class="edit-address text-primary font-medium hover:opacity-70 transition-all duration-200">Cập
                                         nhật</a>
-{{--                                    <a href="#" data-id="{{$warehouse->id}}"--}}
-{{--                                       class="delete-address text-primary font-medium hover:opacity-70 transition-all duration-200">--}}
-{{--                                        Xóa</a>--}}
+                                    {{--                                    <a href="#" data-id="{{$warehouse->id}}"--}}
+                                    {{--                                       class="delete-address text-primary font-medium hover:opacity-70 transition-all duration-200">--}}
+                                    {{--                                        Xóa</a>--}}
                                 </div>
                             </div>
                         </div>
                     @endforeach
                     <div>
+
                         @include('layouts.custom.paginator', ['paginator' => $infoAccount->Warehouses()])
                     </div>
                 </div>
@@ -249,7 +250,6 @@
                 });
             });
         });
-
 
 
         // on('click', function () {

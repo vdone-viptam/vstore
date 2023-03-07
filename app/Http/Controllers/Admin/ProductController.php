@@ -35,14 +35,28 @@ class ProductController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,price,requests.status,users.name as user_name,requests.created_at')
-            ->whereNotIn('requests.status', [2, 0]);
+            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at');
 
-        if ($request->condition && $request->condition != 0) {
-            $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
+
+        if (isset($request->keyword)) {
+            $this->v['requests'] = $this->v['requests']
+                ->orWhere('products.name', 'like', '%' . $request->keyword . '%')
+                ->orWhere('publish_id', $request->keyword)
+                ->orWhere('categories.name', 'like', '%' . $request->keyword . '%')
+                ->orWhere('users.name', 'like', '%' . $request->keyword . '%');
         }
-        $this->v['requests'] = $this->v['requests']->orderBy('requests.id', 'desc')
+        $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy('requests.id', 'desc')
             ->paginate($limit);
+        $a = $this->v['requests']->total();
+        foreach ($this->v['requests'] as $key => $val) {
+            if (!in_array((int)$val->status, [1, 3, 4])) {
+                unset($this->v['requests'][$key]);
+                $a -= 1;
+            }
+        }
+        if ($request->keyword) {
+            $this->v['total'] = $a;
+        }
         $this->v['params'] = $request->all();
         return view('screens.admin.product.index', $this->v);
 
@@ -79,23 +93,23 @@ class ProductController extends Controller
                     'admin_confirm_date' => Carbon::now(),
                     'status' => 2,
                     'vat' => $currentRequest->vat,
-                    'discount'=>$currentRequest->discount,
-                    'discount_vShop'=>$currentRequest->discount_vshop,
-                    'prepay'=>$currentRequest->prepay,
-                    'payment_on_delivery'=>$currentRequest->payment_on_delivery
+                    'discount' => $currentRequest->discount,
+                    'discount_vShop' => $currentRequest->discount_vshop,
+                    'prepay' => $currentRequest->prepay,
+                    'payment_on_delivery' => $currentRequest->payment_on_delivery
                 ]);
                 DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
                     'status' => 0,
-                    'vstore_id'=>null
+                    'vstore_id' => null
                 ]);
-                $deleteByMore = BuyMoreDiscount::where('product_id',$currentRequest->product_id)->delete();
+                $deleteByMore = BuyMoreDiscount::where('product_id', $currentRequest->product_id)->delete();
             }
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => asset('image/users'.$userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                 'href' => route('screens.manufacture.product.request')

@@ -87,34 +87,37 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required',
                 'company_name' => 'required',
-                'tax_code' => 'required',
+                'tax_code' => 'required|digits:10',
                 'address' => 'required',
-                'phone_number' => 'required',
+                'phone_number' => 'required|regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/',
                 'id_vdone' => 'required',
                 'city_id' => 'required',
-                'district_id' => 'required'
+                'district_id' => 'required',
+
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
-                'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà phân phối bắt buộc nhập',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
-                'district_id' => 'Quận (huyện) bắt buộc chọn'
+                'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'phone_number.regex' => 'Số điện thoại không hợp lệ',
+
             ]);
         } elseif ($role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
                 'company_name' => 'required',
-                'tax_code' => 'required|max:255',
+                'tax_code' => 'required|digits:10',
                 'address' => 'required|max:255',
-                'phone_number' => 'required|max:255',
+                'phone_number' => 'required|max:255|regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/',
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
@@ -125,7 +128,6 @@ class LoginController extends Controller
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
-                'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
@@ -138,22 +140,23 @@ class LoginController extends Controller
                 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
                 'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
-                'district_id' => 'Quận (huyện) bắt buộc chọn'
+                'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         } elseif ($role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
                 'company_name' => 'required',
-                'tax_code' => 'required',
+                'tax_code' => 'required|digits:10',
                 'address' => 'required',
-                'phone_number' => 'required',
+                'phone_number' => 'required|regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/',
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required'
             ], [
                 'email.required' => 'Email bắt buộc nhập',
-                'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
@@ -163,7 +166,9 @@ class LoginController extends Controller
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
-                'district_id' => 'Quận (huyện) bắt buộc chọn'
+                'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         }
 

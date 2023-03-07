@@ -11,7 +11,7 @@
                 <div class="w-[51px]">
                     <div class="w-[50px] h-[65px] ">
                         <img class="w-full cursor-pointer"
-                             src="{{asset('asset/images/userVstore.png')}}" class="w-full">
+                             src="{{asset('image/admin-01.png')}}" >
                     </div>
                 </div>
 

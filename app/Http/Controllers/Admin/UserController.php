@@ -31,13 +31,15 @@ class UserController extends Controller
     public function getListRegisterAccount(Request $request)
     {
         $this->v['users'] = User::select();
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         $limit = $request->limit ?? 10;
-        if (isset($request->name)) {
-            $this->v['users'] = $this->v['users']->where('company_name', 'like', '%' . $request->name . '%');
-        }
-        if (isset($request->id)) {
-            $this->v['users'] = $this->v['users']->where('id', $request->id);
+        if (isset($request->keyword)) {
+            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('email', 'like', '%' . $request->keyword . '%')
+                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
+                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
+                ->orwhere('tax_code', '=', $request->keyword)
+                ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
         $this->v['params'] = $request->all();
@@ -47,13 +49,15 @@ class UserController extends Controller
     public function getListUser(Request $request)
     {
         $this->v['users'] = User::select();
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         $limit = $request->limit ?? 10;
-        if (isset($request->name)) {
-            $this->v['users'] = $this->v['users']->where('company_name', 'like', '%' . $request->name . '%');
-        }
-        if (isset($request->id)) {
-            $this->v['users'] = $this->v['users']->where('id', $request->id);
+        if (isset($request->keyword)) {
+            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('email', 'like', '%' . $request->keyword . '%')
+                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
+                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
+                ->orwhere('tax_code', '=', $request->keyword)
+                ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
