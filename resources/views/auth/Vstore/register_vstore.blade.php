@@ -145,7 +145,7 @@
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
                     <select name="city_id" id="city_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="">Lựa chọn tỉnh (thành phố)</option>
+                        <option value="0">Lựa chọn tỉnh (thành phố)</option>
                     </select>
                     @error('city_id')
                     <p class="text-red-600">{{$message}}</p>
@@ -155,7 +155,7 @@
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
                     <select name="district_id" id="district_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="">Lựa chọn quận (huyện)</option>
+                        <option value="0">Lựa chọn quận (huyện)</option>
                     </select>
                     @error('district_id')
                     <p class="text-red-600">{{$message}}</p>
@@ -304,7 +304,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML += data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option value="0">Lựa chọn tỉnh (phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
         })
         .catch(console.error);
 
@@ -315,10 +315,15 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
-                divDistrict.innerHTML += data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+                if (data.length > 0) {
+                    divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>`;
+                }
             })
-            .catch(console.error);
+            .catch(() => divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>`
+            )
     });
 
 </script>

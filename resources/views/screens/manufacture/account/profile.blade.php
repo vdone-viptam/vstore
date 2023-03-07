@@ -122,23 +122,18 @@
                             <textarea type="text" name="description" id="description" rows="5"
                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                             >{{$infoAccount->description}}</textarea>
-                        </div>
-                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-full md:w-[280px]">Link Website:</span>
-                            <div class="w-full flex flex-col justify-start items-start gap-2">
-                                @if($infoAccount->link_web =='')
-                                    <input type="text" name="link_website"
-                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm"
-                                           value="{{$infoAccount->link_website ?? asset('p/'.$infoAccount->slug)}}">
-                                @else
-                                    <input type="text" name="link_website"
-                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
-                                           value="{{$infoAccount->link_web }}">
-                                @endif
 
-                                @error('link_website')
-                                <p class="text-red-600">{{$message}}</p>
-                                @enderror
+                        </div>
+                        @error('description')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Slug:</span>
+                            <div class="w-full flex flex-col justify-start items-start gap-2">
+                                <input type="text" name="link_website"
+                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm"
+                                       value="{{$infoAccount->slug}}">
+
                             </div>
                         </div>
 
@@ -260,17 +255,9 @@
                                     <span>{{$infoAccount->id_vdone_diff}}</span>
                                 </div>
                                 <div class="flex flex-wrap lg:flex-nowrap justify-start items-center gap-4 w-full">
-                                    <span class="text-secondary">Link website: </span>
-
-                                    <span>
-                                        @if($infoAccount->link_web == '')
-                                            <a class="underline"
-                                               href="{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}">{{$infoAccount->link_web ?? asset('p/'.$infoAccount->slug)}}</a>
-                                        @else
-                                            <a class="underline"
-                                               href="{{$infoAccount->link_web}}">{{$infoAccount->link_web}}</a>
-                                        @endif
-                                    </span>
+                                    <span class="text-secondary">Slug: </span>
+                                    <span><a
+                                            href="{{route('intro',['slug'=> $infoAccount->slug])}}">{{config('domain.vstore')}}/{{$infoAccount->slug}}</a></span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <a href="#"
@@ -294,9 +281,9 @@
                                     <div class="w-[200px] file-avt">
                                         <div style="" class="w-full h-[100px]  text-center ">
                                             <img style=""
-                                                src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
-                                                alt=""
-                                                class="w-[100px] m-auto  object-contain">
+                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
+                                                 alt=""
+                                                 class="w-[100px] m-auto  object-contain">
                                         </div>
                                     </div>
                                     <button type="button"

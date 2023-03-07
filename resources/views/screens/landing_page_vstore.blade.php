@@ -227,8 +227,8 @@
                     </div>
                     <div class="flex flex-col gap-3">
                         <div class="flex items-center gap-1 md:gap-2 flex-wrap">
-                            <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{$ps->gia_khuyen_mai}}</span>
-                            <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{$ps->price}}</span>
+                            <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{number_format($ps->gia_khuyen_mai)}}</span>
+                            <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{number_format($ps->price)}}</span>
                         </div>
                         <span class="text-[#696984] text-xs md:text-lg">{{$ps->amount_product_sold}}</span>
                     </div>
@@ -262,10 +262,10 @@
                             <div class="flex flex-col gap-3">
                                 <div class="flex items-center gap-1 md:gap-2 flex-wrap">
                                     @if($pro->price_discount)
-                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ $pro->price_discount }}</span>
-                                        <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{$pro->price}}</span>
+                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ number_format($pro->price_discount) }}</span>
+                                        <span class="text-xs md:text-lg text-[#CBCBD5] line-through">đ {{number_format($pro->price)}}</span>
                                     @else
-                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{ $pro->price }}</span>
+                                        <span class="text-xl md:text-2xl font-semibold text-[#FF3750]">đ {{number_format( $pro->price )}}</span>
                                     @endif
 
                                 </div>

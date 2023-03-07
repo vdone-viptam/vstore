@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DepositExport;
+use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\RequestChangeTaxCode;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -28,13 +31,15 @@ class UserController extends Controller
     public function getListRegisterAccount(Request $request)
     {
         $this->v['users'] = User::select();
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         $limit = $request->limit ?? 10;
-        if (isset($request->name)) {
-            $this->v['users'] = $this->v['users']->where('company_name', 'like', '%' . $request->name . '%');
-        }
-        if (isset($request->id)) {
-            $this->v['users'] = $this->v['users']->where('id', $request->id);
+        if (isset($request->keyword)) {
+            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('email', 'like', '%' . $request->keyword . '%')
+                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
+                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
+                ->orwhere('tax_code', '=', $request->keyword)
+                ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
         $this->v['params'] = $request->all();
@@ -44,13 +49,15 @@ class UserController extends Controller
     public function getListUser(Request $request)
     {
         $this->v['users'] = User::select();
-        $request->page = $request->page1 > 0 ? $request->page1 : $request->page;
         $limit = $request->limit ?? 10;
-        if (isset($request->name)) {
-            $this->v['users'] = $this->v['users']->where('company_name', 'like', '%' . $request->name . '%');
-        }
-        if (isset($request->id)) {
-            $this->v['users'] = $this->v['users']->where('id', $request->id);
+        if (isset($request->keyword)) {
+            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('name', 'like', '%' . $request->keyword . '%')
+                ->orwhere('email', 'like', '%' . $request->keyword . '%')
+                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
+                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
+                ->orwhere('tax_code', '=', $request->keyword)
+                ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
@@ -70,13 +77,13 @@ class UserController extends Controller
 
             } elseif ($user->role_id == 4) {
                 $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-                $number = User::where('tax_code', $user->tax_code )->where('role_id',4)->count();
+                $number = User::where('tax_code', $user->tax_code)->where('role_id', 4)->count();
                 if ($number == 0) {
                     $ID = 'vnk' . '01' . $user->tax_code;
                 } elseif ($number < 10) {
-                    $ID = 'vnk' . '0' . $number  . $user->tax_code;
+                    $ID = 'vnk' . '0' . $number . $user->tax_code;
                 } elseif ($number >= 10) {
-                    $ID = 'vnk' . $number  . $user->tax_code;
+                    $ID = 'vnk' . $number . $user->tax_code;
                 }
 //                elseif ($number > 99) {
 //                    for ($i = 0; $i < count($arr); $i++) {
@@ -157,6 +164,34 @@ class UserController extends Controller
             $request = RequestChangeTaxCode::where('id', $id)->first();
             $user = User::where('id', $request->user_id)->first();
             if ($status == 1) {
+                if ($user->role_id == 3) {
+                    $user->account_code = str_replace($user->tax_code, $request->tax_code, $user->account_code);
+                    $ncc = User::where('tax_code', $user->tax_code)->where('role_id', 2)->get();
+
+                    foreach ($ncc as $nc) {
+                        $nc->account_code = str_replace($nc->tax_code, $request->tax_code, $nc->account_code);
+                        $nc->tax_code = $request->tax_code;
+                        $nc->save();
+                    }
+
+                    $vkho = User::where('tax_code', $user->tax_code)->where('role_id', 4)->get();
+
+                    foreach ($vkho as $vkh) {
+                        $vkh->account_code = str_replace($vkh->tax_code, $request->tax_code, $vkh->account_code);
+                        $vkh->tax_code = $request->tax_code;
+                        $vkh->save();
+                    }
+                } elseif ($user->role_id == 2) {
+                    $user->account_code = str_replace($user->tax_code, $request->tax_code, $user->account_code);
+                    $vkho = User::where('tax_code', $user->tax_code)->where('role_id', 4)->get();
+                    foreach ($vkho as $vkh) {
+                        $vkh->account_code = str_replace($vkh->tax_code, $request->tax_code, $vkh->account_code);
+                        $vkh->tax_code = $request->tax_code;
+                        $vkh->save();
+                    }
+                } else {
+                    $user->account_code = str_replace($user->tax_code, $request->tax_code, $user->account_code);
+                }
                 $user->tax_code = $request->tax_code;
                 $user->save();
                 $request->status = 1;
@@ -191,5 +226,10 @@ class UserController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
+    }
+
+    public function exportUser()
+    {
+        return Excel::download(new UserExport, Carbon::now()->format('d-m-Y') . ' -danh_sach_tai_khoan' . '.xlsx');
     }
 }

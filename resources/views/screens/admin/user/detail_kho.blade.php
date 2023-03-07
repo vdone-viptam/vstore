@@ -27,7 +27,7 @@
                     <span class="text-title font-medium ">Ảnh kho hàng:</span>
                     <span class="text-title">
                         @foreach(json_decode($user->image_storage) as $img)
-                            <img style="width: 100%;height: 250px" src="{{asset($img) ?? ''}}" alt="">
+                           <p> <img style="width: 200px;height: 50px" src="{{asset($img) ?? ''}}" alt=""></p>
                         @endforeach
                     </span>
                 </div>
@@ -35,7 +35,7 @@
                     <span class="text-title font-medium ">Ảnh chứng nhận PCCC:</span>
                     <span class="text-title">
                                     @foreach(json_decode($user->image_pccc) as $img)
-                            <img style="width: 100%;height: 250px" src="{{asset($img) ?? ''}}" alt="">
+                           <p> <img style="width: 200px;height: 50px" src="{{asset($img) ?? ''}}" alt=""></p>
                         @endforeach
 
                 </div>

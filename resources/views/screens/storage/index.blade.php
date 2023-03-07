@@ -45,7 +45,7 @@
         </div>
         <div
             class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Cổng thương mại điện tử
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Hệ thống quản lý
                 <strong class="text-[#1E90FF] font-bold">V-Kho</strong>"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
                     class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
@@ -66,7 +66,7 @@
         <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
     </div>
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Cổng thương mại điện tử <br><strong
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Hệ thống quản lý <strong
                 class="text-[#1E90FF] font-semibold">V-Kho </strong> là gì?</h2>
         <div class="flex flex-col gap-4">
         <div class="flex items-start gap-4">
@@ -79,7 +79,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là địa điểm cất giữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là nơi lưu trữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
         </div>
         <div class="flex items-start gap-4">
             <div class="w-[21px]">
@@ -103,7 +103,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là mắt xích quan trọng đối với chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
         </div>
         </div>
 
@@ -143,7 +143,7 @@
                    3
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Chuyển giao sản phẩm cho Đối tác vận chuyển</h2>
-                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin chỉ với 2 bước sau:</span>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Các đơn vị vận chuyển sẽ đến V-Kho lấy hàng để giao đến tay người dùng.</span>
 
             </div>
         </div>
@@ -189,7 +189,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Hàng nghìn Nhà cung cấp của V-Store đang chờ gửi hàng vào <br> V-Kho.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của V-Store chờ gửi hàng vào <br> V-Kho.</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -226,7 +226,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống VDONE, V-Store.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống V-DONE, V-Store.</span>
         </div>
         </div>
 

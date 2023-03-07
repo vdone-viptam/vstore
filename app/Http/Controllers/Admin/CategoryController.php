@@ -23,20 +23,12 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $this->v['categories'] = Category::select('id', 'name', 'img')->where('status', 1);
-        if (isset($request->id)) {
-            $this->v['categories'] = $this->v['categories']->where('id', $request->id);
-        }
-        if (isset($request->name)) {
-            $this->v['categories'] = $this->v['categories']->where('name', 'like', '%' . $request->name . '%');
-        }
-        $this->v['categories'] = $this->v['categories']->paginate(25);
-
-        if ($request->page > $this->v['categories']->lastPage()) {
-            abort(404);
+        $this->v['categories'] = Category::select('id', 'name', 'img');
+        if (isset($request->keyword)) {
+            $this->v['categories'] = $this->v['categories']->orwhere('name', 'like', '%' . $request->keyword . '%');
         }
         $this->v['params'] = $request->all();
-        $this->v['sumRecordCategory'] = Category::where('status', 1)->count();
+        $this->v['categories'] = $this->v['categories']->paginate($limit);
         return view('screens.admin.category.index', $this->v);
     }
 
@@ -71,7 +63,7 @@ class CategoryController extends Controller
             $file = $request->file('img');
             $filename = date('YmdHi') . $file->getClientOriginalName();
             $file->move(public_path('image/category'), $filename);
-            $category->img = 'image/category/'.$filename;
+            $category->img = 'image/category/' . $filename;
             $category->save();
             DB::commit();
         } catch (\Exception $e) {
@@ -113,7 +105,7 @@ class CategoryController extends Controller
                 $file = $request->file('img');
                 $filename = date('YmdHi') . $file->getClientOriginalName();
                 $file->move(public_path('image/category'), $filename);
-                $category->img = 'image/category/'.$filename;
+                $category->img = 'image/category/' . $filename;
             }
             $category->save();
             DB::commit();
@@ -130,7 +122,7 @@ class CategoryController extends Controller
     {
         DB::beginTransaction();
         try {
-            $category = Category::where('id', $id)->update(['status' => 0]);
+            $category = Category::destroy($id);
             DB::commit();
             return redirect()->back()->with('success', 'Xóa danh mục thành công');
         } catch (\Exception $e) {

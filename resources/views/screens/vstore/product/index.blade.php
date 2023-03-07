@@ -14,7 +14,8 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Tất cả sản phẩm</a>
+            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Tất cả sản
+                phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -116,9 +117,9 @@
                                 Giá bán (đ)
                             </th>
                             <th>Chiết khấu (%)</th>
-{{--                            <th>--}}
-{{--                                Chi tiết--}}
-{{--                            </th>--}}
+                            {{--                            <th>--}}
+                            {{--                                Chi tiết--}}
+                            {{--                            </th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -142,18 +143,18 @@
                                         {{$product->user_name}}
                                     </td>
                                     <td class="w-[200px]">
-                                       {{number_format($product->price,0,',',',')}} đ
+                                        {{number_format($product->price,0,',',',')}} đ
                                     </td>
                                     <td>
 
                                         {{$product->discount}}
-{{--                                        <a href="#" data-id="{{$product->id}}"--}}
-{{--                                           class="more-details text-primary underline">--}}
-{{--                                            Chi tiết</a>--}}
+                                        {{--                                        <a href="#" data-id="{{$product->id}}"--}}
+                                        {{--                                           class="more-details text-primary underline">--}}
+                                        {{--                                            Chi tiết</a>--}}
                                     </td>
                                 </tr>
                             @endforeach
-{{--                            nhh.hoang90@gmail.com--}}
+                            {{--                            nhh.hoang90@gmail.com--}}
                         @else
                             <tr>
                                 <td colspan="7">Không có dữ liệu phù hợp</td>
@@ -165,7 +166,8 @@
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
                             class="font-bold">{{$products->total()}}</strong></span>
-                    @include('layouts.custom.paginator', ['paginator' => $products])
+                    <div>
+                        {{$products->withQueryString()->links()}}                    </div>
 
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"

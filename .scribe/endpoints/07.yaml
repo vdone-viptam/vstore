@@ -1,0 +1,366 @@
+name: Vshop
+description: |-
+
+  Danh sách api liên quan V-shop
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/vshop
+    metadata:
+      groupName: Vshop
+      groupDescription: |-
+
+        Danh sách api liên quan V-shop
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"message":"L\u1ea5y th\u00f4ng tin th\u00e0nh c\u00f4ng","data":[{"id":1,"id_pdone":"pdone123","name":"\u00e1dasda","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":"2023-02-28T17:49:10.000000Z","updated_at":"2023-02-28T17:49:10.000000Z"},{"id":2,"id_pdone":"pdone12121","name":"","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":null,"updated_at":null}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '38'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/vshop/get-discount
+    metadata:
+      groupName: Vshop
+      groupDescription: |-
+
+        Danh sách api liên quan V-shop
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      id:
+        name: id
+        description: ''
+        required: true
+        example: tempora
+        type: string
+        custom: []
+      total:
+        name: total
+        description: ''
+        required: true
+        example: 3.9
+        type: number
+        custom: []
+    cleanBodyParameters:
+      id: tempora
+      total: 3.9
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":401,"error":{"id":["The selected id is invalid."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '37'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/vshop/create-discount
+    metadata:
+      groupName: Vshop
+      groupDescription: |-
+
+        Danh sách api liên quan V-shop
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Lưu mới mã giảm giá'
+      description: 'API này sẽ lưu mới mã giảm giá'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      discount:
+        name: discount
+        description: 'Phần trăm giảm giá required max:discount_vShop'
+        required: false
+        example: 16
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      discount: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      id_pdone:
+        name: id_pdone
+        description: 'p done required'
+        required: false
+        example: repellendus
+        type: Mã
+        custom: []
+      product_id:
+        name: product_id
+        description: 'sản phẩm required exits:products'
+        required: false
+        example: aut
+        type: Mã
+        custom: []
+      start_date:
+        name: start_date
+        description: 'bắt đầu required date_format:Y/m/d after:Today'
+        required: false
+        example: asperiores
+        type: Ngày
+        custom: []
+      end_date:
+        name: end_date
+        description: 'kết thúc required date_format:Y/m/d after:start_date'
+        required: false
+        example: non
+        type: Ngày
+        custom: []
+      discount:
+        name: discount
+        description: 'Must not be greater than 100 characters.'
+        required: true
+        example: zbsrbrymsqnukiaukbh
+        type: string
+        custom: []
+    cleanBodyParameters:
+      id_pdone: repellendus
+      product_id: aut
+      start_date: asperiores
+      end_date: non
+      discount: zbsrbrymsqnukiaukbh
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/vshop/address/store
+    metadata:
+      groupName: Vshop
+      groupDescription: |-
+
+        Danh sách api liên quan V-shop
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      id_pdone:
+        name: id_pdone
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: wgnhyaxifdlutiss
+        type: string
+        custom: []
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: naujfxyngdymywqeocpbeq
+        type: string
+        custom: []
+      address:
+        name: address
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: j
+        type: string
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: cwcmiuitfoabliglzlehqn
+        type: string
+        custom: []
+    cleanBodyParameters:
+      id_pdone: wgnhyaxifdlutiss
+      name: naujfxyngdymywqeocpbeq
+      address: j
+      phone_number: cwcmiuitfoabliglzlehqn
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/vshop/address/edit-address/{id}'
+    metadata:
+      groupName: Vshop
+      groupDescription: |-
+
+        Danh sách api liên quan V-shop
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the edit address.'
+        required: true
+        example: voluptatem
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: voluptatem
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"data":null}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '36'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/vshop/address/update-address/{id}'
+    metadata:
+      groupName: Vshop
+      groupDescription: |-
+
+        Danh sách api liên quan V-shop
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the update address.'
+        required: true
+        example: perspiciatis
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: perspiciatis
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: yevknxrdgttomsyxb
+        type: string
+        custom: []
+      address:
+        name: address
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: hequwb
+        type: string
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: feyatjxfmewrwuygpujpftht
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: yevknxrdgttomsyxb
+      address: hequwb
+      phone_number: feyatjxfmewrwuygpujpftht
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

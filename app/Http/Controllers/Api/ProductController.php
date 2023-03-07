@@ -37,7 +37,7 @@ class ProductController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam category_id id danh mục sản phẩm
-     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán
+     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy
      * @urlParam option 1 asc | 2 desc
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
@@ -50,7 +50,7 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $publish_id = $request->publish_id ?? '';
         $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)->where('publish_id', 'like', '%' . $publish_id . '%')
-            ->select('id', 'name', 'publish_id', 'images', 'price', 'discount_vShop as discount_vstore');
+            ->select('id', 'name', 'publish_id', 'images', 'price', 'discount_vShop as discount_vstore','amount_product_sold');
         if ($request->category_id) {
             $products = $products->where('category_id', $request->category_id);
         }
@@ -128,10 +128,12 @@ class ProductController extends Controller
      * @urlParam order_by_id sắp xếp theo id
      * @urlParam order_by_sold sắp xếp theo sl đã bán
      * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
+     * @urlParam id_pdone dùng để check sản phẩm đã được tiếp thị hay chưa
      * @return JsonResponse
      */
     public function productByVstore(Request $request, $id)
     {
+
         $limit = $request->limit ?? 10;
 
         $products = Product::where('vstore_id', $id)->where('status', 2)
@@ -165,8 +167,9 @@ class ProductController extends Controller
                 $value->available_discount = $available_discount->discount;
             }
 
-//            return $available_discount;
-//            available discount
+            if ($request->id_pdone){
+
+            }
         }
 
         return response()->json([

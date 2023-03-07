@@ -30,7 +30,7 @@
 <div class="grid grid-cols-12">
 <div class="md:col-span-3 2xl:col-span-2 md:block hidden bg-[#F2F8FF]">
     @include('layouts.admin.menu')
-   
+    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.admin.header')
@@ -124,5 +124,16 @@
             tm[i].classList.add("tab__hover")
         }
     }
+
+    const nav1 = document.querySelectorAll('nav');
+    nav1.forEach(item => {
+        const ul = item.querySelector('ul');
+
+        if (ul && ul.classList.contains('pagination')) {
+            console.log(ul);
+            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
+        }
+    })
 </script>
+
 </html>

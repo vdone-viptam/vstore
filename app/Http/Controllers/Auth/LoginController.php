@@ -87,34 +87,37 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required',
                 'company_name' => 'required',
-                'tax_code' => 'required',
+                'tax_code' => 'required|digits:10',
                 'address' => 'required',
-                'phone_number' => 'required',
+                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
-                'district_id' => 'required'
+                'district_id' => 'required',
+
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
-                'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà phân phối bắt buộc nhập',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
-                'district_id' => 'Quận (huyện) bắt buộc chọn'
+                'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'phone_number.regex' => 'Số điện thoại không hợp lệ',
+
             ]);
         } elseif ($role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
                 'company_name' => 'required',
-                'tax_code' => 'required|max:255',
+                'tax_code' => 'required|digits:10',
                 'address' => 'required|max:255',
-                'phone_number' => 'required|max:255',
+                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
@@ -125,7 +128,6 @@ class LoginController extends Controller
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
-                'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
@@ -138,22 +140,23 @@ class LoginController extends Controller
                 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
                 'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
-                'district_id' => 'Quận (huyện) bắt buộc chọn'
+                'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         } elseif ($role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'name' => 'required',
-                'company_name' => 'required|unique:users',
-                'tax_code' => 'required',
+                'company_name' => 'required',
+                'tax_code' => 'required|digits:10',
                 'address' => 'required',
-                'phone_number' => 'required',
+                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required'
             ], [
                 'email.required' => 'Email bắt buộc nhập',
-                'email.unique' => 'Email đã tồn tại',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
@@ -163,7 +166,9 @@ class LoginController extends Controller
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
-                'district_id' => 'Quận (huyện) bắt buộc chọn'
+                'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         }
 
@@ -193,6 +198,16 @@ class LoginController extends Controller
                     return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
                 }
             }
+//            if ( $role_id != 1 || $role_id !=4) {
+//                $checkTax = DB::table('users')
+//                    ->where('company_name', $request->company_name)
+//                    ->where('role_id', $role_id)
+//                    ->count();
+//                if ($checkTax > 0) {
+//                    return redirect()->back()->withErrors(['company_name' => 'Tên công ty đã được đăng ký.'])->withInput($request->all());
+//                }
+//            }
+
             $checkTax2 = DB::table('users')
                 ->where('name', $request->name)
                 ->where('role_id', $role_id)
@@ -228,7 +243,7 @@ class LoginController extends Controller
                     foreach ($request->file('image_storage') as $img) {
                         $filestorage = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filestorage);
-                        $file[] = 'image/users' . $filestorage;
+                        $file[] = 'image/users/' . $filestorage;
                     }
 
 
@@ -239,7 +254,7 @@ class LoginController extends Controller
                     foreach ($request->file('image_pccc') as $img) {
                         $filepccc = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filepccc);
-                        $file1[] = 'image/users' . $filepccc;
+                        $file1[] = 'image/users/' . $filepccc;
                     }
                 }
                 $storage_information = [
@@ -261,13 +276,16 @@ class LoginController extends Controller
 
             if ($role_id == 2) {
 
-                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công');
+                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
+Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
             if ($role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công');
+                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
+Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
             if ($role_id == 4) {
-                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công');
+                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
+Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
 //            return 1
         } catch (\Exception $e) {

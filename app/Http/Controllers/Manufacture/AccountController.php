@@ -44,8 +44,7 @@ class AccountController extends Controller
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-            'link_website' => 'url',
-            'description' => 'required'
+
 
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
@@ -56,8 +55,7 @@ class AccountController extends Controller
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
 //            'link_website.required' => 'Địa chỉ website bắt buộc nhập',
-            'link_website.url' => 'Địa chỉ website không hợp lệ (https://www.example.com/)',
-            'description.required' => 'Giới thiệu bắt buộc nhập'
+
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
@@ -73,7 +71,7 @@ class AccountController extends Controller
         $user->id_vdone_diff = trim($request->id_vdone_diff);
         $user->phone_number = trim($request->phone_number);
         if ($request->link_website) {
-            $user->link_web = trim($request->link_website);
+            $user->slug = trim($request->link_website);
         }
         $user->description = $request->description;
         $user->save();
@@ -272,7 +270,10 @@ class AccountController extends Controller
         }
 
         try {
-            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', Auth::id())->count() > 0) {
+            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', Auth::user()->role_id)->count() > 0) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đang ký'])->withInput($request->all());
+            }
+            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', 3)->count() > 0) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đang ký'])->withInput($request->all());
             }
             DB::table('request_change_taxcode')->insert([

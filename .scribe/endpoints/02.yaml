@@ -6,7 +6,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/cart/{id}'
+    uri: 'api/cart/{pdone_id}'
     metadata:
       groupName: Cart
       groupDescription: |-
@@ -22,15 +22,15 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      id:
-        name: id
-        description: 'The ID of the cart.'
+      pdone_id:
+        name: pdone_id
+        description: 'The ID of the pdone.'
         required: true
-        example: 6
+        example: 11
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 6
+      pdone_id: 11
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -39,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"message":"product saved successfully","data":[]}'
+        content: '{"status_code":200,"data":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -77,31 +77,39 @@ endpoints:
         name: id
         description: 'The ID of the add.'
         required: true
-        example: molestiae
-        type: string
-        custom: []
-      quantity:
-        name: quantity
-        description: 'só lượng sản phẩm không có mặc định là 1'
-        required: false
-        example: qui
+        example: cum
         type: string
         custom: []
     cleanUrlParameters:
-      id: molestiae
-      quantity: qui
+      id: cum
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      user_id:
-        name: user_id
-        description: 'user của người dùng'
+      pdone_id:
+        name: pdone_id
+        description: 'mã user của người dùng'
         required: false
-        example: molestiae
-        type: mã
+        example: fugiat
+        type: required
+        custom: []
+      quantity:
+        name: quantity
+        description: 'Số sản phẩm mua'
+        required: false
+        example: voluptatum
+        type: 'required|numeric|min:1'
+        custom: []
+      vshop_id:
+        name: vshop_id
+        description: 'mã v-shop'
+        required: false
+        example: deserunt
+        type: required
         custom: []
     cleanBodyParameters:
-      user_id: molestiae
+      pdone_id: fugiat
+      quantity: voluptatum
+      vshop_id: deserunt
     fileParameters: []
     responses: []
     responseFields: []
@@ -112,8 +120,8 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: 'api/cart/remove/{id}'
+      - DELETE
+    uri: 'api/cart/remove/{cart_id}'
     metadata:
       groupName: Cart
       groupDescription: |-
@@ -129,27 +137,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      id:
-        name: id
-        description: 'The ID of the remove.'
+      cart_id:
+        name: cart_id
+        description: 'The ID of the cart.'
         required: true
-        example: enim
+        example: dolores
         type: string
         custom: []
     cleanUrlParameters:
-      id: enim
+      cart_id: dolores
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      user_id:
-        name: user_id
-        description: 'tài khoản của người dùng'
-        required: false
-        example: nihil
-        type: mã
-        custom: []
-    cleanBodyParameters:
-      user_id: nihil
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
@@ -161,7 +161,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/cart/quantity/$id
+    uri: 'api/cart/add-quantity/{cart_id}/{type}'
     metadata:
       groupName: Cart
       groupDescription: |-
@@ -170,7 +170,55 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'Cart quantity'
-      description: 'API dùng để tăng giảm số lượng sản phẩm trong giỏ hàng'
+      description: 'API dùng để tăng giảm 1 đơn vị sản phẩm trong giỏ hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      cart_id:
+        name: cart_id
+        description: 'The ID of the cart.'
+        required: true
+        example: qui
+        type: string
+        custom: []
+      type:
+        name: type
+        description: ''
+        required: true
+        example: nihil
+        type: string
+        custom: []
+    cleanUrlParameters:
+      cart_id: qui
+      type: nihil
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/banners/get-banner
+    metadata:
+      groupName: Cart
+      groupDescription: |-
+
+        Danh sách api liên quan tới giỏ hàng
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Lấy banner ở trang chủ'
+      description: 'API dùng để lấy ảnh banner'
       authenticated: false
       custom: []
     headers:
@@ -180,26 +228,21 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      user_id:
-        name: user_id
-        description: 'user của người dùng'
-        required: false
-        example: odio
-        type: mã
-        custom: []
-      quantity:
-        name: quantity
-        description: 'lượng sản phẩm'
-        required: false
-        example: in
-        type: số
-        custom: []
-    cleanBodyParameters:
-      user_id: odio
-      quantity: in
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"data":"http:\/\/localhost\/image\/banners\/202302280824z4144487384401_e7bbf4534854b22b37712fe0bf9dfbde.jpg"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '51'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
     responseFields: []
     auth: []
     controller: null
