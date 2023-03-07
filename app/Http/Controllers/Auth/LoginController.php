@@ -89,7 +89,7 @@ class LoginController extends Controller
                 'company_name' => 'required',
                 'tax_code' => 'required|digits:10',
                 'address' => 'required',
-                'phone_number' => 'required|regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/',
+                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required',
@@ -117,7 +117,7 @@ class LoginController extends Controller
                 'company_name' => 'required',
                 'tax_code' => 'required|digits:10',
                 'address' => 'required|max:255',
-                'phone_number' => 'required|max:255|regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/',
+                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
@@ -151,7 +151,7 @@ class LoginController extends Controller
                 'company_name' => 'required',
                 'tax_code' => 'required|digits:10',
                 'address' => 'required',
-                'phone_number' => 'required|regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/',
+                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required'
@@ -174,9 +174,7 @@ class LoginController extends Controller
 
         try {
             if ($validator->fails()) {
-
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
-
             }
 
 
