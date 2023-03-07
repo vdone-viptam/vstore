@@ -26,59 +26,59 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: dignissimos
+        example: rerum
         type: string
         custom: []
       category_id:
         name: category_id
         description: 'id danh mục sản phẩm'
         required: false
-        example: cumque
+        example: incidunt
         type: string
         custom: []
       order_by:
         name: order_by
         description: '| 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy'
         required: false
-        example: porro
+        example: cum
         type: string
         custom: []
       option:
         name: option
         description: '1 asc | 2 desc'
         required: false
-        example: et
+        example: aut
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang Mặc định 10'
         required: false
-        example: suscipit
+        example: voluptas
         type: string
         custom: []
       payment:
         name: payment
         description: 'Phương thức thanh toán 1 COD | 2 Chuyển khoản'
         required: false
-        example: laudantium
+        example: odio
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'mã sản phẩm'
         required: false
-        example: voluptatem
+        example: modi
         type: string
         custom: []
     cleanUrlParameters:
-      page: dignissimos
-      category_id: cumque
-      order_by: porro
-      option: et
-      limit: suscipit
-      payment: laudantium
-      publish_id: voluptatem
+      page: rerum
+      category_id: incidunt
+      order_by: cum
+      option: aut
+      limit: voluptas
+      payment: odio
+      publish_id: modi
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -125,27 +125,27 @@ endpoints:
         name: id
         description: 'The ID of the product by category.'
         required: true
-        example: et
+        example: cupiditate
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: harum
+        example: et
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: nobis
+        example: natus
         type: string
         custom: []
     cleanUrlParameters:
-      id: et
-      page: harum
-      limit: nobis
+      id: cupiditate
+      page: et
+      limit: natus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -154,7 +154,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/et?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/et?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/et?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/et","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -192,83 +192,83 @@ endpoints:
         name: id
         description: 'The ID of the product by vstore.'
         required: true
-        example: et
+        example: consequatur
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: voluptatem
+        example: et
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: consequatur
+        example: aut
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
         required: false
-        example: possimus
+        example: qui
         type: string
         custom: []
       category_id:
         name: category_id
         description: 'tìm kiếm theo danh mục'
         required: false
-        example: reiciendis
+        example: soluta
         type: string
         custom: []
       order_by_price:
         name: order_by_price
         description: 'sắp xếp theo giá'
         required: false
-        example: sunt
+        example: quod
         type: string
         custom: []
       order_by_id:
         name: order_by_id
         description: 'sắp xếp theo id'
         required: false
-        example: voluptatem
+        example: fuga
         type: string
         custom: []
       order_by_sold:
         name: order_by_sold
         description: 'sắp xếp theo sl đã bán'
         required: false
-        example: consequatur
+        example: iusto
         type: string
         custom: []
       payments:
         name: payments
         description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
         required: false
-        example: ipsum
+        example: veniam
         type: string
         custom: []
       id_pdone:
         name: id_pdone
         description: 'dùng để check sản phẩm đã được tiếp thị hay chưa'
         required: false
-        example: veritatis
+        example: est
         type: string
         custom: []
     cleanUrlParameters:
-      id: et
-      page: voluptatem
-      limit: consequatur
-      publish_id: possimus
-      category_id: reiciendis
-      order_by_price: sunt
-      order_by_id: voluptatem
-      order_by_sold: consequatur
-      payments: ipsum
-      id_pdone: veritatis
+      id: consequatur
+      page: et
+      limit: aut
+      publish_id: qui
+      category_id: soluta
+      order_by_price: quod
+      order_by_id: fuga
+      order_by_sold: iusto
+      payments: veniam
+      id_pdone: est
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -277,7 +277,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/et?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/et?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/et?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/et","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -315,75 +315,75 @@ endpoints:
         name: id
         description: 'The ID of the product by ncc.'
         required: true
-        example: qui
+        example: dolores
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: rem
+        example: in
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: possimus
+        example: officia
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
         required: false
-        example: quidem
+        example: sunt
         type: string
         custom: []
       category_id:
         name: category_id
         description: 'tìm kiếm theo danh mục'
         required: false
-        example: id
+        example: aliquid
         type: string
         custom: []
       order_by_price:
         name: order_by_price
         description: 'sắp xếp theo giá'
         required: false
-        example: quo
+        example: doloribus
         type: string
         custom: []
       order_by_id:
         name: order_by_id
         description: 'sắp xếp theo id'
         required: false
-        example: debitis
+        example: aut
         type: string
         custom: []
       order_by_sold:
         name: order_by_sold
         description: 'sắp xếp theo sl đã bán'
         required: false
-        example: et
+        example: ut
         type: string
         custom: []
       payments:
         name: payments
         description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
         required: false
-        example: et
+        example: ad
         type: string
         custom: []
     cleanUrlParameters:
-      id: qui
-      page: rem
-      limit: possimus
-      publish_id: quidem
-      category_id: id
-      order_by_price: quo
-      order_by_id: debitis
-      order_by_sold: et
-      payments: et
+      id: dolores
+      page: in
+      limit: officia
+      publish_id: sunt
+      category_id: aliquid
+      order_by_price: doloribus
+      order_by_id: aut
+      order_by_sold: ut
+      payments: ad
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -392,7 +392,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/qui?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/qui?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/qui?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/qui","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -430,11 +430,11 @@ endpoints:
         name: id
         description: 'The ID of the vshop pickup.'
         required: true
-        example: excepturi
+        example: minima
         type: string
         custom: []
     cleanUrlParameters:
-      id: excepturi
+      id: minima
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -442,11 +442,11 @@ endpoints:
         name: id_pdone
         description: 'của pdone'
         required: false
-        example: adipisci
+        example: quis
         type: id
         custom: []
     cleanBodyParameters:
-      id_pdone: adipisci
+      id_pdone: quis
     fileParameters: []
     responses: []
     responseFields: []
@@ -478,11 +478,11 @@ endpoints:
         name: id
         description: 'The ID of the vshop ready stock.'
         required: true
-        example: sed
+        example: neque
         type: string
         custom: []
     cleanUrlParameters:
-      id: sed
+      id: neque
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -490,19 +490,19 @@ endpoints:
         name: id_pdone
         description: 'của pdone'
         required: false
-        example: nemo
+        example: consectetur
         type: id
         custom: []
       amount:
         name: amount
         description: 'lượng sản phẩm'
         required: false
-        example: dolorem
+        example: ullam
         type: số
         custom: []
     cleanBodyParameters:
-      id_pdone: nemo
-      amount: dolorem
+      id_pdone: consectetur
+      amount: ullam
     fileParameters: []
     responses: []
     responseFields: []
@@ -543,12 +543,12 @@ endpoints:
           id Mới nhất | amount_product_sold Bán chạy | price Giá
           urlParam type  asc|desc Mặc định asc
         required: false
-        example: et
+        example: vel
         type: string
         custom: []
     cleanUrlParameters:
       id: 1
-      orderBy: et
+      orderBy: vel
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -646,19 +646,19 @@ endpoints:
         name: limit
         description: 'Số lượng bản ghi 1 trang Mặc định 12'
         required: false
-        example: ex
+        example: in
         type: string
         custom: []
       page:
         name: page
         description: 'Trang hiện tại hiển thị'
         required: false
-        example: vero
+        example: aperiam
         type: string
         custom: []
     cleanUrlParameters:
-      limit: ex
-      page: vero
+      limit: in
+      page: aperiam
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

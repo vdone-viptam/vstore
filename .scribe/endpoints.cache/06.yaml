@@ -28,51 +28,51 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: in
+        example: dignissimos
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: adipisci
+        example: blanditiis
         type: string
         custom: []
       branch:
         name: branch
         description: '1 là vstore thường, 2 là vstore cấp 1 (địa phương)'
         required: false
-        example: rerum
+        example: est
         type: string
         custom: []
       account_code:
         name: account_code
         description: 'tìm kiếm mã vstore'
         required: false
-        example: ut
+        example: possimus
         type: string
         custom: []
       name:
         name: name
         description: 'tìm kiếm mã name'
         required: false
-        example: est
+        example: nesciunt
         type: string
         custom: []
       company_name:
         name: company_name
         description: 'tìm kiếm mã tên công ty'
         required: false
-        example: aut
+        example: quas
         type: string
         custom: []
     cleanUrlParameters:
-      page: in
-      limit: adipisci
-      branch: rerum
-      account_code: ut
-      name: est
-      company_name: aut
+      page: dignissimos
+      limit: blanditiis
+      branch: est
+      account_code: possimus
+      name: nesciunt
+      company_name: quas
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -127,11 +127,11 @@ endpoints:
         name: id
         description: 'The ID of the vstore.'
         required: true
-        example: voluptas
+        example: officiis
         type: string
         custom: []
     cleanUrlParameters:
-      id: voluptas
+      id: officiis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -627,20 +627,20 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: asperiores
+        example: unde
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: earum
+        example: explicabo
         type: string
         custom: []
     cleanUrlParameters:
       id: 1
-      page: asperiores
-      limit: earum
+      page: unde
+      limit: explicabo
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

@@ -40,35 +40,35 @@ paths:
                 id_pdone:
                   type: mã
                   description: 'user của người dùng mua hàng'
-                  example: cupiditate
+                  example: laborum
                 name:
                   type: tên
                   description: 'người dùng'
-                  example: nesciunt
+                  example: quia
                 phone_number:
                   type: số
                   description: 'điện thoại'
-                  example: sit
+                  example: nulla
                 address:
                   type: địa
                   description: chỉ
-                  example: voluptas
+                  example: quos
                 province:
                   type: number
                   description: 'Must be at least 1.'
-                  example: 8
+                  example: 76
                 data:
                   type: dữ
                   description: 'liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]'
-                  example: rerum
+                  example: sit
                 district:
                   type: number
                   description: 'Must be at least 1.'
-                  example: 90
+                  example: 49
                 id_vshop:
                   type: mã
                   description: 'user của vshop'
-                  example: voluptas
+                  example: et
               required:
                 - province
                 - district
@@ -122,7 +122,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the detail.'
-        example: occaecati
+        example: deserunt
         required: true
         schema:
           type: string
@@ -1102,7 +1102,7 @@ paths:
         in: path
         name: pdone_id
         description: 'The ID of the pdone.'
-        example: 9
+        example: 11
         required: true
         schema:
           type: integer
@@ -1139,22 +1139,22 @@ paths:
                 pdone_id:
                   type: required
                   description: 'mã user của người dùng'
-                  example: nostrum
+                  example: fugiat
                 quantity:
                   type: 'required|numeric|min:1'
                   description: 'Số sản phẩm mua'
-                  example: quia
+                  example: voluptatum
                 vshop_id:
                   type: required
                   description: 'mã v-shop'
-                  example: consequatur
+                  example: deserunt
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the add.'
-        example: natus
+        example: cum
         required: true
         schema:
           type: string
@@ -1187,7 +1187,7 @@ paths:
         in: path
         name: cart_id
         description: 'The ID of the cart.'
-        example: ab
+        example: dolores
         required: true
         schema:
           type: string
@@ -1220,7 +1220,7 @@ paths:
         in: path
         name: cart_id
         description: 'The ID of the cart.'
-        example: sed
+        example: qui
         required: true
         schema:
           type: string
@@ -1228,7 +1228,7 @@ paths:
         in: path
         name: type
         description: ''
-        example: nesciunt
+        example: nihil
         required: true
         schema:
           type: string
@@ -1658,7 +1658,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: explicabo
+            value: veritatis
       -
         in: path
         name: limit
@@ -1672,7 +1672,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: vel
+            value: iste
   '/api/category/get-category-by-vstore/{vstore_id}':
     get:
       summary: 'Danh sách danh mục theo V-Store'
@@ -1718,7 +1718,7 @@ paths:
         in: path
         name: vstore_id
         description: 'The ID of the vstore.'
-        example: voluptatibus
+        example: possimus
         required: true
         schema:
           type: string
@@ -1735,7 +1735,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: ducimus
+            value: fugiat
   '/api/category/get-product-by-category/{category_id}':
     get:
       summary: 'Danh sách sản phẩm theo danh mục'
@@ -1768,17 +1768,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
+                        url: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1'
                         label: '1'
                         active: true
                       -
@@ -1786,7 +1786,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/category/get-product-by-category/quis'
+                    path: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid'
                     per_page: 8
                     prev_page_url: null
                     to: null
@@ -1806,7 +1806,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
+                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1'
                       from:
                         type: string
                         example: null
@@ -1815,7 +1815,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
+                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1'
                       links:
                         type: array
                         example:
@@ -1824,7 +1824,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
+                            url: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1'
                             label: '1'
                             active: true
                           -
@@ -1848,7 +1848,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/quis'
+                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/aliquid'
                       per_page:
                         type: integer
                         example: 8
@@ -1869,7 +1869,7 @@ paths:
         in: path
         name: category_id
         description: 'The ID of the category.'
-        example: quis
+        example: aliquid
         required: true
         schema:
           type: string
@@ -1886,7 +1886,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: iusto
+            value: architecto
       -
         in: path
         name: limit
@@ -1900,7 +1900,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptatum
+            value: pariatur
   '/api/category/get-vstore-by-category/{id}':
     get:
       summary: 'Danh sách vstore theo danh mục'
@@ -1946,7 +1946,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the get vstore by category.'
-        example: quaerat
+        example: et
         required: true
         schema:
           type: string
@@ -1963,7 +1963,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: delectus
+            value: ut
       -
         in: path
         name: limit
@@ -1977,7 +1977,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: ex
+            value: est
   '/api/category/{id}':
     get:
       summary: 'chi tiết danh mục'
@@ -2124,11 +2124,11 @@ paths:
                 id:
                   type: id
                   description: 'sản phẩm'
-                  example: soluta
+                  example: at
                 total:
                   type: số
                   description: 'lượng sản phẩm'
-                  example: placeat
+                  example: omnis
       security: []
   '/api/discount/available-discount/{id}':
     get:
@@ -2177,7 +2177,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: nihil
+            value: labore
   /api/callback-viettel-post:
     post:
       summary: ''
@@ -3503,7 +3503,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: qui
+            value: officia
       -
         in: path
         name: limit
@@ -3517,7 +3517,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: doloribus
+            value: quae
   '/api/manufactures/profile/{ncc_id}':
     get:
       summary: 'chi tiết nhà cung cấp'
@@ -4337,7 +4337,7 @@ paths:
         in: path
         name: ncc_id
         description: 'The ID of the ncc.'
-        example: repellat
+        example: magni
         required: true
         schema:
           type: string
@@ -4593,7 +4593,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: dignissimos
+            value: rerum
       -
         in: path
         name: category_id
@@ -4607,7 +4607,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: cumque
+            value: incidunt
       -
         in: path
         name: order_by
@@ -4621,7 +4621,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: porro
+            value: cum
       -
         in: path
         name: option
@@ -4635,7 +4635,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: et
+            value: aut
       -
         in: path
         name: limit
@@ -4649,7 +4649,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: suscipit
+            value: voluptas
       -
         in: path
         name: payment
@@ -4663,7 +4663,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: laudantium
+            value: odio
       -
         in: path
         name: publish_id
@@ -4677,7 +4677,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptatem
+            value: modi
   '/api/product/product-by-category/{id}':
     get:
       summary: 'Danh sách sản phẩm theo danh mục'
@@ -4710,17 +4710,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
+                        url: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1'
                         label: '1'
                         active: true
                       -
@@ -4728,7 +4728,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/product/product-by-category/et'
+                    path: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate'
                     per_page: 10
                     prev_page_url: null
                     to: null
@@ -4748,7 +4748,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1'
                       from:
                         type: string
                         example: null
@@ -4757,7 +4757,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1'
                       links:
                         type: array
                         example:
@@ -4766,7 +4766,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
+                            url: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1'
                             label: '1'
                             active: true
                           -
@@ -4790,7 +4790,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-category/et'
+                        example: 'http://api-vstore.ngo/api/product/product-by-category/cupiditate'
                       per_page:
                         type: integer
                         example: 10
@@ -4811,7 +4811,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product by category.'
-        example: et
+        example: cupiditate
         required: true
         schema:
           type: string
@@ -4828,7 +4828,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: harum
+            value: et
       -
         in: path
         name: limit
@@ -4842,7 +4842,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: nobis
+            value: natus
   '/api/product/product-by-vstore/{id}':
     get:
       summary: 'Danh sách sản phẩm vstore'
@@ -4875,17 +4875,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
+                        url: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1'
                         label: '1'
                         active: true
                       -
@@ -4893,7 +4893,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/product/product-by-vstore/et'
+                    path: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur'
                     per_page: 10
                     prev_page_url: null
                     to: null
@@ -4913,7 +4913,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1'
                       from:
                         type: string
                         example: null
@@ -4922,7 +4922,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1'
                       links:
                         type: array
                         example:
@@ -4931,7 +4931,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
+                            url: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1'
                             label: '1'
                             active: true
                           -
@@ -4955,7 +4955,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/et'
+                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/consequatur'
                       per_page:
                         type: integer
                         example: 10
@@ -4976,7 +4976,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product by vstore.'
-        example: et
+        example: consequatur
         required: true
         schema:
           type: string
@@ -4993,7 +4993,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptatem
+            value: et
       -
         in: path
         name: limit
@@ -5007,7 +5007,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequatur
+            value: aut
       -
         in: path
         name: publish_id
@@ -5021,7 +5021,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: possimus
+            value: qui
       -
         in: path
         name: category_id
@@ -5035,7 +5035,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: reiciendis
+            value: soluta
       -
         in: path
         name: order_by_price
@@ -5049,7 +5049,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: sunt
+            value: quod
       -
         in: path
         name: order_by_id
@@ -5063,7 +5063,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptatem
+            value: fuga
       -
         in: path
         name: order_by_sold
@@ -5077,7 +5077,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequatur
+            value: iusto
       -
         in: path
         name: payments
@@ -5091,7 +5091,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: ipsum
+            value: veniam
       -
         in: path
         name: id_pdone
@@ -5105,7 +5105,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: veritatis
+            value: est
   '/api/product/product-by-ncc/{id}':
     get:
       summary: 'Danh sách sản phẩm nhà cung cấp'
@@ -5138,17 +5138,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
+                        url: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1'
                         label: '1'
                         active: true
                       -
@@ -5156,7 +5156,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/product/product-by-ncc/qui'
+                    path: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores'
                     per_page: 10
                     prev_page_url: null
                     to: null
@@ -5176,7 +5176,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1'
                       from:
                         type: string
                         example: null
@@ -5185,7 +5185,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1'
                       links:
                         type: array
                         example:
@@ -5194,7 +5194,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
+                            url: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1'
                             label: '1'
                             active: true
                           -
@@ -5218,7 +5218,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/qui'
+                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/dolores'
                       per_page:
                         type: integer
                         example: 10
@@ -5239,7 +5239,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product by ncc.'
-        example: qui
+        example: dolores
         required: true
         schema:
           type: string
@@ -5256,7 +5256,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: rem
+            value: in
       -
         in: path
         name: limit
@@ -5270,7 +5270,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: possimus
+            value: officia
       -
         in: path
         name: publish_id
@@ -5284,7 +5284,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: quidem
+            value: sunt
       -
         in: path
         name: category_id
@@ -5298,7 +5298,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: id
+            value: aliquid
       -
         in: path
         name: order_by_price
@@ -5312,7 +5312,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: quo
+            value: doloribus
       -
         in: path
         name: order_by_id
@@ -5326,7 +5326,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: debitis
+            value: aut
       -
         in: path
         name: order_by_sold
@@ -5340,7 +5340,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: et
+            value: ut
       -
         in: path
         name: payments
@@ -5354,7 +5354,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: et
+            value: ad
   '/api/product/vshop-pickup/{id}':
     post:
       summary: 'Vshop thêm sản phẩm'
@@ -5388,14 +5388,14 @@ paths:
                 id_pdone:
                   type: id
                   description: 'của pdone'
-                  example: adipisci
+                  example: quis
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the vshop pickup.'
-        example: excepturi
+        example: minima
         required: true
         schema:
           type: string
@@ -5432,18 +5432,18 @@ paths:
                 id_pdone:
                   type: id
                   description: 'của pdone'
-                  example: nemo
+                  example: consectetur
                 amount:
                   type: số
                   description: 'lượng sản phẩm'
-                  example: dolorem
+                  example: ullam
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the vshop ready stock.'
-        example: sed
+        example: neque
         required: true
         schema:
           type: string
@@ -5609,7 +5609,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: et
+            value: vel
   '/api/product/{id}':
     get:
       summary: 'Chi tiết sản phẩm'
@@ -5837,7 +5837,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: ex
+            value: in
       -
         in: path
         name: page
@@ -5851,7 +5851,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: vero
+            value: aperiam
   /api/vshop:
     get:
       summary: ''
@@ -6051,11 +6051,11 @@ paths:
                 id:
                   type: string
                   description: ''
-                  example: nihil
+                  example: tempora
                 total:
                   type: number
                   description: ''
-                  example: 4955128.8
+                  example: 3.9
               required:
                 - id
                 - total
@@ -6093,23 +6093,23 @@ paths:
                 id_pdone:
                   type: Mã
                   description: 'p done required'
-                  example: totam
+                  example: repellendus
                 product_id:
                   type: Mã
                   description: 'sản phẩm required exits:products'
-                  example: expedita
+                  example: aut
                 start_date:
                   type: Ngày
                   description: 'bắt đầu required date_format:Y/m/d after:Today'
-                  example: est
+                  example: asperiores
                 end_date:
                   type: Ngày
                   description: 'kết thúc required date_format:Y/m/d after:start_date'
-                  example: nisi
+                  example: non
                 discount:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: ocxdrktbnnhkiytxlifpb
+                  example: zbsrbrymsqnukiaukbh
               required:
                 - discount
       security: []
@@ -6127,7 +6127,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: 7
+            value: 16
   /api/vshop/address/store:
     post:
       summary: ''
@@ -6161,19 +6161,19 @@ paths:
                 id_pdone:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: bilsuexkpudzwfsovwsw
+                  example: wgnhyaxifdlutiss
                 name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: kg
+                  example: naujfxyngdymywqeocpbeq
                 address:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ibpozhqor
+                  example: j
                 phone_number:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: lkesjamsfbuptnhhptqjx
+                  example: cwcmiuitfoabliglzlehqn
               required:
                 - id_pdone
                 - name
@@ -6225,7 +6225,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the edit address.'
-        example: in
+        example: voluptatem
         required: true
         schema:
           type: string
@@ -6262,15 +6262,15 @@ paths:
                 name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ssxdupkoakvcbohsv
+                  example: yevknxrdgttomsyxb
                 address:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: iqhofhjvbp
+                  example: hequwb
                 phone_number:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ygdrvsacsyy
+                  example: feyatjxfmewrwuygpujpftht
               required:
                 - name
                 - address
@@ -6281,7 +6281,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update address.'
-        example: voluptatem
+        example: perspiciatis
         required: true
         schema:
           type: string
@@ -6488,7 +6488,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: in
+            value: dignissimos
       -
         in: path
         name: limit
@@ -6502,7 +6502,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: adipisci
+            value: blanditiis
       -
         in: path
         name: branch
@@ -6516,7 +6516,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: rerum
+            value: est
       -
         in: path
         name: account_code
@@ -6530,7 +6530,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: ut
+            value: possimus
       -
         in: path
         name: name
@@ -6544,7 +6544,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: est
+            value: nesciunt
       -
         in: path
         name: company_name
@@ -6558,7 +6558,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: aut
+            value: quas
   '/api/vstore/{id}':
     get:
       summary: 'chi tiết vstore'
@@ -7378,7 +7378,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the vstore.'
-        example: voluptas
+        example: officiis
         required: true
         schema:
           type: string
@@ -7532,7 +7532,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: asperiores
+            value: unde
       -
         in: path
         name: limit
@@ -7546,7 +7546,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: earum
+            value: explicabo
 tags:
   -
     name: Bill

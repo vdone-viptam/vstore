@@ -28,19 +28,19 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: explicabo
+        example: veritatis
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang Mặc định 48'
         required: false
-        example: vel
+        example: iste
         type: string
         custom: []
     cleanUrlParameters:
-      page: explicabo
-      limit: vel
+      page: veritatis
+      limit: iste
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -87,19 +87,19 @@ endpoints:
         name: vstore_id
         description: 'The ID of the vstore.'
         required: true
-        example: voluptatibus
+        example: possimus
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi  Mặc định 100'
         required: false
-        example: ducimus
+        example: fugiat
         type: string
         custom: []
     cleanUrlParameters:
-      vstore_id: voluptatibus
-      limit: ducimus
+      vstore_id: possimus
+      limit: fugiat
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -146,27 +146,27 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: quis
+        example: aliquid
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: iusto
+        example: architecto
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang Mặc định 8'
         required: false
-        example: voluptatum
+        example: pariatur
         type: string
         custom: []
     cleanUrlParameters:
-      category_id: quis
-      page: iusto
-      limit: voluptatum
+      category_id: aliquid
+      page: architecto
+      limit: pariatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -175,7 +175,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/quis?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/quis?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/quis?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/quis","per_page":8,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/aliquid?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/aliquid?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/aliquid?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/category\/get-product-by-category\/aliquid","per_page":8,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -213,27 +213,27 @@ endpoints:
         name: id
         description: 'The ID of the get vstore by category.'
         required: true
-        example: quaerat
+        example: et
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: delectus
+        example: ut
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang Mặc định 10'
         required: false
-        example: ex
+        example: est
         type: string
         custom: []
     cleanUrlParameters:
-      id: quaerat
-      page: delectus
-      limit: ex
+      id: et
+      page: ut
+      limit: est
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

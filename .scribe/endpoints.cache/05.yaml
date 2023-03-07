@@ -28,19 +28,19 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: qui
+        example: officia
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang | Mặc định 100 bản ghi'
         required: false
-        example: doloribus
+        example: quae
         type: string
         custom: []
     cleanUrlParameters:
-      page: qui
-      limit: doloribus
+      page: officia
+      limit: quae
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -87,11 +87,11 @@ endpoints:
         name: ncc_id
         description: 'The ID of the ncc.'
         required: true
-        example: repellat
+        example: magni
         type: string
         custom: []
     cleanUrlParameters:
-      ncc_id: repellat
+      ncc_id: magni
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
