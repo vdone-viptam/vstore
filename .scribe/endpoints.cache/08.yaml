@@ -32,19 +32,19 @@ endpoints:
         name: id
         description: 'sản phẩm'
         required: false
-        example: similique
+        example: soluta
         type: id
         custom: []
       total:
         name: total
         description: 'lượng sản phẩm'
         required: false
-        example: iste
+        example: placeat
         type: số
         custom: []
     cleanBodyParameters:
-      id: similique
-      total: iste
+      id: soluta
+      total: placeat
     fileParameters: []
     responses:
       -
@@ -87,11 +87,11 @@ endpoints:
         name: id
         description: 'id sản phẩm'
         required: false
-        example: aliquam
+        example: nihil
         type: string
         custom: []
     cleanUrlParameters:
-      id: aliquam
+      id: nihil
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

@@ -26,19 +26,19 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: fuga
+        example: qui
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang | Mặc định 100 bản ghi'
         required: false
-        example: rerum
+        example: doloribus
         type: string
         custom: []
     cleanUrlParameters:
-      page: fuga
-      limit: rerum
+      page: qui
+      limit: doloribus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -47,7 +47,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":8,"name":"nhacungcap","avatar":"http:\/\/localhost\/image\/Rectangle 44.png"}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list","per_page":100,"prev_page_url":null,"to":1,"total":1}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/manufactures\/get-list","per_page":100,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -85,11 +85,11 @@ endpoints:
         name: ncc_id
         description: 'The ID of the ncc.'
         required: true
-        example: voluptate
+        example: repellat
         type: string
         custom: []
     cleanUrlParameters:
-      ncc_id: voluptate
+      ncc_id: repellat
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

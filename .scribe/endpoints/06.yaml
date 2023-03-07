@@ -26,51 +26,51 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: aliquid
+        example: in
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: consequatur
+        example: adipisci
         type: string
         custom: []
       branch:
         name: branch
         description: '1 là vstore thường, 2 là vstore cấp 1 (địa phương)'
         required: false
-        example: sint
+        example: rerum
         type: string
         custom: []
       account_code:
         name: account_code
         description: 'tìm kiếm mã vstore'
         required: false
-        example: tenetur
+        example: ut
         type: string
         custom: []
       name:
         name: name
         description: 'tìm kiếm mã name'
         required: false
-        example: veritatis
+        example: est
         type: string
         custom: []
       company_name:
         name: company_name
         description: 'tìm kiếm mã tên công ty'
         required: false
-        example: architecto
+        example: aut
         type: string
         custom: []
     cleanUrlParameters:
-      page: aliquid
-      limit: consequatur
-      branch: sint
-      account_code: tenetur
-      name: veritatis
-      company_name: architecto
+      page: in
+      limit: adipisci
+      branch: rerum
+      account_code: ut
+      name: est
+      company_name: aut
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -87,7 +87,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/vstore","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":2,"name":"ducanhng2812+1@gmail.com","company_name":"ducanhng2812+1@gmail.com","phone_number":"1312312312","tax_code":"1312312341","address":"111111","account_code":"vnvst1312312341","avatar":"http:\/\/localhost\/","branch":1}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/vstore?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/vstore","per_page":10,"prev_page_url":null,"to":1,"total":1}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -125,11 +125,11 @@ endpoints:
         name: id
         description: 'The ID of the vstore.'
         required: true
-        example: rerum
+        example: voluptas
         type: string
         custom: []
     cleanUrlParameters:
-      id: rerum
+      id: voluptas
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -625,20 +625,20 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: error
+        example: asperiores
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: minima
+        example: earum
         type: string
         custom: []
     cleanUrlParameters:
       id: 1
-      page: error
-      limit: minima
+      page: asperiores
+      limit: earum
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

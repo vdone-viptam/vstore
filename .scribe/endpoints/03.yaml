@@ -30,67 +30,67 @@ endpoints:
         name: id_pdone
         description: 'user của người dùng mua hàng'
         required: false
-        example: at
+        example: cupiditate
         type: mã
         custom: []
       name:
         name: name
         description: 'người dùng'
         required: false
-        example: voluptates
+        example: nesciunt
         type: tên
         custom: []
       phone_number:
         name: phone_number
         description: 'điện thoại'
         required: false
-        example: aliquid
+        example: sit
         type: số
         custom: []
       address:
         name: address
         description: chỉ
         required: false
-        example: commodi
+        example: voluptas
         type: địa
         custom: []
       province:
         name: province
         description: 'Must be at least 1.'
         required: true
-        example: 57
+        example: 8
         type: number
         custom: []
       data:
         name: data
         description: 'liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]'
         required: false
-        example: qui
+        example: rerum
         type: dữ
         custom: []
       district:
         name: district
         description: 'Must be at least 1.'
         required: true
-        example: 69
+        example: 90
         type: number
         custom: []
       id_vshop:
         name: id_vshop
         description: 'user của vshop'
         required: false
-        example: molestias
+        example: voluptas
         type: mã
         custom: []
     cleanBodyParameters:
-      id_pdone: at
-      name: voluptates
-      phone_number: aliquid
-      address: commodi
-      province: 57
-      data: qui
-      district: 69
-      id_vshop: molestias
+      id_pdone: cupiditate
+      name: nesciunt
+      phone_number: sit
+      address: voluptas
+      province: 8
+      data: rerum
+      district: 90
+      id_vshop: voluptas
     fileParameters: []
     responses: []
     responseFields: []
@@ -122,11 +122,11 @@ endpoints:
         name: id
         description: 'The ID of the detail.'
         required: true
-        example: veniam
+        example: occaecati
         type: string
         custom: []
     cleanUrlParameters:
-      id: veniam
+      id: occaecati
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

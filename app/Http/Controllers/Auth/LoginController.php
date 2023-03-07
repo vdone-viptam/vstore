@@ -174,7 +174,9 @@ class LoginController extends Controller
 
         try {
             if ($validator->fails()) {
+
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
             }
 
 

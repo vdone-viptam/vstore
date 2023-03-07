@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->string('account_code')->nullable()->comment('Mã tài khoản');
             $table->string('avatar')->nullable()->comment('Ảnh đại diện tài khoản');
             $table->string('banner')->nullable()->comment('Đường dẫn ảnh banner của tài khoản');
-            $table->integer('role_id')->nullable()->comment('quyền 1 admin 2 nhà cung cấp 3 nhà phan phối(vstore),4 kho(storage) ');
+            $table->integer('role_id')->nullable()->comment('quyền 1 admin 2 nhà cung cấp 3 nhà phân phối(vstore),4 kho(storage) ');
             $table->string('slug')->nullable();
             $table->integer('district_id')->nullable();
             $table->integer('provinceId')->nullable();

@@ -40,35 +40,35 @@ paths:
                 id_pdone:
                   type: mã
                   description: 'user của người dùng mua hàng'
-                  example: at
+                  example: cupiditate
                 name:
                   type: tên
                   description: 'người dùng'
-                  example: voluptates
+                  example: nesciunt
                 phone_number:
                   type: số
                   description: 'điện thoại'
-                  example: aliquid
+                  example: sit
                 address:
                   type: địa
                   description: chỉ
-                  example: commodi
+                  example: voluptas
                 province:
                   type: number
                   description: 'Must be at least 1.'
-                  example: 57
+                  example: 8
                 data:
                   type: dữ
                   description: 'liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]'
-                  example: qui
+                  example: rerum
                 district:
                   type: number
                   description: 'Must be at least 1.'
-                  example: 69
+                  example: 90
                 id_vshop:
                   type: mã
                   description: 'user của vshop'
-                  example: molestias
+                  example: voluptas
               required:
                 - province
                 - district
@@ -122,7 +122,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the detail.'
-        example: veniam
+        example: occaecati
         required: true
         schema:
           type: string
@@ -1102,7 +1102,7 @@ paths:
         in: path
         name: pdone_id
         description: 'The ID of the pdone.'
-        example: 20
+        example: 9
         required: true
         schema:
           type: integer
@@ -1139,22 +1139,22 @@ paths:
                 pdone_id:
                   type: required
                   description: 'mã user của người dùng'
-                  example: rerum
+                  example: nostrum
                 quantity:
                   type: 'required|numeric|min:1'
                   description: 'Số sản phẩm mua'
-                  example: accusantium
+                  example: quia
                 vshop_id:
                   type: required
                   description: 'mã v-shop'
-                  example: a
+                  example: consequatur
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the add.'
-        example: consequatur
+        example: natus
         required: true
         schema:
           type: string
@@ -1187,7 +1187,7 @@ paths:
         in: path
         name: cart_id
         description: 'The ID of the cart.'
-        example: ullam
+        example: ab
         required: true
         schema:
           type: string
@@ -1220,7 +1220,7 @@ paths:
         in: path
         name: cart_id
         description: 'The ID of the cart.'
-        example: ab
+        example: sed
         required: true
         schema:
           type: string
@@ -1228,7 +1228,7 @@ paths:
         in: path
         name: type
         description: ''
-        example: nemo
+        example: nesciunt
         required: true
         schema:
           type: string
@@ -1307,111 +1307,119 @@ paths:
                       -
                         id: 1
                         name: 'Thời trang nữ'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/thoi_trang_nu.png'
                       -
                         id: 2
                         name: 'Thời trang nam'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/thoi_trang_nam.png'
                       -
                         id: 3
                         name: 'Sắc đẹp'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/sac_dep.png'
                       -
                         id: 4
                         name: 'Sức khỏe'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/suc_khoe.png'
                       -
                         id: 5
                         name: 'Phụ kiện thời trang'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/phu_kien_thoi_trang.png'
                       -
                         id: 6
                         name: 'Thiết bị điện gia dụng'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/thiet_bi_dien_gia_dung.png'
                       -
                         id: 7
                         name: 'Giày dép nam'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/giay_dep_nam.png'
                       -
                         id: 8
-                        name: 'Điện thoại & phụ kiện'
-                        img: 'http://localhost/'
+                        name: 'Giày dép nữ'
+                        img: 'http://localhost/image/category/giay_dep_nu.png'
                       -
                         id: 9
-                        name: 'Du lịch & Hành lý'
-                        img: 'http://localhost/'
+                        name: 'Điện thoại & phụ kiện'
+                        img: 'http://localhost/image/category/phu_kien_dien_thoai.png'
                       -
                         id: 10
-                        name: 'Túi ví nữ'
-                        img: 'http://localhost/'
+                        name: 'Du lịch & Hành lý'
+                        img: 'http://localhost/image/category/du_lich_hanh_ly.png'
                       -
                         id: 11
-                        name: 'Túi ví nam'
-                        img: 'http://localhost/'
+                        name: 'Túi ví nữ'
+                        img: 'http://localhost/image/category/tui_vi_nu.png'
                       -
                         id: 12
-                        name: 'Đồng hồ'
-                        img: 'http://localhost/'
+                        name: 'Túi ví nam'
+                        img: 'http://localhost/image/category/tui_vi_nam.png'
                       -
                         id: 13
-                        name: 'Thiết bị âm thanh'
-                        img: 'http://localhost/'
+                        name: 'Đồng hồ'
+                        img: 'http://localhost/image/category/dong_ho.png'
                       -
                         id: 14
-                        name: 'Thực phầm và đồ uống'
-                        img: 'http://localhost/'
+                        name: 'Thiết bị âm thanh'
+                        img: 'http://localhost/image/category/thiet_bi_am_thanh.png'
                       -
                         id: 15
-                        name: 'Chăm sóc thú cưng'
-                        img: 'http://localhost/'
+                        name: 'Thực phầm và đồ uống'
+                        img: 'http://localhost/image/category/thuc_pham_do_uong.png'
                       -
                         id: 16
-                        name: 'Mẹ & Bé'
-                        img: 'http://localhost/'
+                        name: 'Chăm sóc thú cưng'
+                        img: 'http://localhost/image/category/cham_soc_thu_cung.png'
                       -
                         id: 17
-                        name: 'Thời trang trẻ em & trẻ sơ sinh'
-                        img: 'http://localhost/'
+                        name: 'Mẹ & Bé'
+                        img: 'http://localhost/image/category/me_be.png'
                       -
                         id: 18
-                        name: 'Gaming & Console'
-                        img: 'http://localhost/'
+                        name: 'Thời trang trẻ em & trẻ sơ sinh'
+                        img: 'http://localhost/image/category/thoi_trang_tre_em.png'
                       -
                         id: 19
-                        name: 'Cameras & Flycam'
-                        img: 'http://localhost/'
+                        name: 'Game & Console'
+                        img: 'http://localhost/image/category/game_console.png'
                       -
                         id: 20
-                        name: 'Nhà cửa & Đời sống'
-                        img: 'http://localhost/'
+                        name: 'Cameras & Flycam'
+                        img: 'http://localhost/image/category/camera_flycam.png'
                       -
                         id: 21
-                        name: 'Thể Thao & Dã Ngoại'
-                        img: 'http://localhost/'
+                        name: 'Nhà cửa & Đời sống'
+                        img: 'http://localhost/image/category/nha_cua_doi_song.png'
                       -
                         id: 22
-                        name: 'Văn Phòng Phẩm'
-                        img: 'http://localhost/'
+                        name: 'Thể Thao & Dã Ngoại'
+                        img: 'http://localhost/image/category/the_thao_da_ngoai.png'
                       -
                         id: 23
-                        name: 'Ô tô'
-                        img: 'http://localhost/'
+                        name: 'Văn Phòng Phẩm'
+                        img: 'http://localhost/image/category/van_phong_pham.png'
                       -
                         id: 24
-                        name: 'Mô tô, xe máy'
-                        img: 'http://localhost/'
+                        name: 'Ô tô'
+                        img: 'http://localhost/image/category/o_to.png'
                       -
                         id: 25
-                        name: Sách
-                        img: 'http://localhost/'
+                        name: 'Mô tô, xe máy'
+                        img: 'http://localhost/image/category/moto_xe_may.png'
                       -
                         id: 26
-                        name: 'Máy tính & Laptop'
-                        img: 'http://localhost/'
+                        name: Sách
+                        img: 'http://localhost/image/category/sach.png'
                       -
                         id: 27
+                        name: 'Máy tính & Laptop'
+                        img: 'http://localhost/image/category/may_tinh_laptop.png'
+                      -
+                        id: 28
                         name: 'Bất động sản'
-                        img: 'http://localhost/'
+                        img: 'http://localhost/image/category/nha_cua_doi_song.png'
+                      -
+                        id: 29
+                        name: 'Sở thích & siêu tầm'
+                        img: 'http://localhost/image/category/so_thich_suu_tam.png'
                     first_page_url: 'http://api-vstore.ngo/api/category?page=1'
                     from: 1
                     last_page: 1
@@ -1433,8 +1441,8 @@ paths:
                     path: 'http://api-vstore.ngo/api/category'
                     per_page: 48
                     prev_page_url: null
-                    to: 27
-                    total: 27
+                    to: 29
+                    total: 29
                 properties:
                   status_code:
                     type: integer
@@ -1451,111 +1459,119 @@ paths:
                           -
                             id: 1
                             name: 'Thời trang nữ'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/thoi_trang_nu.png'
                           -
                             id: 2
                             name: 'Thời trang nam'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/thoi_trang_nam.png'
                           -
                             id: 3
                             name: 'Sắc đẹp'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/sac_dep.png'
                           -
                             id: 4
                             name: 'Sức khỏe'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/suc_khoe.png'
                           -
                             id: 5
                             name: 'Phụ kiện thời trang'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/phu_kien_thoi_trang.png'
                           -
                             id: 6
                             name: 'Thiết bị điện gia dụng'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/thiet_bi_dien_gia_dung.png'
                           -
                             id: 7
                             name: 'Giày dép nam'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/giay_dep_nam.png'
                           -
                             id: 8
-                            name: 'Điện thoại & phụ kiện'
-                            img: 'http://localhost/'
+                            name: 'Giày dép nữ'
+                            img: 'http://localhost/image/category/giay_dep_nu.png'
                           -
                             id: 9
-                            name: 'Du lịch & Hành lý'
-                            img: 'http://localhost/'
+                            name: 'Điện thoại & phụ kiện'
+                            img: 'http://localhost/image/category/phu_kien_dien_thoai.png'
                           -
                             id: 10
-                            name: 'Túi ví nữ'
-                            img: 'http://localhost/'
+                            name: 'Du lịch & Hành lý'
+                            img: 'http://localhost/image/category/du_lich_hanh_ly.png'
                           -
                             id: 11
-                            name: 'Túi ví nam'
-                            img: 'http://localhost/'
+                            name: 'Túi ví nữ'
+                            img: 'http://localhost/image/category/tui_vi_nu.png'
                           -
                             id: 12
-                            name: 'Đồng hồ'
-                            img: 'http://localhost/'
+                            name: 'Túi ví nam'
+                            img: 'http://localhost/image/category/tui_vi_nam.png'
                           -
                             id: 13
-                            name: 'Thiết bị âm thanh'
-                            img: 'http://localhost/'
+                            name: 'Đồng hồ'
+                            img: 'http://localhost/image/category/dong_ho.png'
                           -
                             id: 14
-                            name: 'Thực phầm và đồ uống'
-                            img: 'http://localhost/'
+                            name: 'Thiết bị âm thanh'
+                            img: 'http://localhost/image/category/thiet_bi_am_thanh.png'
                           -
                             id: 15
-                            name: 'Chăm sóc thú cưng'
-                            img: 'http://localhost/'
+                            name: 'Thực phầm và đồ uống'
+                            img: 'http://localhost/image/category/thuc_pham_do_uong.png'
                           -
                             id: 16
-                            name: 'Mẹ & Bé'
-                            img: 'http://localhost/'
+                            name: 'Chăm sóc thú cưng'
+                            img: 'http://localhost/image/category/cham_soc_thu_cung.png'
                           -
                             id: 17
-                            name: 'Thời trang trẻ em & trẻ sơ sinh'
-                            img: 'http://localhost/'
+                            name: 'Mẹ & Bé'
+                            img: 'http://localhost/image/category/me_be.png'
                           -
                             id: 18
-                            name: 'Gaming & Console'
-                            img: 'http://localhost/'
+                            name: 'Thời trang trẻ em & trẻ sơ sinh'
+                            img: 'http://localhost/image/category/thoi_trang_tre_em.png'
                           -
                             id: 19
-                            name: 'Cameras & Flycam'
-                            img: 'http://localhost/'
+                            name: 'Game & Console'
+                            img: 'http://localhost/image/category/game_console.png'
                           -
                             id: 20
-                            name: 'Nhà cửa & Đời sống'
-                            img: 'http://localhost/'
+                            name: 'Cameras & Flycam'
+                            img: 'http://localhost/image/category/camera_flycam.png'
                           -
                             id: 21
-                            name: 'Thể Thao & Dã Ngoại'
-                            img: 'http://localhost/'
+                            name: 'Nhà cửa & Đời sống'
+                            img: 'http://localhost/image/category/nha_cua_doi_song.png'
                           -
                             id: 22
-                            name: 'Văn Phòng Phẩm'
-                            img: 'http://localhost/'
+                            name: 'Thể Thao & Dã Ngoại'
+                            img: 'http://localhost/image/category/the_thao_da_ngoai.png'
                           -
                             id: 23
-                            name: 'Ô tô'
-                            img: 'http://localhost/'
+                            name: 'Văn Phòng Phẩm'
+                            img: 'http://localhost/image/category/van_phong_pham.png'
                           -
                             id: 24
-                            name: 'Mô tô, xe máy'
-                            img: 'http://localhost/'
+                            name: 'Ô tô'
+                            img: 'http://localhost/image/category/o_to.png'
                           -
                             id: 25
-                            name: Sách
-                            img: 'http://localhost/'
+                            name: 'Mô tô, xe máy'
+                            img: 'http://localhost/image/category/moto_xe_may.png'
                           -
                             id: 26
-                            name: 'Máy tính & Laptop'
-                            img: 'http://localhost/'
+                            name: Sách
+                            img: 'http://localhost/image/category/sach.png'
                           -
                             id: 27
+                            name: 'Máy tính & Laptop'
+                            img: 'http://localhost/image/category/may_tinh_laptop.png'
+                          -
+                            id: 28
                             name: 'Bất động sản'
-                            img: 'http://localhost/'
+                            img: 'http://localhost/image/category/nha_cua_doi_song.png'
+                          -
+                            id: 29
+                            name: 'Sở thích & siêu tầm'
+                            img: 'http://localhost/image/category/so_thich_suu_tam.png'
                         items:
                           type: object
                           properties:
@@ -1567,7 +1583,7 @@ paths:
                               example: 'Thời trang nữ'
                             img:
                               type: string
-                              example: 'http://localhost/'
+                              example: 'http://localhost/image/category/thoi_trang_nu.png'
                       first_page_url:
                         type: string
                         example: 'http://api-vstore.ngo/api/category?page=1'
@@ -1621,10 +1637,10 @@ paths:
                         example: null
                       to:
                         type: integer
-                        example: 27
+                        example: 29
                       total:
                         type: integer
-                        example: 27
+                        example: 29
       tags:
         - Categories
       security: []
@@ -1642,7 +1658,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: at
+            value: explicabo
       -
         in: path
         name: limit
@@ -1656,7 +1672,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: non
+            value: vel
   '/api/category/get-category-by-vstore/{vstore_id}':
     get:
       summary: 'Danh sách danh mục theo V-Store'
@@ -1702,7 +1718,7 @@ paths:
         in: path
         name: vstore_id
         description: 'The ID of the vstore.'
-        example: id
+        example: voluptatibus
         required: true
         schema:
           type: string
@@ -1719,7 +1735,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: iusto
+            value: ducimus
   '/api/category/get-product-by-category/{category_id}':
     get:
       summary: 'Danh sách sản phẩm theo danh mục'
@@ -1752,17 +1768,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1'
+                        url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
                         label: '1'
                         active: true
                       -
@@ -1770,7 +1786,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam'
+                    path: 'http://api-vstore.ngo/api/category/get-product-by-category/quis'
                     per_page: 8
                     prev_page_url: null
                     to: null
@@ -1790,7 +1806,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1'
+                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
                       from:
                         type: string
                         example: null
@@ -1799,7 +1815,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1'
+                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
                       links:
                         type: array
                         example:
@@ -1808,7 +1824,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1'
+                            url: 'http://api-vstore.ngo/api/category/get-product-by-category/quis?page=1'
                             label: '1'
                             active: true
                           -
@@ -1832,7 +1848,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/laboriosam'
+                        example: 'http://api-vstore.ngo/api/category/get-product-by-category/quis'
                       per_page:
                         type: integer
                         example: 8
@@ -1853,7 +1869,7 @@ paths:
         in: path
         name: category_id
         description: 'The ID of the category.'
-        example: laboriosam
+        example: quis
         required: true
         schema:
           type: string
@@ -1870,7 +1886,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: id
+            value: iusto
       -
         in: path
         name: limit
@@ -1884,7 +1900,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequatur
+            value: voluptatum
   '/api/category/get-vstore-by-category/{id}':
     get:
       summary: 'Danh sách vstore theo danh mục'
@@ -1930,7 +1946,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the get vstore by category.'
-        example: sed
+        example: quaerat
         required: true
         schema:
           type: string
@@ -1947,7 +1963,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: perspiciatis
+            value: delectus
       -
         in: path
         name: limit
@@ -1961,7 +1977,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: qui
+            value: ex
   '/api/category/{id}':
     get:
       summary: 'chi tiết danh mục'
@@ -1995,10 +2011,10 @@ paths:
                     id: 1
                     name: 'Thời trang nữ'
                     parent_id: null
-                    img: null
+                    img: image/category/thoi_trang_nu.png
                     slug: null
                     status: 1
-                    created_at: '2023-02-26T02:41:19.000000Z'
+                    created_at: '2023-03-05T14:02:03.000000Z'
                     updated_at: null
                 properties:
                   status_code:
@@ -2018,7 +2034,7 @@ paths:
                         example: null
                       img:
                         type: string
-                        example: null
+                        example: image/category/thoi_trang_nu.png
                       slug:
                         type: string
                         example: null
@@ -2027,7 +2043,7 @@ paths:
                         example: 1
                       created_at:
                         type: string
-                        example: '2023-02-26T02:41:19.000000Z'
+                        example: '2023-03-05T14:02:03.000000Z'
                       updated_at:
                         type: string
                         example: null
@@ -2108,11 +2124,11 @@ paths:
                 id:
                   type: id
                   description: 'sản phẩm'
-                  example: similique
+                  example: soluta
                 total:
                   type: số
                   description: 'lượng sản phẩm'
-                  example: iste
+                  example: placeat
       security: []
   '/api/discount/available-discount/{id}':
     get:
@@ -2161,7 +2177,31 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: aliquam
+            value: nihil
+  /api/callback-viettel-post:
+    post:
+      summary: ''
+      operationId: postApiCallbackViettelPost
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
   /api/user:
     get:
       summary: ''
@@ -2219,13 +2259,820 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        500:
           description: ''
           content:
             application/json:
               schema:
-                type: integer
-                example: 1
+                type: object
+                example:
+                  message: 'Trying to access array offset on value of type null'
+                  exception: ErrorException
+                  file: 'D:\vvstore\vstore-backend\app\Http\Controllers\TestController.php'
+                  line: 31
+                  trace:
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php'
+                      line: 266
+                      function: handleError
+                      class: Illuminate\Foundation\Bootstrap\HandleExceptions
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\app\Http\Controllers\TestController.php'
+                      line: 31
+                      function: 'Illuminate\Foundation\Bootstrap\{closure}'
+                      class: Illuminate\Foundation\Bootstrap\HandleExceptions
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Controller.php'
+                      line: 54
+                      function: index
+                      class: App\Http\Controllers\TestController
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php'
+                      line: 43
+                      function: callAction
+                      class: Illuminate\Routing\Controller
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php'
+                      line: 260
+                      function: dispatch
+                      class: Illuminate\Routing\ControllerDispatcher
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php'
+                      line: 205
+                      function: runController
+                      class: Illuminate\Routing\Route
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                      line: 798
+                      function: run
+                      class: Illuminate\Routing\Route
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 141
+                      function: 'Illuminate\Routing\{closure}'
+                      class: Illuminate\Routing\Router
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php'
+                      line: 50
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Routing\Middleware\SubstituteBindings
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php'
+                      line: 126
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php'
+                      line: 102
+                      function: handleRequest
+                      class: Illuminate\Routing\Middleware\ThrottleRequests
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php'
+                      line: 54
+                      function: handleRequestUsingNamedLimiter
+                      class: Illuminate\Routing\Middleware\ThrottleRequests
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Routing\Middleware\ThrottleRequests
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 116
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                      line: 799
+                      function: then
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                      line: 776
+                      function: runRouteWithinStack
+                      class: Illuminate\Routing\Router
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                      line: 740
+                      function: runRoute
+                      class: Illuminate\Routing\Router
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                      line: 729
+                      function: dispatchToRoute
+                      class: Illuminate\Routing\Router
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php'
+                      line: 190
+                      function: dispatch
+                      class: Illuminate\Routing\Router
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 141
+                      function: 'Illuminate\Foundation\Http\{closure}'
+                      class: Illuminate\Foundation\Http\Kernel
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php'
+                      line: 21
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php'
+                      line: 31
+                      function: handle
+                      class: Illuminate\Foundation\Http\Middleware\TransformsRequest
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php'
+                      line: 21
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php'
+                      line: 40
+                      function: handle
+                      class: Illuminate\Foundation\Http\Middleware\TransformsRequest
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Foundation\Http\Middleware\TrimStrings
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ValidatePostSize.php'
+                      line: 27
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Foundation\Http\Middleware\ValidatePostSize
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php'
+                      line: 86
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php'
+                      line: 62
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Http\Middleware\HandleCors
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php'
+                      line: 39
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 180
+                      function: handle
+                      class: Illuminate\Http\Middleware\TrustProxies
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                      line: 116
+                      function: 'Illuminate\Pipeline\{closure}'
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php'
+                      line: 165
+                      function: then
+                      class: Illuminate\Pipeline\Pipeline
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php'
+                      line: 134
+                      function: sendRequestThroughRouter
+                      class: Illuminate\Foundation\Http\Kernel
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                      line: 299
+                      function: handle
+                      class: Illuminate\Foundation\Http\Kernel
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                      line: 287
+                      function: callLaravelOrLumenRoute
+                      class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                      line: 92
+                      function: makeApiCall
+                      class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                      line: 45
+                      function: makeResponseCall
+                      class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                      line: 35
+                      function: makeResponseCallIfConditionsPass
+                      class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Extractor.php'
+                      line: 209
+                      function: __invoke
+                      class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Extractor.php'
+                      line: 166
+                      function: iterateThroughStrategies
+                      class: Knuckles\Scribe\Extracting\Extractor
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Extractor.php'
+                      line: 95
+                      function: fetchResponses
+                      class: Knuckles\Scribe\Extracting\Extractor
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\GroupedEndpoints\GroupedEndpointsFromApp.php'
+                      line: 124
+                      function: processRoute
+                      class: Knuckles\Scribe\Extracting\Extractor
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\GroupedEndpoints\GroupedEndpointsFromApp.php'
+                      line: 71
+                      function: extractEndpointsInfoFromLaravelApp
+                      class: Knuckles\Scribe\GroupedEndpoints\GroupedEndpointsFromApp
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\GroupedEndpoints\GroupedEndpointsFromApp.php'
+                      line: 49
+                      function: extractEndpointsInfoAndWriteToDisk
+                      class: Knuckles\Scribe\GroupedEndpoints\GroupedEndpointsFromApp
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Commands\GenerateDocumentation.php'
+                      line: 51
+                      function: get
+                      class: Knuckles\Scribe\GroupedEndpoints\GroupedEndpointsFromApp
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php'
+                      line: 36
+                      function: handle
+                      class: Knuckles\Scribe\Commands\GenerateDocumentation
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\Util.php'
+                      line: 41
+                      function: 'Illuminate\Container\{closure}'
+                      class: Illuminate\Container\BoundMethod
+                      type: '::'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php'
+                      line: 93
+                      function: unwrapIfClosure
+                      class: Illuminate\Container\Util
+                      type: '::'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php'
+                      line: 37
+                      function: callBoundMethod
+                      class: Illuminate\Container\BoundMethod
+                      type: '::'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\Container.php'
+                      line: 661
+                      function: call
+                      class: Illuminate\Container\BoundMethod
+                      type: '::'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Console\Command.php'
+                      line: 183
+                      function: call
+                      class: Illuminate\Container\Container
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Command\Command.php'
+                      line: 312
+                      function: execute
+                      class: Illuminate\Console\Command
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Console\Command.php'
+                      line: 153
+                      function: run
+                      class: Symfony\Component\Console\Command\Command
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Application.php'
+                      line: 1022
+                      function: run
+                      class: Illuminate\Console\Command
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Application.php'
+                      line: 314
+                      function: doRunCommand
+                      class: Symfony\Component\Console\Application
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Application.php'
+                      line: 168
+                      function: doRun
+                      class: Symfony\Component\Console\Application
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Console\Application.php'
+                      line: 102
+                      function: run
+                      class: Symfony\Component\Console\Application
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php'
+                      line: 155
+                      function: run
+                      class: Illuminate\Console\Application
+                      type: '->'
+                    -
+                      file: 'D:\vvstore\vstore-backend\artisan'
+                      line: 37
+                      function: handle
+                      class: Illuminate\Foundation\Console\Kernel
+                      type: '->'
+                properties:
+                  message:
+                    type: string
+                    example: 'Trying to access array offset on value of type null'
+                  exception:
+                    type: string
+                    example: ErrorException
+                  file:
+                    type: string
+                    example: 'D:\vvstore\vstore-backend\app\Http\Controllers\TestController.php'
+                  line:
+                    type: integer
+                    example: 31
+                  trace:
+                    type: array
+                    example:
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php'
+                        line: 266
+                        function: handleError
+                        class: Illuminate\Foundation\Bootstrap\HandleExceptions
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\app\Http\Controllers\TestController.php'
+                        line: 31
+                        function: 'Illuminate\Foundation\Bootstrap\{closure}'
+                        class: Illuminate\Foundation\Bootstrap\HandleExceptions
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Controller.php'
+                        line: 54
+                        function: index
+                        class: App\Http\Controllers\TestController
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php'
+                        line: 43
+                        function: callAction
+                        class: Illuminate\Routing\Controller
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php'
+                        line: 260
+                        function: dispatch
+                        class: Illuminate\Routing\ControllerDispatcher
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php'
+                        line: 205
+                        function: runController
+                        class: Illuminate\Routing\Route
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                        line: 798
+                        function: run
+                        class: Illuminate\Routing\Route
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 141
+                        function: 'Illuminate\Routing\{closure}'
+                        class: Illuminate\Routing\Router
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php'
+                        line: 50
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Routing\Middleware\SubstituteBindings
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php'
+                        line: 126
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php'
+                        line: 102
+                        function: handleRequest
+                        class: Illuminate\Routing\Middleware\ThrottleRequests
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php'
+                        line: 54
+                        function: handleRequestUsingNamedLimiter
+                        class: Illuminate\Routing\Middleware\ThrottleRequests
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Routing\Middleware\ThrottleRequests
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 116
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                        line: 799
+                        function: then
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                        line: 776
+                        function: runRouteWithinStack
+                        class: Illuminate\Routing\Router
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                        line: 740
+                        function: runRoute
+                        class: Illuminate\Routing\Router
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php'
+                        line: 729
+                        function: dispatchToRoute
+                        class: Illuminate\Routing\Router
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php'
+                        line: 190
+                        function: dispatch
+                        class: Illuminate\Routing\Router
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 141
+                        function: 'Illuminate\Foundation\Http\{closure}'
+                        class: Illuminate\Foundation\Http\Kernel
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php'
+                        line: 21
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php'
+                        line: 31
+                        function: handle
+                        class: Illuminate\Foundation\Http\Middleware\TransformsRequest
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php'
+                        line: 21
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php'
+                        line: 40
+                        function: handle
+                        class: Illuminate\Foundation\Http\Middleware\TransformsRequest
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Foundation\Http\Middleware\TrimStrings
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ValidatePostSize.php'
+                        line: 27
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Foundation\Http\Middleware\ValidatePostSize
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php'
+                        line: 86
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php'
+                        line: 62
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Http\Middleware\HandleCors
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php'
+                        line: 39
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 180
+                        function: handle
+                        class: Illuminate\Http\Middleware\TrustProxies
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php'
+                        line: 116
+                        function: 'Illuminate\Pipeline\{closure}'
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php'
+                        line: 165
+                        function: then
+                        class: Illuminate\Pipeline\Pipeline
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php'
+                        line: 134
+                        function: sendRequestThroughRouter
+                        class: Illuminate\Foundation\Http\Kernel
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                        line: 299
+                        function: handle
+                        class: Illuminate\Foundation\Http\Kernel
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                        line: 287
+                        function: callLaravelOrLumenRoute
+                        class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                        line: 92
+                        function: makeApiCall
+                        class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                        line: 45
+                        function: makeResponseCall
+                        class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Strategies\Responses\ResponseCalls.php'
+                        line: 35
+                        function: makeResponseCallIfConditionsPass
+                        class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Extractor.php'
+                        line: 209
+                        function: __invoke
+                        class: Knuckles\Scribe\Extracting\Strategies\Responses\ResponseCalls
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Extractor.php'
+                        line: 166
+                        function: iterateThroughStrategies
+                        class: Knuckles\Scribe\Extracting\Extractor
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Extracting\Extractor.php'
+                        line: 95
+                        function: fetchResponses
+                        class: Knuckles\Scribe\Extracting\Extractor
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\GroupedEndpoints\GroupedEndpointsFromApp.php'
+                        line: 124
+                        function: processRoute
+                        class: Knuckles\Scribe\Extracting\Extractor
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\GroupedEndpoints\GroupedEndpointsFromApp.php'
+                        line: 71
+                        function: extractEndpointsInfoFromLaravelApp
+                        class: Knuckles\Scribe\GroupedEndpoints\GroupedEndpointsFromApp
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\GroupedEndpoints\GroupedEndpointsFromApp.php'
+                        line: 49
+                        function: extractEndpointsInfoAndWriteToDisk
+                        class: Knuckles\Scribe\GroupedEndpoints\GroupedEndpointsFromApp
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\knuckleswtf\scribe\src\Commands\GenerateDocumentation.php'
+                        line: 51
+                        function: get
+                        class: Knuckles\Scribe\GroupedEndpoints\GroupedEndpointsFromApp
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php'
+                        line: 36
+                        function: handle
+                        class: Knuckles\Scribe\Commands\GenerateDocumentation
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\Util.php'
+                        line: 41
+                        function: 'Illuminate\Container\{closure}'
+                        class: Illuminate\Container\BoundMethod
+                        type: '::'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php'
+                        line: 93
+                        function: unwrapIfClosure
+                        class: Illuminate\Container\Util
+                        type: '::'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php'
+                        line: 37
+                        function: callBoundMethod
+                        class: Illuminate\Container\BoundMethod
+                        type: '::'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Container\Container.php'
+                        line: 661
+                        function: call
+                        class: Illuminate\Container\BoundMethod
+                        type: '::'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Console\Command.php'
+                        line: 183
+                        function: call
+                        class: Illuminate\Container\Container
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Command\Command.php'
+                        line: 312
+                        function: execute
+                        class: Illuminate\Console\Command
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Console\Command.php'
+                        line: 153
+                        function: run
+                        class: Symfony\Component\Console\Command\Command
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Application.php'
+                        line: 1022
+                        function: run
+                        class: Illuminate\Console\Command
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Application.php'
+                        line: 314
+                        function: doRunCommand
+                        class: Symfony\Component\Console\Application
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\symfony\console\Application.php'
+                        line: 168
+                        function: doRun
+                        class: Symfony\Component\Console\Application
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Console\Application.php'
+                        line: 102
+                        function: run
+                        class: Symfony\Component\Console\Application
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php'
+                        line: 155
+                        function: run
+                        class: Illuminate\Console\Application
+                        type: '->'
+                      -
+                        file: 'D:\vvstore\vstore-backend\artisan'
+                        line: 37
+                        function: handle
+                        class: Illuminate\Foundation\Console\Kernel
+                        type: '->'
+                    items:
+                      type: object
+                      properties:
+                        file:
+                          type: string
+                          example: 'D:\vvstore\vstore-backend\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php'
+                        line:
+                          type: integer
+                          example: 266
+                        function:
+                          type: string
+                          example: handleError
+                        class:
+                          type: string
+                          example: Illuminate\Foundation\Bootstrap\HandleExceptions
+                        type:
+                          type: string
+                          example: '->'
       tags:
         - Endpoints
       security: []
@@ -2545,13 +3392,9 @@ paths:
                   status_code: 200
                   data:
                     current_page: 1
-                    data:
-                      -
-                        id: 8
-                        name: nhacungcap
-                        avatar: 'http://localhost/image/Rectangle 44.png'
+                    data: []
                     first_page_url: 'http://api-vstore.ngo/api/manufactures/get-list?page=1'
-                    from: 1
+                    from: null
                     last_page: 1
                     last_page_url: 'http://api-vstore.ngo/api/manufactures/get-list?page=1'
                     links:
@@ -2571,8 +3414,8 @@ paths:
                     path: 'http://api-vstore.ngo/api/manufactures/get-list'
                     per_page: 100
                     prev_page_url: null
-                    to: 1
-                    total: 1
+                    to: null
+                    total: 0
                 properties:
                   status_code:
                     type: integer
@@ -2585,29 +3428,13 @@ paths:
                         example: 1
                       data:
                         type: array
-                        example:
-                          -
-                            id: 8
-                            name: nhacungcap
-                            avatar: 'http://localhost/image/Rectangle 44.png'
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              example: 8
-                            name:
-                              type: string
-                              example: nhacungcap
-                            avatar:
-                              type: string
-                              example: 'http://localhost/image/Rectangle 44.png'
+                        example: []
                       first_page_url:
                         type: string
                         example: 'http://api-vstore.ngo/api/manufactures/get-list?page=1'
                       from:
-                        type: integer
-                        example: 1
+                        type: string
+                        example: null
                       last_page:
                         type: integer
                         example: 1
@@ -2654,11 +3481,11 @@ paths:
                         type: string
                         example: null
                       to:
-                        type: integer
-                        example: 1
+                        type: string
+                        example: null
                       total:
                         type: integer
-                        example: 1
+                        example: 0
       tags:
         - Manufacture
       security: []
@@ -2676,7 +3503,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: fuga
+            value: qui
       -
         in: path
         name: limit
@@ -2690,7 +3517,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: rerum
+            value: doloribus
   '/api/manufactures/profile/{ncc_id}':
     get:
       summary: 'chi tiết nhà cung cấp'
@@ -3510,7 +4337,7 @@ paths:
         in: path
         name: ncc_id
         description: 'The ID of the ncc.'
-        example: voluptate
+        example: repellat
         required: true
         schema:
           type: string
@@ -3553,8 +4380,9 @@ paths:
                         images: 'http://localhost/storage/products/img2023022602592770906700.jpeg'
                         price: 100000
                         discount_vstore: 5
+                        amount_product_sold: null
                         price_discount: 95000
-                        available_discount: 10
+                        available_discount: 11
                       -
                         id: 2
                         name: 'sản phẩm 1'
@@ -3562,8 +4390,9 @@ paths:
                         images: 'http://localhost/storage/products/img2023022603230435375000.jpeg'
                         price: 100000
                         discount_vstore: 5
+                        amount_product_sold: null
                         price_discount: 95000
-                        available_discount: 10
+                        available_discount: 11
                       -
                         id: 3
                         name: 'sản phẩm 2'
@@ -3571,8 +4400,9 @@ paths:
                         images: 'http://localhost/storage/products/img2023030103010863736800.jpeg'
                         price: 12
                         discount_vstore: 5
+                        amount_product_sold: null
                         price_discount: 11.4
-                        available_discount: 10
+                        available_discount: 11
                       -
                         id: 4
                         name: 'Sản phẩm test'
@@ -3580,8 +4410,9 @@ paths:
                         images: 'http://localhost/storage/products/img2023030106261919958900.png'
                         price: 120000
                         discount_vstore: 5
+                        amount_product_sold: null
                         price_discount: 114000
-                        available_discount: 10
+                        available_discount: 11
                     first_page_url: 'http://api-vstore.ngo/api/product?page=1'
                     from: 1
                     last_page: 1
@@ -3625,8 +4456,9 @@ paths:
                             images: 'http://localhost/storage/products/img2023022602592770906700.jpeg'
                             price: 100000
                             discount_vstore: 5
+                            amount_product_sold: null
                             price_discount: 95000
-                            available_discount: 10
+                            available_discount: 11
                           -
                             id: 2
                             name: 'sản phẩm 1'
@@ -3634,8 +4466,9 @@ paths:
                             images: 'http://localhost/storage/products/img2023022603230435375000.jpeg'
                             price: 100000
                             discount_vstore: 5
+                            amount_product_sold: null
                             price_discount: 95000
-                            available_discount: 10
+                            available_discount: 11
                           -
                             id: 3
                             name: 'sản phẩm 2'
@@ -3643,8 +4476,9 @@ paths:
                             images: 'http://localhost/storage/products/img2023030103010863736800.jpeg'
                             price: 12
                             discount_vstore: 5
+                            amount_product_sold: null
                             price_discount: 11.4
-                            available_discount: 10
+                            available_discount: 11
                           -
                             id: 4
                             name: 'Sản phẩm test'
@@ -3652,8 +4486,9 @@ paths:
                             images: 'http://localhost/storage/products/img2023030106261919958900.png'
                             price: 120000
                             discount_vstore: 5
+                            amount_product_sold: null
                             price_discount: 114000
-                            available_discount: 10
+                            available_discount: 11
                         items:
                           type: object
                           properties:
@@ -3675,12 +4510,15 @@ paths:
                             discount_vstore:
                               type: integer
                               example: 5
+                            amount_product_sold:
+                              type: string
+                              example: null
                             price_discount:
                               type: integer
                               example: 95000
                             available_discount:
                               type: integer
-                              example: 10
+                              example: 11
                       first_page_url:
                         type: string
                         example: 'http://api-vstore.ngo/api/product?page=1'
@@ -3755,7 +4593,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: impedit
+            value: dignissimos
       -
         in: path
         name: category_id
@@ -3769,11 +4607,11 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: tenetur
+            value: cumque
       -
         in: path
         name: order_by
-        description: 'Optional parameter. | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán'
+        description: 'Optional parameter. | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy'
         required: true
         schema:
           type: string
@@ -3783,7 +4621,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptatem
+            value: porro
       -
         in: path
         name: option
@@ -3797,7 +4635,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: sit
+            value: et
       -
         in: path
         name: limit
@@ -3811,7 +4649,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: temporibus
+            value: suscipit
       -
         in: path
         name: payment
@@ -3825,7 +4663,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: eum
+            value: laudantium
       -
         in: path
         name: publish_id
@@ -3839,7 +4677,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: harum
+            value: voluptatem
   '/api/product/product-by-category/{id}':
     get:
       summary: 'Danh sách sản phẩm theo danh mục'
@@ -3872,17 +4710,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-category/in?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-category/in?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/product/product-by-category/in?page=1'
+                        url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
                         label: '1'
                         active: true
                       -
@@ -3890,7 +4728,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/product/product-by-category/in'
+                    path: 'http://api-vstore.ngo/api/product/product-by-category/et'
                     per_page: 10
                     prev_page_url: null
                     to: null
@@ -3910,7 +4748,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-category/in?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
                       from:
                         type: string
                         example: null
@@ -3919,7 +4757,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-category/in?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
                       links:
                         type: array
                         example:
@@ -3928,7 +4766,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/product/product-by-category/in?page=1'
+                            url: 'http://api-vstore.ngo/api/product/product-by-category/et?page=1'
                             label: '1'
                             active: true
                           -
@@ -3952,7 +4790,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-category/in'
+                        example: 'http://api-vstore.ngo/api/product/product-by-category/et'
                       per_page:
                         type: integer
                         example: 10
@@ -3973,7 +4811,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product by category.'
-        example: in
+        example: et
         required: true
         schema:
           type: string
@@ -3990,7 +4828,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequuntur
+            value: harum
       -
         in: path
         name: limit
@@ -4004,7 +4842,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: libero
+            value: nobis
   '/api/product/product-by-vstore/{id}':
     get:
       summary: 'Danh sách sản phẩm vstore'
@@ -4037,17 +4875,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1'
+                        url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
                         label: '1'
                         active: true
                       -
@@ -4055,7 +4893,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis'
+                    path: 'http://api-vstore.ngo/api/product/product-by-vstore/et'
                     per_page: 10
                     prev_page_url: null
                     to: null
@@ -4075,7 +4913,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
                       from:
                         type: string
                         example: null
@@ -4084,7 +4922,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
                       links:
                         type: array
                         example:
@@ -4093,7 +4931,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1'
+                            url: 'http://api-vstore.ngo/api/product/product-by-vstore/et?page=1'
                             label: '1'
                             active: true
                           -
@@ -4117,7 +4955,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/nobis'
+                        example: 'http://api-vstore.ngo/api/product/product-by-vstore/et'
                       per_page:
                         type: integer
                         example: 10
@@ -4138,7 +4976,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product by vstore.'
-        example: nobis
+        example: et
         required: true
         schema:
           type: string
@@ -4155,7 +4993,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: blanditiis
+            value: voluptatem
       -
         in: path
         name: limit
@@ -4169,7 +5007,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: sapiente
+            value: consequatur
       -
         in: path
         name: publish_id
@@ -4183,7 +5021,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: aspernatur
+            value: possimus
       -
         in: path
         name: category_id
@@ -4197,7 +5035,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequatur
+            value: reiciendis
       -
         in: path
         name: order_by_price
@@ -4211,7 +5049,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: sit
+            value: sunt
       -
         in: path
         name: order_by_id
@@ -4225,7 +5063,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptas
+            value: voluptatem
       -
         in: path
         name: order_by_sold
@@ -4239,7 +5077,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequuntur
+            value: consequatur
       -
         in: path
         name: payments
@@ -4253,7 +5091,21 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: dolorum
+            value: ipsum
+      -
+        in: path
+        name: id_pdone
+        description: 'Optional parameter. dùng để check sản phẩm đã được tiếp thị hay chưa'
+        required: true
+        schema:
+          type: string
+        examples:
+          omitted:
+            summary: 'When the value is omitted'
+            value: ''
+          present:
+            summary: 'When the value is present'
+            value: veritatis
   '/api/product/product-by-ncc/{id}':
     get:
       summary: 'Danh sách sản phẩm nhà cung cấp'
@@ -4286,17 +5138,17 @@ paths:
                   data:
                     current_page: 1
                     data: []
-                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1'
+                    first_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
                     from: null
                     last_page: 1
-                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1'
+                    last_page_url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
                     links:
                       -
                         url: null
                         label: '&laquo; Previous'
                         active: false
                       -
-                        url: 'http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1'
+                        url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
                         label: '1'
                         active: true
                       -
@@ -4304,7 +5156,7 @@ paths:
                         label: 'Next &raquo;'
                         active: false
                     next_page_url: null
-                    path: 'http://api-vstore.ngo/api/product/product-by-ncc/rem'
+                    path: 'http://api-vstore.ngo/api/product/product-by-ncc/qui'
                     per_page: 10
                     prev_page_url: null
                     to: null
@@ -4324,7 +5176,7 @@ paths:
                         example: []
                       first_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
                       from:
                         type: string
                         example: null
@@ -4333,7 +5185,7 @@ paths:
                         example: 1
                       last_page_url:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1'
+                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
                       links:
                         type: array
                         example:
@@ -4342,7 +5194,7 @@ paths:
                             label: '&laquo; Previous'
                             active: false
                           -
-                            url: 'http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1'
+                            url: 'http://api-vstore.ngo/api/product/product-by-ncc/qui?page=1'
                             label: '1'
                             active: true
                           -
@@ -4366,7 +5218,7 @@ paths:
                         example: null
                       path:
                         type: string
-                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/rem'
+                        example: 'http://api-vstore.ngo/api/product/product-by-ncc/qui'
                       per_page:
                         type: integer
                         example: 10
@@ -4387,7 +5239,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product by ncc.'
-        example: rem
+        example: qui
         required: true
         schema:
           type: string
@@ -4404,7 +5256,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: magnam
+            value: rem
       -
         in: path
         name: limit
@@ -4418,7 +5270,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: voluptatem
+            value: possimus
       -
         in: path
         name: publish_id
@@ -4432,7 +5284,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: quia
+            value: quidem
       -
         in: path
         name: category_id
@@ -4446,7 +5298,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: eaque
+            value: id
       -
         in: path
         name: order_by_price
@@ -4460,7 +5312,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: sit
+            value: quo
       -
         in: path
         name: order_by_id
@@ -4474,7 +5326,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: fugit
+            value: debitis
       -
         in: path
         name: order_by_sold
@@ -4488,7 +5340,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: praesentium
+            value: et
       -
         in: path
         name: payments
@@ -4502,7 +5354,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: nihil
+            value: et
   '/api/product/vshop-pickup/{id}':
     post:
       summary: 'Vshop thêm sản phẩm'
@@ -4536,14 +5388,14 @@ paths:
                 id_pdone:
                   type: id
                   description: 'của pdone'
-                  example: dolor
+                  example: adipisci
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the vshop pickup.'
-        example: exercitationem
+        example: excepturi
         required: true
         schema:
           type: string
@@ -4580,18 +5432,18 @@ paths:
                 id_pdone:
                   type: id
                   description: 'của pdone'
-                  example: aspernatur
+                  example: nemo
                 amount:
                   type: số
                   description: 'lượng sản phẩm'
-                  example: nulla
+                  example: dolorem
       security: []
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the vshop ready stock.'
-        example: sapiente
+        example: sed
         required: true
         schema:
           type: string
@@ -4757,7 +5609,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: beatae
+            value: et
   '/api/product/{id}':
     get:
       summary: 'Chi tiết sản phẩm'
@@ -4795,7 +5647,8 @@ paths:
                     price: 100000
                     discount_vShop: 5
                     video: 'storage/products/8971482296780430562_1677380367 . mp4'
-                    products_available: '200'
+                    description: không
+                    products_available: '154'
                 properties:
                   status_code:
                     type: integer
@@ -4824,9 +5677,12 @@ paths:
                       video:
                         type: string
                         example: 'storage/products/8971482296780430562_1677380367 . mp4'
+                      description:
+                        type: string
+                        example: không
                       products_available:
                         type: string
-                        example: '200'
+                        example: '154'
       tags:
         - Product
       security: []
@@ -4870,16 +5726,9 @@ paths:
                   status: 200
                   data:
                     current_page: 1
-                    data:
-                      -
-                        name: 'sản phẩm'
-                        publish_id: 'VN  - aMyIBmBE1F'
-                        price: 100000
-                        id: 1
-                        sum_discount: 10
-                        image: 'http://localhost/storage/products/img2023022602592770906700.jpeg'
+                    data: []
                     first_page_url: 'http://api-vstore.ngo/api/product-sales?page=1'
-                    from: 1
+                    from: null
                     last_page: 1
                     last_page_url: 'http://api-vstore.ngo/api/product-sales?page=1'
                     links:
@@ -4899,8 +5748,8 @@ paths:
                     path: 'http://api-vstore.ngo/api/product-sales'
                     per_page: 12
                     prev_page_url: null
-                    to: 1
-                    total: 1
+                    to: null
+                    total: 0
                 properties:
                   status:
                     type: integer
@@ -4913,41 +5762,13 @@ paths:
                         example: 1
                       data:
                         type: array
-                        example:
-                          -
-                            name: 'sản phẩm'
-                            publish_id: 'VN  - aMyIBmBE1F'
-                            price: 100000
-                            id: 1
-                            sum_discount: 10
-                            image: 'http://localhost/storage/products/img2023022602592770906700.jpeg'
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              example: 'sản phẩm'
-                            publish_id:
-                              type: string
-                              example: 'VN  - aMyIBmBE1F'
-                            price:
-                              type: integer
-                              example: 100000
-                            id:
-                              type: integer
-                              example: 1
-                            sum_discount:
-                              type: integer
-                              example: 10
-                            image:
-                              type: string
-                              example: 'http://localhost/storage/products/img2023022602592770906700.jpeg'
+                        example: []
                       first_page_url:
                         type: string
                         example: 'http://api-vstore.ngo/api/product-sales?page=1'
                       from:
-                        type: integer
-                        example: 1
+                        type: string
+                        example: null
                       last_page:
                         type: integer
                         example: 1
@@ -4994,11 +5815,11 @@ paths:
                         type: string
                         example: null
                       to:
-                        type: integer
-                        example: 1
+                        type: string
+                        example: null
                       total:
                         type: integer
-                        example: 1
+                        example: 0
       tags:
         - Product
       security: []
@@ -5016,7 +5837,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: totam
+            value: ex
       -
         in: path
         name: page
@@ -5030,7 +5851,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: quidem
+            value: vero
   /api/vshop:
     get:
       summary: ''
@@ -5065,7 +5886,7 @@ paths:
                     -
                       id: 1
                       id_pdone: pdone123
-                      name: ''
+                      name: ádasda
                       name_adress: null
                       address: 0
                       phone_number: ''
@@ -5076,6 +5897,20 @@ paths:
                       products_sold: null
                       created_at: '2023-02-28T17:49:10.000000Z'
                       updated_at: '2023-02-28T17:49:10.000000Z'
+                    -
+                      id: 2
+                      id_pdone: pdone12121
+                      name: ''
+                      name_adress: null
+                      address: 0
+                      phone_number: ''
+                      district: null
+                      province: null
+                      lat: ''
+                      long: null
+                      products_sold: null
+                      created_at: null
+                      updated_at: null
                 properties:
                   status_code:
                     type: integer
@@ -5089,7 +5924,7 @@ paths:
                       -
                         id: 1
                         id_pdone: pdone123
-                        name: ''
+                        name: ádasda
                         name_adress: null
                         address: 0
                         phone_number: ''
@@ -5100,6 +5935,20 @@ paths:
                         products_sold: null
                         created_at: '2023-02-28T17:49:10.000000Z'
                         updated_at: '2023-02-28T17:49:10.000000Z'
+                      -
+                        id: 2
+                        id_pdone: pdone12121
+                        name: ''
+                        name_adress: null
+                        address: 0
+                        phone_number: ''
+                        district: null
+                        province: null
+                        lat: ''
+                        long: null
+                        products_sold: null
+                        created_at: null
+                        updated_at: null
                     items:
                       type: object
                       properties:
@@ -5111,7 +5960,7 @@ paths:
                           example: pdone123
                         name:
                           type: string
-                          example: ''
+                          example: ádasda
                         name_adress:
                           type: string
                           example: null
@@ -5202,11 +6051,11 @@ paths:
                 id:
                   type: string
                   description: ''
-                  example: et
+                  example: nihil
                 total:
                   type: number
                   description: ''
-                  example: 550.38809949
+                  example: 4955128.8
               required:
                 - id
                 - total
@@ -5244,23 +6093,23 @@ paths:
                 id_pdone:
                   type: Mã
                   description: 'p done required'
-                  example: quas
+                  example: totam
                 product_id:
                   type: Mã
                   description: 'sản phẩm required exits:products'
-                  example: quia
+                  example: expedita
                 start_date:
                   type: Ngày
                   description: 'bắt đầu required date_format:Y/m/d after:Today'
-                  example: iste
+                  example: est
                 end_date:
                   type: Ngày
                   description: 'kết thúc required date_format:Y/m/d after:start_date'
-                  example: dolorem
+                  example: nisi
                 discount:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: ywbp
+                  example: ocxdrktbnnhkiytxlifpb
               required:
                 - discount
       security: []
@@ -5278,7 +6127,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: 10
+            value: 7
   /api/vshop/address/store:
     post:
       summary: ''
@@ -5312,19 +6161,19 @@ paths:
                 id_pdone:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ocqtqprzuvnouihaftav
+                  example: bilsuexkpudzwfsovwsw
                 name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: jynkgj
+                  example: kg
                 address:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: nubcidhjgqnkiwpixfvqb
+                  example: ibpozhqor
                 phone_number:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: hburvjizqngffetsgcuogirm
+                  example: lkesjamsfbuptnhhptqjx
               required:
                 - id_pdone
                 - name
@@ -5376,7 +6225,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the edit address.'
-        example: perspiciatis
+        example: in
         required: true
         schema:
           type: string
@@ -5413,15 +6262,15 @@ paths:
                 name:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: vbvxgkpymibtvpwse
+                  example: ssxdupkoakvcbohsv
                 address:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: uyfcqllmcctagrvsngt
+                  example: iqhofhjvbp
                 phone_number:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: rygtv
+                  example: ygdrvsacsyy
               required:
                 - name
                 - address
@@ -5432,7 +6281,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update address.'
-        example: aut
+        example: voluptatem
         required: true
         schema:
           type: string
@@ -5467,9 +6316,19 @@ paths:
                   status_code: 200
                   data:
                     current_page: 1
-                    data: []
+                    data:
+                      -
+                        id: 2
+                        name: ducanhng2812+1@gmail.com
+                        company_name: ducanhng2812+1@gmail.com
+                        phone_number: '1312312312'
+                        tax_code: '1312312341'
+                        address: '111111'
+                        account_code: vnvst1312312341
+                        avatar: 'http://localhost/'
+                        branch: 1
                     first_page_url: 'http://api-vstore.ngo/api/vstore?page=1'
-                    from: null
+                    from: 1
                     last_page: 1
                     last_page_url: 'http://api-vstore.ngo/api/vstore?page=1'
                     links:
@@ -5489,8 +6348,8 @@ paths:
                     path: 'http://api-vstore.ngo/api/vstore'
                     per_page: 10
                     prev_page_url: null
-                    to: null
-                    total: 0
+                    to: 1
+                    total: 1
                 properties:
                   status_code:
                     type: integer
@@ -5503,13 +6362,53 @@ paths:
                         example: 1
                       data:
                         type: array
-                        example: []
+                        example:
+                          -
+                            id: 2
+                            name: ducanhng2812+1@gmail.com
+                            company_name: ducanhng2812+1@gmail.com
+                            phone_number: '1312312312'
+                            tax_code: '1312312341'
+                            address: '111111'
+                            account_code: vnvst1312312341
+                            avatar: 'http://localhost/'
+                            branch: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 2
+                            name:
+                              type: string
+                              example: ducanhng2812+1@gmail.com
+                            company_name:
+                              type: string
+                              example: ducanhng2812+1@gmail.com
+                            phone_number:
+                              type: string
+                              example: '1312312312'
+                            tax_code:
+                              type: string
+                              example: '1312312341'
+                            address:
+                              type: string
+                              example: '111111'
+                            account_code:
+                              type: string
+                              example: vnvst1312312341
+                            avatar:
+                              type: string
+                              example: 'http://localhost/'
+                            branch:
+                              type: integer
+                              example: 1
                       first_page_url:
                         type: string
                         example: 'http://api-vstore.ngo/api/vstore?page=1'
                       from:
-                        type: string
-                        example: null
+                        type: integer
+                        example: 1
                       last_page:
                         type: integer
                         example: 1
@@ -5556,11 +6455,11 @@ paths:
                         type: string
                         example: null
                       to:
-                        type: string
-                        example: null
+                        type: integer
+                        example: 1
                       total:
                         type: integer
-                        example: 0
+                        example: 1
       tags:
         - Vstore
       requestBody:
@@ -5589,7 +6488,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: aliquid
+            value: in
       -
         in: path
         name: limit
@@ -5603,7 +6502,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: consequatur
+            value: adipisci
       -
         in: path
         name: branch
@@ -5617,7 +6516,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: sint
+            value: rerum
       -
         in: path
         name: account_code
@@ -5631,7 +6530,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: tenetur
+            value: ut
       -
         in: path
         name: name
@@ -5645,7 +6544,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: veritatis
+            value: est
       -
         in: path
         name: company_name
@@ -5659,7 +6558,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: architecto
+            value: aut
   '/api/vstore/{id}':
     get:
       summary: 'chi tiết vstore'
@@ -6479,7 +7378,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the vstore.'
-        example: rerum
+        example: voluptas
         required: true
         schema:
           type: string
@@ -6633,7 +7532,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: error
+            value: asperiores
       -
         in: path
         name: limit
@@ -6647,7 +7546,7 @@ paths:
             value: ''
           present:
             summary: 'When the value is present'
-            value: minima
+            value: earum
 tags:
   -
     name: Bill
