@@ -131,6 +131,7 @@
 
                                 </tbody>
                             </table>
+                            {{$histories->withQueryString()->links()}}
                         </div>
                     </div>
 

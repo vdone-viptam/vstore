@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Nhà cung cấp " />
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Nhà cung cấp "/>
     <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="{{asset('')}}" />
-    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}"/>
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
@@ -63,7 +64,7 @@
 <div class="grid grid-cols-12">
 
     <div class="md:col-span-3 2xl:col-span-2 hidden md:block">
-    @include('layouts.manufacture.menu')
+        @include('layouts.manufacture.menu')
     </div>
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.manufacture.header')
@@ -162,6 +163,15 @@
             tm[i].classList.add("tab__hover")
         }
     }
+    const nav1 = document.querySelectorAll('nav');
+    nav1.forEach(item => {
+        const ul = item.querySelector('ul');
+
+        if (ul && ul.classList.contains('pagination')) {
+            console.log(ul);
+            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
+        }
+    })
 </script>
 
 </body>
