@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="website"/>
     <meta property="og:title" content="V-store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
-    <meta property="og:url" content="{{asset('')}}" />
-    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}" />
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
+    <meta property="og:url" content="{{asset('')}}"/>
+    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}"/>
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
@@ -129,5 +130,14 @@
             tm[i].classList.add("tab__hover")
         }
     }
+    const nav1 = document.querySelectorAll('nav');
+    nav1.forEach(item => {
+        const ul = item.querySelector('ul');
+
+        if (ul && ul.classList.contains('pagination')) {
+            console.log(ul);
+            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
+        }
+    })
 </script>
 </html>

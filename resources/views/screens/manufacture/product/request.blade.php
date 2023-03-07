@@ -15,7 +15,8 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.manufacture.product.request')}}" class="text-blueMain font-medium italic">Quản lý yêu cầu xét duyệt sản phẩm</a>
+            <a href="{{route('screens.manufacture.product.request')}}" class="text-blueMain font-medium italic">Quản lý
+                yêu cầu xét duyệt sản phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
@@ -228,7 +229,7 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: {{$requests->total()}}</span>
-                    @include('layouts.custom.paginator', ['paginator' => $requests])
+                    {{$requests->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">

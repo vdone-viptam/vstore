@@ -14,6 +14,7 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
 
+
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <input type="text" id="id" name="id" value="{{isset($params['id']) ? $params['id'] : ''}}"
                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[5px] focus:border-primary transition-all duration-200"
@@ -37,10 +38,6 @@
                     </svg>
                     Lọc
                 </button>
-                <a href="{{route('screens.admin.user.export')}}"
-                   class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
-                >
-                    Xuất danh sách</a>
             </div>
             <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
                 <div class="flex justify-between items-center flex-wrap gap-4">
@@ -163,8 +160,8 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">10</strong></span>
-                    @include('layouts.custom.paginator', ['paginator' => $users])
+                            class="font-bold">{{$users->total()}}</strong></span>
+                    {{$users->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
