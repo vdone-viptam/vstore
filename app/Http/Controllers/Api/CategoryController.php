@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @group Categories
@@ -47,12 +49,14 @@ class CategoryController extends Controller
         }
     }
 
+
     /**
      * Danh sách danh mục theo V-Store
      *
-     * API này sẽ trả về danh sách danh mục
+     * API này sẽ trả về danh sách danh mục theo vstore được chọn
      *
      * @param Request $request
+     * @param Request $vstore_id
      * @urlParam limit Giới hạn bản ghi  Mặc định 100
      * @return \Illuminate\Http\JsonResponse
      */
@@ -84,22 +88,48 @@ class CategoryController extends Controller
     /**
      * Danh sách sản phẩm theo danh mục
      *
-     * API này sẽ trả về danh sách sản phẩm
+     * API này sẽ trả về danh sách sản phẩm theo danh mục và các Vstore niêm yết sản phẩm thuộc danh mục đó
      *
      * @param Request $request
+     * @param $category_id
      * @urlParam page Số trang
+     * @urlParam id_pdone Id user Vshop (truyền khi user là đang là VSHOP)
+     * @urlParam orderById Sắp sếp sản phẩm mới nhất asc|desc Mặc định asc
+     * @urlParam amount_product_sold Sắp sếp sản phẩm bán chạy asc|desc
+     * @urlParam orderByPrice Sắp sếp theo giá sản phẩm asc|desc
+     * @urlParam paymentMethod Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 8
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProductByCategory(Request $request, $category_id)
     {
         try {
-            $limit =$request->limit??8;
-            $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
-                ->where('category_id', $category_id)
-                ->where('status', 2)
-                ->paginate($limit);
 
+            $limit = $request->limit ?? 8;
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id')
+                ->where('category_id', $category_id)
+                ->where('status', 2);
+
+            if ($request->orderById) {
+                $product = $product->orderBy('id', $request->orderById);
+            }
+            if ($request->amount_product_sold) {
+                $product = $product->orderBy('amount_product_sold', $request->amount_product_sold);
+            }
+            if ($request->orderByPrice) {
+                $product = $product->orderBy('price', $request->orderByPrice);
+            }
+            if ($request->paymentMethod) {
+                if ($request->paymentMethod == 1) {
+                    $product = $product->where('payment_on_delivery', 1);
+                }
+                if ($request->paymentMethod == 2) {
+                    $product = $product->where('prepay', 1);
+                }
+            }
+            $product = $product->paginate($limit);
+
+            $data_vstore = [];
 
             foreach ($product as $pr) {
                 $pr->discount = DB::table('discounts')
@@ -110,9 +140,20 @@ class CategoryController extends Controller
 
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
+                $data_vstore[] = $pr->vstore_id;
+                unset($pr->vstore_id);
+                if ($request->id_pdone) {
+                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('id_pdone', $request->id_pdone)->count();
+                }
             }
-
-            return response()->json(['status' => 200, 'data' => $product]);
+            $users = User::select('id', 'name', 'avatar')->whereIn('id', $data_vstore)->limit(8)->get();
+            foreach ($users as $user) {
+                $user->avatar = asset('image/users/' . $user->avatar);
+            }
+            return response()->json(['status' => 200, 'data' => [
+                'vstores' => $users,
+                'products' => $product
+            ]]);
         } catch (\Exception $e) {
             return response()->json(['status' => 400, 'error' => $e->getMessage()], 400);
 
@@ -121,66 +162,35 @@ class CategoryController extends Controller
     }
 
     /**
-     * chi tiết danh mục
+     * Danh sách tất cả vstore tiếp thị sản phẩm có danh mục được chọn
      *
-     * API này sẽ trả về chi tiết danh mục
-     *
-     * @param $id id danh mục
-     * @return JsonResponse
-     */
-    public
-    function detail($id)
-    {
-        $category = Category::find($id);
-        if ($category) {
-            return response()->json([
-                'status_code' => 200,
-                'data' => $category
-            ]);
-        } else {
-            return response()->json([
-                'status_code' => 400,
-                'data' => 'not found Category',
-            ], 400);
-        }
-    }
-
-    /**
-     * Danh sách vstore theo danh mục
-     *
-     * API này sẽ trả về danh sách vstore theo danh mucj
+     * API này sẽ trả về danh sách tất cả vstore tiếp thị sản phẩm có danh mục được chọn
      *
      * @param Request $request
-     * @urlParam page Số trang
-     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
+     * @param $category_id ID danh mục
      * @return \Illuminate\Http\JsonResponse
      */
-
-    public function getVstoreByCategory(Request $request, $id){
-        $limit = $request->limit??10;
-        $vstore= Category::join('products','categories.id','=','products.category_id')
-                            ->join('users','products.vstore_id','users.id')
-                            ->where('categories.id',$id)
-                            ->select('users.id','users.name','users.avatar')
-                            ->paginate($limit);
-
-        if (count($vstore)>0){
-            foreach ($vstore as $value){
-                $value->avatar=asset('image/users/'.$value->avatar);
+    public function getAllVstoreByCategory($category_id)
+    {
+        try {
+            $users = Product::select('avatar', 'users.name', 'users.id')
+                ->join('users', 'products.vstore_id', '=', 'users.id')
+                ->where('category_id', $category_id)
+                ->groupBy(['avatar', 'users.name', 'users.id'])
+                ->get();
+            foreach ($users as $user) {
+                $user->avatar = asset('image/users/' . $user->avatar);
             }
             return response()->json([
                 'status_code' => 200,
-                'data' => $vstore
+                'data' => $users
             ]);
-        }else{
+        } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 400,
-                'message' => 'không tìm thấy'
+                'message' => $e->getMessage()
             ]);
         }
-
-
-
     }
 
 }
