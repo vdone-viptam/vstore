@@ -75,7 +75,9 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('bill')->group(function () {
         Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
         Route::get('/detail/{id}', [\App\Http\Controllers\Api\BillController::class, 'detail']);
+        Route::post('/checkout', [\App\Http\Controllers\Api\BillController::class, 'checkout']);
         Route::get('/{id}', [\App\Http\Controllers\Api\BillController::class, 'index']);
+
 
     });
     Route::prefix('categories')->group(function () {

@@ -384,4 +384,121 @@ class BillController extends Controller
                 cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
         return $angle * $earthRadius;
     }
+    public function checkout(Request $request){
+//        return 1;
+        foreach ($request->data as $value) {
+            $product = Product::where('id', $value['id'])->where('status', 2)->first();
+            if (!$product) {
+                return response()->json([
+                    'status_code' => 400,
+                    'data' => 'Không tìm thấy sản phẩm',
+                ], 400);
+            }
+        }
+        $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ware_id')->get();
+//                return $productWh;
+        if (count($productWh) == 0) {
+            return response()->json([
+                'status_code' => 400,
+                'data' => 'sẩn phẩm đã hết',
+
+            ], 400);
+        }
+
+        $ware_id = [];
+        foreach ($productWh as $productp) {
+            $ware_id[] = $productp->ware_id;
+
+        }
+//        return   $ware_id ;
+        $warehouses = Warehouses::whereIn('id', $ware_id)->get();
+        $address = $request->address;
+        $result = app('geocoder')->geocode($address)->get();
+        $coordinates = $result[0]->getCoordinates();
+        $lat = $coordinates->getLatitude();
+        $long = $coordinates->getLongitude();
+
+        foreach ($warehouses as $val) {
+            $addressb = $val->address;
+            $resultb = app('geocoder')->geocode($addressb)->get();
+            $coordinatesb = $resultb[0]->getCoordinates();
+            $latb = $coordinatesb->getLatitude();
+            $longb = $coordinatesb->getLongitude();
+            $val->distance = $this->haversineGreatCircleDistance($lat, $long, $latb, $longb);
+//            return  $val->distance;
+
+        }
+
+//                return $warehouses;
+//            $warehouses= $warehouses->sortBy('distance','desc');
+//            return 1;
+        $min = $warehouses[0];
+        for ($i = 1; $i < count($warehouses); $i++) {
+            if ($min->distance > $warehouses[$i]->distance) {
+                $min = $warehouses[$i];
+            }
+        }
+//
+//        return $min;
+        $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+            'USERNAME' => env('TK_VAN_CHUYEN'),
+            'PASSWORD' => env('MK_VAN_CHUYEN'),
+        ]);
+//        return $product->price;
+        $get_list = Http::withHeaders(
+            [
+                'Content-Type'=>' application/json',
+                'Token'=>$login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
+            'SENDER_DISTRICT'=>$min->district_id,
+            'SENDER_PROVINCE'=>$min->city_id,
+            'RECEIVER_DISTRICT'=>$min->district_id,
+            'RECEIVER_PROVINCE'=>$min->city_id,
+            'PRODUCT_TYPE'=>'HH',
+            'PRODUCT_WEIGHT'=>1000,
+            'PRODUCT_PRICE'=>$product->price,
+            'MONEY_COLLECTION'=>0,
+            'TYPE'=>1,
+        ] );
+//        return $get_list;
+        $list_item[] =[
+            'PRODUCT_NAME'=>$product->name,
+            'PRODUCT_QUANTITY'=>$value['quantity'],
+            'PRODUCT_PRICE'=>$product->price,
+            'PRODUCT_WEIGHT'=>$product->price *$value['quantity']
+        ];
+        $taodon = Http::withHeaders(
+            [
+                'Content-Type'=>' application/json',
+                'Token'=>$login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
+            "ORDER_NUMBER"=>'',
+            "SENDER_FULLNAME"=>'nguyễn Đức Anh',
+            "SENDER_ADDRESS"=>" Hoàn kiếm,Hà Nội ",
+            "SENDER_PHONE"=>'0913635868',
+            "RECEIVER_FULLNAME"=>'Nguyễn Đức Banh',
+            "RECEIVER_ADDRESS"=>'Hoàn kiếm,Hà Nội ,',
+            "RECEIVER_PHONE"=>'0713536471',
+            "PRODUCT_NAME"=>"hàng test",
+            "PRODUCT_DESCRIPTION"=>"",
+            "PRODUCT_QUANTITY"=>1,
+            "PRODUCT_PRICE"=>100000,
+            "PRODUCT_WEIGHT"=>10000,
+            "PRODUCT_LENGTH"=>0,
+            "PRODUCT_WIDTH"=>0,
+            "PRODUCT_HEIGHT"=>0,
+            "ORDER_PAYMENT"=>1,
+            "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
+            "ORDER_SERVICE_ADD"=>null,
+            "ORDER_NOTE"=>"",
+            "MONEY_COLLECTION"=>0,
+            "LIST_ITEM"=>$list_item,
+        ]);
+        return $taodon['data']['MONEY_TOTAL'];
+//        return $list_item;
+//        return $get_list;
+//        return $min;
+    }
 }
