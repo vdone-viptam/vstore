@@ -56,7 +56,7 @@ class CategoryController extends Controller
      * API này sẽ trả về danh sách danh mục theo vstore được chọn
      *
      * @param Request $request
-     * @param Request $vstore_id
+     * @param Request $vstore_id example
      * @urlParam limit Giới hạn bản ghi  Mặc định 100
      * @return \Illuminate\Http\JsonResponse
      */
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Danh sách sản phẩm theo danh mục
+     * Chi tiết danh mục
      *
      * API này sẽ trả về danh sách sản phẩm theo danh mục và các Vstore niêm yết sản phẩm thuộc danh mục đó
      *
