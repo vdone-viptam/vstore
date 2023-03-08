@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -138,6 +139,46 @@ class StorageController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             return response()->json(['message' => $exception->getMessage()]);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required',
+                'password' => 'required',
+            ], [
+                'email.required' => 'Email bắt buộc nhập',
+                'password.required' => 'Mật khẩu bắt buộc nhập',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors());
+            }
+
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => 4]) || Auth::attempt(['code' => $request->email, 'password' => $request->password, 'role_id' => 4])) {
+                $user = User::where('account_code', $request->email)->orWhere('code', $request->email)->first();
+                $tokenResult = $user->createToken('authToken')->plainTextToken;
+
+                return response()->json([
+                    'status_code' => 200,
+                    'access_token' => $tokenResult,
+                    'token_type' => 'Bearer',
+                    'user' => $user
+                ]);
+            }
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Tài khoản, mật khẩu không chính xác',
+            ]);
+
+        } catch (\Exception $error) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Error in Login',
+                'error' => $error,
+            ]);
         }
     }
 }
