@@ -297,7 +297,7 @@
                                         <div class="w-full file-banner">
                                             <div class="w-full h-[100px] rounded-full shadow-xl">
                                                 <img
-                                                    src="{{asset('image/users/'.$infoAccount->banner) ?? asset('asset/images/bannerlg.png')}}"
+                                                    src="{{$infoAccount->banner ? asset('image/users/'.$infoAccount->banner) : asset('asset/images/bannerlg.png')}}"
                                                     alt="" class="w-full">
                                             </div>
                                         </div>
