@@ -113,6 +113,9 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
     });
+    Route::prefix('storage')->group(function () {
+        Route::post('register', [\App\Http\Controllers\Api\StorageController::class, 'register']);
+    });
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
 
