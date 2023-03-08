@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -52,7 +53,10 @@ class StorageController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json($validator->errors());
+                return response()->json([
+                    'success' => false,
+                    'messages' => $validator->errors()
+                ]);
             }
 
 
@@ -63,7 +67,10 @@ class StorageController extends Controller
                 ->count();
 
             if ($checkEmail > 0) {
-                return response()->json(['email' => 'Email đã được đăng ký.']);
+                return response()->json([
+                    'success' => false,
+                    'messages' => ['email' => 'Email đã được đăng ký.']
+                ]);
             }
 
             $checkTax = DB::table('users')
@@ -71,7 +78,10 @@ class StorageController extends Controller
                 ->where('role_id', 4)
                 ->count();
             if ($checkTax > 0) {
-                return response()->json(['tax_code' => 'Mã số thuế đã được đăng ký.']);
+                return response()->json([
+                    'success' => false,
+                    'messages' => ['tax_code' => 'Mã số thuế đã được đăng ký.']
+                ]);
             }
 
             $checkTax2 = DB::table('users')
@@ -79,7 +89,10 @@ class StorageController extends Controller
                 ->where('role_id', 4)
                 ->count();
             if ($checkTax2 > 0) {
-                return response()->json(['name' => 'Tên đã tồn tại.']);
+                return response()->json([
+                    'success' => false,
+                    'messages' => ['name' => 'Tên đã tồn tại.']
+                ]);
             }
 
             $user = new User();
@@ -135,10 +148,16 @@ class StorageController extends Controller
             $user->save();
             DB::commit();
 
-            return response()->json(['message' => 'Đăng ký thành công']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Đăng ký thành công'
+            ]);
         } catch (\Exception $exception) {
             DB::rollBack();
-            return response()->json(['message' => $exception->getMessage()]);
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ]);
         }
     }
 
@@ -154,7 +173,10 @@ class StorageController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json($validator->errors());
+                return response()->json([
+                    'success' => false,
+                    'messages' => $validator->errors()
+                ]);
             }
 
             if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => 4]) || Auth::attempt(['code' => $request->email, 'password' => $request->password, 'role_id' => 4])) {
@@ -165,20 +187,24 @@ class StorageController extends Controller
                     'status_code' => 200,
                     'access_token' => $tokenResult,
                     'token_type' => 'Bearer',
-                    'user' => $user
+                    'user' => $user,
+                    'success' => true
                 ]);
             }
             return response()->json([
                 'status_code' => 500,
+                'success' => false,
                 'message' => 'Tài khoản, mật khẩu không chính xác',
             ]);
 
         } catch (\Exception $error) {
             return response()->json([
                 'status_code' => 500,
+                'success' => false,
                 'message' => 'Error in Login',
                 'error' => $error,
             ]);
         }
     }
+
 }
