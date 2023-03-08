@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 //        "req" => $req
 //    ]);
 //});
-Route::post('callback-viettel-post',[\App\Http\Controllers\ViettelpostController::class,'index']);
+Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -78,15 +78,12 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/{id}', [\App\Http\Controllers\Api\BillController::class, 'index']);
 
     });
-    Route::prefix('category')->group(function () {
+    Route::prefix('categories')->group(function () {
         //list danh mục
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
         Route::get('get-category-by-vstore/{vstore_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getCategoryByVstore']);
         Route::get('get-product-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getProductByCategory']);
-        Route::get('get-vstore-by-category/{id}',[\App\Http\Controllers\Api\CategoryController::class,'getVstoreByCategory']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\CategoryController::class, 'detail']);
-
-
+        Route::get('get-all-vstore-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getAllVstoreByCategory']);
     });
     Route::prefix('manufactures')->group(function () {
         //list nhà cung cấp
@@ -97,7 +94,7 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
-    Route::get('/{id}',[\App\Http\Controllers\Api\VstoreController::class,'detail']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
     });
@@ -115,6 +112,9 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('discount')->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
+    });
+    Route::prefix('storage')->group(function () {
+        Route::post('register', [\App\Http\Controllers\Api\StorageController::class, 'register']);
     });
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });

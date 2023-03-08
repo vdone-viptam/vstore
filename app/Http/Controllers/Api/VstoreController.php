@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +31,8 @@ class VstoreController extends Controller
      * @urlParam company_name tìm kiếm mã tên công ty
      * @return JsonResponse
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $validator = Validator::make($request->all(), [
 
             'branch' => 'numeric|min:1|max:2',
@@ -43,39 +45,39 @@ class VstoreController extends Controller
             ]);
         }
         $limit = $request->limit ?? 10;
-        if ($request->branch){
-            $user = User::where('role_id',3)->where('account_code','!=',null)
-                ->where('branch',$request->branch)
-                ->select('id','name','company_name','phone_number','tax_code','address','account_code','avatar','branch');
-            if($request->account_code){
-                $user = $user->where('account_code','like','%'.$request->account_code.'%');
+        if ($request->branch) {
+            $user = User::where('role_id', 3)->where('account_code', '!=', null)
+                ->where('branch', $request->branch)
+                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
+            if ($request->account_code) {
+                $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
             }
-            if($request->name){
-                $user = $user->where('name','like','%'.$request->name.'%');
+            if ($request->name) {
+                $user = $user->where('name', 'like', '%' . $request->name . '%');
             }
-            if($request->company_name){
-                $user = $user->where('company_name','like','%'.$request->company_name.'%');
+            if ($request->company_name) {
+                $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
             }
-           $user= $user->paginate($limit);
+            $user = $user->paginate($limit);
 
 
-        }else{
+        } else {
 
-            $user = User::where('role_id',3)->where('account_code','!=',null)
-                ->select('id','name','company_name','phone_number','tax_code','address','account_code','avatar','branch');
-                  if($request->account_code){
-                      $user = $user->where('account_code','like','%'.$request->account_code.'%');
-                  }
-            if($request->name){
-                $user = $user->where('name','like','%'.$request->name.'%');
+            $user = User::where('role_id', 3)->where('account_code', '!=', null)
+                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
+            if ($request->account_code) {
+                $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
             }
-            if($request->company_name){
-                $user = $user->where('company_name','like','%'.$request->company_name.'%');
+            if ($request->name) {
+                $user = $user->where('name', 'like', '%' . $request->name . '%');
             }
-            $user= $user->paginate($limit);
+            if ($request->company_name) {
+                $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
+            }
+            $user = $user->paginate($limit);
         }
-        if ($user){
-            foreach ($user as $value){
+        if ($user) {
+            foreach ($user as $value) {
                 $value->avatar = asset($value->avatar);
             }
         }
@@ -97,15 +99,16 @@ class VstoreController extends Controller
      * @urlParam limit Giới hạn bản ghi trên một trang
      * @return JsonResponse
      */
-    public function listByCategory(Request $request, $id){
-        $limit = $request->limit ??10;
-        $vstores = User::join('products','users.id','=','products.vstore_id')
-            ->join('categories','products.category_id','=','categories.id')
-            ->where('categories.id',$id)
-            ->select('users.id','users.name','users.avatar')
+    public function listByCategory(Request $request, $id)
+    {
+        $limit = $request->limit ?? 10;
+        $vstores = User::join('products', 'users.id', '=', 'products.vstore_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('categories.id', $id)
+            ->select('users.id', 'users.name', 'users.avatar')
             ->paginate($limit);
-        foreach ($vstores as $value){
-            $value->avatar=asset('image/users/'.$value->avatar);
+        foreach ($vstores as $value) {
+            $value->avatar = asset('image/users/' . $value->avatar);
         }
         return response()->json([
             'status_code' => 200,
@@ -139,7 +142,19 @@ class VstoreController extends Controller
             }
 
             $user->categories = implode(', ', $data);
-
+            $products = Product::select('images')->where('vstore_id', $id)->where('status', 2)->limit(5)->get();
+            $images = [];
+            for ($i = 0; $i < count($products); $i++) {
+                $images[] = asset(json_decode($products[$i]->images)[0]);
+            }
+            $data = [];
+            foreach ($cate as $c) {
+                $data[] = $c->name;
+            }
+            $user->description = [
+                'text' => $user->description,
+                'images' => $images
+            ];
             return response()->json([
                 'status' => 200,
                 'data' => $user
