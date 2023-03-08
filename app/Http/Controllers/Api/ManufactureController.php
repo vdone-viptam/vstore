@@ -58,32 +58,37 @@ class ManufactureController extends Controller
     {
 
         try {
-            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
-            $user->total_product = $user->products()->where('status', 2)->count();
-            $cate = Category::select('categories.name')
-                ->join('products', 'categories.id', '=', 'products.category_id')
-                ->where('user_id', $ncc_id)
-                ->groupBy('categories.name')
-                ->get();
-            $products = Product::select('images')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
-            $images = [];
-            for ($i = 0; $i < count($products); $i++) {
-                $images[] = asset(json_decode($products[$i]->images)[0]);
-            }
-            $data = [];
-            foreach ($cate as $c) {
-                $data[] = $c->name;
-            }
-            $user->description = [
-                'text' => $user->description,
-                'images' => $images
-            ];
-            $user->categories = implode(', ', $data);
 
-            return response()->json([
-                'status' => 200,
-                'data' => $user
-            ]);
+            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
+           if ($user){
+               $user->total_product = $user->products()->where('status', 2)->count();
+
+               $cate = Category::select('categories.name')
+                   ->join('products', 'categories.id', '=', 'products.category_id')
+                   ->where('user_id', $ncc_id)
+                   ->groupBy('categories.name')
+                   ->get();
+               $products = Product::select('images')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
+               $images = [];
+               for ($i = 0; $i < count($products); $i++) {
+                   $images[] = asset(json_decode($products[$i]->images)[0]);
+               }
+               $data = [];
+               foreach ($cate as $c) {
+                   $data[] = $c->name;
+               }
+               $user->description = [
+                   'text' => $user->description,
+                   'images' => $images
+               ];
+               $user->categories = implode(', ', $data);
+
+               return response()->json([
+                   'status' => 200,
+                   'data' => $user
+               ]);
+           }
+
         } catch (\Exception $e) {
 
             return response()->json([
