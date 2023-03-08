@@ -37,8 +37,7 @@ class ProductController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam category_id id danh mục sản phẩm
-     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán
-     * @urlParam option 1 asc | 2 desc Thứ tự sấp xếp
+     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 bán chạy nhất| 3 Giá cao nhất | 4 giá thấp nhất
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @urlParam publish_id mã sản phẩm
@@ -59,16 +58,17 @@ class ProductController extends Controller
             $products = $products->where('category_id', $request->category_id);
         }
         if ($request->order_by == 1) {
-            $order_by = $request->option == 1 ? 'asc' : 'desc';
-            $products = $products->orderBy('id', $order_by);
+
+            $products = $products->orderBy('id', 'desc');
         }
         if ($request->order_by == 2) {
-            $order_by_price = $request->option == 1 ? 'asc' : 'desc';
-            $products = $products->orderBy('price', $order_by_price);
+
+            $products = $products->orderBy('amount_product_sold', 'desc');
         }
         if ($request->order_by == 3) {
-            $order_by_sold = $request->option == 1 ? 'asc' : 'desc';
-            $products = $products->orderBy('amount_product_sold', $order_by_sold);
+            $products = $products->orderBy('price', 'asc');
+        }elseif ($request->order_by == 4){
+            $products = $products->orderBy('price', 'desc');
         }
         if ($request->payment) {
             if ($request->payment == 1) {
@@ -78,6 +78,8 @@ class ProductController extends Controller
                 $products = $products->where('prepay', 1);
             }
         }
+//        return 1;
+
         $products = $products->paginate($limit);
 
         foreach ($products as $pro) {
