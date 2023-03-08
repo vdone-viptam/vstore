@@ -100,25 +100,27 @@ class StorageController extends Controller
             $warehouse = $request->warehouse ?? '';
             $normal_storage = $request->normal_storage ?? $request->volume;
             $file = [];
-            if ($request->hasFile('image_storage')) {
 
+            foreach (json_decode('image_storage') as $image) {
+                $file = base64_decode($image);
+                $folderName = '/image/users/';
+                $safeName = str_random(10) . '.' . 'png';
+                $destinationPath = public_path() . $folderName;
+                file_put_contents(public_path() . '/image/users/' . $safeName, $file);
 
-                foreach ($request->file('image_storage') as $img) {
-                    $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                    $img->move(public_path('image/users'), $filestorage);
-                    $file[] = 'image/users/' . $filestorage;
-                }
-
-
+                //save new file path into db
+                $file[] = $safeName;
             }
             $file1 = [];
-            if ($request->hasFile('image_pccc')) {
+            foreach (json_decode('image_pccc') as $image) {
+                $file = base64_decode($image);
+                $folderName = '/image/users/';
+                $safeName = str_random(10) . '.' . 'png';
+                $destinationPath = public_path() . $folderName;
+                file_put_contents(public_path() . '/image/users/' . $safeName, $file);
 
-                foreach ($request->file('image_pccc') as $img) {
-                    $filepccc = date('YmdHi') . $img->getClientOriginalName();
-                    $img->move(public_path('image/users'), $filepccc);
-                    $file1[] = 'image/users/' . $filepccc;
-                }
+                //save new file path into db
+                $file1[] = $safeName;
             }
             $storage_information = [
                 'floor_area' => $request->floor_area,
