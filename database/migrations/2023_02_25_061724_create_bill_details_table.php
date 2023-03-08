@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->float('transport_fee',20,2)->default(0)->comment('phí vận chuyển');
             $table->integer('status')->default(0)->comment('trạng thái đơn hàng');
             $table->date('success_day')->nullable()->comment('ngày giao hàng thành công');
+            $table->float('transport_fee',20,2)->nullable()->comment('phí vận chuển');
             $table->timestamps();
         });
     }
