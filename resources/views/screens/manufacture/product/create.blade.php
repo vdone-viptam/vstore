@@ -228,20 +228,28 @@
 
 
                 <div class="  items-center gap-8 w-full">
-                    <span class="text-title font-med">Chiết khấu hàng nhập sẵn</span>
+                    <span class="text-title font-med">Chiết khấu hàng nhập sẵn <strong
+                            class="text-[#FF4D4F]">*</strong></span>
                     <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
 
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="" name="sl[]" id=""
+                            <input type="number" value="" required name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="text" value="" name="moneyv[]" id=""
+                            <input type="number" value="" min="1" max="100" name="moneyv[]" id=""
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
+
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Tiền cọc khi nhập hàng sẵn</span>
+                            <input type="number" value="" min="1" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -251,14 +259,21 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="" name="sl[]" id=""
+                            <input type="number" value="" min="1" name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="text" value="" name="moneyv[]" id=""
+                            <input type="number" value="" name="moneyv[]" id=""
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
+
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Tiền cọc khi nhập hàng sẵn</span>
+                            <input type="text" value="" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -268,23 +283,35 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="" name="sl[]" id=""
+                            <input type="number" value="" min="1" name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="text" value="" name="moneyv[]" id=""
+                            <input type="number" value="" min="1" max="99" name="moneyv[]" id=""
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
+
+                        </div>
+                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                <span
+                                    class="text-title font-medium whitespace-nowrap">Tiền cọc khi nhập hàng sẵn</span>
+                            <input type="text" value=""  name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
 
                     </div>
-                    @error('sl')
+{{--                    @error('sl')--}}
+{{--                    <p class="text-red-600">{{$message}}</p>--}}
+{{--                    @enderror--}}
+                    @error('deposit_money')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
+
+
                 <h4 class="font-medium text-[#141414] text-2xl">Thanh toán</h4>
                 <div class="flex flex-col justify-start items-start gap-4">
                 <span class="text-title font-medium">Phương thức thanh toán<strong
@@ -499,7 +526,7 @@ Thêm địa chỉ mới</a>
                 })
             }
 
-            abc();
+
         </script>
     @endif
 @endsection

@@ -287,7 +287,8 @@ class ProductController extends Controller
                 'discount' => 'required',
                 'role' => 'min:1',
                 'prepay' => 'required',
-                'vat' => 'required|min:1|max:99'
+                'vat' => 'required|min:1|max:99',
+                'deposit_money' => 'required|min:1'
 
             ], [
                 'vstore_id.required' => 'V-store bắt buộc chọn',
@@ -298,6 +299,8 @@ class ProductController extends Controller
                 'vat.required' => 'VAT bắt buộc nhâp',
                 'vat.min' => 'VAT nhỏ nhất 1',
                 'vat.max' => 'VAT lớn nhất 99',
+                'deposit_money.required' => 'Tiền cọc khi nhập sẵn bắt buộc nhập',
+                'deposit_money.min' => 'Tiền cọc khi nhập sẵn không được nhỏ hơn hoặc bằng 0',
 
             ]);
             if ($request->sl[0] == '' || $request->moneyv[0] == '') {
@@ -317,6 +320,7 @@ class ProductController extends Controller
             $object->user_id = Auth::id();
             $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
             $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
+            $object->deposit_money = $request->deposit_money;
             $code = rand(100000000000, 999999999999);
 
             while (true) {
