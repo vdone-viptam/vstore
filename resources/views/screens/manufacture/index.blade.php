@@ -35,31 +35,30 @@
 </head>
 <body>
 <div class="bgncc w-full relative h-auto md:h-screen">
-    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
+    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-start gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-
-            <div class="w-[170px] h-[45px] md:hidden">
+            <div class=" w-[107px] h-[38px]">
                 <a href="./">
-                 <img src="{{asset('home/img/logoncc.png')}}" class="w-full object-contain" alt="">
-        </a>
-            </div>
-
-
-            <div class="hidden md:block w-[234px] h-[67px]">
-                <a href="./">
-                <img src="{{asset('home/img/logoncc.png')}}" class="w-full object-contain" alt="">
+                <img src="{{asset('home/img/NCC.png')}}" class="w-full object-contain" alt="">
                 </a>
             </div>
+            <div class="w-[105px] h-[82px]">
+            <img src="{{asset('home/img/vdone.png')}}" class="w-full object-contain" alt="">
 
-            <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold text-[#FFF] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
+            </div>
         </div>
-        <div class="flex flex-col justify-center w-full md:justify-start gap-14 md:max-w-[650px] text-center md:text-left">
+        <div class="flex flex-col justify-center w-full md:justify-start gap-8 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp V-Done</h2>
             <span class="text-[#FFF] max-w-[450px]">Đầu tư ngay trên nền tảng thương mại điện tử mang lại doanh thu khủng, quản lý dễ dàng, vận hành đơn giản, tiết kiệm thời gian. Cùng đăng ký ngay</span>
+            <div class="flex items-center gap-6">
+        <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
+
+        <a class=" text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px]   border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('register_ncc')}}">Đăng ký ngay</a>
+     
         </div>
-        <div class="max-w-[197px] mx-auto md:mx-0">
-            <button class="bg-[#FFF] text-center w-full rounded-[4px] text-[#00A8DB] px-[28px] md:px-0 py-4 font-semibold transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_ncc')}}">Đăng ký ngay</a></button>
         </div>
+    
+   
     </div>
 
 </div>
