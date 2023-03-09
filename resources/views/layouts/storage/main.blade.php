@@ -8,8 +8,9 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+    <meta property="og:title" content="Kho | Hệ thống quản lý kho chuyên nghiệp"/>
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <meta property="og:image:width" content="130">
@@ -156,7 +157,7 @@
 
         if (ul && ul.classList.contains('pagination')) {
             console.log(ul);
-            ul.setAttribute('class','pagination flex justify-start items-center gap-2 flex-wrap')
+            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })
 </script>

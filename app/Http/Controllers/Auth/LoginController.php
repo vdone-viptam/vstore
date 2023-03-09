@@ -576,7 +576,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     public function getCity(Request $request)
     {
         if ($request->type == 2) {
-            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
+            $response = Http::get('https://partner.viettelposth.vn/v2/categories/listDistrict?provinceId=' . $request->value);
         } else {
             $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 

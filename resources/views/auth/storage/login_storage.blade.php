@@ -11,8 +11,9 @@
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
-    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+    <meta property="og:title" content="Kho | Hệ thống quản lý kho chuyên nghiệp"/>
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <meta property="og:image:width" content="120">
@@ -104,7 +105,7 @@
                 {{--                    <span>Duy trì đăng nhập</span>--}}
                 {{--                </div>--}}
                 <a href="{{route('form_forgot_password',['type' => 4])}}" class="font-medium text-[#096DD9]">Quên mật
-                    khẩu?</a>            </div>
+                    khẩu?</a></div>
             {{--            bg-sky-500/100--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
@@ -147,7 +148,7 @@
             btn.setAttribute('disabled', 'true')
         }
     })
-    $('#form-log').submit(function (){
+    $('#form-log').submit(function () {
         btn.setAttribute('disabled', 'true');
     })
 </script>
