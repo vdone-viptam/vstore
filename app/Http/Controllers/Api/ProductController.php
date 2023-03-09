@@ -37,8 +37,7 @@ class ProductController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam category_id id danh mục sản phẩm
-     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy
-     * @urlParam option 1 asc | 2 desc
+     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 bán chạy nhất| 3 Giá cao nhất | 4 giá thấp nhất
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @urlParam publish_id mã sản phẩm
@@ -48,23 +47,28 @@ class ProductController extends Controller
     {
 
         $limit = $request->limit ?? 10;
-        $publish_id = $request->publish_id ?? '';
-        $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)->where('publish_id', 'like', '%' . $publish_id . '%')
-            ->select('id', 'name', 'publish_id', 'images', 'price', 'discount_vShop as discount_vstore','amount_product_sold');
+        $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
+        $selected = ['id', 'name', 'publish_id', 'images', 'price'];
+
+        if ($request->id_pdone) {
+            $selected[] = 'discount';
+        }
+        $products = $products->select($selected);
         if ($request->category_id) {
             $products = $products->where('category_id', $request->category_id);
         }
         if ($request->order_by == 1) {
-            $order_by = $request->option == 1 ? 'asc' : 'desc';
-            $products = $products->orderBy('id', $order_by);
+
+            $products = $products->orderBy('id', 'desc');
         }
         if ($request->order_by == 2) {
-            $order_by_price = $request->option == 1 ? 'asc' : 'desc';
-            $products = $products->orderBy('price', $order_by_price);
+
+            $products = $products->orderBy('amount_product_sold', 'desc');
         }
         if ($request->order_by == 3) {
-            $order_by_sold = $request->option == 1 ? 'asc' : 'desc';
-            $products = $products->orderBy('amount_product_sold', $order_by_sold);
+            $products = $products->orderBy('price', 'asc');
+        }elseif ($request->order_by == 4){
+            $products = $products->orderBy('price', 'desc');
         }
         if ($request->payment) {
             if ($request->payment == 1) {
@@ -74,13 +78,22 @@ class ProductController extends Controller
                 $products = $products->where('prepay', 1);
             }
         }
+//        return 1;
+
         $products = $products->paginate($limit);
 
         foreach ($products as $pro) {
             $pro->images = asset(json_decode($pro->images)[0]);
-            $pro->price_discount = $pro->price - ($pro->price / 100 * $pro->discount_vstore);
-            $pro->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
-                    ->first()->sum ?? 0;
+            $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->first()->sum;
+            $pro->discount = $discount ?? 0;
+            if ($request->id_pdone) {
+                $pro->is_affiliate = DB::table('vshop_products')->where('product_id', $pro->id)->where('id_pdone', $request->id_pdone)->count();
+                $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
+                $pro->available_discount = $more_dis ?? 0;
+            }
 
 //
         }
@@ -90,6 +103,26 @@ class ProductController extends Controller
         ]);
 
     }
+
+    /**
+     * Tìm kiếm sản phẩm theo tên
+     *
+     * API này sẽ trả về danh sách sản phẩm có tên chứa kí tự tìm kiếm
+     *
+     * @param Request $key_word Từ khóa tìm kiếm sản phẩm (tên sản phẩm)
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function searchProductByKeyWord($key_word)
+    {
+        $products = Product::select('id', 'name')->where('status', 2)->where('name', 'like', '%' . $key_word . '%')->get();
+
+        return response()->json([
+            'status_code' => 200,
+            'data' => $products
+        ]);
+    }
+
 
     /**
      * Danh sách sản phẩm theo danh mục
@@ -128,12 +161,10 @@ class ProductController extends Controller
      * @urlParam order_by_id sắp xếp theo id
      * @urlParam order_by_sold sắp xếp theo sl đã bán
      * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
-     * @urlParam id_pdone dùng để check sản phẩm đã được tiếp thị hay chưa
      * @return JsonResponse
      */
     public function productByVstore(Request $request, $id)
     {
-
         $limit = $request->limit ?? 10;
 
         $products = Product::where('vstore_id', $id)->where('status', 2)
@@ -167,9 +198,8 @@ class ProductController extends Controller
                 $value->available_discount = $available_discount->discount;
             }
 
-            if ($request->id_pdone){
-
-            }
+//            return $available_discount;
+//            available discount
         }
 
         return response()->json([
@@ -199,8 +229,8 @@ class ProductController extends Controller
     public function productByNcc(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
-        $products = Product::where('user_id',$id)->where('status', 2)
-            ->select('id','price', 'publish_id','category_id', 'name', 'images','discount_vShop as discount_vstore');
+        $products = Product::where('user_id', $id)->where('status', 2)
+            ->select('id', 'price', 'publish_id', 'category_id', 'name', 'images', 'discount_vShop as discount_vstore');
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
         }
@@ -244,13 +274,13 @@ class ProductController extends Controller
      * API dùng để lấy chi tiết 1 sản phẩm
      *
      * @param  $id mã sản phẩm
-     *
+     * @urlParam id_pdone
      * @return JsonResponse
      */
-    public function productById($id)
+    public function productById(Request $request, $id)
     {
 
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop', 'video','description')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video','description','user_id','category_id','amount_product_sold')->first();
 
         if (!$product) {
             return response()->json([
@@ -261,7 +291,30 @@ class ProductController extends Controller
         }
         $products_available = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =" . $product->id . " ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
         $product->products_available = $products_available;
-        return response()->json([
+        $product->available_discount= BuyMoreDiscount::Where('end',0)->where('product_id',$product->id)->select('discount')->first()->discount;
+        $product->rating = 5;
+        //check đã tiếp thị hay chưa
+        if ($request->id_pdone){
+            $check_vshop_product = VshopProduct::where('id_pdone',$request->id_pdone)->where('product_id',$id)->first();
+            if ($check_vshop_product){
+                $product->affiliate = 1;
+            }else{
+                $product->affiliate = 0;
+            }
+        }
+        $list_vshop = VshopProduct::where('product_id',$id)->get();
+
+        foreach ($list_vshop as $list){
+            $discount = Discount::where('product_id',$id)->where('user_id',$list->id_pdone)
+                ->where('start_date','<=',Carbon::now())
+                ->where('end_date','>=',Carbon::now())
+                ->first();
+            $list->vshop_discount= $discount->discount??0 ;
+
+
+        }
+//        return $list_vshop;
+         return response()->json([
             'status_code' => 200,
             'data' => $product,
 

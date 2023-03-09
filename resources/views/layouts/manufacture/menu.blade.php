@@ -49,7 +49,13 @@
         <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
             <div class="w-[80px] h-[80px] ">
 {{--                <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">--}}
-                <img class="w-full object-contain" src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
+                @if(!empty(Auth::user()->avatar))
+                    <img class="w-full object-contain" src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
+                @else
+                    <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+                @endif
+
+
             </div>
         </a>
         <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"><img
