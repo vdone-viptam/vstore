@@ -12,9 +12,9 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
-    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
+    <meta property="og:title" content="Kho | Hệ thống quản lý kho chuyên nghiệp"/>
     <meta property="og:description"
-          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <meta property="og:image:width" content="120">
@@ -117,8 +117,8 @@
             </div>
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên V-kho</span>
-                <input type="text" name="name" id="name" placeholder="Nhập tên V-kho" value="{{old('name')}}"
+                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Kho</span>
+                <input type="text" name="name" id="name" placeholder="Nhập tên Kho" value="{{old('name')}}"
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('name')
                 <p class="text-red-600">{{$message}}</p>
@@ -317,7 +317,72 @@
 </form>
 
 <script src="{{asset('asset/js/main.js')}}"></script>
-
+<script>
+    // $('#formRegister-V').validate({
+    //     rules: {
+    //         name: {
+    //             required: true,
+    //         },
+    //         id_vdone: {
+    //             required: true,
+    //         },
+    //         email: {
+    //             required: true,
+    //         },
+    //         company_name: {
+    //             required: true,
+    //         },
+    //         tax_code: {
+    //             required: true,
+    //         },
+    //         address: {
+    //             required: true,
+    //         },
+    //         phone_number: {
+    //             required: true,
+    //         },
+    //         password: {
+    //             required: true,
+    //
+    //         },
+    //         password_confirmation: {
+    //             required: true,
+    //             equalTo: '#password'
+    //         },
+    //
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: 'Bạn cần nhập tên Kho'
+    //         },
+    //         id_vdone: {
+    //             required: 'Bạn cần nhập ID người đại diện'
+    //         },
+    //         email: {
+    //             required: 'Bạn cần nhập địa chỉ Email'
+    //         },
+    //         company_name: {
+    //             required: 'Bạn cần nhập tên công ty'
+    //         },
+    //         tax_code: {
+    //             required: 'Bạn cần nhập mã số thuế'
+    //         },
+    //         address: {
+    //             required: 'Bạn cần nhập địa chỉ'
+    //         },
+    //         password: {
+    //             required: 'Bạn phải nhập mật khẩu',
+    //
+    //         },
+    //         phone_number: {
+    //             required: 'Số điện thoại bắt buộc nhập',
+    //         },
+    //     },
+    //     submitHandler: function (form) {
+    //         form.submit();
+    //     }
+    // });
+</script>
 <script !src="">
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
@@ -328,7 +393,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML = `<option>Lựa chọn tỉnh (phố)</option>`+data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option>Lựa chọn tỉnh (phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
         })
         .catch(console.error);
 

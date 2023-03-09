@@ -114,7 +114,7 @@ class StorageController extends Controller
             $normal_storage = $request->normal_storage ?? $request->volume;
             $file = [];
 
-            foreach (json_decode('image_storage') as $image) {
+            foreach ($request->image_storage as $image) {
                 $file = base64_decode($image);
                 $folderName = '/image/users/';
                 $safeName = str_random(10) . '.' . 'png';
@@ -125,7 +125,7 @@ class StorageController extends Controller
                 $file[] = $safeName;
             }
             $file1 = [];
-            foreach (json_decode('image_pccc') as $image) {
+            foreach ($request->image_pccc as $image) {
                 $file = base64_decode($image);
                 $folderName = '/image/users/';
                 $safeName = str_random(10) . '.' . 'png';

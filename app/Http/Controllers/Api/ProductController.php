@@ -40,7 +40,6 @@ class ProductController extends Controller
      * @urlParam order_by | 1 Sắp xếp mới nhất | 2 bán chạy nhất| 3 Giá cao nhất | 4 giá thấp nhất
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
-     * @urlParam publish_id mã sản phẩm
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -289,6 +288,12 @@ class ProductController extends Controller
 
             ], 400);
         }
+        $img=[];
+        foreach (json_decode($product->images) as $valimage){
+            $img[]=asset($valimage);
+        }
+        $product->images=$img;
+//        return $product;
         $products_available = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =" . $product->id . " ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
         $product->products_available = $products_available;
         $product->available_discount= BuyMoreDiscount::Where('end',0)->where('product_id',$product->id)->select('discount')->first()->discount;
@@ -302,6 +307,8 @@ class ProductController extends Controller
                 $product->affiliate = 0;
             }
         }
+        $product->discount=10;
+        $product->price_discount = $product->price - ( $product->price /100 *10);
         $list_vshop = VshopProduct::where('product_id',$id)->get();
 
         foreach ($list_vshop as $list){
@@ -313,11 +320,13 @@ class ProductController extends Controller
 
 
         }
+
+
 //        return $list_vshop;
          return response()->json([
             'status_code' => 200,
             'data' => $product,
-
+             'list_vshop'=>$list_vshop,
         ]);
     }
 

@@ -421,6 +421,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     public function formResetForgot($token, Request $request)
     {
+
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
             $role_id = 1;
@@ -445,6 +446,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     public function postResetForgot(Request $request, $token)
     {
+
         $validator = Validator::make($request->all(), [
             'password' => 'required|min:6|max:30|confirmed',
             'password_confirmation' => 'required',
@@ -456,6 +458,9 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
             $role_id = 1;

@@ -85,7 +85,7 @@
                     <input type="password" name="password" placeholder="Nhập mật khẩu mới"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('password')
-                    <p class="text-danger">{{$message}}</p>
+                    <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
                 <input type="hidden" value="{{$role_id}}" name="role_id">
@@ -94,7 +94,7 @@
                     <input type="password" name="password_confirmation" placeholder="Xác nhận mật khẩu mới"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('password_confirmation')
-                    <p class="text-danger">{{$message}}</p>
+                    <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
             </div>
