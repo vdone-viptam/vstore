@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// THANH TOÁN APP
+Route::group(['domain' => config('domain.payment')], function () {
+    Route::get('/payment/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9Pay']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+    Route::get('payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+});
+// END THANH TOÁN APP
+
 
 //Route::post('callback-viettel-post', function (Request $req) {
 //
@@ -36,6 +45,14 @@ use Illuminate\Support\Facades\Route;
 //        "req" => $req
 //    ]);
 //});
+
+Route::prefix('bill')->group(function () {
+    Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
+    Route::get('/detail/{id}', [\App\Http\Controllers\Api\BillController::class, 'detail']);
+    Route::post('/checkout', [\App\Http\Controllers\Api\BillController::class, 'checkout']);
+    Route::get('/{id}', [\App\Http\Controllers\Api\BillController::class, 'index']);
+});
+
 Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -45,7 +62,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return config('domain.api');
 //});
 //Route::group(['domain' => config('domain.api')], function () {
-//echo config('domain.api');
 Route::domain(config('domain.api'))->group(function () {
 
 

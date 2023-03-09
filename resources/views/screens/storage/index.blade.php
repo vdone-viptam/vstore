@@ -33,11 +33,10 @@
     <div
         class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-            <div class="w-[120px] h-[30px] md:hidden">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
-            </div>
-            <div class="hidden md:block w-[190px] h-[52px]">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
+            <div class="w-[105px] h-[82px]">
+                <a href="./">
+                    <img src="{{asset('home/img/vdone.png')}}" class="w-full object-contain" alt="">
+                </a>
             </div>
 
             <a href="{{route('login_storage')}}"
@@ -45,53 +44,55 @@
                 nhập</a>
         </div>
         <div
-            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Hệ thống quản lý chuyên
-                nghiệp
-                <strong class="text-[#1E90FF] font-bold">Kho</strong>"</h2>
+            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-8 md:max-w-[650px] text-center md:text-left">
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl flex items-center gap-2 md:block">Hệ thống quản lý
+                <div class="w-[103px] md:w-[174px] h-[60px]">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
+                </div>
+            </h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
-                    class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
-                    class="text-[#1E90FF]"> Kho.</strong></span>
-            <div class="max-w-[320px] w-full">
-                <button
-                    class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
-                    <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
-            </div>
+                    class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng <strong
+                    class="text-[#1E90FF]">KHO</strong></span>
+                    <div class="max-w-[320px] w-full">
+            <button
+                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 font-semibold text-2xl transition-all duration-200 hover:opacity-70 ">
+                <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
         </div>
-        <div></div>
+                </div>
+       <div></div>
     </div>
 
 </div>
 <div class="bg-gra">
-    <div
-        class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4 md:py-10 xl:py-24">
-        <div class="w-full h-full order-last md:order-first">
-            <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
-        </div>
-        <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-            <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Hệ thống quản lý <br><strong
-                    class="text-[#1E90FF] font-semibold">Kho </strong> là gì?</h2>
-            <div class="flex flex-col gap-4">
-                <div class="flex items-start gap-4">
-                    <div class="w-[21px]">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
-                            <path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
-                            <path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
-                            <path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
-                        </svg>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4 md:py-10 xl:py-24">
+    <div class="w-full h-full order-last md:order-first">
+        <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
+    </div>
+    <div class="flex flex-col gap-6 order-first md:order-last text-center ">
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F] flex justify-center items-center gap-[8px]">Hệ thống quản lý <div class="w-[103px] h-36px]">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
+                </div> là gì?</h2>
+        <div class="flex flex-col gap-4">
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
-                    </div>
-                    <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Kho là địa điểm cất giữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-[21px]">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
-                            <path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
-                            <path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
-                            <path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
-                        </svg>
+            </div>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là nơi lưu trữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
+        </div>
+        <div class="flex items-start gap-4">
+            <div class="w-[21px]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+</svg>
 
             </div>
             <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Đa dạng phân loại gồm Kho thường, Kho lạnh, Kho bãi. </span>
@@ -106,7 +107,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
         </div>
         </div>
 
@@ -115,8 +116,10 @@
 </div>
 <div class="md:max-w-[1440px] py-4 px-[20px] md:px-20 w-full mx-auto md:my-10 xl:my-24">
     <div class="flex flex-col items-center gap-6 md:gap-10 ">
-        <h2 class="text-lg lg:text-3xl xl:text-4xl text-[#343434] font-semibold text-center">Quy trình trở thành <strong class="text-[#1E90FF] font-bold">V-Kho</strong></h2>
-        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký V-Kho đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
+        <h2 class=" text-lg sm:text-4xl  text-[#343434] font-semibold text-center flex items-center gap-[8px]">Quy trình trở thành <div class="w-[103px] h-36px] inline">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
+                </div></h2>
+        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký KHO đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] xl:gap-[30px] max-w-[650px] lg:max-w-[900px] xl:max-w-[1440px] mx-auto">
             <div class="item-qt flex flex-col items-center gap-[30px] p-3 py-10">
                 <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
@@ -126,7 +129,7 @@
                 <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin chỉ với 2 bước sau:</span>
                 <div class="flex items-center gap-3">
                     <div class="bg-[#FFBA49] text-[#FFF] py-[6px] px-[10px] rounded-[5px] text-sm xl:text-xl font-semibold max-w-[80px] whitespace-nowrap">Bước 1</div>
-                    <span class="text-[#525252] text-sm xl:text-lg font-medium">Cung cấp thông tin Người/Cơ quan quản lý kho.</span>
+                    <span class="text-[#525252] text-sm xl:text-lg font-medium">Cung cấp thông tin Người/Cơ quan quản lý KHO</span>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="bg-[#FFBA49] text-[#FFF] py-[6px] px-[10px] rounded-[5px] text-sm xl:text-xl font-semibold max-w-[80px] whitespace-nowrap">Bước 2</div>
@@ -138,7 +141,7 @@
                    2
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tiếp nhận hàng hóa từ Nhà cung cấp V-Store</h2>
-                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng V-Kho của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng KHO của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
 
             </div>
             <div class="item-qt flex flex-col items-center gap-[30px] p-3 py-10">
@@ -146,7 +149,7 @@
                    3
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Chuyển giao sản phẩm cho Đối tác vận chuyển</h2>
-                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Các đơn vị vận chuyển sẽ đến V-Kho lấy hàng để giao đến tay người dùng.</span>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Các đơn vị vận chuyển sẽ đến KHO lấy hàng để giao đến tay người dùng.</span>
 
             </div>
         </div>
@@ -154,9 +157,9 @@
 </div>
 <div class="bg-gra">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto md:p-16 p-4">
-    <div class="flex flex-col gap-6 order-last md:order-first text-center md:text-left">
-        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Lợi ích tham gia <strong
-                class="text-[#1E90FF] font-semibold">V-Kho </strong></h2>
+    <div class="flex flex-col gap-6 order-last md:order-first text-center ">
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F] flex justify-center items-center gap-[8px]">Lợi ích tham gia <div class="w-[103px] h-36px]">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt=""></h2>
         <div class="flex flex-col gap-4">
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -180,7 +183,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Được cung cấp website quản trị riêng cho tính năng quản lý kho. </span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Được cung cấp website quản trị riêng cho tính năng quản lý KHO. </span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -192,7 +195,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của V-Store chờ gửi hàng vào <br> V-Kho.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của V-Store chờ gửi hàng vào <br> KHO.</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">

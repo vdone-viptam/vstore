@@ -35,31 +35,30 @@
 </head>
 <body>
 <div class="bgncc w-full relative h-auto md:h-screen">
-    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
+    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-start gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-
-            <div class="w-[170px] h-[45px] md:hidden">
+            <div class=" w-[107px] h-[38px]">
                 <a href="./">
-                 <img src="{{asset('home/img/logoncc.png')}}" class="w-full object-contain" alt="">
-        </a>
-            </div>
-
-
-            <div class="hidden md:block w-[234px] h-[67px]">
-                <a href="./">
-                <img src="{{asset('home/img/logoncc.png')}}" class="w-full object-contain" alt="">
+                <img src="{{asset('home/img/NCC.png')}}" class="w-full object-contain" alt="">
                 </a>
             </div>
+            <div class="w-[105px] h-[82px]">
+            <img src="{{asset('home/img/vdone.png')}}" class="w-full object-contain" alt="">
 
-            <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-xl  hover:bg-[#0E88FF] transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold text-[#FFF] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
+            </div>
         </div>
-        <div class="flex flex-col justify-center w-full md:justify-start gap-14 md:max-w-[650px] text-center md:text-left">
+        <div class="flex flex-col justify-center w-full md:justify-start gap-8 md:max-w-[650px] text-center md:text-left">
             <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp V-Done</h2>
             <span class="text-[#FFF] max-w-[450px]">Đầu tư ngay trên nền tảng thương mại điện tử mang lại doanh thu khủng, quản lý dễ dàng, vận hành đơn giản, tiết kiệm thời gian. Cùng đăng ký ngay</span>
+            <div class="flex items-center gap-6">
+        <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
+
+        <a class=" text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px]   border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('register_ncc')}}">Đăng ký ngay</a>
+     
         </div>
-        <div class="max-w-[197px] mx-auto md:mx-0">
-            <button class="bg-[#FFF] text-center w-full rounded-[4px] text-[#00A8DB] px-[28px] md:px-0 py-4 font-semibold transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_ncc')}}">Đăng ký ngay</a></button>
         </div>
+    
+   
     </div>
 
 </div>
@@ -319,7 +318,7 @@
 
 
 <footer class="bg-[#1E90FF]">
-    <div class="grid grid-cols-1 lg:grid-cols-2  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 place-items-center md:place-items-start  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
         <ul class="flex items-center gap-14">
             <li><a href="#"><svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.6183 2.37575C23.713 2.76628 22.7278 3.04735 21.713 3.15682C22.7666 2.53089 23.5556 1.54202 23.9319 0.375752C22.9433 0.963885 21.8602 1.37629 20.7308 1.59469C20.2587 1.09003 19.6878 0.687999 19.0535 0.413643C18.4193 0.139287 17.7354 -0.00151415 17.0444 1.22793e-05C14.2485 1.22793e-05 12 2.26628 12 5.04735C12 5.43788 12.0473 5.82841 12.1243 6.20415C7.93786 5.98522 4.20414 3.98522 1.72189 0.923089C1.2696 1.69562 1.03258 2.57524 1.0355 3.47042C1.0355 5.2219 1.92603 6.76628 3.28402 7.67456C2.48374 7.64305 1.7022 7.42308 1.00296 7.03255V7.09468C1.00296 9.54734 2.73668 11.5799 5.04733 12.0473C4.61348 12.16 4.16718 12.2177 3.71893 12.2189C3.39053 12.2189 3.07988 12.1864 2.76627 12.142C3.40532 14.142 5.26627 15.5947 7.48224 15.642C5.74852 17 3.57692 17.7988 1.21893 17.7988C0.795858 17.7988 0.405325 17.784 0 17.7367C2.23668 19.1716 4.89053 20 7.74852 20C17.0266 20 22.1035 12.3136 22.1035 5.64202C22.1035 5.42309 22.1035 5.20415 22.0887 4.98522C23.071 4.26628 23.9319 3.37575 24.6183 2.37575Z" fill="#272D4E"/>

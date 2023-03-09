@@ -248,7 +248,7 @@ $(document).ready(function () {
         $(this).children('.list').toggleClass('hidden')
 
     })
-//test
+
     $('.notify').on('click', function () {
         $('.screen').removeClass('hidden')
         $('.sub-nav-notify').toggleClass('activeTb')

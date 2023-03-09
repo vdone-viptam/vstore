@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use mysql_xdevapi\CollectionModify;
 use PHPUnit\Exception;
 
 /**
@@ -255,9 +254,9 @@ class ProductController extends Controller
         foreach ($products as $value) {
 
             $value->images = asset(json_decode($value->images)[0]);
-            $value->price_discount = $value->price - ($value->price / 100 * $value->discount_vstore);
+            $value->price_discount = $value->price -($value->price/100 * $value->discount_vstore);
             $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
-                    ->first()->sum ?? 0;
+                ->first()->sum ?? 0;
 
         }
 
@@ -280,7 +279,7 @@ class ProductController extends Controller
     public function productById(Request $request, $id)
     {
 
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video','description','user_id','category_id','amount_product_sold')->first();
 
         if (!$product) {
             return response()->json([
@@ -289,35 +288,45 @@ class ProductController extends Controller
 
             ], 400);
         }
+        $img=[];
+        foreach (json_decode($product->images) as $valimage){
+            $img[]=asset($valimage);
+        }
+        $product->images=$img;
+//        return $product;
         $products_available = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =" . $product->id . " ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
         $product->products_available = $products_available;
-        $product->available_discount = BuyMoreDiscount::Where('end', 0)->where('product_id', $product->id)->select('discount')->first()->discount;
+        $product->available_discount= BuyMoreDiscount::Where('end',0)->where('product_id',$product->id)->select('discount')->first()->discount;
         $product->rating = 5;
         //check đã tiếp thị hay chưa
-        if ($request->id_pdone) {
-            $check_vshop_product = VshopProduct::where('id_pdone', $request->id_pdone)->where('product_id', $id)->first();
-            if ($check_vshop_product) {
+        if ($request->id_pdone){
+            $check_vshop_product = VshopProduct::where('id_pdone',$request->id_pdone)->where('product_id',$id)->first();
+            if ($check_vshop_product){
                 $product->affiliate = 1;
-            } else {
+            }else{
                 $product->affiliate = 0;
             }
         }
-        $list_vshop = VshopProduct::where('product_id', $id)->get();
+        $product->discount=10;
+        $product->price_discount = $product->price - ( $product->price /100 *10);
+        $list_vshop = VshopProduct::where('product_id',$id)->get();
 
-        foreach ($list_vshop as $list) {
-            $discount = Discount::where('product_id', $id)->where('user_id', $list->id_pdone)
-                ->where('start_date', '<=', Carbon::now())
-                ->where('end_date', '>=', Carbon::now())
+        foreach ($list_vshop as $list){
+            $discount = Discount::where('product_id',$id)->where('user_id',$list->id_pdone)
+                ->where('start_date','<=',Carbon::now())
+                ->where('end_date','>=',Carbon::now())
                 ->first();
-            $list->vshop_discount = $discount->discount ?? 0;
+            $list->vshop_discount= $discount->discount??0 ;
 
 
         }
+
+
 //        return $list_vshop;
-        return response()->json([
+         return response()->json([
             'status_code' => 200,
             'data' => $product,
-
+             'list_vshop'=>$list_vshop,
         ]);
     }
 
