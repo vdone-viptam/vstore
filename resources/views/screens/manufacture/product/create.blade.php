@@ -222,6 +222,9 @@
                         <span class="text-title font-medium">Tài liệu sản phẩm</span>
                         {{--                        <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start"></div>--}}
                         <input type="file" id="images[]" name="images[]" multiple>
+                        @error('images')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                     </div>
 
                 </div>
@@ -303,9 +306,9 @@
                         </div>
 
                     </div>
-{{--                    @error('sl')--}}
-{{--                    <p class="text-red-600">{{$message}}</p>--}}
-{{--                    @enderror--}}
+                    @error('sl')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
                     @error('deposit_money')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror

@@ -288,7 +288,8 @@ class ProductController extends Controller
                 'role' => 'min:1',
                 'prepay' => 'required',
                 'vat' => 'required|min:1|max:99',
-                'deposit_money' => 'required|min:1'
+                'deposit_money' => 'required|min:1',
+
 
             ], [
                 'vstore_id.required' => 'V-store bắt buộc chọn',
@@ -303,6 +304,10 @@ class ProductController extends Controller
                 'deposit_money.min' => 'Tiền cọc khi nhập sẵn không được nhỏ hơn hoặc bằng 0',
 
             ]);
+           if ($request->hasFile('images') !=1) {
+               return redirect()->back()->withErrors(['images' => 'Tải tài liệu liên quan đến sản phẩm']);
+           }
+
             if ($request->sl[0] == '' || $request->moneyv[0] == '') {
                 return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn']);
             }
@@ -349,12 +354,16 @@ class ProductController extends Controller
                     $images[] = 'storage / ' . $path;
                 }
             }
+
             $object->images = json_encode($images);
+
             $object->save();
             $product = Product::find($request->product_id);
+//            return $request;
             if ($product) {
                 $product->vstore_id = $request->vstore_id;
                 $product->save();
+
                 $sl = [];
 
                 for ($i = 0; $i < 3; $i++) {
@@ -363,12 +372,13 @@ class ProductController extends Controller
                         $sl[] = [
                             'start' => $request->sl[$i],
                             'discount' => $request->moneyv[$i],
-                            'product_id' => $product->id
+                            'product_id' => $product->id,
+//                            'deposit_money'=>$request->deposit_money[$i]??0,
                         ];
                     }
 
                 }
-//                dd($sl);
+                dd($sl);
 
 
 //                return $sl;
