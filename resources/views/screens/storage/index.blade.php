@@ -36,7 +36,13 @@
                 <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
             </div>
             <div class="hidden md:block w-[190px] h-[52px]">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
+                <a href="./"> 
+                    <script>
+                    const url = "https://kho.vdone.vn/";
+                        document.write(`<img src="${url}home/img/logokho.png" class='w-full object-contain' alt=''>`)
+                        // document.write('test') = "<img  src=`${url}+'home/img/logokho.png'` class='w-full object-contain' alt="">";
+                    </script>
+            </a>
             </div>
 
             <a href="{{route('login_storage')}}"

@@ -317,72 +317,7 @@
 </form>
 
 <script src="{{asset('asset/js/main.js')}}"></script>
-<script>
-    // $('#formRegister-V').validate({
-    //     rules: {
-    //         name: {
-    //             required: true,
-    //         },
-    //         id_vdone: {
-    //             required: true,
-    //         },
-    //         email: {
-    //             required: true,
-    //         },
-    //         company_name: {
-    //             required: true,
-    //         },
-    //         tax_code: {
-    //             required: true,
-    //         },
-    //         address: {
-    //             required: true,
-    //         },
-    //         phone_number: {
-    //             required: true,
-    //         },
-    //         password: {
-    //             required: true,
-    //
-    //         },
-    //         password_confirmation: {
-    //             required: true,
-    //             equalTo: '#password'
-    //         },
-    //
-    //     },
-    //     messages: {
-    //         name: {
-    //             required: 'Bạn cần nhập tên V-Kho'
-    //         },
-    //         id_vdone: {
-    //             required: 'Bạn cần nhập ID người đại diện'
-    //         },
-    //         email: {
-    //             required: 'Bạn cần nhập địa chỉ Email'
-    //         },
-    //         company_name: {
-    //             required: 'Bạn cần nhập tên công ty'
-    //         },
-    //         tax_code: {
-    //             required: 'Bạn cần nhập mã số thuế'
-    //         },
-    //         address: {
-    //             required: 'Bạn cần nhập địa chỉ'
-    //         },
-    //         password: {
-    //             required: 'Bạn phải nhập mật khẩu',
-    //
-    //         },
-    //         phone_number: {
-    //             required: 'Số điện thoại bắt buộc nhập',
-    //         },
-    //     },
-    //     submitHandler: function (form) {
-    //         form.submit();
-    //     }
-    // });
-</script>
+
 <script !src="">
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
