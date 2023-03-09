@@ -12,10 +12,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//dd(1);
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
+// THANH TOÁN APP
+Route::group(['domain' => config('domain.payment')], function () {
+    Route::get('/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // TEST sau nhớ bỏ đi.
+
+    Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
+    Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
+
+    Route::get('/payment/success', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentSuccess'])->name('paymentSuccess');
+    Route::get('/payment/err500', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9PayErr500'])->name('payment500');
+    Route::get('/payment/err', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentErr'])->name('paymentErr');
+});
+// END THANH TOÁN APP
 
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
 Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'formForgotPassword'])->name('form_forgot_password');
@@ -53,7 +62,6 @@ Route::group(['domain' => config('domain.vstore')], function () {
     Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegisterVstore'])->name('register_vstore');
     Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLoginVstore'])->name('login_vstore');
     Route::get('/p/{slug}', [\App\Http\Controllers\LandingpageController::class, 'vstore'])->name('intro_vstore');
-
 });
 
 //role_id = 4 Quyền kho

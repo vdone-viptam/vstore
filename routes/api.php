@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// THANH TOÁN APP
+Route::group(['domain' => config('domain.payment')], function () {
+    Route::get('/payment/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9Pay']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+    Route::get('payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+});
+// END THANH TOÁN APP
+
+
 //Route::post('callback-viettel-post', function (Request $req) {
 //
 //    return $req->all();
@@ -37,6 +45,14 @@ use Illuminate\Support\Facades\Route;
 //        "req" => $req
 //    ]);
 //});
+
+Route::prefix('bill')->group(function () {
+    Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
+    Route::get('/detail/{id}', [\App\Http\Controllers\Api\BillController::class, 'detail']);
+    Route::post('/checkout', [\App\Http\Controllers\Api\BillController::class, 'checkout']);
+    Route::get('/{id}', [\App\Http\Controllers\Api\BillController::class, 'index']);
+});
+
 Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -47,7 +63,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //});
 //Route::group(['domain' => config('domain.api')], function () {
 Route::domain(config('domain.api'))->group(function () {
-
 
     Route::prefix('product')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
