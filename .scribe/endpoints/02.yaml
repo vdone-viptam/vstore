@@ -26,11 +26,11 @@ endpoints:
         name: pdone_id
         description: 'The ID of the pdone.'
         required: true
-        example: 20
+        example: 11
         type: integer
         custom: []
     cleanUrlParameters:
-      pdone_id: 20
+      pdone_id: 11
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -77,11 +77,11 @@ endpoints:
         name: id
         description: 'The ID of the add.'
         required: true
-        example: consequatur
+        example: cum
         type: string
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: cum
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -89,27 +89,27 @@ endpoints:
         name: pdone_id
         description: 'mã user của người dùng'
         required: false
-        example: rerum
+        example: fugiat
         type: required
         custom: []
       quantity:
         name: quantity
         description: 'Số sản phẩm mua'
         required: false
-        example: accusantium
+        example: voluptatum
         type: 'required|numeric|min:1'
         custom: []
       vshop_id:
         name: vshop_id
         description: 'mã v-shop'
         required: false
-        example: a
+        example: deserunt
         type: required
         custom: []
     cleanBodyParameters:
-      pdone_id: rerum
-      quantity: accusantium
-      vshop_id: a
+      pdone_id: fugiat
+      quantity: voluptatum
+      vshop_id: deserunt
     fileParameters: []
     responses: []
     responseFields: []
@@ -141,11 +141,11 @@ endpoints:
         name: cart_id
         description: 'The ID of the cart.'
         required: true
-        example: ullam
+        example: dolores
         type: string
         custom: []
     cleanUrlParameters:
-      cart_id: ullam
+      cart_id: dolores
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -181,19 +181,19 @@ endpoints:
         name: cart_id
         description: 'The ID of the cart.'
         required: true
-        example: ab
+        example: qui
         type: string
         custom: []
       type:
         name: type
         description: ''
         required: true
-        example: nemo
+        example: nihil
         type: string
         custom: []
     cleanUrlParameters:
-      cart_id: ab
-      type: nemo
+      cart_id: qui
+      type: nihil
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

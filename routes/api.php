@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,6 +45,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return config('domain.api');
 //});
 //Route::group(['domain' => config('domain.api')], function () {
+//echo config('domain.api');
 Route::domain(config('domain.api'))->group(function () {
 
 
@@ -53,13 +53,13 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
 
         Route::get('search/{key_word}', [\App\Http\Controllers\Api\ProductController::class, 'searchProductByKeyWord']);
-//        Route::get('/product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);
-//        Route::get('/product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
-//        Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
-//        Route::post('/vshop-pickup/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopPickup']);
-//        Route::post('/vshop-ready-stock/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopReadyStock']);
-//        Route::get('/vshop/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
-//        Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
+        Route::get('/product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);
+        Route::get('/product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
+        Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
+        Route::post('/vshop-pickup/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopPickup']);
+        Route::post('/vshop-ready-stock/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopReadyStock']);
+        Route::get('/vshop/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
     });
     Route::prefix('cart')->group(function () {
         Route::get('/{pdone_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
@@ -77,7 +77,9 @@ Route::domain(config('domain.api'))->group(function () {
     Route::prefix('bill')->group(function () {
         Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
         Route::get('/detail/{id}', [\App\Http\Controllers\Api\BillController::class, 'detail']);
+        Route::post('/checkout', [\App\Http\Controllers\Api\BillController::class, 'checkout']);
         Route::get('/{id}', [\App\Http\Controllers\Api\BillController::class, 'index']);
+
 
     });
     Route::prefix('categories')->group(function () {

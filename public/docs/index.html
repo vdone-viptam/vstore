@@ -45,12 +45,12 @@
     </span>
 </a>
 <div class="tocify-wrapper">
-
+    
             <div class="lang-selector">
                                             <button type="button" class="lang-button" data-language-name="bash">bash</button>
                                             <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
                     </div>
-
+    
     <div class="search">
         <input type="text" class="search" id="input-search" placeholder="Search">
     </div>
@@ -144,7 +144,10 @@
                     <a href="#endpoints">Endpoints</a>
                 </li>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-callback-viettel-post">
+                                <a href="#endpoints-POSTapi-callback-viettel-post">POST api/callback-viettel-post</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-user">
                                 <a href="#endpoints-GETapi-user">GET api/user</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-test">
@@ -252,7 +255,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 3, 2023</li>
+        <li>Last updated: March 7, 2023</li>
     </ul>
 </div>
 
@@ -291,14 +294,14 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_pdone\": \"at\",
-    \"name\": \"voluptates\",
-    \"phone_number\": \"aliquid\",
-    \"address\": \"commodi\",
-    \"province\": 57,
-    \"data\": \"qui\",
-    \"district\": 69,
-    \"id_vshop\": \"molestias\"
+    \"id_pdone\": \"laborum\",
+    \"name\": \"quia\",
+    \"phone_number\": \"nulla\",
+    \"address\": \"quos\",
+    \"province\": 76,
+    \"data\": \"sit\",
+    \"district\": 49,
+    \"id_vshop\": \"et\"
 }"
 </code></pre></div>
 
@@ -314,14 +317,14 @@ const headers = {
 };
 
 let body = {
-    "id_pdone": "at",
-    "name": "voluptates",
-    "phone_number": "aliquid",
-    "address": "commodi",
-    "province": 57,
-    "data": "qui",
-    "district": 69,
-    "id_vshop": "molestias"
+    "id_pdone": "laborum",
+    "name": "quia",
+    "phone_number": "nulla",
+    "address": "quos",
+    "province": 76,
+    "data": "sit",
+    "district": 49,
+    "id_vshop": "et"
 };
 
 fetch(url, {
@@ -402,10 +405,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id_pdone"                data-endpoint="POSTapi-bill-add"
-               value="at"
+               value="laborum"
                data-component="body">
     <br>
-<p>user của người dùng mua hàng Example: <code>at</code></p>
+<p>user của người dùng mua hàng Example: <code>laborum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -413,10 +416,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="name"                data-endpoint="POSTapi-bill-add"
-               value="voluptates"
+               value="quia"
                data-component="body">
     <br>
-<p>người dùng Example: <code>voluptates</code></p>
+<p>người dùng Example: <code>quia</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
@@ -424,10 +427,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="phone_number"                data-endpoint="POSTapi-bill-add"
-               value="aliquid"
+               value="nulla"
                data-component="body">
     <br>
-<p>điện thoại Example: <code>aliquid</code></p>
+<p>điện thoại Example: <code>nulla</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -435,10 +438,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="address"                data-endpoint="POSTapi-bill-add"
-               value="commodi"
+               value="quos"
                data-component="body">
     <br>
-<p>chỉ Example: <code>commodi</code></p>
+<p>chỉ Example: <code>quos</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>province</code></b>&nbsp;&nbsp;
@@ -446,10 +449,10 @@ fetch(url, {
  &nbsp;
                 <input type="number" style="display: none"
                name="province"                data-endpoint="POSTapi-bill-add"
-               value="57"
+               value="76"
                data-component="body">
     <br>
-<p>Must be at least 1. Example: <code>57</code></p>
+<p>Must be at least 1. Example: <code>76</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
@@ -457,10 +460,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="data"                data-endpoint="POSTapi-bill-add"
-               value="qui"
+               value="sit"
                data-component="body">
     <br>
-<p>liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{&quot;id&quot;:&quot;19&quot;,&quot;vshop_id&quot;:&quot;MVS123123&quot;,&quot;quantity&quot;:12},{&quot;id&quot;:&quot;20&quot;,&quot;vshop_id&quot;:&quot;MVS123123&quot;,&quot;quantity&quot;:12}] Example: <code>qui</code></p>
+<p>liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{&quot;id&quot;:&quot;19&quot;,&quot;vshop_id&quot;:&quot;MVS123123&quot;,&quot;quantity&quot;:12},{&quot;id&quot;:&quot;20&quot;,&quot;vshop_id&quot;:&quot;MVS123123&quot;,&quot;quantity&quot;:12}] Example: <code>sit</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>district</code></b>&nbsp;&nbsp;
@@ -468,10 +471,10 @@ fetch(url, {
  &nbsp;
                 <input type="number" style="display: none"
                name="district"                data-endpoint="POSTapi-bill-add"
-               value="69"
+               value="49"
                data-component="body">
     <br>
-<p>Must be at least 1. Example: <code>69</code></p>
+<p>Must be at least 1. Example: <code>49</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>id_vshop</code></b>&nbsp;&nbsp;
@@ -479,10 +482,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id_vshop"                data-endpoint="POSTapi-bill-add"
-               value="molestias"
+               value="et"
                data-component="body">
     <br>
-<p>user của vshop Example: <code>molestias</code></p>
+<p>user của vshop Example: <code>et</code></p>
         </div>
         </form>
 
@@ -499,14 +502,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/bill/detail/veniam" \
+    --get "http://localhost/api/bill/detail/deserunt" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/bill/detail/veniam"
+    "http://localhost/api/bill/detail/deserunt"
 );
 
 const headers = {
@@ -611,10 +614,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-bill-detail--id-"
-               value="veniam"
+               value="deserunt"
                data-component="url">
     <br>
-<p>The ID of the detail. Example: <code>veniam</code></p>
+<p>The ID of the detail. Example: <code>deserunt</code></p>
             </div>
                     </form>
 
@@ -1267,14 +1270,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/cart/20" \
+    --get "http://localhost/api/cart/11" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/cart/20"
+    "http://localhost/api/cart/11"
 );
 
 const headers = {
@@ -1378,10 +1381,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="number" style="display: none"
                name="pdone_id"                data-endpoint="GETapi-cart--pdone_id-"
-               value="20"
+               value="11"
                data-component="url">
     <br>
-<p>The ID of the pdone. Example: <code>20</code></p>
+<p>The ID of the pdone. Example: <code>11</code></p>
             </div>
                     </form>
 
@@ -1398,20 +1401,20 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/cart/add/consequatur" \
+    "http://localhost/api/cart/add/cum" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"pdone_id\": \"rerum\",
-    \"quantity\": \"accusantium\",
-    \"vshop_id\": \"a\"
+    \"pdone_id\": \"fugiat\",
+    \"quantity\": \"voluptatum\",
+    \"vshop_id\": \"deserunt\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/cart/add/consequatur"
+    "http://localhost/api/cart/add/cum"
 );
 
 const headers = {
@@ -1420,9 +1423,9 @@ const headers = {
 };
 
 let body = {
-    "pdone_id": "rerum",
-    "quantity": "accusantium",
-    "vshop_id": "a"
+    "pdone_id": "fugiat",
+    "quantity": "voluptatum",
+    "vshop_id": "deserunt"
 };
 
 fetch(url, {
@@ -1503,10 +1506,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="POSTapi-cart-add--id-"
-               value="consequatur"
+               value="cum"
                data-component="url">
     <br>
-<p>The ID of the add. Example: <code>consequatur</code></p>
+<p>The ID of the add. Example: <code>cum</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1515,10 +1518,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="pdone_id"                data-endpoint="POSTapi-cart-add--id-"
-               value="rerum"
+               value="fugiat"
                data-component="body">
     <br>
-<p>mã user của người dùng Example: <code>rerum</code></p>
+<p>mã user của người dùng Example: <code>fugiat</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>quantity</code></b>&nbsp;&nbsp;
@@ -1526,10 +1529,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="quantity"                data-endpoint="POSTapi-cart-add--id-"
-               value="accusantium"
+               value="voluptatum"
                data-component="body">
     <br>
-<p>Số sản phẩm mua Example: <code>accusantium</code></p>
+<p>Số sản phẩm mua Example: <code>voluptatum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>vshop_id</code></b>&nbsp;&nbsp;
@@ -1537,10 +1540,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="vshop_id"                data-endpoint="POSTapi-cart-add--id-"
-               value="a"
+               value="deserunt"
                data-component="body">
     <br>
-<p>mã v-shop Example: <code>a</code></p>
+<p>mã v-shop Example: <code>deserunt</code></p>
         </div>
         </form>
 
@@ -1557,14 +1560,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/cart/remove/ullam" \
+    "http://localhost/api/cart/remove/dolores" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/cart/remove/ullam"
+    "http://localhost/api/cart/remove/dolores"
 );
 
 const headers = {
@@ -1649,10 +1652,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="cart_id"                data-endpoint="DELETEapi-cart-remove--cart_id-"
-               value="ullam"
+               value="dolores"
                data-component="url">
     <br>
-<p>The ID of the cart. Example: <code>ullam</code></p>
+<p>The ID of the cart. Example: <code>dolores</code></p>
             </div>
                     </form>
 
@@ -1669,14 +1672,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/cart/add-quantity/ab/nemo" \
+    "http://localhost/api/cart/add-quantity/qui/nihil" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/cart/add-quantity/ab/nemo"
+    "http://localhost/api/cart/add-quantity/qui/nihil"
 );
 
 const headers = {
@@ -1761,10 +1764,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="cart_id"                data-endpoint="POSTapi-cart-add-quantity--cart_id---type-"
-               value="ab"
+               value="qui"
                data-component="url">
     <br>
-<p>The ID of the cart. Example: <code>ab</code></p>
+<p>The ID of the cart. Example: <code>qui</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
@@ -1772,10 +1775,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="type"                data-endpoint="POSTapi-cart-add-quantity--cart_id---type-"
-               value="nemo"
+               value="nihil"
                data-component="url">
     <br>
-<p>Example: <code>nemo</code></p>
+<p>Example: <code>nihil</code></p>
             </div>
                     </form>
 
@@ -1960,137 +1963,147 @@ access-control-allow-origin: *
             {
                 &quot;id&quot;: 1,
                 &quot;name&quot;: &quot;Thời trang nữ&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/thoi_trang_nu.png&quot;
             },
             {
                 &quot;id&quot;: 2,
                 &quot;name&quot;: &quot;Thời trang nam&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/thoi_trang_nam.png&quot;
             },
             {
                 &quot;id&quot;: 3,
                 &quot;name&quot;: &quot;Sắc đẹp&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/sac_dep.png&quot;
             },
             {
                 &quot;id&quot;: 4,
                 &quot;name&quot;: &quot;Sức khỏe&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/suc_khoe.png&quot;
             },
             {
                 &quot;id&quot;: 5,
                 &quot;name&quot;: &quot;Phụ kiện thời trang&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/phu_kien_thoi_trang.png&quot;
             },
             {
                 &quot;id&quot;: 6,
                 &quot;name&quot;: &quot;Thiết bị điện gia dụng&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/thiet_bi_dien_gia_dung.png&quot;
             },
             {
                 &quot;id&quot;: 7,
                 &quot;name&quot;: &quot;Gi&agrave;y d&eacute;p nam&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/giay_dep_nam.png&quot;
             },
             {
                 &quot;id&quot;: 8,
-                &quot;name&quot;: &quot;Điện thoại &amp; phụ kiện&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Gi&agrave;y d&eacute;p nữ&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/giay_dep_nu.png&quot;
             },
             {
                 &quot;id&quot;: 9,
-                &quot;name&quot;: &quot;Du lịch &amp; H&agrave;nh l&yacute;&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Điện thoại &amp; phụ kiện&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/phu_kien_dien_thoai.png&quot;
             },
             {
                 &quot;id&quot;: 10,
-                &quot;name&quot;: &quot;T&uacute;i v&iacute; nữ&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Du lịch &amp; H&agrave;nh l&yacute;&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/du_lich_hanh_ly.png&quot;
             },
             {
                 &quot;id&quot;: 11,
-                &quot;name&quot;: &quot;T&uacute;i v&iacute; nam&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;T&uacute;i v&iacute; nữ&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/tui_vi_nu.png&quot;
             },
             {
                 &quot;id&quot;: 12,
-                &quot;name&quot;: &quot;Đồng hồ&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;T&uacute;i v&iacute; nam&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/tui_vi_nam.png&quot;
             },
             {
                 &quot;id&quot;: 13,
-                &quot;name&quot;: &quot;Thiết bị &acirc;m thanh&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Đồng hồ&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/dong_ho.png&quot;
             },
             {
                 &quot;id&quot;: 14,
-                &quot;name&quot;: &quot;Thực phầm v&agrave; đồ uống&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Thiết bị &acirc;m thanh&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/thiet_bi_am_thanh.png&quot;
             },
             {
                 &quot;id&quot;: 15,
-                &quot;name&quot;: &quot;Chăm s&oacute;c th&uacute; cưng&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Thực phầm v&agrave; đồ uống&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/thuc_pham_do_uong.png&quot;
             },
             {
                 &quot;id&quot;: 16,
-                &quot;name&quot;: &quot;Mẹ &amp; B&eacute;&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Chăm s&oacute;c th&uacute; cưng&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/cham_soc_thu_cung.png&quot;
             },
             {
                 &quot;id&quot;: 17,
-                &quot;name&quot;: &quot;Thời trang trẻ em &amp; trẻ sơ sinh&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Mẹ &amp; B&eacute;&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/me_be.png&quot;
             },
             {
                 &quot;id&quot;: 18,
-                &quot;name&quot;: &quot;Gaming &amp; Console&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Thời trang trẻ em &amp; trẻ sơ sinh&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/thoi_trang_tre_em.png&quot;
             },
             {
                 &quot;id&quot;: 19,
-                &quot;name&quot;: &quot;Cameras &amp; Flycam&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Game &amp; Console&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/game_console.png&quot;
             },
             {
                 &quot;id&quot;: 20,
-                &quot;name&quot;: &quot;Nh&agrave; cửa &amp; Đời sống&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Cameras &amp; Flycam&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/camera_flycam.png&quot;
             },
             {
                 &quot;id&quot;: 21,
-                &quot;name&quot;: &quot;Thể Thao &amp; D&atilde; Ngoại&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Nh&agrave; cửa &amp; Đời sống&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/nha_cua_doi_song.png&quot;
             },
             {
                 &quot;id&quot;: 22,
-                &quot;name&quot;: &quot;Văn Ph&ograve;ng Phẩm&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Thể Thao &amp; D&atilde; Ngoại&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/the_thao_da_ngoai.png&quot;
             },
             {
                 &quot;id&quot;: 23,
-                &quot;name&quot;: &quot;&Ocirc; t&ocirc;&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;Văn Ph&ograve;ng Phẩm&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/van_phong_pham.png&quot;
             },
             {
                 &quot;id&quot;: 24,
-                &quot;name&quot;: &quot;M&ocirc; t&ocirc;, xe m&aacute;y&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;&Ocirc; t&ocirc;&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/o_to.png&quot;
             },
             {
                 &quot;id&quot;: 25,
-                &quot;name&quot;: &quot;S&aacute;ch&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;M&ocirc; t&ocirc;, xe m&aacute;y&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/moto_xe_may.png&quot;
             },
             {
                 &quot;id&quot;: 26,
-                &quot;name&quot;: &quot;M&aacute;y t&iacute;nh &amp; Laptop&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;name&quot;: &quot;S&aacute;ch&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/sach.png&quot;
             },
             {
                 &quot;id&quot;: 27,
+                &quot;name&quot;: &quot;M&aacute;y t&iacute;nh &amp; Laptop&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/may_tinh_laptop.png&quot;
+            },
+            {
+                &quot;id&quot;: 28,
                 &quot;name&quot;: &quot;Bất động sản&quot;,
-                &quot;img&quot;: &quot;http://localhost/&quot;
+                &quot;img&quot;: &quot;http://localhost/image/category/nha_cua_doi_song.png&quot;
+            },
+            {
+                &quot;id&quot;: 29,
+                &quot;name&quot;: &quot;Sở th&iacute;ch &amp; si&ecirc;u tầm&quot;,
+                &quot;img&quot;: &quot;http://localhost/image/category/so_thich_suu_tam.png&quot;
             }
         ],
         &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/category?page=1&quot;,
@@ -2118,8 +2131,8 @@ access-control-allow-origin: *
         &quot;path&quot;: &quot;http://api-vstore.ngo/api/category&quot;,
         &quot;per_page&quot;: 48,
         &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: 27,
-        &quot;total&quot;: 27
+        &quot;to&quot;: 29,
+        &quot;total&quot;: 29
     }
 }</code>
  </pre>
@@ -2192,10 +2205,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-category"
-               value="at"
+               value="veritatis"
                data-component="url">
     <br>
-<p>Số trang Example: <code>at</code></p>
+<p>Số trang Example: <code>veritatis</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -2203,10 +2216,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-category"
-               value="non"
+               value="iste"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Mặc định 48 Example: <code>non</code></p>
+<p>Giới hạn bản ghi trên một trang Mặc định 48 Example: <code>iste</code></p>
             </div>
                     </form>
 
@@ -2223,14 +2236,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/category/get-category-by-vstore/id" \
+    --get "http://localhost/api/category/get-category-by-vstore/possimus" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/category/get-category-by-vstore/id"
+    "http://localhost/api/category/get-category-by-vstore/possimus"
 );
 
 const headers = {
@@ -2334,10 +2347,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="vstore_id"                data-endpoint="GETapi-category-get-category-by-vstore--vstore_id-"
-               value="id"
+               value="possimus"
                data-component="url">
     <br>
-<p>The ID of the vstore. Example: <code>id</code></p>
+<p>The ID of the vstore. Example: <code>possimus</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -2345,10 +2358,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-category-get-category-by-vstore--vstore_id-"
-               value="iusto"
+               value="fugiat"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi  Mặc định 100 Example: <code>iusto</code></p>
+<p>Giới hạn bản ghi  Mặc định 100 Example: <code>fugiat</code></p>
             </div>
                     </form>
 
@@ -2365,14 +2378,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/category/get-product-by-category/laboriosam" \
+    --get "http://localhost/api/category/get-product-by-category/aliquid" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/category/get-product-by-category/laboriosam"
+    "http://localhost/api/category/get-product-by-category/aliquid"
 );
 
 const headers = {
@@ -2407,10 +2420,10 @@ access-control-allow-origin: *
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
         &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1&quot;,
+        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1&quot;,
         &quot;from&quot;: null,
         &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1&quot;,
+        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -2418,7 +2431,7 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/laboriosam?page=1&quot;,
+                &quot;url&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/aliquid?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;active&quot;: true
             },
@@ -2429,7 +2442,7 @@ access-control-allow-origin: *
             }
         ],
         &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/laboriosam&quot;,
+        &quot;path&quot;: &quot;http://api-vstore.ngo/api/category/get-product-by-category/aliquid&quot;,
         &quot;per_page&quot;: 8,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: null,
@@ -2506,10 +2519,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="category_id"                data-endpoint="GETapi-category-get-product-by-category--category_id-"
-               value="laboriosam"
+               value="aliquid"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>laboriosam</code></p>
+<p>The ID of the category. Example: <code>aliquid</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
@@ -2517,10 +2530,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-category-get-product-by-category--category_id-"
-               value="id"
+               value="architecto"
                data-component="url">
     <br>
-<p>Số trang Example: <code>id</code></p>
+<p>Số trang Example: <code>architecto</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -2528,10 +2541,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-category-get-product-by-category--category_id-"
-               value="consequatur"
+               value="pariatur"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Mặc định 8 Example: <code>consequatur</code></p>
+<p>Giới hạn bản ghi trên một trang Mặc định 8 Example: <code>pariatur</code></p>
             </div>
                     </form>
 
@@ -2548,14 +2561,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/category/get-vstore-by-category/sed" \
+    --get "http://localhost/api/category/get-vstore-by-category/et" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/category/get-vstore-by-category/sed"
+    "http://localhost/api/category/get-vstore-by-category/et"
 );
 
 const headers = {
@@ -2659,10 +2672,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-category-get-vstore-by-category--id-"
-               value="sed"
+               value="et"
                data-component="url">
     <br>
-<p>The ID of the get vstore by category. Example: <code>sed</code></p>
+<p>The ID of the get vstore by category. Example: <code>et</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
@@ -2670,10 +2683,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-category-get-vstore-by-category--id-"
-               value="perspiciatis"
+               value="ut"
                data-component="url">
     <br>
-<p>Số trang Example: <code>perspiciatis</code></p>
+<p>Số trang Example: <code>ut</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -2681,10 +2694,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-category-get-vstore-by-category--id-"
-               value="qui"
+               value="est"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Mặc định 10 Example: <code>qui</code></p>
+<p>Giới hạn bản ghi trên một trang Mặc định 10 Example: <code>est</code></p>
             </div>
                     </form>
 
@@ -2744,10 +2757,10 @@ access-control-allow-origin: *
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;Thời trang nữ&quot;,
         &quot;parent_id&quot;: null,
-        &quot;img&quot;: null,
+        &quot;img&quot;: &quot;image/category/thoi_trang_nu.png&quot;,
         &quot;slug&quot;: null,
         &quot;status&quot;: 1,
-        &quot;created_at&quot;: &quot;2023-02-26T02:41:19.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2023-03-05T14:02:03.000000Z&quot;,
         &quot;updated_at&quot;: null
     }
 }</code>
@@ -2849,8 +2862,8 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"similique\",
-    \"total\": \"iste\"
+    \"id\": \"at\",
+    \"total\": \"omnis\"
 }"
 </code></pre></div>
 
@@ -2866,8 +2879,8 @@ const headers = {
 };
 
 let body = {
-    "id": "similique",
-    "total": "iste"
+    "id": "at",
+    "total": "omnis"
 };
 
 fetch(url, {
@@ -2974,10 +2987,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-discount-get-discount"
-               value="similique"
+               value="at"
                data-component="body">
     <br>
-<p>sản phẩm Example: <code>similique</code></p>
+<p>sản phẩm Example: <code>at</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>total</code></b>&nbsp;&nbsp;
@@ -2985,10 +2998,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="total"                data-endpoint="GETapi-discount-get-discount"
-               value="iste"
+               value="omnis"
                data-component="body">
     <br>
-<p>lượng sản phẩm Example: <code>iste</code></p>
+<p>lượng sản phẩm Example: <code>omnis</code></p>
         </div>
         </form>
 
@@ -3005,14 +3018,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/discount/available-discount/aliquam" \
+    --get "http://localhost/api/discount/available-discount/labore" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/discount/available-discount/aliquam"
+    "http://localhost/api/discount/available-discount/labore"
 );
 
 const headers = {
@@ -3113,18 +3126,118 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-discount-available-discount--id-"
-               value="aliquam"
+               value="labore"
                data-component="url">
     <br>
-<p>id sản phẩm Example: <code>aliquam</code></p>
+<p>id sản phẩm Example: <code>labore</code></p>
             </div>
                     </form>
 
                 <h1 id="endpoints">Endpoints</h1>
 
+    
+
+                                <h2 id="endpoints-POSTapi-callback-viettel-post">POST api/callback-viettel-post</h2>
+
+<p>
+</p>
 
 
-                                <h2 id="endpoints-GETapi-user">GET api/user</h2>
+
+<span id="example-requests-POSTapi-callback-viettel-post">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/callback-viettel-post" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/callback-viettel-post"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-callback-viettel-post">
+</span>
+<span id="execution-results-POSTapi-callback-viettel-post" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-callback-viettel-post"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-callback-viettel-post" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-callback-viettel-post" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-callback-viettel-post"></code></pre>
+</span>
+<form id="form-POSTapi-callback-viettel-post" data-method="POST"
+      data-path="api/callback-viettel-post"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-callback-viettel-post', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-callback-viettel-post"
+                    onclick="tryItOut('POSTapi-callback-viettel-post');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-callback-viettel-post"
+                    onclick="cancelTryOut('POSTapi-callback-viettel-post');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-callback-viettel-post" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/callback-viettel-post</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="POSTapi-callback-viettel-post"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="POSTapi-callback-viettel-post"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-user">GET api/user</h2>
 
 <p>
 </p>
@@ -3277,20 +3390,475 @@ fetch(url, {
 
 <span id="example-responses-GETapi-test">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">content-type: text/html; charset=UTF-8
-cache-control: no-cache, private
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
 x-ratelimit-limit: 60
 x-ratelimit-remaining: 33
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">1</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Trying to access array offset on value of type null&quot;,
+    &quot;exception&quot;: &quot;ErrorException&quot;,
+    &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\app\\Http\\Controllers\\TestController.php&quot;,
+    &quot;line&quot;: 31,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php&quot;,
+            &quot;line&quot;: 266,
+            &quot;function&quot;: &quot;handleError&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Bootstrap\\HandleExceptions&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\app\\Http\\Controllers\\TestController.php&quot;,
+            &quot;line&quot;: 31,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Bootstrap\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Bootstrap\\HandleExceptions&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php&quot;,
+            &quot;line&quot;: 54,
+            &quot;function&quot;: &quot;index&quot;,
+            &quot;class&quot;: &quot;App\\Http\\Controllers\\TestController&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php&quot;,
+            &quot;line&quot;: 43,
+            &quot;function&quot;: &quot;callAction&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Controller&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php&quot;,
+            &quot;line&quot;: 260,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\ControllerDispatcher&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php&quot;,
+            &quot;line&quot;: 205,
+            &quot;function&quot;: &quot;runController&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Route&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 798,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Route&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Routing\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php&quot;,
+            &quot;line&quot;: 126,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php&quot;,
+            &quot;line&quot;: 102,
+            &quot;function&quot;: &quot;handleRequest&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php&quot;,
+            &quot;line&quot;: 54,
+            &quot;function&quot;: &quot;handleRequestUsingNamedLimiter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 799,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 776,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 740,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 729,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 190,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php&quot;,
+            &quot;line&quot;: 31,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php&quot;,
+            &quot;line&quot;: 62,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php&quot;,
+            &quot;line&quot;: 39,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 165,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 134,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 92,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 209,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 166,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 124,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 71,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 49,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php&quot;,
+            &quot;line&quot;: 41,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 37,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php&quot;,
+            &quot;line&quot;: 661,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 183,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Command\\Command.php&quot;,
+            &quot;line&quot;: 312,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 153,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 1022,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 314,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 168,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php&quot;,
+            &quot;line&quot;: 102,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php&quot;,
+            &quot;line&quot;: 155,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\vvstore\\vstore-backend\\artisan&quot;,
+            &quot;line&quot;: 37,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-test" hidden>
@@ -3846,15 +4414,9 @@ access-control-allow-origin: *
     &quot;status_code&quot;: 200,
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
-        &quot;data&quot;: [
-            {
-                &quot;id&quot;: 8,
-                &quot;name&quot;: &quot;nhacungcap&quot;,
-                &quot;avatar&quot;: &quot;http://localhost/image/Rectangle 44.png&quot;
-            }
-        ],
+        &quot;data&quot;: [],
         &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/manufactures/get-list?page=1&quot;,
-        &quot;from&quot;: 1,
+        &quot;from&quot;: null,
         &quot;last_page&quot;: 1,
         &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/manufactures/get-list?page=1&quot;,
         &quot;links&quot;: [
@@ -3878,8 +4440,8 @@ access-control-allow-origin: *
         &quot;path&quot;: &quot;http://api-vstore.ngo/api/manufactures/get-list&quot;,
         &quot;per_page&quot;: 100,
         &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: 1,
-        &quot;total&quot;: 1
+        &quot;to&quot;: null,
+        &quot;total&quot;: 0
     }
 }</code>
  </pre>
@@ -3952,10 +4514,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-manufactures-get-list"
-               value="fuga"
+               value="officia"
                data-component="url">
     <br>
-<p>Số trang Example: <code>fuga</code></p>
+<p>Số trang Example: <code>officia</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -3963,10 +4525,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-manufactures-get-list"
-               value="rerum"
+               value="quae"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang | Mặc định 100 bản ghi Example: <code>rerum</code></p>
+<p>Giới hạn bản ghi trên một trang | Mặc định 100 bản ghi Example: <code>quae</code></p>
             </div>
                     </form>
 
@@ -3983,14 +4545,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/manufactures/profile/voluptate" \
+    --get "http://localhost/api/manufactures/profile/magni" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/manufactures/profile/voluptate"
+    "http://localhost/api/manufactures/profile/magni"
 );
 
 const headers = {
@@ -4532,10 +5094,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="ncc_id"                data-endpoint="GETapi-manufactures-profile--ncc_id-"
-               value="voluptate"
+               value="magni"
                data-component="url">
     <br>
-<p>The ID of the ncc. Example: <code>voluptate</code></p>
+<p>The ID of the ncc. Example: <code>magni</code></p>
             </div>
                     </form>
 
@@ -4605,8 +5167,9 @@ access-control-allow-origin: *
                 &quot;images&quot;: &quot;http://localhost/storage/products/img2023022602592770906700.jpeg&quot;,
                 &quot;price&quot;: 100000,
                 &quot;discount_vstore&quot;: 5,
+                &quot;amount_product_sold&quot;: null,
                 &quot;price_discount&quot;: 95000,
-                &quot;available_discount&quot;: 10
+                &quot;available_discount&quot;: 11
             },
             {
                 &quot;id&quot;: 2,
@@ -4615,8 +5178,9 @@ access-control-allow-origin: *
                 &quot;images&quot;: &quot;http://localhost/storage/products/img2023022603230435375000.jpeg&quot;,
                 &quot;price&quot;: 100000,
                 &quot;discount_vstore&quot;: 5,
+                &quot;amount_product_sold&quot;: null,
                 &quot;price_discount&quot;: 95000,
-                &quot;available_discount&quot;: 10
+                &quot;available_discount&quot;: 11
             },
             {
                 &quot;id&quot;: 3,
@@ -4625,8 +5189,9 @@ access-control-allow-origin: *
                 &quot;images&quot;: &quot;http://localhost/storage/products/img2023030103010863736800.jpeg&quot;,
                 &quot;price&quot;: 12,
                 &quot;discount_vstore&quot;: 5,
+                &quot;amount_product_sold&quot;: null,
                 &quot;price_discount&quot;: 11.4,
-                &quot;available_discount&quot;: 10
+                &quot;available_discount&quot;: 11
             },
             {
                 &quot;id&quot;: 4,
@@ -4635,8 +5200,9 @@ access-control-allow-origin: *
                 &quot;images&quot;: &quot;http://localhost/storage/products/img2023030106261919958900.png&quot;,
                 &quot;price&quot;: 120000,
                 &quot;discount_vstore&quot;: 5,
+                &quot;amount_product_sold&quot;: null,
                 &quot;price_discount&quot;: 114000,
-                &quot;available_discount&quot;: 10
+                &quot;available_discount&quot;: 11
             }
         ],
         &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product?page=1&quot;,
@@ -4738,10 +5304,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-product"
-               value="impedit"
+               value="rerum"
                data-component="url">
     <br>
-<p>Số trang Example: <code>impedit</code></p>
+<p>Số trang Example: <code>rerum</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
@@ -4749,10 +5315,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="category_id"                data-endpoint="GETapi-product"
-               value="tenetur"
+               value="incidunt"
                data-component="url">
     <br>
-<p>id danh mục sản phẩm Example: <code>tenetur</code></p>
+<p>id danh mục sản phẩm Example: <code>incidunt</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by</code></b>&nbsp;&nbsp;
@@ -4760,10 +5326,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by"                data-endpoint="GETapi-product"
-               value="voluptatem"
+               value="cum"
                data-component="url">
     <br>
-<p>| 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán Example: <code>voluptatem</code></p>
+<p>| 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy Example: <code>cum</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>option</code></b>&nbsp;&nbsp;
@@ -4771,10 +5337,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="option"                data-endpoint="GETapi-product"
-               value="sit"
+               value="aut"
                data-component="url">
     <br>
-<p>1 asc | 2 desc Example: <code>sit</code></p>
+<p>1 asc | 2 desc Example: <code>aut</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -4782,10 +5348,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-product"
-               value="temporibus"
+               value="voluptas"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Mặc định 10 Example: <code>temporibus</code></p>
+<p>Giới hạn bản ghi trên một trang Mặc định 10 Example: <code>voluptas</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>payment</code></b>&nbsp;&nbsp;
@@ -4793,10 +5359,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="payment"                data-endpoint="GETapi-product"
-               value="eum"
+               value="odio"
                data-component="url">
     <br>
-<p>Phương thức thanh toán 1 COD | 2 Chuyển khoản Example: <code>eum</code></p>
+<p>Phương thức thanh toán 1 COD | 2 Chuyển khoản Example: <code>odio</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>publish_id</code></b>&nbsp;&nbsp;
@@ -4804,10 +5370,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="publish_id"                data-endpoint="GETapi-product"
-               value="harum"
+               value="modi"
                data-component="url">
     <br>
-<p>mã sản phẩm Example: <code>harum</code></p>
+<p>mã sản phẩm Example: <code>modi</code></p>
             </div>
                     </form>
 
@@ -4824,14 +5390,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/product/product-by-category/in" \
+    --get "http://localhost/api/product/product-by-category/cupiditate" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/product/product-by-category/in"
+    "http://localhost/api/product/product-by-category/cupiditate"
 );
 
 const headers = {
@@ -4866,10 +5432,10 @@ access-control-allow-origin: *
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
         &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/in?page=1&quot;,
+        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1&quot;,
         &quot;from&quot;: null,
         &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/in?page=1&quot;,
+        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -4877,7 +5443,7 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/in?page=1&quot;,
+                &quot;url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/cupiditate?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;active&quot;: true
             },
@@ -4888,7 +5454,7 @@ access-control-allow-origin: *
             }
         ],
         &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/in&quot;,
+        &quot;path&quot;: &quot;http://api-vstore.ngo/api/product/product-by-category/cupiditate&quot;,
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: null,
@@ -4965,10 +5531,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-product-product-by-category--id-"
-               value="in"
+               value="cupiditate"
                data-component="url">
     <br>
-<p>The ID of the product by category. Example: <code>in</code></p>
+<p>The ID of the product by category. Example: <code>cupiditate</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
@@ -4976,10 +5542,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-product-product-by-category--id-"
-               value="consequuntur"
+               value="et"
                data-component="url">
     <br>
-<p>Số trang Example: <code>consequuntur</code></p>
+<p>Số trang Example: <code>et</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -4987,10 +5553,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-product-product-by-category--id-"
-               value="libero"
+               value="natus"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Example: <code>libero</code></p>
+<p>Giới hạn bản ghi trên một trang Example: <code>natus</code></p>
             </div>
                     </form>
 
@@ -5007,14 +5573,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/product/product-by-vstore/nobis" \
+    --get "http://localhost/api/product/product-by-vstore/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/product/product-by-vstore/nobis"
+    "http://localhost/api/product/product-by-vstore/consequatur"
 );
 
 const headers = {
@@ -5049,10 +5615,10 @@ access-control-allow-origin: *
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
         &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1&quot;,
+        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1&quot;,
         &quot;from&quot;: null,
         &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1&quot;,
+        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -5060,7 +5626,7 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/nobis?page=1&quot;,
+                &quot;url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/consequatur?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;active&quot;: true
             },
@@ -5071,7 +5637,7 @@ access-control-allow-origin: *
             }
         ],
         &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/nobis&quot;,
+        &quot;path&quot;: &quot;http://api-vstore.ngo/api/product/product-by-vstore/consequatur&quot;,
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: null,
@@ -5148,10 +5714,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="nobis"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the product by vstore. Example: <code>nobis</code></p>
+<p>The ID of the product by vstore. Example: <code>consequatur</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
@@ -5159,10 +5725,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="blanditiis"
+               value="et"
                data-component="url">
     <br>
-<p>Số trang Example: <code>blanditiis</code></p>
+<p>Số trang Example: <code>et</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -5170,10 +5736,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="sapiente"
+               value="aut"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Example: <code>sapiente</code></p>
+<p>Giới hạn bản ghi trên một trang Example: <code>aut</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>publish_id</code></b>&nbsp;&nbsp;
@@ -5181,10 +5747,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="publish_id"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="aspernatur"
+               value="qui"
                data-component="url">
     <br>
-<p>tìm kiếm theo mã sản phẩm mã sản phẩm Example: <code>aspernatur</code></p>
+<p>tìm kiếm theo mã sản phẩm mã sản phẩm Example: <code>qui</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
@@ -5192,10 +5758,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="category_id"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="consequatur"
+               value="soluta"
                data-component="url">
     <br>
-<p>tìm kiếm theo danh mục Example: <code>consequatur</code></p>
+<p>tìm kiếm theo danh mục Example: <code>soluta</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by_price</code></b>&nbsp;&nbsp;
@@ -5203,10 +5769,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by_price"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="sit"
+               value="quod"
                data-component="url">
     <br>
-<p>sắp xếp theo giá Example: <code>sit</code></p>
+<p>sắp xếp theo giá Example: <code>quod</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by_id</code></b>&nbsp;&nbsp;
@@ -5214,10 +5780,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by_id"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="voluptas"
+               value="fuga"
                data-component="url">
     <br>
-<p>sắp xếp theo id Example: <code>voluptas</code></p>
+<p>sắp xếp theo id Example: <code>fuga</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by_sold</code></b>&nbsp;&nbsp;
@@ -5225,10 +5791,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by_sold"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="consequuntur"
+               value="iusto"
                data-component="url">
     <br>
-<p>sắp xếp theo sl đã bán Example: <code>consequuntur</code></p>
+<p>sắp xếp theo sl đã bán Example: <code>iusto</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>payments</code></b>&nbsp;&nbsp;
@@ -5236,10 +5802,21 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="payments"                data-endpoint="GETapi-product-product-by-vstore--id-"
-               value="dolorum"
+               value="veniam"
                data-component="url">
     <br>
-<p>sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước Example: <code>dolorum</code></p>
+<p>sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước Example: <code>veniam</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id_pdone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+               name="id_pdone"                data-endpoint="GETapi-product-product-by-vstore--id-"
+               value="est"
+               data-component="url">
+    <br>
+<p>dùng để check sản phẩm đã được tiếp thị hay chưa Example: <code>est</code></p>
             </div>
                     </form>
 
@@ -5256,14 +5833,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/product/product-by-ncc/rem" \
+    --get "http://localhost/api/product/product-by-ncc/dolores" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/product/product-by-ncc/rem"
+    "http://localhost/api/product/product-by-ncc/dolores"
 );
 
 const headers = {
@@ -5298,10 +5875,10 @@ access-control-allow-origin: *
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
         &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1&quot;,
+        &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1&quot;,
         &quot;from&quot;: null,
         &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1&quot;,
+        &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -5309,7 +5886,7 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/rem?page=1&quot;,
+                &quot;url&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/dolores?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;active&quot;: true
             },
@@ -5320,7 +5897,7 @@ access-control-allow-origin: *
             }
         ],
         &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/rem&quot;,
+        &quot;path&quot;: &quot;http://api-vstore.ngo/api/product/product-by-ncc/dolores&quot;,
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: null,
@@ -5397,10 +5974,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="rem"
+               value="dolores"
                data-component="url">
     <br>
-<p>The ID of the product by ncc. Example: <code>rem</code></p>
+<p>The ID of the product by ncc. Example: <code>dolores</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
@@ -5408,10 +5985,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="magnam"
+               value="in"
                data-component="url">
     <br>
-<p>Số trang Example: <code>magnam</code></p>
+<p>Số trang Example: <code>in</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -5419,10 +5996,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="voluptatem"
+               value="officia"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Example: <code>voluptatem</code></p>
+<p>Giới hạn bản ghi trên một trang Example: <code>officia</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>publish_id</code></b>&nbsp;&nbsp;
@@ -5430,10 +6007,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="publish_id"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="quia"
+               value="sunt"
                data-component="url">
     <br>
-<p>tìm kiếm theo mã sản phẩm mã sản phẩm Example: <code>quia</code></p>
+<p>tìm kiếm theo mã sản phẩm mã sản phẩm Example: <code>sunt</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
@@ -5441,10 +6018,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="category_id"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="eaque"
+               value="aliquid"
                data-component="url">
     <br>
-<p>tìm kiếm theo danh mục Example: <code>eaque</code></p>
+<p>tìm kiếm theo danh mục Example: <code>aliquid</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by_price</code></b>&nbsp;&nbsp;
@@ -5452,10 +6029,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by_price"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="sit"
+               value="doloribus"
                data-component="url">
     <br>
-<p>sắp xếp theo giá Example: <code>sit</code></p>
+<p>sắp xếp theo giá Example: <code>doloribus</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by_id</code></b>&nbsp;&nbsp;
@@ -5463,10 +6040,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by_id"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="fugit"
+               value="aut"
                data-component="url">
     <br>
-<p>sắp xếp theo id Example: <code>fugit</code></p>
+<p>sắp xếp theo id Example: <code>aut</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_by_sold</code></b>&nbsp;&nbsp;
@@ -5474,10 +6051,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="order_by_sold"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="praesentium"
+               value="ut"
                data-component="url">
     <br>
-<p>sắp xếp theo sl đã bán Example: <code>praesentium</code></p>
+<p>sắp xếp theo sl đã bán Example: <code>ut</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>payments</code></b>&nbsp;&nbsp;
@@ -5485,10 +6062,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="payments"                data-endpoint="GETapi-product-product-by-ncc--id-"
-               value="nihil"
+               value="ad"
                data-component="url">
     <br>
-<p>sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước Example: <code>nihil</code></p>
+<p>sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước Example: <code>ad</code></p>
             </div>
                     </form>
 
@@ -5505,18 +6082,18 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/product/vshop-pickup/exercitationem" \
+    "http://localhost/api/product/vshop-pickup/minima" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_pdone\": \"dolor\"
+    \"id_pdone\": \"quis\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/product/vshop-pickup/exercitationem"
+    "http://localhost/api/product/vshop-pickup/minima"
 );
 
 const headers = {
@@ -5525,7 +6102,7 @@ const headers = {
 };
 
 let body = {
-    "id_pdone": "dolor"
+    "id_pdone": "quis"
 };
 
 fetch(url, {
@@ -5606,10 +6183,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="POSTapi-product-vshop-pickup--id-"
-               value="exercitationem"
+               value="minima"
                data-component="url">
     <br>
-<p>The ID of the vshop pickup. Example: <code>exercitationem</code></p>
+<p>The ID of the vshop pickup. Example: <code>minima</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -5618,10 +6195,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id_pdone"                data-endpoint="POSTapi-product-vshop-pickup--id-"
-               value="dolor"
+               value="quis"
                data-component="body">
     <br>
-<p>của pdone Example: <code>dolor</code></p>
+<p>của pdone Example: <code>quis</code></p>
         </div>
         </form>
 
@@ -5638,19 +6215,19 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/product/vshop-ready-stock/sapiente" \
+    "http://localhost/api/product/vshop-ready-stock/neque" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_pdone\": \"aspernatur\",
-    \"amount\": \"nulla\"
+    \"id_pdone\": \"consectetur\",
+    \"amount\": \"ullam\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/product/vshop-ready-stock/sapiente"
+    "http://localhost/api/product/vshop-ready-stock/neque"
 );
 
 const headers = {
@@ -5659,8 +6236,8 @@ const headers = {
 };
 
 let body = {
-    "id_pdone": "aspernatur",
-    "amount": "nulla"
+    "id_pdone": "consectetur",
+    "amount": "ullam"
 };
 
 fetch(url, {
@@ -5741,10 +6318,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="POSTapi-product-vshop-ready-stock--id-"
-               value="sapiente"
+               value="neque"
                data-component="url">
     <br>
-<p>The ID of the vshop ready stock. Example: <code>sapiente</code></p>
+<p>The ID of the vshop ready stock. Example: <code>neque</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -5753,10 +6330,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id_pdone"                data-endpoint="POSTapi-product-vshop-ready-stock--id-"
-               value="aspernatur"
+               value="consectetur"
                data-component="body">
     <br>
-<p>của pdone Example: <code>aspernatur</code></p>
+<p>của pdone Example: <code>consectetur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -5764,10 +6341,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="amount"                data-endpoint="POSTapi-product-vshop-ready-stock--id-"
-               value="nulla"
+               value="ullam"
                data-component="body">
     <br>
-<p>lượng sản phẩm Example: <code>nulla</code></p>
+<p>lượng sản phẩm Example: <code>ullam</code></p>
         </div>
         </form>
 
@@ -5941,11 +6518,11 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="orderBy"                data-endpoint="GETapi-product-vshop--id-"
-               value="beatae"
+               value="vel"
                data-component="url">
     <br>
 <p>id Mới nhất | amount_product_sold Bán chạy | price Giá
-urlParam type  asc|desc Mặc định asc Example: <code>beatae</code></p>
+urlParam type  asc|desc Mặc định asc Example: <code>vel</code></p>
             </div>
                     </form>
 
@@ -6009,7 +6586,8 @@ access-control-allow-origin: *
         &quot;price&quot;: 100000,
         &quot;discount_vShop&quot;: 5,
         &quot;video&quot;: &quot;storage/products/8971482296780430562_1677380367 . mp4&quot;,
-        &quot;products_available&quot;: &quot;200&quot;
+        &quot;description&quot;: &quot;kh&ocirc;ng&quot;,
+        &quot;products_available&quot;: &quot;154&quot;
     }
 }</code>
  </pre>
@@ -6143,18 +6721,9 @@ access-control-allow-origin: *
     &quot;status&quot;: 200,
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
-        &quot;data&quot;: [
-            {
-                &quot;name&quot;: &quot;sản phẩm&quot;,
-                &quot;publish_id&quot;: &quot;VN  - aMyIBmBE1F&quot;,
-                &quot;price&quot;: 100000,
-                &quot;id&quot;: 1,
-                &quot;sum_discount&quot;: 10,
-                &quot;image&quot;: &quot;http://localhost/storage/products/img2023022602592770906700.jpeg&quot;
-            }
-        ],
+        &quot;data&quot;: [],
         &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/product-sales?page=1&quot;,
-        &quot;from&quot;: 1,
+        &quot;from&quot;: null,
         &quot;last_page&quot;: 1,
         &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/product-sales?page=1&quot;,
         &quot;links&quot;: [
@@ -6178,8 +6747,8 @@ access-control-allow-origin: *
         &quot;path&quot;: &quot;http://api-vstore.ngo/api/product-sales&quot;,
         &quot;per_page&quot;: 12,
         &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: 1,
-        &quot;total&quot;: 1
+        &quot;to&quot;: null,
+        &quot;total&quot;: 0
     }
 }</code>
  </pre>
@@ -6252,10 +6821,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-product-sales"
-               value="totam"
+               value="in"
                data-component="url">
     <br>
-<p>Số lượng bản ghi 1 trang Mặc định 12 Example: <code>totam</code></p>
+<p>Số lượng bản ghi 1 trang Mặc định 12 Example: <code>in</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
@@ -6263,10 +6832,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-product-sales"
-               value="quidem"
+               value="aperiam"
                data-component="url">
     <br>
-<p>Trang hiện tại hiển thị Example: <code>quidem</code></p>
+<p>Trang hiện tại hiển thị Example: <code>aperiam</code></p>
             </div>
                     </form>
 
@@ -6331,7 +6900,7 @@ access-control-allow-origin: *
         {
             &quot;id&quot;: 1,
             &quot;id_pdone&quot;: &quot;pdone123&quot;,
-            &quot;name&quot;: &quot;&quot;,
+            &quot;name&quot;: &quot;&aacute;dasda&quot;,
             &quot;name_adress&quot;: null,
             &quot;address&quot;: 0,
             &quot;phone_number&quot;: &quot;&quot;,
@@ -6342,6 +6911,21 @@ access-control-allow-origin: *
             &quot;products_sold&quot;: null,
             &quot;created_at&quot;: &quot;2023-02-28T17:49:10.000000Z&quot;,
             &quot;updated_at&quot;: &quot;2023-02-28T17:49:10.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;id_pdone&quot;: &quot;pdone12121&quot;,
+            &quot;name&quot;: &quot;&quot;,
+            &quot;name_adress&quot;: null,
+            &quot;address&quot;: 0,
+            &quot;phone_number&quot;: &quot;&quot;,
+            &quot;district&quot;: null,
+            &quot;province&quot;: null,
+            &quot;lat&quot;: &quot;&quot;,
+            &quot;long&quot;: null,
+            &quot;products_sold&quot;: null,
+            &quot;created_at&quot;: null,
+            &quot;updated_at&quot;: null
         }
     ]
 }</code>
@@ -6427,8 +7011,8 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"et\",
-    \"total\": 550.38809949
+    \"id\": \"tempora\",
+    \"total\": 3.9
 }"
 </code></pre></div>
 
@@ -6444,8 +7028,8 @@ const headers = {
 };
 
 let body = {
-    "id": "et",
-    "total": 550.38809949
+    "id": "tempora",
+    "total": 3.9
 };
 
 fetch(url, {
@@ -6549,10 +7133,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-vshop-get-discount"
-               value="et"
+               value="tempora"
                data-component="body">
     <br>
-<p>Example: <code>et</code></p>
+<p>Example: <code>tempora</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>total</code></b>&nbsp;&nbsp;
@@ -6560,10 +7144,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="number" style="display: none"
                name="total"                data-endpoint="GETapi-vshop-get-discount"
-               value="550.38809949"
+               value="3.9"
                data-component="body">
     <br>
-<p>Example: <code>550.38809949</code></p>
+<p>Example: <code>3.9</code></p>
         </div>
         </form>
 
@@ -6584,11 +7168,11 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_pdone\": \"quas\",
-    \"product_id\": \"quia\",
-    \"start_date\": \"iste\",
-    \"end_date\": \"dolorem\",
-    \"discount\": \"ywbp\"
+    \"id_pdone\": \"repellendus\",
+    \"product_id\": \"aut\",
+    \"start_date\": \"asperiores\",
+    \"end_date\": \"non\",
+    \"discount\": \"zbsrbrymsqnukiaukbh\"
 }"
 </code></pre></div>
 
@@ -6604,11 +7188,11 @@ const headers = {
 };
 
 let body = {
-    "id_pdone": "quas",
-    "product_id": "quia",
-    "start_date": "iste",
-    "end_date": "dolorem",
-    "discount": "ywbp"
+    "id_pdone": "repellendus",
+    "product_id": "aut",
+    "start_date": "asperiores",
+    "end_date": "non",
+    "discount": "zbsrbrymsqnukiaukbh"
 };
 
 fetch(url, {
@@ -6689,10 +7273,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="number" style="display: none"
                name="discount"                data-endpoint="POSTapi-vshop-create-discount"
-               value="10"
+               value="16"
                data-component="url">
     <br>
-<p>Phần trăm giảm giá required max:discount_vShop Example: <code>10</code></p>
+<p>Phần trăm giảm giá required max:discount_vShop Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -6701,10 +7285,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="id_pdone"                data-endpoint="POSTapi-vshop-create-discount"
-               value="quas"
+               value="repellendus"
                data-component="body">
     <br>
-<p>p done required Example: <code>quas</code></p>
+<p>p done required Example: <code>repellendus</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
@@ -6712,10 +7296,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="product_id"                data-endpoint="POSTapi-vshop-create-discount"
-               value="quia"
+               value="aut"
                data-component="body">
     <br>
-<p>sản phẩm required exits:products Example: <code>quia</code></p>
+<p>sản phẩm required exits:products Example: <code>aut</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -6723,10 +7307,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="start_date"                data-endpoint="POSTapi-vshop-create-discount"
-               value="iste"
+               value="asperiores"
                data-component="body">
     <br>
-<p>bắt đầu required date_format:Y/m/d after:Today Example: <code>iste</code></p>
+<p>bắt đầu required date_format:Y/m/d after:Today Example: <code>asperiores</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
@@ -6734,10 +7318,10 @@ fetch(url, {
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="end_date"                data-endpoint="POSTapi-vshop-create-discount"
-               value="dolorem"
+               value="non"
                data-component="body">
     <br>
-<p>kết thúc required date_format:Y/m/d after:start_date Example: <code>dolorem</code></p>
+<p>kết thúc required date_format:Y/m/d after:start_date Example: <code>non</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>discount</code></b>&nbsp;&nbsp;
@@ -6745,10 +7329,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="discount"                data-endpoint="POSTapi-vshop-create-discount"
-               value="ywbp"
+               value="zbsrbrymsqnukiaukbh"
                data-component="body">
     <br>
-<p>Must not be greater than 100 characters. Example: <code>ywbp</code></p>
+<p>Must not be greater than 100 characters. Example: <code>zbsrbrymsqnukiaukbh</code></p>
         </div>
         </form>
 
@@ -6769,10 +7353,10 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id_pdone\": \"ocqtqprzuvnouihaftav\",
-    \"name\": \"jynkgj\",
-    \"address\": \"nubcidhjgqnkiwpixfvqb\",
-    \"phone_number\": \"hburvjizqngffetsgcuogirm\"
+    \"id_pdone\": \"wgnhyaxifdlutiss\",
+    \"name\": \"naujfxyngdymywqeocpbeq\",
+    \"address\": \"j\",
+    \"phone_number\": \"cwcmiuitfoabliglzlehqn\"
 }"
 </code></pre></div>
 
@@ -6788,10 +7372,10 @@ const headers = {
 };
 
 let body = {
-    "id_pdone": "ocqtqprzuvnouihaftav",
-    "name": "jynkgj",
-    "address": "nubcidhjgqnkiwpixfvqb",
-    "phone_number": "hburvjizqngffetsgcuogirm"
+    "id_pdone": "wgnhyaxifdlutiss",
+    "name": "naujfxyngdymywqeocpbeq",
+    "address": "j",
+    "phone_number": "cwcmiuitfoabliglzlehqn"
 };
 
 fetch(url, {
@@ -6872,10 +7456,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="id_pdone"                data-endpoint="POSTapi-vshop-address-store"
-               value="ocqtqprzuvnouihaftav"
+               value="wgnhyaxifdlutiss"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>ocqtqprzuvnouihaftav</code></p>
+<p>Must not be greater than 255 characters. Example: <code>wgnhyaxifdlutiss</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -6883,10 +7467,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="name"                data-endpoint="POSTapi-vshop-address-store"
-               value="jynkgj"
+               value="naujfxyngdymywqeocpbeq"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>jynkgj</code></p>
+<p>Must not be greater than 255 characters. Example: <code>naujfxyngdymywqeocpbeq</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -6894,10 +7478,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="address"                data-endpoint="POSTapi-vshop-address-store"
-               value="nubcidhjgqnkiwpixfvqb"
+               value="j"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>nubcidhjgqnkiwpixfvqb</code></p>
+<p>Must not be greater than 255 characters. Example: <code>j</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
@@ -6905,10 +7489,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="phone_number"                data-endpoint="POSTapi-vshop-address-store"
-               value="hburvjizqngffetsgcuogirm"
+               value="cwcmiuitfoabliglzlehqn"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>hburvjizqngffetsgcuogirm</code></p>
+<p>Must not be greater than 255 characters. Example: <code>cwcmiuitfoabliglzlehqn</code></p>
         </div>
         </form>
 
@@ -6925,14 +7509,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/vshop/address/edit-address/perspiciatis" \
+    --get "http://localhost/api/vshop/address/edit-address/voluptatem" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/vshop/address/edit-address/perspiciatis"
+    "http://localhost/api/vshop/address/edit-address/voluptatem"
 );
 
 const headers = {
@@ -7036,10 +7620,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-vshop-address-edit-address--id-"
-               value="perspiciatis"
+               value="voluptatem"
                data-component="url">
     <br>
-<p>The ID of the edit address. Example: <code>perspiciatis</code></p>
+<p>The ID of the edit address. Example: <code>voluptatem</code></p>
             </div>
                     </form>
 
@@ -7056,20 +7640,20 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/vshop/address/update-address/aut" \
+    "http://localhost/api/vshop/address/update-address/perspiciatis" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vbvxgkpymibtvpwse\",
-    \"address\": \"uyfcqllmcctagrvsngt\",
-    \"phone_number\": \"rygtv\"
+    \"name\": \"yevknxrdgttomsyxb\",
+    \"address\": \"hequwb\",
+    \"phone_number\": \"feyatjxfmewrwuygpujpftht\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/vshop/address/update-address/aut"
+    "http://localhost/api/vshop/address/update-address/perspiciatis"
 );
 
 const headers = {
@@ -7078,9 +7662,9 @@ const headers = {
 };
 
 let body = {
-    "name": "vbvxgkpymibtvpwse",
-    "address": "uyfcqllmcctagrvsngt",
-    "phone_number": "rygtv"
+    "name": "yevknxrdgttomsyxb",
+    "address": "hequwb",
+    "phone_number": "feyatjxfmewrwuygpujpftht"
 };
 
 fetch(url, {
@@ -7161,10 +7745,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="PUTapi-vshop-address-update-address--id-"
-               value="aut"
+               value="perspiciatis"
                data-component="url">
     <br>
-<p>The ID of the update address. Example: <code>aut</code></p>
+<p>The ID of the update address. Example: <code>perspiciatis</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7173,10 +7757,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="name"                data-endpoint="PUTapi-vshop-address-update-address--id-"
-               value="vbvxgkpymibtvpwse"
+               value="yevknxrdgttomsyxb"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>vbvxgkpymibtvpwse</code></p>
+<p>Must not be greater than 255 characters. Example: <code>yevknxrdgttomsyxb</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -7184,10 +7768,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="address"                data-endpoint="PUTapi-vshop-address-update-address--id-"
-               value="uyfcqllmcctagrvsngt"
+               value="hequwb"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>uyfcqllmcctagrvsngt</code></p>
+<p>Must not be greater than 255 characters. Example: <code>hequwb</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone_number</code></b>&nbsp;&nbsp;
@@ -7195,10 +7779,10 @@ fetch(url, {
  &nbsp;
                 <input type="text" style="display: none"
                name="phone_number"                data-endpoint="PUTapi-vshop-address-update-address--id-"
-               value="rygtv"
+               value="feyatjxfmewrwuygpujpftht"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>rygtv</code></p>
+<p>Must not be greater than 255 characters. Example: <code>feyatjxfmewrwuygpujpftht</code></p>
         </div>
         </form>
 
@@ -7269,9 +7853,21 @@ access-control-allow-origin: *
     &quot;status_code&quot;: 200,
     &quot;data&quot;: {
         &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
+        &quot;data&quot;: [
+            {
+                &quot;id&quot;: 2,
+                &quot;name&quot;: &quot;ducanhng2812+1@gmail.com&quot;,
+                &quot;company_name&quot;: &quot;ducanhng2812+1@gmail.com&quot;,
+                &quot;phone_number&quot;: &quot;1312312312&quot;,
+                &quot;tax_code&quot;: &quot;1312312341&quot;,
+                &quot;address&quot;: &quot;111111&quot;,
+                &quot;account_code&quot;: &quot;vnvst1312312341&quot;,
+                &quot;avatar&quot;: &quot;http://localhost/&quot;,
+                &quot;branch&quot;: 1
+            }
+        ],
         &quot;first_page_url&quot;: &quot;http://api-vstore.ngo/api/vstore?page=1&quot;,
-        &quot;from&quot;: null,
+        &quot;from&quot;: 1,
         &quot;last_page&quot;: 1,
         &quot;last_page_url&quot;: &quot;http://api-vstore.ngo/api/vstore?page=1&quot;,
         &quot;links&quot;: [
@@ -7295,8 +7891,8 @@ access-control-allow-origin: *
         &quot;path&quot;: &quot;http://api-vstore.ngo/api/vstore&quot;,
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;to&quot;: 1,
+        &quot;total&quot;: 1
     }
 }</code>
  </pre>
@@ -7369,10 +7965,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-vstore"
-               value="aliquid"
+               value="dignissimos"
                data-component="url">
     <br>
-<p>Số trang Example: <code>aliquid</code></p>
+<p>Số trang Example: <code>dignissimos</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -7380,10 +7976,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-vstore"
-               value="consequatur"
+               value="blanditiis"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Example: <code>consequatur</code></p>
+<p>Giới hạn bản ghi trên một trang Example: <code>blanditiis</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>branch</code></b>&nbsp;&nbsp;
@@ -7391,10 +7987,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="branch"                data-endpoint="GETapi-vstore"
-               value="sint"
+               value="est"
                data-component="url">
     <br>
-<p>1 là vstore thường, 2 là vstore cấp 1 (địa phương) Example: <code>sint</code></p>
+<p>1 là vstore thường, 2 là vstore cấp 1 (địa phương) Example: <code>est</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>account_code</code></b>&nbsp;&nbsp;
@@ -7402,10 +7998,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="account_code"                data-endpoint="GETapi-vstore"
-               value="tenetur"
+               value="possimus"
                data-component="url">
     <br>
-<p>tìm kiếm mã vstore Example: <code>tenetur</code></p>
+<p>tìm kiếm mã vstore Example: <code>possimus</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -7413,10 +8009,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="name"                data-endpoint="GETapi-vstore"
-               value="veritatis"
+               value="nesciunt"
                data-component="url">
     <br>
-<p>tìm kiếm mã name Example: <code>veritatis</code></p>
+<p>tìm kiếm mã name Example: <code>nesciunt</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>company_name</code></b>&nbsp;&nbsp;
@@ -7424,10 +8020,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="company_name"                data-endpoint="GETapi-vstore"
-               value="architecto"
+               value="quas"
                data-component="url">
     <br>
-<p>tìm kiếm mã tên công ty Example: <code>architecto</code></p>
+<p>tìm kiếm mã tên công ty Example: <code>quas</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7456,14 +8052,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/vstore/rerum" \
+    --get "http://localhost/api/vstore/officiis" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/vstore/rerum"
+    "http://localhost/api/vstore/officiis"
 );
 
 const headers = {
@@ -8005,10 +8601,10 @@ access-control-allow-origin: *
  &nbsp;
                 <input type="text" style="display: none"
                name="id"                data-endpoint="GETapi-vstore--id-"
-               value="rerum"
+               value="officiis"
                data-component="url">
     <br>
-<p>The ID of the vstore. Example: <code>rerum</code></p>
+<p>The ID of the vstore. Example: <code>officiis</code></p>
             </div>
                     </form>
 
@@ -8177,10 +8773,10 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="page"                data-endpoint="GETapi-vstore-category--id-"
-               value="error"
+               value="unde"
                data-component="url">
     <br>
-<p>Số trang Example: <code>error</code></p>
+<p>Số trang Example: <code>unde</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
@@ -8188,16 +8784,16 @@ access-control-allow-origin: *
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                name="limit"                data-endpoint="GETapi-vstore-category--id-"
-               value="minima"
+               value="explicabo"
                data-component="url">
     <br>
-<p>Giới hạn bản ghi trên một trang Example: <code>minima</code></p>
+<p>Giới hạn bản ghi trên một trang Example: <code>explicabo</code></p>
             </div>
                     </form>
 
+            
 
-
-
+        
     </div>
     <div class="dark-box">
                     <div class="lang-selector">

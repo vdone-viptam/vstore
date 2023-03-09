@@ -33,7 +33,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"message":"L\u1ea5y th\u00f4ng tin th\u00e0nh c\u00f4ng","data":[{"id":1,"id_pdone":"pdone123","name":"","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":"2023-02-28T17:49:10.000000Z","updated_at":"2023-02-28T17:49:10.000000Z"}]}'
+        content: '{"status_code":200,"message":"L\u1ea5y th\u00f4ng tin th\u00e0nh c\u00f4ng","data":[{"id":1,"id_pdone":"pdone123","name":"\u00e1dasda","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":"2023-02-28T17:49:10.000000Z","updated_at":"2023-02-28T17:49:10.000000Z"},{"id":2,"id_pdone":"pdone12121","name":"","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":null,"updated_at":null}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -75,19 +75,19 @@ endpoints:
         name: id
         description: ''
         required: true
-        example: et
+        example: tempora
         type: string
         custom: []
       total:
         name: total
         description: ''
         required: true
-        example: 550.38809949
+        example: 3.9
         type: number
         custom: []
     cleanBodyParameters:
-      id: et
-      total: 550.38809949
+      id: tempora
+      total: 3.9
     fileParameters: []
     responses:
       -
@@ -130,11 +130,11 @@ endpoints:
         name: discount
         description: 'Phần trăm giảm giá required max:discount_vShop'
         required: false
-        example: 10
+        example: 16
         type: integer
         custom: []
     cleanUrlParameters:
-      discount: 10
+      discount: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -142,43 +142,43 @@ endpoints:
         name: id_pdone
         description: 'p done required'
         required: false
-        example: quas
+        example: repellendus
         type: Mã
         custom: []
       product_id:
         name: product_id
         description: 'sản phẩm required exits:products'
         required: false
-        example: quia
+        example: aut
         type: Mã
         custom: []
       start_date:
         name: start_date
         description: 'bắt đầu required date_format:Y/m/d after:Today'
         required: false
-        example: iste
+        example: asperiores
         type: Ngày
         custom: []
       end_date:
         name: end_date
         description: 'kết thúc required date_format:Y/m/d after:start_date'
         required: false
-        example: dolorem
+        example: non
         type: Ngày
         custom: []
       discount:
         name: discount
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: ywbp
+        example: zbsrbrymsqnukiaukbh
         type: string
         custom: []
     cleanBodyParameters:
-      id_pdone: quas
-      product_id: quia
-      start_date: iste
-      end_date: dolorem
-      discount: ywbp
+      id_pdone: repellendus
+      product_id: aut
+      start_date: asperiores
+      end_date: non
+      discount: zbsrbrymsqnukiaukbh
     fileParameters: []
     responses: []
     responseFields: []
@@ -214,35 +214,35 @@ endpoints:
         name: id_pdone
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: ocqtqprzuvnouihaftav
+        example: wgnhyaxifdlutiss
         type: string
         custom: []
       name:
         name: name
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: jynkgj
+        example: naujfxyngdymywqeocpbeq
         type: string
         custom: []
       address:
         name: address
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: nubcidhjgqnkiwpixfvqb
+        example: j
         type: string
         custom: []
       phone_number:
         name: phone_number
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: hburvjizqngffetsgcuogirm
+        example: cwcmiuitfoabliglzlehqn
         type: string
         custom: []
     cleanBodyParameters:
-      id_pdone: ocqtqprzuvnouihaftav
-      name: jynkgj
-      address: nubcidhjgqnkiwpixfvqb
-      phone_number: hburvjizqngffetsgcuogirm
+      id_pdone: wgnhyaxifdlutiss
+      name: naujfxyngdymywqeocpbeq
+      address: j
+      phone_number: cwcmiuitfoabliglzlehqn
     fileParameters: []
     responses: []
     responseFields: []
@@ -274,11 +274,11 @@ endpoints:
         name: id
         description: 'The ID of the edit address.'
         required: true
-        example: perspiciatis
+        example: voluptatem
         type: string
         custom: []
     cleanUrlParameters:
-      id: perspiciatis
+      id: voluptatem
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -325,11 +325,11 @@ endpoints:
         name: id
         description: 'The ID of the update address.'
         required: true
-        example: aut
+        example: perspiciatis
         type: string
         custom: []
     cleanUrlParameters:
-      id: aut
+      id: perspiciatis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -337,27 +337,27 @@ endpoints:
         name: name
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: vbvxgkpymibtvpwse
+        example: yevknxrdgttomsyxb
         type: string
         custom: []
       address:
         name: address
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: uyfcqllmcctagrvsngt
+        example: hequwb
         type: string
         custom: []
       phone_number:
         name: phone_number
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: rygtv
+        example: feyatjxfmewrwuygpujpftht
         type: string
         custom: []
     cleanBodyParameters:
-      name: vbvxgkpymibtvpwse
-      address: uyfcqllmcctagrvsngt
-      phone_number: rygtv
+      name: yevknxrdgttomsyxb
+      address: hequwb
+      phone_number: feyatjxfmewrwuygpujpftht
     fileParameters: []
     responses: []
     responseFields: []

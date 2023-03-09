@@ -28,59 +28,59 @@ endpoints:
         name: page
         description: 'Số trang'
         required: false
-        example: impedit
+        example: rerum
         type: string
         custom: []
       category_id:
         name: category_id
         description: 'id danh mục sản phẩm'
         required: false
-        example: tenetur
+        example: incidunt
         type: string
         custom: []
       order_by:
         name: order_by
-        description: '| 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán'
+        description: '| 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy'
         required: false
-        example: voluptatem
+        example: cum
         type: string
         custom: []
       option:
         name: option
         description: '1 asc | 2 desc'
         required: false
-        example: sit
+        example: aut
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang Mặc định 10'
         required: false
-        example: temporibus
+        example: voluptas
         type: string
         custom: []
       payment:
         name: payment
         description: 'Phương thức thanh toán 1 COD | 2 Chuyển khoản'
         required: false
-        example: eum
+        example: odio
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'mã sản phẩm'
         required: false
-        example: harum
+        example: modi
         type: string
         custom: []
     cleanUrlParameters:
-      page: impedit
-      category_id: tenetur
-      order_by: voluptatem
-      option: sit
-      limit: temporibus
-      payment: eum
-      publish_id: harum
+      page: rerum
+      category_id: incidunt
+      order_by: cum
+      option: aut
+      limit: voluptas
+      payment: odio
+      publish_id: modi
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -89,7 +89,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":1,"name":"s\u1ea3n ph\u1ea9m","publish_id":"VN  - aMyIBmBE1F","images":"http:\/\/localhost\/storage\/products\/img2023022602592770906700.jpeg","price":100000,"discount_vstore":5,"price_discount":95000,"available_discount":10},{"id":2,"name":"s\u1ea3n ph\u1ea9m 1","publish_id":"VN  - GKrmNxHaoC","images":"http:\/\/localhost\/storage\/products\/img2023022603230435375000.jpeg","price":100000,"discount_vstore":5,"price_discount":95000,"available_discount":10},{"id":3,"name":"s\u1ea3n ph\u1ea9m 2","publish_id":"VN  - 3dlHYROO27","images":"http:\/\/localhost\/storage\/products\/img2023030103010863736800.jpeg","price":12,"discount_vstore":5,"price_discount":11.4,"available_discount":10},{"id":4,"name":"S\u1ea3n ph\u1ea9m test","publish_id":"VN  - IbiFP7YGGk","images":"http:\/\/localhost\/storage\/products\/img2023030106261919958900.png","price":120000,"discount_vstore":5,"price_discount":114000,"available_discount":10}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product","per_page":10,"prev_page_url":null,"to":4,"total":4}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":1,"name":"s\u1ea3n ph\u1ea9m","publish_id":"VN  - aMyIBmBE1F","images":"http:\/\/localhost\/storage\/products\/img2023022602592770906700.jpeg","price":100000,"discount_vstore":5,"amount_product_sold":null,"price_discount":95000,"available_discount":11},{"id":2,"name":"s\u1ea3n ph\u1ea9m 1","publish_id":"VN  - GKrmNxHaoC","images":"http:\/\/localhost\/storage\/products\/img2023022603230435375000.jpeg","price":100000,"discount_vstore":5,"amount_product_sold":null,"price_discount":95000,"available_discount":11},{"id":3,"name":"s\u1ea3n ph\u1ea9m 2","publish_id":"VN  - 3dlHYROO27","images":"http:\/\/localhost\/storage\/products\/img2023030103010863736800.jpeg","price":12,"discount_vstore":5,"amount_product_sold":null,"price_discount":11.4,"available_discount":11},{"id":4,"name":"S\u1ea3n ph\u1ea9m test","publish_id":"VN  - IbiFP7YGGk","images":"http:\/\/localhost\/storage\/products\/img2023030106261919958900.png","price":120000,"discount_vstore":5,"amount_product_sold":null,"price_discount":114000,"available_discount":11}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product","per_page":10,"prev_page_url":null,"to":4,"total":4}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -127,27 +127,27 @@ endpoints:
         name: id
         description: 'The ID of the product by category.'
         required: true
-        example: in
+        example: cupiditate
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: consequuntur
+        example: et
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: libero
+        example: natus
         type: string
         custom: []
     cleanUrlParameters:
-      id: in
-      page: consequuntur
-      limit: libero
+      id: cupiditate
+      page: et
+      limit: natus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -156,7 +156,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/in?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/in?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/in?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/in","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -194,75 +194,83 @@ endpoints:
         name: id
         description: 'The ID of the product by vstore.'
         required: true
-        example: nobis
+        example: consequatur
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: blanditiis
+        example: et
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: sapiente
+        example: aut
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
         required: false
-        example: aspernatur
+        example: qui
         type: string
         custom: []
       category_id:
         name: category_id
         description: 'tìm kiếm theo danh mục'
         required: false
-        example: consequatur
+        example: soluta
         type: string
         custom: []
       order_by_price:
         name: order_by_price
         description: 'sắp xếp theo giá'
         required: false
-        example: sit
+        example: quod
         type: string
         custom: []
       order_by_id:
         name: order_by_id
         description: 'sắp xếp theo id'
         required: false
-        example: voluptas
+        example: fuga
         type: string
         custom: []
       order_by_sold:
         name: order_by_sold
         description: 'sắp xếp theo sl đã bán'
         required: false
-        example: consequuntur
+        example: iusto
         type: string
         custom: []
       payments:
         name: payments
         description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
         required: false
-        example: dolorum
+        example: veniam
+        type: string
+        custom: []
+      id_pdone:
+        name: id_pdone
+        description: 'dùng để check sản phẩm đã được tiếp thị hay chưa'
+        required: false
+        example: est
         type: string
         custom: []
     cleanUrlParameters:
-      id: nobis
-      page: blanditiis
-      limit: sapiente
-      publish_id: aspernatur
-      category_id: consequatur
-      order_by_price: sit
-      order_by_id: voluptas
-      order_by_sold: consequuntur
-      payments: dolorum
+      id: consequatur
+      page: et
+      limit: aut
+      publish_id: qui
+      category_id: soluta
+      order_by_price: quod
+      order_by_id: fuga
+      order_by_sold: iusto
+      payments: veniam
+      id_pdone: est
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -271,7 +279,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/nobis?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/nobis?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/nobis?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/nobis","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -309,75 +317,75 @@ endpoints:
         name: id
         description: 'The ID of the product by ncc.'
         required: true
-        example: rem
+        example: dolores
         type: string
         custom: []
       page:
         name: page
         description: 'Số trang'
         required: false
-        example: magnam
+        example: in
         type: string
         custom: []
       limit:
         name: limit
         description: 'Giới hạn bản ghi trên một trang'
         required: false
-        example: voluptatem
+        example: officia
         type: string
         custom: []
       publish_id:
         name: publish_id
         description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
         required: false
-        example: quia
+        example: sunt
         type: string
         custom: []
       category_id:
         name: category_id
         description: 'tìm kiếm theo danh mục'
         required: false
-        example: eaque
+        example: aliquid
         type: string
         custom: []
       order_by_price:
         name: order_by_price
         description: 'sắp xếp theo giá'
         required: false
-        example: sit
+        example: doloribus
         type: string
         custom: []
       order_by_id:
         name: order_by_id
         description: 'sắp xếp theo id'
         required: false
-        example: fugit
+        example: aut
         type: string
         custom: []
       order_by_sold:
         name: order_by_sold
         description: 'sắp xếp theo sl đã bán'
         required: false
-        example: praesentium
+        example: ut
         type: string
         custom: []
       payments:
         name: payments
         description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
         required: false
-        example: nihil
+        example: ad
         type: string
         custom: []
     cleanUrlParameters:
-      id: rem
-      page: magnam
-      limit: voluptatem
-      publish_id: quia
-      category_id: eaque
-      order_by_price: sit
-      order_by_id: fugit
-      order_by_sold: praesentium
-      payments: nihil
+      id: dolores
+      page: in
+      limit: officia
+      publish_id: sunt
+      category_id: aliquid
+      order_by_price: doloribus
+      order_by_id: aut
+      order_by_sold: ut
+      payments: ad
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -386,7 +394,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/rem?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/rem?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/rem?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/rem","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -424,11 +432,11 @@ endpoints:
         name: id
         description: 'The ID of the vshop pickup.'
         required: true
-        example: exercitationem
+        example: minima
         type: string
         custom: []
     cleanUrlParameters:
-      id: exercitationem
+      id: minima
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -436,11 +444,11 @@ endpoints:
         name: id_pdone
         description: 'của pdone'
         required: false
-        example: dolor
+        example: quis
         type: id
         custom: []
     cleanBodyParameters:
-      id_pdone: dolor
+      id_pdone: quis
     fileParameters: []
     responses: []
     responseFields: []
@@ -472,11 +480,11 @@ endpoints:
         name: id
         description: 'The ID of the vshop ready stock.'
         required: true
-        example: sapiente
+        example: neque
         type: string
         custom: []
     cleanUrlParameters:
-      id: sapiente
+      id: neque
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -484,19 +492,19 @@ endpoints:
         name: id_pdone
         description: 'của pdone'
         required: false
-        example: aspernatur
+        example: consectetur
         type: id
         custom: []
       amount:
         name: amount
         description: 'lượng sản phẩm'
         required: false
-        example: nulla
+        example: ullam
         type: số
         custom: []
     cleanBodyParameters:
-      id_pdone: aspernatur
-      amount: nulla
+      id_pdone: consectetur
+      amount: ullam
     fileParameters: []
     responses: []
     responseFields: []
@@ -537,12 +545,12 @@ endpoints:
           id Mới nhất | amount_product_sold Bán chạy | price Giá
           urlParam type  asc|desc Mặc định asc
         required: false
-        example: beatae
+        example: vel
         type: string
         custom: []
     cleanUrlParameters:
       id: 1
-      orderBy: beatae
+      orderBy: vel
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -602,7 +610,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"data":{"publish_id":"VN  - aMyIBmBE1F","id":1,"name":"s\u1ea3n ph\u1ea9m","images":"[\"storage\\\/products\\\/img2023022602592770906700.jpeg\"]","price":100000,"discount_vShop":5,"video":"storage\/products\/8971482296780430562_1677380367 . mp4","products_available":"200"}}'
+        content: '{"status_code":200,"data":{"publish_id":"VN  - aMyIBmBE1F","id":1,"name":"s\u1ea3n ph\u1ea9m","images":"[\"storage\\\/products\\\/img2023022602592770906700.jpeg\"]","price":100000,"discount_vShop":5,"video":"storage\/products\/8971482296780430562_1677380367 . mp4","description":"kh\u00f4ng","products_available":"154"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -640,19 +648,19 @@ endpoints:
         name: limit
         description: 'Số lượng bản ghi 1 trang Mặc định 12'
         required: false
-        example: totam
+        example: in
         type: string
         custom: []
       page:
         name: page
         description: 'Trang hiện tại hiển thị'
         required: false
-        example: quidem
+        example: aperiam
         type: string
         custom: []
     cleanUrlParameters:
-      limit: totam
-      page: quidem
+      limit: in
+      page: aperiam
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -661,7 +669,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":200,"data":{"current_page":1,"data":[{"name":"s\u1ea3n ph\u1ea9m","publish_id":"VN  - aMyIBmBE1F","price":100000,"id":1,"sum_discount":10,"image":"http:\/\/localhost\/storage\/products\/img2023022602592770906700.jpeg"}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product-sales","per_page":12,"prev_page_url":null,"to":1,"total":1}}'
+        content: '{"status":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product-sales","per_page":12,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

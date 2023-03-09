@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->float('discount')->nullable()->comment('Phần trăm chiết khấu');
             $table->float('discount_vShop')->default(0)->nullable()->comment('Phần trăm chiết khấu cho v shop');
             $table->string('name')->nullable()->comment('Tên sản phẩm');
-            $table->integer('category_id')->nullable()->comment('giá vốn');
+            $table->integer('category_id')->nullable()->comment('Danh mục');
             $table->longText('description')->nullable()->comment('Mô tả sản phẩm');
             $table->longText('images')->nullable()->comment('Bộ sưu tập hình ảnh sản phẩm');
             $table->longText('brand')->nullable()->comment('Tên thương hiệu sản phẩm');
@@ -51,7 +51,7 @@ return new class extends Migration {
             $table->string('code')->nullable();
             $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
             $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
-            $table->string('video')->comment('video sản phẩm');
+            $table->string('video')->nullable()->comment('video sản phẩm');
             $table->string('material')->nullable();
             $table->float('percent_discount',20,2)->nullable()->comment('Số phần trăm giảm giá');
             $table->string('import_address')->nullable()->comment('Địa chỉ nơi nhập khẩu');
