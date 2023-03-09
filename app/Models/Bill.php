@@ -9,4 +9,5 @@ class Bill extends Model
 {
     use HasFactory;
     protected $table = 'bills';
+    protected $fillable= ['bill_payment_status', 'total'];
 }
