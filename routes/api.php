@@ -58,8 +58,13 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
         Route::post('/vshop-pickup/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopPickup']);
         Route::post('/vshop-ready-stock/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopReadyStock']);
-        Route::get('/vshop/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::get('/product-by-vshop/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::get('/product-available-by-vshop/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'getProductAvailableByVshop']);
+        Route::get('/create-bill/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'createBill']);
+        Route::post('/save-bill/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'saveBill']);
+
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
+        Route::delete('destroy-affiliate/{id_pdone}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
     });
     Route::prefix('cart')->group(function () {
         Route::get('/{pdone_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);

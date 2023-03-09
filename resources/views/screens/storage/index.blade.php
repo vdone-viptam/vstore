@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ V-Kho</title>
+    <title>Trang chủ Kho</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+    <meta property="og:title" content="KHO | Hệ thống quản lý kho chuyên nghiệp."/>
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng KHO."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
@@ -45,50 +46,52 @@
         </div>
         <div
             class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Hệ thống quản lý
-                <strong class="text-[#1E90FF] font-bold">V-Kho</strong>"</h2>
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Hệ thống quản lý chuyên
+                nghiệp
+                <strong class="text-[#1E90FF] font-bold">Kho</strong>"</h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
                     class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
-                    class="text-[#1E90FF]"> V-Kho.</strong></span>
-                    <div class="max-w-[320px] w-full">
-            <button
-                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
-                <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
+                    class="text-[#1E90FF]"> Kho.</strong></span>
+            <div class="max-w-[320px] w-full">
+                <button
+                    class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
+                    <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
+            </div>
         </div>
-                </div>
-       <div></div>
+        <div></div>
     </div>
 
 </div>
 <div class="bg-gra">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4 md:py-10 xl:py-24">
-    <div class="w-full h-full order-last md:order-first">
-        <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
-    </div>
-    <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Hệ thống quản lý <strong
-                class="text-[#1E90FF] font-semibold">V-Kho </strong> là gì?</h2>
-        <div class="flex flex-col gap-4">
-        <div class="flex items-start gap-4">
-            <div class="w-[21px]">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
-<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
-<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
-<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
-</svg>
-
-            </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là nơi lưu trữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
+    <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto xl::p-16 p-4 md:py-10 xl:py-24">
+        <div class="w-full h-full order-last md:order-first">
+            <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
         </div>
-        <div class="flex items-start gap-4">
-            <div class="w-[21px]">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
-<path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
-<path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
-<path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
-</svg>
+        <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
+            <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Hệ thống quản lý <br><strong
+                    class="text-[#1E90FF] font-semibold">Kho </strong> là gì?</h2>
+            <div class="flex flex-col gap-4">
+                <div class="flex items-start gap-4">
+                    <div class="w-[21px]">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+                            <path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+                            <path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+                            <path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+                        </svg>
+
+                    </div>
+                    <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Kho là địa điểm cất giữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="w-[21px]">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.17 0.582764L0.5 10.2528H10.17V0.582764Z" fill="#6FC9FC"/>
+                            <path d="M19.8399 10.2528L10.1699 0.582764V10.2528H19.8399Z" fill="#00A3FF"/>
+                            <path d="M10.1699 10.2528V19.9228L19.8399 10.2528H10.1699Z" fill="#0074C9"/>
+                            <path d="M0.5 10.2528L10.17 19.9228V10.2528H0.5Z" fill="#4D9AE1"/>
+                        </svg>
 
             </div>
             <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Đa dạng phân loại gồm Kho thường, Kho lạnh, Kho bãi. </span>
