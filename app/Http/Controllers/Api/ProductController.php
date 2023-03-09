@@ -41,7 +41,6 @@ class ProductController extends Controller
      * @urlParam option 1 asc | 2 desc Thứ tự sấp xếp
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
-     * @urlParam publish_id mã sản phẩm
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
