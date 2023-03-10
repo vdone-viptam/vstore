@@ -44,18 +44,21 @@
                 nhập</a>
         </div>
         <div
-            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-8 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl flex items-center gap-2 md:block">Hệ thống quản lý
+            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-8 md:max-w-[800px] text-center md:text-left">
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl flex items-center gap-4">Hệ thống quản lý
                 <div class="w-[103px] md:w-[174px] h-[60px]">
                     <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
                 </div>
             </h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
+            <span class="text-grayRgb text-base md:text-lg font-medium max-w-[550px]">Hãy đồng hành cùng <strong
                     class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng <strong
                     class="text-[#1E90FF]">KHO</strong></span>
+                    <div class="max-w-[525px]">
+                <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
+            </div>
                     <div class="max-w-[320px] w-full">
             <button
-                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 font-semibold text-2xl transition-all duration-200 hover:opacity-70 ">
+                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 font-semibold text-base md:text-2xl transition-all duration-200 hover:opacity-70 ">
                 <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
         </div>
                 </div>

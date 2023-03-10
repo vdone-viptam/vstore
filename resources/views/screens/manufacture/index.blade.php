@@ -35,7 +35,7 @@
 </head>
 <body>
 <div class="bgncc w-full relative h-auto md:h-screen">
-    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-start gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
+    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-start gap-6 md:gap-3 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
             <div class=" w-[107px] h-[38px]">
                 <a href="./">
@@ -47,13 +47,16 @@
 
             </div>
         </div>
-        <div class="flex flex-col justify-center w-full md:justify-start gap-8 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp V-Done</h2>
-            <span class="text-[#FFF] max-w-[450px]">Đầu tư ngay trên nền tảng thương mại điện tử mang lại doanh thu khủng, quản lý dễ dàng, vận hành đơn giản, tiết kiệm thời gian. Cùng đăng ký ngay</span>
-            <div class="flex items-center gap-6">
-        <a href="{{route('login_ncc')}}" class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng nhập</a>
+        <div class="flex flex-col justify-center w-full md:justify-start gap-8 md:max-w-[750px] text-center md:text-left">
+            <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp</h2>
+            <span class="text-[#FFF] max-w-[450px]">Tham gia vào hệ thống Thương mại điện tử V-Store để mang sản phẩm của bạn đến tay người tiêu dùng.</span>
+            <div class="max-w-[575px]">
+                <img src="{{asset('home/img/bannerNc.png')}}" alt="" class="w-full object-contain">
+            </div>
+            <div class="flex justify-center md:justify-start items-center gap-6">
+        <a href="{{route('register_ncc')}}" class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng ký ngay</a>
 
-        <a class=" text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px]   border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('register_ncc')}}">Đăng ký ngay</a>
+        <a class="text-xs md:text-base text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px] bg-[#5AC3ED]  border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('login_ncc')}}">Đăng nhập</a>
      
         </div>
         </div>
