@@ -138,15 +138,48 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
     });
+    Route::post('login', [\App\Http\Controllers\Api\storage\AuthController::class, 'login']);
 
-    Route::middleware('auth:sanctum')->group(function() {
+    Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('storage')->group(function () {
-            Route::post('register', [\App\Http\Controllers\Api\StorageController::class, 'register']);
-            Route::post('login', [\App\Http\Controllers\Api\StorageController::class, 'login']);
-            Route::get('products', [\App\Http\Controllers\Api\StorageController::class, 'index']);
-            Route::get('/request', [\App\Http\Controllers\Api\StorageController::class, 'request']);
+            Route::prefix('dashboard')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\DashboardController::class, 'index']);
+            });
+            Route::prefix('products')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\ProductController::class, 'index']);
+                Route::get('/request', [\App\Http\Controllers\Api\storage\ProductController::class, 'request']);
+                Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
 
+                Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
+                Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
+                Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detail']);
+            });
+            Route::prefix('account')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\AccountController::class, 'profile']);
+                Route::post('/edit/{id}', [\App\Http\Controllers\Api\storage\AccountController::class, 'editProfile']);
+                Route::post('/upload/{id}', [\App\Http\Controllers\Api\storage\AccountController::class, 'uploadImage']);
+                Route::get('/change-password', [\App\Http\Controllers\Api\storage\AccountController::class, 'changePassword']);
+                Route::put('/change-password', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangePassword']);
+                Route::get('/edit-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'editTaxCode']);
+                Route::put('/save-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangeTaxCode']);
+            });
+            Route::prefix('finances')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\FinanceController::class, 'index']);
+                Route::post('/store-wallet', [\App\Http\Controllers\Api\storage\FinanceController::class, 'storeWall']);
+                Route::put('/update-wallet/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'updateWall']);
+                Route::post('/create-deposit', [\App\Http\Controllers\Api\storage\FinanceController::class, 'deposit']);
+
+                Route::get('/history', [\App\Http\Controllers\Api\storage\FinanceController::class, 'history']);
+
+            });
+            Route::prefix('partners')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\PartnerController::class, 'index']);
+            });
         });
+
+//        Route::get('/notifications', function () {
+//            return view('layouts.storage.all_noti', []);
+//        })->name('storage_all_noti');
 //        return $request->user();
     });
 
