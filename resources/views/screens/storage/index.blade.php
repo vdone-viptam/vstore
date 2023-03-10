@@ -55,11 +55,11 @@
                     class="text-[#1E90FF]">KHO</strong></span>
                     <div class="max-w-[525px] relative">
                         <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
-                        <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
+                        <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[70px] md:left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
                         1.200.000đ
                         </div>
-                        <div class="absolute center-content bottom-0 p-10">
-                            <div class="flex items-center gap-2">
+                        <div class="absolute left-0 bottom-0 px-4 py-6 md:p-10">
+                            <div class="flex items-center md:gap-2">
                                 <div class="w-[25px]">
                                     <div class="w-[24px] h-[24px]">
                                         <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <span class="text-xs md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản KHO sử dụng trong 1 năm.</span>
+                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản KHO sử dụng trong 1 năm.</span>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của VDone</span>
         </div>
         </div>
 
@@ -250,7 +250,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống V-DONE, V-Store.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống VDONE, V-Store.</span>
         </div>
         </div>
 
