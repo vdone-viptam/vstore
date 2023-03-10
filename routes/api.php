@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::prefix('cart')->group(function () {
+    Route::get('/user/{user_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
+    Route::post('/add/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
+    Route::delete('/remove/{cart_id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
+    Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
+});
+
 // THANH TOÁN APP
 //Route::group(['domain' => config('domain.payment')], function () {
     Route::post('/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
@@ -74,13 +82,7 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('/vshop/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
     });
-    Route::prefix('cart')->group(function () {
-        Route::get('/{pdone_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
-        Route::post('/add/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-        Route::delete('/remove/{cart_id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
-        Route::post('/add-quantity/{cart_id}/{type}', [\App\Http\Controllers\Api\CartController::class, 'quantity']);
-
-    });
+    // CARD
     Route::prefix('product-sales')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'productSale']);
     });

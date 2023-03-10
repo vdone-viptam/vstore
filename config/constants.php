@@ -16,5 +16,14 @@ return [
     'userConfirm'=>[
         'confirm' => 1,
         'unconfimred' => 2
+    ],
+    'statusCart'=>[
+        'cart' => 2,
+        'checkout' => 1
+    ],
+    'discountType'=>[
+        'ncc' => 1,
+        'vstore' => 2,
+        'vshop' => 3
     ]
 ];
