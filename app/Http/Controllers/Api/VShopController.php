@@ -20,10 +20,18 @@ use Illuminate\Support\Facades\Validator;
  */
 class  VShopController extends Controller
 {
+    /**
+     * Tạo Vshop
+     *
+     * API để thêm 1 Vshop
+     *
+     * @param id id của Vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request){
         $vshop = Vshop::where('id_pdone',$request->id_pdone)->first();
         if (!$vshop){
-            $vshop= new $vshop();
+            $vshop= new Vshop();
 
         }
         $vshop->id_pdone = $request->id_pdone;
@@ -128,6 +136,14 @@ class  VShopController extends Controller
         }
     }
 
+    /**
+     * thông tin địa chỉ giao hàng
+     *
+     * API Lấy ra thông tin địa chỉ giao hàng Vshop
+     *
+     * @param id id của Vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function editAddressReceive(Request $request, $id)
     {
 
