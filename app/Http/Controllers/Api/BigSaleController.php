@@ -78,7 +78,7 @@ class BigSaleController extends Controller
                     ->first()->dis;
                 $product->image = asset(json_decode($product->images)[0]);
                 if ($request->id_pdone) {
-                    $product->is_affiliate = DB::table('vshop_products')->where('product_id', $product->id)->where('id_pdone', $request->id_pdone)->count();
+                    $product->is_affiliate = DB::table('vshop_products')->where('product_id', $product->id)->where('status', 1)->where('id_pdone', $request->id_pdone)->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $product->id)->first()->max;
                     $product->available_discount = $more_dis ?? 0;
                 }

@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('specific_address')->nullable();
             $table->string('id_pdone')->nullable();
             $table->string('address')->nullable();
+            $table->integer('bill_payment_status')->default(config('constants.billPaymentStatus.unpaid'));
             $table->timestamps();
         });
     }

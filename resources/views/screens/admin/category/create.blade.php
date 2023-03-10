@@ -8,7 +8,7 @@
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="" class="text-blueMain font-medium italic">Thêm nganh hàng</a>
+        <a href="" class="text-blueMain font-medium italic">Thêm ngành hàng</a>
     </div>
     <div class="px-5 xl:px-16 py-2">
         <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
