@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // THANH TOÁN APP
-Route::group(['domain' => config('domain.payment')], function () {
-    Route::get('/payment/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9Pay']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
-    Route::get('payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
-});
+//Route::group(['domain' => config('domain.payment')], function () {
+    Route::post('/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+//});
 // END THANH TOÁN APP
 
 

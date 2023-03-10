@@ -29,7 +29,6 @@ class CartController extends Controller
     {
         $cart = Cart::where('pdone_id', $pdone_id)->select('quantity', 'products.id as product_id', 'images', 'products.name', 'price', 'carts.id as cart_id', 'vshop_id','products.vat')->join('products', 'carts.product_id', '=', 'products.id')->get();
 
-
         $cart = $this->_group_by($cart, 'vshop_id');
         $data = [];
 
@@ -91,14 +90,16 @@ class CartController extends Controller
             ]);
         }
 
-        if (DB::table('products')->where('id', $id)->where('status', 2)->count() == 0) {
+        $product = DB::table('products')->where('id', $id)->where('status', 2)->first();
+        if (!$product) {
             return response()->json([
                 'status_code' => 401,
                 'errors' => 'Sản phẩm chưa niêm yết'
             ]);
         }
 
-        $cart = Cart::where('vshop_id', $request->vshop_id)->where('product_id', $id)->first();
+        $cart = Cart::where('vshop_id', $request->vshop_id)
+            ->where('product_id', $id)->first();
 
         if (!$cart) {
             $cart = new Cart();

@@ -10,6 +10,7 @@ use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 
 class PaymentMethod9PayController extends Controller
@@ -20,7 +21,7 @@ class PaymentMethod9PayController extends Controller
     public function paymentErr() {
         return view('payment.paymentErr');
     }
-    function payment() {
+    function paymentGet() {
         $bills = Bill::all();
         return view('welcome', compact('bills'));
     }
@@ -218,10 +219,28 @@ class PaymentMethod9PayController extends Controller
         }
     }
 
-    function payment9Pay(Request $request) {
+    function payment(Request $request) {
         $validator = Validator::make($request->all(), [
             'invoice_no' => 'required',
+            'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
+            'id_pdone' => 'required',
+            'name' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
         ]);
+
+        $method = $request->method_payment;
+
+        $bill = new Bill();
+        $bill->code = Str::random('11');
+        $bill->name = $request->name;
+        $bill->id_pdone = $request->id_pdone;
+        $bill->phone_number = $request->phone_number;
+        $bill->address = $request->address;
+        $bill->method_payment = $method;
+        $bill->save();
+
+
         if ($validator->fails()) {
             return $validator->errors();
         }

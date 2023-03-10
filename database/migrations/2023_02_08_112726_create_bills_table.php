@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->string('id_pdone')->nullable();
             $table->string('address')->nullable();
             $table->integer('bill_payment_status')->default(config('constants.billPaymentStatus.unpaid'));
+            $table->string('method_payment')->nullable();
+            $table->integer('user_confirm')->default(2);
             $table->timestamps();
         });
     }

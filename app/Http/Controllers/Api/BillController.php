@@ -93,7 +93,6 @@ class BillController extends Controller
             'province' => 'required|numeric|min:1',
             'data' => 'required',
             'district' => 'required|numeric|min:1',
-
         ]);
         if ($validator->fails()) {
             return $validator->errors();
