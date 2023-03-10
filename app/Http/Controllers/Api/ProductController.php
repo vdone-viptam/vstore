@@ -38,7 +38,7 @@ class ProductController extends Controller
      * @urlParam page Số trang
      * @urlParam category_id id danh mục sản phẩm
      * @urlParam order_by (1,2,3) 1 Sắp xếp theo id,2 sắp xếp theo giá,3 sắp xếp theo số hàng đã bán
-     * @urlParam option (1,2) 1 asc | 2 desc
+     * @urlParam option (asc,desc)
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @return \Illuminate\Http\JsonResponse
@@ -46,59 +46,67 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $limit = $request->limit ?? 10;
-        $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
-        $selected = ['id', 'name', 'publish_id', 'images', 'price'];
+        try {
 
-        if ($request->id_pdone) {
-            $selected[] = 'discount';
-        }
-        $products = $products->select($selected);
-        if ($request->category_id) {
-            $products = $products->where('category_id', $request->category_id);
-        }
-        if ($request->order_by == 1) {
+            $limit = $request->limit ?? 10;
+            $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
+            $selected = ['id', 'name', 'publish_id', 'images', 'price'];
 
-            $products = $products->orderBy('id', $request->option);
-        }
-        if ($request->order_by == 3) {
-
-            $products = $products->orderBy('amount_product_sold', $request->option);
-        }
-        if ($request->order_by == 2) {
-            $products = $products->orderBy('price', $request->option);
-        }
-        if ($request->payment) {
-            if ($request->payment == 1) {
-                $products = $products->where('payment_on_delivery', 1);
-
-            } else {
-                $products = $products->where('prepay', 1);
+            if ($request->id_pdone) {
+                $selected[] = 'discount';
             }
-        }
+            $products = $products->select($selected);
+            if ($request->category_id) {
+                $products = $products->where('category_id', $request->category_id);
+            }
+            if ($request->order_by == 1) {
+
+                $products = $products->orderBy('id', $request->option);
+            }
+            if ($request->order_by == 3) {
+
+                $products = $products->orderBy('amount_product_sold', $request->option);
+            }
+            if ($request->order_by == 2) {
+                $products = $products->orderBy('price', $request->option);
+            }
+            if ($request->payment) {
+                if ($request->payment == 1) {
+                    $products = $products->where('payment_on_delivery', 1);
+
+                } else {
+                    $products = $products->where('prepay', 1);
+                }
+            }
 //        return 1;
 
-        $products = $products->paginate($limit);
+            $products = $products->paginate($limit);
 
-        foreach ($products as $pro) {
-            $pro->images = asset(json_decode($pro->images)[0]);
-            $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
-                ->where('start_date', '<=', Carbon::now())
-                ->where('end_date', '>=', Carbon::now())
-                ->first()->sum;
-            $pro->discount = $discount ?? 0;
-            if ($request->id_pdone) {
-                $pro->is_affiliate = DB::table('vshop_products')->where('product_id', $pro->id)->where('status', 1)->where('id_pdone', $request->id_pdone)->count();
-                $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
-                $pro->available_discount = $more_dis ?? 0;
-            }
+            foreach ($products as $pro) {
+                $pro->images = asset(json_decode($pro->images)[0]);
+                $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
+                    ->where('start_date', '<=', Carbon::now())
+                    ->where('end_date', '>=', Carbon::now())
+                    ->first()->sum;
+                $pro->discount = $discount ?? 0;
+                if ($request->id_pdone) {
+                    $pro->is_affiliate = DB::table('vshop_products')->where('product_id', $pro->id)->where('status', 1)->where('id_pdone', $request->id_pdone)->count();
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
+                    $pro->available_discount = $more_dis ?? 0;
+                }
 
 //
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $products
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ],500);
         }
-        return response()->json([
-            'success' => true,
-            'data' => $products
-        ]);
 
     }
 
