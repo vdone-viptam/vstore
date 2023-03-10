@@ -55,9 +55,7 @@ Route::prefix('bill')->group(function () {
 
 Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 //Route::get('/', function () {
 //    return config('domain.api');
 //});
@@ -140,11 +138,18 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
     });
-    Route::prefix('storage')->group(function () {
-        Route::post('register', [\App\Http\Controllers\Api\StorageController::class, 'register']);
-        Route::post('login', [\App\Http\Controllers\Api\StorageController::class, 'login']);
 
+    Route::middleware('auth:sanctum')->group(function() {
+        Route::prefix('storage')->group(function () {
+            Route::post('register', [\App\Http\Controllers\Api\StorageController::class, 'register']);
+            Route::post('login', [\App\Http\Controllers\Api\StorageController::class, 'login']);
+            Route::get('products', [\App\Http\Controllers\Api\StorageController::class, 'index']);
+            Route::get('/request', [\App\Http\Controllers\Api\StorageController::class, 'request']);
+
+        });
+//        return $request->user();
     });
+
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
 

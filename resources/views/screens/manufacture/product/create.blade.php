@@ -453,7 +453,6 @@ Thêm địa chỉ mới</a>
             style: 'currency',
             currency: 'VND',
         });
-
         $('#product_id').on('select2:select', function (e) {
             // Do something
             var data = e.params.data;
@@ -471,7 +470,6 @@ Thêm địa chỉ mới</a>
                 document.getElementById('price').value = VND.format(price);
                 document.getElementById('money').value = VND.format((discount / 100) * price);
             }
-
         });
         document.getElementById('discount').addEventListener('keyup', (e) => {
             discount = e.target.value;
@@ -481,12 +479,10 @@ Thêm địa chỉ mới</a>
                 document.getElementById('money').value = '0 đ';
             }
         })
-
     </script>
 
     @if(isset($vstore->id))
         <script>
-
             function abc() {
                 document.getElementById('btnAc').addEventListener('click', () => {
                     document.getElementById('boxHid').innerHTML = `
@@ -500,21 +496,17 @@ Thêm địa chỉ mới</a>
                                                                    @endforeach
                     </select>
                                                  <button type="button" id="btnRe" class="p-2 bg-blue-600 text-white mt-2">Bỏ chọn</button>
-
 @error('vstore_id')
                     <p class="text-red-600">{{$message}}</p>
                                                                                                 @enderror
                     `;
-
                     document.getElementById('vstore').innerHTML = '';
-
                     document.getElementById('btnRe').addEventListener('click', () => {
                         document.getElementById('boxHid').innerHTML = '';
                         document.getElementById('vstore').innerHTML = `
                    <select disabled
                                             class="th choose-vstore  outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm">
                                         <option value="{{$vstore->id}}">{{$vstore->name}}</option>
-
                                     </select>
                                     @error('vstore_id')
                         <p class="text-red-600">{{$message}}</p>
@@ -528,8 +520,6 @@ Thêm địa chỉ mới</a>
                     });
                 })
             }
-
-
         </script>
     @endif
 @endsection
