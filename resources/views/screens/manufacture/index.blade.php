@@ -51,35 +51,42 @@
             <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp</h2>
             <span class="text-[#FFF] max-w-[450px]">Tham gia vào hệ thống Thương mại điện tử V-Store để mang sản phẩm của bạn đến tay người tiêu dùng.</span>
             <div class="max-w-[625px] relative">
-                        <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
-                        <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
-                        12.000.000đ
-                        </div>
-                        <div class="absolute text-center bottom-0 center-content w-full px-10 md:py-8 py-5 ">
-                            <div class="flex items-center gap-2">
-                                <div class="w-[25px]">
-                                    <div class="w-[24px] h-[24px]">
-                                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.0003 18.775L7.85033 21.275C7.667 21.3916 7.47533 21.4416 7.27533 21.4249C7.07533 21.4083 6.90033 21.3416 6.75033 21.225C6.60033 21.1083 6.48366 20.9623 6.40033 20.787C6.317 20.6116 6.30033 20.416 6.35033 20.2L7.45033 15.475L3.77533 12.3C3.60866 12.15 3.50466 11.979 3.46333 11.787C3.422 11.595 3.43433 11.4076 3.50033 11.225C3.567 11.0416 3.667 10.8916 3.80033 10.775C3.93366 10.6583 4.117 10.5833 4.35033 10.55L9.20033 10.125L11.0753 5.67495C11.1587 5.47495 11.288 5.32495 11.4633 5.22495C11.6387 5.12495 11.8177 5.07495 12.0003 5.07495C12.1837 5.07495 12.3627 5.12495 12.5373 5.22495C12.712 5.32495 12.8413 5.47495 12.9253 5.67495L14.8003 10.125L19.6503 10.55C19.8837 10.5833 20.067 10.6583 20.2003 10.775C20.3337 10.8916 20.4337 11.0416 20.5003 11.225C20.567 11.4083 20.5797 11.596 20.5383 11.788C20.497 11.98 20.3927 12.1506 20.2253 12.3L16.5503 15.475L17.6503 20.2C17.7003 20.4166 17.6837 20.6126 17.6003 20.788C17.517 20.9633 17.4003 21.109 17.2503 21.225C17.1003 21.3416 16.9253 21.4083 16.7253 21.4249C16.5253 21.4416 16.3337 21.3916 16.1503 21.275L12.0003 18.775Z" fill="#F0B90B"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản NCC sử dụng trong 1 năm.</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-[25px]">
-                                    <div class="w-[24px] h-[24px]">
-                                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.0003 18.775L7.85033 21.275C7.667 21.3916 7.47533 21.4416 7.27533 21.4249C7.07533 21.4083 6.90033 21.3416 6.75033 21.225C6.60033 21.1083 6.48366 20.9623 6.40033 20.787C6.317 20.6116 6.30033 20.416 6.35033 20.2L7.45033 15.475L3.77533 12.3C3.60866 12.15 3.50466 11.979 3.46333 11.787C3.422 11.595 3.43433 11.4076 3.50033 11.225C3.567 11.0416 3.667 10.8916 3.80033 10.775C3.93366 10.6583 4.117 10.5833 4.35033 10.55L9.20033 10.125L11.0753 5.67495C11.1587 5.47495 11.288 5.32495 11.4633 5.22495C11.6387 5.12495 11.8177 5.07495 12.0003 5.07495C12.1837 5.07495 12.3627 5.12495 12.5373 5.22495C12.712 5.32495 12.8413 5.47495 12.9253 5.67495L14.8003 10.125L19.6503 10.55C19.8837 10.5833 20.067 10.6583 20.2003 10.775C20.3337 10.8916 20.4337 11.0416 20.5003 11.225C20.567 11.4083 20.5797 11.596 20.5383 11.788C20.497 11.98 20.3927 12.1506 20.2253 12.3L16.5503 15.475L17.6503 20.2C17.7003 20.4166 17.6837 20.6126 17.6003 20.788C17.517 20.9633 17.4003 21.109 17.2503 21.225C17.1003 21.3416 16.9253 21.4083 16.7253 21.4249C16.5253 21.4416 16.3337 21.3916 16.1503 21.275L12.0003 18.775Z" fill="#F0B90B"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Tặng thêm 10 tài khoản KHO miễn phí trong 1 năm.</span>
+                <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
+                <div
+                    class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
+                    12.000.000đ
+                </div>
+                <div class="absolute text-center top-3/4 center-content w-full px-2 md:px-10 md:py-8 py-5 ">
+                    <div class="flex items-center md:gap-2">
+                        <div class="w-[25px]">
+                            <div class="w-[24px] h-[24px]">
+                                <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12.0003 18.775L7.85033 21.275C7.667 21.3916 7.47533 21.4416 7.27533 21.4249C7.07533 21.4083 6.90033 21.3416 6.75033 21.225C6.60033 21.1083 6.48366 20.9623 6.40033 20.787C6.317 20.6116 6.30033 20.416 6.35033 20.2L7.45033 15.475L3.77533 12.3C3.60866 12.15 3.50466 11.979 3.46333 11.787C3.422 11.595 3.43433 11.4076 3.50033 11.225C3.567 11.0416 3.667 10.8916 3.80033 10.775C3.93366 10.6583 4.117 10.5833 4.35033 10.55L9.20033 10.125L11.0753 5.67495C11.1587 5.47495 11.288 5.32495 11.4633 5.22495C11.6387 5.12495 11.8177 5.07495 12.0003 5.07495C12.1837 5.07495 12.3627 5.12495 12.5373 5.22495C12.712 5.32495 12.8413 5.47495 12.9253 5.67495L14.8003 10.125L19.6503 10.55C19.8837 10.5833 20.067 10.6583 20.2003 10.775C20.3337 10.8916 20.4337 11.0416 20.5003 11.225C20.567 11.4083 20.5797 11.596 20.5383 11.788C20.497 11.98 20.3927 12.1506 20.2253 12.3L16.5503 15.475L17.6503 20.2C17.7003 20.4166 17.6837 20.6126 17.6003 20.788C17.517 20.9633 17.4003 21.109 17.2503 21.225C17.1003 21.3416 16.9253 21.4083 16.7253 21.4249C16.5253 21.4416 16.3337 21.3916 16.1503 21.275L12.0003 18.775Z"
+                                        fill="#F0B90B"/>
+                                </svg>
                             </div>
                         </div>
+                        <span class="text-xs md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản NCC sử dụng trong 1 năm.</span>
                     </div>
-            <div class="flex justify-center md:justify-start items-center gap-6">
-        <a href="{{route('register_ncc')}}" class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng ký ngay</a>
+                    <div class="flex items-center md:gap-2">
+                        <div class="w-[25px]">
+                            <div class="w-[24px] h-[24px]">
+                                <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12.0003 18.775L7.85033 21.275C7.667 21.3916 7.47533 21.4416 7.27533 21.4249C7.07533 21.4083 6.90033 21.3416 6.75033 21.225C6.60033 21.1083 6.48366 20.9623 6.40033 20.787C6.317 20.6116 6.30033 20.416 6.35033 20.2L7.45033 15.475L3.77533 12.3C3.60866 12.15 3.50466 11.979 3.46333 11.787C3.422 11.595 3.43433 11.4076 3.50033 11.225C3.567 11.0416 3.667 10.8916 3.80033 10.775C3.93366 10.6583 4.117 10.5833 4.35033 10.55L9.20033 10.125L11.0753 5.67495C11.1587 5.47495 11.288 5.32495 11.4633 5.22495C11.6387 5.12495 11.8177 5.07495 12.0003 5.07495C12.1837 5.07495 12.3627 5.12495 12.5373 5.22495C12.712 5.32495 12.8413 5.47495 12.9253 5.67495L14.8003 10.125L19.6503 10.55C19.8837 10.5833 20.067 10.6583 20.2003 10.775C20.3337 10.8916 20.4337 11.0416 20.5003 11.225C20.567 11.4083 20.5797 11.596 20.5383 11.788C20.497 11.98 20.3927 12.1506 20.2253 12.3L16.5503 15.475L17.6503 20.2C17.7003 20.4166 17.6837 20.6126 17.6003 20.788C17.517 20.9633 17.4003 21.109 17.2503 21.225C17.1003 21.3416 16.9253 21.4083 16.7253 21.4249C16.5253 21.4416 16.3337 21.3916 16.1503 21.275L12.0003 18.775Z"
+                                        fill="#F0B90B"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="text-xs md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Tặng thêm 10 tài khoản KHO miễn phí trong 1 năm.</span>
+                    </div>
+                </div>
+            </div>
+                <div class="flex justify-center md:justify-start items-center gap-6">
+                    <a href="{{route('register_ncc')}}"
+                       class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng
+                        ký ngay</a>
 
         <a class="text-xs md:text-base text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px] bg-[#5AC3ED]  border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('login_ncc')}}">Đăng nhập</a>
 
@@ -89,22 +96,28 @@
 
     </div>
 
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] place-items-end mx-auto md:p-16 my-8 p-4">
-    <div class="w-full h-full order-last md:order-first">
-        <img src="{{asset('home/img/imgncc.png')}}" class="w-full" alt="">
     </div>
-    <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Nhà cung cấp là gì?</h2>
-        <span class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng VDone. Tại VDone, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
-        <a href="{{route('register_ncc')}}" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành Nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z" fill="#04AADD"/>
-</svg>
-</a>
+    <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] place-items-end mx-auto md:p-16 my-8 p-4">
+        <div class="w-full h-full order-last md:order-first">
+            <img src="{{asset('home/img/imgncc.png')}}" class="w-full" alt="">
+        </div>
+        <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
+            <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Nhà cung cấp là gì?</h2>
+            <span class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng VDone. Tại VDone, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
+            <a href="{{route('register_ncc')}}"
+               class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở
+                thành Nhà cung cấp
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z"
+                        fill="#04AADD"/>
+                </svg>
+            </a>
+        </div>
     </div>
-</div>
-<div class="relative w-full h-full">
-   <div class="absolute top-[-30px] right-0 bannerncc z-[-1] md:-rotate-[5deg]">
+    <div class="relative w-full h-full">
+        <div class="absolute top-[-30px] right-0 bannerncc z-[-1] md:-rotate-[5deg]">
 
    </div>
    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full md:max-w-[1440px] mx-auto place-items-center p-4">
@@ -164,14 +177,14 @@
             <span class="text-sm font-semibold text-[#034D82] text-center">
             Được hưởng chiết khấu, lợi nhuận trên từng sản phẩm.
             </span>
-       </div>
-       <div class="text-center boxli w-full p-3 mx-auto">
-       <div class="w-[35px] md:w-[76px] mx-auto mb-4">
-                <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
-                    <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
-                </div>
             </div>
-            <span class="text-sm font-semibold text-[#034D82] text-center">
+            <div class="text-center boxli w-full p-3 mx-auto">
+                <div class="w-[35px] md:w-[76px] mx-auto mb-4">
+                    <div class="w-[34px] h-[34px] md:w-[75px] md:h-[75px] rounded-full">
+                        <img src="{{asset('home/img/iconpla.png')}}" class="w-full rounded-full" alt="">
+                    </div>
+                </div>
+                <span class="text-sm font-semibold text-[#034D82] text-center">
             Được VDone hỗ trợ kết nối tới các V-Shop.
             </span>
        </div>

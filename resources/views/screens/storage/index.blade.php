@@ -55,11 +55,11 @@
                     class="text-[#1E90FF]">KHO</strong></span>
                     <div class="max-w-[525px] relative">
                         <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
-                        <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
+                        <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[70px] md:left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
                         1.200.000đ
                         </div>
-                        <div class="absolute left-0 bottom-0 p-10">
-                            <div class="flex items-center gap-2">
+                        <div class="absolute left-0 bottom-0 px-4 py-6 md:p-10">
+                            <div class="flex items-center md:gap-2">
                                 <div class="w-[25px]">
                                     <div class="w-[24px] h-[24px]">
                                         <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
