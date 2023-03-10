@@ -248,4 +248,17 @@ class  VShopController extends Controller
         }
     }
 
+    public function getProfile($id){
+        $vshop = Vshop::where('id_pdone',$id)->first();
+        if (!$vshop){
+            return response()->json([
+                'status_code' => 400,
+                'message' => 'Không tìm thấy Vshop',
+            ],400);
+        }
+        return response()->json([
+            'status_code' => 201,
+            'data' => $vshop
+        ]);
+    }
 }
