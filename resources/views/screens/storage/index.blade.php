@@ -58,7 +58,7 @@
                         <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
                         1.200.000đ
                         </div>
-                        <div class="absolute left-0 bottom-0 p-10">
+                        <div class="absolute center-content bottom-0 p-10">
                             <div class="flex items-center gap-2">
                                 <div class="w-[25px]">
                                     <div class="w-[24px] h-[24px]">
@@ -67,7 +67,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản KHO sử dụng trong 1 năm.</span>
+                                <span class="text-xs md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản KHO sử dụng trong 1 năm.</span>
                             </div>
                         </div>
                     </div>

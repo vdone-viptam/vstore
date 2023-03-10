@@ -64,7 +64,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản NCC sử dụng trong 1 năm.</span>
+                                <span class="text-xs md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản NCC sử dụng trong 1 năm.</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <div class="w-[25px]">
@@ -74,7 +74,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Tặng thêm 10 tài khoản KHO miễn phí trong 1 năm.</span>
+                                <span class="text-xs md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Tặng thêm 10 tài khoản KHO miễn phí trong 1 năm.</span>
                             </div>
                         </div>
                     </div>

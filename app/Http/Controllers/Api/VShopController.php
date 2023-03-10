@@ -25,10 +25,22 @@ class  VShopController extends Controller
      *
      * API để thêm 1 Vshop
      *
-     * @param id id của Vshop
+     * @bodyParam  id_pdone id của Vshop
+     * @bodyParam  avatar url ảnh đại diện
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id_pdone' => 'required',
+            'avatar' => 'url',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
         $vshop = Vshop::where('id_pdone',$request->id_pdone)->first();
         if (!$vshop){
             $vshop= new Vshop();
@@ -36,17 +48,33 @@ class  VShopController extends Controller
         }
         $vshop->id_pdone = $request->id_pdone;
         $vshop->avatar = $request->avatar ??'';
-
+        $vshop->save();
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'Tạo Vshop Thành công',
+            'data'=>$vshop
+        ]);
     }
-
-    public function index(){
-        $vshop = Vshop::all();
+    /**
+     * Danh sách Vshop
+     *
+     * API dùng để lấy danh sách Vshop
+     *
+     * @urlParam limit giới hạn bản ghi mặc ịnh là 10
+     * @urlParam page số trang
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(Request $request){
+        $limit = $request->limit ??10;
+        $vshop = Vshop::paginate($limit);
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
             'data'=>$vshop
         ]);
     }
+
     public function getProductByIdPdone(Request $request)
     {
         $limit = $request->limit ?? 10;
