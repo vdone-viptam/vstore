@@ -20,6 +20,16 @@ use Illuminate\Support\Facades\Validator;
  */
 class  VShopController extends Controller
 {
+    public function create(Request $request){
+        $vshop = Vshop::where('id_pdone',$request->id_pdone)->first();
+        if (!$vshop){
+            $vshop= new $vshop();
+
+        }
+        $vshop->id_pdone = $request->id_pdone;
+        $vshop->avatar = $request->avatar ??'';
+
+    }
 
     public function index(){
         $vshop = Vshop::all();
@@ -202,6 +212,7 @@ class  VShopController extends Controller
 
     }
 
+
     public function updateAddressReceive(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -265,6 +276,31 @@ class  VShopController extends Controller
     }
 
     public function postProfile(Request $request,$id){
-        $vshop =Vshop::where('id_pdone',$id);
+        $validator = Validator::make($request->all(), [
+
+            'avatar' => 'required|max:255',
+            'vshop_name' => 'required|max:255',
+            'description' => 'required|max:255',
+
+        ], []);
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+        $vshop =Vshop::where('id_pdone',$id)->first();
+        if (!$vshop){
+            $vshop = new Vshop();
+        }
+        $vshop->avatar = $request->avatar;
+        $vshop->vshop_name= $request->vshop_name;
+        $vshop->description = $request->description;
+        $vshop->save();
+        return response()->json([
+            'status_code' => 201,
+            'data' => $vshop
+        ],200);
+
     }
 }

@@ -125,10 +125,11 @@ Route::domain(config('domain.api'))->group(function () {
     });
     Route::prefix('vshop')->group(function () {
         Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
+        Route::post('create',[\App\Http\Controllers\Api\VShopController::class,'create']);
         Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
         Route::get('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
-        Route::post('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
+        Route::put('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
 //        dd(1);
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
