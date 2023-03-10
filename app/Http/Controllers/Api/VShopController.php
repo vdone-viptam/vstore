@@ -82,7 +82,16 @@ class  VShopController extends Controller
 
         return response()->json($pdone);
     }
-
+    /**
+     * Tỉ lệ chiết khấu mua nhiều giảm giá
+     *
+     * API dùng để tính tỉ lệ chiết khấu cho nhập hàng sẵn
+     *
+     * @urlParam id id sản phẩm
+     * @urlParam total số lượng
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getDiscountByTotalProduct(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -119,7 +128,20 @@ class  VShopController extends Controller
         ]);
 
     }
-
+    /**
+     * Thêm thông tin giao hàng Vshop
+     *
+     * API dùng thêm địa chỉ giao hàng của Vshop
+     *
+     * @bodyParam  id_pdone id của vshop
+     * @bodyParam  name Tên người nhận
+     * @bodyParam  address địa chỉ chi tiết
+     * @bodyParam  phone_number Số điện thoại
+     * @bodyParam  district quận,huyện
+     * @bodyParam  province tỉnh thành
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storeAddressReceive(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -127,6 +149,8 @@ class  VShopController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
+            'district'=>'required|min:1',
+            'province'=>'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -137,18 +161,15 @@ class  VShopController extends Controller
         }
 
         try {
-            $address = $request->address;
-            $result = app('geocoder')->geocode($address)->get();
-            $coordinates = $result[0]->getCoordinates();
-            $lat = $coordinates->getLatitude();
-            $long = $coordinates->getLongitude();
+
+
             DB::table('vshop')->insert([
                 'id_pdone' => $request->id_pdone,
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'lat' => $lat,
-                'long' => $long,
+                'district'=>$request->district,
+                'province'=>$request->province,
                 'created_at' => Carbon::now()
             ]);
 
@@ -255,7 +276,20 @@ class  VShopController extends Controller
 
 
     }
-
+    /**
+     * Sửa thông tin nhận hàng Vshop
+     *
+     * API này để sửa thông tin địa chỉ
+     *
+     * @param $id id Vshop
+     * @param Request $request
+     * @bodyParam name tên người nhận
+     * @bodyParam address Địa chỉ cụ thể
+     * @bodyParam phone_number Số điện thoại
+     * @bodyParam district Quận huyện
+     * @bodyParam province Tỉnh thành
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function updateAddressReceive(Request $request, $id)
     {
@@ -264,6 +298,8 @@ class  VShopController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
+            'district'=>'required|min:1',
+            'province'=>'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -277,20 +313,14 @@ class  VShopController extends Controller
                 'id_pdone' => $id,
                 'name' => $request->name,
                 'phone_number' => $request->phone_number,
-                'updated_at' => Carbon::now()
+                'district' => $request->district,
+                'province' => $request->province,
+                'address'=>$request->address,
+                'updated_at' => Carbon::now(),
             ];
-            if (DB::table('vshop')->where('address', $request->address)->where('id_pdone', $id)->count() == 0) {
-                $data['address'] = $request->address;
-                $address = $request->address;
-                $result = app('geocoder')->geocode($address)->get();
-                $coordinates = $result[0]->getCoordinates();
-                $lat = $coordinates->getLatitude();
-                $long = $coordinates->getLongitude();
-                $data['lat'] = $lat;
-                $data['long'] = $long;
-            }
 
-            $address = DB::table('vshop')->where('id_pdone', $id)->update($data);
+
+            $model = DB::table('vshop')->where('id_pdone', $id)->update($data);
             return response()->json([
                 'status_code' => 201,
                 'data' => 'Cập nhật địa chỉ thành công',
@@ -302,6 +332,15 @@ class  VShopController extends Controller
             ],400);
         }
     }
+
+    /**
+     * Lấy thông tin cá nhân Vshop
+     *
+     * API này dùng để lấy thông tin cá nhân để dùng cho việc xem và chỉnh sửa
+     *
+     * @param $id id Vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function getProfile($id){
         $vshop = Vshop::where('id_pdone',$id)
@@ -318,7 +357,18 @@ class  VShopController extends Controller
             'data' => $vshop
         ],200);
     }
-
+    /**
+     * Cập nhập thông tin Vshop
+     *
+     * API này dùng để lấy thông tin cá nhân để dùng cho việc xem và chỉnh sửa
+     *
+     * @param $id id Vshop
+     * @bodyParam avatar Ảnh đại diện
+     * @bodyParam vshop_name Tên Vshop
+     * @bodyParam description Mô tả
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function postProfile(Request $request,$id){
         $validator = Validator::make($request->all(), [
 
