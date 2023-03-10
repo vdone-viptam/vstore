@@ -37,7 +37,8 @@ class ProductController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam category_id id danh mục sản phẩm
-     * @urlParam order_by | 1 Sắp xếp mới nhất | 2 bán chạy nhất| 3 Giá cao nhất | 4 giá thấp nhất
+     * @urlParam order_by (1,2,3) 1 Sắp xếp theo id,2 sắp xếp theo giá,3 sắp xếp theo số hàng đã bán
+     * @urlParam option (1,2) 1 asc | 2 desc
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
      * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @return \Illuminate\Http\JsonResponse
@@ -58,16 +59,14 @@ class ProductController extends Controller
         }
         if ($request->order_by == 1) {
 
-            $products = $products->orderBy('id', 'desc');
-        }
-        if ($request->order_by == 2) {
-
-            $products = $products->orderBy('amount_product_sold', 'desc');
+            $products = $products->orderBy('id', $request->option);
         }
         if ($request->order_by == 3) {
-            $products = $products->orderBy('price', 'asc');
-        } elseif ($request->order_by == 4) {
-            $products = $products->orderBy('price', 'desc');
+
+            $products = $products->orderBy('amount_product_sold', $request->option);
+        }
+        if ($request->order_by == 2) {
+            $products = $products->orderBy('price', $request->option);
         }
         if ($request->payment) {
             if ($request->payment == 1) {
@@ -97,7 +96,7 @@ class ProductController extends Controller
 //
         }
         return response()->json([
-            'status_code' => 200,
+            'success' => true,
             'data' => $products
         ]);
 
@@ -112,7 +111,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function searchProductByKeyWord($key_word)
+    public
+    function searchProductByKeyWord($key_word)
     {
         $products = Product::select('id', 'name')->where('status', 2)->where('name', 'like', '%' . $key_word . '%')->get();
 
@@ -133,7 +133,8 @@ class ProductController extends Controller
      * @urlParam limit Giới hạn bản ghi trên một trang
      * @return JsonResponse
      */
-    public function productByCategory(Request $request, $id)
+    public
+    function productByCategory(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
         $products = Product::where('category_id', $id)->paginate($limit);
@@ -162,7 +163,8 @@ class ProductController extends Controller
      * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
      * @return JsonResponse
      */
-    public function productByVstore(Request $request, $id)
+    public
+    function productByVstore(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
 
@@ -225,7 +227,8 @@ class ProductController extends Controller
      * @urlParam payments sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước
      * @return JsonResponse
      */
-    public function productByNcc(Request $request, $id)
+    public
+    function productByNcc(Request $request, $id)
     {
         $limit = $request->limit ?? 10;
         $products = Product::where('user_id', $id)->where('status', 2)
@@ -254,9 +257,9 @@ class ProductController extends Controller
         foreach ($products as $value) {
 
             $value->images = asset(json_decode($value->images)[0]);
-            $value->price_discount = $value->price -($value->price/100 * $value->discount_vstore);
+            $value->price_discount = $value->price - ($value->price / 100 * $value->discount_vstore);
             $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
-                ->first()->sum ?? 0;
+                    ->first()->sum ?? 0;
 
         }
 
@@ -276,10 +279,11 @@ class ProductController extends Controller
      * @urlParam id_pdone
      * @return JsonResponse
      */
-    public function productById(Request $request, $id)
+    public
+    function productById(Request $request, $id)
     {
 
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video','description','user_id','category_id','amount_product_sold')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
 
         if (!$product) {
             return response()->json([
@@ -288,45 +292,45 @@ class ProductController extends Controller
 
             ], 400);
         }
-        $img=[];
-        foreach (json_decode($product->images) as $valimage){
-            $img[]=asset($valimage);
+        $img = [];
+        foreach (json_decode($product->images) as $valimage) {
+            $img[] = asset($valimage);
         }
-        $product->images=$img;
+        $product->images = $img;
 //        return $product;
         $products_available = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =" . $product->id . " ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
         $product->products_available = $products_available;
-        $product->available_discount= BuyMoreDiscount::Where('end',0)->where('product_id',$product->id)->select('discount')->first()->discount;
+        $product->available_discount = BuyMoreDiscount::Where('end', 0)->where('product_id', $product->id)->select('discount')->first()->discount;
         $product->rating = 5;
         //check đã tiếp thị hay chưa
-        if ($request->id_pdone){
-            $check_vshop_product = VshopProduct::where('id_pdone',$request->id_pdone)->where('product_id',$id)->first();
-            if ($check_vshop_product){
+        if ($request->id_pdone) {
+            $check_vshop_product = VshopProduct::where('id_pdone', $request->id_pdone)->where('product_id', $id)->first();
+            if ($check_vshop_product) {
                 $product->affiliate = 1;
-            }else{
+            } else {
                 $product->affiliate = 0;
             }
         }
-        $product->discount=10;
-        $product->price_discount = $product->price - ( $product->price /100 *10);
-        $list_vshop = VshopProduct::where('product_id',$id)->get();
+        $product->discount = 10;
+        $product->price_discount = $product->price - ($product->price / 100 * 10);
+        $list_vshop = VshopProduct::where('product_id', $id)->get();
 
-        foreach ($list_vshop as $list){
-            $discount = Discount::where('product_id',$id)->where('user_id',$list->id_pdone)
-                ->where('start_date','<=',Carbon::now())
-                ->where('end_date','>=',Carbon::now())
+        foreach ($list_vshop as $list) {
+            $discount = Discount::where('product_id', $id)->where('user_id', $list->id_pdone)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
                 ->first();
-            $list->vshop_discount= $discount->discount??0 ;
+            $list->vshop_discount = $discount->discount ?? 0;
 
 
         }
 
 
 //        return $list_vshop;
-         return response()->json([
+        return response()->json([
             'status_code' => 200,
             'data' => $product,
-             'list_vshop'=>$list_vshop,
+            'list_vshop' => $list_vshop,
         ]);
     }
 
@@ -340,7 +344,8 @@ class ProductController extends Controller
      * @bodyParam  id_pdone id của pdone
      * @return \Illuminate\Http\JsonResponse
      */
-    public function vshopPickup(Request $request, $id)
+    public
+    function vshopPickup(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'id_pdone' => 'required',
@@ -394,7 +399,8 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function productByVshop(Request $request, $id_pdone)
+    public
+    function productByVshop(Request $request, $id_pdone)
     {
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'asc';
@@ -428,7 +434,8 @@ class ProductController extends Controller
         ], 200);
     }
 
-    public function getProductAvailableByVshop($id_pdone)
+    public
+    function getProductAvailableByVshop($id_pdone)
     {
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'asc';
@@ -472,7 +479,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function createBill($id_pdone)
+    public
+    function createBill($id_pdone)
     {
         $products = DB::table('vshop_products')
             ->select('products.id', 'images', 'products.name', 'vshop_products.amount')
@@ -492,7 +500,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function saveBill($id_pdone, Request $request)
+    public
+    function saveBill($id_pdone, Request $request)
     {
         DB::beginTransaction();
         try {
@@ -531,7 +540,7 @@ class ProductController extends Controller
                         ->first()
                         ->dis ?? 0;
                 $price = ($product->price - ($product->price * $discount / 100));
-                $bills += $price  * $pro['amount'];
+                $bills += $price * $pro['amount'];
                 $vstore[] = [
                     'total' => $price * $pro['amount'] * $product->discount / 100,
                     'vstore_id' => $product->vstore_id
@@ -561,7 +570,8 @@ class ProductController extends Controller
     }
 
 
-    public function mail()
+    public
+    function mail()
     {
         $email = 'phungtheanh2001@gmail.com';
         Mail::send('email.email', ['ID' => '123123123', 'password' => '12121212'], function ($message) use ($email) {
@@ -582,7 +592,8 @@ class ProductController extends Controller
      * @bodyParam  id_pdone id của pdone
      * @return \Illuminate\Http\JsonResponse
      */
-    public function vshopReadyStock(Request $request, $id)
+    public
+    function vshopReadyStock(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'id_pdone' => 'required',
@@ -745,7 +756,8 @@ class ProductController extends Controller
 
     }
 
-    public function haversineGreatCircleDistance(
+    public
+    function haversineGreatCircleDistance(
         $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
     {
         // convert from degrees to radians
@@ -773,7 +785,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function productSale(Request $request)
+    public
+    function productSale(Request $request)
     {
         try {
             $limit = $request->limit ?? 12;
@@ -810,7 +823,8 @@ class ProductController extends Controller
      * @param $product_id ID sản phẩm
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroyAffProduct($id_pdone, $product_id)
+    public
+    function destroyAffProduct($id_pdone, $product_id)
     {
         try {
             DB::table('vshop_products')->where('id_pdone', $id_pdone)->where('product_id', $product_id)->where('status', 1)->update(['status' => 3]);
