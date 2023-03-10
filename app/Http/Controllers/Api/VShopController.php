@@ -202,6 +202,7 @@ class  VShopController extends Controller
 
     }
 
+
     public function updateAddressReceive(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -239,13 +240,57 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 201,
                 'data' => 'Cập nhật địa chỉ thành công',
-            ]);
+            ],200);
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 400,
                 'message' => $e->getMessage(),
-            ]);
+            ],400);
         }
     }
 
+    public function getProfile($id){
+        $vshop = Vshop::where('id_pdone',$id)
+            ->select('id','id_pdone','avatar','vshop_name','description')
+            ->first();
+        if (!$vshop){
+            return response()->json([
+                'status_code' => 400,
+                'message' => 'Không tìm thấy Vshop',
+            ],400);
+        }
+        return response()->json([
+            'status_code' => 201,
+            'data' => $vshop
+        ],200);
+    }
+
+    public function postProfile(Request $request,$id){
+        $validator = Validator::make($request->all(), [
+
+            'avatar' => 'required|max:255',
+            'vshop_name' => 'required|max:255',
+            'description' => 'required|max:255',
+
+        ], []);
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+        $vshop =Vshop::where('id_pdone',$id)->first();
+        if (!$vshop){
+            $vshop = new Vshop();
+        }
+        $vshop->avatar = $request->avatar;
+        $vshop->vshop_name= $request->vshop_name;
+        $vshop->description = $request->description;
+        $vshop->save();
+        return response()->json([
+            'status_code' => 201,
+            'data' => $vshop
+        ],200);
+
+    }
 }

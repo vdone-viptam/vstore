@@ -50,12 +50,12 @@
         <div class="flex flex-col justify-center w-full md:justify-start gap-8 md:max-w-[750px] text-center md:text-left">
             <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp</h2>
             <span class="text-[#FFF] max-w-[450px]">Tham gia vào hệ thống Thương mại điện tử V-Store để mang sản phẩm của bạn đến tay người tiêu dùng.</span>
-            <div class="max-w-[525px] relative">
+            <div class="max-w-[625px] relative">
                         <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
                         <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
                         12.000.000đ
                         </div>
-                        <div class="absolute left-0 bottom-0 px-6 py-4">
+                        <div class="absolute text-center bottom-0 center-content w-full px-10 md:py-8 py-5 ">
                             <div class="flex items-center gap-2">
                                 <div class="w-[25px]">
                                     <div class="w-[24px] h-[24px]">
@@ -82,11 +82,11 @@
         <a href="{{route('register_ncc')}}" class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng ký ngay</a>
 
         <a class="text-xs md:text-base text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px] bg-[#5AC3ED]  border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('login_ncc')}}">Đăng nhập</a>
-     
+
         </div>
         </div>
-    
-   
+
+
     </div>
 
 </div>
