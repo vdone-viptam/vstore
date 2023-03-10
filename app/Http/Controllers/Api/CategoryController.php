@@ -93,10 +93,6 @@ class CategoryController extends Controller
      * @param Request $request
      * @param $category_id
      * @urlParam id_pdone Id user Vshop (truyền khi user đang đăng nhập là đang là VSHOP)
-     * @urlParam orderById Sắp sếp sản phẩm mới nhất asc|desc Mặc định asc
-     * @urlParam amount_product_sold Sắp sếp sản phẩm bán chạy asc|desc
-     * @urlParam orderByPrice Sắp sếp theo giá sản phẩm asc|desc
-     * @urlParam paymentMethod Phương thức thanh toán 1 COD | 2 Chuyển khoản
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProductAndVstoreByCategory(Request $request, $category_id)
@@ -108,23 +104,6 @@ class CategoryController extends Controller
                 ->where('category_id', $category_id)
                 ->where('status', 2);
 
-            if ($request->orderById) {
-                $product = $product->orderBy('id', $request->orderById);
-            }
-            if ($request->amount_product_sold) {
-                $product = $product->orderBy('amount_product_sold', $request->amount_product_sold);
-            }
-            if ($request->orderByPrice) {
-                $product = $product->orderBy('price', $request->orderByPrice);
-            }
-            if ($request->paymentMethod) {
-                if ($request->paymentMethod == 1) {
-                    $product = $product->where('payment_on_delivery', 1);
-                }
-                if ($request->paymentMethod == 2) {
-                    $product = $product->where('prepay', 1);
-                }
-            }
             $product = $product->limit(8)->get();
 
             $data_vstore = [];
