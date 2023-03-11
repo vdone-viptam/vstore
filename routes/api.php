@@ -116,6 +116,16 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/profile/{ncc_id}', [\App\Http\Controllers\Api\ManufactureController::class, 'profileNCC']);
 
     });
+    Route::prefix('finances')->group(function () {
+        Route::get('get-list-bank', [\App\Http\Controllers\Api\FinanceController::class, 'getListBank']);
+        Route::get('/wallet/{id_pdone}', [\App\Http\Controllers\Api\FinanceController::class, 'getWallet']);
+        Route::get('/wallet/edit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'editWallet']);
+        Route::put('/wallet/update/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'updateWallet']);
+        Route::post('/wallet/store', [\App\Http\Controllers\Api\FinanceController::class, 'storeWallet']);
+        Route::post('/wallet/store-deposit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'storeDeposit']);
+
+
+    });
     Route::prefix('vstore')->group(function () {
         //list nhà cung cấp
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
@@ -125,7 +135,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('vshop')->group(function () {
         Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
-        Route::post('create',[\App\Http\Controllers\Api\VShopController::class,'create']);
+        Route::post('create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
         Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
         Route::get('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
@@ -137,7 +147,6 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
             Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
         });
-
     });
     Route::prefix('discount')->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
