@@ -6,4 +6,6 @@ return [
     'api' => env('DOMAIN_API'),
     'storage'=> env('DOMAIN_STORAGE'),
     'payment' => env('DOMAIN_PAYMENT'),
+    'token'=>env('TOKEN'),
+
 ];

@@ -35,7 +35,7 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         if ($request->condition && $request->condition != 0) {
 
-            $this->v['products'] = $this->v['products']->where( ''. $request->condition.'', 'like', '%' . $request->key_search . '%');
+            $this->v['products'] = $this->v['products']->where('' . $request->condition . '', 'like', '%' . $request->key_search . '%');
         }
 
         $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
@@ -250,7 +250,7 @@ class ProductController extends Controller
             if ($request->product) {
 
                 $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop','description')
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);
@@ -287,7 +287,9 @@ class ProductController extends Controller
                 'discount' => 'required',
                 'role' => 'min:1',
                 'prepay' => 'required',
-                'vat' => 'required|min:1|max:99'
+                'vat' => 'required|min:1|max:99',
+                'deposit_money' => 'required|min:1',
+
 
             ], [
                 'vstore_id.required' => 'V-store bắt buộc chọn',
@@ -298,8 +300,14 @@ class ProductController extends Controller
                 'vat.required' => 'VAT bắt buộc nhâp',
                 'vat.min' => 'VAT nhỏ nhất 1',
                 'vat.max' => 'VAT lớn nhất 99',
+                'deposit_money.required' => 'Tiền cọc khi nhập sẵn bắt buộc nhập',
+                'deposit_money.min' => 'Tiền cọc khi nhập sẵn không được nhỏ hơn hoặc bằng 0',
 
             ]);
+            if ($request->hasFile('images') != 1) {
+                return redirect()->back()->withErrors(['images' => 'Tải tài liệu liên quan đến sản phẩm']);
+            }
+
             if ($request->sl[0] == '' || $request->moneyv[0] == '') {
                 return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn']);
             }
@@ -345,12 +353,18 @@ class ProductController extends Controller
                     $images[] = 'storage / ' . $path;
                 }
             }
+
             $object->images = json_encode($images);
+//            return $object;
             $object->save();
+
             $product = Product::find($request->product_id);
+//            return $request;
+
             if ($product) {
                 $product->vstore_id = $request->vstore_id;
                 $product->save();
+
                 $sl = [];
 
                 for ($i = 0; $i < 3; $i++) {
@@ -359,12 +373,29 @@ class ProductController extends Controller
                         $sl[] = [
                             'start' => $request->sl[$i],
                             'discount' => $request->moneyv[$i],
-                            'product_id' => $product->id
+                            'product_id' => $product->id,
+                            'deposit_money' => $request->deposit_money[$i] ?? 0,
                         ];
+
+                        if ($i > 0) {
+                            if (isset($request->sl[$i]) && $request->sl[$i - 1] >= $request->sl[$i]) {
+                                $message = [
+                                    'sl' => 'Số lượng sau phải lớn hơn số lượng trước'];
+                            }
+                            if (isset($request->moneyv[$i]) && $request->moneyv[$i - 1] >= $request->moneyv[$i]) {
+                                $message['moneyv'] = 'Chiết khấu sau phải lớn hơn Chiết khấu trước';
+                            }
+                            if ( isset($request->deposit_money[$i-1]) !='' && isset($request->deposit_money[$i]) && $request->deposit_money[$i - 1] >= $request->deposit_money[$i]) {
+                                $message['deposit_money'] = 'Tiền cọc sau phải lớn hơn Tiền cọc trước';
+                            }
+                            if (isset($message)){
+                                return redirect()->back()->withErrors($message);
+                            }
+                        }
                     }
 
                 }
-//                dd($sl);
+//                return 1;
 
 
 //                return $sl;
@@ -378,6 +409,7 @@ class ProductController extends Controller
 //                   $end = $sl[$i+1]??0;
 
                 }
+//                return $sl;
                 DB::table('buy_more_discount')->insert($sl);
 
 //                return $product;

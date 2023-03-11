@@ -38,14 +38,14 @@ class CategoryController extends Controller
                 }
             }
             return response()->json([
-                'status_code' => 200,
+                'success' => true,
                 'data' => $categories
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status_code' => 400,
+                'success' => false,
                 'message' => $e->getMessage()
-            ], 400);
+            ], 500);
         }
     }
 
@@ -92,21 +92,75 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @param $category_id
-     * @urlParam page Số trang
-     * @urlParam id_pdone Id user Vshop (truyền khi user là đang là VSHOP)
-     * @urlParam orderById Sắp sếp sản phẩm mới nhất asc|desc Mặc định asc
-     * @urlParam amount_product_sold Sắp sếp sản phẩm bán chạy asc|desc
-     * @urlParam orderByPrice Sắp sếp theo giá sản phẩm asc|desc
-     * @urlParam paymentMethod Phương thức thanh toán 1 COD | 2 Chuyển khoản
-     * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 8
+     * @urlParam id_pdone Id user Vshop (truyền khi user đang đăng nhập là đang là VSHOP)
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProductByCategory(Request $request, $category_id)
+    public function getProductAndVstoreByCategory(Request $request, $category_id)
     {
         try {
 
             $limit = $request->limit ?? 8;
             $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id')
+                ->where('category_id', $category_id)
+                ->where('status', 2);
+
+            $product = $product->limit(8)->get();
+
+            $data_vstore = [];
+
+            foreach ($product as $pr) {
+                $pr->discount = DB::table('discounts')
+                        ->selectRaw('SUM(discount) as sum')
+                        ->where('product_id', $pr->id)
+                        ->whereIn('type', [1, 2])
+                        ->first()->sum ?? 0;
+
+                $pr->image = asset(json_decode($pr->images)[0]);
+                unset($pr->images);
+                $data_vstore[] = $pr->vstore_id;
+                unset($pr->vstore_id);
+                if ($request->id_pdone) {
+                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('id_pdone', $request->id_pdone)->count();
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
+                    $pr->available_discount = $more_dis ?? 0;
+                }
+            }
+            $users = User::select('id', 'name', 'avatar')->whereIn('id', $data_vstore)->limit(8)->get();
+            foreach ($users as $user) {
+                $user->avatar = asset('image/users/' . $user->avatar);
+            }
+            return response()->json(['success' => true, 'data' => [
+                'vstores' => $users,
+                'products' => $product
+            ]]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+
+        }
+
+    }
+
+    /**
+     * Danh sách sản phẩm theo danh mục
+     *
+     * API này sẽ trả về danh sách sản phẩm theo danh mục
+     *
+     * @param Request $request
+     * @param $category_id id danh mục
+     * @urlParam id_pdone Id user Vshop (truyền khi user là đang đăng nhập là VSHOP)
+     * @urlParam orderById Sắp sếp sản phẩm mới nhất asc|desc Mặc định asc VD: orderById=asc
+     * @urlParam amount_product_sold Sắp sếp sản phẩm bán chạy asc|desc VD: amount_product_sold=desc
+     * @urlParam orderByPrice Sắp sếp theo giá sản phẩm asc|desc VD: orderByPrice=asc
+     * @urlParam paymentMethod Phương thức thanh toán 1 COD | 2 Chuyển khoản
+     * @urlParam page Trang hiện tại
+     * @urlParam limit Giới hạn bản ghi 1 trang
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getProductByCategory(Request $request, $category_id)
+    {
+        try {
+            $limit = $request->limit ?? 8;
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
                 ->where('category_id', $category_id)
                 ->where('status', 2);
 
@@ -129,7 +183,6 @@ class CategoryController extends Controller
             }
             $product = $product->paginate($limit);
 
-            $data_vstore = [];
 
             foreach ($product as $pr) {
                 $pr->discount = DB::table('discounts')
@@ -140,25 +193,17 @@ class CategoryController extends Controller
 
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
-                $data_vstore[] = $pr->vstore_id;
-                unset($pr->vstore_id);
                 if ($request->id_pdone) {
                     $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('id_pdone', $request->id_pdone)->count();
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
+                    $pr->available_discount = $more_dis ?? 0;
                 }
             }
-            $users = User::select('id', 'name', 'avatar')->whereIn('id', $data_vstore)->limit(8)->get();
-            foreach ($users as $user) {
-                $user->avatar = asset('image/users/' . $user->avatar);
-            }
-            return response()->json(['status' => 200, 'data' => [
-                'vstores' => $users,
-                'products' => $product
-            ]]);
+
+            return response()->json(['success' => true, 'data' => $product]);
         } catch (\Exception $e) {
-            return response()->json(['status' => 400, 'error' => $e->getMessage()], 400);
-
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-
     }
 
     /**
@@ -182,14 +227,14 @@ class CategoryController extends Controller
                 $user->avatar = asset('image/users/' . $user->avatar);
             }
             return response()->json([
-                'status_code' => 200,
+                'success' => true,
                 'data' => $users
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status_code' => 400,
+                'success' => false,
                 'message' => $e->getMessage()
-            ]);
+            ],500);
         }
     }
 

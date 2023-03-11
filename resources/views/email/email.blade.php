@@ -15,7 +15,7 @@
     <div class="infor">
         <p style="color: #212121; font-size: 14px">Số tài khoản: <strong>4938051001</strong></p>
         <p>Số tiền cần chuyển khoản là: 900.000 VNĐ</p>
-        <p style="color: #212121; font-size: 14px">Chủ tài khoản:<strong>CONG TY TNHH V-DONE</strong></p>
+        <p style="color: #212121; font-size: 14px">Chủ tài khoản:<strong>CONG TY TNHH VDONE</strong></p>
         <p style="color: #212121; font-size: 14px">Nội dung chuyển khoản:<strong>Thanh toan don hang {{$id}}</strong>
         </p>
     </div>

@@ -63,28 +63,34 @@ Route::prefix('bill')->group(function () {
 
 Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 //Route::get('/', function () {
 //    return config('domain.api');
 //});
 //Route::group(['domain' => config('domain.api')], function () {
-Route::domain(config('domain.api'))->group(function () {
+Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
-    Route::prefix('product')->group(function () {
+
+    Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
+
+        Route::get('search/{key_word}', [\App\Http\Controllers\Api\ProductController::class, 'searchProductByKeyWord']);
         Route::get('/product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);
         Route::get('/product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
         Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
         Route::post('/vshop-pickup/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopPickup']);
         Route::post('/vshop-ready-stock/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopReadyStock']);
-        Route::get('/vshop/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::get('/product-by-vshop/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::get('/product-available-by-vshop/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'getProductAvailableByVshop']);
+        Route::get('/create-bill/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'createBill']);
+        Route::post('/save-bill/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'saveBill']);
+
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
+        Route::delete('destroy-affiliate/{id_pdone}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
     });
     // CARD
-    Route::prefix('product-sales')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'productSale']);
+    Route::prefix('big-sales')->group(function () {
+        Route::get('/get-list', [\App\Http\Controllers\Api\BigSaleController::class, 'getListProductSale']);
     });
     Route::prefix('banners')->group(function () {
         Route::get('/get-banner', [\App\Http\Controllers\Api\BannerController::class, 'getBannerHomePage']);
@@ -101,7 +107,9 @@ Route::domain(config('domain.api'))->group(function () {
         //list danh mục
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
         Route::get('get-category-by-vstore/{vstore_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getCategoryByVstore']);
+        Route::get('get-product-vstore-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getProductAndVstoreByCategory']);
         Route::get('get-product-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getProductByCategory']);
+
         Route::get('get-all-vstore-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getAllVstoreByCategory']);
     });
     Route::prefix('manufactures')->group(function () {
@@ -119,8 +127,14 @@ Route::domain(config('domain.api'))->group(function () {
     });
     Route::prefix('vshop')->group(function () {
         Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
+        Route::post('create',[\App\Http\Controllers\Api\VShopController::class,'create']);
         Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
+        Route::get('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
+        Route::put('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
+        Route::get('/get-buy-more-discount/{id}',[\App\Http\Controllers\Api\VShopController::class,'getBuyMoreDiscount']);
+//        dd(1);
+        Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
             Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
             Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
@@ -132,9 +146,51 @@ Route::domain(config('domain.api'))->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
     });
-    Route::prefix('storage')->group(function () {
-        Route::post('register', [\App\Http\Controllers\Api\StorageController::class, 'register']);
+    Route::post('login', [\App\Http\Controllers\Api\storage\AuthController::class, 'login']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::prefix('storage')->group(function () {
+            Route::prefix('dashboard')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\DashboardController::class, 'index']);
+            });
+            Route::prefix('products')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\ProductController::class, 'index']);
+                Route::get('/request', [\App\Http\Controllers\Api\storage\ProductController::class, 'request']);
+                Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
+
+                Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
+                Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
+                Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detail']);
+            });
+            Route::prefix('account')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\AccountController::class, 'profile']);
+                Route::post('/edit/{id}', [\App\Http\Controllers\Api\storage\AccountController::class, 'editProfile']);
+                Route::post('/upload/{id}', [\App\Http\Controllers\Api\storage\AccountController::class, 'uploadImage']);
+                Route::get('/change-password', [\App\Http\Controllers\Api\storage\AccountController::class, 'changePassword']);
+                Route::put('/change-password', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangePassword']);
+                Route::get('/edit-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'editTaxCode']);
+                Route::put('/save-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangeTaxCode']);
+            });
+            Route::prefix('finances')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\FinanceController::class, 'index']);
+                Route::post('/store-wallet', [\App\Http\Controllers\Api\storage\FinanceController::class, 'storeWall']);
+                Route::put('/update-wallet/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'updateWall']);
+                Route::post('/create-deposit', [\App\Http\Controllers\Api\storage\FinanceController::class, 'deposit']);
+
+                Route::get('/history', [\App\Http\Controllers\Api\storage\FinanceController::class, 'history']);
+
+            });
+            Route::prefix('partners')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\storage\PartnerController::class, 'index']);
+            });
+        });
+
+//        Route::get('/notifications', function () {
+//            return view('layouts.storage.all_noti', []);
+//        })->name('storage_all_noti');
+//        return $request->user();
     });
+
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
 

@@ -55,7 +55,7 @@
     </div>
     <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
         <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Cổng thương mại điện tử <br><strong class="text-[#1e65ff] font-semibold">V-Store </strong> là gì?</h2>
-        <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội V-Done thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng V-Done. </span>
+        <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội VDone thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng VDone. </span>
     </div>
 </div>
 <div class="banner flex justify-around items-start w-full md:max-w-[1440px] mx-auto  flex-wrap lg:flex-nowrap">
@@ -127,7 +127,7 @@
             </div>
             <h3 class="text-[#1D293F] font-semibold text-2xl">Bắt đầu sử dụng</h3>
             <span class="text-[#7C8087]">
-                    Hoàn thiện đăng ký và trở thành V - Store sở hữu những quyền lợi mang tới lợi ích kinh doanh lớn
+                    Hoàn thiện đăng ký và trở thành V-Store sở hữu những quyền lợi mang tới lợi ích kinh doanh lớn
                 </span>
         </div>
     </div>
@@ -188,7 +188,7 @@
                     </svg>
                 </div>
 
-                <span class="text-[#4F4F4F] font-medium">Được V-Done hỗ trợ kết nối tới các nhà cung cấp. </span>
+                <span class="text-[#4F4F4F] font-medium">Được VDone hỗ trợ kết nối tới các nhà cung cấp. </span>
             </div>
             <div class="flex justify-start items-start gap-2">
                 <div class="w-[21px]">
@@ -344,7 +344,7 @@
     </div>
 </div> -->
 <footer class="bg-[#1E90FF]">
-    <div class="grid grid-cols-1 lg:grid-cols-2  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 place-items-center md:place-items-start  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
         <ul class="flex items-center gap-14">
             <li><a href="#"><svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.6183 2.37575C23.713 2.76628 22.7278 3.04735 21.713 3.15682C22.7666 2.53089 23.5556 1.54202 23.9319 0.375752C22.9433 0.963885 21.8602 1.37629 20.7308 1.59469C20.2587 1.09003 19.6878 0.687999 19.0535 0.413643C18.4193 0.139287 17.7354 -0.00151415 17.0444 1.22793e-05C14.2485 1.22793e-05 12 2.26628 12 5.04735C12 5.43788 12.0473 5.82841 12.1243 6.20415C7.93786 5.98522 4.20414 3.98522 1.72189 0.923089C1.2696 1.69562 1.03258 2.57524 1.0355 3.47042C1.0355 5.2219 1.92603 6.76628 3.28402 7.67456C2.48374 7.64305 1.7022 7.42308 1.00296 7.03255V7.09468C1.00296 9.54734 2.73668 11.5799 5.04733 12.0473C4.61348 12.16 4.16718 12.2177 3.71893 12.2189C3.39053 12.2189 3.07988 12.1864 2.76627 12.142C3.40532 14.142 5.26627 15.5947 7.48224 15.642C5.74852 17 3.57692 17.7988 1.21893 17.7988C0.795858 17.7988 0.405325 17.784 0 17.7367C2.23668 19.1716 4.89053 20 7.74852 20C17.0266 20 22.1035 12.3136 22.1035 5.64202C22.1035 5.42309 22.1035 5.20415 22.0887 4.98522C23.071 4.26628 23.9319 3.37575 24.6183 2.37575Z" fill="#272D4E"/>

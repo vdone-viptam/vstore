@@ -44,7 +44,7 @@
     <a href="{{route('screens.vstore.dashboard.index')}}" class="">
         <div class="w-[80px] h-[80px] ">
         @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
-                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full"
+                <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full object-fill"
                      alt="">
             @else
                 <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-fill" alt="">

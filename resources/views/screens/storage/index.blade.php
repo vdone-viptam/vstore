@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ V-Kho</title>
+    <title>Trang chủ Kho</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-    <meta property="og:title" content="V-kho | Ecommerce. Cổng thương mại điện tử"/>
-    <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng V-Kho."/>
+    <meta property="og:title" content="KHO | Hệ thống quản lý kho chuyên nghiệp."/>
+    <meta property="og:description"
+          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng KHO."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/logo-07.png')}}"/>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
@@ -32,11 +33,10 @@
     <div
         class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-            <div class="w-[120px] h-[30px] md:hidden">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
-            </div>
-            <div class="hidden md:block w-[190px] h-[52px]">
-                <a href="./"> <img src="{{asset('home/img/logokho.png')}}" class="w-full object-contain" alt=""></a>
+            <div class="w-[105px] h-[82px]">
+                <a href="./">
+                    <img src="{{asset('home/img/vdone.png')}}" class="w-full object-contain" alt="">
+                </a>
             </div>
 
             <a href="{{route('login_storage')}}"
@@ -44,15 +44,36 @@
                 nhập</a>
         </div>
         <div
-            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-5 md:max-w-[650px] text-center md:text-left">
-            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl ">"Hệ thống quản lý
-                <strong class="text-[#1E90FF] font-bold">V-Kho</strong>"</h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
-                    class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
-                    class="text-[#1E90FF]"> V-Kho.</strong></span>
+            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start gap-8 md:max-w-[800px] text-center md:text-left">
+            <h2 class="font-bold text-[#414141] md:text-[70px] md:leading-[90px] text-2xl flex items-center gap-4">Hệ thống quản lý
+                <div class="w-[103px] md:w-[174px] h-[60px]">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
+                </div>
+            </h2>
+            <span class="text-grayRgb text-base md:text-lg font-medium max-w-[550px]">Hãy đồng hành cùng <strong
+                    class="text-[#1E90FF]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng <strong
+                    class="text-[#1E90FF]">KHO</strong></span>
+                    <div class="max-w-[525px] relative">
+                        <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
+                        <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[70px] md:left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">
+                        1.200.000đ
+                        </div>
+                        <div class="absolute left-0 bottom-0 px-4 py-6 md:p-10">
+                            <div class="flex items-center md:gap-2">
+                                <div class="w-[25px]">
+                                    <div class="w-[24px] h-[24px]">
+                                        <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12.0003 18.775L7.85033 21.275C7.667 21.3916 7.47533 21.4416 7.27533 21.4249C7.07533 21.4083 6.90033 21.3416 6.75033 21.225C6.60033 21.1083 6.48366 20.9623 6.40033 20.787C6.317 20.6116 6.30033 20.416 6.35033 20.2L7.45033 15.475L3.77533 12.3C3.60866 12.15 3.50466 11.979 3.46333 11.787C3.422 11.595 3.43433 11.4076 3.50033 11.225C3.567 11.0416 3.667 10.8916 3.80033 10.775C3.93366 10.6583 4.117 10.5833 4.35033 10.55L9.20033 10.125L11.0753 5.67495C11.1587 5.47495 11.288 5.32495 11.4633 5.22495C11.6387 5.12495 11.8177 5.07495 12.0003 5.07495C12.1837 5.07495 12.3627 5.12495 12.5373 5.22495C12.712 5.32495 12.8413 5.47495 12.9253 5.67495L14.8003 10.125L19.6503 10.55C19.8837 10.5833 20.067 10.6583 20.2003 10.775C20.3337 10.8916 20.4337 11.0416 20.5003 11.225C20.567 11.4083 20.5797 11.596 20.5383 11.788C20.497 11.98 20.3927 12.1506 20.2253 12.3L16.5503 15.475L17.6503 20.2C17.7003 20.4166 17.6837 20.6126 17.6003 20.788C17.517 20.9633 17.4003 21.109 17.2503 21.225C17.1003 21.3416 16.9253 21.4083 16.7253 21.4249C16.5253 21.4416 16.3337 21.3916 16.1503 21.275L12.0003 18.775Z" fill="#F0B90B"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span class="text-sm md:text-lg whitespace-nowrap font-bold text-[#258AFF]">Sở hữu Tài khoản KHO sử dụng trong 1 năm.</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="max-w-[320px] w-full">
             <button
-                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
+                class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 font-semibold text-base md:text-2xl transition-all duration-200 hover:opacity-70 ">
                 <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
         </div>
                 </div>
@@ -65,9 +86,10 @@
     <div class="w-full h-full order-last md:order-first">
         <img src="{{asset('home/img/IMGk.png')}}" class="w-full" alt="">
     </div>
-    <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Hệ thống quản lý <strong
-                class="text-[#1E90FF] font-semibold">V-Kho </strong> là gì?</h2>
+    <div class="flex flex-col gap-6 order-first md:order-last text-center ">
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F] flex justify-center items-center gap-[8px]">Hệ thống quản lý <div class="w-[103px] h-36px]">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
+                </div> là gì?</h2>
         <div class="flex flex-col gap-4">
         <div class="flex items-start gap-4">
             <div class="w-[21px]">
@@ -79,7 +101,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là nơi lưu trữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là nơi lưu trữ hàng hóa, sản phẩm của Nhà cung cấp, mang lại khả năng lưu trữ bảo quản và chuẩn bị hàng hóa cho doanh nghiệp, đảm bảo số lượng hàng hóa luôn được cung ứng liền mạch đến tay người tiêu dùng cả về chất lượng và số lượng.</span>
         </div>
         <div class="flex items-start gap-4">
             <div class="w-[21px]">
@@ -103,7 +125,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">V-Kho là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của V-Done</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của VDone</span>
         </div>
         </div>
 
@@ -112,8 +134,10 @@
 </div>
 <div class="md:max-w-[1440px] py-4 px-[20px] md:px-20 w-full mx-auto md:my-10 xl:my-24">
     <div class="flex flex-col items-center gap-6 md:gap-10 ">
-        <h2 class="text-lg lg:text-3xl xl:text-4xl text-[#343434] font-semibold text-center">Quy trình trở thành <strong class="text-[#1E90FF] font-bold">V-Kho</strong></h2>
-        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký V-Kho đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
+        <h2 class=" text-lg sm:text-4xl  text-[#343434] font-semibold text-center flex items-center gap-[8px]">Quy trình trở thành <div class="w-[103px] h-36px] inline">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
+                </div></h2>
+        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký KHO đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] xl:gap-[30px] max-w-[650px] lg:max-w-[900px] xl:max-w-[1440px] mx-auto">
             <div class="item-qt flex flex-col items-center gap-[30px] p-3 py-10">
                 <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
@@ -123,7 +147,7 @@
                 <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin chỉ với 2 bước sau:</span>
                 <div class="flex items-center gap-3">
                     <div class="bg-[#FFBA49] text-[#FFF] py-[6px] px-[10px] rounded-[5px] text-sm xl:text-xl font-semibold max-w-[80px] whitespace-nowrap">Bước 1</div>
-                    <span class="text-[#525252] text-sm xl:text-lg font-medium">Cung cấp thông tin Người/Cơ quan quản lý kho.</span>
+                    <span class="text-[#525252] text-sm xl:text-lg font-medium">Cung cấp thông tin Người/Cơ quan quản lý KHO</span>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="bg-[#FFBA49] text-[#FFF] py-[6px] px-[10px] rounded-[5px] text-sm xl:text-xl font-semibold max-w-[80px] whitespace-nowrap">Bước 2</div>
@@ -135,7 +159,7 @@
                    2
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tiếp nhận hàng hóa từ Nhà cung cấp V-Store</h2>
-                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng V-Kho của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng KHO của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
 
             </div>
             <div class="item-qt flex flex-col items-center gap-[30px] p-3 py-10">
@@ -143,7 +167,7 @@
                    3
                 </div>
                 <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Chuyển giao sản phẩm cho Đối tác vận chuyển</h2>
-                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Các đơn vị vận chuyển sẽ đến V-Kho lấy hàng để giao đến tay người dùng.</span>
+                <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Các đơn vị vận chuyển sẽ đến KHO lấy hàng để giao đến tay người dùng.</span>
 
             </div>
         </div>
@@ -151,9 +175,9 @@
 </div>
 <div class="bg-gra">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 place-items-center w-full md:max-w-[1440px] mx-auto md:p-16 p-4">
-    <div class="flex flex-col gap-6 order-last md:order-first text-center md:text-left">
-        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F]">Lợi ích tham gia <strong
-                class="text-[#1E90FF] font-semibold">V-Kho </strong></h2>
+    <div class="flex flex-col gap-6 order-last md:order-first text-center ">
+        <h2 class="font-semibold text-lg sm:text-4xl text-[#1D293F] flex justify-center items-center gap-[8px]">Lợi ích tham gia <div class="w-[103px] h-36px]">
+                    <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt=""></h2>
         <div class="flex flex-col gap-4">
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -177,7 +201,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Được cung cấp website quản trị riêng cho tính năng quản lý kho. </span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Được cung cấp website quản trị riêng cho tính năng quản lý KHO. </span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -189,7 +213,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của V-Store chờ gửi hàng vào <br> V-Kho.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của V-Store chờ gửi hàng vào <br> KHO.</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -226,7 +250,7 @@
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống V-DONE, V-Store.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống VDONE, V-Store.</span>
         </div>
         </div>
 

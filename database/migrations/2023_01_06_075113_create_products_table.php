@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('manufacturer_name')->nullable()->comment('Tên nhà sản xuất');
             $table->string('manufacturer_address')->nullable()->comment('Địa chỉ nhà sản xuất');
             $table->string('import_unit')->nullable()->comment('Đơn vị nhập khẩu');
-            $table->float('price',20,2)->nullable()->comment('Giá bán sản phẩm');
+            $table->float('price', 20, 2)->nullable()->comment('Giá bán sản phẩm');
             $table->integer('unit')->nullable()->comment('Loại dơn vị sản xuất');
             $table->integer('min_product_sale')->nullable()->comment('Số sản phẩm mua ít nhất để giảm giá');
             $table->integer('prepay')->nullable()->comment('Thanh toán trước');
@@ -42,19 +42,20 @@ return new class extends Migration {
             $table->integer('vstore_id')->nullable()->comment('Id nhà phẩn phối');
             $table->integer('user_id')->nullable()->comment('Id sở hữu sản phẩm');
             $table->string('origin')->nullable()->comment('Xuất sứ');
-            $table->float('with',20,2)->nullable()->comment('Chiều rộng');
+            $table->float('with', 20, 2)->nullable()->comment('Chiều rộng');
             $table->integer('sku_id')->nullable()->comment('Mã sản phẩm');
             $table->string('note')->nullable()->comment('Mã sản phẩm');
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');
-            $table->float('vat',20,2)->nullable();
+            $table->float('vat', 20, 2)->nullable();
             $table->string('code')->nullable();
             $table->string('unit_name')->nullable()->comment('Tên đơn vị sẳn xuất');
             $table->longText('unit_images')->nullable()->comment('Ảnh chứng minh');
             $table->string('video')->nullable()->comment('video sản phẩm');
             $table->string('material')->nullable();
-            $table->float('percent_discount',20,2)->nullable()->comment('Số phần trăm giảm giá');
+            $table->float('percent_discount', 20, 2)->nullable()->comment('Số phần trăm giảm giá');
             $table->string('import_address')->nullable()->comment('Địa chỉ nơi nhập khẩu');
+            $table->double('view', 20)->default(0)->comment('Lượt xem sản phẩm');
             $table->timestamps();
         });
     }

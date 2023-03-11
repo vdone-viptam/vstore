@@ -208,7 +208,8 @@
                         @csrf
                         <div class="flex flex-col item-center w-full  flex-wrap md:flex-nowrap mt-2">
                             <span class="text-[#A4B6C6] text-sm ">Số dư tài sản:  </span>
-                            <span class="text-[#4062FF] font-medium text-lg w-full">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,'.','.')}} VNĐ</span>
+                            <span class="text-[#4062FF] font-medium text-lg w-full" id="money1"
+                                  data-money="{{\Illuminate\Support\Facades\Auth::user()->money}}">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,'.','.')}} VNĐ</span>
                         </div>
                     </div>
                 </div>
@@ -337,7 +338,7 @@
         document.querySelector('.btnGra').classList.add('opacity-70');
         const money = document.getElementById('money');
         money.addEventListener('keyup', (e) => {
-            if (e.target.value >= {{\Illuminate\Support\Facades\Auth::user()->money}} || !e.target.value) {
+            if (e.target.value >= Number(document.querySelector('#money1').dataset.money) || !e.target.value) {
                 document.querySelector('.btnGra').setAttribute('disabled', 'true');
                 document.querySelector('.btnGra').classList.add('opacity-70');
             } else {

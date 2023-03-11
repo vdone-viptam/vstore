@@ -68,7 +68,7 @@
                 <li><a href="{{asset('#gioi_thieu')}}" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
                 <li><a href="{{asset('#sale')}}" class="text-lg text-[#2C2C37] ">Sales</a></li>
                 <li><a href="{{asset('#noi_bat')}}" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
-                <li><a href="{{asset('#nha_cung_cap')}}" class="text-lg text-[#2C2C37] ">Nhà cung cấp</a></li>
+                <li><a href="{{asset('#nha_cung_cap')}}" class="text-lg text-[#2C2C37] ">Vstore</a></li>
             </ul>
     </div>
     <div class="max-w-[1320px] flex justify-between items-center px-[15px] xl:px-0 lg:hidden relative">
@@ -250,7 +250,7 @@
                         </div>
                         <div class=" p-[10px] md:p-[20px]">
                             <div class="flex flex-col">
-                                <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">Giày học sinh</h2>
+                                <h2 class="text-[#2C2C37] text-base md:text-2xl font-bold">{{\Illuminate\Support\Str::limit($pro->name,20)}}</h2>
                                 <fieldset class="rating">
                                     <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
                                     <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>

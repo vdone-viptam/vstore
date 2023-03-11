@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -52,7 +55,10 @@ class StorageController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json($validator->errors());
+                return response()->json([
+                    'success' => false,
+                    'messages' => $validator->errors()
+                ]);
             }
 
 
@@ -63,7 +69,10 @@ class StorageController extends Controller
                 ->count();
 
             if ($checkEmail > 0) {
-                return response()->json(['email' => 'Email đã được đăng ký.']);
+                return response()->json([
+                    'success' => false,
+                    'messages' => ['email' => 'Email đã được đăng ký.']
+                ]);
             }
 
             $checkTax = DB::table('users')
@@ -71,7 +80,10 @@ class StorageController extends Controller
                 ->where('role_id', 4)
                 ->count();
             if ($checkTax > 0) {
-                return response()->json(['tax_code' => 'Mã số thuế đã được đăng ký.']);
+                return response()->json([
+                    'success' => false,
+                    'messages' => ['tax_code' => 'Mã số thuế đã được đăng ký.']
+                ]);
             }
 
             $checkTax2 = DB::table('users')
@@ -79,7 +91,10 @@ class StorageController extends Controller
                 ->where('role_id', 4)
                 ->count();
             if ($checkTax2 > 0) {
-                return response()->json(['name' => 'Tên đã tồn tại.']);
+                return response()->json([
+                    'success' => false,
+                    'messages' => ['name' => 'Tên đã tồn tại.']
+                ]);
             }
 
             $user = new User();
@@ -100,25 +115,27 @@ class StorageController extends Controller
             $warehouse = $request->warehouse ?? '';
             $normal_storage = $request->normal_storage ?? $request->volume;
             $file = [];
-            if ($request->hasFile('image_storage')) {
 
+            foreach ($request->image_storage as $image) {
+                $file = base64_decode($image);
+                $folderName = '/image/users/';
+                $safeName = str_random(10) . '.' . 'png';
+                $destinationPath = public_path() . $folderName;
+                file_put_contents(public_path() . '/image/users/' . $safeName, $file);
 
-                foreach ($request->file('image_storage') as $img) {
-                    $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                    $img->move(public_path('image/users'), $filestorage);
-                    $file[] = 'image/users/' . $filestorage;
-                }
-
-
+                //save new file path into db
+                $file[] = $safeName;
             }
             $file1 = [];
-            if ($request->hasFile('image_pccc')) {
+            foreach ($request->image_pccc as $image) {
+                $file = base64_decode($image);
+                $folderName = '/image/users/';
+                $safeName = str_random(10) . '.' . 'png';
+                $destinationPath = public_path() . $folderName;
+                file_put_contents(public_path() . '/image/users/' . $safeName, $file);
 
-                foreach ($request->file('image_pccc') as $img) {
-                    $filepccc = date('YmdHi') . $img->getClientOriginalName();
-                    $img->move(public_path('image/users'), $filepccc);
-                    $file1[] = 'image/users/' . $filepccc;
-                }
+                //save new file path into db
+                $file1[] = $safeName;
             }
             $storage_information = [
                 'floor_area' => $request->floor_area,
@@ -135,10 +152,16 @@ class StorageController extends Controller
             $user->save();
             DB::commit();
 
-            return response()->json(['message' => 'Đăng ký thành công']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Đăng ký thành công'
+            ]);
         } catch (\Exception $exception) {
             DB::rollBack();
-            return response()->json(['message' => $exception->getMessage()]);
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ]);
         }
     }
 
@@ -154,7 +177,10 @@ class StorageController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json($validator->errors());
+                return response()->json([
+                    'success' => false,
+                    'messages' => $validator->errors()
+                ]);
             }
 
             if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => 4]) || Auth::attempt(['code' => $request->email, 'password' => $request->password, 'role_id' => 4])) {
@@ -165,20 +191,79 @@ class StorageController extends Controller
                     'status_code' => 200,
                     'access_token' => $tokenResult,
                     'token_type' => 'Bearer',
-                    'user' => $user
+                    'user' => $user,
+                    'success' => true
                 ]);
             }
             return response()->json([
                 'status_code' => 500,
+                'success' => false,
                 'message' => 'Tài khoản, mật khẩu không chính xác',
             ]);
 
         } catch (\Exception $error) {
             return response()->json([
                 'status_code' => 500,
+                'success' => false,
                 'message' => 'Error in Login',
                 'error' => $error,
             ]);
         }
     }
+
+    public function index(Request $request)
+    {
+
+//        return Auth::user();
+        $limit = $request->limit ?? 10;
+        $products = Category::join('products', 'categories.id', '=', 'products.category_id')
+            ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
+            ->groupBy('products.id')
+            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id', 'product_warehouses.amount');
+
+//        return Auth::user();
+
+        if ($request->key_search) {
+
+            $products = $products->where('products.publish_id', 'like', '%' . $request->key_search . '%')
+                ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
+        }
+        $products = $products->where('warehouses.user_id', Auth::id())
+            ->where('product_warehouses.status', '!=', 3)
+            ->paginate($limit);
+        foreach ($products as $pro) {
+            $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ""))[0]->amount ?? 0;
+        }
+        $this->v['products'] = $products;
+        $this->v['params'] = $request->all();
+//        return  $this->v;
+        return response()->json([
+            'status_code' => 200,
+            'data' => $this->v['products']
+        ], 200);
+//        return view('screens.storage.product.index', $this->v);
+    }
+
+    public function request(Request $request)
+    {
+        $limit = $request->limit ?? 10;
+        $this->v['requests'] = Product::select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
+            ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
+            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
+        if ($request->key_search) {
+            $this->v['requests'] = $this->v['requests']->where('product_warehouses.id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
+                ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
+        }
+        $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status',[0,1,5])->where('warehouses.user_id', Auth::id())->paginate($limit);
+
+        $this->v['params'] = $request->all();
+        return response()->json([
+            'status_code' => 200,
+            'data' => $this->v['requests']
+        ], 200);
+//        return view('screens.storage.product.request', $this->v);
+
+    }
+
 }

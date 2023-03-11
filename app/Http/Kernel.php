@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\CheckRoleAdmin;
 use App\Http\Middleware\CheckRoleNCC;
 use App\Http\Middleware\CheckRoleVstore;
+use App\Http\Middleware\CheckToken;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -46,6 +47,7 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
     ];
 
@@ -71,5 +73,6 @@ class Kernel extends HttpKernel
         'NCC' => \App\Http\Middleware\CheckRoleNCC::class,
         'vStore' => \App\Http\Middleware\CheckRoleVstore::class,
         'storage' => \App\Http\Middleware\CheckRoleStorage::class,
+        'checkToken'=>\App\Http\Middleware\CheckToken::class,
     ];
 }
