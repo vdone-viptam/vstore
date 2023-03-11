@@ -33,6 +33,7 @@ class  VShopController extends Controller
         $validator = Validator::make($request->all(), [
             'id_pdone' => 'required',
             'avatar' => 'url',
+            'vshop_name'=>'string'
 
         ]);
         if ($validator->fails()) {
@@ -67,7 +68,7 @@ class  VShopController extends Controller
      */
     public function index(Request $request){
         $limit = $request->limit ??10;
-        $vshop = Vshop::paginate($limit);
+        $vshop = Vshop::select('id','id_pdone','vshop_name as name','phone_number','products_sold','avatar','description','products_sold','address')->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
@@ -215,7 +216,7 @@ class  VShopController extends Controller
     {
 
         try {
-            $address = DB::table('vshop')->select('name', 'address', 'address', 'phone_number', 'id')->where('id_pdone', $id)->first();
+            $address = DB::table('vshop')->select('name', 'address', 'phone_number', 'id')->where('id_pdone', $id)->first();
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
@@ -378,7 +379,7 @@ class  VShopController extends Controller
     /**
      * Cập nhập thông tin Vshop
      *
-     * API này dùng để lấy thông tin cá nhân để dùng cho việc xem và chỉnh sửa
+     * API này dùng để cập nhập tin cá nhân
      *
      * @param $id id Vshop
      * @bodyParam avatar Ảnh đại diện

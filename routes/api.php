@@ -61,7 +61,10 @@ Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostControlle
 //});
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
-
+//        Route::get('/address',[\App\Http\Controllers\Api\AddressController::class,'import']);
+          Route::get('/get-province',[\App\Http\Controllers\Api\AddressController::class,'getProvince']);
+          Route::get('/get-district/{id}',[\App\Http\Controllers\Api\AddressController::class,'getDistrict']);
+          Route::get('/get-wards/{id}',[\App\Http\Controllers\Api\AddressController::class,'getWards']);
 
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);

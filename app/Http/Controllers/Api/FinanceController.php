@@ -55,10 +55,10 @@ class FinanceController extends Controller
     {
         try {
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('id_pdone', $id_pdone)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id')
+                ->where('id_pdone', $id_pdone)
+                ->first()
+                ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -140,10 +140,10 @@ class FinanceController extends Controller
             }
 
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('id_pdone', $request->id_pdone)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id')
+                ->where('id_pdone', $request->id_pdone)
+                ->first()
+                ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -198,10 +198,10 @@ class FinanceController extends Controller
             }
 
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('id_pdone', $request->id_pdone)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id')
+                ->where('id_pdone', $request->id_pdone)
+                ->first()
+                ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -210,6 +210,12 @@ class FinanceController extends Controller
                 ], 404);
             }
 
+            if (DB::table('wallets')->where('user_id' , $vshop_id)->count() == 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tài khoản ngân hàng đã tồn tại'
+                ], 401);
+            }
             DB::table('wallets')->insert([
                 'account_number' => $request->account_number,
                 'bank_id' => $request->bank_id,
@@ -218,7 +224,7 @@ class FinanceController extends Controller
             ]);
             return response()->json([
                 'success' => true,
-                'message' => 'Thêm mới tài khoản ví thành công'
+                'message' => 'Thêm mới tài khoản ngân hàng thành công'
             ], 201);
 
         } catch (\Exception $e) {
