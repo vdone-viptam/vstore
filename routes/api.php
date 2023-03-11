@@ -60,7 +60,7 @@ Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostControlle
 //    return config('domain.api');
 //});
 //Route::group(['domain' => config('domain.api')], function () {
-Route::domain(config('domain.api'))->group(function () {
+Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
 
     Route::prefix('products')->group(function () {

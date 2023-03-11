@@ -99,7 +99,7 @@
             {{--                <span class="text-title">Quay lại</span>--}}
             {{--            </a>--}}
             <div class="w-[162px]">
-                <img src="{{asset('asset/images/logokho.png')}}" alt="">
+                <img src="{{asset('asset/images/titleK.png')}}" alt="">
             </div>
             <h1 class="text-4xl font-medium max-w-[520px]">Đăng ký</h1>
 

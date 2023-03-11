@@ -45,7 +45,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-
+//        return config('domain.token');
         try {
 
             $limit = $request->limit ?? 10;

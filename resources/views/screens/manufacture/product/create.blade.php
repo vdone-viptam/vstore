@@ -520,6 +520,7 @@ Thêm địa chỉ mới</a>
                     });
                 })
             }
+            abc();
         </script>
     @endif
 @endsection

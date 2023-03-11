@@ -46,7 +46,7 @@
     <div class="flex  justify-center items-center my-4 gap-10 w-[305px]">
     <a href="{{route('screens.storage.dashboard.index')}}" class="">
         <div class="w-[195px] h-[45px]">
-        <img class="w-full object-contain" src="{{asset('asset/images/logokho.png')}}" alt="">
+        <img class="w-full object-contain" src="{{asset('home/img/titleK.png')}}" alt="">
         </div>
     </a>
     <div class="w-[20px] h-[20px] cursor-pointer hover:opacity-70 transition-all duration-200 btn-small-menu"> <img class="w-full" src="{{asset('asset/images/iconmenu.png')}}" alt=""></div>
