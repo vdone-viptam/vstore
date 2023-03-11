@@ -83,6 +83,22 @@ class  VShopController extends Controller
         return response()->json($pdone);
     }
     /**
+     * danh sách chiết khấu cho hàng nhập sẵn
+     *
+     * API dùng để tính tỉ lệ chiết khấu cho nhập hàng sẵn
+     *
+     * @urlParam id id sản phẩm
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getBuyMoreDiscount($id){
+        $buy_more= BuyMoreDiscount::select('start','discount','deposit_money')->where('product_id',$id)->get();
+        return response()->json([
+            'status_code' => 200,
+            'data' => $buy_more,
+        ]);
+    }
+    /**
      * Tỉ lệ chiết khấu mua nhiều giảm giá
      *
      * API dùng để tính tỉ lệ chiết khấu cho nhập hàng sẵn
@@ -114,13 +130,15 @@ class  VShopController extends Controller
                 ->where('start', '<=', $request->total)
                 ->where('end', '>', $request->total)
                 ->where('product_id', $request->id)
-                ->first()->discount ?? 0;
+            ->select('discount','deposit_money')
+                ->first();
 //        return $discount;
         if ($discount == 0) {
             $discount = DB::table('buy_more_discount')->select('discount')
                 ->where('end', 0)
                 ->where('product_id', $request->id)
-                ->first()->discount;
+                ->select('discount','deposit_money')
+                ->first();
         }
         return response()->json([
             'status_code' => 200,
