@@ -582,7 +582,11 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     {
         if ($request->type == 2) {
             $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
-        } else {
+        }elseif ($request->type==3){
+            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId='.$request->value);
+//            https://partner.viettelpost.vn/v2/categories/listWards?districtId=
+        }
+        else {
             $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 
         }
