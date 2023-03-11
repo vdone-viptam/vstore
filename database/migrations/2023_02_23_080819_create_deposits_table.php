@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('code');
             $table->integer('user_id');
             $table->double('old_money', 20, 2)->default(0);
+            $table->integer('type')->default(1);
             $table->timestamps();
         });
     }

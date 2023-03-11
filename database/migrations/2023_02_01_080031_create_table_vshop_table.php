@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('district')->nullable()->comment('quận,huyện');
             $table->integer('province')->nullable()->comment('tỉnh thành');
             $table->string('address')->nullable();
+            $table->double('money', 20, 2)->default(0);
             $table->integer('products_sold')->default(0);
             $table->timestamps();
         });
