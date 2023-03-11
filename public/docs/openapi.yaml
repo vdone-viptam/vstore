@@ -37,7 +37,7 @@ paths:
             schema:
               type: object
               properties:
-                id_pdone:
+                pdone_id:
                   type: mã
                   description: 'user của người dùng mua hàng'
                   example: laborum
@@ -5094,7 +5094,7 @@ paths:
             value: veniam
       -
         in: path
-        name: id_pdone
+        name: pdone_id
         description: 'Optional parameter. dùng để check sản phẩm đã được tiếp thị hay chưa'
         required: true
         schema:
@@ -5385,7 +5385,7 @@ paths:
             schema:
               type: object
               properties:
-                id_pdone:
+                pdone_id:
                   type: id
                   description: 'của pdone'
                   example: quis
@@ -5429,7 +5429,7 @@ paths:
             schema:
               type: object
               properties:
-                id_pdone:
+                pdone_id:
                   type: id
                   description: 'của pdone'
                   example: consectetur
@@ -5885,7 +5885,7 @@ paths:
                   data:
                     -
                       id: 1
-                      id_pdone: pdone123
+                      pdone_id: pdone123
                       name: ádasda
                       name_adress: null
                       address: 0
@@ -5899,7 +5899,7 @@ paths:
                       updated_at: '2023-02-28T17:49:10.000000Z'
                     -
                       id: 2
-                      id_pdone: pdone12121
+                      pdone_id: pdone12121
                       name: ''
                       name_adress: null
                       address: 0
@@ -5923,7 +5923,7 @@ paths:
                     example:
                       -
                         id: 1
-                        id_pdone: pdone123
+                        pdone_id: pdone123
                         name: ádasda
                         name_adress: null
                         address: 0
@@ -5937,7 +5937,7 @@ paths:
                         updated_at: '2023-02-28T17:49:10.000000Z'
                       -
                         id: 2
-                        id_pdone: pdone12121
+                        pdone_id: pdone12121
                         name: ''
                         name_adress: null
                         address: 0
@@ -5955,7 +5955,7 @@ paths:
                         id:
                           type: integer
                           example: 1
-                        id_pdone:
+                        pdone_id:
                           type: string
                           example: pdone123
                         name:
@@ -6090,7 +6090,7 @@ paths:
             schema:
               type: object
               properties:
-                id_pdone:
+                pdone_id:
                   type: Mã
                   description: 'p done required'
                   example: repellendus
@@ -6158,7 +6158,7 @@ paths:
             schema:
               type: object
               properties:
-                id_pdone:
+                pdone_id:
                   type: string
                   description: 'Must not be greater than 255 characters.'
                   example: wgnhyaxifdlutiss
@@ -6175,7 +6175,7 @@ paths:
                   description: 'Must not be greater than 255 characters.'
                   example: cwcmiuitfoabliglzlehqn
               required:
-                - id_pdone
+                - pdone_id
                 - name
                 - address
                 - phone_number

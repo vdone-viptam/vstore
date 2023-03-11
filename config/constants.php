@@ -6,6 +6,10 @@ return [
         'pay'=>1,
         'unpaid'=>2
     ],
+    'orderStatus' => [
+        'wait_for_confirmation' => 2,
+        'confirmation' => 1
+    ],
     'methodPayment' => [
         'atm_card' => 'ATM_CARD',
         'credit_card' => 'CREDIT_CARD',
@@ -22,6 +26,11 @@ return [
         'checkout' => 1
     ],
     'discountType'=>[
+        'ncc' => 1,
+        'vstore' => 2,
+        'vshop' => 3
+    ],
+    'typeDiscount' => [
         'ncc' => 1,
         'vstore' => 2,
         'vshop' => 3

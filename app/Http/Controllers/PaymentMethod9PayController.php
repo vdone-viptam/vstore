@@ -223,7 +223,7 @@ class PaymentMethod9PayController extends Controller
         $validator = Validator::make($request->all(), [
             'invoice_no' => 'required',
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
-            'id_pdone' => 'required',
+            'pdone_id' => 'required',
             'name' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
@@ -234,7 +234,7 @@ class PaymentMethod9PayController extends Controller
         $bill = new Bill();
         $bill->code = Str::random('11');
         $bill->name = $request->name;
-        $bill->id_pdone = $request->id_pdone;
+        $bill->pdone_id = $request->pdone_id;
         $bill->phone_number = $request->phone_number;
         $bill->address = $request->address;
         $bill->method_payment = $method;

@@ -25,13 +25,13 @@ class  VShopController extends Controller
      *
      * API để thêm 1 Vshop
      *
-     * @bodyParam  id_pdone id của Vshop
+     * @bodyParam  pdone_id id của Vshop
      * @bodyParam  avatar url ảnh đại diện
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
-            'id_pdone' => 'required',
+            'pdone_id' => 'required',
             'avatar' => 'url',
 
         ]);
@@ -41,12 +41,12 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ]);
         }
-        $vshop = Vshop::where('id_pdone',$request->id_pdone)->first();
+        $vshop = Vshop::where('pdone_id',$request->pdone_id)->first();
         if (!$vshop){
             $vshop= new Vshop();
 
         }
-        $vshop->id_pdone = $request->id_pdone;
+        $vshop->pdone_id = $request->pdone_id;
         $vshop->avatar = $request->avatar ??'';
         $vshop->save();
         return response()->json([
@@ -78,7 +78,7 @@ class  VShopController extends Controller
     public function getProductByIdPdone(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $pdone = Vshop::select('*')->join('products', 'vshop.id_product', '=', 'products.id')->where('id_pdone', $request->id_pdone)->orderBy('vshop.id', 'desc')->paginate($limit);
+        $pdone = Vshop::select('*')->join('products', 'vshop.id_product', '=', 'products.id')->where('pdone_id', $request->pdone_id)->orderBy('vshop.id', 'desc')->paginate($limit);
 
         return response()->json($pdone);
     }
@@ -151,7 +151,7 @@ class  VShopController extends Controller
      *
      * API dùng thêm địa chỉ giao hàng của Vshop
      *
-     * @bodyParam  id_pdone id của vshop
+     * @bodyParam  pdone_id id của vshop
      * @bodyParam  name Tên người nhận
      * @bodyParam  address địa chỉ chi tiết
      * @bodyParam  phone_number Số điện thoại
@@ -163,7 +163,7 @@ class  VShopController extends Controller
     public function storeAddressReceive(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pdone' => 'required|max:255',
+            'pdone_id' => 'required|max:255',
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
@@ -182,7 +182,7 @@ class  VShopController extends Controller
 
 
             DB::table('vshop')->insert([
-                'id_pdone' => $request->id_pdone,
+                'pdone_id' => $request->pdone_id,
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
@@ -215,7 +215,7 @@ class  VShopController extends Controller
     {
 
         try {
-            $address = DB::table('vshop')->select('name', 'address', 'address', 'phone_number', 'id')->where('id_pdone', $id)->first();
+            $address = DB::table('vshop')->select('name', 'address', 'address', 'phone_number', 'id')->where('pdone_id', $id)->first();
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
@@ -235,7 +235,7 @@ class  VShopController extends Controller
      * API này sẽ lưu mới mã giảm giá
      *
      * @param Request $request
-     * @bodyParam id_pdone Mã p done required
+     * @bodyParam pdone_id Mã p done required
      * @bodyParam product_id Mã sản phẩm required exits:products
      * @bodyParam start_date Ngày bắt đầu required date_format:Y/m/d after:Today
      * @bodyParam end_date Ngày kết thúc required date_format:Y/m/d after:start_date
@@ -246,7 +246,7 @@ class  VShopController extends Controller
     public function createDiscount(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pdone' => 'required',
+            'pdone_id' => 'required',
             'product_id' => 'required|exists:products,id',
             'start_date' => 'required|date_format:Y/m/d|after:' . Carbon::now(),
             'end_date' => 'required|date_format:Y/m/d|after:start_date',
@@ -261,7 +261,7 @@ class  VShopController extends Controller
         }
         $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
 
-        if (DB::table('discounts')->where('user_id', $request->id_pdone)->where('product_id', $request->product_id)->count() > 0) {
+        if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('product_id', $request->product_id)->count() > 0) {
             return response()->json([
                 'status_code' => 401,
                 'error' => 'Mã giảm giá đã tồn tại',
@@ -284,7 +284,7 @@ class  VShopController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'type' => 3,
-                'user_id' => $request->id_pdone
+                'user_id' => $request->pdone_id
             ]);
             return response()->json([
                 'status_code' => 201,
@@ -328,7 +328,7 @@ class  VShopController extends Controller
         }
         try {
             $data = [
-                'id_pdone' => $id,
+                'pdone_id' => $id,
                 'name' => $request->name,
                 'phone_number' => $request->phone_number,
                 'district' => $request->district,
@@ -338,7 +338,7 @@ class  VShopController extends Controller
             ];
 
 
-            $model = DB::table('vshop')->where('id_pdone', $id)->update($data);
+            $model = DB::table('vshop')->where('pdone_id', $id)->update($data);
             return response()->json([
                 'status_code' => 201,
                 'data' => 'Cập nhật địa chỉ thành công',
@@ -361,8 +361,8 @@ class  VShopController extends Controller
      */
 
     public function getProfile($id){
-        $vshop = Vshop::where('id_pdone',$id)
-            ->select('id','id_pdone','avatar','vshop_name','description')
+        $vshop = Vshop::where('pdone_id',$id)
+            ->select('id','pdone_id','avatar','vshop_name','description')
             ->first();
         if (!$vshop){
             return response()->json([
@@ -401,7 +401,7 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ]);
         }
-        $vshop =Vshop::where('id_pdone',$id)->first();
+        $vshop =Vshop::where('pdone_id',$id)->first();
         if (!$vshop){
             $vshop = new Vshop();
         }

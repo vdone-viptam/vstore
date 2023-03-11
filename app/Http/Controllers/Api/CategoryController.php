@@ -92,7 +92,7 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @param $category_id
-     * @urlParam id_pdone Id user Vshop (truyền khi user đang đăng nhập là đang là VSHOP)
+     * @urlParam pdone_id Id user Vshop (truyền khi user đang đăng nhập là đang là VSHOP)
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProductAndVstoreByCategory(Request $request, $category_id)
@@ -119,8 +119,8 @@ class CategoryController extends Controller
                 unset($pr->images);
                 $data_vstore[] = $pr->vstore_id;
                 unset($pr->vstore_id);
-                if ($request->id_pdone) {
-                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('id_pdone', $request->id_pdone)->count();
+                if ($request->pdone_id) {
+                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('pdone_id', $request->pdone_id)->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                     $pr->available_discount = $more_dis ?? 0;
                 }
@@ -147,7 +147,7 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @param $category_id id danh mục
-     * @urlParam id_pdone Id user Vshop (truyền khi user là đang đăng nhập là VSHOP)
+     * @urlParam pdone_id Id user Vshop (truyền khi user là đang đăng nhập là VSHOP)
      * @urlParam orderById Sắp sếp sản phẩm mới nhất asc|desc Mặc định asc VD: orderById=asc
      * @urlParam amount_product_sold Sắp sếp sản phẩm bán chạy asc|desc VD: amount_product_sold=desc
      * @urlParam orderByPrice Sắp sếp theo giá sản phẩm asc|desc VD: orderByPrice=asc
@@ -193,8 +193,8 @@ class CategoryController extends Controller
 
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
-                if ($request->id_pdone) {
-                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('id_pdone', $request->id_pdone)->count();
+                if ($request->pdone_id) {
+                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('pdone_id', $request->pdone_id)->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                     $pr->available_discount = $more_dis ?? 0;
                 }

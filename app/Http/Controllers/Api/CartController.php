@@ -8,6 +8,7 @@ use App\Models\CartItemV2;
 use App\Models\CartV2;
 use App\Models\Discount;
 use App\Models\Product;
+use App\Models\Vshop;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -39,9 +40,6 @@ class CartController extends Controller
             'user_id' => 'required',
             'vshop_id' => 'required',
         ]);
-        $productId = $request->product_id;
-        $quantity = $request->quantity;
-        $vshopId = $request->vshop_id;
 
         if ($validator->fails()) {
             return response()->json([
@@ -49,6 +47,10 @@ class CartController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+
+        $productId = $request->product_id;
+        $quantity = $request->quantity;
+        $vshopId = $request->vshop_id;
         $userId = $request->user_id;
         $cart = CartV2::where('user_id', $userId)
             ->where('id', $id)
@@ -63,7 +65,8 @@ class CartController extends Controller
                 ->where('vshop_id', $vshopId)
                 ->where('product_id', $productId)->delete();
             return response()->json([
-                "status_code" => 200
+                "status_code" => 200,
+                "delete" => true
             ]);
         }
 
@@ -76,6 +79,8 @@ class CartController extends Controller
 
         return response()->json([
             "status_code" => 200,
+            "delete" => false,
+            "quantity" => $quantity
         ]);
     }
 
@@ -106,13 +111,14 @@ class CartController extends Controller
                 'products.name',
                 'products.price',
                 'cart_items_v2.quantity',
-                'cart_items_v2.discount',
                 'cart_items_v2.vshop_id',
                 'vshop.name as name_vshop',
                 'vshop.id as vshop_id_'
             )
             ->get();
+
         $result = [];
+
         foreach ($cartItems as $item) {
             $result[$item['vshop_id']]['vshop'] = [
                 "name" => $item->name_vshop,
@@ -122,7 +128,27 @@ class CartController extends Controller
             $result[$item['vshop_id']]['products'][] = $item;
         }
         $result = array_values($result);
+        if($result===[]) {
+            return response()->json([
+                'status_code' => 404,
+                'message' => "Giỏ hàng trống"
+            ], 404);
+        }
+        // tính giảm giả
+        foreach ($result as $item) {
+            $arrProductId = array_column($item['products'], 'id');
+            $discounts = getDiscountProducts($arrProductId, $item['vshop']['id']);
+            foreach ($item['products'] as $product) {
+                foreach ($discounts as $key => $discount) {
+                    if ($product['id'] == $key) {
+                        $product->discount = $discount;
+                    }
+                }
+            }
+        }
+
         return response()->json([
+            'status_code' => 200,
             'cart_id' => $cart->id,
             'carts' => $result
         ]);
@@ -156,14 +182,25 @@ class CartController extends Controller
         }
 
         $vshopId = $request->vshop_id;
+
+        // Kiểm tra xêm vshop tồn tại không ?
+        $vshop = Vshop::where('pdone_id', $vshopId)->first();
+        if(!$vshop) {
+            return response()->json([
+                'status_code' => 404,
+            ], 500);
+        }
+
         $userId = $request->user_id;
         $quantity = $request->quantity;
 
         $product = DB::table('products')
+            // chưa check status products
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
             ->where('products.id', $id)
             ->where('products.status', 2)
-            ->where('vshop_products.id_pdone', $vshopId)
+            ->where('vshop_products.pdone_id', $vshopId)
+            ->select('products.id', 'products.sku_id', 'products.price', 'products.images', 'products.name')
             ->first();
 
         if (!$product) {
@@ -172,6 +209,9 @@ class CartController extends Controller
                 'errors' => 'Sản phẩm chưa niêm yết'
             ], 404);
         }
+
+        $product->discount = getDiscountProduct($product->id, $vshop->id);
+        $product->images = json_decode($product->images);
 
         $cart = CartV2::where('status', config('constants.statusCart.cart'))
             ->where('user_id', $userId)
@@ -184,11 +224,6 @@ class CartController extends Controller
             $cart->save();
         }
 
-        $discountProduct = Discount::where('product_id', $id)
-            ->where('start_date', '<=', Carbon::now())
-            ->where('end_date', '>=', Carbon::now())
-            ->sum('discount');
-
         $checkCartItem = CartItemV2::where('cart_id', $cart->id)
             ->where('product_id', $product->id)
             ->first();
@@ -196,16 +231,14 @@ class CartController extends Controller
         if($checkCartItem) {
             $checkCartItem->quantity += $quantity;
             $checkCartItem->sku = $product->sku_id;
-            $checkCartItem->discount = $discountProduct;
             $checkCartItem->price = $product->price;
             $checkCartItem->save();
         } else {
             $checkCartItem = new CartItemV2();
             $checkCartItem->product_id = $id;
             $checkCartItem->cart_id = $cart->id;
-            $checkCartItem->vshop_id = $vshopId;
+            $checkCartItem->vshop_id = $vshop->id;
             $checkCartItem->sku = $product->sku_id;
-            $checkCartItem->discount = $discountProduct;
             $checkCartItem->price = $product->price;
             $checkCartItem->quantity = $quantity;
             $checkCartItem->save();
@@ -214,7 +247,11 @@ class CartController extends Controller
         return response()->json([
             'status_code' => 201,
             'message' => 'Thêm sản phẩm vào giỏ hàng thành công',
-            'cart_item' => $checkCartItem
+            'cart_item' => $checkCartItem,
+            'product' =>$product
         ], 201);
     }
+
+
+
 }
