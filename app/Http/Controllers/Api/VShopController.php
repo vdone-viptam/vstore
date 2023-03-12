@@ -134,7 +134,7 @@ class  VShopController extends Controller
             ->select('discount','deposit_money')
                 ->first();
 //        return $discount;
-        if ($discount == 0) {
+        if ($discount->discount == 0) {
             $discount = DB::table('buy_more_discount')->select('discount')
                 ->where('end', 0)
                 ->where('product_id', $request->id)

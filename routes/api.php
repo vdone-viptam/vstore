@@ -144,7 +144,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
         Route::put('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
         Route::get('/get-buy-more-discount/{id}',[\App\Http\Controllers\Api\VShopController::class,'getBuyMoreDiscount']);
-//        dd(1);
+
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
             Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);

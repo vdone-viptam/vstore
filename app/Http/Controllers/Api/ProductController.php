@@ -51,7 +51,7 @@ class ProductController extends Controller
             $limit = $request->limit ?? 10;
             $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
             $selected = ['id', 'name', 'publish_id', 'images', 'price'];
-
+            $request->option=1?'asc':'desc';
             if ($request->id_pdone) {
                 $selected[] = 'discount';
             }
@@ -61,11 +61,11 @@ class ProductController extends Controller
             }
             if ($request->order_by == 1) {
 
-                $products = $products->orderBy('id', $request->option);
+                $products = $products->orderBy('id', 'desc');
             }
             if ($request->order_by == 3) {
 
-                $products = $products->orderBy('amount_product_sold', $request->option);
+                $products = $products->orderBy('amount_product_sold', 'desc');
             }
             if ($request->order_by == 2) {
                 $products = $products->orderBy('price', $request->option);
