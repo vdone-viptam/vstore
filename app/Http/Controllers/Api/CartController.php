@@ -110,6 +110,7 @@ class CartController extends Controller
                 'products.images',
                 'products.name',
                 'products.price',
+                'products.vat',
                 'cart_items_v2.quantity',
                 'cart_items_v2.vshop_id',
                 'vshop.name as name_vshop',

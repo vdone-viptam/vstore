@@ -10,9 +10,12 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+
+
     public function index(Request $request, $userId, $cartId): \Illuminate\Http\JsonResponse
     {
 
@@ -34,15 +37,15 @@ class OrderController extends Controller
         }
 
         $fullname = $request->fullname;
-        $email = $request->email;
         $phone = $request->phone;
 
         $order = new Order();
         $order->status = config('constants.orderStatus.wait_for_confirmation');
+        $latestOrder = Order::orderBy('created_at','DESC')->first();
+        $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
         $order->shipping = 0; // Tổng phí ship
         $order->shipping_details = json_encode([]); // Chi tiết phí ship
         $order->total = 0; // Tổng tiền
-        $order->total_discount = 0; // giá sau khi đã sử dụng discount
         $order->save();
 
         $cart = CartV2::where('cart_v2.user_id', $userId)->where('status', config('constants.statusCart.cart'))->first();
@@ -60,10 +63,11 @@ class OrderController extends Controller
                 'products.id',
                 'products.images',
                 'products.name',
+                'products.vat',
                 'products.price',
                 'products.weight',
                 'cart_items_v2.quantity',
-                'cart_items_v2.discount',
+//                'cart_items_v2.discount',
                 'cart_items_v2.vshop_id',
                 'vshop.name as name_vshop',
                 'vshop.id as vshop_id_'
@@ -77,7 +81,7 @@ class OrderController extends Controller
             $orderItem->product_id = $item->id;
             $orderItem->vshop_id = $item->vshop_id_;
             $orderItem->sku = '';
-            $orderItem->discount = $item->discount;
+//            $orderItem->discount = $item->discount;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->quantity;
             $orderItem->save();
@@ -97,19 +101,31 @@ class OrderController extends Controller
             ], 404);
         }
 
+        foreach ($result as $item) {
+            $arrProductId = array_column($item['products'], 'id');
+            $discounts = getDiscountProducts($arrProductId, $item['vshop']['id']);
+            foreach ($item['products'] as $product) {
+                foreach ($discounts as $key => $discount) {
+                    if ($product['id'] == $key) {
+                        $product->discount = $discount;
+                    }
+                }
+            }
+        }
+
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
         $wardsId = $request->wards_id;
         $address = $request->address;
-
-        if($fullname && $email && $phone) {
-            $order->fullname = '';
-            $order->email = '';
-            $order->phone = '';
+        if($fullname && $phone) {
+            $order->fullname = $fullname;
+            $order->phone = $phone;
         }
-
         if($districtId && $provinceId && $wardsId && $address) {
-            $order->address = '';
+            $order->district_id = $districtId;
+            $order->province_id = $provinceId;
+            $order->address = $address;
+
             $totalShipping = 0;
             $total = 0;
             $shippingDetails = [];
@@ -118,8 +134,23 @@ class OrderController extends Controller
                 $weight = 0;
                 foreach ($item['products'] as $pro) {
                     $weight += $pro->weight;
-                    $price += $pro->price;
-                    $total += $pro->price - $pro->price*($pro->discount/100);
+                    $priceDiscount = $pro->price * $pro->quantity;
+                    $totalDiscountSuppliersAndVStore = 0;
+                    if(isset($pro['discount']['discountsFromSuppliers'])) {
+                        $totalDiscountSuppliersAndVStore += $pro['discount']['discountsFromSuppliers'];
+                    }
+                    if(isset($pro['discount']['id'])) {
+                        $totalDiscountSuppliersAndVStore += $pro['discount']['discountsFromVShop'];
+                    }
+                    if($totalDiscountSuppliersAndVStore > 0) {
+                        $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore/100);
+                    }
+                    if(isset($pro['discount']['discountsFromVStore'])) {
+                        $priceDiscount = $priceDiscount - $priceDiscount * ($pro['discount']['discountsFromVStore']/100);
+                    }
+                    $price += $priceDiscount;
+                    //Tính VAT
+                    $price = $price + $price*($pro['vat']/100);
                 }
                 $body = [
                     'SENDER_DISTRICT' => 14, // Cầu giấy
@@ -150,17 +181,20 @@ class OrderController extends Controller
                 $result[$index] = $item;
                 $shippingDetails[] = [
                     "delivery_time" => $kpiHt,
-                    "transport_fee" => $transportFee
+                    "transport_fee" => $transportFee,
+                    "vshop_id" => $item['vshop']['id']
                 ];
+                $total += $price + $transportFee;
             }
             $order->shipping_details = json_encode($shippingDetails);
             $order->shipping = $totalShipping;
             $order->total = $total;
+            $order->pay = config('constants.payStatus.pay');
             $order->save();
         } else {
-            $result['pay'] = false; // Được phép thanh toán hay chưa
+            $result['pay'] = config('constants.payStatus.unpaid'); // Được phép thanh toán hay chưa
         }
-
+        $order->shipping_details = json_decode($order->shipping_details);
         return response()->json([
             'status_code' => 200,
             'cart_id' => $cart->id,

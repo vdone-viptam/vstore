@@ -25,15 +25,13 @@ Route::prefix('cart')->group(function () {
 });
 
 Route::prefix('order')->group(function () {
-    Route::post('/user/{userId}/cart/{cartId}', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    Route::post('/user/{userId}/cart/{cartId}/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    // THANH TOÁN APP
+    Route::post('/{id}/user/{userId}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+    // END THANH TOÁN APP
 });
 
-// THANH TOÁN APP
-//Route::group(['domain' => config('domain.payment')], function () {
-    Route::post('/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
-    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
-//});
-// END THANH TOÁN APP
 
 
 //Route::post('callback-viettel-post', function (Request $req) {

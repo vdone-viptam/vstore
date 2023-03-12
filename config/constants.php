@@ -6,10 +6,18 @@ return [
         'pay'=>1,
         'unpaid'=>2
     ],
+    // ORDER
     'orderStatus' => [
         'wait_for_confirmation' => 2,
-        'confirmation' => 1
+        'confirmation' => 1,
+        'no_confirmation' => 3
     ],
+
+    'payStatus' => [
+        'pay' => 1,
+        'unpaid' => 2
+    ],
+    // END ORDER
     'methodPayment' => [
         'atm_card' => 'ATM_CARD',
         'credit_card' => 'CREDIT_CARD',
