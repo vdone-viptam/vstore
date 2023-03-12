@@ -224,79 +224,66 @@ class PaymentMethod9PayController extends Controller
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
         ]);
-
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
         $method = $request->method_payment;
         $order = Order::where('id', $id)->where('pay', config('constants.payStatus.pay'))->first();
+        $order->method_payment = $method;
+        $order->status = config('constants.orderStatus.confirmation');
+        $order->save();
         if(!$order) {
             return response()->json([], 404);
         }
-        dd($order);
 
-//        $bill = new Bill();
-//        $bill->code = Str::random('11');
-//        $bill->name = $request->name;
-//        $bill->pdone_id = $request->pdone_id;
-//        $bill->phone_number = $request->phone_number;
-//        $bill->address = $request->address;
-//        $bill->method_payment = $method;
-//        $bill->save();
-//
-//
-//        if ($validator->fails()) {
-//            return $validator->errors();
-//        }
-//        $bill = Bill::where('code', $request->invoice_no)->where('bill_payment_status', config('constants.billPaymentStatus.unpaid'))->first();
-//        if(!$bill) {
-//            return response()->json([
-//                "message"=>"Hoá đơn này không tồn tại"
-//            ], 404);
-//        }
-//        $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
-//
-//        $returnUrl = $request->returnUrl ?? $http . config("domain.payment") . "/payment/return";
-//        $backUrl = $request->backUrl ?? $http . config("domain.payment") . "/payment/back";
-//        $time = time();
-//        $invoiceNo = $request->invoice_no.'_'.$time;
-//        $amount = $bill->total;
-//        $merchantKey = config('payment9Pay.merchantKey');
-//        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
-//        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
-//        $data = array(
-//            'merchantKey' => $merchantKey,
-//            'time' => $time,
-//            'invoice_no' => $invoiceNo,
-//            'description' => 'Đơn hàng Vdone',
-//            'amount' => $amount,
-//            'back_url' => $backUrl,
-//            'return_url' => $returnUrl,
-//            'is_customer_pay_fee' => 1 // Đối tượng chịu phí. 0: người bán chịu phí, 1: khách hàng chịu phí
-//        );
-//        $message = MessageBuilder::instance()
-//            ->with($time, $merchantEndPoint . '/payments/create', 'POST')
-//            ->withParams($data)
-//            ->build();
-//        $hmacs = new HMACSignature();
-//        $signature = $hmacs->sign($message, $merchantKeySecret);
-//        $httpData = [
-//            'baseEncode' => base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)),
-//            'signature' => $signature,
-//        ];
-//        try {
-//            $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
-//            return response()->json([
-//                'redirectUrl'=>$redirectUrl,
-//                'time' => $time,
-//                'invoice_no' => $invoiceNo,
-//                'amount' => $amount,
-//                'back_url' => $backUrl,
-//                'return_url' => $returnUrl,
-//            ], 201);
-//        } catch (Exception $e) {
-//            Log::error($e);
-//            return response()->json([
-//                "message" => "500 Internal Server Error",
-//                "errors" => $e
-//            ], 500);
-//        }
+        $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
+
+        $returnUrl = $request->returnUrl ?? $http . config("domain.payment") . "/payment/return";
+        $backUrl = $request->backUrl ?? $http . config("domain.payment") . "/payment/back";
+//        date_default_timezone_set('UTC');
+        $time = time();
+        $invoiceNo = $order->no;
+        $amount = $order->total;
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $data = array(
+            'merchantKey' => $merchantKey,
+            'time' => $time,
+            'invoice_no' => Str::random(16),
+            'description' => 'Đơn hàng Vdone',
+            'amount' => $amount,
+            'back_url' => $backUrl,
+            'return_url' => $returnUrl,
+            'is_customer_pay_fee' => 1 // Đối tượng chịu phí. 0: người bán chịu phí, 1: khách hàng chịu phí
+        );
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/payments/create', 'POST')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+        $httpData = [
+            'baseEncode' => base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)),
+            'signature' => $signature,
+        ];
+        try {
+            $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
+            return response()->json([
+                'redirectUrl'=>$redirectUrl,
+                'time' => $time,
+                'invoice_no' => $invoiceNo,
+                'amount' => $amount,
+                'back_url' => $backUrl,
+                'return_url' => $returnUrl,
+            ], 201);
+        } catch (Exception $e) {
+            Log::error($e);
+            return response()->json([
+                "message" => "500 Internal Server Error",
+                "errors" => $e
+            ], 500);
+        }
     }
 }

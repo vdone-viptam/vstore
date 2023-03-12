@@ -10,6 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        "payment_status",
         "district_id",
         "province_id",
         "pay",
@@ -19,7 +20,6 @@ class Order extends Model
         "shipping",
         "total",
         "fullname",
-        "email",
         "phone",
         "address",
     ];

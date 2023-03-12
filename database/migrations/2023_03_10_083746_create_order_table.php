@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('district_id')->comment('ID này nhận bên vận chuyển');
             $table->integer('province_id')->comment('ID này nhận bên vận chuyển');
             $table->integer('status')->comment('Trạng thái');
+            $table->integer('payment_status')->default(2)->comment('Trạng thái thanh toán');
             $table->boolean('pay')->comment('Trạng thái có thể thanh toán');
             $table->integer('shipping')->comment('Phí ship');
             $table->string('method_payment')->unique()->comment('cách thức thanh toán');
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->string('shipping_details')->comment('Chi tiết thông tin vận chuyển, mảng');
             $table->decimal('total', 11, 3)->comment('Tổng tiền');
             $table->string('fullname');
-            $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('address');
 

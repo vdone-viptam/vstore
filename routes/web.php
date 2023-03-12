@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 // THANH TOÁN APP
 Route::group(['domain' => config('domain.payment')], function () {
-    Route::get('/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentGet']); // TEST sau nhớ bỏ đi.
-
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
 

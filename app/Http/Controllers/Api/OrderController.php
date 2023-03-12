@@ -112,7 +112,6 @@ class OrderController extends Controller
                 }
             }
         }
-
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
         $wardsId = $request->wards_id;
@@ -125,7 +124,6 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->province_id = $provinceId;
             $order->address = $address;
-
             $totalShipping = 0;
             $total = 0;
             $shippingDetails = [];
