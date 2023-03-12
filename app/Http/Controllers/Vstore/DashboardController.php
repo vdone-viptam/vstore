@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $data = Product::select('products.images', 'name', 'product_id', 'requests.discount')->join('requests', 'products.id', '=', 'requests.product_id')->where('requests.status', 0)->groupBy(['products.images', 'name', 'product_id', 'requests.discount'])
             ->where('products.vstore_id',Auth::id())
             ->limit(10)->get();
-//        $vshop = Vshop::where('id_npp',Auth::id())->groupBy('id_pdone')->paginate(5);
+//        $vshop = Vshop::where('id_npp',Auth::id())->groupBy('pdone_id')->paginate(5);
                 $vshop  = [];
 //        return $vshop;
         return view('screens.vstore.dashboard.index', ['data' => $data, 'vshop' => $vshop]);

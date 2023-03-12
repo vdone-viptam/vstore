@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('phone_number')->nullable();
             $table->float('total',20,2)->nullable();
             $table->string('specific_address')->nullable();
-            $table->string('id_pdone')->nullable();
+            $table->string('pdone_id')->nullable();
             $table->string('address')->nullable();
             $table->integer('bill_payment_status')->default(config('constants.billPaymentStatus.unpaid'));
             $table->timestamps();

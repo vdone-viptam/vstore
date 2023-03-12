@@ -75,13 +75,13 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
         Route::post('/vshop-pickup/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopPickup']);
         Route::post('/vshop-ready-stock/{id}', [\App\Http\Controllers\Api\ProductController::class, 'vshopReadyStock']);
-        Route::get('/product-by-vshop/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
-        Route::get('/product-available-by-vshop/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'getProductAvailableByVshop']);
-        Route::get('/create-bill/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'createBill']);
-        Route::post('/save-bill/{id_pdone}', [\App\Http\Controllers\Api\ProductController::class, 'saveBill']);
+        Route::get('/product-by-vshop/{pdone_id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVshop']);
+        Route::get('/product-available-by-vshop/{pdone_id}', [\App\Http\Controllers\Api\ProductController::class, 'getProductAvailableByVshop']);
+        Route::get('/create-bill/{pdone_id}', [\App\Http\Controllers\Api\ProductController::class, 'createBill']);
+        Route::post('/save-bill/{pdone_id}', [\App\Http\Controllers\Api\ProductController::class, 'saveBill']);
 
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
-        Route::delete('destroy-affiliate/{id_pdone}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
+        Route::delete('destroy-affiliate/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
     });
     Route::prefix('cart')->group(function () {
         Route::get('/{pdone_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
@@ -121,7 +121,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('finances')->group(function () {
         Route::get('get-list-bank', [\App\Http\Controllers\Api\FinanceController::class, 'getListBank']);
-        Route::get('/wallet/{id_pdone}', [\App\Http\Controllers\Api\FinanceController::class, 'getWallet']);
+        Route::get('/wallet/{pdone_id}', [\App\Http\Controllers\Api\FinanceController::class, 'getWallet']);
         Route::get('/wallet/edit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'editWallet']);
         Route::put('/wallet/update/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'updateWallet']);
         Route::post('/wallet/store', [\App\Http\Controllers\Api\FinanceController::class, 'storeWallet']);

@@ -47,17 +47,17 @@ class PartnerController extends Controller
     public function vshop(Request $request)
     {
         $limit = $request->limit ??10;
-        $vshop= Vshop::join('vshop_products','vshop.id_pdone','=','vshop_products.id_pdone')
+        $vshop= Vshop::join('vshop_products','vshop.pdone_id','=','vshop_products.pdone_id')
             ->join('products','vshop_products.product_id','=','products.id')
             ->where('vstore_id',Auth::id())
-            ->select('vshop.id_pdone','vshop.name as name','vshop.phone_number')
-            ->groupBy('vshop_products.id_pdone');
+            ->select('vshop.pdone_id','vshop.name as name','vshop.phone_number')
+            ->groupBy('vshop_products.pdone_id');
         if ($request->key_search){
-            $vshop = $vshop->where('vshop.id_pdone','like','%'.$request->key_search.'%');
+            $vshop = $vshop->where('vshop.pdone_id','like','%'.$request->key_search.'%');
         }
         $vshop=$vshop->paginate($limit);
         foreach ($vshop as $value){
-            $count = VshopProduct::where('id_pdone',$value->id_pdone)->count();
+            $count = VshopProduct::where('pdone_id',$value->pdone_id)->count();
             $value->count =$count;
 //            return $count;
         }

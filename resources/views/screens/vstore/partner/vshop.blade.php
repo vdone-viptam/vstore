@@ -129,7 +129,7 @@
                         @else
                             @foreach( $vshop as $val)
                                 <tr>
-                                    <td>{{$val->id_pdone}}</td>
+                                    <td>{{$val->pdone_id}}</td>
                                     <td>
                                         {{$val->name!= '' ? $val->name  :'-'}}
                                     </td>

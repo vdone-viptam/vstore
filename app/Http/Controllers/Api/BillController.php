@@ -57,7 +57,7 @@ class BillController extends Controller
      *
      * @param Request $request
      * @param  $id mã sản phẩm
-     * @bodyParam  id_pdone mã user của người dùng mua hàng
+     * @bodyParam  pdone_id mã user của người dùng mua hàng
      * @bodyParam  id_vshop mã user của vshop
      * @bodyParam name tên người dùng
      * @bodyParam phone_number số điện thoại
@@ -86,7 +86,7 @@ class BillController extends Controller
     public function add(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_pdone' => 'required',
+            'pdone_id' => 'required',
             'name' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
@@ -109,7 +109,7 @@ class BillController extends Controller
             $bill = new Bill();
             $bill->code = Str::random('11');
             $bill->name = $request->name;
-            $bill->id_pdone = $request->id_pdone;
+            $bill->pdone_id = $request->pdone_id;
             $bill->phone_number = $request->phone_number;
             $bill->address = $request->address;
             $bill->save();
@@ -123,7 +123,7 @@ class BillController extends Controller
                     ], 400);
                 }
 //                return $value['id_vshop'];
-                $checkVshopP = VshopProduct::where('product_id', $product->id)->where('id_pdone', $value['id_vshop'])->whereIn('status', [1, 2])->first();
+                $checkVshopP = VshopProduct::where('product_id', $product->id)->where('pdone_id', $value['id_vshop'])->whereIn('status', [1, 2])->first();
                 if (!$checkVshopP) {
                     return response()->json([
                         'status_code' => 400,

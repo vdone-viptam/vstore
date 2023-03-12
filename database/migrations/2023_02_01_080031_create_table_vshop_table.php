@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('vshop', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pdone')->nullable()->comment('Id pdone');
+            $table->string('pdone_id')->nullable()->comment('Id pdone');
             $table->string('name')->nullable()->comment('tên vshop');
             $table->string('name_adress')->nullable()->comment('tên địa chỉ');
             $table->string('phone_number')->nullable()->comment('số điện thoại');
