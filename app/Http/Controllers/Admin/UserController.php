@@ -153,6 +153,7 @@ class UserController extends Controller
 
     public function requestChangeTaxCode()
     {
+//        return 1;
         $this->v['requests'] = RequestChangeTaxCode::select('id', 'user_id', 'tax_code', 'status')
             ->orderBy('id', 'desc')
             ->paginate(10);
