@@ -28,10 +28,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @include('layouts.css')
     <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
     @yield('custom_css')
+    <style>
+        .loader-container {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            background: #ffffff url("https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw340") center no-repeat;
+            z-index: 1;
+        }
+    </style>
 </head>
 <style>
 
@@ -57,6 +67,9 @@
 </style>
 <body id="body">
 @yield('modal')
+<div class="loader-container">
+    <div class="spinner"></div>
+</div>
 <div class="absolute w-full h-full bg-transparent screen z-[5] hidden">
 
 </div>
@@ -173,6 +186,11 @@
         }
     })
 </script>
-
+<script !src="">
+    const loaderContainer = document.querySelector('.loader-container');
+    window.addEventListener('load', () => {
+        loaderContainer.style.display = 'none';
+    });
+</script>
 </body>
 </html>

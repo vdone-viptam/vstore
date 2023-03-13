@@ -144,7 +144,7 @@
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-title font-medium">Mô tả sản phẩm<strong
                             class="text-[#FF4D4F]">*</strong></span>
-                    <textarea name="description" id="description"
+                    <textarea name="description" id="description" style="width: 100% !important;;height: 750px;"
                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{$product->description}}</textarea>
                     @error('description')
                     <p class="text-red-600">{{$message}}</p>
@@ -344,6 +344,80 @@
 @endsection
 
 @section('custom_js')
+    <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+    <script async>
+        tinymce.init({
+            selector: '#description',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                {value: 'First.Name', title: 'First Name'},
+                {value: 'Email', title: 'Email'},
+            ],
+            image_title: true,
+            /* enable automatic uploads of images represented by blob or data URIs*/
+            automatic_uploads: true,
+            /*
+              URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+              images_upload_url: 'postAcceptor.php',
+              here we add custom filepicker only to Image dialog
+            */
+            file_picker_types: 'image',
+            /* and here's our custom image picker*/
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                /*
+                  Note: In modern browsers input[type="file"] is functional without
+                  even adding it to the DOM, but that might not be the case in some older
+                  or quirky browsers like IE, so you might want to add it to the DOM
+                  just in case, and visually hide it. And do not forget do remove it
+                  once you do not need it anymore.
+                */
+
+                input.onchange = function () {
+                    var file = this.files[0];
+
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        /*
+                          Note: Now we need to register the blob in TinyMCEs image blob
+                          registry. In the next release this part hopefully won't be
+                          necessary, as we are looking to handle it internally.
+                        */
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        fetch('{{route('upload')}}?_token={{csrf_token()}}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: JSON.stringify({file: reader.result}) // body data type must match "Content-Type" header
+                        }).then(res => res.json())
+                            .then(data => {
+                                var blobInfo = blobCache.create(id, file, data);
+                                blobCache.add(blobInfo);
+                                /* call the callback and populate the Title field with the file name */
+                                cb(blobInfo.blobUri(), {title: file.name});
+                            });
+
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+
+        });
+    </script>
     <script>
         $(".js-example-tags").select2({
             tags: true
@@ -455,116 +529,5 @@
             };
             input.click();
         })
-        $('.more-ad').on('click', function () {
-            $('.more-ad').remove();
-            i++;
-            var html = `       <div class=" char p-4 item flex flex-col justify-start items-start gap-4 w-full ">
-        <div class="flex justify-between items-center w-full">
-            <span class="text-title text-lg font-medium">Điểm giao nhận:</span>
-            <svg width="16" height="16" class="remove cursor-pointer hover:opacity-70"  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z" fill="black" fill-opacity="0.45"/>
-                </svg>
-        </div> <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
-                                <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
-                                <span class="text-title font-medium text-sm w-full md:w-[250px]">Điểm giao nhận hàng:<strong
-                                        class="text-[#FF4D4F]">*</strong></span>
-                                    <select name="ward_id[]" id=""
-                                            class="ward_id text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                        <option value="0" selected>Chọn địa chỉ kho hàng</option>
-
-            </select>
-        </div>
-        <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
-        <span class="text-title font-medium text-sm w-full md:w-[250px]">Số lượng hàng trong kho<strong
-                class="text-[#FF4D4F]">*</strong></span>
-            <input type="number" placeholder="Nhập số lượng hàng trong kho" name="amount[]"
-                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-        </div>
-    </div>
-    </div>
-     <div class="new-more-ad w-[210px]">
-        <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
-</svg>
- Thêm địa chỉ mới</a>
-    </div>
-`;
-            $('.choose-adr').append(html);
-            $(document).on("click", ".remove", function () {
-                $(this).parent().parent().remove()
-            });
-            $(document).on("click", ".new-more-ad", function () {
-                i++;
-                var html = `   <div class=" char p-4 item flex flex-col justify-start items-start gap-4 w-full ">
-        <div class="flex justify-between items-center w-full">
-            <span class="text-title text-lg font-medium">Điểm giao nhận :</span>
-            <svg width="16" height="16" class="remove cursor-pointer hover:opacity-70"  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z" fill="black" fill-opacity="0.45"/>
-                </svg>
-        </div>
-        <div class="content-item grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-6 w-full">
-            <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
-                <span class="text-title font-medium text-sm w-full md:w-[250px]">Điểm giao nhận:<strong class="text-[#FF4D4F]">*</strong></span>
-                <select name="ward_id[]" id="ward_id[]"  class="text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <option value="0" selected>Chọn địa chỉ kho hàng</option>
-
-                </select>
-            </div>
-            <div class="flex flex-col md:flex-row justify-start items-center gap-2 w-full">
-                <span class="text-title font-medium text-sm w-full md:w-[250px]">Số lượng hàng trong kho<strong class="text-[#FF4D4F]">*</strong></span>
-                <input type="number" id="amount[]" name="amount[]" placeholder="Nhập số lượng hàng trong kho" class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-            </div>
-        </div>
-    </div>
-    <div class="new-more-ad w-[210px]">
-        <a href="javascript:void(0)" class=" outline-none border-[1px] border-primary rounded-sm px-4 flex justify-start items-center gap-2 text-secondary text-lg hover:text-primary transition-all duration-200"> <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 8H8V13C8 13.2652 7.89464 13.5196 7.70711 13.7071C7.51957 13.8946 7.26522 14 7 14C6.73478 14 6.48043 13.8946 6.29289 13.7071C6.10536 13.5196 6 13.2652 6 13V8H1C0.734784 8 0.48043 7.89464 0.292893 7.70711C0.105357 7.51957 0 7.26522 0 7C0 6.73478 0.105357 6.48043 0.292893 6.29289C0.48043 6.10536 0.734784 6 1 6H6V1C6 0.734784 6.10536 0.480429 6.29289 0.292893C6.48043 0.105357 6.73478 0 7 0C7.26522 0 7.51957 0.105357 7.70711 0.292893C7.89464 0.480429 8 0.734784 8 1V6H13C13.2652 6 13.5196 6.10536 13.7071 6.29289C13.8946 6.48043 14 6.73478 14 7C14 7.26522 13.8946 7.51957 13.7071 7.70711C13.5196 7.89464 13.2652 8 13 8Z" fill="#FF9A62"/>
-</svg>
-Thêm địa chỉ mới</a>
-    </div>
-`;
-                $('.new-more-ad').remove();
-                $('.choose-adr').append(html);
-            });
-        });
-    </script>
-    <script>
-
-
-        $("#discount").keyup(function () {
-            var price = $("#price").val();
-            var discount = $("#discount").val();
-            var total = 0;
-            if (price != null) {
-                total = (price / 100) * discount;
-                $(".total").html('=' + total + 'VNĐ');
-
-
-            }
-
-        })
-        $("#price").keyup(function () {
-            var price = $("#price").val();
-            var discount = $("#discount").val();
-            var total = 0;
-            if (discount != null) {
-                total = (price / 100) * discount;
-                $(".total").html('=' + total + 'VNĐ');
-
-
-            }
-
-        })
-        // const chooseVstore = document.getElementById('vstore_id');
-        // console.log(chooseVstore);
-        // const options = chooseVstore.getElementsByTagName('option');
-        // for (var d = 0;d < options.length;d++){
-        //    if(d > 0){
-        //        const {id} = options[d].dataset;
-        //        console.log(id)
-        //        options[d].innerHTML+=`<span style="display: none">${id}</span>`;
-        //    }
-        // }
-
     </script>
 @endsection
