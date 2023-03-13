@@ -16,12 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// THANH TOÁN APP
-Route::group(['domain' => config('domain.payment')], function () {
-    Route::get('/payment/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9Pay']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
-    Route::get('payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+
+Route::prefix('cart')->group(function () {
+    Route::get('/user/{user_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
+    Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
+    Route::delete('/remove/{cart_id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
+    Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
 });
-// END THANH TOÁN APP
+
+Route::prefix('order')->group(function () {
+    Route::post('/user/{userId}/cart/{cartId}/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    // THANH TOÁN APP
+    Route::post('/{id}/user/{userId}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+    // END THANH TOÁN APP
+});
+
 
 
 //Route::post('callback-viettel-post', function (Request $req) {
@@ -61,10 +71,7 @@ Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostControlle
 //});
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
-//        Route::get('/address',[\App\Http\Controllers\Api\AddressController::class,'import']);
-          Route::get('/get-province',[\App\Http\Controllers\Api\AddressController::class,'getProvince']);
-          Route::get('/get-district/{id}',[\App\Http\Controllers\Api\AddressController::class,'getDistrict']);
-          Route::get('/get-wards/{id}',[\App\Http\Controllers\Api\AddressController::class,'getWards']);
+
 
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
@@ -83,13 +90,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
         Route::delete('destroy-affiliate/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
     });
-    Route::prefix('cart')->group(function () {
-        Route::get('/{pdone_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
-        Route::post('/add/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-        Route::delete('/remove/{cart_id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
-        Route::post('/add-quantity/{cart_id}/{type}', [\App\Http\Controllers\Api\CartController::class, 'quantity']);
-
-    });
+    // CARD
     Route::prefix('big-sales')->group(function () {
         Route::get('/get-list', [\App\Http\Controllers\Api\BigSaleController::class, 'getListProductSale']);
     });
@@ -151,6 +152,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
             Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
         });
+
     });
     Route::prefix('discount')->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);

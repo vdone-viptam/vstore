@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bill extends Model
+class CartV2 extends Model
 {
     use HasFactory;
-    protected $table = 'bills';
-    protected $fillable= ['bill_payment_status', 'total', 'user_confirm', 'method_payment'];
+    protected $fillable = ['user_id','status'];
+    protected $table = 'cart_v2';
 }

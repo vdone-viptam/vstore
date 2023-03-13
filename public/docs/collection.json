@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id_pdone\":\"laborum\",\"name\":\"quia\",\"phone_number\":\"nulla\",\"address\":\"quos\",\"province\":76,\"data\":\"sit\",\"district\":49,\"id_vshop\":\"et\"}"
+                            "raw": "{\"pdone_id\":\"laborum\",\"name\":\"quia\",\"phone_number\":\"nulla\",\"address\":\"quos\",\"province\":76,\"data\":\"sit\",\"district\":49,\"id_vshop\":\"et\"}"
                         },
                         "description": "API d\u00f9ng \u0111\u1ec3 t\u1ea1o h\u00f3a \u0111\u01a1n",
                         "auth": {
@@ -1492,8 +1492,8 @@
                                     "description": "s\u1eafp x\u1ebfp theo h\u00ecnh th\u1ee9c thanh to\u00e1n 1 l\u00e0 COD 2 l\u00e0 tr\u1ea3 tr\u01b0\u1edbc"
                                 },
                                 {
-                                    "id": "id_pdone",
-                                    "key": "id_pdone",
+                                    "id": "pdone_id",
+                                    "key": "pdone_id",
                                     "value": "est",
                                     "description": "d\u00f9ng \u0111\u1ec3 check s\u1ea3n ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c ti\u1ebfp th\u1ecb hay ch\u01b0a"
                                 }
@@ -1688,7 +1688,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id_pdone\":\"quis\"}"
+                            "raw": "{\"pdone_id\":\"quis\"}"
                         },
                         "description": "API d\u00f9ng \u0111\u1ec3 Vshop th\u00eam s\u1ea3n ph\u1ea9m",
                         "auth": {
@@ -1727,7 +1727,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id_pdone\":\"consectetur\",\"amount\":\"ullam\"}"
+                            "raw": "{\"pdone_id\":\"consectetur\",\"amount\":\"ullam\"}"
                         },
                         "description": "API d\u00f9ng \u0111\u1ec3 Vshop nh\u1eadp h\u00e0ng s\u1eb5n",
                         "auth": {
@@ -1997,7 +1997,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"status_code\":200,\"message\":\"L\\u1ea5y th\\u00f4ng tin th\\u00e0nh c\\u00f4ng\",\"data\":[{\"id\":1,\"id_pdone\":\"pdone123\",\"name\":\"\\u00e1dasda\",\"name_adress\":null,\"address\":0,\"phone_number\":\"\",\"district\":null,\"province\":null,\"lat\":\"\",\"long\":null,\"products_sold\":null,\"created_at\":\"2023-02-28T17:49:10.000000Z\",\"updated_at\":\"2023-02-28T17:49:10.000000Z\"},{\"id\":2,\"id_pdone\":\"pdone12121\",\"name\":\"\",\"name_adress\":null,\"address\":0,\"phone_number\":\"\",\"district\":null,\"province\":null,\"lat\":\"\",\"long\":null,\"products_sold\":null,\"created_at\":null,\"updated_at\":null}]}",
+                            "body": "{\"status_code\":200,\"message\":\"L\\u1ea5y th\\u00f4ng tin th\\u00e0nh c\\u00f4ng\",\"data\":[{\"id\":1,\"pdone_id\":\"pdone123\",\"name\":\"\\u00e1dasda\",\"name_adress\":null,\"address\":0,\"phone_number\":\"\",\"district\":null,\"province\":null,\"lat\":\"\",\"long\":null,\"products_sold\":null,\"created_at\":\"2023-02-28T17:49:10.000000Z\",\"updated_at\":\"2023-02-28T17:49:10.000000Z\"},{\"id\":2,\"pdone_id\":\"pdone12121\",\"name\":\"\",\"name_adress\":null,\"address\":0,\"phone_number\":\"\",\"district\":null,\"province\":null,\"lat\":\"\",\"long\":null,\"products_sold\":null,\"created_at\":null,\"updated_at\":null}]}",
                             "name": ""
                         }
                     ]
@@ -2091,7 +2091,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id_pdone\":\"repellendus\",\"product_id\":\"aut\",\"start_date\":\"asperiores\",\"end_date\":\"non\",\"discount\":\"zbsrbrymsqnukiaukbh\"}"
+                            "raw": "{\"pdone_id\":\"repellendus\",\"product_id\":\"aut\",\"start_date\":\"asperiores\",\"end_date\":\"non\",\"discount\":\"zbsrbrymsqnukiaukbh\"}"
                         },
                         "description": "API n\u00e0y s\u1ebd l\u01b0u m\u1edbi m\u00e3 gi\u1ea3m gi\u00e1",
                         "auth": {
@@ -2122,7 +2122,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id_pdone\":\"wgnhyaxifdlutiss\",\"name\":\"naujfxyngdymywqeocpbeq\",\"address\":\"j\",\"phone_number\":\"cwcmiuitfoabliglzlehqn\"}"
+                            "raw": "{\"pdone_id\":\"wgnhyaxifdlutiss\",\"name\":\"naujfxyngdymywqeocpbeq\",\"address\":\"j\",\"phone_number\":\"cwcmiuitfoabliglzlehqn\"}"
                         },
                         "description": "",
                         "auth": {

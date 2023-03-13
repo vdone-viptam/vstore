@@ -190,7 +190,7 @@
 {{--                                                </div>--}}
 
 {{--                                            </div>--}}
-{{--                                            <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">ID:{{$v->id_pdone}}</h2>--}}
+{{--                                            <h2 class="line-clamp-2 text-black font-medium md:px-2 text-center">ID:{{$v->pdone_id}}</h2>--}}
 {{--                                        </div>--}}
 {{--                                    @endforeach--}}
 {{--                                </div>--}}
