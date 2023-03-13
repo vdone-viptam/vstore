@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class FinanceController extends Controller
+class fFinanceController extends Controller
 {
     public function __construct()
     {
