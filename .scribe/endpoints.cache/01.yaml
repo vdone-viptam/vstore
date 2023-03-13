@@ -253,8 +253,8 @@ endpoints:
         example: veniam
         type: string
         custom: []
-      id_pdone:
-        name: id_pdone
+      pdone_id:
+        name: pdone_id
         description: 'dùng để check sản phẩm đã được tiếp thị hay chưa'
         required: false
         example: est
@@ -270,7 +270,7 @@ endpoints:
       order_by_id: fuga
       order_by_sold: iusto
       payments: veniam
-      id_pdone: est
+      pdone_id: est
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -440,15 +440,15 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id_pdone:
-        name: id_pdone
+      pdone_id:
+        name: pdone_id
         description: 'của pdone'
         required: false
         example: quis
         type: id
         custom: []
     cleanBodyParameters:
-      id_pdone: quis
+      pdone_id: quis
     fileParameters: []
     responses: []
     responseFields: []
@@ -488,8 +488,8 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id_pdone:
-        name: id_pdone
+      pdone_id:
+        name: pdone_id
         description: 'của pdone'
         required: false
         example: consectetur
@@ -503,7 +503,7 @@ endpoints:
         type: số
         custom: []
     cleanBodyParameters:
-      id_pdone: consectetur
+      pdone_id: consectetur
       amount: ullam
     fileParameters: []
     responses: []

@@ -26,8 +26,8 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id_pdone:
-        name: id_pdone
+      pdone_id:
+        name: pdone_id
         description: 'user của người dùng mua hàng'
         required: false
         example: laborum
@@ -83,7 +83,7 @@ endpoints:
         type: mã
         custom: []
     cleanBodyParameters:
-      id_pdone: laborum
+      pdone_id: laborum
       name: quia
       phone_number: nulla
       address: quos

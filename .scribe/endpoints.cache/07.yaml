@@ -33,7 +33,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status_code":200,"message":"L\u1ea5y th\u00f4ng tin th\u00e0nh c\u00f4ng","data":[{"id":1,"id_pdone":"pdone123","name":"\u00e1dasda","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":"2023-02-28T17:49:10.000000Z","updated_at":"2023-02-28T17:49:10.000000Z"},{"id":2,"id_pdone":"pdone12121","name":"","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":null,"updated_at":null}]}'
+        content: '{"status_code":200,"message":"L\u1ea5y th\u00f4ng tin th\u00e0nh c\u00f4ng","data":[{"id":1,"pdone_id":"pdone123","name":"\u00e1dasda","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":"2023-02-28T17:49:10.000000Z","updated_at":"2023-02-28T17:49:10.000000Z"},{"id":2,"pdone_id":"pdone12121","name":"","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":null,"updated_at":null}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -138,8 +138,8 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id_pdone:
-        name: id_pdone
+      pdone_id:
+        name: pdone_id
         description: 'p done required'
         required: false
         example: repellendus
@@ -174,7 +174,7 @@ endpoints:
         type: string
         custom: []
     cleanBodyParameters:
-      id_pdone: repellendus
+      pdone_id: repellendus
       product_id: aut
       start_date: asperiores
       end_date: non
@@ -210,8 +210,8 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      id_pdone:
-        name: id_pdone
+      pdone_id:
+        name: pdone_id
         description: 'Must not be greater than 255 characters.'
         required: true
         example: wgnhyaxifdlutiss
@@ -239,7 +239,7 @@ endpoints:
         type: string
         custom: []
     cleanBodyParameters:
-      id_pdone: wgnhyaxifdlutiss
+      pdone_id: wgnhyaxifdlutiss
       name: naujfxyngdymywqeocpbeq
       address: j
       phone_number: cwcmiuitfoabliglzlehqn

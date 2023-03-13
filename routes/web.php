@@ -14,16 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // THANH TOÁN APP
-Route::group(['domain' => config('domain.payment')], function () {
-    Route::get('/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // TEST sau nhớ bỏ đi.
-
+//Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
 
     Route::get('/payment/success', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentSuccess'])->name('paymentSuccess');
     Route::get('/payment/err500', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9PayErr500'])->name('payment500');
     Route::get('/payment/err', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentErr'])->name('paymentErr');
-});
+//});
 // END THANH TOÁN APP
 
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
