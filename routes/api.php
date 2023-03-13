@@ -89,7 +89,6 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('cart')->group(function () {
         Route::get('/user/{user_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
         Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-        Route::delete('/remove/{cart_id}', [\App\Http\Controllers\Api\CartController::class, 'remove']);
         Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
     });
     Route::prefix('big-sales')->group(function () {

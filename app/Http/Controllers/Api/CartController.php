@@ -25,11 +25,14 @@ class CartController extends Controller
     /**
      * Cart quantity
      *
-     * API dùng để tăng giảm 1 đơn vị sản phẩm trong giỏ hàng
+     * API dùng để tăng giảm số lượng đơn vị sản phẩm trong giỏ hàng, 0 sẽ là xoá
      *
      * @param Request $request
-     * @param  $cart_id "Mã giỏ hàng"
-     * @param  $type 1 tăng sản phẩm | 2 giảm sản phẩm
+     * @param $id "Mã giỏ hàng"
+     * @param $product_id "Mã sản phẩm"
+     * @param $quantity "Số lượng"
+     * @param $vshop_id "Vshop id"
+     * @param $user_id "id người dùng"
      * @return JsonResponse|int
      */
     public function updateQuantityInCart(Request $request, $id): JsonResponse|int
@@ -162,7 +165,7 @@ class CartController extends Controller
      *
      * @param Request $request
      * @param $id "mã sản phẩm"
-     * @bodyParam  pdone_id required mã user của người dùng
+     * @bodyParam  user_id required mã user của người dùng
      * @bodyParam  quantity required|numeric|min:1 Số sản phẩm mua
      * @bodyParam  vshop_id required mã v-shop
      * @return JsonResponse

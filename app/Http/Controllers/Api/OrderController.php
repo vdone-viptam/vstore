@@ -20,7 +20,6 @@ class OrderController extends Controller
     {
         $fullname = $request->fullname;
         $phone = $request->phone;
-
         $order = new Order();
         $order->user_id = $userId;
         $order->status = config('constants.orderStatus.wait_for_confirmation');
