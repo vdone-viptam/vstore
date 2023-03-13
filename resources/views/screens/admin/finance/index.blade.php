@@ -48,7 +48,7 @@
                         </div>
                         <div>
                             <label for="" class="mx-2">đến</label>
-                            <input type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                            <input type="date" max="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
                                    name="end_date"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -198,6 +198,7 @@
         const form = document.getElementById('form');
         document.getElementById('btnSearch').addEventListener('click', () => {
                 setTimeout(() => {
+                    location.href = "{{route('screens.admin.finance.exportDeposits')}}";
                     location.reload()
                 }, 2000);
                 form.submit();
