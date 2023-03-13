@@ -8,7 +8,6 @@ use App\Models\BillProduct;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
-use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,11 +53,10 @@ class ProductController extends Controller
     public function request(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $this->v['requests'] = User::with(['category'])->select('category_id',
+        $this->v['requests'] = Product::with(['category', 'NCC'])->select('category_id',
             'products.user_id', 'product_warehouses.amount',
             'product_warehouses.id', 'product_warehouses.created_at',
-            'product_warehouses.status', 'products.name', 'users.name as userName')
-            ->join('products', 'users.id', '=', 'products.user_id')
+            'product_warehouses.status', 'products.name')
             ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
         if ($request->key_search) {
