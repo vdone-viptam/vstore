@@ -9,6 +9,7 @@ use App\Models\CartV2;
 use App\Models\Order;
 use App\Models\PaymentHistory;
 use Http\Client\Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -27,11 +28,9 @@ class PaymentMethod9PayController extends Controller
         $bills = Bill::all();
         return view('welcome', compact('bills'));
     }
-
     function paymentSuccess() {
         return view('payment.paymentSuccess');
     }
-
     function paymentReturn(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -99,7 +98,6 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-
     function paymentBack(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -150,7 +148,6 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-
     function paymentCheck(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -222,6 +219,17 @@ class PaymentMethod9PayController extends Controller
         }
     }
 
+    /**
+     * Thanh toán
+     *
+     * API dùng để thanh toán
+     *
+     * @param Request $request
+     * @param $id "Id order"
+     * @param $userId "user id"
+     * @param $method_payment "ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD"
+     * @return JsonResponse|int
+     */
     function payment(Request $request, $id, $userId) {
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
