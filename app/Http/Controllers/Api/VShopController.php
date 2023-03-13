@@ -416,4 +416,28 @@ class  VShopController extends Controller
         ],200);
 
     }
+    public function get_mony_history(Request $request)
+    {
+
+        $limit = $request->limit ?? 10;
+        $query = DB::table('balance_change_history')
+            ->join('vshop', 'vshop.id', '=', 'balance_change_history.vshop_id')
+            ->where('balance_change_history.vshop_id', $request->id);
+
+        if ($request->start_day) {
+            $query = $query->whereDate('balance_change_history.created_at', '>=', $request->start_day);
+        }
+        if ($request->end_day) {
+            $query = $query->whereDate('balance_change_history.created_at', '<=', $request->end_day);
+        }
+        if ($request->type) {
+            $query = $query->where('balance_change_history.type', $request->type);
+        }
+        $data = $query->select('balance_change_history.*', 'vshop.name as shopName')->paginate($limit);
+        return response()->json([
+            'status_code' => 200,
+            'data' => $data
+        ], 200);
+
+    }
 }
