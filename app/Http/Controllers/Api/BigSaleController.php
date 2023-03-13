@@ -22,7 +22,7 @@ class BigSaleController extends Controller
      * @param Request $request
      * @urlParam page Số trang
      * @urlParam category_id id danh mục sản phẩm
-     * @urlParam id_pdone id user truyền khi quyền user là vshop
+     * @urlParam pdone_id id user truyền khi quyền user là vshop
      * @urlParam order_by | 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 Số sản phẩm đã bán
      * @urlParam option 1 asc | 2 desc Thứ tự sấp xếp
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
@@ -35,7 +35,7 @@ class BigSaleController extends Controller
             $limit = $request->limit ?? 12;
             $products = DB::table('products');
             $selected = ['products.id', 'images', 'publish_id', 'price', 'products.name'];
-            if ($request->id_pdone) {
+            if ($request->pdone_id) {
                 $selected[] = 'discount_vShop';
             }
             $products = $products->select($selected);
@@ -77,8 +77,8 @@ class BigSaleController extends Controller
                     ->whereIn('type', [1, 2])
                     ->first()->dis;
                 $product->image = asset(json_decode($product->images)[0]);
-                if ($request->id_pdone) {
-                    $product->is_affiliate = DB::table('vshop_products')->where('product_id', $product->id)->where('status', 1)->where('id_pdone', $request->id_pdone)->count();
+                if ($request->pdone_id) {
+                    $product->is_affiliate = DB::table('vshop_products')->where('product_id', $product->id)->where('status', 1)->where('pdone_id', $request->pdone_id)->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $product->id)->first()->max;
                     $product->available_discount = $more_dis ?? 0;
                 }

@@ -48,17 +48,17 @@ class FinanceController extends Controller
      * Thông tin ví
      *
      * API này sẽ trả về thông tin ví
-     * @param  $id_pdone id user vshop
+     * @param  $pdone_id id user vshop
      */
 
-    public function getWallet(Request $request, $id_pdone)
+    public function getWallet(Request $request, $pdone_id)
     {
         try {
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('id_pdone', $id_pdone)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id')
+                ->where('pdone_id', $pdone_id)
+                ->first()
+                ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -87,7 +87,7 @@ class FinanceController extends Controller
      *
      * API này sẽ trả về dể cập nhật ví
      * @param $wallet_id id tài khoản ví
-     * @urlParam  id_pdone id user vshop
+     * @urlParam  pdone_id id user vshop
      */
     public function editWallet($wallet_id)
     {
@@ -117,7 +117,7 @@ class FinanceController extends Controller
      * @param Request $request
      * @param $wallet_id id tài khoản ví
      *
-     * @bodyParam id_pdone id user vshop
+     * @bodyParam pdone_id id user vshop
      * @bodyParam bank_id id ngân hàng được chọn
      * @bodyParam account_code Số tài khoản ngân hàng
      * @bodyParam name Tên chủ tài khoản
@@ -127,7 +127,7 @@ class FinanceController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id_pdone' => 'required|max:255',
+                'pdone_id' => 'required|max:255',
                 'bank_id' => 'required|max:255',
                 'account_number' => 'required|max:255',
                 'name' => 'required|max:255'
@@ -140,10 +140,10 @@ class FinanceController extends Controller
             }
 
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('id_pdone', $request->id_pdone)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id')
+                ->where('pdone_id', $request->pdone_id)
+                ->first()
+                ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -175,7 +175,7 @@ class FinanceController extends Controller
      * Thêm mới ngân hàng
      *
      * API này sẽ lưu mới thông tin ngân hàng
-     * @bodyParam id_pdone id user vshop
+     * @bodyParam pdone_id id user vshop
      * @bodyParam bank_id id ngân hàng được chọn
      * @bodyParam account_code Số tài khoản ngân hàng
      * @bodyParam name Tên chủ tài khoản
@@ -185,7 +185,7 @@ class FinanceController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id_pdone' => 'required|max:255',
+                'pdone_id' => 'required|max:255',
                 'bank_id' => 'required|max:255',
                 'account_number' => 'required|max:255',
                 'name' => 'required|max:255'
@@ -198,10 +198,10 @@ class FinanceController extends Controller
             }
 
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('id_pdone', $request->id_pdone)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id')
+                ->where('pdone_id', $request->pdone_id)
+                ->first()
+                ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -210,6 +210,12 @@ class FinanceController extends Controller
                 ], 404);
             }
 
+            if (DB::table('wallets')->where('user_id' , $vshop_id)->count() == 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tài khoản ngân hàng đã tồn tại'
+                ], 401);
+            }
             DB::table('wallets')->insert([
                 'account_number' => $request->account_number,
                 'bank_id' => $request->bank_id,
@@ -218,7 +224,7 @@ class FinanceController extends Controller
             ]);
             return response()->json([
                 'success' => true,
-                'message' => 'Thêm mới tài khoản ví thành công'
+                'message' => 'Thêm mới tài khoản ngân hàng thành công'
             ], 201);
 
         } catch (\Exception $e) {
@@ -234,7 +240,7 @@ class FinanceController extends Controller
      *
      * API này sẽ tạo mới lệnh rút tiền
      * @param $wallet_id id tài khoản ví
-     * @bodyParam id_pdone id user vshop
+     * @bodyParam pdone_id id user vshop
      * @bodyParam amount Số tiên rút
      */
 
@@ -244,7 +250,7 @@ class FinanceController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'id_pdone' => 'required|max:255',
+                'pdone_id' => 'required|max:255',
                 'amount' => 'required|numeric|min:1',
             ]);
             if ($validator->fails()) {
@@ -257,7 +263,7 @@ class FinanceController extends Controller
             $wallet = DB::table('wallets')->where('id', $wallet_id)->first();
             $vshop_id = DB::table('vshop')
                 ->select('id', 'money')
-                ->where('id_pdone', $request->id_pdone)
+                ->where('pdone_id', $request->pdone_id)
                 ->first();
 
             if (!$vshop_id) {
