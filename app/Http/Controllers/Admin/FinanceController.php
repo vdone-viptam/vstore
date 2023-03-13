@@ -21,7 +21,10 @@ class FinanceController extends Controller
 
     public function index()
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('status', 0)->paginate(10);
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id','created_at')
+            ->where('status', 0)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         return view('screens.admin.finance.index', $this->v);
     }
