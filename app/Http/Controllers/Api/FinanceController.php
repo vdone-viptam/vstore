@@ -306,7 +306,8 @@ class FinanceController extends Controller
                 'type' => 0,
                 'title' => 'Rút tiền về ngân hàng',
                 'status' => 1,
-                'money_history' => (double)$request->money
+                'money_history' => (double)$request->amount,
+                'created_at' => Carbon::now()
             ]);
             DB::table('vshop')->where('id', $vshop_id->id)->update(['money' => $vshop_id->money - $request->amount]);
             DB::commit();

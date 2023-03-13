@@ -117,7 +117,8 @@ class FinanceController extends Controller
                 'type' => 0,
                 'title' => 'Rút tiền về ngân hàng',
                 'status' => 1,
-                'money_history' => (double)$request->money
+                'money_history' => (double)$request->money,
+                'created_at' => Carbon::now()
             ]);
             DB::table('users')->where('id', Auth::id())->update(['money' => Auth::user()->money - $request->money]);
             DB::commit();
