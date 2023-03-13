@@ -385,10 +385,10 @@ class ProductController extends Controller
                             if (isset($request->moneyv[$i]) && $request->moneyv[$i - 1] >= $request->moneyv[$i]) {
                                 $message['moneyv'] = 'Chiết khấu sau phải lớn hơn Chiết khấu trước';
                             }
-                            if ( isset($request->deposit_money[$i-1]) !='' && isset($request->deposit_money[$i]) && $request->deposit_money[$i - 1] >= $request->deposit_money[$i]) {
+                            if (isset($request->deposit_money[$i - 1]) != '' && isset($request->deposit_money[$i]) && $request->deposit_money[$i - 1] >= $request->deposit_money[$i]) {
                                 $message['deposit_money'] = 'Tiền cọc sau phải lớn hơn Tiền cọc trước';
                             }
-                            if (isset($message)){
+                            if (isset($message)) {
                                 return redirect()->back()->withErrors($message);
                             }
                         }
@@ -552,6 +552,13 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
+
+    }
+
+    public function uploadImagePost(Request $request)
+    {
+        $srcImage = asset('storage/products/' . $this->saveImgBase64($request->file, 'products'));
+        return response()->json($srcImage);
 
     }
 }

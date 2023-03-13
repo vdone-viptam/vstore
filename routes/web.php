@@ -230,7 +230,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/create-request', [\App\Http\Controllers\Manufacture\ProductController::class, 'createRequest'])->name('screens.manufacture.product.createRequest');
         Route::post('/store-request', [\App\Http\Controllers\Manufacture\ProductController::class, 'storeRequest'])->name('screens.manufacture.product.storeRequest');
         Route::get('/lay-du-lieu', [\App\Http\Controllers\Manufacture\ProductController::class, 'getDataProduct'])->name('screens.manufacture.product.getDataProduct');
-
+        Route::post('/upload-image', [\App\Http\Controllers\Manufacture\ProductController::class, 'uploadImagePost'])->name('upload');
         Route::get('/request', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestProduct'])->name('screens.manufacture.product.request');
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
