@@ -18,28 +18,11 @@ class OrderController extends Controller
 
     public function index(Request $request, $userId, $cartId): \Illuminate\Http\JsonResponse
     {
-
-        $validator = Validator::make($request->all(), [
-//            'address' => 'required',
-//            'fullname' => 'required',
-//            'phone' => 'required',
-//            'related_address',
-//            'district_id',
-//            'province_id',
-//            'wards_id',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status_code' => 401,
-                'errors' => $validator->errors()
-            ]);
-        }
-
         $fullname = $request->fullname;
         $phone = $request->phone;
 
         $order = new Order();
+        $order->user_id = $userId;
         $order->status = config('constants.orderStatus.wait_for_confirmation');
         $latestOrder = Order::orderBy('created_at','DESC')->first();
         $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
