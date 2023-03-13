@@ -418,11 +418,13 @@ class  VShopController extends Controller
     }
     public function get_mony_history(Request $request)
     {
+//        return $request->pdone_id;
 
         $limit = $request->limit ?? 10;
+
         $query = DB::table('balance_change_history')
             ->join('vshop', 'vshop.id', '=', 'balance_change_history.vshop_id')
-            ->where('balance_change_history.vshop_id', $request->id);
+            ->where('vshop.pdone_id', $request->pdone_id);
 
         if ($request->start_day) {
             $query = $query->whereDate('balance_change_history.created_at', '>=', $request->start_day);
