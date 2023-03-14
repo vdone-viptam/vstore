@@ -4,6 +4,28 @@
 use App\Models\Discount;
 use Illuminate\Support\Carbon;
 
+//function calculateShippingByProductID($results, $districtId, $provinceId) {
+//    $grouped = [];
+//    foreach ($results as $item) {
+//        $vshop_id = $item['vshop_id'];
+//        $product_id = $item['product_id'];
+//        if (!isset($grouped[$vshop_id])) {
+//            $grouped[$vshop_id] = ['vshop_id' => $vshop_id, 'product_id' => []];
+//        }
+//        $grouped[$vshop_id]['product_id'][] = $product_id;
+//    }
+//
+//    foreach ($grouped as $key => $value) {
+//        $vshop_id = $value['vshop_id'];
+//        $product_id = $value['product_id'];
+//
+//        $checkShipVShop = \App\Models\VshopProduct::whereIn('product_id', $product_id)
+//            ->where('status', config('constants.statusVShopProduct.ready_goods')) // ready_goods nhập hàng sẵn
+//            ->where('vshop_id', $vshop_id)->get();
+//    }
+//
+//}
+
 function getDiscountProducts($id, $idVshop) {
     $discounts = Discount::whereIn('product_id', $id)
         ->where('discounts.user_id', $idVshop)

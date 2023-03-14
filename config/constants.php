@@ -37,6 +37,18 @@ return [
         'checkout' => 1
     ],
     // END CART
+    // PRODUCT
+    'typePay' => [
+        'prepay' => 1,
+        'postpaid' => 2
+    ],
+    // END PRODUCT
+
+    //PRODUCT_VSHOP
+    'statusVShopProduct' => [
+        'marketing' => 1,
+        'ready_goods' => 2,
+    ],
     'userConfirm'=>[
         'confirm' => 1,
         'unconfimred' => 2
