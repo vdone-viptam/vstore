@@ -33,15 +33,6 @@
     <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
     @yield('custom_css')
-    <style>
-        .loader-container {
-            width: 100%;
-            height: 100vh;
-            position: fixed;
-            background: #ffffff url("https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw340") center no-repeat;
-            z-index: 1;
-        }
-    </style>
 </head>
 <style>
 
@@ -67,9 +58,6 @@
 </style>
 <body id="body">
 @yield('modal')
-<div class="loader-container">
-    <div class="spinner"></div>
-</div>
 <div class="absolute w-full h-full bg-transparent screen z-[5] hidden">
 
 </div>
@@ -185,12 +173,6 @@
             ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })
-</script>
-<script !src="">
-    const loaderContainer = document.querySelector('.loader-container');
-    window.addEventListener('load', () => {
-        loaderContainer.style.display = 'none';
-    });
 </script>
 </body>
 </html>

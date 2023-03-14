@@ -91,7 +91,7 @@ class FinanceController extends Controller
 
     public function history()
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
+        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
         return response()->json([
             'success' => true,
             'data' => $this->v['histories']

@@ -405,7 +405,7 @@
                                 var blobInfo = blobCache.create(id, file, data);
                                 blobCache.add(blobInfo);
                                 /* call the callback and populate the Title field with the file name */
-                                cb(blobInfo.blobUri(), {title: file.name});
+                                cb(data, {title: file.name});
                             });
 
                     };

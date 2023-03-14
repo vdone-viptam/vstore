@@ -55,10 +55,12 @@ class PartnerController extends Controller
         if ($request->key_search) {
             $vshop = $vshop->where('vshop.pdone_id', 'like', '%' . $request->key_search . '%');
         }
-        $vshop = $vshop->paginate($limit);
-        foreach ($vshop as $value) {
-            $count = VshopProduct::where('pdone_id', $value->pdone_id)->count();
-            $value->count = $count;
+        $vshop=$vshop->paginate($limit);
+        foreach ($vshop as $value){
+//            $count = VshopProduct::where('pdone_id',$value->pdone_id)->count();
+            $count= Vshop::join('vshop_products','vshop.id','=','vshop_products.vshop_id')->count();
+//            return $count;
+            $value->count =$count;
 //            return $count;
         }
 

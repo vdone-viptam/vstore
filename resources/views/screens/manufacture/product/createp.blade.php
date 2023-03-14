@@ -151,7 +151,7 @@
                     <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start">
 
                     </div>
-                    <input type="hidden" id="images" name="images">
+                    <input type="hidden" id="images" name="images" >
                     <div
                         class="cursor-pointer add-img-SP w-[104px] h-[104px] border-2 border-dashed bg-[#FAFAFA] border-secondary flex justify-center flex-col items-center rounded-sm gap-1">
                         <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
@@ -171,7 +171,7 @@
                 @enderror
                 <label for="">Video sản phẩm</label>
                 <div class="flex justify-start items-start gap-2 w-full">
-                    <input type="file" accept="video/mp4"
+                    <input type="file" accept="video/mp4" accept="video/*"
                            class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                            name="video" id="video">
                 </div>
@@ -414,7 +414,7 @@
                                 var blobInfo = blobCache.create(id, file, data);
                                 blobCache.add(blobInfo);
                                 /* call the callback and populate the Title field with the file name */
-                                cb(blobInfo.blobUri(), {title: file.name});
+                                cb(data, {title: file.name});
                             });
 
                     };
