@@ -264,8 +264,8 @@
                                         <input type="hidden" name="bank" value="{{$wallet->id}}">
                                         <div class="flex justify-start items-center w-full" style="gap: 10px;">
 
-                                            <div style="width:30px; height:30px">
-                                                <img src="{{$wallet->bank->image}}" alt=""
+                                            <div style="width:40px; height:40px">
+                                                <img src="{{$wallet->bank->image}}" alt="" class="object-contain"
                                                      style="max-width:100%; width:100%; height:100%">
                                             </div>
                                             <div>

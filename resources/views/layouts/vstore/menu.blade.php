@@ -47,7 +47,7 @@
                 <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full object-fill"
                      alt="">
             @else
-                <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-fill" alt="">
+                <img src="{{asset('home/img/logo-06.png')}}" class="w-full object-contain" alt="">
             @endif
         </div>
     </a>
