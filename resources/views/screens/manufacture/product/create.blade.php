@@ -324,14 +324,14 @@
                             <input type="checkbox" name="prepay[]"
                                    {{isset(old('prepay')[0]) && old('prepay')[0] == 1 ? 'checked' : ''}} value="1"
                                    class="accent-primary w-4 h-4">
-                            <span class="text-secondary">Thanh toán trước</span>
+                            <span class="text-secondary">Được thanh toán sau khi nhận hàng</span>
                         </div>
-                        <div>
-                            <input type="checkbox" name="prepay[]"
-                                   {{isset(old('prepay')[1]) && old('prepay')[1] == 2 ? 'checked' : ''}} value="2"
-                                   class="accent-primary w-4 h-4">
-                            <span class="text-secondary">Thanh toán sau khi nhận hàng</span>
-                        </div>
+{{--                        <div>--}}
+{{--                            <input type="checkbox" name="prepay[]"--}}
+{{--                                   {{isset(old('prepay')[1]) && old('prepay')[1] == 2 ? 'checked' : ''}} value="2"--}}
+{{--                                   class="accent-primary w-4 h-4">--}}
+{{--                            <span class="text-secondary">Thanh toán sau khi nhận hàng</span>--}}
+{{--                        </div>--}}
 
                     </div>
                 </div>

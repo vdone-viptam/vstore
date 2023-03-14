@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->integer('payment_on_delivery')->default(0);
             $table->longText('images')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('type_pay')->default(0);
             $table->integer('user_id');
             $table->integer('vstore_id')->nullable();
             $table->double('discount_vshop');

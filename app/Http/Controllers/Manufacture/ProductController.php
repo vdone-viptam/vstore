@@ -323,8 +323,9 @@ class ProductController extends Controller
             $object->vstore_id = $request->vstore_id;
             $object->vat = $request->vat;
             $object->user_id = Auth::id();
-            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
-            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
+            $object->type_pay= $request->prepay[0] == 1 ? 2 : 1;
+//            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
+//            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
             $code = rand(100000000000, 999999999999);
 
             while (true) {
