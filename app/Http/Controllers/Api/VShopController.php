@@ -256,7 +256,7 @@ class  VShopController extends Controller
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 400,
                 'error' => $validator->errors(),
             ]);
         }
@@ -264,19 +264,19 @@ class  VShopController extends Controller
 
         if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('product_id', $request->product_id)->count() > 0) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 404,
                 'error' => 'Mã giảm giá đã tồn tại',
             ]);
         }
         if ($discount == 0) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
             ]);
-        } elseif ($request->discount > $discount) {
+        } elseif ($request->discount > $discount/100 *95) {
             return response()->json([
-                'status_code' => 401,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount,
+                'status_code' => 400,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount/100 *95,
             ]);
         } else {
             DB::table('discounts')->insert([
@@ -416,6 +416,20 @@ class  VShopController extends Controller
         ],200);
 
     }
+
+    /**
+     * Cập nhập thông tin Vshop
+     *
+     * API này dùng để cập nhập tin cá nhân
+     *
+     * @param Request $request
+     * @urlParam  id id vshop
+     * @urlParam start_day lọc ngày bắt đầu
+     * @urlParam  end_day lọc ngày kết thúc
+     *@urlParam type 1 rút 2 cộng thêm, 3 hoàn tiền
+     *@urlParam status 1 thành công, 2 thất bại, 3 đang xử lý
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function get_mony_history(Request $request)
     {
 //        return $request->pdone_id;
@@ -434,6 +448,9 @@ class  VShopController extends Controller
         }
         if ($request->type) {
             $query = $query->where('balance_change_history.type', $request->type);
+        }
+        if ($request->status) {
+            $query = $query->where('balance_change_history.status', $request->status);
         }
         $data = $query->select('balance_change_history.*', 'vshop.name as shopName')->paginate($limit);
         return response()->json([
