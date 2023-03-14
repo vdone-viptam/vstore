@@ -58,12 +58,12 @@ class CartController extends Controller
         $cart = CartV2::where('user_id', $userId)
             ->where('id', $id)
             ->first();
-        if(!$cart) {
+        if (!$cart) {
             return response()->json([
                 "status_code" => 401,
             ], 401);
         }
-        if($quantity <= 0) {
+        if ($quantity <= 0) {
             CartItemV2::where('cart_id', $id)
                 ->where('vshop_id', $vshopId)
                 ->where('product_id', $productId)->delete();
@@ -99,7 +99,7 @@ class CartController extends Controller
     {
         $cart = CartV2::where('cart_v2.user_id', $user_id)
             ->where('status', config('constants.statusCart.cart'))->first();
-        if(!$cart) {
+        if (!$cart) {
             return response()->json([
                 'status_code' => 404,
                 'message' => "Giỏ hàng trống"
@@ -132,7 +132,7 @@ class CartController extends Controller
             $result[$item['vshop_id']]['products'][] = $item;
         }
         $result = array_values($result);
-        if($result===[]) {
+        if ($result === []) {
             return response()->json([
                 'status_code' => 404,
                 'message' => "Giỏ hàng trống"
@@ -189,7 +189,7 @@ class CartController extends Controller
 
         // Kiểm tra xêm vshop tồn tại không ?
         $vshop = Vshop::where('pdone_id', $vshopId)->first();
-        if(!$vshop) {
+        if (!$vshop) {
             return response()->json([
                 'status_code' => 404,
             ], 500);
@@ -201,9 +201,10 @@ class CartController extends Controller
         $product = DB::table('products')
             // chưa check status products
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
+            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
             ->where('products.id', $id)
             ->where('products.status', 2)
-            ->where('vshop_products.pdone_id', $vshopId)
+            ->where('vshop.pdone_id', $vshopId)
             ->select('products.id', 'products.sku_id', 'products.price', 'products.images', 'products.name')
             ->first();
 
@@ -221,7 +222,7 @@ class CartController extends Controller
             ->where('user_id', $userId)
             ->first();
 
-        if(!$cart) {
+        if (!$cart) {
             $cart = new CartV2();
             $cart->status = config('constants.statusCart.cart');
             $cart->user_id = $userId;
@@ -232,7 +233,7 @@ class CartController extends Controller
             ->where('product_id', $product->id)
             ->first();
 
-        if($checkCartItem) {
+        if ($checkCartItem) {
             $checkCartItem->quantity += $quantity;
             $checkCartItem->sku = $product->sku_id;
             $checkCartItem->price = $product->price;
@@ -252,10 +253,9 @@ class CartController extends Controller
             'status_code' => 201,
             'message' => 'Thêm sản phẩm vào giỏ hàng thành công',
             'cart_item' => $checkCartItem,
-            'product' =>$product
+            'product' => $product
         ], 201);
     }
-
 
 
 }

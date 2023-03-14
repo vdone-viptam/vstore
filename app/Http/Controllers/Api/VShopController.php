@@ -29,11 +29,12 @@ class  VShopController extends Controller
      * @bodyParam  avatar url ảnh đại diện
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
             'avatar' => 'url',
-            'vshop_name'=>'string'
+            'vshop_name' => 'string'
 
         ]);
         if ($validator->fails()) {
@@ -42,20 +43,21 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ]);
         }
-        $vshop = Vshop::where('pdone_id',$request->pdone_id)->first();
-        if (!$vshop){
-            $vshop= new Vshop();
+        $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
+        if (!$vshop) {
+            $vshop = new Vshop();
 
         }
         $vshop->pdone_id = $request->pdone_id;
-        $vshop->avatar = $request->avatar ??'';
+        $vshop->avatar = $request->avatar ?? '';
         $vshop->save();
         return response()->json([
             'status_code' => 200,
             'message' => 'Tạo Vshop Thành công',
-            'data'=>$vshop
+            'data' => $vshop
         ]);
     }
+
     /**
      * Danh sách Vshop
      *
@@ -66,13 +68,14 @@ class  VShopController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request){
-        $limit = $request->limit ??10;
-        $vshop = Vshop::select('id','pdone_id','vshop_name as name','phone_number','products_sold','avatar','description','products_sold','address')->paginate($limit);
+    public function index(Request $request)
+    {
+        $limit = $request->limit ?? 10;
+        $vshop = Vshop::select('id', 'pdone_id', 'vshop_name as name', 'phone_number', 'products_sold', 'avatar', 'description', 'products_sold', 'address')->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
-            'data'=>$vshop
+            'data' => $vshop
         ]);
     }
 
@@ -83,6 +86,7 @@ class  VShopController extends Controller
 
         return response()->json($pdone);
     }
+
     /**
      * danh sách chiết khấu cho hàng nhập sẵn
      *
@@ -92,13 +96,15 @@ class  VShopController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getBuyMoreDiscount($id){
-        $buy_more= BuyMoreDiscount::select('start','discount','deposit_money')->where('product_id',$id)->get();
+    public function getBuyMoreDiscount($id)
+    {
+        $buy_more = BuyMoreDiscount::select('start', 'discount', 'deposit_money')->where('product_id', $id)->get();
         return response()->json([
             'status_code' => 200,
             'data' => $buy_more,
         ]);
     }
+
     /**
      * Tỉ lệ chiết khấu mua nhiều giảm giá
      *
@@ -128,17 +134,17 @@ class  VShopController extends Controller
         }
 
         $discount = DB::table('buy_more_discount')->select('discount')
-                ->where('start', '<=', $request->total)
-                ->where('end', '>', $request->total)
-                ->where('product_id', $request->id)
-            ->select('discount','deposit_money')
-                ->first();
+            ->where('start', '<=', $request->total)
+            ->where('end', '>', $request->total)
+            ->where('product_id', $request->id)
+            ->select('discount', 'deposit_money')
+            ->first();
 //        return $discount;
         if ($discount->discount == 0) {
             $discount = DB::table('buy_more_discount')->select('discount')
                 ->where('end', 0)
                 ->where('product_id', $request->id)
-                ->select('discount','deposit_money')
+                ->select('discount', 'deposit_money')
                 ->first();
         }
         return response()->json([
@@ -147,6 +153,7 @@ class  VShopController extends Controller
         ]);
 
     }
+
     /**
      * Thêm thông tin giao hàng Vshop
      *
@@ -168,8 +175,8 @@ class  VShopController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
-            'district'=>'required|min:1',
-            'province'=>'required|min:1'
+            'district' => 'required|min:1',
+            'province' => 'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -187,8 +194,8 @@ class  VShopController extends Controller
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'district'=>$request->district,
-                'province'=>$request->province,
+                'district' => $request->district,
+                'province' => $request->province,
                 'created_at' => Carbon::now()
             ]);
 
@@ -262,7 +269,7 @@ class  VShopController extends Controller
         }
         $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
 
-        if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('product_id', $request->product_id)->count() > 0) {
+        if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('type', 3)->where('product_id', $request->product_id)->count() > 0) {
             return response()->json([
                 'status_code' => 404,
                 'error' => 'Mã giảm giá đã tồn tại',
@@ -273,10 +280,10 @@ class  VShopController extends Controller
                 'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
             ]);
-        } elseif ($request->discount > $discount/100 *95) {
+        } elseif ($request->discount > $discount / 100 * 95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount/100 *95,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
             ]);
         } else {
             DB::table('discounts')->insert([
@@ -295,6 +302,7 @@ class  VShopController extends Controller
 
 
     }
+
     /**
      * Sửa thông tin nhận hàng Vshop
      *
@@ -317,8 +325,8 @@ class  VShopController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
-            'district'=>'required|min:1',
-            'province'=>'required|min:1'
+            'district' => 'required|min:1',
+            'province' => 'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -334,7 +342,7 @@ class  VShopController extends Controller
                 'phone_number' => $request->phone_number,
                 'district' => $request->district,
                 'province' => $request->province,
-                'address'=>$request->address,
+                'address' => $request->address,
                 'updated_at' => Carbon::now(),
             ];
 
@@ -343,12 +351,12 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 201,
                 'data' => 'Cập nhật địa chỉ thành công',
-            ],200);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 400,
                 'message' => $e->getMessage(),
-            ],400);
+            ], 400);
         }
     }
 
@@ -361,21 +369,23 @@ class  VShopController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getProfile($id){
-        $vshop = Vshop::where('pdone_id',$id)
-            ->select('id','pdone_id','avatar','vshop_name','description')
+    public function getProfile($id)
+    {
+        $vshop = Vshop::where('pdone_id', $id)
+            ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'description')
             ->first();
-        if (!$vshop){
+        if (!$vshop) {
             return response()->json([
                 'status_code' => 400,
                 'message' => 'Không tìm thấy Vshop',
-            ],400);
+            ], 400);
         }
         return response()->json([
             'status_code' => 201,
             'data' => $vshop
-        ],200);
+        ], 200);
     }
+
     /**
      * Cập nhập thông tin Vshop
      *
@@ -388,7 +398,8 @@ class  VShopController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postProfile(Request $request,$id){
+    public function postProfile(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
 
             'avatar' => 'required|max:255',
@@ -402,18 +413,18 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ]);
         }
-        $vshop =Vshop::where('pdone_id',$id)->first();
-        if (!$vshop){
+        $vshop = Vshop::where('pdone_id', $id)->first();
+        if (!$vshop) {
             $vshop = new Vshop();
         }
         $vshop->avatar = $request->avatar;
-        $vshop->vshop_name= $request->vshop_name;
+        $vshop->vshop_name = $request->vshop_name;
         $vshop->description = $request->description;
         $vshop->save();
         return response()->json([
             'status_code' => 201,
             'data' => $vshop
-        ],200);
+        ], 200);
 
     }
 
@@ -426,8 +437,8 @@ class  VShopController extends Controller
      * @urlParam  id id vshop
      * @urlParam start_day lọc ngày bắt đầu
      * @urlParam  end_day lọc ngày kết thúc
-     *@urlParam type 1 rút 2 cộng thêm, 3 hoàn tiền
-     *@urlParam status 1 thành công, 2 thất bại, 3 đang xử lý
+     * @urlParam type 1 rút 2 cộng thêm, 3 hoàn tiền
+     * @urlParam status 1 thành công, 2 thất bại, 3 đang xử lý
      * @return \Illuminate\Http\JsonResponse
      */
     public function get_mony_history(Request $request)
