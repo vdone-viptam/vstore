@@ -226,19 +226,25 @@ class PaymentMethod9PayController extends Controller
      *
      * @param Request $request
      * @param $id "Id order"
-     * @param $userId "user id"
+     * @param $user_id "user id"
      * @param $method_payment "ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD"
      * @return JsonResponse|int
      */
-    function payment(Request $request, $id, $userId) {
+    function payment(Request $request, $id) {
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
+            'user_id' => 'required',
+            'is_pdone' => 'required|boolean',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         }
         $method = $request->method_payment;
-        $order = Order::where('id', $id)->where('pay', config('constants.payStatus.pay'))->first();
+        $user_id = $request->user_id;
+
+        $order = Order::where('id', $id)
+            ->where('pay', config('constants.payStatus.pay'))
+            ->first();
         $order->status = config('constants.orderStatus.confirmation');
         if(!$order) {
             return response()->json([], 404);

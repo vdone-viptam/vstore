@@ -41,6 +41,7 @@ class CartController extends Controller
             'product_id' => 'required',
             'quantity' => 'required|numeric|min:0',
             'user_id' => 'required',
+            'is_pdone' => 'required|boolean',
             'vshop_id' => 'required',
         ]);
 
@@ -95,8 +96,23 @@ class CartController extends Controller
      * @param $user_id "mã tài khoản người dùng pdone"
      * @return JsonResponse
      */
-    public function index($user_id): JsonResponse
+    public function index(Request $request): JsonResponse
     {
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'is_pdone' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        $user_id = $request->user_id;
+
         $cart = CartV2::where('cart_v2.user_id', $user_id)
             ->where('status', config('constants.statusCart.cart'))->first();
         if(!$cart) {
@@ -176,6 +192,7 @@ class CartController extends Controller
             'user_id' => 'required',
             'quantity' => 'required|numeric|min:1',
             'vshop_id' => 'required',
+            'is_pdone' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -188,7 +205,7 @@ class CartController extends Controller
         $vshopId = $request->vshop_id;
 
         // Kiểm tra xêm vshop tồn tại không ?
-        $vshop = Vshop::where('pdone_id', $vshopId)->first();
+        $vshop = Vshop::find($vshopId);
         if(!$vshop) {
             return response()->json([
                 'status_code' => 404,
@@ -203,7 +220,7 @@ class CartController extends Controller
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
             ->where('products.id', $id)
             ->where('products.status', 2)
-            ->where('vshop_products.pdone_id', $vshopId)
+            ->where('vshop_products.vshop_id', $vshopId)
             ->select('products.id', 'products.sku_id', 'products.price', 'products.images', 'products.name')
             ->first();
 

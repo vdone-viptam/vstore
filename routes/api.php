@@ -17,12 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+Route::prefix('cart')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Api\CartController::class, 'index']);
+    Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
+    Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
+});
 
 Route::prefix('order')->group(function () {
-    Route::post('/user/{userId}/cart/{cartId}/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    Route::post('/cart/{cartId}/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    Route::post('/{orderId}', [\App\Http\Controllers\Api\OrderController::class, 'update']);
     // THANH TOÁN APP
-    Route::post('/{id}/user/{userId}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+    Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
     Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
     // END THANH TOÁN APP
 });
@@ -86,11 +91,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::delete('destroy-affiliate/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
     });
     // CARt
-    Route::prefix('cart')->group(function () {
-        Route::get('/user/{user_id}', [\App\Http\Controllers\Api\CartController::class, 'index']);
-        Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-        Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
-    });
+
     Route::prefix('big-sales')->group(function () {
         Route::get('/get-list', [\App\Http\Controllers\Api\BigSaleController::class, 'getListProductSale']);
     });
