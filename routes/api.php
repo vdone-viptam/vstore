@@ -141,8 +141,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::post('create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
         Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
-        Route::get('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
-        Route::put('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
+        Route::get('/profile/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
+        Route::put('/profile/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
         Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
 
         Route::get('/get_mony_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
