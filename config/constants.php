@@ -9,7 +9,8 @@ return [
     // ORDER
     'orderStatus' => [
         'wait_for_confirmation' => 2,
-        'confirmation' => 1
+        'confirmation' => 1,
+        'success' => 3,
     ],
     'payStatus' => [ // được phép thanh toán hay chưa
         'pay' => 1,

@@ -80,23 +80,19 @@ function getDiscountProduct($id, $idVshop) {
     $return = [];
     foreach ($discounts as $index => $discount) {
         $type = $discount->type;
-        $productId = $discount->id;
         $price = $discount->price;
         $discountProduct = $discount->discount;
         switch ($type) {
             case config('constants.typeDiscount.ncc') : {
-                $discountsFromSuppliers = $price - ($price * ($discountProduct/100));
-                $return['discountsFromSuppliers'] = $discountsFromSuppliers;
+                $return['discountsFromSuppliers'] = $discountProduct;
                 break;
             }
             case config('constants.typeDiscount.vstore') : {
-                $discountsFromVStore = $price - ($price * ($discountProduct/100));
-                $return['discountsFromVStore'] = $discountsFromVStore;
+                $return['discountsFromVStore'] = $discountProduct;
                 break;
             }
             case config('constants.typeDiscount.vshop') : {
-                $discountsFromVShop = $price - ($price * ($discountProduct/100));
-                $return['discountsFromVShop'] = $discountsFromVShop;
+                $return['discountsFromVShop'] = $discountProduct;
                 break;
             }
             default: {
