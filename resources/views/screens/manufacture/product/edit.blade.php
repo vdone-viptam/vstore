@@ -344,8 +344,7 @@
 @endsection
 
 @section('custom_js')
-    <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/23l4tyr8qs5720ac7v7xlgtooqmbfd8on5mbf3qsf5w1m377/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script async>
         tinymce.init({
             selector: '#description',

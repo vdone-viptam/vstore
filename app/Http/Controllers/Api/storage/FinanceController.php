@@ -136,4 +136,9 @@ class FinanceController extends Controller
             ], 500);
         }
     }
+
+    public function destoryWa($id)
+    {
+        return Wallet::destroy($id);
+    }
 }

@@ -325,10 +325,12 @@ class  VShopController extends Controller
         $validator = Validator::make($request->all(), [
 
             'name' => 'required|max:255',
+            'name_address'=>'required',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
             'district' => 'required|min:1',
-            'province' => 'required|min:1'
+            'province' => 'required|min:1',
+            'wards'=>'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -345,6 +347,8 @@ class  VShopController extends Controller
                 'district' => $request->district,
                 'province' => $request->province,
                 'address' => $request->address,
+                'wards'=>$request->wards,
+                'name_address'=>$request-> name_address,
                 'updated_at' => Carbon::now(),
             ];
 

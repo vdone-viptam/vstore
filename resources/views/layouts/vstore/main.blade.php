@@ -21,6 +21,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     @vite('resources/css/app.css')
 </head>
+<style>
+    td{
+        text-align: left;
+    }
+</style>
 <body id="body">
 @yield('modal')
 <div class="absolute w-full h-full bg-transparent screen z-[5] hidden">

@@ -46,11 +46,13 @@ class ProductController extends Controller
     {
 //        return config('domain.token');
         try {
+//            return $request ->option;
 
             $limit = $request->limit ?? 10;
             $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
-            $selected = ['id', 'name', 'publish_id', 'images', 'price'];
-            $request->option = 1 ? 'asc' : 'desc';
+            $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id','type_pay'];
+            $request->option = $request->option == 'asc' ? 'asc' : 'desc';
+
             if ($request->pdone_id) {
                 $selected[] = 'discount';
             }
@@ -321,10 +323,9 @@ class ProductController extends Controller
         //check đã tiếp thị hay chưa
         if ($request->pdone_id) {
 //            return 1;
-            $check_vshop_product =Vshop::join('vshop_products','vshop.id','=','vshop_products.vshop_id')
-            ->where('vshop.pdone_id', $request->pdone_id)
-            ->where('vshop_products.product_id', $id)->first();
-            ;
+            $check_vshop_product = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                ->where('vshop.pdone_id', $request->pdone_id)
+                ->where('vshop_products.product_id', $id)->first();;
 
 //                VshopProduct::where('pdone_id', $request->pdone_id)->where('product_id', $id)->first();
             if ($check_vshop_product) {

@@ -55,6 +55,9 @@
     .validate-fail .input-code li input {
         border-color: #D90000;
     }
+    td{
+        text-align: left;
+    }
 </style>
 <body id="body">
 @yield('modal')
