@@ -17,22 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::prefix('cart')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Api\CartController::class, 'index']);
-    Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-    Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
-});
-
-Route::prefix('order')->group(function () {
-    Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
-    Route::post('/{orderId}', [\App\Http\Controllers\Api\OrderController::class, 'update']);
-    // THANH TOÁN APP
-    Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
-//    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
-    // END THANH TOÁN APP
-});
-
-
 //Route::post('callback-viettel-post', function (Request $req) {
 //
 //    return $req->all();
@@ -91,7 +75,20 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
         Route::delete('destroy-affiliate/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
     });
-    // CARt
+    // CART
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Api\CartController::class, 'index']);
+        Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
+        Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
+    });
+
+    Route::prefix('order')->group(function () {
+        Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+        Route::post('/{orderId}', [\App\Http\Controllers\Api\OrderController::class, 'update']);
+        // THANH TOÁN APP
+        Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
+        // END THANH TOÁN APP
+    });
 
 //    Route::('big-sales')->group(function () {
     Route::get('/product-sales', [\App\Http\Controllers\Api\BigSaleController::class, 'getListProductSale']);
