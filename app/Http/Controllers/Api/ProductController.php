@@ -70,6 +70,9 @@ class ProductController extends Controller
             if ($request->order_by == 2) {
                 $products = $products->orderBy('price', $request->option);
             }
+            if ($request->type_pay ) {
+                $products = $products->where('type_pay', $request->type_pay);
+            }
             if ($request->payment) {
                 if ($request->payment == 1) {
                     $products = $products->where('payment_on_delivery', 1);
@@ -90,12 +93,13 @@ class ProductController extends Controller
                     ->first()->sum;
                 $pro->discount = $discount ?? 0;
                 if ($request->pdone_id) {
-                    $pro->is_affiliate = DB::table('vshop_products')
-                        ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                    $pro->is_affiliate = Vshop::join('vshop_products','vshop.id','=','vshop_products.vshop_id')
                         ->where('product_id', $pro->id)
                         ->where('vshop_products.status', 1)
-                        ->where('pdone_id', $request->pdone_id)
-                        ->count();
+                        ->where('vshop.pdone_id', $request->pdone_id)
+                        ->count()??0;
+
+
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                     $pro->available_discount = $more_dis ?? 0;
                 }
@@ -296,7 +300,7 @@ class ProductController extends Controller
     function productById(Request $request, $id)
     {
 
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore','type_pay', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
 
         if (!$product) {
             return response()->json([

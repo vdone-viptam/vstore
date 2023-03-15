@@ -36,6 +36,7 @@ class VstoreController extends Controller
      */
     public function index(Request $request)
     {
+//        return 1;
         $validator = Validator::make($request->all(), [
 
             'branch' => 'numeric|min:1|max:2',
@@ -48,7 +49,7 @@ class VstoreController extends Controller
             ]);
         }
         $limit = $request->limit ?? 10;
-        if ($request->branch) {
+        if ($request->branch==2) {
             $user = User::where('role_id', 3)->where('account_code', '!=', null)
                 ->where('branch', $request->branch)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
@@ -61,13 +62,15 @@ class VstoreController extends Controller
             if ($request->company_name) {
                 $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
             }
-            $user = $user->paginate($limit);
+
 
 
         } else {
 
-            $user = User::where('role_id', 3)->where('account_code', '!=', null)
-                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
+            $user = User::where('role_id', 3)->where('account_code', '!=', null)->where('branch','!=',2)
+                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch')
+
+            ;
             if ($request->account_code) {
                 $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
             }
@@ -77,13 +80,24 @@ class VstoreController extends Controller
             if ($request->company_name) {
                 $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
             }
-            $user = $user->paginate($limit);
+
         }
+
+//        return $user->get();
+        $user = $user->paginate($limit);
         if ($user) {
             foreach ($user as $value) {
-                $value->avatar = asset($value->avatar);
+                if ($value->avatar==null){
+                    $value->avatar= asset('home/img/logo-06.png');
+                }else
+                    $value->avatar = asset('image/users/'.$value->avatar);
+
             }
+
+//                $value->avatar != null ? asset($value->avatar):;
+
         }
+//
         return response()->json([
             'status_code' => 200,
             'data' => $user,

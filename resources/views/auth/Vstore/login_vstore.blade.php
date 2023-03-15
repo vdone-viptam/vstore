@@ -124,8 +124,16 @@
             btn.setAttribute('disabled', 'true')
         }
     })
-    $('#form-log').submit(function () {
+    $('#form-log').submit(function (event) {
         btn.setAttribute('disabled', 'true');
+        // $('#form-log').reset();
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
     })
 </script>
 </body>
