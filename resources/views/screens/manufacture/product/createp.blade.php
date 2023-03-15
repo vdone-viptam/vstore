@@ -3,7 +3,7 @@
 
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success flex justify-center items-center show-modal">
+        <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
@@ -14,7 +14,6 @@
                         d="M12 20.4736C16.6318 20.4736 20.4668 16.6304 20.4668 12.0068C20.4668 7.375 16.6235 3.54004 11.9917 3.54004C7.36816 3.54004 3.5332 7.375 3.5332 12.0068C3.5332 16.6304 7.37646 20.4736 12 20.4736ZM9.21094 15.4932C8.8291 15.4932 8.53027 15.186 8.53027 14.8042C8.53027 14.6216 8.59668 14.4473 8.72949 14.3228L11.0288 12.0151L8.72949 9.71582C8.59668 9.58301 8.53027 9.41699 8.53027 9.23438C8.53027 8.84424 8.8291 8.55371 9.21094 8.55371C9.40186 8.55371 9.55127 8.62012 9.68408 8.74463L12 11.0522L14.3325 8.73633C14.4736 8.59521 14.623 8.53711 14.8057 8.53711C15.1875 8.53711 15.4946 8.83594 15.4946 9.21777C15.4946 9.40869 15.4365 9.55811 15.2871 9.70752L12.9795 12.0151L15.2788 14.3145C15.4199 14.439 15.4863 14.6133 15.4863 14.8042C15.4863 15.186 15.1792 15.4932 14.7891 15.4932C14.5981 15.4932 14.4238 15.4268 14.2993 15.2939L12 12.9863L9.70898 15.2939C9.57617 15.4268 9.40186 15.4932 9.21094 15.4932Z"
                         fill="white"/>
                 </svg>
-
                 <div class="content pt-3 px-3 text-center flex flex-col gap-6">
                     <div class="w-[262px] h-[262px] mx-auto">
                         <img src="{{asset('asset/images/success.gif')}}" class="w-full" alt="">
@@ -114,7 +113,7 @@
                                     <option
                                         value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
                                 @endforeach
-                                <option value="0" >khác</option>
+                                <option value="0">khác</option>
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>
@@ -140,8 +139,8 @@
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-title font-medium">Mô tả sản phẩm<strong
                             class="text-[#FF4D4F]">*</strong></span>
-                    <textarea name="description" id="description"
-                              class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{old('description')}}</textarea>
+                    <textarea name="description" id="description" style="width: 100% !important;height: 750px"
+                              class="w-full outline-nonepy-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{old('description')}}</textarea>
                     @error('description')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
@@ -152,7 +151,7 @@
                     <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start">
 
                     </div>
-                    <input type="hidden" id="images" name="images">
+                    <input type="hidden" id="images" name="images" >
                     <div
                         class="cursor-pointer add-img-SP w-[104px] h-[104px] border-2 border-dashed bg-[#FAFAFA] border-secondary flex justify-center flex-col items-center rounded-sm gap-1">
                         <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
@@ -172,7 +171,7 @@
                 @enderror
                 <label for="">Video sản phẩm</label>
                 <div class="flex justify-start items-start gap-2 w-full">
-                    <input type="file" accept="video/mp4"
+                    <input type="file" accept="video/mp4" accept="video/*"
                            class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                            name="video" id="video">
                 </div>
@@ -245,7 +244,7 @@
                         </div>
                         <div class=" flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="date" min="2018-01-01" name="import_date"
+                            <input type="date"  name="import_date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
@@ -319,7 +318,7 @@
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Kiểu đóng gói</span>
-                            <select  name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
+                            <select name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
                                     class=" outline-none w-full py-[11px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Lựa chọn kiểu đóng gói</option>
                                 <option value="1" {{1 == old('packing_type') ? 'selected' : ''}}>Túi</option>
@@ -354,6 +353,79 @@
 @endsection
 
 @section('custom_js')
+    <script src="https://cdn.tiny.cloud/1/23l4tyr8qs5720ac7v7xlgtooqmbfd8on5mbf3qsf5w1m377/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script async>
+        tinymce.init({
+            selector: '#description',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                {value: 'First.Name', title: 'First Name'},
+                {value: 'Email', title: 'Email'},
+            ],
+            image_title: true,
+            /* enable automatic uploads of images represented by blob or data URIs*/
+            automatic_uploads: true,
+            /*
+              URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+              images_upload_url: 'postAcceptor.php',
+              here we add custom filepicker only to Image dialog
+            */
+            file_picker_types: 'image',
+            /* and here's our custom image picker*/
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                /*
+                  Note: In modern browsers input[type="file"] is functional without
+                  even adding it to the DOM, but that might not be the case in some older
+                  or quirky browsers like IE, so you might want to add it to the DOM
+                  just in case, and visually hide it. And do not forget do remove it
+                  once you do not need it anymore.
+                */
+
+                input.onchange = function () {
+                    var file = this.files[0];
+
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        /*
+                          Note: Now we need to register the blob in TinyMCEs image blob
+                          registry. In the next release this part hopefully won't be
+                          necessary, as we are looking to handle it internally.
+                        */
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        fetch('{{route('upload')}}?_token={{csrf_token()}}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: JSON.stringify({file: reader.result}) // body data type must match "Content-Type" header
+                        }).then(res => res.json())
+                            .then(data => {
+                                var blobInfo = blobCache.create(id, file, data);
+                                blobCache.add(blobInfo);
+                                /* call the callback and populate the Title field with the file name */
+                                cb(data, {title: file.name});
+                            });
+
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+
+        });
+    </script>
     <script>
         $(".js-example-tags").select2({
             tags: true

@@ -55,10 +55,10 @@ class FinanceController extends Controller
     {
         try {
             $vshop_id = DB::table('vshop')
-                ->select('id')
-                ->where('pdone_id', $pdone_id)
-                ->first()
-                ->id ?? 0;
+                    ->select('id')
+                    ->where('pdone_id', $pdone_id)
+                    ->first()
+                    ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -140,10 +140,10 @@ class FinanceController extends Controller
             }
 
             $vshop_id = DB::table('vshop')
-                ->select('id')
-                ->where('pdone_id', $request->pdone_id)
-                ->first()
-                ->id ?? 0;
+                    ->select('id')
+                    ->where('pdone_id', $request->pdone_id)
+                    ->first()
+                    ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -198,10 +198,10 @@ class FinanceController extends Controller
             }
 
             $vshop_id = DB::table('vshop')
-                ->select('id')
-                ->where('pdone_id', $request->pdone_id)
-                ->first()
-                ->id ?? 0;
+                    ->select('id')
+                    ->where('pdone_id', $request->pdone_id)
+                    ->first()
+                    ->id ?? 0;
 
             if (!$vshop_id) {
                 return response()->json([
@@ -210,7 +210,7 @@ class FinanceController extends Controller
                 ], 404);
             }
 
-            if (DB::table('wallets')->where('user_id' , $vshop_id)->count() == 1) {
+            if (DB::table('wallets')->where('user_id', $vshop_id)->count() == 1) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Tài khoản ngân hàng đã tồn tại'
@@ -299,6 +299,14 @@ class FinanceController extends Controller
                 'account_number' => $wallet->account_number,
                 'old_money' => $vshop_id->money,
                 'type' => 2,
+                'created_at' => Carbon::now()
+            ]);
+            DB::table('balance_change_history')->insert([
+                'vshop_id' => $vshop_id->id,
+                'type' => 0,
+                'title' => 'Rút tiền về ngân hàng',
+                'status' => 1,
+                'money_history' => (double)$request->amount,
                 'created_at' => Carbon::now()
             ]);
             DB::table('vshop')->where('id', $vshop_id->id)->update(['money' => $vshop_id->money - $request->amount]);

@@ -323,8 +323,9 @@ class ProductController extends Controller
             $object->vstore_id = $request->vstore_id;
             $object->vat = $request->vat;
             $object->user_id = Auth::id();
-            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
-            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
+            $object->type_pay= $request->prepay[0] == 1 ? 2 : 1;
+//            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
+//            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
             $code = rand(100000000000, 999999999999);
 
             while (true) {
@@ -385,10 +386,10 @@ class ProductController extends Controller
                             if (isset($request->moneyv[$i]) && $request->moneyv[$i - 1] >= $request->moneyv[$i]) {
                                 $message['moneyv'] = 'Chiết khấu sau phải lớn hơn Chiết khấu trước';
                             }
-                            if ( isset($request->deposit_money[$i-1]) !='' && isset($request->deposit_money[$i]) && $request->deposit_money[$i - 1] >= $request->deposit_money[$i]) {
+                            if (isset($request->deposit_money[$i - 1]) != '' && isset($request->deposit_money[$i]) && $request->deposit_money[$i - 1] >= $request->deposit_money[$i]) {
                                 $message['deposit_money'] = 'Tiền cọc sau phải lớn hơn Tiền cọc trước';
                             }
-                            if (isset($message)){
+                            if (isset($message)) {
                                 return redirect()->back()->withErrors($message);
                             }
                         }
@@ -552,6 +553,13 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
+
+    }
+
+    public function uploadImagePost(Request $request)
+    {
+        $srcImage = asset('storage/products/' . $this->saveImgBase64($request->file, 'products'));
+        return response()->json($srcImage);
 
     }
 }

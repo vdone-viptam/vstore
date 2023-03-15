@@ -120,7 +120,12 @@ class CategoryController extends Controller
                 $data_vstore[] = $pr->vstore_id;
                 unset($pr->vstore_id);
                 if ($request->pdone_id) {
-                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('pdone_id', $request->pdone_id)->count();
+                    $pr->is_affiliate = DB::table('vshop_products')
+                        ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                        ->where('product_id', $pr->id)
+                        ->where('vshop_products.status', 1)
+                        ->where('pdone_id', $request->pdone_id)
+                        ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                     $pr->available_discount = $more_dis ?? 0;
                 }
@@ -194,7 +199,12 @@ class CategoryController extends Controller
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
                 if ($request->pdone_id) {
-                    $pr->is_affiliate = DB::table('vshop_products')->where('product_id', $pr->id)->where('pdone_id', $request->pdone_id)->count();
+                    $pr->is_affiliate = DB::table('vshop_products')
+                        ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                        ->where('product_id', $pr->id)
+                        ->where('vshop_products.status',1)
+                        ->where('pdone_id', $request->pdone_id)
+                        ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                     $pr->available_discount = $more_dis ?? 0;
                 }
@@ -234,7 +244,7 @@ class CategoryController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ],500);
+            ], 500);
         }
     }
 

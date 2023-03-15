@@ -2,7 +2,7 @@
 @section('page_title','Yêu cầu rút tiền')
 
 @section('content')
-    <form action="" method="GET" id="form">
+    <form action="{{route('screens.admin.finance.exportDeposits')}}" method="GET" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
             <span class="text-secondary">Tài chính</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,9 +40,21 @@
                         Danh sách yêu cầu rút tiền
                     </h2>
                     <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-
-                        <button
-                            class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
+                        <div>
+                            <label for="" class="mx-2">Từ</label>
+                            <input type="date" name="start_date"
+                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
+                                   class=" outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        </div>
+                        <div>
+                            <label for="" class="mx-2">đến</label>
+                            <input type="date" max="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                                   name="end_date"
+                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
+                                   class=" outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        </div>
+                        <button id="btnSearch"
+                                class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_4_2870)">
@@ -57,7 +69,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <a href="{{route('screens.admin.finance.exportDeposits')}}">Xuất danh sách</a>
+                            <a>Xuất danh sách</a>
                         </button>
 
                     </div>
@@ -146,7 +158,7 @@
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                                         <span class="text-sm text-title">Tổng: <strong
                                                 class="font-bold">{{$histories->total()}}</strong></span>
-                                        {{$histories->withQueryString()->links()}}
+                    {{$histories->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
@@ -173,14 +185,25 @@
 @endsection
 
 @section('custom_js')
+
     <script>
+
+        document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
+            document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
+        });
         const name = document.getElementById('name');
         const id = document.getElementById('id');
         const limit = document.getElementById('limit');
         const page = document.getElementById('page');
         const form = document.getElementById('form');
         document.getElementById('btnSearch').addEventListener('click', () => {
+                setTimeout(() => {
+                    location.href = "{{route('screens.admin.finance.exportDeposits')}}";
+                    location.reload()
+                }, 2000);
                 form.submit();
+
+
             }
         )
         limit.addEventListener('change', (e) => {

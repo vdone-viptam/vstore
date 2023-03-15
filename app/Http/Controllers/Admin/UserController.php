@@ -39,7 +39,7 @@ class UserController extends Controller
                 ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
                 ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
                 ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code', '=', $request->keyword)
+                ->orwhere('account_code','like','%' . $request->keyword .'%')
                 ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
@@ -58,7 +58,7 @@ class UserController extends Controller
                 ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
                 ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
                 ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code', '=', $request->keyword)
+                ->orwhere( 'account_code','like','%' . $request->keyword .'%')
                 ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);

@@ -123,19 +123,19 @@
                             @foreach($requests as $request)
 
                                 <tr>
-                                    <td>
+                                    <td class="text-left">
                                         {{$request->product_name}}
                                     </td>
-                                    <td>
+                                    <td class="text-left">
                                         {{$request->name}}
                                     </td>
-                                    <td>
+                                    <td class="text-left">
                                         {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y')}}
                                     </td>
-                                    <td>
+                                    <td class="text-left">
                                         {{$request->user_name}}
-                                    </td>
-                                    <td>
+                                    </td >
+                                    <td class="text-left">
                                         {{$request->publish_id}}
                                     </td>
                                     <td class="w-[200px]">

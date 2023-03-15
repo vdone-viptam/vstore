@@ -22,7 +22,7 @@ class FinanceController extends Controller
     public function index()
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
-        $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())->first();
+        $this->v['wallet'] = Wallet::with(['bank'])->select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())->first();
         return response()->json([
             'success' => true,
             'data' => $this->v
@@ -91,7 +91,7 @@ class FinanceController extends Controller
 
     public function history()
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
+        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
         return response()->json([
             'success' => true,
             'data' => $this->v['histories']
@@ -135,5 +135,10 @@ class FinanceController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function destoryWa($id)
+    {
+        return Wallet::destroy($id);
     }
 }

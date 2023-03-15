@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('vshop_products', function (Blueprint $table) {
             $table->id();
-            $table->string('vshop_id')->nullable();
+            $table->integer('vshop_id')->nullable();
             $table->integer('product_id')->nullable();
             $table->integer('status')->nullable();
             $table->integer('amount')->default(0);

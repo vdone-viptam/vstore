@@ -62,7 +62,7 @@ class ManufactureController extends Controller
             $user = User::select('avatar','name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
            if ($user){
                $user->total_product = $user->products()->where('status', 2)->count();
-                $user->avatar = ($user->avatar !='') ? asset('image/user/'.$user->avatar): asset('home/img/NCC.png');
+                $user->avatar = ($user->avatar !='') ? asset('image/users/'.$user->avatar): asset('home/img/NCC.png');
                $cate = Category::select('categories.name')
                    ->join('products', 'categories.id', '=', 'products.category_id')
                    ->where('user_id', $ncc_id)

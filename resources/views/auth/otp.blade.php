@@ -99,7 +99,7 @@
                 <div class=md:text-left>Bạn chưa nhận được mã. <a
                         class="text-sky-500/100 hover:underline transition-all duration-200"
                         href="{{route('re_otp',['id'=>$user_id])}}">Gửi lại</a></div>
-             
+
             </div>
 
             <div class="flex justify-between items-center w-full">
@@ -110,7 +110,7 @@
                 <input type="submit"
                        class="cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
                        value="Đồng ý"></input>
-             
+
             </div>
 
         </form>

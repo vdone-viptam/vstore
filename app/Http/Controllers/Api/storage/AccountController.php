@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Models\Warehouses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -144,13 +145,16 @@ class AccountController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors()
-            ], 401);
+            ], 400);
         }
 
         $user = User::find(Auth::id());
 
         if (!Hash::check($request->old_password, $user->password)) {
-            return redirect()->back()->withErrors(['old_password' => "Mật khẩu cũ không chính xác"])->withInput($request->all())->with('validate', 'failed');
+            return response()->json([
+                'success' => false,
+                'errors' => ['old_password' => "Mật khẩu cũ không chính xác"]
+            ], 400);
         }
 
         $user->password = Hash::make($request->password);
@@ -180,22 +184,22 @@ class AccountController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors()
-            ], 401);
+            ], 400);
         }
 
         try {
-            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', Auth::user()->role_id)->count() > 0) {
+            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', 4)->count() != 0) {
                 return response()->json([
                     'success' => false,
-                    'errors' => ['tax_code' => 'Mã số thuế đã được đang ký']
-                ], 401);
+                    'errors' => ['tax_code' => 'Mã số thuế đã được đăng ký']
+                ], 400);
 
             }
-            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', 3)->orWhere('role_id', 2)->count() > 0) {
+            if (DB::table('users')->where('tax_code', $request->tax_code)->whereIn('role_id', [2, 3])->count() != 0) {
                 return response()->json([
                     'success' => false,
-                    'errors' => ['tax_code' => 'Mã số thuế đã được đang ký']
-                ], 401);
+                    'errors' => ['tax_code' => 'Mã số thuế đã được đăng ký']
+                ], 400);
             }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),
@@ -216,4 +220,6 @@ class AccountController extends Controller
             ], 500);
         }
     }
+
+
 }

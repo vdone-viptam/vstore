@@ -7,7 +7,6 @@ use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
-use App\Models\Category;
 use App\Models\Discount;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
@@ -47,11 +46,13 @@ class ProductController extends Controller
     {
 //        return config('domain.token');
         try {
+//            return $request ->option;
 
             $limit = $request->limit ?? 10;
             $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
-            $selected = ['id', 'name', 'publish_id', 'images', 'price'];
-            $request->option=1?'asc':'desc';
+            $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id','type_pay'];
+            $request->option = $request->option == 'asc' ? 'asc' : 'desc';
+
             if ($request->pdone_id) {
                 $selected[] = 'discount';
             }
@@ -69,6 +70,9 @@ class ProductController extends Controller
             }
             if ($request->order_by == 2) {
                 $products = $products->orderBy('price', $request->option);
+            }
+            if ($request->type_pay) {
+                $products = $products->where('type_pay', $request->type_pay);
             }
             if ($request->payment) {
                 if ($request->payment == 1) {
@@ -90,7 +94,13 @@ class ProductController extends Controller
                     ->first()->sum;
                 $pro->discount = $discount ?? 0;
                 if ($request->pdone_id) {
-                    $pro->is_affiliate = DB::table('vshop_products')->where('product_id', $pro->id)->where('status', 1)->where('pdone_id', $request->pdone_id)->count();
+                    $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                        ->where('product_id', $pro->id)
+                        ->where('vshop_products.status', 1)
+                        ->where('vshop.pdone_id', $request->pdone_id)
+                        ->count() ?? 0;
+
+
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                     $pro->available_discount = $more_dis ?? 0;
                 }
@@ -105,7 +115,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ],500);
+            ], 500);
         }
 
     }
@@ -267,7 +277,7 @@ class ProductController extends Controller
             $value->images = asset(json_decode($value->images)[0]);
             $value->price_discount = $value->price - ($value->price / 100 * $value->discount_vstore);
             $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
-                    ->first()->sum ?? 0;
+                ->first()->sum ?? 0;
 
         }
 
@@ -291,7 +301,7 @@ class ProductController extends Controller
     function productById(Request $request, $id)
     {
 
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
+        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'type_pay', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
 
         if (!$product) {
             return response()->json([
@@ -312,7 +322,12 @@ class ProductController extends Controller
         $product->rating = 5;
         //check đã tiếp thị hay chưa
         if ($request->pdone_id) {
-            $check_vshop_product = VshopProduct::where('pdone_id', $request->pdone_id)->where('product_id', $id)->first();
+//            return 1;
+            $check_vshop_product = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                ->where('vshop.pdone_id', $request->pdone_id)
+                ->where('vshop_products.product_id', $id)->first();;
+
+//                VshopProduct::where('pdone_id', $request->pdone_id)->where('product_id', $id)->first();
             if ($check_vshop_product) {
                 $product->affiliate = 1;
             } else {
@@ -322,15 +337,30 @@ class ProductController extends Controller
         $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * 10);
         $list_vshop = VshopProduct::where('product_id', $id)->get();
+//        $list_vshop = Vshop::
+        $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+            ->where('vshop_products.product_id', $id)
+            ->select('vshop.pdone_id', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+            ->get();
+//        dd($list_vshop);
+//        return $list_vshop;
 
         foreach ($list_vshop as $list) {
+//            $vshop_name = Vshop::where('pdone_id',$list->id_pdone)->first()->name;
             $discount = Discount::where('product_id', $id)->where('user_id', $list->pdone_id)
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
                 ->first();
             $list->vshop_discount = $discount->discount ?? 0;
 
-
+//            "id": 1,
+//            "pdone_id": "11212",
+//            "product_id": 1,
+//            "status": 1,
+//            "amount": 0,
+//            "created_at": "2023-03-10T04:01:10.000000Z",
+//            "updated_at": null,
+//            "vshop_discount": 0
         }
 
 
@@ -371,7 +401,12 @@ class ProductController extends Controller
             $vshop->save();
         }
 
-        $checkVshop = DB::table('vshop_products')->select('id')->where('pdone_id', $vshop->id)->where('product_id', $id)->count();
+        $checkVshop = DB::table('vshop_products')
+            ->select('vshop_products.id')
+            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+            ->where('type', 1)
+            ->where('pdone_id', $vshop->pdone_id)
+            ->where('product_id', $id)->count();
         if ($checkVshop > 0) {
             return response()->json([
                 'message' => 'Sản phẩm đã được đăng ký tiếp thị',
@@ -379,7 +414,7 @@ class ProductController extends Controller
         }
         try {
             DB::table('vshop_products')->insert([
-                'pdone_id' => $vshop->pdone_id,
+                'vshop_id' => $vshop->id,
                 'product_id' => $id,
                 'status' => 1,
                 'created_at' => Carbon::now()
@@ -413,31 +448,46 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'asc';
         $data = null;
-        $products = DB::table('vshop_products')
-            ->select('name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'amount_product_sold', 'view')
+        $vshop = Vshop::select('name', 'id', 'nick_name', 'avatar', 'pdone_id')->where('pdone_id', $pdone_id)->first();
+        $cate = [];
+
+        $products = DB::table('vshop')
+            ->select('products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'categories.name as cate_name')
+            ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
             ->where('vshop_products.status', 1)
             ->where('pdone_id', $pdone_id);
         $total_product = $products->count();
         $products = $products->paginate($limit);
         foreach ($products as $pr) {
+            $cate[] = $pr->cate_name;
             $pr->discount = DB::table('discounts')
-                    ->selectRaw('SUM(discount) as dis')
-                    ->where('product_id', $pr->id)
-                    ->where('start_date', '<=', Carbon::now())
-                    ->where('end_date', '>=', Carbon::now())
-                    ->whereIn('type', [1, 2])
-                    ->first()->dis ?? 0;
+                ->selectRaw('SUM(discount) as dis')
+                ->where('product_id', $pr->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->first()->dis ?? 0;
             $pr->image = asset(json_decode($pr->images)[0]);
             unset($pr->images);
-            $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
-            $pr->available_discount = $more_dis ?? 0;
-            $pr->vshop_discount = DB::table('discounts')
+            if ($request->pdone_id) {
+                $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
+                $pr->available_discount = $more_dis ?? 0;
+                $pr->vshop_discount = DB::table('discounts')
                     ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
+                $pr->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                    ->where('product_id', $pr->id)
+                    ->where('vshop_products.status', 1)
+                    ->where('vshop.pdone_id', $request->pdone_id)
+                    ->count() ?? 0;
+            }
         }
+        $vshop->categories = implode(', ', array_unique($cate));
+        $vshop->totalProduct = $total_product;
         return response()->json([
             'status_code' => 200,
-            'total_product' => $total_product,
+            'vshop' => $vshop,
             'data' => $products
         ], 200);
     }
@@ -448,8 +498,9 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'asc';
         $data = null;
-        $products = DB::table('vshop_products')
+        $products = DB::table('vshop')
             ->select('name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'amount_product_sold', 'vshop_products.amount as in_stock', 'view')
+            ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.status', 2)
             ->where('pdone_id', $pdone_id);
@@ -457,18 +508,18 @@ class ProductController extends Controller
         $products = $products->paginate($limit);
         foreach ($products as $pr) {
             $pr->discount = DB::table('discounts')
-                    ->selectRaw('SUM(discount) as dis')
-                    ->where('product_id', $pr->id)
-                    ->where('start_date', '<=', Carbon::now())
-                    ->where('end_date', '>=', Carbon::now())
-                    ->whereIn('type', [1, 2])
-                    ->first()->dis ?? 0;
+                ->selectRaw('SUM(discount) as dis')
+                ->where('product_id', $pr->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->first()->dis ?? 0;
             $pr->image = asset(json_decode($pr->images)[0]);
             unset($pr->images);
             $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
             $pr->available_discount = $more_dis ?? 0;
             $pr->vshop_discount = DB::table('discounts')
-                    ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
+                ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
         }
         return response()->json([
             'status_code' => 200,
@@ -525,6 +576,7 @@ class ProductController extends Controller
             $ncc = [];
             foreach ($request->infomation as $pro) {
                 $products = DB::table('vshop_products')
+                    ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                     ->where('pdone_id', $pdone_id)
                     ->where('product_id', $pro['product_id'])
                     ->where('amount', '>=', $pro['amount'])
@@ -541,12 +593,12 @@ class ProductController extends Controller
                     ->where('id', $pro['product_id'])
                     ->first();
                 $discount = DB::table('discounts')->where('start_date', '<=', Carbon::now())
-                        ->selectRaw('SUM(discount) as dis')
-                        ->where('end_date', '>=', Carbon::now())
-                        ->where('product_id', $pro['product_id'])
-                        ->whereIn('user_id', [$product->vstore_id, $product->user_id, $pdone_id])
-                        ->first()
-                        ->dis ?? 0;
+                    ->selectRaw('SUM(discount) as dis')
+                    ->where('end_date', '>=', Carbon::now())
+                    ->where('product_id', $pro['product_id'])
+                    ->whereIn('user_id', [$product->vstore_id, $product->user_id, $pdone_id])
+                    ->first()
+                    ->dis ?? 0;
                 $price = ($product->price - ($product->price * $discount / 100));
                 $bills += $price * $pro['amount'];
                 $vstore[] = [
@@ -835,7 +887,12 @@ class ProductController extends Controller
     function destroyAffProduct($pdone_id, $product_id)
     {
         try {
-            DB::table('vshop_products')->where('pdone_id', $pdone_id)->where('product_id', $product_id)->where('status', 1)->update(['status' => 3]);
+            DB::table('vshop_products')
+                ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                ->where('pdone_id', $pdone_id)
+                ->where('product_id', $product_id)
+                ->where('status', 1)
+                ->update(['status' => 3]);
 
             return response()->json([
                 'status_code' => 201,

@@ -98,6 +98,7 @@ class ProductController extends Controller
                     'prepay' => $currentRequest->prepay,
                     'payment_on_delivery' => $currentRequest->payment_on_delivery,
                     'deposit_money'=>$currentRequest->deposit_money,
+                    'type_pay'=>$currentRequest->type_pay,
                 ]);
                 DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {

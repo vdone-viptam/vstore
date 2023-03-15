@@ -71,7 +71,9 @@ Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostControlle
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
-
+    Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
+    Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
+    Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getWards']);
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
 
@@ -91,9 +93,9 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     // CARt
 
-    Route::prefix('big-sales')->group(function () {
-        Route::get('/get-list', [\App\Http\Controllers\Api\BigSaleController::class, 'getListProductSale']);
-    });
+//    Route::('big-sales')->group(function () {
+    Route::get('/product-sales', [\App\Http\Controllers\Api\BigSaleController::class, 'getListProductSale']);
+//    });
     Route::prefix('banners')->group(function () {
         Route::get('/get-banner', [\App\Http\Controllers\Api\BannerController::class, 'getBannerHomePage']);
     });
@@ -144,7 +146,9 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
         Route::get('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
         Route::put('/profile/{id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
-        Route::get('/get-buy-more-discount/{id}',[\App\Http\Controllers\Api\VShopController::class,'getBuyMoreDiscount']);
+        Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
+
+        Route::get('/get_mony_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
 
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
@@ -190,6 +194,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::post('/create-deposit', [\App\Http\Controllers\Api\storage\FinanceController::class, 'deposit']);
 
                 Route::get('/history', [\App\Http\Controllers\Api\storage\FinanceController::class, 'history']);
+                Route::delete('/destroy-wa/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'destoryWa']);
 
             });
             Route::prefix('partners')->group(function () {
@@ -204,6 +209,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
 
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+
 });
 
 Route::get('/get-city', [\App\Http\Controllers\Auth\LoginController::class, 'getCity'])->name('get_city');

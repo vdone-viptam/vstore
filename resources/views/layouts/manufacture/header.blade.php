@@ -9,8 +9,8 @@
                     <p class="text-black 2xl:text-base xl:text-sm font-medium cursor-pointer">Xin chào, {{strtoupper(\Illuminate\Support\Facades\Auth::user()->account_code) }}!</p>
                 </div>
                 <div class="w-[51px]">
-                    <div class="w-[50px] h-[65px] ">
-                        <img class="w-[45px] h-[100px] cursor-pointer object-fill"
+                    <div class="w-[50px] h-[80px] ">
+                        <img class="w-[38px] h-[38px] cursor-pointer object-contain"
                              src="{{asset('asset/images/userNCC.png')}}" >
 
                     </div>

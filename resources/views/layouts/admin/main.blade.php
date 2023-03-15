@@ -18,6 +18,9 @@
         background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%);
 
     }
+    td{
+        text-align: left;
+    }
 </style>
 <body id="body">
 <div class="over-lay-mobile" onclick="$('.menu-mobile').toggleClass('show-menuMB')">

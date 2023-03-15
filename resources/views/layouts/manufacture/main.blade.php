@@ -28,6 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @include('layouts.css')
     <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
@@ -53,6 +54,9 @@
 
     .validate-fail .input-code li input {
         border-color: #D90000;
+    }
+    td{
+        text-align: left;
     }
 </style>
 <body id="body">
@@ -173,6 +177,5 @@
         }
     })
 </script>
-
 </body>
 </html>
