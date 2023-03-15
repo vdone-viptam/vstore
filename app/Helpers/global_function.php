@@ -69,6 +69,28 @@ function getDiscountProducts($id, $idVshop) {
     return $result;
 }
 
+function getWarehouse($province_id, $district_id, $product_id) {
+
+    $address = \Illuminate\Support\Facades\DB::table('province')
+        ->join('district', 'district.province_id', '=', 'province.province_id')
+        ->where('province.province_id', $province_id)
+        ->first();
+
+    if(!$address) {
+        return false;
+    }
+
+    $warehouse = \App\Models\Warehouses::where('product_warehouses.product_id', $product_id)
+        ->join('product_warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
+//        ->where('warehouses.district_id', $district_id)
+//        ->where('warehouses.city_id', $province_id)
+        ->get();
+    dd($warehouse);
+
+
+    dd($address->province_name . ', ' . $address->district_name);
+}
+
 function getDiscountProduct($id, $idVshop) {
     $discounts = Discount::where('product_id', $id)
         ->where('discounts.user_id', $idVshop)

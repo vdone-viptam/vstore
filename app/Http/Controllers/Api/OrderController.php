@@ -23,7 +23,12 @@ class OrderController extends Controller {
             'product_id' => 'required',
             'vshop_id' => 'required',
             'quantity' => 'required|numeric',
-            'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD'
+            'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
+            'fullname' => 'required',
+            'phone' => 'required',
+            'district_id' => 'required',
+            'province_id' => 'required',
+            'address' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -36,7 +41,6 @@ class OrderController extends Controller {
         $productId = $request->product_id;
         $vshopId = $request->vshop_id;
         $quantity = $request->quantity;
-
 
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
