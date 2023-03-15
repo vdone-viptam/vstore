@@ -146,7 +146,12 @@ class VstoreController extends Controller
     {
 
         try {
-            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 3)->where('id', $id)->first();
+            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number','avatar')->where('role_id', 3)->where('id', $id)->first();
+            if ($user->avatar == null){
+                $user->avatar= asset('home/img/logo-06.png');
+            }else{
+                $user->avatar= asset('image/users/'.$user->avatar);
+            }
             $user->total_product = $user->products()->where('status', 2)->count();
             $cate = Category::select('categories.name')
                 ->join('products', 'categories.id', '=', 'products.category_id')

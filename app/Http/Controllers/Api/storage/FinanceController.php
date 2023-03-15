@@ -22,7 +22,7 @@ class FinanceController extends Controller
     public function index()
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
-        $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())->first();
+        $this->v['wallet'] = Wallet::with(['bank'])->select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())->first();
         return response()->json([
             'success' => true,
             'data' => $this->v

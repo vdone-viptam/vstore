@@ -38,9 +38,10 @@
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 
-        <form action="{{route('postLogin',['type' => 2])}}" method="post" onsubmit="this.disabled = true" class="w-full"
+        <form action="{{route('postLogin',['type' => 2])}}" method="post"  class="w-full"
               id="form-log">
-            {{ csrf_field() }}
+{{--            {{ csrf_field() }}--}}
+            @csrf
             @if(\Illuminate\Support\Facades\Session::has('success'))
                 <h4 style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</h4>
             @endif

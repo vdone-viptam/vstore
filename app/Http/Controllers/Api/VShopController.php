@@ -34,7 +34,8 @@ class  VShopController extends Controller
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
             'avatar' => 'url',
-            'vshop_name' => 'string'
+            ' ' => 'string',
+            'nick_name' => ''
 
         ]);
         if ($validator->fails()) {
@@ -50,6 +51,7 @@ class  VShopController extends Controller
         }
         $vshop->pdone_id = $request->pdone_id;
         $vshop->avatar = $request->avatar ?? '';
+        $vshop->nick_name = $request->nick_name;
         $vshop->save();
         return response()->json([
             'status_code' => 200,
@@ -333,7 +335,7 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 401,
                 'error' => $validator->errors(),
-            ]);
+            ],400);
         }
         try {
             $data = [
