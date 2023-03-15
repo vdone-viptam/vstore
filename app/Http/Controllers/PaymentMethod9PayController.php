@@ -24,10 +24,6 @@ class PaymentMethod9PayController extends Controller
     public function paymentErr() {
         return view('payment.paymentErr');
     }
-    function paymentGet() {
-        $bills = Bill::all();
-        return view('welcome', compact('bills'));
-    }
     function paymentSuccess() {
         return view('payment.paymentSuccess');
     }
@@ -148,76 +144,76 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-    function paymentCheck(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'result' => 'required',
-            'checksum' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        $checksum = $request->checksum;
-        $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
-        $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
-        if($hashChecksum === $checksum){
-            $result = base64_decode($request->result);
-            $payment = json_decode($result);
-            $status = $payment->status;
-            $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
-//            $statusLabel = status9Pay($status);
-            if(!$checkPayment) {
-                // Tạo lịch sử hoá đơn
-                $paymentHistory = new PaymentHistory();
-                $paymentHistory->amount = $payment->amount;
-                $paymentHistory->amount_foreign = $payment->amount_foreign;
-                $paymentHistory->amount_original = $payment->amount_original;
-                $paymentHistory->amount_request = $payment->amount_request;
-                $paymentHistory->bank = $payment->bank;
-                $paymentHistory->card_brand = $payment->card_brand;
-                $paymentHistory->card_info = json_encode($payment->card_info);
-                $paymentHistory->currency = $payment->currency;
-                $paymentHistory->description = $payment->description;
-                $paymentHistory->error_code = $payment->error_code;
-                $paymentHistory->exc_rate = $payment->exc_rate;
-                $paymentHistory->failure_reason = $payment->failure_reason;
-                $paymentHistory->foreign_currency = $payment->foreign_currency;
-                $paymentHistory->invoice_no = $payment->invoice_no;
-                $paymentHistory->lang = $payment->lang;
-                $paymentHistory->method = $payment->method;
-                $paymentHistory->payment_no = $payment->payment_no;
-                $paymentHistory->status = $payment->status;
-                $paymentHistory->tenor = $payment->tenor;
-                $paymentHistory->save();
-                //End Tạo lịch sử hoá đơn
-            }
-            if($status === 5) {
-                $bill = Bill::where('code', strtok($payment->invoice_no, '_'))
-                    ->where('bill_payment_status', config('constants.billPaymentStatus.unpaid'))
-                    ->first();
-                if($bill) {
-                    $bill->bill_payment_status = config('constants.billPaymentStatus.pay');
-                    $bill->save();
-                    return response()->json([
-                        "failure_reason" => 'Giao dịch thành công',
-                        "status" => 1
-                    ], 200);
-                }
-                Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore'.'-'.$payment->invoice_no);
-                return response()->json([
-                    "failure_reason" => 'Giao dịch thành công, vui lòng liên hệ với admin',
-                    "status" => 0
-                ], 200);
-            }
-            Log::error('PAYMENT_9PAY: '.$payment->failure_reason.'-'.$payment->invoice_no);
-            return response()->json([
-                "failure_reason" => $payment->failure_reason,
-                "status" => $payment->status
-            ], 200);
-        } else {
-            return response()->json([], 500);
-        }
-    }
+//    function paymentCheck(Request $request) {
+//        $validator = Validator::make($request->all(), [
+//            'result' => 'required',
+//            'checksum' => 'required',
+//        ]);
+//        if ($validator->fails()) {
+//            return $validator->errors();
+//        }
+//
+//        $checksum = $request->checksum;
+//        $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
+//        $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
+//        if($hashChecksum === $checksum){
+//            $result = base64_decode($request->result);
+//            $payment = json_decode($result);
+//            $status = $payment->status;
+//            $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
+////            $statusLabel = status9Pay($status);
+//            if(!$checkPayment) {
+//                // Tạo lịch sử hoá đơn
+//                $paymentHistory = new PaymentHistory();
+//                $paymentHistory->amount = $payment->amount;
+//                $paymentHistory->amount_foreign = $payment->amount_foreign;
+//                $paymentHistory->amount_original = $payment->amount_original;
+//                $paymentHistory->amount_request = $payment->amount_request;
+//                $paymentHistory->bank = $payment->bank;
+//                $paymentHistory->card_brand = $payment->card_brand;
+//                $paymentHistory->card_info = json_encode($payment->card_info);
+//                $paymentHistory->currency = $payment->currency;
+//                $paymentHistory->description = $payment->description;
+//                $paymentHistory->error_code = $payment->error_code;
+//                $paymentHistory->exc_rate = $payment->exc_rate;
+//                $paymentHistory->failure_reason = $payment->failure_reason;
+//                $paymentHistory->foreign_currency = $payment->foreign_currency;
+//                $paymentHistory->invoice_no = $payment->invoice_no;
+//                $paymentHistory->lang = $payment->lang;
+//                $paymentHistory->method = $payment->method;
+//                $paymentHistory->payment_no = $payment->payment_no;
+//                $paymentHistory->status = $payment->status;
+//                $paymentHistory->tenor = $payment->tenor;
+//                $paymentHistory->save();
+//                //End Tạo lịch sử hoá đơn
+//            }
+//            if($status === 5) {
+//                $bill = Bill::where('code', strtok($payment->invoice_no, '_'))
+//                    ->where('bill_payment_status', config('constants.billPaymentStatus.unpaid'))
+//                    ->first();
+//                if($bill) {
+//                    $bill->bill_payment_status = config('constants.billPaymentStatus.pay');
+//                    $bill->save();
+//                    return response()->json([
+//                        "failure_reason" => 'Giao dịch thành công',
+//                        "status" => 1
+//                    ], 200);
+//                }
+//                Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore'.'-'.$payment->invoice_no);
+//                return response()->json([
+//                    "failure_reason" => 'Giao dịch thành công, vui lòng liên hệ với admin',
+//                    "status" => 0
+//                ], 200);
+//            }
+//            Log::error('PAYMENT_9PAY: '.$payment->failure_reason.'-'.$payment->invoice_no);
+//            return response()->json([
+//                "failure_reason" => $payment->failure_reason,
+//                "status" => $payment->status
+//            ], 200);
+//        } else {
+//            return response()->json([], 500);
+//        }
+//    }
 
     /**
      * Thanh toán
@@ -228,7 +224,7 @@ class PaymentMethod9PayController extends Controller
      * @param $id "Id order"
      * @param $user_id "user id"
      * @param $method_payment "ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD"
-     * @return JsonResponse|int
+     * @return JsonResponse
      */
     function payment(Request $request, $id) {
         $validator = Validator::make($request->all(), [

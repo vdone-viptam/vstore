@@ -147,6 +147,7 @@ class CartController extends Controller
             $item->images = json_decode($item->images);
             $result[$item['vshop_id']]['products'][] = $item;
         }
+
         $result = array_values($result);
         if($result===[]) {
             return response()->json([

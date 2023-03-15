@@ -20,9 +20,14 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('vshop_id');
             $table->string('sku')->nullable();
-            $table->integer('discount')->default(0);
             $table->decimal('price', 11, 3);
             $table->integer('quantity');
+
+            $table->integer('warehouses_id');
+
+            $table->integer('discount_vshop_now');
+            $table->integer('discount_ncc');
+            $table->integer('discount_vstore');
 
             $table->timestamps();
         });

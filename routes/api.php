@@ -24,11 +24,11 @@ Route::prefix('cart')->group(function () {
 });
 
 Route::prefix('order')->group(function () {
-    Route::post('/cart/{cartId}/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+    Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
     Route::post('/{orderId}', [\App\Http\Controllers\Api\OrderController::class, 'update']);
     // THANH TOÁN APP
     Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
-    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
+//    Route::get('/payment/check', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentCheck']); // API CHECK PAYMENT
     // END THANH TOÁN APP
 });
 
