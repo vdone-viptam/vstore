@@ -378,7 +378,7 @@ class  VShopController extends Controller
      *
      * API này dùng để lấy thông tin cá nhân để dùng cho việc xem và chỉnh sửa
      *
-     * @param $pdone_id id Vshop
+     * @param $pdone_id pdone_id Vshop
      * @return \Illuminate\Http\JsonResponse
      */
 
