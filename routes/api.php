@@ -79,7 +79,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('cart')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\CartController::class, 'index']);
         Route::post('/product/{id}', [\App\Http\Controllers\Api\CartController::class, 'add']);
-        Route::post('/{id}/product/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
+        Route::post('/{id}/product/{productId}/quantity', [\App\Http\Controllers\Api\CartController::class, 'updateQuantityInCart']);
     });
 
     Route::prefix('order')->group(function () {

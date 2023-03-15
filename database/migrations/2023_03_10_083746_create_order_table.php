@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('payment_status')->default(2)->comment('Trạng thái thanh toán');
             $table->boolean('pay')->comment('Trạng thái có thể thanh toán');
             $table->integer('shipping')->comment('Phí ship');
-            $table->string('method_payment')->unique()->comment('cách thức thanh toán');
+            $table->string('method_payment')->comment('cách thức thanh toán');
             $table->string('no')->unique()->comment('Mã hoá đơn');
             $table->decimal('total', 11, 3)->comment('Tổng tiền');
             $table->string('fullname');

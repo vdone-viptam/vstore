@@ -35,14 +35,13 @@ class CartController extends Controller
      * @param $user_id "id người dùng"
      * @return JsonResponse|int
      */
-    public function updateQuantityInCart(Request $request, $id): JsonResponse|int
+    public function updateQuantityInCart(Request $request, $id, $productId): JsonResponse|int
     {
         $validator = Validator::make($request->all(), [
-            'product_id' => 'required',
             'quantity' => 'required|numeric|min:0',
+            'vshop_id' => 'required',
             'user_id' => 'required',
             'is_pdone' => 'required|boolean',
-            'vshop_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -52,7 +51,6 @@ class CartController extends Controller
             ]);
         }
 
-        $productId = $request->product_id;
         $quantity = $request->quantity;
         $vshopId = $request->vshop_id;
         $userId = $request->user_id;
@@ -145,6 +143,7 @@ class CartController extends Controller
                 "id" => $item->vshop_id_,
             ];
             $item->images = json_decode($item->images);
+            $item->discount = getDiscountProduct($item->id, $item->vshop_id_);
             $result[$item['vshop_id']]['products'][] = $item;
         }
 
@@ -220,7 +219,7 @@ class CartController extends Controller
             // chưa check status products
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
             ->where('products.id', $id)
-            ->where('products.status', 2)
+            ->where('products.status', 2) // active
             ->where('vshop_products.vshop_id', $vshopId)
             ->select('products.id', 'products.sku_id', 'products.price', 'products.images', 'products.name')
             ->first();
