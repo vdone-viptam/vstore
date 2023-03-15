@@ -225,7 +225,14 @@ class  VShopController extends Controller
     {
 
         try {
-            $address = DB::table('vshop')->select('name', 'address', 'phone_number', 'id')->where('pdone_id', $id)->first();
+            $address = DB::table('vshop')
+                ->select('name','name_address','province','wards','district', 'address', 'phone_number',
+                    'vshop.id','province.province_name','district.district_name','wards.wards_name')
+                ->join('province','vshop.province','=','province.province_id')
+                ->join('district','province.province_id','=','district.province_id')
+                ->join('wards','district.district_id','=','wards.district_id')
+                ->where('vshop.pdone_id', $id)->first();
+
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
@@ -371,13 +378,13 @@ class  VShopController extends Controller
      *
      * API này dùng để lấy thông tin cá nhân để dùng cho việc xem và chỉnh sửa
      *
-     * @param $id id Vshop
+     * @param $pdone_id id Vshop
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getProfile($id)
+    public function getProfile($pdone_id)
     {
-        $vshop = Vshop::where('pdone_id', $id)
+        $vshop = Vshop::where('pdone_id', $pdone_id)
             ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'description')
             ->first();
         if (!$vshop) {
