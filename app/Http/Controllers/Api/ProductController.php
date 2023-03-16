@@ -39,7 +39,7 @@ class ProductController extends Controller
      * @urlParam order_by (1,2,3) 1 Sắp xếp theo id,2 sắp xếp theo giá,3 sắp xếp theo số hàng đã bán
      * @urlParam option (asc,desc)
      * @urlParam limit Giới hạn bản ghi trên một trang Mặc định 10
-     * @urlParam payment Phương thức thanh toán 1 COD | 2 Chuyển khoản
+     * @urlParam type_pay Phương thức thanh toán 1 thanh toán trước | 2 cả 2
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -99,7 +99,7 @@ class ProductController extends Controller
                         ->where('vshop_products.status', 1)
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count() ?? 0;
-
+                    $pro->is_affiliate = $pro->is_affiliate>0 ?1:0;
 
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                     $pro->available_discount = $more_dis ?? 0;
@@ -154,12 +154,57 @@ class ProductController extends Controller
     public
     function productByCategory(Request $request, $id)
     {
-        $limit = $request->limit ?? 10;
-        $products = Product::where('category_id', $id)->paginate($limit);
-        return response()->json([
-            'status_code' => 200,
-            'data' => $products,
-        ]);
+        try {
+            $limit = $request->limit ?? 8;
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
+                ->where('category_id', $id)
+                ->where('status', 2);
+
+            if ($request->orderById) {
+                $product = $product->orderBy('id', $request->orderById);
+            }
+            if ($request->amount_product_sold) {
+                $product = $product->orderBy('amount_product_sold', $request->amount_product_sold);
+            }
+            if ($request->orderByPrice) {
+                $product = $product->orderBy('price', $request->orderByPrice);
+            }
+            if ($request->paymentMethod) {
+                if ($request->paymentMethod == 1) {
+                    $product = $product->where('payment_on_delivery', 1);
+                }
+                if ($request->paymentMethod == 2) {
+                    $product = $product->where('prepay', 1);
+                }
+            }
+            $product = $product->paginate($limit);
+
+
+            foreach ($product as $pr) {
+                $pr->discount = DB::table('discounts')
+                    ->selectRaw('SUM(discount) as sum')
+                    ->where('product_id', $pr->id)
+                    ->whereIn('type', [1, 2])
+                    ->first()->sum ?? 0;
+
+                $pr->image = asset(json_decode($pr->images)[0]);
+                unset($pr->images);
+                if ($request->pdone_id) {
+                    $pr->is_affiliate = DB::table('vshop_products')
+                        ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                        ->where('product_id', $pr->id)
+                        ->where('vshop_products.status',1)
+                        ->where('vshop.pdone_id', $request->pdone_id)
+                        ->count();
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
+                    $pr->available_discount = $more_dis ?? 0;
+                }
+            }
+
+            return response()->json(['success' => true, 'data' => $product]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
 
 
     }
@@ -300,7 +345,7 @@ class ProductController extends Controller
     public
     function productById(Request $request, $id)
     {
-
+//        return $id;
         $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'type_pay', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
 
         if (!$product) {
@@ -329,11 +374,12 @@ class ProductController extends Controller
 
 //                VshopProduct::where('pdone_id', $request->pdone_id)->where('product_id', $id)->first();
             if ($check_vshop_product) {
-                $product->affiliate = 1;
+                $product->is_affiliate = 1;
             } else {
-                $product->affiliate = 0;
+                $product->is_affiliate = 0;
             }
         }
+
         $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * 10);
         $list_vshop = VshopProduct::where('product_id', $id)->get();
@@ -393,32 +439,44 @@ class ProductController extends Controller
                 'messageError' => $validator->errors(),
             ], 401);
         }
-        $vshop = Vshop::select('pdone_id')->where('pdone_id', $request->pdone_id)->first();
+        $vshop = Vshop::select('id','pdone_id')->where('pdone_id', $request->pdone_id)->first();
 
         if (!$vshop) {
             $vshop = new Vshop();
             $vshop->pdone_id = $request->pdone_id;
             $vshop->save();
+//            return $vshop;
         }
-
-        $checkVshop = DB::table('vshop_products')
-            ->select('vshop_products.id')
-            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
-            ->where('type', 1)
-            ->where('pdone_id', $vshop->pdone_id)
-            ->where('product_id', $id)->count();
+//        return $vshop;
+        $checkVshop = Vshop::join('vshop_products','vshop.id','=','vshop_products.vshop_id')
+               ->where('vshop.pdone_id', $vshop->pdone_id)
+                ->where('vshop_products.product_id', $id)->count();
+        ;
+//        $checkVshop = DB::table('vshop_products')
+//            ->select('vshop_products.id')
+//            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+//            ->where('status', 1)
+//            ->where('vshop.pdone_id', $vshop->pdone_id)
+//            ->where('product_id', $id)->count();
+//        return $checkVshop;
         if ($checkVshop > 0) {
             return response()->json([
                 'message' => 'Sản phẩm đã được đăng ký tiếp thị',
             ], 401);
         }
         try {
-            DB::table('vshop_products')->insert([
-                'vshop_id' => $vshop->id,
-                'product_id' => $id,
-                'status' => 1,
-                'created_at' => Carbon::now()
-            ]);
+//            return $vshop;
+            $newVshopProduct = new VshopProduct();
+            $newVshopProduct->vshop_id=$vshop->id;
+            $newVshopProduct->product_id = $id;
+            $newVshopProduct->status=1;
+            $newVshopProduct->save();
+//            DB::table('vshop_products')->insert([
+//                'vshop_id' => $vshop->id,
+//                'product_id' => $id,
+//                'status' => 1,
+//                'created_at' => Carbon::now()
+//            ]);
             return response()->json([
                 'message' => 'Tiếp thị sản phẩm thành công',
             ], 200);
