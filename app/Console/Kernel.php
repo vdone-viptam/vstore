@@ -16,11 +16,13 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         Commands\InactiveUser::class,
+        Commands\AffProduct::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('user:inactiveUsers')->daily();
+        $schedule->command('order:affProduct')->everyMinute();
     }
 
     /**

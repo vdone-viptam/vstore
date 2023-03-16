@@ -100,6 +100,16 @@ class CategoryController extends Controller
         try {
 
             $limit = $request->limit ?? 8;
+            $category = DB::table('categories')->select('id', 'name')->where('id', $category_id)->first();
+
+            if (!$category) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Không tìm thấy danh mục'
+                    ]
+                    , 404);
+            }
             $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id')
                 ->where('category_id', $category_id)
                 ->where('status', 2);
@@ -124,7 +134,7 @@ class CategoryController extends Controller
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
                         ->where('vshop_products.status', 1)
-                        ->where('vshop.pdone_id', $request->pdone_id)
+                        ->where('pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                     $pr->available_discount = $more_dis ?? 0;
@@ -136,7 +146,8 @@ class CategoryController extends Controller
             }
             return response()->json(['success' => true, 'data' => [
                 'vstores' => $users,
-                'products' => $product
+                'products' => $product,
+                'category' => $category
             ]]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
