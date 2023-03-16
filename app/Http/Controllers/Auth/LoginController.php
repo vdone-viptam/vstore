@@ -223,6 +223,13 @@ class LoginController extends Controller
             $user->password = Hash::make(rand(100000, 999999));
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
+            $referral_code = $request->referral_code ?? '';
+            if ($referral_code !== '') {
+                if (DB::table('vshop')->where('pdone_id', $referral_code)->count() == 0) {
+                    return redirect()->back()->withErrors(['referral_code' => 'Mã giới thiệu không chính xác']);
+                }
+            }
+            $user->referral_code = $referral_code;
             if ($role_id == 3) {
                 $user->branch = 1;
             }
@@ -271,7 +278,10 @@ class LoginController extends Controller
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
             $user->save();
-
+            Mail::send('email.register', function ($message) use ($user) {
+                $message->to($user->email);
+                $message->subject('Gửi đơn đăng ký thành công');
+            });
             DB::commit();
 
             if ($role_id == 2) {
@@ -582,10 +592,9 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     {
         if ($request->type == 2) {
             $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
-        }elseif ($request->type==3){
-            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId='.$request->value);
-        }
-        else {
+        } elseif ($request->type == 3) {
+            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
+        } else {
             $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 
         }

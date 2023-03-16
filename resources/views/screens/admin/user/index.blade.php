@@ -116,6 +116,7 @@
                             <th>Ngày đăng ký</th>
                             <th>Ngày duyệt</th>
                             <th>Quyền</th>
+                            <th>Mã giới thiệu</th>
                             <th>
                                 Hành động
                             </th>
@@ -145,6 +146,9 @@
                                         @else
                                             Nhà phân phối
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{strlen($referral_code) > 0 ? $referral_code : 'Không có'}}
                                     </td>
                                     <td>
 
