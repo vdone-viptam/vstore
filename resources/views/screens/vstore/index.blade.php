@@ -48,7 +48,7 @@
                 300.000.000đ
                 </div>
 
-                <div class="flex flex-col gap-1 md:gap-2 mx-auto px-4 pb-6 md:pb-2 xl:pb-8 max-w-[600px]">
+                <div class="flex flex-col gap-1 md:gap-2 mx-auto px-4 pb-6 md:pb-4 xl:pb-12 max-w-[600px]">
                     <div class="flex items-center md:gap-2">
                         <div class="w-[13px] md:w-[25px]">
                             <div class="w-[12px] h-[12px] md:w-[24px] md:h-[24px]">
@@ -111,7 +111,7 @@
 10 sản phẩm, dịch vụ đầu tiên trong vòng 6 tháng.</span>
                     </div>
                 </div>
-      
+
             </div>
     <div class="max-w-[320px] w-full mx-auto lg:mx-0">
             <button class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 "><a class="block w-full h-full"  href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
