@@ -376,6 +376,8 @@ class OrderController extends Controller {
             ->join('order_item', 'orders.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
             ->where('orders.user_id', $id)
-            ->paginate($limit);;
+            ->paginate($limit);
+
+        return response()->json($orders);
     }
 }
