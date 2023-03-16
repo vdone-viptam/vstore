@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::post('/vshop/pre-order/product/{productId}', [\App\Http\Controllers\Api\VShopController::class, 'preOrder']);
+Route::post('/vshop/pre-order/{orderId}/confirm', [\App\Http\Controllers\Api\VShopController::class, 'preOrderConfirm']);
+Route::post('/vshop/pre-order/{orderId}/payment', [\App\Http\Controllers\Api\VShopController::class, 'preOrderPayment']);
 //Route::post('callback-viettel-post', function (Request $req) {
 //
 //    return $req->all();
@@ -155,6 +157,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         });
         // Nhập hàng sẵn
         Route::post('/pre-order/product/{productId}', [\App\Http\Controllers\Api\VShopController::class, 'preOrder']);
+        Route::post('/pre-order/{orderId}/confirm', [\App\Http\Controllers\Api\VShopController::class, 'preOrderPayment']);
         Route::post('/pre-order/{orderId}/payment', [\App\Http\Controllers\Api\VShopController::class, 'preOrderPayment']);
         // END Nhập hàng sẵn
 
