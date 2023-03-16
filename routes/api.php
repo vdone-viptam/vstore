@@ -90,6 +90,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         // END THANH TOÁN APP
 
         Route::get('/user/get-list/{id}', [\App\Http\Controllers\Api\OrderController::class, 'getOrdersByUser']);
+        Route::get('/user/detail/{order_id}', [\App\Http\Controllers\Api\OrderController::class, 'getDetailOrderByUser']);
+
     });
 
 //    Route::('big-sales')->group(function () {
