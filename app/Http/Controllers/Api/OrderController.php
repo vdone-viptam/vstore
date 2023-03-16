@@ -370,51 +370,73 @@ class OrderController extends Controller
 
     public function getOrdersByUser(Request $request, $id)
     {
-        $status = $request->status ?? 0;
-        $limit = $request->limit ?? 5;
-        $orders = Order::select('no', 'products.name',
-            'products.price', 'discount_vshop,
+        try {
+            $status = $request->status ?? 0;
+            $limit = $request->limit ?? 5;
+            $orders = Order::select('no', 'products.name',
+                'products.price', 'discount_vshop,
             discount_ncc,discount_vstore', 'quantity', 'images', 'order_item.id', 'order_item.status')
-            ->join('order_item', 'order.id', '=', 'order_item.order_id')
-            ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->where('order.user_id', $id)
-            ->where('order_item.status', $status)
-            ->paginate($limit);
-
-        return response()->json($orders);
+                ->join('order_item', 'order.id', '=', 'order_item.order_id')
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                ->where('order.user_id', $id)
+                ->where('order_item.status', $status)
+                ->paginate($limit);
+            foreach ($orders as $order) {
+                $order->image = asset(json_decode($order->images)[0]);
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $orders
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getDetailOrderByUser($order_id)
     {
-        $order = OrderItem::with(['order'])->select('created_at')
-            ->select('order_id',
-                'order_item.status',
-                'products.name',
-                'quantity',
-                'products.price',
-                'vat', 'order_item.discount_vshop',
-                'discount_ncc', 'discount_vstore',
-            )
-            ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->where('order_item.id', $order_id)->first();
+        try {
+            $order = OrderItem::with(['order'])->select('created_at')
+                ->select('order_id',
+                    'order_item.status',
+                    'products.name',
+                    'quantity',
+                    'products.price',
+                    'vat', 'order_item.discount_vshop',
+                    'discount_ncc', 'discount_vstore',
+                )
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                ->where('order_item.id', $order_id)->first();
 
 
-        if (!$order) {
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng'
+                ], 404);
+            }
+            $order->info_customer = $order->order()->select('fullname', 'total', 'phone', 'address', 'shipping', 'no')->first();
+
+            $order->total = $order->info_customer->total;
+            $order->shipping = $order->info_customer->shipping;
+            $order->no = $order->info_customer->no;
+
+            unset($order->info_customer->total);
+            unset($order->order);
+            unset($order->info_customer->shipping);
+            unset($order->info_customer->no);
+            return response()->json([
+                'success' => true,
+                'data' => $order
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Không tìm thấy đơn hàng'
-            ], 404);
+                'message' => $e->getMessage()
+            ], 500);
         }
-        $order->info_customer = $order->order()->select('fullname', 'total', 'phone', 'address', 'shipping', 'no')->first();
-
-        $order->total = $order->info_customer->total;
-        $order->shipping = $order->info_customer->shipping;
-        $order->no = $order->info_customer->no;
-
-        unset($order->info_customer->total);
-        unset($order->order);
-        unset($order->info_customer->shipping);
-        unset($order->info_customer->no);
-        return response()->json($order);
     }
 }
