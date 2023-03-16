@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -370,14 +371,45 @@ class OrderController extends Controller {
         $status = $request->status ?? 0;
         $limit = $request->limit ?? 5;
         $orders = Order::select('no', 'products.name',
-            'products.price', 'discount_vshop,
-            discount_ncc,discount_vstore', 'quantity', 'images', 'order_item.id', 'order_item.status')
+            'products.price', 'order_item.discount_vshop',
+            'discount_ncc', 'discount_vstore', 'quantity', 'images', 'order_item.id', 'order_item.status')
             ->join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
             ->where('order.user_id', $id)
             ->where('order_item.status', $status)
             ->paginate($limit);
-
+        foreach ($orders as $order) {
+            $order->image = asset(json_decode($order->images)[0]);
+        }
         return response()->json($orders);
+    }
+
+    public function getDetailOrderByUser($order_id)
+    {
+        $order = OrderItem::with(['order'])->select('created_at')
+            ->select('order.id', 'no',
+                'order_item.status',
+                'products.name',
+                'quantity',
+                'products.price',
+                'vat', 'order_item.discount_vshop',
+                'discount_ncc', 'discount_vstore',
+            )
+            ->join('products', 'order_item.product_id', '=', 'products.id')
+            ->where('order_item.id', $order_id)->first();
+        if (!$order) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng'
+            ], 404);
+        }
+        $order->info_customer = $order->order()->select('full_name', 'total', 'phone', 'address', 'shipping')->first();
+        $order->total = $order->info_customer->total;
+        $order->shipping = $order->info_customer->shipping;
+        unset($order->info_customer->total);
+        unset($order->order);
+        unset($order->info_customer->shipping);
+
+        return response()->json($order);
     }
 }
