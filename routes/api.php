@@ -88,6 +88,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         // THANH TOÁN APP
         Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
         // END THANH TOÁN APP
+
+        Route::get('/user/get-list/{id}', [\App\Http\Controllers\Api\OrderController::class, 'getOrdersByUser']);
     });
 
 //    Route::('big-sales')->group(function () {
