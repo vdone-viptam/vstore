@@ -153,6 +153,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
             Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
         });
+        // Nhập hàng sẵn
+        Route::post('/pre-order/product/{productId}', [\App\Http\Controllers\Api\VShopController::class, 'preOrder']);
+        Route::post('/pre-order/{orderId}/payment', [\App\Http\Controllers\Api\VShopController::class, 'preOrderPayment']);
+        // END Nhập hàng sẵn
 
     });
     Route::prefix('discount')->group(function () {

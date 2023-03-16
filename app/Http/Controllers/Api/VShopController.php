@@ -3,15 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Lib9Pay\HMACSignature;
+use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\BuyMoreDiscount;
+use App\Models\Order;
+use App\Models\PreOrderVshop;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
+use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 /**
  * @group Vshop
@@ -20,6 +27,173 @@ use Illuminate\Support\Facades\Validator;
  */
 class  VShopController extends Controller
 {
+
+
+    public function preOrderPayment(Request $request, $orderId) {
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'is_pdone' => 'required|boolean',
+            'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+
+        $method = $request->method_payment;
+        $user_id = $request->user_id;
+
+        $order = PreOrderVshop::where('id', $orderId)
+            ->where('user_id', $user_id)
+            ->where('payment_deposit_money_status', 2)
+            ->where('status', 2)
+            ->first();
+
+
+        $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
+        $returnUrl = $request->returnUrl ?? $http . config("domain.payment") . "/payment/pre-order/return";
+        $backUrl = $request->backUrl ?? $http . config("domain.payment") . "/payment/pre-order/back";
+//        date_default_timezone_set('UTC');
+        $time = time();
+        $invoiceNo = $order->no;
+        $amount = $order->total;
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $data = array(
+            'merchantKey' => $merchantKey,
+            'time' => $time,
+            'invoice_no' => $invoiceNo,
+            'description' => 'Thanh toán đơn nhập hàng sẵn',
+            'amount' => (float)$amount,
+            'back_url' => $backUrl,
+            'return_url' => $returnUrl,
+            'method' => $method,
+            'is_customer_pay_fee' => 1 // Đối tượng chịu phí. 0: người bán chịu phí, 1: khách hàng chịu phí
+        );
+
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/payments/create', 'POST')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+        $httpData = [
+            'baseEncode' => base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)),
+            'signature' => $signature,
+        ];
+
+        try {
+            $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
+            return response()->json([
+                'redirectUrl'=>$redirectUrl,
+                'time' => $time,
+                'invoice_no' => $invoiceNo,
+                'amount' => $amount,
+                'back_url' => $backUrl,
+                'return_url' => $returnUrl,
+            ], 201);
+        } catch (Exception $e) {
+            Log::error($e);
+            return response()->json([
+                "message" => "500 Internal Server Error",
+                "errors" => $e
+            ], 500);
+        }
+
+
+    }
+    public function preOrder(Request $request, $productId) {
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'is_pdone' => 'required|boolean',
+            'quantity' => 'required|numeric',
+            'place_name' => 'required',
+            'fullname' => 'required',
+            'phone' => 'required',
+            'district_id' => 'required',
+            'province_id' => 'required',
+            'ware_id' => 'required',
+            'address' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+
+        $userId = $request->user_id;
+        $districtId = $request->district_id;
+        $provinceId = $request->province_id;
+        $wareId = $request->ware_id;
+
+        $placeName = $request->place_name;
+        $fullname = $request->fullname;
+        $phone = $request->phone;
+        $address = $request->address;
+
+        $quantity = $request->quantity;
+
+        $product = Product::where('id', $productId)
+            ->where('status', config('constants.productStatus.activity'))
+            ->select('price', 'name', 'vat', 'id', 'images')
+            ->first();
+        $product->images = json_decode($product->images);
+
+        if(!$product) {
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Sản phẩm không tồn tại"
+            ], 404);
+        }
+
+        $productBuyMoreDiscount = BuyMoreDiscount::where('product_id', $productId)
+            ->orderBy('start', "ASC")
+            ->get();
+
+        $buyMoreDiscount = getDiscountAndDepositMoney($quantity, $productBuyMoreDiscount);
+        $total = $product->price * $quantity;
+
+        $order = new PreOrderVshop();
+        $order->user_id = $userId;
+        $order->district_id = $districtId;
+        $order->province_id = $provinceId;
+        $order->ware_id = $wareId;
+        $order->product_id = $productId;
+        $order->status = 2;
+        $order->payment_status = 2;
+        $order->payment_deposit_money_status = 2;
+        $order->quantity = $quantity;
+        $order->place_name = $placeName;
+        $order->fullname = $fullname;
+        $order->phone = $phone;
+        $order->address = $address;
+
+        $latestOrder = PreOrderVshop::orderBy('created_at','DESC')->first();
+        $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+
+        $order->total = $total;
+        $order->discount = $buyMoreDiscount['discount'];
+        $order->deposit_money = $buyMoreDiscount['deposit_money'];
+        $order->save();
+
+        $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
+
+        return response()->json([
+            "order" => $order,
+            "product" => $product
+        ]);
+    }
+
+
     /**
      * Tạo Vshop
      *

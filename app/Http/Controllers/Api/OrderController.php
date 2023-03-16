@@ -28,6 +28,7 @@ class OrderController extends Controller {
             'phone' => 'required',
             'district_id' => 'required',
             'province_id' => 'required',
+            'ward_id' => 'required',
             'address' => 'required',
         ]);
         if ($validator->fails()) {
@@ -72,6 +73,7 @@ class OrderController extends Controller {
         $phone = $request->phone;
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
+        $wardId = $request->ward_id;
         $address = $request->address;
 
         $order = new Order();
@@ -98,8 +100,9 @@ class OrderController extends Controller {
 
         $totalVat = 0;
 
-        if($districtId && $provinceId && $address) {
+        if($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
+            $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
             $vat = $order->total*($product->vat/100);
@@ -239,10 +242,12 @@ class OrderController extends Controller {
             ->get();
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
+        $wardId = $request->ward_id;
         $address = $request->address;
         $totalVat = 0;
-        if($districtId && $provinceId && $address) {
+        if($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
+            $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
             $result = [];
