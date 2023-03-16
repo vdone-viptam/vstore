@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {
@@ -97,17 +99,13 @@ class AccountController extends Controller
     public function uploadImage($id, Request $request)
     {
         $user = User::find($id);
-        if ($request->hasFile('img')) {
-            $file = $request->file('img');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('image/users'), $filename);
-            $user->avatar = $filename;
+        if ($request->img) {
+            $file = $this->saveImgBase64($request->img, 'users');;
+            $user->img = $file;
         }
-        if ($request->hasFile('banner')) {
-            $file = $request->file('banner');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('image/users'), $filename);
-            $user->banner = $filename;
+        if ($request->banner) {
+            $file = $this->saveImgBase64($request->banner, 'users');
+            $user->banner = $file;
         }
 
 
@@ -116,9 +114,28 @@ class AccountController extends Controller
 
         return response()->json([
             'success' => true,
-            'image' => asset('image/users/' . $filename)]);
+            'image' => asset('storage/users/' . $file)]);
     }
 
+    protected function saveImgBase64($param, $folder)
+    {
+        list($extension, $content) = explode(';', $param);
+        $tmpExtension = explode('/', $extension);
+        preg_match('/.([0-9]+) /', microtime(), $m);
+        $fileName = sprintf('img%s%s.%s', date('YmdHis'), $m[1], $tmpExtension[1]);
+        $content = explode(',', $content)[1];
+        $storage = Storage::disk('public');
+
+        $checkDirectory = $storage->exists($folder);
+
+        if (!$checkDirectory) {
+            $storage->makeDirectory($folder);
+        }
+
+        $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
+
+        return $fileName;
+    }
 
     public function changePassword()
     {
