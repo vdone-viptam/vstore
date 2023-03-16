@@ -100,11 +100,29 @@ class AccountController extends Controller
     {
         $user = User::find($id);
         if ($request->img) {
-            $file = $this->saveImgBase64($request->img, 'users');;
+            $img = $request->img;
+            $folderPath = "image/users/"; //path location
+
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $uniqid = uniqid();
+            $file = $folderPath . $uniqid . '.' . $image_type;
+            file_put_contents($file, $image_base64);
             $user->img = $file;
         }
         if ($request->banner) {
-            $file = $this->saveImgBase64($request->banner, 'users');
+            $img = $request->banner;
+            $folderPath = "image/users/"; //path location
+
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $uniqid = uniqid();
+            $file = $folderPath . $uniqid . '.' . $image_type;
+            file_put_contents($file, $image_base64);
             $user->banner = $file;
         }
 
@@ -114,7 +132,7 @@ class AccountController extends Controller
 
         return response()->json([
             'success' => true,
-            'image' => asset('storage/users/' . $file)]);
+            'image' => asset('image/users/' . $file)]);
     }
 
     protected function saveImgBase64($param, $folder)
