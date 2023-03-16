@@ -717,7 +717,8 @@ class  VShopController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data' => $products
+                'data' => $products,
+                'total_product' => $products->total()
             ]);
         } catch (\Exception $e) {
             return response()->json([
