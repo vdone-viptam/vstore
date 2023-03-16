@@ -19,4 +19,8 @@ class OrderItem extends Model
         'quantity',
     ];
     protected $table = 'order_item';
+
+    public function order(){
+        return $this->belongsTo(Order::class,'order_id');
+    }
 }

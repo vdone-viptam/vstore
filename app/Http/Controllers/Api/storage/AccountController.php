@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {
@@ -97,17 +99,31 @@ class AccountController extends Controller
     public function uploadImage($id, Request $request)
     {
         $user = User::find($id);
-        if ($request->hasFile('img')) {
-            $file = $request->file('img');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('image/users'), $filename);
-            $user->avatar = $filename;
+        if ($request->img) {
+            $img = $request->img;
+            $folderPath = "image/users/"; //path location
+
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $uniqid = uniqid();
+            $file = $folderPath . $uniqid . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+            $user->img = str_replace('image/users/', '', $file);
         }
-        if ($request->hasFile('banner')) {
-            $file = $request->file('banner');
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('image/users'), $filename);
-            $user->banner = $filename;
+        if ($request->banner) {
+            $img = $request->banner;
+            $folderPath = "image/users/"; //path location
+
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $uniqid = uniqid();
+            $file = $folderPath . $uniqid . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+            $user->banner = str_replace('image/users/', '', $file);
         }
 
 
@@ -116,9 +132,28 @@ class AccountController extends Controller
 
         return response()->json([
             'success' => true,
-            'image' => asset('image/users/' . $filename)]);
+            'image' => asset('image/users/' . $file)]);
     }
 
+    protected function saveImgBase64($param, $folder)
+    {
+        list($extension, $content) = explode(';', $param);
+        $tmpExtension = explode('/', $extension);
+        preg_match('/.([0-9]+) /', microtime(), $m);
+        $fileName = sprintf('img%s%s.%s', date('YmdHis'), $m[1], $tmpExtension[1]);
+        $content = explode(',', $content)[1];
+        $storage = Storage::disk('public');
+
+        $checkDirectory = $storage->exists($folder);
+
+        if (!$checkDirectory) {
+            $storage->makeDirectory($folder);
+        }
+
+        $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
+
+        return $fileName;
+    }
 
     public function changePassword()
     {

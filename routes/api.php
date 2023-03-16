@@ -88,6 +88,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         // THANH TOÁN APP
         Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
         // END THANH TOÁN APP
+
+        Route::get('/user/get-list/{id}', [\App\Http\Controllers\Api\OrderController::class, 'getOrdersByUser']);
     });
 
 //    Route::('big-sales')->group(function () {
@@ -145,14 +147,18 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::put('/profile/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
         Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
 
-        Route::get('/get_mony_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
+        Route::get('/get_money_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
 
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
-            Route::post('/store', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
+            Route::post('/store/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
             Route::get('/edit-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'editAddressReceive']);
             Route::put('/update-address/{id}', [\App\Http\Controllers\Api\VShopController::class, 'updateAddressReceive']);
         });
+        // Nhập hàng sẵn
+        Route::post('/pre-order/product/{productId}', [\App\Http\Controllers\Api\VShopController::class, 'preOrder']);
+        Route::post('/pre-order/{orderId}/payment', [\App\Http\Controllers\Api\VShopController::class, 'preOrderPayment']);
+        // END Nhập hàng sẵn
 
     });
     Route::prefix('discount')->group(function () {

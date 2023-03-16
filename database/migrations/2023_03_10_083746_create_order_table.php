@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
 
+            $table->integer('warehouse_id')->comment('warehouse id');
             $table->integer('user_id')->comment('ID này bên VDONE');
             $table->integer('district_id')->comment('ID này nhận bên vận chuyển');
             $table->integer('province_id')->comment('ID này nhận bên vận chuyển');
+            $table->integer('ward_id')->comment('ID này nhận bên vận chuyển');
             $table->integer('status')->comment('Trạng thái');
             $table->integer('payment_status')->default(2)->comment('Trạng thái thanh toán');
             $table->boolean('pay')->comment('Trạng thái có thể thanh toán');

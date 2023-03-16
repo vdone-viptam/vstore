@@ -39,6 +39,7 @@ return new class extends Migration {
             $table->string('link_web')->nullable();
             $table->date('expiration_date')->nullable();
             $table->string('code')->nullable()->commen('mã tài khoản phụ');
+            $table->string('referral_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -28,6 +28,7 @@ class OrderController extends Controller {
             'phone' => 'required',
             'district_id' => 'required',
             'province_id' => 'required',
+            'ward_id' => 'required',
             'address' => 'required',
         ]);
         if ($validator->fails()) {
@@ -72,6 +73,7 @@ class OrderController extends Controller {
         $phone = $request->phone;
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
+        $wardId = $request->ward_id;
         $address = $request->address;
 
         $order = new Order();
@@ -98,8 +100,9 @@ class OrderController extends Controller {
 
         $totalVat = 0;
 
-        if($districtId && $provinceId && $address) {
+        if($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
+            $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
             $vat = $order->total*($product->vat/100);
@@ -174,9 +177,10 @@ class OrderController extends Controller {
             $order->fullname = $fullname;
             $order->phone = $phone;
         }
-
+        $order->warehouse_id = 1;
         $order->method_payment = $methodPayment;
         $order->save();
+
         $orderItem = new OrderItem();
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
@@ -239,10 +243,12 @@ class OrderController extends Controller {
             ->get();
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
+        $wardId = $request->ward_id;
         $address = $request->address;
         $totalVat = 0;
-        if($districtId && $provinceId && $address) {
+        if($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
+            $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
             $result = [];
@@ -346,6 +352,7 @@ class OrderController extends Controller {
             }
             $order->shipping = $totalShipping;
             $order->total = $total;
+            $order->warehouse_id = 1;
             $order->method_payment = $methodPayment;
             $order->pay = config('constants.payStatus.pay');
             $order->save();
@@ -358,4 +365,19 @@ class OrderController extends Controller {
         ]);
     }
 
+    public function getOrdersByUser(Request $request, $id)
+    {
+        $status = $request->status ?? 0;
+        $limit = $request->limit ?? 5;
+        $orders = Order::select('no', 'products.name',
+            'products.price', 'discount_vshop,
+            discount_ncc,discount_vstore', 'quantity', 'images', 'order_item.id', 'order_item.status')
+            ->join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->join('products', 'order_item.product_id', '=', 'products.id')
+            ->where('order.user_id', $id)
+            ->where('order_item.status', $status)
+            ->paginate($limit);
+
+        return response()->json($orders);
+    }
 }

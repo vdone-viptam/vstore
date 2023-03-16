@@ -8,9 +8,9 @@ return [
     ],
     // ORDER
     'orderStatus' => [
-        'wait_for_confirmation' => 2,
-        'confirmation' => 1,
-        'success' => 3,
+        'wait_for_confirmation' => 2, // đợi ng dùng thanh toán
+        'confirmation' => 1, // người dùng
+        'success' => 3, // hàng đến tay người dùng
     ],
     'payStatus' => [ // được phép thanh toán hay chưa
         'pay' => 1,
@@ -42,6 +42,10 @@ return [
     'typePay' => [
         'prepay' => 1,
         'postpaid' => 2
+    ],
+    'productStatus' => [
+        'activity' => 2,
+        'inactive' => 1
     ],
     // END PRODUCT
 
