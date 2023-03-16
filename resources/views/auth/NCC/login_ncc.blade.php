@@ -38,9 +38,7 @@
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 
-        <form action="{{route('postLogin',['type' => 2])}}" method="post"  class="w-full"
-              id="form-log">
-{{--            {{ csrf_field() }}--}}
+        <form action="{{route('postLogin',['type' => 2])}}" method="post" class="w-full" id="form-log">
             @csrf
             @if(\Illuminate\Support\Facades\Session::has('success'))
                 <h4 style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</h4>
@@ -104,7 +102,6 @@
 </div>
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script>
-
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const btn = document.querySelector('.btn-ctn')
@@ -133,28 +130,15 @@
             btn.setAttribute('disabled', 'true')
         }
     })
-    // window.onhashchange = function() {
-    //     alert(1);
-    // }
-    $('#form-log').submit(function (event) {
+    $('#form-log').one('submit', function () {
         btn.setAttribute('disabled', 'true');
-        // $('#form-log').reset();
         $(window).keydown(function (event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
                 return false;
             }
         });
-
     })
-
-    // $("form-log").one("submit", submitFormFunction());
-    //
-    // function submitFormFunction(event) {
-    //     console.log(1);
-    //     event.preventDefault();
-    //     $("form-log").submit();
-    // }
 </script>
 </body>
 </html>

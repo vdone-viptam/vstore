@@ -24,4 +24,10 @@ class Order extends Model
         "address",
     ];
     protected $table = 'order';
+
+
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
 }
