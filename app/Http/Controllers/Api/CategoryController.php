@@ -110,7 +110,7 @@ class CategoryController extends Controller
                     ]
                     , 404);
             }
-            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id')
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id','discount_vShop')
                 ->where('category_id', $category_id)
                 ->where('status', 2);
 

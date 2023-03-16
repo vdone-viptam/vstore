@@ -184,7 +184,7 @@
                                         </td>
                                     @else
                                         <td class="text-green-600 font-bold whitespace-nowrap">
-                                            đang xư lý
+                                            đang xử lý
                                         </td>
                                     @endif
                                     <td>{{$value->price}}</td>
