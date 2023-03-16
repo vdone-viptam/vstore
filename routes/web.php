@@ -18,8 +18,12 @@ Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
 
+    Route::get('/payment/pre-order/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentPreOrderReturn']);
+    Route::get('/payment/pre-order/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentPreOrderBack']);
+
     Route::get('/payment/err500', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment9PayErr500'])->name('payment500');
     Route::get('/payment/err', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentErr'])->name('paymentErr');
+    Route::get('/payment/success', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentSuccess'])->name('paymentSuccess');
 });
 // END THANH TOÁN APP
 

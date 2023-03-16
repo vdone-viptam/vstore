@@ -91,6 +91,22 @@ function getWarehouse($province_id, $district_id, $product_id) {
     dd($address->province_name . ', ' . $address->district_name);
 }
 
+function getDiscountAndDepositMoney($quantity, $arr) {
+    foreach($arr as $item) {
+        if($quantity >= $item['start'] && $quantity < $item['end']) {
+            return [
+                "discount" => $item['discount'],
+                "deposit_money" => $item['deposit_money']
+            ];
+        } elseif($item['end'] == 0) {
+            return [
+                "discount" => $item['discount'],
+                "deposit_money" => $item['deposit_money']
+            ];
+        }
+    }
+}
+
 function getDiscountProduct($id, $idVshop) {
     $discounts = Discount::where('product_id', $id)
         ->where('discounts.user_id', $idVshop)

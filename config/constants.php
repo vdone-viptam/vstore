@@ -43,6 +43,10 @@ return [
         'prepay' => 1,
         'postpaid' => 2
     ],
+    'productStatus' => [
+        'activity' => 2,
+        'inactive' => 1
+    ],
     // END PRODUCT
 
     //PRODUCT_VSHOP

@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
 
-class OrderController extends Controller
-{
+class OrderController extends Controller {
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -29,6 +28,7 @@ class OrderController extends Controller
             'phone' => 'required',
             'district_id' => 'required',
             'province_id' => 'required',
+            'ward_id' => 'required',
             'address' => 'required',
         ]);
         if ($validator->fails()) {
@@ -73,6 +73,7 @@ class OrderController extends Controller
         $phone = $request->phone;
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
+        $wardId = $request->ward_id;
         $address = $request->address;
 
         $order = new Order();
@@ -99,11 +100,12 @@ class OrderController extends Controller
 
         $totalVat = 0;
 
-        if ($districtId && $provinceId && $address) {
+        if($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
+            $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
-            $vat = $order->total * ($product->vat / 100);
+            $vat = $order->total*($product->vat/100);
             $order->total = $order->total + $vat;
             $totalVat = $vat;
 
@@ -175,9 +177,10 @@ class OrderController extends Controller
             $order->fullname = $fullname;
             $order->phone = $phone;
         }
-
+        $order->warehouse_id = 1;
         $order->method_payment = $methodPayment;
         $order->save();
+
         $orderItem = new OrderItem();
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
@@ -241,10 +244,12 @@ class OrderController extends Controller
             ->get();
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
+        $wardId = $request->ward_id;
         $address = $request->address;
         $totalVat = 0;
-        if ($districtId && $provinceId && $address) {
+        if($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
+            $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
             $result = [];
@@ -348,6 +353,7 @@ class OrderController extends Controller
             }
             $order->shipping = $totalShipping;
             $order->total = $total;
+            $order->warehouse_id = 1;
             $order->method_payment = $methodPayment;
             $order->pay = config('constants.payStatus.pay');
             $order->save();

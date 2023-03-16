@@ -110,7 +110,7 @@ class AccountController extends Controller
             $uniqid = uniqid();
             $file = $folderPath . $uniqid . '.' . $image_type;
             file_put_contents($file, $image_base64);
-            $user->img = $file;
+            $user->img = str_replace('image/users/', '', $file);
         }
         if ($request->banner) {
             $img = $request->banner;
@@ -123,7 +123,7 @@ class AccountController extends Controller
             $uniqid = uniqid();
             $file = $folderPath . $uniqid . '.' . $image_type;
             file_put_contents($file, $image_base64);
-            $user->banner = $file;
+            $user->banner = str_replace('image/users/', '', $file);
         }
 
 

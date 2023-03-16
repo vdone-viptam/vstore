@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Warehouses;
@@ -81,6 +83,18 @@ class ProductController extends Controller
 //        $count = count($product);
 
         $warehouses = Warehouses::where('user_id',Auth::id())->first();
+        $order = Order::join('order_item','order.id','=','order_item.order_id')
+            ->select('order.no','district_id','province_id','address','order.created_at','order_item.price','order_item.quantity',
+                'order_item.discount_vshop','order_item.discount_ncc','order_item.discount_ncc','order_item.discount_vstore')
+            ->get();
+        foreach ($order as $ord){
+            $ord->total = $ord->price - ($ord->price /100 );
+        }
+//        return $order;
+
+////
+
+
         $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc')->orderBy('id','desc');
         if ($request->key_search  ){
             $bill_detai = $bill_detai->where('code','like','%'.$request->key_search.'%');
