@@ -312,7 +312,6 @@ class PaymentMethod9PayController extends Controller
             ->where('status', 2)
             ->first();
 
-        $orderItems = OrderItem::where('order_id', $order->id)->first(); // Hiện tại đang làm 1
 
         if(!$order) {
             return response()->json([
@@ -320,6 +319,7 @@ class PaymentMethod9PayController extends Controller
                 "message" => "Hoá đơn không tồn tại"
             ], 404);
         }
+        $orderItems = OrderItem::where('order_id', $order->id)->first(); // Hiện tại đang làm 1
         $order->status = config('constants.orderStatus.confirmation');
         if( $method === 'COD' ) {
             $order->method_payment = $method;
