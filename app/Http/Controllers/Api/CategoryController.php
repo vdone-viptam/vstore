@@ -110,7 +110,7 @@ class CategoryController extends Controller
                     ]
                     , 404);
             }
-            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id','discount_vShop')
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id','discount_vShop as discountVstore')
                 ->where('category_id', $category_id)
                 ->where('status', 2);
 
@@ -176,7 +176,7 @@ class CategoryController extends Controller
     {
         try {
             $limit = $request->limit ?? 8;
-            $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id','discount_vShop as discountVstore')
                 ->where('category_id', $category_id)
                 ->where('status', 2);
 
@@ -214,7 +214,7 @@ class CategoryController extends Controller
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
                         ->where('vshop_products.status',1)
-                        ->where('pdone_id', $request->pdone_id)
+                        ->where('vshop.pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                     $pr->available_discount = $more_dis ?? 0;

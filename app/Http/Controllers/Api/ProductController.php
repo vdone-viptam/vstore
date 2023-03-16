@@ -156,7 +156,7 @@ class ProductController extends Controller
     {
         try {
             $limit = $request->limit ?? 8;
-            $product = Product::select('images', 'name', 'publish_id', 'price', 'id')
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id','discount_vShop as discountVstore')
                 ->where('category_id', $id)
                 ->where('status', 2);
 
