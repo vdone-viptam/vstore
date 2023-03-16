@@ -68,7 +68,7 @@
                 <li><a href="{{asset('#gioi_thieu')}}" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
                 <li><a href="{{asset('#sale')}}" class="text-lg text-[#2C2C37] ">Sales</a></li>
                 <li><a href="{{asset('#noi_bat')}}" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
-                <li><a href="{{asset('#nha_cung_cap')}}" class="text-lg text-[#2C2C37] ">Vstore</a></li>
+                <li><a href="{{asset('#nha_cung_cap')}}" class="text-lg text-[#2C2C37] ">V-Store</a></li>
             </ul>
     </div>
     <div class="max-w-[1320px] flex justify-between items-center px-[15px] xl:px-0 lg:hidden relative">
@@ -82,7 +82,7 @@
                 <li><a href="#" class="text-lg text-[#2C2C37] ">Giới thiệu</a></li>
                 <li><a href="#" class="text-lg text-[#2C2C37] ">Sales</a></li>
                 <li><a href="#" class="text-lg text-[#2C2C37] ">Sản phẩm nổi bật</a></li>
-                <li><a href="#" class="text-lg text-[#2C2C37] ">Nhà cung cấp</a></li>
+                <li><a href="#" class="text-lg text-[#2C2C37] ">V-Store</a></li>
         </ul>
         <div class="w-[24px] btn-menu">
                 <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

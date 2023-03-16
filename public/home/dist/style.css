@@ -24,7 +24,15 @@ img{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    height: 1090px;
+    height: 100vh;
+}
+.bg-bannerV{
+    background: url('../img/bannerV.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
 }
 .bgncc{
     background: url('../img/bgncc.png');
