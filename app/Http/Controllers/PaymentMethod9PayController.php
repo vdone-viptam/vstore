@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Lib9Pay\HMACSignature;
 use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\Bill;
+use App\Models\CartItemV2;
 use App\Models\CartV2;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\PaymentHistory;
 use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
@@ -239,20 +241,28 @@ class PaymentMethod9PayController extends Controller
         $user_id = $request->user_id;
 
         $order = Order::where('id', $id)
+            ->where('user_id', $user_id)
             ->where('pay', config('constants.payStatus.pay'))
+            ->where('status', 2)
             ->first();
-        $order->status = config('constants.orderStatus.confirmation');
+
+        $orderItems = OrderItem::where('order_id', $order->id)->first(); // Hiện tại đang làm 1
+
         if(!$order) {
-            return response()->json([], 404);
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Hoá đơn không tồn tại"
+            ], 404);
         }
+        $order->status = config('constants.orderStatus.confirmation');
         if( $method === 'COD' ) {
             $order->method_payment = $method;
             $order->save();
-            CartV2::where('user_id', $order->user_id)
-                ->where('status', config('constants.cartStatus.no_done'))
-                ->update([
-                    'status' => config('constants.cartStatus.done')
-                ]);
+            $cart = CartV2::where('user_id', $order->user_id)
+                ->first();
+            CartItemV2::where('cart_id', $cart->id)
+                ->where('product_id', $orderItems->product_id)
+                ->delete();
             return response()->json([
                 "status_code" => 200,
                 "message" => "Đặt hàng thành công"
@@ -294,11 +304,12 @@ class PaymentMethod9PayController extends Controller
             $order->method_payment = $method;
             $order->save();
 
-            CartV2::where('user_id', $order->user_id)
-                ->where('status', config('constants.cartStatus.no_done'))
-                ->update([
-                    'status' => config('constants.cartStatus.done')
-                ]);
+
+            $cart = CartV2::where('user_id', $order->user_id)
+                ->first();
+            CartItemV2::where('cart_id', $cart->id)
+                ->where('product_id', $orderItems->product_id)
+                ->delete();
 
             try {
                 $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);

@@ -25,7 +25,7 @@ return new class extends Migration
 
             $table->integer('warehouses_id');
 
-            $table->integer('discount_vshop_now');
+            $table->integer('discount_vshop');
             $table->integer('discount_ncc');
             $table->integer('discount_vstore');
 

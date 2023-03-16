@@ -56,19 +56,26 @@ class OrderController extends Controller {
                 'vshop.id as vshop_id'
             )
             ->first();
+
+        $product->quantity = $quantity;
+
         if(!$product) {
             return response()->json([
                 'status_code' => 404
             ], 404);
         }
         $discount = getDiscountProduct($productId, $vshopId);
+        $product->discount = $discount;
+
         $userId = $request->user_id;
         $fullname = $request->fullname;
         $phone = $request->phone;
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
         $address = $request->address;
+
         $order = new Order();
+        $order->pay = 1;
         $order->user_id = $userId;
         $order->status = config('constants.orderStatus.wait_for_confirmation');
         $latestOrder = Order::orderBy('created_at','DESC')->first();
@@ -88,11 +95,47 @@ class OrderController extends Controller {
         if(isset($discount['discountsFromVShop'])) {
             $order->total = $order->total - $order->total * ($discount['discountsFromVShop']/100);
         }
+
+        $totalVat = 0;
+
         if($districtId && $provinceId && $address) {
             $order->district_id = $districtId;
             $order->province_id = $provinceId;
             $order->address = $address;
-            $order->total = $order->total + $order->total*($product->vat/100);
+            $vat = $order->total*($product->vat/100);
+            $order->total = $order->total + $vat;
+            $totalVat = $vat;
+
+            $body = [
+                // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
+                'SENDER_DISTRICT' => 14, // Cầu giấy
+                'SENDER_PROVINCE' => 1, // Hà Nội
+                'RECEIVER_DISTRICT' => $districtId,
+                'RECEIVER_PROVINCE' => $provinceId,
+
+                'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
+                'PRODUCT_WEIGHT' => $product->weight * $quantity,
+                'PRODUCT_PRICE' => $order->total,
+                'MONEY_COLLECTION'=> $methodPayment === 'COD' ? $order->total  : 0,
+                'TYPE'=>config('viettelPost.nationalType.domesticType'),
+            ];
+
+            $getPriceAll = Http::withHeaders(
+                [
+                    'Content-Type'=>' application/json',
+                    'Token'=>'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                ]
+            )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
+
+            if($getPriceAll->status() !== 200 ) {
+                return response()->json([
+                    "status_code" => 403,
+                    "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
+                ]);
+            }
+            $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
+
+
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
                 'SENDER_DISTRICT' => 14, // Cầu giấy
@@ -101,7 +144,7 @@ class OrderController extends Controller {
                 'RECEIVER_PROVINCE' => $provinceId,
 
                 "ORDER_SERVICE_ADD" => "",
-                "ORDER_SERVICE" => "PTN",
+                "ORDER_SERVICE" => $ORDER_SERVICE,
 
                 'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
                 'PRODUCT_WEIGHT' => $product->weight * $quantity,
@@ -142,11 +185,14 @@ class OrderController extends Controller {
         $orderItem->sku = '';
         $orderItem->price = $product->price;
         $orderItem->quantity = $quantity;
-        $orderItem->discount_vshop_now = isset($discount['discountsFromVShop']) ? $discount['discountsFromVShop'] : 0;
+        $orderItem->discount_vshop = isset($discount['discountsFromVShop']) ? $discount['discountsFromVShop'] : 0;
         $orderItem->discount_ncc = isset($discount['discountsFromSuppliers']) ? $discount['discountsFromSuppliers'] : 0;
         $orderItem->discount_vstore = isset($discount['discountsFromVStore']) ? $discount['discountsFromVStore'] : 0;
         $orderItem->save();
         $product->images = json_decode($product->images);
+
+        $order->total_vat = $totalVat;
+
         return response()->json([
             'status_code' => 200,
             'order' => $order,
@@ -179,7 +225,7 @@ class OrderController extends Controller {
             ->select(
                 'order_item.discount_ncc',
                 'order_item.discount_vstore',
-                'order_item.discount_vshop_now',
+                'order_item.discount_vshop',
                 'order_item.vshop_id',
                 'order_item.quantity',
                 'products.weight',
@@ -194,6 +240,7 @@ class OrderController extends Controller {
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
         $address = $request->address;
+        $totalVat = 0;
         if($districtId && $provinceId && $address) {
             $order->district_id = $districtId;
             $order->province_id = $provinceId;
@@ -213,7 +260,7 @@ class OrderController extends Controller {
                 $price = 0;
                 $weight = 0;
                 foreach ($item['products'] as $pro) {
-                    $weight += $pro->weight;
+                    $weight += $pro->weight * $pro->quantity;
                     $priceDiscount = $pro->price * $pro->quantity;
                     $totalDiscountSuppliersAndVStore = 0;
                     if($pro->discount_ncc) {
@@ -225,13 +272,44 @@ class OrderController extends Controller {
                     if($totalDiscountSuppliersAndVStore > 0) {
                         $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore/100);
                     }
-                    if($pro->discount_vshop_now) {
-                        $priceDiscount = $priceDiscount - $priceDiscount * ($pro->discount_vshop_now/100);
+                    if($pro->discount_vshop) {
+                        $priceDiscount = $priceDiscount - $priceDiscount * ($pro->discount_vshop/100);
                     }
                     $price += $priceDiscount;
                     //Tính VAT
-                    $price = $price + $price*($pro['vat']/100);
+                    $vat = $price*($pro['vat']/100);
+                    $totalVat += $vat;
+                    $price = $price + $vat;
                 }
+
+                $body = [
+                    // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
+                    'SENDER_DISTRICT' => 14, // Cầu giấy
+                    'SENDER_PROVINCE' => 1, // Hà Nội
+                    'RECEIVER_DISTRICT' => $districtId,
+                    'RECEIVER_PROVINCE' => $provinceId,
+
+                    'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
+                    'PRODUCT_WEIGHT' => $weight,
+                    'PRODUCT_PRICE' => $price,
+                    'MONEY_COLLECTION'=> $methodPayment === 'COD' ? $price : 0,
+                    'TYPE'=>config('viettelPost.nationalType.domesticType'),
+                ];
+
+                $getPriceAll = Http::withHeaders(
+                    [
+                        'Content-Type'=>' application/json',
+                        'Token'=>'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
+                if($getPriceAll->status() !== 200 ) {
+                    return response()->json([
+                        "status_code" => 403,
+                        "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
+                    ]);
+                }
+                $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
+
                 $body = [
                     // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
                     'SENDER_DISTRICT' => 14, // Cầu giấy
@@ -239,7 +317,7 @@ class OrderController extends Controller {
                     'RECEIVER_DISTRICT' => $districtId,
                     'RECEIVER_PROVINCE' => $provinceId,
                     "ORDER_SERVICE_ADD" => "",
-                    "ORDER_SERVICE" => "VCN",
+                    "ORDER_SERVICE" => $ORDER_SERVICE,
                     'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
                     'PRODUCT_WEIGHT' => $weight,
                     'PRODUCT_PRICE' => $price,
@@ -272,9 +350,11 @@ class OrderController extends Controller {
             $order->pay = config('constants.payStatus.pay');
             $order->save();
         }
+        $order->total_vat = $totalVat;
         return response()->json([
             'status_code' => 200,
-            'order' => $order
+            'order' => $order,
+            'method_payment' => $methodPayment
         ]);
     }
 

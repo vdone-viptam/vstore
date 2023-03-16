@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('discount_ncc');
             $table->integer('discount_vstore');
-            $table->integer('discount_vshop_now');
+            $table->integer('discount_vshop');
 
             $table->timestamps();
         });
