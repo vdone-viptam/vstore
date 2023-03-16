@@ -161,7 +161,7 @@ class  VShopController extends Controller
      *
      * API dùng thêm địa chỉ giao hàng của Vshop
      *
-     * @bodyParam  pdone_id id của vshop
+     * @param   pdone_id id của vshop
      * @bodyParam  name Tên người nhận
      * @bodyParam  address địa chỉ chi tiết
      * @bodyParam  phone_number Số điện thoại
@@ -170,10 +170,10 @@ class  VShopController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeAddressReceive(Request $request)
+    public function storeAddressReceive(Request $request,$pdone_id)
     {
         $validator = Validator::make($request->all(), [
-            'pdone_id' => 'required|max:255',
+//            'pdone_id' => 'required|max:255',
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
@@ -192,7 +192,7 @@ class  VShopController extends Controller
 
 
             DB::table('vshop')->insert([
-                'pdone_id' => $request->pdone_id,
+                'pdone_id' => $pdone_id,
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
