@@ -177,9 +177,10 @@ class OrderController extends Controller {
             $order->fullname = $fullname;
             $order->phone = $phone;
         }
-
+        $order->warehouse_id = 1;
         $order->method_payment = $methodPayment;
         $order->save();
+
         $orderItem = new OrderItem();
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
@@ -351,6 +352,7 @@ class OrderController extends Controller {
             }
             $order->shipping = $totalShipping;
             $order->total = $total;
+            $order->warehouse_id = 1;
             $order->method_payment = $methodPayment;
             $order->pay = config('constants.payStatus.pay');
             $order->save();

@@ -182,10 +182,11 @@ class  VShopController extends Controller
 
         $order->total = $total;
         $order->discount = $buyMoreDiscount['discount'];
-        $order->deposit_money = $buyMoreDiscount['deposit_money'];
         $order->save();
+        $order->prepayment_rate = $buyMoreDiscount['deposit_money'];
 
         $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
+        $order->deposit_payable = $order->total - $order->total*($buyMoreDiscount['deposit_money']/100);
 
         return response()->json([
             "order" => $order,
