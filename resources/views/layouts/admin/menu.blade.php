@@ -125,7 +125,7 @@
 
                 <li data-page="index" class="hover:underline"><a href="{{route('screens.admin.product.index')}}">Quản lý
                         yêu cầu
-                        xét duyệt
+                        xét duyệt sản
                         phẩm</a></li>
             </ul>
         </div>

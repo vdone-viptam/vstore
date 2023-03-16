@@ -17,7 +17,7 @@
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content="" />
     <meta property="og:url" content="{{asset('')}}" />
-    <meta property="og:image" content="{{asset('home/img/logo-05.png')}}" />
+    <meta property="og:image" content="{{asset('home/img/ncc11.png')}}" />
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
