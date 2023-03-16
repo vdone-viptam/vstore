@@ -372,9 +372,9 @@ class OrderController extends Controller {
         $orders = Order::select('no', 'products.name',
             'products.price', 'discount_vshop,
             discount_ncc,discount_vstore', 'quantity', 'images', 'order_item.id', 'order_item.status')
-            ->join('order_item', 'orders.id', '=', 'order_item.order_id')
+            ->join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->where('orders.user_id', $id)
+            ->where('order.user_id', $id)
             ->where('order_item.status', $status)
             ->paginate($limit);
 
