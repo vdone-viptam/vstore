@@ -215,7 +215,12 @@
                 <input type="text" name="id_vdone_diff" placeholder="Nhập ID đại diện thêm"
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
             </div>
+            <div class="flex flex-col justify-start items-start gap-2 w-full">
+                <span class="text-sm font-medium">Mã giới thiệu</span>
+                <input type="text" name="referral_code" placeholder="Nhập ID đại diện thêm" readonly
 
+                       class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
+            </div>
 
         </div>
     </div>
