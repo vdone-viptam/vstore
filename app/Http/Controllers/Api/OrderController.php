@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
 
-class OrderController extends Controller {
+class OrderController extends Controller
+{
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -100,12 +101,12 @@ class OrderController extends Controller {
 
         $totalVat = 0;
 
-        if($districtId && $provinceId && $wardId && $address) {
+        if ($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
-            $vat = $order->total*($product->vat/100);
+            $vat = $order->total * ($product->vat / 100);
             $order->total = $order->total + $vat;
             $totalVat = $vat;
 
@@ -247,7 +248,7 @@ class OrderController extends Controller {
         $wardId = $request->ward_id;
         $address = $request->address;
         $totalVat = 0;
-        if($districtId && $provinceId && $wardId && $address) {
+        if ($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
@@ -376,6 +377,7 @@ class OrderController extends Controller {
             ->join('order_item', 'orders.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
             ->where('orders.user_id', $id)
+            ->where('order_item.status', $status)
             ->paginate($limit);
 
         return response()->json($orders);
