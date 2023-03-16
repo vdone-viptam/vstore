@@ -135,7 +135,7 @@
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="floor_area"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->storage_information->floor_area}}">
+                                       value="''">
                                 @error('floor_area')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
@@ -146,7 +146,7 @@
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="volume"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->storage_information->volume}}">
+                                       value="''">
                                 @error('volume')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
@@ -156,14 +156,14 @@
                             <span class="text-secondary w-full md:w-[280px]">Ảnh kho:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <img style="height: 200px"
-                                     src="{{asset($infoAccount->storage_information->image_storage)}}" alt="">
+                                     src="''" alt="">
                             </div>
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Ảnh chứng nhận PCCC:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <img style="height: 200px"
-                                     src="{{asset($infoAccount->storage_information->image_pccc)}}" alt="">
+                                     src="''" alt="">
                             </div>
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
@@ -171,7 +171,7 @@
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="cold_storage"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->storage_information->cold_storage}}">
+                                       value="''">
                                 @error('cold_storage')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
@@ -182,7 +182,7 @@
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="warehouse"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->storage_information->volume}}">
+                                       value="''">
                                 @error('warehouse')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
@@ -193,7 +193,7 @@
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="normal_storage"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
-                                       value="{{$infoAccount->storage_information->normal_storage}}">
+                                       value="">
                                 @error('normal_storage')
                                 <p class="text-red-600">{{$message}}</p>
                                 @enderror
