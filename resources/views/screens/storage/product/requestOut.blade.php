@@ -133,9 +133,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($bill_detai) > 0)
-                            @foreach($bill_detai as $value)
+
+                        @if(count($order) > 0)
+                            @foreach($order as $value)
                                 <tr>
+
                                     <td>{{$value->no}}</td>
                                     <td>{{$value->address}}</td>
                                     <td>{{$value->total}}</td>
@@ -144,7 +146,7 @@
                                            class="more-details text-primary underline"> Xem</a></td>
                                     <td>
 
-                                        @if($value->export_status ==0)
+                                        @if($value->export_status==0 )
                                             <div
                                                 class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -158,16 +160,25 @@
                                         @elseif($value->export_status == 1)
 
                                             <div
+                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Xác nhận đơn
+                                            </div>
+                                        @elseif($value->export_status == 2)
+                                            <div
                                                 class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                Đồng ý
+                                                đã xuất kho
                                             </div>
-
-                                        @elseif($value->export_status == 2)
+                                        @elseif($value->export_status == 3)
                                             <div
                                                 class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
@@ -175,23 +186,46 @@
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                Từ chối
+                                                đã xuất kho
+                                            </div>
+                                        @elseif($value->export_status == 4)
+                                            <div
+                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                giao thành công
                                             </div>
                                         @endif
 
                                     </td>
                                     <td>
-                                        @if($value->export_status==0)
+                                        @if($value->export_status==0 )
                                             <a href="{{route('screens.storage.product.updateRequestOut',['status'=>1,'id' => $value->id])}}">
                                                 <button type="button"
                                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                    Đồng ý
+                                                    Xác nhận đơn
+                                                </button>
+                                            </a>
+                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>3,'id' => $value->id])}}">
+                                                <button type="button"
+                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                    Từ chối
+                                                </button>
+                                            </a>
+                                        @elseif($value->export_status==1)
+                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
+                                                <button type="button"
+                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                    xuất kho
                                                 </button>
                                             </a>
                                             <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
                                                 <button type="button"
                                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                    Từ chối
+                                                    hủy
                                                 </button>
                                             </a>
                                         @endif
@@ -209,8 +243,8 @@
                     </table>
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">{{$bill_detai->total()}}</span>
-                    {{$bill_detai->withQueryString()->links()}}
+{{--                    <span class="text-sm text-title">{{$bill_detai->total()}}</span>--}}
+                    {{$order->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
