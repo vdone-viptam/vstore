@@ -56,7 +56,8 @@ class OrderController extends Controller
                 'products.type_pay',
                 'products.price',
                 'products.weight',
-                'vshop.id as vshop_id'
+                'vshop.id as vshop_id',
+                'vshop.name as vshop_name'
             )
             ->first();
 

@@ -335,8 +335,8 @@ class PaymentMethod9PayController extends Controller
             ]);
         } else {
             $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
-            $returnUrl = $request->returnUrl ?? $http . config("domain.payment") . "/payment/return";
-            $backUrl = $request->backUrl ?? $http . config("domain.payment") . "/payment/back";
+            $returnUrl = $request->return_url ?? $http . config("domain.payment") . "/payment/return";
+            $backUrl = $request->back_url ?? $http . config("domain.payment") . "/payment/back";
 //        date_default_timezone_set('UTC');
             $time = time();
             $invoiceNo = $order->no;
