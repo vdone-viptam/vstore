@@ -373,7 +373,7 @@ class OrderController extends Controller
         try {
             $status = $request->status ?? 0;
             $limit = $request->limit ?? 5;
-            $orders = Order::with(['orderItem'])->select('no', 'id', 'total', 'export_status');
+            $orders = Order::select('no', 'id', 'total', 'export_status');
 
             if ($status !== 0) {
                 $orders = $orders->where('export_status', $status);
@@ -382,24 +382,26 @@ class OrderController extends Controller
             $orders = $orders->paginate($limit);
 
             foreach ($orders as $order) {
+
                 $order->orderItem = $order->orderItem()
-                    ->select('products.images',
-                        'products.name as product_name',
+                    ->select(
                         'quantity',
                         'discount_vshop',
                         'discount_ncc',
                         'discount_vstore',
-                        'products.price',
+                        'product_id'
                     )
-                    ->join('products', 'order_item.product_id', '=', 'order_item.product_id')
                     ->get();
-
-                foreach ($order->orderItem as $order1) {
-                    $order1->image = asset(json_decode($order1->images)[0]);
-                    unset($order1->images);
+                foreach ($order->orderItem as $item) {
+                    $product = $item->product()->select('name', 'price', 'images')->first();
+                    $item->product_name = $product->name;
+                    $item->price = $product->price;
+                    $item->image = asset(json_decode($product->images)[0]);
                 }
 
                 $order->total_product = count($order->orderItem);
+
+
             }
             return response()->json([
                 'success' => true,
@@ -416,10 +418,15 @@ class OrderController extends Controller
     public function getDetailOrderByUser($order_id)
     {
         try {
-            $order = Order::with(['orderItem'])
-                ->select('no', 'id', 'created_at', 'shipping', 'total', 'full_name', 'phone', 'address', 'export_status')
+            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status')
                 ->where('id', $order_id)->first();
-            $order->info_customer = [
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng'
+                ], 404);
+            }
+            $order->info_receiver = [
                 'fullname' => $order->fullname,
                 'phone' => $order->phone,
                 'address' => $order->address
@@ -428,16 +435,11 @@ class OrderController extends Controller
             unset($order->phone);
             unset($order->address);
             $order->detail = $order->orderItem()
-                ->select("product.name",
-                    'price',
-                    'discount_vshop',
-                    'discount_ncc',
-                    'discount_vstore',
-                    'quantity',
-                    'vat'
-                )
-                ->join('products', 'order_item.product_id', '=', 'order_item.product_id')
-                ->first();
+                ->select('discount_ncc', 'discount_vstore', 'discount_vshop', 'product_id', 'quantity')->first();
+            $product = $order->detail->product()->select('vat', 'price', 'name')->first();
+            $order->detail->vat = $product->vat;
+            $order->detail->price = $product->price;
+            $order->detail->product_name = $product->name;
             return response()->json([
                 'success' => true,
                 'data' => $order
