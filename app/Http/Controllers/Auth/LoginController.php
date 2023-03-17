@@ -227,11 +227,6 @@ class LoginController extends Controller
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
             $referral_code = $request->referral_code ?? '';
-            if ($referral_code !== '') {
-                if (DB::table('vshop')->where('pdone_id', $referral_code)->count() == 0) {
-                    return redirect()->back()->withErrors(['referral_code' => 'Mã giới thiệu không chính xác']);
-                }
-            }
             $user->referral_code = $referral_code;
             if ($role_id == 3) {
                 $user->branch = 1;

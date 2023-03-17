@@ -115,7 +115,7 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên V-Store</span>
-                <input type="text" name="name" id="name" placeholder="Nhập tên V-store" value="{{old('name')}}"
+                <input type="text" name="name" id="name" placeholder="Nhập tên V-Store" value="{{old('name')}}"
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('name')
                 <p class="text-red-600">{{$message}}</p>
@@ -211,7 +211,7 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium">Mã giới thiệu</span>
-                <input type="text" name="referral_code" placeholder="Nhập ID đại diện thêm" readonly
+                <input type="text" name="referral_code" placeholder="Mã giới thiệu" readonly
                        value="{{$referral_code}}"
 
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
@@ -312,7 +312,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML = `<option value="0">Lựa chọn tỉnh (phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option value="0">Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
         })
         .catch(console.error);
 
