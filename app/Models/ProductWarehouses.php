@@ -12,7 +12,7 @@ class ProductWarehouses extends Model
     protected $table = 'product_warehouses';
     protected $fillable = [
         'product_id',
-        'ware_id',
+        'ward_id',
         'amount',
         'status'
     ];

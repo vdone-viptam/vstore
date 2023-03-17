@@ -15,7 +15,7 @@ class PreOrderVshop extends Model
         "user_id",
         "district_id",
         "province_id",
-        "ware_id",
+        "ward_id",
         "product_id",
         "status",
         "payment_status",

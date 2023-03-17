@@ -26,12 +26,12 @@ class OrderController extends Controller
             'vshop_id' => 'required',
             'quantity' => 'required|numeric',
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
-            'fullname' => 'required',
-            'phone' => 'required',
-            'district_id' => 'required',
-            'province_id' => 'required',
-            'ward_id' => 'required',
-            'address' => 'required',
+//            'fullname' => 'required',
+//            'phone' => 'required',
+//            'district_id' => 'required',
+//            'province_id' => 'required',
+//            'ward_id' => 'required',
+//            'address' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([

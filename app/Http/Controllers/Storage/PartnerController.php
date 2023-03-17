@@ -17,7 +17,7 @@ class PartnerController extends Controller
         $ncc = User::select('users.name', 'account_code', 'phone_number', 'company_name', 'tax_code')
             ->join('products', 'users.id', '=', 'products.user_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-            ->where('ware_id', $id)
+            ->where('ward_id', $id)
             ->groupBy(['users.name', 'account_code', 'phone_number', 'company_name', 'tax_code'])
             ->paginate(10);
 

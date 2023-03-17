@@ -30,11 +30,130 @@ use Illuminate\Support\Str;
 class  VShopController extends Controller
 {
 
+
+    public function updateStatusDonePreOrder(Request $request, $orderID) {
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'is_pdone' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+
+        $preOrder = PreOrderVshop::where('id', $orderID)
+            ->where('user_id', $request->user_id)
+            ->where('status', config('constants.statusPreOrder.shipping'))->first();
+
+        if(!$preOrder) {
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Đơn đặt hàng không tồn tại"
+            ]);
+        }
+
+        $preOrder->status = config('constants.statusPreOrder.done');
+        $preOrder->save();
+
+        return response()->json([
+            "status_code" => 200,
+            "message" => "Xác nhận đơn hàng thành công"
+        ]);
+
+    }
+
+    public function getPreOrder(Request $request, $userId) {
+
+        $limit = $request->limit ?? 2;
+
+        $preOrder = PreOrderVshop::where('pre_order_vshop.user_id', $userId);
+        if($request->status) {
+            $preOrder = $preOrder->where('pre_order_vshop.status', $request->status);
+        }
+        $preOrder = $preOrder->join('products', 'products.id', '=', 'pre_order_vshop.product_id')
+            ->join('province', 'province.id', '=', 'pre_order_vshop.province_id')
+            ->join('district', 'district.id', '=', 'pre_order_vshop.district_id')
+            ->join('wards', 'wards.id', '=', 'pre_order_vshop.ward_id')
+            ->select(
+            "pre_order_vshop.id",
+            "pre_order_vshop.no",
+            "pre_order_vshop.quantity",
+            "pre_order_vshop.place_name",
+            "pre_order_vshop.fullname",
+            "pre_order_vshop.phone",
+            "pre_order_vshop.address",
+            "pre_order_vshop.discount",
+            "pre_order_vshop.deposit_money",
+            "pre_order_vshop.total",
+            "pre_order_vshop.no",
+            "pre_order_vshop.status",
+            "products.images",
+            "products.name",
+            "products.price",
+            "products.vat",
+            "province.province_name",
+            "district.district_name",
+            "wards.wards_name"
+        )
+        ->distinct()
+        ->simplePaginate($limit);
+
+        foreach ($preOrder as $value) {
+            $value->prepayment_rate = $value->deposit_money;
+            $value->order_value_minus_discount = $value->total - $value->total*($value->discount/100);
+            $value->deposit_payable = $value->total - $value->total*($value->deposit_money/100);
+
+            $value->status_text = statusPreOrder($value->status);
+
+            $value->receiver_information = [
+                "fullname" => $value->fullname,
+                "phone" => $value->phone,
+                "address" => $value->address,
+                "province_name" => $value->province_name,
+                "district_name" => $value->district_name,
+                "wards_name" => $value->wards_name,
+                "place_name" => $value->place_name,
+            ];
+            $value->product = [
+                "name" => $value->name,
+                "images" => json_decode($value->images),
+                "price" => $value->price,
+                "vat" => $value->vat
+            ];
+
+            unset($value->name);
+            unset($value->images);
+            unset($value->price);
+            unset($value->vat);
+
+            unset($value->place_name);
+            unset($value->fullname);
+            unset($value->phone);
+            unset($value->address);
+            unset($value->province_name);
+            unset($value->district_name);
+            unset($value->wards_name);
+
+        }
+
+        return response()->json([
+            "status_code" => 200,
+            "order" => $preOrder
+        ]);
+
+    }
+
+
+
     public function preOrderConfirm(Request $request, $orderId) {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
-            'is_pdone' => 'required|boolean'
+            'is_pdone' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -158,12 +277,11 @@ class  VShopController extends Controller
 
 
     }
-
-    public function preOrder(Request $request, $productId)
-    {
+    public function preOrder(Request $request, $productId) {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
+            'ncc_id' => 'required',
             'is_pdone' => 'required|boolean',
             'quantity' => 'required|numeric',
             'place_name' => 'required',
@@ -171,7 +289,7 @@ class  VShopController extends Controller
             'phone' => 'required',
             'district_id' => 'required',
             'province_id' => 'required',
-            'ware_id' => 'required',
+            'ward_id' => 'required',
             'address' => 'required'
         ]);
 
@@ -181,11 +299,19 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ]);
         }
+        $nccId = $request->ncc_id;
+        $ncc = User::where('id', $nccId)->where('status', 1)->where('role_id', 2)->first();
+        if(!$ncc) {
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Hoá đơn không tồn tại"
+            ]);
+        }
 
         $userId = $request->user_id;
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
-        $wareId = $request->ware_id;
+        $wareId = $request->ward_id;
 
         $placeName = $request->place_name;
         $fullname = $request->fullname;
@@ -200,7 +326,7 @@ class  VShopController extends Controller
             ->first();
         $product->images = json_decode($product->images);
 
-        if (!$product) {
+        if(!$product) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Sản phẩm không tồn tại"
@@ -218,7 +344,7 @@ class  VShopController extends Controller
         $order->user_id = $userId;
         $order->district_id = $districtId;
         $order->province_id = $provinceId;
-        $order->ware_id = $wareId;
+        $order->ward_id = $wareId;
         $order->product_id = $productId;
         $order->status = 2;
         $order->payment_status = 2;
@@ -228,17 +354,18 @@ class  VShopController extends Controller
         $order->fullname = $fullname;
         $order->phone = $phone;
         $order->address = $address;
+        $order->ncc_id = $ncc->id;
 
-        $latestOrder = PreOrderVshop::orderBy('created_at', 'DESC')->first();
-        $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+        $latestOrder = PreOrderVshop::orderBy('created_at','DESC')->first();
+        $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
 
         $order->total = $total;
         $order->discount = $buyMoreDiscount['discount'];
         $order->save();
         $order->prepayment_rate = $buyMoreDiscount['deposit_money'];
 
-        $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
-        $order->deposit_payable = $order->total - $order->total * ($buyMoreDiscount['deposit_money'] / 100);
+        $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
+        $order->deposit_payable = $order->total - $order->total*($buyMoreDiscount['deposit_money']/100);
 
         return response()->json([
             "order" => $order,
