@@ -158,7 +158,7 @@ class ProductController extends Controller
             $tinh_thanh_nhan = Province::where('province_id',$order->province_id)->first()->province_name ?? '';
             $quan_huyen_nhan = District::where('district_id',$order->district_id)->first()->district_name ?? '';
 //            return $quan_huyen_nhan;
-
+//            return $warehouse->address .',' .$quan_huyen_gui.','.$tinh_thanh_gui;
             $list_item[] =[
                 'PRODUCT_NAME'=>$product->name,
                 'PRODUCT_QUANTITY'=>$order_item['quantity'],
@@ -194,11 +194,23 @@ class ProductController extends Controller
                 "MONEY_COLLECTION"=>0,
                 "LIST_ITEM"=>$list_item,
             ]);
-//            return 1;
-//            return json_decode($taodon);
+
             $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
             $order->save();
-//            return $order;
+        }
+        if ($status == 3 &&  $order->order_number !==''){
+
+            $huy_don = Http::withHeaders(
+                [
+                    'Content-Type'=>' application/json',
+                    'Token'=>$login['data']['token']
+                ]
+            )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder',[
+                'TYPE'=>4,
+                'ORDER_NUMBER'=>$order->order_number,
+                'NOTE'=>"Hủy đơn do kho",
+
+            ] );
         }
 
 

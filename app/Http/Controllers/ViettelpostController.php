@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\BillDetail;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class ViettelpostController extends Controller
 {
     public function index(Request $request){
 //        $billdetail = BillDetail::all();
+        $all = $request->all();
+        \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
         $data=$request->DATA;
-        $billdetail= BillDetail::where('code',$data['ORDER_NUMBER'])->first();
+        $order= Order::where('order_number',$data['ORDER_NUMBER'])->first();
 //        $billdetail->status = $data['ORDER_STATUS'];
 
 
-        $billdetail->status = $data['ORDER_STATUS'];
-        $billdetail->save();
+        $order->order_status = $data['ORDER_STATUS'];
+        $order->save();
 
 //        $billdetail->status = 'abc';
 //        $billdetail->test = 'abc';
