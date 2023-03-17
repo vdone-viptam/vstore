@@ -367,19 +367,28 @@ class OrderController extends Controller
             'method_payment' => $methodPayment
         ]);
     }
-
+    /**
+     * danh sách đơn hàng theo user
+     *
+     * API này sẽ trả danh sách đơn hàng theo user
+     *
+     * @param id $id id user
+     *
+     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 hoàn thành
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getOrdersByUser(Request $request, $id)
     {
         try {
-            $status = $request->status ?? 0;
+            $status = $request->status ?? 10;
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status');
 
-            if ($status !== 0) {
+            if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
             }
 
-            $orders = $orders->paginate($limit);
+            $orders = $orders->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
 
@@ -414,6 +423,14 @@ class OrderController extends Controller
             ], 500);
         }
     }
+    /**
+     * chi tiết đơn hàng theo id
+     *
+     * API này sẽ trả về chi tiết đơn hàng theo id
+     *
+     * @param order_id $order_id id đơn hàng
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function getDetailOrderByUser($order_id)
     {

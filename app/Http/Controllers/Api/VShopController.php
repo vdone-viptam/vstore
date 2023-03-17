@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Lib9Pay\HMACSignature;
 use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\BuyMoreDiscount;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\PreOrderVshop;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -258,9 +260,9 @@ class  VShopController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
-            'avatar' => 'url',
-            ' ' => 'string',
-            'nick_name' => ''
+            'avatar' => 'required|url',
+            'vshop_id' => 'required|string',
+            'nick_name' => 'required'
 
         ]);
         if ($validator->fails()) {
@@ -277,6 +279,8 @@ class  VShopController extends Controller
         $vshop->pdone_id = $request->pdone_id;
         $vshop->avatar = $request->avatar ?? '';
         $vshop->nick_name = $request->nick_name;
+        $vshop->vshop_id = $request->vshop_id;
+
         $vshop->save();
         return response()->json([
             'status_code' => 200,
@@ -610,14 +614,28 @@ class  VShopController extends Controller
     public function getProfile($pdone_id)
     {
         $vshop = Vshop::where('pdone_id', $pdone_id)
-            ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'description')
+            ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'nick_name','description','vshop_id')
             ->first();
+        $total_product = VshopProduct::where('vshop_id',$vshop->id)->count();
         if (!$vshop) {
             return response()->json([
                 'status_code' => 400,
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
         }
+        $vshop->total_product= $total_product;
+        $cate = Category::select('categories.name')
+            ->join('products', 'categories.id', '=', 'products.category_id')
+            ->join('vshop_products','products.id','=','vshop_products.product_id')
+            ->join('vshop','vshop_products.vshop_id','=','vshop.id')
+            ->where('vshop.pdone_id', $vshop->pdone_id)
+            ->groupBy('categories.name')
+            ->get();
+
+        foreach ($cate as $c) {
+            $data[] = $c->name;
+        }
+        $vshop->categories = implode(', ', $data);
         return response()->json([
             'status_code' => 201,
             'data' => $vshop

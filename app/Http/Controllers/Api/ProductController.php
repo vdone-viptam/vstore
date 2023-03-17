@@ -386,7 +386,7 @@ class ProductController extends Controller
 //        $list_vshop = Vshop::
         $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
-            ->select('vshop.pdone_id', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+            ->select('vshop.id','vshop.pdone_id', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 //        dd($list_vshop);
 //        return $list_vshop;
@@ -397,8 +397,8 @@ class ProductController extends Controller
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
                 ->first();
-            $list->vshop_discount = $discount->discount ?? 0;
-
+//            $list->vshop_discount = $discount->discount ?? 0;
+            $list->vshop_discount = rand(10,20);
 //            "id": 1,
 //            "pdone_id": "11212",
 //            "product_id": 1,

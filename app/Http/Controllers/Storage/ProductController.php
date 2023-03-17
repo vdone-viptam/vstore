@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\Category;
+use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\Province;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -108,30 +110,95 @@ class ProductController extends Controller
                 'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
             ]);
 
-
-        $data_login = json_decode($login)->data;
+//        return $login['data']['token'];
+//        $data_login = json_decode($login)->data;
 
         $order->export_status = $status;
         $order->save();
+        $warehouse = Warehouses::find($order->warehouse_id);
+        if (!$warehouse){
+            return redirect()->back();
+        }
+        $order_item= OrderItem::where('order_id',$order->id)->first();
+
+        $product = Product::where('id',$order_item->product_id)->first();
+
+
         if ($status ==1){
+//            return $order->total;
+            if ($order->method_payment == 'COD'){
+                $money_colection = (int) $order->total;
+                $order_payment = 2;
+            }else{
+                $money_colection = 0;
+                $order_payment = 1;
+            }
+
             $get_list = Http::withHeaders(
                 [
                     'Content-Type'=>' application/json',
                     'Token'=>$login['data']['token']
                 ]
             )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
-                'SENDER_DISTRICT'=>12,
-                'SENDER_PROVINCE'=>1,
-                'RECEIVER_DISTRICT'=>12,
-                'RECEIVER_PROVINCE'=>1,
+                'SENDER_DISTRICT'=>$warehouse->district_id,
+                'SENDER_PROVINCE'=>$warehouse->city_id,
+                'RECEIVER_DISTRICT'=>$order->district_id,
+                'RECEIVER_PROVINCE'=>$order->province_id,
                 'PRODUCT_TYPE'=>'HH',
-                'PRODUCT_WEIGHT'=>100000,
-                'PRODUCT_PRICE'=>500000,
-                'MONEY_COLLECTION'=>"500000",
+                'PRODUCT_WEIGHT'=> $product->weight * $order_item->quantity,
+                'PRODUCT_PRICE'=>$order->total - $order->shipping,
+                'MONEY_COLLECTION'=>$money_colection,
                 'TYPE'=>1,
 
             ] );
+//            return $get_list;
+
+            $tinh_thanh_gui = Province::where('province_id',$warehouse->city_id)->first()->province_name ?? '';
+            $quan_huyen_gui = District::where('district_id',$warehouse->district_id)->first()->district_name ?? '';
+            $tinh_thanh_nhan = Province::where('province_id',$order->province_id)->first()->province_name ?? '';
+            $quan_huyen_nhan = District::where('district_id',$order->district_id)->first()->district_name ?? '';
+//            return $quan_huyen_nhan;
+
+            $list_item[] =[
+                'PRODUCT_NAME'=>$product->name,
+                'PRODUCT_QUANTITY'=>$order_item['quantity'],
+                'PRODUCT_PRICE'=>$product->price,
+                'PRODUCT_WEIGHT'=>$product->price *$order_item['quantity']
+            ];
 //            return $get_list[0]['MA_DV_CHINH'];
+            $taodon = Http::withHeaders(
+                [
+                    'Content-Type'=>' application/json',
+                    'Token'=>$login['data']['token']
+                ]
+            )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
+                "ORDER_NUMBER"=>'',
+                "SENDER_FULLNAME"=>$warehouse->name,
+                "SENDER_ADDRESS"=>$warehouse->address .',' .$quan_huyen_gui.','.$tinh_thanh_gui,
+                "SENDER_PHONE"=>$warehouse->phone_nameber,
+                "RECEIVER_FULLNAME"=>$order->fullname,
+                "RECEIVER_ADDRESS"=>$order->address .',' .$quan_huyen_nhan.','.$tinh_thanh_nhan,
+                "RECEIVER_PHONE"=>$order->phone,
+                "PRODUCT_NAME"=>$order->no,
+                "PRODUCT_DESCRIPTION"=>"",
+                "PRODUCT_QUANTITY"=>1,
+                "PRODUCT_PRICE"=>$order->total - $order->shipping,
+                "PRODUCT_WEIGHT"=>$product->weight * $order_item->quantity,
+                "PRODUCT_LENGTH"=>null,
+                "PRODUCT_WIDTH"=>null,
+                "PRODUCT_HEIGHT"=>null,
+                "ORDER_PAYMENT"=>$order_payment,
+                "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
+                "ORDER_SERVICE_ADD"=>null,
+                "ORDER_NOTE"=>"",
+                "MONEY_COLLECTION"=>0,
+                "LIST_ITEM"=>$list_item,
+            ]);
+//            return 1;
+//            return json_decode($taodon);
+            $order->order_namber = json_decode($taodon)->data->ORDER_NUMBER;
+            $order->save();
+            return $order;
         }
 
 
