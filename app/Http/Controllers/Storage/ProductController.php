@@ -196,9 +196,9 @@ class ProductController extends Controller
             ]);
 //            return 1;
 //            return json_decode($taodon);
-            $order->order_namber = json_decode($taodon)->data->ORDER_NUMBER;
+            $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
             $order->save();
-            return $order;
+//            return $order;
         }
 
 
