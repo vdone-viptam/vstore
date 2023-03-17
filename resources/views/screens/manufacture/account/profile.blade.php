@@ -227,7 +227,7 @@
                                     <span>{{$infoAccount->account_code}}</span>
                                 </div>
                                 <div class="flex justify-start items-start gap-4">
-                                    <span class="text-secondary">Tên V-NCC:</span>
+                                    <span class="text-secondary">Tên NCC:</span>
                                     <span>{{$infoAccount->name}}</span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">

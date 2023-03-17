@@ -9,7 +9,7 @@
     <title>@yield('page_title')</title>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Nhà cung cấp "/>
-    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:title" content="NCC | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content=""/>

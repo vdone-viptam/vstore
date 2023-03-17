@@ -10,14 +10,16 @@ class ViettelpostController extends Controller
 {
     public function index(Request $request){
 //        $billdetail = BillDetail::all();
-        $all = $request->all();
+        $all = $request->all()['DATA']['ORDER_STATUS'];
         \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
         $data=$request->DATA;
-        $order= Order::where('order_number',$data['ORDER_NUMBER'])->first();
+        $a = $request->all()['DATA']['ORDER_NUMBER'];
+        $order= Order::where('order_number',$request->all()['DATA']['ORDER_NUMBER'] )->first();
+        \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('order','a'));
 //        $billdetail->status = $data['ORDER_STATUS'];
 
 
-        $order->order_status = $data['ORDER_STATUS'];
+        $order->order_status = $request->all()['DATA']['ORDER_STATUS'];
         $order->save();
 
 //        $billdetail->status = 'abc';
