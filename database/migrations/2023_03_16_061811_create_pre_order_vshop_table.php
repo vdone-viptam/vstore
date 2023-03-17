@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->integer("user_id");
+            $table->integer("ncc_id");
             $table->integer("district_id");
             $table->integer("province_id");
             $table->integer("ward_id");
