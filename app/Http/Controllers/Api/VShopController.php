@@ -28,9 +28,50 @@ use Illuminate\Support\Str;
 class  VShopController extends Controller
 {
 
+    public function preOrderConfirm(Request $request, $orderId) {
 
-    public function preOrderPayment(Request $request, $orderId)
-    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'is_pdone' => 'required|boolean'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 401,
+                'error' => $validator->errors(),
+            ]);
+        }
+
+        $user_id = $request->user_id;
+
+        $order = PreOrderVshop::where('id', $orderId)
+            ->where('user_id', $user_id)
+            ->where('payment_deposit_money_status', 2)
+            ->where('status', 2)
+            ->first();
+
+        if(!$order) {
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Hoá đơn không tồn tại"
+            ]);
+        }
+
+        $order->status = 1;
+        $order->save();
+
+        $order->prepayment_rate = $order->deposit_money;
+        $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
+        $order->deposit_payable = $order->total - $order->total*($order->deposit_money/100);
+
+        return response()->json([
+            "status_code" => 200,
+            "order" => $order
+        ]);
+
+    }
+
+    public function preOrderPayment(Request $request, $orderId) {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -54,6 +95,12 @@ class  VShopController extends Controller
             ->where('status', 2)
             ->first();
 
+        if(!$order) {
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Hoá đơn không tồn tại"
+            ]);
+        }
 
         $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
         $returnUrl = $request->returnUrl ?? $http . config("domain.payment") . "/payment/pre-order/return";
@@ -92,7 +139,7 @@ class  VShopController extends Controller
         try {
             $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
             return response()->json([
-                'redirectUrl' => $redirectUrl,
+                'redirectUrl'=>$redirectUrl,
                 'time' => $time,
                 'invoice_no' => $invoiceNo,
                 'amount' => $amount,

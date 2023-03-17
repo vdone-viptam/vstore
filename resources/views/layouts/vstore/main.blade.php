@@ -10,7 +10,7 @@
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
     <meta property="og:url" content="{{asset('')}}"/>
-    <meta property="og:image" content="{{asset('home/img/logo-06.png')}}"/>
+    <meta property="og:image" content="{{asset('home/img/vstore11.png')}}"/>
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">

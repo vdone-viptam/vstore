@@ -136,7 +136,7 @@
                         @if(count($bill_detai) > 0)
                             @foreach($bill_detai as $value)
                                 <tr>
-                                    <td>{{$value->code}}</td>
+                                    <td>{{$value->no}}</td>
                                     <td>{{$value->address}}</td>
                                     <td>{{$value->total}}</td>
                                     <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d-m-Y')}}</td>
