@@ -387,7 +387,6 @@ class  VShopController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
-            'avatar' => 'required|url',
             'vshop_id' => 'required|string',
             'nick_name' => 'required'
 
