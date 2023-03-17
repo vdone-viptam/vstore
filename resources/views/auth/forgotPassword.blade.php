@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quên mật khẩu V-Store</title>
+    <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="{{asset('asset/css/forgot.css')}}">
     <link rel="stylesheet" href={{asset('asset/dist/forgot.css')}}>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">

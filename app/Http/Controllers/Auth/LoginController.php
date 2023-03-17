@@ -20,21 +20,24 @@ class LoginController extends Controller
 {
     //
 
-    public function getFormRegisterVstore()
+    public function getFormRegisterVstore(Request $request)
     {
-        return view('auth.Vstore.register_vstore');
+        $referral_code = $request->referral_code ?? '';
+
+        return view('auth.Vstore.register_vstore', ['referral_code' => $referral_code]);
     }
 
-    public function getFormRegisterNCC()
+    public function getFormRegisterNCC(Request $request)
     {
-
-
-        return view('auth.NCC.register_ncc');
+        $referral_code = $request->referral_code ?? '';
+        return view('auth.NCC.register_ncc', ['referral_code' => $referral_code]);
     }
 
-    public function getFormRegisterVstorage()
+    public function getFormRegisterVstorage(Request $request)
     {
-        return view('auth.storage.register_storage');
+        $referral_code = $request->referral_code ?? '';
+
+        return view('auth.storage.register_storage', ['referral_code' => $referral_code]);
     }
 
     public function getFormLoginVstorage()
@@ -224,11 +227,6 @@ class LoginController extends Controller
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
             $referral_code = $request->referral_code ?? '';
-            if ($referral_code !== '') {
-                if (DB::table('vshop')->where('pdone_id', $referral_code)->count() == 0) {
-                    return redirect()->back()->withErrors(['referral_code' => 'Mã giới thiệu không chính xác']);
-                }
-            }
             $user->referral_code = $referral_code;
             if ($role_id == 3) {
                 $user->branch = 1;

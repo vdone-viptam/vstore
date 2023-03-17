@@ -48,9 +48,10 @@
         <div></div>
         <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
             <div class="w-[80px] h-[80px] ">
-{{--                <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">--}}
+                {{--                <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">--}}
                 @if(!empty(Auth::user()->avatar))
-                    <img class="w-full object-contain" src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
+                    <img class="w-full object-contain"
+                         src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
                 @else
                     <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
                 @endif
@@ -274,6 +275,9 @@
                                                href="{{route('screens.manufacture.order.pending')}}">Trả
                             hàng, hoàn
                             tiền</a></li>
+                    <li data-page="orders"><a class="hover:underline"
+                                              href="{{route('screens.manufacture.order.order')}}">Quản lý đơn nhập
+                            sẵn</a></li>
 
                 </ul>
             </div>

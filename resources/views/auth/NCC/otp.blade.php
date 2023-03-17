@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập V-Store</title>
+    <title>Mã xác minh</title>
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -38,7 +39,8 @@
 <div class=" grid grid-cols-1 place-items-center ">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full md:w-[500px] ">
-        <a href="{{route('landingpagencc')}}" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
+        <a href="{{route('landingpagencc')}}"
+           class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
             <div>
                 <img src="{{asset('asset/icons/back.png')}}" alt="">
             </div>
@@ -99,12 +101,12 @@
             </div>
             {{--            bg-sky-500/100--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
-                                <input type="submit" disabled
-                                       class="cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"
-                                       value="Đăng nhập">
-{{--                <input type="button" disabled--}}
-{{--                       class="btn-sub cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"--}}
-{{--                       value="Đăng nhập">--}}
+                <input type="submit" disabled
+                       class="cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"
+                       value="Đăng nhập">
+                {{--                <input type="button" disabled--}}
+                {{--                       class="btn-sub cursor-pointer btn-ctn text-center w-full text-white text-xl font-medium bg-btnGrey rounded-lg py-4 bg-slate-300"--}}
+                {{--                       value="Đăng nhập">--}}
                 <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register_ncc')}}"
                                                                                    class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>
             </div>
@@ -147,7 +149,6 @@
     //     alert(1);
     //     $('.login').hide();
     // })
-
 
 
 </script>
