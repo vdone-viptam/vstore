@@ -327,4 +327,17 @@ class FinanceController extends Controller
             ]);
         }
     }
+    /**
+     * chi tiết ngân hàng
+     *
+     * API này sé lấy ra chi tiết ngân hàng
+     * @param $bank_id id bank ngân hàng
+     */
+    public function getBankId($bank_id){
+        $bank = Bank::where('id',$bank_id)->first();
+        return response()->json([
+            'success' => true,
+            'data' => $bank
+        ], 200);
+    }
 }

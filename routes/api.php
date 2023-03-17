@@ -124,6 +124,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('finances')->group(function () {
         Route::get('get-list-bank', [\App\Http\Controllers\Api\FinanceController::class, 'getListBank']);
+        Route::get('get-bank-id/{bank_id}',[\App\Http\Controllers\Api\FinanceController::class,'getBankId']);
         Route::get('/wallet/{pdone_id}', [\App\Http\Controllers\Api\FinanceController::class, 'getWallet']);
         Route::get('/wallet/edit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'editWallet']);
         Route::put('/wallet/update/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'updateWallet']);
