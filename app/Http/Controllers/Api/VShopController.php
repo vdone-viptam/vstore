@@ -152,7 +152,6 @@ class  VShopController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'is_pdone' => 'required|boolean',
-            'ncc_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -163,15 +162,6 @@ class  VShopController extends Controller
         }
 
         $user_id = $request->user_id;
-        $nccId = $request->ncc_id;
-
-        $ncc = User::where('id', $nccId)->where('status', 1)->where('role_id', 2)->first();
-        if(!$ncc) {
-            return response()->json([
-                "status_code" => 404,
-                "message" => "Hoá đơn không tồn tại"
-            ]);
-        }
 
         $order = PreOrderVshop::where('id', $orderId)
             ->where('user_id', $user_id)
@@ -187,7 +177,6 @@ class  VShopController extends Controller
         }
 
         $order->status = 1;
-        $order->ncc_id = $ncc->id;
         $order->save();
 
         $order->prepayment_rate = $order->deposit_money;
@@ -290,6 +279,7 @@ class  VShopController extends Controller
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
+            'ncc_id' => 'required',
             'is_pdone' => 'required|boolean',
             'quantity' => 'required|numeric',
             'place_name' => 'required',
@@ -305,6 +295,14 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 401,
                 'error' => $validator->errors(),
+            ]);
+        }
+        $nccId = $request->ncc_id;
+        $ncc = User::where('id', $nccId)->where('status', 1)->where('role_id', 2)->first();
+        if(!$ncc) {
+            return response()->json([
+                "status_code" => 404,
+                "message" => "Hoá đơn không tồn tại"
             ]);
         }
 
@@ -354,6 +352,7 @@ class  VShopController extends Controller
         $order->fullname = $fullname;
         $order->phone = $phone;
         $order->address = $address;
+        $order->ncc_id = $ncc->id;
 
         $latestOrder = PreOrderVshop::orderBy('created_at','DESC')->first();
         $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
