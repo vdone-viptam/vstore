@@ -216,8 +216,8 @@
             </div>
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"> Đại diện thêm</span>
-                <input type="text" name="id_vdone_diff" placeholder="Nhập ID đại diện thêm"
+                <span class="text-sm font-medium">Người đại diện (khác)</span>
+                <input type="text" name="id_vdone_diff" placeholder="Nhập ID người đại diện (khác)"
                        value="{{old('id_vdone_diff')}}"
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
             </div>
