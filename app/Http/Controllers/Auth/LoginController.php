@@ -20,21 +20,24 @@ class LoginController extends Controller
 {
     //
 
-    public function getFormRegisterVstore()
+    public function getFormRegisterVstore(Request $request)
     {
-        return view('auth.Vstore.register_vstore');
+        $referral_code = $request->referral_code ?? '';
+
+        return view('auth.Vstore.register_vstore', ['referral_code' => $referral_code]);
     }
 
-    public function getFormRegisterNCC()
+    public function getFormRegisterNCC(Request $request)
     {
-
-
-        return view('auth.NCC.register_ncc');
+        $referral_code = $request->referral_code ?? '';
+        return view('auth.NCC.register_ncc', ['referral_code' => $referral_code]);
     }
 
-    public function getFormRegisterVstorage()
+    public function getFormRegisterVstorage(Request $request)
     {
-        return view('auth.storage.register_storage');
+        $referral_code = $request->referral_code ?? '';
+
+        return view('auth.storage.register_storage', ['referral_code' => $referral_code]);
     }
 
     public function getFormLoginVstorage()
