@@ -66,7 +66,7 @@ class FinanceController extends Controller
                     'message' => 'Không tìm thấy vshop'
                 ], 404);
             }
-            $wallet = Wallet::select('wallets.id', 'account_number', 'banks.name as bank_name', 'wallets.name')
+            $wallet = Wallet::select('wallets.id', 'account_number', 'wallets.bank_id','banks.image','banks.name as bank_name', 'wallets.name')
                 ->join('banks', 'wallets.bank_id', '=', 'banks.id')
                 ->where('type',2)
                 ->where('user_id', $vshop_id)->first();

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
+/**
+ * @group Oder
+ *
+ * Danh sách api liên quan tới order bill
+ */
 
 class OrderController extends Controller
 {
@@ -382,7 +387,7 @@ class OrderController extends Controller
         try {
             $status = $request->status ?? 10;
             $limit = $request->limit ?? 5;
-            $orders = Order::select('no', 'id', 'total', 'export_status');
+            $orders = Order::select('no', 'id', 'total', 'export_status','order_number');
 
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
@@ -435,7 +440,7 @@ class OrderController extends Controller
     public function getDetailOrderByUser($order_id)
     {
         try {
-            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status')
+            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status','order_number')
                 ->where('id', $order_id)->first();
             if (!$order) {
                 return response()->json([
