@@ -503,7 +503,7 @@ class  VShopController extends Controller
      *
      * API dùng thêm địa chỉ giao hàng của Vshop
      *
-     * @param   pdone_id id của vshop
+     * @param pdone_id id của vshop
      * @bodyParam  name Tên người nhận
      * @bodyParam  address địa chỉ chi tiết
      * @bodyParam  phone_number Số điện thoại
@@ -512,7 +512,7 @@ class  VShopController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeAddressReceive(Request $request,$pdone_id)
+    public function storeAddressReceive(Request $request, $pdone_id)
     {
         $validator = Validator::make($request->all(), [
 //            'pdone_id' => 'required|max:255',
@@ -568,11 +568,11 @@ class  VShopController extends Controller
 
         try {
             $address = DB::table('vshop')
-                ->select('name','name_address','province','wards','district', 'address', 'phone_number',
-                    'vshop.id','province.province_name','district.district_name','wards.wards_name')
-                ->join('province','vshop.province','=','province.province_id')
-                ->join('district','province.province_id','=','district.province_id')
-                ->join('wards','district.district_id','=','wards.district_id')
+                ->select('name', 'name_address', 'province', 'wards', 'district', 'address', 'phone_number',
+                    'vshop.id', 'province.province_name', 'district.district_name', 'wards.wards_name')
+                ->join('province', 'vshop.province', '=', 'province.province_id')
+                ->join('district', 'province.province_id', '=', 'district.province_id')
+                ->join('wards', 'district.district_id', '=', 'wards.district_id')
                 ->where('vshop.pdone_id', $id)->first();
 
             return response()->json([
@@ -674,19 +674,19 @@ class  VShopController extends Controller
         $validator = Validator::make($request->all(), [
 
             'name' => 'required|max:255',
-            'name_address'=>'required',
+            'name_address' => 'required',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
             'district' => 'required|min:1',
             'province' => 'required|min:1',
-            'wards'=>'required|min:1'
+            'wards' => 'required|min:1'
 
         ], []);
         if ($validator->fails()) {
             return response()->json([
                 'status_code' => 401,
                 'error' => $validator->errors(),
-            ],400);
+            ], 400);
         }
         try {
             $data = [
@@ -696,8 +696,8 @@ class  VShopController extends Controller
                 'district' => $request->district,
                 'province' => $request->province,
                 'address' => $request->address,
-                'wards'=>$request->wards,
-                'name_address'=>$request-> name_address,
+                'wards' => $request->wards,
+                'name_address' => $request->name_address,
                 'updated_at' => Carbon::now(),
             ];
 
@@ -825,4 +825,73 @@ class  VShopController extends Controller
         ], 200);
 
     }
+
+    public function adminGetProductByvShop(Request $request, $pdone_id)
+    {
+        try {
+            $products = [];
+            $request->type = $request->type ?? 1;
+            $request->option = $request->option ?? 'desc';
+            if ($request->type == 1) {
+                $products = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                    ->select(
+                        'products.name', 'publish_id', 'price', 'discount_vShop', 'view', 'amount_product_sold', 'images',
+                        'products.id'
+                    )
+                    ->join('products', 'vshop_product.product_id', '=', 'products.id')
+                    ->where('vshop.pdone_id', $pdone_id)
+                    ->where('vshop.status', 1);
+//                ->paginate(10);
+                if ($request->order_by = 1) {
+                    $products = $products->orderBy('amount_product_sold', $request->option);
+                }
+                if ($request->order_by = 2) {
+                    $products = $products->orderBy('amount_product_sold', $request->option);
+                }
+                foreach ($products as $pro) {
+                    $pro->image = asset(json_decode($pro->image)[0]);
+                    unset($pro->images);
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
+                    $pro->available_discount = $more_dis ?? 0;
+                }
+            }
+            if ($request->type == 2) {
+                $products = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                    ->select(
+                        'products.name', 'publish_id', 'price', 'discount_vShop', 'view', 'amount_product_sold', 'images',
+                        'products.id'
+                    )
+                    ->join('products', 'vshop_product.product_id', '=', 'products.id')
+                    ->where('vshop.pdone_id', $pdone_id)
+                    ->where('vshop.status', 2);
+//                ->paginate(10);
+                if ($request->order_by = 1) {
+                    $products = $products->orderBy('amount_product_sold', $request->option);
+                }
+                if ($request->order_by = 2) {
+                    $products = $products->orderBy('amount_product_sold', $request->option);
+                }
+                foreach ($products as $pro) {
+                    $pro->image = asset(json_decode($pro->image)[0]);
+                    unset($pro->images);
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
+                    $pro->available_discount = $more_dis ?? 0;
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => $products,
+                'total_product' => $products->total()
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+
+    }
+
 }

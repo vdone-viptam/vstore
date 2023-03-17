@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->integer('end')->default(0);
             $table->float('discount', 11, 2);
             $table->integer('product_id')->default(0);
-            $table->float('deposit_money',20,2)->comment('tiền cọc khi nhập sẵn');
+            $table->float('deposit_money',20,2)->default(0)->comment('tiền cọc khi nhập sẵn');
             $table->timestamps();
         });
     }
