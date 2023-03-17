@@ -7,5 +7,6 @@ return [
     'storage'=> env('DOMAIN_STORAGE'),
     'payment' => env('DOMAIN_PAYMENT'),
     'token'=>env('TOKEN'),
-
+    'TK_VAN_CHUYEN'=>env('TK_VAN_CHUYEN'),
+    'MK_VAN_CHUYEN'=>env('MK_VAN_CHUYEN')
 ];
