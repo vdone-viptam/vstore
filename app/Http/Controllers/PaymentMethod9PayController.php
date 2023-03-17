@@ -76,6 +76,7 @@ class PaymentMethod9PayController extends Controller
                 $paymentHistory->save();
                 //End Tạo lịch sử hoá đơn
             }
+
             if($status === 5) {
                 $order = Order::where('no', $payment->invoice_no)
                     ->where('status', config('constants.orderStatus.confirmation'))
@@ -85,6 +86,10 @@ class PaymentMethod9PayController extends Controller
                 if($order) {
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
+                    // nếu tồn tại URL return
+                    if($request->url) {
+                        return redirect()->to($request->url . "?result=".$request->result);
+                    }
                     return redirect()->route('paymentSuccess');
                 }
                 Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore');
@@ -93,15 +98,28 @@ class PaymentMethod9PayController extends Controller
                     "status" => 0
                 ]);
             }
+
+            // nếu tồn tại URL return
+            if($request->url) {
+                return redirect()->to($request->url . "?result=".$request->result);
+            }
+
             return redirect()->route('paymentErr', [
                 "failure_reason" => $payment->failure_reason,
                 "status" => $payment->status
             ]);
         } else {
+
+            // nếu tồn tại URL return
+            if($request->url) {
+                return redirect()->to($request->url . "?result=".$request->result);
+            }
+
             return redirect()->route('payment500');
         }
     }
     function paymentBack(Request $request) {
+        Log::info('BACK_9PAY', $request->all());
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -236,6 +254,7 @@ class PaymentMethod9PayController extends Controller
                 'error' => $validator->errors(),
             ]);
         }
+
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
@@ -335,8 +354,15 @@ class PaymentMethod9PayController extends Controller
             ]);
         } else {
             $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
-            $returnUrl = $request->return_url ?? $http . config("domain.payment") . "/payment/return";
-            $backUrl = $request->back_url ?? $http . config("domain.payment") . "/payment/back";
+
+            $returnUrl = $http . config("domain.payment") . "/payment/return";
+            $backUrl = $http . config("domain.payment") . "/payment/back";
+
+            if($request->return_url && $request->back_url) {
+                $returnUrl = $returnUrl . "?url=" . $request->return_url;
+                $backUrl = $backUrl . "?url=" . $request->back_url;
+            }
+
 //        date_default_timezone_set('UTC');
             $time = time();
             $invoiceNo = $order->no;
