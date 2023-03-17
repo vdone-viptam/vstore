@@ -428,7 +428,7 @@ class  VShopController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $vshop = Vshop::select('id', 'pdone_id', 'vshop_name as name', 'phone_number', 'products_sold', 'avatar', 'description', 'products_sold', 'address')->paginate($limit);
+        $vshop = Vshop::select('id', 'pdone_id', 'vshop_name as name', 'phone_number', 'products_sold', 'avatar', 'description', 'products_sold', 'address','vshop_id','nick_name')->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
