@@ -9,12 +9,14 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
 
-class OrderController extends Controller {
+class OrderController extends Controller
+{
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -24,12 +26,12 @@ class OrderController extends Controller {
             'vshop_id' => 'required',
             'quantity' => 'required|numeric',
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
-            'fullname' => 'required',
-            'phone' => 'required',
-            'district_id' => 'required',
-            'province_id' => 'required',
-            'ward_id' => 'required',
-            'address' => 'required',
+//            'fullname' => 'required',
+//            'phone' => 'required',
+//            'district_id' => 'required',
+//            'province_id' => 'required',
+//            'ward_id' => 'required',
+//            'address' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -60,7 +62,7 @@ class OrderController extends Controller {
 
         $product->quantity = $quantity;
 
-        if(!$product) {
+        if (!$product) {
             return response()->json([
                 'status_code' => 404
             ], 404);
@@ -80,32 +82,32 @@ class OrderController extends Controller {
         $order->pay = 1;
         $order->user_id = $userId;
         $order->status = config('constants.orderStatus.wait_for_confirmation');
-        $latestOrder = Order::orderBy('created_at','DESC')->first();
-        $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+        $latestOrder = Order::orderBy('created_at', 'DESC')->first();
+        $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
         $order->shipping = 0; // Tổng phí ship
         $order->total = $product->price * $quantity;
         $totalDiscountSuppliersAndVStore = 0;
-        if(isset($discount['discountsFromSuppliers'])) {
+        if (isset($discount['discountsFromSuppliers'])) {
             $totalDiscountSuppliersAndVStore += $discount['discountsFromSuppliers'];
         }
-        if(isset($discount['discountsFromVStore'])) {
+        if (isset($discount['discountsFromVStore'])) {
             $totalDiscountSuppliersAndVStore += $discount['discountsFromVStore'];
         }
-        if($totalDiscountSuppliersAndVStore > 0) {
-            $order->total = $order->total - $order->total * ($totalDiscountSuppliersAndVStore/100);
+        if ($totalDiscountSuppliersAndVStore > 0) {
+            $order->total = $order->total - $order->total * ($totalDiscountSuppliersAndVStore / 100);
         }
-        if(isset($discount['discountsFromVShop'])) {
-            $order->total = $order->total - $order->total * ($discount['discountsFromVShop']/100);
+        if (isset($discount['discountsFromVShop'])) {
+            $order->total = $order->total - $order->total * ($discount['discountsFromVShop'] / 100);
         }
 
         $totalVat = 0;
 
-        if($districtId && $provinceId && $wardId && $address) {
+        if ($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
-            $vat = $order->total*($product->vat/100);
+            $vat = $order->total * ($product->vat / 100);
             $order->total = $order->total + $vat;
             $totalVat = $vat;
 
@@ -119,18 +121,18 @@ class OrderController extends Controller {
                 'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
                 'PRODUCT_WEIGHT' => $product->weight * $quantity,
                 'PRODUCT_PRICE' => $order->total,
-                'MONEY_COLLECTION'=> $methodPayment === 'COD' ? $order->total  : 0,
-                'TYPE'=>config('viettelPost.nationalType.domesticType'),
+                'MONEY_COLLECTION' => $methodPayment === 'COD' ? $order->total : 0,
+                'TYPE' => config('viettelPost.nationalType.domesticType'),
             ];
 
             $getPriceAll = Http::withHeaders(
                 [
-                    'Content-Type'=>' application/json',
-                    'Token'=>'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                    'Content-Type' => ' application/json',
+                    'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
                 ]
             )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
 
-            if($getPriceAll->status() !== 200 ) {
+            if ($getPriceAll->status() !== 200) {
                 return response()->json([
                     "status_code" => 403,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
@@ -157,12 +159,12 @@ class OrderController extends Controller {
             ];
 
             $getPrice = Http::withHeaders(
-                    [
-                        'Content-Type' => ' application/json',
-                        'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
-                    ]
-                )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
-            if($getPrice['status'] !== 200 ){
+                [
+                    'Content-Type' => ' application/json',
+                    'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                ]
+            )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
+            if ($getPrice['status'] !== 200) {
                 return response()->json([
                     "status_code" => 403,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
@@ -173,7 +175,7 @@ class OrderController extends Controller {
             $order->total += $transportFee;
             $order->shipping = $transportFee;
         }
-        if($fullname && $phone) {
+        if ($fullname && $phone) {
             $order->fullname = $fullname;
             $order->phone = $phone;
         }
@@ -200,12 +202,13 @@ class OrderController extends Controller {
         return response()->json([
             'status_code' => 200,
             'order' => $order,
-            'product'=> $product,
+            'product' => $product,
             'method_payment' => $methodPayment
         ]);
     }
 
-    public function update(Request $request, $orderId) {
+    public function update(Request $request, $orderId)
+    {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'is_pdone' => 'required|boolean',
@@ -219,7 +222,7 @@ class OrderController extends Controller {
         }
         $order = Order::find($orderId);
         $methodPayment = $request->method_payment ? $request->method_payment : $order->method_payment;
-        if(!$order) {
+        if (!$order) {
             return response()->json([
                 "status_code" => 404
             ], 404);
@@ -246,7 +249,7 @@ class OrderController extends Controller {
         $wardId = $request->ward_id;
         $address = $request->address;
         $totalVat = 0;
-        if($districtId && $provinceId && $wardId && $address) {
+        if ($districtId && $provinceId && $wardId && $address) {
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
@@ -269,21 +272,21 @@ class OrderController extends Controller {
                     $weight += $pro->weight * $pro->quantity;
                     $priceDiscount = $pro->price * $pro->quantity;
                     $totalDiscountSuppliersAndVStore = 0;
-                    if($pro->discount_ncc) {
+                    if ($pro->discount_ncc) {
                         $totalDiscountSuppliersAndVStore += $pro->discount_ncc;
                     }
-                    if($pro->discount_vstore) {
+                    if ($pro->discount_vstore) {
                         $totalDiscountSuppliersAndVStore += $pro->discount_vstore;
                     }
-                    if($totalDiscountSuppliersAndVStore > 0) {
-                        $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore/100);
+                    if ($totalDiscountSuppliersAndVStore > 0) {
+                        $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore / 100);
                     }
-                    if($pro->discount_vshop) {
-                        $priceDiscount = $priceDiscount - $priceDiscount * ($pro->discount_vshop/100);
+                    if ($pro->discount_vshop) {
+                        $priceDiscount = $priceDiscount - $priceDiscount * ($pro->discount_vshop / 100);
                     }
                     $price += $priceDiscount;
                     //Tính VAT
-                    $vat = $price*($pro['vat']/100);
+                    $vat = $price * ($pro['vat'] / 100);
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
@@ -298,17 +301,17 @@ class OrderController extends Controller {
                     'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
                     'PRODUCT_WEIGHT' => $weight,
                     'PRODUCT_PRICE' => $price,
-                    'MONEY_COLLECTION'=> $methodPayment === 'COD' ? $price : 0,
-                    'TYPE'=>config('viettelPost.nationalType.domesticType'),
+                    'MONEY_COLLECTION' => $methodPayment === 'COD' ? $price : 0,
+                    'TYPE' => config('viettelPost.nationalType.domesticType'),
                 ];
 
                 $getPriceAll = Http::withHeaders(
                     [
-                        'Content-Type'=>' application/json',
-                        'Token'=>'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                        'Content-Type' => ' application/json',
+                        'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
                     ]
                 )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
-                if($getPriceAll->status() !== 200 ) {
+                if ($getPriceAll->status() !== 200) {
                     return response()->json([
                         "status_code" => 403,
                         "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
@@ -327,16 +330,16 @@ class OrderController extends Controller {
                     'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
                     'PRODUCT_WEIGHT' => $weight,
                     'PRODUCT_PRICE' => $price,
-                    'MONEY_COLLECTION'=> $methodPayment === 'COD' ? $price : 0,
-                    'NATIONAL_TYPE'=>config('viettelPost.nationalType.domesticType'),
+                    'MONEY_COLLECTION' => $methodPayment === 'COD' ? $price : 0,
+                    'NATIONAL_TYPE' => config('viettelPost.nationalType.domesticType'),
                 ];
                 $getPrice = Http::withHeaders(
                     [
-                        'Content-Type'=>' application/json',
-                        'Token'=>'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                        'Content-Type' => ' application/json',
+                        'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
                     ]
                 )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
-                if($getPrice['status'] !== 200 ){
+                if ($getPrice['status'] !== 200) {
                     return response()->json([
                         "status_code" => 403,
                         "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
@@ -365,4 +368,75 @@ class OrderController extends Controller {
         ]);
     }
 
+    public function getOrdersByUser(Request $request, $id)
+    {
+        try {
+            $status = $request->status ?? 0;
+            $limit = $request->limit ?? 5;
+            $orders = Order::select('no', 'products.name',
+                'products.price', 'discount_vshop,
+            discount_ncc,discount_vstore', 'quantity', 'images', 'order_item.id', 'order_item.status')
+                ->join('order_item', 'order.id', '=', 'order_item.order_id')
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                ->where('order.user_id', $id)
+                ->where('order_item.status', $status)
+                ->paginate($limit);
+            foreach ($orders as $order) {
+                $order->image = asset(json_decode($order->images)[0]);
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $orders
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getDetailOrderByUser($order_id)
+    {
+        try {
+            $order = OrderItem::with(['order'])->select('created_at')
+                ->select('order_id',
+                    'order_item.status',
+                    'products.name',
+                    'quantity',
+                    'products.price',
+                    'vat', 'order_item.discount_vshop',
+                    'discount_ncc', 'discount_vstore',
+                )
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                ->where('order_item.id', $order_id)->first();
+
+
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng'
+                ], 404);
+            }
+            $order->info_customer = $order->order()->select('fullname', 'total', 'phone', 'address', 'shipping', 'no')->first();
+
+            $order->total = $order->info_customer->total;
+            $order->shipping = $order->info_customer->shipping;
+            $order->no = $order->info_customer->no;
+
+            unset($order->info_customer->total);
+            unset($order->order);
+            unset($order->info_customer->shipping);
+            unset($order->info_customer->no);
+            return response()->json([
+                'success' => true,
+                'data' => $order
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

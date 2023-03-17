@@ -750,7 +750,7 @@ class ProductController extends Controller
             $bill->save();
 
 
-            $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ware_id')->get();
+            $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ward_id')->get();
             if (count($productWh) == 0) {
                 return response()->json([
                     'status_code' => 400,
@@ -761,7 +761,7 @@ class ProductController extends Controller
 //        return $productWh;
             $ware_id = [];
             foreach ($productWh as $value) {
-                $ware_id[] = $value->ware_id;
+                $ware_id[] = $value->ward_id;
 
             }
             $warehouses = Warehouses::whereIn('id', $ware_id)->get();
@@ -807,7 +807,7 @@ class ProductController extends Controller
                 }
             }
             $bill_detail->bill_id = $bill->id;
-            $bill_detail->ware_id = $min->id;
+            $bill_detail->ward_id = $min->id;
             $bill_detail->address = $vshop->address;
             $bill_detail->total = $price * $request->amount;
             $bill_detail->pick_up_address = $min->address;
@@ -829,7 +829,7 @@ class ProductController extends Controller
             $bill_product->vstore_id = $product->vstore_id;
             $bill_product->user_id = $product->user_id;
             $bill_product->product_id = $product->id;
-            $bill_product->ware_id = $min->id;
+            $bill_product->ward_id = $min->id;
             $bill_product->status = 1;
             $bill_product->save();
 
@@ -839,7 +839,7 @@ class ProductController extends Controller
 
             $newProductWh = new ProductWarehouses();
             $newProductWh->code = $bill_product->code;
-            $newProductWh->ware_id = $min->id;
+            $newProductWh->ward_id = $min->id;
             $newProductWh->product_id = $product->id;
             $newProductWh->status = 3;
             $newProductWh->amount = $request->amount;

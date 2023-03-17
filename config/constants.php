@@ -49,6 +49,16 @@ return [
     ],
     // END PRODUCT
 
+    // PRE_ORDER
+    'statusPreOrder' => [
+        'done' => 1,
+        'user_confirm' => 2,
+        'shipping' => 4,
+        'cancel' => 5
+    ],
+    // END PRE_ORDER
+
+
     //PRODUCT_VSHOP
     'statusVShopProduct' => [
         'marketing' => 1,

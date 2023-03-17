@@ -28,9 +28,9 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $products = Category::join('products', 'categories.id', '=', 'products.category_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
+            ->join('warehouses', 'product_warehouses.ward_id', '=', 'warehouses.id')
             ->groupBy('products.id')
-            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id', 'product_warehouses.amount');
+            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ward_id', 'product_warehouses.product_id', 'product_warehouses.amount');
 
 //        return Auth::user();
 
@@ -43,7 +43,7 @@ class ProductController extends Controller
             ->where('product_warehouses.status', '!=', 3)
             ->paginate($limit);
         foreach ($products as $pro) {
-            $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ""))[0]->amount ?? 0;
+            $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ward_id =" . $pro->ward_id . " AND product_id = " . $pro->product_id . ") as amount FROM product_warehouses where status = 1 AND ward_id =" . $pro->ward_id . " AND product_id = " . $pro->product_id . ""))[0]->amount ?? 0;
         }
         $this->v['products'] = $products;
         $this->v['params'] = $request->all();
@@ -55,7 +55,7 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $this->v['requests'] = Product::select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
             ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
-            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
+            ->join('warehouses', 'product_warehouses.ward_id', '=', 'warehouses.id');
         if ($request->key_search) {
             $this->v['requests'] = $this->v['requests']->where('product_warehouses.id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
                 ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
@@ -70,7 +70,7 @@ class ProductController extends Controller
     public function requestOut(Request $request)
     {
         $limit = $request->limit ?? 10;
-//       $product = Warehouses::join('product_warehouses','warehouses.id','=','product_warehouses.ware_id')
+//       $product = Warehouses::join('product_warehouses','warehouses.id','=','product_warehouses.ward_id')
 //                    ->join('products','product_warehouses.product_id','=','products.id')
 //                    ->join('categories','products.category_id','=','categories.id')
 //            ->whereIn('product_warehouses.status',[2,3,4])
@@ -88,7 +88,7 @@ class ProductController extends Controller
 //
 //        return $order;
 
-        $bill_detai = BillDetail::where('ware_id',$warehouses->id)->orderBy('export_status','asc')->orderBy('id','desc');
+        $bill_detai = BillDetail::where('ward_id',$warehouses->id)->orderBy('export_status','asc')->orderBy('id','desc');
         if ($request->key_search  ){
             $bill_detai = $bill_detai->where('code','like','%'.$request->key_search.'%');
 
@@ -119,7 +119,7 @@ class ProductController extends Controller
         foreach ($billProduct as $value){
             $productW = new ProductWarehouses();
             $productW->product_id = $value->product_id;
-            $productW->ware_id = $value->ware_id;
+            $productW->ward_id = $value->ward_id;
             $productW->status = 2;
             $productW->amount = $value->quantity;
             $productW->save();

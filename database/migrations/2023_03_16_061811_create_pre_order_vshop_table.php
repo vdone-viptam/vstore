@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer("user_id");
             $table->integer("district_id");
             $table->integer("province_id");
-            $table->integer("ware_id");
+            $table->integer("ward_id");
             $table->integer("product_id");
 
             $table->integer("status")->default(2); // 1 thành công, 2 chờ xét duyệt

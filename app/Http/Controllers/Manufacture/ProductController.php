@@ -170,7 +170,7 @@ class ProductController extends Controller
 //            for ($i = 0; $i < count($request->ward_id); $i++) {
 //                $dataInsert[] = [
 //                    'product_id' => $product->id,
-//                    'ware_id' => $request->ward_id[$i],
+//                    'ward_id' => $request->ward_id[$i],
 //                    'amount' => $request->amount[$i],
 //                    'created_at' => Carbon::now(),
 //                    'status' => 1];
@@ -419,7 +419,7 @@ class ProductController extends Controller
 //            for ($i = 0; $i < count($request->ward_id); $i++) {
 //                $dataInsert[] = [
 //                    'product_id' => $request->product_id,
-//                    'ware_id' => $request->ward_id[$i],
+//                    'ward_id' => $request->ward_id[$i],
 //                    'amount' => $request->amount[$i],
 //                    'created_at' => Carbon::now(),
 //                    'status' => 3];

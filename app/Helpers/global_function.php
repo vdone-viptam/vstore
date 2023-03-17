@@ -81,7 +81,7 @@ function getWarehouse($province_id, $district_id, $product_id) {
     }
 
     $warehouse = \App\Models\Warehouses::where('product_warehouses.product_id', $product_id)
-        ->join('product_warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
+        ->join('product_warehouses', 'product_warehouses.ward_id', '=', 'warehouses.id')
 //        ->where('warehouses.district_id', $district_id)
 //        ->where('warehouses.city_id', $province_id)
         ->get();
@@ -186,6 +186,26 @@ function status9Pay($status)
             ];
         }
 
+    }
+}
+function statusPreOrder($status)
+{
+    switch ($status) {
+        case config('constants.statusPreOrder.done'): {
+            return "Hoàn thành";
+        }
+        case config('constants.statusPreOrder.user_confirm'): {
+            return "Chờ xác nhận";
+        }
+        case config('constants.statusPreOrder.shipping'): {
+            return "Đang giao hàng";
+        }
+        case config('constants.statusPreOrder.cancel'): {
+            return "Đơn huỷ";
+        }
+        default: {
+            return "Đơn hàng chưa được xử lý";
+        }
     }
 }
 

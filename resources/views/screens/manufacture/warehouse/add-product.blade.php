@@ -66,7 +66,7 @@ Thêm sản phẩm vào kho</h2>
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn kho hàng<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                        <select name="ware_id" id="ware_id"
+                        <select name="ward_id" id="ward_id"
                                 class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             <option value="">Chọn kho hàng</option>
 
@@ -76,7 +76,7 @@ Thêm sản phẩm vào kho</h2>
 {{--                            <option value="1">V-store 1</option>--}}
 {{--                            <option value="2">V-store 2</option>--}}
                         </select>
-                        @error('ware_id')
+                        @error('ward_id')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
                     </div>
@@ -179,14 +179,14 @@ Thêm sản phẩm vào kho</h2>
     <script>
         $(".chon_sp").change(function() {
 
-            var val = $("#ware_id").val();
+            var val = $("#ward_id").val();
             if(val >0){
                 $.ajax({
                     url:' {{route('amount')}}',
                     type: 'GET',
                     data: {
                         product_id: $('#product_id').val(),
-                        ware_id: $('#ware_id').val()
+                        ward_id: $('#ward_id').val()
                     },
                     dataType: 'json',
                     success:function (data){
@@ -201,7 +201,7 @@ Thêm sản phẩm vào kho</h2>
 
 
         });
-        $("#ware_id").change(function() {
+        $("#ward_id").change(function() {
 
             var val = $(".chon_sp").val();
             if(val >0){
@@ -210,7 +210,7 @@ Thêm sản phẩm vào kho</h2>
                     type: 'GET',
                     data: {
                         product_id: $('#product_id').val(),
-                        ware_id: $('#ware_id').val()
+                        ward_id: $('#ward_id').val()
                     },
                     dataType: 'json',
                     success:function (data){

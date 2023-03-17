@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->integer('vstore_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('product_id')->nullable();
-            $table->integer('ware_id')->default(0);
+            $table->integer('ward_id')->default(0);
             $table->integer('status')->default(0);
             $table->integer('bill_id')->default(0);
             $table->float('weight')->default(0);

@@ -130,7 +130,7 @@ class BillController extends Controller
                     ], 400);
                 }
 
-                $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ware_id')->get();
+                $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ward_id')->get();
 //                return $productWh;
                 if (count($productWh) == 0) {
                     return response()->json([
@@ -142,7 +142,7 @@ class BillController extends Controller
 
                 $ware_id = [];
                 foreach ($productWh as $productp) {
-                    $ware_id[] = $productp->ware_id;
+                    $ware_id[] = $productp->ward_id;
 
                 }
 
@@ -173,12 +173,12 @@ class BillController extends Controller
                     }
                 }
 
-                $bill_detail = BillDetail::where('bill_id', $bill->id)->where('ware_id', $min->id)->first();
+                $bill_detail = BillDetail::where('bill_id', $bill->id)->where('ward_id', $min->id)->first();
                 if (!$bill_detail) {
                     $bill_detail = new BillDetail();
 //                    $bill_detail->code = Str::random('11');
                     $bill_detail->bill_id = $bill->id;
-                    $bill_detail->ware_id = $min->id;
+                    $bill_detail->ward_id = $min->id;
                     $bill_detail->address = $request->address;
                     $bill_detail->district = $request->district;
                     $bill_detail->province = $request->province;
@@ -208,7 +208,7 @@ class BillController extends Controller
                 $bill_product->bill_detail_id = $bill_detail->id;
                 $bill_product->vstore_id = $product->vstore_id;
                 $bill_product->product_id = $product->id;
-                $bill_product->ware_id = $min->id;
+                $bill_product->ward_id = $min->id;
                 $bill_product->status = 1;
                 $bill_product->weight = $product->weight * $value['quantity'];
                 $bill_product->save();
@@ -227,7 +227,7 @@ class BillController extends Controller
 //
                 $createBillDetail = BillDetail::where('bill_id',$bill->id)->get();
                 foreach ($createBillDetail as $createBdt){
-                    $createWare = Warehouses::find($createBdt->ware_id);
+                    $createWare = Warehouses::find($createBdt->ward_id);
                     $createPro = BillDetail::join('bill_product','bill_details.id','=','bill_product.bill_detail_id')
                         ->join('products','bill_product.product_id','=','products.id')
                         ->where('bill_product.bill_detail_id',$createBdt->id)
@@ -394,7 +394,7 @@ class BillController extends Controller
                 ], 400);
             }
         }
-        $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ware_id')->get();
+        $productWh = ProductWarehouses::where('product_id', $product->id)->where('status', 1)->groupBy('ward_id')->get();
 //                return $productWh;
         if (count($productWh) == 0) {
             return response()->json([
@@ -406,7 +406,7 @@ class BillController extends Controller
 
         $ware_id = [];
         foreach ($productWh as $productp) {
-            $ware_id[] = $productp->ware_id;
+            $ware_id[] = $productp->ward_id;
 
         }
 //        return   $ware_id ;
