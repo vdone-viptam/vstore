@@ -58,7 +58,7 @@ class ProductController extends Controller
     {
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
-        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
+        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->where('id',800)->first();
         $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
 
         return view('screens.manufacture.product.create', $this->v);
@@ -308,9 +308,10 @@ class ProductController extends Controller
                 return redirect()->back()->withErrors(['images' => 'Tải tài liệu liên quan đến sản phẩm']);
             }
 
-            if ($request->sl[0] == '' || $request->moneyv[0] == '') {
-                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn']);
+            if ($request->sl[0] == '' || $request->moneyv[0] == ''||$request->deposit_money[0] == '') {
+                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn và phần trăm cọc']);
             }
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
             }

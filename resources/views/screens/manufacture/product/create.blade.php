@@ -251,8 +251,8 @@
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
-                                    class="text-title font-medium whitespace-nowrap">Tiền cọc khi nhập hàng sẵn</span>
-                            <input type="number" value="" min="1" name="deposit_money[]" id=""
+                                    class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
+                            <input type="number" value="" min="1" max="100" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -275,8 +275,8 @@
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
-                                    class="text-title font-medium whitespace-nowrap">Tiền cọc khi nhập hàng sẵn</span>
-                            <input type="text" value="" name="deposit_money[]" id=""
+                                    class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
+                            <input type="text" value="" min="1" max="100"  name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -293,14 +293,14 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="number" value="" min="1" max="99" name="moneyv[]" id=""
+                            <input type="number" value="" min="1" max="99"  name="moneyv[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
-                                    class="text-title font-medium whitespace-nowrap">Tiền cọc khi nhập hàng sẵn</span>
-                            <input type="text" value=""  name="deposit_money[]" id=""
+                                    class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
+                            <input type="text" value="" min="1" max="100"   name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -320,6 +320,12 @@
                 <span class="text-title font-medium">Phương thức thanh toán<strong
                         class="text-[#FF4D4F]">*</strong></span>
                     <div class="flex justify-start items-center gap-4 flex-wrap">
+                        <div>
+                            <input type="checkbox" name="prepay[]"
+                                   value=""
+                                   class="accent-primary w-4 h-4">
+                            <span class="text-secondary">Thanh toán trước</span>
+                        </div>
                         <div>
                             <input type="checkbox" name="prepay[]"
                                    {{isset(old('prepay')[0]) && old('prepay')[0] == 1 ? 'checked' : ''}} value="1"

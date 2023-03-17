@@ -68,6 +68,7 @@ class FinanceController extends Controller
             }
             $wallet = Wallet::select('wallets.id', 'account_number', 'banks.name as bank_name', 'wallets.name')
                 ->join('banks', 'wallets.bank_id', '=', 'banks.id')
+                ->where('type',2)
                 ->where('user_id', $vshop_id)->first();
             return response()->json([
                 'success' => false,
@@ -183,6 +184,7 @@ class FinanceController extends Controller
 
     public function storeWallet(Request $request)
     {
+//        return 1;
         try {
             $validator = Validator::make($request->all(), [
                 'pdone_id' => 'required|max:255',
@@ -220,7 +222,8 @@ class FinanceController extends Controller
                 'account_number' => $request->account_number,
                 'bank_id' => $request->bank_id,
                 'user_id' => $vshop_id,
-                'name' => $request->name
+                'name' => $request->name,
+                'type'=>2
             ]);
             return response()->json([
                 'success' => true,
