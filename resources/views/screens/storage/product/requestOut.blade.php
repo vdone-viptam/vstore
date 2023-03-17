@@ -186,7 +186,7 @@
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                đã xuất kho
+                                                hủy
                                             </div>
                                         @elseif($value->export_status == 4)
                                             <div
@@ -222,7 +222,7 @@
                                                     xuất kho
                                                 </button>
                                             </a>
-                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
+                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>3,'id' => $value->id])}}">
                                                 <button type="button"
                                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                                     hủy

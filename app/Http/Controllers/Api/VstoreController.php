@@ -52,6 +52,7 @@ class VstoreController extends Controller
         if ($request->branch==2) {
             $user = User::where('role_id', 3)->where('account_code', '!=', null)
                 ->where('branch', $request->branch)
+                ->where('status','!=',0)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
             if ($request->account_code) {
                 $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
