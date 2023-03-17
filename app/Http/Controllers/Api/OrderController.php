@@ -8,6 +8,7 @@ use App\Models\CartV2;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -367,6 +368,7 @@ class OrderController extends Controller
             'method_payment' => $methodPayment
         ]);
     }
+
     /**
      * danh sách đơn hàng theo user
      *
@@ -423,6 +425,7 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
     /**
      * chi tiết đơn hàng theo id
      *
@@ -460,6 +463,73 @@ class OrderController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => $order
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
+     * danh sách đơn hàng theo vshop
+     *
+     * API này sẽ trả danh sách đơn hàng theo vshop
+     *
+     * @param pdone_id $pdone_id pdone_id vshop
+     *
+     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 hoàn thành
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function orderOfUserByVshop($pdone_id)
+    {
+        try {
+            $status = $request->status ?? 10;
+            $limit = $request->limit ?? 5;
+            $vshop_id = Vshop::select('id')->where('pdone_id', $pdone_id)->first();
+
+            if (!$vshop_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy V-shop'
+                ], 404);
+            }
+            $orders = OrderItem::select('product_id',
+                'discount_vshop',
+                'price',
+                'discount_ncc',
+                'discount_vstore',
+                'quantity', 'order_id', 'product_id');
+
+            $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
+                ->where('vshop_id', $vshop_id->id);
+            if ($status !== 10) {
+                $orders = $orders->where('export_status', $status);
+            }
+            $orders = $orders->paginate($limit);
+
+            foreach ($orders as $order) {
+                $product = $order->product()->select('name', 'images')->first();
+                $order->productInfo = null;
+                $order->productInfo = [
+                    'image' => asset(json_decode($product->images)[0]),
+                    'name' => $product->name,
+                    'quantity' => $order->quantity,
+                    'price' => $order->price
+                ];
+                unset($order->quantity);
+                unset($order->price);
+                $parentOrder = $order->order()->select('no', 'order_number')->first();
+                $order->no = $parentOrder->no;
+                $order->order_number = $parentOrder->order_number;
+                $order->total_product = 1;
+                $order->total = $order->productInfo['price'] * $order->productInfo['quantity'];
+                unset($order->order);
+                unset($order->product);
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $orders
             ]);
         } catch (\Exception $e) {
             return response()->json([

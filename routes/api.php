@@ -90,6 +90,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::get('/user/get-list/{id}', [\App\Http\Controllers\Api\OrderController::class, 'getOrdersByUser']);
         Route::get('/user/detail/{order_id}', [\App\Http\Controllers\Api\OrderController::class, 'getDetailOrderByUser']);
+        Route::get('/vshop/get-list/{pdone_id}', [\App\Http\Controllers\Api\OrderController::class, 'orderOfUserByVshop']);
 
     });
 
