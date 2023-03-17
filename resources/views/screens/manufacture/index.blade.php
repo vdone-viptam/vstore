@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
-    <meta property="og:title" content="V-Ncc" />
-    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:title" content="NCC" />
+    <meta property="og:title" content="NCC | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content="" />
     <meta property="og:url" content="{{asset('')}}" />
