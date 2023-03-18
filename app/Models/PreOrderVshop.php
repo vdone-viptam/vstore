@@ -10,7 +10,6 @@ class PreOrderVshop extends Model
 {
     use HasFactory;
 
-
     protected $table = "pre_order_vshop";
     protected $fillable = [
         "user_id",

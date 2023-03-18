@@ -53,6 +53,7 @@ return [
     'statusPreOrder' => [
         'done' => 1,
         'user_confirm' => 2,
+        'new_oder' => 3, // người dụng tạo chưa confirm
         'shipping' => 4,
         'cancel' => 5
     ],
