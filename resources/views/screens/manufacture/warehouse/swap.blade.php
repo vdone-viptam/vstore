@@ -128,15 +128,15 @@
                                 </td>
                                 <td>
                                     @if($product->status == 1)
-                                        Đã nhập
+                                        <span class="text-green-600">Đã nhập</span>
                                     @elseif($product->status == 2)
-                                        Đã xuất
+                                        <span class="text-green-600">Đã xuất</span>
                                     @elseif($product->status == 3)
-                                        Chờ duyệt
+                                        <span class="text-black"> Chờ duyệt</span>
                                     @elseif($product->status == 5 )
-                                        Từ chối nhập
+                                        <span class="text-red-600">Từ chối nhập</span>
                                     @elseif($product->status == 0 )
-                                        Chờ nhập
+                                        <span class="text-yellow-400">Chờ nhập</span>
                                     @endif
                                 </td>
                                 <td>
@@ -160,7 +160,7 @@
                 </table>
             </div>
             <div class="flex justify-end items-center gap-4 flex-wrap">
-
+                <span class="text-sm text-title">Tổng: <strong class="font-bold">{{$products->total()}}</strong></span>
                 {{$products->withQueryString()->links()}}
                 <div class="flex justify-start items-center gap-2 flex-wrap">
                     <select name=""
