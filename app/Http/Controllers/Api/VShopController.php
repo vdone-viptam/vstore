@@ -166,7 +166,7 @@ class  VShopController extends Controller
         $order = PreOrderVshop::where('id', $orderId)
             ->where('user_id', $user_id)
             ->where('payment_deposit_money_status', 2)
-            ->where('status', 2)
+            ->where('status', config('constants.statusPreOrder.new_oder'))
             ->first();
 
         if(!$order) {
@@ -176,7 +176,7 @@ class  VShopController extends Controller
             ]);
         }
 
-        $order->status = 1;
+        $order->status = config('constants.statusPreOrder.user_confirm');;
         $order->save();
 
         $order->prepayment_rate = $order->deposit_money;
@@ -298,11 +298,13 @@ class  VShopController extends Controller
             ]);
         }
         $nccId = $request->ncc_id;
-        $ncc = User::where('id', $nccId)->where('status', 1)->where('role_id', 2)->first();
+        $ncc = User::where('id', $nccId)
+            ->where('status', 1)
+            ->where('role_id', 2)->first();
         if(!$ncc) {
             return response()->json([
                 "status_code" => 404,
-                "message" => "Hoá đơn không tồn tại"
+                "message" => "Nhà cung cấp không tồn tại"
             ]);
         }
 
@@ -344,7 +346,7 @@ class  VShopController extends Controller
         $order->province_id = $provinceId;
         $order->ward_id = $wareId;
         $order->product_id = $productId;
-        $order->status = 2;
+        $order->status = config('constants.statusPreOrder.new_oder');
         $order->payment_status = 2;
         $order->payment_deposit_money_status = 2;
         $order->quantity = $quantity;
