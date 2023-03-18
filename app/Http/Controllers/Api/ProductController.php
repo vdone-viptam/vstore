@@ -346,7 +346,10 @@ class ProductController extends Controller
     function productById(Request $request, $id)
     {
 //        return $id;
-        $product = Product::where('id', $id)->select('publish_id', 'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore', 'type_pay', 'video', 'description', 'user_id', 'category_id', 'amount_product_sold')->first();
+        $product = Product::where('id', $id)->select('publish_id',
+            'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore',
+            'type_pay', 'video', 'description as content', 'user_id', 'category_id',
+            'amount_product_sold','short_content')->first();
 
         if (!$product) {
             return response()->json([
