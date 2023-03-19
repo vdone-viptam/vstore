@@ -556,10 +556,24 @@ class ProductController extends Controller
             'data' => $products
         ], 200);
     }
-
+    /**
+     * sản phẩm Vshop tiếp thị và nhâp sẵn
+     *
+     * API lấy danh sách sản phẩm theo vshop
+     *
+     * @param Request $request
+     * @param  $pdone_id  mã ID user V-Shop
+     * @urlParam orderBy  id Mới nhất | amount_product_sold Bán chạy | price Giá
+     * @urlParam status 1 tiếp thị | 2 nhập sẵn
+     * urlParam type  asc|desc Mặc định asc
+     *
+     * vshop_discount mã giảm giá == null thì được tạo != null thì chuyển trạng thái sang sửa
+     * @return \Illuminate\Http\JsonResponse
+     */
     public
-    function getProductAvailableByVshop($pdone_id)
+    function getProductAvailableByVshop(Request $request, $pdone_id)
     {
+
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'asc';
         $data = null;
@@ -567,7 +581,7 @@ class ProductController extends Controller
             ->select('name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'amount_product_sold', 'vshop_products.amount as in_stock', 'view')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
-            ->where('vshop_products.status', 2)
+            ->where('vshop_products.status', $request->staus)
             ->where('pdone_id', $pdone_id);
         $total_product = $products->count();
         $products = $products->paginate($limit);
