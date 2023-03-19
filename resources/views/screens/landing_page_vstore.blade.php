@@ -60,7 +60,14 @@
     <div class="max-w-[1320px] lg:flex justify-between items-center mx-auto w-full px-[15px] xl:px-0 hidden">
         <div class="max-w-[118px]">
             <div class="w-full h-[118px]">
-                <a href="#"><img src="{{asset('landingpage/images/HPlogo.png')}}" class="w-full " alt=""></a>
+                @if($user->avatar =='')
+                    <a href="#"><img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain " alt=""></a>
+                @else
+                    <a href="#"><img src="{{asset('/image/users/'.$user->avatar)}}" class="w-full " alt=""></a>
+                @endif
+
+
+
             </div>
         </div>
         <ul class="nav-menu lg:flex items-center gap-10 ">
@@ -96,7 +103,14 @@
 </header>
 <div class="max-w-[1320px] mx-auto w-full flex flex-col gap-5 px-[15px] xl:px-0">
     <div class="md:max-w-[1320px] w-full h-auto md:h-[320px] md:rounded-[20px] relative">
-        <img src="{{asset('landingpage/images/bg.png')}}" class="w-full rounded-[20px] object-contain md:object-cover" alt="">
+
+        @if($user->banner =='')
+            <img src="{{asset('landingpage/images/bg.png')}}" class="w-full rounded-[20px] object-contain md:object-cover" alt="">
+        @else
+            <img src="{{asset('image/users/'.$user->banner)}}" class="w-full rounded-[20px] object-contain md:object-cover" alt="">
+        @endif
+
+
         <div class="box p-4 xl:p-8 absolute w-full hidden md:block center-ab max-w-[640px] lg:max-w-[960px] xl:max-w-[1124px]">
             <div class="flex justfy-center md:justify-between items-center w-full flex-wrap lg:flex-nowrap gap-6">
                 <div class="flex flex-col justify-center md:flex-row md:justify-start items-center gap-2 lg:gap-6 w-full">
@@ -335,9 +349,16 @@
                     <ul class="slider-cate tab-ncc  gap-3">
                         @foreach($ncc as $nc)
                             <li>
-                                <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+                                <a target="_blank" href="{{route('intro',['slug'=>$nc->slug])}}" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+
+
                                     <div class="max-w-[120px]">
-                                        <img src="{{asset('image/users/'. $nc->avatar)}}" class="w-full object-contain" alt="">
+                                        @if($nc->avatar =='')
+                                            <img src="{{asset('home/img/NCC.png')}}" class="w-full object-contain" alt="">
+                                        @else
+                                            <img src="{{asset('image/users/'. $nc->avatar)}}" class="w-full object-contain" alt="">
+                                        @endif
+
                                     </div>
                                     <span class="text-[#2C2C37] text-center">{{ mb_strimwidth($nc->name,0,15,'...')}}</span>
                                 </a>

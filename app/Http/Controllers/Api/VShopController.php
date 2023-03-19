@@ -790,6 +790,7 @@ class  VShopController extends Controller
             'vshop_name' => 'required|max:255',
             'description' => 'required|max:255',
 
+
         ], []);
         if ($validator->fails()) {
             return response()->json([
@@ -804,6 +805,9 @@ class  VShopController extends Controller
         $vshop->avatar = $request->avatar;
         $vshop->vshop_name = $request->vshop_name;
         $vshop->description = $request->description;
+        if ($request->nick_name){
+            $vshop->nick_name = $request->nick_name;
+        }
         $vshop->save();
         return response()->json([
             'status_code' => 201,

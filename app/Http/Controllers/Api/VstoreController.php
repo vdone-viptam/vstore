@@ -153,10 +153,15 @@ class VstoreController extends Controller
             }else{
                 $user->avatar= asset('image/users/'.$user->avatar);
             }
-            $user->total_product = $user->products()->where('status', 2)->count();
+//            $user->total_product = $user->products()->where('status', 2)->count();
+            $user->total_product =Product::where('vstore_id',$user->id)
+                ->where('status', 2)->count()
+            ;
+
             $cate = Category::select('categories.name')
                 ->join('products', 'categories.id', '=', 'products.category_id')
                 ->where('vstore_id', $id)
+                ->where('products.status', 2)
                 ->groupBy('categories.name')
                 ->get();
             $data = [];

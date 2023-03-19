@@ -219,7 +219,8 @@
                         </select>
                     </div>
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
-                        <span class="text-title font-medium">Tài liệu sản phẩm</span>
+                        <span class="text-title font-medium">Tài liệu sản phẩm <strong
+                                class="text-[#FF4D4F]">*</strong></span>
                         {{--                        <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start"></div>--}}
                         <input type="file" id="images[]" name="images[]" multiple>
                         @error('images')

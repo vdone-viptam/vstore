@@ -50,7 +50,7 @@ class ProductController extends Controller
 
             $limit = $request->limit ?? 10;
             $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
-            $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id','type_pay'];
+            $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id','type_pay','discount_vShop as discount_vstore'];
             $request->option = $request->option == 'asc' ? 'asc' : 'desc';
 
             if ($request->pdone_id) {
@@ -349,7 +349,7 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->select('publish_id',
             'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore',
             'type_pay', 'video', 'description as content', 'user_id', 'category_id',
-            'amount_product_sold','short_content')->first();
+            'amount_product_sold','short_content','vat')->first();
 
         if (!$product) {
             return response()->json([
@@ -382,14 +382,18 @@ class ProductController extends Controller
                 $product->is_affiliate = 0;
             }
         }
-
-        $product->discount = 10;
-        $product->price_discount = $product->price - ($product->price / 100 * 10);
+        $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $product->id)
+            ->where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->first()->sum;
+        $product->discount = $discount ?? 0;
+//        $product->discount = 10;
+        $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
         $list_vshop = VshopProduct::where('product_id', $id)->get();
 //        $list_vshop = Vshop::
         $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
-            ->select('vshop.id','vshop.pdone_id', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+            ->select('vshop.id','vshop.pdone_id','vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 //        dd($list_vshop);
 //        return $list_vshop;
@@ -400,8 +404,8 @@ class ProductController extends Controller
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
                 ->first();
-//            $list->vshop_discount = $discount->discount ?? 0;
-            $list->vshop_discount = rand(10,20);
+            $list->vshop_discount = $discount->discount ?? 0;
+//            $list->vshop_discount = rand(10,20);
 //            "id": 1,
 //            "pdone_id": "11212",
 //            "product_id": 1,
@@ -513,7 +517,7 @@ class ProductController extends Controller
         $cate = [];
 
         $products = DB::table('vshop')
-            ->select('products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'categories.name as cate_name')
+            ->select('products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop as discount_vstore', 'categories.name as cate_name')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
