@@ -11,6 +11,7 @@ use App\Models\PreOrderVshop;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -182,6 +183,13 @@ class  VShopController extends Controller
         $order->prepayment_rate = $order->deposit_money;
         $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
         $order->deposit_payable = $order->total - $order->total*($order->deposit_money/100);
+
+        $newVshopProduct = new VshopProduct();
+        $newVshopProduct->vshop_id = $user_id;
+        $newVshopProduct->product_id = $order->product_id;
+        $newVshopProduct->amount = $order->quantity;
+        $newVshopProduct->status = 2;
+        $newVshopProduct->save();
 
         return response()->json([
             "status_code" => 200,
