@@ -20,7 +20,10 @@ class ViettelpostController extends Controller
 
 
         $order->order_status = $request->all()['DATA']['ORDER_STATUS'];
-        $order->save();
+        if ($order->order_status == 501){
+            $order->export_status =4;
+        }
+;        $order->save();
 
 //        $billdetail->status = 'abc';
 //        $billdetail->test = 'abc';

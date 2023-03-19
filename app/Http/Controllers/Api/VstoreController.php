@@ -68,7 +68,7 @@ class VstoreController extends Controller
 
         } else {
 
-            $user = User::where('role_id', 3)->where('account_code', '!=', null)->where('branch','!=',2)
+            $user = User::where('role_id', 3)->where('account_code', '!=', null) ->where('status','!=',0)->where('branch','!=',2)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch')
 
             ;

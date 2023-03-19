@@ -91,8 +91,8 @@
             <div class=" flex flex-col justify-start items-start gap-4 p-5 ">
                 <h4 class="font-medium text-[#141414] text-2xl">Thông tin cơ bản</h4>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
-                    <div class="col-span-6 flex flex-col justify-start items-start gap-4">
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <div class="col-span-12 flex flex-row justify-start items-start gap-4">
+                        <div class="col-span-6 flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Chọn V-Store<strong
                                 class="text-[#FF4D4F]">*</strong></span>
 
@@ -133,78 +133,86 @@
                             </div>
 
                         </div>
+                        <div class="col-span-6 flex flex-col justify-start items-start gap-2 w-full">
+                            <div class="flex flex-row justify-start items-start gap-2 w-full ">
+                                <div class="col-span-6 w-full">
+                                    <p class="text-title font-medium mb-2">VAT (%)<strong
+                                            class="text-[#FF4D4F]">*</strong>
+                                    </p>
 
-                        <div class="flex flex-col justify-start items-start gap-2 w-full">
-                        <span class="text-title font-medium">Chọn sản phẩm xét duyệt <strong
-                                class="text-[#FF4D4F]">*</strong></span>
-                            <select name="product_id" id="product_id"
-                                    class="th choose-sp text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Chọn sản phẩm cần xét duyệt</option>
-                                @foreach($products as $product)
-                                    <option
-                                        value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('product_id')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div>
+                                    <input type="number" min="0" max="99" name="vat"
+                                           value="{{old('vat')}}"
+                                           placeholder="Nhập VAT (%)"
+                                           class="w-full outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <span class="total"></span>
 
 
-                    </div>
-                    <div class="col-span-6 flex flex-col justify-start items-start gap-4 w-full">
-                        <div class="flex flex-col justify-start items-start gap-2 w-full ">
-                        <span class="text-title font-medium">VAT (%)<strong class="text-[#FF4D4F]">*</strong>
-                        </span>
-                            <span>
-                                <input type="number" min="0" max="99" name="vat"
-                                       value="{{old('vat')}}"
-                                       placeholder="Nhập VAT (%)"
-                                       class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <span class="total"></span>
-                            </span>
+                                    @error('vat')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-span-6 w-full">
+                                    <p class="text-title font-medium mb-2">Mức chiết khấu (%)<strong
+                                            class="text-[#FF4D4F]">*</strong>
+                                    </p>
 
-                            @error('vat')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                            <span class="text-title font-medium">Mức chiết khấu (%)<strong
-                                    class="text-[#FF4D4F]">*</strong>
-                        </span>
-                            <span>
-                                <input type="number" name="discount" id="discount" min="0" max="99"
-                                       value="{{old('discount')}}"
-                                       placeholder="Nhập mức chiết khấu (%)"
-                                       class=" outline-none w-[250px] py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <span class="total"></span>
-                            </span>
+                                    <input type="number" name="discount" id="discount" min="0" max="99"
+                                           value="{{old('discount')}}"
+                                           placeholder="Nhập mức chiết khấu (%)"
+                                           class="w-full outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <span class="total"></span>
 
-                            @error('discount')
-                            <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div>
 
-                        <div class="flex md:flex-row flex-col items-center gap-8 w-full">
-                            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                                <span class="text-title font-medium">Giá (đồng)</span>
-                                <input type="text" value="0 đ" name="price" id="price" readonly
-                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm" {{old('price')}}>
-                                {{--                            @error('price')--}}
-                                {{--                            <p class="text-red-600">{{$message}}</p>--}}
-                                {{--                            @enderror--}}
+                                    @error('discount')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                                <span
-                                    class="text-title font-medium whitespace-nowrap">Mức chiết khấu (Thành tiền)</span>
-                                <input type="text" value="0 đ" name="money" id="money" readonly
-                                       class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
-                                {{--                            @error('price')--}}
-                                {{--                            <p class="text-red-600">{{$message}}</p>--}}
-                                {{--                            @enderror--}}
-                            </div>
+
+
                         </div>
 
                     </div>
 
+
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+                    <div class="flex flex-col justify-start items-start gap-2 w-full">
+                                                        <span
+                                                            class="text-title font-medium">Chọn sản phẩm xét duyệt <strong
+                                                                class="text-[#FF4D4F]">*</strong></span>
+                        <select name="product_id" id="product_id"
+                                class="th choose-sp text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <option value="">Chọn sản phẩm cần xét duyệt</option>
+                            @foreach($products as $product)
+                                <option
+                                    value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
+                            @endforeach
+                        </select>
+                        @error('product_id')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+
+                    <div class=" flex flex-row justify-start items-start gap-2 w-full">
+                        <div class="col-span-6 justify-start items-start gap-2 w-full">
+                            <p class="text-title font-medium mb-2">Giá (đồng)</p>
+                            <input type="text" value="0 đ" name="price" id="price" readonly
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]  rounded-sm" {{old('price')}}>
+                            {{--                            @error('price')--}}
+                            {{--                            <p class="text-red-600">{{$message}}</p>--}}
+                            {{--                            @enderror--}}
+                        </div>
+                        <div class="col-span-6 justify-start items-start gap-2 w-full">
+                                <p
+                                    class="text-title font-medium whitespace-nowrap mb-2">Mức chiết khấu (Thành tiền)</p>
+                            <input type="text" value="0 đ" name="money" id="money" readonly
+                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
+                            {{--                            @error('price')--}}
+                            {{--                            <p class="text-red-600">{{$message}}</p>--}}
+                            {{--                            @enderror--}}
+                        </div>
+                    </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -277,7 +285,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
-                            <input type="text" value="" min="1" max="100"  name="deposit_money[]" id=""
+                            <input type="text" value="" min="1" max="100" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -294,14 +302,14 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="number" value="" min="1" max="99"  name="moneyv[]" id=""
+                            <input type="number" value="" min="1" max="99" name="moneyv[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
-                            <input type="text" value="" min="1" max="100"   name="deposit_money[]" id=""
+                            <input type="text" value="" min="1" max="100" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
 
                         </div>
@@ -333,12 +341,12 @@
                                    class="accent-primary w-4 h-4">
                             <span class="text-secondary">Được thanh toán sau khi nhận hàng</span>
                         </div>
-{{--                        <div>--}}
-{{--                            <input type="checkbox" name="prepay[]"--}}
-{{--                                   {{isset(old('prepay')[1]) && old('prepay')[1] == 2 ? 'checked' : ''}} value="2"--}}
-{{--                                   class="accent-primary w-4 h-4">--}}
-{{--                            <span class="text-secondary">Thanh toán sau khi nhận hàng</span>--}}
-{{--                        </div>--}}
+                        {{--                        <div>--}}
+                        {{--                            <input type="checkbox" name="prepay[]"--}}
+                        {{--                                   {{isset(old('prepay')[1]) && old('prepay')[1] == 2 ? 'checked' : ''}} value="2"--}}
+                        {{--                                   class="accent-primary w-4 h-4">--}}
+                        {{--                            <span class="text-secondary">Thanh toán sau khi nhận hàng</span>--}}
+                        {{--                        </div>--}}
 
                     </div>
                 </div>
@@ -527,6 +535,7 @@ Thêm địa chỉ mới</a>
                     });
                 })
             }
+
             abc();
         </script>
     @endif

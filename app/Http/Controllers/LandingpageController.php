@@ -113,7 +113,7 @@ class LandingpageController extends Controller
             $arrCategory = Category::whereIn('id', $arrCategory)->get();
             $count_products = Product::where('status',2)->where('user_id',$user->id)->count();
         } else {
-            return redirect(route('intro_vstore'));
+            return redirect(route('landingpagevstore'));
         }
         $products = Product::where('status',2)->where('vstore_id',$user->id)->get();
         foreach ($products as $pro){
