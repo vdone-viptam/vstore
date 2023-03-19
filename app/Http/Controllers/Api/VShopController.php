@@ -185,6 +185,13 @@ class  VShopController extends Controller
         $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
         $order->deposit_payable = $order->total - $order->total*($order->deposit_money/100);
 
+        $newVshopProduct = new VshopProduct();
+        $newVshopProduct->vshop_id = $user_id;
+        $newVshopProduct->product_id = $order->product_id;
+        $newVshopProduct->amount = $order->quantity;
+        $newVshopProduct->status = 2;
+        $newVshopProduct->save();
+
         return response()->json([
             "status_code" => 200,
             "order" => $order
