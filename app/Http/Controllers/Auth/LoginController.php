@@ -276,15 +276,6 @@ class LoginController extends Controller
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
             $user->save();
-
-            Mail::send('email.register', ['role_id' => $role_id], function ($message) use ($user) {
-                $message->to($user->email);
-                $message->subject('Gửi đơn đăng ký thành công');
-            });
-            Mail::send('email.ke_toan', ['user' => $user], function ($message) use ($user) {
-                $message->to('ketoan@vdone.vn');
-                $message->subject('Hệ thống vừa có đơn đăng ký mơi');
-            });
             DB::commit();
 
             if ($role_id == 2) {
