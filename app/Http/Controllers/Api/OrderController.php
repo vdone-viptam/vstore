@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
+
 /**
  * @group Oder
  *
  * Danh sách api liên quan tới order bill
  */
-
 class OrderController extends Controller
 {
     public function index(Request $request): \Illuminate\Http\JsonResponse
@@ -390,13 +390,15 @@ class OrderController extends Controller
         try {
             $status = $request->status ?? 10;
             $limit = $request->limit ?? 5;
-            $orders = Order::select('no', 'id', 'total', 'export_status','order_number');
+            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
             }
 
-            $orders = $orders->where('user_id', $id)->paginate($limit);
+            $orders = $orders
+                ->where('wait_for_confirmation', '!=', 2)
+                ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
 
@@ -444,8 +446,10 @@ class OrderController extends Controller
     public function getDetailOrderByUser($order_id)
     {
         try {
-            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status','order_number')
-                ->where('id', $order_id)->first();
+            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number')
+                ->where('id', $order_id)
+                ->where('wait_for_confirmation', '!=', 2)
+                ->first();
             if (!$order) {
                 return response()->json([
                     'success' => false,
@@ -477,6 +481,7 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
     /**
      * danh sách đơn hàng theo vshop
      *
@@ -508,6 +513,7 @@ class OrderController extends Controller
                 'quantity', 'order_id', 'product_id');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
+                ->join('wait_for_confirmation', '!=', 2)
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
