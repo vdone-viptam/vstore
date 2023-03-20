@@ -86,7 +86,7 @@ class OrderController extends Controller
         $address = $request->address;
 
         $order = new Order();
-        $order->pay = 1;
+        $order->pay = 2;
         $order->user_id = $userId;
         $order->status = config('constants.orderStatus.wait_for_confirmation');
         $latestOrder = Order::orderBy('created_at', 'DESC')->first();
@@ -110,6 +110,7 @@ class OrderController extends Controller
         $totalVat = 0;
 
         if ($districtId && $provinceId && $wardId && $address) {
+            $order->pay = 1;
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;

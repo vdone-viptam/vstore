@@ -173,7 +173,6 @@ class PaymentMethod9PayController extends Controller
         }
     }
 
-
     function paymentPreOrderReturn(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -399,9 +398,12 @@ class PaymentMethod9PayController extends Controller
 
             $cart = CartV2::where('user_id', $order->user_id)
                 ->first();
-            CartItemV2::where('cart_id', $cart->id)
-                ->where('product_id', $orderItems->product_id)
-                ->delete();
+
+            if($cart) {
+                CartItemV2::where('cart_id', $cart->id)
+                    ->where('product_id', $orderItems->product_id)
+                    ->delete();
+            }
 
             try {
                 $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
