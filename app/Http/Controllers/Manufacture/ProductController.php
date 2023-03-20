@@ -271,7 +271,7 @@ class ProductController extends Controller
                 return view('screens.manufacture.product.detail', $this->v);
             }
         } catch (\Exception $e) {
-            return redirect()->back();
+            return $e->getMessage();
 //            dd($e->getMessage());
         }
     }
