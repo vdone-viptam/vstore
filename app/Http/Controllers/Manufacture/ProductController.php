@@ -264,7 +264,7 @@ class ProductController extends Controller
                     ->join('users', 'requests.vstore_id', '=', 'users.id')
                     ->selectRaw('requests.code,products.id,requests.id as re_id,price,
                     requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
-                    users.name as user_name,vat')
+                    users.name as user_name,products.vat')
                     ->where('requests.id', $request->id)
                     ->first();
                 $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id =" . $this->v['request']->id))[0]->amount;
