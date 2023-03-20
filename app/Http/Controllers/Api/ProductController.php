@@ -89,6 +89,7 @@ class ProductController extends Controller
             foreach ($products as $pro) {
                 $pro->images = asset(json_decode($pro->images)[0]);
                 $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
+                    ->whereIn('type',[1,2])
                     ->where('start_date', '<=', Carbon::now())
                     ->where('end_date', '>=', Carbon::now())
                     ->first()->sum;
