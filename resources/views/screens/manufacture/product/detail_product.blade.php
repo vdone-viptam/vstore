@@ -26,7 +26,7 @@
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Giá bán:</span>
-                    <span class="text-title ">{{$product->price}}</span>
+                    <span class="text-title ">{{number_format($product->price,0,'.','.')}} đ</span>
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Thương hiệu:</span>

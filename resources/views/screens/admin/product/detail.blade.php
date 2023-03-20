@@ -31,7 +31,11 @@
                     </div>
                     <div class="flex items-center gap-4 w-full">
                         <span class="text-title font-medium w-[200px]">Giá bán:</span>
-                        <span class="text-title ">{{$request->price}}</span>
+                        <span class="text-title ">{{number_format($request->price,0,'.','.')}}</span>
+                    </div>
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-title font-medium w-[200px]">Vat:</span>
+                        <span class="text-title ">{{$request->vate}} %</span>
                     </div>
                     <div class="flex items-center gap-4 w-full">
                         <span class="text-title font-medium w-[200px]">Chiết khấu cho V-Store:</span>
