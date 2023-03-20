@@ -387,6 +387,7 @@ class ProductController extends Controller
         $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $product->id)
             ->where('start_date', '<=', Carbon::now())
             ->where('end_date', '>=', Carbon::now())
+            ->whereIn('type', [1, 2])
             ->first()->sum;
         $product->discount = $discount ?? 0;
 //        $product->discount = 10;
