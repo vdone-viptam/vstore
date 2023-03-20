@@ -29,6 +29,10 @@
                     <span class="text-title ">{{number_format($product->price,0,'.','.')}} đ</span>
                 </div>
                 <div class="flex items-start gap-4 w-full">
+                    <span class="text-title font-medium w-[150px]">Vat:</span>
+                    <span class="text-title ">{{$product->vat}} %</span>
+                </div>
+                <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Thương hiệu:</span>
                     <span class="text-title ">{{$product->brand}}</span>
                 </div>
