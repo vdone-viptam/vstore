@@ -1,22 +1,40 @@
-{{--<h4>{{route('reset_password',['token'=>$token])}}</h4>--}}
-
-{{--<span>Chúc bạn 1 ngày tốt lành</span> -->--}}
-
-<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-    <div style="margin:50px auto;width:70%;padding:20px 0">
-        <div style="border-bottom:1px solid #eee">
-            <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Chúc mừng bạn</a>
-        </div>
-        <p style="font-size:1.5em">Xin chào,</p>
-        <p style="font-size:1.2em">Chúng tôi nhận được yêu cầu lấy lại mật khẩu của bạn vui lòng truy cập vào link này
-            để tiếp tục<br>{{route('reset_password',['token'=>$token,'role_id' => $role_id])}}</p>
-        <p style="font-size:1em;">Xin cảm ơn,<br/>V-Store admin</p>
-        <hr style="border:none;border-top:1px solid #eee"/>
-        <!-- <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-          <p>Your Brand Inc</p>
-          <p>1600 Amphitheatre Parkway</p>
-          <p>California</p>
-        </div> -->
-    </div>
+<!DOCTYPE html>
+<html>
+<title></title>
+<head>
+</head>
+<body>
+<div style="text-align:center;">
+    @if($role_id == 2)
+        <img src="{{asset('home/img/NCC.png')}}" style="height:60px">
+    @elseif($role_id == 3)
+        <img src="{{asset('home/img/Logo.png')}}" style="height:60px">
+    @else
+        <img src="{{asset('home/img/vdone.png')}}" style="height:60px">
+    @endif
 </div>
+<p>
+    Chào mừng quý khách đến với hệ thống Thương mại điện tử.
+</p>
+<p>
+    Để bắt đầu quá trình đặt lại mật khẩu cho Tài khoản @if($role_id == 1)
+        Admin
+    @elseif($role_id==2)
+        Nhà cung cấp
+    @elseif($role_id ==3)
+        V-Store
+    @else
+        KHO
+    @endif của bạn xin mời bạn Nhấn <a
+        href="{{route('reset_password',['token'=>$token,'role_id' => $role_id])}}" style="text-decoration: underline">vào
+        đây</a> và đợi vài phút. Hệ thống sẽ chuyển đến trang đặt lại mật khẩu.
+</p>
+<p>
+    Rất hân hạnh được phục vụ Quý khách!
+</p>
+<p>
+    Trân trọng cảm ơn!
+</p>
+</body>
+</html>
 

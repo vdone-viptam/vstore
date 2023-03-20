@@ -2,6 +2,11 @@
 <html>
 <head>
 </head>
+<style>
+    p {
+        font-size: 17px;
+    }
+</style>
 <body>
 <div style="text-align:center;margin:15px">
     <img src="{{asset('home/img/Logo.png')}}" style="height:60px">

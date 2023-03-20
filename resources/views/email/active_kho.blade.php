@@ -3,6 +3,11 @@
 <title></title>
 <head>
 </head>
+<style>
+    p {
+        font-size: 17px;
+    }
+</style>
 <body>
 <div style="text-align:center;margin:15px">
     <img src="{{asset('home/img/vdone.png')}}" style="height:60px"></div>

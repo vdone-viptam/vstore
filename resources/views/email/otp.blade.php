@@ -3,6 +3,11 @@
 <title></title>
 <head>
 </head>
+<style>
+    p {
+        font-size: 17px;
+    }
+</style>
 <body>
 <div style="text-align:center;">
     @if($role_id == 2)
