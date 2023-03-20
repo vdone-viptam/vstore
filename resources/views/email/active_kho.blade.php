@@ -11,7 +11,7 @@
 
     </p>
     <p>
-        Quý khách vui lòng truy cập vào địa chỉ <a href="{{asset(config('domain.storage'))}}">https://ncc.vdone.vn/</a>
+        Quý khách vui lòng truy cập vào địa chỉ <a href="{{route('screens.storage.index')}}">https://ncc.vdone.vn/</a>
         để thao tác với thông
         tin tài khoản của Quý khách
         hàng như sau:

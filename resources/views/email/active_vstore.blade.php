@@ -11,7 +11,7 @@
     </p>
     <p>
         Quý khách vui lòng truy cập vào địa chỉ <a
-            href="{{asset(config('domain.vstore'))}}">https://vstore.vdone.vn/</a> để thao tác với thông
+            href="{{route('landingpagevstore')}}">https://vstore.vdone.vn/</a> để thao tác với thông
         tin tài khoản của Quý
         khách hàng như sau:
     <p>
