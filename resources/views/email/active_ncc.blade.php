@@ -5,7 +5,7 @@
 </head>
 <body>
 <div style="text-align:center;margin:15px">
-    <img src="https://ncc.vdone.vn/home/img/NCC.png" style="height: 60px;">
+    <img src="{{asset('home/img/NCC.png')}}" style="height: 60px;">
 </div>
 <div>
     <p>Hệ thống Thương mại điện tử V-Store chúc mừng quý khách hàng đã đăng ký thành công tài khoản Nhà cung cấp

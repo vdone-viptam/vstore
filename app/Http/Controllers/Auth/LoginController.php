@@ -341,7 +341,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
                 $login->user_code = $userLogin->id;
                 $login->number = 0;
                 $login->save();
-                Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($userLogin) {
+                Mail::send('email.otp', ['confirm_code' => $login->code, 'role_id' => $role_id], function ($message) use ($userLogin) {
                     $message->to($userLogin->email);
                     $message->subject('Bạn vừa có yêu cầu đăng nhập');
                 });
