@@ -67,7 +67,9 @@ class ProductController extends Controller
         $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name,requests.note,publish_id,products.id as pro_id')
+            ->selectRaw('requests.code,requests.id,price,requests.discount,
+            requests.discount_vshop,requests.status,products.name as product_name,
+            users.name as user_name,requests.note,publish_id,products.id as pro_id,vat')
             ->where('requests.id', $request->id)
             ->first();
         $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = " . $this->v['request']->pro_id))[0]->amount;
@@ -97,8 +99,8 @@ class ProductController extends Controller
                     'discount_vShop' => $currentRequest->discount_vshop,
                     'prepay' => $currentRequest->prepay,
                     'payment_on_delivery' => $currentRequest->payment_on_delivery,
-                    'deposit_money'=>$currentRequest->deposit_money,
-                    'type_pay'=>$currentRequest->type_pay,
+                    'deposit_money' => $currentRequest->deposit_money,
+                    'type_pay' => $currentRequest->type_pay,
                 ]);
                 DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {

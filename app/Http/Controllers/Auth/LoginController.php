@@ -276,15 +276,6 @@ class LoginController extends Controller
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
             $user->save();
-
-            Mail::send('email.register', ['role_id' => $role_id], function ($message) use ($user) {
-                $message->to($user->email);
-                $message->subject('Gửi đơn đăng ký thành công');
-            });
-            Mail::send('email.ke_toan', ['user' => $user], function ($message) use ($user) {
-                $message->to('ketoan@vdone.vn');
-                $message->subject('Hệ thống vừa có đơn đăng ký mơi');
-            });
             DB::commit();
 
             if ($role_id == 2) {
@@ -350,9 +341,9 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
                 $login->user_code = $userLogin->id;
                 $login->number = 0;
                 $login->save();
-                Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($userLogin) {
+                Mail::send('email.otp', ['confirm_code' => $login->code, 'role_id' => $role_id], function ($message) use ($userLogin) {
                     $message->to($userLogin->email);
-                    $message->subject('Bạn vừa có yêu cầu đăng nhập');
+                    $message->subject('Chào mừng quý khách đến với hệ thống Thương mại điện tử.');
                 });
                 Auth::logout();
                 return redirect()->route('otp', ['token1' => $token, 'id' => $userLogin->id]);
@@ -424,7 +415,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
                 ->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now(), 'role_id' => $role_id]);
             Mail::send('email.forgot', ['token' => $token, 'role_id' => $role_id], function ($message) use ($user) {
                 $message->to($user->email);
-                $message->subject('Thông báo đổi mật khẩu');
+                $message->subject('Xác thực quên mật khẩu tài khoản V-Store');
             });
 
             return redirect()->route('form_forgot_password')->with('success', 'Đường link đổi mật khẩu đã được gửi vào mail');

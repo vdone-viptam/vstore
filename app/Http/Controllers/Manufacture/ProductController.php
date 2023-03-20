@@ -253,7 +253,7 @@ class ProductController extends Controller
             if ($request->product) {
 
                 $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description')
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);
@@ -262,14 +262,16 @@ class ProductController extends Controller
                 $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
                     ->join('requests', 'products.id', '=', 'requests.product_id')
                     ->join('users', 'requests.vstore_id', '=', 'users.id')
-                    ->selectRaw('requests.code,products.id,requests.id as re_id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name')
+                    ->selectRaw('requests.code,products.id,requests.id as re_id,price,
+                    requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
+                    users.name as user_name,products.vat')
                     ->where('requests.id', $request->id)
                     ->first();
                 $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id =" . $this->v['request']->id))[0]->amount;
                 return view('screens.manufacture.product.detail', $this->v);
             }
         } catch (\Exception $e) {
-            return redirect()->back();
+            return $e->getMessage();
 //            dd($e->getMessage());
         }
     }
