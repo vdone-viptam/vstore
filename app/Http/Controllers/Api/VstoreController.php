@@ -49,7 +49,7 @@ class VstoreController extends Controller
             ]);
         }
         $limit = $request->limit ?? 10;
-        if ($request->branch==2) {
+        if ($request->branch==2 ) {
             $user = User::where('role_id', 3)->where('account_code', '!=', null)
                 ->where('branch', $request->branch)
                 ->where('status','!=',0)
@@ -66,7 +66,7 @@ class VstoreController extends Controller
 
 
 
-        } else {
+        } elseif ($request->branch==1) {
 
             $user = User::where('role_id', 3)->where('account_code', '!=', null) ->where('status','!=',0)->where('branch','!=',2)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch')
@@ -82,6 +82,21 @@ class VstoreController extends Controller
                 $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
             }
 
+        }
+        else{
+            $user = User::where('role_id', 3)->where('account_code', '!=', null)
+//                ->where('branch', 2)
+                ->where('status','!=',0)
+                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
+            if ($request->account_code) {
+                $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
+            }
+            if ($request->name) {
+                $user = $user->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->company_name) {
+                $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
+            }
         }
 
 //        return $user->get();
