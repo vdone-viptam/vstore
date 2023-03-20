@@ -116,19 +116,19 @@ class UserController extends Controller
                 $warehouses->user_id = $user->id;
                 $warehouses->save();
             }
-            if ($user->role == 2) {
+            if ($user->role_id == 2) {
                 Mail::send('email.active_ncc', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
                     $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản NCC');
                 });
             }
-            if ($user->role == 3) {
+            if ($user->role_id == 3) {
                 Mail::send('email.active_vstore', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
                     $message->subject('Chào mừng quý khách hàng đã đăng ký tài khoản V-Store');
                 });
             }
-            if ($user->role == 4) {
+            if ($user->role_id == 4) {
                 Mail::send('email.active_kho', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
                     $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản KHO');
