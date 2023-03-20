@@ -7,6 +7,7 @@ use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Warehouses;
@@ -79,13 +80,13 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
 
-        $warehouses = Warehouses::where('user_id',Auth::id())->first();
-        $order = Order::join('order_item','order.id','=','order_item.order_id')
-            ->select('order.id','order.export_status','order.no','district_id','province_id','address','order.created_at','order_item.price','order_item.quantity',
-                'order_item.discount_vshop','order_item.discount_ncc','order_item.discount_ncc','order_item.discount_vstore')
+        $warehouses = Warehouses::where('user_id', Auth::id())->first();
+        $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->select('order.id', 'order.export_status', 'order.no', 'district_id', 'province_id', 'address', 'order.created_at', 'order_item.price', 'order_item.quantity',
+                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore')
             ->paginate(10);
-        foreach ($order as $ord){
-            $ord->total = $ord->price - ($ord->price /100 );
+        foreach ($order as $ord) {
+            $ord->total = $ord->price - ($ord->price / 100);
         }
 
         $count = count($order);
@@ -130,12 +131,12 @@ class ProductController extends Controller
 
     public function detail(Request $request)
     {
-        $bill_detail = BillDetail::where('id', $request->id)->first();
+        $order = Order::where('id', $request->id)->first();
 
-        $products = BillProduct::join('products', 'bill_product.product_id', '=', 'products.id')->where('bill_detail_id', $bill_detail->id)
-            ->select('bill_product.code as code', 'bill_product.quantity', 'products.name as name')
+        $products = OrderItem::join('products', 'order_item.product_id', '=', 'products.id')->where('order_id', $order->id)
+            ->select('order_item.id', 'order_item.quantity', 'products.publish_id', 'products.name as name')
             ->get();
-        $total = $bill_detail->total;
+        $total = $order->total;
 
         return response()->json([
             'success' => true,
