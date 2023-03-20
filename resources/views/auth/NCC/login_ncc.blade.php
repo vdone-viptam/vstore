@@ -34,7 +34,7 @@
             <span class="text-title">Quay lại</span>
         </a>
         <div class="w-[162px]">
-            <img style="object-fit: contain;" src="{{asset('home/img/logoncc.png')}}" alt="">
+            <img style="object-fit: contain;" src="{{asset('home/img/NCC.png')}}" alt="">
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 

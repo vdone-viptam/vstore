@@ -411,15 +411,15 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
             $role_id = 1;
-            $message1 = 'Mã xác thực đăng nhập tài khoản Admin';
+            $message1 = 'Xác thực quên mật khẩu tài khoản Admin';
         }
         if ($domain == config('domain.ncc')) {
             $role_id = 2;
-            $message1 = 'Mã xác thực đăng nhập tài khoản Nhà cung cấp';
+            $message1 = 'Xác thực quên mật khẩu tài khoản Nhà cung cấp';
         }
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
-            $message1 = 'Mã xác thực đăng nhập tài khoản V-Store';
+            $message1 = 'Xác thực quên mật khẩu tài khoản V-Store';
         }
         if ($domain == config('domain.storage')) {
             $role_id = 4;
