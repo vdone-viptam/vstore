@@ -395,7 +395,6 @@ class PaymentMethod9PayController extends Controller
             $order->method_payment = $method;
             $order->save();
 
-
             $cart = CartV2::where('user_id', $order->user_id)
                 ->first();
 

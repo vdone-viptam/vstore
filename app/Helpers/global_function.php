@@ -38,7 +38,6 @@ function getDiscountProducts($id, $idVshop) {
     foreach ($discounts as $index => $discount) {
         $type = $discount->type;
         $productId = $discount->id;
-        $price = $discount->price;
         $discountProduct = $discount->discount;
         switch ($type) {
             case config('constants.typeDiscount.ncc') : {
@@ -109,16 +108,26 @@ function getDiscountAndDepositMoney($quantity, $arr) {
 
 function getDiscountProduct($id, $idVshop) {
     $discounts = Discount::where('product_id', $id)
-        ->where('discounts.user_id', $idVshop)
+        ->where('discounts.type', config('constants.discountType.ncc'))
+        ->orWhere('discounts.type', config('constants.discountType.vstore'))
         ->where('discounts.start_date', '<=', Carbon::now())
         ->where('discounts.end_date', '>=', Carbon::now())
         ->join('products', 'products.id', '=', 'discounts.product_id')
         ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
         ->get();
+
+    $discountVShop = Discount::where('product_id', $id)
+        ->where('discounts.user_id', $idVshop)
+        ->where('discounts.type', config('constants.discountType.vshop'))
+        ->where('discounts.start_date', '<=', Carbon::now())
+        ->where('discounts.end_date', '>=', Carbon::now())
+        ->join('products', 'products.id', '=', 'discounts.product_id')
+        ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
+        ->first();
+
     $return = [];
     foreach ($discounts as $index => $discount) {
         $type = $discount->type;
-        $price = $discount->price;
         $discountProduct = $discount->discount;
         switch ($type) {
             case config('constants.typeDiscount.ncc') : {
@@ -139,6 +148,9 @@ function getDiscountProduct($id, $idVshop) {
         }
     }
 
+    if($discountVShop) {
+        $return['discountsFromVShop'] = $discountVShop->discount;
+    }
     return $return;
 }
 

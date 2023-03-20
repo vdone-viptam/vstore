@@ -154,18 +154,6 @@ class CartController extends Controller
                 'message' => "Giỏ hàng trống"
             ], 404);
         }
-        // tính giảm giả
-        foreach ($result as $item) {
-            $arrProductId = array_column($item['products'], 'id');
-            $discounts = getDiscountProducts($arrProductId, $item['vshop']['id']);
-            foreach ($item['products'] as $product) {
-                foreach ($discounts as $key => $discount) {
-                    if ($product['id'] == $key) {
-                        $product->discount = $discount;
-                    }
-                }
-            }
-        }
 
         return response()->json([
             'status_code' => 200,
