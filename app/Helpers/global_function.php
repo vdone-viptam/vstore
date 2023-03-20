@@ -26,7 +26,7 @@ use Illuminate\Support\Carbon;
 //
 //}
 
-function getDiscountProducts($id, $idVshop) {
+function getDiscountProducts($id, $idVshop) { // SAI
     $discounts = Discount::whereIn('product_id', $id)
         ->where('discounts.user_id', $idVshop)
         ->where('discounts.start_date', '<=', Carbon::now())
