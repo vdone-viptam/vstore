@@ -10,7 +10,7 @@
 </style>
 <body>
 <div style="text-align:center;margin:15px">
-    <img src="{{asset('home/img/vdone.png')}}" style="height:60px"></div>
+    <img src="{{asset('home/img/titleK.png')}}" style="height:60px"></div>
 <div>
     <p>V-Store chào mừng quý khách hàng đã đăng ký tài khoản KHO
 

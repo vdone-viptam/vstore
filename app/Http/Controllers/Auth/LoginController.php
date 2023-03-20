@@ -341,9 +341,22 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
                 $login->user_code = $userLogin->id;
                 $login->number = 0;
                 $login->save();
-                Mail::send('email.otp', ['confirm_code' => $login->code, 'role_id' => $role_id], function ($message) use ($userLogin) {
+                $message1 = '';
+                if ($role_id == 1) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản Admin';
+                }
+                if ($role_id == 2) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản Nhà cung cấp';
+                }
+                if ($role_id == 3) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản V-Store';
+                }
+                if ($role_id == 4) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản KHO';
+                }
+                Mail::send('email.otp', ['confirm_code' => $login->code, 'role_id' => $role_id], function ($message) use ($userLogin, $message1) {
                     $message->to($userLogin->email);
-                    $message->subject('Chào mừng quý khách đến với hệ thống Thương mại điện tử.');
+                    $message->subject($message1);
                 });
                 Auth::logout();
                 return redirect()->route('otp', ['token1' => $token, 'id' => $userLogin->id]);
@@ -394,18 +407,23 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }
+        $message1 = '';
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
             $role_id = 1;
+            $message1 = 'Mã xác thực đăng nhập tài khoản Admin';
         }
         if ($domain == config('domain.ncc')) {
             $role_id = 2;
+            $message1 = 'Mã xác thực đăng nhập tài khoản Nhà cung cấp';
         }
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
+            $message1 = 'Mã xác thực đăng nhập tài khoản V-Store';
         }
         if ($domain == config('domain.storage')) {
             $role_id = 4;
+            $message1 = 'Mã xác thực đăng nhập tài khoản KHO';
         }
         $user = User::where('email', $request->email)->where('role_id', $role_id)->where('account_code', '!=', null)->first();
         if ($user) {
@@ -413,9 +431,9 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             $token = Str::random(32);
             DB::table('password_resets')
                 ->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now(), 'role_id' => $role_id]);
-            Mail::send('email.forgot', ['token' => $token, 'role_id' => $role_id], function ($message) use ($user) {
+            Mail::send('email.forgot', ['token' => $token, 'role_id' => $role_id], function ($message) use ($user, $message1) {
                 $message->to($user->email);
-                $message->subject('Xác thực quên mật khẩu tài khoản V-Store');
+                $message->subject($message1);
             });
 
             return redirect()->route('form_forgot_password')->with('success', 'Đường link đổi mật khẩu đã được gửi vào mail');

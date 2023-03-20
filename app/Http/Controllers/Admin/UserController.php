@@ -119,7 +119,7 @@ class UserController extends Controller
             if ($user->role_id == 2) {
                 Mail::send('email.active_ncc', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
-                    $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản NCC');
+                    $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản Nhà cung cấp');
                 });
             }
             if ($user->role_id == 3) {

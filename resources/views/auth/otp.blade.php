@@ -70,7 +70,7 @@
             @elseif($role_id == 2)
                 <a href="{{route('login_ncc')}}"> <img src="{{asset('asset/images/Logoncc.png')}}" alt=""></a>
             @elseif($role_id == 4)
-                <a href="{{route('login_storage')}}"> <img src="{{asset('asset/images/logokho.png')}}" alt=""></a>
+                <a href="{{route('login_storage')}}"> <img src="{{asset('home/img/titleK.png')}}" alt=""></a>
             @elseif($role_id == 1)
                 <a href="{{route('login_admin')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
             @endif
