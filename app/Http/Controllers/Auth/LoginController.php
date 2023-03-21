@@ -423,7 +423,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         }
         if ($domain == config('domain.storage')) {
             $role_id = 4;
-            $message1 = 'Mã xác thực đăng nhập tài khoản KHO';
+            $message1 = 'Xác thực quên mật khẩu tài khoản KHO';
         }
         $user = User::where('email', $request->email)->where('role_id', $role_id)->where('account_code', '!=', null)->first();
         if ($user) {

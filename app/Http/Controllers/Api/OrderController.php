@@ -398,7 +398,8 @@ class OrderController extends Controller
             }
 
             $orders = $orders
-                ->where('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at','desc')
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
@@ -447,7 +448,8 @@ class OrderController extends Controller
         try {
             $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number')
                 ->where('id', $order_id)
-                ->where('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at','desc')
                 ->first();
             if (!$order) {
                 return response()->json([
@@ -512,7 +514,8 @@ class OrderController extends Controller
                 'quantity', 'order_id', 'product_id');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
-                ->join('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at','desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);

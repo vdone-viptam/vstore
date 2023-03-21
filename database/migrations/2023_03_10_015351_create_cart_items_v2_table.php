@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('sku')->nullable();
             $table->decimal('price', 11, 3);
             $table->integer('quantity');
-            $table->integer('discount_ncc');
-            $table->integer('discount_vstore');
-            $table->integer('discount_vshop');
+            $table->double('discount_ncc',20,2);
+            $table->double('discount_vstore',20,2);
+            $table->double('discount_vshop',20,2);
 
             $table->timestamps();
         });

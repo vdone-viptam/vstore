@@ -777,11 +777,14 @@ class  VShopController extends Controller
             ->where('vshop.pdone_id', $vshop->pdone_id)
             ->groupBy('categories.name')
             ->get();
-
+        $data = [];
         foreach ($cate as $c) {
             $data[] = $c->name;
         }
-        $vshop->categories = implode(', ', $data);
+        if (count($data)>0){
+            $vshop->categories = implode(', ', $data);
+        }
+
         return response()->json([
             'status_code' => 201,
             'data' => $vshop
