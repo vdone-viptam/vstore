@@ -41,9 +41,9 @@ class OrderController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $methodPayment = $request->method_payment;
@@ -224,9 +224,9 @@ class OrderController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $order = Order::find($orderId);
         $methodPayment = $request->method_payment ? $request->method_payment : $order->method_payment;
@@ -400,7 +400,6 @@ class OrderController extends Controller
             $orders = $orders->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
-
                 $order->orderItem = $order->orderItem()
                     ->select(
                         'quantity',
@@ -418,7 +417,6 @@ class OrderController extends Controller
                 }
 
                 $order->total_product = count($order->orderItem);
-
 
             }
             return response()->json([

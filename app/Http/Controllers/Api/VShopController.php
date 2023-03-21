@@ -39,9 +39,9 @@ class  VShopController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $preOrder = PreOrderVshop::where('id', $orderID)
@@ -157,9 +157,9 @@ class  VShopController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $user_id = $request->user_id;
@@ -219,9 +219,9 @@ class  VShopController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $method = $request->method_payment;
@@ -312,9 +312,9 @@ class  VShopController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $nccId = $request->ncc_id;
         $ncc = User::where('id', $nccId)
@@ -413,9 +413,9 @@ class  VShopController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
         if (!$vshop) {
@@ -503,9 +503,9 @@ class  VShopController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $discount = DB::table('buy_more_discount')->select('discount')
@@ -556,9 +556,9 @@ class  VShopController extends Controller
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         try {
@@ -645,9 +645,9 @@ class  VShopController extends Controller
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
 
@@ -715,9 +715,9 @@ class  VShopController extends Controller
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ], 400);
+            ], 403);
         }
         try {
             $data = [
@@ -795,9 +795,9 @@ class  VShopController extends Controller
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ],403);
         }
         $vshop = Vshop::where('pdone_id', $id)->first();
         if (!$vshop) {

@@ -37,9 +37,9 @@ class DiscountController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $discount = DB::table('buy_more_discount')->select('discount')

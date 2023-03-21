@@ -37,9 +37,9 @@ class PaymentMethod9PayController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $checksum = $request->checksum;
@@ -126,9 +126,9 @@ class PaymentMethod9PayController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
@@ -180,9 +180,9 @@ class PaymentMethod9PayController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
@@ -249,9 +249,9 @@ class PaymentMethod9PayController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $checksum = $request->checksum;
@@ -317,9 +317,9 @@ class PaymentMethod9PayController extends Controller
         if ($validator->fails()) {
 
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $method = $request->method_payment;
         $user_id = $request->user_id;
