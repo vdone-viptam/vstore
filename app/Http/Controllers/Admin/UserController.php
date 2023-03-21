@@ -39,7 +39,7 @@ class UserController extends Controller
                 ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
                 ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
                 ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code','like','%' . $request->keyword .'%')
+                ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
                 ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
@@ -58,7 +58,7 @@ class UserController extends Controller
                 ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
                 ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
                 ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere( 'account_code','like','%' . $request->keyword .'%')
+                ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
                 ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
@@ -116,11 +116,24 @@ class UserController extends Controller
                 $warehouses->user_id = $user->id;
                 $warehouses->save();
             }
-
-            Mail::send('email.confirm', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
-                $message->to($user->email);
-                $message->subject('Đơn đăng ký của bạn đã được duyệt');
-            });
+            if ($user->role_id == 2) {
+                Mail::send('email.active_ncc', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản Nhà cung cấp');
+                });
+            }
+            if ($user->role_id == 3) {
+                Mail::send('email.active_vstore', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Chào mừng quý khách hàng đã đăng ký tài khoản V-Store');
+                });
+            }
+            if ($user->role_id == 4) {
+                Mail::send('email.active_kho', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản KHO');
+                });
+            }
             DB::commit();
 
             return redirect()->back()->with('success', 'Kích hoạt tài khoản thành công');

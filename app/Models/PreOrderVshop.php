@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use mysql_xdevapi\CollectionModify;
 
 class PreOrderVshop extends Model
 {
@@ -27,4 +28,14 @@ class PreOrderVshop extends Model
         "discount",
         "deposit_money",
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouses::class, 'ware_id');
+    }
 }

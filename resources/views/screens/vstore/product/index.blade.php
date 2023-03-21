@@ -99,7 +99,7 @@
                         <tr>
 
                             <th>
-                                Mã yêu cầu
+                                Mã sản phẩm
                             </th>
                             <th>
                                 Tên sản phẩm
@@ -116,10 +116,11 @@
                             <th class="w-[200px]">
                                 Giá bán (đ)
                             </th>
+                            <th>VAT (%)</th>
                             <th>Chiết khấu (%)</th>
-                            {{--                            <th>--}}
-                            {{--                                Chi tiết--}}
-                            {{--                            </th>--}}
+                            <th>
+
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -143,21 +144,25 @@
                                         {{$product->user_name}}
                                     </td>
                                     <td class="w-[200px]">
-                                        {{number_format($product->price,0,',',',')}} đ
+                                        {{number_format($product->price,0,'.','.')}}
                                     </td>
                                     <td>
-
+                                        {{$product->vat}}
+                                    </td>
+                                    <td>
                                         {{$product->discount}}
-                                        {{--                                        <a href="#" data-id="{{$product->id}}"--}}
-                                        {{--                                           class="more-details text-primary underline">--}}
-                                        {{--                                            Chi tiết</a>--}}
+                                    </td>
+                                    <td>
+                                        <a href="#" data-id="{{$product->id}}"
+                                           class="more-details text-primary underline">
+                                            Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
                             {{--                            nhh.hoang90@gmail.com--}}
                         @else
                             <tr>
-                                <td colspan="7">Không có dữ liệu phù hợp</td>
+                                <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
@@ -199,7 +204,7 @@
         $('.more-details').each(function (i, e) {
             $(this).on('click', (o) => {
                 $.ajax({
-                    url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
+                    url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&type=2',
                     success: function (result) {
                         $('#modal2').html('');
                         $('#modal2').append(result);

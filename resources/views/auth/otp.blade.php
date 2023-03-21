@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác minh tài khoản</title>
+    <title>Mã xác minh</title>
     <link rel="stylesheet" href="{{asset('asset/css/forgot.css')}}">
     <link rel="stylesheet" href={{asset('asset/dist/forgot.css')}}>
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
@@ -68,9 +68,9 @@
             @if($role_id == 3)
                 <a href="{{route('login_vstore')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
             @elseif($role_id == 2)
-                <a href="{{route('login_ncc')}}"> <img src="{{asset('asset/images/Logoncc.png')}}" alt=""></a>
+                <a href="{{route('login_ncc')}}"> <img src="{{asset('home/img/NCC.png')}}" alt=""></a>
             @elseif($role_id == 4)
-                <a href="{{route('login_storage')}}"> <img src="{{asset('asset/images/logokho.png')}}" alt=""></a>
+                <a href="{{route('login_storage')}}"> <img src="{{asset('home/img/titleK.png')}}" alt=""></a>
             @elseif($role_id == 1)
                 <a href="{{route('login_admin')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
             @endif

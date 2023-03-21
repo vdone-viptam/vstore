@@ -58,7 +58,7 @@ class ProductController extends Controller
     {
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
-        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
+        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->where('id', 800)->first();
         $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
 
         return view('screens.manufacture.product.create', $this->v);
@@ -84,7 +84,8 @@ class ProductController extends Controller
             'weight' => 'required',
             'video' => 'max:512000',
             'images' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'short_content' => 'required|max:500'
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -94,7 +95,8 @@ class ProductController extends Controller
             'weight.required' => 'Trường này không được trống',
             'video.max' => 'Video vượt quá dung lượng cho phép',
             'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
-            'description.required' => 'Mô tả bắt buộc nhập'
+            'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
+            'short_content.required' => 'Mô tả sản phẩm bắt buộc nhập'
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -107,10 +109,11 @@ class ProductController extends Controller
             $product->name = $request->name;
             $product->category_id = $request->category_id;
             $product->price = $request->price;
-            $product->description = $request->description;
+            $product->description = trim($request->description);
             $product->brand = $request->brand;
             $product->material = $request->material;
             $product->weight = $request->weight;
+            $product->short_content = trim($request->short_content);
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
             $product->import_date = $request->import_date;
@@ -250,7 +253,7 @@ class ProductController extends Controller
             if ($request->product) {
 
                 $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description')
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);
@@ -259,14 +262,16 @@ class ProductController extends Controller
                 $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
                     ->join('requests', 'products.id', '=', 'requests.product_id')
                     ->join('users', 'requests.vstore_id', '=', 'users.id')
-                    ->selectRaw('requests.code,products.id,requests.id as re_id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name')
+                    ->selectRaw('requests.code,products.id,requests.id as re_id,price,
+                    requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
+                    users.name as user_name,products.vat')
                     ->where('requests.id', $request->id)
                     ->first();
                 $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id =" . $this->v['request']->id))[0]->amount;
                 return view('screens.manufacture.product.detail', $this->v);
             }
         } catch (\Exception $e) {
-            return redirect()->back();
+            return $e->getMessage();
 //            dd($e->getMessage());
         }
     }
@@ -308,9 +313,10 @@ class ProductController extends Controller
                 return redirect()->back()->withErrors(['images' => 'Tải tài liệu liên quan đến sản phẩm']);
             }
 
-            if ($request->sl[0] == '' || $request->moneyv[0] == '') {
-                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn']);
+            if ($request->sl[0] == '' || $request->moneyv[0] == '' || $request->deposit_money[0] == '') {
+                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn và phần trăm cọc']);
             }
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
             }
@@ -323,7 +329,7 @@ class ProductController extends Controller
             $object->vstore_id = $request->vstore_id;
             $object->vat = $request->vat;
             $object->user_id = Auth::id();
-            $object->type_pay= $request->prepay[0] == 1 ? 2 : 1;
+            $object->type_pay = $request->prepay[0] == 1 ? 2 : 1;
 //            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
 //            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
             $code = rand(100000000000, 999999999999);

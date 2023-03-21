@@ -121,6 +121,27 @@
                 <tr>
                     <td align="center" valign="top" width="600">
             <![endif]-->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                <tr>
+                    <td align="center" valign="top" style="padding: 36px 24px;">
+                        <a href="" target="_blank" style="display: inline-block;">
+                            @if($role_id == 2)
+                                <img src="{{asset('asset/images/Logoncc.png')}}" alt="Logo"
+                                     border="0" width="48"
+                                     style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                            @elseif($role_id == 3)
+                                <img src="{{asset('asset/images/Logo.png')}}" alt="Logo"
+                                     border="0" width="48"
+                                     style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                            @elseif($role_id == 4)
+                                <img src="{{asset('asset/images/logokho.png')}}" alt="Logo"
+                                     border="0" width="48"
+                                     style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                            @endif
+                        </a>
+                    </td>
+                </tr>
+            </table>
             <!--[if (gte mso 9)|(IE)]>
             </td>
             </tr>

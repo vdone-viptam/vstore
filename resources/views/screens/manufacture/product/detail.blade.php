@@ -30,7 +30,11 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Giá bán:</span>
-                    <span class="text-title">{{$request->price}}</span>
+                    <span class="text-title">{{number_format($request->price,0,'.','.')}} đ</span>
+                </div>
+                <div class="grid grid-cols-2 gap-4 w-full">
+                    <span class="text-title font-medium ">Vat:</span>
+                    <span class="text-title">{{$request->vat}} %</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Chiết khấu V-Store:</span>

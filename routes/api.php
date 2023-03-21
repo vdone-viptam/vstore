@@ -90,6 +90,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::get('/user/get-list/{id}', [\App\Http\Controllers\Api\OrderController::class, 'getOrdersByUser']);
         Route::get('/user/detail/{order_id}', [\App\Http\Controllers\Api\OrderController::class, 'getDetailOrderByUser']);
+        Route::get('/vshop/get-list/{pdone_id}', [\App\Http\Controllers\Api\OrderController::class, 'orderOfUserByVshop']);
 
     });
 
@@ -124,6 +125,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('finances')->group(function () {
         Route::get('get-list-bank', [\App\Http\Controllers\Api\FinanceController::class, 'getListBank']);
+        Route::get('get-bank-id/{bank_id}',[\App\Http\Controllers\Api\FinanceController::class,'getBankId']);
         Route::get('/wallet/{pdone_id}', [\App\Http\Controllers\Api\FinanceController::class, 'getWallet']);
         Route::get('/wallet/edit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'editWallet']);
         Route::put('/wallet/update/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'updateWallet']);
@@ -133,7 +135,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     });
     Route::prefix('vstore')->group(function () {
-        //list nhà cung cấp
+        //list nhà phân phối
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);

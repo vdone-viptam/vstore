@@ -32,7 +32,11 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Giá bán:</span>
-                        <span class="text-title ">{{$request->price}}</span>
+                        <span class="text-title ">{{number_format($request->price,0,'.','.')}} đ</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 w-full">
+                        <span class="text-title font-medium  ">Vat:</span>
+                        <span class="text-title ">{{$request->vat}} %</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Chiết khấu cho V-Store:</span>
@@ -66,7 +70,8 @@
 
                         </div>
                         <p class="text-red-600" style="display: none" id="messageDis">
-                            Phần trăm chiết khấu V-shop không được nhỏ hơn 50% chiết khấu V-Store và không lớn hơn 100% chiết khấu V-store</p>
+                            Phần trăm chiết khấu V-shop không được nhỏ hơn 50% chiết khấu V-Store và không lớn hơn 100%
+                            chiết khấu V-store</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
                         @if($request->status == 2)
@@ -85,7 +90,7 @@
                     @if($request->status == 0)
                         <button id="btnConfirm"
                                 class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
-                         Cập nhật
+                            Cập nhật
                         </button>
                     @endif
 

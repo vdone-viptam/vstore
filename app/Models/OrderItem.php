@@ -29,4 +29,15 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function vshop()
+    {
+        return $this->belongsTo(Vshop::class, 'vshop_id');
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouses::class, 'warehouse_id');
+    }
+
 }

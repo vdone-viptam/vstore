@@ -50,7 +50,7 @@ class LandingpageController extends Controller
         $vstore= User::join('products','users.id','=','products.vstore_id')
         ->where('products.user_id',$user->id)
             ->groupBy('products.vstore_id')
-            ->select('users.name','users.avatar')
+            ->select('users.name','users.avatar','users.slug')
             ->get();
 
         $product_super= Product::join('discounts','products.id','=','discounts.product_id')
@@ -100,6 +100,7 @@ class LandingpageController extends Controller
 //            $category = $user->products()->select("category_id")->groupBy('category_id')->get();
             $category= Product::join('categories','products.category_id','=','categories.id')
                 ->where('products.vstore_id',$user->id)
+                ->where('products.status',2)
                 ->groupBy('products.category_id')
                 ->select('categories.id','categories.name','categories.img')
                 ->get();
@@ -112,7 +113,7 @@ class LandingpageController extends Controller
             $arrCategory = Category::whereIn('id', $arrCategory)->get();
             $count_products = Product::where('status',2)->where('user_id',$user->id)->count();
         } else {
-            return redirect(route('intro_vstore'));
+            return redirect(route('landingpagevstore'));
         }
         $products = Product::where('status',2)->where('vstore_id',$user->id)->get();
         foreach ($products as $pro){
@@ -127,11 +128,13 @@ class LandingpageController extends Controller
 
         }
 
-        $ncc= User::join('products','users.id','=','products.vstore_id')
+        $ncc= User::join('products','users.id','=','products.user_id')
             ->where('products.vstore_id',$user->id)
-            ->groupBy('products.user_id')
-            ->select('users.name','users.avatar')
+            ->where('products.status',2)
+            ->groupBy('products.vstore_id')
+            ->select('users.name','users.avatar','users.slug')
             ->get();
+//        return $user->id;
 //         $vstore;
 
         $product_super= Product::join('discounts','products.id','=','discounts.product_id')
@@ -151,7 +154,7 @@ class LandingpageController extends Controller
 
         }
 //        return $product_super;
-        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','user','count_products','products','ncc','product_super'));
+        return view('screens.landing_page_vstore', compact('logo', 'banner', 'name', 'user', 'arrCategory','count_products','products','ncc','product_super'));
 //        return view('screens.landingpage',compact('logo','banner'));
 
     }

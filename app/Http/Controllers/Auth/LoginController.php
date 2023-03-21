@@ -20,21 +20,24 @@ class LoginController extends Controller
 {
     //
 
-    public function getFormRegisterVstore()
+    public function getFormRegisterVstore(Request $request)
     {
-        return view('auth.Vstore.register_vstore');
+        $referral_code = $request->referral_code ?? '';
+
+        return view('auth.Vstore.register_vstore', ['referral_code' => $referral_code]);
     }
 
-    public function getFormRegisterNCC()
+    public function getFormRegisterNCC(Request $request)
     {
-
-
-        return view('auth.NCC.register_ncc');
+        $referral_code = $request->referral_code ?? '';
+        return view('auth.NCC.register_ncc', ['referral_code' => $referral_code]);
     }
 
-    public function getFormRegisterVstorage()
+    public function getFormRegisterVstorage(Request $request)
     {
-        return view('auth.storage.register_storage');
+        $referral_code = $request->referral_code ?? '';
+
+        return view('auth.storage.register_storage', ['referral_code' => $referral_code]);
     }
 
     public function getFormLoginVstorage()
@@ -224,11 +227,6 @@ class LoginController extends Controller
             $user->phone_number = $request->phone_number;
             $user->tax_code = $request->tax_code;
             $referral_code = $request->referral_code ?? '';
-            if ($referral_code !== '') {
-                if (DB::table('vshop')->where('pdone_id', $referral_code)->count() == 0) {
-                    return redirect()->back()->withErrors(['referral_code' => 'Mã giới thiệu không chính xác']);
-                }
-            }
             $user->referral_code = $referral_code;
             if ($role_id == 3) {
                 $user->branch = 1;
@@ -278,10 +276,6 @@ class LoginController extends Controller
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
             $user->save();
-            Mail::send('email.register', function ($message) use ($user) {
-                $message->to($user->email);
-                $message->subject('Gửi đơn đăng ký thành công');
-            });
             DB::commit();
 
             if ($role_id == 2) {
@@ -300,6 +294,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 //            return 1
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
 
         }
@@ -346,9 +341,22 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
                 $login->user_code = $userLogin->id;
                 $login->number = 0;
                 $login->save();
-                Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($userLogin) {
+                $message1 = '';
+                if ($role_id == 1) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản Admin';
+                }
+                if ($role_id == 2) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản Nhà cung cấp';
+                }
+                if ($role_id == 3) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản V-Store';
+                }
+                if ($role_id == 4) {
+                    $message1 = 'Mã xác thực đăng nhập tài khoản KHO';
+                }
+                Mail::send('email.otp', ['confirm_code' => $login->code, 'role_id' => $role_id], function ($message) use ($userLogin, $message1) {
                     $message->to($userLogin->email);
-                    $message->subject('Bạn vừa có yêu cầu đăng nhập');
+                    $message->subject($message1);
                 });
                 Auth::logout();
                 return redirect()->route('otp', ['token1' => $token, 'id' => $userLogin->id]);
@@ -399,18 +407,23 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }
+        $message1 = '';
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
             $role_id = 1;
+            $message1 = 'Xác thực quên mật khẩu tài khoản Admin';
         }
         if ($domain == config('domain.ncc')) {
             $role_id = 2;
+            $message1 = 'Xác thực quên mật khẩu tài khoản Nhà cung cấp';
         }
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
+            $message1 = 'Xác thực quên mật khẩu tài khoản V-Store';
         }
         if ($domain == config('domain.storage')) {
             $role_id = 4;
+            $message1 = 'Mã xác thực đăng nhập tài khoản KHO';
         }
         $user = User::where('email', $request->email)->where('role_id', $role_id)->where('account_code', '!=', null)->first();
         if ($user) {
@@ -418,9 +431,9 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             $token = Str::random(32);
             DB::table('password_resets')
                 ->insert(['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now(), 'role_id' => $role_id]);
-            Mail::send('email.forgot', ['token' => $token, 'role_id' => $role_id], function ($message) use ($user) {
+            Mail::send('email.forgot', ['token' => $token, 'role_id' => $role_id], function ($message) use ($user, $message1) {
                 $message->to($user->email);
-                $message->subject('Thông báo đổi mật khẩu');
+                $message->subject($message1);
             });
 
             return redirect()->route('form_forgot_password')->with('success', 'Đường link đổi mật khẩu đã được gửi vào mail');

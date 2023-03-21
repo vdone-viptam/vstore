@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
+    <title>Đăng nhập NCC</title>
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <meta property="og:title" content="V-ncc"/>
-    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:title" content="NCC"/>
+    <meta property="og:title" content="NCC | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content=""/>
@@ -34,7 +34,7 @@
             <span class="text-title">Quay lại</span>
         </a>
         <div class="w-[162px]">
-            <img style="object-fit: contain;" src="{{asset('home/img/logoncc.png')}}" alt="">
+            <img style="object-fit: contain;" src="{{asset('home/img/NCC.png')}}" alt="">
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 

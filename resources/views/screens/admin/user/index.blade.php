@@ -148,7 +148,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{strlen($referral_code) > 0 ? $referral_code : 'Không có'}}
+                                        {{strlen($user->referral_code) > 0 ? $user->referral_code : 'Không có'}}
                                     </td>
                                     <td>
 

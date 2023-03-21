@@ -49,9 +49,10 @@ class VstoreController extends Controller
             ], 403);
         }
         $limit = $request->limit ?? 10;
-        if ($request->branch==2) {
+        if ($request->branch==2 ) {
             $user = User::where('role_id', 3)->where('account_code', '!=', null)
                 ->where('branch', $request->branch)
+                ->where('status','!=',0)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
             if ($request->account_code) {
                 $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
@@ -65,9 +66,9 @@ class VstoreController extends Controller
 
 
 
-        } else {
+        } elseif ($request->branch==1) {
 
-            $user = User::where('role_id', 3)->where('account_code', '!=', null)->where('branch','!=',2)
+            $user = User::where('role_id', 3)->where('account_code', '!=', null) ->where('status','!=',0)->where('branch','!=',2)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch')
 
             ;
@@ -81,6 +82,21 @@ class VstoreController extends Controller
                 $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
             }
 
+        }
+        else{
+            $user = User::where('role_id', 3)->where('account_code', '!=', null)
+//                ->where('branch', 2)
+                ->where('status','!=',0)
+                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
+            if ($request->account_code) {
+                $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
+            }
+            if ($request->name) {
+                $user = $user->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->company_name) {
+                $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
+            }
         }
 
 //        return $user->get();
@@ -152,10 +168,15 @@ class VstoreController extends Controller
             }else{
                 $user->avatar= asset('image/users/'.$user->avatar);
             }
-            $user->total_product = $user->products()->where('status', 2)->count();
+//            $user->total_product = $user->products()->where('status', 2)->count();
+            $user->total_product =Product::where('vstore_id',$user->id)
+                ->where('status', 2)->count()
+            ;
+
             $cate = Category::select('categories.name')
                 ->join('products', 'categories.id', '=', 'products.category_id')
                 ->where('vstore_id', $id)
+                ->where('products.status', 2)
                 ->groupBy('categories.name')
                 ->get();
             $data = [];

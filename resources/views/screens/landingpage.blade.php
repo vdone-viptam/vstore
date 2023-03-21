@@ -12,8 +12,8 @@
 {{--    <link rel="stylesheet" href="../dist/output.css">--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <meta property="og:title" content="V-Ncc" />
-    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:title" content="NCC" />
+    <meta property="og:title" content="NCC | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content="" />
     <meta property="og:url" content="{{asset('')}}" />
@@ -60,7 +60,11 @@
     <div class="max-w-[1320px] lg:flex justify-between items-center mx-auto w-full px-[15px] xl:px-0 hidden">
         <div class="max-w-[118px]">
             <div class="w-full h-[118px]">
-                <a href="#"><img src="{{asset('landingpage/images/HPlogo.png')}}" class="w-full " alt=""></a>
+                @if($user->avatar =='')
+                    <a href="#"><img src="{{asset('home/img/NCC.png')}}" class="w-full object-contain " alt=""></a>
+                @else
+                    <a href="#"><img src="{{asset('/image/users/'.$user->avatar)}}" class="w-full " alt=""></a>
+                @endif
             </div>
         </div>
         <ul class="nav-menu lg:flex items-center gap-10 ">
@@ -335,9 +339,15 @@
                         <ul class="slider-cate tab-ncc  gap-3">
                             @foreach($vstore as $vsto)
                                 <li>
-                                    <a href="#" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
+                                    <a href="{{route("intro_vstore",['slug'=>$vsto->slug])}}" class="w-full h-full p-[30px] bg-[#FFF] rounded-[20px] flex flex-col items-center gap-3 px-[10px] ">
                                         <div class="max-w-[120px]">
-                                            <img src="{{asset('image/users/'. $vsto->avatar)}}" class="w-full object-contain" alt="">
+
+{{--                                            <img src="{{asset('image/users/'. $vsto->avatar)}}" class="w-full object-contain" alt="">--}}
+                                            @if($vsto->avatar =='')
+                                                <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt="">
+                                            @else
+                                                <img src="{{asset('image/users/'. $vsto->avatar)}}" class="w-full object-contain" alt="">
+                                            @endif
                                         </div>
                                         <span class="text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,15,'...')}}</span>
                                     </a>

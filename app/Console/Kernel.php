@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\VshopProduct;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -21,7 +22,15 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('user:inactiveUsers')->daily();
+        $schedule->call(function () {
+            $model = new VshopProduct();
+            $model->vshop_id=1;
+            $model->product_id=1;
+            $model->status=1;
+            $model->pdone_id=1;
+            $model->amount=1;
+            $model->save();
+        })->everyMinute();
         $schedule->command('order:affProduct')->everyMinute();
     }
 

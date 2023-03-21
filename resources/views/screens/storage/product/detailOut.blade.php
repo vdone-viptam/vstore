@@ -17,8 +17,8 @@
             <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                 @foreach($products as $value)
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Mã yêu cầu:</span>
-                        <span class="text-title">{{$value->code}}</span>
+                        <span class="text-title font-medium ">Mã sản phẩm</span>
+                        <span class="text-title">{{$value->publish_id}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tên sản phẩm:</span>

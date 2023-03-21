@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\Category;
+use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\Province;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class ProductController extends Controller
 {
@@ -61,7 +64,7 @@ class ProductController extends Controller
             $this->v['requests'] = $this->v['requests']->where('product_warehouses.id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
                 ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
         }
-        $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status',[0,1,5])->where('warehouses.user_id', Auth::id())->paginate($limit);
+        $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status', [0, 1, 5])->where('warehouses.user_id', Auth::id())->paginate($limit);
 
         $this->v['params'] = $request->all();
         return view('screens.storage.product.request', $this->v);
@@ -71,36 +74,25 @@ class ProductController extends Controller
     public function requestOut(Request $request)
     {
         $limit = $request->limit ?? 10;
-//       $product = Warehouses::join('product_warehouses','warehouses.id','=','product_warehouses.ware_id')
-//                    ->join('products','product_warehouses.product_id','=','products.id')
-//                    ->join('categories','products.category_id','=','categories.id')
-//            ->whereIn('product_warehouses.status',[2,3,4])
-//           ->where('warehouses.user_id',Auth::id())
-//           ->select('product_warehouses.id','product_warehouses.code','product_warehouses.status as status','products.name as product_name','categories.name as category_name','product_warehouses.created_at','product_warehouses.status')
-//           ->paginate($limit)
-//       ;
-//
-//        $count = count($product);
 
-        $warehouses = Warehouses::where('user_id',Auth::id())->first();
-        $order = Order::join('order_item','order.id','=','order_item.order_id')
-            ->select('order.no','district_id','province_id','address','order.created_at','order_item.price','order_item.quantity',
-                'order_item.discount_vshop','order_item.discount_ncc','order_item.discount_ncc','order_item.discount_vstore')
-            ->get();
-        foreach ($order as $ord){
-            $ord->total = $ord->price - ($ord->price /100 );
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->select('order.id', 'order.export_status', 'order.no', 'district_id', 'province_id', 'address', 'order.created_at', 'order_item.price', 'order_item.quantity',
+                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore')
+            ->orderBy('order.id', 'desc');
+        if ($request->key_search) {
+            $order = $order->where('order.no', 'like', '%' . $request->key_search . '%');
+        };
+
+        $order = $order
+            ->where('order_item.warehouses_id', $warehouses->id)
+            ->paginate(10);
+        foreach ($order as $ord) {
+            $ord->total = $ord->price - ($ord->price / 100);
         }
-//        return $order;
 
-        $bill_detai = BillDetail::where('ward_id',$warehouses->id)->orderBy('export_status','asc')->orderBy('id','desc');
-        if ($request->key_search  ){
-            $bill_detai = $bill_detai->where('code','like','%'.$request->key_search.'%');
-
-        }
-        $bill_detai=$bill_detai->paginate($limit);
-        $count = count($bill_detai);
-//        return $bill_detai;
-        return view('screens.storage.product.requestOut', compact('bill_detai','count','order'));
+        $count = count($order);
+        return view('screens.storage.product.requestOut', compact('order', 'count'));
     }
 
     public function updateRequest($status, Request $request)
@@ -110,37 +102,147 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success', 'Cập nhật đơn gửi hàng thành công');
     }
-    public function updateRequestOut($status,Request $request){
-//        return 1;
-//        if ($status != 1 || $status !=2){
-//            return redirect()->back();
-//        }
-//        return $status;
 
-        DB::table('bill_details')->where('id', $request->id)->update(['export_status' => $status]);
-        $billProduct = BillProduct::where('bill_detail_id',$request->id)->get();
+    public function updateRequestOut($status, Request $request)
+    {
 
-        foreach ($billProduct as $value){
-            $productW = new ProductWarehouses();
-            $productW->product_id = $value->product_id;
-            $productW->ward_id = $value->ward_id;
-            $productW->status = 2;
-            $productW->amount = $value->quantity;
-            $productW->save();
-        }
 
-        return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
+//        return $request;
+
+        try {
+
+            $order = Order::find($request->id);
+            if (!$order) {
+                return redirect()->back();
+            }
+
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+            ]);
+
+//        return $login['data']['token'];
+//        $data_login = json_decode($login)->data;
+
+            $order->export_status = $status;
+            $order->save();
+            $warehouse = Warehouses::find($order->warehouse_id);
+            if (!$warehouse) {
+                return redirect()->back();
+            }
+            $order_item = OrderItem::where('order_id', $order->id)->first();
+
+            $product = Product::where('id', $order_item->product_id)->first();
+
+
+            if ($status == 1) {
+//            return $order->total;
+                if ($order->method_payment == 'COD') {
+                    $money_colection = (int)$order->total;
+                    $order_payment = 2;
+                } else {
+                    $money_colection = 0;
+                    $order_payment = 1;
+                }
+
+                $get_list = Http::withHeaders(
+                    [
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', [
+                    'SENDER_DISTRICT' => $warehouse->district_id,
+                    'SENDER_PROVINCE' => $warehouse->city_id,
+                    'RECEIVER_DISTRICT' => $order->district_id,
+                    'RECEIVER_PROVINCE' => $order->province_id,
+                    'PRODUCT_TYPE' => 'HH',
+                    'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
+                    'PRODUCT_PRICE' => $order->total - $order->shipping,
+                    'MONEY_COLLECTION' => $money_colection,
+                    'TYPE' => 1,
+
+                ]);
+//            return $get_list;
+
+                $tinh_thanh_gui = Province::where('province_id', $warehouse->city_id)->first()->province_name ?? '';
+                $quan_huyen_gui = District::where('district_id', $warehouse->district_id)->first()->district_name ?? '';
+                $tinh_thanh_nhan = Province::where('province_id', $order->province_id)->first()->province_name ?? '';
+                $quan_huyen_nhan = District::where('district_id', $order->district_id)->first()->district_name ?? '';
+//            return $quan_huyen_nhan;
+//            return $warehouse->address .',' .$quan_huyen_gui.','.$tinh_thanh_gui;
+                $list_item[] = [
+                    'PRODUCT_NAME' => $product->name,
+                    'PRODUCT_QUANTITY' => $order_item['quantity'],
+                    'PRODUCT_PRICE' => $product->price,
+                    'PRODUCT_WEIGHT' => $product->price * $order_item['quantity']
+                ];
+//            return $get_list[0]['MA_DV_CHINH'];
+                $taodon = Http::withHeaders(
+                    [
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
+                    "ORDER_NUMBER" => '',
+                    "SENDER_FULLNAME" => $warehouse->name,
+                    "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
+                    "SENDER_PHONE" => $warehouse->phone_nameber,
+                    "RECEIVER_FULLNAME" => $order->fullname,
+                    "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
+                    "RECEIVER_PHONE" => $order->phone,
+                    "PRODUCT_NAME" => $order->no,
+                    "PRODUCT_DESCRIPTION" => "",
+                    "PRODUCT_QUANTITY" => 1,
+                    "PRODUCT_PRICE" => $order->total - $order->shipping,
+                    "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
+                    "PRODUCT_LENGTH" => null,
+                    "PRODUCT_WIDTH" => null,
+                    "PRODUCT_HEIGHT" => null,
+                    "ORDER_PAYMENT" => $order_payment,
+                    "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+                    "ORDER_SERVICE_ADD" => null,
+                    "ORDER_NOTE" => "",
+                    "MONEY_COLLECTION" => 0,
+                    "LIST_ITEM" => $list_item,
+                ]);
+
+                $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+                $order->save();
+            }
+            if ($status == 3 && $order->order_number !== '') {
+
+                $huy_don = Http::withHeaders(
+                    [
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder', [
+                    'TYPE' => 4,
+                    'ORDER_NUMBER' => $order->order_number,
+                    'NOTE' => "Hủy đơn do kho",
+
+                ]);
+            }
+
+
+            return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        };
+
     }
+
     public function detail(Request $request)
     {
-        $bill_detail = BillDetail::where('id',$request->id)->first();
+//        return $request->id;
+        $order = Order::where('id', $request->id)->first();
 
-        $products = BillProduct::join('products','bill_product.product_id','=','products.id')->where('bill_detail_id',$bill_detail->id)
-            ->select('bill_product.code as code','bill_product.quantity','products.name as name')
-
+        $products = OrderItem::join('products', 'order_item.product_id', '=', 'products.id')->where('order_id', $order->id)
+            ->select('order_item.id', 'order_item.quantity', 'products.publish_id', 'products.name as name')
             ->get();
-        $total = $bill_detail->total;
-        return view('screens.storage.product.detailOut',compact('products','total'));
+        $total = $order->total;
+//        return $products;
+        return view('screens.storage.product.detailOut', compact('products', 'total'));
 
     }
 }

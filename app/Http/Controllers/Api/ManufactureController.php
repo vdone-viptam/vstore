@@ -34,9 +34,10 @@ class ManufactureController extends Controller
         $user = User::where('role_id', 2)->where('account_code', '!=', null)
             ->select('id', 'name', 'avatar')
             ->paginate($limit);
+
         if ($user) {
             foreach ($user as $value) {
-                $value->avatar = strlen($value->avatar) == 0 ? asset('image/Rectangle 44.png') : asset('image/users/' . $value->avatar);
+                $value->avatar = strlen($value->avatar) == 0 ? asset('home/img/ncc11.png') : asset('image/users/' . $value->avatar);
             }
         }
         return response()->json([
@@ -66,6 +67,7 @@ class ManufactureController extends Controller
                $cate = Category::select('categories.name')
                    ->join('products', 'categories.id', '=', 'products.category_id')
                    ->where('user_id', $ncc_id)
+                   ->where('products.status',2)
                    ->groupBy('categories.name')
                    ->get();
                $products = Product::select('images')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();

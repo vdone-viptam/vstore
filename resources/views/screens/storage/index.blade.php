@@ -137,7 +137,7 @@
         <h2 class=" text-lg sm:text-4xl  text-[#343434] font-semibold text-center flex items-center gap-[8px]">Quy trình trở thành <div class="w-[103px] h-36px] inline">
                     <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
                 </div></h2>
-        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký KHO đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Kho.</span>
+        <span class="text-[#343434] text-sm xl:text-lg font-medium text-center">Quy trình đăng ký KHO đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Kho.</span>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] xl:gap-[30px] max-w-[650px] lg:max-w-[900px] xl:max-w-[1440px] mx-auto">
             <div class="item-qt flex flex-col items-center gap-[30px] p-3 py-10">
                 <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">

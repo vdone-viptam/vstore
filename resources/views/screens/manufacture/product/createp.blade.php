@@ -137,11 +137,20 @@
 
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-title font-medium">Mô tả sản phẩm<strong
+                    <span class="text-title font-medium">Chi tiết sản phẩm<strong
                             class="text-[#FF4D4F]">*</strong></span>
                     <textarea name="description" id="description" style="width: 100% !important;height: 750px"
                               class="w-full outline-nonepy-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{old('description')}}</textarea>
                     @error('description')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-title font-medium">Mô tả sản phẩm<strong
+                            class="text-[#FF4D4F]">*</strong></span>
+                    <textarea name="short_content" id="short_content" rows="8"
+                              class="w-full outline-nonepy-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{old('short_content')}}</textarea>
+                    @error('short_content')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
@@ -151,7 +160,7 @@
                     <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start">
 
                     </div>
-                    <input type="hidden" id="images" name="images" >
+                    <input type="hidden" id="images" name="images">
                     <div
                         class="cursor-pointer add-img-SP w-[104px] h-[104px] border-2 border-dashed bg-[#FAFAFA] border-secondary flex justify-center flex-col items-center rounded-sm gap-1">
                         <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
@@ -244,7 +253,7 @@
                         </div>
                         <div class=" flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="date"  name="import_date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                            <input type="date" name="import_date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
@@ -353,7 +362,8 @@
 @endsection
 
 @section('custom_js')
-    <script src="https://cdn.tiny.cloud/1/23l4tyr8qs5720ac7v7xlgtooqmbfd8on5mbf3qsf5w1m377/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/23l4tyr8qs5720ac7v7xlgtooqmbfd8on5mbf3qsf5w1m377/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script async>
         tinymce.init({
             selector: '#description',

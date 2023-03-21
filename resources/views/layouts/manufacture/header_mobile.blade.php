@@ -246,11 +246,11 @@
                         </li>
                         <li><a class="hover:underline" href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a>
                         </li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng,
-                                hoàn tiền</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng,
-                                hoàn
-                                tiền</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Đơn hàng
+                                chưa hoàn thành</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.order')}}">Quản lý đơn
+                                nhập
+                                sẵn</a></li>
                     </ul>
                 </div>
                 {{--                Tài chính--}}

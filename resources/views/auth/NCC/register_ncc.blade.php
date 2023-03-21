@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký V-Ncc</title>
+    <title>Đăng ký NCC</title>
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <meta property="og:title" content="V-ncc"/>
-    <meta property="og:title" content="V-ncc | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
+    <meta property="og:title" content="NCC"/>
+    <meta property="og:title" content="NCC | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content=""/>
@@ -216,14 +216,15 @@
             </div>
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"> Đại diện thêm</span>
-                <input type="text" name="id_vdone_diff" placeholder="Nhập ID đại diện thêm"
+                <span class="text-sm font-medium">Người đại diện (khác)</span>
+                <input type="text" name="id_vdone_diff" placeholder="Nhập ID người đại diện (khác)"
                        value="{{old('id_vdone_diff')}}"
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium">Mã giới thiệu</span>
-                <input type="text" name="referral_code" placeholder="Nhập ID đại diện thêm" readonly
+                <input type="text" name="referral_code" placeholder="Mã giới thiệu" readonly
+                       value="{{$referral_code}}"
 
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
             </div>
@@ -325,7 +326,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML = `<option>Lựa chọn tỉnh (phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
         })
         .catch(console.error);
 

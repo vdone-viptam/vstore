@@ -66,8 +66,9 @@ class FinanceController extends Controller
                     'message' => 'Không tìm thấy vshop'
                 ], 404);
             }
-            $wallet = Wallet::select('wallets.id', 'account_number', 'banks.name as bank_name', 'wallets.name')
+            $wallet = Wallet::select('wallets.id', 'account_number', 'wallets.bank_id','banks.image','banks.name as bank_name', 'wallets.name')
                 ->join('banks', 'wallets.bank_id', '=', 'banks.id')
+                ->where('type',2)
                 ->where('user_id', $vshop_id)->first();
             return response()->json([
                 'success' => false,
@@ -183,6 +184,7 @@ class FinanceController extends Controller
 
     public function storeWallet(Request $request)
     {
+//        return 1;
         try {
             $validator = Validator::make($request->all(), [
                 'pdone_id' => 'required|max:255',
@@ -220,7 +222,8 @@ class FinanceController extends Controller
                 'account_number' => $request->account_number,
                 'bank_id' => $request->bank_id,
                 'user_id' => $vshop_id,
-                'name' => $request->name
+                'name' => $request->name,
+                'type'=>2
             ]);
             return response()->json([
                 'success' => true,
@@ -323,5 +326,18 @@ class FinanceController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
+    /**
+     * chi tiết ngân hàng
+     *
+     * API này sé lấy ra chi tiết ngân hàng
+     * @param $bank_id id bank ngân hàng
+     */
+    public function getBankId($bank_id){
+        $bank = Bank::where('id',$bank_id)->first();
+        return response()->json([
+            'success' => true,
+            'data' => $bank
+        ], 200);
     }
 }

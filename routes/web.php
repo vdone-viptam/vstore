@@ -214,6 +214,10 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/', [\App\Http\Controllers\Manufacture\OrderController::class, 'index'])->name('screens.manufacture.order.index');
         Route::get('/destroy', [\App\Http\Controllers\Manufacture\OrderController::class, 'destroy'])->name('screens.manufacture.order.destroy');
         Route::get('/pending', [\App\Http\Controllers\Manufacture\OrderController::class, 'pending'])->name('screens.manufacture.order.pending');
+        Route::get('/orders', [\App\Http\Controllers\Manufacture\OrderController::class, 'order'])->name('screens.manufacture.order.order');
+        Route::get('/orders/{id?}', [\App\Http\Controllers\Manufacture\OrderController::class, 'detailOrder'])->name('screens.manufacture.order.detail');
+        Route::post('/orders/{id?}', [\App\Http\Controllers\Manufacture\OrderController::class, 'updateOrder'])->name('screens.manufacture.order.update');
+
 
     });
 //         Cập nhật thông tin tài khoản nhà cung cấp

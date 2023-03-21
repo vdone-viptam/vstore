@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="bg w-full relative h-auto md:h-screen">
-    <div class=" w-full md:max-w-[1440px] mx-auto flex flex-col  gap-4 py-6 md:h-screen xl:px-20 px-[20px]">
+    <div class=" w-full md:max-w-[1440px] mx-auto gap-4 py-6 md:h-screen xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
             <div class="w-[168px] h-[36px] md:hidden">
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt=""></a>
