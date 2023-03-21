@@ -118,9 +118,9 @@
                             </th>
                             <th>VAT (%)</th>
                             <th>Chiết khấu (%)</th>
-                            {{--                            <th>--}}
-                            {{--                                Chi tiết--}}
-                            {{--                            </th>--}}
+                            <th>
+
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
