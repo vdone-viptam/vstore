@@ -22,12 +22,13 @@ return new class extends Migration
             $table->string('sku')->nullable();
             $table->decimal('price', 11, 3);
             $table->integer('quantity');
-
+            $table->integer('status')->default(0);
             $table->integer('warehouses_id');
-
-            $table->integer('discount_vshop');
-            $table->integer('discount_ncc');
-            $table->integer('discount_vstore');
+            $table->integer('discount');
+            $table->float('discount_vshop',8,2);
+            $table->float('discount_ncc',8,2);
+            $table->float('discount_vstore',8,2);
+            $table->integer('ncc_id')->default(0);
 
             $table->timestamps();
         });

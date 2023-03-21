@@ -44,9 +44,9 @@ class VstoreController extends Controller
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 401,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $limit = $request->limit ?? 10;
         if ($request->branch==2 ) {

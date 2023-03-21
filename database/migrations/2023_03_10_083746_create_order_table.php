@@ -31,7 +31,9 @@ return new class extends Migration
             $table->string('fullname');
             $table->string('phone')->nullable();
             $table->string('address');
-
+            $table->integer('export_status')->default(0)->comment('trạng thái xuất kho 1,xác nhận đơn ,2 xuất kho giao cho vận chuyển , 3 hủy,4 hoàn thành');
+            $table->string('order_number')->comment('mã giao vận');
+            $table->integer('order_status')->comment('mã giao vận');
             $table->timestamps();
         });
     }

@@ -41,9 +41,9 @@ class OrderController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
 
         $methodPayment = $request->method_payment;
@@ -86,7 +86,7 @@ class OrderController extends Controller
         $address = $request->address;
 
         $order = new Order();
-        $order->pay = 1;
+        $order->pay = 2;
         $order->user_id = $userId;
         $order->status = config('constants.orderStatus.wait_for_confirmation');
         $latestOrder = Order::orderBy('created_at', 'DESC')->first();
@@ -110,6 +110,7 @@ class OrderController extends Controller
         $totalVat = 0;
 
         if ($districtId && $provinceId && $wardId && $address) {
+            $order->pay = 1;
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
@@ -223,9 +224,9 @@ class OrderController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 400,
+                'status_code' => 403,
                 'error' => $validator->errors(),
-            ]);
+            ], 403);
         }
         $order = Order::find($orderId);
         $methodPayment = $request->method_payment ? $request->method_payment : $order->method_payment;
@@ -397,11 +398,11 @@ class OrderController extends Controller
             }
 
             $orders = $orders
-                ->where('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at','desc')
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
-
                 $order->orderItem = $order->orderItem()
                     ->select(
                         'quantity',
@@ -419,7 +420,6 @@ class OrderController extends Controller
                 }
 
                 $order->total_product = count($order->orderItem);
-
 
             }
             return response()->json([
@@ -448,7 +448,8 @@ class OrderController extends Controller
         try {
             $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number')
                 ->where('id', $order_id)
-                ->where('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at','desc')
                 ->first();
             if (!$order) {
                 return response()->json([
@@ -513,7 +514,8 @@ class OrderController extends Controller
                 'quantity', 'order_id', 'product_id');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
-                ->join('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at','desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
