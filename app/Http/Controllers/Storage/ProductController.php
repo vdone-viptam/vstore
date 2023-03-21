@@ -79,7 +79,9 @@ class ProductController extends Controller
         $order = Order::join('order_item','order.id','=','order_item.order_id')
             ->select('order.id','order.export_status','order.no','district_id','province_id','address','order.created_at','order_item.price','order_item.quantity',
                 'order_item.discount_vshop','order_item.discount_ncc','order_item.discount_ncc','order_item.discount_vstore','order.total')
-            ->orderBy('order.id','desc');
+            ->orderBy('order.id','desc')
+            ->where('order.status','!=',2)
+        ;
             if ($request->key_search){
                 $order = $order->where('order.no','like','%'.$request->key_search.'%');
             };
