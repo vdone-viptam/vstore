@@ -99,7 +99,7 @@
                         <tr>
 
                             <th>
-                                Mã yêu cầu
+                                Mã sản phẩm
                             </th>
                             <th>
                                 Tên sản phẩm
@@ -116,6 +116,7 @@
                             <th class="w-[200px]">
                                 Giá bán (đ)
                             </th>
+                            <th>VAT (%)</th>
                             <th>Chiết khấu (%)</th>
                             {{--                            <th>--}}
                             {{--                                Chi tiết--}}
@@ -143,14 +144,17 @@
                                         {{$product->user_name}}
                                     </td>
                                     <td class="w-[200px]">
-                                        {{number_format($product->price,0,',',',')}} đ
+                                        {{number_format($product->price,0,'.','.')}}
+                                    </td>
+                                    <td>
+                                        {{$product->vat}}
                                     </td>
                                     <td>
 
                                         {{$product->discount}}
-                                        {{--                                        <a href="#" data-id="{{$product->id}}"--}}
-                                        {{--                                           class="more-details text-primary underline">--}}
-                                        {{--                                            Chi tiết</a>--}}
+                                        <a href="#" data-id="{{$product->id}}"
+                                           class="more-details text-primary underline">
+                                            Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
