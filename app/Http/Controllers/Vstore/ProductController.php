@@ -64,13 +64,21 @@ class ProductController extends Controller
 
     public function detail(Request $request)
     {
-        $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
-            ->join('requests', 'products.id', '=', 'requests.product_id')
-            ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name,requests.note,products.vat')
-            ->where('requests.id', $request->id)
-            ->first();
-        $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = $request->id"))[0]->amount;
+        $type = $request->type ?? 1;
+        if ($type == 1) {
+            $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+                ->join('requests', 'products.id', '=', 'requests.product_id')
+                ->join('users', 'requests.user_id', '=', 'users.id')
+                ->selectRaw('requests.code,requests.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name,requests.note,products.vat')
+                ->where('requests.id', $request->id)
+                ->first();
+            $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = $request->id"))[0]->amount;
+        } else {
+            $this->v['request'] = Product::select('id', 'publish_id', 'images',
+                'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat')
+                ->where('id', $request->id)
+                ->first();
+        }
         return view('screens.vstore.product.detail', $this->v);
     }
 

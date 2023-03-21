@@ -150,8 +150,9 @@
                                         {{$product->vat}}
                                     </td>
                                     <td>
-
                                         {{$product->discount}}
+                                    </td>
+                                    <td>
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline">
                                             Chi tiết</a>
@@ -203,7 +204,7 @@
         $('.more-details').each(function (i, e) {
             $(this).on('click', (o) => {
                 $.ajax({
-                    url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
+                    url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&type=2',
                     success: function (result) {
                         $('#modal2').html('');
                         $('#modal2').append(result);
