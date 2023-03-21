@@ -73,13 +73,16 @@ class ProductController extends Controller
                 ->where('requests.id', $request->id)
                 ->first();
             $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = $request->id"))[0]->amount;
+            return view('screens.vstore.product.detail', $this->v);
+
         } else {
-            $this->v['request'] = Product::select('id', 'publish_id', 'images',
+            $this->v['product'] = Product::select('id', 'publish_id', 'images',
                 'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat')
                 ->where('id', $request->id)
                 ->first();
+            return view('screens.vstore.product.detail2', $this->v);
+
         }
-        return view('screens.vstore.product.detail', $this->v);
     }
 
     public function confirm($id, Request $request)
