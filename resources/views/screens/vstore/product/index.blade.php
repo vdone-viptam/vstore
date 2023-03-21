@@ -161,7 +161,7 @@
                             {{--                            nhh.hoang90@gmail.com--}}
                         @else
                             <tr>
-                                <td colspan="7">Không có dữ liệu phù hợp</td>
+                                <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
