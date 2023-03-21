@@ -89,7 +89,7 @@ class ProductController extends Controller
             foreach ($products as $pro) {
                 $pro->images = asset(json_decode($pro->images)[0]);
                 $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
-                    ->whereIn('type',[1,2])
+                    ->whereIn('type', [1, 2])
                     ->where('start_date', '<=', Carbon::now())
                     ->where('end_date', '>=', Carbon::now())
                     ->first()->sum;
@@ -585,7 +585,7 @@ class ProductController extends Controller
             ->select('name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'amount_product_sold', 'vshop_products.amount as in_stock', 'view')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
-            ->where('vshop_products.status', $request->staus)
+            ->where('vshop_products.status', $request->status)
             ->where('pdone_id', $pdone_id);
         $total_product = $products->count();
         $products = $products->paginate($limit);
