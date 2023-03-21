@@ -400,7 +400,7 @@ class ProductController extends Controller
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 
-        if (count($list_vshop)==0){
+        if (count($list_vshop) == 0) {
             $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                 ->where('vshop_products.product_id', $id)
                 ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
@@ -415,15 +415,15 @@ class ProductController extends Controller
             $list->vshop_discount = $discount->discount ?? 0;
 
         }
-        if (count($list_vshop)==0){
+        if (count($list_vshop) == 0) {
             $list_vshop = Vshop::where('pdone_id', 247)
                 ->select('id', 'pdone_id', 'nick_name', 'vshop_name', 'pdone_id')
                 ->get();
             foreach ($list_vshop as $list) {
 
-                $list->product_id=$product->id;
+                $list->product_id = $product->id;
                 $list->vshop_discount = 0;
-                $list->amount=0;
+                $list->amount = 0;
             }
         }
 
@@ -590,7 +590,7 @@ class ProductController extends Controller
         $data = null;
         $products = DB::table('vshop')
             ->selectRaw('products.name as product_name,publish_id,price,
-                images, products.id, discount_vShop ,amount_product_sold,
+                images, products.id, discount_vShop ,vshop_products.amount_product_sold,
                 vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
