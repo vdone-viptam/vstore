@@ -567,7 +567,7 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @param  $pdone_id  mã ID user V-Shop
-     * @urlParam orderBy  id Mới nhất | amount_product_sold Bán chạy | price Giá
+     * @urlParam orderBy 1 Số lượng sản phẩm còn lại | 2 Số sản phẩm đã bán | 3 Tỷ lệ bán sản phẩm
      * @urlParam status 1 tiếp thị | 2 nhập sẵn
      * urlParam type  asc|desc Mặc định asc
      *
@@ -582,13 +582,22 @@ class ProductController extends Controller
         $type = $request->type ?? 'asc';
         $data = null;
         $products = DB::table('vshop')
-            ->select('products.name as product_name', 'publish_id', 'price',
-                'images', 'products.id', 'discount_vShop', 'amount_product_sold',
-                'vshop_products.amount as in_stock', 'view')
+            ->selectRaw('products.name as product_name,publish_id,price,
+                images, products.id, discount_vShop ,amount_product_sold,
+                vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.status', $request->status)
             ->where('pdone_id', $pdone_id);
+        if ($request->orderBy == 1) {
+            $products = $products->orderBy('vshop_products.amount', $type);
+        }
+        if ($request->orderBy == 2) {
+            $products = $products->orderBy('vshop_products.amount_product_sold', $type);
+        }
+        if ($request->orderBy == 3) {
+            $products = $products->orderBy('ty_le', $type);
+        }
         $total_product = $products->count();
         $products = $products->paginate($limit);
         foreach ($products as $pr) {
