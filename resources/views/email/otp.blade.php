@@ -14,6 +14,8 @@
         <img src="{{asset('home/img/NCC.png')}}" style="height:60px">
     @elseif($role_id == 3)
         <img src="{{asset('home/img/Logo.png')}}" style="height:60px">
+    @elseif($role_id == 1)
+        <img src="{{asset('home/img/vdone.png')}}" style="height:60px">
     @else
         <img src="{{asset('home/img/titleK.png')}}" style="height:60px">
     @endif

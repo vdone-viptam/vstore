@@ -28,7 +28,7 @@ class ProductController extends Controller
 //        return 1;
         $limit = $request->limit ?? 10;
         $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')->join('categories', 'products.category_id', '=', 'categories.id')->where('products.status', 2)->where('vstore_id', Auth::id())
-            ->select('products.publish_id', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount', 'products.vat');
+            ->select('products.publish_id', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount', 'products.vat', 'products.id');
 
         if ($request->condition && $request->condition != 0) {
             $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
