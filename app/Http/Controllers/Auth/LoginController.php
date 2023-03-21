@@ -587,13 +587,26 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     public function reOtp(Request $request)
     {
+        $domain = $request->getHttpHost();
+        if ($domain == config('domain.admin')) {
+            $role_id = 1;
+        }
+        if ($domain == config('domain.ncc')) {
+            $role_id = 2;
+        }
+        if ($domain == config('domain.vstore')) {
+            $role_id = 3;
+        }
+        if ($domain == config('domain.storage')) {
+            $role_id = 4;
+        }
         $user = User::find($request->id);
         $otp = Otp::where('user_code', $user->id)->delete();
         $login = new Otp();
         $login->code = rand(100000, 999999);
         $login->user_code = $user->id;
         $login->save();
-        Mail::send('email.otp', ['confirm_code' => $login->code], function ($message) use ($user) {
+        Mail::send('email.otp', ['confirm_code' => $login->code, 'role_id' => $role_id], function ($message) use ($user) {
             $message->to($user->email);
             $message->subject('Bạn vừa có yêu cầu gửi lại mã xác minh');
         });
