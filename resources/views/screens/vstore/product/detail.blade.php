@@ -36,7 +36,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Vat:</span>
-                        <span class="text-title ">{{$request->vat}} %</span>
+                        <span class="text-title ">{{$request->vat ??0}} %</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Chiết khấu cho V-Store:</span>

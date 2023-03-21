@@ -30,7 +30,7 @@
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Vat:</span>
-                    <span class="text-title ">{{$product->vat}} %</span>
+                    <span class="text-title ">{{$product->vat ??0}} %</span>
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Thương hiệu:</span>

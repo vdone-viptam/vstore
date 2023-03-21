@@ -547,6 +547,7 @@ class  VShopController extends Controller
      */
     public function storeAddressReceive(Request $request, $pdone_id)
     {
+
         $validator = Validator::make($request->all(), [
 //            'pdone_id' => 'required|max:255',
             'name' => 'required|max:255',
@@ -564,17 +565,30 @@ class  VShopController extends Controller
         }
 
         try {
+            $vshop= Vshop::where('pdone_id',$request->pdone_id)->first();
+            if (!$vshop){
+                DB::table('vshop')->insert([
+                    'name_address'=>$request->name_address,
+                    'pdone_id' => $pdone_id,
+                    'name' => $request->name,
+                    'address' => $request->address,
+                    'phone_number' => $request->phone_number,
+                    'district' => $request->district,
+                    'province' => $request->province,
+                    'created_at' => Carbon::now()
+                ]);
+            }else{
+                $vshop->name=$request->name;
+                $vshop->address =$request->address;
+                $vshop->phone_number =  $request->phone_number;
+                $vshop->district= $request->district;
+                $vshop->province = $request->province;
+                $vshop->name_address=$request->name_address;
+                $vshop->save();
+
+            }
 
 
-            DB::table('vshop')->insert([
-                'pdone_id' => $pdone_id,
-                'name' => $request->name,
-                'address' => $request->address,
-                'phone_number' => $request->phone_number,
-                'district' => $request->district,
-                'province' => $request->province,
-                'created_at' => Carbon::now()
-            ]);
 
             return response()->json([
                 'status_code' => 201,

@@ -399,25 +399,32 @@ class ProductController extends Controller
             ->where('vshop_products.product_id', $id)
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
-//        dd($list_vshop);
-//        return $list_vshop;
 
+        if (count($list_vshop)==0){
+            $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                ->where('vshop_products.product_id', $id)
+                ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+                ->get();
+        }
         foreach ($list_vshop as $list) {
-//            $vshop_name = Vshop::where('pdone_id',$list->id_pdone)->first()->name;
+
             $discount = Discount::where('product_id', $id)->where('user_id', $list->pdone_id)
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
                 ->first();
             $list->vshop_discount = $discount->discount ?? 0;
-//            $list->vshop_discount = rand(10,20);
-//            "id": 1,
-//            "pdone_id": "11212",
-//            "product_id": 1,
-//            "status": 1,
-//            "amount": 0,
-//            "created_at": "2023-03-10T04:01:10.000000Z",
-//            "updated_at": null,
-//            "vshop_discount": 0
+
+        }
+        if (count($list_vshop)==0){
+            $list_vshop = Vshop::where('pdone_id', 247)
+                ->select('id', 'pdone_id', 'nick_name', 'vshop_name', 'pdone_id')
+                ->get();
+            foreach ($list_vshop as $list) {
+
+                $list->product_id=$product->id;
+                $list->vshop_discount = 0;
+                $list->amount=0;
+            }
         }
 
 
