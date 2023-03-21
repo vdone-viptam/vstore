@@ -142,7 +142,7 @@
 
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-title font-medium">Mô tả sản phẩm<strong
+                    <span class="text-title font-medium">Tóm tắt sản phẩm<strong
                             class="text-[#FF4D4F]">*</strong></span>
                     <textarea name="description" id="description" style="width: 100% !important;;height: 750px;"
                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{$product->description}}</textarea>

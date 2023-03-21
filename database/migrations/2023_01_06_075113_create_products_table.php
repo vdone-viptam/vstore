@@ -61,6 +61,7 @@ return new class extends Migration {
             $table->float('deposit_money',)->default(0);
             $table->integer('type_pay')->default(0);
             $table->longText('short_content')->nullable();
+            $table->integer('availability_status')->default(0)->comment('trạng thái đã có sản phẩm trong kho');
             $table->timestamps();
         });
     }

@@ -95,8 +95,17 @@ class ProductController extends Controller
 
     public function updateRequest($status, Request $request)
     {
-        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
 
+        $product_warehouses= ProductWarehouses::where('id',$request->id)->first();
+        $product_warehouses->status=$request->status;
+        $product_warehouses->save();
+//        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
+        if ($request->status==1){
+            $product = Product::where('id',$product_warehouses->product_id)->first();
+
+            $product->availability_status = 1;
+            $product->save();
+        }
 
         return redirect()->back()->with('success', 'Cập nhật đơn gửi hàng thành công');
     }
