@@ -49,9 +49,7 @@ class ProductController extends Controller
 //            return $request ->option;
 
             $limit = $request->limit ?? 10;
-            $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)
-
-            ;
+            $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
             $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay', 'discount_vShop as discount_vstore'];
             $request->option = $request->option == 'asc' ? 'asc' : 'desc';
 
@@ -584,7 +582,9 @@ class ProductController extends Controller
         $type = $request->type ?? 'asc';
         $data = null;
         $products = DB::table('vshop')
-            ->select('name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'amount_product_sold', 'vshop_products.amount as in_stock', 'view')
+            ->select('products.name as product_name', 'publish_id', 'price',
+                'images', 'products.id', 'discount_vShop', 'amount_product_sold',
+                'vshop_products.amount as in_stock', 'view')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.status', $request->status)
