@@ -146,7 +146,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
 
         Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
-        Route::post('create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
+        Route::match(['put','post'],'create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
         Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
         Route::get('/profile/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
