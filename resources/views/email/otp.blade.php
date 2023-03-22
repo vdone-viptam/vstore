@@ -34,7 +34,7 @@
     <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng
 
     </p>
-    <p style="margin-top:3%;">
+    <p style="margin-top:1%;">
         Quý khách đang thực hiện đăng nhập trang quản trị @if($role_id == 1)
             Admin
         @elseif($role_id==2)
@@ -50,7 +50,7 @@
     </p>
 
 
-    <p style="margin-top:3%;">Rất hân hạnh được phục vụ Quý khách!</p>
+    <p style="margin-top:1%;">Rất hân hạnh được phục vụ Quý khách!</p>
     <p>Trân trọng cảm ơn!</p>
     </p>
 </div>

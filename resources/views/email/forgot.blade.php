@@ -74,7 +74,7 @@
     <p style="font-weight:bold;font-size:19px;">Chào mừng quý khách đến với hệ thống Thương mại điện tử.
 
     </p>
-    <p style="margin-top:3%;">
+    <p style="margin-top:1%;">
         Để bắt đầu quá trình đặt lại mật khẩu cho Tài khoản
         @if($role_id == 1)
             Admin
@@ -90,7 +90,7 @@
                 đây</a> và đợi vài phút. Hệ thống sẽ chuyển đến trang đặt lại mật khẩu.
     </p>
 
-    <p style="margin-top:3%;">Rất hân hạnh được phục vụ Quý khách!</p>
+    <p style="margin-top:1%;">Rất hân hạnh được phục vụ Quý khách!</p>
     <p>Trân trọng cảm ơn!</p>
     </p>
 </div>
