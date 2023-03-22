@@ -82,8 +82,8 @@
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Địa chỉ:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
-                                <input type="text" name="address" id="address"
-                                       class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                                <input type="text" name="address" id="address" readonly
+                                       class=" bg-gray-200 w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                                        value="{{$infoAccount->address}}">
                                 @error('address')
                                 <p class="text-red-600">{{$message}}</p>

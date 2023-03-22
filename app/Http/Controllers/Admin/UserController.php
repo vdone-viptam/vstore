@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\DepositExport;
 use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\Product;
+use App\Models\Province;
 use App\Models\RequestChangeTaxCode;
 use App\Models\User;
 use App\Models\Warehouses;
@@ -107,6 +109,17 @@ class UserController extends Controller
             $user->save();
 
             if ($user->role_id == 4) {
+
+
+                $district = District::where('district_id',$user->district_id)->first()->district_name;
+                $province = Province::where('province_id',$user->provinceId)->first()->province_name;
+
+                $address = $user->address.', '.$district.'. '.$province;
+               $result = app('geocoder')->geocode($address)->get();
+               $coordinates = $result[0]->getCoordinates();
+               $lat = $coordinates->getLatitude();
+               $long = $coordinates->getLongitude();
+
                 $warehouses = new Warehouses();
                 $warehouses->name = $user->name;
                 $warehouses->phone_number = $user->phone_number;
@@ -114,6 +127,8 @@ class UserController extends Controller
                 $warehouses->city_id = $user->provinceId;
                 $warehouses->district_id = $user->district_id;
                 $warehouses->user_id = $user->id;
+                $warehouses->lat= $lat;
+                $warehouses->long = $long;
                 $warehouses->save();
             }
             if ($user->role_id == 2) {
