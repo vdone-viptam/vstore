@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/getWarehouse', function () {
+    calculateShippingByProductID(1, 1, 1);
+});
+
 // THANH TOÁN APP
 Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);

@@ -7,37 +7,54 @@ use App\Models\Province;
 use Illuminate\Support\Carbon;
 
 function calculateShippingByProductID($productID, $districtId, $provinceId) {
-
-    $product = \App\Models\Product::where('products.id', $productID)
+    $products = \App\Models\Product::where('products.id', $productID)
         ->join('product_warehouses', 'product_warehouses.product_id', 'products.id')
         ->join('warehouses', 'product_warehouses.ware_id', 'warehouses.id')
         ->select(
             'warehouses.lat',
             'warehouses.long',
+            'warehouses.city_id',
+            'warehouses.district_id',
             'warehouses.id'
         )
         ->get();
-
-    if(!$product) {
+    if(!$products) {
         return false;
     }
-
     $district = District::find($districtId);
     $province = Province::find($provinceId);
-
     if(!$district || !$province) {
         return false;
     }
-
     $address = $district->district_name . ", " . $province->province_name;
-
     $result = app('geocoder')->geocode($address)->get();
     $coordinates = $result[0]->getCoordinates();
+    $places = $products;
+    $min_distance = PHP_FLOAT_MAX;
+    $warehouse = null;
+    foreach ($places as $place) {
+        $lat = $coordinates->getLatitude();
+        $long = $coordinates->getLongitude();
+        $distance = haversine($lat, $long, $place->lat, $place->long);
+        if ($distance < $min_distance) {
+            $min_distance = $distance;
+            $warehouse = $place;
+        }
+    }
+    return $warehouse;
+}
 
-
-    dd($coordinates, $product);
-
-
+function haversine($lat1, $lon1, $lat2, $lon2) {
+    $R = 6371;
+    $dLat = deg2rad($lat2 - $lat1);
+    $dLon = deg2rad($lon2 - $lon1);
+    $a =
+        sin($dLat / 2) * sin($dLat / 2) +
+        cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+        sin($dLon / 2) * sin($dLon / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    $d = $R * $c;
+    return $d;
 }
 
 function getDiscountProducts($id, $idVshop) { // SAI
