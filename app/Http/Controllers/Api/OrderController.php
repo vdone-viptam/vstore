@@ -67,6 +67,7 @@ class OrderController extends Controller
             )
             ->first();
 
+
         $product->quantity = $quantity;
 
         if (!$product) {
@@ -119,10 +120,18 @@ class OrderController extends Controller
             $order->total = $order->total + $vat;
             $totalVat = $vat;
 
+            $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId);
+            if(!$warehouse) {
+                return response()->json([
+                    "status_code" => 403,
+                    "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
+                ]);
+            }
+
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                'SENDER_DISTRICT' => 14, // Cầu giấy
-                'SENDER_PROVINCE' => 1, // Hà Nội
+                'SENDER_DISTRICT' => $warehouse->district_id,
+                'SENDER_PROVINCE' => $warehouse->city_id,
                 'RECEIVER_DISTRICT' => $districtId,
                 'RECEIVER_PROVINCE' => $provinceId,
 
@@ -151,8 +160,8 @@ class OrderController extends Controller
 
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                'SENDER_DISTRICT' => 14, // Cầu giấy
-                'SENDER_PROVINCE' => 1, // Hà Nội
+                'SENDER_DISTRICT' => $warehouse->district_id,
+                'SENDER_PROVINCE' => $warehouse->city_id,
                 'RECEIVER_DISTRICT' => $districtId,
                 'RECEIVER_PROVINCE' => $provinceId,
 
@@ -335,8 +344,8 @@ class OrderController extends Controller
 
                 $body = [
                     // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                    'SENDER_DISTRICT' => 14, // Cầu giấy
-                    'SENDER_PROVINCE' => 1, // Hà Nội
+                    'SENDER_DISTRICT' => $warehouse->district_id, // Cầu giấy
+                    'SENDER_PROVINCE' => $warehouse->city_id, // Hà Nội
                     'RECEIVER_DISTRICT' => $districtId,
                     'RECEIVER_PROVINCE' => $provinceId,
                     "ORDER_SERVICE_ADD" => "",

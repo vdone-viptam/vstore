@@ -138,16 +138,17 @@ function getDiscountAndDepositMoney($quantity, $arr) {
 }
 
 function getDiscountProduct($id, $idVshop) {
-    $discounts = Discount::where('product_id', $id)
-        ->where('discounts.type', config('constants.discountType.ncc'))
-        ->orWhere('discounts.type', config('constants.discountType.vstore'))
+    $discounts = Discount::where('discounts.product_id', $id)
+        ->where(function ($query) {
+            $query->where('discounts.type', config('constants.discountType.ncc'))
+                ->orWhere('discounts.type', config('constants.discountType.vstore'));
+        })
         ->where('discounts.start_date', '<=', Carbon::now())
         ->where('discounts.end_date', '>=', Carbon::now())
         ->join('products', 'products.id', '=', 'discounts.product_id')
         ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
         ->get();
-
-    $discountVShop = Discount::where('product_id', $id)
+    $discountVShop = Discount::where('discounts.product_id', $id)
         ->where('discounts.user_id', $idVshop)
         ->where('discounts.type', config('constants.discountType.vshop'))
         ->where('discounts.start_date', '<=', Carbon::now())
