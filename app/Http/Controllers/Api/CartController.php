@@ -131,7 +131,8 @@ class CartController extends Controller
                 'cart_items_v2.quantity',
                 'cart_items_v2.vshop_id',
                 'vshop.nick_name as name_vshop',
-                'vshop.id as vshop_id_'
+                'vshop.id as vshop_id_',
+                'vshop.avatar',
             )
             ->get();
 
