@@ -27,6 +27,7 @@ class WarehouseController extends Controller
 
     public function postAddProduct(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'ware_id' => 'required',

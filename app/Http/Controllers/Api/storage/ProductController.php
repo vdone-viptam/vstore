@@ -256,7 +256,7 @@ class ProductController extends Controller
     public function detail(Request $request)
     {
 //        return $request->id;
-        $order = Order::where('id',$request->id)->first();
+        $order = Order::where('no',$request->id)->first();
 
         $products = OrderItem::join('products','order_item.product_id','=','products.id')->where('order_id',$order->id)
             ->select('order_item.id','order_item.quantity','products.publish_id','products.name as name')

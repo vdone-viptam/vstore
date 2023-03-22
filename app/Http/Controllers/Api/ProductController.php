@@ -96,10 +96,10 @@ class ProductController extends Controller
                 $pro->discount = $discount ?? 0;
                 if ($request->pdone_id) {
                     $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
-                            ->where('product_id', $pro->id)
-                            ->where('vshop_products.status', 1)
-                            ->where('vshop.pdone_id', $request->pdone_id)
-                            ->count() ?? 0;
+                        ->where('product_id', $pro->id)
+                        ->where('vshop_products.status', 1)
+                        ->where('vshop.pdone_id', $request->pdone_id)
+                        ->count() ?? 0;
                     $pro->is_affiliate = $pro->is_affiliate > 0 ? 1 : 0;
 
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
@@ -183,12 +183,12 @@ class ProductController extends Controller
 
             foreach ($product as $pr) {
                 $pr->discount = DB::table('discounts')
-                        ->selectRaw('SUM(discount) as sum')
-                        ->where('product_id', $pr->id)
-                        ->whereIn('type', [1, 2])
-                        ->whereDate('start_date', '<=', \Carbon\Carbon::now())
-                        ->whereDate('end_date', '>=', \Carbon\Carbon::now())
-                        ->first()->sum ?? 0;
+                    ->selectRaw('SUM(discount) as sum')
+                    ->where('product_id', $pr->id)
+                    ->whereIn('type', [1, 2])
+                    ->whereDate('start_date', '<=', \Carbon\Carbon::now())
+                    ->whereDate('end_date', '>=', \Carbon\Carbon::now())
+                    ->first()->sum ?? 0;
 
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
@@ -325,7 +325,7 @@ class ProductController extends Controller
             $value->images = asset(json_decode($value->images)[0]);
             $value->price_discount = $value->price - ($value->price / 100 * $value->discount_vstore);
             $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
-                    ->first()->sum ?? 0;
+                ->first()->sum ?? 0;
 
         }
 
@@ -538,24 +538,24 @@ class ProductController extends Controller
         foreach ($products as $pr) {
             $cate[] = $pr->cate_name;
             $pr->discount = DB::table('discounts')
-                    ->selectRaw('SUM(discount) as dis')
-                    ->where('product_id', $pr->id)
-                    ->where('start_date', '<=', Carbon::now())
-                    ->where('end_date', '>=', Carbon::now())
-                    ->whereIn('type', [1, 2])
-                    ->first()->dis ?? 0;
+                ->selectRaw('SUM(discount) as dis')
+                ->where('product_id', $pr->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->first()->dis ?? 0;
             $pr->image = asset(json_decode($pr->images)[0]);
             unset($pr->images);
             if ($request->pdone_id) {
                 $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
                 $pr->available_discount = $more_dis ?? 0;
                 $pr->vshop_discount = DB::table('discounts')
-                        ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
+                    ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
                 $pr->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
-                        ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
-                        ->where('vshop.pdone_id', $request->pdone_id)
-                        ->count() ?? 0;
+                    ->where('product_id', $pr->id)
+                    ->where('vshop_products.status', 1)
+                    ->where('vshop.pdone_id', $request->pdone_id)
+                    ->count() ?? 0;
             }
         }
         $vshop->categories = implode(', ', array_unique($cate));
@@ -606,21 +606,21 @@ class ProductController extends Controller
             $products = $products->orderBy('ty_le', $type);
         }
         $total_product = $products->count();
-        $products = $products->paginate($limit);
+        $products = $products->orderBy('vshop_products.created_at', 'desc')->paginate($limit);
         foreach ($products as $pr) {
             $pr->discount = DB::table('discounts')
-                    ->selectRaw('SUM(discount) as dis')
-                    ->where('product_id', $pr->id)
-                    ->where('start_date', '<=', Carbon::now())
-                    ->where('end_date', '>=', Carbon::now())
-                    ->whereIn('type', [1, 2])
-                    ->first()->dis ?? 0;
+                ->selectRaw('SUM(discount) as dis')
+                ->where('product_id', $pr->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->first()->dis ?? 0;
             $pr->image = asset(json_decode($pr->images)[0]);
             unset($pr->images);
             $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
             $pr->available_discount = $more_dis ?? 0;
             $pr->vshop_discount = DB::table('discounts')
-                    ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
+                ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
         }
         return response()->json([
             'status_code' => 200,
@@ -661,7 +661,8 @@ class ProductController extends Controller
     }
 
     public
-    function saveBill($pdone_id, Request $request)
+    function
+    saveBill($pdone_id, Request $request)
     {
         DB::beginTransaction();
         try {
@@ -694,12 +695,12 @@ class ProductController extends Controller
                     ->where('id', $pro['product_id'])
                     ->first();
                 $discount = DB::table('discounts')->where('start_date', '<=', Carbon::now())
-                        ->selectRaw('SUM(discount) as dis')
-                        ->where('end_date', '>=', Carbon::now())
-                        ->where('product_id', $pro['product_id'])
-                        ->whereIn('user_id', [$product->vstore_id, $product->user_id, $pdone_id])
-                        ->first()
-                        ->dis ?? 0;
+                    ->selectRaw('SUM(discount) as dis')
+                    ->where('end_date', '>=', Carbon::now())
+                    ->where('product_id', $pro['product_id'])
+                    ->whereIn('user_id', [$product->vstore_id, $product->user_id, $pdone_id])
+                    ->first()
+                    ->dis ?? 0;
                 $price = ($product->price - ($product->price * $discount / 100));
                 $bills += $price * $pro['amount'];
                 $vstore[] = [
@@ -719,7 +720,11 @@ class ProductController extends Controller
 
             }
 
-            return [$vstore, $vshop, $ncc, $bills];
+//            return [$vstore, $vshop, $ncc, $bills];
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'tạo mới thành công'
+            ], 201);
         } catch (\Exception $exception) {
             DB::rollBack();
 
