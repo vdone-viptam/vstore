@@ -326,7 +326,7 @@ class  VShopController extends Controller
             return response()->json([
                 "status_code" => 404,
                 "message" => "Nhà cung cấp không tồn tại"
-            ]);
+            ],404);
         }
 
         $userId = $request->user_id;
@@ -391,7 +391,7 @@ class  VShopController extends Controller
         return response()->json([
             "order" => $order,
             "product" => $product
-        ]);
+        ],200);
     }
 
 
@@ -433,7 +433,7 @@ class  VShopController extends Controller
             'status_code' => 200,
             'message' => 'Tạo Vshop Thành công',
             'data' => $vshop
-        ]);
+        ],200);
     }
 
     /**
@@ -454,7 +454,7 @@ class  VShopController extends Controller
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
             'data' => $vshop
-        ]);
+        ],200);
     }
 
     public function getProductByIdPdone(Request $request)
@@ -480,7 +480,7 @@ class  VShopController extends Controller
         return response()->json([
             'status_code' => 200,
             'data' => $buy_more,
-        ]);
+        ],200);
     }
 
     /**
@@ -528,7 +528,7 @@ class  VShopController extends Controller
         return response()->json([
             'status_code' => 200,
             'discount' => $discount,
-        ]);
+        ],200);
 
     }
 
@@ -683,7 +683,7 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
-            ]);
+            ],400);
         } else {
             DB::table('discounts')->insert([
                 'product_id' => $request->product_id,
@@ -957,7 +957,7 @@ class  VShopController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ]);
+            ],400);
         }
 
 

@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Vshop;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -505,7 +506,7 @@ class OrderController extends Controller
      *
      * @param pdone_id $pdone_id pdone_id vshop
      *
-     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 hoàn thành
+     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 đã giao hàng,5 đã hoàn thành
      * @return \Illuminate\Http\JsonResponse
      */
     public function orderOfUserByVshop(Request $request, $pdone_id)
@@ -526,17 +527,24 @@ class OrderController extends Controller
                 'price',
                 'discount_ncc',
                 'discount_vstore',
-                'quantity', 'order_id', 'product_id', 'export_status');
+                'quantity', 'order_id', 'product_id', 'export_status','order.updated_at');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
                 ->where('status', '!=', 2)
                 ->orderBy('order.updated_at', 'desc')
                 ->where('vshop_id', $vshop_id->id);
-            if ($status !== 10) {
+            if ($status !== 10 && $status !=5) {
                 $orders = $orders->where('export_status', $status);
             }
+            if ($status == 5 ){
+                $orders = $orders->where('export_status', 4)
+                ->whereDate('order.updated_at','<=',Carbon::now()->addDay(7))
+                ;
+            }
+//            return $orders->updated_at;
+//            return Carbon::now()->addDay(7);
             $orders = $orders->paginate($limit);
-
+//            return $orders;
             foreach ($orders as $order) {
                 $product = $order->product()->select('name', 'images')->first();
                 $order->productInfo = null;
@@ -544,7 +552,8 @@ class OrderController extends Controller
                     'image' => asset(json_decode($product->images)[0]),
                     'name' => $product->name,
                     'quantity' => $order->quantity,
-                    'price' => $order->price
+                    'price' => $order->price,
+//                    'updated_at'=>$orders->updated_at
                 ];
                 unset($order->quantity);
                 unset($order->price);
