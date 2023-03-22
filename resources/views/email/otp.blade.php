@@ -13,17 +13,17 @@
     }
 </style>
 <body style="background-color: #F6FAFB; padding-top:10px ;">
-<div style="text-align:center;margin:6%">
+<div style="text-align:center;margin:1%">
     @if($role_id == 1)
 
-        <img src="https://vstore.vdone.vn/asset/images/logo.png" style="height:40px">
+        <img src="{{asset('asset/images/logo.png')}}" style="height:40px">
     @elseif($role_id==2)
 
-        <img src="https://ncc.vdone.vn/home/img/NCC.png" style="height:40px">
+        <img src="{{asset('home/img/NCC.png')}}" style="height:40px">
     @elseif($role_id ==3)
-        <img src="https://vstore.vdone.vn/asset/images/logo.png" style="height:40px">
+        <img src="{{asset('asset/images/logo.png')}}" style="height:40px">
     @else
-        <img src="https://kho.vdone.vn/home/img/titleK.png" style="height:40px">
+        <img src="{{asset('home/img/titleK.png')}}" style="height:40px">
     @endif
 
 

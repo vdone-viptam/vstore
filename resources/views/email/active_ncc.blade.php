@@ -13,7 +13,7 @@
 </style>
 <body style="background-color: #F6FAFB; padding-top:10px ;">
 <div style="text-align:center;margin:6%">
-    <img src="https://ncc.vdone.vn/home/img/NCC.png" style="height:40px"></div>
+    <img src="{{asset('home/img/NCC.png')}}" style="height:40px"></div>
 <div style="background-color: #ffff;padding:4% 6%;width:36%;margin:0px auto;">
 
     <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng đã đăng ký tài khoản NCC
