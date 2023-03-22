@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <title></title>
@@ -7,40 +8,51 @@
     p {
         font-size: 17px;
     }
+    @media only screen and (max-width: 600px) {
+
+    }
 </style>
-<body>
-<div style="text-align:center;">
-    @if($role_id == 2)
-        <img src="{{asset('home/img/NCC.png')}}" style="height:60px">
-    @elseif($role_id == 3)
-        <img src="{{asset('home/img/Logo.png')}}" style="height:60px">
-    @elseif($role_id == 1)
-        <img src="{{asset('home/img/vdone.png')}}" style="height:60px">
-    @else
-        <img src="{{asset('home/img/titleK.png')}}" style="height:60px">
-    @endif
-</div>
-<p>
-    Quý khách đang thực hiện đăng nhập trang quản trị @if($role_id == 1)
-        Admin
+<body style="background-color: #F6FAFB; padding-top:10px ;">
+<div style="text-align:center;margin:6%">
+    @if($role_id == 1)
+
+        <img src="https://vstore.vdone.vn/asset/images/logo.png" style="height:40px">
     @elseif($role_id==2)
-        Nhà cung cấp
+
+        <img src="https://ncc.vdone.vn/home/img/NCC.png" style="height:40px">
     @elseif($role_id ==3)
-        V-Store
+        <img src="https://vstore.vdone.vn/asset/images/logo.png" style="height:40px">
     @else
-        KHO
+        <img src="https://kho.vdone.vn/home/img/titleK.png" style="height:40px">
     @endif
-</p>
-<p>
-    Mã xác thực là: <span style="font-weight:bold;">{{$confirm_code}}</span>
-</p>
-<p>
-    Mã xác thực có hiệu lực trong vòng 3 phút.
-</p>
-<p>Rất hân hạnh được phục vụ Quý khách!
-</p>
-<p>
-    Trân trọng cảm ơn!
-</p>
+
+
+
+</div>
+<div style="background-color: #ffff;padding:4% 6%;width:36%;margin:0px auto;">
+
+    <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng
+
+    </p>
+    <p style="margin-top:6%;">
+        Quý khách đang thực hiện đăng nhập trang quản trị @if($role_id == 1)
+            Admin
+        @elseif($role_id==2)
+            Nhà cung cấp
+        @elseif($role_id ==3)
+            V-Store
+        @else
+            KHO
+    @endif
+    <p>
+        <span style="font-weight:bold;">Mã Xác thực: </span>{{$confirm_code}}
+
+    </p>
+
+
+    <p style="margin-top:6%;">Rất hân hạnh được phục vụ Quý khách!</p>
+    <p>Trân trọng cảm ơn!</p>
+    </p>
+</div>
 </body>
 </html>
