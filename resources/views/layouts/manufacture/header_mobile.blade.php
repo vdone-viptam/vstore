@@ -59,7 +59,12 @@
     <div class="h-full min-w-[200px]  -left-[300px] fixed menu_show z-20 bg-[#F2F8FF] ">
         <div class="flex items-center justify-center py-3 ">
             <div class="w-[60px] mx-auto">
-                <img class="w-full " src="{{asset('asset/images/Logoncc.png')}}" alt="">
+                @if(!empty(Auth::user()->avatar))
+                    <img class="w-full object-contain"
+                         src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
+                @else
+                    <img class="w-full object-contain" src="{{asset('home/img/NCC.png')}}" alt="">
+                @endif
             </div>
         </div>
         <div class="px-4 py-3 box-shadow h-full w-[250px] md:w-full max-w-[250px] ">
@@ -355,7 +360,14 @@
     <div class="bg-[#E6F7FF] w-full py-4 flex justify-between items-center px-4 shadow-lg">
         <a href="{{route('screens.manufacture.dashboard.index')}}" class="">
             <div class="w-[100px] h-[40px]">
-                <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+
+
+                @if(!empty(Auth::user()->avatar))
+                    <img class="w-full object-contain"
+                         src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
+                @else
+                    <img class="w-full object-contain" src="{{asset('home/img/NCC.png')}}" alt="">
+                @endif
             </div>
         </a>
         <div class="w-[24px] cursor-pointer nav_hidden" id="nav">

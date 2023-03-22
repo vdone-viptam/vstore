@@ -53,7 +53,7 @@
                     <img class="w-full object-contain"
                          src="{{asset( 'image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
                 @else
-                    <img class="w-full object-contain" src="{{asset('asset/images/Logoncc.png')}}" alt="">
+                    <img class="w-full object-contain" src="{{asset('home/img/NCC.png')}}" alt="">
                 @endif
 
 

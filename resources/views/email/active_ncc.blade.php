@@ -11,7 +11,7 @@
 
     }
 </style>
-<body style="background-color: #F6FAFB; padding-top:10px ;">
+<body style="background-color: #e8e8e8; padding-top:10px ;">
 <div style="text-align:center;margin:6%">
     <img src="{{asset('home/img/NCC.png')}}" style="height:40px"></div>
 <div style="background-color: #ffff;padding:4% 6%;width:36%;margin:0px auto;">
