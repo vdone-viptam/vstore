@@ -57,6 +57,11 @@ return new class extends Migration {
             $table->float('percent_discount', 20, 2)->nullable()->comment('Số phần trăm giảm giá');
             $table->string('import_address')->nullable()->comment('Địa chỉ nơi nhập khẩu');
             $table->double('view', 20)->default(0)->comment('Lượt xem sản phẩm');
+            $table->string('number')->nullable();
+            $table->float('deposit_money',)->default(0);
+            $table->integer('type_pay')->default(0);
+            $table->longText('short_content')->nullable();
+            $table->integer('availability_status')->default(0)->comment('trạng thái đã có sản phẩm trong kho');
             $table->timestamps();
         });
     }

@@ -43,15 +43,15 @@ class BigSaleController extends Controller
                 $products = $products->where('category_id', $request->category_id);
             }
             if ($request->order_by == 1) {
-                $order_by = $request->option == 1 ? 'asc' : 'desc';
+                $order_by = $request->option == 'asc' ? 'asc' : 'desc';
                 $products = $products->orderBy('id', $order_by);
             }
             if ($request->order_by == 2) {
-                $order_by_price = $request->option == 1 ? 'asc' : 'desc';
+                $order_by_price = $request->option == 'asc' ? 'asc' : 'desc';
                 $products = $products->orderBy('price', $order_by_price);
             }
             if ($request->order_by == 3) {
-                $order_by_sold = $request->option == 1 ? 'asc' : 'desc';
+                $order_by_sold = $request->option == 'asc' ? 'asc' : 'desc';
                 $products = $products->orderBy('amount_product_sold', $order_by_sold);
             }
             if ($request->payment) {

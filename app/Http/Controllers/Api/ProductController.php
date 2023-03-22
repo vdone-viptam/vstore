@@ -89,7 +89,7 @@ class ProductController extends Controller
             foreach ($products as $pro) {
                 $pro->images = asset(json_decode($pro->images)[0]);
                 $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
-                    ->whereIn('type',[1,2])
+                    ->whereIn('type', [1, 2])
                     ->where('start_date', '<=', Carbon::now())
                     ->where('end_date', '>=', Carbon::now())
                     ->first()->sum;
@@ -399,25 +399,32 @@ class ProductController extends Controller
             ->where('vshop_products.product_id', $id)
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
-//        dd($list_vshop);
-//        return $list_vshop;
 
+        if (count($list_vshop) == 0) {
+            $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+                ->where('vshop_products.product_id', $id)
+                ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+                ->get();
+        }
         foreach ($list_vshop as $list) {
-//            $vshop_name = Vshop::where('pdone_id',$list->id_pdone)->first()->name;
+
             $discount = Discount::where('product_id', $id)->where('user_id', $list->pdone_id)
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
                 ->first();
             $list->vshop_discount = $discount->discount ?? 0;
-//            $list->vshop_discount = rand(10,20);
-//            "id": 1,
-//            "pdone_id": "11212",
-//            "product_id": 1,
-//            "status": 1,
-//            "amount": 0,
-//            "created_at": "2023-03-10T04:01:10.000000Z",
-//            "updated_at": null,
-//            "vshop_discount": 0
+
+        }
+        if (count($list_vshop) == 0) {
+            $list_vshop = Vshop::where('pdone_id', 247)
+                ->select('id', 'pdone_id', 'nick_name', 'vshop_name', 'pdone_id')
+                ->get();
+            foreach ($list_vshop as $list) {
+
+                $list->product_id = $product->id;
+                $list->vshop_discount = 0;
+                $list->amount = 0;
+            }
         }
 
 
@@ -567,7 +574,7 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @param  $pdone_id  mã ID user V-Shop
-     * @urlParam orderBy  id Mới nhất | amount_product_sold Bán chạy | price Giá
+     * @urlParam orderBy 1 Số lượng sản phẩm còn lại | 2 Số sản phẩm đã bán | 3 Tỷ lệ bán sản phẩm
      * @urlParam status 1 tiếp thị | 2 nhập sẵn
      * urlParam type  asc|desc Mặc định asc
      *
@@ -582,11 +589,22 @@ class ProductController extends Controller
         $type = $request->type ?? 'asc';
         $data = null;
         $products = DB::table('vshop')
-            ->select('name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop', 'amount_product_sold', 'vshop_products.amount as in_stock', 'view')
+            ->selectRaw('products.name as product_name,publish_id,price,
+                images, products.id, discount_vShop ,vshop_products.amount_product_sold,
+                vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
-            ->where('vshop_products.status', $request->staus)
+            ->where('vshop_products.status', $request->status)
             ->where('pdone_id', $pdone_id);
+        if ($request->orderBy == 1) {
+            $products = $products->orderBy('vshop_products.amount', $type);
+        }
+        if ($request->orderBy == 2) {
+            $products = $products->orderBy('vshop_products.amount_product_sold', $type);
+        }
+        if ($request->orderBy == 3) {
+            $products = $products->orderBy('ty_le', $type);
+        }
         $total_product = $products->count();
         $products = $products->paginate($limit);
         foreach ($products as $pr) {

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('code')->nullable();
             $table->integer('bill_id')->nullable();
-            $table->integer('ward_id')->nullable();
+            $table->integer('ware_id')->nullable();
             $table->string('address')->nullable();
             $table->double('total', 20, 2);
             $table->string('pick_up_address')->nullable();

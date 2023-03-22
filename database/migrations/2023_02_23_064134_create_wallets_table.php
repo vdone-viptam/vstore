@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('bank_id');
             $table->integer('user_id');
             $table->string('name');
+            $table->integer('type')->default(1)->comment('1 ví quản trị , ví vshop');
             $table->timestamps();
         });
     }

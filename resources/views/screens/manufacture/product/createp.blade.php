@@ -146,7 +146,7 @@
                     @enderror
                 </div>
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-title font-medium">Mô tả sản phẩm<strong
+                    <span class="text-title font-medium">Tóm tắt sản phẩm<strong
                             class="text-[#FF4D4F]">*</strong></span>
                     <textarea name="short_content" id="short_content" rows="8"
                               class="w-full outline-nonepy-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">{{old('short_content')}}</textarea>

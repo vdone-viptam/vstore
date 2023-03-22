@@ -1,7 +1,7 @@
 @extends('layouts.vstore.main')
 
 @section('modal')
-    <div id="modal2"></div>
+    <div id="modal5"></div>
 @endsection
 
 @section('page_title','Tất cả sản phẩm')
@@ -206,8 +206,8 @@
                 $.ajax({
                     url: '{{route('screens.vstore.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&type=2',
                     success: function (result) {
-                        $('#modal2').html('');
-                        $('#modal2').append(result);
+                        // $('#modal5').html('');
+                        $('#modal5').html(result);
                         $('.modal-details').toggleClass('show-modal')
                     },
                 });
