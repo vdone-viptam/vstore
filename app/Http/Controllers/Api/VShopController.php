@@ -7,6 +7,7 @@ use App\Http\Lib9Pay\HMACSignature;
 use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\BuyMoreDiscount;
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\PreOrderVshop;
 use App\Models\Product;
@@ -637,6 +638,96 @@ class  VShopController extends Controller
     }
 
     /**
+     * lấy mã giảm giá theo vshop và sản phẩm
+     *
+     * API này lấy chi tiết mã giảm giá theo pdone_id,product_id
+     *
+     * @param Request $request
+     * @param  pdone_id Mã p done required
+     * @param  product_id Mã sản phẩm required exits:products
+     * @return \Illuminate\Http\JsonResponse
+     */
+public function getDiscount(Request $request,$pdone_id,$product_id){
+
+
+        $discount = Discount::where('user_id',$pdone_id)->where('product_id',$product_id)->where('type',3)->first();
+        if (!$discount){
+            return response()->json([
+                'status_code' => 404,
+                'error' => 'Mã giảm giá không tồn tại',
+            ],404);
+        }else{
+            return response()->json([
+                'status_code' => 200,
+                'data' => $discount,
+            ]);
+        }
+//        return $pdone_id. $product_id;
+}
+    /**
+     * thay dổi thông tin mã giảm giá theo vshop và saản phẩm
+     *
+     * API này lấy chi tiết mã giảm giá theo pdone_id,product_id
+     *
+     * @param Request $request
+     * @param  pdone_id Mã p done required
+     * @param  product_id Mã sản phẩm required exits:products
+     * @bodyParam start_date Ngày bắt đầu required date_format:Y/m/d after:Today
+     * @bodyParam end_date Ngày kết thúc required date_format:Y/m/d after:start_date
+     * @urlParam discount Phần trăm giảm giá required min:0 max:discount_vShop
+     * @return \Illuminate\Http\JsonResponse
+     */
+public function editDiscount(Request $request,$pdone_id,$product_id){
+    $validator = Validator::make($request->all(), [
+        'start_date' => 'required|date_format:Y/m/d|after:' . Carbon::now(),
+        'end_date' => 'required|date_format:Y/m/d|after:start_date',
+        "discount" => 'required|min:0|max:100'
+
+    ], []);
+    if ($validator->fails()) {
+        return response()->json([
+            'status_code' => 403,
+            'error' => $validator->errors(),
+        ], 403);
+    }
+
+    $discount = Discount::where('user_id',$pdone_id)->where('product_id',$product_id)->where('type',3)->first();
+    if (!$discount){
+        return response()->json([
+            'status_code' => 404,
+            'error' => 'Mã giảm giá không tồn tại',
+        ],404);
+    }else{
+        $discount_vshop = Product::select('discount_vShop')->where('id', $product_id)->where('status', 2)->first()->discount_vShop ?? 0;
+        if ($discount_vshop == 0) {
+            return response()->json([
+                'status_code' => 400,
+                'error' => 'Sản phẩm chưa niêm yết',
+            ],400);
+        } elseif ($request->discount > $discount_vshop / 100 * 85) {
+            return response()->json([
+                'status_code' => 400,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 85,
+            ],400);
+        } else {
+            $discount->start_date =$request->start_date;
+            $discount->end_date =$request->start_date;
+            $discount->discount =$request->discount;
+            $discount->save();
+//            return $discount;
+            return response()->json([
+                'status_code' => 201,
+                'message' => 'Chỉnh sửa mã giảm giá thành công'
+            ]);
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $discount,
+        ]);
+    }
+
+}
+    /**
      * Lưu mới mã giảm giá
      *
      * API này sẽ lưu mới mã giảm giá
@@ -646,7 +737,7 @@ class  VShopController extends Controller
      * @bodyParam product_id Mã sản phẩm required exits:products
      * @bodyParam start_date Ngày bắt đầu required date_format:Y/m/d after:Today
      * @bodyParam end_date Ngày kết thúc required date_format:Y/m/d after:start_date
-     * @urlParam discount Phần trăm giảm giá required max:discount_vShop
+     * @urlParam discount Phần trăm giảm giá required min:0 max:discount_vShop
      * @return \Illuminate\Http\JsonResponse
      */
 
@@ -657,7 +748,7 @@ class  VShopController extends Controller
             'product_id' => 'required|exists:products,id',
             'start_date' => 'required|date_format:Y/m/d|after:' . Carbon::now(),
             'end_date' => 'required|date_format:Y/m/d|after:start_date',
-            "discount" => 'required|max:100'
+            "discount" => 'required|min:0|max:100'
 
         ], []);
         if ($validator->fails()) {
@@ -670,19 +761,19 @@ class  VShopController extends Controller
 
         if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('type', 3)->where('product_id', $request->product_id)->count() > 0) {
             return response()->json([
-                'status_code' => 404,
+                'status_code' => 400,
                 'error' => 'Mã giảm giá đã tồn tại',
-            ]);
+            ],400);
         }
         if ($discount == 0) {
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
-            ]);
-        } elseif ($request->discount > $discount / 100 * 95) {
+            ],400);
+        } elseif ($request->discount > $discount / 100 * 85) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 85,
             ],400);
         } else {
             DB::table('discounts')->insert([

@@ -533,12 +533,17 @@ class OrderController extends Controller
                 ->where('status', '!=', 2)
                 ->orderBy('order.updated_at', 'desc')
                 ->where('vshop_id', $vshop_id->id);
-            if ($status !== 10 && $status !=5) {
+            if ($status !== 10 && $status !=5 && $status !=4) {
                 $orders = $orders->where('export_status', $status);
+            }
+            if ($status == 4 ){
+                $orders = $orders->where('export_status', 4)
+                    ->whereDate('order.updated_at','>',Carbon::now()->addDay(-7))
+                ;
             }
             if ($status == 5 ){
                 $orders = $orders->where('export_status', 4)
-                ->whereDate('order.updated_at','<=',Carbon::now()->addDay(7))
+                ->whereDate('order.updated_at','<=',Carbon::now()->addDay(-7))
                 ;
             }
 //            return $orders->updated_at;
