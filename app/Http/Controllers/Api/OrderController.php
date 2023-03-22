@@ -298,11 +298,17 @@ class OrderController extends Controller
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
-
+                $warehouse = calculateShippingByProductID($pro[0]->id, $districtId, $provinceId);
+                if(!$warehouse) {
+                    return response()->json([
+                        "status_code" => 403,
+                        "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
+                    ]);
+                }
                 $body = [
                     // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                    'SENDER_DISTRICT' => 14, // Cầu giấy
-                    'SENDER_PROVINCE' => 1, // Hà Nội
+                    'SENDER_DISTRICT' => $warehouse->district_id, // Cầu giấy
+                    'SENDER_PROVINCE' => $warehouse->city_id, // Hà Nội
                     'RECEIVER_DISTRICT' => $districtId,
                     'RECEIVER_PROVINCE' => $provinceId,
 
@@ -398,7 +404,8 @@ class OrderController extends Controller
             }
 
             $orders = $orders
-                ->where('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at', 'desc')
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
@@ -447,7 +454,8 @@ class OrderController extends Controller
         try {
             $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number')
                 ->where('id', $order_id)
-                ->where('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('updated_at', 'desc')
                 ->first();
             if (!$order) {
                 return response()->json([
@@ -491,7 +499,7 @@ class OrderController extends Controller
      * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 hoàn thành
      * @return \Illuminate\Http\JsonResponse
      */
-    public function orderOfUserByVshop($pdone_id)
+    public function orderOfUserByVshop(Request $request, $pdone_id)
     {
         try {
             $status = $request->status ?? 10;
@@ -509,10 +517,11 @@ class OrderController extends Controller
                 'price',
                 'discount_ncc',
                 'discount_vstore',
-                'quantity', 'order_id', 'product_id');
+                'quantity', 'order_id', 'product_id', 'export_status');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
-                ->join('wait_for_confirmation', '!=', 2)
+                ->where('status', '!=', 2)
+                ->orderBy('order.updated_at', 'desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
@@ -526,7 +535,8 @@ class OrderController extends Controller
                     'image' => asset(json_decode($product->images)[0]),
                     'name' => $product->name,
                     'quantity' => $order->quantity,
-                    'price' => $order->price
+                    'price' => $order->price,
+
                 ];
                 unset($order->quantity);
                 unset($order->price);
