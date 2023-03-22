@@ -91,6 +91,7 @@ class  VShopController extends Controller
             "pre_order_vshop.total",
             "pre_order_vshop.no",
             "pre_order_vshop.status",
+            "pre_order_vshop.created_at",
             "products.images",
             "products.name",
             "products.price",

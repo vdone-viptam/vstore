@@ -2,29 +2,43 @@
 
 
 use App\Models\Discount;
+use App\Models\District;
+use App\Models\Province;
 use Illuminate\Support\Carbon;
 
-//function calculateShippingByProductID($results, $districtId, $provinceId) {
-//    $grouped = [];
-//    foreach ($results as $item) {
-//        $vshop_id = $item['vshop_id'];
-//        $product_id = $item['product_id'];
-//        if (!isset($grouped[$vshop_id])) {
-//            $grouped[$vshop_id] = ['vshop_id' => $vshop_id, 'product_id' => []];
-//        }
-//        $grouped[$vshop_id]['product_id'][] = $product_id;
-//    }
-//
-//    foreach ($grouped as $key => $value) {
-//        $vshop_id = $value['vshop_id'];
-//        $product_id = $value['product_id'];
-//
-//        $checkShipVShop = \App\Models\VshopProduct::whereIn('product_id', $product_id)
-//            ->where('status', config('constants.statusVShopProduct.ready_goods')) // ready_goods nhập hàng sẵn
-//            ->where('vshop_id', $vshop_id)->get();
-//    }
-//
-//}
+function calculateShippingByProductID($productID, $districtId, $provinceId) {
+
+    $product = \App\Models\Product::where('products.id', $productID)
+        ->join('product_warehouses', 'product_warehouses.product_id', 'products.id')
+        ->join('warehouses', 'product_warehouses.ware_id', 'warehouses.id')
+        ->select(
+            'warehouses.lat',
+            'warehouses.long',
+            'warehouses.id'
+        )
+        ->get();
+
+    if(!$product) {
+        return false;
+    }
+
+    $district = District::find($districtId);
+    $province = Province::find($provinceId);
+
+    if(!$district || !$province) {
+        return false;
+    }
+
+    $address = $district->district_name . ", " . $province->province_name;
+
+    $result = app('geocoder')->geocode($address)->get();
+    $coordinates = $result[0]->getCoordinates();
+
+
+    dd($coordinates, $product);
+
+
+}
 
 function getDiscountProducts($id, $idVshop) { // SAI
     $discounts = Discount::whereIn('product_id', $id)
