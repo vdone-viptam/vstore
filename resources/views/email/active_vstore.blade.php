@@ -19,7 +19,7 @@
     <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng đã đăng ký tài khoản V-Store
 
     </p>
-    <p style="margin-top:6%;">
+    <p style="margin-top:3%;">
         Quý khách vui lòng truy cập vào địa chỉ <a href="{{route('landingpagevstore')}}">https://vstore.vdone.vn/</a>
         để thao tác với thông
         tin tài khoản của Quý khách
@@ -32,7 +32,7 @@
         <span style="font-weight:bold;">Mật khẩu: </span>{{$password}}
     </p>
     <p>Quý khách có thể đổi mật khẩu trong chức năng Quản lý tài khoản sau khi đăng nhập.</p>
-    <p style="margin-top:6%;">Rất hân hạnh được phục vụ Quý khách!</p>
+    <p style="margin-top:3%;">Rất hân hạnh được phục vụ Quý khách!</p>
     <p>Trân trọng cảm ơn!</p>
     </p>
 </div>
