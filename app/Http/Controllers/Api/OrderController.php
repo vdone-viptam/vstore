@@ -95,19 +95,21 @@ class OrderController extends Controller
         $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
         $order->shipping = 0; // Tổng phí ship
         $order->total = $product->price * $quantity;
-        $totalDiscountSuppliersAndVStore = 0;
+        $totalDiscount = 0;
         if (isset($discount['discountsFromSuppliers'])) {
-            $totalDiscountSuppliersAndVStore += $discount['discountsFromSuppliers'];
+            $totalDiscount += $discount['discountsFromSuppliers'];
         }
         if (isset($discount['discountsFromVStore'])) {
-            $totalDiscountSuppliersAndVStore += $discount['discountsFromVStore'];
+            $totalDiscount += $discount['discountsFromVStore'];
         }
-        if ($totalDiscountSuppliersAndVStore > 0) {
-            $order->total = $order->total - $order->total * ($totalDiscountSuppliersAndVStore / 100);
-        }
+//        if ($totalDiscountSuppliersAndVStore > 0) {
+//            $order->total = $order->total - $order->total * ($totalDiscountSuppliersAndVStore / 100);
+//        }
         if (isset($discount['discountsFromVShop'])) {
-            $order->total = $order->total - $order->total * ($discount['discountsFromVShop'] / 100);
+            $totalDiscount += $discount['discountsFromVShop'];
         }
+
+        $order->total = $order->total - $order->total * ($totalDiscount / 100);
 
         $totalVat = 0;
 

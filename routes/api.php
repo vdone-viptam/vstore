@@ -83,7 +83,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     Route::prefix('order')->group(function () {
         Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'index']);
-        Route::post('/{orderId}', [\App\Http\Controllers\Api\OrderController::class, 'update']);
+//        Route::post('/{orderId}', [\App\Http\Controllers\Api\OrderController::class, 'update']);
         // THANH TOÁN APP
         Route::post('/{id}/payment', [\App\Http\Controllers\PaymentMethod9PayController::class, 'payment']); // API APP CALL ĐỂ NHẬN LINK WEBVIEW
         // END THANH TOÁN APP
