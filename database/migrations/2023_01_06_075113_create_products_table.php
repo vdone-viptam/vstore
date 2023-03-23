@@ -44,7 +44,7 @@ return new class extends Migration {
             $table->integer('user_id')->nullable()->comment('Id sở hữu sản phẩm');
             $table->string('origin')->nullable()->comment('Xuất sứ');
             $table->float('with', 20, 2)->nullable()->comment('Chiều rộng');
-            $table->integer('sku_id')->nullable()->comment('Mã sản phẩm');
+            $table->integer('sku_id')->nullable()->comment('Mã sản phẩm sku');
             $table->string('note')->nullable()->comment('Mã sản phẩm');
             $table->string('amount_product')->nullable()->comment('Ghi chú');
             $table->dateTime('import_date')->nullable()->comment('Ngày xuất/ nhập khảu');

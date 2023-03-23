@@ -142,6 +142,7 @@ class CartController extends Controller
             $result[$item['vshop_id']]['vshop'] = [
                 "name" => $item->name_vshop,
                 "id" => $item->vshop_id_,
+                "avatar" => $item->avatar
             ];
             $item->images = json_decode($item->images);
             $item->discount = getDiscountProduct($item->id, $item->vshop_id_);

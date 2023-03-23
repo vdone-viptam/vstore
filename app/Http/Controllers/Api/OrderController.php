@@ -64,7 +64,8 @@ class OrderController extends Controller
                 'products.price',
                 'products.weight',
                 'vshop.id as vshop_id',
-                'vshop.name as vshop_name'
+                'vshop.name as vshop_name',
+                'vshop.avatar'
             )
             ->first();
 
