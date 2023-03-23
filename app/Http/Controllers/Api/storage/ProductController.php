@@ -279,10 +279,17 @@ class ProductController extends Controller
     {
         $product = Product::select('name', 'category_id', 'brand',
             'weight', 'length', 'height', 'packing_type',
-            'volume', 'with', 'images', 'material')
+            'volume', 'with', 'images', 'material', 'id')
             ->where('sku_id', $sku)
             ->first();
+        $warehouse = Warehouses::select("id")->where('user_id', Auth::id())->first();
+        $product->in_stock = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2  AND product_id = " . $product->id . " AND ware_id =" . $warehouse->id . ") as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . " AND ware_id =" . $warehouse->id . ""))[0]->amount;
 
+        $product->orders = OrderItem::select('no', 'quantity')
+            ->where('product_id', $product->id)
+            ->where('export_status', 0)
+            ->join('order', 'order_item.order_id', '=', 'order.id')
+            ->pagiante(10);
 
         return response()->json([
             'success' => true,
