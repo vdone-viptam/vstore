@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->integer('type')->default(0);
             $table->integer('product_id');
             $table->double('discount', 10, 2);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->string('user_id');
             $table->timestamps();
         });
