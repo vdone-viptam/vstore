@@ -124,9 +124,9 @@ class OrderController extends Controller
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId);
             if(!$warehouse) {
                 return response()->json([
-                    "status_code" => 403,
+                    "status_code" => 400,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-                ]);
+                ], 400);
             }
 
             $body = [
@@ -152,9 +152,9 @@ class OrderController extends Controller
 
             if ($getPriceAll->status() !== 200) {
                 return response()->json([
-                    "status_code" => 403,
+                    "status_code" => 400,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-                ]);
+                ], 400);
             }
             $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
 
@@ -184,9 +184,9 @@ class OrderController extends Controller
             )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
             if ($getPrice['status'] !== 200) {
                 return response()->json([
-                    "status_code" => 403,
+                    "status_code" => 400,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-                ]);
+                ], 400);
             }
             $transportFee = $getPrice['data']['MONEY_TOTAL_OLD'];
 
@@ -311,9 +311,9 @@ class OrderController extends Controller
                 $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId);
                 if(!$warehouse) {
                     return response()->json([
-                        "status_code" => 403,
+                        "status_code" => 400,
                         "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-                    ]);
+                    ], 400);
                 }
                 $body = [
                     // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
@@ -337,9 +337,9 @@ class OrderController extends Controller
                 )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
                 if ($getPriceAll->status() !== 200) {
                     return response()->json([
-                        "status_code" => 403,
+                        "status_code" => 400,
                         "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-                    ]);
+                    ], 400);
                 }
                 $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
 
@@ -365,9 +365,9 @@ class OrderController extends Controller
                 )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
                 if ($getPrice['status'] !== 200) {
                     return response()->json([
-                        "status_code" => 403,
+                        "status_code" => 400,
                         "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-                    ]);
+                    ], 400);
                 }
                 $transportFee = $getPrice['data']['MONEY_TOTAL_OLD'];
                 $kpiHt = $getPrice['data']['KPI_HT'];
