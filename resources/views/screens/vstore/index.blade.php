@@ -29,8 +29,8 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<div class="bg w-full relative h-auto md:h-screen">
-    <div class=" w-full md:max-w-[1440px] mx-auto gap-4 py-6 md:h-screen xl:px-20 px-[20px]">
+<div class="bg w-full relative ">
+    <div class=" w-full md:max-w-[1440px] mx-auto gap-4 py-6 f-full xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
             <div class="w-[168px] h-[36px] md:hidden">
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt=""></a>
@@ -44,7 +44,7 @@
                 nhập</a>
         </div>
         <div
-            class="flex flex-col justify-center items-center md:items-start w-full md:justify-start lg:max-w-[650px] text-center lg:text-left">
+            class="flex flex-col justify-center gap-3 items-center md:items-start w-full md:justify-start lg:max-w-[650px] text-center lg:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[60px] md:leading-[75px] text-2xl ">"Cổng thương mại điện tử
                 <strong class="text-[#1e65ff] font-semibold">V-Store"</strong></h2>
             <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
@@ -52,13 +52,13 @@
                     class="text-[#1e65ff]"> V-Store.</strong></span>
         </div>
         <div
-            class="bg-bannerV w-full h-[200px] md:h-full md:max-w-[655px] relative flex flex-col justify-end items-end mx-auto lg:mx-0">
+            class="bg-bannerV w-full md:max-w-[655px] relative flex flex-col justify-end items-end mx-auto lg:mx-0 my-3">
             <div
                 class="absolute top-1/3 lg:-translate-y-[60px] xl:-translate-y-[48px] md:-translate-y-[65px] -translate-y-[32px] left-[40px] md:left-[80px] font-bold text-xl md:text-4xl text-[#FFF]">
                 300.000.000đ
             </div>
 
-            <div class="flex flex-col gap-1 md:gap-2 mx-auto px-4 pb-6 md:pb-4 xl:pb-12 max-w-[600px]">
+            <div class="flex flex-col gap-1 md:gap-2 mx-auto px-4 pb-6 md:pb-4 xl:pb-12 max-w-[600px] mt-[80px] md:mt-[100px] xl:mt-[150px]">
                 <div class="flex items-center md:gap-2">
                     <div class="w-[13px] md:w-[25px]">
                         <div class="w-[12px] h-[12px] md:w-[24px] md:h-[24px]">
@@ -134,12 +134,13 @@
             </div>
 
         </div>
-        <div class="max-w-[320px] w-full mx-auto lg:mx-0">
+        <div class="max-w-[320px] w-full mx-auto lg:mx-0 ">
             <button
                 class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
                 <a class="block w-full h-full" href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
         </div>
     </div>
+</div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] mx-auto md:p-16 my-8 p-4">
         <div class="w-full h-full order-last md:order-first">
             <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
