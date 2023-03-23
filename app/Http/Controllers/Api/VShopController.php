@@ -704,10 +704,10 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
                 'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
             ],400);
-        } elseif ($request->discount > $discount_vshop / 100 * 85) {
+        } elseif ($request->discount > $discount_vshop / 100 * 95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 85,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 95,
             ],400);
         } else {
             $discount->start_date =$request->start_date;
@@ -770,10 +770,10 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
                 'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
             ],400);
-        } elseif ($request->discount > $discount / 100 * 85) {
+        } elseif ($request->discount > $discount / 100 * 95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 85,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
             ],400);
         } else {
             DB::table('discounts')->insert([

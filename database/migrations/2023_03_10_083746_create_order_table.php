@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('shipping')->comment('Phí ship');
             $table->string('method_payment')->comment('cách thức thanh toán');
             $table->string('no')->unique()->comment('Mã hoá đơn');
-            $table->decimal('total', 11, 3)->comment('Tổng tiền');
+            $table->decimal('total', 20, 3)->comment('Tổng tiền');
             $table->string('fullname');
             $table->string('phone')->nullable();
             $table->string('address');
