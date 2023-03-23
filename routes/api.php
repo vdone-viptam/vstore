@@ -125,7 +125,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('finances')->group(function () {
         Route::get('get-list-bank', [\App\Http\Controllers\Api\FinanceController::class, 'getListBank']);
-        Route::get('get-bank-id/{bank_id}',[\App\Http\Controllers\Api\FinanceController::class,'getBankId']);
+        Route::get('get-bank-id/{bank_id}', [\App\Http\Controllers\Api\FinanceController::class, 'getBankId']);
         Route::get('/wallet/{pdone_id}', [\App\Http\Controllers\Api\FinanceController::class, 'getWallet']);
         Route::get('/wallet/edit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'editWallet']);
         Route::put('/wallet/update/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'updateWallet']);
@@ -146,10 +146,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
 
         Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
-        Route::match(['put','post'],'create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
+        Route::match(['put', 'post'], 'create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
         Route::get('get-discount', [\App\Http\Controllers\Api\VShopController::class, 'getDiscountByTotalProduct']);
-        Route::get('/get-discount/{pdone_id}/{product_id}',[\App\Http\Controllers\Api\VShopController::class,'getDiscount']);
-        Route::put('/edit-discount/{pdone_id}/{product_id}',[\App\Http\Controllers\Api\VShopController::class,'editDiscount']);
+        Route::get('/get-discount/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\VShopController::class, 'getDiscount']);
+        Route::put('/edit-discount/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\VShopController::class, 'editDiscount']);
         Route::post('/create-discount', [\App\Http\Controllers\Api\VShopController::class, 'createDiscount']);
         Route::get('/profile/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'getProfile']);
         Route::put('/profile/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'postProfile']);
@@ -192,6 +192,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
                 Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detail']);
+                Route::get('info/{sku}', [\App\Http\Controllers\Api\storage\ProductController::class, 'getProductAndOrderBySKU']);
             });
             Route::prefix('account')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\AccountController::class, 'profile']);

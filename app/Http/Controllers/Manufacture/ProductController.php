@@ -85,7 +85,15 @@ class ProductController extends Controller
             'video' => 'max:512000',
             'images' => 'required',
             'description' => 'required',
-            'short_content' => 'required|max:500'
+            'short_content' => 'required|max:500',
+            'sku' => 'required',
+            'length' => 'required',
+            'height' => 'required',
+            'packing_type' => 'required',
+            'volume' => 'required',
+            'with' => 'required',
+            'material' => 'required',
+            'origin' => 'required'
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -96,7 +104,15 @@ class ProductController extends Controller
             'video.max' => 'Video vượt quá dung lượng cho phép',
             'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
-            'short_content.required' => 'Mô tả sản phẩm bắt buộc nhập'
+            'short_content.required' => 'Mô tả sản phẩm bắt buộc nhập',
+            'sku.required' => 'Mã SKU sản phẩm bắt buộc nhập',
+            'length.required' => 'Chiều dài bắt buộc nhập',
+            'height.required' => 'Chiều cao bắt buộc nhập',
+            'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
+            'volume.required' => 'Thể tích bắt buộc nhập',
+            'with.required' => 'Chiều dài bắt buộc nhập',
+            'material.required' => 'Chất liệu bắt buộc nhập',
+            'origin.required' => 'Xuất xứ bắt buộc nhập'
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -126,6 +142,7 @@ class ProductController extends Controller
             $product->import_address = $request->import_address ?? '';
             $product->packing_type = $request->packing_type;
             $product->status = 0;
+            $product->sku_id = $request->sku;
             // Upload Image
             if ($request->hasFile('video')) {
                 $filenameWithExt = $request->file('video')->getClientOriginalName();
@@ -308,6 +325,7 @@ class ProductController extends Controller
                 'deposit_money.required' => 'Tiền cọc khi nhập sẵn bắt buộc nhập',
                 'deposit_money.min' => 'Tiền cọc khi nhập sẵn không được nhỏ hơn hoặc bằng 0',
 
+
             ]);
             if ($request->hasFile('images') != 1) {
                 return redirect()->back()->withErrors(['images' => 'Tải tài liệu liên quan đến sản phẩm']);
@@ -466,6 +484,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $product = Product::find($id);
+
         $images = [];
         foreach (json_decode($product->images) as $image) {
             $images[] = asset($image);
@@ -486,7 +505,15 @@ class ProductController extends Controller
             'category_id' => 'required',
             'weight' => 'required',
             'images' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'sku' => 'required',
+            'length' => 'required',
+            'height' => 'required',
+            'packing_type' => 'required',
+            'volume' => 'required',
+            'with' => 'required',
+            'material' => 'required',
+            'origin' => 'required'
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -495,7 +522,15 @@ class ProductController extends Controller
             'category_id.required' => 'Trường này không được trống',
             'weight.required' => 'Trường này không được trống',
             'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
-            'description.required' => 'Mô tả bắt buộc nhập'
+            'description.required' => 'Mô tả bắt buộc nhập',
+            'sku.required' => 'Mã SKU sản phẩm bắt buộc nhập',
+            'length.required' => 'Chiều dài bắt buộc nhập',
+            'height.required' => 'Chiều cao bắt buộc nhập',
+            'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
+            'volume.required' => 'Thể tích bắt buộc nhập',
+            'with.required' => 'Chiều dài bắt buộc nhập',
+            'material.required' => 'Chất liệu bắt buộc nhập',
+            'origin.required' => 'Xuất xứ bắt buộc nhập'
         ]);
 
         if ($validator->fails()) {
@@ -522,6 +557,7 @@ class ProductController extends Controller
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->packing_type = $request->packing_type;
+            $product->sku_id = $request->sku;
             $product->status = 0;
             // Upload Image
             if ($request->hasFile('video')) {

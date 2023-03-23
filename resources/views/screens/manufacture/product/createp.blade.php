@@ -178,8 +178,17 @@
                 @error('images')
                 <p class="text-red-600">{{$message}}</p>
                 @enderror
-                <label for="">Video sản phẩm</label>
-                <div class="flex justify-start items-start gap-2 w-full">
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <label for="">SKU</label>
+                    <input type="text"
+                           class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                           name="sku" id="sku">
+                </div>
+                @error('sku')
+                <p class="text-red-600">{{$message}}</p>
+                @enderror
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <label for="">Video sản phẩm</label>
                     <input type="file" accept="video/mp4" accept="video/*"
                            class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                            name="video" id="video">
@@ -198,7 +207,8 @@
                             @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Chất liệu</span>
+                            <span class="text-title font-medium">Chất liệu<strong
+                                    class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" id="material" name="material"
                                    placeholder="Nhập chất liệu sản phẩm" value="{{old('material')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -216,22 +226,6 @@
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
                         </div>
-
-
-                        <!-- <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Đơn vị</span>
-                            <select name="unit" id="unit"
-                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="0">Doanh nghiệp</option>
-                                <option value="1">Hợp tác xã</option>
-                                <option value="2">Hộ kinh doanh cá thể</option>
-                            </select>
-                            @error('unit')
-                        <p class="text-red-600">{{$message}}</p>
-                            @enderror
-                        </div> -->
-
-
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Tên tổ chức chịu trách nhiệm sản xuất</span>
                             <input type="text" id="manufacturer_name" name="manufacturer_name"
@@ -261,7 +255,8 @@
                     </div>
                     <div class="col-span-6 flex flex-col justify-start items-start gap-4 ">
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Xuất xứ </span>
+                            <span class="text-title font-medium">Xuất xứ <strong
+                                    class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" name="origin" id="origin" placeholder="Nhập xuất xứ"
                                    value="{{old('origin')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -273,22 +268,41 @@
 
                         <div>
                             <div class="flex flex-col justify-start items-start gap-2 w-full">
-                                <span class="text-title font-medium">Kích cỡ (Cm)</span>
+                                <span class="text-title font-medium">Kích cỡ (Cm) <strong
+                                        class="text-[#FF4D4F]">*</strong></span>
 
                                 <div class="flex justify-between items-center w-full gap-6">
-                                    <input type="number" min="0" max="" placeholder="Nhập chiều dài (cm)" name="length"
-                                           value="{{old('length')}}"
-                                           id="length"
-                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <div class="flex flex-col">
+                                        <input type="number" min="0" max="" placeholder="Nhập chiều dài (cm)"
+                                               name="length"
+                                               value="{{old('length')}}"
+                                               id="length"
+                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                        @error('length')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
+                                    </div>
 
-                                    <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)" name="with"
-                                           value="{{old('with')}}"
-                                           id="with"
-                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                    <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)" name="height"
-                                           value="{{old('height')}}"
-                                           id="height"
-                                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <div class="flex flex-col">
+                                        <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)"
+                                               name="with"
+                                               value="{{old('with')}}"
+                                               id="with"
+                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                        @error('with')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)"
+                                               name="height"
+                                               value="{{old('height')}}"
+                                               id="height"
+                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                        @error('height')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
+                                    </div>
 
                                 </div>
 
@@ -297,7 +311,8 @@
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Thể tích (ml)</span>
+                            <span class="text-title font-medium">Thể tích (ml) <strong
+                                    class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
                                    value="{{old('volume')}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -326,7 +341,8 @@
                             @enderror
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Kiểu đóng gói</span>
+                            <span class="text-title font-medium">Kiểu đóng gói<strong
+                                    class="text-[#FF4D4F]">*</strong></span>
                             <select name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
                                     class=" outline-none w-full py-[11px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                 <option value="">Lựa chọn kiểu đóng gói</option>
