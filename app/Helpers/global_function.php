@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 
 function calculateShippingByProductID($productID, $districtId, $provinceId) {
     $products = \App\Models\Product::where('products.id', $productID)
+        ->where('products.status', 2)
         ->join('product_warehouses', 'product_warehouses.product_id', 'products.id')
         ->join('warehouses', 'product_warehouses.ware_id', 'warehouses.id')
         ->select(
@@ -18,7 +19,7 @@ function calculateShippingByProductID($productID, $districtId, $provinceId) {
             'warehouses.id'
         )
         ->get();
-    if($products) {
+    if(!$products) {
         return false;
     }
     $district = District::find($districtId);
