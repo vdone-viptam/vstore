@@ -407,7 +407,6 @@ class BillController extends Controller
         $ware_id = [];
         foreach ($productWh as $productp) {
             $ware_id[] = $productp->ward_id;
-
         }
 //        return   $ware_id ;
         $warehouses = Warehouses::whereIn('id', $ware_id)->get();

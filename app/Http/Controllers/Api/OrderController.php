@@ -64,7 +64,8 @@ class OrderController extends Controller
                 'products.price',
                 'products.weight',
                 'vshop.id as vshop_id',
-                'vshop.name as vshop_name'
+                'vshop.name as vshop_name',
+                'vshop.avatar'
             )
             ->first();
 
@@ -84,9 +85,10 @@ class OrderController extends Controller
         $phone = $request->phone;
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
-        $wardId = $request->ward_id;
+        $wardId = $request->wards_id;
         $address = $request->address;
 
+        // NEW ORDER
         $order = new Order();
         $order->pay = 2;
         $order->user_id = $userId;
@@ -96,22 +98,22 @@ class OrderController extends Controller
         $order->shipping = 0; // Tổng phí ship
         $order->total = $product->price * $quantity;
         $totalDiscount = 0;
+
         if (isset($discount['discountsFromSuppliers'])) {
             $totalDiscount += $discount['discountsFromSuppliers'];
         }
         if (isset($discount['discountsFromVStore'])) {
             $totalDiscount += $discount['discountsFromVStore'];
         }
-//        if ($totalDiscountSuppliersAndVStore > 0) {
-//            $order->total = $order->total - $order->total * ($totalDiscountSuppliersAndVStore / 100);
-//        }
         if (isset($discount['discountsFromVShop'])) {
             $totalDiscount += $discount['discountsFromVShop'];
         }
 
         $order->total = $order->total - $order->total * ($totalDiscount / 100);
 
-        $totalVat = 0;
+        $vat = $order->total * ($product->vat / 100);
+        $order->total = $order->total + $vat;
+        $totalVat = $vat;
 
         if ($districtId && $provinceId && $wardId && $address) {
             $order->pay = 1;
@@ -119,10 +121,6 @@ class OrderController extends Controller
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
-            $vat = $order->total * ($product->vat / 100);
-            $order->total = $order->total + $vat;
-            $totalVat = $vat;
-
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId);
             if(!$warehouse) {
                 return response()->json([
@@ -159,7 +157,6 @@ class OrderController extends Controller
                 ], 400);
             }
             $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
-
 
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
@@ -310,7 +307,7 @@ class OrderController extends Controller
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
-                $warehouse = calculateShippingByProductID($pro->id, $districtId, $provinceId);
+                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId);
                 if(!$warehouse) {
                     return response()->json([
                         "status_code" => 400,
