@@ -42,10 +42,10 @@ class ProductController extends Controller
             ->where('user_id', Auth::id())
             ->paginate($limit);
 
-        foreach ($this->v['products'] as $val){
+        foreach ($this->v['products'] as $val) {
             $val->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2
-                    AND product_id = " . $val->id .") as amount FROM product_warehouses
-                    where status = 1 AND product_id = " . $val->id ))[0]->amount ?? 0;
+                    AND product_id = " . $val->id . ") as amount FROM product_warehouses
+                    where status = 1 AND product_id = " . $val->id))[0]->amount ?? 0;
         }
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
@@ -422,7 +422,17 @@ class ProductController extends Controller
                         }
                     }
                 }
-                $sl[count($sl) - 1]['end'] = 0;
+                for ($i = 0; $i < count($sl); $i++) {
+                    $start = $sl[$i];
+                    if (array_key_exists($i + 1, $sl)) {
+                        $sl[$i]['end'] = $sl[$i + 1]['start'];
+                    } else {
+                        $sl[$i]['end'] = 0;
+                    }
+//                   $end = $sl[$i+1]??0;
+
+                }
+
                 DB::table('buy_more_discount')->insert($sl);
 
 //                return $product;

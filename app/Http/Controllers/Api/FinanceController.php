@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
+use App\Models\Vshop;
 use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,6 +20,31 @@ use Illuminate\Support\Str;
  */
 class FinanceController extends Controller
 {
+
+    /**
+     * Trả ra số dư của vshop
+     *
+     * API này sẽ trả về số dư cửa Vshop
+     * @param  $pdone_id Id vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getSurplusByVshop($pdone_id)
+    {
+        try {
+            $surplus = Vshop::select('money')->where('pdone_id', $pdone_id)->first()->money;
+            return response()->json([
+                'success' => false,
+                'data' => $surplus
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     /**
      * Danh sách ngân hàng
      *
@@ -66,9 +92,9 @@ class FinanceController extends Controller
                     'message' => 'Không tìm thấy vshop'
                 ], 404);
             }
-            $wallet = Wallet::select('wallets.id', 'account_number', 'wallets.bank_id','banks.image','banks.name as bank_name', 'wallets.name')
+            $wallet = Wallet::select('wallets.id', 'account_number', 'wallets.bank_id', 'banks.image', 'banks.name as bank_name', 'wallets.name')
                 ->join('banks', 'wallets.bank_id', '=', 'banks.id')
-                ->where('type',2)
+                ->where('type', 2)
                 ->where('user_id', $vshop_id)->first();
             return response()->json([
                 'success' => false,
@@ -223,7 +249,7 @@ class FinanceController extends Controller
                 'bank_id' => $request->bank_id,
                 'user_id' => $vshop_id,
                 'name' => $request->name,
-                'type'=>2
+                'type' => 2
             ]);
             return response()->json([
                 'success' => true,
@@ -327,14 +353,16 @@ class FinanceController extends Controller
             ]);
         }
     }
+
     /**
      * chi tiết ngân hàng
      *
      * API này sé lấy ra chi tiết ngân hàng
      * @param $bank_id id bank ngân hàng
      */
-    public function getBankId($bank_id){
-        $bank = Bank::where('id',$bank_id)->first();
+    public function getBankId($bank_id)
+    {
+        $bank = Bank::where('id', $bank_id)->first();
         return response()->json([
             'success' => true,
             'data' => $bank

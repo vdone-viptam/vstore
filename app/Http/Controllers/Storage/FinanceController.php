@@ -25,6 +25,7 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
             ->where('type',1)
             ->first();
+
         return view('screens.storage.finance.index', $this->v);
     }
 
