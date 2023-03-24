@@ -186,7 +186,7 @@
                             <option value="">Chọn sản phẩm cần xét duyệt</option>
                             @foreach($products as $product)
                                 <option
-                                    value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
+                                    value="{{$product->id}}">{{$product->name}}</option>
                             @endforeach
                         </select>
                         @error('product_id')
@@ -204,8 +204,8 @@
                             {{--                            @enderror--}}
                         </div>
                         <div class="col-span-6 justify-start items-start gap-2 w-full">
-                                <p
-                                    class="text-title font-medium whitespace-nowrap mb-2">Mức chiết khấu (Thành tiền)</p>
+                            <p
+                                class="text-title font-medium whitespace-nowrap mb-2">Mức chiết khấu (Thành tiền)</p>
                             <input type="text" value="0 đ" name="money" id="money" readonly
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0]   rounded-sm">
                             {{--                            @error('price')--}}
@@ -247,23 +247,27 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="" required name="sl[]" id=""
+                            <input type="number" value="{{isset(old('sl')[0]) ? old('sl')[0] : ''}}" required
+                                   name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
-
+                            <div></div>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="number" value="" min="1" max="100" name="moneyv[]" id=""
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
-
+                            <input type="number" value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}" min="1"
+                                   max="100" name="moneyv[]" id=""
+                                   class="moneyv outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
+                            <p class="text-red-600 messageE"></p>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
-                            <input type="number" value="" min="1" max="100" name="deposit_money[]" id=""
+                            <input type="number"
+                                   value="{{isset(old('deposit_money')[0]) ? old('deposit_money')[0] : ''}}" min="1"
+                                   max="100" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
-
+                            <div></div>
                         </div>
                     </div>
                     <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
@@ -271,23 +275,27 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="" min="1" name="sl[]" id=""
+                            <input type="number" value="{{isset(old('sl')[1]) ? old('sl')[1] : ''}}" required
+                                   name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
-
+                            <div></div>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="number" value="" name="moneyv[]" id=""
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
-
+                            <input type="number" value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}" min="1"
+                                   max="100" name="moneyv[]"
+                                   class="moneyv outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
+                            <p class="text-red-600 messageE"></p>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
-                            <input type="text" value="" min="1" max="100" name="deposit_money[]" id=""
+                            <input type="number"
+                                   value="{{isset(old('deposit_money')[1]) ? old('deposit_money')[1] : ''}}" min="1"
+                                   max="100" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
-
+                            <div></div>
                         </div>
                     </div>
                     <div class="flex md:flex-row flex-col items-center gap-2 md:gap-8 w-full">
@@ -295,23 +303,27 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="" min="1" name="sl[]" id=""
+                            <input type="number" value="{{isset(old('sl')[2]) ? old('sl')[2] : ''}}" required
+                                   name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
-
+                            <div></div>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="number" value="" min="1" max="99" name="moneyv[]" id=""
-                                   class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
-
+                            <input type="number" value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}" min="1"
+                                   max="100" name="moneyv[]" id=""
+                                   class="moneyv outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
+                            <p class="text-red-600 messageE"></p>
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Phần trăm cọc nhập hàng sẵn</span>
-                            <input type="text" value="" min="1" max="100" name="deposit_money[]" id=""
+                            <input type="number"
+                                   value="{{isset(old('deposit_money')[2]) ? old('deposit_money')[2] : ''}}" min="1"
+                                   max="100" name="deposit_money[]" id=""
                                    class=" outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
-
+                            <div></div>
                         </div>
 
                     </div>
@@ -330,15 +342,14 @@
                         class="text-[#FF4D4F]">*</strong></span>
                     <div class="flex justify-start items-center gap-4 flex-wrap">
                         <div>
-                            <input type="checkbox" name="prepay[]"
-                                   value=""
+                            <input type="radio" name="prepay"
+                                   {{old('prepay') == 1 ? 'checked' : ''}} value="1"
                                    class="accent-primary w-4 h-4">
                             <span class="text-secondary">Thanh toán trước</span>
                         </div>
                         <div>
-                            <input type="checkbox" name="prepay[]"
-                                   {{isset(old('prepay')[0]) && old('prepay')[0] == 1 ? 'checked' : ''}} value="1"
-                                   class="accent-primary w-4 h-4">
+                            <input type="radio" name="prepay" value="2" {{old('prepay') == 2 ? 'checked' : ''}}
+                            class="accent-primary w-4 h-4">
                             <span class="text-secondary">Được thanh toán sau khi nhận hàng</span>
                         </div>
                         {{--                        <div>--}}
@@ -376,6 +387,37 @@
 
 @section('custom_js')
     <script>
+        const discounts = document.querySelectorAll('.moneyv');
+
+        discounts.forEach((item, index) => {
+            item.addEventListener('keyup', (e) => {
+                if (document.getElementsByName('discount')[0].value && Number(document.getElementsByName('discount')[0].value) + Number(e.target.value) > 99) {
+                    document.querySelectorAll('.messageE')[index].innerHTML = `Phần trăm chiết khẩu phải nhỏ hơn ${99 - Number(document.getElementsByName('discount')[0].value)}`;
+                    document.querySelector('.btnGra ').style.display = 'none';
+                } else {
+                    document.querySelectorAll('.messageE')[index].innerHTML = '';
+                    if (document.querySelectorAll('.messageE')[0].innerHTML == '' && document.querySelectorAll('.messageE')[1].innerHTML == '' && document.querySelectorAll('.messageE')[2].innerHTML == '') {
+                        document.querySelector('.btnGra ').style.display = 'block';
+                    }
+
+                }
+            });
+        })
+        document.getElementsByName('discount')[0].addEventListener('keyup', (e) => {
+            discounts.forEach((item, index) => {
+
+                if (document.getElementsByName('discount')[0].value && Number(e.target.value) + Number(item.value) > 99) {
+                    document.querySelectorAll('.messageE')[index].innerHTML = `Phần trăm chiết khẩu phải nhỏ hơn ${99 - Number(document.getElementsByName('discount')[0].value)}`;
+                    document.querySelector('.btnGra ').style.display = 'none';
+                } else {
+                    document.querySelectorAll('.messageE')[index].innerHTML = '';
+                    if (document.querySelectorAll('.messageE')[0].innerHTML == '' && document.querySelectorAll('.messageE')[1].innerHTML == '' && document.querySelectorAll('.messageE')[2].innerHTML == '') {
+                        document.querySelector('.btnGra ').style.display = 'block';
+                    }
+
+                }
+            })
+        });
         $(".js-example-tags").select2({
             tags: true
         });

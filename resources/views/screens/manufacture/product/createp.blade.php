@@ -160,7 +160,7 @@
                     <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start">
 
                     </div>
-                    <input type="hidden" id="images" name="images">
+                    <input type="hidden" id="images" name="images" value="{{old('images')}}">
                     <div
                         class="cursor-pointer add-img-SP w-[104px] h-[104px] border-2 border-dashed bg-[#FAFAFA] border-secondary flex justify-center flex-col items-center rounded-sm gap-1">
                         <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
@@ -180,7 +180,7 @@
                 @enderror
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <label for="">SKU</label>
-                    <input type="text"
+                    <input type="text" value="{{old('sku')}}"
                            class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                            name="sku" id="sku">
                 </div>
@@ -452,6 +452,7 @@
 
         });
     </script>
+
     <script>
         $(".js-example-tags").select2({
             tags: true
@@ -672,6 +673,11 @@ Thêm địa chỉ mới</a>
         // }
 
     </script>
+    @if(!empty(old('images')))
+        <script>
+            render(JSON.parse(document.getElementById('images').value));
+        </script>
+    @endif
 @endsection
 
 {{--deposit_money--}}

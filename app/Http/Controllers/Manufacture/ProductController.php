@@ -58,9 +58,14 @@ class ProductController extends Controller
     {
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
-        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->where('id', 800)->first();
-        $this->v['v_stores'] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
-
+        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->orWhere('id', 800)->first();
+        $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
+        $vstores = [];
+        foreach ($listVstores as $list) {
+            $vstores[] = $list;
+        }
+        $vstores[] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
+        $this->v['v_stores'] = array_unique($vstores);
         return view('screens.manufacture.product.create', $this->v);
 
     }
@@ -281,7 +286,7 @@ class ProductController extends Controller
                     ->join('users', 'requests.vstore_id', '=', 'users.id')
                     ->selectRaw('requests.code,products.id,requests.id as re_id,price,
                     requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
-                    users.name as user_name,products.vat')
+                    users.name as user_name,requests.vat')
                     ->where('requests.id', $request->id)
                     ->first();
                 $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id =" . $this->v['request']->id))[0]->amount;
@@ -327,16 +332,13 @@ class ProductController extends Controller
 
 
             ]);
-            if ($request->hasFile('images') != 1) {
-                return redirect()->back()->withErrors(['images' => 'Tải tài liệu liên quan đến sản phẩm']);
-            }
 
-            if ($request->sl[0] == '' || $request->moneyv[0] == '' || $request->deposit_money[0] == '') {
-                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn và phần trăm cọc']);
+            if ($request->sl[0] == '' || $request->moneyv[0] == '') {
+                return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn'])->withInput($request->all());
             }
 
             if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
 
             $object = new Application();
@@ -347,7 +349,7 @@ class ProductController extends Controller
             $object->vstore_id = $request->vstore_id;
             $object->vat = $request->vat;
             $object->user_id = Auth::id();
-            $object->type_pay = $request->prepay[0] == 1 ? 2 : 1;
+            $object->type_pay = $request->prepay == 1 ? 2 : 1;
 //            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
 //            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
             $code = rand(100000000000, 999999999999);
@@ -399,42 +401,22 @@ class ProductController extends Controller
                             'start' => $request->sl[$i],
                             'discount' => $request->moneyv[$i],
                             'product_id' => $product->id,
-                            'deposit_money' => $request->deposit_money[$i] ?? 0,
+                            'deposit_money' => $request->deposit_money[$i] ?? 100,
                         ];
+                    }
 
-                        if ($i > 0) {
-                            if (isset($request->sl[$i]) && $request->sl[$i - 1] >= $request->sl[$i]) {
-                                $message = [
-                                    'sl' => 'Số lượng sau phải lớn hơn số lượng trước'];
-                            }
-                            if (isset($request->moneyv[$i]) && $request->moneyv[$i - 1] >= $request->moneyv[$i]) {
-                                $message['moneyv'] = 'Chiết khấu sau phải lớn hơn Chiết khấu trước';
-                            }
-                            if (isset($request->deposit_money[$i - 1]) != '' && isset($request->deposit_money[$i]) && $request->deposit_money[$i - 1] >= $request->deposit_money[$i]) {
-                                $message['deposit_money'] = 'Tiền cọc sau phải lớn hơn Tiền cọc trước';
-                            }
-                            if (isset($message)) {
-                                return redirect()->back()->withErrors($message);
-                            }
+                }
+                $tg = 0;
+                for ($i = 0; $i < count($sl) - 1; $i++) {
+                    for ($j = $i + 1; $j < count($sl); $j++) {
+                        if ($sl[$i]['start'] > $sl[$j]['start']) {
+                            $tg = $sl[$i];
+                            $sl[$i] = $sl[$j];
+                            $sl[$j] = $tg;
                         }
                     }
-
                 }
-//                return 1;
-
-
-//                return $sl;
-                for ($i = 0; $i < count($sl); $i++) {
-                    $start = $sl[$i];
-                    if (array_key_exists($i + 1, $sl)) {
-                        $sl[$i]['end'] = $sl[$i + 1]['start'];
-                    } else {
-                        $sl[$i]['end'] = 0;
-                    }
-//                   $end = $sl[$i+1]??0;
-
-                }
-//                return $sl;
+                $sl[count($sl) - 1]['end'] = 0;
                 DB::table('buy_more_discount')->insert($sl);
 
 //                return $product;

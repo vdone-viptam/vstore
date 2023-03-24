@@ -69,7 +69,7 @@ class ProductController extends Controller
             $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
                 ->join('requests', 'products.id', '=', 'requests.product_id')
                 ->join('users', 'requests.user_id', '=', 'users.id')
-                ->selectRaw('requests.code,requests.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name,requests.note,products.vat')
+                ->selectRaw('requests.code,requests.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name,requests.note,requests.vat')
                 ->where('requests.id', $request->id)
                 ->first();
             $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = $request->id"))[0]->amount;
