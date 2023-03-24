@@ -137,6 +137,7 @@ class VstoreController extends Controller
         $limit = $request->limit ?? 10;
         $vstores = User::join('products', 'users.id', '=', 'products.vstore_id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('products.availability_status',1)
             ->where('categories.id', $id)
             ->select('users.id', 'users.name', 'users.avatar')
             ->paginate($limit);

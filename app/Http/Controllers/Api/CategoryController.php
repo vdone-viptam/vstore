@@ -32,7 +32,7 @@ class CategoryController extends Controller
     {
         $limit = $request->limit ?? 48;
         try {
-            $categories = Category::select('id', 'name', 'img')->paginate($limit);
+            $categories = Category::select('id', 'name', 'img')->orderBy('name','asc')->paginate($limit);
             if ($categories) {
                 foreach ($categories as $value) {
                     $value->img = asset($value->img);
@@ -113,8 +113,8 @@ class CategoryController extends Controller
             }
             $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id', 'discount_vShop as discountVstore')
                 ->where('category_id', $category_id)
-                ->where('status', 2);
-
+                ->where('status', 2)
+                ->where('availability_status',1);
             $product = $product->limit(8)->get();
 
             $data_vstore = [];

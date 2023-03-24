@@ -61,7 +61,7 @@ class ProductController extends Controller
     public function request(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $this->v['requests'] = Product::select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name','sku_id')
+        $this->v['requests'] = Product::with(['category', 'NCC'])->select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name', 'sku_id')
             ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
         if ($request->key_search) {
@@ -83,15 +83,15 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
 
         $warehouses = Warehouses::where('user_id', Auth::id())->first();
-        $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+        $order = OrderItem::with(['product'])->join('order', 'order_item.order_id', '=', 'order.id')
             ->select('order.id', 'order.export_status', 'order.no', 'district_id', 'province_id', 'address', 'order.created_at', 'order_item.price', 'order_item.quantity',
-                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore', 'order.total')
+                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore', 'order.total', 'product_id')
             ->orderBy('order.id', 'desc');
         if ($request->key_search) {
             $order = $order->where('order.no', 'like', '%' . $request->key_search . '%');
         };
 
-        $order = $order->paginate(10);
+        $order = $order->where('order.status', '!=', 2)->paginate(10);
 //        foreach ($order as $ord){
 //            $ord->total = $ord->price - ($ord->price /100 );
 //        }
@@ -289,11 +289,50 @@ class ProductController extends Controller
             ->where('product_id', $product->id)
             ->where('export_status', 0)
             ->join('order', 'order_item.order_id', '=', 'order.id')
-            ->pagiante(10);
+            ->paginate(10);
 
         return response()->json([
             'success' => true,
             'data' => $product
         ]);
+    }
+
+    public function sendBill($order_id)
+    {
+        try {
+            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number')
+                ->where('id', $order_id)
+                ->where('status', '!=', 2)
+                ->first();
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng'
+                ], 404);
+            }
+            $order->info_receiver = [
+                'fullname' => $order->fullname,
+                'phone' => $order->phone,
+                'address' => $order->address
+            ];
+            unset($order->fullname);
+            unset($order->phone);
+            unset($order->address);
+            $order->detail = $order->orderItem()
+                ->select('discount_ncc', 'discount_vstore', 'discount_vshop', 'product_id', 'quantity')->first();
+            $product = $order->detail->product()->select('vat', 'price', 'name')->first();
+            $order->detail->vat = $product->vat;
+            $order->detail->price = $product->price;
+            $order->detail->product_name = $product->name;
+            return response()->json([
+                'success' => true,
+                'data' => $order
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }

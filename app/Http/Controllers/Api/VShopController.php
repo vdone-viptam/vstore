@@ -679,8 +679,8 @@ public function getDiscount(Request $request,$pdone_id,$product_id){
      */
 public function editDiscount(Request $request,$pdone_id,$product_id){
     $validator = Validator::make($request->all(), [
-        'start_date' => 'required|date_format:Y/m/d|after:' . Carbon::now(),
-        'end_date' => 'required|date_format:Y/m/d|after:start_date',
+        'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now(),
+        'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
         "discount" => 'required|min:0|max:100'
 
     ], []);
@@ -746,8 +746,8 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
             'product_id' => 'required|exists:products,id',
-            'start_date' => 'required|date_format:Y/m/d|after:' . Carbon::now(),
-            'end_date' => 'required|date_format:Y/m/d|after:start_date',
+            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now(),
+            'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
         ], []);

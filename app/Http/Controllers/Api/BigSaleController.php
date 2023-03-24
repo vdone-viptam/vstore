@@ -33,7 +33,9 @@ class BigSaleController extends Controller
     {
         try {
             $limit = $request->limit ?? 12;
-            $products = DB::table('products');
+            $products = DB::table('products')
+                ->where('availability_status',1)
+            ;
             $selected = ['products.id', 'images', 'publish_id', 'price', 'products.name'];
             if ($request->pdone_id) {
                 $selected[] = 'discount_vShop';
