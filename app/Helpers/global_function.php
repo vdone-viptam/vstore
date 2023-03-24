@@ -18,7 +18,7 @@ function calculateShippingByProductID($productID, $districtId, $provinceId) {
             'warehouses.id'
         )
         ->get();
-    if(!$products) {
+    if($products) {
         return false;
     }
     $district = District::find($districtId);
@@ -148,16 +148,22 @@ function getDiscountProduct($id, $idVshop) {
         ->join('products', 'products.id', '=', 'discounts.product_id')
         ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
         ->get();
-    $discountVShop = Discount::where('discounts.product_id', $id)
-        ->where('discounts.user_id', $idVshop)
-        ->where('discounts.type', config('constants.discountType.vshop'))
-        ->where('discounts.start_date', '<=', Carbon::now())
-        ->where('discounts.end_date', '>=', Carbon::now())
-        ->join('products', 'products.id', '=', 'discounts.product_id')
-        ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
-        ->first();
 
+    $vshop = \App\Models\Vshop::where('id', $idVshop)->select('id', 'pdone_id')->first();
     $return = [];
+    if($vshop) {
+        $discountVShop = Discount::where('discounts.product_id', $id)
+            ->where('discounts.user_id', $vshop->pdone_id)
+            ->where('discounts.type', config('constants.discountType.vshop'))
+            ->where('discounts.start_date', '<=', Carbon::now())
+            ->where('discounts.end_date', '>=', Carbon::now())
+            ->join('products', 'products.id', '=', 'discounts.product_id')
+            ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
+            ->first();
+        if($discountVShop) {
+            $return['discountsFromVShop'] = $discountVShop->discount;
+        }
+    }
     foreach ($discounts as $index => $discount) {
         $type = $discount->type;
         $discountProduct = $discount->discount;
@@ -180,9 +186,7 @@ function getDiscountProduct($id, $idVshop) {
         }
     }
 
-    if($discountVShop) {
-        $return['discountsFromVShop'] = $discountVShop->discount;
-    }
+
     return $return;
 }
 

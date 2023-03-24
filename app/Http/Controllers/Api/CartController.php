@@ -134,6 +134,7 @@ class CartController extends Controller
                 'vshop.id as vshop_id_',
                 'vshop.avatar',
             )
+            ->orderBy('id', 'desc')
             ->get();
 
         $result = [];
@@ -236,7 +237,8 @@ class CartController extends Controller
         }
 
         $checkCartItem = CartItemV2::where('cart_id', $cart->id)
-            ->where('product_id', $product->id)
+            ->where('product_id', $id)
+            ->where('vshop_id', $vshopId)
             ->first();
 
         if($checkCartItem) {

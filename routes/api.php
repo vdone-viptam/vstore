@@ -193,6 +193,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detail']);
                 Route::get('info/{sku}', [\App\Http\Controllers\Api\storage\ProductController::class, 'getProductAndOrderBySKU']);
+                Route::get('bill/{order_id}', [\App\Http\Controllers\Api\storage\ProductController::class, 'sendBill']);
             });
             Route::prefix('account')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\AccountController::class, 'profile']);
