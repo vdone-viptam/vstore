@@ -41,6 +41,12 @@ class ProductController extends Controller
         $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
             ->where('user_id', Auth::id())
             ->paginate($limit);
+
+        foreach ($this->v['products'] as $val){
+            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2
+                    AND product_id = " . $val->id .") as amount FROM product_warehouses
+                    where status = 1 AND product_id = " . $val->id ))[0]->amount ?? 0;
+        }
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
     }

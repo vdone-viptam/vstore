@@ -49,7 +49,9 @@ class ProductController extends Controller
 //            return $request ->option;
 
             $limit = $request->limit ?? 10;
-            $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null);
+            $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)
+                ->where('availability_status',1)
+            ;
             $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay', 'discount_vShop as discount_vstore'];
             $request->option = $request->option == 'asc' ? 'asc' : 'desc';
 
@@ -417,6 +419,7 @@ class ProductController extends Controller
             $discount = Discount::where('product_id', $id)->where('user_id', $list->pdone_id)
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
+                ->where('type',3)
                 ->first();
             $list->vshop_discount = $discount->discount ?? 0;
 
