@@ -30,27 +30,28 @@
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Giá sản phẩm:</span>
                         <input disabled name="price" id="price"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
                         <input disabled name="discount_ncc" id="discount_ncc"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Shop:</span>
                         <input disabled name="discount_vshop" id="discount_vshop"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
                         <input name="discount" id="discount"
-                               class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
-                            <input type="datetime-local" name="start_date" min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d\Th:i:s') }}" required
+                            <input type="datetime-local" name="start_date" required id="start_date"
+                                   min="{{\Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i')}}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -58,7 +59,7 @@
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="datetime-local" name="end_date" required min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d\Th:i:s') }}"
+                            <input type="datetime-local" name="end_date" id="end_date"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -101,7 +102,9 @@
                     document.querySelector('#price').value = result.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.discount_vShop + ' %'
                     document.querySelector('#discount_ncc').value = result.discount + ' %'
-
+                    document.getElementById('discount').value = 0;
+                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
 

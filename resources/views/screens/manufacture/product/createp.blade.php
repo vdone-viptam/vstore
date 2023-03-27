@@ -108,7 +108,7 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <select name="category_id" id="category_id"
                                     class="h-[42px] choose-vstore text-opa outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Chọn ngành hàng</option>
+                        <option value="" selected disabled>Chọn ngành hàng</option>
                                 @foreach($categories as $category)
                                     <option
                                         value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
@@ -247,7 +247,7 @@
                         </div>
                         <div class=" flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Ngày sản xuất / ngày nhập khẩu</span>
-                            <input type="date" name="import_date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                            <input type="date" name="import_date"
                                    placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
 
@@ -345,7 +345,7 @@
                                     class="text-[#FF4D4F]">*</strong></span>
                             <select name="packing_type" id="packing_type" placeholder="Nhập kiểu đóng gói sản phẩm"
                                     class=" outline-none w-full py-[11px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Lựa chọn kiểu đóng gói</option>
+                                <option value="" disabled selected>Lựa chọn kiểu đóng gói</option>
                                 <option value="1" {{1 == old('packing_type') ? 'selected' : ''}}>Túi</option>
                                 <option value="2" {{2 == old('packing_type') ? 'selected' : ''}}>Bao</option>
                                 <option value="3" {{3 == old('packing_type') ? 'selected' : ''}}>Hộp</option>
@@ -661,16 +661,7 @@ Thêm địa chỉ mới</a>
             }
 
         })
-        // const chooseVstore = document.getElementById('vstore_id');
-        // console.log(chooseVstore);
-        // const options = chooseVstore.getElementsByTagName('option');
-        // for (var d = 0;d < options.length;d++){
-        //    if(d > 0){
-        //        const {id} = options[d].dataset;
-        //        console.log(id)
-        //        options[d].innerHTML+=`<span style="display: none">${id}</span>`;
-        //    }
-        // }
+
 
     </script>
     @if(!empty(old('images')))
@@ -678,6 +669,8 @@ Thêm địa chỉ mới</a>
             render(JSON.parse(document.getElementById('images').value));
         </script>
     @endif
+
+
 @endsection
 
 {{--deposit_money--}}
