@@ -44,6 +44,8 @@
 @include('layouts.js')
 @yield('custom_js')
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
 <script>
     $('.more-details').on('click', function () {
         $('.modal-details').toggleClass('show-modal');

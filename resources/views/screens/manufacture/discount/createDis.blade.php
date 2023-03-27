@@ -21,7 +21,7 @@
                         <span class="text-title font-medium w-[150px]">Lựa chọn sản phẩm tạo mã:</span>
                         <select name="product_id" id="product_id"
                                 class="h-[42px] choose-product  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <option value="">Chọn sản phẩm</option>
+                            <option value="" selected disabled  >Chọn sản phẩm</option>
                             @foreach($products as $product)
                                 <option value="{{$product->id}}">{{$product->name}}</option>
                             @endforeach
@@ -30,34 +30,33 @@
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Giá sản phẩm:</span>
                         <input disabled name="price" id="price"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store:</span>
                         <input disabled name="discount_ncc" id="discount_ncc"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều:</span>
                         <input disabled name="buy_more" id="buy_more"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         {{--                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>--}}
                         <input disabled name="discount_vshop" id="discount_vshop" type="hidden"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
                         <input name="discount" id="discount"
-                               class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
                             <input type="datetime-local" name="start_date"
-                                   min="{{ Carbon\Carbon::now()->addMinutes(3600)->format('Y-m-d\Th:i:s') }}"
-                                   required
+                                   required min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -65,7 +64,7 @@
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="datetime-local" name="end_date" required min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d\Th:i:s') }}"
+                            <input type="datetime-local" name="end_date" required min="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>

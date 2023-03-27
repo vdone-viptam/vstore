@@ -345,12 +345,12 @@
                             <input type="radio" name="prepay"
                                    {{old('prepay') == 1 ? 'checked' : ''}} value="1"
                                    class="accent-primary w-4 h-4">
-                            <span class="text-secondary">Thanh toán trước</span>
+                            <span class="text-s   document.getElementById('discount')econdary">Chỉ thanh toán trước</span>
                         </div>
                         <div>
                             <input type="radio" name="prepay" value="2" {{old('prepay') == 2 ? 'checked' : ''}}
                             class="accent-primary w-4 h-4">
-                            <span class="text-secondary">Được thanh toán sau khi nhận hàng</span>
+                            <span class="text-s">Tất cả phương thức thanh toán</span>
                         </div>
                         {{--                        <div>--}}
                         {{--                            <input type="checkbox" name="prepay[]"--}}
@@ -474,7 +474,7 @@
                     document.getElementById('boxHid').innerHTML = `
                                                <select name="vstore_id" id="vstore_id"
                                                                        class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                                                                                    <option value="">Chọn V-Store</option>
+                                                                                                    <option value="" disabled selected>Chọn V-Store</option>
                                                                                                     @foreach($v_stores as $v_store)
                     <option
 {{old('vstore_id') == $v_store->id ? 'selected' : ''}}

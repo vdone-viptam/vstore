@@ -46,7 +46,7 @@ Thêm sản phẩm vào kho</h2>
                                 class="text-[#FF4D4F]">*</strong></span>
                         <select name="product_id" id="product_id"
                                 class="chon_sp th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <option value="">Chọn sản phẩm</option>
+                            <option value="" disabled selected>Chọn sản phẩm</option>
 
                             @foreach($products as $val)
                                 <option value="{{$val->id}}">{{$val->name}}</option>
@@ -68,7 +68,7 @@ Thêm sản phẩm vào kho</h2>
                                 class="text-[#FF4D4F]">*</strong></span>
                         <select name="ware_id" id="ware_id"
                                 class="th choose-vstore text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <option value="">Chọn kho hàng</option>
+                            <option value="" disabled selected>Chọn kho hàng</option>
 
                             @foreach($warehouses as $val)
                                 <option value="{{$val->id}}">{{$val->name}}</option>

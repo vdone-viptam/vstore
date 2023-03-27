@@ -31,17 +31,17 @@
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Giá sản phẩm:</span>
                         <input disabled name="price" id="price" value="{{$product1->price}}"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
                         <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>
                         <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
-                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                               class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
@@ -52,7 +52,7 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
                             <input type="datetime-local" name="start_date" value="{{$discount->start_date}}" required
-                                   min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d\Th:i:s') }}"
+                                   min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d H:i') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -61,7 +61,7 @@
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
                             <input type="datetime-local" name="end_date" value="{{$discount->end_date}}" required
-                                   min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d\Th:i:s') }}"
+                                   min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d H:i') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -92,20 +92,6 @@
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
-    document.getElementById('discount').addEventListener('keyup', (o) => {
-        const value = +o.target.value;
-        if (document.getElementById('discount').value <=
-            Number(document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) && value > 0) {
-            document.querySelector('.btnSubmit').removeAttribute('disabled');
-            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
-
-
-        } else {
-            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-        }
-
-    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
@@ -118,12 +104,13 @@
                     document.querySelector('#price').value = result.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.discount_vShop
                     document.querySelector('#discount_ncc').value = result.discount
-
+                    document.getElementById('discount').value = 0;
+                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
 
-                        if (value <= Number(result.discount - result.discount_vShop)
-                            || document.getElementById('discount').value < Number(result.discount - result.discount_vShop) && value > 0) {
+                        if (value <= Number(result.discount - result.discount_vShop)) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
