@@ -22,7 +22,7 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0">Tất cả</option>
+
                     <option
                         value="requests.code" {{isset($params['condition']) && $params['condition'] == 'requests.code' ? 'selected' : ''}}>
                         Mã yêu cầu
@@ -113,6 +113,9 @@
                             <th>
                                 Nhà cung cấp yêu cầu
                             </th>
+                            <th>
+                                Thương hệu
+                            </th>
                             <th class="w-[200px]">
                                 Trạng thái yêu cầu
                             </th>
@@ -140,6 +143,9 @@
                                     </td>
                                     <td>
                                         {{$request->user_name}}
+                                    </td>
+                                    <td>
+                                        {{$request->brand}}
                                     </td>
                                     <td class="w-[200px]">
                                         @if($request->status == 0)

@@ -26,6 +26,7 @@ class OrderController extends Controller
 {
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
+
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'is_pdone' => 'required|boolean',
@@ -121,7 +122,12 @@ class OrderController extends Controller
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
-            $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId);
+
+              $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId);
+//            return response()->json([
+//                'status_code' => 200,
+//                'abcd' => $warehouse,
+//            ], );
             if (!$warehouse) {
                 return response()->json([
                     "status_code" => 400,

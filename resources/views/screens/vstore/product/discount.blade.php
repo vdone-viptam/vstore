@@ -118,7 +118,7 @@
                         <tr>
 
                             <th>
-                                Mã giảm giá
+                               STT
                             </th>
                             <th>
                                 Tên sản phẩm
