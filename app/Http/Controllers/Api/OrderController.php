@@ -485,7 +485,7 @@ class OrderController extends Controller
             $product = $order->detail->product()->select('vat', 'price', 'name', 'price')->first();
             $order->detail->vat = $product->vat * ($product->price - ($product->price * ($order->detail->discount_ncc +
                             $order->detail->discount_vstore
-                            + $order->detail->discount_vshop) / 100)) / 100;
+                            + $order->detail->discount_vshop) / 100)) / 100 * $order->detail->quantity;
             $order->detail->price = $product->price;
             $order->detail->product_name = $product->name;
             return response()->json([

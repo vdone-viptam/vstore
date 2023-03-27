@@ -345,7 +345,8 @@
                             <input type="radio" name="prepay"
                                    {{old('prepay') == 1 ? 'checked' : ''}} value="1"
                                    class="accent-primary w-4 h-4">
-                            <span class="text-s   document.getElementById('discount')econdary">Chỉ thanh toán trước</span>
+                            <span
+                                class="text-s   document.getElementById('discount')econdary">Chỉ thanh toán trước</span>
                         </div>
                         <div>
                             <input type="radio" name="prepay" value="2" {{old('prepay') == 2 ? 'checked' : ''}}
@@ -409,15 +410,17 @@
             }
             discounts.forEach((item, index) => {
 
-                if (document.getElementsByName('discount')[0].value && Number(e.target.value) + Number(item.value) >= 100) {
-                    document.querySelectorAll('.messageE')[index].innerHTML = `Phần trăm chiết khẩu phải nhỏ hơn ${100 - Number(document.getElementsByName('discount')[0].value)}`;
-                    document.querySelector('.btnGra ').style.display = 'none';
-                } else {
-                    document.querySelectorAll('.messageE')[index].innerHTML = '';
-                    if (document.querySelectorAll('.messageE')[0].innerHTML == '' && document.querySelectorAll('.messageE')[1].innerHTML == '' && document.querySelectorAll('.messageE')[2].innerHTML == '') {
-                        document.querySelector('.btnGra ').style.display = 'block';
-                    }
+                if (item.value) {
+                    if (document.getElementsByName('discount')[0].value && Number(e.target.value) + Number(item.value) >= 100) {
+                        document.querySelectorAll('.messageE')[index].innerHTML = `Phần trăm chiết khẩu phải nhỏ hơn ${100 - Number(document.getElementsByName('discount')[0].value)}`;
+                        document.querySelector('.btnGra ').style.display = 'none';
+                    } else {
+                        document.querySelectorAll('.messageE')[index].innerHTML = '';
+                        if (document.querySelectorAll('.messageE')[0].innerHTML == '' && document.querySelectorAll('.messageE')[1].innerHTML == '' && document.querySelectorAll('.messageE')[2].innerHTML == '') {
+                            document.querySelector('.btnGra ').style.display = 'block';
+                        }
 
+                    }
                 }
             })
         });
