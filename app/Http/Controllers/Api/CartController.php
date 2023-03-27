@@ -134,7 +134,7 @@ class CartController extends Controller
                 'vshop.id as vshop_id_',
                 'vshop.avatar',
             )
-            ->orderBy('id', 'desc')
+            ->orderBy('cart_items_v2.id', 'desc')
             ->get();
 
         $result = [];
