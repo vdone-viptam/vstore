@@ -55,8 +55,8 @@
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
-                            <input type="date" name="start_date"
-                                   min="{{ Carbon\Carbon::now()->addDays(1)->format('Y-m-d') }}"
+                            <input type="datetime-local" name="start_date"
+                                   min="{{ Carbon\Carbon::now()->addMinutes(3600)->format('Y-m-d\Th:i:s') }}"
                                    required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
@@ -65,7 +65,7 @@
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="date" name="end_date" required
+                            <input type="datetime-local" name="end_date" required min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d\Th:i:s') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
