@@ -476,8 +476,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             'role_id' => 'required',
         ], [
             'password.required' => 'Email bắt buộc nhập',
-            'password.min' => 'Qúa ít ký tự',
-            'password.max' => 'Qúa nhiều ký tự',
+            'password.min' => 'Mật khẩu ít nhất 6 ký tự',
+            'password.max' => 'Mật khẩu nhiều nhất 30 ký tự',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
         ]);

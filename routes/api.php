@@ -131,7 +131,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::put('/wallet/update/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'updateWallet']);
         Route::post('/wallet/store', [\App\Http\Controllers\Api\FinanceController::class, 'storeWallet']);
         Route::post('/wallet/store-deposit/{wallet_id}', [\App\Http\Controllers\Api\FinanceController::class, 'storeDeposit']);
-        Route::get('/get-surplus', [\App\Http\Controllers\Api\FinanceController::class, 'getSurplusByVshop']);
+        Route::get('/get-surplus/{pdone_id}', [\App\Http\Controllers\Api\FinanceController::class, 'getSurplusByVshop']);
 
     });
     Route::prefix('vstore')->group(function () {

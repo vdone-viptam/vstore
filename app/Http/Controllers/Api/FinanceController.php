@@ -34,9 +34,9 @@ class FinanceController extends Controller
         try {
             $surplus = Vshop::select('money')->where('pdone_id', $pdone_id)->first()->money;
             return response()->json([
-                'success' => false,
-                'data' => $surplus
-            ], 500);
+                'success' => true,
+                'surplus' => $surplus
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -81,10 +81,9 @@ class FinanceController extends Controller
     {
         try {
             $vshop_id = DB::table('vshop')
-                    ->select('id')
-                    ->where('pdone_id', $pdone_id)
-                    ->first()
-                    ->id ?? 0;
+                ->select('id', 'money')
+                ->where('pdone_id', $pdone_id)
+                ->first();
 
             if (!$vshop_id) {
                 return response()->json([
@@ -95,10 +94,14 @@ class FinanceController extends Controller
             $wallet = Wallet::select('wallets.id', 'account_number', 'wallets.bank_id', 'banks.image', 'banks.name as bank_name', 'wallets.name')
                 ->join('banks', 'wallets.bank_id', '=', 'banks.id')
                 ->where('type', 2)
-                ->where('user_id', $vshop_id)->first();
+                ->where('user_id', $vshop_id->id)->first();
+
             return response()->json([
-                'success' => false,
-                'data' => $wallet
+                'success' => true,
+                'data' => [
+                    'wallet' => $wallet,
+                    'money' => $vshop_id->money
+                ]
             ], 200);
         } catch (\Exception $exception) {
             return response()->json([
