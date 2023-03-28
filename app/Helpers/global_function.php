@@ -29,6 +29,9 @@ function calculateShippingByProductID($productID, $districtId, $provinceId) {
     }
     $address = $district->district_name . ", " . $province->province_name;
     $result = app('geocoder')->geocode($address)->get();
+    if(count($result) < 1) {
+        return false;
+    }
     $coordinates = $result[0]->getCoordinates();
     $places = $products;
     $min_distance = PHP_FLOAT_MAX;
@@ -139,6 +142,7 @@ function getDiscountAndDepositMoney($quantity, $arr) {
 }
 
 function getDiscountProduct($id, $idVshop) {
+//    dd($id, $idVshop);
     $discounts = Discount::where('discounts.product_id', $id)
         ->where(function ($query) {
             $query->where('discounts.type', config('constants.discountType.ncc'))
@@ -149,7 +153,6 @@ function getDiscountProduct($id, $idVshop) {
         ->join('products', 'products.id', '=', 'discounts.product_id')
         ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
         ->get();
-
     $vshop = \App\Models\Vshop::where('id', $idVshop)->select('id', 'pdone_id')->first();
     $return = [];
     if($vshop) {
@@ -186,7 +189,6 @@ function getDiscountProduct($id, $idVshop) {
             }
         }
     }
-
 
     return $return;
 }
