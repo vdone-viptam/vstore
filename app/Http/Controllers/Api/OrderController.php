@@ -26,7 +26,6 @@ class OrderController extends Controller
 {
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'is_pdone' => 'required|boolean',
@@ -55,6 +54,7 @@ class OrderController extends Controller
 
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
+            ->where('vshop_products.vshop_id', $vshopId)
             ->join('vshop', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->select(
                 'products.id',
@@ -69,7 +69,6 @@ class OrderController extends Controller
                 'vshop.avatar'
             )
             ->first();
-
 
         $product->quantity = $quantity;
 
@@ -122,13 +121,8 @@ class OrderController extends Controller
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
-
-              $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId);
-//            return response()->json([
-//                'status_code' => 200,
-//                'abcd' => $warehouse,
-//            ], );
-            if (!$warehouse) {
+            $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
+            if(!$warehouse) {
                 return response()->json([
                     "status_code" => 400,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
