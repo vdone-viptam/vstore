@@ -54,6 +54,7 @@ class OrderController extends Controller
 
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
+            ->where('vshop_products.vshop_id', $vshopId)
             ->join('vshop', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->select(
                 'products.id',
@@ -68,7 +69,6 @@ class OrderController extends Controller
                 'vshop.avatar'
             )
             ->first();
-
 
         $product->quantity = $quantity;
 
