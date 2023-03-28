@@ -25,7 +25,7 @@ class AccountController extends Controller
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $this->v['infoAccount'] = Auth::user();
+        $this->v['infoAccount'] = User::with(['province', 'district'])->where('id', Auth::id())->first();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
         return view('screens.storage.account.profile', $this->v);
 
@@ -65,10 +65,10 @@ class AccountController extends Controller
         }
 
         $user = \App\Models\User::find($id);
-
         $user->name = trim($request->name);
         $user->company_name = trim($request->company_name);
-//        $user->tax_code = trim($request->tax_code);
+        $user->provinceId = $request->city_id;
+        $user->district_id = $request->district_id;
         $user->address = trim($request->address);
         $user->id_vdone = trim($request->id_vdone);
         $user->id_vdone_diff = trim($request->id_vdone_diff);

@@ -52,7 +52,18 @@ class User extends Authenticatable
         return $this->hasMany(Product::class, 'user_id');
     }
 
-    public function vstoreProducts(){
+    public function vstoreProducts()
+    {
         return $this->hasMany(Product::class, 'vstore_id');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'provinceId', 'province_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id', 'district_id');
     }
 }
