@@ -179,7 +179,8 @@
                 <p class="text-red-600">{{$message}}</p>
                 @enderror
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <label for="">SKU</label>
+                    <label for="">SKU<strong
+                            class="text-[#FF4D4F]">*</strong></label>
                     <input type="text" value="{{old('sku')}}"
                            class="outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                            name="sku" id="sku">

@@ -35,7 +35,7 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         if ($request->condition && $request->condition != 0) {
 
-            $this->v['products'] = $this->v['products']->where('' . $request->condition . '', 'like', '%' . $request->key_search . '%');
+            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . trim($request->key_search) . '%');
         }
 
         $this->v['products'] = $this->v['products']->orderBy('id', 'desc')

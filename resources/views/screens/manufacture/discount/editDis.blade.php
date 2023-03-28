@@ -34,17 +34,17 @@
                                class="h-[42px] choose-vstore   outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store:</span>
-                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount ?? 0}}"
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store (%):</span>
+                        <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9]  bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều:</span>
-                        <input disabled name="buy_more" id="buy_more" value="{{$products->buy_more ?? 0}}"
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều (%):</span>
+                        <input disabled name="buy_more" id="buy_more" value="{{$product1->buy_more}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
+                        <span class="text-title font-medium  ">Phần trăm giảm giá (%):</span>
                         <input name="discount" id="discount" value="{{$discount->discount}}"
                                class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -92,11 +92,10 @@
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
-    // document.getElementById('discount').addEventListener('keyup', (o) => {
-        const value = +document.getElementById('discount').value;
-
-        if (value > 0 && value <=
-            100 - Number(document.querySelector('#discount_ncc').value) + Number(document.querySelector('#buy_more').value)) {
+    document.getElementById('discount').addEventListener('keyup', (o) => {
+        const value = +o.target.value;
+        if (value > 0 && value <
+            100 - document.querySelector('#discount_ncc').value - document.querySelector('#buy_more').value) {
 
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
@@ -107,7 +106,7 @@
             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
         }
 
-    // });
+    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
@@ -118,16 +117,16 @@
 
                 if (result) {
                     document.querySelector('#price').value = result.pro.price + ' đ'
-                    document.querySelector('#discount_ncc').value = result.pro.discount + ' %'
-                    document.querySelector('#buy_more').value = result.pro.buy_more + ' %';
+                    document.querySelector('#discount_ncc').value = result.pro.discount;
+                    document.querySelector('#buy_more').value = result.pro.buy_more;
                     document.getElementById('discount').value = 0;
                     document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
 
-                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0
-                            ) {
+                        if (value < 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0
+                        ) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 

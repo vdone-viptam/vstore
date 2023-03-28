@@ -13,14 +13,23 @@ use Illuminate\Support\Facades\Validator;
 
 class DiscountController extends Controller
 {
-    public function discount()
+    private $v;
+
+    public function __construct()
+    {
+        $this->v = [];
+    }
+
+    public function discount(Request $request)
     {
         $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date')
             ->join('products', 'discounts.product_id', '=', 'products.id')
-            ->where('discounts.user_id', Auth::id())
-            ->paginate(10);
-
-
+            ->where('discounts.user_id', Auth::id());
+        if ($request->input('key_search')) {
+            $this->v['discounts'] = $this->v['discounts']->where('products.name', 'like', '%' . trim($request->key_search) . '%');
+        }
+        $this->v['discounts'] = $this->v['discounts']->paginate(10);
+        $this->v['params'] = $request->all();
         return view('screens.manufacture.discount.discount', $this->v);
 
     }
@@ -50,7 +59,6 @@ class DiscountController extends Controller
             $pro->buy_more = $buy_more->discount ?? 0;
             return response()->json([
                 'pro' => $pro,
-
             ]);
         } else {
             return null;
@@ -87,8 +95,7 @@ class DiscountController extends Controller
         $this->v['products'] = $data;
         $this->v['discount'] = DB::table('discounts')->select('id', 'product_id', 'start_date', 'end_date', 'start_date', 'discount')->where('id', $request->id)->first();
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
-        $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['product1']->product_id)->first();
-
+        $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['product1']->id)->first();
         $this->v['product1']->buy_more = $buy_more->discount ?? 0;
 
         return view('screens.manufacture.discount.editDis', $this->v);

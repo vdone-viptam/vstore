@@ -28,7 +28,7 @@ class ProductController extends Controller
 //        return $request->condition;
         $limit = $request->limit ?? 10;
         $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')->join('categories', 'products.category_id', '=', 'categories.id')->where('products.status', 2)->where('vstore_id', Auth::id())
-            ->select('products.publish_id','products.brand', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount', 'products.vat', 'products.id');
+            ->select('products.publish_id', 'products.brand', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount', 'products.vat', 'products.id');
 
         if ($request->condition && $request->condition != 0) {
             $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
@@ -140,13 +140,16 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
     }
 
-    public function discount()
+    public function discount(Request $request)
     {
-        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date','products.name')
+        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name')
             ->join('products', 'discounts.product_id', '=', 'products.id')
-            ->where('discounts.user_id', Auth::id())
-            ->paginate(10);
-//        return $this->v['discounts'] ;
+            ->where('discounts.user_id', Auth::id());
+        if ($request->input('key_search')) {
+            $this->v['discounts'] = $this->v['discounts']->where('products.name', 'like', '%' . trim($request->key_search) . '%');
+        }
+        $this->v['discounts'] = $this->v['discounts']->paginate(10);
+        $this->v['params'] = $request->all();
         return view('screens.vstore.product.discount', $this->v);
 
     }

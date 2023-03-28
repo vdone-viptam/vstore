@@ -33,12 +33,12 @@
                                class="h-[42px] choose-vstore  bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store:</span>
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Store (%):</span>
                         <input disabled name="discount_ncc" id="discount_ncc"
                                class="h-[42px] choose-vstore  bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều:</span>
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu mua nhiều (%):</span>
                         <input disabled name="buy_more" id="buy_more"
                                class="h-[42px] choose-vstore bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -48,7 +48,7 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
+                        <span class="text-title font-medium  ">Phần trăm giảm giá (%):</span>
                         <input name="discount" id="discount"
                                class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -108,12 +108,12 @@
                 console.log(result)
                 if (result) {
                     document.querySelector('#price').value = result.pro.price + ' đ'
-                    document.querySelector('#discount_vshop').value = result.pro.discount_vShop + ' %'
-                    document.querySelector('#discount_ncc').value = result.pro.discount + ' %'
-                    document.querySelector('#buy_more').value = result.pro.buy_more + ' %'
+                    document.querySelector('#discount_vshop').value = result.pro.discount_vShop;
+                    document.querySelector('#discount_ncc').value = result.pro.discount;
+                    document.querySelector('#buy_more').value = result.pro.buy_more;
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
-                        if (value <= 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0) {
+                        if (value < 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                         } else {
