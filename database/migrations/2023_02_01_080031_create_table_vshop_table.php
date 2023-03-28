@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->integer('description')->default(0);
             $table->integer('vshop_name')->default(0);
             $table->string('avatar')->nullable();
-            $table->string('avatar')->nullable();
+            // $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }
