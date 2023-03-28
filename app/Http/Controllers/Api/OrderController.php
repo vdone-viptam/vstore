@@ -213,7 +213,11 @@ class OrderController extends Controller
         $orderItem->discount_vstore = isset($discount['discountsFromVStore']) ? $discount['discountsFromVStore'] : 0;
         $orderItem->save();
         $product->images = json_decode($product->images);
-
+        $newImages = [];
+        foreach ($product->images as $index => $image) {
+            array_push($newImages, asset($image));
+        }
+        $product->images = $newImages;
         $order->total_vat = $totalVat;
 
         return response()->json([
@@ -389,7 +393,7 @@ class OrderController extends Controller
             'order' => $order,
             'method_payment' => $methodPayment
         ]);
-    }
+    } // BỎ
 
     /**
      * danh sách đơn hàng theo user
