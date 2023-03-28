@@ -25,16 +25,18 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-//        return 1;
+//        return $request->condition;
         $limit = $request->limit ?? 10;
         $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')->join('categories', 'products.category_id', '=', 'categories.id')->where('products.status', 2)->where('vstore_id', Auth::id())
-            ->select('products.publish_id', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount', 'products.vat', 'products.id');
+            ->select('products.publish_id','products.brand', 'products.name as name', 'users.name as user_name', 'products.price', 'categories.name as cate_name', 'products.discount as discount', 'products.vat', 'products.id');
 
         if ($request->condition && $request->condition != 0) {
             $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
         }
+
         $this->v['products'] = $this->v['products']->orderBy('products.id', 'desc')
             ->paginate($limit);
+//        return $this->v['products'] ;
 //return  $this->v['products'];
         $this->v['params'] = $request->all();
 
@@ -50,7 +52,7 @@ class ProductController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name')
+            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.brand,products.name as product_name,users.name as user_name')
             ->where('requests.vstore_id', Auth::id());
         if ($request->condition && $request->condition != 0) {
             $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
@@ -140,10 +142,11 @@ class ProductController extends Controller
 
     public function discount()
     {
-        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date')
+        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date','products.name')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->where('discounts.user_id', Auth::id())
             ->paginate(10);
+//        return $this->v['discounts'] ;
         return view('screens.vstore.product.discount', $this->v);
 
     }

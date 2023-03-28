@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Vstore;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
@@ -27,10 +29,8 @@ class PartnerController extends Controller
             ->where('products.vstore_id', Auth::id())
             ->groupBy('users.id')
             ->select('users.id', 'users.account_code', 'users.name', 'users.phone_number');
-        if ($request->key_search) {
-            $users = $users->Where('users.account_code', 'like', '%' . $request->key_search . '%')
-                ->orWhere('users.name', 'like', '%' . $request->key_search . '%')
-                ->orWhere('users.phone_number', 'like', '%' . $request->key_search . '%');
+        if ($request->key_search && $request->condition ) {
+            $users = $users->Where($request->condition, 'like', '%' . $request->key_search . '%');
         }
         $users = $users->paginate($limit);
 
@@ -50,7 +50,7 @@ class PartnerController extends Controller
         $vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vstore_id', Auth::id())
-            ->select('vshop.pdone_id', 'vshop.name as name', 'vshop.phone_number')
+            ->select('vshop.id','vshop.pdone_id','vshop.nick_name', 'vshop.name as name', 'vshop.phone_number')
             ->groupBy('vshop.pdone_id');
         if ($request->key_search) {
             $vshop = $vshop->where('vshop.pdone_id', 'like', '%' . $request->key_search . '%');
@@ -58,13 +58,21 @@ class PartnerController extends Controller
         $vshop=$vshop->paginate($limit);
         foreach ($vshop as $value){
 //            $count = VshopProduct::where('pdone_id',$value->pdone_id)->count();
-            $count= Vshop::join('vshop_products','vshop.id','=','vshop_products.vshop_id')->count();
+
+            $count= Vshop::join('vshop_products','vshop.id','=','vshop_products.vshop_id')
+                ->join('products','vshop_products.product_id','=','products.id')
+                ->where('vshop.id',$value->id)
+                ->where('products.vstore_id',Auth::id())
+                ->count();
+
+            $order_item = Order::join('order_item','order.id','=','order_item.order_id')->where('vshop_id',$value->id)->sum('quantity')??0;
 //            return $count;
+            $value->sum_sl = $order_item;
             $value->count =$count;
 //            return $count;
         }
 
-//         $vshop=$vshop;
+//        return $vshop;
         $count = count($vshop);
         return view('screens.vstore.partner.vshop', compact('vshop', 'count'));
 
