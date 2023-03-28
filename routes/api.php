@@ -73,6 +73,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::get('/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productById']);
         Route::delete('destroy-affiliate/{pdone_id}/{product_id}', [\App\Http\Controllers\Api\ProductController::class, 'destroyAffProduct']);
+
+        Route::post('/store-review-product', [\App\Http\Controllers\Api\ProductController::class, 'storeReviewProduct']);
+        Route::get('/review-product/{point_id}', [\App\Http\Controllers\Api\ProductController::class, 'reviewProduct']);
+
     });
     // CART
     Route::prefix('cart')->group(function () {
