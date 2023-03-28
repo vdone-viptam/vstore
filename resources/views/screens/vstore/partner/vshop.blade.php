@@ -25,23 +25,16 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0">Tất cả</option>
+
                     <option
-                        value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
-                        Mã sản phẩm
+                        value="vshop.pdone_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
+                        Mã Vshop
                     </option>
                     <option
-                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
-                        Tên sản phẩm
+                        value=vshop.nick_name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                        Tên Vshop
                     </option>
-                    <option
-                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
-                        Thương hiệu
-                    </option>
-                    <option
-                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
-                        Ngành hàng
-                    </option>
+
                 </select>
 
                 <input type="text" name="key_search" value="{{$params['key_search'] ?? '' }}"
@@ -131,7 +124,7 @@
                                 <tr>
                                     <td>{{$val->pdone_id}}</td>
                                     <td>
-                                        {{$val->name!= '' ? $val->name  :'-'}}
+                                        {{$val->nick_name!= '' ? $val->nick_name  :'-'}}
                                     </td>
                                     <td>
                                         {{$val->phone_number!= '' ? $val->phone_number  :'-'}}
@@ -140,7 +133,7 @@
                                         {{$val->count != '' ? $val->count  :'-'}}
                                     </td>
                                     <td>
-                                        -
+                                        {{$val->sum_sl}}
                                     </td>
                                     <td>-</td>
                                     <td>
