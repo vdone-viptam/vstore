@@ -183,7 +183,7 @@
                                                                 class="text-[#FF4D4F]">*</strong></span>
                         <select name="product_id" id="product_id"
                                 class="th choose-sp text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <option value="">Chọn sản phẩm cần xét duyệt</option>
+                            <option value="" selected disabled>Chọn sản phẩm cần xét duyệt</option>
                             @foreach($products as $product)
                                 <option
                                     value="{{$product->id}}">{{$product->name}}</option>
@@ -220,7 +220,7 @@
                                     class="text-[#FF4D4F]">*</strong></span>
                         <select name="role" id="role"
                                 class="th choose-vt text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                            <option value="">Chọn vai trò</option>
+                            <option value="" disabled selected>Chọn vai trò</option>
                             <option value="1" {{old('role') == 1 ? 'selected' : '' }}>Nhà sản xuất</option>
                             <option value="2" {{old('role') == 2 ? 'selected' : '' }}>Nhà nhập khẩu</option>
                             <option value="3" {{old('role') == 3 ? 'selected' : '' }}>Nhà phân phối</option>

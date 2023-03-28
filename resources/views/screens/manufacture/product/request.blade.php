@@ -23,7 +23,6 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0">Tất cả</option>
                     <option
                         value="requests.code" {{isset($params['condition']) && $params['condition'] == 'requests.code' ? 'selected' : ''}}>
                         Mã yêu cầu

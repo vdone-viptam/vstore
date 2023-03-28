@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-full md:w-[280px]">Mã số thuê:</span>
+                            <span class="text-secondary w-full md:w-[280px]">Mã số thuế:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="tax_code" name="tax_code"
                                        class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
@@ -80,10 +80,34 @@
                             </div>
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-full md:w-[280px]">Địa chỉ:</span>
+                            <span class="text-secondary w-full md:w-[280px]">Tỉnh (thành phố):</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
-                                <input type="text" name="address" id="address" readonly
-                                       class=" bg-gray-200 w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                                <select name="city_id" id="city_id"
+                                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <option value="" disabled selected>Lựa chọn tỉnh (thành phố)</option>
+                                </select>
+                                @error('city_id')
+                                <p class="text-red-600">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Quận (huyện):</span>
+                            <div class="w-full flex flex-col justify-start items-start gap-2">
+                                <select name="district_id" id="district_id"
+                                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <option value="" hidden>Lựa chọn quận (huyện)</option>
+                                </select>
+                                @error('district_id')
+                                <p class="text-red-600">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Địa chỉ chính xác:</span>
+                            <div class="w-full flex flex-col justify-start items-start gap-2">
+                                <input type="text" name="address" id="address"
+                                       class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                                        value="{{$infoAccount->address}}">
                                 @error('address')
                                 <p class="text-red-600">{{$message}}</p>
@@ -164,7 +188,8 @@
                             <span class="text-secondary w-full md:w-[280px]">Ảnh chứng nhận PCCC:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <img style="height: 200px"
-                                     src="{{asset(json_decode($infoAccount->storage_information->image_pccc)[0])}}" alt="">
+                                     src="{{asset(json_decode($infoAccount->storage_information->image_pccc)[0])}}"
+                                     alt="">
                             </div>
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
@@ -266,6 +291,14 @@
                                     <span>{{$infoAccount->address}}</span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
+                                    <span class="text-secondary">Tỉnh (thành phố): </span>
+                                    <span>{{ucfirst($infoAccount->province->province_name)}}</span>
+                                </div>
+                                <div class="flex justify-start items-center gap-4 w-full">
+                                    <span class="text-secondary">Quận (huyện): </span>
+                                    <span>{{ucfirst($infoAccount->district->district_name)}}</span>
+                                </div>
+                                <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Số điện thoại: </span>
                                     <span>{{$infoAccount->phone_number}}</span>
                                 </div>
@@ -346,6 +379,57 @@
 
 @endsection
 @section('custom_js')
+    <script !src="">
+        const divCity = document.getElementById('city_id');
+        const divDistrict = document.getElementById('district_id');
+
+        fetch('{{route('get_city')}}', {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == '{{(int) $infoAccount->provinceId}}' ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            })
+            .catch(console.error);
+        fetch('{{route('get_city')}}?type=2&value=' + '{{(int) $infoAccount->provinceId}}', {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if (data.length > 0) {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == '{{(int) $infoAccount->district_id}}' ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                }
+            })
+            .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+            )
+        ;
+        divCity.addEventListener('change', (e) => {
+            fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
+                mode: 'no-cors',
+
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.length > 0) {
+                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+
+                    } else {
+                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                    }
+                })
+                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                )
+            ;
+        });
+
+    </script>
     <script>
         $('.change-avt').on('click', function () {
             let input = document.createElement('input');

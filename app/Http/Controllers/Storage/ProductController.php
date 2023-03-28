@@ -75,35 +75,35 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
 
-        $warehouses = Warehouses::where('user_id',Auth::id())->first();
-        $order = Order::join('order_item','order.id','=','order_item.order_id')
-            ->select('order.id','order.export_status','order.no','district_id','province_id','address','order.created_at','order_item.price','order_item.quantity',
-                'order_item.discount_vshop','order_item.discount_ncc','order_item.discount_ncc','order_item.discount_vstore','order.total')
-            ->orderBy('order.id','desc')
-            ->where('order.status','!=',2)
-        ;
-            if ($request->key_search){
-                $order = $order->where('order.no','like','%'.$request->key_search.'%');
-            };
+        $warehouses = Warehouses::where('user_id', Auth::id())->first();
+        $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->select('order.id', 'order.export_status', 'order.no', 'district_id', 'province_id', 'address', 'order.created_at', 'order_item.price', 'order_item.quantity',
+                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore', 'order.total')
+            ->orderBy('order.id', 'desc')
+            ->where('order.status', '!=', 2)
+            ->where('warehouses_id', $warehouses->id);
+        if ($request->key_search) {
+            $order = $order->where('order.no', 'like', '%' . $request->key_search . '%');
+        };
 
-        $order= $order->paginate(10);
+        $order = $order->paginate(10);
 //        foreach ($order as $ord){
 //            $ord->total = $ord->price - ($ord->price /100 );
 //        }
 
         $count = count($order);
-        return view('screens.storage.product.requestOut', compact('order','count'));
+        return view('screens.storage.product.requestOut', compact('order', 'count'));
     }
 
     public function updateRequest($status, Request $request)
     {
 
-        $product_warehouses= ProductWarehouses::where('id',$request->id)->first();
-        $product_warehouses->status=$request->status;
+        $product_warehouses = ProductWarehouses::where('id', $request->id)->first();
+        $product_warehouses->status = $request->status;
         $product_warehouses->save();
 //        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
-        if ($request->status==1){
-            $product = Product::where('id',$product_warehouses->product_id)->first();
+        if ($request->status == 1) {
+            $product = Product::where('id', $product_warehouses->product_id)->first();
 
             $product->availability_status = 1;
             $product->save();
@@ -111,7 +111,9 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success', 'Cập nhật đơn gửi hàng thành công');
     }
-    public function updateRequestOut($status,Request $request){
+
+    public function updateRequestOut($status, Request $request)
+    {
 
 
 //        return $request;
@@ -134,121 +136,122 @@ class ProductController extends Controller
             $order->export_status = $status;
             $order->save();
             $warehouse = Warehouses::find($order->warehouse_id);
-            if (!$warehouse){
+            if (!$warehouse) {
                 return redirect()->back();
             }
-            $order_item= OrderItem::where('order_id',$order->id)->first();
+            $order_item = OrderItem::where('order_id', $order->id)->first();
 
-            $product = Product::where('id',$order_item->product_id)->first();
+            $product = Product::where('id', $order_item->product_id)->first();
 
 
-            if ($status ==1){
+            if ($status == 1) {
 //            return $order->total;
-                if ($order->method_payment == 'COD'){
-                    $money_colection = (int) $order->total;
+                if ($order->method_payment == 'COD') {
+                    $money_colection = (int)$order->total;
                     $order_payment = 2;
-                }else{
+                } else {
                     $money_colection = 0;
                     $order_payment = 1;
                 }
 
                 $get_list = Http::withHeaders(
                     [
-                        'Content-Type'=>' application/json',
-                        'Token'=>$login['data']['token']
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
                     ]
-                )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
-                    'SENDER_DISTRICT'=>$warehouse->district_id,
-                    'SENDER_PROVINCE'=>$warehouse->city_id,
-                    'RECEIVER_DISTRICT'=>$order->district_id,
-                    'RECEIVER_PROVINCE'=>$order->province_id,
-                    'PRODUCT_TYPE'=>'HH',
-                    'PRODUCT_WEIGHT'=> $product->weight * $order_item->quantity,
-                    'PRODUCT_PRICE'=>$order->total - $order->shipping,
-                    'MONEY_COLLECTION'=>$money_colection,
-                    'TYPE'=>1,
+                )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', [
+                    'SENDER_DISTRICT' => $warehouse->district_id,
+                    'SENDER_PROVINCE' => $warehouse->city_id,
+                    'RECEIVER_DISTRICT' => $order->district_id,
+                    'RECEIVER_PROVINCE' => $order->province_id,
+                    'PRODUCT_TYPE' => 'HH',
+                    'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
+                    'PRODUCT_PRICE' => $order->total - $order->shipping,
+                    'MONEY_COLLECTION' => $money_colection,
+                    'TYPE' => 1,
 
-                ] );
+                ]);
 //            return $get_list;
 
-                $tinh_thanh_gui = Province::where('province_id',$warehouse->city_id)->first()->province_name ?? '';
-                $quan_huyen_gui = District::where('district_id',$warehouse->district_id)->first()->district_name ?? '';
-                $tinh_thanh_nhan = Province::where('province_id',$order->province_id)->first()->province_name ?? '';
-                $quan_huyen_nhan = District::where('district_id',$order->district_id)->first()->district_name ?? '';
+                $tinh_thanh_gui = Province::where('province_id', $warehouse->city_id)->first()->province_name ?? '';
+                $quan_huyen_gui = District::where('district_id', $warehouse->district_id)->first()->district_name ?? '';
+                $tinh_thanh_nhan = Province::where('province_id', $order->province_id)->first()->province_name ?? '';
+                $quan_huyen_nhan = District::where('district_id', $order->district_id)->first()->district_name ?? '';
 //            return $quan_huyen_nhan;
 //            return $warehouse->address .',' .$quan_huyen_gui.','.$tinh_thanh_gui;
-                $list_item[] =[
-                    'PRODUCT_NAME'=>$product->name,
-                    'PRODUCT_QUANTITY'=>$order_item['quantity'],
-                    'PRODUCT_PRICE'=>$product->price,
-                    'PRODUCT_WEIGHT'=>$product->price *$order_item['quantity']
+                $list_item[] = [
+                    'PRODUCT_NAME' => $product->name,
+                    'PRODUCT_QUANTITY' => $order_item['quantity'],
+                    'PRODUCT_PRICE' => $product->price,
+                    'PRODUCT_WEIGHT' => $product->price * $order_item['quantity']
                 ];
 //            return $get_list[0]['MA_DV_CHINH'];
                 $taodon = Http::withHeaders(
                     [
-                        'Content-Type'=>' application/json',
-                        'Token'=>$login['data']['token']
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
                     ]
-                )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
-                    "ORDER_NUMBER"=>'',
-                    "SENDER_FULLNAME"=>$warehouse->name,
-                    "SENDER_ADDRESS"=>$warehouse->address .',' .$quan_huyen_gui.','.$tinh_thanh_gui,
-                    "SENDER_PHONE"=>$warehouse->phone_nameber,
-                    "RECEIVER_FULLNAME"=>$order->fullname,
-                    "RECEIVER_ADDRESS"=>$order->address .',' .$quan_huyen_nhan.','.$tinh_thanh_nhan,
-                    "RECEIVER_PHONE"=>$order->phone,
-                    "PRODUCT_NAME"=>$order->no,
-                    "PRODUCT_DESCRIPTION"=>"",
-                    "PRODUCT_QUANTITY"=>1,
-                    "PRODUCT_PRICE"=>$order->total - $order->shipping,
-                    "PRODUCT_WEIGHT"=>$product->weight * $order_item->quantity,
-                    "PRODUCT_LENGTH"=>null,
-                    "PRODUCT_WIDTH"=>null,
-                    "PRODUCT_HEIGHT"=>null,
-                    "ORDER_PAYMENT"=>$order_payment,
-                    "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
-                    "ORDER_SERVICE_ADD"=>null,
-                    "ORDER_NOTE"=>"",
-                    "MONEY_COLLECTION"=>0,
-                    "LIST_ITEM"=>$list_item,
+                )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
+                    "ORDER_NUMBER" => '',
+                    "SENDER_FULLNAME" => $warehouse->name,
+                    "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
+                    "SENDER_PHONE" => $warehouse->phone_nameber,
+                    "RECEIVER_FULLNAME" => $order->fullname,
+                    "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
+                    "RECEIVER_PHONE" => $order->phone,
+                    "PRODUCT_NAME" => $order->no,
+                    "PRODUCT_DESCRIPTION" => "",
+                    "PRODUCT_QUANTITY" => 1,
+                    "PRODUCT_PRICE" => $order->total - $order->shipping,
+                    "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
+                    "PRODUCT_LENGTH" => null,
+                    "PRODUCT_WIDTH" => null,
+                    "PRODUCT_HEIGHT" => null,
+                    "ORDER_PAYMENT" => $order_payment,
+                    "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+                    "ORDER_SERVICE_ADD" => null,
+                    "ORDER_NOTE" => "",
+                    "MONEY_COLLECTION" => 0,
+                    "LIST_ITEM" => $list_item,
                 ]);
 
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
             }
-            if ($status == 3 &&  $order->order_number !==''){
+            if ($status == 3 && $order->order_number !== '') {
 
                 $huy_don = Http::withHeaders(
                     [
-                        'Content-Type'=>' application/json',
-                        'Token'=>$login['data']['token']
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
                     ]
-                )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder',[
-                    'TYPE'=>4,
-                    'ORDER_NUMBER'=>$order->order_number,
-                    'NOTE'=>"Hủy đơn do kho",
+                )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder', [
+                    'TYPE' => 4,
+                    'ORDER_NUMBER' => $order->order_number,
+                    'NOTE' => "Hủy đơn do kho",
 
-                ] );
+                ]);
             }
 
 
             return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back();
         };
 
     }
+
     public function detail(Request $request)
     {
 //        return $request->id;
-        $order = Order::where('id',$request->id)->first();
+        $order = Order::where('id', $request->id)->first();
 
-        $products = OrderItem::join('products','order_item.product_id','=','products.id')->where('order_id',$order->id)
-            ->select('order_item.id','order_item.quantity','products.publish_id','products.name as name')
+        $products = OrderItem::join('products', 'order_item.product_id', '=', 'products.id')->where('order_id', $order->id)
+            ->select('order_item.id', 'order_item.quantity', 'products.publish_id', 'products.name as name')
             ->get();
         $total = $order->total;
 //        return $products;
-        return view('screens.storage.product.detailOut',compact('products','total'));
+        return view('screens.storage.product.detailOut', compact('products', 'total'));
 
     }
 }

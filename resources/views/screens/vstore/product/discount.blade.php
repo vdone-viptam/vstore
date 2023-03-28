@@ -21,22 +21,9 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0">Tất cả</option>
                     <option
-                        value="requests.code" {{isset($params['condition']) && $params['condition'] == 'requests.code' ? 'selected' : ''}}>
-                        Mã yêu cầu
-                    </option>
-                    <option
-                        value="products.name" {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                        value="products.name" selected {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
                         Tên sản phẩm
-                    </option>
-                    <option
-                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
-                        Thương hiệu
-                    </option>
-                    <option
-                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
-                        Ngành hàng
                     </option>
                 </select>
 
@@ -140,7 +127,7 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td>{{$discount->id}}</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$discount->name}}</td>
                                     <td>{{$discount->discount}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>

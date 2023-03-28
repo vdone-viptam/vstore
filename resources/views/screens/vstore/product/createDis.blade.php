@@ -33,17 +33,17 @@
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp:</span>
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu từ nhà cung cấp (%):</span>
                         <input disabled name="discount_ncc" id="discount_ncc"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Shop:</span>
+                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho V-Shop (%):</span>
                         <input disabled name="discount_vshop" id="discount_vshop"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Phần trăm giảm giá:</span>
+                        <span class="text-title font-medium  ">Phần trăm giảm giá (%):</span>
                         <input name="discount" id="discount"
                                class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="datetime-local" name="end_date" id="end_date"
+                            <input type="datetime-local" name="end_date" id="end_date" required
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
                             <p class="text-red-600">{{$message}}</p>
@@ -100,15 +100,15 @@
                 console.log(result)
                 if (result) {
                     document.querySelector('#price').value = result.price + ' đ'
-                    document.querySelector('#discount_vshop').value = result.discount_vShop + ' %'
-                    document.querySelector('#discount_ncc').value = result.discount + ' %'
+                    document.querySelector('#discount_vshop').value = result.discount_vShop;
+                    document.querySelector('#discount_ncc').value = result.discount;
                     document.getElementById('discount').value = 0;
                     document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
 
-                        if (value <= (Number(result.discount - result.discount_vShop)) && value > 0) {
+                        if (value < (Number(result.discount - result.discount_vShop)) && value > 0) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
