@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->float('price', 20, 2)->nullable()->comment('Giá bán sản phẩm');
             $table->integer('unit')->nullable()->comment('Loại dơn vị sản xuất');
             $table->integer('min_product_sale')->nullable()->comment('Số sản phẩm mua ít nhất để giảm giá');
-            $table->integer('type_pay')->nullable()->comment('1 Thanh toán trước ,2 trước +sau');
+            // $table->integer('type_pay')->nullable()->comment('1 Thanh toán trước ,2 trước +sau');
             $table->integer('prepay')->nullable()->comment('Thanh toán trước');
             $table->integer('payment_on_delivery')->nullable()->comment('Thanh toán khi nhận hàng');
             $table->integer('status')->nullable()->comment('Trạng thái sản phẩm');
