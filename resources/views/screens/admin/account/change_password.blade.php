@@ -1,10 +1,9 @@
 @extends('layouts.admin.main')
-
-
 @section('page_title','Đổi mật khẩu')
+
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success flex justify-center items-center show-modal">
+        <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
@@ -74,58 +73,117 @@
                                 <span class="text-secondary">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
                             </div>
 
-                            <div class="flex flex-col justify-center items-center pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">
-                                <div class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
-                                    <span class="w-full text-title font-medium">Mật khẩu cũ</span>
-                                    <input type="password" name="old_password" value="{{old('old_password')}}"
-                                           class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
-                                    <div class="w-full">
-                                        @error('old_password')
-                                        <p class="text-red-600">{{$message}}</p>
-                                        @endif
+                            <div class="grid grid-cols-2  pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">
+                                <div class="w-full flex flex-col gap-4">
+                                    <div
+                                        class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
+                                        <span class="min-w-[200px]  text-title font-medium">Mật khẩu cũ</span>
+                                        <div class="flex flex-col gap-2 w-full">
+
+                                            <input type="password" name="old_password"
+                                                   value="{{old('old_password')}}"
+                                                   class=" text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                            <div class="w-full">
+                                                @error('old_password')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
+                                        <span class="min-w-[200px]  text-title font-medium">Mật khẩu mới</span>
+                                        <div class="flex flex-col gap-2 w-full">
+
+                                            <input type="password" name="password"
+                                                   value="{{old('password')}}"
+                                                   class=" text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                            <div class="w-full">
+                                                @error('password')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
+                                        <span class="min-w-[200px]  text-title font-medium">Xác nhận mật khẩu</span>
+                                        <div class="flex flex-col gap-2 w-full">
+
+                                            <input type="password" name="password_confirmation"
+                                                   value="{{old('password_confirmation')}}"
+                                                   class=" text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                            <div class="w-full">
+                                                @error('password_confirmation')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="flex justify-center items-center">
+                                        <a href="#"
+                                           class="btn-acp cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 text-center text-[#FFFFFF] hover:opacity-70">
+                                            Xác nhận
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
-                                    <span class="w-full text-title font-medium">Mật khẩu mới</span>
-                                    <input type="password" name="password" value="{{old('password')}}"
-                                           class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
-                                    <div class="w-full">
-                                        @error('password')
-                                        <p class="text-red-600">{{$message}}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
-                                    <span class="w-full text-title font-medium">Xác nhận mật khẩu</span>
-                                    <input type="password" name="password_confirmation"
-                                           value="{{old('password_confirmation')}}"
-                                           class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
-                                    <div class="w-full">
-                                        @error('password_confirmation')
-                                        <p class="text-red-600">{{$message}}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="flex justify-center items-center">
-                                    <a href="#"
-                                       class="btn-acp cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
-                                        Xác nhận
-                                    </a>
+
+                                <div class="w-full">
+                                    <div style="border: 1px solid gray;padding: 8px;width: 50%;margin-left: 10%">
+                                        <p style="font-weight: bold">Lưu ý về mật khẩu:</p>
+                                        <p>Ít nhất 8 ký tự</p>
+                                        <p>Ít nhất 1 ký tự số</p>
+                                        <p>Ít nhất 1 ký tự viết hoa</p>
+                                        <p>Ít nhất 1 ký tự đặc biệt</p></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
-
-
-            </div>
     </form>
 @endsection
 
 @section('custom_js')
     <script>
+        document.querySelector('.btn-acp').setAttribute('disabled', 'true');
+        document.querySelector('.btn-acp').classList.add('bg-slate-300');
+
+
         $('.btn-acp').on('click', function () {
             $('.modal-acp').toggleClass('show-modal');
         })
+        document.querySelectorAll('input').forEach(item => {
+            item.addEventListener('keyup', (e) => {
+                let check1 = true;
+                let check2 = true;
+                let check3 = true;
+                if (!document.querySelectorAll('input')[1].value) {
+                    check1 = false;
+                }
+                if (!document.querySelectorAll('input')[2].value) {
+                    check2 = false;
+                }
+                if (!document.querySelectorAll('input')[3].value) {
+                    check3 = false;
+                }
+                if (check1 && check2 && check3) {
+                    document.querySelector('.btn-acp').removeAttribute('disabled');
+                    document.querySelector('.btn-acp').classList.remove('bg-slate-300');
+
+                } else {
+                    document.querySelector('.btn-acp').setAttribute('disabled', 'true');
+                    document.querySelector('.btn-acp').classList.add('bg-slate-300');
+
+                }
+            })
+        })
     </script>
+
 @endsection

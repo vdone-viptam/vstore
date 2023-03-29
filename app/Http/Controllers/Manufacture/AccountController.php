@@ -228,10 +228,10 @@ class AccountController extends Controller
         ], [
             'old_password.required' => 'Mật khẩu cũ bắt buộc nhập',
             'password.confirmed' => 'Xác nhận mật khẩu không chính xác',
-            'password.min' => 'Mật khẩu ít nhất 8 kí tự',
-            'password.regex' => 'Mật khẩu không dúng dịnh dạng (ít nhất 1 chữ số,kí tự đặc biệt và 1 ký tự in hoa bất kì)',
+            'password.min' => 'Mật khẩu không đúng định dạng',
+            'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
-            'password_confirmation.required' => 'Bạn chưa xác nhận mật khảu'
+            'password_confirmation.required' => 'Bạn chưa xác nhận mật khẩu'
         ]);
 
 
