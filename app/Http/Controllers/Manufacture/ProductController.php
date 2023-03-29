@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -601,5 +602,43 @@ class ProductController extends Controller
         $srcImage = asset('storage/products/' . $this->saveImgBase64($request->file, 'products'));
         return response()->json($srcImage);
 
+    }
+
+    public function checkDate(Request $request)
+    {
+        $to = Carbon::make($request->start_date);
+        $from = Carbon::make($request->end_date);
+        if ($to->diffInMinutes(Carbon::now()) < 10 && !$request->end_date) {
+            return response()->json([
+                'validated' => false,
+                'error' => [
+                    'end_date' => 'Thời gian bắt đầu phải sau 10 phút thời điểm hiện tại'
+                ],
+            ], 200);
+        }
+        if ($request->end_date) {
+            if ($to->diffInMinutes(Carbon::now()) < 10 || Carbon::now() > $to) {
+                return response()->json([
+                    'validated' => false,
+                    'error' => [
+                        'end_date' => 'Thời gian bắt đầu phải sau 10 phút thời điểm hiện tại'
+                    ],
+                ], 200);
+            }
+            if ($from->diffInMinutes($to) < 10 || $from < $to) {
+                return response()->json([
+                    'validated' => false,
+                    'error' => [
+                        'end_date' => 'Thời gian kết thúc phải sau thời gian bắt đầu 10 phút'
+                    ],
+                ], 200);
+            }
+        }
+        return response()->json([
+            'validated' => true,
+            'error' => [
+                'end_date' => ''
+            ],
+        ], 200);
     }
 }
