@@ -14,7 +14,6 @@ class Point extends Model
     {
         return Attribute::make(
             get: fn ($value) => json_decode($value),
-            // set: fn ($value) => json_encode($value),
         );
     }
     protected function createdAt(): Attribute
