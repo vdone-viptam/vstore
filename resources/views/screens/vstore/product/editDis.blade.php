@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Giá sản phẩm:</span>
+                        <span class="text-title font-medium  ">Giá sản phẩm (đ):</span>
                         <input disabled name="price" id="price" value="{{$product1->price}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -112,7 +112,7 @@
     });
     document.getElementById('start_date').addEventListener('change', (e) => {
         $.ajax({
-            url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' +  e.target.value,
+            url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
             success: function (result) {
                 if (!result.validated) {
                     document.getElementById('message').innerHTML = result.error.end_date;
@@ -187,7 +187,7 @@
             success: function (result) {
                 console.log(result)
                 if (result) {
-                    document.querySelector('#price').value = result.price + ' đ'
+                    document.querySelector('#price').value = result.price;
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.discount;
                     document.getElementById('discount').value = 0;

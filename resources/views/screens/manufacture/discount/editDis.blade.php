@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Giá sản phẩm:</span>
+                        <span class="text-title font-medium  ">Giá sản phẩm (đ):</span>
                         <input disabled name="price" id="price" value="{{$product1->price}}"
                                class="h-[42px] choose-vstore   outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -177,7 +177,10 @@
         }
 
     });
-
+    const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
@@ -188,7 +191,7 @@
             success: function (result) {
                 console.log(result)
                 if (result.validated === false) {
-                    document.querySelector('#price').value = result.pro.price + ' đ'
+                    document.querySelector('#price').value = VND(result.pro.price);
                     document.querySelector('#buy_more').value = result.pro.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.pro.discount;
                     document.querySelector('#buy_more').value = result.pro.buy_more;

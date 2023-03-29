@@ -28,7 +28,7 @@
                         </select>
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Giá sản phẩm:</span>
+                        <span class="text-title font-medium  ">Giá sản phẩm (đ):</span>
                         <input disabled name="price" id="price"
                                class="h-[42px] choose-vstore  bg-[#f0f0f0]  outline-none w-full px-3 border-[1px] border-[#D9D9D9] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -99,6 +99,8 @@
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
+    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
     document.getElementById('start_date').addEventListener('change', (e) => {
         $.ajax({
             url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
@@ -138,6 +140,10 @@
             },
         });
     });
+    const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
     document.getElementById('end_date').addEventListener('change', (e) => {
         if (document.getElementById('start_date').value) {
             $.ajax({
@@ -174,7 +180,7 @@
             success: function (result) {
                 console.log(result)
                 if (result) {
-                    document.querySelector('#price').value = result.pro.price + ' đ'
+                    document.querySelector('#price').value = VND(result.pro.price);
                     document.querySelector('#discount_vshop').value = result.pro.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.pro.discount;
                     document.querySelector('#buy_more').value = result.pro.buy_more;

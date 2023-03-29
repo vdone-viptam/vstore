@@ -28,7 +28,7 @@
                         </select>
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Giá sản phẩm:</span>
+                        <span class="text-title font-medium  ">Giá sản phẩm (đ):</span>
                         <input disabled name="price" id="price"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -90,6 +90,8 @@
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
+    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
     document.getElementById('start_date').addEventListener('change', (e) => {
         $.ajax({
             url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
@@ -103,7 +105,7 @@
                     document.getElementById('message').innerHTML = '';
                     if (document.getElementById('end_date').value) {
                         $.ajax({
-                            url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' +e.target.value,
+                            url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' + e.target.value,
                             success: function (result) {
                                 if (result.validated === false) {
                                     document.getElementById('message').innerHTML = result.error.end_date;
@@ -164,9 +166,8 @@
         $.ajax({
             url: '{{route('screens.vstore.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
-                console.log(result)
                 if (!result.validated) {
-                    document.querySelector('#price').value = result.price + ' đ'
+                    document.querySelector('#price').value = result.price
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.discount;
                     document.getElementById('discount').value = 0;
