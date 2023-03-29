@@ -10,6 +10,14 @@ class Point extends Model
 {
     use HasFactory;
     protected $table='points';
+    protected $fillable = [
+        "customer_id",
+        "product_id",
+        "point_evaluation",
+        "order_item_id",
+        "descriptions",
+        "images",
+    ];
     protected function images(): Attribute
     {
         return Attribute::make(

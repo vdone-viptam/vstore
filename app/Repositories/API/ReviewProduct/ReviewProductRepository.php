@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Repositories\API\ReviewProduct;
+
+use App\Interfaces\API\ReviewProduct\ReviewProductRepositoryInterface;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
+
+class ReviewProductRepository implements ReviewProductRepositoryInterface
+{
+    public function calculatorFeeProductPoint($productId,$pointsId)
+    {
+        $product = Product::where('id',$productId)->first();
+
+        $array = [];
+        if($product){
+            $array['name_product'] = $product->name;
+            
+            $orderItem = OrderItem::join('points','points.order_item_id','order_item.id')
+                ->join('order','order.id','order_item.order_id')
+                ->where('points.id',$pointsId)
+                ->select(
+                    'order_item.quantity',
+                    'discount_vshop',
+                    'discount_ncc',
+                    'discount_vstore',
+                    'order_item.price',
+                    'order.shipping'
+                )
+                ->first();
+            $array['count_product'] = $orderItem->quantity;
+
+            // a = ( giá sp * sl) - giảm giá
+            //  b = a *vat (tính vat)
+            // số tiền thực tế phải đóng = a + b + phí ship
+            $totalDiscount = ($orderItem->discount_vshop + $orderItem->discount_ncc + $orderItem->discount_vstore );
+            if( $totalDiscount  > 0 ){
+                $totalDiscount = $totalDiscount /100;
+            }
+            $totalProduct = $orderItem->price * $orderItem->quantity;
+            $shipping = $orderItem->shipping;
+            $totalVat = $product->vat;
+            if( $totalVat  > 0 ){
+                $totalVat = $totalVat / 100 ;
+            }
+            $amount_to_pay = $totalProduct  -  (  $totalProduct * $totalDiscount );
+            $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
+            $array['amount_to_pay'] = $amount_to_pay;
+            $array['price_product'] = $totalProduct;
+        }
+        return $array;
+    }
+}

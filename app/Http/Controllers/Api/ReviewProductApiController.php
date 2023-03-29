@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\API\ReviewProduct\ReviewProductRepositoryInterface;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Point;
@@ -19,6 +20,11 @@ use Illuminate\Support\Facades\Http;
 
 class ReviewProductApiController extends Controller
 {
+    private ReviewProductRepositoryInterface $reviewProductRepository;
+    public function __construct(ReviewProductRepositoryInterface $reviewProductRepository)
+    {
+        $this->reviewProductRepository = $reviewProductRepository;
+    }
     /**
      * lưu đánh giá sản phẩm
      *
@@ -88,15 +94,59 @@ class ReviewProductApiController extends Controller
      * API dùng xem chi tiết đánh giá sản phẩm
      *
      * @param Request $request
+     * @param $product_id ID product
+     * @bodyParam limit tổng số review / 1 trang
+     * @bodyParam point_evaluation điểm đánh giá
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function showListReviewProduct(Request $request,$product_id){
+        try {
+            $point_evaluation = $request->point_evaluation;
+            $limit = $request->limit ?? 3;
+
+            $totalReviews = Point::query()
+                            ->where('product_id', $product_id)
+                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id')
+                            ->orderBy('updated_at', 'desc');
+            if(!empty($point_evaluation)){
+                $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
+            }
+            $totalReviews = $totalReviews->paginate($limit);
+            foreach($totalReviews as $key => $value){
+                $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
+                if(!empty($calculatorFeeProductPoint)){
+                    $totalReviews[$key]['name_product'] = $calculatorFeeProductPoint['name_product'];
+                    $totalReviews[$key]['count_product'] = $calculatorFeeProductPoint['count_product'];
+                    $totalReviews[$key]['amount_to_pay'] = $calculatorFeeProductPoint['amount_to_pay'];
+                    $totalReviews[$key]['price_product'] = $calculatorFeeProductPoint['price_product'];
+                }
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $totalReviews
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * xem danh sách đánh giá một sản phẩm
+     *
+     * API dùng xem danh sách đánh giá sản phẩm
+     *
+     * @param Request $request
      * @param $point_id ID points
-     * @bodyParam order_item_id ID order_item
      * @bodyParam customer_id ID customer
      * @return \Illuminate\Http\JsonResponse
      */
     public function reviewDetailProduct(Request $request,$point_id){
-        // return $request->all();
+
         $validator = Validator::make($request->all(), [
-            'point_id' => 'required|exists:points,id',
+            // 'point_id' => 'required|exists:points,id',
             'customer_id' => 'required',
         ]);
         if ($validator->fails()) {
@@ -115,41 +165,12 @@ class ReviewProductApiController extends Controller
                     'message' => 'Không tìm thấy đánh giá !'
                 ], 500);
             }else{
-                $productId = $data -> product_id;
-                $product = Product::where('id',$productId)->first();
-                if($product){
-                    $data['name_product'] = $product->name;
-                    $orderItem = OrderItem::join('points','points.order_item_id','order_item.id')
-                        ->join('order','order.id','order_item.order_id')
-                        ->where('points.id',$request->point_id)
-                        ->select(
-                            'order_item.quantity',
-                            'discount_vshop',
-                            'discount_ncc',
-                            'discount_vstore',
-                            'order_item.price',
-                            'order.shipping'
-                        )
-                        ->first();
-                    $data['count_product'] = $orderItem->quantity;
-
-                    // a = ( giá sp * sl) - giảm giá
-                    //  b = a *vat (tính vat)
-                    // số tiền thực tế phải đóng = a + b + phí ship
-                    $totalDiscount = ($orderItem->discount_vshop + $orderItem->discount_ncc + $orderItem->discount_vstore );
-                    if( $totalDiscount  > 0 ){
-                        $totalDiscount = $totalDiscount /100;
-                    }
-                    $totalProduct = $orderItem->price * $orderItem->quantity;
-                    $shipping = $orderItem->shipping;
-                    $totalVat = $product->vat;
-                    if( $totalVat  > 0 ){
-                        $totalVat = $totalVat / 100 ;
-                    }
-                    $amount_to_pay = $totalProduct  -  (  $totalProduct * $totalDiscount );
-                    $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
-                    $data['amount_to_pay'] = $amount_to_pay;
-                    $data['price_product'] = $totalProduct;
+                $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($data->product_id,$data->id);
+                if(!empty($calculatorFeeProductPoint)){
+                    $data['name_product'] = $calculatorFeeProductPoint['name_product'];
+                    $data['count_product'] = $calculatorFeeProductPoint['count_product'];
+                    $data['amount_to_pay'] = $calculatorFeeProductPoint['amount_to_pay'];
+                    $data['price_product'] = $calculatorFeeProductPoint['price_product'];
                 }
                 return response()->json([
                     'status_code' => 200,

@@ -78,6 +78,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('review-product')->group(function () {
         Route::post('/accept-review', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'acceptReviewProduct']);
         Route::get('/review-detail-product/{point_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'reviewDetailProduct']);
+        Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
     });
     // CART
     Route::prefix('cart')->group(function () {
