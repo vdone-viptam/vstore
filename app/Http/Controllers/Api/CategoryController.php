@@ -145,7 +145,12 @@ class CategoryController extends Controller
             }
             $users = User::select('id', 'name', 'avatar')->whereIn('id', $data_vstore)->limit(8)->get();
             foreach ($users as $user) {
-                $user->avatar = asset('image/users/' . $user->avatar);
+                if ($user->avatar != ''){
+                    $user->avatar = asset('image/users/' . $user->avatar);
+
+                }else{
+                    $user->avatar = asset('home/img/logo-06.png');
+                }
             }
             return response()->json(['success' => true, 'data' => [
                 'vstores' => $users,
