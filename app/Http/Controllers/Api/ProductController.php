@@ -56,7 +56,7 @@ class ProductController extends Controller
             $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)
                 ->where('availability_status',1)
             ;
-            $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay', 'discount_vShop as discount_vstore'];
+            $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay', 'discount_vShop as discountVstore'];
             $request->option = $request->option == 'asc' ? 'asc' : 'desc';
 
             if ($request->pdone_id) {
@@ -360,7 +360,7 @@ class ProductController extends Controller
     {
 //        return $id;
         $product = Product::where('id', $id)->select('publish_id',
-            'id', 'name', 'images', 'price', 'discount_vShop as discount_Vstore',
+            'id', 'name', 'images', 'price', 'discount_vShop as discountVstore',
             'type_pay', 'video', 'description as content', 'user_id', 'category_id',
             'amount_product_sold', 'short_content', 'vat')
             ->where('availability_status',1)

@@ -43,7 +43,7 @@
                 <div class="content  max-h-[400px] overflow-y-auto">
                     <div class="flex flex-col justify-start items-start gap-6 py-2 md:p-6 w-full ">
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
-                            <span class="text-secondary w-full md:w-[280px]">Tên V-Store:</span>
+                            <span class="text-secondary w-full md:w-[280px]">Tên NCC:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" id="name" name="name"
                                        class="w-full outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"

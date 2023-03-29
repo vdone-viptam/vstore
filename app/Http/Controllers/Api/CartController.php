@@ -146,6 +146,12 @@ class CartController extends Controller
                 "avatar" => $item->avatar
             ];
             $item->images = json_decode($item->images);
+            $newImages = [];
+            foreach ($item->images as $index => $image) {
+                array_push($newImages, asset($image));
+            }
+            $item->images = $newImages;
+
             $item->discount = getDiscountProduct($item->id, $item->vshop_id_);
             $result[$item['vshop_id']]['products'][] = $item;
         }
@@ -224,6 +230,12 @@ class CartController extends Controller
 
         $product->discount = getDiscountProduct($product->id, $vshop->id);
         $product->images = json_decode($product->images);
+
+        $newImages = [];
+        foreach ($product->images as $index => $image) {
+            array_push($newImages, asset($image));
+        }
+        $product->images = $newImages;
 
         $cart = CartV2::where('status', config('constants.statusCart.cart'))
             ->where('user_id', $userId)

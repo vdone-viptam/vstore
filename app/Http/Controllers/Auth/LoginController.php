@@ -471,7 +471,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     {
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:6|max:30|confirmed',
+            'password' => 'required|min:8|max:30|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
             'password_confirmation' => 'required',
             'role_id' => 'required',
         ], [
@@ -480,6 +480,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             'password.max' => 'Mật khẩu nhiều nhất 30 ký tự',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
+            'password.regex' => 'Mật khẩu không dúng dịnh dạng (ít nhất 1 chữ số,kí tự đặc biệt và 1 ký tự in hoa bất kì)'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());

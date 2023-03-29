@@ -142,7 +142,12 @@ class VstoreController extends Controller
             ->select('users.id', 'users.name', 'users.avatar')
             ->paginate($limit);
         foreach ($vstores as $value) {
-            $value->avatar = asset('image/users/' . $value->avatar);
+            if ($value->avatar !=''){
+                $value->avatar = asset('image/users/' . $value->avatar);
+            }else{
+                $value->avatar = asset('home/img/logo-06.png');
+            }
+
         }
         return response()->json([
             'status_code' => 200,
