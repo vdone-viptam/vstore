@@ -471,16 +471,16 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     {
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8max:30|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password' => 'required|min:8|max:30|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
             'password_confirmation' => 'required',
             'role_id' => 'required',
         ], [
             'password.required' => 'Email bắt buộc nhập',
-            'password.min' => 'Mật khẩu ít nhất 6 ký tự',
+            'password.min' => 'Mật khẩu ít nhất 8 ký tự',
             'password.max' => 'Mật khẩu nhiều nhất 30 ký tự',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
-            'password.regex' => 'Mật khẩu ít nhất 8 ký tự,chứa ít nhất 1 ký tự viết hoa,1 ký tự đặc biệt'
+            'password.regex' => 'Mật khẩu không đúng định dạng'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());

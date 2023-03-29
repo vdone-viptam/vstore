@@ -57,7 +57,7 @@
 
 <div class=" grid grid-cols-1 place-items-center">
     <div
-        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl md:w-[500px]">
+        class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full md:w-[500px]">
         {{--        <a href="../" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
         {{--            <div>--}}
         {{--                <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
@@ -87,7 +87,9 @@
                     @error('password')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
+
                 </div>
+
                 <input type="hidden" value="{{$role_id}}" name="role_id">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Xác nhận mật khẩu </span>
@@ -99,13 +101,16 @@
                 </div>
             </div>
 
-            {{--            <div class="flex justify-between items-center w-full">--}}
+         <div class="ms-3">
+             <p style="font-weight: bold">Mật khẩu bao gồm:</p>
+             <p>Ít nhất 8 ký tự</p>
+             <p>Ít nhất 1 ký tự số</p>
+             <p>Ít nhất 1 ký tự viết hoa</p>
+             <p>Ít nhất 1 ký tự đặc biệt</p></div>
 
-            {{--                <a href="{{route('login')}}" class="font-medium text-[#096DD9]">Đăng nhập</a>--}}
-            {{--            </div>--}}
-            <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
+            <div class="mt-12 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
-                       class="cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
+                       class="btnA cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
                        value="Đồng ý"></input>
                 {{--                                <button type="submit" class="text-red-300"> Đòng ý</button>--}}
                 {{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register')}}" class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}
@@ -116,5 +121,38 @@
 
 </div>
 {{--<script src="{{asset('asset/js/main.js')}}"></script>--}}
+
+
+<script>
+    document.querySelector('.btnA').setAttribute('disabled', 'true');
+    document.querySelector('.btnA').classList.add('bg-slate-300');
+
+
+    $('.btn-acp').on('click', function () {
+        $('.modal-acp').toggleClass('show-modal');
+    })
+    document.querySelectorAll('input').forEach(item => {
+        item.addEventListener('keyup', (e) => {
+            let check1 = true;
+            let check2 = true;
+            if (!document.querySelectorAll('input')[2].value) {
+                check1 = false;
+            }
+            if (!document.querySelectorAll('input')[3].value) {
+                check2 = false;
+            }
+            if (check1 && check2) {
+                document.querySelector('.btnA').removeAttribute('disabled');
+                document.querySelector('.btnA').classList.remove('bg-slate-300');
+
+            } else {
+                document.querySelector('.btnA').setAttribute('disabled', 'true');
+                document.querySelector('.btnA').classList.add('bg-slate-300');
+
+            }
+        })
+    })
+</script>
+
 </body>
 </html>

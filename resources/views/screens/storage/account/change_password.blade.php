@@ -135,7 +135,7 @@
 
                                 <div class="w-full">
                                     <div style="border: 1px solid gray;padding: 8px;width: 50%;margin-left: 10%">
-                                        <p style="font-weight: bold">Lưu ý về mật khẩu:</p>
+                                        <p style="font-weight: bold">Mật khẩu bao gồm:</p>
                                         <p>Ít nhất 8 ký tự</p>
                                         <p>Ít nhất 1 ký tự số</p>
                                         <p>Ít nhất 1 ký tự viết hoa</p>
