@@ -476,11 +476,11 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             'role_id' => 'required',
         ], [
             'password.required' => 'Email bắt buộc nhập',
-            'password.min' => 'Mật khẩu ít nhất 6 ký tự',
+            'password.min' => 'Mật khẩu ít nhất 8 ký tự',
             'password.max' => 'Mật khẩu nhiều nhất 30 ký tự',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
-            'password.regex' => 'Mật khẩu không dúng dịnh dạng (ít nhất 1 chữ số,kí tự đặc biệt và 1 ký tự in hoa bất kì)'
+            'password.regex' => 'Mật khẩu không đúng định dạng'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());

@@ -82,7 +82,7 @@
             @endif
             <div class="flex flex-col justify-center items-center gap-6 w-full py-6">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Email </span>
+                    <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Email đăng ký tài khoản</span>
                     <input type="hidden" name="role_id" value="{{$role_id}}">
                     <input type="email" name="email" placeholder="Nhập email"
                            class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -111,7 +111,7 @@
             {{--            </div>--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">
                 <input type="submit"
-                       class="cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
+                       class="btnA cursor-pointer hover:opacity-70 transition-all duration-200 btn-ctn text-center w-full text-white text-xl font-medium rounded-lg py-4 bg-sky-500/100"
                        value="Đồng ý"></input>
                 {{--                <button type="submit" class="text-red-300"> Đòng ý</button>--}}
                 {{--                <span class="text-xl font-medium w-full">Bạn chưa có tài khoản? <a href="{{route('register')}}" class="text-primary hover:opacity-70 transition-all duration-500">Đăng ký ngay</a></span>--}}
@@ -121,6 +121,33 @@
     </div>
 
 </div>
-{{--<script src="{{asset('asset/js/main.js')}}"></script>--}}
+<script>
+    document.querySelector('.btnA').setAttribute('disabled', 'true');
+    document.querySelector('.btnA').classList.add('bg-slate-300');
+
+
+    $('.btn-acp').on('click', function () {
+        $('.modal-acp').toggleClass('show-modal');
+    })
+    document.querySelectorAll('input').forEach(item => {
+        item.addEventListener('keyup', (e) => {
+            let check1 = true;
+            if (!document.querySelectorAll('input')[1].value) {
+                check1 = false;
+            }
+
+            if (check1) {
+                document.querySelector('.btnA').removeAttribute('disabled');
+                document.querySelector('.btnA').classList.remove('bg-slate-300');
+
+            } else {
+                document.querySelector('.btnA').setAttribute('disabled', 'true');
+                document.querySelector('.btnA').classList.add('bg-slate-300');
+
+            }
+        })
+    })
+</script>
 </body>
+
 </html>

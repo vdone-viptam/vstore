@@ -20,14 +20,15 @@ class OrderController extends Controller
         $limit = $request->limit ?? 10;
         $orders = OrderItem::with(['product', 'vshop', 'warehouse', 'order'])->select('order_id',
             'product_id',
-            'price',
+            'order_item.price',
             'quantity',
             'warehouse_id',
             'order_id',
             'vshop_id',
             'warehouse_id'
-        )->where('ncc_id', Auth::id())
-            ->orderBy('id', 'desc')->paginate($limit);
+        )->join('products', 'order_item.product_id', '=', 'products.id')
+            ->where('products.user_id', Auth::id())
+            ->orderBy('order_item.id', 'desc')->paginate($limit);
 
         return view('screens.manufacture.order.index', ['orders' => $orders]);
     }
@@ -41,20 +42,19 @@ class OrderController extends Controller
     public function pending()
     {
         $limit = $request->limit ?? 10;
+
         $orders = OrderItem::with(['product', 'vshop', 'warehouse', 'order'])->select('order_id',
             'product_id',
-            'price',
+            'order_item.price',
             'quantity',
             'warehouse_id',
             'order_id',
             'vshop_id',
             'warehouse_id'
-        )->where('ncc_id', Auth::id())
-            ->join('order', 'order_item.order_id', '=', 'order.id')
+        )->where('products.user_id', Auth::id())
+            ->join('products', 'order_item.product_id', '=', 'products.id')
             ->orderBy('order_item.id', 'desc')
-            ->where('export_status', '!=', 4)
             ->paginate($limit);
-
         return view('screens.manufacture.order.pending', ['orders' => $orders]);
 
     }
@@ -62,9 +62,10 @@ class OrderController extends Controller
     public function order()
     {
         $orders = PreOrderVshop::with(['product'])
-            ->select('status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'discount', 'deposit_money', 'created_at', 'product_id', 'id')
-            ->where('ncc_id', Auth::id())
-            ->orderBy('id', 'desc')
+            ->select('pre_order_vshop.status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money', 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
+            ->where('products.user_id', Auth::id())
+            ->orderBy('pre_order_vshop.id', 'desc')
             ->paginate(10);;
         return view('screens.manufacture.order.order', [
             'orders' => $orders
@@ -74,9 +75,10 @@ class OrderController extends Controller
     public function detailOrder($id)
     {
         $orders = PreOrderVshop::with(['product'])
-            ->select('status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'discount', 'deposit_money', 'created_at', 'product_id', 'id')
-            ->where('ncc_id', Auth::id())
-            ->where('id', $id)
+            ->select('pre_order_vshop.status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money', 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
+            ->where('products.user_id', Auth::id())
+            ->where('pre_order_vshop.id', $id)
             ->first();
         return view('screens.manufacture.order.detail', [
             'order' => $orders

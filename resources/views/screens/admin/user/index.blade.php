@@ -171,8 +171,10 @@
                                                class="more-details text-primary underline ml-4">
                                                 Chi tiết</a>
                                         @else
-                                            <a class="duyet min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                                               href="{{route('screens.admin.user.confirm',['id' => $user->id])}}">Duyệt
+                                            <a data-abc="{{$loop->iteration - 1}}"
+                                               data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
+                                               class="duyet min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                                               href="#">Duyệt
                                             </a>
 
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
@@ -222,7 +224,22 @@
 
 @section('custom_js')
     <script>
+        document.querySelectorAll('.duyet').forEach((item, index3) => {
+            const index = +item.dataset.abc
+            item.addEventListener('click', (e) => {
+                document.querySelectorAll('.duyet').forEach((item2, index2) => {
+                    if (item2.dataset.abc == index) {
+                        if (item2.dataset.href) {
+                            document.location = item2.dataset.href;
+                        }
+                    } else {
+                        item2.removeAttribute('data-href');
+                    }
+                });
+            })
 
+
+        })
 
         const name = document.getElementById('name');
         const id = document.getElementById('id');

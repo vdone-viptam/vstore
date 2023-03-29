@@ -51,7 +51,8 @@
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div>
                             <span class="text-title font-medium  ">Ngày bắt đầu:</span>
-                            <input type="datetime-local" name="start_date" value="{{$discount->start_date}}" required
+                            <input type="datetime-local" id="start_date" name="start_date"
+                                   value="{{$discount->start_date}}" required
                                    min="{{ Carbon\Carbon::now()->addMinutes(10)->format('Y-m-d H:i') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('start_date')
@@ -60,7 +61,8 @@
                         </div>
                         <div>
                             <span class="text-title font-medium  ">Ngày kết thúc:</span>
-                            <input type="datetime-local" name="end_date" value="{{$discount->end_date}}" required
+                            <input type="datetime-local" id="end_date" name="end_date" value="{{$discount->end_date}}"
+                                   required
                                    min="{{ Carbon\Carbon::parse($discount->end_date)->format('Y-m-d H:i') }}"
                                    class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('end_date')
@@ -89,13 +91,15 @@
 </form>
 
 <script>
+    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
     document.getElementById('discount').addEventListener('keyup', (o) => {
         const value = +o.target.value;
         if (value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value
-             && value > 0) {
+            && value > 0) {
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
 
@@ -106,10 +110,78 @@
         }
 
     });
+    document.getElementById('start_date').addEventListener('change', (e) => {
+        $.ajax({
+            url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' +  e.target.value,
+            success: function (result) {
+                if (!result.validated) {
+                    document.getElementById('message').innerHTML = result.error.end_date;
+                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                } else {
+                    document.getElementById('message').innerHTML = '';
+                    if (document.getElementById('end_date').value) {
+                        $.ajax({
+                            url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' + document.getElementById('start_date').value,
+                            success: function (result) {
+                                if (!result.validated) {
+                                    document.getElementById('message').innerHTML = result.error.end_date;
+                                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                } else {
+                                    if (document.getElementById('discount').value > 0 && document.getElementById('discount').value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) {
+                                        document.querySelector('.btnSubmit').removeAttribute('disabled');
+                                        document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                                        document.getElementById('message').innerHTML = '';
+                                    } else {
+                                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                        document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
+
+                                    }
+
+                                }
+                            },
+                        });
+                    }
+                }
+            },
+        });
+    });
+    document.getElementById('end_date').addEventListener('change', (e) => {
+        if (document.getElementById('start_date').value) {
+            $.ajax({
+                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + e.target.value + '&start_date=' + document.getElementById('start_date').value,
+                success: function (result) {
+                    console.log(result);
+                    if (!result.validated) {
+                        document.getElementById('message').innerHTML = result.error.end_date;
+                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+
+                    } else {
+                        document.querySelector('.btnSubmit').removeAttribute('disabled');
+                        document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                        document.getElementById('message').innerHTML = '';
+                        if (document.getElementById('discount').value > 0 && document.getElementById('discount').value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) {
+                            document.querySelector('.btnSubmit').removeAttribute('disabled');
+                            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                            document.getElementById('message').innerHTML = '';
+                        } else {
+                            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                            document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
+
+                        }
+                    }
+                },
+            });
+        }
+    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-
+        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
         $.ajax({
             url: '{{route('screens.vstore.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
@@ -124,11 +196,32 @@
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
 
-                        if (value < Number(result.discount - result.discount_vShop)) {
+                        if (value < (Number(result.discount - result.discount_vShop)) && value > 0 &&
+                            document.getElementById('start_date').value && document.getElementById('end_date').value) {
+                            $.ajax({
+                                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + e.target.value + '&start_date=' + document.getElementById('start_date').value,
+                                success: function (result) {
+                                    if (!result.validated) {
+                                        document.getElementById('message').innerHTML = result.error.end_date;
+                                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                    } else {
+                                        if (document.getElementById('discount').value > 0 && document.getElementById('discount').value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) {
+                                            document.querySelector('.btnSubmit').removeAttribute('disabled');
+                                            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                                            document.getElementById('message').innerHTML = '';
+                                        } else {
+                                            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                            document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
+
+                                        }
+
+                                    }
+                                },
+                            });
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
-
-
                         } else {
                             document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
