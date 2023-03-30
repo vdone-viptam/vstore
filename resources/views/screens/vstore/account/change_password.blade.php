@@ -9,7 +9,7 @@
     </style>
 @endsection
 
-@section('modal')
+@section('modal')f
     @if(\Illuminate\Support\Facades\Session::has('success'))
         <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>

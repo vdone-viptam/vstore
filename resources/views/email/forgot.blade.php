@@ -9,8 +9,16 @@
     p {
         font-size: 17px;
     }
-    @media only screen and (max-width: 600px) {
+    #box {
+        padding: 4% 6%;
+        width: 36%;
+        margin: 0px auto;
+    }
 
+    @media only screen and (max-width: 768px) {
+        #box {
+            width: 100% !important;
+        }
     }
 </style>
 <body style="padding-top:10px ; background-color: #e8e8e8;">
@@ -28,7 +36,7 @@
     @endif
 
 </div>
-<div style="background-color: #ffff;padding:4% 6%;width:36%;margin:0px auto;">
+<div style="background-color: #ffff;" id="box">
 
 
     <p style="font-weight:bold;font-size:19px;">Chào mừng quý khách đến với hệ thống Thương mại điện tử.

@@ -176,6 +176,20 @@
             ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })
+    document.querySelector('.btnA').setAttribute('disabled', 'true');
+    document.querySelector('.btnA').classList.add('bg-slate-300');
+    document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
+    document.querySelector('#key_search').addEventListener('keyup', (e) => {
+        if (e.target.value) {
+            document.querySelector('.btnA').removeAttribute('disabled');
+            document.querySelector('.btnA').classList.remove('bg-slate-300');
+            document.querySelector('.btnA').classList.add('bg-[#40BAFF]');
+        } else {
+            document.querySelector('.btnA').setAttribute('disabled', 'true');
+            document.querySelector('.btnA').classList.add('bg-slate-300');
+            document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
+        }
+    });
 </script>
 </body>
 </html>
