@@ -127,7 +127,8 @@ class LoginController extends Controller
                 'image_storage' => 'required',
                 'image_pccc' => 'required',
                 'city_id' => 'required',
-                'district_id' => 'required'
+                'district_id' => 'required',
+                'ward_id' => 'required'
 
             ], [
                 'email.required' => 'Email bắt buộc nhập',
@@ -144,6 +145,7 @@ class LoginController extends Controller
                 'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'ward_id' => 'Phường (xã) bắt buộc chọn',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);

@@ -375,7 +375,7 @@
 @endsection
 
 @section('custom_js')
-    <script src="https://cdn.tiny.cloud/1/23l4tyr8qs5720ac7v7xlgtooqmbfd8on5mbf3qsf5w1m377/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/7v46ob448fd1i42e0fle8qsifky50i9gg368joxi55dlp64h/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script async>
         tinymce.init({

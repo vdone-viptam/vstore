@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\User;
 use App\Models\Warehouses;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Exception;
 
 class AccountController extends Controller
 {
@@ -44,8 +46,9 @@ class AccountController extends Controller
             'volume' => 'required',
             'cold_storage' => 'required',
             'warehouse' => 'required',
-            'normal_storage' => 'required'
-
+            'normal_storage' => 'required',
+            'city_id'=>'required',
+            'district_id'=>'required',
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
@@ -55,34 +58,63 @@ class AccountController extends Controller
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
             'floor_area.required' => 'trường này không được trống',
-            'volume.required' => 'trường này không được trống',
-            'cold_storage.required' => 'trường này không được trống',
-            'warehouse.required' => 'trường này không được trống',
-            'normal_storage.required' => 'trường này không được trống',
+            'volume.required' => 'Trường này không được trống',
+            'cold_storage.required' => 'Trường này không được trống',
+            'warehouse.required' => 'Trường này không được trống',
+            'normal_storage.required' => 'Trường này không được trống',
+            'city_id.required' => 'Trường này không được trống',
+            'district_id.required' => 'Trường này không được trống',
+
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
+        try {
+            $user = \App\Models\User::find($id);
+            $user->name = trim($request->name);
+            $user->company_name = trim($request->company_name);
+            $user->provinceId = $request->city_id;
+            $user->district_id = $request->district_id;
+            $user->address = trim($request->address);
+            $user->id_vdone = trim($request->id_vdone);
+            $user->id_vdone_diff = trim($request->id_vdone_diff);
+            $user->phone_number = trim($request->phone_number);
+            $old_info = json_decode($user->storage_information);
+            $old_info->floor_area = $request->floor_area;
+            $old_info->volume = $request->volume;
+            $old_info->cold_storage = $request->cold_storage;
+            $old_info->warehouse = $request->warehouse;
+            $old_info->normal_storage = $request->normal_storage;
+            $user->storage_information = json_encode($old_info);
+            $user->save();
 
-        $user = \App\Models\User::find($id);
-        $user->name = trim($request->name);
-        $user->company_name = trim($request->company_name);
-        $user->provinceId = $request->city_id;
-        $user->district_id = $request->district_id;
-        $user->address = trim($request->address);
-        $user->id_vdone = trim($request->id_vdone);
-        $user->id_vdone_diff = trim($request->id_vdone_diff);
-        $user->phone_number = trim($request->phone_number);
-        $old_info = json_decode($user->storage_information);
-        $old_info->floor_area = $request->floor_area;
-        $old_info->volume = $request->volume;
-        $old_info->cold_storage = $request->cold_storage;
-        $old_info->warehouse = $request->warehouse;
-        $old_info->normal_storage = $request->normal_storage;
-        $user->storage_information = json_encode($old_info);
-        $user->save();
 
-        return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+
+            $address = $user->address .','. $user->district->district_name.', '  .$user->province->province_name;
+//            return $address_ware;
+            $result = app('geocoder')->geocode($address)->get();
+            if (!isset($result[0])){
+                return redirect()->back()->with('error','Địa chỉ không hợp lệ');
+            }
+            $coordinates = $result[0]->getCoordinates();
+
+            $lat = $coordinates->getLatitude();
+            $long = $coordinates->getLongitude();
+
+            $warehouse= Warehouses::where('user_id',$user->id)->first();
+            $warehouse->name=$user->name;
+            $warehouse->city_id =$request->city_id;
+            $warehouse->district_id =$request->district_id;
+            $warehouse->lat= $lat;
+            $warehouse->long = $long;
+            $warehouse->save();
+            return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+
+        }catch (Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+
     }
 
     public function uploadImage($id, Request $request)
