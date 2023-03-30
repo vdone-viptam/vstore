@@ -140,10 +140,6 @@
             },
         });
     });
-    const VND = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-    });
     document.getElementById('end_date').addEventListener('change', (e) => {
         if (document.getElementById('start_date').value) {
             $.ajax({
@@ -180,7 +176,7 @@
             success: function (result) {
                 console.log(result)
                 if (result) {
-                    document.querySelector('#price').value = VND(result.pro.price);
+                    document.querySelector('#price').value = result.pro.price;
                     document.querySelector('#discount_vshop').value = result.pro.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.pro.discount;
                     document.querySelector('#buy_more').value = result.pro.buy_more;

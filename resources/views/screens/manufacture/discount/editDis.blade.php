@@ -177,10 +177,6 @@
         }
 
     });
-    const VND = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
@@ -189,55 +185,44 @@
         $.ajax({
             url: '{{route('screens.manufacture.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
-                console.log(result)
-                if (result.validated === false) {
-                    document.querySelector('#price').value = VND(result.pro.price);
-                    document.querySelector('#buy_more').value = result.pro.discount_vShop;
-                    document.querySelector('#discount_ncc').value = result.pro.discount;
-                    document.querySelector('#buy_more').value = result.pro.buy_more;
-                    document.getElementById('discount').addEventListener('keyup', (o) => {
-                        const value = +o.target.value;
-                        if (value < 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0 &&
-                            document.getElementById('start_date').value && document.getElementById('end_date').value) {
-                            $.ajax({
-                                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' + document.getElementById('start_date').value,
-                                success: function (result) {
-                                    if (result.validated === false) {
-                                        document.getElementById('message').innerHTML = result.error.end_date;
+                document.querySelector('#price').value = result.pro.price;
+                document.querySelector('#discount_ncc').value = result.pro.discount;
+                document.querySelector('#buy_more').value = result.pro.buy_more;
+                document.getElementById('discount').addEventListener('keyup', (o) => {
+                    const value = +o.target.value;
+                    if (value < 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0 &&
+                        document.getElementById('start_date').value && document.getElementById('end_date').value) {
+                        $.ajax({
+                            url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' + document.getElementById('start_date').value,
+                            success: function (result) {
+                                if (result.validated === false) {
+                                    document.getElementById('message').innerHTML = result.error.end_date;
+                                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                } else {
+                                    if (document.getElementById('discount').value && document.getElementById('discount').value < 100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value) {
+                                        document.querySelector('.btnSubmit').removeAttribute('disabled');
+                                        document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                                        document.getElementById('message').innerHTML = '';
+                                    } else {
                                         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                                         document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                                    } else {
-                                        if (document.getElementById('discount').value && document.getElementById('discount').value < 100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value) {
-                                            document.querySelector('.btnSubmit').removeAttribute('disabled');
-                                            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
-                                            document.getElementById('message').innerHTML = '';
-                                        } else {
-                                            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-                                            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                                            document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
-
-                                        }
+                                        document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
 
                                     }
-                                },
-                            });
-                            document.querySelector('.btnSubmit').removeAttribute('disabled');
-                            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
-                            document.getElementById('message').innerHTML = '';
-                        } else {
-                            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-                            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                        }
 
-                    });
-                } else {
-                    document.querySelector('#price').value = 0 + ' đ';
-                    document.querySelector('#buy_more').value = ''
-                    document.querySelector('#discount_ncc').value = ''
-                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                    document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
-                }
+                                }
+                            },
+                        });
+                        document.querySelector('.btnSubmit').removeAttribute('disabled');
+                        document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                        document.getElementById('message').innerHTML = '';
+                    } else {
+                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                    }
+
+                });
                 // console.log(result);
             },
         });

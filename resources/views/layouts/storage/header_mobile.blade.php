@@ -196,16 +196,15 @@
                         <li data-page="/"><a class="hover:underline" href="{{route('screens.storage.finance.index')}}">Ví</a>
                         </li>
                         <li data-page="history"><a class="hover:underline"
-                                                   href="{{route('screens.storage.finance.history')}}">Lịch sử thay đổi
+                                                   href="{{route('screens.storage.finance.history')}}">
+                                Yêu cầu rút
+                                tiền
+                            </a>
+                        </li>
+                        <li data-page="revenue"><a class="hover:underline"
+                                                   href="{{route('screens.storage.finance.revenue')}}"> Lịch sử biến
+                                động
                                 số dư</a>
-                        </li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.destroy')}}">Đơn hủy</a>
-                        </li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng,
-                                hoàn tiền</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.order.pending')}}">Trả hàng,
-                                hoàn
-                                tiền</a></li>
                     </ul>
                 </div>
                 {{--                Tài chính--}}
@@ -237,7 +236,8 @@
 
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi số dư</a></li>
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử
+                                thay đổi số dư</a></li>
                         <!-- <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
                                 thu</a>
                         </li> -->
@@ -269,8 +269,12 @@
                     </div>
 
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li data-page="/"><a class="hover:underline" href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a></li>
-                        <li data-page="change-password"><a class="hover:underline" href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
+                        <li data-page="/"><a class="hover:underline"
+                                             href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a>
+                        </li>
+                        <li data-page="change-password"><a class="hover:underline"
+                                                           href="{{route('screens.manufacture.account.changePassword')}}">Đổi
+                                mật khẩu</a>
                         </li>
                     </ul>
                 </div>

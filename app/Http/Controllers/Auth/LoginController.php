@@ -219,7 +219,7 @@ class LoginController extends Controller
                 $error['name'] = 'Tên đã được đăng ký';
             }
             $checkTax3 = DB::table('users')
-                ->where('phone_number', $request->phone_nunber)
+                ->where('phone_number', $request->phone_number)
                 ->where('role_id', $role_id)
                 ->count();
             if ($checkTax3 > 0) {

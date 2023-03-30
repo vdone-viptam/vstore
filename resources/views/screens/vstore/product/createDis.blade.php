@@ -5,7 +5,7 @@
             class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
             <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                 <div></div>
-                <h2 class=" text-title font-semibold text-xl">Thêm mới mã giảm giá</h2>
+                <h2 class=" text-title font-semibold text-xl">Thêm mới giảm giá</h2>
                 <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                      onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">

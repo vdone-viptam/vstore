@@ -73,6 +73,7 @@
                             <th>
                                 Số lượng
                             </th>
+                            <th>Tiền đặt cọc</th>
                             <th>Tổng tiền</th>
                             <th>Trạng thái</th>
                             <th>
