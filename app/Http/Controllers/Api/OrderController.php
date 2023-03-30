@@ -424,6 +424,7 @@ class OrderController extends Controller
             foreach ($orders as $order) {
                 $order->orderItem = $order->orderItem()
                     ->select(
+                        'id as order_item_id',
                         'quantity',
                         'discount_vshop',
                         'discount_ncc',
@@ -527,7 +528,9 @@ class OrderController extends Controller
                     'message' => 'Không tìm thấy V-shop'
                 ], 404);
             }
-            $orders = OrderItem::select('product_id',
+            $orders = OrderItem::select(
+                'id as order_item_id',
+                'product_id',
                 'discount_vshop',
                 'price',
                 'discount_ncc',
