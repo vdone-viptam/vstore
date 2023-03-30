@@ -66,7 +66,7 @@
         {{--        </a>--}}
         <div class="w-[162px]">
             @if($role_id == 3)
-                <a href="{{route('login_vstore')}}"><img src="{{asset('asset/images/Logo.png')}}" alt=""></a>
+                <a href="{{route('login_vstore')}}"><img src="{{asset('home/img/logo.png')}}" alt=""></a>
             @elseif($role_id == 2)
                 <a href="{{route('login_ncc')}}"> <img src="{{asset('home/img/NCC.png')}}" alt=""></a>
             @elseif($role_id == 4)

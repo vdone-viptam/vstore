@@ -101,7 +101,7 @@ class LoginController extends Controller
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
-                'name.required' => 'Tên nhà phân phối bắt buộc nhập',
+                'name.required' => 'Tên nhà V-store bắt buộc nhập',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
@@ -188,9 +188,9 @@ class LoginController extends Controller
                 ->where('email', $request->email)
                 ->where('role_id', $role_id)
                 ->count();
-
+            $error = null;
             if ($checkEmail > 0) {
-                return redirect()->back()->withErrors(['email' => 'Email đã được đăng ký.'])->withInput($request->all());
+                $error['email'] = 'Email đã được đăng ký.';
             }
             if ($role_id != 4) {
                 $checkTax = DB::table('users')
@@ -198,25 +198,35 @@ class LoginController extends Controller
                     ->where('role_id', $role_id)
                     ->count();
                 if ($checkTax > 0) {
-                    return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký.'])->withInput($request->all());
+                    $error['tax_code'] = 'Mã số thuế đã được đăng ký';
                 }
             }
-//            if ( $role_id != 1 || $role_id !=4) {
-//                $checkTax = DB::table('users')
-//                    ->where('company_name', $request->company_name)
-//                    ->where('role_id', $role_id)
-//                    ->count();
-//                if ($checkTax > 0) {
-//                    return redirect()->back()->withErrors(['company_name' => 'Tên công ty đã được đăng ký.'])->withInput($request->all());
-//                }
-//            }
+            if ($role_id != 4) {
+                $checkTax = DB::table('users')
+                    ->where('company_name', $request->company_name)
+                    ->where('role_id', $role_id)
+                    ->count();
+                if ($checkTax > 0) {
+                    $error['company_name'] = 'Tên công ty đã được đăng ký';
+                }
+            }
 
             $checkTax2 = DB::table('users')
                 ->where('name', $request->name)
                 ->where('role_id', $role_id)
                 ->count();
             if ($checkTax2 > 0) {
-                return redirect()->back()->withErrors(['name' => 'Tên đã tồn tại.'])->withInput($request->all());
+                $error['name'] = 'Tên đã được đăng ký';
+            }
+            $checkTax3 = DB::table('users')
+                ->where('phone_number', $request->phone_nunber)
+                ->where('role_id', $role_id)
+                ->count();
+            if ($checkTax3 > 0) {
+                $error['phone_number'] = 'Số điện thoại đã được đăng ký';
+            }
+            if ($error !== null) {
+                return redirect()->back()->withErrors($error)->withInput($request->all());
             }
             $user = new User();
             $user->name = $request->name;
@@ -301,7 +311,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     }
 
-    public function postLogin(Request $request)
+    public
+    function postLogin(Request $request)
     {
 
         $request->validate([
@@ -371,12 +382,14 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     }
 
-    public function getLogin()
+    public
+    function getLogin()
     {
         return view('auth.login');
     }
 
-    public function formForgotPassword(Request $request)
+    public
+    function formForgotPassword(Request $request)
     {
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
@@ -394,7 +407,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         return view('auth.forgotPassword', ['role_id' => $role_id]);
     }
 
-    public function postForgotPassword(Request $request)
+    public
+    function postForgotPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|exists:users,email|email',
@@ -442,7 +456,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         }
     }
 
-    public function formResetForgot($token, Request $request)
+    public
+    function formResetForgot($token, Request $request)
     {
 
         $domain = $request->getHttpHost();
@@ -467,7 +482,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         return view('auth.formReset', ['role_id' => $role_id]);
     }
 
-    public function postResetForgot(Request $request, $token)
+    public
+    function postResetForgot(Request $request, $token)
     {
 
         $validator = Validator::make($request->all(), [
@@ -511,14 +527,16 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     }
 
-    public function getLogout()
+    public
+    function getLogout()
     {
         Auth::logout();
         Auth::hasUser();
         return redirect('login');
     }
 
-    public function OTP($token1, Request $request)
+    public
+    function OTP($token1, Request $request)
     {
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
@@ -541,7 +559,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         ]);
     }
 
-    public function post_OTP(Request $request, $token1)
+    public
+    function post_OTP(Request $request, $token1)
     {
         $otp = Otp::where('user_code', $request->id)->where('code', $request->otp)->first();
 
@@ -586,7 +605,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 
     }
 
-    public function reOtp(Request $request)
+    public
+    function reOtp(Request $request)
     {
         $domain = $request->getHttpHost();
         if ($domain == config('domain.admin')) {
@@ -615,7 +635,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     }
 
 
-    public function getCity(Request $request)
+    public
+    function getCity(Request $request)
     {
         if ($request->type == 2) {
             $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);

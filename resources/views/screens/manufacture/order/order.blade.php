@@ -51,9 +51,9 @@
                 @if(\Illuminate\Support\Facades\Session::has('success'))
                     <p class="text-green-600">{{\Illuminate\Support\Facades\Session::get('success')}}</p>
                 @endif
-                    @if(\Illuminate\Support\Facades\Session::has('error'))
-                        <p class="text-red-600">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
-                    @endif
+                @if(\Illuminate\Support\Facades\Session::has('error'))
+                    <p class="text-red-600">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
+                @endif
                 <div class="w-full overflow-scroll">
                     <table class="w-full dsth">
                         <thead>
@@ -73,7 +73,6 @@
                             <th>
                                 Số lượng
                             </th>
-                            <th>Tiền đặt cọc (nếu có)</th>
                             <th>Tổng tiền</th>
                             <th>Trạng thái</th>
                             <th>

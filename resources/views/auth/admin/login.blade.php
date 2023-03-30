@@ -59,14 +59,9 @@
 <div class=" grid grid-cols-1 place-items-center ">
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full  md:w-[500px] ">
-        <a href="#" class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">
-            <div>
-                <img src="{{asset('asset/icons/back.png')}}" alt="">
-            </div>
-            <span class="text-title">Quay lại</span>
-        </a>
+
         <div class="w-[162px]">
-            <img style="object-fit: contain;" src="{{asset('asset/images/Logo.png')}}" alt="">
+            <img style="object-fit: contain;" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>
 
