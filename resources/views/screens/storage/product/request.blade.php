@@ -21,11 +21,11 @@
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
 
-                <input type="text" name="key_search" value="{{$params['key_search'] ?? ''}}"
+                <input type="text" name="key_search" value="{{$params['key_search'] ?? ''}}" id="key_search"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Nhập từ khóa">
                 <button type="submit"
-                        class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
+                        class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
                     <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z"
