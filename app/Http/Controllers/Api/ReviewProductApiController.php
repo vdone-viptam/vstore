@@ -87,9 +87,9 @@ class ReviewProductApiController extends Controller
                     $newPoint -> images = json_encode($request->images);
                 $newPoint -> save();
                 return response()->json([
-                    'status_code' => 200,
+                    'status_code' => 201,
                     'message' => 'Đánh giá sản phẩm thành công'
-                ], 200);
+                ], 201);
             }
         } catch (\Exception $e) {
             return response()->json([
@@ -260,7 +260,7 @@ class ReviewProductApiController extends Controller
                     $data['price_product'] = $calculatorFeeProductPoint['price_product'];
                 }
                 return response()->json([
-                    'status_code' => 200,
+                    'success' => true,
                     'data' => $data
                 ], 200);
             }
@@ -312,9 +312,9 @@ class ReviewProductApiController extends Controller
             $point -> save();
 
             return response()->json([
-                'status_code' => 200,
+                'status_code' => 201,
                 'message' => 'Phản hồi đánh giá thành công'
-            ], 200);
+            ], 201);
 
         } catch (\Exception $e) {
             return response()->json([
