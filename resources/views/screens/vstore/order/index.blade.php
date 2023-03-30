@@ -108,7 +108,17 @@
                                 <tr>
                                     <td>{{$order->order->no}}</td>
                                     <td>{{$order->product->name}}</td>
-                                    <td>{{$order->order->export_status}}</td>
+                                    <td>
+                                        @if($order->order->status == 0)
+                                            <span class="text-yellow-400">Chờ xác nhận</span>
+                                        @elseif($order->order->status == 1)
+                                            <span class="text-blue-600">Chờ giao hàng</span>
+                                        @elseif($order->order->status == 2)
+                                            <span class="text-blue-600">Đang giao hàng</span>
+                                        @else
+                                            <span class="text-green-600">Hoàn thành</span>
+                                        @endif
+                                    </td>
                                     <td>{{$order->product->price}}</td>
                                     <td>{{$order->quantity}}</td>
                                     <td>{{\Carbon\Carbon::parse($order->order->created_at)->format('d/m/Y H:i')}}</td>
