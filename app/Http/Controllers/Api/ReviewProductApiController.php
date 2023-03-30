@@ -195,8 +195,6 @@ class ReviewProductApiController extends Controller
                                 'points.descriptions',
                                 'points.images',
                                 'points.id');
-
-            // return $totalReviews->get()->count();
             if(isset($status_rep)){
                 $totalReviews = $totalReviews->where('points.status',$status_rep);
             }
