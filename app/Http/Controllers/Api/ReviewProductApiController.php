@@ -114,7 +114,7 @@ class ReviewProductApiController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'point_evaluation' => 'integer|between:1,5',
-                'limit' => 'integer|between:1,999',
+                'limit' => 'numeric|min:1',
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -133,6 +133,7 @@ class ReviewProductApiController extends Controller
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
             }
             $totalReviews = $totalReviews->paginate($limit);
+
             foreach($totalReviews as $key => $value){
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
                 if(!empty($calculatorFeeProductPoint)){
@@ -170,7 +171,7 @@ class ReviewProductApiController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'status_rep' => 'integer|between:0,1',
-                'limit' => 'integer|between:1,999',
+                'limit' => 'numeric|min:1',
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -316,6 +317,70 @@ class ReviewProductApiController extends Controller
                 'message' => 'Phản hồi đánh giá thành công'
             ], 201);
 
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * xem đánh giá tổng quan số sao của một sản phẩm
+     *
+     * API dùng xem tổng quan đánh giá sản phẩm dựa vào số sao
+     *
+     * @param $product_id ID product
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ratingRateProduct($product_id){
+        try {
+            $totalPoint = Point::where('product_id', $product_id)->get();
+            if(count($totalPoint) == 0){
+                return response()->json([
+                    'status_code' => 404,
+                    'error' => 'Sản phẩm chưa có đánh giá',
+                ],404);
+            }
+
+            $arrPoint= [
+                [
+                    "key" => 1,
+                    "name" => "one_point",
+                    "count" => 0
+                ],
+                [
+                    "key" => 2,
+                    "name" => "two_point",
+                    "count" => 0
+                ],
+                [
+                    "key" => 3,
+                    "name" => "three_point",
+                    "count" => 0
+                ],
+                [
+                    "key" => 4,
+                    "name" => "four_point",
+                    "count" => 0
+                ],
+                [
+                    "key" => 5,
+                    "name" => "five_point",
+                    "count" => 0
+                ]
+            ];
+            foreach ($arrPoint as $key => $value) {
+                $arrPoint[$key]['count'] = $totalPoint->where('point_evaluation', $value['key'])->count();
+            }
+            $star = $totalPoint->avg('point_evaluation');
+            $data = [];
+            $data['rating_rate'] = round($star,1);
+            $data ['data']= $arrPoint;
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
