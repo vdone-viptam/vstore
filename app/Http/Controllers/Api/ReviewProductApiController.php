@@ -7,7 +7,9 @@ use App\Interfaces\API\ReviewProduct\ReviewProductRepositoryInterface;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Point;
+use App\Models\PointRep;
 use App\Models\Product;
+use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +68,15 @@ class ReviewProductApiController extends Controller
                     'message' => 'Đơn hàng chưa giao thành công, không thể đánh giá'
                 ], 500);
             }else{
+                // case đánh giá sản phẩm khi gửi request liên tục ?
+                $checkExistPoint = Point::where('order_item_id',$request->order_item_id)
+                                    ->where('product_id',$request->product_id)
+                                    ->exists();
+                if($checkExistPoint)
+                    return response()->json([
+                        'status_code' => 409,
+                        'message' => 'Đã tồn tại đánh giá'
+                    ], 409);
                 $newPoint = new Point();
                 $newPoint -> customer_id = $request->customer_id;
                 $newPoint -> product_id = $request->product_id;
@@ -89,9 +100,9 @@ class ReviewProductApiController extends Controller
     }
 
     /**
-     * xem chi tiết đánh giá sản phẩm
+     * xem danh sách đánh giá một sản phẩm
      *
-     * API dùng xem chi tiết đánh giá sản phẩm
+     * API dùng xem danh sách đánh giá sản phẩm
      *
      * @param Request $request
      * @param $product_id ID product
@@ -101,6 +112,16 @@ class ReviewProductApiController extends Controller
      */
     public function showListReviewProduct(Request $request,$product_id){
         try {
+            $validator = Validator::make($request->all(), [
+                'point_evaluation' => 'integer|between:1,5',
+                'limit' => 'integer|between:1,999',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'messageError' => $validator->errors(),
+                ], 401);
+            }
+
             $point_evaluation = $request->point_evaluation;
             $limit = $request->limit ?? 3;
 
@@ -108,7 +129,7 @@ class ReviewProductApiController extends Controller
                             ->where('product_id', $product_id)
                             ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id')
                             ->orderBy('updated_at', 'desc');
-            if(!empty($point_evaluation)){
+            if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
             }
             $totalReviews = $totalReviews->paginate($limit);
@@ -134,9 +155,77 @@ class ReviewProductApiController extends Controller
     }
 
     /**
-     * xem danh sách đánh giá một sản phẩm
+     * xem danh sách đánh giá một sản phẩm trên Vdone
      *
-     * API dùng xem danh sách đánh giá sản phẩm
+     * API dùng xem danh sách đánh giá sản phẩm trên Vdone
+     *
+     * @param Request $request
+     * @param $vdone_id vdone_id product
+     * @bodyParam limit tổng số review / 1 trang
+     * @bodyParam status_rep trạng thái trả lời của shop
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+     public function showListReviewVDone(Request $request,$vdone_id){
+        try {
+            $validator = Validator::make($request->all(), [
+                'status_rep' => 'integer|between:0,1',
+                'limit' => 'integer|between:1,999',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'messageError' => $validator->errors(),
+                ], 401);
+            }
+
+            $status_rep = $request->status_rep;
+            $limit = $request->limit ?? 3;
+
+            $totalReviews = Point::query()
+                            ->with(['pointRep'])
+                            ->join('order_item','order_item.id','points.order_item_id')
+                            ->join('vshop','order_item.vshop_id','vshop.id')
+                            ->where('vshop.pdone_id', $vdone_id)
+                            ->select(
+                                'points.customer_id',
+                                'points.product_id',
+                                'points.point_evaluation',
+                                'points.created_at',
+                                'points.updated_at',
+                                'points.descriptions',
+                                'points.images',
+                                'points.id');
+
+            // return $totalReviews->get()->count();
+            if(isset($status_rep)){
+                $totalReviews = $totalReviews->where('points.status',$status_rep);
+            }
+            $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
+            foreach($totalReviews as $key => $value){
+                $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
+                if(!empty($calculatorFeeProductPoint)){
+                    $totalReviews[$key]['name_product'] = $calculatorFeeProductPoint['name_product'];
+                    $totalReviews[$key]['count_product'] = $calculatorFeeProductPoint['count_product'];
+                    $totalReviews[$key]['amount_to_pay'] = $calculatorFeeProductPoint['amount_to_pay'];
+                    $totalReviews[$key]['price_product'] = $calculatorFeeProductPoint['price_product'];
+                }
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $totalReviews
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * xem chi tiết đánh giá sản phẩm
+     *
+     * API dùng xem chi tiết đánh giá sản phẩm
      *
      * @param Request $request
      * @param $point_id ID points
@@ -177,6 +266,58 @@ class ReviewProductApiController extends Controller
                     'data' => $data
                 ], 200);
             }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * rep đánh giá của khách
+     *
+     * API để shop rep đánh giá của khách
+     *
+     * @param Request $request
+     * @bodyParam point_id ID point
+     * @bodyParam descriptions nội dung
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function repReviewProduct(Request $request){
+        $validator = Validator::make($request->all(), [
+            'point_id' => 'required|exists:points,id',
+            'descriptions' => 'required|max:200',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        try {
+            // case khi gửi request liên tục ?
+            $checkExistPointRep = PointRep::query()
+                ->where('point_id',$request->point_id)
+                ->exists();
+            if($checkExistPointRep)
+                return response()->json([
+                    'status_code' => 409,
+                    'message' => 'Đánh giá này đã được phản hồi'
+                ], 409);
+            $newPointRep = new PointRep();
+            $newPointRep -> point_id = $request->point_id;
+            $newPointRep -> descriptions = $request->descriptions;
+            $newPointRep -> save();
+
+            $point =  Point::find($request->point_id);
+            $point -> status = 1;
+            $point -> save();
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Phản hồi đánh giá thành công'
+            ], 200);
+
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,

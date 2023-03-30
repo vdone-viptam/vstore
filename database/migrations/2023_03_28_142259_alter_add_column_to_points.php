@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('points', function (Blueprint $table) {
-            $table->bigInteger('order_item_id')->unsigned()->nullable()->nullable()->comment('lưu id order item');
+            $table->bigInteger('order_item_id')->unsigned()->nullable()->comment('lưu id order item');
             $table->string('descriptions')->nullable();
             $table->longText('images')->nullable();
+            $table->tinyInteger('status')->default(0)->comment('0: chưa trả lời, 1: đã trả lời');
             $table->foreign('order_item_id')->references('id')->on('order_item')->onDelete('cascade');
         });
     }
