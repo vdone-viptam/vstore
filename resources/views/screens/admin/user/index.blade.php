@@ -1,5 +1,17 @@
 @extends('layouts.admin.main')
 @section('page_title','Danh sách đơn đăng ký tài khoản')
+@section('custom_css')
+    <style>
+        .loader-container {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            background: #ffffff url("https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw340") center no-repeat;
+            z-index: 1;
+        }
+    </style>
+@endsection
+
 @section('modal')
     <div id="modal1">
 
@@ -164,6 +176,7 @@
                                                class="duyet min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
                                                href="#">Duyệt
                                             </a>
+
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
                                                class="more-details text-primary underline ml-4">
                                                 Chi tiết</a>
@@ -252,5 +265,16 @@
                 });
             });
         });
+
+
+    </script>
+    <script !src="">
+        $('.duyet').click(function (e) {
+            // alert(1);
+            // $('.duyet').attr("href", "#")
+        e.preventDefault()
+
+        })
+
     </script>
 @endsection

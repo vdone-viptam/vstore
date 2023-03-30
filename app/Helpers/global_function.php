@@ -6,8 +6,9 @@ use App\Models\District;
 use App\Models\Province;
 use Illuminate\Support\Carbon;
 
-function calculateShippingByProductID($productID, $districtId, $provinceId) {
+function calculateShippingByProductID($productID, $districtId, $provinceId, $wardId) {
     $products = \App\Models\Product::where('products.id', $productID)
+        ->where('products.status', 2)
         ->join('product_warehouses', 'product_warehouses.product_id', 'products.id')
         ->join('warehouses', 'product_warehouses.ware_id', 'warehouses.id')
         ->select(
@@ -18,16 +19,20 @@ function calculateShippingByProductID($productID, $districtId, $provinceId) {
             'warehouses.id'
         )
         ->get();
-    if($products) {
+    if(!$products) {
         return false;
     }
-    $district = District::find($districtId);
-    $province = Province::find($provinceId);
-    if(!$district || !$province) {
+    $district = District::where('district_id', $districtId)->first();
+    $province = Province::where('province_id', $provinceId)->first();
+    $ward = \App\Models\Ward::where('wards_id', $wardId)->first();
+    if(!$district || !$province || !$ward) {
         return false;
     }
-    $address = $district->district_name . ", " . $province->province_name;
+    $address = $ward->wards_name . ", " . $district->district_name . ", " . $province->province_name;
     $result = app('geocoder')->geocode($address)->get();
+    if(count($result) < 1) {
+        return false;
+    }
     $coordinates = $result[0]->getCoordinates();
     $places = $products;
     $min_distance = PHP_FLOAT_MAX;
@@ -138,6 +143,7 @@ function getDiscountAndDepositMoney($quantity, $arr) {
 }
 
 function getDiscountProduct($id, $idVshop) {
+//    dd($id, $idVshop);
     $discounts = Discount::where('discounts.product_id', $id)
         ->where(function ($query) {
             $query->where('discounts.type', config('constants.discountType.ncc'))
@@ -148,7 +154,6 @@ function getDiscountProduct($id, $idVshop) {
         ->join('products', 'products.id', '=', 'discounts.product_id')
         ->select('discounts.type', 'discounts.discount', 'products.id', 'products.price')
         ->get();
-
     $vshop = \App\Models\Vshop::where('id', $idVshop)->select('id', 'pdone_id')->first();
     $return = [];
     if($vshop) {
@@ -185,7 +190,6 @@ function getDiscountProduct($id, $idVshop) {
             }
         }
     }
-
 
     return $return;
 }

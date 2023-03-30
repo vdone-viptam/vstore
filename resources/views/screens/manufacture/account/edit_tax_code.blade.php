@@ -4,10 +4,10 @@
 @section('modal')
     @if(\Illuminate\Support\Facades\Session::has('success'))
         <div class="modal modal-success flex justify-center items-center show-modal">
-            <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
+            <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal') @php \Illuminate\Support\Facades\Session::remove('success') @endphp"></div>
             <div
                 class="information bg-[white] flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
-                <svg width="24" height="24" viewBox="0 0 24 24" onclick="$('.modal-success').toggleClass('show-modal')"
+                <svg width="24" height="24" viewBox="0 0 24 24" onclick="$('.modal-success').toggleClass('show-modal') @php \Illuminate\Support\Facades\Session::remove('success') @endphp"
                      class="cursor-pointer absolute top-[-25px] right-0 hover:opacity-75 transition-all duration-200"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -70,7 +70,6 @@
                             <div
                                 class="flex flex-col justify-start items-start pb-6 border-b-[1px] border-grey w-full gap-2">
                                 <h3 class="captilize font-medium text-xl text-title">Cập nhật mã số thuế</h3>
-                                <span class="text-secondary">Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</span>
                             </div>
 
                             <div class="flex flex-col justify-center items-center pt-6 md:gap-6 gap-y-4 w-full md:p-6 ">

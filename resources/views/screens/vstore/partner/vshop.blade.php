@@ -122,7 +122,7 @@
                                 <tr>
                                     <td>{{$val->pdone_id}}</td>
                                     <td>
-                                        {{$val->name!= '' ? $val->name  :'-'}}
+                                        {{$val->nick_name!= '' ? $val->nick_name  :'-'}}
                                     </td>
                                     <td>
                                         {{$val->phone_number!= '' ? $val->phone_number  :'-'}}
@@ -131,7 +131,7 @@
                                         {{$val->count != '' ? $val->count  :'-'}}
                                     </td>
                                     <td>
-                                        -
+                                        {{$val->sum_sl}}
                                     </td>
                                     <td>-</td>
                                     <td>

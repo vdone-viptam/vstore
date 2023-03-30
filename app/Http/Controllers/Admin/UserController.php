@@ -81,13 +81,14 @@ class UserController extends Controller
 
             } elseif ($user->role_id == 4) {
                 $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-                $number = User::where('tax_code', $user->tax_code)->where('role_id', 4)->count();
+                $number = User::where('tax_code', $user->tax_code)->where('status',1)->where('role_id', 4)->count();
                 if ($number == 0) {
                     $ID = 'vnk' . '01' . $user->tax_code;
-                } elseif ($number < 10) {
-                    $ID = 'vnk' . '0' . $number . $user->tax_code;
+                } elseif ($number < 10 && $number >0) {
+                    $ID = 'vnk' . '0' . $number +1 . $user->tax_code;
+
                 } elseif ($number >= 10) {
-                    $ID = 'vnk' . $number . $user->tax_code;
+                    $ID = 'vnk' . $number +1 . $user->tax_code;
                 }
 //                elseif ($number > 99) {
 //                    for ($i = 0; $i < count($arr); $i++) {
@@ -106,6 +107,7 @@ class UserController extends Controller
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();
             $user->expiration_date = Carbon::now()->addDays(365);
+            $user->status=1;
             $user->save();
 
             if ($user->role_id == 4) {
