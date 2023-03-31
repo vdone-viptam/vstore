@@ -139,7 +139,7 @@
                                 yêu cầu
                                 xét duyệt sản phẩm</a></li>
                         <li class="hover:underline"><a href="{{route('screens.manufacture.product.discount')}}">
-                                Mã giảm giá</a></li>
+                                Quản lý mã giảm giá</a></li>
                     </ul>
                 </div>
                 {{--                Kho hàng--}}
@@ -287,11 +287,12 @@
 
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a></li>
-                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Lịch sử
-                                thay đổi số dư</a></li>
-                        <!-- <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Doanh
-                                thu</a>
-                        </li> -->
+                        <li><a class="hover:underline" href="{{route('screens.manufacture.finance.history')}}">Yêu cầu
+                                rút</a></li>
+                        <li><a class="hover:underline"
+                               href="{{route('screens.manufacture.finance.revenue')}}">Lịch sử
+                                thay đổi số dư
+                                tiền</a>
                     </ul>
                 </div>
 

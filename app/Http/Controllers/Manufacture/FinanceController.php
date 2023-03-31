@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlanceChange;
 use App\Models\Deposit;
 use App\Models\Wallet;
 use Carbon\Carbon;
@@ -25,7 +26,7 @@ class FinanceController extends Controller
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')
-            ->where('type',1)
+            ->where('type', 1)
             ->where('user_id', Auth::id())->first();
         return view('screens.manufacture.finance.index', $this->v);
     }
@@ -55,6 +56,16 @@ class FinanceController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
+    }
+
+    public function transferMoney()
+    {
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at', 'code')
+            ->where('user_id', Auth::id())
+            ->where('vshop_id', '!=', Auth::id())
+            ->paginate(10);
+
+        return view('screens.manufacture.finance.revenue', $this->v);
     }
 
     public function updateWall(Request $request, $id)

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
+Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
+Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getWards']);
 Route::get('/getWarehouse', function () {
     calculateShippingByProductID(1, 1, 1);
 });
@@ -102,8 +104,8 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::post('/store-wallet', [\App\Http\Controllers\Storage\FinanceController::class, 'storeWall'])->name('screens.storage.finance.storeWall');
         Route::post('/update-wallet/{id}', [\App\Http\Controllers\Storage\FinanceController::class, 'updateWall'])->name('screens.storage.finance.updateWall');
         Route::post('/create-deposit', [\App\Http\Controllers\Storage\FinanceController::class, 'deposit'])->name('screens.storage.finance.deposit');
-
         Route::get('/history', [\App\Http\Controllers\Storage\FinanceController::class, 'history'])->name('screens.storage.finance.history');
+        Route::get('revenue', [\App\Http\Controllers\Storage\FinanceController::class, 'transferMoney'])->name('screens.storage.finance.revenue');
 
     });
     Route::prefix('partners')->group(function () {
@@ -211,6 +213,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::post('/update-wallet/{id}', [\App\Http\Controllers\Manufacture\FinanceController::class, 'updateWall'])->name('screens.manufacture.finance.updateWall');
         Route::post('/create-deposit', [\App\Http\Controllers\Manufacture\FinanceController::class, 'deposit'])->name('screens.manufacture.finance.deposit');
         Route::get('/history', [\App\Http\Controllers\Manufacture\FinanceController::class, 'history'])->name('screens.manufacture.finance.history');
+        Route::get('revenue', [\App\Http\Controllers\Manufacture\FinanceController::class, 'transferMoney'])->name('screens.manufacture.finance.revenue');
 
     });
     Route::prefix('orders')->group(function () {
@@ -273,7 +276,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::post('/store-wallet', [\App\Http\Controllers\Vstore\FinanceController::class, 'storeWall'])->name('screens.vstore.finance.storeWall');
         Route::post('/update-wallet/{id}', [\App\Http\Controllers\Vstore\FinanceController::class, 'updateWall'])->name('screens.vstore.finance.updateWall');
         Route::post('/create-deposit', [\App\Http\Controllers\Vstore\FinanceController::class, 'deposit'])->name('screens.vstore.finance.deposit');
-        Route::get('revenue', [\App\Http\Controllers\Vstore\FinanceController::class, 'revenue'])->name('screens.vstore.finance.revenue');
+        Route::get('revenue', [\App\Http\Controllers\Vstore\FinanceController::class, 'transferMoney'])->name('screens.vstore.finance.revenue');
         Route::get('history', [\App\Http\Controllers\Vstore\FinanceController::class, 'history'])->name('screens.vstore.finance.history');
 
     });

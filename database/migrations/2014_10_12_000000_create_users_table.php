@@ -33,6 +33,7 @@ return new class extends Migration {
             $table->string('slug')->nullable();
             $table->integer('district_id')->nullable();
             $table->integer('provinceId')->nullable();
+            $table->integer('ward_id')->nullable();
             $table->longText('storage_information')->nullable();
             $table->longText('description')->nullable();
             $table->integer('branch')->default(0)->comment('ngành vstore, 0 thường, 1 địa phương');

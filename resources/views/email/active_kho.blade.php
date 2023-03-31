@@ -7,14 +7,23 @@
     p {
         font-size: 17px;
     }
-    @media only screen and (max-width: 600px) {
 
+    #box {
+        padding: 4% 6%;
+        width: 36%;
+        margin: 0px auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        #box {
+            width: 100% !important;
+        }
     }
 </style>
 <body style="background-color: #e8e8e8; padding-top:10px ;">
 <div style="text-align:center;margin:1%">
     <img src="{{asset('home/img/titleK.png')}}" style="height:40px"></div>
-<div style="background-color: #ffff;padding:4% 6%;width:36%;margin:0px auto;">
+<div style="background-color: #ffff;" id="box">
 
     <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng đã đăng ký tài khoản KHO
 

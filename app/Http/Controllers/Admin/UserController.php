@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Province;
 use App\Models\RequestChangeTaxCode;
 use App\Models\User;
+use App\Models\Ward;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
@@ -81,7 +82,7 @@ class UserController extends Controller
 
             } elseif ($user->role_id == 4) {
                 $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-                $number = User::where('tax_code', $user->tax_code)->where('status',1)->where('role_id', 4)->count();
+                $number = User::where('tax_code', $user->tax_code)->where('confirm_date','!=',null)->where('role_id', 4)->count();
                 if ($number == 0) {
                     $ID = 'vnk' . '01' . $user->tax_code;
                 } elseif ($number < 10 && $number >0) {
@@ -115,8 +116,9 @@ class UserController extends Controller
 
                 $district = District::where('district_id',$user->district_id)->first()->district_name;
                 $province = Province::where('province_id',$user->provinceId)->first()->province_name;
+                $wards = Ward::where('wards_id',$user->ward_id)->first()->wards_name;
 
-                $address = $user->address.', '.$district.'. '.$province;
+                $address = $wards.', '.$district.'. '.$province;
                $result = app('geocoder')->geocode($address)->get();
                $coordinates = $result[0]->getCoordinates();
                $lat = $coordinates->getLatitude();
@@ -128,6 +130,7 @@ class UserController extends Controller
                 $warehouses->address = $user->address;
                 $warehouses->city_id = $user->provinceId;
                 $warehouses->district_id = $user->district_id;
+                $warehouses->ward_id = $user->ward_id;
                 $warehouses->user_id = $user->id;
                 $warehouses->lat= $lat;
                 $warehouses->long = $long;
@@ -156,7 +159,7 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Kích hoạt tài khoản thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

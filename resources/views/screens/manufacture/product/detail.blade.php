@@ -41,10 +41,6 @@
                     <span class="text-title">{{$request->discount}}%</span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
-                    <span class="text-title font-medium ">Chiết khấu V-Shop:</span>
-                    <span class="text-title">{{$request->discount_vshop}}%</span>
-                </div>
-                <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Số lượng bán:</span>
                     <span class="text-title">{{$request->amount_product ?? 0 }}</span>
                 </div>

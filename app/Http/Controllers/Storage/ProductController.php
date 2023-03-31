@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Province;
 use App\Models\Warehouses;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,9 @@ class ProductController extends Controller
 
     public function requestOut(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
         $limit = $request->limit ?? 10;
 
         $warehouses = Warehouses::where('user_id', Auth::id())->first();

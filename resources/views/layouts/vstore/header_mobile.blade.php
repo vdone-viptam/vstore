@@ -134,7 +134,7 @@
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a></li>
                         <li><a href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt sản phẩm</a>
-                        <li><a href="{{route('screens.vstore.product.discount')}}">Mã giảm giá</a>
+                        <li><a href="{{route('screens.vstore.product.discount')}}">Quản lý giảm giá</a>
                     </ul>
                 </div>
                 {{--                Quản lý đơn hàng--}}
@@ -199,7 +199,7 @@
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
                         <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
-{{--                        <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>--}}
+                        {{--                        <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>--}}
                     </ul>
                 </div>
                 {{--                Tài chính--}}
@@ -229,9 +229,9 @@
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.finance.index')}}">Ví</a></li>
-                        <li><a href="{{Route('screens.vstore.finance.revenue')}}">Doanh thu</a></li>
-                        <li><a href="{{Route('screens.vstore.finance.history')}}">Lịch
-                                sử giao dịch</a></li>
+                        <li><a href="{{Route('screens.vstore.finance.revenue')}}">Lịch
+                                sử biến động số dư</a></li>
+                        <li><a href="{{Route('screens.vstore.finance.history')}}">Yêu cầu rút tiền</a></li>
                     </ul>
                 </div>
                 <!-- tài khoản -->
@@ -241,10 +241,10 @@
                             <div
                                 class="flex items-center gap-3">
                                 <div class="w-[12px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <path class="svgFill" fill="#B8BED9"
-                                      d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-                            </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path class="svgFill" fill="#B8BED9"
+                                              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                    </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
                                     <p class="text-[#495057] text-sm  text__menu">Tài khoản</p>
@@ -259,12 +259,14 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                    <li data-page="/"><a class="hover:underline" href="{{route('screens.vstore.account.profile')}}">Hồ sơ
-                        của tôi</a></li>
-                <li data-page="change-password"><a class="hover:underline"
-                                                   href="{{route('screens.vstore.account.changePassword')}}">Đổi mật
-                        khẩu</a>
-                </li>
+                        <li data-page="/"><a class="hover:underline" href="{{route('screens.vstore.account.profile')}}">Hồ
+                                sơ
+                                của tôi</a></li>
+                        <li data-page="change-password"><a class="hover:underline"
+                                                           href="{{route('screens.vstore.account.changePassword')}}">Đổi
+                                mật
+                                khẩu</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -300,7 +302,8 @@
         <a href="{{route('screens.vstore.dashboard.index')}}" class="">
             <div class=" w-[130px] h-[62px]">
                 @if(\Illuminate\Support\Facades\Auth::user()->avatar != null )
-                    <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}" class="w-full object-contain"
+                    <img src="{{asset('image/users/'.\Illuminate\Support\Facades\Auth::user()->avatar)}}"
+                         class="w-full object-contain"
                          alt="">
                 @else
                     <img src="{{asset('home/img/logo-06.png')}}" class="w-full" alt="">

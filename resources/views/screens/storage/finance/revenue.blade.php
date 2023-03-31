@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.storage.main')
 @section('page_title','Lịch sử biến động só dư')
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
@@ -103,6 +103,7 @@
                                     </tbody>
                                 </table>
 
+
                             </div>
                             <div class="flex justify-end items-center gap-4 flex-wrap mt-4">
                                 <span class="text-sm text-title">Tổng: {{$histories->total()}}</span>
@@ -126,7 +127,6 @@
 
                                 </div>
                             </div>
-
                         </div>
 
                     </div>

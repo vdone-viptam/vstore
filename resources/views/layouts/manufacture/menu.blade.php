@@ -144,7 +144,7 @@
                             xét duyệt sản phẩm</a></li>
                     <li class="hover:underline" data-page="discount"><a
                             href="{{route('screens.manufacture.product.discount')}}"
-                        >Mã giảm giá</a></li>
+                        >Quản lý mã giảm giá</a></li>
 
                 </ul>
             </div>
@@ -318,11 +318,17 @@
                 <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-8 list hidden md:max-w-[150px] xl:max-w-[230px] ">
                     <li data-page="/"><a class="hover:underline" href="{{route('screens.manufacture.finance.index')}}">Ví</a>
                     </li>
+
                     <li data-page="history"><a class="hover:underline"
-                                               href="{{route('screens.manufacture.finance.history')}}">Lịch sử thay đổi
+                                               href="{{route('screens.manufacture.finance.history')}}">
+                            Yêu cầu rút
+                            tiền
+                          </a>
+                    </li>
+                    <li data-page="revenue"><a class="hover:underline"
+                                               href="{{route('screens.manufacture.finance.revenue')}}">  Lịch sử thay đổi
                             số dư</a>
                     </li>
-
                 </ul>
             </div>
             {{--        Tài khoản--}}
