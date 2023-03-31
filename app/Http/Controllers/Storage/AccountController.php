@@ -96,7 +96,7 @@ class AccountController extends Controller
 
 
 
-            $address = $user->address .','. $user->district->district_name.', '  .$user->province->province_name;
+            $address = $user->ward->wards_name .','. $user->district->district_name.', '  .$user->province->province_name;
 //            return $address_ware;
             $result = app('geocoder')->geocode($address)->get();
             if (!isset($result[0])){

@@ -130,6 +130,7 @@ class UserController extends Controller
                 $warehouses->address = $user->address;
                 $warehouses->city_id = $user->provinceId;
                 $warehouses->district_id = $user->district_id;
+                $warehouses->ward_id = $user->ward_id;
                 $warehouses->user_id = $user->id;
                 $warehouses->lat= $lat;
                 $warehouses->long = $long;
