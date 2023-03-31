@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\API\ReviewProduct\ReviewProductRepositoryInterface;
+use App\Interfaces\BigStore\CallApiRepositoryInterface;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Point;
 use App\Models\PointRep;
 use App\Models\Product;
 use App\Models\Vshop;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +20,19 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
-use Illuminate\Support\Facades\Http;
+
 
 class ReviewProductApiController extends Controller
 {
     private ReviewProductRepositoryInterface $reviewProductRepository;
-    public function __construct(ReviewProductRepositoryInterface $reviewProductRepository)
+    private CallApiRepositoryInterface $callApiRepositoryInterface;
+    public function __construct(
+        ReviewProductRepositoryInterface $reviewProductRepository,
+        CallApiRepositoryInterface $callApiRepositoryInterface
+        )
     {
         $this->reviewProductRepository = $reviewProductRepository;
+        $this->callApiRepositoryInterface = $callApiRepositoryInterface;
     }
     /**
      * lưu đánh giá sản phẩm
@@ -136,13 +143,11 @@ class ReviewProductApiController extends Controller
 
             foreach($totalReviews as $key => $value){
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
-                if(!empty($calculatorFeeProductPoint)){
-                    $totalReviews[$key]['name_product'] = $calculatorFeeProductPoint['name_product'];
-                    $totalReviews[$key]['count_product'] = $calculatorFeeProductPoint['count_product'];
-                    $totalReviews[$key]['amount_to_pay'] = $calculatorFeeProductPoint['amount_to_pay'];
-                    $totalReviews[$key]['price_product'] = $calculatorFeeProductPoint['price_product'];
-                }
+                $totalReviews[$key]['product'] = $calculatorFeeProductPoint;
+
+                $totalReviews[$key]['customer'] = $this->callApiRepositoryInterface->callApiCustomerProfile($value->customer_id) ?? null;
             }
+
             return response()->json([
                 'success' => true,
                 'data' => $totalReviews
@@ -202,12 +207,9 @@ class ReviewProductApiController extends Controller
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
             foreach($totalReviews as $key => $value){
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
-                if(!empty($calculatorFeeProductPoint)){
-                    $totalReviews[$key]['name_product'] = $calculatorFeeProductPoint['name_product'];
-                    $totalReviews[$key]['count_product'] = $calculatorFeeProductPoint['count_product'];
-                    $totalReviews[$key]['amount_to_pay'] = $calculatorFeeProductPoint['amount_to_pay'];
-                    $totalReviews[$key]['price_product'] = $calculatorFeeProductPoint['price_product'];
-                }
+
+                $totalReviews[$key]['product'] = $calculatorFeeProductPoint;
+                $totalReviews[$key]['customer'] = $this->callApiRepositoryInterface->callApiCustomerProfile($value->customer_id) ?? null;
             }
             return response()->json([
                 'success' => true,
@@ -254,12 +256,9 @@ class ReviewProductApiController extends Controller
                 ], 500);
             }else{
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($data->product_id,$data->id);
-                if(!empty($calculatorFeeProductPoint)){
-                    $data['name_product'] = $calculatorFeeProductPoint['name_product'];
-                    $data['count_product'] = $calculatorFeeProductPoint['count_product'];
-                    $data['amount_to_pay'] = $calculatorFeeProductPoint['amount_to_pay'];
-                    $data['price_product'] = $calculatorFeeProductPoint['price_product'];
-                }
+
+                $data['product'] = $calculatorFeeProductPoint;
+                $data['customer'] = $this->callApiRepositoryInterface->callApiCustomerProfile($data->customer_id) ?? null;
                 return response()->json([
                     'success' => true,
                     'data' => $data
@@ -388,4 +387,5 @@ class ReviewProductApiController extends Controller
             ], 500);
         }
     }
+
 }

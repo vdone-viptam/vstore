@@ -16,7 +16,12 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
         $array = [];
         if($product){
             $array['name_product'] = $product->name;
-            
+            $array['product_id'] = $product->id;
+            $array['images_product'] = null;
+            if(!empty($product->images)){
+                $array_images = json_decode($product->images);
+                $array['images_product'] = asset($array_images[0]);
+            }
             $orderItem = OrderItem::join('points','points.order_item_id','order_item.id')
                 ->join('order','order.id','order_item.order_id')
                 ->where('points.id',$pointsId)
@@ -26,7 +31,7 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
                     'discount_ncc',
                     'discount_vstore',
                     'order_item.price',
-                    'order.shipping'
+                    'order.shipping',
                 )
                 ->first();
             $array['count_product'] = $orderItem->quantity;
