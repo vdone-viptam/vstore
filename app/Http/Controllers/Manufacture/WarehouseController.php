@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Notifications\AppNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +50,18 @@ class WarehouseController extends Controller
         $model->fill($request->only('product_id', 'ware_id', 'amount'));
         $model->status = 0;
         $model->save();
-
+        $warehouse = Warehouses::select('user_id')->where('id', $request->ware_id)->first();
+        if ($warehouse) {
+            $user = User::find($warehouse->user_id);
+            $data = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => asset('image/users/' . Auth::user()->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                'message' => 'Bạn vừa có đơn yêu cầu gửi sản phẩm mới',
+                'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                'href' => route('screens.storage.product.request')
+            ];
+            $user->notify(new AppNotification($data));
+        }
         return redirect()->route('screens.manufacture.warehouse.addProduct')->with('message', 'Thêm Thành Công');
     }
 

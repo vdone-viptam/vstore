@@ -1,7 +1,7 @@
 @extends('layouts.vstore.main')
 
 
-@section('page_title','Lịch sử giao dịch')
+@section('page_title','Yêu cầu rút tiền')
 
 
 @section('content')
@@ -14,7 +14,7 @@
                           stroke="black"
                           stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
-                <a href="" class="text-blueMain font-medium italic">Lịch sử giao dịch</a>
+                <a href="" class="text-blueMain font-medium italic">Yêu cầu rút tiền</a>
             </div>
 
             <div class="box w-full">
@@ -44,7 +44,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            Lịch sử giao dịch
+                            Yêu cầu rút tiền
                         </h3>
                     </div>
                     <div class=" pt-6 w-full md:p-6 ">
@@ -124,15 +124,41 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="9">Không tìm thấy dữ liệu phù hợp</td>
+                                        <td colspan="9" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                                     </tr>
                                 @endif
 
 
                                 </tbody>
                             </table>
-                            {{$histories->withQueryString()->links()}}
+
                         </div>
+                        <div class="flex justify-end items-center gap-4 flex-wrap mt-4">
+                            <span class="text-sm text-title">Tổng: {{$histories->total()}}</span>
+                            {{$histories->withQueryString()->links()}}
+                            <div class="flex justify-start items-center gap-2 flex-wrap">
+                                <select name="limit"
+                                        class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
+                                    <option
+                                        value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
+                                        10
+                                        hàng / trang
+                                    </option>
+                                    <option
+                                        value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
+                                        25
+                                        hàng / trang
+                                    </option>
+                                    <option
+                                        value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
+                                        50
+                                        hàng / trang
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>

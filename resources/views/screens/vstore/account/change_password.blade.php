@@ -1,7 +1,15 @@
 @extends('layouts.vstore.main')
 @section('page_title','Đổi mật khẩu')
 
-@section('modal')
+@section('custom_css')
+    <style>
+        .disabled-link {
+            pointer-events: none;
+        }
+    </style>
+@endsection
+
+@section('modal')f
     @if(\Illuminate\Support\Facades\Session::has('success'))
         <div class="modal modal-success flex justify-center items-center show-modal">
             <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
@@ -152,8 +160,8 @@
 
 @section('custom_js')
     <script>
-        document.querySelector('.btn-acp').setAttribute('disabled', 'true');
         document.querySelector('.btn-acp').classList.add('bg-slate-300');
+        document.querySelector('.btn-acp').classList.add('disabled-link');
 
 
         $('.btn-acp').on('click', function () {
@@ -174,12 +182,12 @@
                     check3 = false;
                 }
                 if (check1 && check2 && check3) {
-                    document.querySelector('.btn-acp').removeAttribute('disabled');
                     document.querySelector('.btn-acp').classList.remove('bg-slate-300');
+                    document.querySelector('.btn-acp').classList.remove('disabled-link');
 
                 } else {
-                    document.querySelector('.btn-acp').setAttribute('disabled', 'true');
                     document.querySelector('.btn-acp').classList.add('bg-slate-300');
+                    document.querySelector('.btn-acp').classList.add('disabled-link');
 
                 }
             })

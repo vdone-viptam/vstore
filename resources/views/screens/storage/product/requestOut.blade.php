@@ -21,45 +21,45 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                <select name="condition" id=""
-                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                    <option value="0">Tất cả</option>
-                    <option
-                        value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
-                        Mã sản phẩm
-                    </option>
-                    <option
-                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
-                        Tên sản phẩm
-                    </option>
-                    <option
-                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
-                        Thương hiệu
-                    </option>
-                    <option
-                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
-                        Ngành hàng
-                    </option>
-                </select>
+{{--                <select name="condition" id=""--}}
+{{--                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">--}}
+{{--                    <option value="0">Tất cả</option>--}}
+{{--                    <option--}}
+{{--                        value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>--}}
+{{--                        Mã sản phẩm--}}
+{{--                    </option>--}}
+{{--                    <option--}}
+{{--                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>--}}
+{{--                        Tên sản phẩm--}}
+{{--                    </option>--}}
+{{--                    <option--}}
+{{--                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>--}}
+{{--                        Thương hiệu--}}
+{{--                    </option>--}}
+{{--                    <option--}}
+{{--                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>--}}
+{{--                        Ngành hàng--}}
+{{--                    </option>--}}
+{{--                </select>--}}
 
-                <input type="text" name="key_search" value="{{$params['key_search'] ?? ''}}"
-                       class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="Nhập từ khóa">
-                <button type="submit"
-                        class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
-                >
-                    <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z"
-                              fill="white"/>
-                        <path d="M13 11H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 15H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 19H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path
-                            d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"
-                            stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    Lọc
-                </button>
+{{--                <input type="text" name="key_search" value="{{$params['key_search'] ?? ''}}"--}}
+{{--                       class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"--}}
+{{--                       placeholder="Nhập từ khóa">--}}
+{{--                <button type="submit"--}}
+{{--                        class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "--}}
+{{--                >--}}
+{{--                    <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z"--}}
+{{--                              fill="white"/>--}}
+{{--                        <path d="M13 11H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
+{{--                        <path d="M13 15H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
+{{--                        <path d="M13 19H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
+{{--                        <path--}}
+{{--                            d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"--}}
+{{--                            stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
+{{--                    </svg>--}}
+{{--                    Lọc--}}
+{{--                </button>--}}
             </div>
             <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
                 <div class="flex justify-between items-center flex-wrap gap-4">

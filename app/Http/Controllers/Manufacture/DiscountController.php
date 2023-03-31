@@ -96,6 +96,7 @@ class DiscountController extends Controller
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
         $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['product1']->id)->first();
         $this->v['product1']->buy_more = $buy_more->discount ?? 0;
+        $this->v['product1']->price = number_format($this->v['product1']->price, 0, '.', '.');
 
         return view('screens.manufacture.discount.editDis', $this->v);
 

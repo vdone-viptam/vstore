@@ -91,7 +91,7 @@
     @csrf
     <div class=" grid grid-cols-1 lg:grid-cols-2">
         <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
-            {{--            <a href="{{route('login_ncc')}}}"--}}
+            {{--     home/img/titleK.png       <a href="{{route('login_ncc')}}}"--}}
             {{--               class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
             {{--                <div>--}}
             {{--                    <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
@@ -99,7 +99,7 @@
             {{--                <span class="text-title">Quay lại</span>--}}
             {{--            </a>--}}
             <div class="w-[162px]">
-                <img src="{{asset('asset/images/titleK.png')}}" alt="">
+                <a href="{{route('screens.storage.index')}}"> <img src="{{asset('home/img/titleK.png')}}" alt=""></a>
             </div>
             <h1 class="text-4xl font-medium max-w-[520px]">Đăng ký</h1>
 
@@ -158,7 +158,7 @@
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
                     <select name="city_id" id="city_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="">Lựa chọn tỉnh (thành phố)</option>
+                        <option value="" selected disabled>Lựa chọn tỉnh (thành phố)</option>
                     </select>
                     @error('city_id')
                     <p class="text-red-600">{{$message}}</p>
@@ -168,7 +168,7 @@
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
                     <select name="district_id" id="district_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="">Lựa chọn quận (huyện)</option>
+                        <option value="" selected disabled>Lựa chọn quận (huyện)</option>
                     </select>
                     @error('district_id')
                     <p class="text-red-600">{{$message}}</p>
@@ -410,7 +410,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML = `<option>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME.toUpperCase()}</option>`);
         })
         .catch(console.error);
 
@@ -422,16 +422,35 @@
             .then((response) => response.json())
             .then((data) => {
                 if (data.length > 0) {
-                    divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
 
                 } else {
-                    divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>`;
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
                 }
             })
-            .catch(() => divDistrict.innerHTML = `<option value="0">Lựa chọn quận (huyện)</option>`
+            .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
             )
     });
 
 </script>
+@if(old('city_id') != '')
+    <script>
+        fetch('{{route('get_city')}}?type=2&value={{old('city_id')}}', {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                }
+            })
+            .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+            );
+    </script>
+@endif
 </body>
 </html>

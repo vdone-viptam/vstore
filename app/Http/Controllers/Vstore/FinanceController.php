@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vstore;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlanceChange;
 use App\Models\Deposit;
 use App\Models\Wallet;
 use Carbon\Carbon;
@@ -28,7 +29,7 @@ class FinanceController extends Controller
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
-            ->where('type',1)
+            ->where('type', 1)
             ->first();
         return view('screens.vstore.finance.index', $this->v);
     }
@@ -89,6 +90,16 @@ class FinanceController extends Controller
     {
         $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
         return view('screens.vstore.finance.history', $this->v);
+    }
+
+    public function transferMoney()
+    {
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at', 'code')
+            ->where('user_id', Auth::id())
+            ->where('vshop_id', '!=', Auth::id())
+            ->paginate(10);
+
+        return view('screens.vstore.finance.revenue', $this->v);
     }
 
     public function deposit(Request $request)

@@ -5,7 +5,7 @@
             class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
             <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                 <div></div>
-                <h2 class=" text-title font-semibold text-xl">Cập nhật mã giảm giá</h2>
+                <h2 class=" text-title font-semibold text-xl">Cập nhật giảm giá</h2>
                 <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                      onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="gap-4 w-full">
-                        <span class="text-title font-medium  ">Giá sản phẩm:</span>
+                        <span class="text-title font-medium  ">Giá sản phẩm (đ):</span>
                         <input disabled name="price" id="price" value="{{$product1->price}}"
                                class="h-[42px] choose-vstore  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -112,7 +112,7 @@
     });
     document.getElementById('start_date').addEventListener('change', (e) => {
         $.ajax({
-            url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' +  e.target.value,
+            url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
             success: function (result) {
                 if (!result.validated) {
                     document.getElementById('message').innerHTML = result.error.end_date;
@@ -187,7 +187,7 @@
             success: function (result) {
                 console.log(result)
                 if (result) {
-                    document.querySelector('#price').value = result.price + ' đ'
+                    document.querySelector('#price').value = result.price;
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.discount;
                     document.getElementById('discount').value = 0;
