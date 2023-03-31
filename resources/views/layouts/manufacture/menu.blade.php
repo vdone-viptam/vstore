@@ -326,8 +326,7 @@
                           </a>
                     </li>
                     <li data-page="revenue"><a class="hover:underline"
-                                               href="{{route('screens.manufacture.finance.revenue')}}">  Lịch sử thay đổi
-                            số dư</a>
+                                               href="{{route('screens.manufacture.finance.revenue')}}">  Lịch sử biến động số dư</a>
                     </li>
                 </ul>
             </div>

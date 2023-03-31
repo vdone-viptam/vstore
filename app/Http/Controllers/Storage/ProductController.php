@@ -35,7 +35,7 @@ class ProductController extends Controller
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->groupBy('products.id')
-            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id', 'product_warehouses.amount');
+            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id');
 
 //        return Auth::user();
 
@@ -45,7 +45,7 @@ class ProductController extends Controller
                 ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
         }
         $products = $products->where('warehouses.user_id', Auth::id())
-            ->where('product_warehouses.status', '!=', 3)
+            ->where('product_warehouses.status', 1)
             ->paginate($limit);
         foreach ($products as $pro) {
             $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ""))[0]->amount ?? 0;
@@ -108,7 +108,6 @@ class ProductController extends Controller
 //        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
         if ($request->status == 1) {
             $product = Product::where('id', $product_warehouses->product_id)->first();
-
             $product->availability_status = 1;
             $product->save();
         }

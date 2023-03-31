@@ -122,11 +122,11 @@
                             <textarea type="text" name="description" id="description" rows="5" maxlength="500"
                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                             >{{$infoAccount->description}}</textarea>
-
+                            @error('description')
+                            <p class="text-red-600">{{$message}}</p>
+                            @enderror
                         </div>
-                        @error('description')
-                        <p class="text-red-600">{{$message}}</p>
-                        @enderror
+
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Slug:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
@@ -277,13 +277,13 @@
                                   id="form" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div
-                                    class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey pt-6 md:pt-0">
+                                    class="flex flex-col justify-center items-center gap-4 w-full text-center border-l-0 md:border-l-[2px] border-grey">
                                     <div class="w-[200px] file-avt">
-                                        <div style="" class="w-full h-[100px]  text-center ">
-                                            <img style=""
-                                                 src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
-                                                 alt=""
-                                                 class="w-[100px] m-auto  object-contain">
+                                        <div class="w-[200px] h-[100px]  ">
+                                            <img
+                                                src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
+                                                alt=""
+                                                class="w-[100px] mx-auto  object-contain ">
                                         </div>
                                     </div>
                                     <button type="button"
@@ -291,13 +291,13 @@
                                         Chọn ảnh
                                     </button>
                                     <div id="image"></div>
-                                    {{--                                    <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB--}}
-                                    {{--                                    Định dạng:.JPEG, .PNG</span>--}}
+                                    <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
+                                                                        Định dạng:.JPEG, .PNG</span>
                                     <div class="flex flex-col justify-center items-center text-center gap-4 w-full p-4">
                                         <div class="w-full file-banner">
                                             <div class="w-full h-[100px] rounded-full shadow-xl">
                                                 <img
-                                                    src="{{$infoAccount->banner ? asset('image/users/'.$infoAccount->banner) : asset('asset/images/bannerlg.png')}}"
+                                                    src="{{asset('image/users/'.$infoAccount->banner) ?? asset('asset/images/bannerlg.png')}}"
                                                     alt="" class="w-full">
                                             </div>
                                         </div>
@@ -306,8 +306,8 @@
                                             Chọn ảnh Banner
                                         </button>
                                         <div id="image2"></div>
-                                        {{--                                        <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB--}}
-                                        {{--                                            Định dạng:.JPEG, .PNG</span>--}}
+                                        <span class="text-secondary text-sm w-[200px]">Dụng lượng file tối đa 1 MB
+                                                                                    Định dạng:.JPEG, .PNG</span>
                                     </div>
                                 </div>
                             </form>

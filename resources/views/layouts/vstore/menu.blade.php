@@ -243,7 +243,7 @@
                     </li>
                     <li data-page="revenue"><a class="hover:underline"
                                                href="{{Route('screens.vstore.finance.revenue')}}">Lịch
-                            sử biến động số dư<</a>
+                            sử biến động số dư</a>
                     </li>
                     <li data-page="history"><a class="hover:underline"
                                                href="{{Route('screens.vstore.finance.history')}}">Yêu cầu rút tiền</a>

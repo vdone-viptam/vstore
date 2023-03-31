@@ -291,8 +291,7 @@
                                 rút</a></li>
                         <li><a class="hover:underline"
                                href="{{route('screens.manufacture.finance.revenue')}}">Lịch sử
-                                thay đổi số dư
-                                tiền</a>
+                                thay biến động số dư</a>
                     </ul>
                 </div>
 
