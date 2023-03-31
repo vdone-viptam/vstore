@@ -119,7 +119,7 @@
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Giới thiệu</span>
-                            <textarea type="text" name="description" id="description" rows="5"
+                            <textarea type="text" name="description" id="description" rows="5" maxlength="500"
                                       class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
                             >{{$infoAccount->description}}</textarea>
 

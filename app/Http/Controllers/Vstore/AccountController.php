@@ -39,7 +39,7 @@ class AccountController extends Controller
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-
+            'description' => 'max:500'
 
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
@@ -48,6 +48,7 @@ class AccountController extends Controller
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
+            'description.max' => 'Giới thiệu ít hơn 500 ký tự'
 
         ]);
         if ($validator->fails()) {
