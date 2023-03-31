@@ -176,6 +176,7 @@ class LoginController extends Controller
                 'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         }
+//        return $request;
 
         try {
             if ($validator->fails()) {
@@ -287,6 +288,7 @@ class LoginController extends Controller
             }
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
+            $user->ward_id = $request->ward_id;
             $user->save();
             DB::commit();
 

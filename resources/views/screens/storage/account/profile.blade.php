@@ -104,6 +104,18 @@
                             </div>
                         </div>
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
+                            <span class="text-secondary w-full md:w-[280px]">Phường (xã):</span>
+                            <div class="w-full flex flex-col justify-start items-start gap-2">
+                                <select name="ward_id" id="ward_id"
+                                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                    <option value="" >Lựa chọn Phường (xã)</option>
+                                </select>
+                                @error('ward_id')
+                                <p class="text-red-600">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Địa chỉ chính xác:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
                                 <input type="text" name="address" id="address"
@@ -301,6 +313,10 @@
                                     <span>{{ucfirst($infoAccount->district->district_name)}}</span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
+                                    <span class="text-secondary">Phường(xã) </span>
+                                    <span>{{ucfirst($infoAccount->ward->wards_name)}}</span>
+                                </div>
+                                <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Số điện thoại: </span>
                                     <span>{{$infoAccount->phone_number}}</span>
                                 </div>
@@ -384,7 +400,7 @@
     <script !src="">
         const divCity = document.getElementById('city_id');
         const divDistrict = document.getElementById('district_id');
-
+        const divWard = document.getElementById('ward_id');
         fetch('{{route('get_city')}}', {
             mode: 'no-cors',
 
@@ -400,7 +416,7 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+
                 if (data.length > 0) {
                     divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == '{{(int) $infoAccount->district_id}}' ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
 
@@ -409,8 +425,24 @@
                 }
             })
             .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
-            )
-        ;
+            );
+        fetch('{{route('get_city')}}?type=3&value=' + '{{(int) $infoAccount->district_id}}', {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+
+            .then((data) => {
+
+                if (data.length > 0) {
+                    divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == '{{(int) $infoAccount->ward_id}}' ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+
+                } else {
+                    divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
+                }
+            })
+            .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
+            );
         divCity.addEventListener('change', (e) => {
             fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
                 mode: 'no-cors',
@@ -418,17 +450,38 @@
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
+
                     if (data.length > 0) {
                         divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
-
+                        divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                     } else {
                         divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                        divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                     }
                 })
-                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                .catch(() => {divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                    divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`}
                 )
             ;
+        });
+        divDistrict.addEventListener('change', (e) => {
+            fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
+                mode: 'no-cors',
+
+            })
+                .then((response) => response.json())
+
+                .then((data) => {
+
+                    if (data.length > 0) {
+                        divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option  data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+
+                    } else {
+                        divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
+                    }
+                })
+                .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
+                );
         });
 
     </script>

@@ -66,4 +66,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(District::class, 'district_id', 'district_id');
     }
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id', 'wards_id');
+    }
 }

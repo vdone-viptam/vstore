@@ -153,8 +153,8 @@
                 @enderror
             </div>
 
-            <div class="grid grid-cols-3 ">
-                <div>
+            <div class="grid grid-cols-1  md:grid-cols-3 gap-2">
+                <div class="w-full">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
                     <select name="city_id" id="city_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -164,7 +164,7 @@
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div>
+                <div class="">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
                     <select name="district_id" id="district_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -174,7 +174,7 @@
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div>
+                <div class="">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Phường (xã)</span>
                     <select name="ward_id" id="ward_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -403,7 +403,7 @@
 <script !src="">
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
-
+    const divWard = document.getElementById('ward_id');
     fetch('{{route('get_city')}}', {
         mode: 'no-cors',
 
@@ -420,6 +420,7 @@
 
         })
             .then((response) => response.json())
+
             .then((data) => {
                 if (data.length > 0) {
                     divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
@@ -431,7 +432,25 @@
             .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
             )
     });
+    divDistrict.addEventListener('change', (e) => {
+        fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
+            mode: 'no-cors',
 
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+
+                } else {
+                    divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`;
+                }
+            })
+            .catch(() => divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`
+            )
+    });
+
+    // divWard.addEventListener('')
 </script>
 @if(old('city_id') != '')
     <script>

@@ -6,7 +6,8 @@
 - npm run dev
 - npm run build 
 - php artisan db:seed
-- 
+- php artisan storage:link
+
 - DOMAIN_ADMIN=ad-tmdt.vdone.vn
   DOMAIN_MAN=ncc.vdone.vn
   DOMAIN_VSTORE=vstore.ngo

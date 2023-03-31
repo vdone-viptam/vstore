@@ -24,11 +24,13 @@ class AccountController extends Controller
 
     public function profile()
     {
+//        return 1;
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $this->v['infoAccount'] = User::with(['province', 'district'])->where('id', Auth::id())->first();
+        $this->v['infoAccount'] = User::with(['province', 'district','ward'])->where('id', Auth::id())->first();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
+//        return $this->v['infoAccount'];
         return view('screens.storage.account.profile', $this->v);
 
     }
@@ -49,6 +51,7 @@ class AccountController extends Controller
             'normal_storage' => 'required',
             'city_id'=>'required',
             'district_id'=>'required',
+            'ward_id'=>'required',
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
@@ -64,6 +67,7 @@ class AccountController extends Controller
             'normal_storage.required' => 'Trường này không được trống',
             'city_id.required' => 'Trường này không được trống',
             'district_id.required' => 'Trường này không được trống',
+            'ward_id.required' => 'Trường này không được trống',
 
         ]);
         if ($validator->fails()) {
@@ -75,6 +79,8 @@ class AccountController extends Controller
             $user->company_name = trim($request->company_name);
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
+            $user->ward_id = $request->ward_id;
+
             $user->address = trim($request->address);
             $user->id_vdone = trim($request->id_vdone);
             $user->id_vdone_diff = trim($request->id_vdone_diff);
@@ -103,6 +109,7 @@ class AccountController extends Controller
 
             $warehouse= Warehouses::where('user_id',$user->id)->first();
             $warehouse->name=$user->name;
+            $warehouse->ward_id =$request->ward_id;
             $warehouse->city_id =$request->city_id;
             $warehouse->district_id =$request->district_id;
             $warehouse->lat= $lat;
