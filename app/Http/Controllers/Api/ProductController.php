@@ -8,6 +8,9 @@ use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
 use App\Models\Discount;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Vshop;
@@ -15,6 +18,7 @@ use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -1057,4 +1061,6 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+    
 }
