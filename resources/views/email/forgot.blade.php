@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <title></title>
@@ -9,6 +7,7 @@
     p {
         font-size: 17px;
     }
+
     #box {
         padding: 4% 6%;
         width: 36%;
@@ -22,7 +21,7 @@
     }
 </style>
 <body style="padding-top:10px ; background-color: #e8e8e8;">
-<div style="text-align:center;margin:1%">
+<div style="text-align:center !important;margin:1%">
     @if($role_id == 1)
 
         <img src="https://vstore.vdone.vn/asset/images/logo.png" style="height:40px">
@@ -52,10 +51,11 @@
             V-Store
         @else
             KHO
-    @endif
-            của bạn xin mời bạn Nhấn <a
-                href="{{route('reset_password',['token'=>$token,'role_id' => $role_id])}}" style="text-decoration: underline">vào
-                đây</a> và đợi vài phút. Hệ thống sẽ chuyển đến trang đặt lại mật khẩu.
+        @endif
+        của bạn xin mời bạn Nhấn <a
+            href="{{route('reset_password',['token'=>$token,'role_id' => $role_id])}}"
+            style="text-decoration: underline">vào
+            đây</a> và đợi vài phút. Hệ thống sẽ chuyển đến trang đặt lại mật khẩu.
     </p>
 
     <p style="margin-top:1%;">Rất hân hạnh được phục vụ Quý khách!</p>

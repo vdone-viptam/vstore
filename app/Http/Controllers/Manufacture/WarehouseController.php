@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -49,6 +50,7 @@ class WarehouseController extends Controller
         $model = new ProductWarehouses();
         $model->fill($request->only('product_id', 'ware_id', 'amount'));
         $model->status = 0;
+        $model->code = \Illuminate\Support\Str::random(12);
         $model->save();
         $warehouse = Warehouses::select('user_id')->where('id', $request->ware_id)->first();
         if ($warehouse) {

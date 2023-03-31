@@ -59,16 +59,10 @@
                                         Số tiền
                                     </th>
                                     <th>
-                                        Số dư
-                                    </th>
-                                    <th>Chủ tài khoản</th>
-                                    <th>Ngân hàng</th>
-                                    <th>Số tài khoản</th>
-                                    <th>
                                         Nội dung
                                     </th>
                                     <th>
-                                        Ngày giao dịch
+                                        Ngày tạo yêu cầu
                                     </th>
 
 
@@ -95,21 +89,6 @@
                                             @endif
                                             <td>
                                                 {{number_format($history->amount,0,'.','.')}}
-                                            </td>
-                                            <td>
-                                                {{number_format($history->old_money,0,'.','.')}}
-                                            </td>
-                                            <td>
-                                                {{$history->name}}
-                                            </td>
-                                            <td>
-                                                {{$history->bank->name}}
-                                            </td>
-                                            <td>
-                                                @for($i = 0;$i < strlen($history->account_number) - 4;$i++)
-                                                    *
-                                                @endfor
-                                                {{substr($history->account_number,strlen($history->account_number) - 4)}}
                                             </td>
                                             <td>
                                                 Chuyển khoản ra ngoài

@@ -40,7 +40,7 @@
                             <div class="w-full">
                                 <select name="bank_id"
                                         class="w-full outline-none rounded-sm border-[1px] border-[#D9D9D9] px-3 py-[6px] focus:border-primary transition-all duration-200">
-                                    <option value="">Lựa chọn ngân hàng</option>
+                                    <option value="" selected disabled>Lựa chọn ngân hàng</option>
                                     @foreach($banks as $bank)
                                         <option
                                             value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
@@ -118,7 +118,7 @@
                                 <div class="w-full">
                                     <select name="bank_id"
                                             class="w-full outline-none rounded-sm border-[1px] border-[#D9D9D9] px-3 py-[6px] focus:border-primary transition-all duration-200">
-                                        <option value="">Lựa chọn ngân hàng</option>
+                                        <option value="" selected disabled>Lựa chọn ngân hàng</option>
                                         @foreach($banks as $bank)
                                             <option
                                                 {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>

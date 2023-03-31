@@ -20,7 +20,7 @@
     }
 </style>
 <body style="background-color: #e8e8e8; padding-top:10px ;">
-<div style="text-align:center;margin:6%">
+<div style="text-align:center !important;margin:1%">
     <img src="{{asset('home/img/NCC.png')}}" style="height:40px"></div>
 <div style="background-color: #ffff;" id="box">
 

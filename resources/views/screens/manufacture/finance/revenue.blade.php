@@ -59,7 +59,7 @@
                                             Số tiền
                                         </th>
                                         <th>
-                                            Giá trị
+                                            Nội dung
                                         </th>
                                         <th>
                                             Thời gian
@@ -89,6 +89,9 @@
                                                             -{{number_format($history->money_history,0,'.','.')}}</p>
                                                     @endif
                                                 </td>
+                                                <th>
+                                                    {{$history->title}}
+                                                </th>
                                                 <td>
                                                     {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                                 </td>

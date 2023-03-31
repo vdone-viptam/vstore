@@ -7,18 +7,6 @@
     p {
         font-size: 17px;
     }
-
-    #box {
-        padding: 4% 6%;
-        width: 36%;
-        margin: 0px auto;
-    }
-
-    @media only screen and (max-width: 768px) {
-        #box {
-            width: 100% !important;
-        }
-    }
 </style>
 <body style="background-color: #e8e8e8; padding-top:10px ;">
 <div style="text-align:center;margin:1%">
@@ -36,7 +24,11 @@
 
 
 </div>
-<div style="background-color: #ffff;" id="box">
+<div style="background-color: #ffff !important;padding: 4% 6%;
+        width: 36%;
+        margin: 0px auto;@media screen {
+          width: 100% !important;
+        }" id="box">
 
     <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng
 
