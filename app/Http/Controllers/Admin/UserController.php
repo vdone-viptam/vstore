@@ -88,7 +88,7 @@ class UserController extends Controller
                     $ID = 'vnk' . '0' . $number +1 . $user->tax_code;
 
                 } elseif ($number >= 10) {
-                    $ID = 'vnk' . $number . $user->tax_code;
+                    $ID = 'vnk' . $number +1 . $user->tax_code;
                 }
 //                elseif ($number > 99) {
 //                    for ($i = 0; $i < count($arr); $i++) {

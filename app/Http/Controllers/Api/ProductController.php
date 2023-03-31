@@ -333,9 +333,30 @@ class ProductController extends Controller
         foreach ($products as $value) {
 
             $value->images = asset(json_decode($value->images)[0]);
-            $value->price_discount = $value->price - ($value->price / 100 * $value->discount_vstore);
-            $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
-                ->first()->sum ?? 0;
+//            if ($request->pdone_id){
+//                $value->price_discount = $value->price - ($value->price / 100 * $value->discount_vstore);
+//            }else{
+//                $discount_price =  DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
+//                    ->where('start_date','<=',Carbon::now())
+//                    ->where('end_date','>=',Carbon::now())
+//                ->first()->sum ?? 0;
+//                if ($discount_price !=0){
+//                    $value->price_discount =$value->price - ($value->price / 100 * $value->price_discount);
+//                }else{
+//                    $value->price_discount =$value->price;
+//                }
+//
+//            }
+            $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $value->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->first()->sum;
+            $value->discount = $discount ?? 0;
+            $value->available_discount = BuyMoreDiscount::where('product_id',$value->id)->orderBy('id', 'desc')->first()->discount;
+
+//            $value->available_discount = DB::table('discounts')->selectRaw('sum(discount) as sum ')->where('type', '!=', 3)
+//                ->first()->sum ?? 0;
 
         }
 

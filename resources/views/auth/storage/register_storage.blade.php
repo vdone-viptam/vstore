@@ -153,7 +153,7 @@
                 @enderror
             </div>
 
-            <div class="grid grid-cols-2 gap-2 w-full">
+            <div class="grid grid-cols-3 ">
                 <div>
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
                     <select name="city_id" id="city_id"
@@ -171,6 +171,16 @@
                         <option value="">Lựa chọn quận (huyện)</option>
                     </select>
                     @error('district_id')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div>
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Phường (xã)</span>
+                    <select name="ward_id" id="ward_id"
+                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <option value="">Lựa chọn Phường (xã)</option>
+                    </select>
+                    @error('ward_id')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>

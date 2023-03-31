@@ -243,7 +243,9 @@
 
 @endsection
 @section('content')
-
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <p>{{\Illuminate\Support\Facades\Session::get('error')}}</p>
+    @endif
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
         <div class="col-span-12">
             <div class="box w-full">

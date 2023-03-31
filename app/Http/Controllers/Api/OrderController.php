@@ -114,7 +114,6 @@ class OrderController extends Controller
         $vat = $order->total * ($product->vat / 100);
         $order->total = $order->total + $vat;
         $totalVat = $vat;
-
         if ($districtId && $provinceId && $wardId && $address) {
             $order->pay = 1;
             $order->district_id = $districtId;
@@ -128,6 +127,8 @@ class OrderController extends Controller
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
                 ], 400);
             }
+
+            $order->warehouse_id = $warehouse->id;
 
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
@@ -196,7 +197,7 @@ class OrderController extends Controller
             $order->fullname = $fullname;
             $order->phone = $phone;
         }
-        $order->warehouse_id = 1;
+
         $order->method_payment = $methodPayment;
         $order->save();
 
@@ -204,7 +205,7 @@ class OrderController extends Controller
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
         $orderItem->vshop_id = $product->vshop_id;
-        $orderItem->warehouse_id = 1;
+        $orderItem->warehouse_id = $order->warehouse_id;
         $orderItem->sku = '';
         $orderItem->price = $product->price;
         $orderItem->quantity = $quantity;

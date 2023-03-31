@@ -81,7 +81,7 @@ class ProductController extends Controller
                 'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore', 'order.total')
             ->orderBy('order.id', 'desc')
             ->where('order.status', '!=', 2)
-            ->where('warehouses_id', $warehouses->id);
+            ->where('order_item.warehouse_id', $warehouses->id);
         if ($request->key_search) {
             $order = $order->where('order.no', 'like', '%' . $request->key_search . '%');
         };

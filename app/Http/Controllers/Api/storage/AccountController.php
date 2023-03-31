@@ -71,13 +71,12 @@ class AccountController extends Controller
                 'errors' => $validator->errors()
             ], 401);
         }
-
+dd($request->all());
         $user = \App\Models\User::find($id);
 
         $user->name = trim($request->name);
         $user->company_name = trim($request->company_name);
-//        $user->tax_code = trim($request->tax_code);
-        $user->address = trim($request->address);
+
         $user->id_vdone = trim($request->id_vdone);
         $user->id_vdone_diff = trim($request->id_vdone_diff);
         $user->phone_number = trim($request->phone_number);

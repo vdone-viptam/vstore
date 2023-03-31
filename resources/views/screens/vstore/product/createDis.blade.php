@@ -90,6 +90,73 @@
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
+    document.getElementById('start_date').addEventListener('change', (e) => {
+        $.ajax({
+            url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
+            success: function (result) {
+                if (result.validated === false) {
+                    console.log(result)
+                    document.getElementById('message').innerHTML = result.error.end_date;
+                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                } else {
+                    document.getElementById('message').innerHTML = '';
+                    if (document.getElementById('end_date').value) {
+                        $.ajax({
+                            url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' +e.target.value,
+                            success: function (result) {
+                                if (result.validated === false) {
+                                    document.getElementById('message').innerHTML = result.error.end_date;
+                                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                } else {
+                                    if (document.getElementById('discount').value > 0 && document.getElementById('discount').value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) {
+                                        document.querySelector('.btnSubmit').removeAttribute('disabled');
+                                        document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                                        document.getElementById('message').innerHTML = '';
+                                    } else {
+                                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                        document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
+
+                                    }
+
+                                }
+                            },
+                        });
+                    }
+                }
+            },
+        });
+    });
+    document.getElementById('end_date').addEventListener('change', (e) => {
+        if (document.getElementById('start_date').value) {
+            $.ajax({
+                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + e.target.value + '&start_date=' + document.getElementById('start_date').value,
+                success: function (result) {
+                    console.log(result)
+                    if (!result.validated) {
+                        document.getElementById('message').innerHTML = result.error.end_date;
+                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                    } else {
+                        if (document.getElementById('discount').value > 0 && document.getElementById('discount').value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) {
+                            document.querySelector('.btnSubmit').removeAttribute('disabled');
+                            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                            document.getElementById('message').innerHTML = '';
+                            re
+                        } else {
+                            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                            document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
+
+                        }
+
+                    }
+                },
+            });
+        }
+    });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
@@ -98,7 +165,7 @@
             url: '{{route('screens.vstore.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
             success: function (result) {
                 console.log(result)
-                if (result) {
+                if (!result.validated) {
                     document.querySelector('#price').value = result.price + ' đ'
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
                     document.querySelector('#discount_ncc').value = result.discount;
@@ -108,11 +175,32 @@
                     document.getElementById('discount').addEventListener('keyup', (o) => {
                         const value = +o.target.value;
 
-                        if (value < (Number(result.discount - result.discount_vShop)) && value > 0) {
+                        if (value < (Number(result.discount - result.discount_vShop)) && value > 0 &&
+                            document.getElementById('start_date').value && document.getElementById('end_date').value) {
+                            $.ajax({
+                                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + e.target.value + '&start_date=' + document.getElementById('start_date').value,
+                                success: function (result) {
+                                    if (result.validated === false) {
+                                        document.getElementById('message').innerHTML = result.error.end_date;
+                                        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                    } else {
+                                        if (document.getElementById('discount').value > 0 && document.getElementById('discount').value < document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value) {
+                                            document.querySelector('.btnSubmit').removeAttribute('disabled');
+                                            document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
+                                            document.getElementById('message').innerHTML = '';
+                                        } else {
+                                            document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
+                                            document.querySelector('.btnSubmit').classList.add('bg-slate-300');
+                                            document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
+
+                                        }
+
+                                    }
+                                },
+                            });
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
-
-
                         } else {
                             document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
