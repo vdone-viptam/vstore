@@ -425,6 +425,7 @@ class OrderController extends Controller
             foreach ($orders as $order) {
                 $order->orderItem = $order->orderItem()
                     ->select(
+                        'id as order_item_id',
                         'quantity',
                         'discount_vshop',
                         'discount_ncc',
@@ -528,7 +529,9 @@ class OrderController extends Controller
                     'message' => 'Không tìm thấy V-shop'
                 ], 404);
             }
-            $orders = OrderItem::select('product_id',
+            $orders = OrderItem::select(
+                'id as order_item_id',
+                'product_id',
                 'discount_vshop',
                 'price',
                 'discount_ncc',
@@ -581,6 +584,65 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * khách từ chối nhận/ huỷ đơn hàng
+     *
+     * API dùng khi khách hàng huỷ đơn hàng
+     *
+     * @param Request $request
+     * @bodyParam order_id id order
+     * @bodyParam order_id descriptions order
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refuseOrderByCustomer(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required',
+            'descriptions' => 'required|max:200',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        try {
+            $order = Order::find($request->order_id);
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy Order'
+                ], 404);
+            }
+
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+            ]);
+
+            $refuseStatus = 5 ;
+            $order->export_status = $refuseStatus;
+            $order->note = $request->descriptions;
+            $order->save();
+
+            $huy_don = Http::withHeaders(
+                [
+                    'Content-Type' => ' application/json',
+                    'Token' => $login['data']['token']
+                ]
+            )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder', [
+                'TYPE' => 4,
+                'ORDER_NUMBER' => $order->order_number,
+                'NOTE' => "Hủy đơn do khách hàng",
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
                 'message' => $e->getMessage()
             ], 500);
         }
