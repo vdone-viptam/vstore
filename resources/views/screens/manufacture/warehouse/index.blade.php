@@ -149,10 +149,10 @@
                             <td>
                                 {{$ware->address}}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{$ware->amount}}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{$ware->amount_product}}
                             </td>
                             <td>
