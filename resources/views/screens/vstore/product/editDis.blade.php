@@ -18,15 +18,16 @@
                 @csrf
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class=" gap-4 w-full">
-                        <span class="text-title font-medium w-[150px]">Lựa chọn sản phẩm tạo mã:</span>
-                        <select name="product_id" id="product_id"
-                                class="h-[42px] choose-product  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <span class="text-title font-medium w-[150px]">Lựa chọn sản phẩm tạo giảm giá:</span>
+                        <select id="product_id" disabled
+                                class="h-[42px] choose-product  outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#f0f0f0] focus:border-primary transition-all duration-200 rounded-sm">
 
                             <option value="{{$product1->id}}" selected>{{$product1->name}}</option>
                             @foreach($products as $product)
                                 <option value="{{$product->id}}">{{$product->name}}</option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="product_id" value="{{$product1->id}}">
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Giá sản phẩm (đ):</span>
