@@ -144,7 +144,7 @@
                             xét duyệt sản phẩm</a></li>
                     <li class="hover:underline" data-page="discount"><a
                             href="{{route('screens.manufacture.product.discount')}}"
-                        >Quản lý mã giảm giá</a></li>
+                        >Quản lý giảm giá</a></li>
 
                 </ul>
             </div>
