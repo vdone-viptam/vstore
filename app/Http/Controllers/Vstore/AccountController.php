@@ -105,29 +105,32 @@ class AccountController extends Controller
 
     public function saveChangePassword(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
-            'password_confirmation' => 'required|confirmed'
-        ], [
-            'old_password.required' => 'Mật khẩu cũ bắt buộc nhập',
-            'password.confirmed' => 'Xác nhận mật khẩu không chính xác',
-            'password.min' => 'Mật khẩu ít nhất 8 kí tự',
-            'password.regex' => 'Mật khẩu không dúng dịnh dạng (ít nhất 1 chữ số,kí tự đặc biệt và 1 ký tự in hoa bất kì)',
-            'password.required' => 'Mật khẩu mới bắt buộc nhập',
-            'password_confirmation.required' => 'Xác nhận mật khẩu bắt buộc nhập'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
-        }
-
         $user = User::find(Auth::id());
 
+        if (strlen($request->old_password) == 0) {
+            return redirect()->back()->withErrors(['old_password' => "Mật khẩu cũ bắt buộc nhập"])->withInput($request->all())->with('validate', 'failed');
+        }
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->back()->withErrors(['old_password' => "Mật khẩu cũ không chính xác"])->withInput($request->all())->with('validate', 'failed');
         }
 
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+        ], [
+            'password.min' => 'Mật khẩu không đúng định dạng',
+            'password.regex' => 'Mật khẩu không đúng định dạng',
+            'password.required' => 'Mật khẩu mới bắt buộc nhập',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+        if (strlen($request->password_confirmation) == 0) {
+            return redirect()->back()->withErrors(['password_confirmation' => "Xác nhận mật khẩu bắt buộc nhập"])->withInput($request->all())->with('validate', 'failed');
+        }
+        if ($request->password != $request->password_confirmation) {
+            return redirect()->back()->withErrors(['password_confirmation' => "Xác nhận mật khẩu không chính xác"])->withInput($request->all())->with('validate', 'failed');
+
+        }
         $user->password = Hash::make($request->password);
         $user->save();
 
