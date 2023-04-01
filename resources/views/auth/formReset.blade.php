@@ -66,13 +66,13 @@
         {{--        </a>--}}
         <div class="w-[162px]">
             @if($role_id == 3)
-                <a href="{{route('login_vstore')}}"><img src="{{asset('asset/images/logo.png')}}" alt=""></a>
+                <a href="{{route('login_vstore')}}"><img src="{{asset('home/img/Logo.png')}}" alt=""></a>
             @elseif($role_id == 2)
                 <a href="{{route('login_ncc')}}"> <img src="{{asset('home/img/NCC.png')}}" alt=""></a>
             @elseif($role_id == 4)
                 <a href="{{route('login_storage')}}"> <img src="{{asset('home/img/titleK.png')}}" alt=""></a>
             @elseif($role_id == 1)
-                <a href="{{route('login_admin')}}"><img src="{{asset('asset/images/logo.png')}}" alt=""></a>
+                <a href="{{route('login_admin')}}"><img src="{{asset('home/img/Logo.png')}}" alt=""></a>
             @endif
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Quên mật khẩu</h1>
