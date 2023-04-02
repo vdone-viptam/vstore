@@ -65,18 +65,17 @@ class OrderController extends Controller
                 'products.price',
                 'products.weight',
                 'vshop.id as vshop_id',
-                'vshop.name as vshop_name',
+                'vshop.nick_name as vshop_name',
                 'vshop.avatar'
             )
             ->first();
-
-        $product->quantity = $quantity;
 
         if (!$product) {
             return response()->json([
                 'status_code' => 404
             ], 404);
         }
+        $product->quantity = $quantity;
         $discount = getDiscountProduct($productId, $vshopId);
         $product->discount = $discount;
 
@@ -114,7 +113,6 @@ class OrderController extends Controller
         $vat = $order->total * ($product->vat / 100);
         $order->total = $order->total + $vat;
         $totalVat = $vat;
-
         if ($districtId && $provinceId && $wardId && $address) {
             $order->pay = 1;
             $order->district_id = $districtId;
@@ -128,6 +126,8 @@ class OrderController extends Controller
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
                 ], 400);
             }
+
+            $order->warehouse_id = $warehouse->id;
 
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
@@ -196,7 +196,7 @@ class OrderController extends Controller
             $order->fullname = $fullname;
             $order->phone = $phone;
         }
-        $order->warehouse_id = 1;
+
         $order->method_payment = $methodPayment;
         $order->save();
 
@@ -204,7 +204,7 @@ class OrderController extends Controller
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
         $orderItem->vshop_id = $product->vshop_id;
-        $orderItem->warehouse_id = 1;
+        $orderItem->warehouse_id = $order->warehouse_id;
         $orderItem->sku = '';
         $orderItem->price = $product->price;
         $orderItem->quantity = $quantity;
@@ -424,6 +424,7 @@ class OrderController extends Controller
             foreach ($orders as $order) {
                 $order->orderItem = $order->orderItem()
                     ->select(
+                        'id as order_item_id',
                         'quantity',
                         'discount_vshop',
                         'discount_ncc',
@@ -527,7 +528,9 @@ class OrderController extends Controller
                     'message' => 'Không tìm thấy V-shop'
                 ], 404);
             }
-            $orders = OrderItem::select('product_id',
+            $orders = OrderItem::select(
+                'id as order_item_id',
+                'product_id',
                 'discount_vshop',
                 'price',
                 'discount_ncc',
@@ -580,6 +583,65 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * khách từ chối nhận/ huỷ đơn hàng
+     *
+     * API dùng khi khách hàng huỷ đơn hàng
+     *
+     * @param Request $request
+     * @bodyParam order_id id order
+     * @bodyParam order_id descriptions order
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refuseOrderByCustomer(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required',
+            'descriptions' => 'required|max:200',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        try {
+            $order = Order::find($request->order_id);
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy Order'
+                ], 404);
+            }
+
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+            ]);
+
+            $refuseStatus = 5 ;
+            $order->export_status = $refuseStatus;
+            $order->note = $request->descriptions;
+            $order->save();
+
+            $huy_don = Http::withHeaders(
+                [
+                    'Content-Type' => ' application/json',
+                    'Token' => $login['data']['token']
+                ]
+            )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder', [
+                'TYPE' => 4,
+                'ORDER_NUMBER' => $order->order_number,
+                'NOTE' => "Hủy đơn do khách hàng",
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
                 'message' => $e->getMessage()
             ], 500);
         }
