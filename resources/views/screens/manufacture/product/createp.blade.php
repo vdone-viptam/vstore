@@ -125,7 +125,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                            <input type="text" placeholder="Nhập giá sản phẩm" id="price"
+                            <input type="text" placeholder="Nhập giá sản phẩm" id="price" autocomplete="off"
                                    value="{{old('price')}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
@@ -570,11 +570,17 @@
             });
         }
 
-        document.querySelector('#price').addEventListener("keyup", (e) => {
+        document.querySelector('#price').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
             if (e.target.value) {
-                    e.target.value = e.target.value.replaceAll(/[a-zA-Z]+/g, '')
-                    document.getElementsByName('price')[0].value = Number(e.target.value.replaceAll('.', ''));
-                    document.querySelector('#price').value = format1(Number(e.target.value.replaceAll('.', '')), '');
+                e.target.value = e.target.value.replaceAll(/[a-zA-Z]+/g, '')
+                document.getElementsByName('price')[0].value = Number(e.target.value.replaceAll('.', '').replaceAll('đ', ''));
+                document.querySelector('#price').value = format1(Number(e.target.value.replaceAll('.', '').replaceAll('đ', '')), '');
             }
         });
 
