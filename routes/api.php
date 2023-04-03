@@ -217,6 +217,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             Route::prefix('warehouses')->group(function () {
                 Route::get('/import', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'importProduct']);
                 Route::get('/export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportProduct']);
+                Route::put('/confirm-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'confirmExportProduct']);
+
                 Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
                 Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
             });
