@@ -307,7 +307,6 @@ class ProductController extends Controller
 
                 ]);
             }
-            return $order;
             return response()->json([
                 'success' => true,
                 'message' => 'Cập nhật đơn hàng thành công',
