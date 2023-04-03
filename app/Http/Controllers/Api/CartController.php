@@ -9,6 +9,7 @@ use App\Models\CartV2;
 use App\Models\Discount;
 use App\Models\Product;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -140,6 +141,15 @@ class CartController extends Controller
         $result = [];
 
         foreach ($cartItems as $item) {
+
+            $checkProductVshop = VshopProduct::where('product_id', $item->id)
+                ->where('vshop_id', $item->vshop_id_)
+                ->first();
+
+            if(!$checkProductVshop) {
+                continue;
+            }
+
             $result[$item['vshop_id']]['vshop'] = [
                 "name" => $item->name_vshop,
                 "id" => $item->vshop_id_,
