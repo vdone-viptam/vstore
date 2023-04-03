@@ -248,12 +248,11 @@ class CategoryController extends Controller
      */
     public function getAllVstoreByCategory($category_id)
     {
-
         try {
             $users = Product::select('avatar', 'users.name', 'users.id')
                 ->join('users', 'products.vstore_id', '=', 'users.id')
                 ->where('category_id', $category_id)
-                ->where('products.availability_status',1)
+                ->where('availability_status',1)
                 ->groupBy(['avatar', 'users.name', 'users.id'])
                 ->get();
             foreach ($users as $user) {
