@@ -206,27 +206,6 @@ class ProductController extends Controller
                     $order_payment = 1;
                 }
 
-                $request = new RequestWarehouse();
-
-                $request->ncc_id = 0;
-                $request->product_id = $product->id;
-                $request->status = 0;
-                $request->type = 2;
-                $request->ware_id = $order->warehouse_id;
-                $request->quantity = $order_item->quantity;
-                $code = 'YCX' . rand(100000000, 999999999);
-
-                while (true) {
-                    $re = RequestWarehouse::where('code', $code)->count();
-                    if ($re == 0) {
-                        break;
-                    }
-                    $code = 'YCX' . rand(100000000, 999999999);
-                }
-                $request->code = $code;
-                $request->note = 'Yêu cầu xuất kho';
-                $request->save();
-
 
                 $get_list = Http::withHeaders(
                     [
@@ -292,6 +271,27 @@ class ProductController extends Controller
 
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
+                $request = new RequestWarehouse();
+
+                $request->ncc_id = 0;
+                $request->product_id = $product->id;
+                $request->status = 0;
+                $request->type = 2;
+                $request->ware_id = $order->warehouse_id;
+                $request->quantity = $order_item->quantity;
+                $code = 'YCX' . rand(100000000, 999999999);
+
+                while (true) {
+                    $re = RequestWarehouse::where('code', $code)->count();
+                    if ($re == 0) {
+                        break;
+                    }
+                    $code = 'YCX' . rand(100000000, 999999999);
+                }
+                $request->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+                $request->code = $code;
+                $request->note = 'Yêu cầu xuất kho';
+                $request->save();
             }
             if ($status == 3 && $order->order_number !== '') {
 

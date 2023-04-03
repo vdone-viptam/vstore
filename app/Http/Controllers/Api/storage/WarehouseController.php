@@ -131,6 +131,7 @@ class WarehouseController extends Controller
                 'request_warehouses.created_at',
                 'request_warehouses.id',
                 'request_warehouses.status',
+                'request_warehouses.order_number',
                 'request_warehouses.note'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
