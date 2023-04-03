@@ -85,15 +85,27 @@ class WarehouseController extends Controller
 
             $productWare = ProductWarehouses::where('ware_id', $requestEx->ware_id)->where('product_id', $requestEx->product_id)->first();
 
+            if (!$productWare) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy sản phẩm'
+                ], 404);
+            }
             $productWare->export = $productWare->export + $requestEx->quantity;
 
+            if ($productWare->export > $productWare->amount) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Số lượng sản phẩm không đủ để xuất'
+                ], 400);
+            }
             $productWare->save();
 
             $requestEx->save();
             DB::commit();
             return response()->json([
                 'success' => true,
-                'message' => 'Xác nhận yêu cầu hủy thành công'
+                'message' => 'Xác nhận yêu cầu xuất thành công'
             ], 201);
         } catch (\Exception $exception) {
             DB::rollBack();
