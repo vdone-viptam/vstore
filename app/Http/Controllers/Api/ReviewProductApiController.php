@@ -138,7 +138,10 @@ class ReviewProductApiController extends Controller
 
             $totalReviews = Point::query()
                             ->where('product_id', $product_id)
-                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id')
+                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id',
+                            DB::raw('round(AVG(point_evaluation),1) as rating_rate')
+                            )
+                            ->groupBy('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id')
                             ->orderBy('updated_at', 'desc');
             if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
@@ -204,7 +207,19 @@ class ReviewProductApiController extends Controller
                                 'points.updated_at',
                                 'points.descriptions',
                                 'points.images',
-                                'points.id');
+                                'points.id',
+                            DB::raw('round(AVG(point_evaluation),1) as rating_rate')
+                            )
+                            ->groupBy(
+                                'points.customer_id',
+                                'points.product_id',
+                                'points.point_evaluation',
+                                'points.created_at',
+                                'points.updated_at',
+                                'points.descriptions',
+                                'points.images',
+                                'points.id'
+                            );
             if(isset($status_rep)){
                 $totalReviews = $totalReviews->where('points.status',$status_rep);
             }
