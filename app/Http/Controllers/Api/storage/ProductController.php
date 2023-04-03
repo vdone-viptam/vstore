@@ -128,28 +128,28 @@ class ProductController extends Controller
             ], 400);
         }
 
-        $request = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->first();
-        if (!$request) {
+        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->first();
+        if (!$requestIm) {
             return response()->json([
                 'success' => false,
                 'message' => 'Không tìm thấy yêu cầu',
             ], 404);
         }
         if ($status == 1) {
-            if ($request->type == 1) {
-                $ware = ProductWarehouses::where('ware_id', $request->ware_id)->where('product_id', $request->product_id)->first();
+            if ($requestIm->type == 1) {
+                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
                 if (!$ware) {
                     return response()->json([
                         'success' => false,
                         'message' => 'Không tìm thấy sản phẩm',
                     ], 404);
                 }
-                $ware->amount = $ware->amount + $request->quantity;
+                $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
             }
         }
-        $request->status = $status;
-        $request->save();
+        $requestIm->status = $status;
+        $requestIm->save();
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật đơn gửi hàng thành công',
