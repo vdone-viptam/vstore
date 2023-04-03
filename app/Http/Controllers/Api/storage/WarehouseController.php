@@ -29,6 +29,7 @@ class WarehouseController extends Controller
                 'products.name as product_name',
                 'users.name as ncc_name',
                 'quantity',
+                'request_warehouses.status',
                 'request_warehouses.created_at',
                 'request_warehouses.id'
             )
