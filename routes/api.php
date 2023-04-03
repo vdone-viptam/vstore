@@ -214,6 +214,12 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/edit-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'editTaxCode']);
                 Route::put('/save-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangeTaxCode']);
             });
+            Route::prefix('warehouses')->group(function () {
+                Route::get('/import', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'importProduct']);
+                Route::get('/export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportProduct']);
+                Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
+                Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
+            });
             Route::prefix('finances')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\FinanceController::class, 'index']);
                 Route::post('/store-wallet', [\App\Http\Controllers\Api\storage\FinanceController::class, 'storeWall']);
