@@ -402,7 +402,7 @@ class OrderController extends Controller
      *
      * @param id $id id user
      *
-     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 hoàn thành
+     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 đã giao hàng,5 đã hoàn thành
      * @return \Illuminate\Http\JsonResponse
      */
     public function getOrdersByUser(Request $request, $id)
@@ -412,8 +412,16 @@ class OrderController extends Controller
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
-            if ($status !== 10 ) {
+            if ($status !== 10 && $status != 5 && $status != 4) {
                 $orders = $orders->where('export_status', $status);
+            }
+            if ($status == 4) {
+                $orders = $orders->where('export_status', 4)
+                    ->whereDate('order.updated_at', '>', Carbon::now()->addDay(-7));
+            }
+            if ($status == 5) {
+                $orders = $orders->where('export_status', 4)
+                    ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(-7));
             }
 
             $orders = $orders
