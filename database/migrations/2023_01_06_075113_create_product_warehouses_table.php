@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer('status')->comment('0 cho nhap,1 nhap,2 xuat,3 cho xuat,4 tu choi xuat');
             $table->integer('amount');
             $table->integer('bill_product_id');
+            $table->integer('export')->nullable()->comment('số lượng đã xuất');
             $table->timestamps();
         });
     }

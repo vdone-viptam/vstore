@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manufacture;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
@@ -31,6 +32,7 @@ class WarehouseController extends Controller
     public function postAddProduct(Request $request)
     {
 
+//        return $request;
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'ware_id' => 'required',
@@ -47,10 +49,18 @@ class WarehouseController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
-        $model = new ProductWarehouses();
-        $model->fill($request->only('product_id', 'ware_id', 'amount'));
-        $model->status = 0;
-        $model->code = \Illuminate\Support\Str::random(12);
+        $model = new RequestWarehouse();
+        $model->ncc_id = Auth::id();
+        $model->product_id=$request->product_id;
+        $model->status=0;
+        $model->type=1;
+        $model->ware_id=$request->ware_id;
+        $model->quantity=$request->amount;
+        $model->code = 'ycn'. \Illuminate\Support\Str::random(12);
+        $model->note='Yêu cầu nhập kho từ nhà cung cấp '. Auth::user()->account_code;
+//        $model->fill($request->only('product_id', 'ware_id', 'amount'));
+//        $model->status = 0;
+//        $model->code = \Illuminate\Support\Str::random(12);
         $model->save();
         $warehouse = Warehouses::select('user_id')->where('id', $request->ware_id)->first();
         if ($warehouse) {
