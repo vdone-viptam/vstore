@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('quantity')->nullable()->comment('số lượng sản phẩm');
             $table->integer('code')->nullable()->comment('mã xuất, nhập');
             $table->integer('note')->nullable()->comment('ghi chú');
+            $table->integer('export')->nullable()->comment('số lượng đã xuất');
             $table->timestamps();
         });
     }

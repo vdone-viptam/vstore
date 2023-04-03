@@ -70,13 +70,12 @@ class OrderController extends Controller
             )
             ->first();
 
-        $product->quantity = $quantity;
-
         if (!$product) {
             return response()->json([
                 'status_code' => 404
             ], 404);
         }
+        $product->quantity = $quantity;
         $discount = getDiscountProduct($productId, $vshopId);
         $product->discount = $discount;
 
