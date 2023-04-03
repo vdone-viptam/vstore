@@ -252,6 +252,7 @@ class CategoryController extends Controller
             $users = Product::select('avatar', 'users.name', 'users.id')
                 ->join('users', 'products.vstore_id', '=', 'users.id')
                 ->where('category_id', $category_id)
+                ->where('availability_status',1)
                 ->groupBy(['avatar', 'users.name', 'users.id'])
                 ->get();
             foreach ($users as $user) {
