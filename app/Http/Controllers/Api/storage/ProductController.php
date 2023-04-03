@@ -124,7 +124,7 @@ class ProductController extends Controller
         if (!in_array((int)$status, [5, 2, 1])) {
             return response()->json([
                 'success' => false,
-                'message' => 'Trạng thái cập nhật chỉ là 1 hoặc 2',
+                'message' => 'Trạng thái cập nhật chỉ là 1,5 hoặc 2',
             ], 400);
         }
 
