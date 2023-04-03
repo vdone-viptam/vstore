@@ -71,7 +71,6 @@ class AccountController extends Controller
                 'errors' => $validator->errors()
             ], 401);
         }
-        dd($request->all());
         $user = \App\Models\User::find($id);
 
         $user->name = trim($request->name);
