@@ -95,17 +95,23 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
 
         $warehouses = Warehouses::where('user_id', Auth::id())->first();
-        $order = OrderItem::with(['product'])->join('order', 'order_item.order_id', '=', 'order.id')
+        $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
+            ->join('order', 'order_item.order_id', '=', 'order.id')
             ->select(
                 'order.no',
+                'products.publish_id',
+                'products.name',
                 'order_item.quantity',
+                'order.method_payment',
                 'order.export_status',
                 'order.created_at',
-                'product_id',
                 'order.id'
             )
             ->orderBy('order.id', 'desc');
-        $order = $order->where('order.status', '!=', 2)->paginate(10);
+        $order = $order->where('order.status', '!=', 2)
+            ->where('export_status', 0)
+            ->where('order_item.warehouse_id', $warehouses->id)
+            ->paginate(10);
         return response()->json([
             'success' => true,
             'data' => $order
@@ -115,7 +121,7 @@ class ProductController extends Controller
 
     public function updateRequest($status, Request $request)
     {
-        if (!in_array((int)$status, [1, 2])) {
+        if (!in_array((int)$status, [5, 2, 1])) {
             return response()->json([
                 'success' => false,
                 'message' => 'Trạng thái cập nhật chỉ là 1 hoặc 2',
@@ -199,23 +205,27 @@ class ProductController extends Controller
                     $money_colection = 0;
                     $order_payment = 1;
                 }
-                $requestEx = RequestWarehouse::where('id', $order_item->request_warehouse_id)->where('type', 2)->first();
-                if (!$requestEx) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy yêu cầu xuất kho'
-                    ], 404);
+
+                $request = new RequestWarehouse();
+
+                $request->ncc_id = 0;
+                $request->product_id = $product->id;
+                $request->status = 0;
+                $request->type = 2;
+                $request->ware_id = $order->warehouse_id;
+                $request->quantity = $order_item->quantity;
+                $code = 'YCX' . rand(100000000, 999999999);
+
+                while (true) {
+                    $re = RequestWarehouse::where('code', $code)->count();
+                    if ($re == 0) {
+                        break;
+                    }
+                    $code = 'YCX' . rand(100000000, 999999999);
                 }
-
-                $requestEx->status = 1;
-
-                $productWare = ProductWarehouses::where('ware_id', $warehouse->id)->where('product_id', $product->id)->first();
-
-                $productWare->export = $productWare->export + $order_item->quantity;
-
-                $productWare->save();
-
-                $requestEx->save();
+                $request->code = $code;
+                $request->note = 'Yêu cầu xuất kho';
+                $request->save();
 
 
                 $get_list = Http::withHeaders(
@@ -235,6 +245,7 @@ class ProductController extends Controller
                     'TYPE' => 1,
 
                 ]);
+
 //            return $get_list;
 
                 $tinh_thanh_gui = Province::where('province_id', $warehouse->city_id)->first()->province_name ?? '';

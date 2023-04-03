@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\ProductWarehouses;
+use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WarehouseController extends Controller
 {
@@ -31,7 +34,7 @@ class WarehouseController extends Controller
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
-            ->where('request_warehouses.status', 1)
+            ->whereIn('request_warehouses.status', [5, 1])
             ->orderBy('request_warehouses.id', 'desc')
             ->paginate($limit);
         return response()->json([
@@ -55,13 +58,50 @@ class WarehouseController extends Controller
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 2)
-            ->where('request_warehouses.status', 1)
-            ->orderBy('request_warehouses.id', 'desc')
+            ->orderBy('request_warehouses.status', 'asc')
             ->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $requests
         ], 200);
+
+    }
+
+
+    public function confirmExportProduct(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $requestEx = RequestWarehouse::where('id', $request->id)->where('type', 2)->where('status', 0)->first();
+            if (!$requestEx) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy yêu cầu xuất kho'
+                ], 404);
+            }
+
+            $requestEx->status = 1;
+
+            $productWare = ProductWarehouses::where('ware_id', $requestEx->ware_id)->where('product_id', $requestEx->product_id)->first();
+
+            $productWare->export = $productWare->export + $requestEx->quantity;
+
+            $productWare->save();
+
+            $requestEx->save();
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Xác nhận yêu cầu hủy thành công'
+            ], 201);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 500);
+        }
     }
 
     public function exportDestroyProduct()
