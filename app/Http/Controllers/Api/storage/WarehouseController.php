@@ -54,6 +54,7 @@ class WarehouseController extends Controller
                 'products.name as product_name',
                 'users.name as ncc_name',
                 'quantity',
+                'request_warehouses.status',
                 'request_warehouses.created_at',
                 'request_warehouses.id'
             )
@@ -129,6 +130,7 @@ class WarehouseController extends Controller
                 'quantity',
                 'request_warehouses.created_at',
                 'request_warehouses.id',
+                'request_warehouses.status',
                 'request_warehouses.note'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
