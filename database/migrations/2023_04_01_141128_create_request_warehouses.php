@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('type')->nullable()->comment('1 nhập , 2 xuất');
             $table->integer('ware_id')->nullable()->comment('id kho');
             $table->integer('quantity')->nullable()->comment('số lượng sản phẩm');
-            $table->integer('code')->nullable()->comment('mã xuất, nhập');
+            $table->string('code')->nullable()->comment('mã xuất, nhập');
             $table->integer('note')->nullable()->comment('ghi chú');
             $table->integer('export')->nullable()->comment('số lượng đã xuất');
             $table->timestamps();

@@ -479,7 +479,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         }
         $passwordReset = PasswordReset::where('token', $token)->where('role_id', $role_id)->first();
 
-        if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
+        if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180 || !$passwordReset) {
             abort(404);
         }
 
