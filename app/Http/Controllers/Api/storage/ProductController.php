@@ -109,7 +109,6 @@ class ProductController extends Controller
             )
             ->orderBy('order.id', 'desc');
         $order = $order->where('order.status', '!=', 2)
-            ->where('export_status', 0)
             ->where('order_item.warehouse_id', $warehouses->id)
             ->paginate(10);
         return response()->json([
@@ -185,6 +184,7 @@ class ProductController extends Controller
 
             $order->export_status = $status;
             $order->save();
+
             $warehouse = Warehouses::find($order->warehouse_id);
             if (!$warehouse) {
                 return response()->json([
@@ -306,22 +306,8 @@ class ProductController extends Controller
                     'NOTE' => "Hủy đơn do kho",
 
                 ]);
-                $order_item = OrderItem::where('order_id', $order->id)->first();
-
-                $requestEx = RequestWarehouse::where('id', $order_item->request_warehouse_id)->where('type', 2)->first();
-                if (!$requestEx) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy yêu cầu xuất kho'
-                    ], 404);
-                }
-
-                $requestEx->status = 2;
-
-
-                $requestEx->save();
-
             }
+            return $order;
             return response()->json([
                 'success' => true,
                 'message' => 'Cập nhật đơn hàng thành công',
