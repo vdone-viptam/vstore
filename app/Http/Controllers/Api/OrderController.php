@@ -442,21 +442,23 @@ class OrderController extends Controller
                     $item->image = asset(json_decode($product->images)[0]);
 
                 }
+
                 $rating = Point::where('customer_id', $id)
                     ->where('order_item_id', $order->orderItem[0]->order_item_id)
                     ->join('products', 'points.product_id', '=', 'products.id')
-                    ->select('points.id', 'products.name as product_name', 'products.images as image', 'point_evaluation', 'descriptions', 'points.images')
+                    ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images')
                     ->first();
                 if ($rating) {
                     $order->rating = $rating;
-                    $order->rating->image = $rating->image ? asset(json_decode($rating->image)[0]) : '';
-                    $order->rating->content_image = $rating->images ? json_decode($rating->images)[0] : '';
+                    $order->rating->image = $product->images ? asset(json_decode($product->images)[0]) : '';
+                    $order->rating->content_image = $rating->images ? json_decode($rating->images) : '';
                     $order->rating->total = $product->price - ($product->price * ($order->orderItem[0]->discount_ncc +
                                 $order->orderItem[0]->discount_vstore
                                 + $order->orderItem[0]->discount_vshop) / 100);
+
                     $order->rating->quantity = $order->orderItem[0]->quantity;
                     $order->rating->product_price = $product->price;
-                    unset($rating->images);
+                    unset($order->rating->images);
                 } else {
                     $order->rating = null;
 
