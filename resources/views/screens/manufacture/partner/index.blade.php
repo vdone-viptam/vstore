@@ -148,8 +148,8 @@
                             <td>{{$value->name}}</td>
                             <td>{{$value->price}}</td>
                             <td>{{$value->user_name}}</td>
-                            <td>{{$value->discount}}</td>
-                            <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                            <td class="text-center">{{$value->discount}}</td>
+                            <td class="text-center">{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
                         </tr>
                     @endforeach
 

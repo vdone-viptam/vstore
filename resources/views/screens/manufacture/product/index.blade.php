@@ -29,7 +29,7 @@
                         Mã sản phẩm
                     </option>
                     <option
-                        value=products.name" {{isset($params['condition']) && $params['condition'] == 'products.name' ? 'selected' : ''}}>
+                        value="products.name" {{isset($params['condition']) && $params['condition'] == 'products.name' ? 'selected' : ''}}>
                         Tên sản phẩm
                     </option>
                     <option
@@ -175,8 +175,8 @@
                                     <td>
                                         {{$product->vStore->name ?? '-'}}
                                     </td>
-                                    <td>{{$product->amount_product ?? '-'}}</td>
-                                    <td>-</td>
+                                    <td class="text-center">{{$product->amount_product ?? '-'}}</td>
+                                    <td class="text-center">-</td>
                                     <td>
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline"> Chi tiết</a>

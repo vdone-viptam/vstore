@@ -243,7 +243,7 @@ class ProductController extends Controller
 
         $products = Product::where('vstore_id', $id)->where('status', 2)
             ->where('availability_status',1)
-            ->select('id', 'publish_id', 'discount', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length', 'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id', 'user_id', 'discount_vShop');
+            ->select('id', 'publish_id', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length', 'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id', 'user_id', 'discount_vShop');
 
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
@@ -251,14 +251,25 @@ class ProductController extends Controller
         if ($request->category_id) {
             $products = $products->where('category_id', $request->category_id);
         }
-        if ($request->order_by_id) {
-            $products = $products->orderBy('id', $request->order_by_id);
+//        if ($request->order_by_id) {
+//            $products = $products->orderBy('id', $request->order_by_id);
+//        }
+//        if ($request->order_by_sold) {
+//            $products = $products->orderBy('amount_product_sold', $request->order_by_sold);
+//        }
+//        if ($request->order_by_price) {
+//            $products = $products->orderBy('price', $request->order_by_price);
+//        }
+        if ($request->order_by == 1) {
+
+            $products = $products->orderBy('id', 'desc');
         }
-        if ($request->order_by_sold) {
-            $products = $products->orderBy('amount_product_sold', $request->order_by_sold);
+        if ($request->order_by == 3) {
+
+            $products = $products->orderBy('amount_product_sold', 'desc');
         }
-        if ($request->order_by_price) {
-            $products = $products->orderBy('price', $request->order_by_price);
+        if ($request->order_by == 2) {
+            $products = $products->orderBy('price', $request->option);
         }
         if ($request->payments == 1) {
             $products = $products->where('prepay', 1);
@@ -273,6 +284,14 @@ class ProductController extends Controller
             if ($available_discount) {
                 $value->available_discount = $available_discount->discount;
             }
+
+            $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $value->id)
+                ->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now())
+                ->whereIn('type', [1, 2])
+                ->first()->sum ??0;
+            $value->discount = $discount;
+
 
 //            return $available_discount;
 //            available discount
@@ -315,14 +334,25 @@ class ProductController extends Controller
         if ($request->category_id) {
             $products = $products->where('category_id', $request->category_id);
         }
-        if ($request->order_by_id) {
-            $products = $products->orderBy('id', $request->order_by_id);
+//        if ($request->order_by_id) {
+//            $products = $products->orderBy('id', $request->order_by_id);
+//        }
+//        if ($request->order_by_sold) {
+//            $products = $products->orderBy('amount_product_sold', $request->order_by_sold);
+//        }
+//        if ($request->order_by_price) {
+//            $products = $products->orderBy('price', $request->order_by_price);
+//        }
+        if ($request->order_by == 1) {
+
+            $products = $products->orderBy('id', 'desc');
         }
-        if ($request->order_by_sold) {
-            $products = $products->orderBy('amount_product_sold', $request->order_by_sold);
+        if ($request->order_by == 3) {
+
+            $products = $products->orderBy('amount_product_sold', 'desc');
         }
-        if ($request->order_by_price) {
-            $products = $products->orderBy('price', $request->order_by_price);
+        if ($request->order_by == 2) {
+            $products = $products->orderBy('price', $request->option);
         }
         if ($request->payments == 1) {
             $products = $products->where('prepay', 1);
@@ -1062,5 +1092,5 @@ class ProductController extends Controller
         }
     }
 
-    
+
 }

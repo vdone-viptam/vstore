@@ -32,7 +32,8 @@ class  VShopController extends Controller
 {
 
 
-    public function updateStatusDonePreOrder(Request $request, $orderID) {
+    public function updateStatusDonePreOrder(Request $request, $orderID)
+    {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -50,7 +51,7 @@ class  VShopController extends Controller
             ->where('user_id', $request->user_id)
             ->where('status', config('constants.statusPreOrder.shipping'))->first();
 
-        if(!$preOrder) {
+        if (!$preOrder) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Đơn đặt hàng không tồn tại"
@@ -67,12 +68,13 @@ class  VShopController extends Controller
 
     }
 
-    public function getPreOrder(Request $request, $userId) {
+    public function getPreOrder(Request $request, $userId)
+    {
 
         $limit = $request->limit ?? 2;
 
         $preOrder = PreOrderVshop::where('pre_order_vshop.user_id', $userId);
-        if($request->status) {
+        if ($request->status) {
             $preOrder = $preOrder->where('pre_order_vshop.status', $request->status);
         }
         $preOrder = $preOrder->join('products', 'products.id', '=', 'pre_order_vshop.product_id')
@@ -80,34 +82,34 @@ class  VShopController extends Controller
             ->join('district', 'district.id', '=', 'pre_order_vshop.district_id')
             ->join('wards', 'wards.id', '=', 'pre_order_vshop.ward_id')
             ->select(
-            "pre_order_vshop.id",
-            "pre_order_vshop.no",
-            "pre_order_vshop.quantity",
-            "pre_order_vshop.place_name",
-            "pre_order_vshop.fullname",
-            "pre_order_vshop.phone",
-            "pre_order_vshop.address",
-            "pre_order_vshop.discount",
-            "pre_order_vshop.deposit_money",
-            "pre_order_vshop.total",
-            "pre_order_vshop.no",
-            "pre_order_vshop.status",
-            "pre_order_vshop.created_at",
-            "products.images",
-            "products.name",
-            "products.price",
-            "products.vat",
-            "province.province_name",
-            "district.district_name",
-            "wards.wards_name"
-        )
-        ->distinct()
-        ->simplePaginate($limit);
+                "pre_order_vshop.id",
+                "pre_order_vshop.no",
+                "pre_order_vshop.quantity",
+                "pre_order_vshop.place_name",
+                "pre_order_vshop.fullname",
+                "pre_order_vshop.phone",
+                "pre_order_vshop.address",
+                "pre_order_vshop.discount",
+                "pre_order_vshop.deposit_money",
+                "pre_order_vshop.total",
+                "pre_order_vshop.no",
+                "pre_order_vshop.status",
+                "pre_order_vshop.created_at",
+                "products.images",
+                "products.name",
+                "products.price",
+                "products.vat",
+                "province.province_name",
+                "district.district_name",
+                "wards.wards_name"
+            )
+            ->distinct()
+            ->simplePaginate($limit);
 
         foreach ($preOrder as $value) {
             $value->prepayment_rate = $value->deposit_money;
-            $value->order_value_minus_discount = $value->total - $value->total*($value->discount/100);
-            $value->deposit_payable = $value->total - $value->total*($value->deposit_money/100);
+            $value->order_value_minus_discount = $value->total - $value->total * ($value->discount / 100);
+            $value->deposit_payable = $value->total - $value->total * ($value->deposit_money / 100);
 
             $value->status_text = statusPreOrder($value->status);
 
@@ -150,8 +152,8 @@ class  VShopController extends Controller
     }
 
 
-
-    public function preOrderConfirm(Request $request, $orderId) {
+    public function preOrderConfirm(Request $request, $orderId)
+    {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -173,7 +175,7 @@ class  VShopController extends Controller
             ->where('status', config('constants.statusPreOrder.new_oder'))
             ->first();
 
-        if(!$order) {
+        if (!$order) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Hoá đơn không tồn tại"
@@ -184,15 +186,15 @@ class  VShopController extends Controller
         $order->save();
 
         $order->prepayment_rate = $order->deposit_money;
-        $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
-        $order->deposit_payable = $order->total - $order->total*($order->deposit_money/100);
+        $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
+        $order->deposit_payable = $order->total - $order->total * ($order->deposit_money / 100);
 
 
         $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
             ->where('product_id', $order->product_id)
             ->first();
 
-        if($checkNewVshopProduct) {
+        if ($checkNewVshopProduct) {
             $checkNewVshopProduct->status = 2;
             $checkNewVshopProduct->save();
         } else {
@@ -212,7 +214,8 @@ class  VShopController extends Controller
 
     }
 
-    public function preOrderPayment(Request $request, $orderId) {
+    public function preOrderPayment(Request $request, $orderId)
+    {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -236,7 +239,7 @@ class  VShopController extends Controller
             ->where('status', 2)
             ->first();
 
-        if(!$order) {
+        if (!$order) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Hoá đơn không tồn tại"
@@ -280,7 +283,7 @@ class  VShopController extends Controller
         try {
             $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
             return response()->json([
-                'redirectUrl'=>$redirectUrl,
+                'redirectUrl' => $redirectUrl,
                 'time' => $time,
                 'invoice_no' => $invoiceNo,
                 'amount' => $amount,
@@ -297,7 +300,9 @@ class  VShopController extends Controller
 
 
     }
-    public function preOrder(Request $request, $productId) {
+
+    public function preOrder(Request $request, $productId)
+    {
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -323,11 +328,11 @@ class  VShopController extends Controller
         $ncc = User::where('id', $nccId)
             ->where('status', 1)
             ->where('role_id', 2)->first();
-        if(!$ncc) {
+        if (!$ncc) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Nhà cung cấp không tồn tại"
-            ],404);
+            ], 404);
         }
 
         $userId = $request->user_id;
@@ -348,7 +353,7 @@ class  VShopController extends Controller
             ->first();
         $product->images = json_decode($product->images);
 
-        if(!$product) {
+        if (!$product) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Sản phẩm không tồn tại"
@@ -378,21 +383,21 @@ class  VShopController extends Controller
         $order->address = $address;
         $order->ncc_id = $ncc->id;
 
-        $latestOrder = PreOrderVshop::orderBy('created_at','DESC')->first();
-        $order->no = Str::random(5).str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+        $latestOrder = PreOrderVshop::orderBy('created_at', 'DESC')->first();
+        $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
 
         $order->total = $total;
         $order->discount = $buyMoreDiscount['discount'];
         $order->save();
         $order->prepayment_rate = $buyMoreDiscount['deposit_money'];
 
-        $order->order_value_minus_discount = $order->total - $order->total*($order->discount/100);
-        $order->deposit_payable = $order->total - $order->total*($buyMoreDiscount['deposit_money']/100);
+        $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
+        $order->deposit_payable = $order->total - $order->total * ($buyMoreDiscount['deposit_money'] / 100);
 
         return response()->json([
             "order" => $order,
             "product" => $product
-        ],200);
+        ], 200);
     }
 
 
@@ -434,7 +439,7 @@ class  VShopController extends Controller
             'status_code' => 200,
             'message' => 'Tạo Vshop Thành công',
             'data' => $vshop
-        ],200);
+        ], 200);
     }
 
     /**
@@ -450,12 +455,12 @@ class  VShopController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $vshop = Vshop::select('id', 'pdone_id', 'vshop_name as name', 'phone_number', 'products_sold', 'avatar', 'description', 'products_sold', 'address','vshop_id','nick_name')->paginate($limit);
+        $vshop = Vshop::select('id', 'pdone_id', 'phone_number','vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
             'data' => $vshop
-        ],200);
+        ], 200);
     }
 
     public function getProductByIdPdone(Request $request)
@@ -481,7 +486,7 @@ class  VShopController extends Controller
         return response()->json([
             'status_code' => 200,
             'data' => $buy_more,
-        ],200);
+        ], 200);
     }
 
     /**
@@ -529,7 +534,7 @@ class  VShopController extends Controller
         return response()->json([
             'status_code' => 200,
             'discount' => $discount,
-        ],200);
+        ], 200);
 
     }
 
@@ -567,10 +572,10 @@ class  VShopController extends Controller
         }
 
         try {
-            $vshop= Vshop::where('pdone_id',$request->pdone_id)->first();
-            if (!$vshop){
+            $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
+            if (!$vshop) {
                 DB::table('vshop')->insert([
-                    'name_address'=>$request->name_address,
+                    'name_address' => $request->name_address,
                     'pdone_id' => $pdone_id,
                     'name' => $request->name,
                     'address' => $request->address,
@@ -579,17 +584,16 @@ class  VShopController extends Controller
                     'province' => $request->province,
                     'created_at' => Carbon::now()
                 ]);
-            }else{
-                $vshop->name=$request->name;
-                $vshop->address =$request->address;
-                $vshop->phone_number =  $request->phone_number;
-                $vshop->district= $request->district;
+            } else {
+                $vshop->name = $request->name;
+                $vshop->address = $request->address;
+                $vshop->phone_number = $request->phone_number;
+                $vshop->district = $request->district;
                 $vshop->province = $request->province;
-                $vshop->name_address=$request->name_address;
+                $vshop->name_address = $request->name_address;
                 $vshop->save();
 
             }
-
 
 
             return response()->json([
@@ -643,90 +647,103 @@ class  VShopController extends Controller
      * API này lấy chi tiết mã giảm giá theo pdone_id,product_id
      *
      * @param Request $request
-     * @param  pdone_id Mã p done required
-     * @param  product_id Mã sản phẩm required exits:products
+     * @param pdone_id Mã p done required
+     * @param product_id Mã sản phẩm required exits:products
      * @return \Illuminate\Http\JsonResponse
      */
-public function getDiscount(Request $request,$pdone_id,$product_id){
+    public function getDiscount(Request $request, $pdone_id, $product_id)
+    {
 
 
-        $discount = Discount::where('user_id',$pdone_id)->where('product_id',$product_id)->where('type',3)->first();
-        if (!$discount){
+        $discount = Discount::where('user_id', $pdone_id)->where('product_id', $product_id)->where('type', 3)->first();
+        if (!$discount) {
             return response()->json([
                 'status_code' => 404,
                 'error' => 'Mã giảm giá không tồn tại',
-            ],404);
-        }else{
+            ], 404);
+        } else {
             return response()->json([
                 'status_code' => 200,
                 'data' => $discount,
             ]);
         }
 //        return $pdone_id. $product_id;
-}
+    }
+
     /**
      * thay dổi thông tin mã giảm giá theo vshop và saản phẩm
      *
      * API này lấy chi tiết mã giảm giá theo pdone_id,product_id
      *
      * @param Request $request
-     * @param  pdone_id Mã p done required
-     * @param  product_id Mã sản phẩm required exits:products
+     * @param pdone_id Mã p done required
+     * @param product_id Mã sản phẩm required exits:products
      * @bodyParam start_date Ngày bắt đầu required date_format:Y/m/d after:Today
      * @bodyParam end_date Ngày kết thúc required date_format:Y/m/d after:start_date
      * @urlParam discount Phần trăm giảm giá required min:0 max:discount_vShop
      * @return \Illuminate\Http\JsonResponse
      */
-public function editDiscount(Request $request,$pdone_id,$product_id){
-    $validator = Validator::make($request->all(), [
-        'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now(),
-        'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
-        "discount" => 'required|min:0|max:100'
+    public function editDiscount(Request $request, $pdone_id, $product_id)
+    {
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(10),
+            'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
+            "discount" => 'required|min:0|max:100'
 
-    ], []);
-    if ($validator->fails()) {
-        return response()->json([
-            'status_code' => 403,
-            'error' => $validator->errors(),
-        ], 403);
-    }
-
-    $discount = Discount::where('user_id',$pdone_id)->where('product_id',$product_id)->where('type',3)->first();
-    if (!$discount){
-        return response()->json([
-            'status_code' => 404,
-            'error' => 'Mã giảm giá không tồn tại',
-        ],404);
-    }else{
-        $discount_vshop = Product::select('discount_vShop')->where('id', $product_id)->where('status', 2)->first()->discount_vShop ?? 0;
-        if ($discount_vshop == 0) {
+        ], []);
+        if ($validator->fails()) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Sản phẩm chưa niêm yết',
-            ],400);
-        } elseif ($request->discount > $discount_vshop / 100 * 95) {
+                'error' => $validator->errors(),
+            ], 400);
+        }
+        $to = Carbon::make($request->start_date);
+        $from = Carbon::make($request->end_date);
+        if ($from->diffInMinutes($to) < 10) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 95,
-            ],400);
+                'error' => [
+                    'end_date' => 'Thời gian kết thúc phải sau thời gian bắt đầu 10 phút'
+                ],
+            ], 400);
+        }
+        $discount = Discount::where('user_id', $pdone_id)->where('product_id', $product_id)->where('type', 3)->first();
+        if (!$discount) {
+            return response()->json([
+                'status_code' => 404,
+                'error' => 'Mã giảm giá không tồn tại',
+            ], 404);
         } else {
-            $discount->start_date =$request->start_date;
-            $discount->end_date =$request->start_date;
-            $discount->discount =$request->discount;
-            $discount->save();
+            $discount_vshop = Product::select('discount_vShop')->where('id', $product_id)->where('status', 2)->first()->discount_vShop ?? 0;
+            if ($discount_vshop == 0) {
+                return response()->json([
+                    'status_code' => 400,
+                    'error' => 'Sản phẩm chưa niêm yết',
+                ], 400);
+            } elseif ($request->discount > $discount_vshop / 100 * 95) {
+                return response()->json([
+                    'status_code' => 400,
+                    'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 95,
+                ], 400);
+            } else {
+                $discount->start_date = $request->start_date;
+                $discount->end_date = $request->end_date;
+                $discount->discount = $request->discount;
+                $discount->save();
 //            return $discount;
+                return response()->json([
+                    'status_code' => 201,
+                    'message' => 'Chỉnh sửa mã giảm giá thành công'
+                ]);
+            }
             return response()->json([
-                'status_code' => 201,
-                'message' => 'Chỉnh sửa mã giảm giá thành công'
+                'status_code' => 200,
+                'data' => $discount,
             ]);
         }
-        return response()->json([
-            'status_code' => 200,
-            'data' => $discount,
-        ]);
+
     }
 
-}
     /**
      * Lưu mới mã giảm giá
      *
@@ -746,16 +763,26 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
             'product_id' => 'required|exists:products,id',
-            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now(),
+            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(10),
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
         ], []);
         if ($validator->fails()) {
             return response()->json([
-                'status_code' => 403,
+                'status_code' => 400,
                 'error' => $validator->errors(),
-            ], 403);
+            ], 400);
+        }
+        $to = Carbon::make($request->start_date);
+        $from = Carbon::make($request->end_date);
+        if ($from->diffInMinutes($to) < 10) {
+            return response()->json([
+                'status_code' => 400,
+                'error' => [
+                    'end_date' => 'Thời gian kết thúc phải sau thời gian bắt đầu 10 phút'
+                ],
+            ], 400);
         }
         $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
 
@@ -763,18 +790,18 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Mã giảm giá đã tồn tại',
-            ],400);
+            ], 400);
         }
         if ($discount == 0) {
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
-            ],400);
+            ], 400);
         } elseif ($request->discount > $discount / 100 * 95) {
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
-            ],400);
+            ], 400);
         } else {
             DB::table('discounts')->insert([
                 'product_id' => $request->product_id,
@@ -866,20 +893,20 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
     public function getProfile($pdone_id)
     {
         $vshop = Vshop::where('pdone_id', $pdone_id)
-            ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'nick_name','description','vshop_id')
+            ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'nick_name', 'description', 'vshop_id')
             ->first();
-        $total_product = VshopProduct::where('vshop_id',$vshop->id)->count();
+        $total_product = VshopProduct::where('vshop_id', $vshop->id)->count();
         if (!$vshop) {
             return response()->json([
                 'status_code' => 400,
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
         }
-        $vshop->total_product= $total_product;
+        $vshop->total_product = $total_product;
         $cate = Category::select('categories.name')
             ->join('products', 'categories.id', '=', 'products.category_id')
-            ->join('vshop_products','products.id','=','vshop_products.product_id')
-            ->join('vshop','vshop_products.vshop_id','=','vshop.id')
+            ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
+            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
             ->where('vshop.pdone_id', $vshop->pdone_id)
             ->groupBy('categories.name')
             ->get();
@@ -887,7 +914,7 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
         foreach ($cate as $c) {
             $data[] = $c->name;
         }
-        if (count($data)>0){
+        if (count($data) > 0) {
             $vshop->categories = implode(', ', $data);
         }
 
@@ -923,7 +950,7 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
             return response()->json([
                 'status_code' => 403,
                 'error' => $validator->errors(),
-            ],403);
+            ], 403);
         }
         $vshop = Vshop::where('pdone_id', $id)->first();
         if (!$vshop) {
@@ -932,7 +959,7 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
         $vshop->avatar = $request->avatar;
         $vshop->vshop_name = $request->vshop_name;
         $vshop->description = $request->description;
-        if ($request->nick_name){
+        if ($request->nick_name) {
             $vshop->nick_name = $request->nick_name;
         }
         $vshop->save();
@@ -1048,7 +1075,7 @@ public function editDiscount(Request $request,$pdone_id,$product_id){
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ],400);
+            ], 400);
         }
 
 
