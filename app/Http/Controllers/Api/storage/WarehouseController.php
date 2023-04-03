@@ -97,7 +97,7 @@ class WarehouseController extends Controller
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->where('order.export_status', 10)
             ->where('order.status', 2)
-            ->where('warehouse_id', $ware->id)
+            ->where('order_item.warehouse_id', $ware->id)
             ->paginate($limit);
 
         return response()->json([
