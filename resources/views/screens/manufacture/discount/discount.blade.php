@@ -4,7 +4,7 @@
     <div id="modal2"></div>
 @endsection
 
-@section('page_title','Mã giảm giá')
+@section('page_title','Sản phẩm giảm giá')
 
 @section('content')
     <form action="" id="form">
@@ -65,7 +65,7 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        Mã giảm giá
+                        Sản phẩm giảm giá
                     </h2>
                     <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
                         <a href="#"

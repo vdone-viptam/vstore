@@ -20,7 +20,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PHPUnit\Exception;
-
+/**
+ * @group Review
+ *
+ * Danh sách api liên quan tới đánh giá sản phẩm
+ */
 
 class ReviewProductApiController extends Controller
 {

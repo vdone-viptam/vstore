@@ -47,6 +47,12 @@ class ProductController extends Controller
             ->paginate($limit);
         foreach ($products as $pro) {
             $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->id . ""))[0]->amount ?? 0;
+            $pro->pause_product = DB::table('order_item')
+                    ->join('order', 'order_item.order_id', '=', 'order.id')
+                    ->selectRaw('SUM(order_item.quantity) as total')
+                    ->where('order_item.product_id', $pro->id)
+                    ->where('order_item.warehouse_id', $pro->ware_id)
+                    ->first()->total ?? 0;
         }
         $this->v['products'] = $products;
         $this->v['params'] = $request->all();
@@ -68,7 +74,8 @@ class ProductController extends Controller
                 'products.user_id',
                 'product_warehouses.amount',
                 'product_warehouses.created_at',
-                'product_warehouses.status'
+                'product_warehouses.status',
+                'product_warehouses.id'
             ])
             ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
@@ -89,35 +96,37 @@ class ProductController extends Controller
 
         $warehouses = Warehouses::where('user_id', Auth::id())->first();
         $order = OrderItem::with(['product'])->join('order', 'order_item.order_id', '=', 'order.id')
-            ->select('order.id', 'order.export_status', 'order.no', 'district_id', 'province_id', 'address', 'order.created_at', 'order_item.price', 'order_item.quantity',
-                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore', 'order.total', 'product_id')
+            ->select(
+                'order.no',
+                'order_item.quantity',
+                'order.export_status',
+                'order.created_at',
+                'product_id',
+                'order.id'
+            )
             ->orderBy('order.id', 'desc');
-        if ($request->key_search) {
-            $order = $order->where('order.no', 'like', '%' . $request->key_search . '%');
-        };
-
         $order = $order->where('order.status', '!=', 2)->paginate(10);
-//        foreach ($order as $ord){
-//            $ord->total = $ord->price - ($ord->price /100 );
-//        }
-
-        $count = count($order);
         return response()->json([
             'success' => true,
-            'data' => $order,
-            'count' => $count
+            'data' => $order
         ], 200);
 
     }
 
     public function updateRequest($status, Request $request)
     {
+        if (!DB::table('product_warehouses')->where('id', $request->id)->first()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng',
+            ], 404);
+        }
         DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật đơn gửi hàng thành công',
 
-        ], 200);
+        ], 201);
 
 
     }
@@ -132,7 +141,10 @@ class ProductController extends Controller
 
             $order = Order::find($request->id);
             if (!$order) {
-                return redirect()->back();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng'
+                ], 404);
             }
 
             $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
@@ -147,7 +159,10 @@ class ProductController extends Controller
             $order->save();
             $warehouse = Warehouses::find($order->warehouse_id);
             if (!$warehouse) {
-                return redirect()->back();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy kho hàng'
+                ], 404);
             }
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
@@ -246,14 +261,13 @@ class ProductController extends Controller
                 'success' => true,
                 'message' => 'Cập nhật đơn hàng thành công',
 
-            ], 200);
+            ], 201);
 
 
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Lỗi rồi',
-
+                'message' => $e->getMessage(),
             ], 400);
 
         };
