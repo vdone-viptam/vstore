@@ -101,6 +101,9 @@
                     <thead>
                     <tr>
                         <th>
+                           Mã
+                        </th>
+                        <th>
                             Tên kho hàng
                         </th>
                         <th>
@@ -122,25 +125,28 @@
                     @if(count($products) > 0)
                         @foreach($products as $product)
                             <tr>
+                                <td>{{$product->code}}</td>
                                 <td>{{$product->ware_name}}</td>
                                 <td>
                                     {{$product->name}}
                                 </td>
                                 <td>
-                                    @if($product->status == 1)
+                                    @if($product->status == 1 && $product->type ==1)
                                         <span class="text-green-600">Đã nhập</span>
-                                    @elseif($product->status == 2)
+                                    @elseif($product->status == 1 && $product->type ==2)
                                         <span class="text-green-600">Đã xuất</span>
-                                    @elseif($product->status == 3)
-                                        <span class="text-black"> Chờ duyệt</span>
-                                    @elseif($product->status == 5 )
+                                    @elseif($product->status == 2 &&  $product->type ==2)
+                                        <span class="text-red-500"> Từ chối xuất</span>
+                                    @elseif($product->status == 2 && $product->type ==1)
                                         <span class="text-red-600">Từ chối nhập</span>
-                                    @elseif($product->status == 0 )
+                                    @elseif($product->status == 0 && $product->type ==1)
                                         <span class="text-yellow-400">Chờ nhập</span>
+                                    @elseif($product->status == 0 && $product->type ==2)
+                                        <span class="text-yellow-400">Chờ xuất</span>
                                     @endif
                                 </td>
                                 <td>
-                                    {{$product->amount}}
+                                    {{$product->quantity}}
                                 </td>
                                 <td>
                                     {{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}
