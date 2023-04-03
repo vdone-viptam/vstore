@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\CartItemV2;
-use App\Models\CartV2;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Point;
 use App\Models\Product;
 use App\Models\Vshop;
 use Carbon\Carbon;
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use PHPUnit\Exception;
 
 /**
  * @group Oder
@@ -120,7 +118,7 @@ class OrderController extends Controller
             $order->province_id = $provinceId;
             $order->address = $address;
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
-            if(!$warehouse) {
+            if (!$warehouse) {
                 return response()->json([
                     "status_code" => 400,
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
@@ -204,7 +202,7 @@ class OrderController extends Controller
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
         $orderItem->vshop_id = $product->vshop_id;
-        $orderItem->warehouse_id = $order->warehouse_id;
+        $orderItem->warehouse_id = 1;
         $orderItem->sku = '';
         $orderItem->price = $product->price;
         $orderItem->quantity = $quantity;
@@ -213,11 +211,7 @@ class OrderController extends Controller
         $orderItem->discount_vstore = isset($discount['discountsFromVStore']) ? $discount['discountsFromVStore'] : 0;
         $orderItem->save();
         $product->images = json_decode($product->images);
-        $newImages = [];
-        foreach ($product->images as $index => $image) {
-            array_push($newImages, asset($image));
-        }
-        $product->images = $newImages;
+
         $order->total_vat = $totalVat;
 
         return response()->json([
@@ -415,7 +409,14 @@ class OrderController extends Controller
             if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
             }
-
+            if ($status == 4) {
+                $orders = $orders->where('export_status', 4)
+                    ->whereDate('order.updated_at', '>', Carbon::now()->addDay(-7));
+            }
+            if ($status == 5) {
+                $orders = $orders->where('export_status', 4)
+                    ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(-7));
+            }
             $orders = $orders
                 ->where('status', '!=', 2)
                 ->orderBy('updated_at', 'desc')
@@ -429,14 +430,36 @@ class OrderController extends Controller
                         'discount_vshop',
                         'discount_ncc',
                         'discount_vstore',
-                        'product_id'
+                        'product_id',
+                        'price'
                     )
                     ->get();
+                $product = null;
                 foreach ($order->orderItem as $item) {
                     $product = $item->product()->select('name', 'price', 'images')->first();
                     $item->product_name = $product->name;
                     $item->price = $product->price;
                     $item->image = asset(json_decode($product->images)[0]);
+
+                }
+                $rating = Point::where('customer_id', $id)
+                    ->where('order_item_id', $order->orderItem[0]->order_item_id)
+                    ->join('products', 'points.product_id', '=', 'products.id')
+                    ->select('points.id', 'products.name as product_name', 'products.images as image', 'point_evaluation', 'descriptions', 'points.images')
+                    ->first();
+                if ($rating) {
+                    $order->rating = $rating;
+                    $order->rating->image = $rating->image ? asset(json_decode($rating->image)[0]) : '';
+                    $order->rating->content_image = $rating->images ? json_decode($rating->images)[0] : '';
+                    $order->rating->total = $product->price - ($product->price * ($order->orderItem[0]->discount_ncc +
+                                $order->orderItem[0]->discount_vstore
+                                + $order->orderItem[0]->discount_vshop) / 100);
+                    $order->rating->quantity = $order->orderItem[0]->quantity;
+                    $order->rating->product_price = $product->price;
+                    unset($rating->images);
+                } else {
+                    $order->rating = null;
+
                 }
 
                 $order->total_product = count($order->orderItem);
@@ -598,7 +621,8 @@ class OrderController extends Controller
      * @bodyParam order_id descriptions order
      * @return \Illuminate\Http\JsonResponse
      */
-    public function refuseOrderByCustomer(Request $request){
+    public function refuseOrderByCustomer(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'order_id' => 'required',
@@ -623,7 +647,7 @@ class OrderController extends Controller
                 'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
             ]);
 
-            $refuseStatus = 5 ;
+            $refuseStatus = 5;
             $order->export_status = $refuseStatus;
             $order->note = $request->descriptions;
             $order->save();
