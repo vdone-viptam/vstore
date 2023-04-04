@@ -13,6 +13,7 @@ use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class WarehouseController extends Controller
 {
@@ -195,6 +196,104 @@ class WarehouseController extends Controller
             'data' => $orders
         ], 200);
     }
+
+    public function createRequestDestroy(Request $request)
+    {
+        $products = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
+            ->select('products.id', 'products.name', DB::raw('(amount - export) as in_stock',), 'warehouses.id as ware_id')
+            ->where('warehouses.user_id', Auth::id())
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ]);
+    }
+
+    public function storeRequestDestroy(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'warehouse_id' => 'required'
+        ], [
+            'product_id.required' => 'Mã sản phẩm là bắt buộc',
+            'quantity.required' => 'Số lượng sản phẩm hủy bắt buộc nhập',
+            'warehouse_id.required' => 'ID kho hàng là bắt buộc'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 400);
+        }
+        DB::beginTransaction();
+        try {
+            $requestDe = new RequestWarehouse();
+
+            $requestDe->ncc_id = 0;
+            $requestDe->product_id = $request->product_id;
+            $requestDe->status = 1;
+            $requestDe->type = 3;
+            $requestDe->ware_id = $request->warehouse_id;
+            $requestDe->quantity = $request->quantity;
+            $requestDe->order_number = '';
+            $code = 'YCXH' . rand(100000000, 999999999);
+
+            while (true) {
+                $re = RequestWarehouse::where('code', $code)->count();
+                if ($re == 0) {
+                    break;
+                }
+                $code = 'YCX' . rand(100000000, 999999999);
+            }
+            $requestDe->code = $code;
+            $requestDe->note = $request->note;
+            $requestDe->save();
+
+            $productWare = ProductWarehouses::where('ware_id', $request->warehouse_id)->where('product_id', $request->product_id)->first();
+            if (!$productWare) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy sản phẩm'
+                ], 404);
+            }
+            $pause_product = (int)DB::table('request_warehouses')
+                    ->selectRaw('SUM(quantity) as total')
+                    ->where('request_warehouses.product_id', $request->product_id)
+                    ->where('request_warehouses.ware_id', $request->warehouse_id)
+                    ->where('type', 2)
+                    ->first()->total ?? 0;
+            if ($productWare->amount - $request->export - $request->quantity - $pause_product < 0) {
+                DB::rollBack();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' .$productWare->amount -  $productWare->export - $pause_product
+                ], 400);
+            } else {
+                $productWare->export = $productWare->export + $request->quantity;
+
+                $productWare->save();
+                DB::commit();
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Hủy sản phẩm thành công'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+
+    }
+
 
     public function detailDestroyOrder(Request $request)
     {
