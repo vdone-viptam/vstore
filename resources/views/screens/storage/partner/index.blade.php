@@ -88,7 +88,7 @@
                             </defs>
                         </svg>
 
-                        Danh sách đối tác
+                        Danh sách Nhà cung cấp
                     </h2>
 
 
