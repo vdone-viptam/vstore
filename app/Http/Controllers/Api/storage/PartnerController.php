@@ -39,7 +39,7 @@ class PartnerController extends Controller
             $ncc = User::query()
                 ->select('users.name', 'account_code','province.province_name',
                         DB::raw('count(*) as count_product'),
-                        DB::raw('sum(product_warehouses.amount) as amount_product')
+                        DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
                     )
                 ->join('province', 'users.provinceId', '=', 'province.province_id')
                 ->join('products', 'users.id', '=', 'products.user_id')
