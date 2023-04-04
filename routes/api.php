@@ -62,7 +62,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
 
-        Route::get('search/{key_word}', [\App\Http\Controllers\Api\ProductController::class, 'searchProductByKeyWord']);
+        Route::get('search', [\App\Http\Controllers\Api\ProductController::class, 'searchProductByKeyWord']);
         Route::get('/product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);
         Route::get('/product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
         Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
