@@ -215,7 +215,7 @@ class ProductController extends Controller
             ], 400);
         }
 
-        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->first();
+        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->orWhere('status', 5)->first();
         if (!$requestIm) {
             return response()->json([
                 'success' => false,
