@@ -70,13 +70,12 @@ class OrderController extends Controller
             )
             ->first();
 
-        $product->quantity = $quantity;
-
         if (!$product) {
             return response()->json([
                 'status_code' => 404
             ], 404);
         }
+        $product->quantity = $quantity;
         $discount = getDiscountProduct($productId, $vshopId);
         $product->discount = $discount;
 
@@ -413,7 +412,7 @@ class OrderController extends Controller
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
-            if ($status !== 10) {
+            if ($status !== 10 ) {
                 $orders = $orders->where('export_status', $status);
             }
 
