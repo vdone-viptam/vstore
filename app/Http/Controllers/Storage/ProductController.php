@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Province;
+use App\Models\User;
 use App\Models\Warehouses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,7 +39,6 @@ class ProductController extends Controller
             ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id');
 
 
-
         if ($request->key_search) {
 
             $products = $products->where($request->condition, 'like', '%' . $request->key_search . '%');
@@ -56,28 +56,27 @@ class ProductController extends Controller
 
     public function request(Request $request)
     {
-//        return 1;
         $limit = $request->limit ?? 10;
-//        $this->v['requests'] = Product::select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
-//            ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
-//            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
-        $this->v['requests']= Warehouses::join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
-            ->join("products", 'product_warehouses.product_id', '=', 'product_warehouses.id')
-            ->select('category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
-//
-        ;
+        $this->v['requests'] =
+//            User::join('products','users.id','=','products.user_id')
 
-
-
+            Product::select('products.category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
+                ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
+                ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
         if ($request->key_search) {
-            $this->v['requests'] = $this->v['requests']->Where($request->condition, 'like', '%' . $request->key_search . '%');
 
-//                ->where('product_warehouses.id', 'like', '%' . str_replace('YC', '', $request->key_search) . '%')
-//                ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
+            if ($request->condition == 'users.name') {
+                $user = User::select('id')->where($request->condition, 'like', '%' . $request->key_search . '%')->first();
+                $this->v['requests'] = $this->v['requests']->Where('products.user_id', '=',$user->id ?? 0);
+            } else {
+                $this->v['requests'] = $this->v['requests']->Where($request->condition, 'like', '%' . $request->key_search . '%');
+            }
+
+
         }
         $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status', [0, 1, 5])->where('warehouses.user_id', Auth::id())->paginate($limit);
-        return $this->v;
         $this->v['params'] = $request->all();
+
         return view('screens.storage.product.request', $this->v);
 
     }
@@ -208,7 +207,7 @@ class ProductController extends Controller
                     "ORDER_NUMBER" => '',
                     "SENDER_FULLNAME" => $warehouse->name,
                     "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
-                    "SENDER_PHONE" => $warehouse->phone_nameber,
+                    "SENDER_PHONE" => $warehouse->phone_number,
                     "RECEIVER_FULLNAME" => $order->fullname,
                     "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
                     "RECEIVER_PHONE" => $order->phone,

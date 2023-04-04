@@ -93,6 +93,7 @@ class ProductController extends Controller
             $products = $products->paginate($limit);
 
             foreach ($products as $pro) {
+                $pro->image = asset(json_decode($pro->images)[0]);
                 $pro->images = asset(json_decode($pro->images)[0]);
                 $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
                     ->whereIn('type', [1, 2])

@@ -220,7 +220,7 @@ class ProductController extends Controller
                     "ORDER_NUMBER" => '',
                     "SENDER_FULLNAME" => $warehouse->name,
                     "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
-                    "SENDER_PHONE" => $warehouse->phone_nameber,
+                    "SENDER_PHONE" => $warehouse->phone_number,
                     "RECEIVER_FULLNAME" => $order->fullname,
                     "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
                     "RECEIVER_PHONE" => $order->phone,
