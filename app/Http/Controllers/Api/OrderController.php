@@ -396,7 +396,7 @@ class OrderController extends Controller
      *
      * @param id $id id user
      *
-     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 hoàn thành
+     * @urlParam status trạng thái đơn hàng 0 trạng thái chờ xác nhận,1 chờ giao hàng ,2 đang giao hàng , 4 đã giao hàng,5 đã hoàn thành
      * @return \Illuminate\Http\JsonResponse
      */
     public function getOrdersByUser(Request $request, $id)
