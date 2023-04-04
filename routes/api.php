@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/els', [\App\Http\Controllers\Api\ElasticsearchController::class, 'index']);
+
 //Route::post('callback-viettel-post', function (Request $req) {
 //
 //    return $req->all();

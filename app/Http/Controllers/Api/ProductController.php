@@ -32,6 +32,16 @@ use PHPUnit\Exception;
  */
 class ProductController extends Controller
 {
+
+    public function indexProduct(Request $request)  {
+
+        $elasticsearchController = new ElasticsearchController();
+//        $res = $elasticsearchController->createDocProduct(1, "Sản phẩm", "Mô tả", "Danh mục", "JSNXCLKJ3");
+        $res = $elasticsearchController->searchDocProduct("Mô");
+
+        dd($res);
+    }
+
     /**
      * Danh sách sản phẩm
      *

@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/els', [\App\Http\Controllers\Api\ProductController::class, 'indexProduct']);
+
 Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
 Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
 Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getWards']);
-Route::get('/getWarehouse', function () {
-    calculateShippingByProductID(1, 1, 1);
-});
 // THANH TOÁN APP
 Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
