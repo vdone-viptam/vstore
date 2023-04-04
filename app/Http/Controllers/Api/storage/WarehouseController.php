@@ -153,8 +153,8 @@ class WarehouseController extends Controller
         $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
-            ->where('order.export_status', 10)
-            ->where('order.status', 2)
+            ->where('order.export_status', 3)
+            ->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $ware->id)
             ->paginate($limit);
 
