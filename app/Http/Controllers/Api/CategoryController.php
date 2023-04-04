@@ -131,6 +131,7 @@ class CategoryController extends Controller
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
                 $data_vstore[] = $pr->vstore_id;
+                return $data_vstore;
                 unset($pr->vstore_id);
                 if ($request->pdone_id) {
                     $pr->is_affiliate = DB::table('vshop_products')
@@ -252,7 +253,6 @@ class CategoryController extends Controller
             $users = Product::select('avatar', 'users.name', 'users.id')
                 ->join('users', 'products.vstore_id', '=', 'users.id')
                 ->where('category_id', $category_id)
-                ->where('products.availability_status',1)
                 ->groupBy(['avatar', 'users.name', 'users.id'])
                 ->get();
             foreach ($users as $user) {
