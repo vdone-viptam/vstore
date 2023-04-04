@@ -216,11 +216,14 @@ class WarehouseController extends Controller
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'quantity' => 'required',
-            'warehouse_id' => 'required'
+            'warehouse_id' => 'required',
+            'note' => 'required|max:255'
         ], [
             'product_id.required' => 'Mã sản phẩm là bắt buộc',
             'quantity.required' => 'Số lượng sản phẩm hủy bắt buộc nhập',
-            'warehouse_id.required' => 'ID kho hàng là bắt buộc'
+            'warehouse_id.required' => 'ID kho hàng là bắt buộc',
+            'note.required' => 'Lý do hủy hàng bắt buộc nhập',
+            'note.max' => 'Lý do ít hơn 255 ký tự '
         ]);
 
         if ($validator->fails()) {
@@ -270,7 +273,7 @@ class WarehouseController extends Controller
                 DB::rollBack();
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' .$productWare->amount -  $productWare->export - $pause_product
+                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' . $productWare->amount - $productWare->export - $pause_product
                 ], 400);
             } else {
                 $productWare->export = $productWare->export + $request->quantity;
