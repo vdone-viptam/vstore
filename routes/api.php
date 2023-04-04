@@ -199,12 +199,12 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             });
             Route::prefix('products')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\ProductController::class, 'index']);
+                Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailProduct']);
                 Route::get('/request', [\App\Http\Controllers\Api\storage\ProductController::class, 'request']);
                 Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
 
                 Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
                 Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
-                Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detail']);
                 Route::get('info/{sku}', [\App\Http\Controllers\Api\storage\ProductController::class, 'getProductAndOrderBySKU']);
                 Route::get('bill/{order_id}', [\App\Http\Controllers\Api\storage\ProductController::class, 'sendBill']);
             });
