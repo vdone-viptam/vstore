@@ -570,11 +570,17 @@
             });
         }
 
-        document.querySelector('#price').addEventListener("keyup", (e) => {
+        document.querySelector('#price').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
             if (e.target.value) {
-                    e.target.value = e.target.value.replaceAll(/[a-zA-Z]+/g, '')
-                    document.getElementsByName('price')[0].value = Number(e.target.value.replaceAll('.', ''));
-                    document.querySelector('#price').value = format1(Number(e.target.value.replaceAll('.', '')), '');
+                e.target.value = e.target.value.replaceAll(/[a-zA-Z]+/g, '')
+                document.getElementsByName('price')[0].value = Number(e.target.value.replaceAll('.', '').replaceAll('đ', ''));
+                document.querySelector('#price').value = format1(Number(e.target.value.replaceAll('.', '').replaceAll('đ', '')), '');
             }
         });
 
