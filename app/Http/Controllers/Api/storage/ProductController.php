@@ -215,12 +215,18 @@ class ProductController extends Controller
             ], 400);
         }
 
-        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->orWhere('status', 5)->first();
-        if (!$requestIm) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Không tìm thấy yêu cầu',
-            ], 404);
+        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0);
+        if (!$requestIm->first()) {
+            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 5)->first();
+            if (!$requestIm) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy yêu cầu',
+                ], 404);
+            }
+
+        } else {
+            $requestIm = $requestIm->first();
         }
         if ($status == 1) {
             if ($requestIm->type == 1) {
