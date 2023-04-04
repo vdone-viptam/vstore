@@ -148,6 +148,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('vstore')->group(function () {
         //list nhà phân phối
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
+        Route::get('search', [\App\Http\Controllers\Api\VstoreController::class, 'searchVstoreByKeyword']);
+
         Route::get('/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 

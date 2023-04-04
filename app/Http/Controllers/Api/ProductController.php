@@ -196,10 +196,29 @@ class ProductController extends Controller
     public
     function searchProductByKeyWord(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
         $limit = $request->limit ?? 12;
         $elasticsearchController = new ElasticsearchController();
         $res = $elasticsearchController->searchDocProduct($request->key_word);
-
+        if (isset($res[0]) && $res[0] == 'BAD_REQUEST') {
+            return response()->json([
+                'status_code' => 400,
+                'error' => 'Yêu cầu không hợp lệ'
+            ], 400);
+        }
         $products = Product::where('vstore_id', '!=', null)->where('status', 2)->where('publish_id', '!=', null)
             ->where('availability_status', 1)->whereIn('id', $res);
         $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay'];
