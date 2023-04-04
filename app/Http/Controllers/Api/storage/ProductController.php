@@ -383,6 +383,8 @@ class ProductController extends Controller
                 $request->save();
             }
             if ($status == 3 && $order->order_number !== '') {
+                $order->note = $request->note;
+                $order->save();
                 $huy_don = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
