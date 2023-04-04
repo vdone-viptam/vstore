@@ -206,6 +206,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/', [\App\Http\Controllers\Api\storage\ProductController::class, 'index']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailProduct']);
                 Route::get('/request', [\App\Http\Controllers\Api\storage\ProductController::class, 'request']);
+                Route::get('/detail-request', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequest']);
+
                 Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
 
                 Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
