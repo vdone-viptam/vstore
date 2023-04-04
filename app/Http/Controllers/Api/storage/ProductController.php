@@ -238,6 +238,7 @@ class ProductController extends Controller
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
             $product = Product::where('id', $order_item->product_id)->first();
+            DB::table('request_warehouses')->where('code', $order->no)->where('type', 10)->delete();
 
             if ($status == 1) {
 //            return $order->total;
@@ -314,7 +315,6 @@ class ProductController extends Controller
 
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
-                DB::table('request_warehouses')->where('code', $order->no)->where('type', 10)->delete();
                 $request = new RequestWarehouse();
 
                 $request->ncc_id = 0;
@@ -338,7 +338,6 @@ class ProductController extends Controller
                 $request->save();
             }
             if ($status == 3 && $order->order_number !== '') {
-                DB::table('request_warehouses')->where('code', $order->no)->where('type', 10)->delete();
                 $huy_don = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
