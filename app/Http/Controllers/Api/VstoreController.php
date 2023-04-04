@@ -18,7 +18,6 @@ class VstoreController extends Controller
 {
 
 
-
     //
     /**
      * Danh sách nhà vstore
@@ -49,10 +48,10 @@ class VstoreController extends Controller
             ], 403);
         }
         $limit = $request->limit ?? 10;
-        if ($request->branch==2 ) {
+        if ($request->branch == 2) {
             $user = User::where('role_id', 3)->where('account_code', '!=', null)
                 ->where('branch', $request->branch)
-                ->where('status','!=',0)
+                ->where('status', '!=', 0)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
             if ($request->account_code) {
                 $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
@@ -65,13 +64,10 @@ class VstoreController extends Controller
             }
 
 
+        } elseif ($request->branch == 1) {
 
-        } elseif ($request->branch==1) {
-
-            $user = User::where('role_id', 3)->where('account_code', '!=', null) ->where('status','!=',0)->where('branch','!=',2)
-                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch')
-
-            ;
+            $user = User::where('role_id', 3)->where('account_code', '!=', null)->where('status', '!=', 0)->where('branch', '!=', 2)
+                ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
             if ($request->account_code) {
                 $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
             }
@@ -82,11 +78,10 @@ class VstoreController extends Controller
                 $user = $user->where('company_name', 'like', '%' . $request->company_name . '%');
             }
 
-        }
-        else{
+        } else {
             $user = User::where('role_id', 3)->where('account_code', '!=', null)
 //                ->where('branch', 2)
-                ->where('status','!=',0)
+                ->where('status', '!=', 0)
                 ->select('id', 'name', 'company_name', 'phone_number', 'tax_code', 'address', 'account_code', 'avatar', 'branch');
             if ($request->account_code) {
                 $user = $user->where('account_code', 'like', '%' . $request->account_code . '%');
@@ -103,10 +98,10 @@ class VstoreController extends Controller
         $user = $user->paginate($limit);
         if ($user) {
             foreach ($user as $value) {
-                if ($value->avatar==null){
-                    $value->avatar= asset('home/img/logo-06.png');
-                }else
-                    $value->avatar = asset('image/users/'.$value->avatar);
+                if ($value->avatar == null) {
+                    $value->avatar = asset('home/img/logo-06.png');
+                } else
+                    $value->avatar = asset('image/users/' . $value->avatar);
 
             }
 
@@ -137,14 +132,14 @@ class VstoreController extends Controller
         $limit = $request->limit ?? 10;
         $vstores = User::join('products', 'users.id', '=', 'products.vstore_id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->where('products.availability_status',1)
+            ->where('products.availability_status', 1)
             ->where('categories.id', $id)
             ->select('users.id', 'users.name', 'users.avatar')
             ->paginate($limit);
         foreach ($vstores as $value) {
-            if ($value->avatar !=''){
+            if ($value->avatar != '') {
                 $value->avatar = asset('image/users/' . $value->avatar);
-            }else{
+            } else {
                 $value->avatar = asset('home/img/logo-06.png');
             }
 
@@ -168,16 +163,15 @@ class VstoreController extends Controller
     {
 
         try {
-            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number','avatar')->where('role_id', 3)->where('id', $id)->first();
-            if ($user->avatar == null){
-                $user->avatar= asset('home/img/logo-06.png');
-            }else{
-                $user->avatar= asset('image/users/'.$user->avatar);
+            $user = User::select('name', 'id', 'account_code', 'description', 'phone_number', 'avatar')->where('role_id', 3)->where('id', $id)->first();
+            if ($user->avatar == null) {
+                $user->avatar = asset('home/img/logo-06.png');
+            } else {
+                $user->avatar = asset('image/users/' . $user->avatar);
             }
 //            $user->total_product = $user->products()->where('status', 2)->count();
-            $user->total_product =Product::where('vstore_id',$user->id)
-                ->where('status', 2)->count()
-            ;
+            $user->total_product = Product::where('vstore_id', $user->id)
+                ->where('status', 2)->count();
 
             $cate = Category::select('categories.name')
                 ->join('products', 'categories.id', '=', 'products.category_id')
@@ -215,5 +209,54 @@ class VstoreController extends Controller
                 'message' => $e->getMessage()
             ], 400);
         }
+    }
+
+    /**
+     * Danh sách V-Store có tên chứa từ khóa tìm kiếm
+     *
+     * API này sẽ trả về danh sách vstore
+     *
+     * @urlParam  key_word id user
+     * @return JsonResponse
+     */
+
+    public function searchVstoreByKeyword(Request $request)
+    {
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocVStore($request->key_word);
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+        $user = User::where('role_id', 3)->where('account_code', '!=', null)
+            ->whereIn('id', $res)
+            ->where('status', '!=', 0)
+            ->select('id', 'name', 'avatar');
+
+        $user = $user->paginate($limit);
+        if ($user) {
+            foreach ($user as $value) {
+                if ($value->avatar == null) {
+                    $value->avatar = asset('home/img/logo-06.png');
+                } else
+                    $value->avatar = asset('image/users/' . $value->avatar);
+
+            }
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $user,
+        ]);
     }
 }

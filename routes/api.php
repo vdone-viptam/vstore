@@ -62,7 +62,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('products')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProductController::class, 'index']);
 
-        Route::get('search/{key_word}', [\App\Http\Controllers\Api\ProductController::class, 'searchProductByKeyWord']);
+        Route::get('search', [\App\Http\Controllers\Api\ProductController::class, 'searchProductByKeyWord']);
         Route::get('/product-by-category/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByCategory']);
         Route::get('/product-by-vstore/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByVstore']);
         Route::get('/product-by-ncc/{id}', [\App\Http\Controllers\Api\ProductController::class, 'productByNcc']);
@@ -153,6 +153,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::prefix('vstore')->group(function () {
         //list nhà phân phối
         Route::get('', [\App\Http\Controllers\Api\VstoreController::class, 'index']);
+        Route::get('search', [\App\Http\Controllers\Api\VstoreController::class, 'searchVstoreByKeyword']);
+
         Route::get('/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'detail']);
         Route::get('/category/{id}', [\App\Http\Controllers\Api\VstoreController::class, 'listByCategory']);
 
@@ -202,12 +204,16 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             });
             Route::prefix('products')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\ProductController::class, 'index']);
+                Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailProduct']);
                 Route::get('/request', [\App\Http\Controllers\Api\storage\ProductController::class, 'request']);
+                Route::get('/detail-request', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequest']);
+
                 Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
 
                 Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
+                Route::get('/detail-request-out', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequestOut']);
+
                 Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
-                Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detail']);
                 Route::get('info/{sku}', [\App\Http\Controllers\Api\storage\ProductController::class, 'getProductAndOrderBySKU']);
                 Route::get('bill/{order_id}', [\App\Http\Controllers\Api\storage\ProductController::class, 'sendBill']);
             });
@@ -219,6 +225,14 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::put('/change-password', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangePassword']);
                 Route::get('/edit-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'editTaxCode']);
                 Route::put('/save-tax-code', [\App\Http\Controllers\Api\storage\AccountController::class, 'saveChangeTaxCode']);
+            });
+            Route::prefix('warehouses')->group(function () {
+                Route::get('/import', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'importProduct']);
+                Route::get('/export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportProduct']);
+                Route::put('/confirm-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'confirmExportProduct']);
+
+                Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
+                Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
             });
             Route::prefix('finances')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\FinanceController::class, 'index']);

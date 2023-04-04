@@ -9,6 +9,7 @@ use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
 use Illuminate\Http\Request;
 use Elastic\Elasticsearch\ClientBuilder;
+
 class ElasticsearchController extends Controller
 {
 
@@ -27,7 +28,8 @@ class ElasticsearchController extends Controller
      * @throws ClientResponseException
      * @throws MissingParameterException
      */
-    public function createDocProduct($id, $name, $description, $nameCategory, $productCode) {
+    public function createDocProduct($id, $name, $description, $nameCategory, $productCode)
+    {
         $params = [
             'index' => config('elasticsearch.vstore_products'),
             'id' => $id,
@@ -63,13 +65,150 @@ class ElasticsearchController extends Controller
                 ]
             ],
         ];
-        $response = $this->client->search($params);
+        try {
+            $response = $this->client->search($params);
+        } catch (ClientResponseException $e) {
+            if ($e->getCode() == 400) {
+                return ['BAD_REQUEST'];
+            }
+        }
         $hits = $response['hits']['hits'];
         $arrIdProduct = [];
         foreach ($hits as $hit) {
             array_push($arrIdProduct, $hit['_id']);
         }
         return $arrIdProduct;
+    }
+
+    /**
+     * @throws ServerResponseException
+     * @throws ClientResponseException
+     * @throws MissingParameterException
+     */
+    public function createDocVStore($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.vstore_products'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->index($params);
+    }
+
+    public function updateDocVStore($id, $name)
+    {
+        $params = [
+            'index' => 'vstore',
+            'id' => $id,
+            'body' => [
+                'doc' => [
+                    'name' => $name
+                ]
+            ]
+        ];
+
+        $response = $this->client->update($params);
+
+        return $response;
+    }
+
+
+    public function searchDocVStore($keyword, $from = 0, $size = 10): array
+    {
+        $params = [
+            "index" => config('elasticsearch.vstore_products'),
+            "body" => [
+                "from" => $from,
+                "size" => $size,
+                "fields" => ["id"],
+                "query" => [
+                    "multi_match" => [
+                        "query" => $keyword,
+                        "fields" => [
+                            "name"
+                        ],
+                    ],
+                ]
+            ],
+        ];
+        try {
+            $response = $this->client->search($params);
+        } catch (ClientResponseException $e) {
+            if ($e->getCode() == 400) {
+                return ['BAD_REQUEST'];
+            }
+        }
+        $hits = $response['hits']['hits'];
+        $arrIdVStore = [];
+        foreach ($hits as $hit) {
+            array_push($arrIdVStore, $hit['_id']);
+        }
+        return $arrIdVStore;
+    }
+
+    public function createDocNCC($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.supplier'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->index($params);
+    }
+
+    public function updateDocNCC($id, $name)
+    {
+        $params = [
+            'index' => 'supplier',
+            'id' => $id,
+            'body' => [
+                'doc' => [
+                    'name' => $name
+                ]
+            ]
+        ];
+
+        $response = $this->client->update($params);
+
+        return $response;
+    }
+
+
+    public function searchDocNCC($keyword, $from = 0, $size = 10): array
+    {
+        $params = [
+            "index" => config('elasticsearch.supplier'),
+            "body" => [
+                "from" => $from,
+                "size" => $size,
+                "fields" => ["id"],
+                "query" => [
+                    "multi_match" => [
+                        "query" => $keyword,
+                        "fields" => [
+                            "name"
+                        ],
+                    ],
+                ]
+            ],
+        ];
+        try {
+            $response = $this->client->search($params);
+        } catch (ClientResponseException $e) {
+            if ($e->getCode() == 400) {
+                return ['BAD_REQUEST'];
+            }
+        }
+        $hits = $response['hits']['hits'];
+        $arrIdVStore = [];
+        foreach ($hits as $hit) {
+            array_push($arrIdVStore, $hit['_id']);
+        }
+        return $arrIdVStore;
     }
 
 }
