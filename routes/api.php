@@ -211,6 +211,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
 
                 Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
+                Route::get('/detail-request-out', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequestOut']);
+
                 Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
                 Route::get('info/{sku}', [\App\Http\Controllers\Api\storage\ProductController::class, 'getProductAndOrderBySKU']);
                 Route::get('bill/{order_id}', [\App\Http\Controllers\Api\storage\ProductController::class, 'sendBill']);
