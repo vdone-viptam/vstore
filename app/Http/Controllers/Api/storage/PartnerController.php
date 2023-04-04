@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderItem;
 use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class PartnerController extends Controller
      *
      * @param Request $request
      * @bodyParam search : tìm kiếm qua mã, tên ncc
+     * @bodyParam limit tổng số review / 1 trang
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -54,6 +56,54 @@ class PartnerController extends Controller
             $ncc= $ncc->groupBy(['users.name', 'account_code'])
                 ->paginate($limit);
 
+            return response()->json(['success' => true, 'data' => $ncc]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
+     * danh sách đối tác giao hàng
+     *
+     * API này sẽ trả về danh sách đối tác giao hàng
+     *
+     * @param Request $request
+     * @bodyParam limit tổng số review / 1 trang
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deliveryPartner(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                // 'search' => 'max:200',
+                'limit' => 'numeric|min:1',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'messageError' => $validator->errors(),
+                ], 401);
+            }
+            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+            // $search = $request->search;
+            $limit = $request->limit ?? 10;
+            $ncc = OrderItem::query()
+                ->select('products.name','products.id as product_id',
+                        DB::raw('count(*) as count_product'),
+                    )
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                // sau này còn phải join đên delivery_partner để lấy các mã ncc khác viettel post !
+                ->join('order', 'order.id', '=', 'order_item.order_id')
+                ->where('order_item.warehouse_id', $id)
+                ->where('order.export_status', 4);
+            $ncc= $ncc->groupBy(['products.name'])
+                ->paginate($limit);
+            foreach ($ncc as $item)
+            {
+                $item->name_partner = "Viettel Post";
+                $item->code_partner = "codevt";
+            }
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([
