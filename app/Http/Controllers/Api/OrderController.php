@@ -406,7 +406,7 @@ class OrderController extends Controller
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
-            if ($status !== 10 ) {
+            if ($status !== 10) {
                 $orders = $orders->where('export_status', $status);
             }
             if ($status == 4) {
@@ -451,7 +451,7 @@ class OrderController extends Controller
                 if ($rating) {
                     $order->rating = $rating;
                     $order->rating->image = $product->images ? asset(json_decode($product->images)[0]) : '';
-                    $order->rating->content_image = $rating->images ? json_decode($rating->images) : '';
+                    $order->rating->content_image = $rating->images ;
                     $order->rating->total = $product->price - ($product->price * ($order->orderItem[0]->discount_ncc +
                                 $order->orderItem[0]->discount_vstore
                                 + $order->orderItem[0]->discount_vshop) / 100);
