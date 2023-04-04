@@ -52,8 +52,8 @@ class AccountController extends Controller
             'district_id'=>'required',
             'ward_id'=>'required',
         ], [
-            'name.required' => 'Tên v-store bắt buộc nhập',
-            'name.max' => 'Tên v-store tối đa 30 ký tự',
+            'name.required' => 'Tên bắt buộc nhập',
+            'name.max' => 'Tên  tối đa 30 ký tự',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
             'company_name.max' => 'Tên công ty tối đa 100 ký tự',
             'address.required' => 'Địa chỉ bắt buộc nhập',
