@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Point;
 use App\Models\Product;
+use App\Models\ProductWarehouses;
 use App\Models\Vshop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -652,6 +653,7 @@ class OrderController extends Controller
             $refuseStatus = 5;
             $order->export_status = $refuseStatus;
             $order->note = $request->descriptions;
+            $order->cancel_status = 1;
             $order->save();
 
             $huy_don = Http::withHeaders(
@@ -664,6 +666,109 @@ class OrderController extends Controller
                 'ORDER_NUMBER' => $order->order_number,
                 'NOTE' => "Hủy đơn do khách hàng",
             ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
+     * chi tiết Đơn hàng hủy
+     *
+     * API dùng khi hiện chi tiết Đơn hàng hủy
+     *
+     * @param Request $request
+     * @bodyParam order_id id order
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function detailOrderCancel(Request $request)
+    {
+        // return $request->all();
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:order,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        try {
+            $data = Order::query()
+                ->with(['orderItem:id,order_id,product_id,quantity','orderItem.product:id,name,publish_id'])
+                ->where('id',$request->order_id)
+                ->where('export_status',5)
+                ->select('order.no','order.id','order.note')
+                ->first();
+            if(!($data)){
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Không tìm thấy đơn hàng huỷ bởi khách hàng !'
+                ], 500);
+            }else{
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ], 200);
+            }
+
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
+     * cập nhật lại số lượng kho khi Đơn hàng hủy bởi khách hàng
+     *
+     * API dùng cập nhật lại số lượng kho khi Đơn hàng hủy bởi khách hàng
+     *
+     * @param Request $request
+     * @bodyParam order_id id order
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateAmountWarehouse(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:order,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        try {
+
+            $data = Order::query()
+                ->where('id',$request->order_id)
+                ->where('export_status',5)
+                ->where('cancel_status',1)
+                ->first();
+            if(!($data)){
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Không tìm thấy đơn hàng huỷ bởi khách hàng !'
+                ], 500);
+            }else{
+                $data->cancel_status  = 2;
+                $data->save();
+
+                $warehouse_id = $data->warehouse_id;
+                $orderItem = OrderItem::where('order_id',$request->order_id)->first();
+                $product_id = $orderItem->product_id;
+                $count = $orderItem->quantity;
+                $updateCountProduct = ProductWarehouses::where('ware_id',$warehouse_id)->where('product_id', $product_id)
+                    ->increment('amount', $count);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Cập nhật thành công',
+                ], 200);
+            }
+
 
         } catch (\Exception $e) {
             return response()->json([

@@ -39,7 +39,7 @@ class PartnerController extends Controller
             $search = $request->search;
             $limit = $request->limit ?? 10;
             $ncc = User::query()
-                ->select('users.name', 'account_code','province.province_name',
+                ->select('users.name', 'account_code','province.province_name','users.id as user_id',
                         DB::raw('count(*) as count_product'),
                         DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
                     )
@@ -64,6 +64,48 @@ class PartnerController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * chi tiết Nhà cung cấp
+     *
+     * API này sẽ trả về chi tiết Nhà cung cấp
+     *
+     * @param Request $request
+     * @bodyParam user_id : user id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function detailNcc(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'user_id' => 'required|exists:users,id'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'messageError' => $validator->errors(),
+                ], 401);
+            }
+            $ncc = User::query()
+                ->select('users.name', 'account_code','province.province_name','users.id as user_id',
+                        DB::raw('count(*) as count_product'),
+                        DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
+                    )
+                ->join('province', 'users.provinceId', '=', 'province.province_id')
+                ->join('products', 'users.id', '=', 'products.user_id')
+                ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+                ->where('user_id', $request->user_id);
+            $ncc= $ncc->groupBy(['users.name', 'account_code','user_id'])->get();
+
+            return response()->json(['success' => true, 'data' => $ncc]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     /**
      * danh sách đối tác giao hàng
      *
@@ -103,8 +145,56 @@ class PartnerController extends Controller
             {
                 $item->name_partner = "Viettel Post";
                 $item->code_partner = "codevt";
+                $item->partner_id = 1;
             }
             return response()->json(['success' => true, 'data' => $ncc]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * chi tiết đối tác giao hàng
+     *
+     * API này sẽ trả về chi tiết đối tác giao hàng
+     *
+     * @param Request $request
+     * @bodyParam user_id : user id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function detailDeliveryPartner(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'user_id' => 'required|exists:users,id',
+                'partner_id' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'messageError' => $validator->errors(),
+                ], 401);
+            }
+
+            $data = OrderItem::query()
+                ->select('products.name','products.id as product_id',
+                        DB::raw('count(*) as count_product'),
+                    )
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                // sau này còn phải join đên delivery_partner để lấy các mã ncc khác viettel post !
+                ->join('order', 'order.id', '=', 'order_item.order_id')
+                // ->where('order_item.warehouse_id', $id)
+                ->where('order.export_status', 4);
+            $data= $data->groupBy(['products.name'])->get();
+            foreach ($data as $item)
+            {
+                $item->name_partner = "Viettel Post";
+                $item->code_partner = "codevt";
+                $item->partner_id = 1;
+            }
+            return response()->json(['success' => true, 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
