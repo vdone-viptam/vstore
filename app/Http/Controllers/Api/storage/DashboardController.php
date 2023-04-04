@@ -54,7 +54,7 @@ class DashboardController extends Controller
                                                             AND type = 2 AND ware_id = $warehouses->id
                                                             AND product_id = product_warehouses.product_id) as 'total'
         FROM product_warehouses
-        WHERE ware_id = $warehouses->id HAVING total <= 2000
+        WHERE ware_id = $warehouses->id HAVING total <= 10
         "))) ?? 0;
         return response()->json([
             'success' => true,
