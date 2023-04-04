@@ -235,6 +235,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             });
             Route::prefix('partners')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\PartnerController::class, 'index']);
+                Route::get('/delivery-partner', [\App\Http\Controllers\Api\storage\PartnerController::class, 'deliveryPartner']);
             });
         });
 
