@@ -451,7 +451,7 @@ class OrderController extends Controller
                 if ($rating) {
                     $order->rating = $rating;
                     $order->rating->image = $product->images ? asset(json_decode($product->images)[0]) : '';
-                    $order->rating->content_image = $rating->images ? json_decode($rating->images) : '';
+                    $order->rating->content_image = $rating->images ;
                     $order->rating->total = $product->price - ($product->price * ($order->orderItem[0]->discount_ncc +
                                 $order->orderItem[0]->discount_vstore
                                 + $order->orderItem[0]->discount_vshop) / 100);
