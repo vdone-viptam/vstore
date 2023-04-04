@@ -68,6 +68,7 @@ class ProductController extends Controller
     public function request(Request $request)
     {
         $limit = $request->limit ?? 10;
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select('request_warehouses.code',
                 'products.publish_id',
@@ -80,6 +81,7 @@ class ProductController extends Controller
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
+            ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.id', 'desc')
             ->paginate($limit);
         $this->v['params'] = $request->all();
@@ -94,7 +96,7 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
 
-        $warehouses = Warehouses::where('user_id', Auth::id())->first();
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->select(

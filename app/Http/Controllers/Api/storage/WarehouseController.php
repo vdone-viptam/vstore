@@ -22,6 +22,8 @@ class WarehouseController extends Controller
     public function importProduct()
     {
         $limit = $request->limit ?? 10;
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -35,6 +37,7 @@ class WarehouseController extends Controller
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
+            ->where('request_warehouses.ware_id', $warehouses->id)
             ->whereIn('request_warehouses.status', [5, 1])
             ->orderBy('request_warehouses.id', 'desc')
             ->paginate($limit);
@@ -47,6 +50,7 @@ class WarehouseController extends Controller
     public function exportProduct()
     {
         $limit = $request->limit ?? 10;
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -61,6 +65,7 @@ class WarehouseController extends Controller
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 2)
+            ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.status', 'asc')
             ->paginate($limit);
         return response()->json([
@@ -122,6 +127,7 @@ class WarehouseController extends Controller
     public function exportDestroyProduct()
     {
         $limit = $request->limit ?? 10;
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -138,6 +144,7 @@ class WarehouseController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 3)
             ->where('request_warehouses.status', 1)
+            ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.id', 'desc')
             ->paginate($limit);
         return response()->json([
@@ -153,8 +160,8 @@ class WarehouseController extends Controller
         $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
-            ->where('order.export_status', 10)
-            ->where('order.status', 2)
+            ->where('order.export_status', 3)
+            ->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $ware->id)
             ->paginate($limit);
 
