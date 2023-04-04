@@ -668,7 +668,18 @@ class OrderController extends Controller
                 $newRequestWarehouse -> type = 1;
                 $newRequestWarehouse -> ware_id = $checkUpdate->ware_id;
                 $newRequestWarehouse -> quantity = $checkUpdate->quantity;
-                // $newRequestWarehouse -> code = 'YCH'.;
+
+                $code = 'YCH' . rand(100000000, 999999999);
+                while (true) {
+                    $re = RequestWarehouse::where('code', $code)->count();
+                    if ($re == 0) {
+                        break;
+                    }
+                    $code = 'YCH' . rand(100000000, 999999999);
+                }
+                $newRequestWarehouse -> code = $code;
+                $newRequestWarehouse -> note = "Yêu cầu hoàn lại hàng";
+                $newRequestWarehouse -> save();
             }
 
             $refuseStatus = 5;
