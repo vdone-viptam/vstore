@@ -103,6 +103,11 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/vshop/get-list/{pdone_id}', [\App\Http\Controllers\Api\OrderController::class, 'orderOfUserByVshop']);
         Route::get('/refuse-order', [\App\Http\Controllers\Api\OrderController::class, 'refuseOrderByCustomer']);
 
+
+
+        Route::get('/detail-order-cancel', [\App\Http\Controllers\Api\OrderController::class, 'detailOrderCancel']);
+        Route::put('/update-amount-warehouse', [\App\Http\Controllers\Api\OrderController::class, 'updateAmountWarehouse']);
+
     });
 
 //    Route::('big-sales')->group(function () {
@@ -237,7 +242,9 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             });
             Route::prefix('partners')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\PartnerController::class, 'index']);
+                Route::get('/detail-ncc', [\App\Http\Controllers\Api\storage\PartnerController::class, 'detailNcc']);
                 Route::get('/delivery-partner', [\App\Http\Controllers\Api\storage\PartnerController::class, 'deliveryPartner']);
+                Route::get('/detail-delivery-partner', [\App\Http\Controllers\Api\storage\PartnerController::class, 'detailDeliveryPartner']);
             });
         });
 
