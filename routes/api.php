@@ -228,6 +228,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
                 Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailImportProduct']);
+                Route::get('/detail-destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailDestroyOrder']);
 
             });
             Route::prefix('finances')->group(function () {

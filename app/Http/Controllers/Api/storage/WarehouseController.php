@@ -196,4 +196,18 @@ class WarehouseController extends Controller
         ], 200);
     }
 
+    public function detailDestroyOrder(Request $request)
+    {
+        $orders = Product::select('order.no', 'order_item.quantity', 'note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id')
+            ->join('order_item', 'products.id', '=', 'order_item.product_id')
+            ->join('order', 'order_item.order_id', '=', 'order.id')
+            ->where('order.id', $request->id)
+            ->first();
+
+        return response()->json([
+            'success' => true,
+            'data' => $orders
+        ], 200);
+    }
+
 }
