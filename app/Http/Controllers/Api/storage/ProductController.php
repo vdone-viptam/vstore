@@ -12,6 +12,8 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Province;
+use App\Models\RequestWarehouse;
+use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,40 +27,40 @@ class ProductController extends Controller
 
     public function __construct()
     {
+        $this->v = [];
     }
 
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $products = Product::with(['category', 'NCC'])
+        $products = DB::table('categories')->selectRaw('products.publish_id,
+            products.sku_id,
+            products.name as product_name,
+            categories.name as cate_name,
+            users.name,
+            (product_warehouses.amount - product_warehouses.export) as in_stock,
+            warehouses.id as warehouse_id,
+            products.id as product_id'
+        )
+            ->join('products', 'categories.id', '=', 'products.category_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
-            ->groupBy('products.id')
-            ->select('products.id',
-                'products.publish_id',
-                'products.sku_id',
-                'products.user_id',
-                'products.category_id',
-                'products.name as name',
-                'ware_id'
-            );
-        $products = $products->where('warehouses.user_id', Auth::id())
-            ->where('product_warehouses.status', '!=', 1)
-            ->paginate($limit);
+            ->join('users', 'warehouses.user_id', 'users.id')
+            ->groupBy(['products.id'])
+            ->where('warehouses.user_id', Auth::id())
+            ->paginate($limit);;
+
         foreach ($products as $pro) {
-            $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->id . ""))[0]->amount ?? 0;
-            $pro->pause_product = DB::table('order_item')
-                    ->join('order', 'order_item.order_id', '=', 'order.id')
-                    ->selectRaw('SUM(order_item.quantity) as total')
-                    ->where('order_item.product_id', $pro->id)
-                    ->where('order_item.warehouse_id', $pro->ware_id)
+            $pro->pause_product = (int)DB::table('request_warehouses')
+                    ->selectRaw('SUM(quantity) as total')
+                    ->where('request_warehouses.product_id', $pro->product_id)
+                    ->where('request_warehouses.ware_id', $pro->warehouse_id)
+                    ->where('type', 2)
                     ->first()->total ?? 0;
         }
-        $this->v['products'] = $products;
-        $this->v['params'] = $request->all();
         return response()->json([
             'success' => true,
-            'data' => $this->v
+            'data' => $products
         ], 200);
 
     }
@@ -66,26 +68,24 @@ class ProductController extends Controller
     public function request(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $this->v['requests'] = Product::with(['NCC'])
-            ->select([
-                'product_warehouses.code',
+        $requests = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select('request_warehouses.code',
                 'products.publish_id',
-                'products.name',
-                'products.user_id',
-                'product_warehouses.amount',
-                'product_warehouses.created_at',
-                'product_warehouses.status',
-                'product_warehouses.id'
-            ])
-            ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
-            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
-        $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status', [0, 1, 5])->
-        where('warehouses.user_id', Auth::id())->paginate($limit);
-
+                'products.name as product_name',
+                'users.name as ncc_name',
+                'quantity',
+                'request_warehouses.created_at',
+                'request_warehouses.status',
+                'request_warehouses.id'
+            )
+            ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->where('type', 1)
+            ->orderBy('request_warehouses.id', 'desc')
+            ->paginate($limit);
         $this->v['params'] = $request->all();
         return response()->json([
             'success' => true,
-            'data' => $this->v
+            'data' => $requests
         ], 200);
 
     }
@@ -115,13 +115,35 @@ class ProductController extends Controller
 
     public function updateRequest($status, Request $request)
     {
-        if (!DB::table('product_warehouses')->where('id', $request->id)->first()) {
+        if (!in_array((int)$status, [1, 2])) {
             return response()->json([
                 'success' => false,
-                'message' => 'Không tìm thấy đơn hàng',
+                'message' => 'Trạng thái cập nhật chỉ là 1 hoặc 2',
+            ], 400);
+        }
+
+        $request = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->first();
+        if (!$request) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy yêu cầu',
             ], 404);
         }
-        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
+        if ($status == 1) {
+            if ($request->type == 1) {
+                $ware = ProductWarehouses::where('ware_id', $request->ware_id)->where('product_id', $request->product_id)->first();
+                if (!$ware) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy sản phẩm',
+                    ], 404);
+                }
+                $ware->amount = $ware->amount + $request->quantity;
+                $ware->save();
+            }
+        }
+        $request->status = $status;
+        $request->save();
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật đơn gửi hàng thành công',
@@ -168,7 +190,6 @@ class ProductController extends Controller
 
             $product = Product::where('id', $order_item->product_id)->first();
 
-
             if ($status == 1) {
 //            return $order->total;
                 if ($order->method_payment == 'COD') {
@@ -178,6 +199,24 @@ class ProductController extends Controller
                     $money_colection = 0;
                     $order_payment = 1;
                 }
+                $requestEx = RequestWarehouse::where('id', $order_item->request_warehouse_id)->where('type', 2)->first();
+                if (!$requestEx) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy yêu cầu xuất kho'
+                    ], 404);
+                }
+
+                $requestEx->status = 1;
+
+                $productWare = ProductWarehouses::where('ware_id', $warehouse->id)->where('product_id', $product->id)->first();
+
+                $productWare->export = $productWare->export + $order_item->quantity;
+
+                $productWare->save();
+
+                $requestEx->save();
+
 
                 $get_list = Http::withHeaders(
                     [
@@ -256,6 +295,21 @@ class ProductController extends Controller
                     'NOTE' => "Hủy đơn do kho",
 
                 ]);
+                $order_item = OrderItem::where('order_id', $order->id)->first();
+
+                $requestEx = RequestWarehouse::where('id', $order_item->request_warehouse_id)->where('type', 2)->first();
+                if (!$requestEx) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy yêu cầu xuất kho'
+                    ], 404);
+                }
+
+                $requestEx->status = 2;
+
+
+                $requestEx->save();
+
             }
             return response()->json([
                 'success' => true,
