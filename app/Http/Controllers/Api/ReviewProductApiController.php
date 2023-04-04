@@ -139,7 +139,7 @@ class ReviewProductApiController extends Controller
             $totalReviews = Point::query()
                             ->with(['pointRep'])
                             ->where('product_id', $product_id)
-                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id')
+                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id')
                             ->orderBy('updated_at', 'desc');
             if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
