@@ -56,13 +56,31 @@ class DashboardController extends Controller
         FROM product_warehouses
         WHERE ware_id = $warehouses->id HAVING total <= 10
         "))) ?? 0;
+
+        $products = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select(
+                'request_warehouses.code',
+                'products.publish_id',
+                'products.name as product_name',
+                'users.name as ncc_name',
+                'quantity',
+                'request_warehouses.status',
+                'request_warehouses.created_at',
+                'request_warehouses.type',
+                'request_warehouses.id',
+            )
+            ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->whereIn('request_warehouses.type', [1, 10])
+            ->where('request_warehouses.ware_id', $warehouses->id)
+            ->where('request_warehouses.status', 0)
+            ->orderBy('request_warehouses.id', 'desc')
+            ->limit($request->limit ?? 10)->get();
+
         return response()->json([
             'success' => true,
-            'data' => [
-                'requestIm' => $requestIm,
-                'requestEx' => $requestEx,
-                'productOutStock' => $productOutStock
-            ]
-        ], 200);
+            'requestEx' => $requestEx,
+            'requestIm' => $requestIm,
+            'productOutStock' => $productOutStock,
+            'products' => $products]);
     }
 }

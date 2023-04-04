@@ -87,8 +87,8 @@ class ProductController extends Controller
         if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' =>  'Không tìm thấy sản phẩm'
-            ],404);
+                'message' => 'Không tìm thấy sản phẩm'
+            ], 404);
         }
         $product->ex_im = DB::table('request_warehouses')
             ->selectRaw('SUM(quantity) as total,type')
@@ -96,7 +96,7 @@ class ProductController extends Controller
             ->where('request_warehouses.ware_id', $product->warehouse_id)
             ->whereIn('type', [1, 2])
             ->where('status', 0)
-            ->orderBy('type','asc')
+            ->orderBy('type', 'asc')
             ->groupBy('type')
             ->get();
 
@@ -209,7 +209,7 @@ class ProductController extends Controller
 
         try {
 
-            $order = Order::find($request->id);
+            $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
             if (!$order) {
                 return response()->json([
                     'success' => false,
@@ -314,6 +314,7 @@ class ProductController extends Controller
 
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
+                DB::table('request_warehouses')->where('code', $order->no)->delete();
                 $request = new RequestWarehouse();
 
                 $request->ncc_id = 0;
