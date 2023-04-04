@@ -81,7 +81,6 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
         Route::get('/list-review-vdone/{done_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
         Route::post('/rep-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'repReviewProduct']);
-        Route::get('/rating-rate-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'ratingRateProduct']);
     });
     // CART
     Route::prefix('cart')->group(function () {
