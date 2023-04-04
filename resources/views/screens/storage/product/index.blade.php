@@ -22,7 +22,23 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
+                <select name="condition" id=""
+                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
+{{--                    <option value="0">Tất cả</option>--}}
+                    <option
+                        value="products.publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
+                        Mã sản phẩm
+                    </option>
+                    <option
+                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                        Tên sản phẩm
+                    </option>
 
+                    <option
+                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
+                        Ngành hàng
+                    </option>
+                </select>
                 <input type="text" id="key_search" name="key_search" value="{{$params['key_search'] ?? '' }}"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
                        placeholder="Nhập từ khóa">
