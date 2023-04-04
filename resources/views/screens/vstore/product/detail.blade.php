@@ -70,8 +70,8 @@
 
                         </div>
                         <p class="text-red-600" style="display: none" id="messageDis">
-                            Phần trăm chiết khấu V-shop không được nhỏ hơn 50% chiết khấu V-Store và không lớn hơn 100%
-                            chiết khấu V-store</p>
+                            Phần trăm chiết khấu V-shop không được nhỏ hơn {{$request->discount/2}} % <br> và không lớn
+                            hơn {{$request->discount}} %</p>
                     </div>
                     <div class="flex justify-start items-center gap-2 w-full" id="note">
                         @if($request->status == 2)
