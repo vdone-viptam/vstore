@@ -314,7 +314,7 @@
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Phường(xã) </span>
-                                    <span>{{ucfirst($infoAccount->ward->wards_name)}}</span>
+                                    <span>{{ucfirst($infoAccount->ward->wards_name)??'' }}</span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Số điện thoại: </span>

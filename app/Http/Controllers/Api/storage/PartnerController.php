@@ -120,7 +120,6 @@ class PartnerController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                // 'search' => 'max:200',
                 'limit' => 'numeric|min:1',
             ]);
             if ($validator->fails()) {
@@ -129,25 +128,20 @@ class PartnerController extends Controller
                 ], 401);
             }
             $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
-            // $search = $request->search;
+
             $limit = $request->limit ?? 10;
             $ncc = OrderItem::query()
                 ->select('products.id as product_id',
+                        'delivery_partner.name_partner','delivery_partner.code_partner','delivery_partner.id as delivery_partner_id',
                         DB::raw('count(*) as count_product'),
                     )
-                ->join('products', 'order_item.product_id', '=', 'products.id')
-                // sau này còn phải join đên delivery_partner để lấy các mã ncc khác viettel post !
-                ->join('order', 'order.id', '=', 'order_item.order_id')
+                ->join('products', 'order_item.product_id', 'products.id')
+                ->join('order', 'order.id','order_item.order_id')
+                ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
                 ->where('order_item.warehouse_id', $id)
                 ->where('order.export_status', 4);
-            $ncc= $ncc->groupBy(['product_id'])
+            $ncc= $ncc->groupBy(['product_id','delivery_partner_id'])
                 ->paginate($limit);
-            foreach ($ncc as $item)
-            {
-                $item->name_partner = "Viettel Post";
-                $item->code_partner = "codevt";
-                $item->partner_id = 1;
-            }
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([
@@ -163,38 +157,32 @@ class PartnerController extends Controller
      * API này sẽ trả về chi tiết đối tác giao hàng
      *
      * @param Request $request\
+     * @bodyParam delivery_partner_id id đối tác giao hàng
      * @return \Illuminate\Http\JsonResponse
      */
     public function detailDeliveryPartner(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                // 'user_id' => 'required|exists:users,id',
-                // 'partner_id' => 'required'
+                'delivery_partner_id' => 'required'
             ]);
             if ($validator->fails()) {
                 return response()->json([
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-
             $data = OrderItem::query()
                 ->select(DB::raw('count(*) as count_product'),
-                    )
+                            'delivery_partner.name_partner','delivery_partner.code_partner','delivery_partner.id as delivery_partner_id',
+                        )
                 ->join('products', 'order_item.product_id', '=', 'products.id')
-                // sau này còn phải join đên delivery_partner để lấy các mã ncc khác viettel post !
+                ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
                 ->join('order', 'order.id', '=', 'order_item.order_id')
                 ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
                 ->where('warehouses.user_id', Auth::id())
+                ->where('delivery_partner.id', $request->delivery_partner_id)
                 ->where('order.export_status', 4)->get();
 
-            // $data= $data->groupBy(['products.id'])->get();
-            foreach ($data as $item)
-            {
-                $item->name_partner = "Viettel Post";
-                $item->code_partner = "codevt";
-                $item->partner_id = 1;
-            }
             return response()->json(['success' => true, 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([

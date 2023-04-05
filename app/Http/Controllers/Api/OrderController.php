@@ -448,7 +448,7 @@ class OrderController extends Controller
                 $rating = Point::where('customer_id', $id)
                     ->where('order_item_id', $order->orderItem[0]->order_item_id)
                     ->join('products', 'points.product_id', '=', 'products.id')
-                    ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images')
+                    ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images', 'points.created_at')
                     ->first();
                 if ($rating) {
                     $order->rating = $rating;
@@ -627,7 +627,6 @@ class OrderController extends Controller
      */
     public function refuseOrderByCustomer(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'order_id' => 'required',
             'descriptions' => 'required|max:200',
@@ -651,41 +650,25 @@ class OrderController extends Controller
                 'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
             ]);
 
-            // if( $order->export_status == 1 ){
-            //     $orderItem = OrderItem::join('order','order.id','order_item.order_id')->where('order.id',$request->order_id)->first();
-            //     $product_id = $orderItem->product_id;
-            // }
-            $checkUpdate = RequestWarehouse::join('order','order.order_number','request_warehouses.order_number')
-                ->where('order.id',$request->order_id)
-                ->where('status',1)->first();
+            // check nếu khách huỷ mà chưa đc duyệt request
+            $checkUpdate = RequestWarehouse::select('request_warehouses.status')->join('order', 'order.order_number', 'request_warehouses.order_number')
+                ->where('order.id', $request->order_id)
+                ->where('type', 2)
+                ->first();
 
-            if($checkUpdate){
-                // tự động tạo request mới
-                $newRequestWarehouse = new RequestWarehouse();
-                $newRequestWarehouse -> ncc_id = $checkUpdate->ncc_id;
-                $newRequestWarehouse -> product_id = $checkUpdate->ncc_id;
-                $newRequestWarehouse -> status = 0;
-                $newRequestWarehouse -> type = 1;
-                $newRequestWarehouse -> ware_id = $checkUpdate->ware_id;
-                $newRequestWarehouse -> quantity = $checkUpdate->quantity;
-
-                $code = 'YCH' . rand(100000000, 999999999);
-                while (true) {
-                    $re = RequestWarehouse::where('code', $code)->count();
-                    if ($re == 0) {
-                        break;
-                    }
-                    $code = 'YCH' . rand(100000000, 999999999);
+            if ($checkUpdate) {
+                if ($checkUpdate->status == 1) {
+                    $order->cancel_status = 2;
+                } else {
+                    $order->cancel_status = 1;
                 }
-                $newRequestWarehouse -> code = $code;
-                $newRequestWarehouse -> note = "Yêu cầu hoàn lại hàng";
-                $newRequestWarehouse -> save();
+            } else {
+                $order->cancel_status = 1;
             }
-
             $refuseStatus = 5;
             $order->export_status = $refuseStatus;
             $order->note = $request->descriptions;
-            $order->cancel_status = 1;
+
             $order->save();
 
 
@@ -707,6 +690,7 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
     /**
      * chi tiết Đơn hàng hủy
      *
@@ -729,17 +713,43 @@ class OrderController extends Controller
         }
         try {
             $data = Order::query()
-                ->with(['orderItem:id,order_id,product_id,quantity','orderItem.product:id,name,publish_id'])
-                ->where('id',$request->order_id)
-                ->where('export_status',5)
-                ->select('order.no','order.id','order.note')
+                ->with(['orderItem:id,order_id,product_id,quantity', 'orderItem.product:id,name,publish_id'])
+                ->where('id', $request->order_id)
+                ->where('export_status', 5)
+                ->select('order.no', 'order.id', 'order.note')
                 ->first();
-            if(!($data)){
+            if (!($data)) {
                 return response()->json([
                     'status_code' => 500,
                     'message' => 'Không tìm thấy đơn hàng huỷ bởi khách hàng !'
                 ], 500);
-            }else{
+            } else {
+                $checkUpdate = RequestWarehouse::join('order', 'order.order_number', 'request_warehouses.order_number')
+                    ->where('order.id', $request->order_id)
+                    ->where('status', 1)->first();
+
+                // tự động tạo request mới khi khách hàng huỷ đơn và đơn hàng đã giao mà chưa chuyển cho khách hàng
+                if ($checkUpdate) {
+                    $newRequestWarehouse = new RequestWarehouse();
+                    $newRequestWarehouse->ncc_id = $checkUpdate->ncc_id;
+                    $newRequestWarehouse->product_id = $checkUpdate->ncc_id;
+                    $newRequestWarehouse->status = 0;
+                    $newRequestWarehouse->type = 1;
+                    $newRequestWarehouse->ware_id = $checkUpdate->ware_id;
+                    $newRequestWarehouse->quantity = $checkUpdate->quantity;
+
+                    $code = 'YCH' . rand(100000000, 999999999);
+                    while (true) {
+                        $re = RequestWarehouse::where('code', $code)->count();
+                        if ($re == 0) {
+                            break;
+                        }
+                        $code = 'YCH' . rand(100000000, 999999999);
+                    }
+                    $newRequestWarehouse->code = $code;
+                    $newRequestWarehouse->note = "Yêu cầu hoàn lại hàng";
+                    $newRequestWarehouse->save();
+                }
                 return response()->json([
                     'success' => true,
                     'data' => $data
@@ -754,6 +764,7 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
     /**
      * cập nhật lại số lượng kho khi Đơn hàng hủy bởi khách hàng
      *
@@ -776,25 +787,26 @@ class OrderController extends Controller
         try {
 
             $data = Order::query()
-                ->where('id',$request->order_id)
-                ->where('export_status',5)
-                ->where('cancel_status',1)
+                ->where('id', $request->order_id)
+                ->where('export_status', 5)
+                ->where('cancel_status', 1)
                 ->first();
-            if(!($data)){
+            if (!($data)) {
                 return response()->json([
                     'status_code' => 500,
                     'message' => 'Không tìm thấy đơn hàng huỷ bởi khách hàng !'
                 ], 500);
-            }else{
-                $data->cancel_status  = 2;
+            } else {
+                $data->cancel_status = 2;
                 $data->save();
 
                 $warehouse_id = $data->warehouse_id;
-                $orderItem = OrderItem::where('order_id',$request->order_id)->first();
+                $orderItem = OrderItem::where('order_id', $request->order_id)->first();
                 $product_id = $orderItem->product_id;
                 $count = $orderItem->quantity;
-                $updateCountProduct = ProductWarehouses::where('ware_id',$warehouse_id)->where('product_id', $product_id)
-                    ->increment('amount', $count);
+
+                // $updateCountProduct = ProductWarehouses::where('ware_id',$warehouse_id)->where('product_id', $product_id)
+                //     ->increment('amount', $count);
 
                 return response()->json([
                     'success' => true,

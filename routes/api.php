@@ -78,6 +78,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     });
     Route::prefix('review-product')->group(function () {
+
         Route::post('/accept-review', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'acceptReviewProduct']);
         Route::get('/review-detail-product/{point_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'reviewDetailProduct']);
         Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
@@ -102,7 +103,6 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/user/detail/{order_id}', [\App\Http\Controllers\Api\OrderController::class, 'getDetailOrderByUser']);
         Route::get('/vshop/get-list/{pdone_id}', [\App\Http\Controllers\Api\OrderController::class, 'orderOfUserByVshop']);
         Route::get('/refuse-order', [\App\Http\Controllers\Api\OrderController::class, 'refuseOrderByCustomer']);
-
 
 
         Route::get('/detail-order-cancel', [\App\Http\Controllers\Api\OrderController::class, 'detailOrderCancel']);
@@ -233,6 +233,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
                 Route::get('/create/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'createRequestDestroy']);
                 Route::post('/store/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeRequestDestroy']);
+                Route::post('/store/import-destroy-order', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeImportProduct']);
 
                 Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailImportProduct']);

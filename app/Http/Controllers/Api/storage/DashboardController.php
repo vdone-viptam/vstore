@@ -9,14 +9,16 @@ use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
         $warehouses = Warehouses::where('user_id', Auth::id())->first();
+        $sku_id = $request->sku_id;
         $requestEx = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->select(
@@ -29,6 +31,9 @@ class DashboardController extends Controller
                 'order.created_at',
                 'order.id'
             );
+        if(isset($sku_id)){
+            $requestEx = $requestEx->where('products.sku_id', $sku_id);
+        }
         $requestEx = $requestEx->where('order.status', '!=', 2)
             ->where('export_status', 0)
             ->where('order_item.warehouse_id', $warehouses->id)
