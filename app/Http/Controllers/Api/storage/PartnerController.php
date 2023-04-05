@@ -39,21 +39,21 @@ class PartnerController extends Controller
             $search = $request->search;
             $limit = $request->limit ?? 10;
             $ncc = User::query()
-                ->select('users.name', 'account_code','province.province_name','users.id as user_id',
-                        DB::raw('count(*) as count_product'),
-                        DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
-                    )
+                ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
+                    DB::raw('count(*) as count_product'),
+                    DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
+                )
                 ->join('province', 'users.provinceId', '=', 'province.province_id')
                 ->join('products', 'users.id', '=', 'products.user_id')
                 ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
                 ->where('ware_id', $id);
-            if(isset($request->search)){
-                $ncc= $ncc->where(function ($query) use ($search) {
-                                $query->where('users.name', 'like','%'. $search . '%')
-                                    ->orWhere('users.account_code','like','%'. $search . '%');
-                                });
+            if (isset($request->search)) {
+                $ncc = $ncc->where(function ($query) use ($search) {
+                    $query->where('users.name', 'like', '%' . $search . '%')
+                        ->orWhere('users.account_code', 'like', '%' . $search . '%');
+                });
             }
-            $ncc= $ncc->groupBy(['users.name', 'account_code'])
+            $ncc = $ncc->groupBy(['users.name', 'account_code'])
                 ->paginate($limit);
 
             return response()->json(['success' => true, 'data' => $ncc]);
@@ -87,10 +87,10 @@ class PartnerController extends Controller
             }
             $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
             $ncc = User::query()
-                ->select('users.name', 'account_code','province.province_name','users.id as user_id',
-                        DB::raw('count(*) as count_product'),
-                        DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
-                    )
+                ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
+                    DB::raw('count(*) as count_product'),
+                    DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
+                )
                 ->join('province', 'users.provinceId', '=', 'province.province_id')
                 ->join('products', 'users.id', '=', 'products.user_id')
                 ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
@@ -131,16 +131,18 @@ class PartnerController extends Controller
 
             $limit = $request->limit ?? 10;
             $ncc = OrderItem::query()
+                ->selectSub('select COUNT(id) from `order` join order_item on order.id = order_item.order_id
+                 where export_status=4 and warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
                 ->select('products.id as product_id',
-                        'delivery_partner.name_partner','delivery_partner.code_partner','delivery_partner.id as delivery_partner_id',
-                        DB::raw('count(*) as count_product'),
-                    )
+                    'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
+                    DB::raw('count(*) as count_product'),
+                )
                 ->join('products', 'order_item.product_id', 'products.id')
-                ->join('order', 'order.id','order_item.order_id')
+                ->join('order', 'order.id', 'order_item.order_id')
                 ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
                 ->where('order_item.warehouse_id', $id)
                 ->where('order.export_status', 4);
-            $ncc= $ncc->groupBy(['product_id','delivery_partner_id'])
+            $ncc = $ncc->groupBy(['delivery_partner_id'])
                 ->paginate($limit);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
@@ -156,7 +158,7 @@ class PartnerController extends Controller
      *
      * API này sẽ trả về chi tiết đối tác giao hàng
      *
-     * @param Request $request\
+     * @param Request $request \
      * @bodyParam delivery_partner_id id đối tác giao hàng
      * @return \Illuminate\Http\JsonResponse
      */
@@ -171,10 +173,12 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
+            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+
             $data = OrderItem::query()
-                ->select(DB::raw('count(*) as count_product'),
-                            'delivery_partner.name_partner','delivery_partner.code_partner','delivery_partner.id as delivery_partner_id',
-                        )
+                ->selectSub('select COUNT(id) from `order` join order_item on order.id = order_item.order_id
+                 where export_status=4 and warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+                ->selectSub('select COUNT(id) from `order` where export_status=4 and warehouse_id =' . $id, 'destroy_order')
                 ->join('products', 'order_item.product_id', '=', 'products.id')
                 ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
                 ->join('order', 'order.id', '=', 'order_item.order_id')
