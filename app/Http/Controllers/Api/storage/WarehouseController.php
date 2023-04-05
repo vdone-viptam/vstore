@@ -40,7 +40,7 @@ class WarehouseController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->whereIn('request_warehouses.status', [5, 1])
+            ->whereIn('request_warehouses.status', [5, 1, 7])
             ->orderBy('request_warehouses.id', 'desc')
             ->paginate($limit);
         return response()->json([
@@ -216,7 +216,7 @@ class WarehouseController extends Controller
 
             $requestIm->ncc_id = $order->user_id;
             $requestIm->product_id = $order->product_id;
-            $requestIm->status = 5;
+            $requestIm->status = 7;
             $requestIm->type = 1;
             $requestIm->ware_id = $order->warehouse_id;
             $requestIm->quantity = $order->quantity;
