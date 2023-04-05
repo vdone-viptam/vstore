@@ -446,7 +446,7 @@ class OrderController extends Controller
                 $rating = Point::where('customer_id', $id)
                     ->where('order_item_id', $order->orderItem[0]->order_item_id)
                     ->join('products', 'points.product_id', '=', 'products.id')
-                    ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images')
+                    ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images', 'points.created_at')
                     ->first();
                 if ($rating) {
                     $order->rating = $rating;

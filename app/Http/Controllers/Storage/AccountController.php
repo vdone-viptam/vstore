@@ -38,9 +38,8 @@ class AccountController extends Controller
     public function editProfile(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'company_name' => 'required',
-//            'tax_code' => 'required',
+            'name' => 'required|max:30',
+            'company_name' => 'required|max:100',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
@@ -53,9 +52,10 @@ class AccountController extends Controller
             'district_id'=>'required',
             'ward_id'=>'required',
         ], [
-            'name.required' => 'Tên v-store bắt buộc nhập',
+            'name.required' => 'Tên bắt buộc nhập',
+            'name.max' => 'Tên  tối đa 30 ký tự',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
-//            'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+            'company_name.max' => 'Tên công ty tối đa 100 ký tự',
             'address.required' => 'Địa chỉ bắt buộc nhập',
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
