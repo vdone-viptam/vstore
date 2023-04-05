@@ -202,9 +202,8 @@ class WarehouseController extends Controller
         $products = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->select('products.id', 'products.name', DB::raw('(amount - export) as in_stock'), 'warehouses.id as ware_id')
-            ->where('warehouses.user_id', Auth::id())
-            ->get();
-        foreach ($products as $product) {
+            ->where('warehouses.user_id', Auth::id());
+        foreach ($products->get() as $product) {
             $pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
                     ->where('request_warehouses.product_id', $product->id)
@@ -311,7 +310,7 @@ class WarehouseController extends Controller
 
     public function detailDestroyOrder(Request $request)
     {
-        $orders = Product::select('order.no', 'order_item.quantity', 'note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id')
+        $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->where('order.id', $request->id)
