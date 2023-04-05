@@ -564,12 +564,6 @@
         })
     </script>
     <script>
-        function format1(n, currency) {
-            return currency + n.toFixed(0).replace(/./g, function (c, i, a) {
-                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "." + c : c;
-            });
-        }
-
         document.querySelector('#price').addEventListener("keypress", (e) => {
             var regex = new RegExp("^[0-9]+$");
             var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
@@ -577,12 +571,22 @@
                 event.preventDefault();
                 return false;
             }
+        });
+        document.querySelector('#price').addEventListener("keyup", (e) => {
             if (e.target.value) {
-                e.target.value = e.target.value.replaceAll(/[a-zA-Z]+/g, '')
-                document.getElementsByName('price')[0].value = Number(e.target.value.replaceAll('.', '').replaceAll('đ', ''));
-                document.querySelector('#price').value = format1(Number(e.target.value.replaceAll('.', '').replaceAll('đ', '')), '');
+                value = new Intl.NumberFormat('en-US', {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0
+                }).format((e.target.value.replaceAll(',', '')));
+                // document.getElementById('price').value = value.replaceAll('$', '');
+
+                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '');
+                ;
+                document.getElementById('price').value = value.replaceAll('$', '')
             }
         });
+
 
     </script>
     @if(!empty(old('images')))
