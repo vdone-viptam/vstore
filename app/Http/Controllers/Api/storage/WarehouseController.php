@@ -237,7 +237,7 @@ class WarehouseController extends Controller
             DB::table('order')->where('id', $order->id)->update(['cancel_status' => 3]);
             DB::commit();
             return response()->json([
-                'success' => false,
+                'success' => true,
                 'message' => 'Tạo yêu cầu hoàn hàng thành công'
             ], 201);
         } catch (\Exception $e) {

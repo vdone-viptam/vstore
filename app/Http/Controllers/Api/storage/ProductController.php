@@ -237,6 +237,9 @@ class ProductController extends Controller
                         'message' => 'Không tìm thấy sản phẩm',
                     ], 404);
                 }
+                if ($ware->status == 0) {
+                    $ware->status = 1;
+                }
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
             }
