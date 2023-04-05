@@ -721,12 +721,13 @@ class ProductController extends Controller
     public
     function createBill($pdone_id)
     {
-        $products = DB::table('vshop_products')
+        $products = DB::table('vshop')->join
+        ('vshop_products','vshop.id','=','vshop_products.vshop_id')
             ->select('products.id', 'images', 'products.name', 'vshop_products.amount')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.status', 2)
             ->where('products.availability_status',1)
-            ->where('pdone_id', $pdone_id)
+            ->where('vshop.pdone_id', $pdone_id)
             ->where('vshop_products.amount', '>', 0)
             ->get();
         foreach ($products as $pr) {

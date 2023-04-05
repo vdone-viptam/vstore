@@ -183,6 +183,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         // END Nhập hàng sẵn
 
     });
+    Route::prefix('wallet')->group(function () {
+        Route::get('/{pdone_id}', [\App\Http\Controllers\Api\WalletVshopController::class, 'surplus']);
+
+    });
     Route::prefix('discount')->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
