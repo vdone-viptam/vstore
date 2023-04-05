@@ -34,7 +34,8 @@ class WarehouseController extends Controller
                 'quantity',
                 'request_warehouses.status',
                 'request_warehouses.created_at',
-                'request_warehouses.id'
+                'request_warehouses.id',
+                'request_warehouses.note'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
@@ -179,14 +180,85 @@ class WarehouseController extends Controller
         ], 200);
     }
 
+    public function storeImportProduct(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required',
+        ], [
+            'order_id.required' => 'Mã đơn hàng là bắt buộc'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 400);
+        }
+        DB::beginTransaction();
+        try {
+            $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+            $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+                ->select('quantity', 'order_item.product_id', 'order_item.warehouse_id', 'order.no', 'products.user_id', 'order.id')
+                ->join('products', 'order_item.product_id', '=', 'products.id')
+                ->where('order_id', $request->order_id)
+                ->where('order.warehouse_id', $warehouses->id)
+                ->where('order.cancel_status', 1)
+                ->where('order.export_status', 5)
+                ->first();
+
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng để hoàn hàng'], 404);
+            }
+
+            $requestIm = new RequestWarehouse();
+
+            $requestIm->ncc_id = $order->user_id;
+            $requestIm->product_id = $order->product_id;
+            $requestIm->status = 5;
+            $requestIm->type = 1;
+            $requestIm->ware_id = $order->warehouse_id;
+            $requestIm->quantity = $order->quantity;
+            $code = 'YCHH' . rand(100000000, 999999999);
+
+            while (true) {
+                $re = RequestWarehouse::where('code', $code)->count();
+                if ($re == 0) {
+                    break;
+                }
+                $code = 'YCHH' . rand(100000000, 999999999);
+            }
+            $requestIm->code = $code;
+            $requestIm->order_number = '';
+            $requestIm->note = 'Hoàn hàng khách hủy - ' . $order->no;
+            $requestIm->save();
+
+            DB::table('order')->where('id', $order->id)->update(['cancel_status' => 3]);
+            DB::commit();
+            return response()->json([
+                'success' => false,
+                'message' => 'Tạo yêu cầu hoàn hàng thành công'
+            ], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function destroyOrder()
     {
         $limit = $request->limit ?? 10;
         $ware = Warehouses::select('id')->where('user_id', Auth::id())->first();
-        $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id', 'order.id as order_id')
+        $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id', 'order.id as order_id',
+            'order.export_status', 'order.cancel_status')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
-            ->where('order.export_status', 3)
+            ->whereIn('order.export_status', [3, 5])
             ->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $ware->id)
             ->paginate($limit);
@@ -196,6 +268,7 @@ class WarehouseController extends Controller
             'data' => $orders
         ], 200);
     }
+
 
     public function createRequestDestroy(Request $request)
     {

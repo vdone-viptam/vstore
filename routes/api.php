@@ -105,7 +105,6 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/refuse-order', [\App\Http\Controllers\Api\OrderController::class, 'refuseOrderByCustomer']);
 
 
-
         Route::get('/detail-order-cancel', [\App\Http\Controllers\Api\OrderController::class, 'detailOrderCancel']);
         Route::put('/update-amount-warehouse', [\App\Http\Controllers\Api\OrderController::class, 'updateAmountWarehouse']);
 
@@ -234,6 +233,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
                 Route::get('/create/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'createRequestDestroy']);
                 Route::post('/store/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeRequestDestroy']);
+                Route::post('/store/import-destroy-order', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeImportProduct']);
 
                 Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailImportProduct']);
