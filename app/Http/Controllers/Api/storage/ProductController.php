@@ -48,8 +48,13 @@ class ProductController extends Controller
             ->join('users', 'warehouses.user_id', 'users.id')
             ->where('product_warehouses.status', 1)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id())
-            ->paginate($limit);;
+            ->where('warehouses.user_id', Auth::id());
+
+        if ($request->publish_id) {
+            $products = $products->where('products.publish_id', $request->publish_id);
+        }
+
+        $products = $products->paginate($limit);
 
         foreach ($products as $pro) {
             $pro->pause_product = (int)DB::table('request_warehouses')
