@@ -8,6 +8,7 @@ use App\Models\OrderItem;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\RequestWarehouse;
 use App\Models\Vshop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -650,11 +651,43 @@ class OrderController extends Controller
                 'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
             ]);
 
+            // if( $order->export_status == 1 ){
+            //     $orderItem = OrderItem::join('order','order.id','order_item.order_id')->where('order.id',$request->order_id)->first();
+            //     $product_id = $orderItem->product_id;
+            // }
+            $checkUpdate = RequestWarehouse::join('order','order.order_number','request_warehouses.order_number')
+                ->where('order.id',$request->order_id)
+                ->where('status',1)->first();
+
+            if($checkUpdate){
+                // tự động tạo request mới
+                $newRequestWarehouse = new RequestWarehouse();
+                $newRequestWarehouse -> ncc_id = $checkUpdate->ncc_id;
+                $newRequestWarehouse -> product_id = $checkUpdate->ncc_id;
+                $newRequestWarehouse -> status = 0;
+                $newRequestWarehouse -> type = 1;
+                $newRequestWarehouse -> ware_id = $checkUpdate->ware_id;
+                $newRequestWarehouse -> quantity = $checkUpdate->quantity;
+
+                $code = 'YCH' . rand(100000000, 999999999);
+                while (true) {
+                    $re = RequestWarehouse::where('code', $code)->count();
+                    if ($re == 0) {
+                        break;
+                    }
+                    $code = 'YCH' . rand(100000000, 999999999);
+                }
+                $newRequestWarehouse -> code = $code;
+                $newRequestWarehouse -> note = "Yêu cầu hoàn lại hàng";
+                $newRequestWarehouse -> save();
+            }
+
             $refuseStatus = 5;
             $order->export_status = $refuseStatus;
             $order->note = $request->descriptions;
             $order->cancel_status = 1;
             $order->save();
+
 
             $huy_don = Http::withHeaders(
                 [
