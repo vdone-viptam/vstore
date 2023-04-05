@@ -113,7 +113,6 @@
                                     <option
                                         value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
                                 @endforeach
-                                <option value="0">khác</option>
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>

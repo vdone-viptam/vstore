@@ -478,12 +478,17 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             $role_id = 4;
         }
         $passwordReset = PasswordReset::where('token', $token)->where('role_id', $role_id)->first();
-
-        if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180 || !$passwordReset) {
-            abort(404);
+        if ($passwordReset) {
+            if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
+                return redirect()->route('form_forgot_password')->with('error', 'Token của bạn đã hết hạn');
+            } else {
+                return view('auth.formReset', ['role_id' => $role_id]);
+            }
+        } else {
+            return redirect()->route('form_forgot_password')->with('error', 'Token của bạn đã hết hạn');
         }
 
-        return view('auth.formReset', ['role_id' => $role_id]);
+
     }
 
     public
