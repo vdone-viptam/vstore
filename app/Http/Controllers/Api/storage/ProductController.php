@@ -243,6 +243,8 @@ class ProductController extends Controller
                 }
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
+
+                DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
             }
         }
         if ($requestIm->status == 7) {
