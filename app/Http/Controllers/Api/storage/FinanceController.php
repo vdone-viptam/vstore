@@ -96,7 +96,8 @@ class FinanceController extends Controller
     {
         $limit = $request->limit ?? 10;
         $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
-            ->where('user_id', Auth::id());
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc');
 
         if ($request->code) {
             $this->v['histories'] = $this->v['histories']->where('code', $request->code);
@@ -111,6 +112,26 @@ class FinanceController extends Controller
 
     public function deposit(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'bank' => 'required|exists:wallets,id',
+            'money' => 'required|numeric|min:1',
+        ], [
+            'bank.required' => 'Bạn chưa có ví',
+            'bank.exists' => 'Ví không tồn tại',
+            'money.required' => 'Số tiền rút bắt buộc nhập',
+            'money.numeric' => 'Số tiền rút bắt buộc nhập phải là số',
+            'money.min' => 'Số tiền rút phải lớn hơn 0',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+
         DB::beginTransaction();
 
         try {
