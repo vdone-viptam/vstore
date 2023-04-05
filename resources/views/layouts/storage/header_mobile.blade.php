@@ -159,7 +159,7 @@
                         </div>
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
-                        <li><a class="hover:underline" href="{{route('screens.storage.partner.index')}}">Danh sách nhà
+                        <li><a class="hover:underline" href="{{route('screens.storage.partner.index')}}">Danh sách Nhà
                                 cung cấp</a></li>
                     </ul>
                 </div>

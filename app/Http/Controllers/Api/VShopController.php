@@ -797,10 +797,10 @@ class  VShopController extends Controller
                 'status_code' => 400,
                 'error' => 'Sản phẩm chưa niêm yết',
             ], 400);
-        } elseif ($request->discount > $discount / 100 * 95) {
+        } elseif ($request->discount > $discount / 100 * 85) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 85,
             ], 400);
         } else {
             DB::table('discounts')->insert([

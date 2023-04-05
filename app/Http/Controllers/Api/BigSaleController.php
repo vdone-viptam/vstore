@@ -75,6 +75,8 @@ class BigSaleController extends Controller
             foreach ($products as $product) {
                 $product->discount = DB::table('discounts')
                     ->selectRaw('SUM(discount) as dis')
+                    ->where('start_date', '<=', Carbon::now())
+                    ->where('end_date', '>=', Carbon::now())
                     ->where('product_id', $product->id)
                     ->whereIn('type', [1, 2])
                     ->first()->dis;

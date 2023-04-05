@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('price', 11, 3);
             $table->integer('quantity');
             $table->integer('status')->default(0);
-            $table->integer('warehouses_id');
+            $table->integer('warehouse_id');
             $table->integer('discount');
             $table->float('discount_vshop',8,2);
             $table->float('discount_ncc',8,2);

@@ -78,7 +78,7 @@ class ProductController extends Controller
             }
             if ($request->order_by == 1) {
 
-                $products = $products->orderBy('id', 'desc');
+                $products = $products->orderBy('admin_confirm_date', 'desc');
             }
             if ($request->order_by == 3) {
 
@@ -103,6 +103,7 @@ class ProductController extends Controller
             $products = $products->paginate($limit);
 
             foreach ($products as $pro) {
+                $pro->image = asset(json_decode($pro->images)[0]);
                 $pro->images = asset(json_decode($pro->images)[0]);
                 $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
                     ->whereIn('type', [1, 2])
@@ -730,12 +731,13 @@ class ProductController extends Controller
     public
     function createBill($pdone_id)
     {
-        $products = DB::table('vshop_products')
+        $products = DB::table('vshop')->join
+        ('vshop_products','vshop.id','=','vshop_products.vshop_id')
             ->select('products.id', 'images', 'products.name', 'vshop_products.amount')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.status', 2)
             ->where('products.availability_status',1)
-            ->where('pdone_id', $pdone_id)
+            ->where('vshop.pdone_id', $pdone_id)
             ->where('vshop_products.amount', '>', 0)
             ->get();
         foreach ($products as $pr) {

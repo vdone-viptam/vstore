@@ -43,7 +43,9 @@ class AccountController extends Controller
 
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
+            'name.max' => 'Tên v-store tối đa 30 ký tự',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
+            'company_name.max' => 'Tên công ty tối đa 30 ký tự',
             'address.required' => 'Địa chỉ bắt buộc nhập',
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',

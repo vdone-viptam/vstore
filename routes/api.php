@@ -78,12 +78,12 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     });
     Route::prefix('review-product')->group(function () {
+
         Route::post('/accept-review', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'acceptReviewProduct']);
         Route::get('/review-detail-product/{point_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'reviewDetailProduct']);
         Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
         Route::get('/list-review-vdone/{done_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
         Route::post('/rep-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'repReviewProduct']);
-        Route::get('/rating-rate-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'ratingRateProduct']);
     });
     // CART
     Route::prefix('cart')->group(function () {
@@ -183,6 +183,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/user/{userId}/pre-order', [\App\Http\Controllers\Api\VShopController::class, 'getPreOrder']);
         Route::post('/pre-order/{orderId}', [\App\Http\Controllers\Api\VShopController::class, 'updateStatusDonePreOrder']);
         // END Nhập hàng sẵn
+
+    });
+    Route::prefix('wallet')->group(function () {
+        Route::get('/{pdone_id}', [\App\Http\Controllers\Api\WalletVshopController::class, 'surplus']);
 
     });
     Route::prefix('discount')->group(function () {
