@@ -273,7 +273,7 @@ class WarehouseController extends Controller
                 DB::rollBack();
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' . $productWare->amount - $productWare->export - $pause_product
+                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' . $productWare->export + $pause_product
                 ], 400);
             } else {
                 $productWare->export = $productWare->export + $request->quantity;
