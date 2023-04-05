@@ -109,6 +109,8 @@ class PaymentMethod9PayController extends Controller
                     $requestEx->note = 'Yêu cầu xuất kho';
                     $requestEx->save();
 
+                    $order->request_warehouse_id = $requestEx->id;
+
                     $order->save();
                     // nếu tồn tại URL return
                     if ($request->url) {
