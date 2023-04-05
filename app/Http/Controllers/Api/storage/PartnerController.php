@@ -132,7 +132,7 @@ class PartnerController extends Controller
             $limit = $request->limit ?? 10;
             $ncc = OrderItem::query()
                 ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
-                 where export_status=4 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+                 where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
                 ->select('products.id as product_id',
                     'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
                     DB::raw('count(*) as count_product'),
@@ -180,7 +180,7 @@ class PartnerController extends Controller
                     'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
                 )
                 ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
-                 where export_status=4 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+                 where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
                 ->join('products', 'order_item.product_id', '=', 'products.id')
                 ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
                 ->join('order', 'order.id', '=', 'order_item.order_id')
