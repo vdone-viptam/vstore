@@ -68,6 +68,7 @@ class DashboardController extends Controller
                 'request_warehouses.created_at',
                 'request_warehouses.type',
                 'request_warehouses.id',
+                'products.sku_id'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->whereIn('request_warehouses.type', [1, 10])
