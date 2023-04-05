@@ -48,12 +48,16 @@ class WarehouseController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
-        $model = new ProductWarehouses();
-        $model->fill($request->only('product_id', 'ware_id', 'amount'));
-        $model->status = 0;
-        $model->code = \Illuminate\Support\Str::random(12);
-        $model->export = 0;
-        $model->save();
+
+        if (!DB::table('product_warehouses')->where('product_id', $request->product_id)->where('ware_id', $request->ware_id)->first()) {
+            $model = new ProductWarehouses();
+            $model->fill($request->only('product_id', 'ware_id', 'amount'));
+            $model->status = 0;
+            $model->code = \Illuminate\Support\Str::random(12);
+            $model->export = 0;
+            $model->save();
+        }
+
 
         $requestIm = new RequestWarehouse();
 
