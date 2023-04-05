@@ -78,7 +78,7 @@ class DashboardController extends Controller
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->whereIn('request_warehouses.status', [7, 0])
             ->orderBy('request_warehouses.id', 'desc')
-            ->limit($request->limit ?? 5)->get();
+            ->paginate($request->limit ?? 10);
 
         return response()->json([
             'success' => true,
@@ -95,6 +95,6 @@ class DashboardController extends Controller
         return response()->json([
             'success' => true,
             'data' => $noti
-        ],200);
+        ], 200);
     }
 }
