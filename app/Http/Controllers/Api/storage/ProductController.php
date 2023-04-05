@@ -200,6 +200,7 @@ class ProductController extends Controller
             ->orderBy('order.id', 'desc');
         $order = $order->where('order.status', '!=', 2)
             ->where('order.id', $request->id)
+            ->orWhere('order.code', $request->id)
             ->first();
         return response()->json([
             'success' => true,

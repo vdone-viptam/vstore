@@ -65,6 +65,7 @@ class WarehouseController extends Controller
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('request_warehouses.id', $request->id)
+            ->orWhere('request_warehouses.code', $request->id)
             ->first();
 
         return response()->json([
