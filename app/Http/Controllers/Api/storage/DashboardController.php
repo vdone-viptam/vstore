@@ -74,7 +74,7 @@ class DashboardController extends Controller
                 'products.sku_id'
             );
         $products = $products->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
-            ->whereIn('request_warehouses.type', [1, 10])
+            ->whereIn('request_warehouses.type', [1, 10, 2, 7])
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->where('request_warehouses.status', 0)
             ->orderBy('request_warehouses.id', 'desc')
