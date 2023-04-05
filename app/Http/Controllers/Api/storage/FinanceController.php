@@ -147,7 +147,7 @@ class FinanceController extends Controller
             if ($request->money > Auth::user()->money) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số tiền rút tối đa là ' . Auth::user()->money
+                    'message' => 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ'
                 ], 400);
             }
             DB::table('deposits')->insert([
