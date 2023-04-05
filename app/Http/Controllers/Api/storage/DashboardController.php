@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $warehouses = Warehouses::where('user_id', Auth::id())->first();
-        $sku_id = $request->sku_id;
+        $publish_id = $request->publish_id;
         $requestEx = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->select(
@@ -31,9 +31,7 @@ class DashboardController extends Controller
                 'order.created_at',
                 'order.id'
             );
-        if(isset($sku_id)){
-            $requestEx = $requestEx->where('products.sku_id', $sku_id);
-        }
+
         $requestEx = $requestEx->where('order.status', '!=', 2)
             ->where('export_status', 0)
             ->where('order_item.warehouse_id', $warehouses->id)
@@ -74,8 +72,11 @@ class DashboardController extends Controller
                 'request_warehouses.type',
                 'request_warehouses.id',
                 'products.sku_id'
-            )
-            ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            );
+        if(isset($publish_id)){
+            $products = $products->where('products.publish_id', $publish_id);
+        }
+        $products = $products->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->whereIn('request_warehouses.type', [1, 10])
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->where('request_warehouses.status', 0)
