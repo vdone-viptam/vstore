@@ -85,6 +85,7 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
+            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
             $ncc = User::query()
                 ->select('users.name', 'account_code','province.province_name','users.id as user_id',
                         DB::raw('count(*) as count_product'),
@@ -93,8 +94,8 @@ class PartnerController extends Controller
                 ->join('province', 'users.provinceId', '=', 'province.province_id')
                 ->join('products', 'users.id', '=', 'products.user_id')
                 ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-                ->where('user_id', $request->user_id);
-            $ncc= $ncc->groupBy(['users.name', 'account_code','user_id'])->get();
+                ->where('ware_id', $id)
+                ->where('products.user_id', $request->user_id)->first();
 
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
@@ -131,7 +132,7 @@ class PartnerController extends Controller
             // $search = $request->search;
             $limit = $request->limit ?? 10;
             $ncc = OrderItem::query()
-                ->select('products.name','products.id as product_id',
+                ->select('products.id as product_id',
                         DB::raw('count(*) as count_product'),
                     )
                 ->join('products', 'order_item.product_id', '=', 'products.id')
@@ -139,7 +140,7 @@ class PartnerController extends Controller
                 ->join('order', 'order.id', '=', 'order_item.order_id')
                 ->where('order_item.warehouse_id', $id)
                 ->where('order.export_status', 4);
-            $ncc= $ncc->groupBy(['products.name'])
+            $ncc= $ncc->groupBy(['product_id'])
                 ->paginate($limit);
             foreach ($ncc as $item)
             {
@@ -161,16 +162,15 @@ class PartnerController extends Controller
      *
      * API này sẽ trả về chi tiết đối tác giao hàng
      *
-     * @param Request $request
-     * @bodyParam user_id : user id
+     * @param Request $request\
      * @return \Illuminate\Http\JsonResponse
      */
     public function detailDeliveryPartner(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'user_id' => 'required|exists:users,id',
-                'partner_id' => 'required'
+                // 'user_id' => 'required|exists:users,id',
+                // 'partner_id' => 'required'
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -179,15 +179,16 @@ class PartnerController extends Controller
             }
 
             $data = OrderItem::query()
-                ->select('products.name','products.id as product_id',
-                        DB::raw('count(*) as count_product'),
+                ->select(DB::raw('count(*) as count_product'),
                     )
                 ->join('products', 'order_item.product_id', '=', 'products.id')
                 // sau này còn phải join đên delivery_partner để lấy các mã ncc khác viettel post !
                 ->join('order', 'order.id', '=', 'order_item.order_id')
-                // ->where('order_item.warehouse_id', $id)
-                ->where('order.export_status', 4);
-            $data= $data->groupBy(['products.name'])->get();
+                ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
+                ->where('warehouses.user_id', Auth::id())
+                ->where('order.export_status', 4)->get();
+
+            // $data= $data->groupBy(['products.id'])->get();
             foreach ($data as $item)
             {
                 $item->name_partner = "Viettel Post";
