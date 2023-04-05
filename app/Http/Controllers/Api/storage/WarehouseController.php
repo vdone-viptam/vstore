@@ -10,6 +10,7 @@ use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -83,7 +84,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
-        $requests = User::join('products', 'users.id', '=', 'products.user_id')
+        $requests = User::query()
+            ->join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
                 'products.publish_id',
@@ -145,6 +147,17 @@ class WarehouseController extends Controller
             $productWare->save();
 
             $requestEx->save();
+            $order = Order::where('order_number', $requestEx->order_number)->first();
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng'
+                ], 404);
+            }
+
+            $order->cancel_status = 1;
+            $order->save();
+
             DB::commit();
             return response()->json([
                 'success' => true,
