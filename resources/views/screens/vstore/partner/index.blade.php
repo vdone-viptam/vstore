@@ -112,17 +112,17 @@
                             @foreach($users as $val)
 
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         {{$val->account_code}}
                                     </td>
                                     <td>
                                         {{$val->name}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{$val->phone_number}}
                                     </td>
 
-                                    <td>
+                                    <td class="text-center">
                                         {{$val->sl}}
                                     </td>
 
