@@ -199,6 +199,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('storage')->group(function () {
+            Route::get('/notification', [\App\Http\Controllers\Api\storage\DashboardController::class, 'notifi']);
             Route::prefix('dashboard')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\DashboardController::class, 'index']);
             });
