@@ -20,7 +20,7 @@ class WarehouseController extends Controller
     //
 
 
-    public function importProduct()
+    public function importProduct(Request $request)
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
@@ -41,8 +41,11 @@ class WarehouseController extends Controller
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->whereIn('request_warehouses.status', [5, 1, 7])
-            ->orderBy('request_warehouses.id', 'desc')
-            ->paginate($limit);
+            ->orderBy('request_warehouses.id', 'desc');
+        if ($request->code) {
+            $requests = $requests->where('request_warehouses.code', $request->code);
+        }
+        $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $requests
@@ -76,7 +79,7 @@ class WarehouseController extends Controller
 
     }
 
-    public function exportProduct()
+    public function exportProduct(Request $request)
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
@@ -95,8 +98,11 @@ class WarehouseController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.status', 'asc')
-            ->paginate($limit);
+            ->orderBy('request_warehouses.status', 'asc');
+        if ($request->code) {
+            $requests = $requests->where('request_warehouses.code', $request->code);
+        }
+        $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $requests
@@ -153,7 +159,7 @@ class WarehouseController extends Controller
         }
     }
 
-    public function exportDestroyProduct()
+    public function exportDestroyProduct(Request $request)
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
@@ -174,8 +180,11 @@ class WarehouseController extends Controller
             ->where('type', 3)
             ->where('request_warehouses.status', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.id', 'desc')
-            ->paginate($limit);
+            ->orderBy('request_warehouses.id', 'desc');
+        if ($request->code) {
+            $requests = $requests->where('request_warehouses.code', $request->code);
+        }
+        $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $requests
@@ -252,7 +261,7 @@ class WarehouseController extends Controller
         }
     }
 
-    public function destroyOrder()
+    public function destroyOrder(Request $request)
     {
         $limit = $request->limit ?? 10;
         $ware = Warehouses::select('id')->where('user_id', Auth::id())->first();
@@ -262,8 +271,11 @@ class WarehouseController extends Controller
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->whereIn('order.export_status', [3, 5])
             ->where('order.status', '!=', 2)
-            ->where('order_item.warehouse_id', $ware->id)
-            ->paginate($limit);
+            ->where('order_item.warehouse_id', $ware->id);
+        if ($request->code) {
+            $orders = $orders->where('order.no', $request->code);
+        }
+        $orders = $orders->paginate($limit);
 
         return response()->json([
             'success' => true,
