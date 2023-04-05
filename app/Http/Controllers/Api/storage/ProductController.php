@@ -215,12 +215,18 @@ class ProductController extends Controller
             ], 400);
         }
 
-        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0)->first();
-        if (!$requestIm) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Không tìm thấy yêu cầu',
-            ], 404);
+        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0);
+        if (!$requestIm->first()) {
+            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 5)->first();
+            if (!$requestIm) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy yêu cầu',
+                ], 404);
+            }
+
+        } else {
+            $requestIm = $requestIm->first();
         }
         if ($status == 1) {
             if ($requestIm->type == 1) {
@@ -338,7 +344,7 @@ class ProductController extends Controller
                     "ORDER_NUMBER" => '',
                     "SENDER_FULLNAME" => $warehouse->name,
                     "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
-                    "SENDER_PHONE" => $warehouse->phone_nameber,
+                    "SENDER_PHONE" => $warehouse->phone_number,
                     "RECEIVER_FULLNAME" => $order->fullname,
                     "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
                     "RECEIVER_PHONE" => $order->phone,
@@ -383,6 +389,8 @@ class ProductController extends Controller
                 $request->save();
             }
             if ($status == 3 && $order->order_number !== '') {
+                $order->note = $request->note;
+                $order->save();
                 $huy_don = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',

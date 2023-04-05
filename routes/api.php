@@ -206,11 +206,11 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/', [\App\Http\Controllers\Api\storage\ProductController::class, 'index']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailProduct']);
                 Route::get('/request', [\App\Http\Controllers\Api\storage\ProductController::class, 'request']);
-                Route::get('/detail-request', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequest']);
 
                 Route::put('/request/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequest']);
 
                 Route::get('/requestOut', [\App\Http\Controllers\Api\storage\ProductController::class, 'requestOut']);
+                Route::get('/detail-request', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequest']);
                 Route::get('/detail-request-out', [\App\Http\Controllers\Api\storage\ProductController::class, 'detailRequestOut']);
 
                 Route::put('/requestOut/update/{status}', [\App\Http\Controllers\Api\storage\ProductController::class, 'updateRequestOut']);
@@ -230,9 +230,14 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/import', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'importProduct']);
                 Route::get('/export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportProduct']);
                 Route::put('/confirm-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'confirmExportProduct']);
-
                 Route::get('/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportDestroyProduct']);
+                Route::get('/create/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'createRequestDestroy']);
+                Route::post('/store/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeRequestDestroy']);
+
                 Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
+                Route::get('/detail', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailImportProduct']);
+                Route::get('/detail-destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailDestroyOrder']);
+
             });
             Route::prefix('finances')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\FinanceController::class, 'index']);

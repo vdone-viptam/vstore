@@ -417,7 +417,7 @@ class OrderController extends Controller
             }
             if ($status == 5) {
                 $orders = $orders->where('export_status', 4)
-                    ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(-7));
+                    ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(7));
             }
             $orders = $orders
                 ->where('status', '!=', 2)
@@ -453,7 +453,7 @@ class OrderController extends Controller
                 if ($rating) {
                     $order->rating = $rating;
                     $order->rating->image = $product->images ? asset(json_decode($product->images)[0]) : '';
-                    $order->rating->content_image = $rating->images ;
+                    $order->rating->content_image = $rating->images;
                     $order->rating->total = $product->price - ($product->price * ($order->orderItem[0]->discount_ncc +
                                 $order->orderItem[0]->discount_vstore
                                 + $order->orderItem[0]->discount_vshop) / 100);
@@ -556,7 +556,7 @@ class OrderController extends Controller
                 ], 404);
             }
             $orders = OrderItem::select(
-                'id as order_item_id',
+                'order_item.id as order_item_id',
                 'product_id',
                 'discount_vshop',
                 'price',
@@ -582,7 +582,7 @@ class OrderController extends Controller
 //            return $orders->updated_at;
 //            return Carbon::now()->addDay(7);
             $orders = $orders->paginate($limit);
-//            return $orders;
+            return $orders;
             foreach ($orders as $order) {
                 $product = $order->product()->select('name', 'images')->first();
                 $order->productInfo = null;
