@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manufacture;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
@@ -51,7 +52,31 @@ class WarehouseController extends Controller
         $model->fill($request->only('product_id', 'ware_id', 'amount'));
         $model->status = 0;
         $model->code = \Illuminate\Support\Str::random(12);
+        $model->export = 0;
         $model->save();
+
+        $requestIm = new RequestWarehouse();
+
+        $requestIm->ncc_id = Auth::id();
+        $requestIm->product_id = $request->product_id;
+        $requestIm->status = 0;
+        $requestIm->type = 1;
+        $requestIm->ware_id = $request->ware_id;
+        $requestIm->quantity = $request->amount;
+        $code = 'YCN' . rand(100000000, 999999999);
+
+        while (true) {
+            $re = RequestWarehouse::where('code', $code)->count();
+            if ($re == 0) {
+                break;
+            }
+            $code = 'YCN' . rand(100000000, 999999999);
+        }
+        $requestIm->code = $code;
+        $requestIm->order_number = '';
+        $requestIm->note = 'Yêu cầu gửi sản phẩm';
+        $requestIm->save();
+
         $warehouse = Warehouses::select('user_id')->where('id', $request->ware_id)->first();
         if ($warehouse) {
             $user = User::find($warehouse->user_id);

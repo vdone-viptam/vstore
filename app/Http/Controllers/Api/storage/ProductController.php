@@ -46,6 +46,7 @@ class ProductController extends Controller
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->join('users', 'warehouses.user_id', 'users.id')
+            ->where('warehouses.status', 1)
             ->groupBy(['products.id'])
             ->where('warehouses.user_id', Auth::id())
             ->paginate($limit);;
@@ -236,6 +237,9 @@ class ProductController extends Controller
                         'success' => false,
                         'message' => 'Không tìm thấy sản phẩm',
                     ], 404);
+                }
+                if ($ware->status == 0) {
+                    $ware->status = 1;
                 }
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
