@@ -92,9 +92,17 @@ class FinanceController extends Controller
         ], 201);
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')->where('user_id', Auth::id())->paginate(10);
+        $limit = $request->limit ?? 10;
+        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->where('user_id', Auth::id());
+
+        if ($request->code) {
+            $this->v['histories'] = $this->v['histories']->where('code', $request->code);
+        }
+
+        $this->v['histories'] = $this->v['histories']->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $this->v['histories']
