@@ -73,9 +73,6 @@ class DashboardController extends Controller
                 'request_warehouses.id',
                 'products.sku_id'
             );
-        if(isset($publish_id)){
-            $products = $products->where('products.publish_id', $publish_id);
-        }
         $products = $products->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->whereIn('request_warehouses.type', [1, 10])
             ->where('request_warehouses.ware_id', $warehouses->id)
