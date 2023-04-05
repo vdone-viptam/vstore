@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\BillCurrent;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
+use App\Models\DetailBillCurrent;
 use App\Models\Discount;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
@@ -700,6 +702,8 @@ class ProductController extends Controller
             $vstore = [];
             $vshop = [];
             $ncc = [];
+
+            $arrayDetailBillCurrent = [];
             foreach ($request->infomation as $pro) {
                 $products = DB::table('vshop_products')
                     ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
@@ -738,10 +742,46 @@ class ProductController extends Controller
                     'pdone_id' => $pdone_id
                 ];
 
+                $total_price = $price * $pro['amount'] - ($price * $pro['amount'] * $product->discount / 100) - ($price * $pro['amount'] * $product->discount_vShop / 100);
                 $ncc[] = [
-                    'total' => $price * $pro['amount'] - ($price * $pro['amount'] * $product->discount / 100) - ($price * $pro['amount'] * $product->discount_vShop / 100),
+                    'total' => $total_price,
                     'ncc_id' => $product->user_id
                 ];
+                // tạo bill vãng lai chi tiết
+                $arrayDetailBillCurrent[] = [
+                    'product_id' => $pro['product_id'],
+                    'amount' => $pro['amount'],
+                    'price' => $total_price,
+                    'status' => 0,
+                ];
+                // $detailBillCurrent = new DetailBillCurrent();
+                // $detailBillCurrent->bill_current_id = 1231;
+                // $detailBillCurrent->product_id = $pro['product_id'] ;
+                // $detailBillCurrent->amount = $pro['amount'] ;
+                // $detailBillCurrent->price = $total_price;
+                // $detailBillCurrent->status = 0 ;
+                // $detailBillCurrent->save();
+            }
+            $vshop = Vshop::where('pdone_id',$pdone_id)->first();
+            if($vshop){
+                $billCurrent = new BillCurrent();
+                while (true) {
+                $code = 'bill-' . Str::random(10);
+                if (!BillCurrent::where('code_bill', $code)->first()) {
+                    $billCurrent->code_bill = $code;
+                    break;
+                    }
+                }
+                $billCurrent->vshop_id = $vshop->id;
+                $billCurrent->price = $total_price;
+                $billCurrent->status = 0 ;
+                $billCurrent->save();
+
+                $idBillCurrent = $billCurrent->id;
+                foreach( $arrayDetailBillCurrent as $key => $value){
+                    $detailBillCurrent = new DetailBillCurrent();
+                    dd($value);
+                }
 
             }
 
