@@ -87,4 +87,14 @@ class DashboardController extends Controller
             'productOutStock' => $productOutStock,
             'products' => $products]);
     }
+
+    public function notifi()
+    {
+        $noti = Auth::user()->notifications;
+
+        return response()->json([
+            'success' => true,
+            'data' => $noti
+        ],200);
+    }
 }
