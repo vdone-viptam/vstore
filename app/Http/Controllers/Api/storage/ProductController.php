@@ -124,9 +124,11 @@ class ProductController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.id', 'desc')
-            ->paginate($limit);
-        $this->v['params'] = $request->all();
+            ->orderBy('request_warehouses.id', 'desc');
+        if ($request->code) {
+            $requests = $requests->where('request_warehouses.code', $request->code);
+        }
+        $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $requests
@@ -174,8 +176,11 @@ class ProductController extends Controller
             )
             ->orderBy('order.id', 'desc');
         $order = $order->where('order.status', '!=', 2)
-            ->where('order_item.warehouse_id', $warehouses->id)
-            ->paginate(10);
+            ->where('order_item.warehouse_id', $warehouses->id);
+        if ($request->code) {
+            $order = $order->where('order.no', $request->code);
+        }
+        $order = $order->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $order

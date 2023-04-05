@@ -23,7 +23,7 @@ class FinanceController extends Controller
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::with(['bank'])->select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
-            ->where('type',1)
+            ->where('type', 1)
             ->first();
         return response()->json([
             'success' => true,
@@ -114,6 +114,12 @@ class FinanceController extends Controller
                 } else {
                     break;
                 }
+            }
+            if ($request->money > Auth::user()->money) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Số tiền rút tối đa là ' . Auth::user()->money
+                ], 400);
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
