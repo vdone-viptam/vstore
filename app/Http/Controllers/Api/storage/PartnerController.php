@@ -120,7 +120,6 @@ class PartnerController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                // 'search' => 'max:200',
                 'limit' => 'numeric|min:1',
             ]);
             if ($validator->fails()) {
@@ -158,13 +157,13 @@ class PartnerController extends Controller
      * API này sẽ trả về chi tiết đối tác giao hàng
      *
      * @param Request $request\
+     * @bodyParam delivery_partner_id id đối tác giao hàng
      * @return \Illuminate\Http\JsonResponse
      */
     public function detailDeliveryPartner(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                // 'user_id' => 'required|exists:users,id',
                 'delivery_partner_id' => 'required'
             ]);
             if ($validator->fails()) {
@@ -172,7 +171,6 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-
             $data = OrderItem::query()
                 ->select(DB::raw('count(*) as count_product'),
                             'delivery_partner.name_partner','delivery_partner.code_partner','delivery_partner.id as delivery_partner_id',
