@@ -20,6 +20,11 @@
     }
     td{
         text-align: left;
+
+    }
+    .page-link{
+        width: 100%;
+        text-align: center;
     }
 
 </style>

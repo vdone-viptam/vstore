@@ -800,6 +800,8 @@ class ProductController extends Controller
                     'ncc_id' => $product->user_id
                 ];
 
+
+
             }
 
 //            return [$vstore, $vshop, $ncc, $bills];

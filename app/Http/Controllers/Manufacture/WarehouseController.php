@@ -92,7 +92,7 @@ class WarehouseController extends Controller
 //            ->groupBy('product_warehouses.product_id')
             ->where('products.user_id', Auth::id())->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
         foreach ($ware as $wa) {
-            $wa->amount = ProductWarehouses::where('ware_id', $wa->id)->groupBy('product_id')->count();
+            $wa->amount = ProductWarehouses::where('ware_id', $wa->id)->distinct('product_id')->count('id');
 //            return  $wa;
             $nhap = ProductWarehouses::where('ware_id', $wa->id)->where('status', 1)->sum('amount');
             $xuat = ProductWarehouses::where('ware_id', $wa->id)->where('status', 2)->sum('amount');
