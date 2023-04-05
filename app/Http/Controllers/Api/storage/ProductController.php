@@ -217,7 +217,7 @@ class ProductController extends Controller
 
         $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0);
         if (!$requestIm->first()) {
-            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 5)->first();
+            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->whereIn('status', [5, 7])->first();
             if (!$requestIm) {
                 return response()->json([
                     'success' => false,
@@ -241,6 +241,20 @@ class ProductController extends Controller
                 $ware->save();
             }
         }
+        if ($requestIm->status == 7) {
+            if ($requestIm->type == 1) {
+                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+                if (!$ware) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy sản phẩm',
+                    ], 404);
+                }
+                $ware->export = $ware->export - $requestIm->quantity;
+                $ware->save();
+            }
+        }
+
         $requestIm->status = $status;
         $requestIm->save();
         return response()->json([
