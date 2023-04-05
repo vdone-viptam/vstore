@@ -269,11 +269,11 @@ class WarehouseController extends Controller
                     ->where('request_warehouses.ware_id', $request->warehouse_id)
                     ->where('type', 2)
                     ->first()->total ?? 0;
-            if ($productWare->amount - $productWare->export - $request->quantity - $pause_product < 0) {
+            if ($productWare->amount - ($productWare->export + $pause_product) < $request->quantity) {
                 DB::rollBack();
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' . $productWare->export + $pause_product
+                    'message' => 'Số lượng sản phẩm hủy phải nhỏ hơn ' . $productWare->amount - ($productWare->export + $pause_product)
                 ], 400);
             } else {
                 $productWare->export = $productWare->export + $request->quantity;
