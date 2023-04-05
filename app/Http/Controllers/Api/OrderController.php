@@ -627,7 +627,6 @@ class OrderController extends Controller
      */
     public function refuseOrderByCustomer(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'order_id' => 'required',
             'descriptions' => 'required|max:200',
@@ -651,36 +650,10 @@ class OrderController extends Controller
                 'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
             ]);
 
-            // if( $order->export_status == 1 ){
-            //     $orderItem = OrderItem::join('order','order.id','order_item.order_id')->where('order.id',$request->order_id)->first();
-            //     $product_id = $orderItem->product_id;
-            // }
+            // check nếu khách huỷ mà chưa đc duyệt request
             $checkUpdate = RequestWarehouse::join('order','order.order_number','request_warehouses.order_number')
                 ->where('order.id',$request->order_id)
-                ->where('status',1)->first();
-
-            if($checkUpdate){
-                // tự động tạo request mới
-                $newRequestWarehouse = new RequestWarehouse();
-                $newRequestWarehouse -> ncc_id = $checkUpdate->ncc_id;
-                $newRequestWarehouse -> product_id = $checkUpdate->ncc_id;
-                $newRequestWarehouse -> status = 0;
-                $newRequestWarehouse -> type = 1;
-                $newRequestWarehouse -> ware_id = $checkUpdate->ware_id;
-                $newRequestWarehouse -> quantity = $checkUpdate->quantity;
-
-                $code = 'YCH' . rand(100000000, 999999999);
-                while (true) {
-                    $re = RequestWarehouse::where('code', $code)->count();
-                    if ($re == 0) {
-                        break;
-                    }
-                    $code = 'YCH' . rand(100000000, 999999999);
-                }
-                $newRequestWarehouse -> code = $code;
-                $newRequestWarehouse -> note = "Yêu cầu hoàn lại hàng";
-                $newRequestWarehouse -> save();
-            }
+                ->where('status',0)->update(['status'=>2]);
 
             $refuseStatus = 5;
             $order->export_status = $refuseStatus;
@@ -740,6 +713,32 @@ class OrderController extends Controller
                     'message' => 'Không tìm thấy đơn hàng huỷ bởi khách hàng !'
                 ], 500);
             }else{
+                $checkUpdate = RequestWarehouse::join('order','order.order_number','request_warehouses.order_number')
+                ->where('order.id',$request->order_id)
+                ->where('status',1)->first();
+
+                // tự động tạo request mới khi khách hàng huỷ đơn và đơn hàng đã giao mà chưa chuyển cho khách hàng
+                if($checkUpdate){
+                    $newRequestWarehouse = new RequestWarehouse();
+                    $newRequestWarehouse -> ncc_id = $checkUpdate->ncc_id;
+                    $newRequestWarehouse -> product_id = $checkUpdate->ncc_id;
+                    $newRequestWarehouse -> status = 0;
+                    $newRequestWarehouse -> type = 1;
+                    $newRequestWarehouse -> ware_id = $checkUpdate->ware_id;
+                    $newRequestWarehouse -> quantity = $checkUpdate->quantity;
+
+                    $code = 'YCH' . rand(100000000, 999999999);
+                    while (true) {
+                        $re = RequestWarehouse::where('code', $code)->count();
+                        if ($re == 0) {
+                            break;
+                        }
+                        $code = 'YCH' . rand(100000000, 999999999);
+                    }
+                    $newRequestWarehouse -> code = $code;
+                    $newRequestWarehouse -> note = "Yêu cầu hoàn lại hàng";
+                    $newRequestWarehouse -> save();
+                }
                 return response()->json([
                     'success' => true,
                     'data' => $data
@@ -793,8 +792,9 @@ class OrderController extends Controller
                 $orderItem = OrderItem::where('order_id',$request->order_id)->first();
                 $product_id = $orderItem->product_id;
                 $count = $orderItem->quantity;
-                $updateCountProduct = ProductWarehouses::where('ware_id',$warehouse_id)->where('product_id', $product_id)
-                    ->increment('amount', $count);
+
+                // $updateCountProduct = ProductWarehouses::where('ware_id',$warehouse_id)->where('product_id', $product_id)
+                //     ->increment('amount', $count);
 
                 return response()->json([
                     'success' => true,
