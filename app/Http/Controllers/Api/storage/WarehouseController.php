@@ -387,7 +387,7 @@ class WarehouseController extends Controller
 
     public function detailDestroyOrder(Request $request)
     {
-        $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id')
+        $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id', 'order.id')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->where('order.id', $request->id)
