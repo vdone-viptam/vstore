@@ -201,10 +201,19 @@ class WarehouseController extends Controller
     {
         $products = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
-            ->select('products.id', 'products.name', DB::raw('(amount - export) as in_stock',), 'warehouses.id as ware_id')
+            ->select('products.id', 'products.name', DB::raw('(amount - export) as in_stock'), 'warehouses.id as ware_id')
             ->where('warehouses.user_id', Auth::id())
             ->get();
+        foreach ($products as $product) {
+            $pause_product = (int)DB::table('request_warehouses')
+                    ->selectRaw('SUM(quantity) as total')
+                    ->where('request_warehouses.product_id', $product->id)
+                    ->where('request_warehouses.ware_id', $product->ware_id)
+                    ->where('type', 2)
+                    ->first()->total ?? 0;
 
+            $product->in_stock = $product->in_stock - $pause_product;
+        }
         return response()->json([
             'success' => true,
             'data' => $products
