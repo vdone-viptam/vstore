@@ -156,7 +156,7 @@
                 </div>
                 <ul class="flex flex-col gap-2 text-[#3369D1] text-[15px] font-medium xl:pl-20 md:pl-16  list hidden xl:max-w-[230px] md:max-w-[150px]">
                     <li data-page="/"><a class="hover:underline" href="{{Route('screens.storage.partner.index')}}">Danh
-                            sách nhà cung cấp</a></li>
+                            sách Nhà cung cấp</a></li>
 
                 </ul>
             </div>

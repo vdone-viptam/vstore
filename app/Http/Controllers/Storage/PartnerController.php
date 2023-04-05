@@ -21,7 +21,7 @@ class PartnerController extends Controller
             ->groupBy(['users.name', 'account_code', 'phone_number', 'company_name', 'tax_code'])
             ->paginate(10);
 
-
+//        return $ncc;
         return view('screens.storage.partner.index', ['ncc' => $ncc]);
 
     }

@@ -117,7 +117,7 @@ class ProductController extends Controller
             }
             if ($request->order_by == 1) {
 
-                $products = $products->orderBy('id', 'desc');
+                $products = $products->orderBy('admin_confirm_date', 'desc');
             }
             if ($request->order_by == 3) {
 
@@ -142,6 +142,7 @@ class ProductController extends Controller
             $products = $products->paginate($limit);
 
             foreach ($products as $pro) {
+                $pro->image = asset(json_decode($pro->images)[0]);
                 $pro->images = asset(json_decode($pro->images)[0]);
                 $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
                     ->whereIn('type', [1, 2])
