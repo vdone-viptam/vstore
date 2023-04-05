@@ -215,12 +215,14 @@ class WarehouseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
-            'quantity' => 'required',
+            'quantity' => 'required|numeric|min:1',
             'warehouse_id' => 'required',
             'note' => 'required|max:255'
         ], [
             'product_id.required' => 'Mã sản phẩm là bắt buộc',
             'quantity.required' => 'Số lượng sản phẩm hủy bắt buộc nhập',
+            'quantity.numeric' => 'Số lượng sản phẩm hủy bắt buộc phải là số',
+            'quantity.min' => 'Số lượng sản phẩm hủy bắt buộc lớn hơn 0',
             'warehouse_id.required' => 'ID kho hàng là bắt buộc',
             'note.required' => 'Lý do hủy hàng bắt buộc nhập',
             'note.max' => 'Lý do ít hơn 255 ký tự '
