@@ -61,7 +61,8 @@ class WarehouseController extends Controller
                 'request_warehouses.status',
                 'request_warehouses.created_at',
                 'request_warehouses.id',
-                'request_warehouses.note'
+                'request_warehouses.note',
+                'request_warehouses.type'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('request_warehouses.id', $request->id)
