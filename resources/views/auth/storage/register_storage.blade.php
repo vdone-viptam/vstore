@@ -316,10 +316,10 @@
 
 
     </div>
-    <div class="text-center my-4"><input name="checkbox" required type="checkbox"> Bạn đồng ý với điều khoản sử
-        dụng của
-        chúng
-        tôi. <a href="#"
+    <div class="text-center my-4">
+        <input type="checkbox" id="terms_of_use" required>
+        <label for="terms_of_use"> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</label>
+        <a href="#"
                 onclick="$('.modal-hd').toggleClass('show-modal')"
                 class="underline text-blue-700">Xem
             thêm</a></div>
