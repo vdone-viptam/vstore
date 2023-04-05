@@ -204,7 +204,8 @@ class WarehouseController extends Controller
             ->select('products.id', 'products.name', DB::raw('(amount - export) as in_stock'), 'warehouses.id as ware_id')
             ->where('warehouses.user_id', Auth::id())
             ->get();
-        foreach ($products as $key => $product) {
+        $arr = [];
+        foreach ($products as $product) {
             $pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
                     ->where('request_warehouses.product_id', $product->id)
@@ -212,13 +213,13 @@ class WarehouseController extends Controller
                     ->where('type', 2)
                     ->first()->total ?? 0;
             $product->in_stock = $product->in_stock - $pause_product;
-            if ($product->in_stock <= 0) {
-                unset($products[$key]);
+            if ($product->in_stock > 0) {
+                $arr[] = $product;
             }
         }
         return response()->json([
             'success' => true,
-            'data' => $products
+            'data' => $arr
         ]);
     }
 
