@@ -91,8 +91,8 @@ class LoginController extends Controller
         if ($role_id == 3) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required',
-                'company_name' => 'required',
+                'name' => 'required|max:32',
+                'company_name' => 'required|max:50',
                 'tax_code' => 'required|digits:10',
                 'address' => 'required',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
@@ -105,7 +105,9 @@ class LoginController extends Controller
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà V-store bắt buộc nhập',
+                'name.max' => 'Tên nhà V-store tối đa 30 ký tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'company_name.max' => 'Tên công ty tối đa 50 kí tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -119,8 +121,8 @@ class LoginController extends Controller
         } elseif ($role_id == 4) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required',
-                'company_name' => 'required',
+                'name' => 'required|max:32',
+                'company_name' => 'required|max:50',
                 'tax_code' => 'required|digits:10',
                 'address' => 'required|max:255',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
@@ -137,7 +139,9 @@ class LoginController extends Controller
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
+                'name.max' => 'Tên tối đa 30 ký tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
+                'company_name.max' => 'Tên công ty tối đa 100 ký tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
@@ -145,7 +149,9 @@ class LoginController extends Controller
                 'floor_area.required' => 'Diện tích kho bắt buộc nhập',
                 'volume.required' => 'Thể tích kho bắt buộc nhập',
                 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
+                'image_storage.image' => 'Không đúng định dạng ảnh',
                 'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
+                'image_pccc.image' => 'Không đúng định dạng ảnh',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'ward_id' => 'Phường (xã) bắt buộc chọn',
@@ -155,8 +161,8 @@ class LoginController extends Controller
         } elseif ($role_id == 2) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
-                'name' => 'required',
-                'company_name' => 'required',
+                'name' => 'required|max:32',
+                'company_name' => 'required|max:50',
                 'tax_code' => 'required|digits:10',
                 'address' => 'required',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
@@ -168,7 +174,9 @@ class LoginController extends Controller
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
+                'name.max' => 'Tên nhà cung cấp tối đa 30 ký tự',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
+                'company_name.unique' => 'Tên công ty tối đa 100 kí tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -486,12 +494,17 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             $role_id = 4;
         }
         $passwordReset = PasswordReset::where('token', $token)->where('role_id', $role_id)->first();
-
-        if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180 || !$passwordReset) {
-            abort(404);
+        if ($passwordReset) {
+            if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
+                return redirect()->route('form_forgot_password')->with('error', 'Token của bạn đã hết hạn');
+            } else {
+                return view('auth.formReset', ['role_id' => $role_id]);
+            }
+        } else {
+            return redirect()->route('form_forgot_password')->with('error', 'Token của bạn đã hết hạn');
         }
 
-        return view('auth.formReset', ['role_id' => $role_id]);
+
     }
 
     public
@@ -504,8 +517,8 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             'role_id' => 'required',
         ], [
             'password.required' => 'Email bắt buộc nhập',
-            'password.min' => 'Mật khẩu ít nhất 8 ký tự',
-            'password.max' => 'Mật khẩu nhiều nhất 30 ký tự',
+            'password.min' => 'Mật khẩu không đúng định dạng',
+            'password.max' => 'Mật khẩu nhiều không đúng định dạng',
             'password.confirmed' => 'Mật khẩu không trùng khớp',
             'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
             'password.regex' => 'Mật khẩu không đúng định dạng'

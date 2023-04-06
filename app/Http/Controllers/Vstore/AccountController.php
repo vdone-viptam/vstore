@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Vstore;
 
+use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Warehouses;
 use Carbon\Carbon;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,7 +45,9 @@ class AccountController extends Controller
 
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
+            'name.max' => 'Tên v-store tối đa 30 ký tự',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
+            'company_name.max' => 'Tên công ty tối đa 30 ký tự',
             'address.required' => 'Địa chỉ bắt buộc nhập',
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
@@ -55,23 +59,38 @@ class AccountController extends Controller
 
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
+        DB::beginTransaction();
+        try {
+            $user = \App\Models\User::find($id);
 
-        $user = \App\Models\User::find($id);
-
-        $user->name = trim($request->name);
-        $user->company_name = trim($request->company_name);
+            $user->name = trim($request->name);
+            $user->company_name = trim($request->company_name);
 //        $user->tax_code = trim($request->tax_code);
-        $user->address = trim($request->address);
-        $user->id_vdone = trim($request->id_vdone);
-        $user->id_vdone_diff = trim($request->id_vdone_diff);
-        $user->phone_number = trim($request->phone_number);
-        if ($request->link_website) {
-            $user->slug = trim($request->link_website);
-        }
-        $user->description = $request->description;
-        $user->save();
+            $user->address = trim($request->address);
+            $user->id_vdone = trim($request->id_vdone);
+            $user->id_vdone_diff = trim($request->id_vdone_diff);
+            $user->phone_number = trim($request->phone_number);
+            if ($request->link_website) {
+                $user->slug = trim($request->link_website);
+            }
+            $user->description = $request->description;
+            $user->save();
 
-        return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+            $elasticsearchController = new ElasticsearchController();
+            try {
+                $res = $elasticsearchController->updateDocVStore((string)$user->id, $request->name);
+                DB::commit();
+            } catch (ClientResponseException $exception) {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            }
+            return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+
+        }
+
     }
 
     public function uploadImage($id, Request $request)

@@ -47,6 +47,9 @@ class ManufactureController extends Controller
         ]);
     }
 
+
+
+
     /**
      * chi tiết nhà cung cấp
      *

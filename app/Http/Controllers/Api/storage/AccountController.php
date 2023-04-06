@@ -71,7 +71,6 @@ class AccountController extends Controller
                 'errors' => $validator->errors()
             ], 401);
         }
-dd($request->all());
         $user = \App\Models\User::find($id);
 
         $user->name = trim($request->name);
@@ -162,41 +161,34 @@ dd($request->all());
 
     public function saveChangePassword(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'password' => 'confirmed|required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
-            'password_confirmation' => 'required'
-        ], [
-            'old_password.required' => 'Mật khẩu cũ bắt buộc nhập',
-            'password.confirmed' => 'Xác nhận mật khẩu không chính xác',
-            'password.min' => 'Mật khẩu ít nhất 8 kí tự',
-            'password.regex' => 'Mật khẩu không dúng dịnh dạng (ít nhất 1 chữ số,kí tự đặc biệt và 1 ký tự in hoa bất kì)',
-            'password.required' => 'Mật khẩu mới bắt buộc nhập',
-            'password_confirmation.required' => 'Bạn chưa xác nhận mật khẩu'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 400);
-        }
-
         $user = User::find(Auth::id());
 
+        if (strlen($request->old_password) == 0) {
+            return response()->json(['old_password' => "Mật khẩu cũ bắt buộc nhập"], 400);
+        }
         if (!Hash::check($request->old_password, $user->password)) {
-            return response()->json([
-                'success' => false,
-                'errors' => ['old_password' => "Mật khẩu cũ không chính xác"]
-            ], 400);
+            return response()->json(['old_password' => "Mật khẩu cũ không chính xác"], 400);
         }
 
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+        ], [
+            'password.min' => 'Mật khẩu không đúng định dạng',
+            'password.regex' => 'Mật khẩu không đúng định dạng',
+            'password.required' => 'Mật khẩu mới bắt buộc nhập',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+        if (strlen($request->password_confirmation) == 0) {
+            return response()->json(['password_confirmation' => "Xác nhận mật khẩu bắt buộc nhập"], 400);
+        }
+        if ($request->password != $request->password_confirmation) {
+            return response()->json(['password_confirmation' => "Xác nhận mật khẩu không chính xác"], 400);
+        }
         $user->password = Hash::make($request->password);
         $user->save();
-        return response()->json([
-            'success' => true,
-            'message' => 'Thay đổi mật khẩu thành công'
-        ], 201);
+        return response()->json(['message' => "Thay đổi mật khẩu thành công"], 201);
     }
 
     public function editTaxCode()

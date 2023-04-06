@@ -32,7 +32,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address');
             $table->integer('export_status')->default(0)->comment('trạng thái xuất kho 1,xác nhận đơn ,2 xuất kho giao cho vận chuyển , 3 kho hủy,4 hoàn thành, 5 khách hàng huỷ');
-            $table->string('note')->nullable()->comment('ghi chú');
+            $table->integer('cancel_status')->nullable()->comment('trạng thái huỷ kho bởi khách,mac dinh null, khi khach huy cap nhat len 1, nhap kho cap nhat thanh 2');
+            $table->string('note')->nullable()->comment('ghi chú khi khach hang huy (khi huy cap nhat export_status = 5 )');
             $table->string('order_number')->comment('mã giao vận');
             $table->integer('order_status')->comment('mã giao vận');
             $table->timestamps();

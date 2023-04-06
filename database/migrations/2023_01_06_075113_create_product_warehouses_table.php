@@ -18,9 +18,8 @@ return new class extends Migration {
             $table->integer('ware_id');
             $table->integer('product_id');
             $table->integer('status')->comment('0 cho nhap,1 nhap,2 xuat,3 cho xuat,4 tu choi xuat');
-            $table->integer('amount');
-            $table->integer('bill_product_id');
-            $table->integer('export')->nullable()->comment('số lượng đã xuất');
+            $table->integer('amount')->comment('tong so luong nhap');;
+            $table->integer('export')->default(0)->comment('so luong xuat');;
             $table->timestamps();
         });
     }

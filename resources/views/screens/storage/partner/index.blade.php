@@ -5,7 +5,7 @@
 
     </div>
 @endsection
-@section('page_title','Danh sách nhà cung cấp')
+@section('page_title','Danh sách Nhà cung cấp')
 
 @section('content')
 
@@ -16,7 +16,7 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.vstore.partner.index')}}" class="text-blueMain font-medium italic">Danh sách nhà
+            <a href="{{route('screens.vstore.partner.index')}}" class="text-blueMain font-medium italic">Danh sách Nhà
                 cung cấp</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
@@ -59,7 +59,7 @@
                             d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"
                             stroke="white" stroke-width="2" stroke-linecap="round"/>
                     </svg>
-                    Lọc
+                    Tìm kiếm
                 </button>
             </div>
             <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
@@ -88,7 +88,7 @@
                             </defs>
                         </svg>
 
-                        Danh sách đối tác
+                        Danh sách Nhà cung cấp
                     </h2>
 
 

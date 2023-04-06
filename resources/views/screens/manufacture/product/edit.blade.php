@@ -112,13 +112,12 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <select name="category_id" id="category_id"
                                     class="h-[42px] choose-vstore text-opa outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Chọn ngành hàng</option>
+                                <option value="" disabled selected>Chọn ngành hàng</option>
                                 @foreach($categories as $category)
                                     <option
                                         value="{{$category->id}}"
                                         @if($category->id ==$product->category_id) selected @endif>{{$category->name}}</option>
                                 @endforeach
-                                <option value="0">khác</option>
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>
@@ -130,8 +129,8 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                            <input type="text" placeholder="Nhập giá sản phẩm" name="price" id="price"
-                                   value="{{$product->price}}"
+                            <input type="text" placeholder="Nhập giá sản phẩm" id="price"
+                                   value="{{number_format($product->price,0,',',',')}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
                             <p class="text-red-600">{{$message}}</p>
@@ -353,7 +352,7 @@
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="price" value="{{$product->price}}">
 
                 <div class="flex justify-center md:justify-center items-center gap-5  w-full">
                     <a href="{{route('screens.manufacture.product.index')}}"
@@ -448,6 +447,7 @@
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
 
         });
+
     </script>
     <script>
         $(".js-example-tags").select2({
@@ -560,5 +560,27 @@
             };
             input.click();
         })
+        document.querySelector('#price').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        document.querySelector('#price').addEventListener("keyup", (e) => {
+            if (e.target.value) {
+                value = new Intl.NumberFormat('en-US', {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0
+                }).format((e.target.value.replaceAll(',', '')));
+                // document.getElementById('price').value = value.replaceAll('$', '');
+
+                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '');
+                ;
+                document.getElementById('price').value = value.replaceAll('$', '')
+            }
+        });
     </script>
 @endsection
