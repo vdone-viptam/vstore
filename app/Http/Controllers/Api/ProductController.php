@@ -32,56 +32,6 @@ use PHPUnit\Exception;
  */
 class ProductController extends Controller
 {
-
-    public function indexProduct(Request $request)
-    {
-
-        $elasticsearchController = new ElasticsearchController();
-//        $products = [
-//            [
-//                'name' => 'BST 50 - Áo thun nam nữ form rộng vải dày mịn logo cá tính cách',
-//                'short_content' => 'iPhone 11 sở hữu hiệu năng khá mạnh mẽ, ổn định trong thời gian dài nhờ được trang bị chipset A13 Bionic. Màn hình LCD 6.1 inch sắc nét cùng chất lượng hiển thị Full HD của máy cho trải nghiệm hình ảnh mượt mà và có độ tương phản cao. Hệ thống camera hiện đại được tích hợp những tính năng công nghệ mới kết hợp với viên Pin dung lượng 3110mAh, giúp nâng cao trải nghiệm của người dùng.',
-//                'cate_name' => 'Thời trang nữ',
-//                'publish_id' => 'VN-3rX8LkFeUN'
-//            ],
-//            [
-//                'name' => 'Giày trắng nữ đế dày xốp instagram phong cách Hàn Quốc',
-//                'short_content' => 'iPhone 11 sở hữu hiệu năng khá mạnh mẽ, ổn định trong thời gian dài nhờ được trang bị chipset A13 Bionic. Màn hình LCD 6.1 inch sắc nét cùng chất lượng hiển thị Full HD của máy cho trải nghiệm hình ảnh mượt mà và có độ tương phản cao. Hệ thống camera hiện đại được tích hợp những tính năng công nghệ mới kết hợp với viên Pin dung lượng 3110mAh, giúp nâng cao trải nghiệm của người dùng.',
-//                'cate_name' => 'Giày dép nam',
-//                'publish_id' => 'VN-3rX8LkFeUN'
-//            ],
-//            [
-//                'name' => 'Điện thoại Apple iPhone 11 64GB',
-//                'short_content' => 'iPhone 11 sở hữu hiệu năng khá mạnh mẽ, ổn định trong thời gian dài nhờ được trang bị chipset A13 Bionic. Màn hình LCD 6.1 inch sắc nét cùng chất lượng hiển thị Full HD của máy cho trải nghiệm hình ảnh mượt mà và có độ tương phản cao. Hệ thống camera hiện đại được tích hợp những tính năng công nghệ mới kết hợp với viên Pin dung lượng 3110mAh, giúp nâng cao trải nghiệm của người dùng.',
-//                'cate_name' => 'Điện thoại & Phụ kiện',
-//                'publish_id' => 'VN-DOAw4lnoea'
-//            ],
-//            [
-//                'name' => 'Điện thoại Apple iPhone 13 128GB',
-//                'short_content' => 'iPhone 11 sở hữu hiệu năng khá mạnh mẽ, ổn định trong thời gian dài nhờ được trang bị chipset A13 Bionic. Màn hình LCD 6.1 inch sắc nét cùng chất lượng hiển thị Full HD của máy cho trải nghiệm hình ảnh mượt mà và có độ tương phản cao. Hệ thống camera hiện đại được tích hợp những tính năng công nghệ mới kết hợp với viên Pin dung lượng 3110mAh, giúp nâng cao trải nghiệm của người dùng.',
-//                'cate_name' => 'Điện thoại & Phụ kiện',
-//                'publish_id' => 'VN-fnKInkQOBq'
-//            ],
-//            [
-//                'name' => '[Trả góp 0%] Điện Thoại Apple iPhone 13 Chính hãng VN/A [Viettel Store',
-//                'short_content' => 'iPhone 11 sở hữu hiệu năng khá mạnh mẽ, ổn định trong thời gian dài nhờ được trang bị chipset A13 Bionic. Màn hình LCD 6.1 inch sắc nét cùng chất lượng hiển thị Full HD của máy cho trải nghiệm hình ảnh mượt mà và có độ tương phản cao. Hệ thống camera hiện đại được tích hợp những tính năng công nghệ mới kết hợp với viên Pin dung lượng 3110mAh, giúp nâng cao trải nghiệm của người dùng.',
-//                'cate_name' => 'Điện thoại & Phụ kiện',
-//                'publish_id' => 'VN-YkyXklGz1r'
-//            ]
-//        ];
-//
-//        foreach ($products as $index => $val) {
-//            $res = $elasticsearchController->createDocProduct($index + 1,
-//                $val['name'],
-//                $val['short_content'],
-//                $val['cate_name'],
-//                $val['publish_id']);
-//        }
-        $res = $elasticsearchController->searchDocProduct("Apple");
-
-        dd($res);
-    }
-
     /**
      * Danh sách sản phẩm
      *
@@ -861,12 +811,13 @@ class ProductController extends Controller
     public
     function createBill($pdone_id)
     {
-        $products = DB::table('vshop_products')
+        $products = DB::table('vshop')->join
+        ('vshop_products','vshop.id','=','vshop_products.vshop_id')
             ->select('products.id', 'images', 'products.name', 'vshop_products.amount')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.status', 2)
-            ->where('products.availability_status', 1)
-            ->where('pdone_id', $pdone_id)
+            ->where('products.availability_status',1)
+            ->where('vshop.pdone_id', $pdone_id)
             ->where('vshop_products.amount', '>', 0)
             ->get();
         foreach ($products as $pr) {
@@ -938,6 +889,8 @@ class ProductController extends Controller
                     'total' => $price * $pro['amount'] - ($price * $pro['amount'] * $product->discount / 100) - ($price * $pro['amount'] * $product->discount_vShop / 100),
                     'ncc_id' => $product->user_id
                 ];
+
+
 
             }
 
