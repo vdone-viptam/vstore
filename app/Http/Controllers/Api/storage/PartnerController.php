@@ -211,7 +211,7 @@ class PartnerController extends Controller
                 ->where('warehouses.user_id', Auth::id());
             $result = $data->where('delivery_partner.id', $request->delivery_partner_id)->get();
 
-            if (!strlen($result[0]->delivery_partner_id) && isset($result[0]->delivery_partner_id)) {
+            if (!isset($result[0]->delivery_partner_id)) {
                 $data = OrderItem::query()
                     ->select(DB::raw('count(*) as count_product'),
                         'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
@@ -224,7 +224,7 @@ class PartnerController extends Controller
                     ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
                     ->where('order.export_status', 4)
                     ->where('warehouses.user_id', Auth::id())->where('delivery_partner.code_partner', $request->delivery_partner_id)->get();
-                if (!strlen($data[0]->delivery_partner_id) && isset($data[0]->delivery_partner_id)) {
+                if (!isset($data[0]->delivery_partner_id)) {
 
                     return response()->json([
                         'success' => false,
