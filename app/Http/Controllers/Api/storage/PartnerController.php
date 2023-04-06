@@ -94,8 +94,21 @@ class PartnerController extends Controller
                 ->join('province', 'users.provinceId', '=', 'province.province_id')
                 ->join('products', 'users.id', '=', 'products.user_id')
                 ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-                ->where('ware_id', $id)
-                ->where('products.user_id', $request->user_id)->first();
+                ->where('ware_id', $id);
+
+            $result = $ncc->where('products.user_id', $request->user_id)->first();
+
+            if (!$result) {
+                $ncc = $ncc->where('users.account_code', $request->user_id)->first();
+                if (!$ncc) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy nhà cung cấp'
+                    ]);
+                }
+            } else {
+                $ncc = $result;
+            }
 
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
@@ -185,10 +198,20 @@ class PartnerController extends Controller
                 ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
                 ->join('order', 'order.id', '=', 'order_item.order_id')
                 ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
-                ->where('warehouses.user_id', Auth::id())
-                ->where('delivery_partner.id', $request->delivery_partner_id)
-                ->where('order.export_status', 4)->get();
-
+                ->where('order.export_status', 4)
+                ->where('warehouses.user_id', Auth::id());
+            $result = $data->where('delivery_partner.id', $request->delivery_partner_id)->get();
+            if (count($result) == 0) {
+                $data = $data->where('delivery_partner.code_partner', $request->delivery_partner_id)->get();
+                if (count($data) == 0) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy đối tác giao hàng'
+                    ]);
+                }
+            } else {
+                $data = $result;
+            }
             return response()->json(['success' => true, 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([
