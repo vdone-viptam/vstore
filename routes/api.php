@@ -191,6 +191,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         // END Nhập hàng sẵn
 
     });
+    Route::prefix('wallet')->group(function () {
+        Route::get('/{pdone_id}', [\App\Http\Controllers\Api\WalletVshopController::class, 'surplus']);
+
+    });
     Route::prefix('discount')->group(function () {
         Route::get('get-discount', [\App\Http\Controllers\Api\DiscountController::class, 'getDiscountByTotalProduct']);
         Route::get('available-discount/{id}', [\App\Http\Controllers\Api\DiscountController::class, 'availableDiscount']);
@@ -199,6 +203,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('storage')->group(function () {
+            Route::get('/notification', [\App\Http\Controllers\Api\storage\DashboardController::class, 'notifi']);
             Route::prefix('dashboard')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\DashboardController::class, 'index']);
             });

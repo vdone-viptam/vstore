@@ -46,9 +46,15 @@ class ProductController extends Controller
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->join('users', 'warehouses.user_id', 'users.id')
+            ->where('product_warehouses.status', 1)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id())
-            ->paginate($limit);;
+            ->where('warehouses.user_id', Auth::id());
+
+        if ($request->publish_id) {
+            $products = $products->where('products.publish_id', $request->publish_id);
+        }
+
+        $products = $products->paginate($limit);
 
         foreach ($products as $pro) {
             $pro->pause_product = (int)DB::table('request_warehouses')
@@ -56,6 +62,7 @@ class ProductController extends Controller
                     ->where('request_warehouses.product_id', $pro->product_id)
                     ->where('request_warehouses.ware_id', $pro->warehouse_id)
                     ->where('type', 2)
+                    ->where('status', 0)
                     ->first()->total ?? 0;
         }
         return response()->json([
@@ -123,9 +130,11 @@ class ProductController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.id', 'desc')
-            ->paginate($limit);
-        $this->v['params'] = $request->all();
+            ->orderBy('request_warehouses.id', 'desc');
+        if ($request->code) {
+            $requests = $requests->where('request_warehouses.code', $request->code);
+        }
+        $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $requests
@@ -173,8 +182,11 @@ class ProductController extends Controller
             )
             ->orderBy('order.id', 'desc');
         $order = $order->where('order.status', '!=', 2)
-            ->where('order_item.warehouse_id', $warehouses->id)
-            ->paginate(10);
+            ->where('order_item.warehouse_id', $warehouses->id);
+        if ($request->code) {
+            $order = $order->where('order.no', $request->code);
+        }
+        $order = $order->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $order
@@ -199,6 +211,7 @@ class ProductController extends Controller
             ->orderBy('order.id', 'desc');
         $order = $order->where('order.status', '!=', 2)
             ->where('order.id', $request->id)
+            ->orWhere('order.no', $request->id)
             ->first();
         return response()->json([
             'success' => true,
@@ -237,8 +250,13 @@ class ProductController extends Controller
                         'message' => 'Không tìm thấy sản phẩm',
                     ], 404);
                 }
+                if ($ware->status == 0) {
+                    $ware->status = 1;
+                }
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
+
+                DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
             }
         }
         if ($requestIm->status == 7) {
