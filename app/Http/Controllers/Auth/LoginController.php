@@ -126,8 +126,10 @@ class LoginController extends Controller
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
-                'image_storage' => 'required|image',
-                'image_pccc' => 'required|image',
+                'image_storage' => 'required',
+                'image_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_pccc' => 'required',
+                'image_pccc.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
                 'city_id' => 'required',
                 'district_id' => 'required',
                 'ward_id' => 'required'
