@@ -280,7 +280,7 @@ class WarehouseController extends Controller
             'order.export_status', 'order.cancel_status')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
-            ->whereIn('order.export_status', [3, 5])
+            ->where('order.export_status', 5)
             ->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $ware->id);
         if ($request->code) {
