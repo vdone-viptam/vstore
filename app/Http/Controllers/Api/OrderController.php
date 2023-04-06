@@ -408,7 +408,7 @@ class OrderController extends Controller
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
-            if ($status !== 10) {
+            if ($status !== 10 && $status !=4  && $status !=5) {
                 $orders = $orders->where('export_status', $status);
             }
             if ($status == 4) {
@@ -416,8 +416,9 @@ class OrderController extends Controller
                     ->whereDate('order.updated_at', '>', Carbon::now()->addDay(-7));
             }
             if ($status == 5) {
+
                 $orders = $orders->where('export_status', 4)
-                    ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(7));
+                    ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(-7));
             }
             $orders = $orders
                 ->where('status', '!=', 2)
