@@ -257,7 +257,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
             });
             Route::prefix('partners')->group(function () {
                 Route::get('/', [\App\Http\Controllers\Api\storage\PartnerController::class, 'index']);
-                Route::get('/detail-ncc', [\App\Http\Controllers\Api\storage\PartnerController::class, 'detailNcc']);
+                Route::get('/detail-ncc', [\App\Http\Controllers\Api\storage\PartnerController::class, 'detailNcc'])->name('detail.ncc');
                 Route::get('/delivery-partner', [\App\Http\Controllers\Api\storage\PartnerController::class, 'deliveryPartner']);
                 Route::get('/detail-delivery-partner', [\App\Http\Controllers\Api\storage\PartnerController::class, 'detailDeliveryPartner']);
             });

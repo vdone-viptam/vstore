@@ -63,7 +63,7 @@
                         <div id="submenu-4" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./listSupplier.html">Nhà cung cấp</a>
+                                    <a class="nav-link" href="{{ route('screens.vstore.partner.index')}}">Nhà cung cấp</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="./listShip.html">Đối tác giao hàng</a>

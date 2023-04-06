@@ -113,6 +113,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
+        Route::get('/detail-ncc', [\App\Http\Controllers\Storage\PartnerController::class, 'detailNcc'])->name('detail.ncc');
         //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
