@@ -212,6 +212,8 @@ class PartnerController extends Controller
             } else {
                 $data = $result;
             }
+
+
             return response()->json(['success' => true, 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([
