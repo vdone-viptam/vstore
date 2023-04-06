@@ -98,7 +98,7 @@
                                     <a class="nav-link" href="./profile.html">Hồ sơ của tôi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('screens.storage.account.editTaxCode')}}">Đổi mật khẩu</a>
+                                    <a class="nav-link" href="{{route('screens.storage.account.changePassword')}}">Đổi mật khẩu</a>
                                 </li>
                             </ul>
                         </div>

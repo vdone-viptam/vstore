@@ -2,13 +2,34 @@
 @section('page_title','Đổi mật khẩu')
 
 @section('custom_css')
-    <style>
-        .disabled-link {
-            pointer-events: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('asset/bootstrap.min.css')}}">
+    <link href="{{asset('asset/assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('asset/style.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('asset/assets/vendor/datatables/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('asset/assets/vendor/datatables/css/buttons.bootstrap4.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/assets/vendor/datatables/css/select.bootstrap4.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('asset/assets/vendor/datatables/css/fixedHeader.bootstrap4.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('asset/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('asset/assets/vendor/charts/chartist-bundle/chartist.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/assets/vendor/charts/morris-bundle/morris.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('asset/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/assets/vendor/charts/c3charts/c3.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('asset/assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+            integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('modal')
+
+@endsection
+@section('content')
     <div class="container-fluid dashboard-content ">
         <!-- ============================================================== -->
         <!-- pageheader  -->
@@ -45,27 +66,32 @@
                         <div class="alert alert-success collapse" role="alert">
                             Mật khẩu của bạn đã được đổi thành công!
                         </div>
-                        <form method="post">
+                        <form method="post" >
+                            @csrf
                             <div class="row">
 
                                 <div class=" col-xl-10 mx-auto  col-lg-10 col-md-12 col-sm-12 col-12 p-4">
                                     <div class="form-group old">
                                         <label for="name">Mật khẩu cũ</label>
-                                        <input type="password" class="form-control form-control-lg" id="old_password" name="old_password">
+                                        <input type="password" class="form-control form-control-lg"
+                                               id="old_password" name='old_password'>
                                         <div></div>
                                     </div>
                                     <div class="form-group pas">
                                         <label for="name">Mật khẩu mới</label>
-                                        <input type="password" class="form-control form-control-lg" id="password" name="password">
+                                        <input type="password" class="form-control form-control-lg"
+                                               id="password" name="password">
                                         <div></div>
                                     </div>
                                     <div class="form-group conf">
                                         <label for="name">Nhập lại mật khẩu</label>
-                                        <input type="password" class="form-control form-control-lg" id="password_confirmation" name="password_confirmation">
+                                        <input type="password" class="form-control form-control-lg"
+                                               id="password_confirmation" name="password_confirmation">
                                         <div></div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:10px">
+                                    <div class="d-flex justify-content-center align-items-center"
+                                         style="gap:10px">
                                         <button class="btn btn-primary btn-acp">Cập nhập mật khẩu</button>
 
                                     </div>
@@ -82,8 +108,8 @@
             <!-- ============================================================== -->
         </div>
     </div>
-@endsection
 
+@endsection
 @section('custom_js')
     <script>
         document.querySelector('.btn-acp').classList.add('bg-slate-300');
