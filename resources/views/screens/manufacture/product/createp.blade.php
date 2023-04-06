@@ -520,6 +520,7 @@
         $('.add-img-SP').on('click', function () {
             let input = document.createElement('input');
             input.type = 'file';
+            input.accept = "image/png, image/gif, image/jpeg";
             input.onchange = _ => {
                 var files = Array.from(input.files);
                 const reader = new FileReader();
