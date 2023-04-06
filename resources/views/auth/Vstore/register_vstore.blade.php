@@ -110,7 +110,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
-                <input type="text" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
+                <input required type="email" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('email')
                 <p class="text-red-600">{{$message}}</p>
@@ -118,7 +118,7 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên V-Store</span>
-                <input type="text" name="name" id="name" placeholder="Nhập tên V-Store" value="{{old('name')}}"
+                <input required  type="text" name="name" id="name" placeholder="Nhập tên V-Store" value="{{old('name')}}"
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('name')
                 <p class="text-red-600">{{$message}}</p>
@@ -127,7 +127,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
-                <input type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
+                <input required type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
                        value="{{old('company_name')}}"
                        class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('company_name')
@@ -137,7 +137,8 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
-                <input type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                <input required type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                        pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                        value="{{old('tax_code')}}"
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('tax_code')
@@ -148,7 +149,7 @@
             <div class="grid grid-cols-2 gap-2 w-full">
                 <div>
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
-                    <select name="city_id" id="city_id"
+                    <select required name="city_id" id="city_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         <option value="0" selected disabled>Lựa chọn tỉnh (thành phố)</option>
                     </select>
@@ -158,7 +159,7 @@
                 </div>
                 <div>
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
-                    <select name="district_id" id="district_id"
+                    <select required name="district_id" id="district_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         <option value="0" selected disabled>Lựa chọn quận (huyện)</option>
                     </select>
@@ -169,7 +170,7 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
-                <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
+                <input required type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
 
@@ -178,7 +179,8 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
-                <input type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
+                <input required type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
+                        pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('phone_number')
                 <p class="text-red-600">{{$message}}</p>
@@ -200,7 +202,7 @@
                             fill="black" fill-opacity="0.45"/>
                         </svg>
                         </span>
-                <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
+                <input required type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('id_vdone')
                 <p class="text-red-600">{{$message}}</p>
