@@ -93,7 +93,7 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required|max:32',
                 'company_name' => 'required|max:50',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
@@ -109,7 +109,7 @@ class LoginController extends Controller
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'company_name.max' => 'Tên công ty tối đa 50 kí tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
@@ -123,14 +123,16 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required|max:32',
                 'company_name' => 'required|max:50',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required|max:255',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
-                'image_storage' => 'required|image',
-                'image_pccc' => 'required|image',
+                'image_storage' => 'required',
+                'image_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_pccc' => 'required',
+                'image_pccc.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
                 'city_id' => 'required',
                 'district_id' => 'required',
                 'ward_id' => 'required'
@@ -155,7 +157,7 @@ class LoginController extends Controller
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'ward_id' => 'Phường (xã) bắt buộc chọn',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         } elseif ($role_id == 2) {
@@ -163,13 +165,12 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required|max:32',
                 'company_name' => 'required|max:50',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
-                'district_id' => 'required',
-                'ward_id' => 'required'
+                'district_id' => 'required'
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
@@ -184,9 +185,10 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
-                'ward_id' => 'Phường (xã) bắt buộc chọn',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ',
+                'ward_id' => 'Phường (xã) bắt buộc chọn',
+
 
             ]);
         }
@@ -255,10 +257,8 @@ class LoginController extends Controller
             $user->tax_code = $request->tax_code;
             $referral_code = $request->referral_code ?? '';
             $user->referral_code = $referral_code;
-            $user->ward_id = $request->ward_id;
             if ($role_id == 3) {
                 $user->branch = 1;
-
             }
             if ($request->id_vdone_diff) {
                 $user->id_vdone_diff = $request->id_vdone_diff;
@@ -681,6 +681,6 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
 //            return $response->json('data');
 
         }
-//        return $response;
+        return $response->json()['data'];
     }
 }

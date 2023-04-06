@@ -87,7 +87,7 @@
         </div>
     </div>
 </div>
-<form action="{{route('post_register',['role_id' => 2])}}" id="formRegister-V" method="POST">
+<form action="{{route('post_register',['role_id' => 2])}}" id="formRegister-V" method="POST" onsubmit="return validateForm()">
     @csrf
     <div class=" grid grid-cols-1 lg:grid-cols-2">
         <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
@@ -112,7 +112,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
-                <input type="text" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
+                <input required type="email" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"> @error('email')
                 <p class="text-danger text-red-500 text-red-500">{{$message}}</p>
                 @enderror
@@ -121,7 +121,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên nhà cung cấp</span>
-                <input type="text" name="name" id="name" placeholder="Nhập tên nhà cung cấp" value="{{old('name')}}"
+                <input required type="text" name="name" id="name" placeholder="Nhập tên nhà cung cấp" value="{{old('name')}}"
                        class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('name')
                 <p class="text-danger text-red-500">{{$message}}</p>
@@ -130,7 +130,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
-                <input type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
+                <input required type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
                        value="{{old('company_name')}}"
                        class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('company_name')
@@ -140,7 +140,8 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
-                <input type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                <input required type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                        pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                        value="{{old('tax_code')}}"
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('tax_code')
@@ -153,7 +154,7 @@
             <div class="grid grid-cols-1  md:grid-cols-3 gap-2">
                 <div class="w-full">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
-                    <select name="city_id" id="city_id"
+                    <select required name="city_id" id="city_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         <option value="" selected disabled>Lựa chọn tỉnh (thành phố)</option>
                     </select>
@@ -163,7 +164,7 @@
                 </div>
                 <div class="">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
-                    <select name="district_id" id="district_id"
+                    <select required name="district_id" id="district_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         <option value="" selected disabled>Lựa chọn quận (huyện)</option>
                     </select>
@@ -184,7 +185,7 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
-                <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
+                <input required type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
                        class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('address')
                 <p class="text-danger text-red-500">{{$message}}</p>
@@ -196,7 +197,8 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
-                <input type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
+                <input required type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
+                    pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"> @error('phone_number')
                 <p class="text-danger text-red-500">{{$message}}</p>
                 @enderror
@@ -218,7 +220,7 @@
                             fill="black" fill-opacity="0.45"/>
                         </svg>
                         </span>
-                <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_phone')}}"
+                <input required type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_phone')}}"
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('id_vdone')
                 <p class="text-danger text-red-500">{{$message}}</p>
@@ -241,11 +243,12 @@
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox" required> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a
-            href="#"
+    <div class="text-center my-4">
+        <input type="checkbox" id="terms_of_use" required>
+        <label for="terms_of_use"> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</label>
+        <a href="#"
             onclick="$('.modal-hd').toggleClass('show-modal')"
-            class="underline text-blue-700">Xem
-            thêm</a></div>
+            class="underline text-blue-700">Xem thêm</a></div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
                 class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
@@ -258,73 +261,86 @@
 
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script>
-    $('#formRegister-V').validate({
-        rules: {
-            name: {
-                required: true,
-            },
-            id_vdone: {
-                required: true,
-            },
-            email: {
-                required: true,
-            },
-            company_name: {
-                required: true,
-            },
-            tax_code: {
-                required: true,
-            },
-            address: {
-                required: true,
-            },
-            phone_number: {
-                required: true,
-            },
-            password: {
-                required: true,
+    // $('#formRegister-V').validate({
+    //     rules: {
+    //         name: {
+    //             required: true,
+    //         },
+    //         id_vdone: {
+    //             required: true,
+    //         },
+    //         email: {
+    //             required: true,
+    //         },
+    //         company_name: {
+    //             required: true,
+    //         },
+    //         tax_code: {
+    //             required: true,
+    //         },
+    //         address: {
+    //             required: true,
+    //         },
+    //         phone_number: {
+    //             required: true,
+    //         },
+    //         password: {
+    //             required: true,
 
-            },
-            password_confirmation: {
-                required: true,
-                equalTo: '#password'
-            }
-        },
-        messages: {
-            name: {
-                required: 'Bạn cần nhập tên V-Store'
-            },
-            id_vdone: {
-                required: 'Bạn cần nhập ID người đại diện'
-            },
-            email: {
-                required: 'Bạn cần nhập địa chỉ Email'
-            },
-            company_name: {
-                required: 'Bạn cần nhập tên công ty'
-            },
-            tax_code: {
-                required: 'Bạn cần nhập mã số thuế'
-            },
-            address: {
-                required: 'Bạn cần nhập địa chỉ'
-            },
-            password: {
-                required: 'Bạn phải nhập mật khẩu',
+    //         },
+    //         password_confirmation: {
+    //             required: true,
+    //             equalTo: '#password'
+    //         },
+    //         terms_of_use: {
+    //             required: true,
+    //         }
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: 'Bạn cần nhập tên V-Store'
+    //         },
+    //         id_vdone: {
+    //             required: 'Bạn cần nhập ID người đại diện'
+    //         },
+    //         email: {
+    //             required: 'Bạn cần nhập địa chỉ Email'
+    //         },
+    //         company_name: {
+    //             required: 'Bạn cần nhập tên công ty'
+    //         },
+    //         tax_code: {
+    //             required: 'Bạn cần nhập mã số thuế'
+    //         },
+    //         address: {
+    //             required: 'Bạn cần nhập địa chỉ'
+    //         },
+    //         password: {
+    //             required: 'Bạn phải nhập mật khẩu',
 
-            },
-            password_confirmation: {
-                required: 'Bạn phải nhập lại mật khẩu',
-                equalTo: 'Mật khẩu không khớp'
-            },
-            phone_number: {
-                required: 'Số điện thoại bắt buộc nhập',
-            },
-        },
-        submitHandler: function (form) {
-            form.submit();
+    //         },
+    //         password_confirmation: {
+    //             required: 'Bạn phải nhập lại mật khẩu',
+    //             equalTo: 'Mật khẩu không khớp'
+    //         },
+    //         phone_number: {
+    //             required: 'Số điện thoại bắt buộc nhập',
+    //         },
+    //         terms_of_use: {
+    //             required: 'Bạn cần đồng ý điều khoản sử dụng của chúng tôi',
+    //         },
+    //     },
+    //     submitHandler: function (form) {
+    //         form.submit();
+    //     }
+    // });
+    function validateForm() {
+        let x = document.getElementById('email').value;
+        if (x == "") {
+            alert("Name must be filled out");
+            // return false;
         }
-    });
+    }
 </script>
 <script !src="">
     const divCity = document.getElementById('city_id');
