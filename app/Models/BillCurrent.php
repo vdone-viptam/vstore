@@ -9,4 +9,5 @@ class BillCurrent extends Model
 {
     use HasFactory;
     protected $table = 'bill_current';
+    protected $fillable= ['id', 'code_bill', 'vshop_id', 'price','status'];
 }
