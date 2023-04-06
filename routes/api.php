@@ -239,10 +239,10 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::get('/create/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'createRequestDestroy']);
                 Route::post('/store/destroy-export', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeRequestDestroy']);
                 Route::post('/store/import-destroy-order', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'storeImportProduct']);
-
                 Route::get('/destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'destroyOrder']);
                 Route::get('/detail', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailImportProduct']);
                 Route::get('/detail-destroy', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'detailDestroyOrder']);
+                Route::get('/export-bill', [\App\Http\Controllers\Api\storage\WarehouseController::class, 'exportBill']);
 
             });
             Route::prefix('finances')->group(function () {
