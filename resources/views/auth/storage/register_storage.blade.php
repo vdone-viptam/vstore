@@ -259,7 +259,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Hình ảnh kho </span>
-                <input type="file" multiple name="image_storage[]" id="" placeholder="Nhập địa chỉ thư điện tử"
+                <input type="file" multiple accept="image/png, image/gif, image/jpeg" name="image_storage[]" id="" placeholder="Nhập địa chỉ thư điện tử"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('image_storage')
                 <p class="text-red-600">{{$message}}</p>
@@ -268,7 +268,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Giấy chứng nhận PCCC/ Chứng nhận khác </span>
-                <input type="file" multiple name="image_pccc[]" id="" placeholder="Nhập địa chỉ thư điện tử"
+                <input type="file" multiple accept="image/png, image/gif, image/jpeg" name="image_pccc[]" id="" placeholder="Nhập địa chỉ thư điện tử"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('image_pccc')
                 <p class="text-red-600">{{$message}}</p>
@@ -316,10 +316,10 @@
 
 
     </div>
-    <div class="text-center my-4"><input name="checkbox" required type="checkbox"> Bạn đồng ý với điều khoản sử
-        dụng của
-        chúng
-        tôi. <a href="#"
+    <div class="text-center my-4">
+        <input type="checkbox" id="terms_of_use" required>
+        <label for="terms_of_use"> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</label>
+        <a href="#"
                 onclick="$('.modal-hd').toggleClass('show-modal')"
                 class="underline text-blue-700">Xem
             thêm</a></div>

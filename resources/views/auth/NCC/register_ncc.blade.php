@@ -231,11 +231,12 @@
 
         </div>
     </div>
-    <div class="text-center my-4"><input type="checkbox" required> Bạn đồng ý với điều khoản sử dụng của chúng tôi. <a
-            href="#"
+    <div class="text-center my-4">
+        <input type="checkbox" id="terms_of_use" required>
+        <label for="terms_of_use"> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</label>
+        <a href="#"
             onclick="$('.modal-hd').toggleClass('show-modal')"
-            class="underline text-blue-700">Xem
-            thêm</a></div>
+            class="underline text-blue-700">Xem thêm</a></div>
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
                 class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
@@ -248,73 +249,79 @@
 
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script>
-    $('#formRegister-V').validate({
-        rules: {
-            name: {
-                required: true,
-            },
-            id_vdone: {
-                required: true,
-            },
-            email: {
-                required: true,
-            },
-            company_name: {
-                required: true,
-            },
-            tax_code: {
-                required: true,
-            },
-            address: {
-                required: true,
-            },
-            phone_number: {
-                required: true,
-            },
-            password: {
-                required: true,
+    // $('#formRegister-V').validate({
+    //     rules: {
+    //         name: {
+    //             required: true,
+    //         },
+    //         id_vdone: {
+    //             required: true,
+    //         },
+    //         email: {
+    //             required: true,
+    //         },
+    //         company_name: {
+    //             required: true,
+    //         },
+    //         tax_code: {
+    //             required: true,
+    //         },
+    //         address: {
+    //             required: true,
+    //         },
+    //         phone_number: {
+    //             required: true,
+    //         },
+    //         password: {
+    //             required: true,
 
-            },
-            password_confirmation: {
-                required: true,
-                equalTo: '#password'
-            }
-        },
-        messages: {
-            name: {
-                required: 'Bạn cần nhập tên V-Store'
-            },
-            id_vdone: {
-                required: 'Bạn cần nhập ID người đại diện'
-            },
-            email: {
-                required: 'Bạn cần nhập địa chỉ Email'
-            },
-            company_name: {
-                required: 'Bạn cần nhập tên công ty'
-            },
-            tax_code: {
-                required: 'Bạn cần nhập mã số thuế'
-            },
-            address: {
-                required: 'Bạn cần nhập địa chỉ'
-            },
-            password: {
-                required: 'Bạn phải nhập mật khẩu',
+    //         },
+    //         password_confirmation: {
+    //             required: true,
+    //             equalTo: '#password'
+    //         },
+    //         terms_of_use: {
+    //             required: true,
+    //         }
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: 'Bạn cần nhập tên V-Store'
+    //         },
+    //         id_vdone: {
+    //             required: 'Bạn cần nhập ID người đại diện'
+    //         },
+    //         email: {
+    //             required: 'Bạn cần nhập địa chỉ Email'
+    //         },
+    //         company_name: {
+    //             required: 'Bạn cần nhập tên công ty'
+    //         },
+    //         tax_code: {
+    //             required: 'Bạn cần nhập mã số thuế'
+    //         },
+    //         address: {
+    //             required: 'Bạn cần nhập địa chỉ'
+    //         },
+    //         password: {
+    //             required: 'Bạn phải nhập mật khẩu',
 
-            },
-            password_confirmation: {
-                required: 'Bạn phải nhập lại mật khẩu',
-                equalTo: 'Mật khẩu không khớp'
-            },
-            phone_number: {
-                required: 'Số điện thoại bắt buộc nhập',
-            },
-        },
-        submitHandler: function (form) {
-            form.submit();
-        }
-    });
+    //         },
+    //         password_confirmation: {
+    //             required: 'Bạn phải nhập lại mật khẩu',
+    //             equalTo: 'Mật khẩu không khớp'
+    //         },
+    //         phone_number: {
+    //             required: 'Số điện thoại bắt buộc nhập',
+    //         },
+    //         terms_of_use: {
+    //             required: 'Bạn cần đồng ý điều khoản sử dụng của chúng tôi',
+    //         },
+    //     },
+    //     submitHandler: function (form) {
+    //         form.submit();
+    //     }
+    // });
 </script>
 <script !src="">
     const divCity = document.getElementById('city_id');
