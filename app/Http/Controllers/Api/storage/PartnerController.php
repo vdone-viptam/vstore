@@ -78,7 +78,7 @@ class PartnerController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'user_id' => 'required|exists:users,id'
+                'user_id' => 'required'
             ]);
             if ($validator->fails()) {
                 return response()->json([
