@@ -93,9 +93,11 @@ class WarehouseController extends Controller
                 'request_warehouses.status',
                 'request_warehouses.created_at',
                 'request_warehouses.id',
-                'request_warehouses.order_number'
+                'request_warehouses.order_number',
+                'order.id as order_id'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.status', 'asc');
