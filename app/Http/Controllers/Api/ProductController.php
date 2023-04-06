@@ -777,6 +777,13 @@ class ProductController extends Controller
                     $value['created_at'] = Carbon::now();
                     $value['updated_at'] = Carbon::now();
                     DetailBillCurrent::create($value);
+
+                    $increment = DB::table('vshop_products')
+                    ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                    ->where('pdone_id', $pdone_id)
+                    ->where('product_id', $value['product_id'])
+                    ->where('vshop_products.amount', '>=', $value['amount'])
+                    ->increment('vshop_products.amount', -$value['amount']);
                 }
             }
 
