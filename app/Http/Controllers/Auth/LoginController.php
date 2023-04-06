@@ -127,8 +127,8 @@ class LoginController extends Controller
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
-                'image_storage' => 'required',
-                'image_pccc' => 'required',
+                'image_storage' => 'required|image',
+                'image_pccc' => 'required|image',
                 'city_id' => 'required',
                 'district_id' => 'required',
                 'ward_id' => 'required'
@@ -162,7 +162,8 @@ class LoginController extends Controller
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
-                'district_id' => 'required'
+                'district_id' => 'required',
+                'ward_id' => 'required'
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
@@ -175,8 +176,10 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
+                'ward_id' => 'Phường (xã) bắt buộc chọn',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
-                'phone_number.regex' => 'Số điện thoại không hợp lệ'
+                'phone_number.regex' => 'Số điện thoại không hợp lệ',
+
             ]);
         }
 //        return $request;
@@ -244,8 +247,10 @@ class LoginController extends Controller
             $user->tax_code = $request->tax_code;
             $referral_code = $request->referral_code ?? '';
             $user->referral_code = $referral_code;
+            $user->ward_id = $request->ward_id;
             if ($role_id == 3) {
                 $user->branch = 1;
+
             }
             if ($request->id_vdone_diff) {
                 $user->id_vdone_diff = $request->id_vdone_diff;
