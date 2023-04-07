@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    @include('layouts.storage.css')
     @yield('custom_css')
 </head>
 
@@ -149,31 +150,6 @@
     <!-- ============================================================== -->
 </div>
 @yield('custom_js')
-{{--<script>--}}
-{{--    const nav1 = document.querySelectorAll('nav');--}}
-{{--    nav1.forEach(item => {--}}
-{{--        const ul = item.querySelector('ul');--}}
-
-{{--        if (ul && ul.classList.contains('pagination')) {--}}
-{{--            console.log(ul);--}}
-{{--            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')--}}
-{{--        }--}}
-{{--    })--}}
-{{--    document.querySelector('.btnA').setAttribute('disabled', 'true');--}}
-{{--    document.querySelector('.btnA').classList.add('bg-slate-300');--}}
-{{--    document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');--}}
-{{--    document.querySelector('#key_search').addEventListener('keyup', (e) => {--}}
-{{--        if (e.target.value) {--}}
-{{--            document.querySelector('.btnA').removeAttribute('disabled');--}}
-{{--            document.querySelector('.btnA').classList.remove('bg-slate-300');--}}
-{{--            document.querySelector('.btnA').classList.add('bg-[#40BAFF]');--}}
-{{--        } else {--}}
-{{--            document.querySelector('.btnA').setAttribute('disabled', 'true');--}}
-{{--            document.querySelector('.btnA').classList.add('bg-slate-300');--}}
-{{--            document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');--}}
-{{--        }--}}
-{{--    });--}}
-{{--</script>--}}
 
 </body>
 </html>

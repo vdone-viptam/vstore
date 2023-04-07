@@ -12,46 +12,67 @@
                         Menu
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./index.html" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('dashboard*')) ? 'active' : '' }}"
+                           href="{{route('screens.storage.dashboard.index')}}" aria-expanded="false"
                            data-target="#submenu-1" aria-controls="submenu-1"><i
                                 class="fa fa-fw fas fa-home"></i>Tổng quan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('products*')) ? 'active' : '' }}" href="#"
+                           data-toggle="collapse" aria-expanded="false"
                            data-target="#submenu-2" aria-controls="submenu-2"><i
                                 class="fa fa-fw fas fa-truck"></i>Hàng hóa
                         </a>
-                        <div id="submenu-2" class="collapse submenu" style="">
+                        <div id="submenu-2"
+                             class="{{ (request()->is('products*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./product.html">Tất cả sản phẩm</a>
+                                    <a class="nav-link {{ (request()->is('products/index')) ? 'active1' : '' }}" id=""
+                                       href="{{route('screens.storage.product.index')}}">Tất cả
+                                        sản
+                                        phẩm</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./request.html">Quản lý yêu cầu nhập kho</a>
+                                    <a class="nav-link {{ (request()->is('products/request')) ? 'active1' : '' }}"
+                                       id="requests"
+                                       href="{{route('screens.storage.product.request')}}">Quản lý yêu
+                                        cầu nhập kho</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./requestAcp.html">Xác nhận đơn hàng</a>
+                                    <a class="nav-link {{ (request()->is('products/requestOut')) ? 'active1' : '' }}"
+                                       id="requestOut"
+                                       href="{{route('screens.storage.product.requestOut')}}">Xác nhận
+                                        đơn hàng</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('warehouses*')) ? 'active' : '' }}" href="#"
+                           data-toggle="collapse" aria-expanded="false"
                            data-target="#submenu-3" aria-controls="submenu-3"><i
                                 class="fas fa-fw fas fa-warehouse"></i>Quản lý kho</a>
-                        <div id="submenu-3" class="collapse submenu" style="">
+                        <div id="submenu-3"
+                             class="{{ (request()->is('warehouses*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./proIn.html">Nhập hàng</a>
+                                    <a class="nav-link {{ (request()->is('warehouses/import')) ? 'active1' : '' }}"
+                                       href="{{route('screens.storage.warehouse.import')}}">Nhập
+                                        hàng</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./proOut.html">Xuất hàng</a>
+                                    <a class="nav-link {{ (request()->is('warehouses/export')) ? 'active1' : '' }}"
+                                       href="{{route('screens.storage.warehouse.export')}}">Xuất
+                                        hàng</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./proDel.html">Xuất hủy</a>
+                                    <a class="nav-link {{ (request()->is('warehouses/export-destroy')) ? 'active1' : '' }}"
+                                       href="{{route('screens.storage.warehouse.exportDestroyProduct')}}">Xuất hủy</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./listDel.html">Đơn hàng hủy</a>
+                                    <a class="nav-link {{ (request()->is('warehouses/order-destroy')) ? 'active1' : '' }}"
+                                       href="{{route('screens.storage.warehouse.destroyOrder')}}">Đơn
+                                        hàng hủy</a>
                                 </li>
                             </ul>
                         </div>

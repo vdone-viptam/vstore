@@ -1,30 +1,4 @@
 @extends('layouts.storage.main')
-@section('custom_css')
-    <link rel="stylesheet" href="{{asset('asset/bootstrap.min.css')}}">
-    <link href="{{asset('asset/assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('asset/style.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('asset/assets/vendor/datatables/css/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('asset/assets/vendor/datatables/css/buttons.bootstrap4.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('asset/assets/vendor/datatables/css/select.bootstrap4.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('asset/assets/vendor/datatables/css/fixedHeader.bootstrap4.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/charts/chartist-bundle/chartist.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/assets/vendor/charts/morris-bundle/morris.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/assets/vendor/charts/c3charts/c3.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-            integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-@endsection
 
 
 @section('page')
@@ -125,10 +99,22 @@
                                 <td>0</td>
                                 <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 <td>
-
+                                    @if($product->type == 1)
+                                        <span class="text-success">Yêu cầu nhập</span>
+                                    @else
+                                        <span style="color:#005d1d;">Xác nhận đơn hàng</span>
+                                    @endif
                                 </td>
-                                <td>2</td>
-                                <td>3</td>
+                                <td>
+                                    @if($product->type == 1)
+                                        <a href="" class="btn btn-primary">Đồng ý</a>
+                                        <a href="" class="btn btn-danger">Từ chối</a>
+                                    @else
+                                        <a href="" class="btn btn-primary">Đồng ý</a>
+                                        <a href="" class="btn btn-danger">Từ chối</a>
+                                    @endif
+                                </td>
+                                <td><a href="#" class="btn btn-link">Chi tiết</a></td>
                             </tr>
                         @endforeach
 

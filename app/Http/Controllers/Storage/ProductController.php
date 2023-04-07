@@ -72,25 +72,26 @@ class ProductController extends Controller
     public function request(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $this->v['requests'] =
-//            User::join('products','users.id','=','products.user_id')
-
-            Product::select('products.category_id', 'products.user_id', 'product_warehouses.amount', 'product_warehouses.id', 'product_warehouses.created_at', 'product_warehouses.status', 'products.name')
-                ->join("product_warehouses", 'products.id', '=', 'product_warehouses.product_id')
-                ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id');
-        if ($request->key_search) {
-
-            if ($request->condition == 'users.name') {
-                $user = User::select('id')->where($request->condition, 'like', '%' . $request->key_search . '%')->first();
-                $this->v['requests'] = $this->v['requests']->Where('products.user_id', '=', $user->id ?? 0);
-            } else {
-                $this->v['requests'] = $this->v['requests']->Where($request->condition, 'like', '%' . $request->key_search . '%');
-            }
-
-
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $requests = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select('request_warehouses.code',
+                'products.publish_id',
+                'products.name as product_name',
+                'users.name as ncc_name',
+                'quantity',
+                'request_warehouses.created_at',
+                'request_warehouses.status',
+                'request_warehouses.id'
+            )
+            ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->where('type', 1)
+            ->where('request_warehouses.ware_id', $warehouses->id)
+            ->orderBy('request_warehouses.id', 'desc');
+        if ($request->code) {
+            $requests = $requests->where('request_warehouses.code', $request->code);
         }
-        $this->v['requests'] = $this->v['requests']->whereIn('product_warehouses.status', [0, 1, 5])->where('warehouses.user_id', Auth::id())->paginate($limit);
-        $this->v['params'] = $request->all();
+        $requests = $requests->paginate($limit);
+        $this->v['requests'] = $requests;
 
         return view('screens.storage.product.request', $this->v);
 
@@ -98,29 +99,29 @@ class ProductController extends Controller
 
     public function requestOut(Request $request)
     {
-        if (isset($request->noti_id)) {
-            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
-        }
         $limit = $request->limit ?? 10;
 
-        $warehouses = Warehouses::where('user_id', Auth::id())->first();
-        $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
-            ->select('order.id', 'order.export_status', 'order.no', 'district_id', 'province_id', 'address', 'order.created_at', 'order_item.price', 'order_item.quantity',
-                'order_item.discount_vshop', 'order_item.discount_ncc', 'order_item.discount_ncc', 'order_item.discount_vstore', 'order.total')
-            ->orderBy('order.id', 'desc')
-            ->where('order.status', '!=', 2)
+        $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
+            ->join('order', 'order_item.order_id', '=', 'order.id')
+            ->select(
+                'order.no',
+                'products.publish_id',
+                'products.name',
+                'order_item.quantity',
+                'order.method_payment',
+                'order.export_status',
+                'order.updated_at as created_at',
+                'order.id'
+            )
+            ->orderBy('order.id', 'desc');
+        $order = $order->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $warehouses->id);
-        if ($request->key_search) {
-            $order = $order->where('order.no', 'like', '%' . $request->key_search . '%');
-        };
-
-        $order = $order->paginate(10);
-//        foreach ($order as $ord){
-//            $ord->total = $ord->price - ($ord->price /100 );
-//        }
-
-        $count = count($order);
-        return view('screens.storage.product.requestOut', compact('order', 'count'));
+        if ($request->code) {
+            $order = $order->where('order.no', $request->code);
+        }
+        $order = $order->paginate($limit);
+        return view('screens.storage.product.requestOut', compact('order'));
     }
 
     public function updateRequest($status, Request $request)
