@@ -110,16 +110,16 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('account*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="false"
                            data-target="#submenu-7" aria-controls="submenu-7"><i
                                 class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
-                        <div id="submenu-7" class="collapse submenu" style="">
+                        <div id="submenu-7" class="{{ (request()->is('account*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link" href="./profile.html">Hồ sơ của tôi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('screens.storage.account.changePassword')}}">Đổi mật khẩu</a>
+                                    <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}" href="{{route('screens.storage.account.changePassword')}}">Đổi mật khẩu</a>
                                 </li>
                             </ul>
                         </div>
