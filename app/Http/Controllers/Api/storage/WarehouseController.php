@@ -308,6 +308,7 @@ class WarehouseController extends Controller
         foreach ($products as $product) {
             $pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('request_warehouses.product_id', $product->id)
                     ->where('request_warehouses.ware_id', $product->ware_id)
                     ->where('type', 2)
@@ -379,6 +380,7 @@ class WarehouseController extends Controller
             }
             $pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('request_warehouses.product_id', $request->product_id)
                     ->where('request_warehouses.ware_id', $request->warehouse_id)
                     ->where('type', 2)

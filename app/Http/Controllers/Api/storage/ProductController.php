@@ -62,6 +62,7 @@ class ProductController extends Controller
                     ->selectRaw('SUM(quantity) as total')
                     ->where('request_warehouses.product_id', $pro->product_id)
                     ->where('request_warehouses.ware_id', $pro->warehouse_id)
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('type', 2)
                     ->where('status', 0)
                     ->first()->total ?? 0;
