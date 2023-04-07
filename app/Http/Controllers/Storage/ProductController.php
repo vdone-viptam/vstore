@@ -54,7 +54,7 @@ class ProductController extends Controller
             $products = $products->where('products.publish_id', $request->publish_id);
         }
 
-        $products = $products->paginate($limit);
+        $products = $products->paginate(1);
 
         foreach ($products as $pro) {
             $pro->pause_product = (int)DB::table('request_warehouses')
