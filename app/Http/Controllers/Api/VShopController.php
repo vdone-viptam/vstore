@@ -708,6 +708,7 @@ class  VShopController extends Controller
             ], 400);
         }
         $discount = Discount::where('user_id', $pdone_id)->where('product_id', $product_id)->where('type', 3)->first();
+        $product = Product::find($request->product_id);
         if (!$discount) {
             return response()->json([
                 'status_code' => 404,
