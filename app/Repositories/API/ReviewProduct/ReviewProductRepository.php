@@ -16,11 +16,19 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
         $array = [];
         if($product){
             $array['name_product'] = $product->name;
+            $array['name'] = $product->name;
             $array['product_id'] = $product->id;
+            $array['id'] = $product->id;
             $array['images_product'] = null;
+            $array['images'] = null;
+            $array['image'] = null;
             if(!empty($product->images)){
                 $array_images = json_decode($product->images);
                 $array['images_product'] = asset($array_images[0]);
+                $array['image'] = asset($array_images[0]);
+                foreach ($array_images as $key => $value) {
+                    $array['images'][] = asset($value);
+                }
             }
             $orderItem = OrderItem::join('points','points.order_item_id','order_item.id')
                 ->join('order','order.id','order_item.order_id')
@@ -35,6 +43,7 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
                 )
                 ->first();
             $array['count_product'] = $orderItem->quantity;
+            $array['quantity'] = $orderItem->quantity;
 
             // a = ( giá sp * sl) - giảm giá
             //  b = a *vat (tính vat)
@@ -53,6 +62,7 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
             $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
             $array['amount_to_pay'] = $amount_to_pay;
             $array['price_product'] = $totalProduct;
+            $array['price'] = $totalProduct;
         }
         return $array;
     }

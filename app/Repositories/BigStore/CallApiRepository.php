@@ -15,8 +15,11 @@ class CallApiRepository implements CallApiRepositoryInterface
             if(!empty($customer->data)){
                 $profileCustomer = [];
                 $profileCustomer['name_customer'] = $customer->data->displayName;
+                $profileCustomer['displayName'] = $customer->data->displayName;
                 $profileCustomer['image_customer'] = $customer->data->avatar;
+                $profileCustomer['avatar'] = $customer->data->avatar;
                 $profileCustomer['customer_id'] = $customer->data->id;
+                $profileCustomer['id'] = $customer->data->id;
                 return $profileCustomer;
             }else{
                 return null;
