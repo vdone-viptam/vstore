@@ -25,6 +25,20 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     @include('layouts.storage.css')
     @yield('custom_css')
+    <style>
+        .page-item.active .page-link{
+            background-color:transparent !important;
+            color: #1890FF !important;
+            border-color: transparent !important;
+        }
+        .page-link{
+            margin-right: 0 !important;
+        }
+        .pagination{
+            gap: 8px;
+        }
+    </style>
+
 </head>
 
 <body id="body">
