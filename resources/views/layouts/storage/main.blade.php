@@ -26,15 +26,17 @@
     @include('layouts.storage.css')
     @yield('custom_css')
     <style>
-        .page-item.active .page-link{
-            background-color:transparent !important;
+        .page-item.active .page-link {
+            background-color: transparent !important;
             color: #1890FF !important;
             border-color: transparent !important;
         }
-        .page-link{
+
+        .page-link {
             margin-right: 0 !important;
         }
-        .pagination{
+
+        .pagination {
             gap: 8px;
         }
     </style>
@@ -164,6 +166,17 @@
     <!-- ============================================================== -->
 </div>
 @yield('custom_js')
+<script>
+    function convertDate(inputFormat) {
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
+
+        var d = new Date(inputFormat)
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
+    }
+
+</script>
 <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>

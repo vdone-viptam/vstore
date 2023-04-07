@@ -185,4 +185,29 @@ class ProductController extends Controller
             'data' => $requests
         ], 200);
     }
+
+    public function detailRequestOut(Request $request)
+    {
+        $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
+            ->join('order', 'order_item.order_id', '=', 'order.id')
+            ->select(
+                'order.no',
+                'products.publish_id',
+                'products.name',
+                'order_item.quantity',
+                'order.method_payment',
+                'order.export_status',
+                'order.created_at',
+                'order.id'
+            )
+            ->orderBy('order.id', 'desc');
+        $order = $order->where('order.status', '!=', 2)
+            ->where('order.id', $request->id)
+            ->orWhere('order.no', $request->id)
+            ->first();
+        return response()->json([
+            'success' => true,
+            'data' => $order
+        ], 200);
+    }
 }

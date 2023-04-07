@@ -89,15 +89,19 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detailProduct'])->name('screens.storage.product.detail');
 
         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
-        Route::get('/detailrequest', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
+        Route::get('/detail-request', [\App\Http\Controllers\Storage\ProductController::class, 'detailRequest'])->name('screens.storage.product.detailRequest');
 
         Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
 
         Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
+        Route::get('/detailRequestOut', [\App\Http\Controllers\Storage\ProductController::class, 'detailRequestOut'])->name('screens.storage.product.detailRequestOut');
+
         Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
     });
     Route::prefix('warehouses')->group(function () {
         Route::get('/import', [\App\Http\Controllers\Storage\WarehouseController::class, 'importProduct'])->name('screens.storage.warehouse.import');
+        Route::get('/detail-import', [\App\Http\Controllers\Storage\WarehouseController::class, 'detailRequest'])->name('screens.storage.warehouse.detailRequest');
+
         Route::get('/export', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportProduct'])->name('screens.storage.warehouse.export');
         Route::get('/export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportDestroyProduct'])->name('screens.storage.warehouse.exportDestroyProduct');
         Route::get('/order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'destroyOrder'])->name('screens.storage.warehouse.destroyOrder');
