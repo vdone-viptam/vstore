@@ -170,5 +170,7 @@
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
+<script src="{{asset('asset/js/main.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
 </body>
 </html>

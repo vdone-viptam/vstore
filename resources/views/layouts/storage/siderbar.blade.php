@@ -116,7 +116,7 @@
                         <div id="submenu-7" class="{{ (request()->is('account*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('screens.storage.account.profile')}}">Hồ sơ của tôi</a>
+                                    <a class="nav-link {{ (request()->is('account')) ? 'active1' : '' }}" href="{{route('screens.storage.account.profile')}}">Hồ sơ của tôi</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}" href="{{route('screens.storage.account.changePassword')}}">Đổi mật khẩu</a>

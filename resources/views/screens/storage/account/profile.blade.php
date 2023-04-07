@@ -3,6 +3,7 @@
 
 @section('custom_css')
 
+
 @endsection
 @section('modal')
 
@@ -23,13 +24,6 @@
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Tài
                                     khoản</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Hồ sơ của tôi</li>
-                            <div>
-                                <li><a href="" class="w-full global time ">
-                                    Xin chào, hello!</a></li>
-                                    <li>xin một lần cho đủ time nàoasdjjngnajajwjannab
-                                        <a href="#">xin chào </a>
-                                    </li>
-                            </div>
                         </ol>
                     </nav>
                 </div>
@@ -57,10 +51,12 @@
                                 @csrf
                                 <div class="row">
                                     <div class=" col-xl-10 mx-auto  col-lg-10 col-md-12 col-sm-12 col-12 p-4">
+                                        @if(Session::has('success'))
                                         <div class="alert alert-success collapshow" role="alert"
                                             id="alert-succ">
                                             Thông tin của bạn đã được cập nhập thành công!
                                         </div>
+                                        @endif
                                         <div class="form-g">
                                             <div class="form-group">
                                                 <label for="name">Tên V-Kho:</label>
@@ -77,14 +73,11 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="tax_code">Mã số thuế:</label>
-                                                <input required type="text" class="form-control form-control-lg" id="tax_code" name="tax_code" value="{{$infoAccount->tax_code}}" readonly>
-                                                @error('tax_code')
-                                                <p class="text-red-600">{{$message}}</p>
-                                                @enderror
+                                                <label>Mã số thuế:</label>
+                                                <input required type="text" class="form-control form-control-lg" value="{{$infoAccount->tax_code}}" readonly>
                                             </div>
                                             <div class="row">
-                                                <div class="col-4">
+                                                <div class="col-xl-4 mx-auto col-lg-4 col-md-12 col-sm-12 col-12">
                                                     <div class="form-group">
                                                         <label for="name">Tỉnh (thành phố):</label>
                                                         <select required name="city_id" id="city_id" class="addr form-control form-control-lg">
@@ -96,7 +89,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-xl-4 mx-auto col-lg-4 col-md-12 col-sm-12 col-12">
                                                     <div class="form-group">
                                                         <label for="name">Quận (huyện):</label>
                                                         <select required name="district_id" id="district_id" class="addr form-control form-control-lg">
@@ -108,7 +101,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-xl-4 mx-auto col-lg-4 col-md-12 col-sm-12 col-12">
                                                     <div class="form-group">
                                                         <label for="name">Phường (xã):</label>
                                                         <select required name="ward_id" id="ward_id" class="addr form-control form-control-lg">
@@ -122,15 +115,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="addres">Địa chỉ:</label>
-                                                <input type="text" class="form-control form-control-lg" id="address" name="address" value="{{$infoAccount->address}}">
+                                                <input required type="text" class="form-control form-control-lg" id="address" name="address" value="{{$infoAccount->address}}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="phone_number">Số điện thoại:</label>
-                                                <input type="text" class="form-control form-control-lg" id="phone_number" name="phone_number" value="{{$infoAccount->phone_number}}">
+                                                <input required type="text" class="form-control form-control-lg" id="phone_number" name="phone_number" value="{{$infoAccount->phone_number}}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="id_vdone">ID Người đại diện:</label>
-                                                <input type="text" class="form-control form-control-lg" id="id_vdone" name="id_vdone" value="{{$infoAccount->id_vdone}}">
+                                                <input required type="text" class="form-control form-control-lg" id="id_vdone" name="id_vdone" value="{{$infoAccount->id_vdone}}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="id_vdone_diff">ID Người đại diện (khác):</label>
@@ -139,14 +132,14 @@
                                             <span style="font-size:18px; font-weight:600">Thông tin kho:</span>
                                             <div class="form-group">
                                                 <label for="floor_area">Diện tích sàn (m2):</label>
-                                                <input type="text" class="form-control form-control-lg" id="floor_area" name="floor_area" value="{{$infoAccount->storage_information->floor_area}}">
+                                                <input required type="text" class="form-control form-control-lg" id="floor_area" name="floor_area" value="{{$infoAccount->storage_information->floor_area}}">
                                                 @error('floor_area')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="volume">Thể tích (m3):</label>
-                                                <input type="text" class="form-control form-control-lg" id="volume" name="volume" value="{{$infoAccount->storage_information->volume}}">
+                                                <input required type="text" class="form-control form-control-lg" id="volume" name="volume" value="{{$infoAccount->storage_information->volume}}">
                                                 @error('volume')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -154,21 +147,21 @@
 
                                             <div class="form-group">
                                                 <label for="cold_storage">Diện tích kho lạnh (m2):</label>
-                                                <input type="text" class="form-control form-control-lg" id="cold_storage" name="cold_storage" value="{{$infoAccount->storage_information->cold_storage}}">
+                                                <input required type="text" class="form-control form-control-lg" id="cold_storage" name="cold_storage" value="{{$infoAccount->storage_information->cold_storage}}">
                                                 @error('cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="warehouse">Diện tích kho bãi (m2):</label>
-                                                <input type="text" class="form-control form-control-lg" id="warehouse" name="warehouse" value="{{$infoAccount->storage_information->volume}}">
+                                                <input required type="text" class="form-control form-control-lg" id="warehouse" name="warehouse" value="{{$infoAccount->storage_information->volume}}">
                                                 @error('warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="normal-storage">Diện tích kho thường (m2):</label>
-                                                <input type="text" class="form-control form-control-lg" id="normal-storage" name="normal-storage" value="{{$infoAccount->storage_information->normal_storage}}">
+                                                <label for="normal_storage">Diện tích kho thường (m2):</label>
+                                                <input required type="text" class="form-control form-control-lg" id="normal_storage" name="normal_storage" value="{{$infoAccount->storage_information->normal_storage}}">
                                                 @error('normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -178,9 +171,14 @@
                                             style="gap:10px">
                                             <button type="submit" class="btn btn-primary btn-submit ">Cập nhập
                                                 thông tin</button>
-                                            <button type="button" class="btn btn-success "
-                                                data-toggle="modal" data-target="#modal-tax-code">Cập nhập
-                                                mã số thuế</button>
+                                            <button type="button" class="btn btn-success"
+                                            {{-- data-toggle="modal" data-target="#modal-tax-code" --}}
+                                            >
+                                                <a href="{{route('screens.storage.account.editTaxCode')}}"
+                                                class="text-white">
+                                                    Cập nhật mã số thuế
+                                                </a>
+                                            </button>
                                         </div>
 
                                     </div>
@@ -190,6 +188,41 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal tax-code -->
+    <div class="modal fade" id="modal-tax-code" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cập nhập mã số thuế</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('screens.storage.account.saveChangeTaxCode')}}" method="POST">
+                    @csrf
+                    <div class="modal-body" id="form-tax-code">
+                        <div class="form-group">
+                            <label for="tax_code">Mã số thuế:</label>
+                            <input type="text" class="form-control form-control-lg" value="{{$infoAccount->tax_code}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tax_code">Mã số thuế mới:</label>
+                            <input required type="text" class="form-control form-control-lg" id="new_tax_code" name="tax_code"
+                            pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
+                            value="" >
+                            <div class="vali"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng lại</button>
+                        <button type="submit" class="btn btn-primary btn-save-tax">Lưu lại</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -283,8 +316,8 @@
                                                             <input type="text" class="form-control form-control-lg" id="warehouse" value="${data.data.storage_information.warehouse ? data.data.storage_information.warehouse : 'Không có'}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="normal-storage">Diện tích kho thường:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="normal-storage" value="${data.data.storage_information.normal_storage ? data.data.storage_information.normal_storage : 'Không có'}">
+                                                            <label for="normal_storage">Diện tích kho thường:</label>
+                                                            <input type="text" class="form-control form-control-lg" id="normal_storage" value="${data.data.storage_information.normal_storage ? data.data.storage_information.normal_storage : 'Không có'}">
                                                         </div>`
                         $('.profile').html(htmlData);
                         // $('.form-g').html(htmlDataForm);
@@ -313,11 +346,9 @@
             .catch(console.error);
         fetch('{{route('get_city')}}?type=2&value=' + '{{(int) $infoAccount->provinceId}}', {
             mode: 'no-cors',
-
         })
             .then((response) => response.json())
             .then((data) => {
-
                 if (data.length > 0) {
                     divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == '{{(int) $infoAccount->district_id}}' ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
 
@@ -334,10 +365,9 @@
             .then((response) => response.json())
 
             .then((data) => {
-
                 if (data.length > 0) {
                     divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == '{{(int) $infoAccount->ward_id}}' ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
-
+                    console.log(1);
                 } else {
                     divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                 }

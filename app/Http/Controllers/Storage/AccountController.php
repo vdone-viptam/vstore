@@ -38,7 +38,7 @@ class AccountController extends Controller
         }
         $this->v['infoAccount'] = User::with(['province', 'district','ward'])->where('id', Auth::id())->first();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
-//        return $this->v['infoAccount'];
+        // dd ($this->v['infoAccount']);
         return view('screens.storage.account.profile', $this->v);
 
     }
@@ -52,7 +52,7 @@ class AccountController extends Controller
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-            // 'floor_area' => 'required',
+            'floor_area' => 'required',
             'volume' => 'required',
             'cold_storage' => 'required',
             'warehouse' => 'required',
@@ -106,7 +106,7 @@ class AccountController extends Controller
 
 
             $address = $user->ward->wards_name .','. $user->district->district_name.', '  .$user->province->province_name;
-//            return $address_ware;
+
             $result = app('geocoder')->geocode($address)->get();
             if (!isset($result[0])){
                 return redirect()->back()->with('error','Địa chỉ không hợp lệ');
@@ -210,10 +210,10 @@ class AccountController extends Controller
     public function saveChangeTaxCode(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'tax_code' => 'required|digits:10',
+            'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
         ], [
             'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-            'tax_code.digits' => 'Mã số thuế không hợp lệ'
+            'tax_code.regex' => 'Mã số thuế không hợp lệ'
         ]);
 
 
@@ -223,11 +223,16 @@ class AccountController extends Controller
 
         try {
             if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', Auth::user()->role_id)->count() > 0) {
-                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đang ký'])->withInput($request->all());
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
 
             }
-            if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', 3)->orWhere('role_id', 2)->count() > 0) {
-                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đang ký'])->withInput($request->all());
+            $countTax = DB::table('users')->where('tax_code', $request->tax_code)
+                            ->where(function ($query){
+                                $query->where('role_id',3 )
+                                    ->orWhere('role_id',2);
+                            })->count();
+            if ( $countTax > 0) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),

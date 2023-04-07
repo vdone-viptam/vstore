@@ -270,8 +270,19 @@ $(document).ready(function () {
     $('.btn-small-menu').on('click', function () {
         $('.side-bar-tab').toggleClass('small-menu')
     })
-})
 
+
+})
+function swalNoti(position, icon, title, width, showConfirmButton, timer) {
+    Swal.fire({
+        position: position,
+        icon: icon,
+        title: title,
+        width: width,
+        showConfirmButton: showConfirmButton,
+        timer: timer
+    });
+}
 // MENU
 
 
