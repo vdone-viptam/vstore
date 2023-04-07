@@ -63,6 +63,11 @@
                 <div class="card">
                     <h5 class="card-header" style="font-size: 18px;">Đổi mật khẩu</h5>
                     <div class="card-body">
+                        @if(\Illuminate\Support\Facades\Session::has('success'))
+                            <div class="alert alert-success collapse" role="alert">
+                                Mật khẩu của bạn đã được đổi thành công!
+                            </div>
+                        @endif
                         <div class="alert alert-success collapse" role="alert">
                             Mật khẩu của bạn đã được đổi thành công!
                         </div>
@@ -75,19 +80,28 @@
                                         <label for="name">Mật khẩu cũ</label>
                                         <input type="password" class="form-control form-control-lg"
                                                id="old_password" name='old_password'>
-                                        <div></div>
+                                        <div>
+                                            @error('old_password')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="form-group pas">
                                         <label for="name">Mật khẩu mới</label>
                                         <input type="password" class="form-control form-control-lg"
                                                id="password" name="password">
-                                        <div></div>
+                                        <div>  @error('password')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror</div>
                                     </div>
                                     <div class="form-group conf">
                                         <label for="name">Nhập lại mật khẩu</label>
                                         <input type="password" class="form-control form-control-lg"
                                                id="password_confirmation" name="password_confirmation">
-                                        <div></div>
+                                        <div>
+                                            @error('password_confirmation')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror</div>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center"

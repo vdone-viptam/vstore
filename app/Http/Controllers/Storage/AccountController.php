@@ -155,7 +155,7 @@ class AccountController extends Controller
 
     public function saveChangePassword(Request $request)
     {
-        return 1;
+//        return 1;
         $user = User::find(Auth::id());
 
         if (strlen($request->old_password) == 0) {
@@ -166,11 +166,16 @@ class AccountController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password' => 'required|confirmed|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password_confirmation'=>'required'
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',
             'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
+            'password.confirmed'=>'Xác nhận mật khẩu không khớp',
+//            'password_confirmation.required'=>'vvUI LONG NHẬP '
+            'password_confirmation'=>'Xác nhận mật khẩu bắt buộc nhập'
+
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
