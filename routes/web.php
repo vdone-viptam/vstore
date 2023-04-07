@@ -102,6 +102,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
+        Route::get('/detail-profile', [\App\Http\Controllers\Storage\AccountController::class, 'detailProfile'])->name('screens.storage.account.profile.detail');
         Route::post('/edit/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'editProfile'])->name('screens.storage.account.editPro');
         Route::post('/upload/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'uploadImage'])->name('screens.storage.account.upload');
         Route::get('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'changePassword'])->name('screens.storage.account.changePassword');

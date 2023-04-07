@@ -21,7 +21,15 @@ class AccountController extends Controller
         $this->v = [];
     }
 
-
+    public function detailProfile(Request $request)
+    {
+        $this->v['infoAccount'] = Auth::user();
+        $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
+        return response()->json([
+            'success' => true,
+            'data' => $this->v['infoAccount']
+        ]);
+    }
     public function profile()
     {
 //        return 1;
@@ -37,13 +45,14 @@ class AccountController extends Controller
 
     public function editProfile(Request $request, $id)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:30',
             'company_name' => 'required|max:100',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-            'floor_area' => 'required',
+            // 'floor_area' => 'required',
             'volume' => 'required',
             'cold_storage' => 'required',
             'warehouse' => 'required',
