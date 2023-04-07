@@ -224,7 +224,7 @@ class WarehouseController extends Controller
             $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
                 ->select('quantity', 'order_item.product_id', 'order_item.warehouse_id', 'order.no', 'products.user_id', 'order.id')
                 ->join('products', 'order_item.product_id', '=', 'products.id')
-                ->where('order_id', $request->order_id)
+                ->where('order_item.order_id', $request->order_id)
                 ->where('order.warehouse_id', $warehouses->id)
                 ->where('order.cancel_status', 1)
                 ->where('order.export_status', 5)
