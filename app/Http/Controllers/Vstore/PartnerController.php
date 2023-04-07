@@ -38,7 +38,6 @@ class PartnerController extends Controller
         foreach ($users as $val) {
             $val->sl = Product::where('user_id', $val->id)->where('vstore_id', Auth::id())->count();
         }
-//        return $users;
         $count = count($users);
         return view('screens.vstore.partner.index', compact('users', 'count'));
 
@@ -57,7 +56,6 @@ class PartnerController extends Controller
         }
         $vshop = $vshop->paginate($limit);
         foreach ($vshop as $value) {
-//            $count = VshopProduct::where('pdone_id',$value->pdone_id)->count();
 
             $count = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                 ->join('products', 'vshop_products.product_id', '=', 'products.id')
@@ -66,13 +64,10 @@ class PartnerController extends Controller
                 ->count();
 
             $order_item = Order::join('order_item', 'order.id', '=', 'order_item.order_id')->where('vshop_id', $value->id)->sum('quantity') ?? 0;
-//            return $count;
             $value->sum_sl = $order_item;
             $value->count = $count;
-//            return $count;
         }
 
-//        return $vshop;
         $count = count($vshop);
         $params = $request->all();
         return view('screens.vstore.partner.vshop', compact('vshop', 'count', 'params'));

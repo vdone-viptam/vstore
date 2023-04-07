@@ -233,10 +233,11 @@ class CartController extends Controller
             ->first();
 
         if (!$product) {
-            return response()->json([
-                'status_code' => 401,
-                'errors' => 'Sản phẩm chưa niêm yết'
-            ], 404);
+//            return response()->json([
+//                'status_code' => 401,
+//                'errors' => 'Sản phẩm chưa niêm yết'
+//            ], 404);
+            $product = Product::find($id);
         }
 
         $product->discount = getDiscountProduct($product->id, $vshop->id);
