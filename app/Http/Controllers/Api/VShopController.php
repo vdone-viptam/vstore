@@ -685,6 +685,7 @@ class  VShopController extends Controller
      */
     public function editDiscount(Request $request, $pdone_id, $product_id)
     {
+//        return 1;
         $validator = Validator::make($request->all(), [
             'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(10),
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
@@ -707,14 +708,18 @@ class  VShopController extends Controller
                 ],
             ], 400);
         }
+
         $discount = Discount::where('user_id', $pdone_id)->where('product_id', $product_id)->where('type', 3)->first();
-        $product = Product::find($request->product_id);
+        $product = Product::find($product_id);
+
         if (!$discount) {
             return response()->json([
                 'status_code' => 404,
                 'error' => 'Mã giảm giá không tồn tại',
             ], 404);
+
         } else {
+
             $discount_vshop = Product::select('discount_vShop')->where('id', $product_id)->where('status', 2)->first()->discount_vShop ?? 0;
             if ($discount_vshop == 0) {
                 return response()->json([
@@ -722,15 +727,21 @@ class  VShopController extends Controller
                     'error' => 'Sản phẩm chưa niêm yết',
                 ], 400);
             } elseif ($request->discount > $discount_vshop / 100 * 95) {
+//                return  $discount ;
                 return response()->json([
                     'status_code' => 400,
-                    'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 95,
+                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . $discount_vshop / 100 * 95,
+                    'discount_limit'=>$discount_vshop / 100 * 95,
+                    'discount_price_limit'=> $product->price /100 * ($discount_vshop / 100 * 95)
                 ], 400);
+
             } else {
+
                 $discount->start_date = $request->start_date;
                 $discount->end_date = $request->end_date;
                 $discount->discount = $request->discount;
                 $discount->save();
+
 //            return $discount;
                 return response()->json([
                     'status_code' => 201,
@@ -786,7 +797,7 @@ class  VShopController extends Controller
             ], 400);
         }
         $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
-
+        $product = Product::find($request->product_id);
         if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('type', 3)->where('product_id', $request->product_id)->count() > 0) {
             return response()->json([
                 'status_code' => 400,
@@ -801,7 +812,9 @@ class  VShopController extends Controller
         } elseif ($request->discount > $discount / 100 * 95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 95,
+                'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . $discount / 100 * 95,
+                'discount_limit'=>$discount / 100 * 95,
+                'discount_price_limit'=> $product->price /100 * ($discount / 100 * 95)
             ], 400);
         } else {
             DB::table('discounts')->insert([
