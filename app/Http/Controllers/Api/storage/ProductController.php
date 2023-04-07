@@ -16,6 +16,7 @@ use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -61,8 +62,9 @@ class ProductController extends Controller
                     ->selectRaw('SUM(quantity) as total')
                     ->where('request_warehouses.product_id', $pro->product_id)
                     ->where('request_warehouses.ware_id', $pro->warehouse_id)
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('type', 2)
-                    ->where('status', 0)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
         }
         return response()->json([
@@ -351,8 +353,8 @@ class ProductController extends Controller
                     'TYPE' => 1,
 
                 ]);
-
-//            return $get_list;
+                $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
+                $order->estimated_date = Carbon::now()->addHours((int)$date);
 
                 $tinh_thanh_gui = Province::where('province_id', $warehouse->city_id)->first()->province_name ?? '';
                 $quan_huyen_gui = District::where('district_id', $warehouse->district_id)->first()->district_name ?? '';
