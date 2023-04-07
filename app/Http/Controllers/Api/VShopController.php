@@ -708,6 +708,7 @@ class  VShopController extends Controller
             ], 400);
         }
         $discount = Discount::where('user_id', $pdone_id)->where('product_id', $product_id)->where('type', 3)->first();
+        $product = Product::find($request->product_id);
         if (!$discount) {
             return response()->json([
                 'status_code' => 404,
@@ -724,6 +725,8 @@ class  VShopController extends Controller
                 return response()->json([
                     'status_code' => 400,
                     'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount_vshop / 100 * 85,
+                    'discount_limit'=>$discount / 100 * 85,
+                    'discount_price_limit'=> $product->price /100 * ($discount / 100 * 85)
                 ], 400);
             } else {
                 $discount->start_date = $request->start_date;
@@ -785,7 +788,7 @@ class  VShopController extends Controller
             ], 400);
         }
         $discount = Product::select('discount_vShop')->where('id', $request->product_id)->where('status', 2)->first()->discount_vShop ?? 0;
-
+        $product = Product::find($request->product_id);
         if (DB::table('discounts')->where('user_id', $request->pdone_id)->where('type', 3)->where('product_id', $request->product_id)->count() > 0) {
             return response()->json([
                 'status_code' => 400,
@@ -801,6 +804,8 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Phầm trăm giảm giá nhỏ hơn ' . $discount / 100 * 85,
+                'discount_limit'=>$discount / 100 * 85,
+                'discount_price_limit'=> $product->price /100 * ($discount / 100 * 85)
             ], 400);
         } else {
             DB::table('discounts')->insert([
