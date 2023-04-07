@@ -312,6 +312,7 @@ class WarehouseController extends Controller
                     ->where('request_warehouses.product_id', $product->id)
                     ->where('request_warehouses.ware_id', $product->ware_id)
                     ->where('type', 2)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
             $product->in_stock = $product->in_stock - $pause_product;
             if ($product->in_stock > 0) {
@@ -384,6 +385,7 @@ class WarehouseController extends Controller
                     ->where('request_warehouses.product_id', $request->product_id)
                     ->where('request_warehouses.ware_id', $request->warehouse_id)
                     ->where('type', 2)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
             if ($productWare->amount - ($productWare->export + $pause_product) < $request->quantity) {
                 DB::rollBack();

@@ -64,7 +64,7 @@ class ProductController extends Controller
                     ->where('request_warehouses.ware_id', $pro->warehouse_id)
                     ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('type', 2)
-                    ->where('status', 0)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
         }
         return response()->json([
