@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('order_item', function (Blueprint $table) {
-            $table->bigInteger('delivery_partner_id')->unsigned()->default(1)->comment('lưu id delivery_partner');
+            $table->bigInteger('delivery_partner_id')->unsigned()->nullable()->comment('lưu id delivery_partner');
             $table->foreign('delivery_partner_id')->references('id')->on('delivery_partner')->onDelete('cascade');
         });
     }

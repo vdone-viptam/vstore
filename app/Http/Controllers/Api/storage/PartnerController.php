@@ -153,23 +153,25 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
-
             $limit = $request->limit ?? 10;
-            $ncc = OrderItem::query()
-                ->select('products.id as product_id',
-                    'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
-                    DB::raw('count(*) as count_product'),
-                )
-                ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
-                 where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
-                ->join('products', 'order_item.product_id', 'products.id')
-                ->join('order', 'order.id', 'order_item.order_id')
-                ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
-                ->where('order_item.warehouse_id', $id)
-                ->where('order.export_status', 4);
-            $ncc = $ncc->groupBy(['delivery_partner_id'])
-                ->paginate($limit);
+            // $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+            // // return $id;
+            // $ncc = OrderItem::query()
+            //     ->select('products.id as product_id',
+            //         'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
+            //         DB::raw('count(*) as count_product'),
+            //     )
+            //     ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
+            //      where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+            //     ->join('products', 'order_item.product_id', 'products.id')
+            //     ->join('order', 'order.id', 'order_item.order_id')
+            //     ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
+            //     ->where('order_item.warehouse_id', $id)
+            //     ->where('order.export_status', 4);
+            // $ncc = $ncc->groupBy(['delivery_partner_id'])
+            //     ->paginate($limit);
+
+            $ncc = $this->partnerRepository->deliveryPartner($limit);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([

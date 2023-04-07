@@ -17,19 +17,19 @@ class CheckToken
     public function handle(Request $request, Closure $next)
     {
 //        return getallheaders();
-        if($request->header('Token') != config('domain.token'))
-        {
-            $response = [
-                'status' => 2,
-                'message' => 'Unauthorized',
-            ];
+        // if($request->header('Token') != config('domain.token'))
+        // {
+        //     $response = [
+        //         'status' => 2,
+        //         'message' => 'Unauthorized',
+        //     ];
 
-            return response()->json($response, 500);
-        }
-        else
-        {
-            return $next($request);
-        }
+        //     return response()->json($response, 500);
+        // }
+        // else
+        // {
+        //     return $next($request);
+        // }
         return $next($request);
     }
 }
