@@ -81,7 +81,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="partner-datatables" class="table table-striped table-bordered second"
+                        <table id="supplier-datatables" class="table table-striped table-bordered second"
                             style="width:100%">
                             <thead>
                                 <tr>
@@ -129,7 +129,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#partner-datatables').DataTable({
+            $('#supplier-datatables').DataTable({
                 processing: true,
                 serverSide: true,
                 searching: true,
@@ -174,7 +174,7 @@
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
-                url: '{{ route('detail.ncc') }}',
+                url: '{{ route('storage.detail.ncc') }}',
                 dataType: "json",
                 data: { user_id: id},
                 encode: true,

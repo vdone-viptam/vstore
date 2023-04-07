@@ -27,11 +27,20 @@ class PartnerController extends Controller
         if ( request()->ajax()) {
             return Datatables::of($ncc)->make(true);
         }
-        return view('screens.storage.partner.index', ['ncc' => $ncc]);
+        return view('screens.storage.partner.supplier.index', ['ncc' => $ncc]);
     }
     public function detailNcc(Request $request)
     {
         $ncc = $this->partnerRepository->detailNcc($request->user_id);
         return response()->json(['success' => true, 'data' => $ncc]);
+    }
+    public function deliveryPartner(Request $request)
+    {
+        $limit = $request->limit;
+        $ncc = $this->partnerRepository->deliveryPartner($limit)->get();
+        if ( request()->ajax()) {
+            return Datatables::of($ncc)->make(true);
+        }
+        return view('screens.storage.partner.delivery-partner.index');
     }
 }

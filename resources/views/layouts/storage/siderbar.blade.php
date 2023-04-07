@@ -66,7 +66,7 @@
                                     <a class="nav-link" href="{{ route('screens.storage.partner.index')}}">Nhà cung cấp</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./listShip.html">Đối tác giao hàng</a>
+                                    <a class="nav-link" href="{{ route('screens.storage.delivery.partner')}}">Đối tác giao hàng</a>
                                 </li>
                             </ul>
                         </div>
