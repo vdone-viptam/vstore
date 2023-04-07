@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Hash;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +93,13 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
         Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detail'])->name('screens.storage.product.detail');
     });
+    Route::prefix('warehouses')->group(function () {
+        Route::get('/import', [\App\Http\Controllers\Storage\WarehouseController::class, 'importProduct'])->name('screens.storage.warehouse.import');
+        Route::get('/export', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportProduct'])->name('screens.storage.warehouse.export');
+        Route::get('/export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportDestroyProduct'])->name('screens.storage.warehouse.exportDestroyProduct');
+        Route::get('/order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'destroyOrder'])->name('screens.storage.warehouse.destroyOrder');
+
+    });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
         Route::post('/edit/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'editProfile'])->name('screens.storage.account.editPro');
@@ -113,6 +120,9 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
+        Route::get('/detail-ncc', [\App\Http\Controllers\Storage\PartnerController::class, 'detailNcc'])->name('storage.detail.ncc');
+        Route::get('/delivery-partner', [\App\Http\Controllers\Storage\PartnerController::class, 'deliveryPartner'])->name('screens.storage.delivery.partner');
+        Route::get('/detail-delivery-partner', [\App\Http\Controllers\Storage\PartnerController::class, 'detailDeliveryPartner'])->name('storage.detail.delivery.partner');
         //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 

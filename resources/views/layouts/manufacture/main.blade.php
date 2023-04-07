@@ -33,6 +33,7 @@
     <link rel="stylesheet" href={{asset("asset/css/menu.css")}}>
     @vite('resources/css/app.css')
     @yield('custom_css')
+
 </head>
 <style>
 
@@ -58,6 +59,7 @@
     td{
         text-align: left;
     }
+
 </style>
 <body id="body">
 @yield('modal')

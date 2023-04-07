@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\Otp;
 use App\Models\PasswordReset;
+use App\Models\Province;
 use App\Models\User;
+use App\Models\Ward;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -183,7 +186,10 @@ class LoginController extends Controller
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
-                'phone_number.regex' => 'Số điện thoại không hợp lệ'
+                'phone_number.regex' => 'Số điện thoại không hợp lệ',
+                'ward_id' => 'Phường (xã) bắt buộc chọn',
+
+
             ]);
         }
 //        return $request;
@@ -658,11 +664,21 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
     function getCity(Request $request)
     {
         if ($request->type == 2) {
-            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
+
+            $response = District::select('district_id as DISTRICT_ID','district_name as DISTRICT_NAME','district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
+            ->where('province_id',$request->value)->get();
+//            return  $response;
+//            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
+          return $response;
         } elseif ($request->type == 3) {
-            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
+            $response = Ward::select('wards_id as WARDS_ID','district_id as DISTRICT_ID','wards_name as WARDS_NAME')->where('district_id',$request->value)->get();
+//            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
+            return $response;
         } else {
-            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
+            $response = Province::select('province_id as PROVINCE_ID','province_code as PROVINCE_CODE','province_name as PROVINCE_NAME')->get();
+            return  $response;
+//            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
+//            return $response->json('data');
 
         }
         return $response->json()['data'];
