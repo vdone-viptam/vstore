@@ -130,4 +130,31 @@ class WarehouseController extends Controller
         ]);
     }
 
+    public function detailRequest(Request $request)
+    {
+        $requests = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select(
+                'request_warehouses.code',
+                'products.publish_id',
+                'products.name as product_name',
+                'users.name as ncc_name',
+                'quantity',
+                'request_warehouses.status',
+                'request_warehouses.created_at',
+                'request_warehouses.id',
+                'request_warehouses.note',
+                'request_warehouses.type'
+            )
+            ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->where('request_warehouses.id', $request->id)
+            ->orWhere('request_warehouses.code', $request->id)
+            ->first();
+
+        return response()->json([
+            'success' => true,
+            'data' => $requests
+        ], 200);
+
+    }
+
 }

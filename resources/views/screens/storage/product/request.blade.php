@@ -95,7 +95,8 @@
                                         <a href="" class="btn btn-primary">Đồng ý</a>
                                         <a href="" class="btn btn-danger">Từ chối</a>
                                     </td>
-                                    <td><a href="" class="btn btn-link">Chi tiết</a></td>
+                                    <td><a href="#" class="btn btn-link" onclick="showDetail({{$product->id}})">Chi
+                                            tiết</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -111,6 +112,92 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.storage.product.detailRequest')}}?id=` + id,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                var htmlData = ``;
+                if (data.data) {
+                    htmlData += ` <form method="post">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="name">Mã yêu cầu:</label>
+                            <input type="text" class="form-control form-control-lg" id="code" value="${data.data.code}" readonly>
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="publish_id">Mã sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="publish_id" value="${data.data.publish_id}" readonly>
+                        </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="product_name">Tên sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.product_name}" readonly >
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="ncc_name">Nhà cung cấp:</label>
+                            <input type="text" class="form-control form-control-lg" id="ncc_name" value="${data.data.ncc_name}" readonly>
+                        </div>
+                            </div>
+                        </div>
 
+
+                        <div class="form-group">
+                            <label for="quantity">Số lượng nhập:</label>
+                            <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_vdone">Chiết khấu: </label>
+                            <input type="text" class="form-control form-control-lg" id="id_vdone" value="0" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="created_at">Ngày yêu cầu: </label>
+                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertDate(data.data.created_at)}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_vdone">Trạng thái</label>
+
+                            ${data.data.status != 0 ? ` <select class="custom-select" id="inputGroupSelect01" disabled>
+                                <option selected > ${data.data.status == 5 || data.data.status == 1 ? `Đồng ý` : `Từ chối`}</option>
+                            </select>` : ` <select class="custom-select" id="inputGroupSelect01">
+                                <option  value="5">Đồng ý</option>
+                                <option  value="2">Từ chối</option>
+                            </select>`}
+
+                        </div>
+                   </form>     `;
+
+                    if (data.data.status != 0) {
+                        $('.btn-update').addClass('hidden');
+                    } else {
+                        $('.btn-update').removeClass('hidden');
+                    }
+
+                    $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+                    $('.btn-update').data('key', id);
+
+
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+        }
+    </script>
 
 @endsection

@@ -164,4 +164,50 @@ class ProductController extends Controller
             'data' => $product
         ]);
     }
+
+    public function detailRequest(Request $request)
+    {
+        $requests = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select('request_warehouses.code',
+                'products.publish_id',
+                'products.name as product_name',
+                'users.name as ncc_name',
+                'quantity',
+                'request_warehouses.created_at',
+                'request_warehouses.status',
+                'request_warehouses.id'
+            )
+            ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->where('request_warehouses.id', $request->id)
+            ->first();
+        return response()->json([
+            'success' => true,
+            'data' => $requests
+        ], 200);
+    }
+
+    public function detailRequestOut(Request $request)
+    {
+        $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
+            ->join('order', 'order_item.order_id', '=', 'order.id')
+            ->select(
+                'order.no',
+                'products.publish_id',
+                'products.name',
+                'order_item.quantity',
+                'order.method_payment',
+                'order.export_status',
+                'order.created_at',
+                'order.id'
+            )
+            ->orderBy('order.id', 'desc');
+        $order = $order->where('order.status', '!=', 2)
+            ->where('order.id', $request->id)
+            ->orWhere('order.no', $request->id)
+            ->first();
+        return response()->json([
+            'success' => true,
+            'data' => $order
+        ], 200);
+    }
 }
