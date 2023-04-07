@@ -89,6 +89,8 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detailProduct'])->name('screens.storage.product.detail');
 
         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
+        Route::get('/detailrequest', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
+
         Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
 
         Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
