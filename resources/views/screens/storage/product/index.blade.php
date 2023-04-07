@@ -2,6 +2,27 @@
 
 
 
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -64,7 +85,8 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->in_stock ?? 0}}</td>
                                     <td>{{$product->pause_product}}</td>
-                                    <td><a href="" class="btn btn-link">Chi tiết</a></td>
+                                    <td><a href="#" onclick="showDetail({{$product->product_id}})" class="btn btn-link">Chi
+                                            tiết</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -86,6 +108,92 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.storage.product.detail')}}?product_id=` + id,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                var htmlData = ``;
 
+                if (data.data) {
+                    htmlData += `   <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã sản phẩm: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.publish_id}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Tên sản phẩm: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.product_name}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã SKU sản phẩm: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.sku_id}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Danh mục sản phẩm: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.cate_name}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Nhà cung cấp: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.name}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Tồn kho: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.in_stock}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        ${data.data.ex_im.length != 0 ? `<div class="col-6">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số lượng chờ xuất: <span class="text-danger" style="font-weight:500">${data.data.ex_im[0] ? data.data.ex_im[0].total : 'Không có'}</span></h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số lượng chờ nhập: <span class="text-success" style="font-weight:500">${data.data.ex_im[1] ? data.data.ex_im[1].total : 'Không có'}</span></h5>
+                        </div>` : `<div class="col-5"><h5 style="font-size:16px; white-space:nowrap; font-weight:600">Trạng thái nhập xuất: </h5>
+                            </div>
+                        <div class="col-7"><span style="color:#000; font-size:14px; font-weight:400">Không có thông tin</span>
+            `}
+
+               </div>
+
+                        `;
+                    $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+
+
+        }
+    </script>
 
 @endsection
