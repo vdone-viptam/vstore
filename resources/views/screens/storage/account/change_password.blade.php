@@ -66,7 +66,7 @@
                         <div class="alert alert-success collapse" role="alert">
                             Mật khẩu của bạn đã được đổi thành công!
                         </div>
-                        <form method="post" >
+                        <form method="post" action="{{route('screens.storage.account.saveChangePassword')}}">
                             @csrf
                             <div class="row">
 

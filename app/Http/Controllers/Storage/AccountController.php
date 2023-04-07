@@ -155,6 +155,7 @@ class AccountController extends Controller
 
     public function saveChangePassword(Request $request)
     {
+        return 1;
         $user = User::find(Auth::id());
 
         if (strlen($request->old_password) == 0) {
