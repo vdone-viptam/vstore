@@ -33,26 +33,40 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $products = Category::join('products', 'categories.id', '=', 'products.category_id')
+        $products = DB::table('categories')->selectRaw('products.publish_id,
+            products.sku_id,
+            products.name as product_name,
+            categories.name as cate_name,
+            users.name,
+            (product_warehouses.amount - product_warehouses.export) as in_stock,
+            warehouses.id as warehouse_id,
+            products.id as product_id'
+        )
+            ->join('products', 'categories.id', '=', 'products.category_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
-            ->groupBy('products.id')
-            ->select('products.id', 'products.publish_id', 'products.images', 'products.name as name', 'categories.name as cate_name', 'products.price', 'product_warehouses.ware_id', 'product_warehouses.product_id');
-
-
-        if ($request->key_search) {
-
-            $products = $products->where($request->condition, 'like', '%' . $request->key_search . '%');
-        }
-        $products = $products->where('warehouses.user_id', Auth::id())
+            ->join('users', 'warehouses.user_id', 'users.id')
             ->where('product_warehouses.status', 1)
-            ->paginate($limit);
-        foreach ($products as $pro) {
-            $pro->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $pro->ware_id . " AND product_id = " . $pro->product_id . ""))[0]->amount ?? 0;
+            ->groupBy(['products.id'])
+            ->where('warehouses.user_id', Auth::id());
+
+        if ($request->publish_id) {
+            $products = $products->where('products.publish_id', $request->publish_id);
         }
-        $this->v['products'] = $products;
-        $this->v['params'] = $request->all();
-        return view('screens.storage.product.index', $this->v);
+
+        $products = $products->paginate($limit);
+
+        foreach ($products as $pro) {
+            $pro->pause_product = (int)DB::table('request_warehouses')
+                    ->selectRaw('SUM(quantity) as total')
+                    ->where('request_warehouses.product_id', $pro->product_id)
+                    ->where('request_warehouses.ware_id', $pro->warehouse_id)
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
+                    ->where('type', 2)
+                    ->where('request_warehouses.status', 0)
+                    ->first()->total ?? 0;
+        }
+        return view('screens.storage.product.index', ['products' => $products]);
     }
 
     public function request(Request $request)
@@ -68,7 +82,7 @@ class ProductController extends Controller
 
             if ($request->condition == 'users.name') {
                 $user = User::select('id')->where($request->condition, 'like', '%' . $request->key_search . '%')->first();
-                $this->v['requests'] = $this->v['requests']->Where('products.user_id', '=',$user->id ?? 0);
+                $this->v['requests'] = $this->v['requests']->Where('products.user_id', '=', $user->id ?? 0);
             } else {
                 $this->v['requests'] = $this->v['requests']->Where($request->condition, 'like', '%' . $request->key_search . '%');
             }
