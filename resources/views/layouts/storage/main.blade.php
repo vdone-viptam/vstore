@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    @yield('custom_css')
+
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Kho | Hệ thống quản lý kho chuyên nghiệp"/>
     <meta property="og:description"
@@ -20,7 +20,10 @@
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    @yield('custom_css')
 </head>
 
 <body id="body">
@@ -59,7 +62,7 @@
                         <!-- ============================================================== -->
                         <!-- sales  -->
                         <!-- ============================================================== -->
-                    @yield('dash')
+                        @yield('dash')
                         <!-- ============================================================== -->
                         <!-- end total orders  -->
                         <!-- ============================================================== -->
@@ -72,7 +75,7 @@
 
                         <!-- recent orders  -->
                         <!-- ============================================================== -->
-                       @yield('content')
+                        @yield('content')
                         <!-- ============================================================== -->
                         <!-- end recent orders  -->
 
@@ -86,7 +89,6 @@
                         <!-- end customer acquistion  -->
                         <!-- ============================================================== -->
                     </div>
-
 
 
                     <!-- <div class="row">
