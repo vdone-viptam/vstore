@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,13 +86,20 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
     });
     Route::prefix('products')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
+        Route::get('/index', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
         Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
 
         Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
         Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
         Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detail'])->name('screens.storage.product.detail');
+    });
+    Route::prefix('warehouses')->group(function () {
+        Route::get('/import', [\App\Http\Controllers\Storage\WarehouseController::class, 'importProduct'])->name('screens.storage.warehouse.import');
+        Route::get('/export', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportProduct'])->name('screens.storage.warehouse.export');
+        Route::get('/export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportDestroyProduct'])->name('screens.storage.warehouse.exportDestroyProduct');
+        Route::get('/order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'destroyOrder'])->name('screens.storage.warehouse.destroyOrder');
+
     });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
@@ -113,7 +121,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
-        Route::get('/detail-ncc', [\App\Http\Controllers\Storage\PartnerController::class, 'detailNcc'])->name('detail.ncc');
+//        Route::get('/detail-ncc', [\App\Http\Controllers\Storage\PartnerController::class, 'detailNcc'])->name('detail.ncc');
         //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
