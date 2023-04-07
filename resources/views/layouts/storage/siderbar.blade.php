@@ -12,7 +12,7 @@
                         Menu
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link active" href="./index.html" aria-expanded="false"
+                        <a class="nav-link" href="./index.html" aria-expanded="false"
                            data-target="#submenu-1" aria-controls="submenu-1"><i
                                 class="fa fa-fw fas fa-home"></i>Tổng quan</a>
                     </li>
@@ -57,16 +57,16 @@
                         </div>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="false"
                            data-target="#submenu-4" aria-controls="submenu-4"><i
                                 class="fab fa-fw fas fa-users"></i>Đối tác</a>
-                        <div id="submenu-4" class="collapse submenu" style="">
+                        <div id="submenu-4" class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('screens.storage.partner.index')}}">Nhà cung cấp</a>
+                                    <a class="nav-link {{ (request()->is('partners')) ? 'active1' : '' }}" href="{{ route('screens.storage.partner.index')}}">Nhà cung cấp</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('screens.storage.delivery.partner')}}">Đối tác giao hàng</a>
+                                    <a class="nav-link {{ (request()->is('partners/delivery-partner*')) ? 'active1' : '' }}" href="{{ route('screens.storage.delivery.partner')}}">Đối tác giao hàng</a>
                                 </li>
                             </ul>
                         </div>

@@ -22,12 +22,9 @@ class PartnerController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $limit = $request->limit;
-        $ncc = $this->partnerRepository->index($search,$limit)->get();
-        if ( request()->ajax()) {
-            return Datatables::of($ncc)->make(true);
-        }
-        return view('screens.storage.partner.supplier.index', ['ncc' => $ncc]);
+        $limit = $request->limit ?? 10 ;
+        $suppliers = $this->partnerRepository->index($search,$limit);
+        return view('screens.storage.partner.supplier.index', ['suppliers' => $suppliers]);
     }
     public function detailNcc(Request $request)
     {
@@ -36,11 +33,13 @@ class PartnerController extends Controller
     }
     public function deliveryPartner(Request $request)
     {
-        $limit = $request->limit;
-        $ncc = $this->partnerRepository->deliveryPartner($limit)->get();
-        if ( request()->ajax()) {
-            return Datatables::of($ncc)->make(true);
-        }
-        return view('screens.storage.partner.delivery-partner.index');
+        $limit = $request->limit ?? 10;
+        $deliveryPartners = $this->partnerRepository->deliveryPartner($limit);
+        return view('screens.storage.partner.delivery-partner.index',['deliveryPartners' => $deliveryPartners]);
+    }
+    public function detailDeliveryPartner(Request $request)
+    {
+        $deliveryPartners = $this->partnerRepository->detailDeliveryPartner($request->delivery_partner_id);
+        return response()->json(['success' => true, 'data' => $deliveryPartners]);
     }
 }

@@ -94,9 +94,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach($suppliers as $supplier)
+                                    <tr>
+                                        <td> {{$supplier->name}}</td>
+                                        <td>{{$supplier->account_code}}</td>
+                                        <td>{{$supplier->province_name}}</td>
+                                        <td>{{$supplier->count_product}}</td>
+                                        <td>{{$supplier->amount_product}}</td>
+                                        <td> <a class="text-primary underline" href="#" onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div id="example_paginate">
+                        <ul class="pagination d-flex justify-content-end align-items-center"
+                            style="gap:8px ;margin-top:10px;margin-right: 10px;">
+                            {{$suppliers->render()}}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -128,6 +143,7 @@
 
 
     <script>
+        /*
         $(document).ready(function () {
             $('#supplier-datatables').DataTable({
                 processing: true,
@@ -170,7 +186,7 @@
                 "dom": '<<t>ip>',
             });
         });
-
+        */
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
@@ -235,5 +251,6 @@
             })
 
         }
+
     </script>
 @endsection

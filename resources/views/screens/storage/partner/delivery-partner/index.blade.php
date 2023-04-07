@@ -92,6 +92,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($deliveryPartners as $deliveryPartners)
+                                    <tr>
+                                        <td>{{$deliveryPartners->code_partner}}</td>
+                                        <td>{{$deliveryPartners->name_partner}}</td>
+                                        <td>{{$deliveryPartners->count_product}}</td>
+                                        <td>{{$deliveryPartners->destroy_order}}</td>
+                                        <td> <a class="text-primary underline" href="#" onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi tiết</a></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -126,98 +135,54 @@
 
     <script>
         $(document).ready(function () {
-            $('#delivery-partner-datatables').DataTable({
-                processing: true,
-                serverSide: true,
-                searching: true,
-                ajax: {
-                    url: '{{ route('screens.storage.partner.index') }}',
-                    type: 'GET',
-                    data: function(param) {
-                        param.limit = '';
-                        param.search = '';
-                    }
-                },
-                lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
-                ],
-                "oLanguage": {
-                    "sLengthMenu": "Hiển thị _MENU_ đối tác",
-                    "sZeroRecords": "Không tìm thấy đối tác nào",
-                    "sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ đối tác",
-                    "sInfoEmpty": "Hiển thị 0 to 0 of 0 danh sách",
-                    "sInfoFiltered": "(Lọc từ tổng số _MAX_ đối tác)",
-                    "sProcessing": "<div id='loader-datatable'></div>",
-                },
-                columns: [
-                    { data: 'name', name: 'name' },
-                    { data: 'account_code', name: 'account_code' },
-                    { data: 'province_name', name: 'province_name' },
-                    { data: 'count_product', name: 'count_product' },
-                    { data: 'amount_product', name: 'amount_product' },
-                    {
-                        data: '', name: '',
-                        render: function(data, type, row) {
-                            console.log(row);
-                            return `<a class="text-primary underline" href="#" onclick="showDetail(${row.user_id})">Chi tiết</a>`;
-                        }
-                    },
-                ],
-                "dom": '<<t>ip>',
-            });
+
         });
 
-        async function showDetail(id) {
+        async function showDetail(id){
+
             await $.ajax({
                 type: "GET",
-                url: '{{ route('storage.detail.ncc') }}',
+                url: '{{ route('storage.detail.delivery.partner') }}',
                 dataType: "json",
-                data: { user_id: id},
+                data: { delivery_partner_id: id},
                 encode: true,
             }).done(function (data) {
+
                 var htmlData = ``;
-                if (data.data) {
+                    if(data.data){
                     htmlData += `   <div class="row">
                         <div class="col-5">
-                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã nhà cung cấp: </h5>
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã đối tác: </h5>
                         </div>
                         <div class="col-7">
-                            <span style="color:#000">${data.data.account_code}</span>
+                            <span style="color:#000">${data.data[0].code_partner}</span>
                         </div>
-            </div>
-            <div class="row">
+                </div>
+                <div class="row">
                         <div class="col-5">
-                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Tên nhà cung cấp: </h5>
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Tên đối tác: </h5>
                         </div>
                         <div class="col-7">
-                            <span style="color:#000">${data.data.name}</span>
+                            <span style="color:#000">${data.data[0].name_partner}</span>
                         </div>
-            </div>
-            <div class="row">
+                </div>
+                <div class="row">
                         <div class="col-5">
-                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Khu vực: </h5>
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Tổng đơn hàng đã giao: </h5>
                         </div>
                         <div class="col-7">
-                            <span style="color:#000">${data.data.province_name}</span>
+                            <span style="color:#000">${data.data[0].count_product}</span>
                         </div>
-            </div>
-            <div class="row">
+                </div>
+
+                <div class="row">
+                        <div class="col-7">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số đơn hàng không hoàn thành: </h5>
+                        </div>
                         <div class="col-5">
-                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số loại sản phẩm: </h5>
+                            <span style="color:#000">${data.data[0].destroy_order}</span>
                         </div>
-                        <div class="col-7">
-                            <span style="color:#000">${data.data.count_product}</span>
-                        </div>
-            </div>
-            <div class="row">
-                        <div class="col-5">
-                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số lượng tồn: </h5>
-                        </div>
-                        <div class="col-7">
-                            <span style="color:#000">${data.data.amount_product}</span>
-                        </div>
-            </div>
+                </div>
 
                         `;
                     $('.md-content').html(htmlData)
@@ -232,5 +197,6 @@
             })
 
         }
+
     </script>
 @endsection
