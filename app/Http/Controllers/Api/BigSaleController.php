@@ -87,7 +87,8 @@ class BigSaleController extends Controller
                         ->where('product_id', $product->id)
                         ->where('vshop_products.status', 1)
                         ->where('vshop.pdone_id', $request->pdone_id)
-                        ->count();                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $product->id)->first()->max;
+                        ->count();
+                    $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $product->id)->first()->max;
                     $product->available_discount = $more_dis ?? 0;
                 }
                 unset($product->images);

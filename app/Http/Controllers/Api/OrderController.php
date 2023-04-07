@@ -554,7 +554,7 @@ class OrderController extends Controller
                 ], 404);
             }
             $orders = OrderItem::select(
-                'id as order_item_id',
+                'order_item.id as order_item_id',
                 'product_id',
                 'discount_vshop',
                 'price',
@@ -601,6 +601,7 @@ class OrderController extends Controller
                 unset($order->order);
                 unset($order->product);
             }
+            return $orders;
             return response()->json([
                 'success' => true,
                 'data' => $orders
