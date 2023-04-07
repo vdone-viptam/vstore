@@ -78,7 +78,7 @@
                                 <div class=" col-xl-10 mx-auto  col-lg-10 col-md-12 col-sm-12 col-12 p-4">
                                     <div class="form-group old">
                                         <label for="name">Mật khẩu cũ</label>
-                                        <input type="password" class="form-control form-control-lg"
+                                        <input required type="password" class="form-control form-control-lg"
                                                id="old_password" name='old_password'>
                                         <div>
                                             @error('old_password')
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="form-group pas">
                                         <label for="name">Mật khẩu mới</label>
-                                        <input type="password" class="form-control form-control-lg"
+                                        <input required type="password" class="form-control form-control-lg"
                                                id="password" name="password">
                                         <div>  @error('password')
                                             <p class="text-danger">{{$message}}</p>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="form-group conf">
                                         <label for="name">Nhập lại mật khẩu</label>
-                                        <input type="password" class="form-control form-control-lg"
+                                        <input required type="password" class="form-control form-control-lg"
                                                id="password_confirmation" name="password_confirmation">
                                         <div>
                                             @error('password_confirmation')
