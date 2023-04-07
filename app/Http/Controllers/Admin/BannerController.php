@@ -40,7 +40,7 @@ class BannerController extends Controller
             'name.required' => 'Tên banner bắt buộc nhập',
             'name.unique' => 'Tên banner đã tồn tại',
             'img.required' => 'Ảnh banner bắt buộc nhập',
-            'img.imagev' => 'Ảnh banner không đúng định dạng',
+            'img.image' => 'Ảnh banner không đúng định dạng',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
