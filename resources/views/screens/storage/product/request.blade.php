@@ -17,11 +17,32 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary btn-update" data-dismiss="modal">Cập nhập</button>
+                    <button type="button" class="btn btn-primary btn-update" data-dismiss="modal">Lưu thay đổi</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn thực hiện thao tác này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-accept">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 
@@ -91,9 +112,36 @@
                                     <td>{{$product->quantity}}</td>
                                     <td>0</td>
                                     <td>{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary">Đồng ý</a>
-                                        <a href="" class="btn btn-danger">Từ chối</a>
+                                    <td class="status{{$product->id}}">
+                                        @if($product->status == 0 || $product->status == 7)
+                                            <a href="#" onclick="upDateStatus({{$product->id}},5)"
+                                               class="btn btn-primary">Đồng ý</a>
+                                            <a href="#" onclick="upDateStatus({{$product->id}},2)"
+                                               class="btn btn-danger">Từ chối</a>
+                                        @elseif($product->status == 5 || $product->status == 1)
+                                            <div
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                style="gap:14px;">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Đồng ý
+                                            </div>
+                                        @else
+                                            <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
+                                                </svg>
+                                                Từ chối
+                                            </div>
+                                        @endif
                                     </td>
                                     <td><a href="#" class="btn btn-link" onclick="showDetail({{$product->id}})">Chi
                                             tiết</a></td>
@@ -105,7 +153,9 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="d-flex align-items-end justify-content-end mt-4">
+                    {{$requests->links()}}
+                </div>
             </div>
         </div>
     </div>
@@ -113,6 +163,73 @@
 
 @section('custom_js')
     <script>
+        $('.btn-accept').on('click', async function () {
+                const status = $('.btn-accept').data('status');
+                const id = $('.btn-accept').data('key');
+                await $.ajax({
+                    type: "PUT",
+                    url: `{{route('screens.storage.product.updateRequest')}}/${$('.btn-accept').data('status')}?_token={{csrf_token()}}`,
+                    data: {
+                        id: $('.btn-accept').data('key')
+                    },
+
+                    error: function (jqXHR, error, errorThrown) {
+                        $('#requestModal').modal('hide')
+                        var error0 = JSON.parse(jqXHR.responseText)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Cập nhật yêu cầu không thành công !',
+                            text: error0.message,
+                        })
+                    }
+                }).done(function (data) {
+                    Swal.fire(
+                        data.message,
+                        'Click vào nút bên dưới để đóng',
+                        'success'
+                    )
+                    $('#requestModal').modal('hide')
+                    if (+status === 5) {
+                        $('.status' + id).html(`
+                       <div
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                style="gap:14px;">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Đồng ý
+                                            </div>
+                    `);
+                    } else {
+                        $('.status' + id).html(`
+                   <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
+                                                </svg>
+                                                Từ chối
+                                            </div>
+                    `)
+
+                    }
+                })
+
+            }
+        )
+
+
+        function upDateStatus(id, status) {
+            $('.btn-accept').data('key', id);
+            $('.btn-accept').data('status', status);
+            $('#requestModal').modal('show')
+        }
+
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
@@ -120,9 +237,10 @@
                 dataType: "json",
                 encode: true,
             }).done(function (data) {
+                $('.btn-accept').data('key', id);
                 var htmlData = ``;
                 if (data.data) {
-                    htmlData += ` <form method="post">
+                    htmlData = `
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -176,19 +294,71 @@
                             </select>`}
 
                         </div>
-                   </form>     `;
+           `;
 
                     if (data.data.status != 0) {
                         $('.btn-update').addClass('hidden');
                     } else {
                         $('.btn-update').removeClass('hidden');
-                    }
+                        $('.btn-update').on('click', async function () {
+                            const id = data.data.id;
+                            await $.ajax({
+                                type: "PUT",
+                                url: `{{route('screens.storage.product.updateRequest')}}/${$('#inputGroupSelect01').val()}?_token={{csrf_token()}}`,
+                                data: {
+                                    id: data.data.id
+                                },
 
+                                error: function (jqXHR, error, errorThrown) {
+                                    $('#requestModal').modal('hide')
+                                    var error0 = JSON.parse(jqXHR.responseText)
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Cập nhật yêu cầu không thành công !',
+                                        text: error0.message,
+                                    })
+                                }
+                            }).done(function (data) {
+                                Swal.fire(
+                                    data.message,
+                                    'Click vào nút bên dưới để đóng',
+                                    'success'
+                                )
+                                $('#requestModal').modal('hide')
+                                if (+$('#inputGroupSelect01').val() === 5) {
+                                    $('.status' + id).html(`
+                       <div
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                style="gap:14px;">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Đồng ý
+                                            </div>
+                    `);
+                                } else {
+                                    $('.status' + id).html(`
+                   <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
+                                                </svg>
+                                                Từ chối
+                                            </div>
+                    `)
+
+                                }
+                            })
+                        });
+                    }
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    $('.btn-update').data('key', id);
-
-
                 } else {
                     $('#modalDetail').modal('show');
                     $('.md-content').html('Chưa có dữ liệu của sản phẩm!')

@@ -2,7 +2,28 @@
 
 
 @section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-update" data-dismiss="modal">Nhập hàng trở lại
+                        kho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('page')
@@ -51,6 +72,7 @@
                             <th>Tên sản phẩm</th>
                             <th>Số lượng</th>
                             <th>Lý do hủy</th>
+                            <th>Trạng thái</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -63,7 +85,15 @@
                                     <td>{{$request->product_name}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
-                                    <td><a href="#" onclick="showDetail({{$request->id}},{{$request->cancel_status}})"
+                                    <td>
+                                        @if($request->cancel_status == 1)
+                                            <p class="text-success">Chưa hoàn hàng</p>
+                                        @else
+                                            <p class="text-danger">Đã hoàn hàng</p>
+                                        @endif
+                                    </td>
+                                    <td><a href="#"
+                                           onclick="showDetail({{$request->order_id}},{{$request->cancel_status}})"
                                            class="btn btn-link">Chi tiết</a></td>
                                 </tr>
                             @endforeach
@@ -71,6 +101,9 @@
                         @endif
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex align-items-end justify-content-end mt-4">
+                    {{$orders->links()}}
                 </div>
             </div>
         </div>
@@ -82,25 +115,26 @@
         async function showDetail(id, cancel_status) {
             if (cancel_status == 1) {
                 $(".btn-update").removeClass("hidden")
+                $('.btn-update').data('order_id', id)
             } else {
                 $(".btn-update").addClass("hidden")
-
             }
             await $.ajax({
                 type: "GET",
-                url: `{{route('screens.storage.warehouse.detailDestroyOrder')}}id=`,
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Token': customToken,
-                    'Content-Type': 'application/json'
+                url: `{{route('screens.storage.warehouse.detailDestroyOrder')}}?id=` + id,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Nhập hàng trở lại kho thất bại !',
+                        text: error0.message,
+                    })
                 },
-                dataType: "json",
-                encode: true,
             }).done(function (data) {
                 var htmlData = ``;
 
                 if (data.data) {
-                    htmlData += `<form method="post">
+                    htmlData = `<form method="post">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -137,14 +171,6 @@
                             <label for="id_vdone">Lý do hủy: </label>
                             <textarea  class="form-control form-control-lg" readonly>${data.data.note}</textarea>
                         </div>
-                        <div class="row align-items-center">
-                            <div class="col-3">
-                                <label for="created_at">Nhập lại kho: </label>
-                            </div>
-                            <div class="col-9">
-                                 ${cancel_status == 1 ? `<input type="checkbox" value="${data.data.id}" class="btn_proBack" >` : cancel_status == 3 ? `<input disabled type="checkbox" value="${data.data.id}" class="btn_proBack" >` : `<input disabled type="checkbox" value="${data.data.id}" class="btn_proBack" >`}
-                            </div>
-                        </div>
                         ${cancel_status == 1 ? `<p class="error_proBack text-danger"></p>` : cancel_status == 3 ? `<p class="error_proBack text-success">Đã nhập lại hàng</p>` : `<p class="error_proBack text-danger">Hàng chưa xuất kho</p>`}
 
                    </form>
@@ -154,12 +180,32 @@
                 } else {
                     $('#modalDetail').modal('show');
                     $('.md-content').html('Chưa có dữ liệu!')
-                    setTimeout(() => {
-                        $('#modalDetail').modal('hide');
-                    }, 1000);
                 }
             })
         }
+
+        $(".btn-update").click(function () {
+            $.ajax({
+                type: "POST",
+                url: `{{route('screens.storage.warehouse.storeImportProduct')}}?order_id=${$(".btn-update").data('order_id')}&_token={{csrf_token()}}`,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Nhập hàng trở lại kho thất bại !',
+                        text: error0.message,
+                    })
+
+                }
+            }).done(function (data) {
+                Swal.fire(
+                    data.message,
+                    'Click vào nút bên dưới để đóng',
+                    'success'
+                ).then(() => location.reload());
+            })
+        })
+
     </script>
 
 @endsection
