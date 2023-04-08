@@ -2,9 +2,9 @@
 
 
 @section('modal')
-    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document">\index.html
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
@@ -12,7 +12,27 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body md-content">
+                <div class="modal-body md-create">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-createProDel">Tạo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">\index.html
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-detail">
 
                 </div>
                 <div class="modal-footer">
@@ -20,7 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 
@@ -98,6 +117,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="d-flex align-items-end justify-content-end mt-4">
+                    {{$requests->links()}}
+                </div>
             </div>
         </div>
     </div>
@@ -115,7 +137,7 @@
                 var htmlData = ``;
                 if (data.data) {
 
-                    htmlData += `   <div class="row">
+                    htmlData = `   <div class="row">
                         <div class="col-5">
                             <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã đơn hàng: </h5>
                         </div>
@@ -156,13 +178,82 @@
                         </div>
                </div>
                         `;
-                    $('.md-content').html(htmlData)
+                    $('.md-detail').html(htmlData)
                     $('#modalDetail').modal('show');
                 }
             })
 
 
         }
+
+        async function createProDel() {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.storage.warehouse.createRequestDestroy')}}`,
+            }).done(function (data) {
+
+                if (data.data.length < 1) {
+                    $('table tbody').html(`<tr style="text-align:center;"><td colspan="8">Không có dữ liệu phù hợp!</td></tr>`)
+                } else {
+                    var op = ``
+                    data.data.map((item, index) => {
+                        op += `<option data-ware_id ="${item.ware_id}" value ="${item.id}">${item.name}</option>`
+                    })
+                    $('.md-create').html(`
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Tạo xuất hủy</label>
+                            <select class="form-control" id="product_id">
+                                ${op}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="exampleFormControlInput1">Nhập số lượng hủy</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="">
+                        <p class="text-danger mt-1 error_quantity"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Lí do hủy</label>
+                        <textarea class="form-control" id="note" rows="3"></textarea>
+                        <p class="text-danger mt-1 error_note"></p>
+                    </div>
+                    `);
+
+                }
+            });
+        }
+
+        $(".btn-createProDel").click(function () {
+            const formData = {
+                product_id: $("#product_id").val(),
+                quantity: $("#quantity").val(),
+                warehouse_id: $("#product_id").find(':selected').attr('data-ware_id'),
+                note: $("#note").val()
+            }
+            $.ajax({
+                type: "POST",
+                url: `{{route('screens.storage.warehouse.storeRequestDestroy')}}?_token={{csrf_token()}}`,
+                data: formData,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    $(".error_quantity").html(`${error0.message || ''}`)
+                    $(".error_quantity").html(`${error0.errors.quantity[0] || ''}`)
+                    $(".error_note").html(`${error0.errors.note[0] ? error0.errors.note[0] : ''}`)
+                },
+            }).done(function (data) {
+                Swal.fire(
+                    data.message,
+                    'Click vào nút bên dưới để đóng',
+                    'success'
+                ).then(() => location.reload()
+            )
+
+
+            })
+        })
+        $(".btn-create").click(async function () {
+            await createProDel();
+            $('#modalCreate').modal('show');
+        })
     </script>
 
 @endsection

@@ -36,6 +36,11 @@
             margin-right: 0 !important;
         }
 
+        .page-item a:hover{
+            background: transparent !important;
+            color: #1890FF !important;
+        }
+
         .pagination {
             gap: 8px;
         }
@@ -177,6 +182,9 @@
     }
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
