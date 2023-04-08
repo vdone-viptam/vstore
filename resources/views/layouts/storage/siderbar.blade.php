@@ -93,17 +93,20 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="false"
                            data-target="#submenu-6" aria-controls="submenu-6"><i
                                 class="fas fa-fw fa-dollar-sign"></i>
                             Tài chính</a>
-                        <div id="submenu-6" class="collapse submenu" style="">
+                        <div id="submenu-6" class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./finance.html">Ví</a>
+                                    <a class="nav-link {{ (request()->is('finances')) ? 'active1' : '' }}" href="{{ route('screens.storage.finance.index') }}">Ví</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./history.html">Lịch sử thay đổi số
+                                    <a class="nav-link {{ (request()->is('finances/history')) ? 'active1' : '' }}" href="{{ route('screens.storage.finance.history') }}">Yêu cầu rút tiền</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('finances/revenue')) ? 'active1' : '' }}" href="{{ route('screens.storage.finance.revenue') }}">Lịch sử biến động số
                                         dư</a>
                                 </li>
                             </ul>

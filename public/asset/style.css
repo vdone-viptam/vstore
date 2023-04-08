@@ -902,7 +902,7 @@ Background Color / Color
 }
 
 .bg-secondary {
-    background-color: #ff407b !important;
+    /* background-color: #ff407b !important; */
     color: #fff !important;
 }
 
@@ -2747,8 +2747,8 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 .btn-secondary:hover {
     color: #fff;
-    background-color: #f0346e;
-    border-color: #f0346e;
+    /* background-color: #f0346e; */
+    /* border-color: #f0346e; */
 }
 .dt-buttons{
     display: none;

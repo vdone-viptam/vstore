@@ -226,12 +226,7 @@ class AccountController extends Controller
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
 
             }
-            $countTax = DB::table('users')->where('tax_code', $request->tax_code)
-                            ->where(function ($query){
-                                $query->where('role_id',3 )
-                                    ->orWhere('role_id',2);
-                            })->count();
-            if ( $countTax > 0) {
+            if ( DB::table('users')->where('tax_code', $request->tax_code)->whereIn('role_id', [2, 3])->count() > 0) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
             DB::table('request_change_taxcode')->insert([
