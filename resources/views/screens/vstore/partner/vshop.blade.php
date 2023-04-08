@@ -26,7 +26,7 @@
                 <select name="condition" id=""
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
                     <option
-                        value="vshop.pdone_id" {{isset($params['condition']) && $params['condition'] == 'vshop.pdone_id' ? 'selected' : ''}}>
+                        value="vshop.vshop_id" {{isset($params['condition']) && $params['condition'] == 'vshop.pdone_id' ? 'selected' : ''}}>
                         Mã Vshop
                     </option>
                     <option
@@ -120,22 +120,24 @@
                         @else
                             @foreach( $vshop as $val)
                                 <tr>
-                                    <td>{{$val->pdone_id}}</td>
+                                    <td class="text-center">{{$val->vshop_id}}</td>
                                     <td>
                                         {{$val->nick_name!= '' ? $val->nick_name  :'-'}}
                                     </td>
                                     <td>
                                         {{$val->phone_number!= '' ? $val->phone_number  :'-'}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{$val->count != '' ? $val->count  :'-'}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{$val->sum_sl}}
                                     </td>
-                                    <td>-</td>
+                                    <td class="text-center">{{$val->thu_nhap}}</td>
                                     <td>
-
+                                        <a href="#" data-id="{{$val->id}}"
+                                           class="more-details text-primary underline">
+                                            Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -185,7 +187,7 @@
         $('.more-details').each(function (i, e) {
             $(this).on('click', (o) => {
                 $.ajax({
-                    url: '{{route('screens.manufacture.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&product=abc',
+                    url: '{{route('screens.vstore.partner.vshopDetail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
                         // $('#modal5').html('');
                         $('#modal5').html(result);
