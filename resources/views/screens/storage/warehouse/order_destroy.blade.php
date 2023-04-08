@@ -1,6 +1,9 @@
 @extends('layouts.storage.main')
 
 
+@section('modal')
+
+@endsection
 
 @section('page')
     <div class="row">
@@ -60,7 +63,8 @@
                                     <td>{{$request->product_name}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
-                                    <td><a href="" class="btn btn-link">Chi tiết</a></td>
+                                    <td><a href="#" onclick="showDetail({{$request->id}},{{$request->cancel_status}})"
+                                           class="btn btn-link">Chi tiết</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -74,6 +78,88 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        async function showDetail(id, cancel_status) {
+            if (cancel_status == 1) {
+                $(".btn-update").removeClass("hidden")
+            } else {
+                $(".btn-update").addClass("hidden")
 
+            }
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.storage.warehouse.detailDestroyOrder')}}id=`,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Token': customToken,
+                    'Content-Type': 'application/json'
+                },
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                var htmlData = ``;
+
+                if (data.data) {
+                    htmlData += `<form method="post">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="name">Mã đơn hàng:</label>
+                            <input type="text" class="form-control form-control-lg" id="code" value="${data.data.no}" readonly>
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="publish_id">Mã sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="publish_id" value="${data.data.publish_id}" readonly>
+                        </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="product_name">Tên sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.product_name}" readonly>
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="quantity">Số lượng sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
+                        </div>
+                        </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="id_vdone">Lý do hủy: </label>
+                            <textarea  class="form-control form-control-lg" readonly>${data.data.note}</textarea>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <label for="created_at">Nhập lại kho: </label>
+                            </div>
+                            <div class="col-9">
+                                 ${cancel_status == 1 ? `<input type="checkbox" value="${data.data.id}" class="btn_proBack" >` : cancel_status == 3 ? `<input disabled type="checkbox" value="${data.data.id}" class="btn_proBack" >` : `<input disabled type="checkbox" value="${data.data.id}" class="btn_proBack" >`}
+                            </div>
+                        </div>
+                        ${cancel_status == 1 ? `<p class="error_proBack text-danger"></p>` : cancel_status == 3 ? `<p class="error_proBack text-success">Đã nhập lại hàng</p>` : `<p class="error_proBack text-danger">Hàng chưa xuất kho</p>`}
+
+                   </form>
+                        `;
+                    $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+        }
+    </script>
 
 @endsection

@@ -105,6 +105,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
         Route::get('/export', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportProduct'])->name('screens.storage.warehouse.export');
         Route::get('/export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportDestroyProduct'])->name('screens.storage.warehouse.exportDestroyProduct');
         Route::get('/order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'destroyOrder'])->name('screens.storage.warehouse.destroyOrder');
+        Route::get('/detail-order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'detailDestroyOrder'])->name('screens.storage.warehouse.detailDestroyOrder');
 
     });
     Route::prefix('account')->group(function () {

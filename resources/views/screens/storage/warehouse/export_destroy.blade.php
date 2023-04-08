@@ -1,6 +1,28 @@
 @extends('layouts.storage.main')
 
 
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@endsection
 
 @section('page')
     <div class="row">
@@ -20,6 +42,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 
@@ -66,7 +89,8 @@
                                     <td>{{$request->product_name}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
-                                    <td><a href="" class="btn btn-link">Chi tiết</a></td>
+                                    <td><a href="#" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi
+                                            tiết</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -80,6 +104,65 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.storage.warehouse.detailRequest')}}?id=` + id,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                var htmlData = ``;
+                if (data.data) {
 
+                    htmlData += `   <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã đơn hàng: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.code}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã xuất hủy: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.publish_id}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Tên sản phẩm: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.product_name}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số lượng sản phẩm: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.quantity}</span>
+                        </div>
+               </div>
+               <div class="row">
+                        <div class="col-5">
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Lý do hủy: </h5>
+                        </div>
+                        <div class="col-7">
+                            <span style="color:#000">${data.data.note}</span>
+                        </div>
+               </div>
+                        `;
+                    $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+                }
+            })
+
+
+        }
+    </script>
 
 @endsection
