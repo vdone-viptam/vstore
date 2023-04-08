@@ -90,7 +90,7 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required|max:32',
                 'company_name' => 'required|max:50',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
@@ -106,7 +106,7 @@ class LoginController extends Controller
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'company_name.max' => 'Tên công ty tối đa 50 kí tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
@@ -120,14 +120,16 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required|max:32',
                 'company_name' => 'required|max:50',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required|max:255',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
                 'floor_area' => 'required',
                 'volume' => 'required',
-                'image_storage' => 'required|image',
-                'image_pccc' => 'required|image',
+                'image_storage' => 'required',
+                'image_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_pccc' => 'required',
+                'image_pccc.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
                 'city_id' => 'required',
                 'district_id' => 'required',
                 'ward_id' => 'required'
@@ -152,7 +154,7 @@ class LoginController extends Controller
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'ward_id' => 'Phường (xã) bắt buộc chọn',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         } elseif ($role_id == 2) {
@@ -160,7 +162,7 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'name' => 'required|max:32',
                 'company_name' => 'required|max:50',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required',
@@ -180,7 +182,7 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
         }
@@ -486,12 +488,17 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             $role_id = 4;
         }
         $passwordReset = PasswordReset::where('token', $token)->where('role_id', $role_id)->first();
-
-        if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
-            abort(404);
+        if ($passwordReset) {
+            if (Carbon::now()->diffInSeconds($passwordReset->created_at) > 180) {
+                return redirect()->route('form_forgot_password')->with('error', 'Token của bạn đã hết hạn');
+            } else {
+                return view('auth.formReset', ['role_id' => $role_id]);
+            }
+        } else {
+            return redirect()->route('form_forgot_password')->with('error', 'Token của bạn đã hết hạn');
         }
 
-        return view('auth.formReset', ['role_id' => $role_id]);
+
     }
 
     public
