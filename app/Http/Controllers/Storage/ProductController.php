@@ -49,21 +49,24 @@ class ProductController extends Controller
             ->join('users', 'warehouses.user_id', 'users.id')
             ->where('product_warehouses.status', 1)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id())
-//        ->where('product_name','like','%'.$request->key_search .'%')
+            ->where('warehouses.user_id', Auth::id())//        ->where('product_name','like','%'.$request->key_search .'%')
         ;
-        if ($request->publish_id) {
-            $products = $products->where('products.publish_id', $request->publish_id);
-        }
+//        if ($request->publish_id) {
+//            $products = $products->where('products.publish_id', $request->publish_id);
+//        }
 
-        if ($request->key_search){
-            $products->where('products.name',$request->key_search )
-            ->orWhere('products.publish_id',$request->key_search)
-                ->orWhere('users.name',$request->key_search)
-            ;
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $products->where(function ($query) use ($request) {
+                $query->where('products.publish_id', $request->key_search)
+                    ->orWhere('products.sku_id', $request->key_search)
+                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('users.name', $request->key_search)
+                    ->orWhere('categories.name', $request->key_search);
+            });
         }
-//        return $request->key_search;
         $products = $products->paginate($limit);
+
 //        return $products;
         foreach ($products as $pro) {
             $pro->pause_product = (int)DB::table('request_warehouses')
@@ -75,7 +78,7 @@ class ProductController extends Controller
                     ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
         }
-        return view('screens.storage.product.index', ['products' => $products]);
+        return view('screens.storage.product.index', ['products' => $products, 'key_search' => trim($request->key_search) ?? '']);
     }
 
     public function request(Request $request)
@@ -97,17 +100,18 @@ class ProductController extends Controller
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.id', 'desc');
-        if ($request->code) {
-            $requests = $requests->where('request_warehouses.code', $request->code);
-        }
-        if ($request->key_search){
-            $requests = $requests->where('request_warehouses.code', $request->key_search)
-                                ->orWhere('products.publish_id',$request->key_search)
-            ;
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $requests->where(function ($query) use ($request) {
+                $query->where('request_warehouses.code', $request->key_search)
+                    ->orWhere('products.publish_id', $request->key_search)
+                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('users.name', $request->key_search);
+            });
         }
         $requests = $requests->paginate($limit);
         $this->v['requests'] = $requests;
-
+        $this->v['key_search'] = trim($request->key_search) ?? '';
         return view('screens.storage.product.request', $this->v);
 
     }
@@ -194,11 +198,17 @@ class ProductController extends Controller
             ->orderBy('order.id', 'desc');
         $order = $order->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $warehouses->id);
-        if ($request->code) {
-            $order = $order->where('order.no', $request->code);
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $order->where(function ($query) use ($request) {
+                $query->where('order.no', $request->key_search)
+                    ->orWhere('products.publish_id', $request->key_search)
+                    ->orWhere('products.name', $request->key_search);
+            });
         }
         $order = $order->paginate($limit);
-        return view('screens.storage.product.requestOut', compact('order'));
+        $key_search = trim($request->key_search) ?? '';
+        return view('screens.storage.product.requestOut', compact('order', 'key_search'));
     }
 
     public function detailProduct(Request $request)

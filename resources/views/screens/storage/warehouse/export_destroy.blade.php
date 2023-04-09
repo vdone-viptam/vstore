@@ -70,19 +70,22 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header">
-                <div class=" d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                    <h5 class="mb-0" style="font-size:18px;">Xuất hủy</h5>
-                    <div class="d-flex justify-content-start align-items-center" style="gap:8px">
-                        <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <div id="custom-search" class="top-search-bar">
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm..">
-                                </div>
-                            </li>
-                        </ul>
-                        <button class="btn btn-primary btn-create">Xuất hủy</button>
+                <form action="">
+                    <div class=" d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                        <h5 class="mb-0" style="font-size:18px;">Xuất hủy</h5>
+                        <div class="d-flex justify-content-start align-items-center" style="gap:8px">
+                            <ul class="navbar-nav ">
+                                <li class="nav-item">
+                                    <div id="custom-search" class="top-search-bar">
+                                        <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                               type="search" placeholder="Tìm kiếm..">
+                                    </div>
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-create">Xuất hủy</button>
+                        </div>
                     </div>
-                </div>
+                </form>
 
             </div>
             <div class="card-body">
@@ -118,7 +121,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->links()}}
+                    {{$requests->withQueryString()->links()}}
                 </div>
             </div>
         </div>
@@ -245,7 +248,7 @@
                     'Click vào nút bên dưới để đóng',
                     'success'
                 ).then(() => location.reload()
-            )
+                )
 
 
             })

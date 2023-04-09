@@ -80,7 +80,8 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
-                                <input name="key_search" class="form-control" type="search" placeholder="Tìm kiếm..">
+                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                       type="search" placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
@@ -116,12 +117,12 @@
                                     <td>0</td>
                                     <td>{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
                                     <td class="status{{$product->id}}">
-                                        @if($product->status == 0 || $product->status == 7)
+                                        @if($product->status == 0)
                                             <a href="#" onclick="upDateStatus({{$product->id}},5)"
                                                class="btn btn-primary">Đồng ý</a>
                                             <a href="#" onclick="upDateStatus({{$product->id}},2)"
                                                class="btn btn-danger">Từ chối</a>
-                                        @elseif($product->status == 5 || $product->status == 1)
+                                        @elseif($product->status == 5 || $product->status == 1 ||  $product->status == 7)
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
                                                 style="gap:14px;">
@@ -157,7 +158,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->links()}}
+                    {{$requests->withQueryString()->links()}}
                 </div>
             </div>
         </div>
@@ -290,7 +291,7 @@
                             <label for="id_vdone">Trạng thái</label>
 
                             ${data.data.status != 0 ? ` <select class="custom-select" id="inputGroupSelect01" disabled>
-                                <option selected > ${data.data.status == 5 || data.data.status == 1 ? `Đồng ý` : `Từ chối`}</option>
+                                <option selected > ${data.data.status == 5 || data.data.status == 1 || data.data.status == 7 ? `Đồng ý` : `Từ chối`}</option>
                             </select>` : ` <select class="custom-select" id="inputGroupSelect01">
                                 <option  value="5">Đồng ý</option>
                                 <option  value="2">Từ chối</option>

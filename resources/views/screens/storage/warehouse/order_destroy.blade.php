@@ -51,16 +51,20 @@
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Đơn hàng hủy</h5>
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <div id="custom-search" class="top-search-bar">
-                            <input class="form-control" type="search" placeholder="Tìm kiếm..">
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <form action="">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                    <h5 class="mb-0" style="font-size:18px;">Đơn hàng hủy</h5>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" value="{{$key_search ?? ''}}" name="key_search"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second"
@@ -87,9 +91,11 @@
                                     <td>{{$request->note}}</td>
                                     <td>
                                         @if($request->cancel_status == 1)
-                                            <p class="text-success">Chưa hoàn hàng</p>
+                                            <p class="text-primary">Chưa hoàn hàng</p>
+                                        @elseif($request->cancel_status == 3)
+                                            <p class="text-success">Đã hoàn hàng</p>
                                         @else
-                                            <p class="text-danger">Đã hoàn hàng</p>
+                                            <p class="text-danger">Hàng chưa xuất kho</p>
                                         @endif
                                     </td>
                                     <td><a href="#"
@@ -103,7 +109,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$orders->links()}}
+                    {{$orders->withQueryString()->links()}}
                 </div>
             </div>
         </div>

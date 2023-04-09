@@ -40,12 +40,19 @@ class WarehouseController extends Controller
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->whereIn('request_warehouses.status', [5, 1, 7])
             ->orderBy('request_warehouses.id', 'desc');
-        if ($request->code) {
-            $requests = $requests->where('request_warehouses.code', $request->code);
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $requests->where(function ($query) use ($request) {
+                $query->where('request_warehouses.code', $request->key_search)
+                    ->orWhere('products.publish_id', $request->key_search)
+                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('users.name', $request->key_search);
+            });
         }
         $requests = $requests->paginate($limit);
         return view('screens.storage.warehouse.import', [
-            'requests' => $requests
+            'requests' => $requests,
+            'key_search' => trim($request->key_search) ?? ''
         ]);
     }
 
@@ -72,12 +79,19 @@ class WarehouseController extends Controller
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.status', 'asc');
-        if ($request->code) {
-            $requests = $requests->where('request_warehouses.code', $request->code);
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $requests->where(function ($query) use ($request) {
+                $query->where('request_warehouses.code', $request->key_search)
+                    ->orWhere('products.publish_id', $request->key_search)
+                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('users.name', $request->key_search);
+            });
         }
         $requests = $requests->paginate($limit);
         return view('screens.storage.warehouse.export', [
-            'requests' => $requests
+            'requests' => $requests,
+            'key_search' => $request->key_search ?? ''
         ]);
 
     }
@@ -104,13 +118,20 @@ class WarehouseController extends Controller
             ->where('request_warehouses.status', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.id', 'desc');
-        if ($request->code) {
-            $requests = $requests->where('request_warehouses.code', $request->code);
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $requests->where(function ($query) use ($request) {
+                $query->where('request_warehouses.code', $request->key_search)
+                    ->orWhere('products.publish_id', $request->key_search)
+                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('users.name', $request->key_search);
+            });
         }
         $requests = $requests->paginate($limit);
 
         return view('screens.storage.warehouse.export_destroy', [
-            'requests' => $requests
+            'requests' => $requests,
+            'key_search' => $request->key_search ?? ''
         ]);
     }
 
@@ -127,6 +148,14 @@ class WarehouseController extends Controller
             ->where('order_item.warehouse_id', $ware->id);
         if ($request->code) {
             $orders = $orders->where('order.no', $request->code);
+        }
+        if ($request->key_search) {
+            $request->key_search = trim($request->key_search);
+            $orders->where(function ($query) use ($request) {
+                $query->where('order.no', $request->key_search)
+                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.publish_id', $request->key_search);
+            });
         }
         $orders = $orders->paginate($limit);
 

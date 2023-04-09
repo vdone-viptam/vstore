@@ -83,6 +83,8 @@ Route::group(['domain' => config('domain.storage')], function () {
 Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
+        Route::get('/search', [\App\Http\Controllers\Storage\DashboardController::class, 'searchAllByKeyword'])->name('screens.storage.dashboard.searchAllByKeyword');
+
     });
     Route::prefix('products')->group(function () {
         Route::get('/index', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');

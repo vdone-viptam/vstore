@@ -88,17 +88,20 @@
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
-                 style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Xuất hàng</h5>
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <div id="custom-search" class="top-search-bar">
-                            <input class="form-control" type="search" placeholder="Tìm kiếm..">
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <form action="">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
+                     style="gap:10px">
+                    <h5 class="mb-0" style="font-size:18px;">Xuất hàng</h5>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search" placeholder="Tìm kiếm..">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second"
@@ -165,7 +168,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->links()}}
+                    {{$requests->withQueryString()->links()}}
                 </div>
             </div>
         </div>
@@ -429,12 +432,6 @@
 
                 }
 
-            }).fail(function (data) {
-                $('#modalBill').modal('show');
-                $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
-                setTimeout(() => {
-                    $('#modalBill').modal('hide');
-                }, 1000);
             })
         }
 

@@ -70,16 +70,20 @@
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Nhập hàng</h5>
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <div id="custom-search" class="top-search-bar">
-                            <input class="form-control" type="search" placeholder="Tìm kiếm..">
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <form action="">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                    <h5 class="mb-0" style="font-size:18px;">Nhập hàng</h5>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second"
@@ -107,7 +111,7 @@
                                     <td>{{$request->quantity}}</td>
                                     <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$request->id}}">
-                                        @if($request->status == 5)
+                                        @if($request->status == 5 || $request->status == 7)
                                             <a href="#" onclick="upDateStatus({{$request->id}},1)"
                                                class="btn btn-primary">Đồng
                                                 ý</a>
@@ -134,7 +138,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->links()}}
+                    {{$requests->withQueryString()->links()}}
                 </div>
             </div>
         </div>
@@ -248,7 +252,7 @@
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                Đồng ý
+                                               Đã nhập kho
                                             </div>
                     `);
                             })
@@ -302,7 +306,7 @@
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                Đồng ý
+                                                Đã nhập kho
                                             </div>
                     `);
                     } else {

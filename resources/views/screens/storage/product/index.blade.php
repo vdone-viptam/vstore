@@ -53,8 +53,10 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <form >
-                                <input name="key_search" class="form-control" type="search" placeholder="Tìm kiếm..">
+                            <form>
+                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
@@ -99,7 +101,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->links()}}
+                    {{$products->withQueryString()->links()}}
                 </div>
 
 

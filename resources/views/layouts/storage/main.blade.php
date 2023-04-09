@@ -36,7 +36,7 @@
             margin-right: 0 !important;
         }
 
-        .page-item a:hover{
+        .page-item a:hover {
             background: transparent !important;
             color: #1890FF !important;
         }
@@ -180,6 +180,33 @@
         var d = new Date(inputFormat)
         return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
+
+    $(document).keypress(async function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            if ($('#search').val().length > 0) {
+                await $.ajax({
+                    type: "GET",
+                    url: `{{route('screens.storage.dashboard.searchAllByKeyword')}}?_token={{csrf_token()}}`,
+                    data: {
+                        key_search: $('#search').val().trim()
+                    },
+
+                    error: function (jqXHR, error, errorThrown) {
+                        $('#requestModal').modal('hide')
+                        var error0 = JSON.parse(jqXHR.responseText)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tìm kiếm không thành công !',
+                            text: error0.message,
+                        })
+                    }
+                }).done(function (data) {
+                    document.location = data.href;
+                })
+            }
+        }
+    });
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

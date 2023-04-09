@@ -201,40 +201,40 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-            // $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+//             $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+//
+//             $data = OrderItem::query()
+//                 ->select(DB::raw('count(*) as count_product'),
+//                     'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
+//                 )
+//                 ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
+//                  where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+//                 ->join('products', 'order_item.product_id', '=', 'products.id')
+//                 ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
+//                 ->join('order', 'order.id', '=', 'order_item.order_id')
+//                 ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
+//                 ->where('order.export_status', 4)
+//                 ->where('warehouses.user_id', Auth::id());
+//             $result = $data->where('delivery_partner.id', $request->delivery_partner_id)->get();
+//             if (count($result) == 0) {
+//                 $data = $data->where('delivery_partner.code_partner', $request->delivery_partner_id)->get();
+//                 if (count($data) == 0) {
+//                     return response()->json([
+//                         'success' => false,
+//                         'message' => 'Không tìm thấy đối tác giao hàng'
+//                     ]);
+//                 }
+//             } else {
+//                 $data = $result;
+//             }
 
-            // $data = OrderItem::query()
-            //     ->select(DB::raw('count(*) as count_product'),
-            //         'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
-            //     )
-            //     ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
-            //      where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
-            //     ->join('products', 'order_item.product_id', '=', 'products.id')
-            //     ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
-            //     ->join('order', 'order.id', '=', 'order_item.order_id')
-            //     ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
-            //     ->where('order.export_status', 4)
-            //     ->where('warehouses.user_id', Auth::id());
-            // $result = $data->where('delivery_partner.id', $request->delivery_partner_id)->get();
-            // if (count($result) == 0) {
-            //     $data = $data->where('delivery_partner.code_partner', $request->delivery_partner_id)->get();
-            //     if (count($data) == 0) {
-            //         return response()->json([
-            //             'success' => false,
-            //             'message' => 'Không tìm thấy đối tác giao hàng'
-            //         ]);
-            //     }
-            // } else {
-            //     $data = $result;
-            // }
-            //
             $data = $this->partnerRepository->detailDeliveryPartner($request->delivery_partner_id);
-            if (!$data) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Không tìm thấy đối tác giao hàng'
-                ]);
-            }
+//            if (!$data) {
+//                return response()->json([
+//                    'success' => false,
+//                    'message' => 'Không tìm thấy đối tác giao hàng'
+//                ]);
+//            }
             return response()->json(['success' => true, 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([
