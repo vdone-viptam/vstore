@@ -213,9 +213,13 @@
 integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+{{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}
+<script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}" ></script>
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
+<script src="{{asset('asset/js/main.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
 </body>
 </html>

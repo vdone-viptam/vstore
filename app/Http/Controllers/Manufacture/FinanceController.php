@@ -60,9 +60,15 @@ class FinanceController extends Controller
 
     public function transferMoney()
     {
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at', 'code')
-            ->where('user_id', Auth::id())
-            ->where('vshop_id', '!=', Auth::id())
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+            ->where(function ($query) {
+                $query->where('user_id', Auth::id())
+                    ->whereNull('vshop_id');
+            })
+            ->orWhere(function ($query) {
+                $query->where('vshop_id', Auth::id())
+                    ->whereNull('user_id');
+            })
             ->paginate(10);
 
         return view('screens.manufacture.finance.revenue', $this->v);

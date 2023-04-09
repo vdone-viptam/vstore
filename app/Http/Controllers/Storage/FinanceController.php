@@ -26,7 +26,6 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
             ->where('type', 1)
             ->first();
-
         return view('screens.storage.finance.index', $this->v);
     }
 
@@ -35,24 +34,24 @@ class FinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'account_number' => 'required',
-            'bank_id' => 'required',
+            'bank_id' => 'required|numeric|min:0',
             'name' => 'required',
         ], [
             'account_number.required' => 'Số tài khoản bắt buộc nhập',
             'bank_id.required' => 'Ngân hàng bắt buộc chọn',
+            'bank_id.numeric' => 'Ngân hàng bắt buộc chọn',
             'name.required' => 'Tên chủ tài khoản bắt buộc nhập',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateCreate', 'failed');
         }
 
-        DB::table('wallets')->insert([
-            'account_number' => $request->account_number,
-            'bank_id' => $request->bank_id,
-            'user_id' => Auth::id(),
-            'name' => $request->name
-        ]);
+        $wallets = new Wallet();
+        $wallets -> account_number = $request->account_number;
+        $wallets -> bank_id = $request->bank_id;
+        $wallets -> name = $request->name;
+        $wallets -> user_id = Auth::id();
+        $wallets -> save();
 
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
     }
@@ -61,7 +60,7 @@ class FinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'account_number' => 'required',
-            'bank_id' => 'required',
+            'bank_id' => 'required|numeric|min:0',
             'name' => 'required',
         ], [
             'account_number.required' => 'Số tài khoản bắt buộc nhập',
@@ -69,7 +68,6 @@ class FinanceController extends Controller
             'name.required' => 'Tên chủ tài khoản bắt buộc nhập',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateUpdate', 'failed');
         }
         DB::table('wallets')->where('id', $id)->update([
@@ -90,18 +88,22 @@ class FinanceController extends Controller
 
     public function transferMoney()
     {
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at', 'code')
-            ->where('user_id', Auth::id())
-            ->where('vshop_id', '!=', Auth::id())
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+            ->where(function ($query) {
+                $query->where('user_id', Auth::id())
+                    ->whereNull('vshop_id');
+            })
+            ->orWhere(function ($query) {
+                $query->where('vshop_id', Auth::id())
+                    ->whereNull('user_id');
+            })
             ->paginate(10);
-
         return view('screens.storage.finance.revenue', $this->v);
     }
 
     public function deposit(Request $request)
     {
         DB::beginTransaction();
-
         try {
             $wallet = DB::table('wallets')->where('id', $request->bank)->first();
             $code = Str::random(12);
