@@ -53,7 +53,10 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                            <form >
+                                <input name="key_search" class="form-control" type="search" placeholder="Tìm kiếm..">
+                            </form>
+
                         </div>
                     </li>
                 </ul>

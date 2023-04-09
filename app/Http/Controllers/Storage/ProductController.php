@@ -49,14 +49,22 @@ class ProductController extends Controller
             ->join('users', 'warehouses.user_id', 'users.id')
             ->where('product_warehouses.status', 1)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id());
-
+            ->where('warehouses.user_id', Auth::id())
+//        ->where('product_name','like','%'.$request->key_search .'%')
+        ;
         if ($request->publish_id) {
             $products = $products->where('products.publish_id', $request->publish_id);
         }
 
+        if ($request->key_search){
+            $products->where('products.name',$request->key_search )
+            ->orWhere('products.publish_id',$request->key_search)
+                ->orWhere('users.name',$request->key_search)
+            ;
+        }
+//        return $request->key_search;
         $products = $products->paginate($limit);
-
+//        return $products;
         foreach ($products as $pro) {
             $pro->pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
@@ -72,6 +80,7 @@ class ProductController extends Controller
 
     public function request(Request $request)
     {
+
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
@@ -90,6 +99,11 @@ class ProductController extends Controller
             ->orderBy('request_warehouses.id', 'desc');
         if ($request->code) {
             $requests = $requests->where('request_warehouses.code', $request->code);
+        }
+        if ($request->key_search){
+            $requests = $requests->where('request_warehouses.code', $request->key_search)
+                                ->orWhere('products.publish_id',$request->key_search)
+            ;
         }
         $requests = $requests->paginate($limit);
         $this->v['requests'] = $requests;
