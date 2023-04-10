@@ -831,7 +831,7 @@ class  VShopController extends Controller
         } elseif ($request->discount > $discount / 100 * 95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . $discount / 100 * 95,
+                'error' => 'Phần trăm giảm giá nhỏ hơn hoặc bằng ' . $discount / 100 * 95,
                 'discount_limit'=>$discount / 100 * 95,
                 'discount_price_limit'=> $product->price /100 * ($discount / 100 * 95)
             ], 400);

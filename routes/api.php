@@ -271,6 +271,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 
+    Route::get('/baby', [\App\Http\Controllers\TestController::class, 'baby']);
 });
 
 Route::get('/get-city', [\App\Http\Controllers\Auth\LoginController::class, 'getCity'])->name('get_city');
