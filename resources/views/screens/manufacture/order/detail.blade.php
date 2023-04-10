@@ -67,7 +67,7 @@
                         <span
                             class="text-title">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</span>
                     </div>
-                    @if($order->status == 2)
+                    @if($order->status == 3)
                         <div class="grid grid-cols-2 gap-4 w-full">
                             <span class="text-title font-medium ">Xác nhận đơn hàng:</span>
                             <select name="status" id="status"
@@ -80,7 +80,7 @@
                     @endif
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
-                    @if($order->status == 2)
+                    @if($order->status == 3)
                     <button id="btnConfirm"
                             class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                         Lưu thay đổi
