@@ -1,4 +1,5 @@
 @extends('layouts.storage.main')
+@section('page_title','Xuất hủy')
 
 
 @section('modal')
@@ -82,7 +83,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <button class="btn btn-primary btn-create">Xuất hủy</button>
+                            <button type="button" class="btn btn-primary btn-create">Xuất hủy</button>
                         </div>
                     </div>
                 </form>
@@ -237,10 +238,12 @@
                 url: `{{route('screens.storage.warehouse.storeRequestDestroy')}}?_token={{csrf_token()}}`,
                 data: formData,
                 error: function (jqXHR, error, errorThrown) {
+
                     var error0 = JSON.parse(jqXHR.responseText)
+                    console.log(error0);
                     $(".error_quantity").html(`${error0.message || ''}`)
-                    $(".error_quantity").html(`${error0.errors.quantity[0] || ''}`)
-                    $(".error_note").html(`${error0.errors.note[0] ? error0.errors.note[0] : ''}`)
+                    $(".error_quantity").html(`${error0.errors.quantity ? error0.errors.quantity[0] : ''}`)
+                    $(".error_note").html(`${error0.errors.note ? error0.errors.note[0] : ''}`)
                 },
             }).done(function (data) {
                 Swal.fire(

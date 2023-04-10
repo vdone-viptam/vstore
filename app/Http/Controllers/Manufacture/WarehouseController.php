@@ -89,7 +89,7 @@ class WarehouseController extends Controller
                 'avatar' => asset('image/users/' . Auth::user()->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => 'Bạn vừa có đơn yêu cầu gửi sản phẩm mới',
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.storage.product.request')
+                'href' => route('screens.storage.product.request', ['key_search' => $requestIm->code])
             ];
             $user->notify(new AppNotification($data));
         }

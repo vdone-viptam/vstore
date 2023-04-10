@@ -105,7 +105,7 @@ class DashboardController extends Controller
                 }
             }
             return response()->json([
-                'message' => 'Không tim thấy yêu cầu phù hợp'
+                'message' => 'Không tim thấy kết quả phù hợp'
             ], 404);
 
         } else if (strpos($key_search, 'YCHH') !== false) {
@@ -113,13 +113,27 @@ class DashboardController extends Controller
                 'href' => route('screens.storage.warehouse.import', ['key_search' => $key_search])
             ]);
         } else if (strpos($key_search, 'YCXH') !== false) {
+            $query = RequestWarehouse::select('status')->where('code', $key_search)->first();
+            if ($query) {
+                return response()->json([
+                    'href' => route('screens.storage.warehouse.exportDestroyProduct', ['key_search' => $key_search])
+                ]);
+            }
             return response()->json([
-                'href' => route('screens.storage.warehouse.exportDestroyProduct', ['key_search' => $key_search])
-            ]);
+                'message' => 'Không tim thấy kết quả phù hợp'
+            ], 404);
+
         } else if (strpos($key_search, 'YCX') !== false) {
+            $query = RequestWarehouse::select('status')->where('code', $key_search)->first();
+            if ($query) {
+                return response()->json([
+                    'href' => route('screens.storage.warehouse.export', ['key_search' => $key_search])
+                ]);
+            }
             return response()->json([
-                'href' => route('screens.storage.warehouse.export', ['key_search' => $key_search])
-            ]);
+                'message' => 'Không tim thấy kết quả phù hợp'
+            ], 404);
+
         } else if (strpos($key_search, 'VN-') !== false) {
             $query = Warehouses::join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
                 ->join('products', 'product_warehouses.product_id', '=', 'products.id')
@@ -132,7 +146,7 @@ class DashboardController extends Controller
                     'href' => route('screens.storage.product.index', ['key_search' => $key_search])]);
             } else {
                 return response()->json([
-                    'message' => 'Không tim thấy sản phẩm phù hợp'
+                    'message' => 'Không tim thấy kết quả phù hợp'
                 ], 404);
             }
 
@@ -150,7 +164,7 @@ class DashboardController extends Controller
                 }
             }
             return response()->json([
-                'message' => 'Không tim thấy yêu cầu phù hợp'
+                'message' => 'Không tim thấy kết quả phù hợp'
             ], 404);
         } else {
             return response()->json([

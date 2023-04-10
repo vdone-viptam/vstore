@@ -1,4 +1,5 @@
 @extends('layouts.storage.main')
+@section('page_title','Tất cả sản phẩm')
 
 
 

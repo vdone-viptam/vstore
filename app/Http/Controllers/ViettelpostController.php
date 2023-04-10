@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BillDetail;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ViettelpostController extends Controller
@@ -22,6 +23,7 @@ class ViettelpostController extends Controller
         $order->order_status = $request->all()['DATA']['ORDER_STATUS'];
         if ($order->order_status == 501){
             $order->export_status =4;
+            $order->updated_at= Carbon::now();
         }
 ;        $order->save();
 

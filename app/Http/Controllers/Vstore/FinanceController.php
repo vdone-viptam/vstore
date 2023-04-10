@@ -122,6 +122,9 @@ class FinanceController extends Controller
                     break;
                 }
             }
+            if ($request->money > Auth::user()->money) {
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
+            }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
                 'code' => $code,

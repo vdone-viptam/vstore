@@ -30,13 +30,14 @@ class AccountController extends Controller
             'data' => $this->v['infoAccount']
         ]);
     }
+
     public function profile()
     {
 //        return 1;
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $this->v['infoAccount'] = User::with(['province', 'district','ward'])->where('id', Auth::id())->first();
+        $this->v['infoAccount'] = User::with(['province', 'district', 'ward'])->where('id', Auth::id())->first();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
         // dd ($this->v['infoAccount']);
         return view('screens.storage.account.profile', $this->v);
@@ -57,9 +58,9 @@ class AccountController extends Controller
             'cold_storage' => 'required',
             'warehouse' => 'required',
             'normal_storage' => 'required',
-            'city_id'=>'required',
-            'district_id'=>'required',
-            'ward_id'=>'required',
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'ward_id' => 'required',
         ], [
             'name.required' => 'Tên bắt buộc nhập',
             'name.max' => 'Tên  tối đa 30 ký tự',
@@ -104,29 +105,28 @@ class AccountController extends Controller
             $user->save();
 
 
-
-            $address = $user->ward->wards_name .','. $user->district->district_name.', '  .$user->province->province_name;
+            $address = $user->ward->wards_name . ',' . $user->district->district_name . ', ' . $user->province->province_name;
 
             $result = app('geocoder')->geocode($address)->get();
-            if (!isset($result[0])){
-                return redirect()->back()->with('error','Địa chỉ không hợp lệ');
+            if (!isset($result[0])) {
+                return redirect()->back()->with('error', 'Địa chỉ không hợp lệ');
             }
             $coordinates = $result[0]->getCoordinates();
 
             $lat = $coordinates->getLatitude();
             $long = $coordinates->getLongitude();
 
-            $warehouse= Warehouses::where('user_id',$user->id)->first();
-            $warehouse->name=$user->name;
-            $warehouse->ward_id =$request->ward_id;
-            $warehouse->city_id =$request->city_id;
-            $warehouse->district_id =$request->district_id;
-            $warehouse->lat= $lat;
+            $warehouse = Warehouses::where('user_id', $user->id)->first();
+            $warehouse->name = $user->name;
+            $warehouse->ward_id = $request->ward_id;
+            $warehouse->city_id = $request->city_id;
+            $warehouse->district_id = $request->district_id;
+            $warehouse->lat = $lat;
             $warehouse->long = $long;
             $warehouse->save();
             return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
 
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
 
@@ -176,14 +176,14 @@ class AccountController extends Controller
 
         $validator = Validator::make($request->all(), [
             'password' => 'required|confirmed|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
-            'password_confirmation'=>'required'
+            'password_confirmation' => 'required'
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',
             'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
-            'password.confirmed'=>'Xác nhận mật khẩu không khớp',
+            'password.confirmed' => 'Xác nhận mật khẩu không khớp',
 //            'password_confirmation.required'=>'vvUI LONG NHẬP '
-            'password_confirmation'=>'Xác nhận mật khẩu bắt buộc nhập'
+            'password_confirmation' => 'Xác nhận mật khẩu bắt buộc nhập'
 
         ]);
         if ($validator->fails()) {
@@ -218,6 +218,7 @@ class AccountController extends Controller
 
 
         if ($validator->fails()) {
+            return 1;
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
 
@@ -226,7 +227,10 @@ class AccountController extends Controller
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
 
             }
-            if ( DB::table('users')->where('tax_code', $request->tax_code)->whereIn('role_id', [2, 3])->count() > 0) {
+            if (DB::table('users')->where('tax_code', $request->tax_code)->whereIn('role_id', [2, 3])->count() > 0) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
+            }
+            if (DB::table('request_change_taxcode')->where('tax_code', $request->tax_code)->where('status', 0)->first()) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
             DB::table('request_change_taxcode')->insert([
@@ -239,6 +243,7 @@ class AccountController extends Controller
 
 
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại');
         }
     }

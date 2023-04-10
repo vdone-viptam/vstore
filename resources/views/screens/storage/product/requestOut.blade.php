@@ -1,5 +1,6 @@
 @extends('layouts.storage.main')
 
+@section('page_title','Xác nhận đơn hàng')
 
 @section('modal')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -76,7 +77,8 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}" type="search"
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search"
                                        placeholder="Tìm kiếm..">
                             </div>
                         </li>
@@ -117,10 +119,17 @@
                                     <td>{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$ord->id}}">
                                         @if($ord->export_status == 0)
-                                            <a href="#" onclick="upDateStatus({{$ord->id}},1)"
-                                               class="btn btn-primary">Đồng ý</a>
-                                            <a href="#" onclick="upDateStatus({{$ord->id}},3)"
-                                               class="btn btn-danger">Từ chối</a>
+                                            <div style="display:flex; justify-content:center; gap:10px"><a
+                                                    href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},1)"
+                                                    style="text-decoration:underline"
+                                                    class="text-primary  text-white font-medium  rounded">
+                                                    Đồng ý
+                                                </a>
+                                                <a href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},3)"
+                                                   style="text-decoration:underline"
+                                                   class="text-danger  text-white font-medium  rounded">
+                                                    Từ chối
+                                                </a></div>
                                         @elseif($ord->export_status == 1)
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"

@@ -1,4 +1,5 @@
 @extends('layouts.storage.main')
+@section('page_title','Xuất hàng')
 
 @section('modal')
     <div class="modal fade" id="modalBill" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -129,13 +130,14 @@
                                     <td>{{$request->ncc_name}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="status{{$request->id}} ">
+                                    <td class="status{{$request->id}} text-center">
                                         @if($request->status == 0)
                                             <a href="javascript:void(0)"
                                                onclick="upDateStatus({{$request->id}}, 1)"
-                                               class="bg-primary  text-white font-medium py-2 px-2 rounded btn-up">
+                                               class=" bg-primary  text-white font-medium py-2 px-2 rounded btn-up">
                                                 Xuất hàng
                                             </a>
+
                                         @else
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
@@ -154,7 +156,7 @@
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_id}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">
-                                                In hóa đơn
+                                                Xuất hóa đơn
                                             </a>
                                         </div>
                                     </td>

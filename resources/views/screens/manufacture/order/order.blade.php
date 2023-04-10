@@ -95,7 +95,7 @@
                                     <td>
                                         @if($order->status == 1)
                                             Đã hoàn thành
-                                        @elseif($order->status == 2)
+                                        @elseif($order->status == 3)
                                             Chờ xác nhận
                                         @elseif($order->status == 4)
                                             Đang giao hàng

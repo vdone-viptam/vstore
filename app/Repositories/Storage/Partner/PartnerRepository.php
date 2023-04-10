@@ -60,7 +60,7 @@ class PartnerRepository implements PartnerRepositoryInterface
         }
         return $ncc;
     }
-    public function deliveryPartner($limit)
+    public function deliveryPartner($search, $limit)
     {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
 
@@ -79,6 +79,14 @@ class PartnerRepository implements PartnerRepositoryInterface
             ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
             ->where('order_item.warehouse_id', $id)
             ->where('order.export_status', 4);
+
+        if (isset($search)) {
+            $ncc = $ncc->where(function ($query) use ($search) {
+                $query->where('delivery_partner.name_partner', 'like', '%' . $search . '%')
+                    ->orWhere('delivery_partner.code_partner', 'like', '%' . $search . '%');
+            });
+        }
+
         $ncc = $ncc->groupBy(['delivery_partner_id']);
         if (isset($limit)) {
             $ncc = $ncc->paginate($limit);

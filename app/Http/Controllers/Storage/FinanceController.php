@@ -47,11 +47,11 @@ class FinanceController extends Controller
         }
 
         $wallets = new Wallet();
-        $wallets -> account_number = $request->account_number;
-        $wallets -> bank_id = $request->bank_id;
-        $wallets -> name = $request->name;
-        $wallets -> user_id = Auth::id();
-        $wallets -> save();
+        $wallets->account_number = $request->account_number;
+        $wallets->bank_id = $request->bank_id;
+        $wallets->name = $request->name;
+        $wallets->user_id = Auth::id();
+        $wallets->save();
 
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
     }
@@ -82,7 +82,10 @@ class FinanceController extends Controller
 
     public function history()
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')
+            ->where('user_id', Auth::id())
+            ->orderBy('id', 'desc')
+            ->paginate(10);
         return view('screens.storage.finance.history', $this->v);
     }
 
@@ -97,6 +100,7 @@ class FinanceController extends Controller
                 $query->where('vshop_id', Auth::id())
                     ->whereNull('user_id');
             })
+            ->orderBy('id', 'desc')
             ->paginate(10);
         return view('screens.storage.finance.revenue', $this->v);
     }
@@ -113,6 +117,9 @@ class FinanceController extends Controller
                 } else {
                     break;
                 }
+            }
+            if ($request->money > Auth::user()->money) {
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
