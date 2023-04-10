@@ -377,7 +377,7 @@
                                 <option selected > ${data.data.status == 5 || data.data.status == 1 || data.data.status == 7 ? `Đồng ý` : `Từ chối`}</option>
                             </select>` : ` <select class="custom-select" id="inputGroupSelect01">
                                 <option  value="5">Đồng ý</option>
-                                <option  value="2">Từ chối</option>
+                                <option  value="10">Từ chối</option>
                             </select>`}
 
                         </div>
