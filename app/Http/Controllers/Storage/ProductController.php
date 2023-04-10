@@ -48,6 +48,7 @@ class ProductController extends Controller
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->join('users', 'warehouses.user_id', 'users.id')
             ->where('product_warehouses.status', 1)
+            ->orderBy('in_stock', 'asc')
             ->groupBy(['products.id'])
             ->where('warehouses.user_id', Auth::id())//        ->where('product_name','like','%'.$request->key_search .'%')
         ;
