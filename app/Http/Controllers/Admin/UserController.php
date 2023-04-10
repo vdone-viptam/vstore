@@ -127,6 +127,7 @@ class UserController extends Controller
 
                 $address = $wards . ', ' . $district . '. ' . $province;
                 $result = app('geocoder')->geocode($address)->get();
+                return $result;
                 $coordinates = $result[0]->getCoordinates();
                 $lat = $coordinates->getLatitude();
                 $long = $coordinates->getLongitude();
