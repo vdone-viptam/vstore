@@ -83,7 +83,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <button class="btn btn-primary btn-create">Xuất hủy</button>
+                            <button type="button" class="btn btn-primary btn-create">Xuất hủy</button>
                         </div>
                     </div>
                 </form>
