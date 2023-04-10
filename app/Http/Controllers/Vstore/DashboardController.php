@@ -24,15 +24,19 @@ class DashboardController extends Controller
             ->limit(10)->get();
                 $vshop  = [];
 
-        $dataChartMonth = $this->chartRepository->revenueRangeTimeMonth();
-        $dataChartYear = $this->chartRepository->revenueRangeTimeYear();
+        $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
+        $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
+        $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
+        $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
         return view('screens.vstore.dashboard.index',
         [
             'data' => $data,
             'vshop' => $vshop,
-            'dataChartMonth' => $dataChartMonth,
-            'dataChartYear' => $dataChartYear,
+            'dataRevenueChartMonth' => $dataRevenueChartMonth,
+            'dataRevenueChartYear' => $dataRevenueChartYear,
+            'dataOrderChartMonth' => $dataOrderChartMonth,
+            'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
         ]);
 
     }
