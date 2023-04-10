@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductWarehouses;
+use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
@@ -72,16 +75,87 @@ class DashboardController extends Controller
                 'products.sku_id'
             );
         $products = $products->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
-            ->whereIn('request_warehouses.type', [1, 10, 2, 3])
+            ->whereIn('request_warehouses.type', [1, 10])
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->whereIn('request_warehouses.status', [7, 0])
-            ->orderBy('request_warehouses.id', 'desc')
-            ->paginate($request->limit ?? 10);
+            ->where('request_warehouses.status', 0)
+            ->orderBy('request_warehouses.id', 'desc')->paginate($request->limit);
         return view('screens.storage.dashboard.index', [
             'success' => true,
             'requestEx' => $requestEx,
             'requestIm' => $requestIm,
             'productOutStock' => $productOutStock,
             'products' => $products]);
+    }
+
+    public function searchAllByKeyword(Request $request)
+    {
+        $key_search = trim($request->key_search) ?? '';
+
+        if (strpos($key_search, 'YCN') !== false) {
+            $query = RequestWarehouse::select('status')->where('code', $key_search)->first();
+            if ($query) {
+                if ($query->status == 0) {
+                    return response()->json([
+                        'href' => route('screens.storage.product.request', ['key_search' => $key_search])
+                    ]);
+                } else {
+                    return response()->json([
+                        'href' => route('screens.storage.warehouse.import', ['key_search' => $key_search])
+                    ]);
+                }
+            }
+            return response()->json([
+                'message' => 'Không tim thấy yêu cầu phù hợp'
+            ], 404);
+
+        } else if (strpos($key_search, 'YCHH') !== false) {
+            return response()->json([
+                'href' => route('screens.storage.warehouse.import', ['key_search' => $key_search])
+            ]);
+        } else if (strpos($key_search, 'YCXH') !== false) {
+            return response()->json([
+                'href' => route('screens.storage.warehouse.exportDestroyProduct', ['key_search' => $key_search])
+            ]);
+        } else if (strpos($key_search, 'YCX') !== false) {
+            return response()->json([
+                'href' => route('screens.storage.warehouse.export', ['key_search' => $key_search])
+            ]);
+        } else if (strpos($key_search, 'VN-') !== false) {
+            $query = Warehouses::join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
+                ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+                ->where('product_warehouses.status', 1)
+                ->where('warehouses.user_id', Auth::id())
+                ->where('products.publish_id', $key_search)
+                ->first();
+            if ($query) {
+                return response()->json([
+                    'href' => route('screens.storage.product.index', ['key_search' => $key_search])]);
+            } else {
+                return response()->json([
+                    'message' => 'Không tim thấy sản phẩm phù hợp'
+                ], 404);
+            }
+
+        } else if (!strpos($key_search, 'YC') && strlen($key_search) == 13) {
+            $query1 = Order::select('export_status')->where('no', $key_search)->first();
+            if ($query1) {
+                if ($query1->export_status == 5) {
+                    return response()->json([
+                        'href' => route('screens.storage.warehouse.destroyOrder', ['key_search' => $key_search])
+                    ]);
+                } else {
+                    return response()->json([
+                        'href' => route('screens.storage.product.requestOut', ['key_search' => $key_search])
+                    ]);
+                }
+            }
+            return response()->json([
+                'message' => 'Không tim thấy yêu cầu phù hợp'
+            ], 404);
+        } else {
+            return response()->json([
+                'message' => 'Mã yêu cầu không hợp lệ'
+            ], 404);
+        }
     }
 }

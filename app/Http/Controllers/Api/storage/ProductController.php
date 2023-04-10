@@ -16,6 +16,7 @@ use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -61,8 +62,9 @@ class ProductController extends Controller
                     ->selectRaw('SUM(quantity) as total')
                     ->where('request_warehouses.product_id', $pro->product_id)
                     ->where('request_warehouses.ware_id', $pro->warehouse_id)
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('type', 2)
-                    ->where('status', 0)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
         }
         return response()->json([
@@ -228,49 +230,46 @@ class ProductController extends Controller
             ], 400);
         }
 
-        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->where('status', 0);
-        if (!$requestIm->first()) {
-            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->whereIn('status', [5, 7])->first();
-            if (!$requestIm) {
+        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->first();
+        if (!$requestIm) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy yêu cầu',
+            ], 404);
+        } else {
+            if ($requestIm->status == 1 || $requestIm->status == 2) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Không tìm thấy yêu cầu',
                 ], 404);
             }
-
-        } else {
-            $requestIm = $requestIm->first();
         }
-        if ($status == 1) {
-            if ($requestIm->type == 1) {
-                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
-                if (!$ware) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy sản phẩm',
-                    ], 404);
-                }
-                if ($ware->status == 0) {
-                    $ware->status = 1;
-                }
-                $ware->amount = $ware->amount + $requestIm->quantity;
-                $ware->save();
-
-                DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
+        if ($requestIm->status == 5) {
+            $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+            if (!$ware) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy sản phẩm',
+                ], 404);
             }
+            if ($ware->status == 0) {
+                $ware->status = 1;
+            }
+            $ware->amount = $ware->amount + $requestIm->quantity;
+            $ware->save();
+
+            DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
         }
         if ($requestIm->status == 7) {
-            if ($requestIm->type == 1) {
-                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
-                if (!$ware) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy sản phẩm',
-                    ], 404);
-                }
-                $ware->export = $ware->export - $requestIm->quantity;
-                $ware->save();
+            $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+            if (!$ware) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy sản phẩm',
+                ], 404);
             }
+            $ware->export = $ware->export - (int)$requestIm->quantity;
+            $ware->save();
         }
 
         $requestIm->status = $status;
@@ -351,8 +350,8 @@ class ProductController extends Controller
                     'TYPE' => 1,
 
                 ]);
-
-//            return $get_list;
+                $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
+                $order->estimated_date = Carbon::now()->addHours((int)$date);
 
                 $tinh_thanh_gui = Province::where('province_id', $warehouse->city_id)->first()->province_name ?? '';
                 $quan_huyen_gui = District::where('district_id', $warehouse->district_id)->first()->district_name ?? '';

@@ -156,12 +156,12 @@
    ========================================================================== */
 
 body {
-    font-family: sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    color: #71748d;
-    background-color: #efeff6;
+    font-family           : sans-serif;
+    font-style            : normal;
+    font-weight           : normal;
+    font-size             : 14px;
+    color                 : #71748d;
+    background-color      : #efeff6;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -170,10 +170,11 @@ body {
     overflow-x: scroll;
 }
 
-.item-dash:hover{
-    opacity: 0.7;
+.item-dash:hover {
+    opacity   : 0.7;
     transition: 0.5s all;
 }
+
 ::-webkit-scrollbar {
     width : 0.3rem;
     height: 0.6rem;
@@ -1276,7 +1277,7 @@ Top Header
     line-height: inherit;
     white-space: nowrap;
    min-width: 264px;
-   
+
     font-size: 30px;
     text-transform: uppercase;
     font-weight: 700;
@@ -2757,7 +2758,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
     display: none;
 }
 table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:after {
-  
+
     opacity: 0!important;
     display: none !important;
 }
@@ -3288,7 +3289,7 @@ btn-link
     display: flex;
     text-align: center;
     justify-content: center;
-  
+
 }
 
 .card-link {}
@@ -6876,7 +6877,7 @@ Media Query
     .top-menu-mb{
         margin-right: 14px !important;
     }
-   
+
     .dashboard-content {
     padding: 20px 20px 60px 20px;
 }
@@ -7070,53 +7071,53 @@ div.my-alert {
     /* Unknown class .content */
     width: 100%;
   }
-  
+
   div.my-alert > form {
     width: 100%;
   }
-  
+
   div.my-alert > form > div {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  
+
   @media (min-width: 1024px) {
     div.my-alert > form > div {
       grid-template-columns: repeat(12, minmax(0, 1fr));
     }
   }
-  
+
   div.my-alert > form > div {
     row-gap: var(--tw-size-4);
   }
-  
+
   @media (min-width: 1280px) {
     div.my-alert > form > div {
       gap: var(--tw-size-10);
     }
   }
-  
+
   div.my-alert > form > div {
     padding-left: var(--tw-size-5);
     padding-right: var(--tw-size-5);
   }
-  
+
   @media (min-width: 1280px) {
     div.my-alert > form > div {
       padding-left: var(--tw-size-16);
       padding-right: var(--tw-size-16);
     }
   }
-  
+
   div.my-alert > form > div {
     padding-top: var(--tw-size-4);
     padding-bottom: var(--tw-size-4);
   }
-  
+
   div.my-alert > form > div > div {
     grid-column: span 12 / span 12;
   }
-  
+
   div.my-alert > form > div > div > div.my-alert__unique1 {
     /* Unknown class .brc */
     display: flex;
@@ -7126,29 +7127,29 @@ div.my-alert {
     padding-top: var(--tw-size-4);
     padding-bottom: var(--tw-size-4);
   }
-  
+
   div.my-alert > form > div > div > div > span {
     /* Unknown class .text-secondary */
   }
-  
+
   div.my-alert > form > div > div > div > a {
     --tw-text-opacity: 1;
     color: rgb(var(--tw-color-blue-700) / var(--tw-text-opacity));
     font-weight: var(--tw-font-weight-medium);
     font-style: italic;
   }
-  
+
   div.my-alert > form > div > div > div.my-alert__unique2 {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div.my-alert__unique2 {
       grid-template-columns: repeat(12, minmax(0, 1fr));
     }
   }
-  
+
   div.my-alert > form > div > div > div > div.my-alert__unique6 {
     /* Unknown class .finance */
     grid-column: span 6 / span 6;
@@ -7159,18 +7160,18 @@ div.my-alert {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div > div.my-alert__unique6 {
       padding-left: 60px;
     }
   }
-  
+
   div.my-alert > form > div > div > div > div.my-alert__unique6 {
     padding-top: var(--tw-size-6);
     padding-bottom: var(--tw-size-6);
   }
-  
+
   div.my-alert > form > div > div > div > div > h3.my-alert__unique8 {
     /* Unknown class .captilize */
     font-weight: var(--tw-font-weight-medium);
@@ -7181,7 +7182,7 @@ div.my-alert {
     align-items: center;
     gap: var(--tw-size-4);
   }
-  
+
   div.my-alert > form > div > div > div > div > div.my-alert__unique10 {
     display: flex;
     flex-direction: column;
@@ -7189,24 +7190,24 @@ div.my-alert {
     width: 100%;
     flex-wrap: wrap;
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div > div > div.my-alert__unique10 {
       flex-wrap: nowrap;
     }
   }
-  
+
   div.my-alert > form > div > div > div > div > div.my-alert__unique10 {
     margin-top: var(--tw-size-2);
   }
-  
+
   div.my-alert > form > div > div > div > div > div > span.my-alert__unique3 {
     --tw-text-opacity: 1;
     color: rgb(164 182 198 / var(--tw-text-opacity));
     font-size: var(--tw-font-size-sm);
     line-height: var(--tw-line-height-5);
   }
-  
+
   div.my-alert > form > div > div > div > div > div > span.my-alert__unique4 {
     --tw-text-opacity: 1;
     color: rgb(64 98 255 / var(--tw-text-opacity));
@@ -7215,31 +7216,31 @@ div.my-alert {
     line-height: var(--tw-line-height-7);
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div.my-alert__unique5 {
     grid-column: span 12 / span 12;
     /* Unknown class .box */
     border-top-right-radius: var(--tw-border-radius-none);
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div.my-alert__unique5 {
       border-top-right-radius: 30px;
     }
   }
-  
+
   div.my-alert > form > div > div > div.my-alert__unique5 {
     border-top-left-radius: var(--tw-border-radius-none);
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  
+
   @media (min-width: 1024px) {
     div.my-alert > form > div > div > div.my-alert__unique5 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  
+
   div.my-alert > form > div > div > div.my-alert__unique5 {
     place-items: center;
     gap: var(--tw-size-32);
@@ -7247,19 +7248,19 @@ div.my-alert {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div.my-alert__unique5 {
       padding-left: 60px;
       padding-right: 60px;
     }
   }
-  
+
   div.my-alert > form > div > div > div.my-alert__unique5 {
     padding-top: var(--tw-size-10);
     padding-bottom: var(--tw-size-10);
   }
-  
+
   div.my-alert > form > div > div > div > div.my-alert__unique7 {
     display: flex;
     flex-direction: column;
@@ -7267,7 +7268,7 @@ div.my-alert {
     gap: var(--tw-size-6);
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div > div > h3.my-alert__unique9 {
     /* Unknown class .text-title */
     font-size: var(--tw-font-size-lg);
@@ -7277,12 +7278,12 @@ div.my-alert {
     align-items: center;
     gap: var(--tw-size-4);
   }
-  
+
   div.my-alert > form > div > div > div > div > p {
     --tw-text-opacity: 1;
     color: rgb(var(--tw-color-green-600) / var(--tw-text-opacity));
   }
-  
+
   div.my-alert > form > div > div > div > div > div.my-alert__unique11 {
     display: flex;
     flex-direction: column;
@@ -7290,7 +7291,7 @@ div.my-alert {
     gap: var(--tw-size-2);
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div > div > div > label {
     width: 100%;
     --tw-text-opacity: 1;
@@ -7298,12 +7299,12 @@ div.my-alert {
     font-size: var(--tw-font-size-sm);
     line-height: var(--tw-line-height-5);
   }
-  
+
   div.my-alert > form > div > div > div > div > div > label > strong {
     --tw-text-opacity: 1;
     color: rgb(255 77 79 / var(--tw-text-opacity));
   }
-  
+
   div.my-alert > form > div > div > div > div > div > input {
     outline: 2px solid transparent;
     outline-offset: 2px;
@@ -7318,19 +7319,19 @@ div.my-alert {
     --tw-bg-opacity: 1;
     background-color: rgb(241 241 244 / var(--tw-bg-opacity));
   }
-  
+
   div.my-alert > form > div > div > div > div > div > input:focus {
     --tw-border-opacity: 1;
     border-color: rgb(var(--tw-color-primary) / var(--tw-border-opacity));
   }
-  
+
   div.my-alert > form > div > div > div > div > div > input {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
     border-radius: var(--tw-border-radius-sm);
   }
-  
+
   div.my-alert > form > div > div > div > div > div.my-alert__unique12 {
     display: flex;
     flex-direction: column;
@@ -7338,17 +7339,17 @@ div.my-alert {
     width: 100%;
     flex-wrap: wrap;
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div > div > div.my-alert__unique12 {
       flex-wrap: nowrap;
     }
   }
-  
+
   div.my-alert > form > div > div > div > div > div > div {
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div > div > div > div > div {
     display: flex;
     justify-content: space-between;
@@ -7357,7 +7358,7 @@ div.my-alert {
     cursor: pointer;
     min-height: 100px;
   }
-  
+
   div.my-alert
     > form
     > div
@@ -7374,23 +7375,23 @@ div.my-alert {
     align-items: center;
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div > div > div > div > div > a {
     /* Unknown class .btn-add-bank */
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div > div > div > div > div > a > div {
     /* Unknown class .add */
   }
-  
+
   div.my-alert > form > div > div > div > div > div > div > div > a > div > div {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
   }
-  
+
   div.my-alert
     > form
     > div
@@ -7409,21 +7410,21 @@ div.my-alert {
     --tw-text-opacity: 1;
     color: rgb(30 144 255 / var(--tw-text-opacity));
   }
-  
+
   div.my-alert > form > div > div > div > div > div.my-alert__unique15 {
     text-align: center;
   }
-  
+
   @media (min-width: 768px) {
     div.my-alert > form > div > div > div > div > div.my-alert__unique15 {
       text-align: right;
     }
   }
-  
+
   div.my-alert > form > div > div > div > div > div.my-alert__unique15 {
     width: 100%;
   }
-  
+
   div.my-alert > form > div > div > div > div > div > button {
     /* Unknown class .btnGra */
     cursor: pointer;
@@ -7441,22 +7442,22 @@ div.my-alert {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
-  
+
   div.my-alert > form > div > div > div > div > div > button:hover {
     opacity: 0.7;
   }
-  
+
   div.my-alert > form > div > div > div > div.my-alert__unique16 {
     width: 100%;
     display: none;
   }
-  
+
   @media (min-width: 1024px) {
     div.my-alert > form > div > div > div > div.my-alert__unique16 {
       display: block;
     }
   }
-  
+
   div.my-alert > form > div > div > div > div > img {
     width: 100%;
   }
@@ -7469,7 +7470,7 @@ div.my-alert {
       -webkit-appearance: none;
       margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
   }
-  
+
   input[type=number] {
       -moz-appearance:textfield; /* Firefox */
   }
@@ -7516,4 +7517,7 @@ div.table-responsive > div.dataTables_wrapper > div.row{
 }
 .hidden{
     display: none !important;
+}
+.sidebar-dark.nav-left-sidebar .navbar-nav .submenu .nav .active1 {
+    text-decoration: underline;
 }

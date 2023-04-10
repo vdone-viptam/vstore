@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Hash;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,18 +83,43 @@ Route::group(['domain' => config('domain.storage')], function () {
 Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
+        Route::get('/search', [\App\Http\Controllers\Storage\DashboardController::class, 'searchAllByKeyword'])->name('screens.storage.dashboard.searchAllByKeyword');
+
     });
     Route::prefix('products')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
+        Route::get('/index', [\App\Http\Controllers\Storage\ProductController::class, 'index'])->name('screens.storage.product.index');
+        Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detailProduct'])->name('screens.storage.product.detail');
+
         Route::get('/request', [\App\Http\Controllers\Storage\ProductController::class, 'request'])->name('screens.storage.product.request');
-        Route::get('/request/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
+        Route::get('/detail-request', [\App\Http\Controllers\Storage\ProductController::class, 'detailRequest'])->name('screens.storage.product.detailRequest');
+
+        Route::put('/request/update/{status?}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequest'])->name('screens.storage.product.updateRequest');
 
         Route::get('/requestOut', [\App\Http\Controllers\Storage\ProductController::class, 'requestOut'])->name('screens.storage.product.requestOut');
-        Route::get('/requestOut/update/{status}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
-        Route::get('/detail', [\App\Http\Controllers\Storage\ProductController::class, 'detail'])->name('screens.storage.product.detail');
+        Route::get('/detailRequestOut', [\App\Http\Controllers\Storage\ProductController::class, 'detailRequestOut'])->name('screens.storage.product.detailRequestOut');
+
+        Route::put('/requestOut/update/{status?}', [\App\Http\Controllers\Storage\ProductController::class, 'updateRequestOut'])->name('screens.storage.product.updateRequestOut');
+    });
+    Route::prefix('warehouses')->group(function () {
+        Route::get('/import', [\App\Http\Controllers\Storage\WarehouseController::class, 'importProduct'])->name('screens.storage.warehouse.import');
+        Route::get('/detail-import', [\App\Http\Controllers\Storage\WarehouseController::class, 'detailRequest'])->name('screens.storage.warehouse.detailRequest');
+
+        Route::get('/export', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportProduct'])->name('screens.storage.warehouse.export');
+        Route::put('/confirm-export', [\App\Http\Controllers\Storage\WarehouseController::class, 'confirmExportProduct'])->name('screens.storage.warehouse.confirmExportProduct');
+        Route::get('/export-bill', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportBill'])->name('screens.storage.warehouse.exportBill');
+
+        Route::get('/export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'exportDestroyProduct'])->name('screens.storage.warehouse.exportDestroyProduct');
+        Route::get('/create-export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'createRequestDestroy'])->name('screens.storage.warehouse.createRequestDestroy');
+        Route::post('/store-export-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'storeRequestDestroy'])->name('screens.storage.warehouse.storeRequestDestroy');
+
+        Route::get('/order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'destroyOrder'])->name('screens.storage.warehouse.destroyOrder');
+        Route::get('/detail-order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'detailDestroyOrder'])->name('screens.storage.warehouse.detailDestroyOrder');
+        Route::post('/revert-order-destroy', [\App\Http\Controllers\Storage\WarehouseController::class, 'storeImportProduct'])->name('screens.storage.warehouse.storeImportProduct');
+
     });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
+        Route::get('/detail-profile', [\App\Http\Controllers\Storage\AccountController::class, 'detailProfile'])->name('screens.storage.account.profile.detail');
         Route::post('/edit/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'editProfile'])->name('screens.storage.account.editPro');
         Route::post('/upload/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'uploadImage'])->name('screens.storage.account.upload');
         Route::get('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'changePassword'])->name('screens.storage.account.changePassword');
@@ -113,6 +138,9 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\PartnerController::class, 'index'])->name('screens.storage.partner.index');
+        Route::get('/detail-ncc', [\App\Http\Controllers\Storage\PartnerController::class, 'detailNcc'])->name('storage.detail.ncc');
+        Route::get('/delivery-partner', [\App\Http\Controllers\Storage\PartnerController::class, 'deliveryPartner'])->name('screens.storage.delivery.partner');
+        Route::get('/detail-delivery-partner', [\App\Http\Controllers\Storage\PartnerController::class, 'detailDeliveryPartner'])->name('storage.detail.delivery.partner');
         //        Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         //        Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
@@ -312,6 +340,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');
         Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
+        Route::get('/vshop/detail', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshopDetail'])->name('screens.vstore.partner.vshopDetail');
         Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
 
 //        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');

@@ -1,58 +1,58 @@
-name: Discount
+name: Manufacture
 description: |-
 
-  Danh sách api liên quan tới mã giảm giá
+  Danh sách api liên quan nhà cung cấp
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/discount/get-discount
+    uri: api/manufactures/get-list
     metadata:
-      groupName: Discount
+      groupName: Manufacture
       groupDescription: |-
 
-        Danh sách api liên quan tới mã giảm giá
+        Danh sách api liên quan nhà cung cấp
       subgroup: ''
       subgroupDescription: ''
-      title: Bill
-      description: 'API dùng trả về % giảm giá dựa trên số lượng sản phẩm V-Shop lấy hàng sẵn'
+      title: 'Danh sách nhà cung cấp'
+      description: 'API này sẽ trả về sách Nhà cung cấp'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: tempore
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang | Mặc định 100 bản ghi'
+        required: false
+        example: accusamus
+        type: string
+        custom: []
+    cleanUrlParameters:
+      page: tempore
+      limit: accusamus
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      id:
-        name: id
-        description: 'sản phẩm'
-        required: false
-        example: at
-        type: id
-        custom: []
-      total:
-        name: total
-        description: 'lượng sản phẩm'
-        required: false
-        example: omnis
-        type: số
-        custom: []
-    cleanBodyParameters:
-      id: at
-      total: omnis
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":401,"error":{"id":["The selected id is invalid."],"total":["S\u1ed1 l\u01b0\u1ee3ng s\u1ea3n ph\u1ea9m ph\u1ea3i l\u00e0 s\u1ed1"]}}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '35'
+          x-ratelimit-remaining: '27'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -65,31 +65,31 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/discount/available-discount/{id}'
+    uri: 'api/manufactures/profile/{ncc_id}'
     metadata:
-      groupName: Discount
+      groupName: Manufacture
       groupDescription: |-
 
-        Danh sách api liên quan tới mã giảm giá
+        Danh sách api liên quan nhà cung cấp
       subgroup: ''
       subgroupDescription: ''
-      title: Bill
-      description: 'API dùng trả về % giảm giá dựa trên số lượng sản phẩm'
+      title: 'chi tiết nhà cung cấp'
+      description: 'API này sẽ trả về thông tin nhà cung cấp'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      id:
-        name: id
-        description: 'id sản phẩm'
-        required: false
-        example: labore
+      ncc_id:
+        name: ncc_id
+        description: 'The ID of the ncc.'
+        required: true
+        example: explicabo
         type: string
         custom: []
     cleanUrlParameters:
-      id: labore
+      ncc_id: explicabo
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -97,13 +97,13 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '[]'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '34'
+          x-ratelimit-remaining: '26'
           access-control-allow-origin: '*'
         description: null
         custom: []

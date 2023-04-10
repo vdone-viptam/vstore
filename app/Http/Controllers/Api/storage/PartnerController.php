@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\Storage\Partner\PartnerRepositoryInterface;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Models\Warehouses;
@@ -13,6 +14,11 @@ use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
+    private PartnerRepositoryInterface $partnerRepository;
+    public function __construct(PartnerRepositoryInterface $partnerRepository)
+    {
+        $this->partnerRepository = $partnerRepository;
+    }
     /**
      * danh sách Nhà cung cấp
      *
@@ -35,27 +41,28 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+            // $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
             $search = $request->search;
             $limit = $request->limit ?? 10;
-            $ncc = User::query()
-                ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
-                    DB::raw('count(*) as count_product'),
-                    DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
-                )
-                ->join('province', 'users.provinceId', '=', 'province.province_id')
-                ->join('products', 'users.id', '=', 'products.user_id')
-                ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-                ->where('ware_id', $id);
-            if (isset($request->search)) {
-                $ncc = $ncc->where(function ($query) use ($search) {
-                    $query->where('users.name', 'like', '%' . $search . '%')
-                        ->orWhere('users.account_code', 'like', '%' . $search . '%');
-                });
-            }
-            $ncc = $ncc->groupBy(['users.name', 'account_code'])
-                ->paginate($limit);
-
+            // $ncc = User::query()
+            //     ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
+            //         DB::raw('count(*) as count_product'),
+            //         DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
+            //     )
+            //     ->join('province', 'users.provinceId', '=', 'province.province_id')
+            //     ->join('products', 'users.id', '=', 'products.user_id')
+            //     ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+            //     ->where('ware_id', $id);
+            // if (isset($request->search)) {
+            //     $ncc = $ncc->where(function ($query) use ($search) {
+            //         $query->where('users.name', 'like', '%' . $search . '%')
+            //             ->orWhere('users.account_code', 'like', '%' . $search . '%');
+            //     });
+            // }
+            // $ncc = $ncc->groupBy(['users.name', 'account_code'])
+            //     ->paginate($limit);
+            // return $search.'```````'.$limit;
+            $ncc = $this->partnerRepository->index($search,$limit);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([
@@ -85,31 +92,37 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
-            $ncc = User::query()
-                ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
-                    DB::raw('count(*) as count_product'),
-                    DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
-                )
-                ->join('province', 'users.provinceId', '=', 'province.province_id')
-                ->join('products', 'users.id', '=', 'products.user_id')
-                ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-                ->where('ware_id', $id);
+            // $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+            // $ncc = User::query()
+            //     ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
+            //         DB::raw('count(*) as count_product'),
+            //         DB::raw('sum(product_warehouses.amount - product_warehouses.export) as amount_product')
+            //     )
+            //     ->join('province', 'users.provinceId', '=', 'province.province_id')
+            //     ->join('products', 'users.id', '=', 'products.user_id')
+            //     ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+            //     ->where('ware_id', $id);
 
-            $result = $ncc->where('products.user_id', $request->user_id)->first();
+            // $result = $ncc->where('products.user_id', $request->user_id)->first();
 
-            if (!$result) {
-                $ncc = $ncc->where('users.account_code', $request->user_id)->first();
-                if (!$ncc) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy nhà cung cấp'
-                    ]);
-                }
-            } else {
-                $ncc = $result;
+            // if (!$result) {
+            //     $ncc = $ncc->where('users.account_code', $request->user_id)->first();
+            //     if (!$ncc) {
+            //         return response()->json([
+            //             'success' => false,
+            //             'message' => 'Không tìm thấy nhà cung cấp'
+            //         ]);
+            //     }
+            // } else {
+            //     $ncc = $result;
+            // }
+            $ncc = $this->partnerRepository->detailNcc($request->user_id);
+            if (!$ncc) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy nhà cung cấp'
+                ]);
             }
-
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([
@@ -140,23 +153,25 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
-
             $limit = $request->limit ?? 10;
-            $ncc = OrderItem::query()
-                ->select('products.id as product_id',
-                    'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
-                    DB::raw('count(*) as count_product'),
-                )
-                ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
-                 where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
-                ->join('products', 'order_item.product_id', 'products.id')
-                ->join('order', 'order.id', 'order_item.order_id')
-                ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
-                ->where('order_item.warehouse_id', $id)
-                ->where('order.export_status', 4);
-            $ncc = $ncc->groupBy(['delivery_partner_id'])
-                ->paginate($limit);
+            // $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+            // // return $id;
+            // $ncc = OrderItem::query()
+            //     ->select('products.id as product_id',
+            //         'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
+            //         DB::raw('count(*) as count_product'),
+            //     )
+            //     ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
+            //      where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+            //     ->join('products', 'order_item.product_id', 'products.id')
+            //     ->join('order', 'order.id', 'order_item.order_id')
+            //     ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
+            //     ->where('order_item.warehouse_id', $id)
+            //     ->where('order.export_status', 4);
+            // $ncc = $ncc->groupBy(['delivery_partner_id'])
+            //     ->paginate($limit);
+
+            $ncc = $this->partnerRepository->deliveryPartner($limit);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([
@@ -186,32 +201,40 @@ class PartnerController extends Controller
                     'messageError' => $validator->errors(),
                 ], 401);
             }
-            $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+//             $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
+//
+//             $data = OrderItem::query()
+//                 ->select(DB::raw('count(*) as count_product'),
+//                     'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
+//                 )
+//                 ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
+//                  where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
+//                 ->join('products', 'order_item.product_id', '=', 'products.id')
+//                 ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
+//                 ->join('order', 'order.id', '=', 'order_item.order_id')
+//                 ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
+//                 ->where('order.export_status', 4)
+//                 ->where('warehouses.user_id', Auth::id());
+//             $result = $data->where('delivery_partner.id', $request->delivery_partner_id)->get();
+//             if (count($result) == 0) {
+//                 $data = $data->where('delivery_partner.code_partner', $request->delivery_partner_id)->get();
+//                 if (count($data) == 0) {
+//                     return response()->json([
+//                         'success' => false,
+//                         'message' => 'Không tìm thấy đối tác giao hàng'
+//                     ]);
+//                 }
+//             } else {
+//                 $data = $result;
+//             }
 
-            $data = OrderItem::query()
-                ->select(DB::raw('count(*) as count_product'),
-                    'delivery_partner.name_partner', 'delivery_partner.code_partner', 'delivery_partner.id as delivery_partner_id',
-                )
-                ->selectSub('select COUNT(order.id) from `order` join order_item on order.id = order_item.order_id
-                 where export_status=3 or export_status=5 and order_item.warehouse_id =' . $id . ' and delivery_partner_id= delivery_partner.id', 'destroy_order')
-                ->join('products', 'order_item.product_id', '=', 'products.id')
-                ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
-                ->join('order', 'order.id', '=', 'order_item.order_id')
-                ->join('warehouses', 'warehouses.id', '=', 'order.warehouse_id')
-                ->where('order.export_status', 4)
-                ->where('warehouses.user_id', Auth::id());
-            $result = $data->where('delivery_partner.id', $request->delivery_partner_id)->get();
-            if (count($result) == 0) {
-                $data = $data->where('delivery_partner.code_partner', $request->delivery_partner_id)->get();
-                if (count($data) == 0) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy đối tác giao hàng'
-                    ]);
-                }
-            } else {
-                $data = $result;
-            }
+            $data = $this->partnerRepository->detailDeliveryPartner($request->delivery_partner_id);
+//            if (!$data) {
+//                return response()->json([
+//                    'success' => false,
+//                    'message' => 'Không tìm thấy đối tác giao hàng'
+//                ]);
+//            }
             return response()->json(['success' => true, 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([

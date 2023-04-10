@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -95,9 +93,11 @@ class WarehouseController extends Controller
                 'request_warehouses.status',
                 'request_warehouses.created_at',
                 'request_warehouses.id',
-                'request_warehouses.order_number'
+                'request_warehouses.order_number',
+                'order.id as order_id'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
+            ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->orderBy('request_warehouses.status', 'asc');
@@ -224,7 +224,7 @@ class WarehouseController extends Controller
             $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
                 ->select('quantity', 'order_item.product_id', 'order_item.warehouse_id', 'order.no', 'products.user_id', 'order.id')
                 ->join('products', 'order_item.product_id', '=', 'products.id')
-                ->where('order_id', $request->order_id)
+                ->where('order_item.order_id', $request->order_id)
                 ->where('order.warehouse_id', $warehouses->id)
                 ->where('order.cancel_status', 1)
                 ->where('order.export_status', 5)
@@ -282,7 +282,7 @@ class WarehouseController extends Controller
             'order.export_status', 'order.cancel_status')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
-            ->whereIn('order.export_status', [3, 5])
+            ->where('order.export_status', 5)
             ->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $ware->id);
         if ($request->code) {
@@ -308,9 +308,11 @@ class WarehouseController extends Controller
         foreach ($products as $product) {
             $pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('request_warehouses.product_id', $product->id)
                     ->where('request_warehouses.ware_id', $product->ware_id)
                     ->where('type', 2)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
             $product->in_stock = $product->in_stock - $pause_product;
             if ($product->in_stock > 0) {
@@ -379,9 +381,11 @@ class WarehouseController extends Controller
             }
             $pause_product = (int)DB::table('request_warehouses')
                     ->selectRaw('SUM(quantity) as total')
+                    ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
                     ->where('request_warehouses.product_id', $request->product_id)
                     ->where('request_warehouses.ware_id', $request->warehouse_id)
                     ->where('type', 2)
+                    ->where('request_warehouses.status', 0)
                     ->first()->total ?? 0;
             if ($productWare->amount - ($productWare->export + $pause_product) < $request->quantity) {
                 DB::rollBack();
@@ -424,6 +428,66 @@ class WarehouseController extends Controller
             'success' => true,
             'data' => $orders
         ], 200);
+    }
+
+
+    public function exportBill(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:order,id',
+        ], [
+            'order_id.required' => 'Mã đơn hàng là bắt buộc',
+            'order_id.exits' => 'Không tìm thấy đơn hàng'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        $data = Order::query()
+            ->select('order.order_number',
+                'order.no',
+                'order.fullname as name_customer',
+                'order.address as address_customer',
+                'order.phone as phone_customer',
+                'order_item.quantity',
+                'total',
+                'order.method_payment',
+                'shipping',
+                'users.name as storage_name',
+                'users.phone_number as storage_phone',
+                'order.estimated_date'
+            )
+            ->selectSub('select province_name from province where  province_id = warehouses.city_id limit 1', 'province_boss_storage')
+            ->selectSub('select district_name from district where  district_id = warehouses.district_id limit 1', 'district_id_boss_storage')
+            ->selectSub('select wards_name from wards where  wards_id = warehouses.ward_id limit 1', 'ward_id_boss_storage')
+            ->selectSub('select weight from products where  id = order_item.product_id limit 1', 'weight')
+            ->selectSub('select name from products where  id = order_item.product_id limit 1', 'name')
+            ->selectSub('select updated_at from request_warehouses where  order_number = order.order_number and type = 2 and status =1 limit 1', 'export_date')
+            ->join('order_item', 'order_item.order_id', '=', 'order.id')
+            ->join('warehouses', 'order_item.warehouse_id', '=', 'warehouses.id')
+            ->join('users', 'warehouses.user_id', '=', 'users.id')
+            ->where('order.status', '!=', 2)
+            ->where('export_status', 1)
+            ->where('order.id', $request->order_id)
+            ->first();
+
+
+        if (!isset($data->no)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng phù hợp'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => $data
+        ], 200);
+
     }
 
 }

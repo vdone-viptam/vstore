@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('page_title')</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    @yield('custom_css')
+
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Kho | Hệ thống quản lý kho chuyên nghiệp"/>
     <meta property="og:description"
@@ -20,7 +20,32 @@
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    @include('layouts.storage.css')
+    @yield('custom_css')
+    <style>
+        .page-item.active .page-link {
+            background-color: transparent !important;
+            color: #1890FF !important;
+            border-color: transparent !important;
+        }
+
+        .page-link {
+            margin-right: 0 !important;
+        }
+
+        .page-item a:hover {
+            background: transparent !important;
+            color: #1890FF !important;
+        }
+
+        .pagination {
+            gap: 8px;
+        }
+    </style>
+
 </head>
 
 <body id="body">
@@ -59,7 +84,7 @@
                         <!-- ============================================================== -->
                         <!-- sales  -->
                         <!-- ============================================================== -->
-                    @yield('dash')
+                        @yield('dash')
                         <!-- ============================================================== -->
                         <!-- end total orders  -->
                         <!-- ============================================================== -->
@@ -72,7 +97,7 @@
 
                         <!-- recent orders  -->
                         <!-- ============================================================== -->
-                       @yield('content')
+                        @yield('content')
                         <!-- ============================================================== -->
                         <!-- end recent orders  -->
 
@@ -86,7 +111,6 @@
                         <!-- end customer acquistion  -->
                         <!-- ============================================================== -->
                     </div>
-
 
 
                     <!-- <div class="row">
@@ -147,31 +171,55 @@
     <!-- ============================================================== -->
 </div>
 @yield('custom_js')
-{{--<script>--}}
-{{--    const nav1 = document.querySelectorAll('nav');--}}
-{{--    nav1.forEach(item => {--}}
-{{--        const ul = item.querySelector('ul');--}}
+<script>
+    function convertDate(inputFormat) {
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
 
-{{--        if (ul && ul.classList.contains('pagination')) {--}}
-{{--            console.log(ul);--}}
-{{--            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')--}}
-{{--        }--}}
-{{--    })--}}
-{{--    document.querySelector('.btnA').setAttribute('disabled', 'true');--}}
-{{--    document.querySelector('.btnA').classList.add('bg-slate-300');--}}
-{{--    document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');--}}
-{{--    document.querySelector('#key_search').addEventListener('keyup', (e) => {--}}
-{{--        if (e.target.value) {--}}
-{{--            document.querySelector('.btnA').removeAttribute('disabled');--}}
-{{--            document.querySelector('.btnA').classList.remove('bg-slate-300');--}}
-{{--            document.querySelector('.btnA').classList.add('bg-[#40BAFF]');--}}
-{{--        } else {--}}
-{{--            document.querySelector('.btnA').setAttribute('disabled', 'true');--}}
-{{--            document.querySelector('.btnA').classList.add('bg-slate-300');--}}
-{{--            document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');--}}
-{{--        }--}}
-{{--    });--}}
-{{--</script>--}}
+        var d = new Date(inputFormat)
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
+    }
 
+    $(document).keypress(async function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            if ($('#search').val().length > 0) {
+                await $.ajax({
+                    type: "GET",
+                    url: `{{route('screens.storage.dashboard.searchAllByKeyword')}}?_token={{csrf_token()}}`,
+                    data: {
+                        key_search: $('#search').val().trim()
+                    },
+
+                    error: function (jqXHR, error, errorThrown) {
+                        $('#requestModal').modal('hide')
+                        var error0 = JSON.parse(jqXHR.responseText)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tìm kiếm không thành công !',
+                            text: error0.message,
+                        })
+                    }
+                }).done(function (data) {
+                    document.location = data.href;
+                })
+            }
+        }
+    });
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+{{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}
+<script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}" ></script>
+<script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
+<script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
+<script src="{{asset('asset/js/main.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
 </body>
 </html>
