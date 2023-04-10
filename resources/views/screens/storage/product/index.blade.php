@@ -71,30 +71,8 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm
-                                @if($field == 'publish_id')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="publish_id" style="float: right;cursor: pointer"> </i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="publish_id" style="float: right;cursor: pointer"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="publish_id"
-                                       style="float: right;cursor: pointer">
-                                @endif
-                            </th>
-                            <th>Mã SKU
-                                @if($field == 'sku_id')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="sku_id" style="float: right;cursor: pointer"></i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="sku_id" style="float: right;cursor: pointer"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="sku_id"
-                                       style="float: right;cursor: pointer">
-                                @endif
-                            </th>
+                            <th>Mã sản phẩm</th>
+                            <th>Mã SKU</th>
                             <th>Tên sản phẩm
                                 @if($field == 'product_name')
                                     @if($type == 'desc')

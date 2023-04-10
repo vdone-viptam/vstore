@@ -84,7 +84,7 @@ class ProductController extends Controller
         }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $filed = $request->field ?? 'request_warehouses.id';
+        $field = $request->field ?? 'request_warehouses.id';
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select('request_warehouses.code',
@@ -99,7 +99,7 @@ class ProductController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy($filed, $type);
+            ->orderBy($field, $type);
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
             $requests->where(function ($query) use ($request) {
@@ -112,6 +112,8 @@ class ProductController extends Controller
         $requests = $requests->paginate($limit);
         $this->v['requests'] = $requests;
         $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['type'] = $type;
+        $this->v['field'] = $field;
         return view('screens.storage.product.request', $this->v);
 
     }
@@ -182,7 +184,7 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $filed = $request->field ?? 'order.id';
+        $field = $request->field ?? 'order.id';
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
@@ -196,7 +198,7 @@ class ProductController extends Controller
                 'order.updated_at as created_at',
                 'order.id'
             )
-            ->orderBy($filed, $type);
+            ->orderBy($field, $type);
         $order = $order->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $warehouses->id);
         if ($request->key_search) {
@@ -209,7 +211,7 @@ class ProductController extends Controller
         }
         $order = $order->paginate($limit);
         $key_search = trim($request->key_search) ?? '';
-        return view('screens.storage.product.requestOut', compact('order', 'key_search'));
+        return view('screens.storage.product.requestOut', compact('order', 'key_search', 'field', 'type'));
     }
 
     public function detailProduct(Request $request)
