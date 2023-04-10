@@ -133,7 +133,7 @@
                                                     class="text-primary  text-white font-medium  rounded">
                                                     Đồng ý
                                                 </a>
-                                                <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},2)"
+                                                <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10)"
                                                    style="text-decoration:underline"
                                                    class="text-danger  text-white font-medium  rounded">
                                                     Từ chối

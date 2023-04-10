@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $filed = $request->filed ?? 'in_stock';
+        $field = $request->field ?? 'in_stock';
         $products = DB::table('categories')->selectRaw('products.publish_id,
             products.sku_id,
             products.name as product_name,
@@ -53,7 +53,7 @@ class ProductController extends Controller
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->join('users', 'warehouses.user_id', 'users.id')
             ->where('product_warehouses.status', 1)
-            ->orderBy($filed, $type)
+            ->orderBy($field, $type)
             ->groupBy(['products.id'])
             ->where('warehouses.user_id', Auth::id())//        ->where('product_name','like','%'.$request->key_search .'%')
         ;
@@ -73,7 +73,8 @@ class ProductController extends Controller
         }
         $products = $products->paginate($limit);
 
-        return view('screens.storage.product.index', ['products' => $products, 'key_search' => trim($request->key_search) ?? '', 'type' => $type]);
+        return view('screens.storage.product.index',
+            ['products' => $products, 'key_search' => trim($request->key_search) ?? '', 'type' => $type, 'field' => $field]);
     }
 
     public function request(Request $request)
@@ -83,7 +84,7 @@ class ProductController extends Controller
         }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $filed = $request->filed ?? 'request_warehouses.id';
+        $filed = $request->field ?? 'request_warehouses.id';
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select('request_warehouses.code',
@@ -181,7 +182,7 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $filed = $request->filed ?? 'order.id';
+        $filed = $request->field ?? 'order.id';
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')

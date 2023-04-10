@@ -133,7 +133,7 @@
                                     @if($product->type == 1)
                                         <a href="#" onclick="upDateStatus({{$product->id}},5,1)"
                                            class="btn btn-primary">Đồng ý</a>
-                                        <a href="#" onclick="upDateStatus({{$product->id}},2,1)" class="btn btn-danger">Từ
+                                        <a href="#" onclick="upDateStatus({{$product->id}},10,1)" class="btn btn-danger">Từ
                                             chối</a>
                                     @else
                                         <a href="#" onclick="upDateStatus('{{$product->code}}',1,7)"
