@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('note')->nullable()->comment('ghi chú khi khach hang huy (khi huy cap nhat export_status = 5 )');
             $table->string('order_number')->comment('mã giao vận');
             $table->integer('order_status')->comment('mã giao vận');
+            $table->integer('is_split')->default(0)->comment('0 chưa chia tiền ,1 đã chia tiền');
             $table->timestamps();
         });
     }
