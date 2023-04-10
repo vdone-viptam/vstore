@@ -98,14 +98,7 @@ class FinanceController extends Controller
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'id';
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
-            ->where(function ($query) {
-                $query->where('user_id', Auth::id())
-                    ->whereNull('vshop_id');
-            })
-            ->orWhere(function ($query) {
-                $query->where('vshop_id', Auth::id())
-                    ->whereNull('user_id');
-            })
+            ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
         $this->v['field'] = $field;
