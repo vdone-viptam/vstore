@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class PartnerRepository implements PartnerRepositoryInterface
 {
-    public function index($search, $limit, $type = 'users.id', $field = 'desc')
+    public function index($search, $limit, $type, $field)
     {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
         $ncc = User::query()
@@ -64,7 +64,7 @@ class PartnerRepository implements PartnerRepositoryInterface
         return $ncc;
     }
 
-    public function deliveryPartner($search, $limit, $type = 'delivery_partner.id', $field = 'desc')
+    public function deliveryPartner($search, $limit, $type, $field)
     {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
 
