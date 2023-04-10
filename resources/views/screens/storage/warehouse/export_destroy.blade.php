@@ -97,8 +97,34 @@
                         <tr>
                             <th>Mã xuất hủy</th>
                             <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
+                            <th>Tên sản phẩm
+                                @if($field == 'product_name')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="product_name"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th>Số lượng
+                                @if($field == 'quantity')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="quantity"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
                             <th>Lý do hủy</th>
                             <th></th>
                         </tr>
@@ -260,6 +286,19 @@
             await createProDel();
             $('#modalCreate').modal('show');
         })
+        document.querySelectorAll('.sort').forEach(item => {
+            const {sort} = item.dataset;
+            item.addEventListener('click', () => {
+                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                if (orderBy === 'asc') {
+                    localStorage.setItem('orderBy', JSON.stringify('desc'));
+                } else {
+                    localStorage.setItem('orderBy', JSON.stringify('asc'));
+                }
+                document.location = '{{route('screens.storage.warehouse.exportDestroyProduct',['key_search' => $key_search])}}&type=' + orderBy +
+                    '&field=' + sort
+            });
+        });
     </script>
 
 @endsection
