@@ -150,7 +150,7 @@
                                                 <span style="font-size:18px; font-weight:600">Thông tin kho:</span>
                                                 <div class="form-group">
                                                     <label for="floor_area">Diện tích sàn (m2):</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <input required type="number" class="form-control form-control-lg"
                                                            id="floor_area" name="floor_area"
                                                            value="{{$infoAccount->storage_information->floor_area}}">
                                                     @error('floor_area')
@@ -159,7 +159,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="volume">Thể tích (m3):</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <input required type="number" class="form-control form-control-lg"
                                                            id="volume" name="volume"
                                                            value="{{$infoAccount->storage_information->volume}}">
                                                     @error('volume')
@@ -169,7 +169,7 @@
 
                                                 <div class="form-group">
                                                     <label for="cold_storage">Diện tích kho lạnh (m2):</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <input required type="number" class="form-control form-control-lg"
                                                            id="cold_storage" name="cold_storage"
                                                            value="{{$infoAccount->storage_information->cold_storage}}">
                                                     @error('cold_storage')
@@ -178,7 +178,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="warehouse">Diện tích kho bãi (m2):</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <input required type="number" class="form-control form-control-lg"
                                                            id="warehouse" name="warehouse"
                                                            value="{{$infoAccount->storage_information->volume}}">
                                                     @error('warehouse')
@@ -187,7 +187,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="normal_storage">Diện tích kho thường (m2):</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <input required type="number" class="form-control form-control-lg"
                                                            id="normal_storage" name="normal_storage"
                                                            value="{{$infoAccount->storage_information->normal_storage}}">
                                                     @error('normal_storage')
