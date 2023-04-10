@@ -105,7 +105,7 @@ class DashboardController extends Controller
                 }
             }
             return response()->json([
-                'message' => 'Không tim thấy yêu cầu phù hợp'
+                'message' => 'Không tim thấy kết quả phù hợp'
             ], 404);
 
         } else if (strpos($key_search, 'YCHH') !== false) {
@@ -132,7 +132,7 @@ class DashboardController extends Controller
                     'href' => route('screens.storage.product.index', ['key_search' => $key_search])]);
             } else {
                 return response()->json([
-                    'message' => 'Không tim thấy sản phẩm phù hợp'
+                    'message' => 'Không tim thấy kết quả phù hợp'
                 ], 404);
             }
 
@@ -150,7 +150,7 @@ class DashboardController extends Controller
                 }
             }
             return response()->json([
-                'message' => 'Không tim thấy yêu cầu phù hợp'
+                'message' => 'Không tim thấy kết quả phù hợp'
             ], 404);
         } else {
             return response()->json([
