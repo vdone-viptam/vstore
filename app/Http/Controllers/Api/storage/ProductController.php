@@ -117,6 +117,9 @@ class ProductController extends Controller
 
     public function request(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => \Carbon\Carbon::now()]);
+        }
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $requests = User::join('products', 'users.id', '=', 'products.user_id')

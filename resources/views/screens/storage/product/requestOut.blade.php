@@ -1,5 +1,6 @@
 @extends('layouts.storage.main')
 
+@section('page_title','Xác nhận đơn hàng')
 
 @section('modal')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -76,7 +77,8 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}" type="search"
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search"
                                        placeholder="Tìm kiếm..">
                             </div>
                         </li>

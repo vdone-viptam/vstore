@@ -1,4 +1,5 @@
 @extends('layouts.storage.main')
+@section('page_title','Xuất hàng')
 
 @section('modal')
     <div class="modal fade" id="modalBill" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

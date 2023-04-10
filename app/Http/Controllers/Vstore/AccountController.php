@@ -179,6 +179,9 @@ class AccountController extends Controller
             if (DB::table('users')->where('tax_code', $request->tax_code)->where('role_id', Auth::user()->role_id)->count() > 0) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
+            if (DB::table('request_change_taxcode')->where('tax_code', $request->tax_code)->where('status', 0)->first()) {
+                return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
+            }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),
                 'tax_code' => $request->tax_code,

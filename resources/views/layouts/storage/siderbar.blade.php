@@ -128,7 +128,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link logout" aria-expanded="false" data-target="#submenu-8"
+                        <a class="nav-link logout" href="{{route('logout')}}" aria-expanded="false" data-target="#submenu-8"
                            aria-controls="submenu-8" style="color:#FF4D4F"><i class="fas fa-fw fa-sign-out-alt"
                                                                               style="color:#FF4D4F"></i>Đăng xuất</a>
                     </li>

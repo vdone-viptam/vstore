@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\Storage\Partner\PartnerRepositoryInterface;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\Warehouses;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 
 class PartnerController extends Controller
 {

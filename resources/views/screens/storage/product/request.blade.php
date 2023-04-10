@@ -1,4 +1,5 @@
 @extends('layouts.storage.main')
+@section('page_title','Quản lý yêu cầu nhập kho')
 
 
 @section('modal')

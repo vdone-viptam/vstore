@@ -3,7 +3,7 @@
 
 @endsection
 
-@section('page_title','Danh sách Nhà cung cấp')
+@section('page_title','Nhà cung cấp')
 
 @section('content')
 
