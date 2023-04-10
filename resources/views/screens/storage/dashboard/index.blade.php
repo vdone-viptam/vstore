@@ -48,7 +48,7 @@
 
 @section('dash')
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./requestAcp.html" class="item-dash">
+        <a href="{{route('screens.storage.product.requestOut')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Đơn hàng chưa xác nhận</h5>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./request.html" class="item-dash">
+        <a href="{{route('screens.storage.product.request')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Yêu cầu nhập kho</h5>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./product.html" class="item-dash">
+        <a href="{{route('screens.storage.product.index')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Số mặt hàng sắp hết</h5>
@@ -138,7 +138,8 @@
                                     @else
                                         <a href="#" onclick="upDateStatus('{{$product->code}}',1,7)"
                                            class="btn btn-primary">Đồng ý</a>
-                                        <a href="#" onclick="upDateStatus('{{$product->code}}',3,7)" class="btn btn-danger">Từ
+                                        <a href="#" onclick="upDateStatus('{{$product->code}}',3,7)"
+                                           class="btn btn-danger">Từ
                                             chối</a>
                                     @endif
                                 </td>
