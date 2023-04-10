@@ -206,6 +206,7 @@ class OrderController extends Controller
         $orderItem->vshop_id = $product->vshop_id;
         $orderItem->warehouse_id = 1;
         $orderItem->sku = '';
+        $orderItem->delivery_partner_id = 1;
         $orderItem->price = $product->price;
         $orderItem->quantity = $quantity;
         $orderItem->discount_vshop = isset($discount['discountsFromVShop']) ? $discount['discountsFromVShop'] : 0;
@@ -408,7 +409,7 @@ class OrderController extends Controller
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
-            if ($status != 10 && $status !=4 && $status !=5) {
+            if ($status != 10 && $status != 4 && $status != 5) {
                 $orders = $orders->where('export_status', $status);
             }
             if ($status == 4) {
