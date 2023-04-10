@@ -143,6 +143,9 @@
                                 </tr>
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="6" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>

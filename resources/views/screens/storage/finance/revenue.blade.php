@@ -52,15 +52,51 @@
                                     <th>Mã giao dịch</th>
                                     <th>
                                         Trạng thái
+                                        @if($field == 'status')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="status"
+                                                   style="float: right;cursor: pointer"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="status"
+                                                   style="float: right;cursor: pointer"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="status"
+                                               style="float: right;cursor: pointer"></i>
+                                        @endif
                                     </th>
                                     <th>
                                         Số tiền
+                                        @if($field == 'money_history')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="money_history"
+                                                   style="float: right;cursor: pointer"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="money_history"
+                                                   style="float: right;cursor: pointer"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="money_history"
+                                               style="float: right;cursor: pointer"></i>
+                                        @endif
                                     </th>
                                     <th>
                                         Nội dung
                                     </th>
                                     <th>
                                         Thời gian
+                                        @if($field == 'created_at')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="created_at"
+                                                   style="float: right;cursor: pointer"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="created_at"
+                                                   style="float: right;cursor: pointer"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="created_at"
+                                               style="float: right;cursor: pointer"></i>
+                                        @endif
                                     </th>
 
                                 </tr>
@@ -105,7 +141,7 @@
                     <div id="example_paginate">
                         <ul class="pagination d-flex justify-content-end align-items-center"
                             style="gap:8px ;margin-top:10px;margin-right: 10px;">
-                            {{$histories->render()}}
+                            {{$histories->withQueryString()->links()}}
                         </ul>
                     </div>
                 </div>
@@ -125,6 +161,19 @@
         if($('#check-success').val() == 1){
             swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công', 500, true, 2200);
         }
+    });
+    document.querySelectorAll('.sort').forEach(item => {
+        const {sort} = item.dataset;
+        item.addEventListener('click', () => {
+            let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+            if (orderBy === 'asc') {
+                localStorage.setItem('orderBy', JSON.stringify('desc'));
+            } else {
+                localStorage.setItem('orderBy', JSON.stringify('asc'));
+            }
+            document.location = '{{route('screens.storage.finance.revenue')}}?type=' + orderBy +
+                '&field=' + sort
+        });
     });
 </script>
 @endsection

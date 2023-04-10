@@ -233,7 +233,9 @@
                                 </tr>
                             @endforeach
                         @else
-
+                            <tr>
+                                <td colspan="9" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
