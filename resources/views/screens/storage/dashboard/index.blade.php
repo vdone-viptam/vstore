@@ -131,16 +131,29 @@
                                 </td>
                                 <td>
                                     @if($product->type == 1)
-                                        <a href="#" onclick="upDateStatus({{$product->id}},5,1)"
-                                           class="btn btn-primary">Đồng ý</a>
-                                        <a href="#" onclick="upDateStatus({{$product->id}},10,1)" class="btn btn-danger">Từ
-                                            chối</a>
+                                        <div style="display:flex; justify-content:center; gap:10px"><a
+                                                href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"
+                                                style="text-decoration:underline"
+                                                class="text-primary  text-white font-medium  rounded">
+                                                Đồng ý
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10,1)"
+                                               style="text-decoration:underline"
+                                               class="text-danger  text-white font-medium  rounded">
+                                                Từ chối
+                                            </a></div>
                                     @else
-                                        <a href="#" onclick="upDateStatus('{{$product->code}}',1,7)"
-                                           class="btn btn-primary">Đồng ý</a>
-                                        <a href="#" onclick="upDateStatus('{{$product->code}}',3,7)"
-                                           class="btn btn-danger">Từ
-                                            chối</a>
+                                        <div style="display:flex; justify-content:center; gap:10px"><a
+                                                href="javascript:void(0)" onclick="upDateStatus({{$product->id}},1,7)"
+                                                style="text-decoration:underline"
+                                                class="text-primary  text-white font-medium  rounded">
+                                                Đồng ý
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},3,7)"
+                                               style="text-decoration:underline"
+                                               class="text-danger  text-white font-medium  rounded">
+                                                Từ chối
+                                            </a></div>
                                     @endif
                                 </td>
                             </tr>
