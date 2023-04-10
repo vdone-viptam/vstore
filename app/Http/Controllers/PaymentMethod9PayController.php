@@ -106,7 +106,7 @@ class PaymentMethod9PayController extends Controller
                     $code = $order->no;
                     $requestEx->order_number = '';
                     $requestEx->code = $code;
-                    $requestEx->note = 'Yêu cầu xuất kho';
+                    $requestEx->note = 'Đơn hàng mới';
                     $requestEx->save();
 
                     $order->request_warehouse_id = $requestEx->id;
