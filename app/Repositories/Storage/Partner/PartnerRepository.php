@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Http;
 
 class PartnerRepository implements PartnerRepositoryInterface
 {
-    public function index($search, $limit){
-
+    public function index($search, $limit, $type = 'users.id', $field = 'desc')
+    {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
         $ncc = User::query()
             ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
@@ -23,6 +23,7 @@ class PartnerRepository implements PartnerRepositoryInterface
             ->join('province', 'users.provinceId', '=', 'province.province_id')
             ->join('products', 'users.id', '=', 'products.user_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+            ->orderBy($field, $type)
             ->where('ware_id', $id);
 
         if (isset($search)) {
@@ -39,7 +40,9 @@ class PartnerRepository implements PartnerRepositoryInterface
         }
         return $ncc;
     }
-    public function detailNcc($user_id){
+
+    public function detailNcc($user_id)
+    {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
         $ncc = User::query()
             ->select('users.name', 'account_code', 'province.province_name', 'users.id as user_id',
@@ -60,7 +63,8 @@ class PartnerRepository implements PartnerRepositoryInterface
         }
         return $ncc;
     }
-    public function deliveryPartner($search, $limit)
+
+    public function deliveryPartner($search, $limit, $type = 'delivery_partner.id', $field = 'desc')
     {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
 
@@ -78,7 +82,8 @@ class PartnerRepository implements PartnerRepositoryInterface
             ->join('order', 'order.id', 'order_item.order_id')
             ->join('delivery_partner', 'delivery_partner.id', 'order_item.delivery_partner_id')
             ->where('order_item.warehouse_id', $id)
-            ->where('order.export_status', 4);
+            ->where('order.export_status', 4)
+            ->orderBy($field, $type);
 
         if (isset($search)) {
             $ncc = $ncc->where(function ($query) use ($search) {
@@ -93,6 +98,7 @@ class PartnerRepository implements PartnerRepositoryInterface
         }
         return $ncc;
     }
+
     public function detailDeliveryPartner($delivery_partner_id)
     {
         $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
@@ -112,7 +118,7 @@ class PartnerRepository implements PartnerRepositoryInterface
             ->where('order.export_status', 4)
             ->where('order_item.warehouse_id', $id)
             ->where(function ($query) use ($delivery_partner_id) {
-                $query->where('order_item.delivery_partner_id', $delivery_partner_id )
+                $query->where('order_item.delivery_partner_id', $delivery_partner_id)
                     ->orWhere('delivery_partner.code_partner', $delivery_partner_id);
             })->get();
 

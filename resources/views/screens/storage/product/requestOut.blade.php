@@ -143,7 +143,7 @@
                                     <i class="fas fa-sort sort" data-sort="created_at"
                                        style="float: right;cursor: pointer"></i>
                                 @endif</th>
-                            <th>Xác nhận / Từ chối  @if($field == 'export_status')
+                            <th>Xác nhận / Từ chối @if($field == 'export_status')
                                     @if($type == 'desc')
                                         <i class="fa-solid fa-sort-down sort" data-sort="export_status"
                                            style="float: right;cursor: pointer"></i>
@@ -447,17 +447,21 @@
             })
         }
 
-        document.querySelectorAll('.sort').forEach(item => {
-            const {sort} = item.dataset;
-            item.addEventListener('click', () => {
-                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
-                if (orderBy === 'asc') {
-                    localStorage.setItem('orderBy', JSON.stringify('desc'));
-                } else {
-                    localStorage.setItem('orderBy', JSON.stringify('asc'));
-                }
-                document.location = '{{route('screens.storage.product.requestOut',['key_search' => $key_search])}}&type=' + orderBy +
-                    '&field=' + sort
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.product.requestOut',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
             });
         });
     </script>

@@ -289,17 +289,21 @@
             await createProDel();
             $('#modalCreate').modal('show');
         })
-        document.querySelectorAll('.sort').forEach(item => {
-            const {sort} = item.dataset;
-            item.addEventListener('click', () => {
-                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
-                if (orderBy === 'asc') {
-                    localStorage.setItem('orderBy', JSON.stringify('desc'));
-                } else {
-                    localStorage.setItem('orderBy', JSON.stringify('asc'));
-                }
-                document.location = '{{route('screens.storage.warehouse.exportDestroyProduct',['key_search' => $key_search])}}&type=' + orderBy +
-                    '&field=' + sort
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.warehouse.exportDestroyProduct',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
             });
         });
     </script>

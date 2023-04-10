@@ -103,12 +103,77 @@
                         <tr class="border-0">
                             <th class="border-0">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="border-0">Mã sản phẩm</th>
-                            <th class="border-0">Tên sản phẩm</th>
-                            <th class="border-0">Nhà cung cấp</th>
-                            <th class="border-0">Số lượng</th>
+                            <th class="border-0">Tên sản phẩm
+                                @if($field == 'product_name')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="product_name"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th class="border-0">Nhà cung cấp
+                                @if($field == 'ncc_name')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="ncc_name"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th class="border-0">Số lượng
+                                @if($field == 'quantity')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="quantity"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
                             <th class="border-0">Chiết khấu</th>
-                            <th class="border-0">Thời gian</th>
-                            <th class="border-0">Phân loại</th>
+                            <th class="border-0">Thời gian
+                                @if($field == 'created_at')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="created_at"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th class="border-0">Phân loại
+                                @if($field == 'type')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="type"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="type"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="type"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
                             <th class="border-0">Xác nhận/từ chối</th>
                         </tr>
                         </thead>
@@ -244,6 +309,25 @@
             $('.btn-accept').data('type', type);
             $('#requestModal').modal('show')
         }
+
+        $(document).ready(function () {
+
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.dashboard.index')}}?type=' + orderBy +
+                            '&field=' + sort
+                    }, 200);
+                });
+            });
+        });
     </script>
 
 @endsection

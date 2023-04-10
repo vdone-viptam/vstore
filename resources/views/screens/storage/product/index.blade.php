@@ -76,9 +76,11 @@
                             <th>Tên sản phẩm
                                 @if($field == 'product_name')
                                     @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
                                     @endif
                                 @else
                                     <i class="fas fa-sort sort" data-sort="product_name"
@@ -88,9 +90,11 @@
                             <th>Danh mục
                                 @if($field == 'cate_name')
                                     @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="cate_name"  style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-down sort" data-sort="cate_name"
+                                           style="float: right;cursor: pointer"></i>
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="cate_name" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-up sort" data-sort="cate_name"
+                                           style="float: right;cursor: pointer"></i>
                                     @endif
                                 @else
                                     <i class="fas fa-sort sort" data-sort="cate_name"
@@ -100,9 +104,11 @@
                             <th>Nhà cung cấp
                                 @if($field == 'users.name')
                                     @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="users.name" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-down sort" data-sort="users.name"
+                                           style="float: right;cursor: pointer"></i>
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="users.name" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-up sort" data-sort="users.name"
+                                           style="float: right;cursor: pointer"></i>
                                     @endif
                                 @else
                                     <i class="fas fa-sort sort" data-sort="users.name"
@@ -113,9 +119,11 @@
                             <th>Tồn kho
                                 @if($field == 'in_stock')
                                     @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="in_stock" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-down sort" data-sort="in_stock"
+                                           style="float: right;cursor: pointer"></i>
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="in_stock" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-up sort" data-sort="in_stock"
+                                           style="float: right;cursor: pointer"></i>
                                     @endif
                                 @else
                                     <i class="fas fa-sort sort" data-sort="in_stock"
@@ -125,9 +133,11 @@
                             <th>Số lượng chờ xuất
                                 @if($field == 'pause_product')
                                     @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="pause_product" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-down sort" data-sort="pause_product"
+                                           style="float: right;cursor: pointer"></i>
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="pause_product" style="float: right;cursor: pointer"></i>
+                                        <i class="fa-solid fa-sort-up sort" data-sort="pause_product"
+                                           style="float: right;cursor: pointer"></i>
                                     @endif
                                 @else
                                     <i class="fas fa-sort sort" data-sort="pause_product"
@@ -261,17 +271,21 @@
 
         }
 
-        document.querySelectorAll('.sort').forEach(item => {
-            const {sort} = item.dataset;
-            item.addEventListener('click', () => {
-                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
-                if (orderBy === 'asc') {
-                    localStorage.setItem('orderBy', JSON.stringify('desc'));
-                } else {
-                    localStorage.setItem('orderBy', JSON.stringify('asc'));
-                }
-                document.location = '{{route('screens.storage.product.index',['key_search' => $key_search])}}&type=' + orderBy +
-                    '&field=' + sort
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.product.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
             });
         });
     </script>
