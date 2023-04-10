@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller

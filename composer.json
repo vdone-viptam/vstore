@@ -14,7 +14,6 @@
         "maatwebsite/excel": "^3.1",
         "skagarwal/google-places-api": "^2.1",
         "toin0u/geocoder-laravel": "^4.6",
-        "yajra/laravel-datatables": "9.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -13,7 +13,7 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <div id="custom-search" class="top-search">
-                        <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                        <input class="form-control" id="search" type="search" placeholder="Tìm kiếm..">
                     </div>
                 </li>
             </ul>
@@ -125,3 +125,5 @@
         </div>
     </nav>
 </div>
+
+

@@ -47,14 +47,22 @@ $(document).ready(function () {
         checkRegister()
     })
     $('.password .icon').on('click', function () {
-
         if ($('.pass input').attr('type') == 'password') {
             $('.pass input').prop("type", "text");
             $('.password .icon').html(svgShowPass)
-
         } else {
             $('.pass input').prop("type", "password")
             $('.password .icon').html(svgHidePass)
+        }
+    })
+    $('.icon-password .icon').on('click', function () {
+        var inputPass = $(this).parent().siblings('.pass');
+        if ($(inputPass).attr('type') == 'password') {
+            $(inputPass).prop("type", "text");
+            $(this).html(svgShowPass)
+        } else {
+            $(inputPass).prop("type", "password")
+            $(this).html(svgHidePass)
         }
     })
     // $('.more-details').each(function () {
@@ -262,8 +270,19 @@ $(document).ready(function () {
     $('.btn-small-menu').on('click', function () {
         $('.side-bar-tab').toggleClass('small-menu')
     })
-})
 
+
+})
+function swalNoti(position, icon, title, width, showConfirmButton, timer) {
+    Swal.fire({
+        position: position,
+        icon: icon,
+        title: title,
+        width: width,
+        showConfirmButton: showConfirmButton,
+        timer: timer
+    });
+}
 // MENU
 
 

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,7 +50,7 @@ class PartnerController extends Controller
         $vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vstore_id', Auth::id())
-            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number')
+            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number','vshop.vshop_id')
             ->groupBy('vshop.pdone_id');
         if ($request->key_search) {
             $vshop = $vshop->where($request->condition, 'like', '%' . trim($request->key_search) . '%');
@@ -63,8 +64,32 @@ class PartnerController extends Controller
                 ->where('products.vstore_id', Auth::id())
                 ->count();
 
-            $order_item = Order::join('order_item', 'order.id', '=', 'order_item.order_id')->where('vshop_id', $value->id)->sum('quantity') ?? 0;
+            $order_item = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+                ->where('export_status',4)
+                ->where('order.updated_at','<=',Carbon::now()->addDay(-7))
+                ->where('vshop_id', $value->id)->sum('quantity') ?? 0;
+
+            $money = 0;
+            $order_tinh = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+                ->where('export_status',4)
+                ->where('order.updated_at','<=',Carbon::now()->addDay(-7))
+                ->where('vshop_id', $value->id)->get();
+            foreach ($order_tinh as $val){
+                // lấy chiết khấu vshop trong product;
+                $product_dis_vshop= Product::where('id',$val->product_id)->first()->discount_vShop??0;
+//                return $val->discount_vshop;
+                if ($product_dis_vshop !=0){
+                    $money += (($val->price * $val->quantity) /100 * ($product_dis_vshop - $val->discount_vshop))/100*85;
+                }else{
+                    $money+=0;
+                }
+//                    (100000 /100 * (10 -1)) /100 * 85
+            }
             $value->sum_sl = $order_item;
+            if ($money <0){
+                $money =0;
+            }
+            $value->thu_nhap = $money;
             $value->count = $count;
         }
 
@@ -78,5 +103,11 @@ class PartnerController extends Controller
     {
         return view('screens.vstore.partner.ship', $this->v);
 
+    }
+    public function vshopDetail(Request $request){
+
+        $vshop = Vshop::find($request->id);
+
+        return view('screens.vstore.partner.vshop-detail',compact('vshop') );
     }
 }

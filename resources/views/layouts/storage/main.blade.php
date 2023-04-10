@@ -36,6 +36,11 @@
             margin-right: 0 !important;
         }
 
+        .page-item a:hover {
+            background: transparent !important;
+            color: #1890FF !important;
+        }
+
         .pagination {
             gap: 8px;
         }
@@ -176,11 +181,45 @@
         return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
 
+    $(document).keypress(async function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            if ($('#search').val().length > 0) {
+                await $.ajax({
+                    type: "GET",
+                    url: `{{route('screens.storage.dashboard.searchAllByKeyword')}}?_token={{csrf_token()}}`,
+                    data: {
+                        key_search: $('#search').val().trim()
+                    },
+
+                    error: function (jqXHR, error, errorThrown) {
+                        $('#requestModal').modal('hide')
+                        var error0 = JSON.parse(jqXHR.responseText)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tìm kiếm không thành công !',
+                            text: error0.message,
+                        })
+                    }
+                }).done(function (data) {
+                    document.location = data.href;
+                })
+            }
+        }
+    });
+
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+{{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}
+<script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}" ></script>
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
+<script src="{{asset('asset/js/main.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
 </body>
 </html>
