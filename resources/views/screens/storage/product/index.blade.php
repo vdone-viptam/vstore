@@ -70,13 +70,21 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Mã SKU</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Danh mục</th>
-                            <th>Nhà cung cấp</th>
-                            <th>Tồn kho</th>
-                            <th>Số lượng chờ xuất</th>
+                            <th>Mã sản phẩm <i class="fas fa-sort" data-sort="publish_id"
+                                               style="float: right;cursor: pointer"></i></th>
+                            <th>Mã SKU <i class="fas fa-sort " data-sort="sku_id"
+                                          style="float: right;cursor: pointer"></i></th>
+                            <th>Tên sản phẩm <i class="fas fa-sort" data-sort="product_name"
+                                                style="float: right;cursor: pointer"></i>
+                            </th>
+                            <th>Danh mục <i class="fas fa-sort" data-sort="cate_name"
+                                            style="float: right;cursor: pointer"></i></th>
+                            <th>Nhà cung cấp <i class="fas fa-sort" data-sort="name" style="float: right;cursor: pointer"></i>
+                            </th>
+                            <th>Tồn kho <i class="fas fa-sort" data-sort="in_stock"
+                                           style="float: right;cursor:pointer"></i></th>
+                            <th>Số lượng chờ xuất <i class="fas fa-sort" data-sort="pause_product"
+                                                     style="float: right;cursor: pointer"></i></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -200,6 +208,20 @@
 
 
         }
+
+        document.querySelectorAll('.fa-sort').forEach(item => {
+            const {sort} = item.dataset;
+            item.addEventListener('click', () => {
+                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                if (orderBy === 'asc') {
+                    localStorage.setItem('orderBy', JSON.stringify('desc'));
+                } else {
+                    localStorage.setItem('orderBy', JSON.stringify('asc'));
+                }
+                document.location = '{{route('screens.storage.product.index',['key_search' => $key_search])}}&type=' + orderBy +
+                    '&field=' + sort
+            });
+        });
     </script>
 
 @endsection

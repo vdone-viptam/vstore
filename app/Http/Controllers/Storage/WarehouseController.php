@@ -89,6 +89,7 @@ class WarehouseController extends Controller
             });
         }
         $requests = $requests->paginate($limit);
+
         return view('screens.storage.warehouse.export', [
             'requests' => $requests,
             'key_search' => $request->key_search ?? ''

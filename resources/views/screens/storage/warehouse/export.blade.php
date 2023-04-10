@@ -137,7 +137,6 @@
                                                class=" bg-primary  text-white font-medium py-2 px-2 rounded btn-up">
                                                 Xuất hàng
                                             </a>
-
                                         @else
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"

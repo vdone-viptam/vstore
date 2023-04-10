@@ -91,13 +91,20 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Trạng thái thanh toán</th>
-                            <th>Ngày đặt hàng</th>
-                            <th>Xác nhận / Từ chối</th>
+                            <th>Mã đơn hàng <i class="fas fa-sort" data-sort="no"
+                                               style="float: right;cursor: pointer"></i></th>
+                            <th>Mã sản phẩm <i class="fas fa-sort" data-sort="publish_id"
+                                               style="float: right;cursor: pointer"></i></th>
+                            <th>Tên sản phẩm <i class="fas fa-sort" data-sort="name"
+                                                style="float: right;cursor: pointer"></i></th>
+                            <th>Số lượng <i class="fas fa-sort" data-sort="quantity"
+                                            style="float: right;cursor: pointer"></i></th>
+                            <th>Trạng thái thanh toán <i class="fas fa-sort" data-sort="method_payment"
+                                                         style="float: right;cursor: pointer"></i></th>
+                            <th>Ngày đặt hàng <i class="fas fa-sort" data-sort="created_at"
+                                                 style="float: right;cursor: pointer"></i></th>
+                            <th>Xác nhận / Từ chối <i class="fas fa-sort" data-sort="export_status"
+                                                      style="float: right;cursor: pointer"></i></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -387,6 +394,20 @@
                 }
             })
         }
+
+        document.querySelectorAll('.fa-sort').forEach(item => {
+            const {sort} = item.dataset;
+            item.addEventListener('click', () => {
+                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                if (orderBy === 'asc') {
+                    localStorage.setItem('orderBy', JSON.stringify('desc'));
+                } else {
+                    localStorage.setItem('orderBy', JSON.stringify('asc'));
+                }
+                document.location = '{{route('screens.storage.product.requestOut',['key_search' => $key_search])}}&type=' + orderBy +
+                    '&field=' + sort
+            });
+        });
     </script>
 
 @endsection

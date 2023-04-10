@@ -95,14 +95,22 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã yêu cầu</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Nhà cung cấp</th>
-                            <th>Số lượng nhập</th>
-                            <th>Chiết khấu</th>
-                            <th>Ngày yêu cầu</th>
-                            <th>Xác nhận / từ chối</th>
+                            <th>Mã yêu cầu <i class="fas fa-sort" data-sort="code"
+                                              style="float: right;cursor: pointer"></i></th>
+                            <th>Mã sản phẩm <i class="fas fa-sort" data-sort="publish_id"
+                                               style="float: right;cursor: pointer"></i></th>
+                            <th>Tên sản phẩm <i class="fas fa-sort" data-sort="product_name"
+                                                style="float: right;cursor: pointer"></i></th>
+                            <th>Nhà cung cấp <i class="fas fa-sort" data-sort="ncc_name"
+                                                style="float: right;cursor: pointer"></i></th>
+                            <th>Số lượng nhập <i class="fas fa-sort" data-sort="quantity"
+                                                 style="float: right;cursor: pointer"></i></th>
+                            <th>Chiết khấu <i class="fas fa-sort" data-sort="code"
+                                              style="float: right;cursor: pointer"></i></th>
+                            <th>Ngày yêu cầu <i class="fas fa-sort" data-sort="created_at"
+                                                style="float: right;cursor: pointer"></i></th>
+                            <th>Xác nhận / từ chối <i class="fas fa-sort" data-sort="status"
+                                                      style="float: right;cursor: pointer"></i></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -380,6 +388,21 @@
                 }
             })
         }
+
+        document.querySelectorAll('.fa-sort').forEach(item => {
+            const {sort} = item.dataset;
+            item.addEventListener('click', () => {
+                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                if (orderBy === 'asc') {
+                    localStorage.setItem('orderBy', JSON.stringify('desc'));
+                } else {
+                    localStorage.setItem('orderBy', JSON.stringify('asc'));
+                }
+                document.location = '{{route('screens.storage.product.request',['key_search' => $key_search])}}&type=' + orderBy +
+                    '&field=' + sort
+            });
+        });
+
     </script>
 
 @endsection
