@@ -119,10 +119,17 @@
                                     <td>{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
                                     <td class="status{{$product->id}}">
                                         @if($product->status == 0)
-                                            <a href="#" onclick="upDateStatus({{$product->id}},5)"
-                                               class="btn btn-primary">Đồng ý</a>
-                                            <a href="#" onclick="upDateStatus({{$product->id}},2)"
-                                               class="btn btn-danger">Từ chối</a>
+                                            <div style="display:flex; justify-content:center; gap:10px"><a
+                                                    href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5)"
+                                                    style="text-decoration:underline"
+                                                    class="text-primary  text-white font-medium  rounded">
+                                                    Đồng ý
+                                                </a>
+                                                <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},2)"
+                                                   style="text-decoration:underline"
+                                                   class="text-danger  text-white font-medium  rounded">
+                                                    Từ chối
+                                                </a></div>
                                         @elseif($product->status == 5 || $product->status == 1 ||  $product->status == 7)
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"

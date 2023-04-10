@@ -113,9 +113,13 @@
                                     <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$request->id}}">
                                         @if($request->status == 5 || $request->status == 7)
-                                            <a href="#" onclick="upDateStatus({{$request->id}},1)"
-                                               class="btn btn-primary">Đồng
-                                                ý</a>
+                                            <div style="display:flex; justify-content:center; gap:10px"><a
+                                                    href="javascript:void(0)" onclick="upDateStatus({{$request->id}},1)"
+                                                    style="text-decoration:underline"
+                                                    class="text-primary  text-white font-medium  rounded">
+                                                    Nhập hàng
+                                                </a>
+                                            </div>
                                         @else
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
