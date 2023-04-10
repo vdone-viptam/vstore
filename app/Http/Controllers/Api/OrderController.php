@@ -408,7 +408,7 @@ class OrderController extends Controller
             $limit = $request->limit ?? 5;
             $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
 
-            if ($status !== 10 && $status !=4  && $status !=5) {
+            if ($status != 10 && $status !=4 && $status !=5) {
                 $orders = $orders->where('export_status', $status);
             }
             if ($status == 4) {
@@ -416,13 +416,12 @@ class OrderController extends Controller
                     ->whereDate('order.updated_at', '>', Carbon::now()->addDay(-7));
             }
             if ($status == 5) {
-
                 $orders = $orders->where('export_status', 4)
                     ->whereDate('order.updated_at', '<=', Carbon::now()->addDay(-7));
             }
             $orders = $orders
                 ->where('status', '!=', 2)
-                ->orderBy('updated_at', 'desc')
+                ->orderBy('order.updated_at', 'desc')
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
@@ -557,7 +556,7 @@ class OrderController extends Controller
                 ], 404);
             }
             $orders = OrderItem::select(
-                'order_item.id as order_item_id',
+                'id as order_item_id',
                 'product_id',
                 'discount_vshop',
                 'price',
@@ -583,7 +582,7 @@ class OrderController extends Controller
 //            return $orders->updated_at;
 //            return Carbon::now()->addDay(7);
             $orders = $orders->paginate($limit);
-            return $orders;
+//            return $orders;
             foreach ($orders as $order) {
                 $product = $order->product()->select('name', 'images')->first();
                 $order->productInfo = null;
@@ -628,6 +627,7 @@ class OrderController extends Controller
      */
     public function refuseOrderByCustomer(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'order_id' => 'required',
             'descriptions' => 'required|max:200',

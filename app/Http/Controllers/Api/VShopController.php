@@ -34,7 +34,7 @@ class  VShopController extends Controller
 
     public function updateStatusDonePreOrder(Request $request, $orderID)
     {
-
+//        return 1;
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'is_pdone' => 'required|boolean',
@@ -60,6 +60,25 @@ class  VShopController extends Controller
 
         $preOrder->status = config('constants.statusPreOrder.done');
         $preOrder->save();
+
+        $vshop = Vshop::select('id')->where('pdone_id',$request->user_id)->first();
+//        return $preOrder->product_id;
+        if ($vshop){
+            $vshop_product = VshopProduct::where('vshop_id',$vshop->id)->where('product_id',$preOrder->product_id)->first();
+//            return $vshop_product;
+            if ($vshop_product){
+                $vshop_product->status=2;
+                $vshop_product->amount += $preOrder->quantity;
+                $vshop_product->save();
+            }else{
+                $vshop_product = new VshopProduct();
+                $vshop_product->vshop_id= $vshop->id;
+                $vshop_product->status=2;
+                $vshop_product->amount += $preOrder->quantity;
+                $vshop_product->save();
+            }
+
+        }
 
         return response()->json([
             "status_code" => 200,
@@ -190,21 +209,21 @@ class  VShopController extends Controller
         $order->deposit_payable = $order->total - $order->total * ($order->deposit_money / 100);
 
 
-        $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
-            ->where('product_id', $order->product_id)
-            ->first();
-
-        if ($checkNewVshopProduct) {
-            $checkNewVshopProduct->status = 2;
-            $checkNewVshopProduct->save();
-        } else {
-            $newVshopProduct = new VshopProduct();
-            $newVshopProduct->vshop_id = $user_id;
-            $newVshopProduct->product_id = $order->product_id;
-            $newVshopProduct->amount = $order->quantity;
-            $newVshopProduct->status = 2;
-            $newVshopProduct->save();
-        }
+//        $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
+//            ->where('product_id', $order->product_id)
+//            ->first();
+//
+//        if ($checkNewVshopProduct) {
+//            $checkNewVshopProduct->status = 2;
+//            $checkNewVshopProduct->save();
+//        } else {
+//            $newVshopProduct = new VshopProduct();
+//            $newVshopProduct->vshop_id = $user_id;
+//            $newVshopProduct->product_id = $order->product_id;
+//            $newVshopProduct->amount = $order->quantity;
+//            $newVshopProduct->status = 2;
+//            $newVshopProduct->save();
+//        }
 
 
         return response()->json([
