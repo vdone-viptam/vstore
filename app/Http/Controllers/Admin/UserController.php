@@ -126,7 +126,7 @@ class UserController extends Controller
                 $wards = Ward::where('wards_id', $user->ward_id)->first()->wards_name;
 
                 $address = $wards . ', ' . $district . '. ' . $province;
-                return $address;
+
                 $result = app('geocoder')->geocode($address)->get();
 
                 $coordinates = $result[0]->getCoordinates();
