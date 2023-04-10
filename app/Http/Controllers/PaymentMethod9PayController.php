@@ -12,9 +12,14 @@ use App\Models\OrderItem;
 use App\Models\PaymentHistory;
 use App\Models\PreOrderVshop;
 use App\Models\RequestWarehouse;
+use App\Models\User;
+use App\Models\Warehouses;
+use App\Notifications\AppNotification;
+use Carbon\Carbon;
 use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -112,6 +117,17 @@ class PaymentMethod9PayController extends Controller
                     $order->request_warehouse_id = $requestEx->id;
 
                     $order->save();
+
+                    $ware_user = Warehouses::select('user_id')->where('id', $order->warehouse_id)->first();
+                    $user = User::find($ware_user->user_id);
+                    $data = [
+                        'title' => 'Bạn vừa có 1 thông báo mới',
+                        'avatar' => asset('image/users/' . Auth::user()->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                        'message' => 'Bạn vừa có đơn hàng mới',
+                        'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                        'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
+                    ];
+                    $user->notify(new AppNotification($data));
                     // nếu tồn tại URL return
                     if ($request->url) {
                         return redirect()->to($request->url . "?result=" . $request->result);
