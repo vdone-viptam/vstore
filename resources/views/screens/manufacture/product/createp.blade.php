@@ -113,7 +113,6 @@
                                     <option
                                         value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->name}}</option>
                                 @endforeach
-                                <option value="0">khác</option>
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>
@@ -125,7 +124,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
-                            <input type="text" placeholder="Nhập giá sản phẩm" id="price"
+                            <input type="text" placeholder="Nhập giá sản phẩm" id="price" autocomplete="off"
                                    value="{{old('price')}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
@@ -521,6 +520,7 @@
         $('.add-img-SP').on('click', function () {
             let input = document.createElement('input');
             input.type = 'file';
+            input.accept = "image/png, image/gif, image/jpeg";
             input.onchange = _ => {
                 var files = Array.from(input.files);
                 const reader = new FileReader();

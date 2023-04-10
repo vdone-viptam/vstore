@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manufacture;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
@@ -47,11 +48,39 @@ class WarehouseController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
-        $model = new ProductWarehouses();
-        $model->fill($request->only('product_id', 'ware_id', 'amount'));
-        $model->status = 0;
-        $model->code = \Illuminate\Support\Str::random(12);
-        $model->save();
+
+        if (!DB::table('product_warehouses')->where('product_id', $request->product_id)->where('ware_id', $request->ware_id)->first()) {
+            $model = new ProductWarehouses();
+            $model->fill($request->only('product_id', 'ware_id', 'amount'));
+            $model->status = 0;
+            $model->code = \Illuminate\Support\Str::random(12);
+            $model->export = 0;
+            $model->save();
+        }
+
+
+        $requestIm = new RequestWarehouse();
+
+        $requestIm->ncc_id = Auth::id();
+        $requestIm->product_id = $request->product_id;
+        $requestIm->status = 0;
+        $requestIm->type = 1;
+        $requestIm->ware_id = $request->ware_id;
+        $requestIm->quantity = $request->amount;
+        $code = 'YCN' . rand(100000000, 999999999);
+
+        while (true) {
+            $re = RequestWarehouse::where('code', $code)->count();
+            if ($re == 0) {
+                break;
+            }
+            $code = 'YCN' . rand(100000000, 999999999);
+        }
+        $requestIm->code = $code;
+        $requestIm->order_number = '';
+        $requestIm->note = 'Yêu cầu gửi sản phẩm';
+        $requestIm->save();
+
         $warehouse = Warehouses::select('user_id')->where('id', $request->ware_id)->first();
         if ($warehouse) {
             $user = User::find($warehouse->user_id);
@@ -92,7 +121,7 @@ class WarehouseController extends Controller
 //            ->groupBy('product_warehouses.product_id')
             ->where('products.user_id', Auth::id())->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
         foreach ($ware as $wa) {
-            $wa->amount = ProductWarehouses::where('ware_id', $wa->id)->groupBy('product_id')->count();
+            $wa->amount = ProductWarehouses::where('ware_id', $wa->id)->distinct('product_id')->count('id');
 //            return  $wa;
             $nhap = ProductWarehouses::where('ware_id', $wa->id)->where('status', 1)->sum('amount');
             $xuat = ProductWarehouses::where('ware_id', $wa->id)->where('status', 2)->sum('amount');

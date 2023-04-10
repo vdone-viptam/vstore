@@ -228,14 +228,16 @@ class CartController extends Controller
             ->where('products.id', $id)
             ->where('products.status', 2) // active
             ->where('vshop_products.vshop_id', $vshopId)
+            ->WhereIn('vshop_products.status',[1,2])
             ->select('products.id', 'products.sku_id', 'products.price', 'products.images', 'products.name')
             ->first();
 
         if (!$product) {
-            return response()->json([
-                'status_code' => 401,
-                'errors' => 'Sản phẩm chưa niêm yết'
-            ], 404);
+//            return response()->json([
+//                'status_code' => 401,
+//                'errors' => 'Sản phẩm chưa niêm yết'
+//            ], 404);
+            $product = Product::find($id);
         }
 
         $product->discount = getDiscountProduct($product->id, $vshop->id);

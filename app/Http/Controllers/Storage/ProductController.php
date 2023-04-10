@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Storage;
 
+use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
@@ -116,7 +117,16 @@ class ProductController extends Controller
         $product_warehouses->save();
 //        DB::table('product_warehouses')->where('id', $request->id)->update(['status' => $status]);
         if ($request->status == 1) {
-            $product = Product::where('id', $product_warehouses->product_id)->first();
+            $product = Product::with(['category'])->where('id', $product_warehouses->product_id)->first();
+            if ($product->availability_status == 0) {
+                $elasticsearchController = new ElasticsearchController();
+
+                $res = $elasticsearchController->createDocProduct($product->id,
+                    $product->name,
+                    $product->short_content,
+                    $product->category->name,
+                    $product->publish_id);
+            }
             $product->availability_status = 1;
             $product->save();
         }

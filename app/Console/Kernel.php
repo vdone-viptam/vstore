@@ -22,16 +22,9 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            $model = new VshopProduct();
-            $model->vshop_id=1;
-            $model->product_id=1;
-            $model->status=1;
-            $model->pdone_id=1;
-            $model->amount=1;
-            $model->save();
-        })->everyMinute();
-        $schedule->command('order:affProduct')->everyMinute();
+
+//        $schedule->command('order:affProduct')->everyMinute();
+        $schedule->command('orders:split')->everyMinute();
     }
 
     /**

@@ -13,6 +13,7 @@ use App\Models\OrderService;
 use App\Models\PaymentHistory;
 use App\Models\PreOrderVshop;
 use App\Models\User;
+use App\Models\RequestWarehouse;
 use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,16 +25,23 @@ use Illuminate\Support\Str;
 
 class PaymentMethod9PayController extends Controller
 {
-    public function payment9PayErr500() {
+    public function payment9PayErr500()
+    {
         return view('payment.payment500');
     }
-    public function paymentErr() {
+
+    public function paymentErr()
+    {
         return view('payment.paymentErr');
     }
-    function paymentSuccess() {
+
+    function paymentSuccess()
+    {
         return view('payment.paymentSuccess');
     }
-    function paymentReturn(Request $request) {
+
+    function paymentReturn(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -48,13 +56,13 @@ class PaymentMethod9PayController extends Controller
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
-        if($hashChecksum === $checksum){
+        if ($hashChecksum === $checksum) {
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
 //            $statusLabel = status9Pay($status);
-            if(!$checkPayment) {
+            if (!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
                 $paymentHistory->amount = $payment->amount;
@@ -80,18 +88,36 @@ class PaymentMethod9PayController extends Controller
                 //End Tạo lịch sử hoá đơn
             }
 
-            if($status === 5) {
+            if ($status === 5) {
                 $order = Order::where('no', $payment->invoice_no)
                     ->where('status', config('constants.orderStatus.confirmation'))
                     ->where('payment_status', config('constants.paymentStatus.no_done'))
                     ->first();
 
-                if($order) {
+                if ($order) {
                     $order->payment_status = config('constants.paymentStatus.done');
+
+                    $order_item = OrderItem::where('order_id', $order->id)->first();
+                    $requestEx = new RequestWarehouse();
+
+                    $requestEx->ncc_id = 0;
+                    $requestEx->product_id = $order_item->product_id;
+                    $requestEx->status = 0;
+                    $requestEx->type = 10;
+                    $requestEx->ware_id = $order->warehouse_id;
+                    $requestEx->quantity = $order_item->quantity;
+                    $code = $order->no;
+                    $requestEx->order_number = '';
+                    $requestEx->code = $code;
+                    $requestEx->note = 'Yêu cầu xuất kho';
+                    $requestEx->save();
+
+                    $order->request_warehouse_id = $requestEx->id;
+
                     $order->save();
                     // nếu tồn tại URL return
-                    if($request->url) {
-                        return redirect()->to($request->url . "?result=".$request->result);
+                    if ($request->url) {
+                        return redirect()->to($request->url . "?result=" . $request->result);
                     }
                     return redirect()->route('paymentSuccess');
                 }
@@ -103,8 +129,8 @@ class PaymentMethod9PayController extends Controller
             }
 
             // nếu tồn tại URL return
-            if($request->url) {
-                return redirect()->to($request->url . "?result=".$request->result);
+            if ($request->url) {
+                return redirect()->to($request->url . "?result=" . $request->result);
             }
 
             return redirect()->route('paymentErr', [
@@ -114,13 +140,15 @@ class PaymentMethod9PayController extends Controller
         } else {
 
             // nếu tồn tại URL return
-            if($request->url) {
-                return redirect()->to($request->url . "?result=".$request->result);
+            if ($request->url) {
+                return redirect()->to($request->url . "?result=" . $request->result);
             }
 
             return redirect()->route('payment500');
         }
     }
+
+
     function paymentOrderServiceReturn(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -399,6 +427,7 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
+
     /**
      * Thanh toán
      *

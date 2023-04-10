@@ -112,13 +112,12 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <select name="category_id" id="category_id"
                                     class="h-[42px] choose-vstore text-opa outline-none w-full px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                                <option value="">Chọn ngành hàng</option>
+                                <option value="" disabled selected>Chọn ngành hàng</option>
                                 @foreach($categories as $category)
                                     <option
                                         value="{{$category->id}}"
                                         @if($category->id ==$product->category_id) selected @endif>{{$category->name}}</option>
                                 @endforeach
-                                <option value="0">khác</option>
                             </select>
                             @error('category_id')
                             <p class="text-red-600">{{$message}}</p>

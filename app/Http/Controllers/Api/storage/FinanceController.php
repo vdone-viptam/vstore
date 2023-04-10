@@ -23,7 +23,7 @@ class FinanceController extends Controller
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::with(['bank'])->select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
-            ->where('type',1)
+            ->where('type', 1)
             ->first();
         return response()->json([
             'success' => true,
@@ -92,9 +92,18 @@ class FinanceController extends Controller
         ], 201);
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')->where('user_id', Auth::id())->paginate(10);
+        $limit = $request->limit ?? 10;
+        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc');
+
+        if ($request->code) {
+            $this->v['histories'] = $this->v['histories']->where('code', $request->code);
+        }
+
+        $this->v['histories'] = $this->v['histories']->paginate($limit);
         return response()->json([
             'success' => true,
             'data' => $this->v['histories']
@@ -103,6 +112,26 @@ class FinanceController extends Controller
 
     public function deposit(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'bank' => 'required|exists:wallets,id',
+            'money' => 'required|numeric|min:1',
+        ], [
+            'bank.required' => 'Bạn chưa có ví',
+            'bank.exists' => 'Ví không tồn tại',
+            'money.required' => 'Số tiền rút bắt buộc nhập',
+            'money.numeric' => 'Số tiền rút bắt buộc nhập phải là số',
+            'money.min' => 'Số tiền rút phải lớn hơn 0',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+
         DB::beginTransaction();
 
         try {
@@ -114,6 +143,12 @@ class FinanceController extends Controller
                 } else {
                     break;
                 }
+            }
+            if ($request->money > Auth::user()->money) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ'
+                ], 400);
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,

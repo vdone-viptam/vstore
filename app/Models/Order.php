@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = [
         "payment_status",
         "district_id",
-        "province_id",
+        "province_id",  
         "pay",
         "method_payment",
         "status",

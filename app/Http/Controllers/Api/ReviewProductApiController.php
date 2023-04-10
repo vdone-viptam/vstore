@@ -139,7 +139,7 @@ class ReviewProductApiController extends Controller
             $totalReviews = Point::query()
                             ->with(['pointRep'])
                             ->where('product_id', $product_id)
-                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','images','id')
+                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id')
                             ->orderBy('updated_at', 'desc');
             if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
@@ -147,9 +147,10 @@ class ReviewProductApiController extends Controller
             $totalReviews = $totalReviews->paginate($limit);
 
             foreach($totalReviews as $key => $value){
+                $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
+                $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
                 $totalReviews[$key]['product'] = $calculatorFeeProductPoint;
-
                 $totalReviews[$key]['customer'] = $this->callApiRepositoryInterface->callApiCustomerProfile($value->customer_id) ?? null;
             }
             $rating_rate = collect(['rating_rate' => $this->ratingRateProductVer2($product_id)]);
@@ -212,6 +213,8 @@ class ReviewProductApiController extends Controller
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
             foreach($totalReviews as $key => $value){
+                $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
+                $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
 
                 $totalReviews[$key]['product'] = $calculatorFeeProductPoint;
@@ -262,8 +265,9 @@ class ReviewProductApiController extends Controller
                     'message' => 'Không tìm thấy đánh giá !'
                 ], 500);
             }else{
+                $data['created_at_iso'] = Carbon::parse($data->created_at);
+                $data['updated_at_iso'] = Carbon::parse($data->updated_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($data->product_id,$data->id);
-
                 $data['product'] = $calculatorFeeProductPoint;
                 $data['customer'] = $this->callApiRepositoryInterface->callApiCustomerProfile($data->customer_id) ?? null;
                 return response()->json([
