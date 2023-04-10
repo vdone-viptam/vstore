@@ -16,7 +16,7 @@ class PartnerController extends Controller
     }
     public function index(Request $request)
     {
-        $search = $request->search;
+        $search = $request->key_search;
         $limit = $request->limit ?? 10 ;
         $suppliers = $this->partnerRepository->index($search,$limit);
         return view('screens.storage.partner.supplier.index', ['suppliers' => $suppliers]);
@@ -28,8 +28,9 @@ class PartnerController extends Controller
     }
     public function deliveryPartner(Request $request)
     {
+        $search = $request->key_search;
         $limit = $request->limit ?? 10;
-        $deliveryPartners = $this->partnerRepository->deliveryPartner($limit);
+        $deliveryPartners = $this->partnerRepository->deliveryPartner($search, $limit);
         return view('screens.storage.partner.delivery-partner.index',['deliveryPartners' => $deliveryPartners]);
     }
     public function detailDeliveryPartner(Request $request)

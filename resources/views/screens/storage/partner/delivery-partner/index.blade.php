@@ -49,13 +49,17 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
                     <h5 class="mb-0" style="font-size:18px;">Đối tác giao hàng</h5>
-                    <!-- <ul class="navbar-nav ">
+                    <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                <form>
+                                    <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                           type="search"
+                                           placeholder="Tìm kiếm..">
+                                </form>
                             </div>
                         </li>
-                    </ul> -->
+                    </ul>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -101,15 +105,6 @@
 
 @section('custom_js')
 
-<script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}" ></script>
-<script src="{{asset('asset/assets/vendor/datatables/js/jquery.dataTables.min.js')}}" ></script>
-
-
-<script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
-
-
-
-<script src="{{asset('asset/assets/vendor/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
 
 
     <script>
