@@ -222,7 +222,7 @@
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <span class="text-secondary">Slug: </span>
                                     <span><a
-                                            href="{{route('intro_vstore',['slug'=> $infoAccount->slug])}}">{{config('domain.vstore')}}/{{$infoAccount->slug}}</a></span>
+                                            href="{{route('intro_vstore',['slug'=> $infoAccount->slug])}}">{{config('domain.vstore') }}/{{$infoAccount->slug}}</a></span>
                                 </div>
                                 <div class="flex justify-start items-center gap-4 w-full">
                                     <a href="#"

@@ -9,12 +9,15 @@ use App\Models\CartItemV2;
 use App\Models\CartV2;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderService;
 use App\Models\PaymentHistory;
 use App\Models\PreOrderVshop;
+use App\Models\User;
 use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -118,8 +121,7 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-    function paymentBack(Request $request) {
-        Log::info('BACK_9PAY', $request->all());
+    function paymentOrderServiceReturn(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -130,15 +132,16 @@ class PaymentMethod9PayController extends Controller
                 'error' => $validator->errors(),
             ], 403);
         }
+
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
+
         if($hashChecksum === $checksum){
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
-//            $statusLabel = status9Pay($status);
             if(!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
@@ -164,6 +167,24 @@ class PaymentMethod9PayController extends Controller
                 $paymentHistory->save();
                 //End Tạo lịch sử hoá đơn
             }
+            if($status === 5) {
+                $order = OrderService::where('no', $payment->invoice_no)
+                    ->where('status', config('constants.orderServiceStatus.confirmation'))
+                    ->where('payment_status', config('constants.paymentStatus.no_done'))
+                    ->first();
+
+                if($order) {
+                    $order->payment_status = config('constants.paymentStatus.done');
+                    $order->save();
+                    return redirect()->route('paymentSuccess');
+                }
+
+                Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore');
+                return redirect()->route('paymentErr', [
+                    "failure_reason" => 'Giao dịch thành công, vui lòng liên hệ với admin',
+                    "status" => 0
+                ]);
+            }
             return redirect()->route('paymentErr', [
                 "failure_reason" => $payment->failure_reason,
                 "status" => $payment->status
@@ -172,7 +193,89 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
+    function paymentOrderServiceBack(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'result' => 'required',
+            'checksum' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 403,
+                'error' => $validator->errors(),
+            ], 403);
+        }
 
+        $checksum = $request->checksum;
+        $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
+        $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
+
+        if($hashChecksum === $checksum){
+            $result = base64_decode($request->result);
+            $payment = json_decode($result);
+            $status = $payment->status;
+            $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
+            if(!$checkPayment) {
+                // Tạo lịch sử hoá đơn
+                $paymentHistory = new PaymentHistory();
+                $paymentHistory->amount = $payment->amount;
+                $paymentHistory->amount_foreign = $payment->amount_foreign;
+                $paymentHistory->amount_original = $payment->amount_original;
+                $paymentHistory->amount_request = $payment->amount_request;
+                $paymentHistory->bank = $payment->bank;
+                $paymentHistory->card_brand = $payment->card_brand;
+                $paymentHistory->card_info = json_encode($payment->card_info);
+                $paymentHistory->currency = $payment->currency;
+                $paymentHistory->description = $payment->description;
+                $paymentHistory->error_code = $payment->error_code;
+                $paymentHistory->exc_rate = $payment->exc_rate;
+                $paymentHistory->failure_reason = $payment->failure_reason;
+                $paymentHistory->foreign_currency = $payment->foreign_currency;
+                $paymentHistory->invoice_no = $payment->invoice_no;
+                $paymentHistory->lang = $payment->lang;
+                $paymentHistory->method = $payment->method;
+                $paymentHistory->payment_no = $payment->payment_no;
+                $paymentHistory->status = $payment->status;
+                $paymentHistory->tenor = $payment->tenor;
+                $paymentHistory->save();
+                //End Tạo lịch sử hoá đơn
+            }
+            if($status === 5) {
+                $order = OrderService::where('no', $payment->invoice_no)
+                    ->where('status', config('constants.orderServiceStatus.confirmation'))
+                    ->where('payment_status', config('constants.paymentStatus.no_done'))
+                    ->first();
+                if($order) {
+                    $order->payment_status = config('constants.paymentStatus.done');
+                    $order->save();
+                    $user = User::find($order->user_id);
+                    return view('screens.manufacture.index', compact(['order', 'user']));
+                }
+                Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore');
+                return redirect()->route('register_ncc', [
+                    "orderErr" => 'Giao dịch thành công, vui lòng liên hệ với admin',
+                    "status" => 0
+                ])->with([
+                    "orderErr" => 'Giao dịch thành công, vui lòng liên hệ với admin',
+                    "status" => 0
+                ]);
+            }
+            return redirect()->route('register_ncc', [
+                "orderErr" => "Hành động không được thực hiện, vui lòng đăng ký lại",
+//                "failure_reason" => $payment->failure_reason,
+                "status" => $payment->status
+            ])->with([
+                "orderErr" => "Hành động không được thực hiện, vui lòng đăng ký lại",
+//                "failure_reason" => $payment->failure_reason,
+                "status" => $payment->status
+            ]);
+        } else {
+            return redirect()->route('register_ncc', [
+                "orderErr" => "Hành động không được thực hiện, vui lòng đăng ký lại"
+            ])->with([
+                "orderErr" => "Hành động không được thực hiện, vui lòng đăng ký lại"
+            ]);
+        }
+    }
     function paymentPreOrderReturn(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -296,7 +399,6 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-
     /**
      * Thanh toán
      *

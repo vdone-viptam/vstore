@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/els', [\App\Http\Controllers\Api\ProductController::class, 'indexProduct']);
 
 Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
@@ -22,6 +21,9 @@ Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class
 Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
+
+    Route::get('/payment/order-service/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBack']);
+    Route::get('/payment/order-service/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceReturn']);
 
     Route::get('/payment/pre-order/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentPreOrderReturn']);
     Route::get('/payment/pre-order/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentPreOrderBack']);
@@ -33,6 +35,8 @@ Route::group(['domain' => config('domain.payment')], function () {
 // END THANH TOÁN APP
 
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
+Route::post('/register/order', [\App\Http\Controllers\Auth\LoginController::class, 'postRegisterOrder'])->name('post_register_order');
+
 Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'formForgotPassword'])->name('form_forgot_password');
 Route::post('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'postForgotPassword']);
 Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'formResetForgot'])->name('reset_password');

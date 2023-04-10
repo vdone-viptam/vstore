@@ -23,10 +23,10 @@
 </head>
 <body>
 @if(\Illuminate\Support\Facades\Session::has('success'))
-    <div class="modal modal-success  flex justify-center items-center show-modal">
+    <div class="modal modal-success flex justify-center items-center show-modal">
         <div class="over-lay-modal" onclick="$('.modal-success').toggleClass('show-modal')"></div>
         <div
-            class="information success flex flex-col justify-end w-full  max-w-[300px] md:max-w-[650px] h-[400px]  shadow-xl p-6 my-6 mx-auto rounded-sm">
+            class="information success flex flex-col justify-end w-full max-w-[300px] md:max-w-[650px] h-[400px] shadow-xl p-6 my-6 mx-auto rounded-sm">
             <svg width="24" height="24" viewBox="0 0 24 24" onclick="$('.modal-success').toggleClass('show-modal')"
                  class="cursor-pointer absolute top-[-25px] right-0 hover:opacity-75 transition-all duration-200"
                  fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +47,7 @@
 <div class="modal modal-hd">
     <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
     <div
-        class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
+        class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px] shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
         <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
             <h2 class="text-base text-title">Hợp đồng điện tử</h2>
             <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
@@ -86,119 +86,111 @@
         </div>
     </div>
 </div>
-<form action="{{route('post_register',['role_id' => 4])}}" id="formRegister-V" enctype="multipart/form-data"
-      method="POST">
-    @csrf
-    <div class=" grid grid-cols-1 lg:grid-cols-2">
-        <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
-            {{--     home/img/titleK.png       <a href="{{route('login_ncc')}}}"--}}
-            {{--               class="flex justify-start items-center gap-2 hover:opacity-75 transition-all duration-500">--}}
-            {{--                <div>--}}
-            {{--                    <img src="{{asset('asset/icons/back.png')}}" alt="">--}}
-            {{--                </div>--}}
-            {{--                <span class="text-title">Quay lại</span>--}}
-            {{--            </a>--}}
-            <div class="w-[162px]">
-                <a href="{{route('screens.storage.index')}}"> <img src="{{asset('home/img/titleK.png')}}" alt=""></a>
-            </div>
-            <h1 class="text-4xl font-medium max-w-[520px]">Đăng ký</h1>
+<div class="mb-20">
+    <form action="{{route('post_register',['role_id' => 4])}}" id="formRegister-V" enctype="multipart/form-data"
+          method="POST">
+        @csrf
+        <div class=" grid grid-cols-1 lg:grid-cols-2">
+            <div class="register-1 flex flex-col justify-start items-start gap-6 xl:px-32 p-10 px-4 lg:px-10">
+                <div class="w-[162px]">
+                    <a href="{{route('screens.storage.index')}}"> <img src="{{asset('home/img/titleK.png')}}" alt=""></a>
+                </div>
+                <h1 class="text-4xl font-medium max-w-[520px]">Đăng ký</h1>
 
+            </div>
         </div>
-    </div>
-    <div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
-        <div class="flex flex-col justify-start items-start gap-6 w-full">
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
-                <input type="text" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
-                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('email')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Kho</span>
-                <input type="text" name="name" id="name" placeholder="Nhập tên Kho" value="{{old('name')}}"
-                       class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('name')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
-                <input type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
-                       value="{{old('company_name')}}"
-                       class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('company_name')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
-                <input type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
-                       value="{{old('tax_code')}}"
-                       class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('tax_code')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
-                <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
-                       class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('address')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="grid grid-cols-1  md:grid-cols-3 gap-2">
-                <div class="w-full">
-                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
-                    <select name="city_id" id="city_id"
-                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="" selected disabled>Lựa chọn tỉnh (thành phố)</option>
-                    </select>
-                    @error('city_id')
-                    <p class="text-red-600">{{$message}}</p>
+        <div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
+            <div class="flex flex-col justify-start items-start gap-6 w-full">
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Email</span>
+                    <input type="text" name="email" id="email" placeholder="Nhập email" value="{{old('email')}}"
+                           class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('email')
+                        <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="">
-                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
-                    <select name="district_id" id="district_id"
-                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="" selected disabled>Lựa chọn quận (huyện)</option>
-                    </select>
-                    @error('district_id')
-                    <p class="text-red-600">{{$message}}</p>
+
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Kho</span>
+                    <input type="text" name="name" id="name" placeholder="Nhập tên Kho" value="{{old('name')}}"
+                           class="nameV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('name')
+                        <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="">
-                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Phường (xã)</span>
-                    <select name="ward_id" id="ward_id"
-                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="">Lựa chọn Phường (xã)</option>
-                    </select>
-                    @error('ward_id')
-                    <p class="text-red-600">{{$message}}</p>
+
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tên Công ty</span>
+                    <input type="text" name="company_name" id="company_name" placeholder="Nhập tên công ty"
+                           value="{{old('company_name')}}"
+                           class="comp outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('company_name')
+                        <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
+                    <input type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                           value="{{old('tax_code')}}"
+                           class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('tax_code')
+                        <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Địa chỉ</span>
+                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{old('address')}}"
+                           class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('address')
+                        <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+
+                <div class="grid grid-cols-1  md:grid-cols-3 gap-2">
+                    <div class="w-full">
+                        <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
+                        <select name="city_id" id="city_id"
+                                class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <option value="" selected disabled>Lựa chọn tỉnh (thành phố)</option>
+                        </select>
+                        @error('city_id')
+                            <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
+                        <select name="district_id" id="district_id"
+                                class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <option value="" selected disabled>Lựa chọn quận (huyện)</option>
+                        </select>
+                        @error('district_id')
+                            <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Phường (xã)</span>
+                        <select name="ward_id" id="ward_id"
+                                class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <option value="">Lựa chọn Phường (xã)</option>
+                        </select>
+                        @error('ward_id')
+                            <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
             </div>
+            <div class="flex flex-col justify-start items-start gap-6 w-full">
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
+                    <input type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
+                           class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('phone_number')
+                        <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
 
-
-        </div>
-        <div class="flex flex-col justify-start items-start gap-6 w-full">
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
-                <input type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
-                       class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('phone_number')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium flex justify-start items-center gap-1"><strong
                             class="text-[#FF4D4F]">*</strong> Người đại diện <svg class="cursor-pointer" width="14"
                                                                                   height="14" viewBox="0 0 14 14"
@@ -213,125 +205,125 @@
                             fill="black" fill-opacity="0.45"/>
                         </svg>
                         </span>
-                <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
-                       class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('id_vdone')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
+                    <input type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
+                           class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('id_vdone')
+                        <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
 
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium">Người đại diện (khác)</span>
-                <input type="text" name="id_vdone_diff" placeholder="Nhập ID người đại diện (khác)"
-                       value="{{old('id_vdone_diff')}}"
-                       class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
-            </div>
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium">Mã giới thiệu</span>
-                <input type="text" name="referral_code" placeholder="Mã giới thiệu" readonly
-                       value="{{$referral_code}}"
-
-                       class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
-            </div>
-
-        </div>
-    </div>
-
-    <div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
-        <div class="flex flex-col justify-start items-start gap-6 w-full">
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Diện tích sàn (m2)</span>
-                <input type="text" name="floor_area" id="" placeholder="Nhập diện tích"
-                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('floor_area')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích(m3)</span>
-                <input type="text" name="volume" id="" placeholder="Nhập thể tích"
-                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('volume')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Hình ảnh kho </span>
-                <input type="file" multiple name="image_storage[]" id="" placeholder="Nhập địa chỉ thư điện tử"
-                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('image_storage')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Giấy chứng nhận PCCC/ Chứng nhận khác </span>
-                <input type="file" multiple name="image_pccc[]" id="" placeholder="Nhập địa chỉ thư điện tử"
-                       class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                @error('image_pccc')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-
-        </div>
-        <div class="flex flex-col justify-start items-start gap-6 w-full">
-            <div class="w-full">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm font-medium">Kích thước (m)</span>
+                    <span class="text-sm font-medium">Người đại diện (khác)</span>
+                    <input type="text" name="id_vdone_diff" placeholder="Nhập ID người đại diện (khác)"
+                           value="{{old('id_vdone_diff')}}"
+                           class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
+                </div>
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium">Mã giới thiệu</span>
+                    <input type="text" name="referral_code" placeholder="Mã giới thiệu" readonly
+                           value="{{$referral_code}}"
+                           class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
+            <div class="flex flex-col justify-start items-start gap-6 w-full">
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Diện tích sàn (m2)</span>
+                    <input type="text" name="floor_area" id="" placeholder="Nhập diện tích"
+                           class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('floor_area')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích(m3)</span>
+                    <input type="text" name="volume" id="" placeholder="Nhập thể tích"
+                           class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('volume')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Hình ảnh kho </span>
+                    <input type="file" multiple name="image_storage[]" id="" placeholder="Nhập địa chỉ thư điện tử"
+                           class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('image_storage')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Giấy chứng nhận PCCC/ Chứng nhận khác </span>
+                    <input type="file" multiple name="image_pccc[]" id="" placeholder="Nhập địa chỉ thư điện tử"
+                           class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                    @error('image_pccc')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+
+            </div>
+            <div class="flex flex-col justify-start items-start gap-6 w-full">
+                <div class="w-full">
+                    <div class="flex flex-col justify-start items-start gap-2 w-full">
+                        <span class="text-sm font-medium">Kích thước (m)</span>
+
+                        <div class="flex justify-between items-center w-full gap-6">
+                            <input type="number" min="0" max="" placeholder="Nhập chiều dài (m)" name="length" value=""
+                                   id="length"
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <input type="number" min="0" max="" placeholder="Nhập chiều rộng (m)" name="with" value=""
+                                   id="with"
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                            <input type="number" min="0" max="" placeholder="Nhập chiều cao (m)" name="height" value=""
+                                   id="height"
+                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col justify-start items-start gap-2 w-full">
+                    <span class="text-sm font-medium">Diện tích loại kho (m2)</span>
 
                     <div class="flex justify-between items-center w-full gap-6">
-                        <input type="number" min="0" max="" placeholder="Nhập chiều dài (m)" name="length" value=""
+                        <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage" value=""
                                id="length"
                                class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <input type="number" min="0" max="" placeholder="Nhập chiều rộng (m)" name="with" value=""
-                               id="with"
+                        <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value="" id="with"
                                class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <input type="number" min="0" max="" placeholder="Nhập chiều cao (m)" name="height" value=""
+                        <input type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value=""
                                id="height"
                                class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
 
                 </div>
-
             </div>
 
-            <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium">Diện tích loại kho (m2)</span>
 
-                <div class="flex justify-between items-center w-full gap-6">
-                    <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage" value=""
-                           id="length"
-                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value="" id="with"
-                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <input type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value=""
-                           id="height"
-                           class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                </div>
-
-            </div>
         </div>
-
-
-    </div>
-    <div class="text-center my-4"><input name="checkbox" required type="checkbox"> Bạn đồng ý với điều khoản sử
-        dụng của
-        chúng
-        tôi. <a href="#"
-                onclick="$('.modal-hd').toggleClass('show-modal')"
-                class="underline text-blue-700">Xem
-            thêm</a></div>
-    <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
-        <button type="submit"
-                class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
-        >Tiếp tục
-        </button>
-        <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_storage')}}"
-                                                                         class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
-    </div>
-</form>
+        <div class="text-center my-4">
+            <input name="checkbox" id="dksd" required type="checkbox">
+            <label for="dksd">
+                Bạn đồng ý với điều khoản sử
+                dụng của
+                chúng
+                tôi.
+            </label> <a href="#"
+                    onclick="$('.modal-hd').toggleClass('show-modal')"
+                    class="underline text-blue-700">Xem
+                thêm</a></div>
+        <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
+            <button type="submit"
+                    class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
+            >Tiếp tục
+            </button>
+            <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_storage')}}"
+                                                                             class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
+        </div>
+    </form>
+</div>
 
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script>

@@ -581,7 +581,7 @@ class ProductController extends Controller
             foreach (json_decode($request->images) as $image) {
                 try {
                     if (strpos($image, 'storage/products') !== false) {
-                        $photo_gallery[] = explode(config('domain.ncc') . "/", $image)[1];
+                        $photo_gallery[] = explode(config('domain.ncc')  . "/", $image)[1];
                     } else {
                         $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
 
