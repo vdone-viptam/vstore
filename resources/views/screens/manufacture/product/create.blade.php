@@ -275,7 +275,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="{{isset(old('sl')[1]) ? old('sl')[1] : ''}}" required
+                            <input type="number" value="{{isset(old('sl')[1]) ? old('sl')[1] : ''}}"
                                    name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
                             <div></div>
@@ -303,7 +303,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="{{isset(old('sl')[2]) ? old('sl')[2] : ''}}" required
+                            <input type="number" value="{{isset(old('sl')[2]) ? old('sl')[2] : ''}}"
                                    name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
                             <div></div>
