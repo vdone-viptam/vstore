@@ -99,6 +99,7 @@ class OrderController extends Controller
         $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
         $order->shipping = 0; // Tổng phí ship
         $order->total = $product->price * $quantity;
+        $order->address = $request->address;
         $totalDiscount = 0;
 
         if (isset($discount['discountsFromSuppliers'])) {
@@ -121,7 +122,7 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $address;
+            $order->address = $request->address;
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
             if (!$warehouse) {
                 return response()->json([
@@ -274,7 +275,7 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $address;
+            $order->address = $request->address;
             $result = [];
             foreach ($orderItems as $item) {
                 $result[$item['vshop_id']]['vshop'] = [
