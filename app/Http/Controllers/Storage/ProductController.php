@@ -55,11 +55,8 @@ class ProductController extends Controller
             ->where('product_warehouses.status', 1)
             ->orderBy($field, $type)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id())//        ->where('product_name','like','%'.$request->key_search .'%')
+            ->where('warehouses.user_id', Auth::id())
         ;
-//        if ($request->publish_id) {
-//            $products = $products->where('products.publish_id', $request->publish_id);
-//        }
 
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);

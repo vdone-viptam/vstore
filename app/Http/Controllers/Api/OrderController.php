@@ -122,7 +122,6 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $request->address;
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
             if (!$warehouse) {
                 return response()->json([

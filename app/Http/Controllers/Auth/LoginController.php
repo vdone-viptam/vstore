@@ -432,6 +432,7 @@ class LoginController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e);
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
     }

@@ -1,36 +1,76 @@
-name: Cart
+name: Product
 description: |-
 
-  Danh sách api liên quan tới giỏ hàng
+  Danh sách api liên quan tới sản phẩm
 endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/cart/{pdone_id}'
+    uri: api/products
     metadata:
-      groupName: Cart
+      groupName: Product
       groupDescription: |-
 
-        Danh sách api liên quan tới giỏ hàng
+        Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: Cart
-      description: 'API dùng để xem sản phẩm trong giỏ hàng'
+      title: 'Danh sách sản phẩm'
+      description: 'API này sẽ trả về thông tin hiển thị sản phẩm'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      pdone_id:
-        name: pdone_id
-        description: 'The ID of the pdone.'
-        required: true
-        example: 11
-        type: integer
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: architecto
+        type: string
+        custom: []
+      category_id:
+        name: category_id
+        description: 'id danh mục sản phẩm'
+        required: false
+        example: repellat
+        type: string
+        custom: []
+      order_by:
+        name: order_by
+        description: '(1,2,3) 1 Sắp xếp theo id,2 sắp xếp theo giá,3 sắp xếp theo số hàng đã bán'
+        required: false
+        example: minus
+        type: string
+        custom: []
+      option:
+        name: option
+        description: '(asc,desc)'
+        required: false
+        example: ut
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang Mặc định 10'
+        required: false
+        example: consectetur
+        type: string
+        custom: []
+      type_pay:
+        name: type_pay
+        description: 'Phương thức thanh toán 1 thanh toán trước | 2 cả 2'
+        required: false
+        example: accusantium
+        type: string
         custom: []
     cleanUrlParameters:
-      pdone_id: 11
+      page: architecto
+      category_id: repellat
+      order_by: minus
+      option: ut
+      limit: consectetur
+      type_pay: accusantium
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -38,8 +78,115 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"data":[]}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '54'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/products/search
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Tìm kiếm sản phẩm theo tên'
+      description: 'API này sẽ trả về danh sách sản phẩm có tên chứa kí tự tìm kiếm và bộ lọc'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: minus
+        type: string
+        custom: []
+      category_id:
+        name: category_id
+        description: 'id danh mục sản phẩm'
+        required: false
+        example: totam
+        type: string
+        custom: []
+      key_word:
+        name: key_word
+        description: 'Từ khóa tìm kiếm sản phẩm'
+        required: false
+        example: aut
+        type: string
+        custom: []
+      order_by:
+        name: order_by
+        description: '(1,2,3) 1 Sắp xếp theo id,2 sắp xếp theo giá,3 sắp xếp theo số hàng đã bán'
+        required: false
+        example: vel
+        type: string
+        custom: []
+      option:
+        name: option
+        description: '(asc,desc)'
+        required: false
+        example: consequatur
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang Mặc định 10'
+        required: false
+        example: voluptatibus
+        type: string
+        custom: []
+      type_pay:
+        name: type_pay
+        description: 'Phương thức thanh toán 1 thanh toán trước | 2 cả 2'
+        required: false
+        example: recusandae
+        type: string
+        custom: []
+    cleanUrlParameters:
+      page: minus
+      category_id: totam
+      key_word: aut
+      order_by: vel
+      option: consequatur
+      limit: voluptatibus
+      type_pay: recusandae
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      key_word:
+        name: key_word
+        description: ''
+        required: true
+        example: optio
+        type: string
+        custom: []
+    cleanBodyParameters:
+      key_word: optio
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -56,17 +203,17 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: 'api/cart/add/{id}'
+      - GET
+    uri: 'api/products/product-by-category/{id}'
     metadata:
-      groupName: Cart
+      groupName: Product
       groupDescription: |-
 
-        Danh sách api liên quan tới giỏ hàng
+        Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: 'Cart add'
-      description: 'API dùng để thêm sản phẩm vào giỏ hàng'
+      title: 'Danh sách sản phẩm theo danh mục'
+      description: 'API này sẽ trả về sản phẩm theo danh mục'
       authenticated: false
       custom: []
     headers:
@@ -75,43 +222,46 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the add.'
+        description: 'The ID of the product by category.'
         required: true
-        example: cum
+        example: ex
+        type: string
+        custom: []
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: ipsum
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: amet
         type: string
         custom: []
     cleanUrlParameters:
-      id: cum
+      id: ex
+      page: ipsum
+      limit: amet
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      pdone_id:
-        name: pdone_id
-        description: 'mã user của người dùng'
-        required: false
-        example: fugiat
-        type: required
-        custom: []
-      quantity:
-        name: quantity
-        description: 'Số sản phẩm mua'
-        required: false
-        example: voluptatum
-        type: 'required|numeric|min:1'
-        custom: []
-      vshop_id:
-        name: vshop_id
-        description: 'mã v-shop'
-        required: false
-        example: deserunt
-        type: required
-        custom: []
-    cleanBodyParameters:
-      pdone_id: fugiat
-      quantity: voluptatum
-      vshop_id: deserunt
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '52'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
     responseFields: []
     auth: []
     controller: null
@@ -120,36 +270,274 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - DELETE
-    uri: 'api/cart/remove/{cart_id}'
+      - GET
+    uri: 'api/products/product-by-vstore/{id}'
     metadata:
-      groupName: Cart
+      groupName: Product
       groupDescription: |-
 
-        Danh sách api liên quan tới giỏ hàng
+        Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: 'Cart remove'
-      description: 'API dùng để xóa sản phẩm khỏi giỏ hàng'
+      title: 'Danh sách sản phẩm vstore'
+      description: 'API này sẽ trả về sách sản phẩm vstore'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      cart_id:
-        name: cart_id
-        description: 'The ID of the cart.'
+      id:
+        name: id
+        description: 'The ID of the product by vstore.'
         required: true
-        example: dolores
+        example: quam
+        type: string
+        custom: []
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: doloremque
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: numquam
+        type: string
+        custom: []
+      publish_id:
+        name: publish_id
+        description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
+        required: false
+        example: voluptatibus
+        type: string
+        custom: []
+      category_id:
+        name: category_id
+        description: 'tìm kiếm theo danh mục'
+        required: false
+        example: molestiae
+        type: string
+        custom: []
+      order_by_price:
+        name: order_by_price
+        description: 'sắp xếp theo giá'
+        required: false
+        example: pariatur
+        type: string
+        custom: []
+      order_by_id:
+        name: order_by_id
+        description: 'sắp xếp theo id'
+        required: false
+        example: officiis
+        type: string
+        custom: []
+      order_by_sold:
+        name: order_by_sold
+        description: 'sắp xếp theo sl đã bán'
+        required: false
+        example: quis
+        type: string
+        custom: []
+      payments:
+        name: payments
+        description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
+        required: false
+        example: modi
         type: string
         custom: []
     cleanUrlParameters:
-      cart_id: dolores
+      id: quam
+      page: doloremque
+      limit: numquam
+      publish_id: voluptatibus
+      category_id: molestiae
+      order_by_price: pariatur
+      order_by_id: officiis
+      order_by_sold: quis
+      payments: modi
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '51'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/products/product-by-ncc/{id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Danh sách sản phẩm nhà cung cấp'
+      description: 'API này sẽ trả về thông tin hiển thị sản phẩm nhà cung cấp'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the product by ncc.'
+        required: true
+        example: labore
+        type: string
+        custom: []
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: vitae
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang'
+        required: false
+        example: maiores
+        type: string
+        custom: []
+      publish_id:
+        name: publish_id
+        description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
+        required: false
+        example: et
+        type: string
+        custom: []
+      category_id:
+        name: category_id
+        description: 'tìm kiếm theo danh mục'
+        required: false
+        example: suscipit
+        type: string
+        custom: []
+      order_by_price:
+        name: order_by_price
+        description: 'sắp xếp theo giá'
+        required: false
+        example: minima
+        type: string
+        custom: []
+      order_by_id:
+        name: order_by_id
+        description: 'sắp xếp theo id'
+        required: false
+        example: nam
+        type: string
+        custom: []
+      order_by_sold:
+        name: order_by_sold
+        description: 'sắp xếp theo sl đã bán'
+        required: false
+        example: ducimus
+        type: string
+        custom: []
+      payments:
+        name: payments
+        description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
+        required: false
+        example: omnis
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: labore
+      page: vitae
+      limit: maiores
+      publish_id: et
+      category_id: suscipit
+      order_by_price: minima
+      order_by_id: nam
+      order_by_sold: ducimus
+      payments: omnis
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '50'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/products/vshop-pickup/{id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Vshop thêm sản phẩm'
+      description: 'API dùng để Vshop thêm sản phẩm'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the vshop pickup.'
+        required: true
+        example: autem
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: autem
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'của pdone'
+        required: false
+        example: enim
+        type: id
+        custom: []
+    cleanBodyParameters:
+      pdone_id: enim
     fileParameters: []
     responses: []
     responseFields: []
@@ -161,39 +549,270 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/cart/add-quantity/{cart_id}/{type}'
+    uri: 'api/products/vshop-ready-stock/{id}'
     metadata:
-      groupName: Cart
+      groupName: Product
       groupDescription: |-
 
-        Danh sách api liên quan tới giỏ hàng
+        Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: 'Cart quantity'
-      description: 'API dùng để tăng giảm 1 đơn vị sản phẩm trong giỏ hàng'
+      title: 'Vshop Nhập hàng sẵn'
+      description: 'API dùng để Vshop nhập hàng sẵn'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      cart_id:
-        name: cart_id
-        description: 'The ID of the cart.'
+      id:
+        name: id
+        description: 'The ID of the vshop ready stock.'
         required: true
-        example: qui
-        type: string
-        custom: []
-      type:
-        name: type
-        description: ''
-        required: true
-        example: nihil
+        example: vel
         type: string
         custom: []
     cleanUrlParameters:
-      cart_id: qui
-      type: nihil
+      id: vel
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'của pdone'
+        required: false
+        example: quibusdam
+        type: id
+        custom: []
+      amount:
+        name: amount
+        description: 'lượng sản phẩm'
+        required: false
+        example: quo
+        type: số
+        custom: []
+    cleanBodyParameters:
+      pdone_id: quibusdam
+      amount: quo
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/products/product-by-vshop/{pdone_id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'sản phẩm Vshop'
+      description: 'API lấy danh sách sản phẩm theo vshop'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'The ID of the pdone.'
+        required: true
+        example: in
+        type: string
+        custom: []
+      orderBy:
+        name: orderBy
+        description: |-
+          id Mới nhất | amount_product_sold Bán chạy | price Giá
+          urlParam type  asc|desc Mặc định asc
+        required: false
+        example: omnis
+        type: string
+        custom: []
+    cleanUrlParameters:
+      pdone_id: in
+      orderBy: omnis
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '49'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/products/product-available-by-vshop/{pdone_id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'sản phẩm Vshop tiếp thị và nhâp sẵn'
+      description: 'API lấy danh sách sản phẩm theo vshop'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'The ID of the pdone.'
+        required: true
+        example: nostrum
+        type: string
+        custom: []
+      orderBy:
+        name: orderBy
+        description: '1 Số lượng sản phẩm còn lại | 2 Số sản phẩm đã bán | 3 Tỷ lệ bán sản phẩm'
+        required: false
+        example: sunt
+        type: string
+        custom: []
+      status:
+        name: status
+        description: |-
+          1 tiếp thị | 2 nhập sẵn
+          urlParam type  asc|desc Mặc định asc
+
+          vshop_discount mã giảm giá == null thì được tạo != null thì chuyển trạng thái sang sửa
+        required: false
+        example: 18
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      pdone_id: nostrum
+      orderBy: sunt
+      status: 18
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '48'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/products/create-bill/{pdone_id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Tạo mới bill vãng lai'
+      description: 'API lấy danh sách sản phẩm để tạo bill vãng lai'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'The ID of the pdone.'
+        required: true
+        example: perferendis
+        type: string
+        custom: []
+    cleanUrlParameters:
+      pdone_id: perferendis
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '47'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/products/save-bill/{pdone_id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'The ID of the pdone.'
+        required: true
+        example: sed
+        type: string
+        custom: []
+    cleanUrlParameters:
+      pdone_id: sed
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -209,23 +828,39 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/banners/get-banner
+    uri: 'api/products/{id}'
     metadata:
-      groupName: Cart
+      groupName: Product
       groupDescription: |-
 
-        Danh sách api liên quan tới giỏ hàng
+        Danh sách api liên quan tới sản phẩm
       subgroup: ''
       subgroupDescription: ''
-      title: 'Lấy banner ở trang chủ'
-      description: 'API dùng để lấy ảnh banner'
+      title: 'Chi tiết sản phẩm'
+      description: 'API dùng để lấy chi tiết 1 sản phẩm'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the product.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+      pdone_id:
+        name: pdone_id
+        description: ''
+        required: false
+        example: rem
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: 1
+      pdone_id: rem
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -233,16 +868,64 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"data":"http:\/\/localhost\/image\/banners\/202302280824z4144487384401_e7bbf4534854b22b37712fe0bf9dfbde.jpg"}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '51'
+          x-ratelimit-remaining: '46'
           access-control-allow-origin: '*'
         description: null
         custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/products/destroy-affiliate/{pdone_id}/{product_id}'
+    metadata:
+      groupName: Product
+      groupDescription: |-
+
+        Danh sách api liên quan tới sản phẩm
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Hủy niêm yết sản phẩm của 1 V-shop'
+      description: 'API dùng để hủy niêm yết sản phẩm của V-shop'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'The ID of the pdone.'
+        required: true
+        example: soluta
+        type: string
+        custom: []
+      product_id:
+        name: product_id
+        description: 'The ID of the product.'
+        required: true
+        example: itaque
+        type: string
+        custom: []
+    cleanUrlParameters:
+      pdone_id: soluta
+      product_id: itaque
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null

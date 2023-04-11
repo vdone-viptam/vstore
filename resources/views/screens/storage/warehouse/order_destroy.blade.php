@@ -75,47 +75,44 @@
                             <th>Mã đơn hàng</th>
                             <th>Mã sản phẩm</th>
                             <th>Tên sản phẩm
-                                @if($field == 'product_name')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="product_name"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Số lượng
-                                @if($field == 'quantity')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="quantity"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Lý do hủy</th>
                             <th>Trạng thái
-                                @if($field == 'cancel_status')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="cancel_status"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'cancel_status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="cancel_status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="cancel_status"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="cancel_status"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="cancel_status"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="cancel_status"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th></th>
                         </tr>

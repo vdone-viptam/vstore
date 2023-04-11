@@ -126,18 +126,18 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Cập nhật danh mục sản phẩm thành công');
 
     }
-
-    public function destroy($id)
-    {
-        DB::beginTransaction();
-        try {
-            $category = Category::destroy($id);
-            DB::commit();
-            return redirect()->back()->with('success', 'Xóa danh mục thành công');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
-        }
-
-    }
+//
+//    public function destroy($id)
+//    {
+//        DB::beginTransaction();
+//        try {
+//            $category = Category::destroy($id);
+//            DB::commit();
+//            return redirect()->back()->with('success', 'Xóa danh mục thành công');
+//        } catch (\Exception $e) {
+//            DB::rollBack();
+//            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
+//        }
+//
+//    }
 }

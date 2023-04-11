@@ -1,13 +1,164 @@
-name: Endpoints
-description: ''
+name: Bill
+description: |-
+
+  Danh sách api liên quan hóa dơn
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/callback-viettel-post
+    uri: api/bill/add
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Bill create'
+      description: 'API dùng để tạo hóa đơn'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'user của người dùng mua hàng'
+        required: false
+        example: vel
+        type: mã
+        custom: []
+      name:
+        name: name
+        description: 'người dùng'
+        required: false
+        example: quaerat
+        type: tên
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'điện thoại'
+        required: false
+        example: eius
+        type: số
+        custom: []
+      address:
+        name: address
+        description: chỉ
+        required: false
+        example: ut
+        type: địa
+        custom: []
+      province:
+        name: province
+        description: 'Must be at least 1.'
+        required: true
+        example: 8
+        type: number
+        custom: []
+      data:
+        name: data
+        description: 'liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]'
+        required: false
+        example: illum
+        type: dữ
+        custom: []
+      district:
+        name: district
+        description: 'Must be at least 1.'
+        required: true
+        example: 33
+        type: number
+        custom: []
+      id_vshop:
+        name: id_vshop
+        description: 'user của vshop'
+        required: false
+        example: blanditiis
+        type: mã
+        custom: []
+    cleanBodyParameters:
+      pdone_id: vel
+      name: quaerat
+      phone_number: eius
+      address: ut
+      province: 8
+      data: illum
+      district: 33
+      id_vshop: blanditiis
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/bill/detail/{id}'
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'chi tiết hóa đơn'
+      description: 'API này sẽ trả về chi tiết 1 hóa đơn'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the detail.'
+        required: true
+        example: molestiae
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: molestiae
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"message":"successfully retrieved information","data":null}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '59'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/bill/checkout
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -34,21 +185,31 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/user
+    uri: 'api/bill/{id}'
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: Bill
+      description: 'API dùng để lấy danh sách hóa đơn của 1 người dùng'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the bill.'
+        required: true
+        example: 15
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 15
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -56,11 +217,518 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
+        status: 500
+        content: |-
+          {
+              "message": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause' (SQL: select * from `bills` where `user_id` = 15)",
+              "exception": "Illuminate\\Database\\QueryException",
+              "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+              "line": 760,
+              "trace": [
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+                      "line": 720,
+                      "function": "runQueryCallback",
+                      "class": "Illuminate\\Database\\Connection",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+                      "line": 422,
+                      "function": "run",
+                      "class": "Illuminate\\Database\\Connection",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 2706,
+                      "function": "select",
+                      "class": "Illuminate\\Database\\Connection",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 2694,
+                      "function": "runSelect",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 3230,
+                      "function": "Illuminate\\Database\\Query\\{closure}",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 2695,
+                      "function": "onceWithColumns",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+                      "line": 710,
+                      "function": "get",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+                      "line": 694,
+                      "function": "getModels",
+                      "class": "Illuminate\\Database\\Eloquent\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/app/Http/Controllers/Api/BillController.php",
+                      "line": 39,
+                      "function": "get",
+                      "class": "Illuminate\\Database\\Eloquent\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Controller.php",
+                      "line": 54,
+                      "function": "index",
+                      "class": "App\\Http\\Controllers\\Api\\BillController",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php",
+                      "line": 43,
+                      "function": "callAction",
+                      "class": "Illuminate\\Routing\\Controller",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
+                      "line": 260,
+                      "function": "dispatch",
+                      "class": "Illuminate\\Routing\\ControllerDispatcher",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
+                      "line": 205,
+                      "function": "runController",
+                      "class": "Illuminate\\Routing\\Route",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+                      "line": 798,
+                      "function": "run",
+                      "class": "Illuminate\\Routing\\Route",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 141,
+                      "function": "Illuminate\\Routing\\{closure}",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
+                      "line": 50,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+                      "line": 126,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+                      "line": 102,
+                      "function": "handleRequest",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+                      "line": 54,
+                      "function": "handleRequestUsingNamedLimiter",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 116,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+                      "line": 799,
+                      "function": "then",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+                      "line": 776,
+                      "function": "runRouteWithinStack",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+                      "line": 740,
+                      "function": "runRoute",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+                      "line": 729,
+                      "function": "dispatchToRoute",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+                      "line": 190,
+                      "function": "dispatch",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 141,
+                      "function": "Illuminate\\Foundation\\Http\\{closure}",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+                      "line": 21,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
+                      "line": 31,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+                      "line": 21,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php",
+                      "line": 40,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php",
+                      "line": 27,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
+                      "line": 86,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php",
+                      "line": 62,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Http\\Middleware\\HandleCors",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php",
+                      "line": 39,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Http\\Middleware\\TrustProxies",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+                      "line": 116,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+                      "line": 165,
+                      "function": "then",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+                      "line": 134,
+                      "function": "sendRequestThroughRouter",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
+                      "line": 299,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
+                      "line": 287,
+                      "function": "callLaravelOrLumenRoute",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
+                      "line": 92,
+                      "function": "makeApiCall",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
+                      "line": 45,
+                      "function": "makeResponseCall",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
+                      "line": 35,
+                      "function": "makeResponseCallIfConditionsPass",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
+                      "line": 209,
+                      "function": "__invoke",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
+                      "line": 166,
+                      "function": "iterateThroughStrategies",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
+                      "line": 95,
+                      "function": "fetchResponses",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
+                      "line": 124,
+                      "function": "processRoute",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
+                      "line": 71,
+                      "function": "extractEndpointsInfoFromLaravelApp",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
+                      "line": 49,
+                      "function": "extractEndpointsInfoAndWriteToDisk",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Commands/GenerateDocumentation.php",
+                      "line": 51,
+                      "function": "get",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
+                      "line": 36,
+                      "function": "handle",
+                      "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php",
+                      "line": 41,
+                      "function": "Illuminate\\Container\\{closure}",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
+                      "line": 93,
+                      "function": "unwrapIfClosure",
+                      "class": "Illuminate\\Container\\Util",
+                      "type": "::"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
+                      "line": 37,
+                      "function": "callBoundMethod",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php",
+                      "line": 661,
+                      "function": "call",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php",
+                      "line": 183,
+                      "function": "call",
+                      "class": "Illuminate\\Container\\Container",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Command/Command.php",
+                      "line": 312,
+                      "function": "execute",
+                      "class": "Illuminate\\Console\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php",
+                      "line": 153,
+                      "function": "run",
+                      "class": "Symfony\\Component\\Console\\Command\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Application.php",
+                      "line": 1022,
+                      "function": "run",
+                      "class": "Illuminate\\Console\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Application.php",
+                      "line": 314,
+                      "function": "doRunCommand",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Application.php",
+                      "line": 168,
+                      "function": "doRun",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Console/Application.php",
+                      "line": 102,
+                      "function": "run",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php",
+                      "line": 155,
+                      "function": "run",
+                      "class": "Illuminate\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/artisan",
+                      "line": 37,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Console\\Kernel",
+                      "type": "->"
+                  }
+              ]
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '58'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -72,11 +740,160 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - GET
-    uri: api/test
+      - POST
+    uri: api/bill/add
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Bill create'
+      description: 'API dùng để tạo hóa đơn'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      pdone_id:
+        name: pdone_id
+        description: 'user của người dùng mua hàng'
+        required: false
+        example: facere
+        type: mã
+        custom: []
+      name:
+        name: name
+        description: 'người dùng'
+        required: false
+        example: vel
+        type: tên
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'điện thoại'
+        required: false
+        example: consequatur
+        type: số
+        custom: []
+      address:
+        name: address
+        description: chỉ
+        required: false
+        example: magni
+        type: địa
+        custom: []
+      province:
+        name: province
+        description: 'Must be at least 1.'
+        required: true
+        example: 62
+        type: number
+        custom: []
+      data:
+        name: data
+        description: 'liệu sản phẩm id:id sản phẩm, vshop_id: mã vshop,quantity:số lượng sản phẩm [{"id":"19","vshop_id":"MVS123123","quantity":12},{"id":"20","vshop_id":"MVS123123","quantity":12}]'
+        required: false
+        example: inventore
+        type: dữ
+        custom: []
+      district:
+        name: district
+        description: 'Must be at least 1.'
+        required: true
+        example: 85
+        type: number
+        custom: []
+      id_vshop:
+        name: id_vshop
+        description: 'user của vshop'
+        required: false
+        example: ut
+        type: mã
+        custom: []
+    cleanBodyParameters:
+      pdone_id: facere
+      name: vel
+      phone_number: consequatur
+      address: magni
+      province: 62
+      data: inventore
+      district: 85
+      id_vshop: ut
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/bill/detail/{id}'
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'chi tiết hóa đơn'
+      description: 'API này sẽ trả về chi tiết 1 hóa đơn'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the detail.'
+        required: true
+        example: aut
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: aut
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status_code":200,"message":"successfully retrieved information","data":null}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '34'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/bill/checkout
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -93,459 +910,548 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/bill/{id}'
+    metadata:
+      groupName: Bill
+      groupDescription: |-
+
+        Danh sách api liên quan hóa dơn
+      subgroup: ''
+      subgroupDescription: ''
+      title: Bill
+      description: 'API dùng để lấy danh sách hóa đơn của 1 người dùng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the bill.'
+        required: true
+        example: 18
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 18
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
     responses:
       -
         status: 500
         content: |-
           {
-              "message": "Trying to access array offset on value of type null",
-              "exception": "ErrorException",
-              "file": "D:\\vvstore\\vstore-backend\\app\\Http\\Controllers\\TestController.php",
-              "line": 31,
+              "message": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause' (SQL: select * from `bills` where `user_id` = 18)",
+              "exception": "Illuminate\\Database\\QueryException",
+              "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+              "line": 760,
               "trace": [
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php",
-                      "line": 266,
-                      "function": "handleError",
-                      "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+                      "line": 720,
+                      "function": "runQueryCallback",
+                      "class": "Illuminate\\Database\\Connection",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\app\\Http\\Controllers\\TestController.php",
-                      "line": 31,
-                      "function": "Illuminate\\Foundation\\Bootstrap\\{closure}",
-                      "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+                      "line": 422,
+                      "function": "run",
+                      "class": "Illuminate\\Database\\Connection",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 2706,
+                      "function": "select",
+                      "class": "Illuminate\\Database\\Connection",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 2694,
+                      "function": "runSelect",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 3230,
+                      "function": "Illuminate\\Database\\Query\\{closure}",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+                      "line": 2695,
+                      "function": "onceWithColumns",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+                      "line": 710,
+                      "function": "get",
+                      "class": "Illuminate\\Database\\Query\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+                      "line": 694,
+                      "function": "getModels",
+                      "class": "Illuminate\\Database\\Eloquent\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/app/Http/Controllers/Api/BillController.php",
+                      "line": 39,
+                      "function": "get",
+                      "class": "Illuminate\\Database\\Eloquent\\Builder",
+                      "type": "->"
+                  },
+                  {
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Controller.php",
                       "line": 54,
                       "function": "index",
-                      "class": "App\\Http\\Controllers\\TestController",
+                      "class": "App\\Http\\Controllers\\Api\\BillController",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php",
                       "line": 43,
                       "function": "callAction",
                       "class": "Illuminate\\Routing\\Controller",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
                       "line": 260,
                       "function": "dispatch",
                       "class": "Illuminate\\Routing\\ControllerDispatcher",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
                       "line": 205,
                       "function": "runController",
                       "class": "Illuminate\\Routing\\Route",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 798,
                       "function": "run",
                       "class": "Illuminate\\Routing\\Route",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 141,
                       "function": "Illuminate\\Routing\\{closure}",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
                       "line": 50,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
                       "line": 126,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
                       "line": 102,
                       "function": "handleRequest",
                       "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
                       "line": 54,
                       "function": "handleRequestUsingNamedLimiter",
                       "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 116,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 799,
                       "function": "then",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 776,
                       "function": "runRouteWithinStack",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 740,
                       "function": "runRoute",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
                       "line": 729,
                       "function": "dispatchToRoute",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
                       "line": 190,
                       "function": "dispatch",
                       "class": "Illuminate\\Routing\\Router",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 141,
                       "function": "Illuminate\\Foundation\\Http\\{closure}",
                       "class": "Illuminate\\Foundation\\Http\\Kernel",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
                       "line": 21,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
                       "line": 31,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
                       "line": 21,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php",
                       "line": 40,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php",
                       "line": 27,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
                       "line": 86,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php",
                       "line": 62,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Http\\Middleware\\HandleCors",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php",
                       "line": 39,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 180,
                       "function": "handle",
                       "class": "Illuminate\\Http\\Middleware\\TrustProxies",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
                       "line": 116,
                       "function": "Illuminate\\Pipeline\\{closure}",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
                       "line": 165,
                       "function": "then",
                       "class": "Illuminate\\Pipeline\\Pipeline",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
                       "line": 134,
                       "function": "sendRequestThroughRouter",
                       "class": "Illuminate\\Foundation\\Http\\Kernel",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 299,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Http\\Kernel",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 287,
                       "function": "callLaravelOrLumenRoute",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 92,
                       "function": "makeApiCall",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 45,
                       "function": "makeResponseCall",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Strategies/Responses/ResponseCalls.php",
                       "line": 35,
                       "function": "makeResponseCallIfConditionsPass",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
                       "line": 209,
                       "function": "__invoke",
                       "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
                       "line": 166,
                       "function": "iterateThroughStrategies",
                       "class": "Knuckles\\Scribe\\Extracting\\Extractor",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Extracting/Extractor.php",
                       "line": 95,
                       "function": "fetchResponses",
                       "class": "Knuckles\\Scribe\\Extracting\\Extractor",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
                       "line": 124,
                       "function": "processRoute",
                       "class": "Knuckles\\Scribe\\Extracting\\Extractor",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
                       "line": 71,
                       "function": "extractEndpointsInfoFromLaravelApp",
                       "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/GroupedEndpoints/GroupedEndpointsFromApp.php",
                       "line": 49,
                       "function": "extractEndpointsInfoAndWriteToDisk",
                       "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
+                      "file": "/var/www/vstore-backend/vendor/knuckleswtf/scribe/src/Commands/GenerateDocumentation.php",
                       "line": 51,
                       "function": "get",
                       "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
                       "line": 36,
                       "function": "handle",
                       "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php",
                       "line": 41,
                       "function": "Illuminate\\Container\\{closure}",
                       "class": "Illuminate\\Container\\BoundMethod",
                       "type": "::"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
                       "line": 93,
                       "function": "unwrapIfClosure",
                       "class": "Illuminate\\Container\\Util",
                       "type": "::"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php",
                       "line": 37,
                       "function": "callBoundMethod",
                       "class": "Illuminate\\Container\\BoundMethod",
                       "type": "::"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php",
                       "line": 661,
                       "function": "call",
                       "class": "Illuminate\\Container\\BoundMethod",
                       "type": "::"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php",
                       "line": 183,
                       "function": "call",
                       "class": "Illuminate\\Container\\Container",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Command\\Command.php",
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Command/Command.php",
                       "line": 312,
                       "function": "execute",
                       "class": "Illuminate\\Console\\Command",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php",
                       "line": 153,
                       "function": "run",
                       "class": "Symfony\\Component\\Console\\Command\\Command",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Application.php",
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Application.php",
                       "line": 1022,
                       "function": "run",
                       "class": "Illuminate\\Console\\Command",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Application.php",
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Application.php",
                       "line": 314,
                       "function": "doRunCommand",
                       "class": "Symfony\\Component\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\symfony\\console\\Application.php",
+                      "file": "/var/www/vstore-backend/vendor/symfony/console/Application.php",
                       "line": 168,
                       "function": "doRun",
                       "class": "Symfony\\Component\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Console/Application.php",
                       "line": 102,
                       "function": "run",
                       "class": "Symfony\\Component\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+                      "file": "/var/www/vstore-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php",
                       "line": 155,
                       "function": "run",
                       "class": "Illuminate\\Console\\Application",
                       "type": "->"
                   },
                   {
-                      "file": "D:\\vvstore\\vstore-backend\\artisan",
+                      "file": "/var/www/vstore-backend/artisan",
                       "line": 37,
                       "function": "handle",
                       "class": "Illuminate\\Foundation\\Console\\Kernel",
@@ -558,47 +1464,6 @@ endpoints:
           content-type: application/json
           x-ratelimit-limit: '60'
           x-ratelimit-remaining: '33'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/get-city
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '[{"PROVINCE_ID":1,"PROVINCE_CODE":"HNI","PROVINCE_NAME":"H\u00e0 N\u1ed9i"},{"PROVINCE_ID":2,"PROVINCE_CODE":"HCM","PROVINCE_NAME":"H\u1ed3 Ch\u00ed Minh"},{"PROVINCE_ID":3,"PROVINCE_CODE":"HPG","PROVINCE_NAME":"H\u1ea3i Ph\u00f2ng"},{"PROVINCE_ID":4,"PROVINCE_CODE":"DNG","PROVINCE_NAME":"\u0110\u00e0 N\u1eb5ng"},{"PROVINCE_ID":5,"PROVINCE_CODE":"CTO","PROVINCE_NAME":"C\u1ea7n Th\u01a1"},{"PROVINCE_ID":6,"PROVINCE_CODE":"TGG","PROVINCE_NAME":"Ti\u1ec1n Giang"},{"PROVINCE_ID":8,"PROVINCE_CODE":"HUG","PROVINCE_NAME":"H\u1eadu Giang"},{"PROVINCE_ID":9,"PROVINCE_CODE":"DKG","PROVINCE_NAME":"\u0110\u0103k N\u00f4ng"},{"PROVINCE_ID":10,"PROVINCE_CODE":"VPC","PROVINCE_NAME":"V\u0129nh Ph\u00fac"},{"PROVINCE_ID":11,"PROVINCE_CODE":"BNH","PROVINCE_NAME":"B\u1eafc Ninh"},{"PROVINCE_ID":12,"PROVINCE_CODE":"HDG","PROVINCE_NAME":"H\u1ea3i D\u01b0\u01a1ng"},{"PROVINCE_ID":13,"PROVINCE_CODE":"HYN","PROVINCE_NAME":"H\u01b0ng Y\u00ean"},{"PROVINCE_ID":14,"PROVINCE_CODE":"HNM","PROVINCE_NAME":"H\u00e0 Nam"},{"PROVINCE_ID":15,"PROVINCE_CODE":"NDH","PROVINCE_NAME":"Nam \u00d0\u1ecbnh"},{"PROVINCE_ID":16,"PROVINCE_CODE":"TBH","PROVINCE_NAME":"Th\u00e1i B\u00ecnh"},{"PROVINCE_ID":17,"PROVINCE_CODE":"NBH","PROVINCE_NAME":"Ninh B\u00ecnh"},{"PROVINCE_ID":18,"PROVINCE_CODE":"HGG","PROVINCE_NAME":"H\u00e0 Giang"},{"PROVINCE_ID":19,"PROVINCE_CODE":"CBG","PROVINCE_NAME":"Cao B\u1eb1ng"},{"PROVINCE_ID":20,"PROVINCE_CODE":"LCI","PROVINCE_NAME":"L\u00e0o Cai"},{"PROVINCE_ID":21,"PROVINCE_CODE":"BKN","PROVINCE_NAME":"B\u1eafc K\u1ea1n"},{"PROVINCE_ID":22,"PROVINCE_CODE":"LSN","PROVINCE_NAME":"L\u1ea1ng S\u01a1n"},{"PROVINCE_ID":23,"PROVINCE_CODE":"TQG","PROVINCE_NAME":"Tuy\u00ean Quang"},{"PROVINCE_ID":24,"PROVINCE_CODE":"YBN","PROVINCE_NAME":"Y\u00ean B\u00e1i"},{"PROVINCE_ID":25,"PROVINCE_CODE":"TNN","PROVINCE_NAME":"Th\u00e1i Nguy\u00ean"},{"PROVINCE_ID":26,"PROVINCE_CODE":"PHO","PROVINCE_NAME":"Ph\u00fa Th\u1ecd"},{"PROVINCE_ID":27,"PROVINCE_CODE":"BGG","PROVINCE_NAME":"B\u1eafc Giang"},{"PROVINCE_ID":28,"PROVINCE_CODE":"QNH","PROVINCE_NAME":"Qu\u1ea3ng Ninh"},{"PROVINCE_ID":29,"PROVINCE_CODE":"LCU","PROVINCE_NAME":"Lai Ch\u00e2u"},{"PROVINCE_ID":30,"PROVINCE_CODE":"SLA","PROVINCE_NAME":"S\u01a1n La"},{"PROVINCE_ID":31,"PROVINCE_CODE":"HBH","PROVINCE_NAME":"H\u00f2a B\u00ecnh"},{"PROVINCE_ID":32,"PROVINCE_CODE":"THA","PROVINCE_NAME":"Thanh H\u00f3a"},{"PROVINCE_ID":33,"PROVINCE_CODE":"NAN","PROVINCE_NAME":"Ngh\u1ec7 An"},{"PROVINCE_ID":34,"PROVINCE_CODE":"HTH","PROVINCE_NAME":"H\u00e0 T\u0129nh"},{"PROVINCE_ID":35,"PROVINCE_CODE":"QBH","PROVINCE_NAME":"Qu\u1ea3ng B\u00ecnh"},{"PROVINCE_ID":36,"PROVINCE_CODE":"QTI","PROVINCE_NAME":"Qu\u1ea3ng Tr\u1ecb"},{"PROVINCE_ID":37,"PROVINCE_CODE":"HUE","PROVINCE_NAME":"Th\u1eeba Thi\u00ean - Hu\u1ebf"},{"PROVINCE_ID":38,"PROVINCE_CODE":"QNM","PROVINCE_NAME":"Qu\u1ea3ng Nam"},{"PROVINCE_ID":39,"PROVINCE_CODE":"QNI","PROVINCE_NAME":"Qu\u1ea3ng Ng\u00e3i"},{"PROVINCE_ID":40,"PROVINCE_CODE":"BDH","PROVINCE_NAME":"B\u00ecnh \u00d0\u1ecbnh"},{"PROVINCE_ID":41,"PROVINCE_CODE":"PYN","PROVINCE_NAME":"Ph\u00fa Y\u00ean"},{"PROVINCE_ID":42,"PROVINCE_CODE":"KHA","PROVINCE_NAME":"Kh\u00e1nh H\u00f2a"},{"PROVINCE_ID":43,"PROVINCE_CODE":"KTM","PROVINCE_NAME":"Kon Tum"},{"PROVINCE_ID":44,"PROVINCE_CODE":"GLI","PROVINCE_NAME":"Gia Lai"},{"PROVINCE_ID":45,"PROVINCE_CODE":"DLK","PROVINCE_NAME":"\u0110\u0103k L\u0103k"},{"PROVINCE_ID":46,"PROVINCE_CODE":"LDG","PROVINCE_NAME":"L\u00e2m \u00d0\u1ed3ng"},{"PROVINCE_ID":47,"PROVINCE_CODE":"NTN","PROVINCE_NAME":"Ninh Thu\u1eadn"},{"PROVINCE_ID":48,"PROVINCE_CODE":"BPC","PROVINCE_NAME":"B\u00ecnh Ph\u01b0\u1edbc"},{"PROVINCE_ID":49,"PROVINCE_CODE":"TNH","PROVINCE_NAME":"T\u00e2y Ninh"},{"PROVINCE_ID":50,"PROVINCE_CODE":"BDG","PROVINCE_NAME":"B\u00ecnh D\u01b0\u01a1ng"},{"PROVINCE_ID":51,"PROVINCE_CODE":"DNI","PROVINCE_NAME":"\u0110\u1ed3ng Nai"},{"PROVINCE_ID":52,"PROVINCE_CODE":"BTN","PROVINCE_NAME":"B\u00ecnh Thu\u1eadn"},{"PROVINCE_ID":53,"PROVINCE_CODE":"VTU","PROVINCE_NAME":"B\u00e0 r\u1ecba - V\u0169ng t\u00e0u"},{"PROVINCE_ID":54,"PROVINCE_CODE":"LAN","PROVINCE_NAME":"Long An"},{"PROVINCE_ID":55,"PROVINCE_CODE":"DTP","PROVINCE_NAME":"\u0110\u1ed3ng Th\u00e1p"},{"PROVINCE_ID":56,"PROVINCE_CODE":"AGG","PROVINCE_NAME":"An Giang"},{"PROVINCE_ID":57,"PROVINCE_CODE":"VLG","PROVINCE_NAME":"V\u0129nh Long"},{"PROVINCE_ID":58,"PROVINCE_CODE":"BTE","PROVINCE_NAME":"B\u1ebfn Tre"},{"PROVINCE_ID":59,"PROVINCE_CODE":"KGG","PROVINCE_NAME":"Ki\u00ean Giang"},{"PROVINCE_ID":60,"PROVINCE_CODE":"TVH","PROVINCE_NAME":"Tr\u00e0 Vinh"},{"PROVINCE_ID":61,"PROVINCE_CODE":"STG","PROVINCE_NAME":"S\u00f3c Tr\u0103ng"},{"PROVINCE_ID":62,"PROVINCE_CODE":"BLU","PROVINCE_NAME":"B\u1ea1c Li\u00eau"},{"PROVINCE_ID":63,"PROVINCE_CODE":"CMU","PROVINCE_NAME":"C\u00e0 Mau"},{"PROVINCE_ID":64,"PROVINCE_CODE":"DBN","PROVINCE_NAME":"\u0110i\u1ec7n Bi\u00ean"}]'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '32'
           access-control-allow-origin: '*'
         description: null
         custom: []

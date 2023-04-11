@@ -270,7 +270,7 @@
         <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
             <button type="submit"
                     class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
-            >Tiếp tục
+            >mua ngay
             </button>
             <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
                                                                              class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
