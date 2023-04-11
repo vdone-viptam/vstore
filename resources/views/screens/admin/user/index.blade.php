@@ -185,7 +185,7 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">10</strong></span>
+                            class="font-bold">{{$count}}</strong></span>
                     {{$users->withQueryString()->links()}}
                     {{--                    @include('layouts.custom.paginator', ['paginator' => ])--}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">

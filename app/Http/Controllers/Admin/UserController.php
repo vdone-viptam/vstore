@@ -52,7 +52,9 @@ class UserController extends Controller
                 ->where('order_service.status', 1)
                 ->where('payment_status', 1);
         }
+        $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
+
         $this->v['params'] = $request->all();
         return view('screens.admin.user.index', $this->v);
     }

@@ -63,7 +63,7 @@ class ProductController extends Controller
             }
             $products = $products->select($selected);
             if ($request->category_id) {
-                $products = $products->where('category_id', $request->category_id);
+                $products = $products->where('category_id', $request->category_id)->get();
             }
             if ($request->order_by == 1) {
 
@@ -545,10 +545,10 @@ class ProductController extends Controller
         $product->discount = $discount ?? 0;
 //        $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
-        $list_vshop = VshopProduct::where('product_id', $id)->get();
 //        $list_vshop = Vshop::
         $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
+            ->whereIn('status',[1,2])
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 
@@ -690,7 +690,7 @@ class ProductController extends Controller
         $cate = [];
 
         $products = DB::table('vshop')
-            ->select('products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop as discount_vstore', 'categories.name as cate_name')
+            ->select('products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop as discountVstore', 'categories.name as cate_name')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
