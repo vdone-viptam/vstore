@@ -99,7 +99,7 @@ class OrderController extends Controller
         $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
         $order->shipping = 0; // Tổng phí ship
         $order->total = $product->price * $quantity;
-        $order->address = $request->address;
+        $order->address = $address;
         $totalDiscount = 0;
 
         if (isset($discount['discountsFromSuppliers'])) {
