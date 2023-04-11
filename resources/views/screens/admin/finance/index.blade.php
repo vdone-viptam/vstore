@@ -57,7 +57,7 @@
                         action="{{route('screens.admin.finance.exportDeposits')}}"
                         method="GET">
                         <input type="hidden" value="{{$limit}}" name="limit">
-                        <input type="hidden" value="{{($histories->currentPage() * 10) - 10}}" name="offset">
+                        <input type="hidden" value="{{($histories->currentPage() * 10)}}" name="offset">
                         <button
                             class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
