@@ -56,8 +56,8 @@
                                     <div class="form-group old pass w-full relative">
                                         <label for="name">Mật khẩu cũ</label>
                                         <input required type="password" class="form-control form-control-lg pass"
-                                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
-                                               title="Mật khẩu ít nhất 8 ký tự, ít nhất 1 chữ hoa, 1 chữ thường, 1 ký tự đặc biệt, 1 chữ số"
+                                               {{-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$" --}}
+                                               {{-- title="Mật khẩu ít nhất 8 ký tự, ít nhất 1 chữ hoa, 1 chữ thường, 1 ký tự đặc biệt, 1 chữ số" --}}
                                                id="old_password" name='old_password'>
                                         <div class="icon-password">
                                             <svg width="16" height="16" class="icon cursor-pointer absolute top-[45px] right-[10px]" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
