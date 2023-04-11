@@ -723,6 +723,7 @@ class ProductController extends Controller
 
 
         $products = $products->paginate($limit);
+
         foreach ($products as $pr) {
             $cate[] = $pr->cate_name;
             $pr->discount = DB::table('discounts')

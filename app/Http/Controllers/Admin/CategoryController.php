@@ -23,12 +23,21 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
+        $page = $request->page ?? 1;
         $this->v['categories'] = Category::select('id', 'name', 'img');
         if (isset($request->keyword)) {
             $this->v['categories'] = $this->v['categories']->orwhere('name', 'like', '%' . $request->keyword . '%');
         }
         $this->v['params'] = $request->all();
         $this->v['categories'] = $this->v['categories']->paginate($limit);
+        if($page >1){
+            $this->v['limit_limit'] = $limit *($page -1)+1;
+        }else{
+            $this->v['limit_limit'] = 1;
+        }
+
+
+//        return $this->v['categories'];
         return view('screens.admin.category.index', $this->v);
     }
 
