@@ -545,10 +545,10 @@ class ProductController extends Controller
         $product->discount = $discount ?? 0;
 //        $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
-        $list_vshop = VshopProduct::where('product_id', $id)->get();
 //        $list_vshop = Vshop::
         $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
+            ->whereIn('status',[1,2])
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 
