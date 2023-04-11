@@ -53,11 +53,11 @@ class OrderController extends Controller
         $vshopId = $request->vshop_id;
         $quantity = $request->quantity;
 
-        $checkVshopId = VshopProduct::where('vshop_id',$vshopId)
-        ->where('product_id',$request->product_id)
-        ->first();
-        if (!$checkVshopId){
-            $vshopId = Vshop::where('pdone_id',247)->first();
+        $checkVshopId = VshopProduct::where('vshop_id', $vshopId)
+            ->where('product_id', $request->product_id)
+            ->first();
+        if (!$checkVshopId) {
+            $vshopId = Vshop::where('pdone_id', 247)->first();
         }
 
         $product = Product::where('products.id', $request->product_id)
@@ -577,7 +577,7 @@ class OrderController extends Controller
                 'quantity', 'order_id', 'product_id', 'export_status', 'order.updated_at');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
-                ->where('status', '!=', 2)
+                ->where('order.status', '!=', 2)
                 ->orderBy('order.updated_at', 'desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10 && $status != 5 && $status != 4) {
