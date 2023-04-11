@@ -140,7 +140,7 @@
                                             class="text-[#FF4D4F]">*</strong>
                                     </p>
 
-                                    <input type="number" min="0" max="99" name="vat"
+                                    <input required type="number" min="0" max="99" name="vat"
                                            value="{{old('vat')}}"
                                            placeholder="Nhập VAT (%)"
                                            class="w-full outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -156,7 +156,7 @@
                                             class="text-[#FF4D4F]">*</strong>
                                     </p>
 
-                                    <input type="number" name="discount" id="discount" min="0" max="99"
+                                    <input required type="number" name="discount" id="discount" min="0" max="99"
                                            value="{{old('discount')}}"
                                            placeholder="Nhập mức chiết khấu (%)"
                                            class="w-full outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -181,7 +181,7 @@
                                                         <span
                                                             class="text-title font-medium">Chọn sản phẩm xét duyệt <strong
                                                                 class="text-[#FF4D4F]">*</strong></span>
-                        <select name="product_id" id="product_id"
+                        <select required name="product_id" id="product_id"
                                 class="th choose-sp text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             <option value="" selected disabled>Chọn sản phẩm cần xét duyệt</option>
                             @foreach($products as $product)
@@ -218,7 +218,7 @@
                     <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Vai trò đối với sản phẩm<strong
                                     class="text-[#FF4D4F]">*</strong></span>
-                        <select name="role" id="role"
+                        <select required name="role" id="role"
                                 class="th choose-vt text-title outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             <option value="" disabled selected>Chọn vai trò</option>
                             <option value="1" {{old('role') == 1 ? 'selected' : '' }}>Nhà sản xuất</option>
@@ -230,7 +230,7 @@
                         <span class="text-title font-medium">Tài liệu sản phẩm <strong
                                 class="text-[#FF4D4F]">*</strong></span>
                         {{--                        <div class="file-sp flex justify-center items-start gap-4 flex-wrap md:justify-start"></div>--}}
-                        <input type="file" id="images[]" name="images[]" multiple>
+                        <input required type="file" id="images[]" name="images[]" multiple accept="image/png, image/gif, image/jpeg">
                         @error('images')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -247,7 +247,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="{{isset(old('sl')[0]) ? old('sl')[0] : ''}}" required
+                            <input required type="number" value="{{isset(old('sl')[0]) ? old('sl')[0] : ''}}" required
                                    name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
                             <div></div>
@@ -255,7 +255,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                                 <span
                                     class="text-title font-medium whitespace-nowrap">Chiết khấu (%)</span>
-                            <input type="number" value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}" min="1"
+                            <input required type="number" value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}" min="1"
                                    max="100" name="moneyv[]" id=""
                                    class="moneyv outline-none w-full bg-opa py-2 px-3 border-[1px] border-[#D9D9D9]    rounded-sm">
                             <p class="text-red-600 messageE"></p>
@@ -275,7 +275,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="{{isset(old('sl')[1]) ? old('sl')[1] : ''}}" required
+                            <input type="number" value="{{isset(old('sl')[1]) ? old('sl')[1] : ''}}"
                                    name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
                             <div></div>
@@ -303,7 +303,7 @@
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
 
                             <span class="text-title font-medium">Số lượng sản phẩm</span>
-                            <input type="number" value="{{isset(old('sl')[2]) ? old('sl')[2] : ''}}" required
+                            <input type="number" value="{{isset(old('sl')[2]) ? old('sl')[2] : ''}}"
                                    name="sl[]" id=""
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9]   rounded-sm">
                             <div></div>
@@ -342,16 +342,15 @@
                         class="text-[#FF4D4F]">*</strong></span>
                     <div class="flex justify-start items-center gap-4 flex-wrap">
                         <div>
-                            <input type="radio" name="prepay"
+                            <input required type="radio" name="prepay"
                                    {{old('prepay') == 1 ? 'checked' : ''}} value="1"
-                                   class="accent-primary w-4 h-4">
-                            <span
-                                class="text-s   document.getElementById('discount')econdary">Chỉ thanh toán trước</span>
+                                   class="accent-primary w-4 h-4" id="check_prepay_one">
+                            <label for="check_prepay_one" class="text-s">Chỉ thanh toán trước</label>
                         </div>
                         <div>
-                            <input type="radio" name="prepay" value="2" {{old('prepay') == 2 ? 'checked' : ''}}
-                            class="accent-primary w-4 h-4">
-                            <span class="text-s">Tất cả phương thức thanh toán</span>
+                            <input required type="radio" name="prepay" value="2" {{old('prepay') == 2 ? 'checked' : ''}}
+                            class="accent-primary w-4 h-4" id="check_prepay">
+                            <label for="check_prepay" class="text-s">Tất cả phương thức thanh toán</label>
                         </div>
                         {{--                        <div>--}}
                         {{--                            <input type="checkbox" name="prepay[]"--}}

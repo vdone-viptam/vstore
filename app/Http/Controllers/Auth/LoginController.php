@@ -81,7 +81,8 @@ class LoginController extends Controller
         return view('auth.admin.login');
     }
 
-    public function postRegisterOrder(Request $request){
+    public function postRegisterOrder(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER',
             'order_id' => 'required',
@@ -89,7 +90,8 @@ class LoginController extends Controller
 
         $order_id = $request->order_id;
 
-        if ($validator->fails()) {}
+        if ($validator->fails()) {
+        }
 
         $method = $request->method_payment;
 
@@ -97,7 +99,7 @@ class LoginController extends Controller
             ->where('status', 2)
             ->first();
 
-        if(!$order) {
+        if (!$order) {
             return redirect()->back()->withErrors([
                 "orderErr" => "Hành động không được thực hiện, vui lòng thử lại"
             ]);
@@ -121,7 +123,7 @@ class LoginController extends Controller
             'time' => $time,
             'invoice_no' => $invoiceNo,
             'description' => 'Mua dịch vụ',
-            'amount' => $amount + ($amount*(10/100)),
+            'amount' => $amount + ($amount * (10 / 100)),
             'back_url' => $backUrl,
             'return_url' => $returnUrl,
             'method' => $method,
@@ -468,7 +470,7 @@ class LoginController extends Controller
                 $role_id = 4;
             }
 
-            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id]) || Auth::attempt(['code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
+            if (Auth::attempt(['account_code' => $request->email, 'password' => $request->password, 'role_id' => $role_id])) {
                 if (Auth::user()->status == 4) {
                     return redirect()->back()->with('error', 'Tài khoản đã hết hạn sử dụng.Liên hệ quản trị viên để gia hạn tài khoản');
                 }
@@ -773,18 +775,18 @@ class LoginController extends Controller
     {
         if ($request->type == 2) {
 
-            $response = District::select('district_id as DISTRICT_ID','district_name as DISTRICT_NAME','district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
-            ->where('province_id',$request->value)->get();
+            $response = District::select('district_id as DISTRICT_ID', 'district_name as DISTRICT_NAME', 'district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
+                ->where('province_id', $request->value)->get();
 //            return  $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
-          return $response;
+            return $response;
         } elseif ($request->type == 3) {
-            $response = Ward::select('wards_id as WARDS_ID','district_id as DISTRICT_ID','wards_name as WARDS_NAME')->where('district_id',$request->value)->get();
+            $response = Ward::select('wards_id as WARDS_ID', 'district_id as DISTRICT_ID', 'wards_name as WARDS_NAME')->where('district_id', $request->value)->get();
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
             return $response;
         } else {
-            $response = Province::select('province_id as PROVINCE_ID','province_code as PROVINCE_CODE','province_name as PROVINCE_NAME')->get();
-            return  $response;
+            $response = Province::select('province_id as PROVINCE_ID', 'province_code as PROVINCE_CODE', 'province_name as PROVINCE_NAME')->get();
+            return $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 //            return $response->json('data');
 

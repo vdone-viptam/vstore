@@ -37,14 +37,20 @@ class UserController extends Controller
         $this->v['users'] = User::select();
         $limit = $request->limit ?? 10;
         if (isset($request->keyword)) {
-            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('email', 'like', '%' . $request->keyword . '%')
-                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
-                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
-                ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
-                ->orwhere('address', 'like', '%' . $request->keyword . '%');
+            $this->v['users'] = $this->v['users']
+                ->where(function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('company_name', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('email', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('tax_code', '=', $request->keyword)
+                        ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('address', 'like', '%' . $request->keyword . '%');
+                })
+                ->join('order_service', 'users.id', '=', 'order_service.user_id')
+                ->where('order_service.status', 1)
+                ->where('payment_status', 1);
         }
         $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
