@@ -5,6 +5,7 @@ use App\Models\Discount;
 use App\Models\District;
 use App\Models\Province;
 use Illuminate\Support\Carbon;
+use GuzzleHttp\Client;
 
 function calculateShippingByProductID($productID, $districtId, $provinceId, $wardId)
 {
@@ -29,6 +30,9 @@ function calculateShippingByProductID($productID, $districtId, $provinceId, $war
     if (!$district || !$province || !$ward) {
         return false;
     }
+
+    $warehouse = \App\Models\Warehouses::find(2);
+    return $warehouse;
     $address = $ward->wards_name . ", " . $district->district_name . ", " . $province->province_name;
     $result = app('geocoder')->geocode($address)->get();
     if (count($result) < 1) {
