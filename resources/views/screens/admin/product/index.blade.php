@@ -86,7 +86,9 @@
                     <table class="w-full dsth">
                         <thead>
                         <tr>
-
+                            <th>
+                                STT
+                            </th>
 
                             <th>
                                 Tên sản phẩm
@@ -114,6 +116,7 @@
                             @foreach($requests as $request)
 
                                 <tr>
+                                    <td class="text-left">{{$loop->iteration}}</td>
                                     <td class="text-left">
                                         {{$request->product_name}}
                                     </td>
