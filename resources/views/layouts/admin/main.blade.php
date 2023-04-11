@@ -52,7 +52,7 @@
     </div>
 </div>
 @include('layouts.js')
-@yield('custom_js')
+
 <script>
     let url = window.location.href.split('/');
     let tm = document.querySelectorAll(".tab__menu")
@@ -157,6 +157,7 @@
         }
     });
 </script>
+@yield('custom_js')
 </body>
 
 
