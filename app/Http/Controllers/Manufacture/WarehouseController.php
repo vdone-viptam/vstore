@@ -51,7 +51,8 @@ class WarehouseController extends Controller
 
         if (!DB::table('product_warehouses')->where('product_id', $request->product_id)->where('ware_id', $request->ware_id)->first()) {
             $model = new ProductWarehouses();
-            $model->fill($request->only('product_id', 'ware_id', 'amount'));
+            $model->fill($request->only('product_id', 'ware_id'));
+            $model->amount = 0;
             $model->status = 0;
             $model->code = \Illuminate\Support\Str::random(12);
             $model->export = 0;
