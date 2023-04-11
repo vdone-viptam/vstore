@@ -52,18 +52,13 @@
     </div>
 </div>
 @include('layouts.js')
-@yield('custom_js')
-</body>
-<script>
-    $('.more-details').on('click', function () {
-        $('.modal-details').toggleClass('show-modal');
-    })
 
-    const url = window.location.href.split('/');
-    const tm = document.querySelectorAll(".tab__menu")
-    const l = document.getElementsByClassName("list")
-    const param = url[3];
-    const a = url[4] || '/';
+<script>
+    let url = window.location.href.split('/');
+    let tm = document.querySelectorAll(".tab__menu")
+    let l = document.getElementsByClassName("list")
+    let param = url[3];
+    let a = url[4] || '/';
     if (param.includes('dashboard')) {
         tm[0].classList.toggle("active")
     }
@@ -162,5 +157,8 @@
         }
     });
 </script>
+@yield('custom_js')
+</body>
+
 
 </html>

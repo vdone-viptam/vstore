@@ -232,8 +232,10 @@ class LoginController extends Controller
                 'volume.required' => 'Thể tích kho bắt buộc nhập',
                 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
                 'image_storage.image' => 'Không đúng định dạng ảnh',
+                'image_storage.*' => 'Không đúng định dạng ảnh !',
                 'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'image_pccc.image' => 'Không đúng định dạng ảnh',
+                'image_pccc.*' => 'Không đúng định dạng ảnh !',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'ward_id' => 'Phường (xã) bắt buộc chọn',
@@ -527,7 +529,7 @@ class LoginController extends Controller
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
         }
-        if ($domain == config('domain.vstore')) {
+        if ($domain == config('domain.storage')) {
             $role_id = 4;
         }
         return view('auth.forgotPassword', ['role_id' => $role_id]);

@@ -20,7 +20,7 @@
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                 >
                 <button type="submit"
-                        class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
+                        class="btnSearch btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
 
                     Tìm kiếm
@@ -130,7 +130,8 @@
                                     </td>
                                     <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
-                                            <a onclick="return confirm('Vui lòng xác nhận')" class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                            <a onclick="return confirm('Vui lòng xác nhận')"
+                                               class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                                href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>
@@ -185,12 +186,10 @@
     <script>
 
 
-
-        const name = document.getElementById('name');
-        const id = document.getElementById('id');
-        const limit = document.getElementById('limit');
-        const page = document.getElementById('page1');
-        const form = document.getElementById('form');
+        let name = document.getElementById('name');
+        let id = document.getElementById('id');
+        let limit = document.getElementById('limit');
+        let form = document.getElementById('form');
         document.getElementById('btnSearch').addEventListener('click', () => {
                 form.submit();
             }
@@ -198,9 +197,6 @@
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-
-    </script>
-    <script type="text/javascript">
         var elems = document.getElementsByClassName('confirmation');
         var confirmIt = function (e) {
             if (!confirm('Are you sure?')) e.preventDefault();
