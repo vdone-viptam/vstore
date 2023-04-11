@@ -53,12 +53,7 @@
 </div>
 @include('layouts.js')
 @yield('custom_js')
-</body>
 <script>
-    $('.more-details').on('click', function () {
-        $('.modal-details').toggleClass('show-modal');
-    })
-
     const url = window.location.href.split('/');
     const tm = document.querySelectorAll(".tab__menu")
     const l = document.getElementsByClassName("list")
@@ -162,5 +157,7 @@
         }
     });
 </script>
+</body>
+
 
 </html>
