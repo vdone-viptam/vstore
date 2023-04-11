@@ -130,7 +130,8 @@
                                     </td>
                                     <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
-                                            <a onclick="return confirm('Vui lòng xác nhận')" class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                            <a onclick="return confirm('Vui lòng xác nhận')"
+                                               class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                                href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>
@@ -148,7 +149,9 @@
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
                             class="font-bold">{{$users->total()}}</strong></span>
-                    {{$users->withQueryString()->links()}}
+                    <nav>
+                        {{$users->withQueryString()->links()}}
+                    </nav>
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
@@ -183,7 +186,6 @@
 
 @section('custom_js')
     <script>
-
 
 
         const name = document.getElementById('name');
