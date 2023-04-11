@@ -108,9 +108,9 @@ class AccountController extends Controller
             $address = $user->ward->wards_name . ',' . $user->district->district_name . ', ' . $user->province->province_name;
 
             $result = app('geocoder')->geocode($address)->get();
-//            if (!isset($result[0])) {
-//                return redirect()->back()->with('error', 'Địa chỉ không hợp lệ');
-//            }
+            if (!isset($result[0])) {
+                return redirect()->back()->with('error', 'Địa chỉ không hợp lệ');
+            }
             $coordinates = $result[0]->getCoordinates();
 
             $lat = $coordinates->getLatitude();
