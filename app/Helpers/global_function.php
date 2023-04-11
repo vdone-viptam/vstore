@@ -128,10 +128,6 @@ function getWarehouse($province_id, $district_id, $product_id)
 //        ->where('warehouses.district_id', $district_id)
 //        ->where('warehouses.city_id', $province_id)
         ->get();
-    dd($warehouse);
-
-
-    dd($address->province_name . ', ' . $address->district_name);
 }
 
 function getDiscountAndDepositMoney($quantity, $arr)
