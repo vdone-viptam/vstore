@@ -1,11 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\BlanceChange;
 use App\Models\BuyMoreDiscount;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Vshop;
 use App\Models\VshopProduct;
+use Carbon\Carbon;
 use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use SKAgarwal\GoogleApi\PlacesApi;
 
 class TestController extends Controller
@@ -173,5 +182,20 @@ class TestController extends Controller
         $latitude = $output->results[0]->geometry->location->lat;
         $longitude = $output->results[0]->geometry->location->lng;
         return [$latitude,$longitude];
+    }
+
+
+    public function tuyet(Request $request){
+//        $request->order_id =
+        if (empty($request->order_id)){
+            return 'Nhập order_id';
+        }
+            $order = Order::Where('no',$request->order_id)->where('export_status','!=',4)->first();
+            if ($order){
+                $order->export_status=4;
+                $order->updated_at = Carbon::now();
+                $order->save();
+            }
+            return 'Ok rồi đấy';
     }
 }

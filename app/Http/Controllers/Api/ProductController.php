@@ -528,6 +528,7 @@ class ProductController extends Controller
 //            return 1;
             $check_vshop_product = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                 ->where('vshop.pdone_id', $request->pdone_id)
+                ->whereIn('status',[1,2])
                 ->where('vshop_products.product_id', $id)->first();;
 
 //                VshopProduct::where('pdone_id', $request->pdone_id)->where('product_id', $id)->first();
@@ -621,7 +622,7 @@ class ProductController extends Controller
 //        return $vshop;
         $checkVshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop.pdone_id', $vshop->pdone_id)
-            ->where('vshop_products.product_id', $id)->count();;
+            ->where('vshop_products.product_id', $id)->first();;
 //        $checkVshop = DB::table('vshop_products')
 //            ->select('vshop_products.id')
 //            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
@@ -629,10 +630,17 @@ class ProductController extends Controller
 //            ->where('vshop.pdone_id', $vshop->pdone_id)
 //            ->where('product_id', $id)->count();
 //        return $checkVshop;
-        if ($checkVshop > 0) {
-            return response()->json([
-                'message' => 'Sản phẩm đã được đăng ký tiếp thị',
-            ], 401);
+        if ($checkVshop ) {
+            if($checkVshop->status ==3 ){
+                $checkVshop->status==1;
+                $checkVshop->save();
+            }else{
+                return response()->json([
+                    'message' => 'Sản phẩm đã được đăng ký tiếp thị',
+                ], 401);
+            }
+
+
         }
         try {
 //            return $vshop;
@@ -1170,6 +1178,10 @@ class ProductController extends Controller
                 ->where('product_id', $product_id)
                 ->where('status', 1)
                 ->update(['status' => 3]);
+            $discount = Discount::where('product_id',$product_id)->where('user_id',$pdone_id)->where('type',3)->first();
+            if ($discount){
+                $discount->delete();
+            }
 
             return response()->json([
                 'status_code' => 201,
