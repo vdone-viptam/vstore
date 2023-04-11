@@ -53,7 +53,7 @@
                                class=" outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <form
-                        action="{{route('screens.admin.finance.exportDeposits',['limit' => 10,'offset' => ($histories->currentPage() * 10) - 10])}}"
+                        action="{{route('screens.admin.finance.exportDeposits',['limit' => $limit,'offset' => ($histories->currentPage() * 10) - 10])}}"
                         method="GET" id="form">
 
                         <button id="btnSearch"
