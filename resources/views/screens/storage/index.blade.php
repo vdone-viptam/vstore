@@ -1,6 +1,12 @@
 @php
-    $isOrder = count($order);
-    $isUser = count($user);
+
+if($order && $user) {
+    $isOrder = true;
+    $isUser = true;
+} else {
+    $isOrder = false;
+    $isUser = false;
+}
 @endphp
 
     <!DOCTYPE html>
