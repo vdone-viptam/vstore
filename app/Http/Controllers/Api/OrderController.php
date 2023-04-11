@@ -308,7 +308,7 @@ class OrderController extends Controller
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
-                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId);
+                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId,$wardId);
                 if (!$warehouse) {
                     return response()->json([
                         "status_code" => 400,
