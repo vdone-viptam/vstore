@@ -266,6 +266,9 @@
                 @error('image_storage')
                 <p class="text-red-600">{{$message}}</p>
                 @enderror
+                @if ($errors->has('image_storage.*'))
+                    <p class="text-red-600">{{ $errors->first('image_storage.*')}}</p>
+                @endif
             </div>
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
@@ -275,6 +278,9 @@
                 @error('image_pccc')
                 <p class="text-red-600">{{$message}}</p>
                 @enderror
+                @if ($errors->has('image_pccc.*'))
+                    <p class="text-red-600">{{ $errors->first('image_pccc.*')}}</p>
+                @endif
             </div>
 
         </div>
