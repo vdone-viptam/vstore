@@ -112,17 +112,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($deliveryPartners as $deliveryPartners)
+                                @if(count($deliveryPartners) > 0)
+                                    @foreach($deliveryPartners as $deliveryPartners)
+                                        <tr>
+                                            <td>{{$deliveryPartners->code_partner}}</td>
+                                            <td>{{$deliveryPartners->name_partner}}</td>
+                                            <td>{{$deliveryPartners->count_product}}</td>
+                                            <td>{{$deliveryPartners->destroy_order}}</td>
+                                            <td><a class="text-primary underline" href="#"
+                                                onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
+                                                    tiết</a></td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$deliveryPartners->code_partner}}</td>
-                                        <td>{{$deliveryPartners->name_partner}}</td>
-                                        <td>{{$deliveryPartners->count_product}}</td>
-                                        <td>{{$deliveryPartners->destroy_order}}</td>
-                                        <td><a class="text-primary underline" href="#"
-                                               onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
-                                                tiết</a></td>
+                                        <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                                     </tr>
-                                @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>
