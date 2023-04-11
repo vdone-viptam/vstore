@@ -19,8 +19,8 @@
                        name="keyword" id="key_search"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                 >
-                <button type="submit"
-                        class="btnSearch btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
+                <button type="submit" id="btnSearch"
+                        class=" btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
 
                     Tìm kiếm
@@ -184,8 +184,6 @@
 
 @section('custom_js')
     <script>
-
-
         let name = document.getElementById('name');
         let id = document.getElementById('id');
         let limit = document.getElementById('limit');
@@ -197,12 +195,12 @@
         limit.addEventListener('change', (e) => {
             form.submit();
         });
-        var elems = document.getElementsByClassName('confirmation');
-        var confirmIt = function (e) {
-            if (!confirm('Are you sure?')) e.preventDefault();
-        };
-        for (var i = 0, l = elems.length; i < l; i++) {
-            elems[i].addEventListener('click', confirmIt, false);
-        }
+        // var elems = document.getElementsByClassName('confirmation');
+        // var confirmIt = function (e) {
+        //     if (!confirm('Are you sure?')) e.preventDefault();
+        // };
+        // for (var i = 0, l = elems.length; i < l; i++) {
+        //     elems[i].addEventListener('click', confirmIt, false);
+        // }
     </script>
 @endsection
