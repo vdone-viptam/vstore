@@ -119,6 +119,7 @@ class OrderController extends Controller
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
             $order->address = $address;
+            return $product->id;
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
             if (!$warehouse) {
                 return response()->json([
@@ -308,7 +309,7 @@ class OrderController extends Controller
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
-                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId,$wardId);
+                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId, $wardId);
                 if (!$warehouse) {
                     return response()->json([
                         "status_code" => 400,
