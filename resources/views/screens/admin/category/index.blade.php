@@ -104,9 +104,6 @@
                         @if(count($categories) > 0)
                             @foreach($categories as $category)
                                 <tr>
-                                    {{--                        <td><input type="checkbox"></td>--}}
-
-{{--                                    @if({{ Request::get('page') }})--}}
                                     <td>{{ $limit_limit ++}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>
@@ -115,9 +112,7 @@
                                     </td>
                                     <td><a href="{{route('screens.admin.category.edit',['id' => $category->id])}}"
                                            class="">Cập
-                                            nhật</a> / <a
-                                            href="{{route('screens.admin.category.destroy',['id' => $category->id])}}"
-                                            class="">Xóa</a>
+                                            nhật</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -132,7 +127,6 @@
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
                             class="font-bold">{{$categories->total()}}</strong></span>
-                    {{--                    {{$categories->withQueryString()->links()}}--}}
                     {{$categories->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
@@ -150,13 +144,13 @@
                                 hàng / trang
                             </option>
                         </select>
-{{--                        <div class="flex justify-start items-center gap-2">--}}
-{{--                            <span class="text-title text-sm">Đi đến</span>--}}
-{{--                            <input type="number" name="page1" id="page"--}}
-{{--                                   value="{{isset($params['page']) && $params['page'] ? $params['page'] : ''}}"--}}
-{{--                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
-{{--                                   min="1">--}}
-{{--                        </div>--}}
+                        {{--                        <div class="flex justify-start items-center gap-2">--}}
+                        {{--                            <span class="text-title text-sm">Đi đến</span>--}}
+                        {{--                            <input type="number" name="page1" id="page"--}}
+                        {{--                                   value="{{isset($params['page']) && $params['page'] ? $params['page'] : ''}}"--}}
+                        {{--                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
+                        {{--                                   min="1">--}}
+                        {{--                        </div>--}}
                     </div>
                 </div>
             </div>
