@@ -46,7 +46,9 @@ class UserController extends Controller
                 ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
                 ->orwhere('address', 'like', '%' . $request->keyword . '%');
         }
+        $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
+
         $this->v['params'] = $request->all();
         return view('screens.admin.user.index', $this->v);
     }
