@@ -74,9 +74,11 @@ class ProductController extends Controller
         foreach ($listVstores as $list) {
             $vstores[] = $list;
         }
-        $vstores[] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
+        $v = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
+        if ($v) {
+            $vstores[] = $v;
+        }
         $this->v['v_stores'] = array_unique($vstores);
-        dd($this->v['v_stores']);
         return view('screens.manufacture.product.create', $this->v);
 
     }
