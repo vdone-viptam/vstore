@@ -132,13 +132,14 @@ class AccountController extends Controller
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->back()->withErrors(['old_password' => "Mật khẩu cũ không chính xác"])->withInput($request->all())->with('validate', 'failed');
         }
-
+        
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password' => 'required|confirmed|min:8|regex:'.config('regex.password'),
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',
             'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
+            'password.confirmed' => 'Mật khẩu không khớp',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
