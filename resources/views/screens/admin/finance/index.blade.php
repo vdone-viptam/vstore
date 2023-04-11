@@ -71,7 +71,7 @@
                         <input type="hidden" value="{{$start_date ?? null}}" name="start_date">
                         <input type="hidden" value="{{$end_date ?? null}}" name="end_date">
                         <button
-                            class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
+                            class="bg-[#4062ff] border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_4_2870)">
