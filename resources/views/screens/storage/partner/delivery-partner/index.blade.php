@@ -68,45 +68,44 @@
                                 <thead>
                                 <tr>
                                     <th>Mã đối tác</th>
-                                    <th>Tên đối tác @if($field == 'name_partner')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="name_partner"
-                                                   style="float: right;cursor: pointer"></i>
+                                    <th>Tên đối tác
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name_partner')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name_partner"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name_partner"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="name_partner"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="name_partner"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="name_partner"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif</th>
+                                        </span>
+                                    </th>
                                     <th>Tổng đơn hàng đã giao
-                                        @if($field == 'count_product')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="count_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'count_product')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="count_product"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="count_product"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="count_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="count_product"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="count_product"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
                                     <th>Số đơn hàng không hoàn thành
-                                        @if($field == 'destroy_order')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="destroy_order"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'destroy_order')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="destroy_order"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="destroy_order"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="destroy_order"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="destroy_order"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="destroy_order"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
                                     <th></th>
                                 </tr>
