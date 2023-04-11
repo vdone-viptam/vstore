@@ -82,6 +82,8 @@ class LandingpageController extends Controller
 
     public function ladingpageNCC(Request $request)
     {
+        $user = collect();
+        $order = collect();
         if($request->order && $request->user) {
             $user = User::find($request->user);
             $order = OrderService::find($request->order);
@@ -93,6 +95,8 @@ class LandingpageController extends Controller
     public function ladingpageStorage(Request $request)
     {
 
+        $user = collect();
+        $order = collect();
         if($request->order && $request->user) {
             $user = User::find($request->user);
             $order = OrderService::find($request->order);
