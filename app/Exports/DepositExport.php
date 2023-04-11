@@ -25,8 +25,8 @@ class DepositExport implements FromCollection, WithHeadings
     {
         $query = Deposit::query()->select('code as Mã giao dịch', 'deposits.name as Chủ tài khoản', 'amount as Số tiền rút', 'account_number as Số tài khoản', 'banks.name as Tên ngân hàng', 'full_name as Tên đầy đủ ngân hàng', 'deposits.created_at as Ngày yêu cầu')
             ->join('banks', 'deposits.bank_id', '=', 'banks.id')
-            ->limit($this->limit)
             ->offset($this->offset)
+            ->limit($this->limit)
             ->get();
         return $query;
 
