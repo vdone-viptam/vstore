@@ -283,6 +283,9 @@ function swalNoti(position, icon, title, width, showConfirmButton, timer) {
         timer: timer
     });
 }
+function convertVND(params) {
+    return params.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+}
 // MENU
 
 

@@ -1,101 +1,30 @@
-name: Product
-description: |-
-
-  Danh sách api liên quan tới sản phẩm
+name: Endpoints
+description: ''
 endpoints:
   -
     httpMethods:
-      - GET
-    uri: api/product
+      - POST
+    uri: api/callback-viettel-post
     metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Danh sách sản phẩm'
-      description: 'API này sẽ trả về thông tin hiển thị sản phẩm'
+      title: ''
+      description: ''
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      page:
-        name: page
-        description: 'Số trang'
-        required: false
-        example: rerum
-        type: string
-        custom: []
-      category_id:
-        name: category_id
-        description: 'id danh mục sản phẩm'
-        required: false
-        example: incidunt
-        type: string
-        custom: []
-      order_by:
-        name: order_by
-        description: '| 1 Sắp xếp mới nhất | 2 Sắp xếp theo giá | 3 bán chạy'
-        required: false
-        example: cum
-        type: string
-        custom: []
-      option:
-        name: option
-        description: '1 asc | 2 desc'
-        required: false
-        example: aut
-        type: string
-        custom: []
-      limit:
-        name: limit
-        description: 'Giới hạn bản ghi trên một trang Mặc định 10'
-        required: false
-        example: voluptas
-        type: string
-        custom: []
-      payment:
-        name: payment
-        description: 'Phương thức thanh toán 1 COD | 2 Chuyển khoản'
-        required: false
-        example: odio
-        type: string
-        custom: []
-      publish_id:
-        name: publish_id
-        description: 'mã sản phẩm'
-        required: false
-        example: modi
-        type: string
-        custom: []
-    cleanUrlParameters:
-      page: rerum
-      category_id: incidunt
-      order_by: cum
-      option: aut
-      limit: voluptas
-      payment: odio
-      publish_id: modi
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[{"id":1,"name":"s\u1ea3n ph\u1ea9m","publish_id":"VN  - aMyIBmBE1F","images":"http:\/\/localhost\/storage\/products\/img2023022602592770906700.jpeg","price":100000,"discount_vstore":5,"amount_product_sold":null,"price_discount":95000,"available_discount":11},{"id":2,"name":"s\u1ea3n ph\u1ea9m 1","publish_id":"VN  - GKrmNxHaoC","images":"http:\/\/localhost\/storage\/products\/img2023022603230435375000.jpeg","price":100000,"discount_vstore":5,"amount_product_sold":null,"price_discount":95000,"available_discount":11},{"id":3,"name":"s\u1ea3n ph\u1ea9m 2","publish_id":"VN  - 3dlHYROO27","images":"http:\/\/localhost\/storage\/products\/img2023030103010863736800.jpeg","price":12,"discount_vstore":5,"amount_product_sold":null,"price_discount":11.4,"available_discount":11},{"id":4,"name":"S\u1ea3n ph\u1ea9m test","publish_id":"VN  - IbiFP7YGGk","images":"http:\/\/localhost\/storage\/products\/img2023030106261919958900.png","price":120000,"discount_vstore":5,"amount_product_sold":null,"price_discount":114000,"available_discount":11}],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","from":1,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product","per_page":10,"prev_page_url":null,"to":4,"total":4}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '59'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -105,47 +34,21 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/product/product-by-category/{id}'
+    uri: api/get-province
     metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Danh sách sản phẩm theo danh mục'
-      description: 'API này sẽ trả về sản phẩm theo danh mục'
+      title: 'danh sách tỉnh thành'
+      description: 'API này sẽ trả về danh sách tỉnh thành'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the product by category.'
-        required: true
-        example: cupiditate
-        type: string
-        custom: []
-      page:
-        name: page
-        description: 'Số trang'
-        required: false
-        example: et
-        type: string
-        custom: []
-      limit:
-        name: limit
-        description: 'Giới hạn bản ghi trên một trang'
-        required: false
-        example: natus
-        type: string
-        custom: []
-    cleanUrlParameters:
-      id: cupiditate
-      page: et
-      limit: natus
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -153,131 +56,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-category\/cupiditate","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '58'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/product/product-by-vstore/{id}'
-    metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Danh sách sản phẩm vstore'
-      description: 'API này sẽ trả về sách sản phẩm vstore'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the product by vstore.'
-        required: true
-        example: consequatur
-        type: string
-        custom: []
-      page:
-        name: page
-        description: 'Số trang'
-        required: false
-        example: et
-        type: string
-        custom: []
-      limit:
-        name: limit
-        description: 'Giới hạn bản ghi trên một trang'
-        required: false
-        example: aut
-        type: string
-        custom: []
-      publish_id:
-        name: publish_id
-        description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
-        required: false
-        example: qui
-        type: string
-        custom: []
-      category_id:
-        name: category_id
-        description: 'tìm kiếm theo danh mục'
-        required: false
-        example: soluta
-        type: string
-        custom: []
-      order_by_price:
-        name: order_by_price
-        description: 'sắp xếp theo giá'
-        required: false
-        example: quod
-        type: string
-        custom: []
-      order_by_id:
-        name: order_by_id
-        description: 'sắp xếp theo id'
-        required: false
-        example: fuga
-        type: string
-        custom: []
-      order_by_sold:
-        name: order_by_sold
-        description: 'sắp xếp theo sl đã bán'
-        required: false
-        example: iusto
-        type: string
-        custom: []
-      payments:
-        name: payments
-        description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
-        required: false
-        example: veniam
-        type: string
-        custom: []
-      pdone_id:
-        name: pdone_id
-        description: 'dùng để check sản phẩm đã được tiếp thị hay chưa'
-        required: false
-        example: est
-        type: string
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-      page: et
-      limit: aut
-      publish_id: qui
-      category_id: soluta
-      order_by_price: quod
-      order_by_id: fuga
-      order_by_sold: iusto
-      payments: veniam
-      pdone_id: est
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-vstore\/consequatur","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -295,16 +75,14 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/product/product-by-ncc/{id}'
+    uri: 'api/get-district/{id}'
     metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Danh sách sản phẩm nhà cung cấp'
-      description: 'API này sẽ trả về thông tin hiển thị sản phẩm nhà cung cấp'
+      title: 'danh sách quận huyện'
+      description: 'API này sẽ trả về danh sách quận huyện'
       authenticated: false
       custom: []
     headers:
@@ -313,77 +91,13 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the product by ncc.'
+        description: 'The ID of the get district.'
         required: true
-        example: dolores
-        type: string
-        custom: []
-      page:
-        name: page
-        description: 'Số trang'
-        required: false
-        example: in
-        type: string
-        custom: []
-      limit:
-        name: limit
-        description: 'Giới hạn bản ghi trên một trang'
-        required: false
-        example: officia
-        type: string
-        custom: []
-      publish_id:
-        name: publish_id
-        description: 'tìm kiếm theo mã sản phẩm mã sản phẩm'
-        required: false
-        example: sunt
-        type: string
-        custom: []
-      category_id:
-        name: category_id
-        description: 'tìm kiếm theo danh mục'
-        required: false
-        example: aliquid
-        type: string
-        custom: []
-      order_by_price:
-        name: order_by_price
-        description: 'sắp xếp theo giá'
-        required: false
-        example: doloribus
-        type: string
-        custom: []
-      order_by_id:
-        name: order_by_id
-        description: 'sắp xếp theo id'
-        required: false
-        example: aut
-        type: string
-        custom: []
-      order_by_sold:
-        name: order_by_sold
-        description: 'sắp xếp theo sl đã bán'
-        required: false
-        example: ut
-        type: string
-        custom: []
-      payments:
-        name: payments
-        description: 'sắp xếp theo hình thức thanh toán 1 là COD 2 là trả trước'
-        required: false
-        example: ad
+        example: odio
         type: string
         custom: []
     cleanUrlParameters:
-      id: dolores
-      page: in
-      limit: officia
-      publish_id: sunt
-      category_id: aliquid
-      order_by_price: doloribus
-      order_by_id: aut
-      order_by_sold: ut
-      payments: ad
+      id: odio
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -391,8 +105,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/product-by-ncc\/dolores","per_page":10,"prev_page_url":null,"to":null,"total":0}}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -409,121 +123,15 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: 'api/product/vshop-pickup/{id}'
-    metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Vshop thêm sản phẩm'
-      description: 'API dùng để Vshop thêm sản phẩm'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the vshop pickup.'
-        required: true
-        example: minima
-        type: string
-        custom: []
-    cleanUrlParameters:
-      id: minima
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      pdone_id:
-        name: pdone_id
-        description: 'của pdone'
-        required: false
-        example: quis
-        type: id
-        custom: []
-    cleanBodyParameters:
-      pdone_id: quis
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: 'api/product/vshop-ready-stock/{id}'
-    metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Vshop Nhập hàng sẵn'
-      description: 'API dùng để Vshop nhập hàng sẵn'
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the vshop ready stock.'
-        required: true
-        example: neque
-        type: string
-        custom: []
-    cleanUrlParameters:
-      id: neque
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      pdone_id:
-        name: pdone_id
-        description: 'của pdone'
-        required: false
-        example: consectetur
-        type: id
-        custom: []
-      amount:
-        name: amount
-        description: 'lượng sản phẩm'
-        required: false
-        example: ullam
-        type: số
-        custom: []
-    cleanBodyParameters:
-      pdone_id: consectetur
-      amount: ullam
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
       - GET
-    uri: 'api/product/vshop/{id}'
+    uri: 'api/get-wards/{id}'
     metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'sản phẩm Vshop'
-      description: 'API lấy danh sách sản phẩm theo vshop'
+      title: 'danh sách xã phường'
+      description: 'API này sẽ trả về danh sách quận huyện'
       authenticated: false
       custom: []
     headers:
@@ -532,23 +140,13 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the vshop.'
+        description: 'The ID of the get ward.'
         required: true
-        example: 1
-        type: integer
-        custom: []
-      orderBy:
-        name: orderBy
-        description: |-
-          id Mới nhất | amount_product_sold Bán chạy | price Giá
-          urlParam type  asc|desc Mặc định asc
-        required: false
-        example: vel
+        example: qui
         type: string
         custom: []
     cleanUrlParameters:
-      id: 1
-      orderBy: vel
+      id: qui
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -556,8 +154,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"data":{"info":{"total_product":0,"categories":""},"products":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product\/vshop\/1?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product\/vshop\/1?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product\/vshop\/1?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product\/vshop\/1","per_page":10,"prev_page_url":null,"to":null,"total":0}}}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -574,17 +172,15 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - GET
-    uri: 'api/product/{id}'
+      - POST
+    uri: 'api/order/{id}/payment'
     metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Chi tiết sản phẩm'
-      description: 'API dùng để lấy chi tiết 1 sản phẩm'
+      title: 'Thanh toán'
+      description: 'API dùng để thanh toán'
       authenticated: false
       custom: []
     headers:
@@ -593,13 +189,97 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the product.'
+        description: 'The ID of the order.'
         required: true
-        example: 1
+        example: 1001
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 1001
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      method_payment:
+        name: method_payment
+        description: 'Must be one of <code>ATM_CARD</code>, <code>CREDIT_CARD</code>, <code>9PAY</code>, <code>BANK_TRANSFER</code>, or <code>COD</code>.'
+        required: true
+        example: COD
+        type: string
+        custom: []
+      user_id:
+        name: user_id
+        description: ''
+        required: true
+        example: dolorem
+        type: string
+        custom: []
+      is_pdone:
+        name: is_pdone
+        description: ''
+        required: true
+        example: false
+        type: boolean
+        custom: []
+    cleanBodyParameters:
+      method_payment: COD
+      user_id: dolorem
+      is_pdone: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/dashboard
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -607,13 +287,11 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"data":{"publish_id":"VN  - aMyIBmBE1F","id":1,"name":"s\u1ea3n ph\u1ea9m","images":"[\"storage\\\/products\\\/img2023022602592770906700.jpeg\"]","price":100000,"discount_vShop":5,"video":"storage\/products\/8971482296780430562_1677380367 . mp4","description":"kh\u00f4ng","products_available":"154"}}'
+        status: 401
+        content: '{"message":"Unauthenticated."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '54'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -626,39 +304,1638 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/product-sales
+    uri: api/storage/products
     metadata:
-      groupName: Product
-      groupDescription: |-
-
-        Danh sách api liên quan tới sản phẩm
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Danh sách sản phẩm giảm giá siêu tốc'
-      description: 'API dùng để lấy danh sách sản phẩm giảm giá siêu tốc'
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/products/detail
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/products/request
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/storage/products/request/update/{status}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      limit:
-        name: limit
-        description: 'Số lượng bản ghi 1 trang Mặc định 12'
-        required: false
-        example: in
-        type: string
-        custom: []
-      page:
-        name: page
-        description: 'Trang hiện tại hiển thị'
-        required: false
-        example: aperiam
+      status:
+        name: status
+        description: ''
+        required: true
+        example: voluptas
         type: string
         custom: []
     cleanUrlParameters:
-      limit: in
-      page: aperiam
+      status: voluptas
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/products/requestOut
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/products/detail-request
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/products/detail-request-out
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/storage/products/requestOut/update/{status}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      status:
+        name: status
+        description: ''
+        required: true
+        example: molestiae
+        type: string
+        custom: []
+    cleanUrlParameters:
+      status: molestiae
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/storage/products/info/{sku}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      sku:
+        name: sku
+        description: ''
+        required: true
+        example: exercitationem
+        type: string
+        custom: []
+    cleanUrlParameters:
+      sku: exercitationem
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/storage/products/bill/{order_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      order_id:
+        name: order_id
+        description: 'The ID of the order.'
+        required: true
+        example: 18
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      order_id: 18
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/account
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/storage/account/edit/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the edit.'
+        required: true
+        example: illo
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: illo
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: consectetur
+        type: string
+        custom: []
+      company_name:
+        name: company_name
+        description: ''
+        required: true
+        example: veniam
+        type: string
+        custom: []
+      address:
+        name: address
+        description: ''
+        required: true
+        example: cumque
+        type: string
+        custom: []
+      phone_number:
+        name: phone_number
+        description: 'Must match the regex /(84.'
+        required: true
+        example: (84
+        type: string
+        custom: []
+      id_vdone:
+        name: id_vdone
+        description: ''
+        required: true
+        example: natus
+        type: string
+        custom: []
+      floor_area:
+        name: floor_area
+        description: ''
+        required: true
+        example: commodi
+        type: string
+        custom: []
+      volume:
+        name: volume
+        description: ''
+        required: true
+        example: dolore
+        type: string
+        custom: []
+      cold_storage:
+        name: cold_storage
+        description: ''
+        required: true
+        example: quo
+        type: string
+        custom: []
+      warehouse:
+        name: warehouse
+        description: ''
+        required: true
+        example: enim
+        type: string
+        custom: []
+      normal_storage:
+        name: normal_storage
+        description: ''
+        required: true
+        example: et
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: consectetur
+      company_name: veniam
+      address: cumque
+      phone_number: (84
+      id_vdone: natus
+      floor_area: commodi
+      volume: dolore
+      cold_storage: quo
+      warehouse: enim
+      normal_storage: et
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/storage/account/upload/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the upload.'
+        required: true
+        example: cumque
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: cumque
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/account/change-password
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: api/storage/account/change-password
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        name: password
+        description: 'Must match the regex /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/. Must be at least 8 characters.'
+        required: true
+        example: 'd<P:3.ef!}+_9HZ>'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      password: 'd<P:3.ef!}+_9HZ>'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/account/edit-tax-code
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: api/storage/account/save-tax-code
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      tax_code:
+        name: tax_code
+        description: 'Must be 10 digits.'
+        required: true
+        example: '0631196934'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      tax_code: '0631196934'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/import
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/export
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: api/storage/warehouses/confirm-export
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/destroy-export
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/create/destroy-export
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/storage/warehouses/store/destroy-export
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      product_id:
+        name: product_id
+        description: ''
+        required: true
+        example: quaerat
+        type: string
+        custom: []
+      quantity:
+        name: quantity
+        description: ''
+        required: true
+        example: quis
+        type: string
+        custom: []
+      warehouse_id:
+        name: warehouse_id
+        description: ''
+        required: true
+        example: in
+        type: string
+        custom: []
+      note:
+        name: note
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: utoxiosotdgc
+        type: string
+        custom: []
+    cleanBodyParameters:
+      product_id: quaerat
+      quantity: quis
+      warehouse_id: in
+      note: utoxiosotdgc
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/destroy
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/detail
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/warehouses/detail-destroy
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/finances
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/storage/finances/store-wallet
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      account_number:
+        name: account_number
+        description: ''
+        required: true
+        example: aut
+        type: string
+        custom: []
+      bank_id:
+        name: bank_id
+        description: ''
+        required: true
+        example: sapiente
+        type: string
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: true
+        example: iure
+        type: string
+        custom: []
+    cleanBodyParameters:
+      account_number: aut
+      bank_id: sapiente
+      name: iure
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/storage/finances/update-wallet/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the update wallet.'
+        required: true
+        example: corporis
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: corporis
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      account_number:
+        name: account_number
+        description: ''
+        required: true
+        example: iure
+        type: string
+        custom: []
+      bank_id:
+        name: bank_id
+        description: ''
+        required: true
+        example: et
+        type: string
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: true
+        example: sit
+        type: string
+        custom: []
+    cleanBodyParameters:
+      account_number: iure
+      bank_id: et
+      name: sit
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/storage/finances/create-deposit
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/finances/history
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/storage/finances/destroy-wa/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the destroy wa.'
+        required: true
+        example: maiores
+        type: string
+        custom: []
+    cleanUrlParameters:
+      id: maiores
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/partners
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'danh sách Nhà cung cấp'
+      description: 'API này sẽ trả về danh sách Nhà cung cấp'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      search:
+        name: search
+        description: 'tìm kiếm qua mã, tên ncc'
+        required: false
+        example: eos
+        type: ':'
+        custom: []
+      limit:
+        name: limit
+        description: 'số review / 1 trang'
+        required: false
+        example: dolores
+        type: tổng
+        custom: []
+    cleanBodyParameters:
+      search: eos
+      limit: dolores
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/partners/detail-ncc
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'chi tiết Nhà cung cấp'
+      description: 'API này sẽ trả về chi tiết Nhà cung cấp'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_id:
+        name: user_id
+        description: 'user id'
+        required: false
+        example: modi
+        type: ':'
+        custom: []
+    cleanBodyParameters:
+      user_id: modi
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/partners/delivery-partner
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'danh sách đối tác giao hàng'
+      description: 'API này sẽ trả về danh sách đối tác giao hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      limit:
+        name: limit
+        description: 'số review / 1 trang'
+        required: false
+        example: voluptatem
+        type: tổng
+        custom: []
+    cleanBodyParameters:
+      limit: voluptatem
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/storage/partners/detail-delivery-partner
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'chi tiết đối tác giao hàng'
+      description: 'API này sẽ trả về chi tiết đối tác giao hàng'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_id:
+        name: user_id
+        description: 'user id'
+        required: false
+        example: et
+        type: ':'
+        custom: []
+    cleanBodyParameters:
+      user_id: et
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/test
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '5'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/get-city
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -667,12 +1944,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":200,"data":{"current_page":1,"data":[],"first_page_url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/api-vstore.ngo\/api\/product-sales?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/api-vstore.ngo\/api\/product-sales","per_page":12,"prev_page_url":null,"to":null,"total":0}}'
+        content: '[{"PROVINCE_ID":1,"PROVINCE_CODE":"HNI","PROVINCE_NAME":"H\u00e0 N\u1ed9i"},{"PROVINCE_ID":2,"PROVINCE_CODE":"HCM","PROVINCE_NAME":"H\u1ed3 Ch\u00ed Minh"},{"PROVINCE_ID":3,"PROVINCE_CODE":"HPG","PROVINCE_NAME":"H\u1ea3i Ph\u00f2ng"},{"PROVINCE_ID":4,"PROVINCE_CODE":"DNG","PROVINCE_NAME":"\u0110\u00e0 N\u1eb5ng"},{"PROVINCE_ID":5,"PROVINCE_CODE":"CTO","PROVINCE_NAME":"C\u1ea7n Th\u01a1"},{"PROVINCE_ID":6,"PROVINCE_CODE":"TGG","PROVINCE_NAME":"Ti\u1ec1n Giang"},{"PROVINCE_ID":8,"PROVINCE_CODE":"HUG","PROVINCE_NAME":"H\u1eadu Giang"},{"PROVINCE_ID":9,"PROVINCE_CODE":"DKG","PROVINCE_NAME":"\u0110\u0103k N\u00f4ng"},{"PROVINCE_ID":10,"PROVINCE_CODE":"VPC","PROVINCE_NAME":"V\u0129nh Ph\u00fac"},{"PROVINCE_ID":11,"PROVINCE_CODE":"BNH","PROVINCE_NAME":"B\u1eafc Ninh"},{"PROVINCE_ID":12,"PROVINCE_CODE":"HDG","PROVINCE_NAME":"H\u1ea3i D\u01b0\u01a1ng"},{"PROVINCE_ID":13,"PROVINCE_CODE":"HYN","PROVINCE_NAME":"H\u01b0ng Y\u00ean"},{"PROVINCE_ID":14,"PROVINCE_CODE":"HNM","PROVINCE_NAME":"H\u00e0 Nam"},{"PROVINCE_ID":15,"PROVINCE_CODE":"NDH","PROVINCE_NAME":"Nam \u00d0\u1ecbnh"},{"PROVINCE_ID":16,"PROVINCE_CODE":"TBH","PROVINCE_NAME":"Th\u00e1i B\u00ecnh"},{"PROVINCE_ID":17,"PROVINCE_CODE":"NBH","PROVINCE_NAME":"Ninh B\u00ecnh"},{"PROVINCE_ID":18,"PROVINCE_CODE":"HGG","PROVINCE_NAME":"H\u00e0 Giang"},{"PROVINCE_ID":19,"PROVINCE_CODE":"CBG","PROVINCE_NAME":"Cao B\u1eb1ng"},{"PROVINCE_ID":20,"PROVINCE_CODE":"LCI","PROVINCE_NAME":"L\u00e0o Cai"},{"PROVINCE_ID":21,"PROVINCE_CODE":"BKN","PROVINCE_NAME":"B\u1eafc K\u1ea1n"},{"PROVINCE_ID":22,"PROVINCE_CODE":"LSN","PROVINCE_NAME":"L\u1ea1ng S\u01a1n"},{"PROVINCE_ID":23,"PROVINCE_CODE":"TQG","PROVINCE_NAME":"Tuy\u00ean Quang"},{"PROVINCE_ID":24,"PROVINCE_CODE":"YBN","PROVINCE_NAME":"Y\u00ean B\u00e1i"},{"PROVINCE_ID":25,"PROVINCE_CODE":"TNN","PROVINCE_NAME":"Th\u00e1i Nguy\u00ean"},{"PROVINCE_ID":26,"PROVINCE_CODE":"PHO","PROVINCE_NAME":"Ph\u00fa Th\u1ecd"},{"PROVINCE_ID":27,"PROVINCE_CODE":"BGG","PROVINCE_NAME":"B\u1eafc Giang"},{"PROVINCE_ID":28,"PROVINCE_CODE":"QNH","PROVINCE_NAME":"Qu\u1ea3ng Ninh"},{"PROVINCE_ID":29,"PROVINCE_CODE":"LCU","PROVINCE_NAME":"Lai Ch\u00e2u"},{"PROVINCE_ID":30,"PROVINCE_CODE":"SLA","PROVINCE_NAME":"S\u01a1n La"},{"PROVINCE_ID":31,"PROVINCE_CODE":"HBH","PROVINCE_NAME":"H\u00f2a B\u00ecnh"},{"PROVINCE_ID":32,"PROVINCE_CODE":"THA","PROVINCE_NAME":"Thanh H\u00f3a"},{"PROVINCE_ID":33,"PROVINCE_CODE":"NAN","PROVINCE_NAME":"Ngh\u1ec7 An"},{"PROVINCE_ID":34,"PROVINCE_CODE":"HTH","PROVINCE_NAME":"H\u00e0 T\u0129nh"},{"PROVINCE_ID":35,"PROVINCE_CODE":"QBH","PROVINCE_NAME":"Qu\u1ea3ng B\u00ecnh"},{"PROVINCE_ID":36,"PROVINCE_CODE":"QTI","PROVINCE_NAME":"Qu\u1ea3ng Tr\u1ecb"},{"PROVINCE_ID":37,"PROVINCE_CODE":"HUE","PROVINCE_NAME":"Th\u1eeba Thi\u00ean - Hu\u1ebf"},{"PROVINCE_ID":38,"PROVINCE_CODE":"QNM","PROVINCE_NAME":"Qu\u1ea3ng Nam"},{"PROVINCE_ID":39,"PROVINCE_CODE":"QNI","PROVINCE_NAME":"Qu\u1ea3ng Ng\u00e3i"},{"PROVINCE_ID":40,"PROVINCE_CODE":"BDH","PROVINCE_NAME":"B\u00ecnh \u00d0\u1ecbnh"},{"PROVINCE_ID":41,"PROVINCE_CODE":"PYN","PROVINCE_NAME":"Ph\u00fa Y\u00ean"},{"PROVINCE_ID":42,"PROVINCE_CODE":"KHA","PROVINCE_NAME":"Kh\u00e1nh H\u00f2a"},{"PROVINCE_ID":43,"PROVINCE_CODE":"KTM","PROVINCE_NAME":"Kon Tum"},{"PROVINCE_ID":44,"PROVINCE_CODE":"GLI","PROVINCE_NAME":"Gia Lai"},{"PROVINCE_ID":45,"PROVINCE_CODE":"DLK","PROVINCE_NAME":"\u0110\u0103k L\u0103k"},{"PROVINCE_ID":46,"PROVINCE_CODE":"LDG","PROVINCE_NAME":"L\u00e2m \u00d0\u1ed3ng"},{"PROVINCE_ID":47,"PROVINCE_CODE":"NTN","PROVINCE_NAME":"Ninh Thu\u1eadn"},{"PROVINCE_ID":48,"PROVINCE_CODE":"BPC","PROVINCE_NAME":"B\u00ecnh Ph\u01b0\u1edbc"},{"PROVINCE_ID":49,"PROVINCE_CODE":"TNH","PROVINCE_NAME":"T\u00e2y Ninh"},{"PROVINCE_ID":50,"PROVINCE_CODE":"BDG","PROVINCE_NAME":"B\u00ecnh D\u01b0\u01a1ng"},{"PROVINCE_ID":51,"PROVINCE_CODE":"DNI","PROVINCE_NAME":"\u0110\u1ed3ng Nai"},{"PROVINCE_ID":52,"PROVINCE_CODE":"BTN","PROVINCE_NAME":"B\u00ecnh Thu\u1eadn"},{"PROVINCE_ID":53,"PROVINCE_CODE":"VTU","PROVINCE_NAME":"B\u00e0 r\u1ecba - V\u0169ng t\u00e0u"},{"PROVINCE_ID":54,"PROVINCE_CODE":"LAN","PROVINCE_NAME":"Long An"},{"PROVINCE_ID":55,"PROVINCE_CODE":"DTP","PROVINCE_NAME":"\u0110\u1ed3ng Th\u00e1p"},{"PROVINCE_ID":56,"PROVINCE_CODE":"AGG","PROVINCE_NAME":"An Giang"},{"PROVINCE_ID":57,"PROVINCE_CODE":"VLG","PROVINCE_NAME":"V\u0129nh Long"},{"PROVINCE_ID":58,"PROVINCE_CODE":"BTE","PROVINCE_NAME":"B\u1ebfn Tre"},{"PROVINCE_ID":59,"PROVINCE_CODE":"KGG","PROVINCE_NAME":"Ki\u00ean Giang"},{"PROVINCE_ID":60,"PROVINCE_CODE":"TVH","PROVINCE_NAME":"Tr\u00e0 Vinh"},{"PROVINCE_ID":61,"PROVINCE_CODE":"STG","PROVINCE_NAME":"S\u00f3c Tr\u0103ng"},{"PROVINCE_ID":62,"PROVINCE_CODE":"BLU","PROVINCE_NAME":"B\u1ea1c Li\u00eau"},{"PROVINCE_ID":63,"PROVINCE_CODE":"CMU","PROVINCE_NAME":"C\u00e0 Mau"},{"PROVINCE_ID":64,"PROVINCE_CODE":"DBN","PROVINCE_NAME":"\u0110i\u1ec7n Bi\u00ean"}]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '52'
+          x-ratelimit-remaining: '4'
           access-control-allow-origin: '*'
         description: null
         custom: []

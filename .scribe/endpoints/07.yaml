@@ -1,28 +1,44 @@
-name: Vshop
+name: Categories
 description: |-
 
-  Danh sách api liên quan V-shop
+  Danh sách api liên quan tới danh mục
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/vshop
+    uri: api/categories
     metadata:
-      groupName: Vshop
+      groupName: Categories
       groupDescription: |-
 
-        Danh sách api liên quan V-shop
+        Danh sách api liên quan tới danh mục
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Danh sách danh mục'
+      description: 'API này sẽ trả về danh sách danh mục'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      page:
+        name: page
+        description: 'Số trang'
+        required: false
+        example: in
+        type: string
+        custom: []
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi trên một trang Mặc định 48'
+        required: false
+        example: omnis
+        type: string
+        custom: []
+    cleanUrlParameters:
+      page: in
+      limit: omnis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -30,13 +46,13 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"message":"L\u1ea5y th\u00f4ng tin th\u00e0nh c\u00f4ng","data":[{"id":1,"pdone_id":"pdone123","name":"\u00e1dasda","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":"2023-02-28T17:49:10.000000Z","updated_at":"2023-02-28T17:49:10.000000Z"},{"id":2,"pdone_id":"pdone12121","name":"","name_adress":null,"address":0,"phone_number":"","district":null,"province":null,"lat":"","long":null,"products_sold":null,"created_at":null,"updated_at":null}]}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '38'
+          x-ratelimit-remaining: '32'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -49,53 +65,53 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/vshop/get-discount
+    uri: 'api/categories/get-category-by-vstore/{vstore_id}'
     metadata:
-      groupName: Vshop
+      groupName: Categories
       groupDescription: |-
 
-        Danh sách api liên quan V-shop
+        Danh sách api liên quan tới danh mục
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Danh sách danh mục theo V-Store'
+      description: 'API này sẽ trả về danh sách danh mục theo vstore được chọn'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      id:
-        name: id
-        description: ''
+    urlParameters:
+      vstore_id:
+        name: vstore_id
+        description: 'The ID of the vstore.'
         required: true
-        example: tempora
+        example: nesciunt
         type: string
         custom: []
-      total:
-        name: total
-        description: ''
-        required: true
-        example: 3.9
-        type: number
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi  Mặc định 100'
+        required: false
+        example: sequi
+        type: string
         custom: []
-    cleanBodyParameters:
-      id: tempora
-      total: 3.9
+    cleanUrlParameters:
+      vstore_id: nesciunt
+      limit: sequi
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":401,"error":{"id":["The selected id is invalid."]}}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '37'
+          x-ratelimit-remaining: '31'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -107,176 +123,147 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: api/vshop/create-discount
+      - GET
+    uri: 'api/categories/get-product-vstore-by-category/{category_id}'
     metadata:
-      groupName: Vshop
+      groupName: Categories
       groupDescription: |-
 
-        Danh sách api liên quan V-shop
+        Danh sách api liên quan tới danh mục
       subgroup: ''
       subgroupDescription: ''
-      title: 'Lưu mới mã giảm giá'
-      description: 'API này sẽ lưu mới mã giảm giá'
+      title: 'Chi tiết danh mục'
+      description: 'API này sẽ trả về danh sách sản phẩm theo danh mục và các Vstore niêm yết sản phẩm thuộc danh mục đó'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      discount:
-        name: discount
-        description: 'Phần trăm giảm giá required max:discount_vShop'
-        required: false
-        example: 16
-        type: integer
+      category_id:
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: consequuntur
+        type: string
         custom: []
-    cleanUrlParameters:
-      discount: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
       pdone_id:
         name: pdone_id
-        description: 'p done required'
+        description: 'Id user Vshop (truyền khi user đang đăng nhập là đang là VSHOP)'
         required: false
-        example: repellendus
-        type: Mã
+        example: qui
+        type: string
         custom: []
-      product_id:
-        name: product_id
-        description: 'sản phẩm required exits:products'
+    cleanUrlParameters:
+      category_id: consequuntur
+      pdone_id: qui
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '30'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/categories/get-product-by-category/{category_id}'
+    metadata:
+      groupName: Categories
+      groupDescription: |-
+
+        Danh sách api liên quan tới danh mục
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Danh sách sản phẩm theo danh mục'
+      description: 'API này sẽ trả về danh sách sản phẩm theo danh mục'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      category_id:
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: consectetur
+        type: string
+        custom: []
+      pdone_id:
+        name: pdone_id
+        description: 'Id user Vshop (truyền khi user là đang đăng nhập là VSHOP)'
+        required: false
+        example: impedit
+        type: string
+        custom: []
+      orderById:
+        name: orderById
+        description: 'Sắp sếp sản phẩm mới nhất asc|desc Mặc định asc VD: orderById=asc'
+        required: false
+        example: nobis
+        type: string
+        custom: []
+      amount_product_sold:
+        name: amount_product_sold
+        description: 'Sắp sếp sản phẩm bán chạy asc|desc VD: amount_product_sold=desc'
+        required: false
+        example: nobis
+        type: string
+        custom: []
+      orderByPrice:
+        name: orderByPrice
+        description: 'Sắp sếp theo giá sản phẩm asc|desc VD: orderByPrice=asc'
         required: false
         example: aut
-        type: Mã
+        type: string
         custom: []
-      start_date:
-        name: start_date
-        description: 'bắt đầu required date_format:Y/m/d after:Today'
+      paymentMethod:
+        name: paymentMethod
+        description: 'Phương thức thanh toán 1 COD | 2 Chuyển khoản'
         required: false
-        example: asperiores
-        type: Ngày
+        example: ea
+        type: string
         custom: []
-      end_date:
-        name: end_date
-        description: 'kết thúc required date_format:Y/m/d after:start_date'
+      page:
+        name: page
+        description: 'Trang hiện tại'
         required: false
-        example: non
-        type: Ngày
-        custom: []
-      discount:
-        name: discount
-        description: 'Must not be greater than 100 characters.'
-        required: true
-        example: zbsrbrymsqnukiaukbh
+        example: inventore
         type: string
         custom: []
-    cleanBodyParameters:
-      pdone_id: repellendus
-      product_id: aut
-      start_date: asperiores
-      end_date: non
-      discount: zbsrbrymsqnukiaukbh
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/vshop/address/store
-    metadata:
-      groupName: Vshop
-      groupDescription: |-
-
-        Danh sách api liên quan V-shop
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      pdone_id:
-        name: pdone_id
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: wgnhyaxifdlutiss
-        type: string
-        custom: []
-      name:
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: naujfxyngdymywqeocpbeq
-        type: string
-        custom: []
-      address:
-        name: address
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: j
-        type: string
-        custom: []
-      phone_number:
-        name: phone_number
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: cwcmiuitfoabliglzlehqn
-        type: string
-        custom: []
-    cleanBodyParameters:
-      pdone_id: wgnhyaxifdlutiss
-      name: naujfxyngdymywqeocpbeq
-      address: j
-      phone_number: cwcmiuitfoabliglzlehqn
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/vshop/address/edit-address/{id}'
-    metadata:
-      groupName: Vshop
-      groupDescription: |-
-
-        Danh sách api liên quan V-shop
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the edit address.'
-        required: true
-        example: voluptatem
+      limit:
+        name: limit
+        description: 'Giới hạn bản ghi 1 trang'
+        required: false
+        example: ducimus
         type: string
         custom: []
     cleanUrlParameters:
-      id: voluptatem
+      category_id: consectetur
+      pdone_id: impedit
+      orderById: nobis
+      amount_product_sold: nobis
+      orderByPrice: aut
+      paymentMethod: ea
+      page: inventore
+      limit: ducimus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -284,13 +271,13 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status_code":200,"data":null}'
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '36'
+          x-ratelimit-remaining: '29'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -302,62 +289,49 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - PUT
-    uri: 'api/vshop/address/update-address/{id}'
+      - GET
+    uri: 'api/categories/get-all-vstore-by-category/{category_id}'
     metadata:
-      groupName: Vshop
+      groupName: Categories
       groupDescription: |-
 
-        Danh sách api liên quan V-shop
+        Danh sách api liên quan tới danh mục
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Danh sách tất cả vstore tiếp thị sản phẩm có danh mục được chọn'
+      description: 'API này sẽ trả về danh sách tất cả vstore tiếp thị sản phẩm có danh mục được chọn'
       authenticated: false
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      id:
-        name: id
-        description: 'The ID of the update address.'
+      category_id:
+        name: category_id
+        description: 'The ID of the category.'
         required: true
-        example: perspiciatis
+        example: qui
         type: string
         custom: []
     cleanUrlParameters:
-      id: perspiciatis
+      category_id: qui
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: yevknxrdgttomsyxb
-        type: string
-        custom: []
-      address:
-        name: address
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: hequwb
-        type: string
-        custom: []
-      phone_number:
-        name: phone_number
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: feyatjxfmewrwuygpujpftht
-        type: string
-        custom: []
-    cleanBodyParameters:
-      name: yevknxrdgttomsyxb
-      address: hequwb
-      phone_number: feyatjxfmewrwuygpujpftht
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 500
+        content: '{"status":2,"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '28'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
     responseFields: []
     auth: []
     controller: null
