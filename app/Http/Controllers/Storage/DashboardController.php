@@ -100,11 +100,11 @@ class DashboardController extends Controller
             if ($query) {
                 if ($query->status == 0) {
                     return response()->json([
-                        'href' => route('screens . storage . product . request', ['key_search' => $key_search])
+                        'href' => route('screens.storage.product.request', ['key_search' => $key_search])
                     ]);
                 } else {
                     return response()->json([
-                        'href' => route('screens . storage . warehouse . import', ['key_search' => $key_search])
+                        'href' => route('screens.storage.warehouse.import', ['key_search' => $key_search])
                     ]);
                 }
             }
@@ -114,13 +114,13 @@ class DashboardController extends Controller
 
         } else if (strpos($key_search, 'YCHH') !== false) {
             return response()->json([
-                'href' => route('screens . storage . warehouse . import', ['key_search' => $key_search])
+                'href' => route('screens.storage.warehouse.import', ['key_search' => $key_search])
             ]);
         } else if (strpos($key_search, 'YCXH') !== false) {
             $query = RequestWarehouse::select('status')->where('code', $key_search)->first();
             if ($query) {
                 return response()->json([
-                    'href' => route('screens . storage . warehouse . exportDestroyProduct', ['key_search' => $key_search])
+                    'href' => route('screens.storage.warehouse.exportDestroyProduct', ['key_search' => $key_search])
                 ]);
             }
             return response()->json([
@@ -131,23 +131,23 @@ class DashboardController extends Controller
             $query = RequestWarehouse::select('status')->where('code', $key_search)->first();
             if ($query) {
                 return response()->json([
-                    'href' => route('screens . storage . warehouse . export', ['key_search' => $key_search])
+                    'href' => route('screens.storage.warehouse.export', ['key_search' => $key_search])
                 ]);
             }
             return response()->json([
                 'message' => 'Không tim thấy kết quả phù hợp'
             ], 404);
 
-        } else if (strpos($key_search, 'VN - ') !== false) {
-            $query = Warehouses::join('product_warehouses', 'warehouses . id', ' = ', 'product_warehouses . ware_id')
-                ->join('products', 'product_warehouses . product_id', ' = ', 'products . id')
-                ->where('product_warehouses . status', 1)
-                ->where('warehouses . user_id', Auth::id())
-                ->where('products . publish_id', $key_search)
+        } else if (strpos($key_search, 'VN-') !== false) {
+            $query = Warehouses::join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
+                ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+                ->where('product_warehouses.status', 1)
+                ->where('warehouses.user_id', Auth::id())
+                ->where('products.publish_id', $key_search)
                 ->first();
             if ($query) {
                 return response()->json([
-                    'href' => route('screens . storage . product . index', ['key_search' => $key_search])]);
+                    'href' => route('screens.storage.product.index', ['key_search' => $key_search])]);
             } else {
                 return response()->json([
                     'message' => 'Không tim thấy kết quả phù hợp'
@@ -159,11 +159,11 @@ class DashboardController extends Controller
             if ($query1) {
                 if ($query1->export_status == 5) {
                     return response()->json([
-                        'href' => route('screens . storage . warehouse . destroyOrder', ['key_search' => $key_search])
+                        'href' => route('screens.storage.warehouse.destroyOrder', ['key_search' => $key_search])
                     ]);
                 } else {
                     return response()->json([
-                        'href' => route('screens . storage . product . requestOut', ['key_search' => $key_search])
+                        'href' => route('screens.storage.product.requestOut', ['key_search' => $key_search])
                     ]);
                 }
             }

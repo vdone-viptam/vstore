@@ -307,6 +307,26 @@
 
         $(document).ready(function () {
 
+
+            document.addEventListener('keypress', event => {
+                if (interval) {
+                    clearInterval(interval);
+                }
+                if (event.code == 'Enter') {
+                    if (barcode) {
+                        call(barcode);
+                    }
+                    barcode = '';
+                    return;
+                }
+                if (event.code != 'Shift') {
+                    barcode += event.key;
+                }
+                interval = setInterval(() => barcode = '', 20);
+            });
+            function call(code) {
+               $('#search').val(code);
+            }
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {
@@ -323,6 +343,7 @@
                 });
             });
         });
+
     </script>
 
 @endsection
