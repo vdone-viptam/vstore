@@ -202,7 +202,7 @@
         const form = document.getElementById('form');
         $(document).keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
-            if (keycode === '13') {
+            if (keycode == '13') {
                 location.href = "{{route('screens.admin.finance.index')}}?start_date=" + $('#start_date').val() + '&end_date=' + $('#end_date').val();
             }
         });
