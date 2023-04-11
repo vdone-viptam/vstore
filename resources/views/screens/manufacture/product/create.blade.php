@@ -469,8 +469,8 @@
             }
         })
     </script>
+    @if(isset($v_stores))
 
-    @if(isset($vstore->id))
         <script>
             function abc() {
                 document.getElementById('btnAc').addEventListener('click', () => {

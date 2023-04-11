@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         foreach ($this->v['products'] as $val) {
 //            return $val->id;
-            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount) - SUM(export) AS amount FROM product_warehouses WHERE product_id =".$val->id))[0]->amount;
+            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount) - SUM(export) AS amount FROM product_warehouses WHERE product_id =" . $val->id))[0]->amount;
 //                return $val->amount_product;
 //            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2
 //                    AND product_id = " . $val->id . ") as amount FROM product_warehouses
@@ -66,16 +66,26 @@ class ProductController extends Controller
 
     public function createRequest()
     {
+//        return 1;
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
-        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->orWhere('id', 800)->first();
+        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
+
+        if (!$this->v['vstore']) {
+            $this->v['vstore'] = User::where('id',800)->first();
+        }
+//        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
         $vstores = [];
         foreach ($listVstores as $list) {
             $vstores[] = $list;
         }
-        $vstores[] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
+        $v = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
+        if ($v) {
+            $vstores[] = $v;
+        }
         $this->v['v_stores'] = array_unique($vstores);
+//        return $this->v['v_stores'];
         return view('screens.manufacture.product.create', $this->v);
 
     }

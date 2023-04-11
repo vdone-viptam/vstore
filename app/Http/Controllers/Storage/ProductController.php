@@ -120,7 +120,7 @@ class ProductController extends Controller
 
     public function updateRequest(Request $request, $status = null)
     {
-        if (!in_array((int)$status, [10, 2, 1])) {
+        if (!in_array((int)$status, [10, 5, 1])) {
             return response()->json([
                 'success' => false,
                 'message' => 'Trạng thái cập nhật chỉ là 1,5 hoặc 10',

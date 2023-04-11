@@ -15,10 +15,12 @@ use Illuminate\Http\Request;
 class PartnerController extends Controller
 {
     private PartnerRepositoryInterface $partnerRepository;
+
     public function __construct(PartnerRepositoryInterface $partnerRepository)
     {
         $this->partnerRepository = $partnerRepository;
     }
+
     /**
      * danh sách Nhà cung cấp
      *
@@ -62,7 +64,9 @@ class PartnerController extends Controller
             // $ncc = $ncc->groupBy(['users.name', 'account_code'])
             //     ->paginate($limit);
             // return $search.'```````'.$limit;
-            $ncc = $this->partnerRepository->index($search,$limit);
+            $type = $request->type ?? 'asc';
+            $field = $request->field ?? 'users.id';
+            $ncc = $this->partnerRepository->index($search, $limit, $type, $field);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([
@@ -154,6 +158,8 @@ class PartnerController extends Controller
                 ], 401);
             }
             $limit = $request->limit ?? 10;
+            $search = $request->search;
+            $limit = $request->limit ?? 10;
             // $id = Warehouses::select('id')->where('user_id', Auth::id())->first()->id;
             // // return $id;
             // $ncc = OrderItem::query()
@@ -170,8 +176,9 @@ class PartnerController extends Controller
             //     ->where('order.export_status', 4);
             // $ncc = $ncc->groupBy(['delivery_partner_id'])
             //     ->paginate($limit);
-
-            $ncc = $this->partnerRepository->deliveryPartner($limit);
+            $type = $request->type ?? 'asc';
+            $field = $request->field ?? 'users.id';
+            $ncc = $this->partnerRepository->deliveryPartner($search ?? '', $limit, $type, $field);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
             return response()->json([

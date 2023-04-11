@@ -229,6 +229,9 @@
                                 </tr>
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="9" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -541,17 +544,21 @@
             })
 
         })
-        document.querySelectorAll('.sort').forEach(item => {
-            const {sort} = item.dataset;
-            item.addEventListener('click', () => {
-                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
-                if (orderBy === 'asc') {
-                    localStorage.setItem('orderBy', JSON.stringify('desc'));
-                } else {
-                    localStorage.setItem('orderBy', JSON.stringify('asc'));
-                }
-                document.location = '{{route('screens.storage.warehouse.export',['key_search' => $key_search])}}&type=' + orderBy +
-                    '&field=' + sort
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.warehouse.export',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
             });
         });
     </script>

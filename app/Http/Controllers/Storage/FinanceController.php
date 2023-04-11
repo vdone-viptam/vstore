@@ -80,28 +80,29 @@ class FinanceController extends Controller
         return redirect()->back()->with('success', 'Cập nhật ngân hàng thành công');
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
             ->where('user_id', Auth::id())
-            ->orderBy('id', 'desc')
+            ->orderBy($field, $type)
             ->paginate(10);
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
         return view('screens.storage.finance.history', $this->v);
     }
 
     public function transferMoney()
     {
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
-            ->where(function ($query) {
-                $query->where('user_id', Auth::id())
-                    ->whereNull('vshop_id');
-            })
-            ->orWhere(function ($query) {
-                $query->where('vshop_id', Auth::id())
-                    ->whereNull('user_id');
-            })
-            ->orderBy('id', 'desc')
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
             ->paginate(10);
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
         return view('screens.storage.finance.revenue', $this->v);
     }
 
@@ -119,7 +120,7 @@ class FinanceController extends Controller
                 }
             }
             if ($request->money > Auth::user()->money) {
-                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
