@@ -43,13 +43,14 @@
                     <div>
                         <label for="" class="mx-2">Từ</label>
                         <input type="date" name="start_date" id="start_date"
+                               value="{{isset($start_date) ? $start_date : ''}}"
                                placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                class=" outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div>
                         <label for="" class="mx-2">đến</label>
                         <input type="date" max="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
-                               name="end_date" id="end_date"
+                               name="end_date" id="end_date" value="{{isset($end_date) ? $end_date : ''}}"
                                placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
                                class=" outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
@@ -57,7 +58,9 @@
                         action="{{route('screens.admin.finance.exportDeposits')}}"
                         method="GET">
                         <input type="hidden" value="{{$limit}}" name="limit">
-                        <input type="hidden" value="{{($histories->currentPage() * 10)}}" name="offset">
+                        <input type="hidden" value="{{(($histories->currentPage() - 1) * $limit)}}" name="offset">
+                        <input type="hidden" value="{{$start_date ?? null}}" name="start_date">
+                        <input type="hidden" value="{{$end_date ?? null}}" name="end_date">
                         <button
                             class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -116,7 +119,7 @@
                         @if(count($histories) > 0)
                             @foreach($histories as $history)
                                 <tr>
-                                    <td>GD-{{$history->code}}</td>
+                                    <td>{{$history->code}}</td>
 
                                     @if($history->status == 0)
                                         <td class="text-yellow-400">

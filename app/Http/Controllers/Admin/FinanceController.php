@@ -27,10 +27,12 @@ class FinanceController extends Controller
             ->orderBy('id', 'desc');
 //            ->paginate(10);
         if ($request->start_date) {
-            $this->v['histories'] = $this->v['histories']->where('created_at', '>=', $request->start_date);
+            $this->v['histories'] = $this->v['histories']->whereDate('created_at', '>=', $request->start_date);
+            $this->v['start_date'] = $request->start_date;
         }
         if ($request->end_date) {
-            $this->v['histories'] = $this->v['histories']->where('created_at', '<=', $request->end_date);
+            $this->v['histories'] = $this->v['histories']->whereDate('created_at', '<=', $request->end_date);
+            $this->v['end_date'] = $request->end_date;
         }
         $this->v['histories'] = $this->v['histories']->paginate($limit);
         $this->v['limit'] = $limit;
@@ -41,9 +43,10 @@ class FinanceController extends Controller
     {
 
         try {
-            return Excel::download(new DepositExport($request->limit, $request->offset), Carbon::now()->format('d-m-Y') . ' -yeu_cau_rut_tien' . '.xlsx');
+            return Excel::download(new DepositExport($request->limit, $request->offset, $request->start_date, $request->end_date), Carbon::now()->format('d-m-Y') . ' -yeu_cau_rut_tien' . '.xlsx');
         } catch (\Exception $e) {
-            return redirect()->back()->with('success', 'Có lỗi xảy ra.Vui lòng thử lại');
+
+            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
 }
