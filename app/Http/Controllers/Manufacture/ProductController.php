@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         foreach ($this->v['products'] as $val) {
 //            return $val->id;
-            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount) - SUM(export) AS amount FROM product_warehouses WHERE product_id =".$val->id))[0]->amount;
+            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount) - SUM(export) AS amount FROM product_warehouses WHERE product_id =" . $val->id))[0]->amount;
 //                return $val->amount_product;
 //            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2
 //                    AND product_id = " . $val->id . ") as amount FROM product_warehouses
@@ -76,6 +76,7 @@ class ProductController extends Controller
         }
         $vstores[] = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('tax_code', Auth::user()->tax_code)->where('role_id', 3)->first();
         $this->v['v_stores'] = array_unique($vstores);
+        dd($this->v['v_stores']);
         return view('screens.manufacture.product.create', $this->v);
 
     }
