@@ -2,7 +2,7 @@
 @section('page_title','Yêu cầu rút tiền')
 
 @section('content')
-    <form action="">
+    <form action="" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
             <span class="text-secondary">Tài chính</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@
                         </div>
                         <form
                             action="{{route('screens.admin.finance.exportDeposits',['limit' => $limit,'offset' => ($histories->currentPage() * 10) - 10])}}"
-                            method="GET" id="form">
+                            method="GET">
 
                             <button id="btnSearch"
                                     class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
