@@ -574,7 +574,7 @@ class OrderController extends Controller
                 'price',
                 'discount_ncc',
                 'discount_vstore',
-                'quantity', 'order_id', 'product_id', 'export_status', 'order.updated_at');
+                'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
                 ->where('order.status', '!=', 2)
