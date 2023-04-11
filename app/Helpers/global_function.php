@@ -30,7 +30,6 @@ function calculateShippingByProductID($productID, $districtId, $provinceId, $war
         return false;
     }
     $address = $ward->wards_name . ", " . $district->district_name . ", " . $province->province_name;
-    return $address;
     $result = app('geocoder')->geocode($address)->get();
     if (count($result) < 1) {
         return false;
