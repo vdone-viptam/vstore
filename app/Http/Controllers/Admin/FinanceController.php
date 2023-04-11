@@ -43,7 +43,7 @@ class FinanceController extends Controller
     {
 
         try {
-            return Excel::download(new DepositExport($request->limit, $request->offset, $request->start_date, $request->end_date), Carbon::now()->format('d-m-Y') . ' -yeu_cau_rut_tien' . '.xlsx');
+            return Excel::download(new DepositExport($request->start_date, $request->end_date), Carbon::now()->format('d-m-Y') . ' -yeu_cau_rut_tien' . '.xlsx');
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');

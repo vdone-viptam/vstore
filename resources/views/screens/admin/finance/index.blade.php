@@ -40,25 +40,34 @@
                     Danh sách yêu cầu rút tiền
                 </h2>
                 <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-                    <div>
-                        <label for="" class="mx-2">Từ</label>
-                        <input type="date" name="start_date" id="start_date"
-                               value="{{isset($start_date) ? $start_date : ''}}"
-                               placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
-                               class=" outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    </div>
-                    <div>
-                        <label for="" class="mx-2">đến</label>
-                        <input type="date" max="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
-                               name="end_date" id="end_date" value="{{isset($end_date) ? $end_date : ''}}"
-                               placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
-                               class=" outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    </div>
+                    <form action=""
+                          class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
+                        <div>
+                            <label for="" class="mx-2">Từ</label>
+                            <input type="date" name="start_date" id="start_date"
+                                   value="{{isset($start_date) ? $start_date : ''}}"
+                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
+                                   class=" outline-none  py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        </div>
+                        <div>
+                            <label for="" class="mx-2">đến</label>
+                            <input type="date" max="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
+                                   name="end_date" id="end_date" value="{{isset($end_date) ? $end_date : ''}}"
+                                   placeholder="Nhập ngày sản xuất hoặc nhập khẩu"
+                                   class=" outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        </div>
+                        <div class="flex flex-col">
+                            <button
+                                class="bg-black border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3"
+                            >
+                                Lọc
+                            </button>
+
+                        </div>
+                    </form>
                     <form
                         action="{{route('screens.admin.finance.exportDeposits')}}"
                         method="GET">
-                        <input type="hidden" value="{{$limit}}" name="limit">
-                        <input type="hidden" value="{{(($histories->currentPage() - 1) * $limit)}}" name="offset">
                         <input type="hidden" value="{{$start_date ?? null}}" name="start_date">
                         <input type="hidden" value="{{$end_date ?? null}}" name="end_date">
                         <button
@@ -159,6 +168,10 @@
                                     </td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr>
+                                <td colspan="10">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
 
 
