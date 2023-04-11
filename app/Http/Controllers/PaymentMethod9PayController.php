@@ -148,7 +148,6 @@ class PaymentMethod9PayController extends Controller
         }
     }
 
-
     function paymentOrderServiceReturn(Request $request) {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
@@ -160,16 +159,15 @@ class PaymentMethod9PayController extends Controller
                 'error' => $validator->errors(),
             ], 403);
         }
-
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
-
         if($hashChecksum === $checksum){
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
+//            $statusLabel = status9Pay($status);
             if(!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
@@ -194,24 +192,6 @@ class PaymentMethod9PayController extends Controller
                 $paymentHistory->tenor = $payment->tenor;
                 $paymentHistory->save();
                 //End Tạo lịch sử hoá đơn
-            }
-            if($status === 5) {
-                $order = OrderService::where('no', $payment->invoice_no)
-                    ->where('status', config('constants.orderServiceStatus.confirmation'))
-                    ->where('payment_status', config('constants.paymentStatus.no_done'))
-                    ->first();
-
-                if($order) {
-                    $order->payment_status = config('constants.paymentStatus.done');
-                    $order->save();
-                    return redirect()->route('paymentSuccess');
-                }
-
-                Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore');
-                return redirect()->route('paymentErr', [
-                    "failure_reason" => 'Giao dịch thành công, vui lòng liên hệ với admin',
-                    "status" => 0
-                ]);
             }
             return redirect()->route('paymentErr', [
                 "failure_reason" => $payment->failure_reason,
@@ -276,8 +256,20 @@ class PaymentMethod9PayController extends Controller
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     $user = User::find($order->user_id);
-                    return view('screens.manufacture.index', compact(['order', 'user']));
+
+                    if($order->type == "NCC") {
+                        return redirect()->route('landingpagencc',[
+                            "order" => $order,
+                            "user" => $user
+                        ]);
+                    } else if ($order->type == "KHO") {
+                        return redirect()->route('screens.storage.index', [
+                            "order" => $order,
+                            "user" => $user
+                        ]);
+                    }
                 }
+
                 Log::error('PAYMENT_9PAY: Lỗi nghiêm trọng, cổng thanh toán trả về invoice không khớp với hệ thống Vstore');
                 return redirect()->route('register_ncc', [
                     "orderErr" => 'Giao dịch thành công, vui lòng liên hệ với admin',

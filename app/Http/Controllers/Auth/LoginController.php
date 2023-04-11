@@ -271,6 +271,7 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }
 
+
         try {
             DB::beginTransaction();
             $checkEmail = DB::table('users')
@@ -342,15 +343,11 @@ class LoginController extends Controller
                 $normal_storage = $request->normal_storage ?? $request->volume;
                 $file = [];
                 if ($request->hasFile('image_storage')) {
-
-
                     foreach ($request->file('image_storage') as $img) {
                         $filestorage = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filestorage);
                         $file[] = 'image/users/' . $filestorage;
                     }
-
-
                 }
                 $file1 = [];
                 if ($request->hasFile('image_pccc')) {
@@ -382,6 +379,7 @@ class LoginController extends Controller
             if ($role_id == 2) {
                 $order = new OrderService();
                 $order->user_id = $user->id;
+                $order->type = "NCC";
                 $order->status = 2; // 2 là chưa hoàn thành
                 $order->payment_status = 2; // 2 là chưa thanh toán
                 $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
@@ -403,7 +401,25 @@ class LoginController extends Controller
             }
 
             if ($role_id == 4) {
-                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+
+                $order = new OrderService();
+                $order->user_id = $user->id;
+                $order->type = "KHO";
+                $order->status = 2; // 2 là chưa hoàn thành
+                $order->payment_status = 2; // 2 là chưa thanh toán
+                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                $order->total = config('constants.orderService.price_kho');
+                $order->save();
+                return redirect()
+                    ->back()
+                    ->with([
+                        "order" => $order,
+                        "user" => $user
+                    ]);
+
+//                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
 
             return redirect()->back()->with('error', 'Yêu cầu không hợp lệ');

@@ -268,7 +268,7 @@
     </form>
 </div>
 @if($isOrder)
-<div id="payment" class="absolute w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
+<div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
     <form method="POST" action="{{route('post_register_order',['order_id' => $order->id])}}">
         @csrf
         <div

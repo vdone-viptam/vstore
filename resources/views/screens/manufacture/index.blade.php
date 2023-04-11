@@ -211,10 +211,8 @@
 </div>
 
 @if($isOrder && $isUser)
-    <div id="payment" class="absolute w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
-        <form method="POST" action="{{route('post_register_order',['order_id' => $order->id])}}">
-            @csrf
-            <div
+    <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
+        <div
                 class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">
                 <div class="relative">
                     <img src="{{asset('home/img/NCC.png')}}" alt="Logo Nhà Cung Cấp">
@@ -347,10 +345,9 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap justify-center mt-8">
-                    <button type="submit" class="order-first md:order-last text-white border border-[#258AFF] rounded-2xl py-[10px] w-[300px] bg-[#258AFF]">Đóng</button>
+                    <button type="submit" class="closeModalPayment order-first md:order-last text-white border border-[#258AFF] rounded-2xl py-[10px] w-[300px] bg-[#258AFF]">Đóng</button>
                 </div>
             </div>
-        </form>
     </div>
 @endif
 
@@ -527,6 +524,21 @@
         <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
     </div>
 </footer>
+
+@if($isOrder && $isUser)
+    <script>
+        const formRegister = document.querySelector('#formRegister');
+        const payment = document.querySelector('#payment');
+        const closeModalPayment = document.querySelectorAll('.closeModalPayment');
+
+        for (i = 0; i < closeModalPayment.length; i++) {
+            closeModalPayment[i].addEventListener('click', function() {
+                payment.classList.add("hidden");
+                formRegister.classList.remove("fixed");
+            });
+        }
+    </script>
+@endif
 
 <script>
     $('.slider').slick({
