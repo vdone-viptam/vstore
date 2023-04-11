@@ -112,74 +112,69 @@
                             <th>Mã xuất hàng</th>
                             <th>Mã sản phẩm</th>
                             <th>Tên sản phẩm
-                                @if($field == 'product_name')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="product_name"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Nhà cung cấp
-                                @if($field == 'ncc_name')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'ncc_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="ncc_name"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="ncc_name"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Số lượng
-                                @if($field == 'quantity')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="quantity"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Ngày xuất hàng
-                                @if($field == 'created_at')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="created_at"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Thao tác/Trạng thái
-                                @if($field == 'status')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="status"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="status"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="status"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="status"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Xuất hóa đơn</th>
                             <th></th>

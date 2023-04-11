@@ -93,68 +93,71 @@
                         <tr>
                             <th>Mã đơn hàng</th>
                             <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm @if($field == 'name')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="name"
-                                           style="float: right;cursor: pointer"></i>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="name"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="name"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="name"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif</th>
-                            <th>Số lượng @if($field == 'quantity')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="quantity"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif</th>
-                            <th>Trạng thái thanh toán
-                                @if($field == 'method_payment')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="method_payment"
-                                           style="float: right;cursor: pointer"></i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="method_payment"
-                                           style="float: right;cursor: pointer"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="method_payment"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
-                            <th>Ngày đặt hàng @if($field == 'created_at')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"
-                                           style="float: right;cursor: pointer"></i>
+                            <th>Số lượng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="created_at"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif</th>
-                            <th>Xác nhận / Từ chối @if($field == 'export_status')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="export_status"
-                                           style="float: right;cursor: pointer"></i>
+                                </span>
+                            </th>
+                            <th>Trạng thái thanh toán
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'method_payment')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="method_payment"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="method_payment"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="export_status"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="method_payment"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="export_status"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif</th>
+                                </span>
+                            </th>
+                            <th>Ngày đặt hàng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Xác nhận / Từ chối
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'export_status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="export_status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="export_status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="export_status"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>

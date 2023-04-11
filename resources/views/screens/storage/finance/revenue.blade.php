@@ -52,51 +52,48 @@
                                     <th>Mã giao dịch</th>
                                     <th>
                                         Trạng thái
-                                        @if($field == 'status')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="status"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'status')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="status" ></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="status"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="status"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="status"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
                                     <th>
                                         Số tiền
-                                        @if($field == 'money_history')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="money_history"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'money_history')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="money_history"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="money_history"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="money_history"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="money_history"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="money_history"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
                                     <th>
                                         Nội dung
                                     </th>
                                     <th>
                                         Thời gian
-                                        @if($field == 'created_at')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="created_at"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'created_at')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="created_at"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="created_at"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="created_at"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
 
                                 </tr>
