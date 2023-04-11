@@ -120,7 +120,9 @@ class WarehouseController extends Controller
             address,SUM(product_warehouses.amount - export) as amount_product,count(products.id) as amount')
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
-            ->where('products.user_id', Auth::id())->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
+            ->where('products.user_id', Auth::id())
+            ->where('product_warehouses.status',1)
+            ->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
         return view('screens.manufacture.warehouse.index', ['warehouses' => $ware]);
     }
 
