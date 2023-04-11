@@ -58,6 +58,12 @@
                                                     Thông tin của bạn đã được cập nhập thành công!
                                                 </div>
                                             @endif
+                                            @if(\Illuminate\Support\Facades\Session::has('error'))
+                                                <div class="alert alert-danger collapshow" role="alert"
+                                                     id="alert-succ">
+                                                    {{\Illuminate\Support\Facades\Session::get('error')}}
+                                                </div>
+                                            @endif
                                             <div class="form-g">
                                                 <div class="form-group">
                                                     <label for="name">Tên V-Kho:</label>
