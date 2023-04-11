@@ -129,17 +129,17 @@ class UserController extends Controller
             if ($user->role_id == 4) {
 
 
-                $district = District::where('district_id', $user->district_id)->first()->district_name;
-                $province = Province::where('province_id', $user->provinceId)->first()->province_name;
-                $wards = Ward::where('wards_id', $user->ward_id)->first()->wards_name;
-
-                $address = $wards . ', ' . $district . '. ' . $province;
-
-                $result = app('geocoder')->geocode($address)->get();
-
-                $coordinates = $result[0]->getCoordinates();
-                $lat = $coordinates->getLatitude();
-                $long = $coordinates->getLongitude();
+//                $district = District::where('district_id', $user->district_id)->first()->district_name;
+//                $province = Province::where('province_id', $user->provinceId)->first()->province_name;
+//                $wards = Ward::where('wards_id', $user->ward_id)->first()->wards_name;
+//
+//                $address = $wards . ', ' . $district . '. ' . $province;
+//
+//                $result = app('geocoder')->geocode($address)->get();
+//
+//                $coordinates = $result[0]->getCoordinates();
+//                $lat = $coordinates->getLatitude();
+//                $long = $coordinates->getLongitude();
 
                 $warehouses = new Warehouses();
                 $warehouses->name = $user->name;
@@ -149,8 +149,8 @@ class UserController extends Controller
                 $warehouses->district_id = $user->district_id;
                 $warehouses->ward_id = $user->ward_id;
                 $warehouses->user_id = $user->id;
-                $warehouses->lat = $lat;
-                $warehouses->long = $long;
+                $warehouses->lat = $lat ?? '19.6397685';
+                $warehouses->long = $long ?? '105.7028457';
                 $warehouses->save();
             }
             if ($user->role_id == 2) {

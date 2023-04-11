@@ -36,7 +36,7 @@
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Tìm kiếm">
                 <button type="submit" id="btnSearch"
-                        class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
+                        class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
 
                     Tìm kiếm
@@ -185,7 +185,7 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">{{$count}}</strong></span>
+                            class="font-bold">{{$users->total()}}</strong></span>
                     {{$users->withQueryString()->links()}}
                     {{--                    @include('layouts.custom.paginator', ['paginator' => ])--}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
