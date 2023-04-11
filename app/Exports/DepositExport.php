@@ -11,9 +11,9 @@ class DepositExport implements FromCollection, WithHeadings
     /**
      * @return \Illuminate\Support\Collection
      */
-    private $start_date = null;
+    private $limit = null;
 
-    private $end_date = null;
+    private $offset = null;
 
     public function __construct($limit, $offset)
     {
