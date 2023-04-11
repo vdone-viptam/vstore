@@ -137,7 +137,7 @@
         <div class="max-w-[320px] w-full mx-auto lg:mx-0 ">
             <button
                 class="btn-register text-center w-full rounded-[10px] text-[#FFF] py-4 uppercase transition-all duration-200 hover:opacity-70 ">
-                <a class="block w-full h-full" href="{{route('register_vstore')}}">Đăng ký ngay</a></button>
+                <a class="block w-full h-full" href="{{route('register_vstore')}}">Đăng ký mua</a></button>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('payment_status')->default(2)->comment('Trạng thái thanh toán');
             $table->string('method_payment')->comment('cách thức thanh toán');
             $table->string('no')->unique()->comment('Mã hoá đơn');
-            $table->string('type')->unique()->comment('kiểu dịch vụ');
+            $table->string('type')->comment('kiểu dịch vụ');
             $table->decimal('total', 20, 3)->comment('Tổng tiền');
 
             $table->timestamps();

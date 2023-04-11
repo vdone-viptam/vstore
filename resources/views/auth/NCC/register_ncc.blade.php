@@ -165,24 +165,34 @@
                     <p class="text-danger text-red-500 text-red-500">Mã số thuế đã đăng ký hoặc lỗi</p>
                 @endif
             </div>
-            <div class="grid grid-cols-2 gap-2 w-full">
-                <div>
+            <div class="grid grid-cols-1  md:grid-cols-3 gap-2">
+                <div class="w-full">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Tỉnh (thành phố)</span>
                     <select required name="city_id" id="city_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="" disabled selected>Lựa chọn tỉnh (thành phố)</option>
+                        <option value="" selected disabled>Lựa chọn tỉnh (thành phố)</option>
                     </select>
                     @error('city_id')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-                <div>
+                <div class="">
                     <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Quận (huyện)</span>
                     <select required name="district_id" id="district_id"
                             class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <option value="" disabled selected>Lựa chọn quận (huyện)</option>
+                        <option value="" selected disabled>Lựa chọn quận (huyện)</option>
                     </select>
                     @error('district_id')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="">
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Phường (xã)</span>
+                    <select name="ward_id" id="ward_id"
+                            class="addr outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <option value="">Lựa chọn Phường (xã)</option>
+                    </select>
+                    @error('ward_id')
                     <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
@@ -260,7 +270,7 @@
         <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
             <button type="submit"
                     class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
-            >Tiếp tục
+            >mua ngay
             </button>
             <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
                                                                              class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
@@ -508,7 +518,7 @@
 <script !src="">
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
-
+    const divWard = document.getElementById('ward_id');
     fetch('{{route('get_city')}}', {
         mode: 'no-cors',
 
@@ -525,6 +535,7 @@
 
         })
             .then((response) => response.json())
+
             .then((data) => {
                 if (data.length > 0) {
                     divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
@@ -536,7 +547,25 @@
             .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
             )
     });
+    divDistrict.addEventListener('change', (e) => {
+        fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
+            mode: 'no-cors',
 
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+
+                } else {
+                    divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`;
+                }
+            })
+            .catch(() => divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`
+            )
+    });
+
+    // divWard.addEventListener('')
 </script>
 @if(old('city_id') != '')
     <script>
