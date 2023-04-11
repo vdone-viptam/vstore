@@ -41,7 +41,7 @@ class FinanceController extends Controller
     {
 
         try {
-            return Excel::download(new DepositExport(10, $request->offset), Carbon::now()->format('d-m-Y') . ' -yeu_cau_rut_tien' . '.xlsx');
+            return Excel::download(new DepositExport($request->limit, $request->offset), Carbon::now()->format('d-m-Y') . ' -yeu_cau_rut_tien' . '.xlsx');
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->with('success', 'Có lỗi xảy ra.Vui lòng thử lại');
