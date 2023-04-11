@@ -124,7 +124,7 @@ class PaymentMethod9PayController extends Controller
                     $user = User::find($ware_user->user_id);
                     $data = [
                         'title' => 'Bạn vừa có 1 thông báo mới',
-                        'avatar' => asset('image/users/' . Auth::user()->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                        'avatar' => '',
                         'message' => 'Bạn vừa có đơn hàng mới',
                         'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                         'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
