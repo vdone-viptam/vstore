@@ -115,7 +115,6 @@ class ProductController extends Controller
             'length' => 'required',
             'height' => 'required',
             'packing_type' => 'required',
-            'volume' => 'required',
             'with' => 'required',
             'material' => 'required',
             'origin' => 'required'
@@ -134,7 +133,6 @@ class ProductController extends Controller
             'length.required' => 'Chiều dài bắt buộc nhập',
             'height.required' => 'Chiều cao bắt buộc nhập',
             'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
-            'volume.required' => 'Thể tích bắt buộc nhập',
             'with.required' => 'Chiều dài bắt buộc nhập',
             'material.required' => 'Chất liệu bắt buộc nhập',
             'origin.required' => 'Xuất xứ bắt buộc nhập'
@@ -522,7 +520,6 @@ class ProductController extends Controller
             'length' => 'required',
             'height' => 'required',
             'packing_type' => 'required',
-            'volume' => 'required',
             'with' => 'required',
             'material' => 'required',
             'origin' => 'required'
@@ -539,7 +536,6 @@ class ProductController extends Controller
             'length.required' => 'Chiều dài bắt buộc nhập',
             'height.required' => 'Chiều cao bắt buộc nhập',
             'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
-            'volume.required' => 'Thể tích bắt buộc nhập',
             'with.required' => 'Chiều dài bắt buộc nhập',
             'material.required' => 'Chất liệu bắt buộc nhập',
             'origin.required' => 'Xuất xứ bắt buộc nhập'
