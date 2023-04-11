@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $type = $request->type ?? 'desc';
+        $type = $request->type ?? 'asc';
         $field = $request->field ?? 'in_stock';
         $products = DB::table('categories')->selectRaw('products.publish_id,
             products.sku_id,
