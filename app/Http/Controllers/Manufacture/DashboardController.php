@@ -3,13 +3,28 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\Chart\ChartRepositoryInterface;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    private ChartRepositoryInterface $chartRepository;
+    public function __construct(ChartRepositoryInterface $chartRepository)
+    {
+        $this->chartRepository = $chartRepository;
+    }
     public function index()
     {
-        // dd(1);
-        return view('screens.manufacture.dashboard.index', []);
+        $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
+        $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
+        $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
+        $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
+
+        return view('screens.manufacture.dashboard.index', [
+            'dataRevenueChartMonth' => $dataRevenueChartMonth,
+            'dataRevenueChartYear' => $dataRevenueChartYear,
+            'dataOrderChartMonth' => $dataOrderChartMonth,
+            'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+        ]);
     }
 }
