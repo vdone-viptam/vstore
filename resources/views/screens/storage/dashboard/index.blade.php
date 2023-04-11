@@ -204,12 +204,12 @@
                                             </a></div>
                                     @else
                                         <div style="display:flex; justify-content:center; gap:10px"><a
-                                                href="javascript:void(0)" onclick="upDateStatus({{$product->code}},1,7)"
+                                                href="javascript:void(0)" onclick="upDateStatus('{{$product->code}}',1,7)"
                                                 style="text-decoration:underline"
                                                 class="text-primary  text-white font-medium  rounded">
                                                 Đồng ý
                                             </a>
-                                            <a href="javascript:void(0)" onclick="upDateStatus({{$product->code}},3,7)"
+                                            <a href="javascript:void(0)" onclick="upDateStatus('{{$product->code}}',3,7)"
                                                style="text-decoration:underline"
                                                class="text-danger  text-white font-medium  rounded">
                                                 Từ chối
