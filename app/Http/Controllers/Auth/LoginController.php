@@ -529,7 +529,7 @@ class LoginController extends Controller
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
         }
-        if ($domain == config('domain.vstore')) {
+        if ($domain == config('domain.storage')) {
             $role_id = 4;
         }
         return view('auth.forgotPassword', ['role_id' => $role_id]);
