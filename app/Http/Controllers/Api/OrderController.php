@@ -204,7 +204,7 @@ class OrderController extends Controller
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
         $orderItem->vshop_id = $product->vshop_id;
-        $orderItem->warehouse_id = 1;
+        $orderItem->warehouse_id = $order->warehouse_id ?? 5;
         $orderItem->sku = '';
         $orderItem->delivery_partner_id = 1;
         $orderItem->price = $product->price;
