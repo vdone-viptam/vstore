@@ -3,6 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Lib9Pay\HMACSignature;
+use App\Http\Lib9Pay\MessageBuilder;
+use App\Models\CartItemV2;
+use App\Models\CartV2;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\OrderService;
 use App\Models\District;
 use App\Models\Otp;
 use App\Models\PasswordReset;
@@ -10,11 +17,13 @@ use App\Models\Province;
 use App\Models\User;
 use App\Models\Ward;
 use Carbon\Carbon;
+use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -72,19 +81,93 @@ class LoginController extends Controller
         return view('auth.admin.login');
     }
 
-    public function postFormRegister(Request $request)
+    public function postRegisterOrder(Request $request){
+        $validator = Validator::make($request->all(), [
+            'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER',
+            'order_id' => 'required',
+        ]);
+
+        $order_id = $request->order_id;
+
+        if ($validator->fails()) {}
+
+        $method = $request->method_payment;
+
+        $order = OrderService::where('id', $order_id)
+            ->where('status', 2)
+            ->first();
+
+        if(!$order) {
+            return redirect()->back()->withErrors([
+                "orderErr" => "Hành động không được thực hiện, vui lòng thử lại"
+            ]);
+        }
+        $order->status = config('constants.orderServiceStatus.confirmation');
+        $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
+
+        $returnUrl = $http . config("domain.payment") . "/payment/order-service/back";
+        $backUrl = $http . config("domain.payment") . "/payment/order-service/return";
+
+        $time = time();
+        $invoiceNo = $order->no;
+        $amount = (float)$order->total;
+
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $data = array(
+            'merchantKey' => $merchantKey,
+            'time' => $time,
+            'invoice_no' => $invoiceNo,
+            'description' => 'Mua dịch vụ',
+            'amount' => $amount + ($amount*(10/100)),
+            'back_url' => $backUrl,
+            'return_url' => $returnUrl,
+            'method' => $method,
+            'is_customer_pay_fee' => 1 // Đối tượng chịu phí. 0: người bán chịu phí, 1: khách hàng chịu phí
+        );
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/payments/create', 'POST')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+        $httpData = [
+            'baseEncode' => base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)),
+            'signature' => $signature,
+        ];
+
+        $order->method_payment = $method;
+        $order->save();
+
+        try {
+            $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
+            return redirect()->to($redirectUrl);
+        } catch (Exception $e) {
+            Log::error($e);
+            return response()->json([
+                "message" => "500 Internal Server Error",
+                "errors" => $e
+            ], 500);
+        }
+
+    }
+
+    public function postFormRegister(Request $request) // FORM SUBMIT ĐĂNG kÝ
     {
         $domain = $request->getHttpHost();
+        $role_id = 0;
         if ($domain == config('domain.admin')) {
             $role_id = 1;
         }
-        if ($domain == config('domain.ncc')) {
+        if ($domain == config('domain.ncc')) { // Nhà Cung cấp
             $role_id = 2;
         }
-        if ($domain == config('domain.vstore')) {
+        if ($domain == config('domain.vstore')) { // Vstore
             $role_id = 3;
         }
-        if ($domain == config('domain.storage')) {
+        if ($domain == config('domain.storage')) { // Kho
             $role_id = 4;
         }
 
@@ -99,8 +182,6 @@ class LoginController extends Controller
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required',
-
-
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
@@ -136,7 +217,6 @@ class LoginController extends Controller
                 'city_id' => 'required',
                 'district_id' => 'required',
                 'ward_id' => 'required'
-
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
@@ -177,7 +257,7 @@ class LoginController extends Controller
                 'name.required' => 'Tên nhà cung cấp bắt buộc nhập',
                 'name.max' => 'Tên nhà cung cấp tối đa 30 ký tự',
                 'company_name.unique' => 'Tên công ty đã tồn tại',
-                'company_name.unique' => 'Tên công ty tối đa 100 kí tự',
+                'company_name.max' => 'Tên công ty tối đa 100 kí tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
@@ -187,21 +267,18 @@ class LoginController extends Controller
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ',
-                'ward_id' => 'Phường (xã) bắt buộc chọn',
+                'ward_id.required' => 'Phường (xã) bắt buộc chọn',
 
 
             ]);
         }
-//        return $request;
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }
+
 
         try {
-            if ($validator->fails()) {
-
-                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
-
-            }
-
-
             DB::beginTransaction();
             $checkEmail = DB::table('users')
                 ->where('email', $request->email)
@@ -272,15 +349,11 @@ class LoginController extends Controller
                 $normal_storage = $request->normal_storage ?? $request->volume;
                 $file = [];
                 if ($request->hasFile('image_storage')) {
-
-
                     foreach ($request->file('image_storage') as $img) {
                         $filestorage = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filestorage);
                         $file[] = 'image/users/' . $filestorage;
                     }
-
-
                 }
                 $file1 = [];
                 if ($request->hasFile('image_pccc')) {
@@ -306,29 +379,62 @@ class LoginController extends Controller
             $user->district_id = $request->district_id;
             $user->ward_id = $request->ward_id;
             $user->save();
+
             DB::commit();
 
             if ($role_id == 2) {
+                $order = new OrderService();
+                $order->user_id = $user->id;
+                $order->type = "NCC";
+                $order->status = 2; // 2 là chưa hoàn thành
+                $order->payment_status = 2; // 2 là chưa thanh toán
+                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                $order->total = config('constants.orderService.price_ncc');
+                $order->save();
 
-                return redirect()->route('login_ncc')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
-Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+                return redirect()
+                    ->back()
+                    ->with([
+                        "order" => $order,
+                        "user" => $user
+                    ]);
             }
+
             if ($role_id == 3) {
-                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
-Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
+
             if ($role_id == 4) {
-                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt.
-Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+
+                $order = new OrderService();
+                $order->user_id = $user->id;
+                $order->type = "KHO";
+                $order->status = 2; // 2 là chưa hoàn thành
+                $order->payment_status = 2; // 2 là chưa thanh toán
+                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                $order->total = config('constants.orderService.price_kho');
+                $order->save();
+                return redirect()
+                    ->back()
+                    ->with([
+                        "order" => $order,
+                        "user" => $user
+                    ]);
+
+//                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
-//            return 1
+
+            return redirect()->back()->with('error', 'Yêu cầu không hợp lệ');
+
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
+            dd($e);
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
-
         }
-
     }
 
     public
@@ -421,7 +527,7 @@ Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
         }
-        if ($domain == config('domain.storage')) {
+        if ($domain == config('domain.vstore')) {
             $role_id = 4;
         }
         return view('auth.forgotPassword', ['role_id' => $role_id]);

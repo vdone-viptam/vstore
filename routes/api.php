@@ -251,6 +251,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::post('/store-wallet', [\App\Http\Controllers\Api\storage\FinanceController::class, 'storeWall']);
                 Route::put('/update-wallet/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'updateWall']);
                 Route::post('/create-deposit', [\App\Http\Controllers\Api\storage\FinanceController::class, 'deposit']);
+                Route::get('revenue', [\App\Http\Controllers\storage\FinanceController::class, 'transferMoney']);
 
                 Route::get('/history', [\App\Http\Controllers\Api\storage\FinanceController::class, 'history']);
                 Route::delete('/destroy-wa/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'destoryWa']);

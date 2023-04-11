@@ -6,6 +6,12 @@ return [
         'pay'=>1,
         'unpaid'=>2
     ],
+    //ORDER SERVICE
+    'orderServiceStatus' => [
+        'wait_for_confirmation' => 2, // đợi ng dùng thanh toán
+        'confirmation' => 1, // người dùng
+        'done' => 3, // hàng đến tay người dùng
+    ],
     // ORDER
     'orderStatus' => [
         'wait_for_confirmation' => 2, // đợi ng dùng thanh toán
@@ -78,5 +84,11 @@ return [
         'ncc' => 1,
         'vstore' => 2,
         'vshop' => 3
+    ],
+    // Mua dịch vụ
+    'orderService' => [
+        'price_ncc' => 12000000,
+        'price_kho' => 1200000,
+        'price_vstore' => 300000000,
     ]
 ];

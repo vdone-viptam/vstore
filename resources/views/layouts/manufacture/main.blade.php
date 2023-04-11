@@ -56,7 +56,8 @@
     .validate-fail .input-code li input {
         border-color: #D90000;
     }
-    td{
+
+    td {
         text-align: left;
     }
 
@@ -90,36 +91,36 @@
     const l = document.getElementsByClassName("list")
     const param = url[3];
     const a = url[4] || '/';
-    if (param === "dashboard") {
+    if (param.includes('dashboard')) {
         tm[0].classList.toggle("active")
     }
-    if (param === "products") {
+    if (param.includes('products')) {
         tm[1].classList.toggle("active");
         l[0].classList.remove("hidden");
 
         checkUnder(tm[1], a)
     }
-    if (param === "warehouses") {
+    if (param.includes('warehouses')) {
         tm[2].classList.toggle("active")
         l[1].classList.remove("hidden");
         checkUnder(tm[2], a)
     }
-    if (param === "partners") {
+    if (param.includes('partners')) {
         tm[3].classList.toggle("active");
         l[2].classList.remove("hidden");
         checkUnder(tm[3], a)
     }
-    if (param === "orders") {
+    if (param.includes('orders')) {
         tm[4].classList.toggle("active");
         l[3].classList.remove("hidden");
         checkUnder(tm[4], a)
     }
-    if (param === "finances") {
+    if (param.includes('finances')) {
         tm[5].classList.toggle("active");
         l[4].classList.remove("hidden");
         checkUnder(tm[5], a)
     }
-    if (param === "account") {
+    if (param.includes('account')) {
         tm[6].classList.toggle("active")
         l[5].classList.remove("hidden");
         checkUnder(tm[6], a)

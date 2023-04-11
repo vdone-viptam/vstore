@@ -51,7 +51,8 @@ class WarehouseController extends Controller
 
         if (!DB::table('product_warehouses')->where('product_id', $request->product_id)->where('ware_id', $request->ware_id)->first()) {
             $model = new ProductWarehouses();
-            $model->fill($request->only('product_id', 'ware_id', 'amount'));
+            $model->fill($request->only('product_id', 'ware_id'));
+            $model->amount = 0;
             $model->status = 0;
             $model->code = \Illuminate\Support\Str::random(12);
             $model->export = 0;
@@ -115,32 +116,33 @@ class WarehouseController extends Controller
 //        }
 //        dd($products);
         $ware = DB::table('warehouses')
-            ->selectRaw('warehouses.name as ware_name,warehouses.id,phone_number,address')
+            ->selectRaw('warehouses.name as ware_name,warehouses.id,
+            phone_number,
+            address,SUM(product_warehouses.amount - export) as amount_product,count(products.id) as amount')
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
-//            ->groupBy('product_warehouses.product_id')
-            ->where('products.user_id', Auth::id())->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
-        foreach ($ware as $wa) {
-            $wa->amount = ProductWarehouses::where('ware_id', $wa->id)->distinct('product_id')->count('id');
-//            return  $wa;
-            $nhap = ProductWarehouses::where('ware_id', $wa->id)->where('status', 1)->sum('amount');
-            $xuat = ProductWarehouses::where('ware_id', $wa->id)->where('status', 2)->sum('amount');
-//            return $nhap;
-            $wa->amount_product = $nhap - $xuat;
-            if ($wa->amount_product <= 0) {
-                $wa->amount_product = 0;
-            }
-        }
-//        return $ware;
+            ->where('products.user_id', Auth::id())
+            ->where('product_warehouses.status', 1)
+            ->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
         return view('screens.manufacture.warehouse.index', ['warehouses' => $ware]);
     }
 
     public function swap()
     {
 //        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->where('product_warehouses.status','!=',3)->orderBy('product_warehouses.id', 'desc')->paginate(10);
-        $products = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
-            ->select('warehouses.name as ware_name', 'products.name', 'product_warehouses.status', 'product_warehouses.amount', 'product_warehouses.created_at')
+//        $products = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+//            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
+//            ->select()
+//            ->paginate(10);
+
+        $products = Warehouses::select('request_warehouses.code', 'warehouses.name as ware_name',
+            'products.name', 'request_warehouses.status',
+            'request_warehouses.quantity',
+            'request_warehouses.created_at', 'request_warehouses.type')
+            ->join('request_warehouses', 'warehouses.id', '=', 'request_warehouses.ware_id')
+            ->join("products", 'request_warehouses.product_id', '=', 'products.id')
+            ->orderBy('request_warehouses.id', 'desc')
+            ->where('products.user_id', Auth::id())
             ->paginate(10);
 //        $products = Product::where('user_id',Auth::user()->id)->paginate(10);
         return view('screens.manufacture.warehouse.swap', ['products' => $products]);
@@ -150,12 +152,12 @@ class WarehouseController extends Controller
     public function detail(Request $request)
     {
 
-        $kho = ProductWarehouses::select('products.name as name', 'product_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->groupBy(['product_id', 'products.name'])->where('ware_id', $request->id)->get();
+        $kho = ProductWarehouses::select('products.name as name', 'product_id', DB::raw('(amount -export) as amount_product'))
+            ->join('products', 'product_warehouses.product_id', '=', 'products.id')->groupBy(['product_id', 'products.name']
+            )->where('ware_id', $request->id)
+            ->where('product_warehouses.status', 1)
+            ->get();
 
-        foreach ($kho as $wa) {
-//            return DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ""));
-            $wa->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ") as amount FROM product_warehouses where status = 1 AND ware_id =" . $request->id . " AND product_id = " . $wa->product_id . ""))[0]->amount ?? 0;
-        }
 
         return view('screens.manufacture.warehouse.detail', ['products1' => $kho]);
 
