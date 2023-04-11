@@ -93,10 +93,11 @@ class FinanceController extends Controller
         return view('screens.storage.finance.history', $this->v);
     }
 
-    public function transferMoney()
+    public function transferMoney(Request $request)
     {
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'id';
+        // dd($type,$field);
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)

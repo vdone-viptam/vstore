@@ -116,17 +116,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($suppliers as $supplier)
+                                @if(count($suppliers) > 0)
+                                    @foreach($suppliers as $supplier)
+                                        <tr>
+                                            <td>{{$supplier->account_code}}</td>
+                                            <td> {{$supplier->name}}</td>
+                                            <td>{{$supplier->province_name}}</td>
+                                            <td>{{$supplier->count_product}}</td>
+                                            <td>{{$supplier->amount_product}}</td>
+                                            <td><a class="text-primary underline" href="#"
+                                                onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$supplier->account_code}}</td>
-                                        <td> {{$supplier->name}}</td>
-                                        <td>{{$supplier->province_name}}</td>
-                                        <td>{{$supplier->count_product}}</td>
-                                        <td>{{$supplier->amount_product}}</td>
-                                        <td><a class="text-primary underline" href="#"
-                                               onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
+                                        <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                                     </tr>
-                                @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

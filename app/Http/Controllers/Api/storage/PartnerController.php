@@ -177,7 +177,7 @@ class PartnerController extends Controller
             // $ncc = $ncc->groupBy(['delivery_partner_id'])
             //     ->paginate($limit);
             $type = $request->type ?? 'asc';
-            $field = $request->field ?? 'users.id';
+            $field = $request->field ?? 'delivery_partner.id';
             $ncc = $this->partnerRepository->deliveryPartner($search ?? '', $limit, $type, $field);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {
