@@ -5,6 +5,7 @@ namespace App\Repositories\Chart;
 use App\Interfaces\Chart\ChartRepositoryInterface;
 use App\Models\BlanceChange;
 use App\Models\Order;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +15,12 @@ class ChartRepository implements ChartRepositoryInterface
 {
     public function revenueRangeTimeMonth()
     {
-        $data = BlanceChange::where('user_id',Auth::id())->where('type',1)->where('status',1)
-                ->select(
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+        $data = BlanceChange::where('type',1)->where('status',1);
+        if($checkRole != 1){
+            $data = $data ->where('user_id',Auth::id());
+        }
+        $data = $data->select(
                         DB::raw('sum(money_history) as sums'),
                         DB::raw("(DATE_FORMAT(created_at, '%d/%m/%Y')) as my_date")
                 )
@@ -67,8 +72,12 @@ class ChartRepository implements ChartRepositoryInterface
     }
     public function revenueRangeTimeYear()
     {
-        $data = BlanceChange::where('user_id',Auth::id())->where('type',1)->where('status',1)
-                ->select(
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+        $data = BlanceChange::where('type',1)->where('status',1);
+        if($checkRole != 1){
+            $data = $data ->where('user_id',Auth::id());
+        }
+        $data = $data->select(
                         DB::raw('sum(money_history) as sums'),
                         DB::raw("(DATE_FORMAT(created_at, '%m/%Y')) as my_month")
                 )
@@ -116,8 +125,12 @@ class ChartRepository implements ChartRepositoryInterface
     }
     public function orderRangeTimeMonth()
     {
-        $data = Order::where('user_id',Auth::id())->where('status',1)
-                ->select(
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+        $data = Order::where('status',1);
+        if($checkRole != 1){
+            $data = $data ->where('user_id',Auth::id());
+        }
+        $data = $data->select(
                         DB::raw('count(*) as countOrder'),
                         DB::raw("(DATE_FORMAT(created_at, '%d/%m/%Y')) as my_date")
                 )
@@ -168,8 +181,12 @@ class ChartRepository implements ChartRepositoryInterface
     }
     public function orderRangeTimeYear()
     {
-        $data = Order::where('user_id',Auth::id())->where('status',1)
-                ->select(
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+        $data = Order::where('status',1);
+        if($checkRole != 1){
+            $data = $data ->where('user_id',Auth::id());
+        }
+        $data = $data->select(
                         DB::raw('count(*) as countOrder'),
                         DB::raw("(DATE_FORMAT(created_at, '%m/%Y')) as my_date")
                 )
