@@ -121,7 +121,7 @@ class WarehouseController extends Controller
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
-            ->where('product_warehouses.status',1)
+            ->where('product_warehouses.status', 1)
             ->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
         return view('screens.manufacture.warehouse.index', ['warehouses' => $ware]);
     }
@@ -152,7 +152,10 @@ class WarehouseController extends Controller
     {
 
         $kho = ProductWarehouses::select('products.name as name', 'product_id', DB::raw('(amount -export) as amount_product'))
-            ->join('products', 'product_warehouses.product_id', '=', 'products.id')->groupBy(['product_id', 'products.name'])->where('ware_id', $request->id)->get();
+            ->join('products', 'product_warehouses.product_id', '=', 'products.id')->groupBy(['product_id', 'products.name']
+            )->where('ware_id', $request->id)
+            ->where('product_warehouses.status', 1)
+            ->get();
 
 
         return view('screens.manufacture.warehouse.detail', ['products1' => $kho]);
