@@ -39,6 +39,51 @@ class ReviewProductApiController extends Controller
         $this->callApiRepositoryInterface = $callApiRepositoryInterface;
     }
     /**
+     * lấy thông tin sản phẩm trước khi đánh giá
+     *
+     * @bodyParam product_id ID product
+     * @bodyParam order_item_id ID order_item
+     * API dùng để lấy thông tin sản phẩm trước khi đánh giá
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+     public function infoReviewProduct(Request $request){
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|exists:products,id',
+            'order_item_id' => 'required|exists:order_item,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 400);
+        }
+        try {
+            $data = Order::join('order_item','order_item.order_id','order.id')
+                ->where('order_item.id',$request->order_item_id)
+                ->where('order_item.product_id',$request->product_id)
+                ->where('order.export_status',4)
+                ->select('product_id','order_item.id')
+                ->first();
+            if($data){
+                $data['product'] = $this->reviewProductRepository->calculatorFeeProductOrder($request->product_id,$request->order_item_id);
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ], 200);
+            }
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng hoặc đơn hàng chưa giao thành công'
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
      * lưu đánh giá sản phẩm
      *
      * @bodyParam product_id ID product
@@ -65,7 +110,7 @@ class ReviewProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         try {
             $checkExportStatus = Order::join('order_item','order_item.order_id','order.id')
@@ -130,7 +175,7 @@ class ReviewProductApiController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'messageError' => $validator->errors(),
-                ], 401);
+                ], 400);
             }
 
             $point_evaluation = $request->point_evaluation;
@@ -188,7 +233,7 @@ class ReviewProductApiController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'messageError' => $validator->errors(),
-                ], 401);
+                ], 400);
             }
 
             $status_rep = $request->status_rep;
@@ -252,7 +297,7 @@ class ReviewProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         try {
             $data = Point::query()
@@ -301,7 +346,7 @@ class ReviewProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         try {
             // case khi gửi request liên tục ?
