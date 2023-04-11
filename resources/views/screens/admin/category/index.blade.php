@@ -27,6 +27,7 @@
                 </button>
             </div>
             <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
+
                 <div class="flex justify-between items-center flex-wrap gap-4">
                     <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
                         <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +105,9 @@
                             @foreach($categories as $category)
                                 <tr>
                                     {{--                        <td><input type="checkbox"></td>--}}
-                                    <td>{{ $loop->iteration}}</td>
+
+{{--                                    @if({{ Request::get('page') }})--}}
+                                    <td>{{ $limit_limit ++}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>
                                         <img style="margin: auto;width: 125px"
@@ -147,13 +150,13 @@
                                 hàng / trang
                             </option>
                         </select>
-                        <div class="flex justify-start items-center gap-2">
-                            <span class="text-title text-sm">Đi đến</span>
-                            <input type="number" name="page1" id="page"
-                                   value="{{isset($params['page']) && $params['page'] ? $params['page'] : ''}}"
-                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"
-                                   min="1">
-                        </div>
+{{--                        <div class="flex justify-start items-center gap-2">--}}
+{{--                            <span class="text-title text-sm">Đi đến</span>--}}
+{{--                            <input type="number" name="page1" id="page"--}}
+{{--                                   value="{{isset($params['page']) && $params['page'] ? $params['page'] : ''}}"--}}
+{{--                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
+{{--                                   min="1">--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -170,15 +173,19 @@
         const limit = document.getElementById('limit');
         const page = document.getElementById('page');
         const form = document.getElementById('form');
+        limit.addEventListener('change', (e) => {
+            // alert(1);
+            form.submit();
+        });
         document.getElementById('btnSearch').addEventListener('click', () => {
                 form.submit();
             }
         )
-        limit.addEventListener('change', (e) => {
-            form.submit();
-        });
+
         page.addEventListener('change', (e) => {
             form.submit();
         });
+
+
     </script>
 @endsection
