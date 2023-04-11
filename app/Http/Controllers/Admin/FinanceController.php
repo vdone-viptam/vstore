@@ -27,10 +27,10 @@ class FinanceController extends Controller
             ->orderBy('id', 'desc');
 //            ->paginate(10);
         if ($request->start_date) {
-            $this->v['histories'] = $this->v['histories']->where('created_at', '<=', $request->start_date);
+            $this->v['histories'] = $this->v['histories']->where('created_at', '>=', $request->start_date);
         }
         if ($request->end_date) {
-            $this->v['histories'] = $this->v['histories']->where('created_at', '>=', $request->end_date);
+            $this->v['histories'] = $this->v['histories']->where('created_at', '<=', $request->end_date);
         }
         $this->v['histories'] = $this->v['histories']->paginate($limit);
         $this->v['limit'] = $limit;
