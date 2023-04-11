@@ -1,6 +1,6 @@
 @php
-    $isOrder = isset($order);
-    $isUser = isset($user);
+    $isOrder = count($order);
+    $isUser = count($user);
 @endphp
 
 <!DOCTYPE html>
