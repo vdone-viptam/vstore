@@ -185,7 +185,7 @@
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
                             class="font-bold">{{isset($total) ? $total :  $requests->total()}}</strong></span>
-                    @include('layouts.custom.paginator', ['paginator' => $requests])
+                    {{$requests->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
