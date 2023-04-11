@@ -65,7 +65,7 @@ class ReviewProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         try {
             $checkExportStatus = Order::join('order_item','order_item.order_id','order.id')
@@ -130,7 +130,7 @@ class ReviewProductApiController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'messageError' => $validator->errors(),
-                ], 401);
+                ], 400);
             }
 
             $point_evaluation = $request->point_evaluation;
@@ -188,7 +188,7 @@ class ReviewProductApiController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'messageError' => $validator->errors(),
-                ], 401);
+                ], 400);
             }
 
             $status_rep = $request->status_rep;
@@ -254,7 +254,7 @@ class ReviewProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         try {
             $data = Point::query()
@@ -303,7 +303,7 @@ class ReviewProductApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         try {
             // case khi gửi request liên tục ?
