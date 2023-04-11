@@ -167,15 +167,15 @@
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit" id="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option value="10" {{ isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>
+                            <option value="10" {{ isset($limit) && $limit == 10 ? 'selected' : ''}}>
                                 10
                                 hàng / trang
                             </option>
-                            <option value="25" {{ isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>
+                            <option value="25" {{ isset($limit) && $limit == 25 ? 'selected' : ''}}>
                                 25
                                 hàng / trang
                             </option>
-                            <option value="50" {{ isset($params['limit']) && $params['limit'] == 50 ? 'selected' : ''}}>
+                            <option value="50" {{ isset($limit) && $limit == 50 ? 'selected' : ''}}>
                                 50
                                 hàng / trang
                             </option>
