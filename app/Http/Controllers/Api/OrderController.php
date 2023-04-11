@@ -568,7 +568,7 @@ class OrderController extends Controller
                 ], 404);
             }
             $orders = OrderItem::select(
-                'id as order_item_id',
+                'order_item.id as order_item_id',
                 'product_id',
                 'discount_vshop',
                 'price',
