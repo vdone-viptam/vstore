@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Discount;
+use App\Models\OrderService;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LandingpageController extends Controller
 {
@@ -78,14 +80,25 @@ class LandingpageController extends Controller
         return view('screens.vstore.index');
     }
 
-    public function ladingpageNCC()
+    public function ladingpageNCC(Request $request)
     {
-        return view('screens.manufacture.index');
+        if($request->order && $request->user) {
+            $user = User::find($request->user);
+            $order = OrderService::find($request->order);
+        }
+
+        return view('screens.manufacture.index', compact(['user', 'order']));
     }
 
-    public function ladingpageStorage()
+    public function ladingpageStorage(Request $request)
     {
-        return view('screens.storage.index');
+
+        if($request->order && $request->user) {
+            $user = User::find($request->user);
+            $order = OrderService::find($request->order);
+        }
+
+        return view('screens.storage.index', compact(['user', 'order']));
     }
 
     public function vstore($slug){

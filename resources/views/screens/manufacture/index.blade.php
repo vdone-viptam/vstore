@@ -1,3 +1,8 @@
+@php
+    $isOrder = isset($order);
+    $isUser = isset($user);
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +12,6 @@
     <title>Trang chủ nhà cung cấp NCC</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-    {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
     <meta property="og:title" content="NCC" />
     <meta property="og:title" content="NCC | Ecommerce. Cổng thương mại điện tử dành cho nhà cung cấp và sản xuất"/>
     <meta property="og:description" content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
@@ -28,7 +32,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
     body{
-        font-family: 'Nunito Sans';
+        font-family: 'Nunito Sans', serif;
     }
 </style>
     @vite('resources/css/app.css')
@@ -92,10 +96,7 @@
 
         </div>
         </div>
-
-
     </div>
-
     </div>
     <div
         class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] place-items-end mx-auto md:p-16 my-8 p-4">
@@ -209,6 +210,146 @@
     </div>
 </div>
 
+@if($isOrder && $isUser)
+    <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
+        <div
+                class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">
+                <div class="relative">
+                    <img src="{{asset('home/img/NCC.png')}}" alt="Logo Nhà Cung Cấp">
+                    <h2 class="font-medium text-2xl mt-4">Thông tin thanh toán</h2>
+
+                    <button class="closeModalPayment absolute top-0 right-0">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.0726 0.553704C22.9071 0.383748 22.7104 0.248911 22.4939 0.156911C22.2774 0.064912 22.0453 0.0175566 21.8109 0.0175566C21.5765 0.0175566 21.3444 0.064912 21.1279 0.156911C20.9114 0.248911 20.7147 0.383748 20.5492 0.553704L11.7976 9.50037L3.04608 0.535371C2.88038 0.365637 2.68368 0.230997 2.46719 0.139138C2.2507 0.0472788 2.01867 1.78843e-09 1.78435 0C1.55003 -1.78843e-09 1.318 0.0472788 1.10151 0.139138C0.885021 0.230997 0.688316 0.365637 0.522624 0.535371C0.356931 0.705104 0.225497 0.906607 0.135825 1.12837C0.0461531 1.35014 -1.74585e-09 1.58783 0 1.82787C1.74585e-09 2.06791 0.0461531 2.3056 0.135825 2.52737C0.225497 2.74913 0.356931 2.95064 0.522624 3.12037L9.27417 12.0854L0.522624 21.0504C0.356931 21.2201 0.225497 21.4216 0.135825 21.6434C0.0461531 21.8651 0 22.1028 0 22.3429C0 22.5829 0.0461531 22.8206 0.135825 23.0424C0.225497 23.2641 0.356931 23.4656 0.522624 23.6354C0.688316 23.8051 0.885021 23.9397 1.10151 24.0316C1.318 24.1235 1.55003 24.1707 1.78435 24.1707C2.01867 24.1707 2.2507 24.1235 2.46719 24.0316C2.68368 23.9397 2.88038 23.8051 3.04608 23.6354L11.7976 14.6704L20.5492 23.6354C20.7149 23.8051 20.9116 23.9397 21.1281 24.0316C21.3445 24.1235 21.5766 24.1707 21.8109 24.1707C22.0452 24.1707 22.2773 24.1235 22.4937 24.0316C22.7102 23.9397 22.9069 23.8051 23.0726 23.6354C23.2383 23.4656 23.3698 23.2641 23.4594 23.0424C23.5491 22.8206 23.5952 22.5829 23.5952 22.3429C23.5952 22.1028 23.5491 21.8651 23.4594 21.6434C23.3698 21.4216 23.2383 21.2201 23.0726 21.0504L14.3211 12.0854L23.0726 3.12037C23.7527 2.4237 23.7527 1.25037 23.0726 0.553704Z" fill="black"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="w-full">
+                    <div class="flex flex-col md:flex-row gap-[30px] pt-8">
+                        <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
+                            <h3 class="font-extrabold text-xl">Thông tin bên mua</h3>
+                            <div class="mt-6 table w-full">
+                                <div class="table-row">
+                                    <p class="font-medium text-xl leading-8 table-cell">Tên công ty</p>
+                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->company_name}}</p>
+                                </div>
+                                <div class="table-row">
+                                    <p class="font-medium text-xl leading-8 table-cell">Email</p>
+                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->email}}</p>
+                                </div>
+                                <div class="table-row">
+                                    <p class="font-medium text-xl leading-8 table-cell">Số điện thoại</p>
+                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->phone_number}}</p>
+                                </div>
+                                <div class="table-row">
+                                    <p class="font-medium text-xl leading-8 table-cell">Tên nhà cung cấp</p>
+                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->name}}</p>
+                                </div>
+                                <div class="table-row">
+                                    <p class="font-medium text-xl leading-8 table-cell">Mã số thuế</p>
+                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->tax_code}}</p>
+                                </div>
+                                <div class="table-row">
+                                    <p class="font-medium text-xl leading-8 table-cell">Người đại diện</p>
+                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->id_vdone}}</p>
+                                </div>
+                                @if($user->referral_code)
+                                    <div class="table-row">
+                                        <p class="font-medium text-xl leading-8 table-cell">Mã người giới thiệu</p>
+                                        <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->referral_code}}</p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
+                            <h3 class="font-extrabold text-xl">Chi tiết sản phẩm</h3>
+                            @php
+                                $price = (float) config('constants.orderService.price_ncc');
+                                $priceFormat = number_format($price, 0, '', '.');
+                                $vat = (float) config('constants.orderService.price_ncc')*10/100;
+                                $vatFormat = number_format($vat, 0, '', '.');
+
+                                $total = $price + $vat;
+                                $totalFormat = number_format($total, 0, '', '.');
+
+                                $chiTietThanhToan = array(
+                                    [
+                                        "title" => "Ngày tạo",
+                                        "value" => $order->created_at,
+                                        "class" => ""
+                                    ],
+                                    [
+                                        "title" => "Tài khoản",
+                                        "value" => "Nhà cung cấp",
+                                        "class" => ""
+                                    ],
+                                    [
+                                        "title" => "Thời hạn",
+                                        "value" => "1 năm",
+                                        "class" => ""
+                                    ],
+                                    [
+                                        "title" => "Giá sản phẩm",
+                                        "value" => $priceFormat . "đ",
+                                        "class" => ""
+                                    ],
+                                    [
+                                        "title" => "VAT",
+                                        "value" => $vatFormat . "đ",
+                                        "class" => ""
+                                    ],
+                                    [
+                                        "title" => "Tổng số tiền",
+                                        "value" => $totalFormat . "đ",
+                                        "class" => "text-red-500"
+                                    ]);
+                            @endphp
+                            <div class="mt-6 table w-full">
+                                @foreach($chiTietThanhToan as $value)
+                                    <div class="table-row">
+                                        <p class="font-medium text-xl leading-8 table-cell">{{$value['title']}}</p>
+                                        <p class=" {{$value['class']}} font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$value['value']}}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-[30px] pt-8">
+                    <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
+                        <h3 class="font-extrabold text-xl">Phương thức thanh toán</h3>
+                        <p class="mt-4">
+
+                            @switch($order->method_payment)
+                                @case("ATM_CARD")
+                                    Thẻ nội địa
+                                    @break
+                                @case("CREDIT_CARD")
+                                    Thẻ quốc tế
+                                    @break
+                                @case("9PAY")
+                                    Thanh toán ngay qua 9Pay
+                                    @break
+                                @case("BANK_TRANSFER")
+                                    Chuyển khoản ngân hàng
+                                    @break
+                            @endswitch
+
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full flex justify-center mt-8">
+                    <p class="w-full text-center lg:w-6/12">
+                        Thông tin đăng nhập của bạn sẽ được gửi về email đăng ký trong vòng 24 tiếng.
+                        Vui lòng kiểm tra lại email để sử dụng tài khoản.
+                    </p>
+                </div>
+                <div class="flex flex-wrap justify-center mt-8">
+                    <button type="submit" class="closeModalPayment order-first md:order-last text-white border border-[#258AFF] rounded-2xl py-[10px] w-[300px] bg-[#258AFF]">Đóng</button>
+                </div>
+            </div>
+    </div>
+@endif
 
 <div class="bg-[#D4F0FF]">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
@@ -383,6 +524,21 @@
         <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
     </div>
 </footer>
+
+@if($isOrder && $isUser)
+    <script>
+        const formRegister = document.querySelector('#formRegister');
+        const payment = document.querySelector('#payment');
+        const closeModalPayment = document.querySelectorAll('.closeModalPayment');
+
+        for (i = 0; i < closeModalPayment.length; i++) {
+            closeModalPayment[i].addEventListener('click', function() {
+                payment.classList.add("hidden");
+                formRegister.classList.remove("fixed");
+            });
+        }
+    </script>
+@endif
 
 <script>
     $('.slider').slick({
