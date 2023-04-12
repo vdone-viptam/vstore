@@ -23,9 +23,6 @@ class AccountController extends Controller
 
     public function detailProfile(Request $request)
     {
-        if (isset($request->noti_id)) {
-            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
-        }
         $this->v['infoAccount'] = Auth::user();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
         return response()->json([
@@ -34,7 +31,7 @@ class AccountController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
 //        return 1;
         if (isset($request->noti_id)) {
