@@ -583,7 +583,8 @@ class  VShopController extends Controller
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
             'district' => 'required|min:1',
-            'province' => 'required|min:1'
+            'province' => 'required|min:1',
+            'wards'=>'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -652,7 +653,6 @@ class  VShopController extends Controller
             $address->province_name= Province::where('province_id',$address->province)->first()->province_name;
             $address->district_name= District::where('district_id',$address->district)->first()->district_name;
             $address->wards_name= Ward::where('wards_id',$address->wards)->first()->wards_name;
-        return  $address;
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
