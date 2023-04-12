@@ -139,7 +139,7 @@
                                         <i class="fas fa-sort sort" data-sort="pause_product"></i>
                                     @endif
                                 </span>
-                                </th>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -149,7 +149,7 @@
                                 <tr>
                                     <td>{{$product->publish_id}}</td>
                                     <td>{{$product->sku_id}}</td>
-                                    <td>{{$product->product_name}}</td>
+                                    <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->in_stock ?? 0}}</td>

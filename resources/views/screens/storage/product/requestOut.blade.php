@@ -167,7 +167,7 @@
                                 <tr>
                                     <td>{{$ord->no}}</td>
                                     <td>{{$ord->publish_id}}</td>
-                                    <td>{{$ord->name}}</td>
+                                    <td title="{{$ord->name}}">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
                                     <td>{{$ord->quantity}}</td>
                                     <td>
                                         @if($ord->method_payment == 'COD')

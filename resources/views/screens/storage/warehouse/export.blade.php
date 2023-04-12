@@ -186,7 +186,7 @@
                                 <tr>
                                     <td>{{$request->code}}</td>
                                     <td>{{$request->publish_id}}</td>
-                                    <td>{{$request->product_name}}</td>
+                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td>{{$request->ncc_name}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
