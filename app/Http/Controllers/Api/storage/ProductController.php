@@ -40,7 +40,6 @@ class ProductController extends Controller
             products.sku_id,
             products.name as product_name,
             categories.name as cate_name,
-            users.name,
             (product_warehouses.amount - product_warehouses.export) as in_stock,
             warehouses.id as warehouse_id,
             products.id as product_id'
