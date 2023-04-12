@@ -38,7 +38,7 @@ class BigSaleController extends Controller
             ;
             $selected = ['products.id', 'images', 'publish_id', 'price', 'products.name'];
             if ($request->pdone_id) {
-                $selected[] = 'discount_vShop as discountVStore';
+                $selected[] = 'discount_vShop as discountVstore';
             }
             $products = $products->select($selected);
             if ($request->category_id) {
