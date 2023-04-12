@@ -32,6 +32,10 @@ class DashboardController extends Controller
         $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
         $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
+        $dataRevenueToday = $this->chartRepository->revenueToday();
+        $dataOrderToday = $this->chartRepository->orderToday();
+        $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
+
         return view('screens.vstore.dashboard.index',
         [
             'data' => $data,
@@ -40,6 +44,10 @@ class DashboardController extends Controller
             'dataRevenueChartYear' => $dataRevenueChartYear,
             'dataOrderChartMonth' => $dataOrderChartMonth,
             'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+
+            'dataRevenueToday' => $dataRevenueToday,
+            'dataOrderToday' => $dataOrderToday,
+            'dataOrderSuccessToday' => $dataOrderSuccessToday,
         ]);
 
     }
