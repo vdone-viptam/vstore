@@ -58,9 +58,10 @@ class DashboardController extends Controller
                                                             AND type = 2 AND ware_id = $warehouses->id
                                                             AND product_id = product_warehouses.product_id) as 'total'
         FROM product_warehouses
-        WHERE ware_id = $warehouses->id HAVING total <= 10
+        WHERE ware_id = $warehouses->id AND product_warehouses.status = 1 HAVING total <= 10
         "))) ?? 0;
-
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'request_warehouses.id';
         $products = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -78,13 +79,16 @@ class DashboardController extends Controller
             ->whereIn('request_warehouses.type', [1, 10])
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->where('request_warehouses.status', 0)
-            ->orderBy('request_warehouses.id', 'desc')->paginate($request->limit);
+            ->orderBy($field, $type)->paginate($request->limit);
         return view('screens.storage.dashboard.index', [
             'success' => true,
             'requestEx' => $requestEx,
             'requestIm' => $requestIm,
             'productOutStock' => $productOutStock,
-            'products' => $products]);
+            'products' => $products,
+            'type' => $type,
+            'field' => $field
+        ]);
     }
 
     public function searchAllByKeyword(Request $request)

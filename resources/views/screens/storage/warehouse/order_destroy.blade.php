@@ -74,10 +74,46 @@
                         <tr>
                             <th>Mã đơn hàng</th>
                             <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Số lượng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>Lý do hủy</th>
-                            <th>Trạng thái</th>
+                            <th>Trạng thái
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'cancel_status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="cancel_status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="cancel_status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="cancel_status"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -105,6 +141,9 @@
                                 </tr>
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="7" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -212,7 +251,24 @@
                 ).then(() => location.reload());
             })
         })
+        $(document).ready(function () {
 
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.warehouse.destroyOrder',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
+            });
+        });
     </script>
 
 @endsection

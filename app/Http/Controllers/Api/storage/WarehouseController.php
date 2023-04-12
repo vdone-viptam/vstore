@@ -23,7 +23,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
-
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'request_warehouses.id';
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -40,14 +41,16 @@ class WarehouseController extends Controller
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->whereIn('request_warehouses.status', [5, 1, 7])
-            ->orderBy('request_warehouses.id', 'desc');
+            ->orderBy($field, $type);
         if ($request->code) {
             $requests = $requests->where('request_warehouses.code', $request->code);
         }
         $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
-            'data' => $requests
+            'data' => $requests,
+            'field' => $field,
+            'type' => $type
         ], 200);
     }
 
@@ -82,6 +85,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'request_warehouses.id';
         $requests = User::query()
             ->join('products', 'users.id', '=', 'products.user_id')
             ->select(
@@ -100,14 +105,16 @@ class WarehouseController extends Controller
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.status', 'asc');
+            ->orderBy($field, $type);
         if ($request->code) {
             $requests = $requests->where('request_warehouses.code', $request->code);
         }
         $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
-            'data' => $requests
+            'data' => $requests,
+            'field' => $field,
+            'type' => $type
         ], 200);
 
     }
@@ -176,6 +183,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'request_warehouses.id';
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -193,14 +202,16 @@ class WarehouseController extends Controller
             ->where('type', 3)
             ->where('request_warehouses.status', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.id', 'desc');
+            ->orderBy($field, $type);
         if ($request->code) {
             $requests = $requests->where('request_warehouses.code', $request->code);
         }
         $requests = $requests->paginate($limit);
         return response()->json([
             'success' => true,
-            'data' => $requests
+            'data' => $requests,
+            'field' => $field,
+            'type' => $type
         ], 200);
     }
 
@@ -278,12 +289,15 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $ware = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'order.id';
         $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id', 'order.id as order_id',
             'order.export_status', 'order.cancel_status')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->where('order.export_status', 5)
             ->where('order.status', '!=', 2)
+            ->orderBy($field, $type)
             ->where('order_item.warehouse_id', $ware->id);
         if ($request->code) {
             $orders = $orders->where('order.no', $request->code);
@@ -292,7 +306,9 @@ class WarehouseController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $orders
+            'data' => $orders,
+            'field' => $field,
+            'type' => $type
         ], 200);
     }
 

@@ -8,5 +8,6 @@ return [
     'payment' => env('DOMAIN_PAYMENT'),
     'token'=>env('TOKEN'),
     'TK_VAN_CHUYEN'=>env('TK_VAN_CHUYEN'),
-    'MK_VAN_CHUYEN'=>env('MK_VAN_CHUYEN')
+    'MK_VAN_CHUYEN'=>env('MK_VAN_CHUYEN'),
+    'domain_vdone'=>env('DOMAIN_VDONE')
 ];

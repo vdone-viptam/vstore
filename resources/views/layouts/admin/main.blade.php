@@ -18,11 +18,13 @@
         background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%);
 
     }
-    td{
+
+    td {
         text-align: left;
 
     }
-    .page-link{
+
+    .page-link {
         width: 100%;
         text-align: center;
     }
@@ -38,11 +40,11 @@
 
 </div>
 <div class="grid grid-cols-12">
-<div class="md:col-span-3 2xl:col-span-2 md:block hidden ">
-    @include('layouts.admin.menu')
-</div>
-{{--    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">--}}
-{{--    </div>--}}
+    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">
+        @include('layouts.admin.menu')
+    </div>
+    {{--    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">--}}
+    {{--    </div>--}}
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.admin.header')
         @include('layouts.admin.header_mobile')
@@ -50,42 +52,39 @@
     </div>
 </div>
 @include('layouts.js')
-@yield('custom_js')
-</body>
-<script>
-    $('.more-details').on('click', function () {
-        $('.modal-details').toggleClass('show-modal');
-    })
 
-    const url = window.location.href.split('/');
-    const tm = document.querySelectorAll(".tab__menu")
-    const l = document.getElementsByClassName("list")
-    const param = url[3];
-    const a = url[4] || '/';
-    if (param === "dashboard") {
+@yield('custom_js')
+
+<script>
+    let url = window.location.href.split('/');
+    let tm = document.querySelectorAll(".tab__menu")
+    let l = document.getElementsByClassName("list")
+    let param = url[3];
+    let a = url[4] || '/';
+    if (param.includes('dashboard')) {
         tm[0].classList.toggle("active")
     }
-    if (param === "product") {
+    if (param.includes('product')) {
         tm[1].classList.toggle("active");
         l[0].classList.remove("hidden");
         checkUnder(tm[1], a)
     }
-    if (param === "categories") {
+    if (param.includes('categories')) {
         tm[2].classList.toggle("active")
         checkUnder(tm[2], a)
     }
-    if (param === "users") {
+    if (param.includes('users')) {
         tm[3].classList.toggle("active")
         l[1].classList.remove("hidden");
         checkUnder(tm[3], a)
 
     }
-    if (param === "finances") {
+    if (param.includes('finances')) {
         tm[4].classList.toggle("active")
         l[2].classList.remove("hidden");
         checkUnder(tm[4], a)
     }
-    if (param === "account") {
+    if (param.includes('account')) {
         tm[5].classList.toggle("active")
         l[3].classList.remove("hidden");
         checkUnder(tm[5], a)
@@ -160,5 +159,7 @@
         }
     });
 </script>
+</body>
+
 
 </html>

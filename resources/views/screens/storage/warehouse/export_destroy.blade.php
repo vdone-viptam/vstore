@@ -97,8 +97,32 @@
                         <tr>
                             <th>Mã xuất hủy</th>
                             <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Số lượng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>Lý do hủy</th>
                             <th></th>
                         </tr>
@@ -117,6 +141,9 @@
                                 </tr>
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="6" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -260,6 +287,23 @@
             await createProDel();
             $('#modalCreate').modal('show');
         })
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.warehouse.exportDestroyProduct',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
+            });
+        });
     </script>
 
 @endsection

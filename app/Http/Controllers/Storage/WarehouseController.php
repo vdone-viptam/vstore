@@ -22,7 +22,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
-
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'request_warehouses.id';
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -39,7 +40,7 @@ class WarehouseController extends Controller
             ->where('type', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->whereIn('request_warehouses.status', [5, 1, 7])
-            ->orderBy('request_warehouses.id', 'desc');
+            ->orderBy($field, $type);
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
             $requests->where(function ($query) use ($request) {
@@ -52,7 +53,9 @@ class WarehouseController extends Controller
         $requests = $requests->paginate($limit);
         return view('screens.storage.warehouse.import', [
             'requests' => $requests,
-            'key_search' => trim($request->key_search) ?? ''
+            'key_search' => trim($request->key_search) ?? '',
+            'field' => $field,
+            'type' => $type
         ]);
     }
 
@@ -60,6 +63,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'request_warehouses.status';
         $requests = User::query()
             ->join('products', 'users.id', '=', 'products.user_id')
             ->select(
@@ -78,7 +83,7 @@ class WarehouseController extends Controller
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.status', 'asc');
+            ->orderBy($field, $type);
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
             $requests->where(function ($query) use ($request) {
@@ -89,9 +94,12 @@ class WarehouseController extends Controller
             });
         }
         $requests = $requests->paginate($limit);
+
         return view('screens.storage.warehouse.export', [
             'requests' => $requests,
-            'key_search' => $request->key_search ?? ''
+            'key_search' => $request->key_search ?? '',
+            'field' => $field,
+            'type' => $type
         ]);
 
     }
@@ -100,6 +108,8 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'request_warehouses.status';
         $requests = User::join('products', 'users.id', '=', 'products.user_id')
             ->select(
                 'request_warehouses.code',
@@ -117,7 +127,7 @@ class WarehouseController extends Controller
             ->where('type', 3)
             ->where('request_warehouses.status', 1)
             ->where('request_warehouses.ware_id', $warehouses->id)
-            ->orderBy('request_warehouses.id', 'desc');
+            ->orderBy($field, $type);
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
             $requests->where(function ($query) use ($request) {
@@ -131,7 +141,9 @@ class WarehouseController extends Controller
 
         return view('screens.storage.warehouse.export_destroy', [
             'requests' => $requests,
-            'key_search' => $request->key_search ?? ''
+            'key_search' => $request->key_search ?? '',
+            'type' => $type,
+            'field' => $field
         ]);
     }
 
@@ -139,12 +151,17 @@ class WarehouseController extends Controller
     {
         $limit = $request->limit ?? 10;
         $ware = Warehouses::select('id')->where('user_id', Auth::id())->first();
-        $orders = Product::select('order.no', 'order_item.quantity', 'order.note', 'order_item.product_id', 'products.name as product_name', 'products.publish_id', 'order.id as order_id',
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'order.id';
+        $orders = Product::select('order.no', 'order_item.quantity',
+            'order.note', 'order_item.product_id', 'products.name as product_name',
+            'products.publish_id', 'order.id as order_id',
             'order.export_status', 'order.cancel_status')
             ->join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
             ->where('order.export_status', 5)
             ->where('order.status', '!=', 2)
+            ->orderBy($field, $type)
             ->where('order_item.warehouse_id', $ware->id);
         if ($request->code) {
             $orders = $orders->where('order.no', $request->code);
@@ -160,7 +177,10 @@ class WarehouseController extends Controller
         $orders = $orders->paginate($limit);
 
         return view('screens.storage.warehouse.order_destroy', [
-            'orders' => $orders
+            'orders' => $orders,
+            'field' => $field,
+            'type' => $type,
+            'key_search' => trim($request->key_search) ?? ''
         ]);
     }
 

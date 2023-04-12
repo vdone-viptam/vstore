@@ -214,7 +214,7 @@ class ReviewProductApiController extends Controller
     }
 
     /**
-     * xem danh sách đánh giá một sản phẩm trên Vdone
+     * xem danh sách đánh giá tất sản phẩm trên Vdone
      *
      * API dùng xem danh sách đánh giá sản phẩm trên Vdone
      *
@@ -237,6 +237,7 @@ class ReviewProductApiController extends Controller
             }
 
             $status_rep = $request->status_rep;
+
             $limit = $request->limit ?? 3;
 
             $totalReviews = Point::query()
@@ -253,10 +254,11 @@ class ReviewProductApiController extends Controller
                                 'points.descriptions',
                                 'points.images',
                                 'points.id');
-            if(isset($status_rep)){
-                $totalReviews = $totalReviews->where('points.status',$status_rep);
+            if($status_rep){
+                 $totalReviews->where('points.status',$status_rep);
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
+//            return $totalReviews;
             foreach($totalReviews as $key => $value){
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
                 $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);

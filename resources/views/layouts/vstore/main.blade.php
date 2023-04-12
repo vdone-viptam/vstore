@@ -22,7 +22,7 @@
     @vite('resources/css/app.css')
 </head>
 <style>
-    td{
+    td {
         text-align: left;
     }
 </style>
@@ -56,35 +56,35 @@
     const l = document.getElementsByClassName("list")
     const param = url[3];
     const a = url[4] || '/';
-    if (param === "dashboard") {
+    if (param.includes('dashboard')) {
         tm[0].classList.toggle("active")
         checkUnder(tm[0], a);
     }
-    if (param === "products") {
+    if (param.includes('products')) {
         tm[1].classList.toggle("active");
         l[0].classList.remove("hidden");
         checkUnder(tm[1], a);
 
     }
-    if (param === "order") {
+    if (param.includes('order')) {
         tm[2].classList.toggle("active")
         l[1].classList.remove("hidden");
         checkUnder(tm[2], a);
 
     }
-    if (param === "partners") {
+    if (param.includes('partners')) {
         tm[3].classList.toggle("active")
         l[2].classList.remove("hidden");
         checkUnder(tm[3], a);
 
     }
-    if (param === "finance") {
+    if (param.includes('finance')) {
         tm[4].classList.toggle("active")
         l[3].classList.remove("hidden");
         checkUnder(tm[4], a);
 
     }
-    if (param === "account") {
+    if (param.includes('account')) {
         tm[5].classList.toggle("active")
         l[4].classList.remove("hidden");
         checkUnder(tm[5], a);

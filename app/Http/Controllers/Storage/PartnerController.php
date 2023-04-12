@@ -20,8 +20,10 @@ class PartnerController extends Controller
     {
         $search = $request->key_search;
         $limit = $request->limit ?? 10;
-        $suppliers = $this->partnerRepository->index($search, $limit);
-        return view('screens.storage.partner.supplier.index', ['suppliers' => $suppliers, 'key_search' => trim($search)]);
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'users.id';
+        $suppliers = $this->partnerRepository->index($search, $limit, $type, $field);
+        return view('screens.storage.partner.supplier.index', ['suppliers' => $suppliers, 'key_search' => trim($search), 'type' => $type, 'field' => $field]);
     }
 
     public function detailNcc(Request $request)
@@ -34,8 +36,10 @@ class PartnerController extends Controller
     {
         $search = $request->key_search;
         $limit = $request->limit ?? 10;
-        $deliveryPartners = $this->partnerRepository->deliveryPartner($search, $limit);
-        return view('screens.storage.partner.delivery-partner.index', ['deliveryPartners' => $deliveryPartners, 'key_search' => trim($search)]);
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'delivery_partner.id';
+        $deliveryPartners = $this->partnerRepository->deliveryPartner($search, $limit, $type, $field);
+        return view('screens.storage.partner.delivery-partner.index', ['deliveryPartners' => $deliveryPartners, 'key_search' => trim($search), 'type' => $type, 'field' => $field]);
     }
 
     public function detailDeliveryPartner(Request $request)

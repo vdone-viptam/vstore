@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Province;
 use App\Models\RequestChangeTaxCode;
 use App\Models\User;
+use App\Models\UserReferral;
 use App\Models\Ward;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
@@ -36,16 +37,24 @@ class UserController extends Controller
         $this->v['users'] = User::select();
         $limit = $request->limit ?? 10;
         if (isset($request->keyword)) {
-            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('email', 'like', '%' . $request->keyword . '%')
-                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
-                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
-                ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
-                ->orwhere('address', 'like', '%' . $request->keyword . '%');
+            $this->v['users'] = $this->v['users']
+                ->where(function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('company_name', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('email', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('tax_code', '=', $request->keyword)
+                        ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
+                        ->orwhere('address', 'like', '%' . $request->keyword . '%');
+                })
+                ->join('order_service', 'users.id', '=', 'order_service.user_id')
+                ->where('order_service.status', 1)
+                ->where('payment_status', 1);
         }
+        $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
+
         $this->v['params'] = $request->all();
         return view('screens.admin.user.index', $this->v);
     }
@@ -82,14 +91,14 @@ class UserController extends Controller
 
             } elseif ($user->role_id == 4) {
                 $arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-                $number = User::where('tax_code', $user->tax_code)->where('confirm_date','!=',null)->where('role_id', 4)->count();
+                $number = User::where('tax_code', $user->tax_code)->where('confirm_date', '!=', null)->where('role_id', 4)->count();
                 if ($number == 0) {
                     $ID = 'vnk' . '01' . $user->tax_code;
-                } elseif ($number < 10 && $number >0) {
-                    $ID = 'vnk' . '0' . $number +1 . $user->tax_code;
+                } elseif ($number < 10 && $number > 0) {
+                    $ID = 'vnk' . '0' . $number + 1 . $user->tax_code;
 
                 } elseif ($number >= 10) {
-                    $ID = 'vnk' . $number +1 . $user->tax_code;
+                    $ID = 'vnk' . $number + 1 . $user->tax_code;
                 }
 //                elseif ($number > 99) {
 //                    for ($i = 0; $i < count($arr); $i++) {
@@ -108,21 +117,29 @@ class UserController extends Controller
             $user->password = Hash::make($password);
             $user->confirm_date = Carbon::now();
             $user->expiration_date = Carbon::now()->addDays(365);
-            $user->status=1;
+            $user->status = 1;
+            if (strlen($user->referral_code) > 0) {
+                $referral = new UserReferral();
+                $referral->user_id = $user->id;
+                $referral->vshop_id = $user->referral_code;
+                $referral->save();
+            }
             $user->save();
 
             if ($user->role_id == 4) {
 
 
-                $district = District::where('district_id',$user->district_id)->first()->district_name;
-                $province = Province::where('province_id',$user->provinceId)->first()->province_name;
-                $wards = Ward::where('wards_id',$user->ward_id)->first()->wards_name;
-
-                $address = $wards.', '.$district.'. '.$province;
-               $result = app('geocoder')->geocode($address)->get();
-               $coordinates = $result[0]->getCoordinates();
-               $lat = $coordinates->getLatitude();
-               $long = $coordinates->getLongitude();
+//                $district = District::where('district_id', $user->district_id)->first()->district_name;
+//                $province = Province::where('province_id', $user->provinceId)->first()->province_name;
+//                $wards = Ward::where('wards_id', $user->ward_id)->first()->wards_name;
+//
+//                $address = $wards . ', ' . $district . '. ' . $province;
+//
+//                $result = app('geocoder')->geocode($address)->get();
+//
+//                $coordinates = $result[0]->getCoordinates();
+//                $lat = $coordinates->getLatitude();
+//                $long = $coordinates->getLongitude();
 
                 $warehouses = new Warehouses();
                 $warehouses->name = $user->name;
@@ -132,8 +149,8 @@ class UserController extends Controller
                 $warehouses->district_id = $user->district_id;
                 $warehouses->ward_id = $user->ward_id;
                 $warehouses->user_id = $user->id;
-                $warehouses->lat= $lat;
-                $warehouses->long = $long;
+                $warehouses->lat = $lat ?? '19.6397685';
+                $warehouses->long = $long ?? '105.7028457';
                 $warehouses->save();
             }
             if ($user->role_id == 2) {

@@ -93,11 +93,71 @@
                         <tr>
                             <th>Mã nhập kho</th>
                             <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Nhà cung cấp</th>
-                            <th>Số lượng</th>
-                            <th>Ngày nhập hàng</th>
-                            <th>Thao tác/Trạng thái</th>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Nhà cung cấp
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'ncc_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="ncc_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Số lượng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Ngày nhập hàng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Thao tác/Trạng thái
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="status"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -138,6 +198,9 @@
                                 </tr>
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -341,6 +404,25 @@
             $('.btn-accept').data('status', status);
             $('#requestModal').modal('show')
         }
+
+        $(document).ready(function () {
+
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.warehouse.import',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
+            });
+        });
     </script>
 
 @endsection

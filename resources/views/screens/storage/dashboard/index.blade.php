@@ -48,7 +48,7 @@
 
 @section('dash')
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./requestAcp.html" class="item-dash">
+        <a href="{{route('screens.storage.product.requestOut')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Đơn hàng chưa xác nhận</h5>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./request.html" class="item-dash">
+        <a href="{{route('screens.storage.product.request')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Yêu cầu nhập kho</h5>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./product.html" class="item-dash">
+        <a href="{{route('screens.storage.product.index')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Số mặt hàng sắp hết</h5>
@@ -103,12 +103,72 @@
                         <tr class="border-0">
                             <th class="border-0">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="border-0">Mã sản phẩm</th>
-                            <th class="border-0">Tên sản phẩm</th>
-                            <th class="border-0">Nhà cung cấp</th>
-                            <th class="border-0">Số lượng</th>
+                            <th class="border-0">Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="border-0">Nhà cung cấp
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'ncc_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="ncc_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="border-0">Số lượng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th class="border-0">Chiết khấu</th>
-                            <th class="border-0">Thời gian</th>
-                            <th class="border-0">Phân loại</th>
+                            <th class="border-0">Thời gian
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="border-0">Phân loại
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'type')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="type"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="type"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="type"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th class="border-0">Xác nhận/từ chối</th>
                         </tr>
                         </thead>
@@ -131,15 +191,29 @@
                                 </td>
                                 <td>
                                     @if($product->type == 1)
-                                        <a href="#" onclick="upDateStatus({{$product->id}},5,1)"
-                                           class="btn btn-primary">Đồng ý</a>
-                                        <a href="#" onclick="upDateStatus({{$product->id}},2,1)" class="btn btn-danger">Từ
-                                            chối</a>
+                                        <div style="display:flex; justify-content:center; gap:10px"><a
+                                                href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"
+                                                style="text-decoration:underline"
+                                                class="text-primary  text-white font-medium  rounded">
+                                                Đồng ý
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10,1)"
+                                               style="text-decoration:underline"
+                                               class="text-danger  text-white font-medium  rounded">
+                                                Từ chối
+                                            </a></div>
                                     @else
-                                        <a href="#" onclick="upDateStatus('{{$product->code}}',1,7)"
-                                           class="btn btn-primary">Đồng ý</a>
-                                        <a href="#" onclick="upDateStatus('{{$product->code}}',3,7)" class="btn btn-danger">Từ
-                                            chối</a>
+                                        <div style="display:flex; justify-content:center; gap:10px"><a
+                                                href="javascript:void(0)" onclick="upDateStatus('{{$product->code}}',1,7)"
+                                                style="text-decoration:underline"
+                                                class="text-primary  text-white font-medium  rounded">
+                                                Đồng ý
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus('{{$product->code}}',3,7)"
+                                               style="text-decoration:underline"
+                                               class="text-danger  text-white font-medium  rounded">
+                                                Từ chối
+                                            </a></div>
                                     @endif
                                 </td>
                             </tr>
@@ -230,6 +304,46 @@
             $('.btn-accept').data('type', type);
             $('#requestModal').modal('show')
         }
+
+        $(document).ready(function () {
+
+
+            document.addEventListener('keypress', event => {
+                if (interval) {
+                    clearInterval(interval);
+                }
+                if (event.code == 'Enter') {
+                    if (barcode) {
+                        call(barcode);
+                    }
+                    barcode = '';
+                    return;
+                }
+                if (event.code != 'Shift') {
+                    barcode += event.key;
+                }
+                interval = setInterval(() => barcode = '', 20);
+            });
+            function call(code) {
+               $('#search').val(code);
+            }
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.dashboard.index')}}?type=' + orderBy +
+                            '&field=' + sort
+                    }, 200);
+                });
+            });
+        });
+
     </script>
 
 @endsection

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,13 @@ class OrderController extends Controller
         $vshopId = $request->vshop_id;
         $quantity = $request->quantity;
 
+        $checkVshopId = VshopProduct::where('vshop_id', $vshopId)
+            ->where('product_id', $request->product_id)
+            ->first();
+        if (!$checkVshopId) {
+            $vshopId = Vshop::where('pdone_id', 247)->first();
+        }
+
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.vshop_id', $vshopId)
@@ -85,8 +93,11 @@ class OrderController extends Controller
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
         $wardId = $request->wards_id;
-        $address = $request->address;
-
+        $address = explode(', ', $request->address);
+        if (count($address) == 4) {
+            unset($address[0]);
+        }
+        $address = implode(', ', $address);
         // NEW ORDER
         $order = new Order();
         $order->pay = 2;
@@ -96,6 +107,7 @@ class OrderController extends Controller
         $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
         $order->shipping = 0; // Tổng phí ship
         $order->total = $product->price * $quantity;
+        $order->address = $request->address;
         $totalDiscount = 0;
 
         if (isset($discount['discountsFromSuppliers'])) {
@@ -118,7 +130,6 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $address;
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
             if (!$warehouse) {
                 return response()->json([
@@ -204,7 +215,7 @@ class OrderController extends Controller
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
         $orderItem->vshop_id = $product->vshop_id;
-        $orderItem->warehouse_id = 1;
+        $orderItem->warehouse_id = $order->warehouse_id ?? 5;
         $orderItem->sku = '';
         $orderItem->delivery_partner_id = 1;
         $orderItem->price = $product->price;
@@ -271,7 +282,7 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $address;
+            $order->address = $request->address;
             $result = [];
             foreach ($orderItems as $item) {
                 $result[$item['vshop_id']]['vshop'] = [
@@ -308,7 +319,7 @@ class OrderController extends Controller
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
-                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId);
+                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId, $wardId);
                 if (!$warehouse) {
                     return response()->json([
                         "status_code" => 400,
@@ -557,16 +568,16 @@ class OrderController extends Controller
                 ], 404);
             }
             $orders = OrderItem::select(
-                'id as order_item_id',
+                'order_item.id as order_item_id',
                 'product_id',
                 'discount_vshop',
                 'price',
                 'discount_ncc',
                 'discount_vstore',
-                'quantity', 'order_id', 'product_id', 'export_status', 'order.updated_at');
+                'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at');
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
-                ->where('status', '!=', 2)
+                ->where('order.status', '!=', 2)
                 ->orderBy('order.updated_at', 'desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10 && $status != 5 && $status != 4) {

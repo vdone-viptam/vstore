@@ -64,6 +64,7 @@
                     </li>
                 </ul>
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second"
@@ -72,11 +73,73 @@
                         <tr>
                             <th>Mã sản phẩm</th>
                             <th>Mã SKU</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Danh mục</th>
-                            <th>Nhà cung cấp</th>
-                            <th>Tồn kho</th>
-                            <th>Số lượng chờ xuất</th>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Danh mục
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'cate_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="cate_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="cate_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="cate_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+
+                            <th>Nhà cung cấp
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'users.name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="users.name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="users.name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="users.name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Tồn kho
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'in_stock')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="in_stock"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="in_stock"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="in_stock"></i>
+                                    @endif
+                                </span>
+                            </th>
+
+                            <th>Số lượng chờ xuất
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pause_product')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pause_product"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pause_product"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pause_product"></i>
+                                    @endif
+                                </span>
+                                </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -96,6 +159,9 @@
                                 </tr>
                             @endforeach
                         @else
+                            <tr>
+                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -200,6 +266,24 @@
 
 
         }
+
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.product.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
+            });
+        });
     </script>
 
 @endsection
