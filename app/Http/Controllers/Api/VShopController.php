@@ -935,7 +935,7 @@ class  VShopController extends Controller
         $vshop = Vshop::where('pdone_id', $pdone_id)
             ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'nick_name', 'description', 'vshop_id')
             ->first();
-        $total_product = VshopProduct::where('vshop_id', $vshop->id)->count();
+        $total_product = VshopProduct::where('vshop_id', $vshop->id)->whereIn('status',[1,2])->count();
         if (!$vshop) {
             return response()->json([
                 'status_code' => 400,
