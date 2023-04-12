@@ -75,6 +75,7 @@
                            class="hover:text-primary duration-200 transition-all text-title font-medium">Tất
                             cả</a>
                     </div>
+                    <div style="max-height: 300px;overflow: auto">
                     @if(count(Auth::user()->unreadNotifications) > 0)
                         @foreach (Auth::user()->unreadNotifications as $index =>$notification)
                             <li>
@@ -86,7 +87,7 @@
                     @else
                         <div class="text-center"><p>Bạn chưa có thông báo mới nào</p></div>
                     @endif
-
+                    </div>
 
                 </ul>
             </div>
