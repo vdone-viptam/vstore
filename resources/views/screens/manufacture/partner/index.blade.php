@@ -147,7 +147,7 @@
                             <td>{{$value->publish_id}}</td>
                             <td>{{$value->name}}</td>
                             <td>{{ number_format($value->price,0,',','.')  }}</td>
-                            <td>{{$value->user_name}}</td>
+                            <td>{{$value->user_name}}<
                             <td class="text-center">{{$value->discount}}</td>
                             <td class="text-center">{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
                         </tr>
