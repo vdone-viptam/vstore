@@ -63,7 +63,7 @@ class ProductController extends Controller
             }
             $products = $products->select($selected);
             if ($request->category_id) {
-                $products = $products->where('category_id', $request->category_id)->get();
+                $products = $products->where('category_id', $request->category_id);
             }
             if ($request->order_by == 1) {
 
@@ -87,10 +87,8 @@ class ProductController extends Controller
                     $products = $products->where('prepay', 1);
                 }
             }
-//        return 1;
 
             $products = $products->paginate($limit);
-
             foreach ($products as $pro) {
                 $pro->image = asset(json_decode($pro->images)[0]);
                 $pro->images = asset(json_decode($pro->images)[0]);
@@ -1197,6 +1195,7 @@ class ProductController extends Controller
     public
     function destroyAffProduct($pdone_id, $product_id)
     {
+
         try {
             DB::table('vshop_products')
                 ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')

@@ -19,7 +19,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $data = Product::select('products.images', 'name', 'product_id', 'products.discount')->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')->where('request_warehouses.status', 0)->groupBy(['products.images', 'name', 'product_id', 'products.discount'])
+        $data = Product::select('products.images', 'name', 'product_id', 'products.discount')
+            ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->where('requests.status', 0)
+            ->groupBy(['products.images', 'name', 'product_id', 'products.discount'])
             ->where('products.vstore_id',Auth::id())
             ->limit(10)->get();
                 $vshop  = [];

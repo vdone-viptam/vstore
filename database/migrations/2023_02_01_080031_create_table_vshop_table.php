@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('pdone_id')->nullable()->comment('Id pdone');
             $table->string('name')->nullable()->comment('tên vshop');
-            $table->string('name_adress')->nullable()->comment('tên địa chỉ');
+            $table->string('name_address')->nullable()->comment('tên địa chỉ');
             $table->string('phone_number')->nullable()->comment('số điện thoại');
             $table->string('district')->nullable()->comment('quận,huyện');
             $table->integer('province')->nullable()->comment('tỉnh thành');
