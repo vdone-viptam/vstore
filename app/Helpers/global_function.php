@@ -5,7 +5,21 @@ use App\Models\Discount;
 use App\Models\District;
 use App\Models\Province;
 use Illuminate\Support\Carbon;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
+
+function getLatLongByAddress($address) {
+    $response = Http::get('https://api.opencagedata.com/geocode/v1/json', [
+        'q' => $address,
+        'limit' => 1,
+        'no_annotations' => 1,
+        'key' => config('opencagedata.key')
+    ]);
+    $response = $response->json();
+    if($response['status']['code'] === 200) {
+        return $response['results'][0]['geometry'];
+    }
+    return false;
+}
 
 function calculateShippingByProductID($productID, $districtId, $provinceId, $wardId)
 {
@@ -31,20 +45,19 @@ function calculateShippingByProductID($productID, $districtId, $provinceId, $war
         return false;
     }
 
-    $warehouse = \App\Models\Warehouses::find(2);
-    return $warehouse;
-    $address = $ward->wards_name . ", " . $district->district_name . ", " . $province->province_name;
-    $result = app('geocoder')->geocode($address)->get();
-    if (count($result) < 1) {
+//    $warehouse = \App\Models\Warehouses::find(2);
+//    return $warehouse;
+    $address = $ward->wards_name . ", " . $district->district_name . ", " . $province->province_name . "+vn";
+    $result = getLatLongByAddress($address);
+    if (!$result) {
         return false;
     }
-    $coordinates = $result[0]->getCoordinates();
     $places = $products;
     $min_distance = PHP_FLOAT_MAX;
     $warehouse = null;
     foreach ($places as $place) {
-        $lat = $coordinates->getLatitude();
-        $long = $coordinates->getLongitude();
+        $lat = $result['lat'];
+        $long = $result['lng'];
         $distance = haversine($lat, $long, $place->lat, $place->long);
         if ($distance < $min_distance) {
             $min_distance = $distance;
