@@ -37,7 +37,7 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->paginate($limit);
+        $orders = $orders->orderBy('id', 'desc')->paginate($limit);
         return view('screens.manufacture.order.index', ['orders' => $orders]);
     }
 
@@ -69,7 +69,7 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->paginate($limit);
+        $orders = $orders->orderBy('id', 'desc')->paginate($limit);
         return view('screens.manufacture.order.pending', ['orders' => $orders]);
 
     }

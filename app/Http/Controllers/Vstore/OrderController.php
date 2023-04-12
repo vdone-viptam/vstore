@@ -34,7 +34,7 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->paginate($limit);
+        $orders = $orders->orderBy('id', 'desc')->paginate($limit);
 //        ->whereHas('books', function (Builder $query) {
 //        $query->where('title', 'like', 'PHP%');
 //    })
