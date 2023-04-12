@@ -18,18 +18,14 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $orders = OrderItem::with(['product', 'vshop', 'warehouse', 'order'])->select('order_id',
-            'product_id',
-            'order_item.price',
-            'quantity',
-            'warehouse_id',
-            'order_id',
-            'vshop_id',
-            'warehouse_id'
-        )->join('products', 'order_item.product_id', '=', 'products.id')
-            ->where('products.user_id', Auth::id())
-            ->orderBy('order_item.id', 'desc')->paginate($limit);
-
+        $orders = Order::with(['orderItem.product',
+            'orderItem.vshop',
+            'orderItem.warehouse',
+            'orderItem'])->select(
+            'no', 'id', 'export_status', 'created_at'
+        )
+            ->where('order.status', '!=', 2)
+            ->paginate($limit);
         return view('screens.manufacture.order.index', ['orders' => $orders]);
     }
 
@@ -42,18 +38,14 @@ class OrderController extends Controller
     public function pending()
     {
         $limit = $request->limit ?? 10;
-
-        $orders = OrderItem::with(['product', 'vshop', 'warehouse', 'order'])->select('order_id',
-            'product_id',
-            'order_item.price',
-            'quantity',
-            'warehouse_id',
-            'order_id',
-            'vshop_id',
-            'warehouse_id'
-        )->where('products.user_id', Auth::id())
-            ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->orderBy('order_item.id', 'desc')
+        $orders = Order::with(['orderItem.product',
+            'orderItem.vshop',
+            'orderItem.warehouse',
+            'orderItem'])->select(
+            'no', 'id', 'export_status', 'created_at'
+        )
+            ->where('order.status', '!=', 2)
+            ->where('export_status', '!=', 4)
             ->paginate($limit);
         return view('screens.manufacture.order.pending', ['orders' => $orders]);
 
