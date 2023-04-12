@@ -287,7 +287,7 @@ class WarehouseController extends Controller
 
             $vshop_Id = OrderItem::select('vshop_id')->where('order_id', $order->id)->first();
 
-            $vshop_product = VshopProduct::where('vshop_id', $vshop_Id->vshop_id)->first();
+            $vshop_product = VshopProduct::where('vshop_id', $vshop_Id->vshop_id)->where('product_id', $requestEx->product_id)->first();
             $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $requestEx->quantity;
 
             $vshop_product->save();
