@@ -40,7 +40,6 @@ class ProductController extends Controller
             products.sku_id,
             products.name as product_name,
             categories.name as cate_name,
-            users.name,
             (product_warehouses.amount - product_warehouses.export) as in_stock,
             warehouses.id as warehouse_id,
             products.id as product_id'
@@ -48,6 +47,7 @@ class ProductController extends Controller
             ->selectSub('select IFNULL(SUM(quantity),0) from request_warehouses
                      where request_warehouses.product_id = products.id
                        and request_warehouses.ware_id = warehouses.id  and request_warehouses.type = 2 and request_warehouses.status = 0', 'pause_product')
+            ->selectSub('select name from users where id = products.user_id', 'name')
             ->join('products', 'categories.id', '=', 'products.category_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
@@ -55,8 +55,7 @@ class ProductController extends Controller
             ->where('product_warehouses.status', 1)
             ->orderBy($field, $type)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id())
-        ;
+            ->where('warehouses.user_id', Auth::id());
 
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
