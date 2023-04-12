@@ -30,7 +30,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 //        return 1;
-        $this->v['products'] = Product::select('products.id', 'publish_id', 'images', 'products.name', 'brand', 'category_id', 'price', 'products.status', 'vstore_id')
+        $this->v['products'] = Product::select('products.id',
+            'publish_id', 'images', 'products.name', 'brand',
+            'category_id', 'price', 'products.status', 'vstore_id', 'amount_product_sold')
             ->join("categories", 'products.category_id', '=', 'categories.id')
             ->orderBy('id', 'desc');
         $limit = $request->limit ?? 10;
@@ -72,7 +74,7 @@ class ProductController extends Controller
         $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
 
         if (!$this->v['vstore']) {
-            $this->v['vstore'] = User::where('id',800)->first();
+            $this->v['vstore'] = User::where('id', 800)->first();
         }
 //        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
@@ -292,8 +294,10 @@ class ProductController extends Controller
 
             if ($request->product) {
 
-                $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat')
+                $this->v['product'] = Product::query()->select('id', 'publish_id', 'images',
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id',
+                    'discount', 'discount_vShop', 'description', 'vat', 'amount_product_sold')
+                    ->selectSub('select amount - export from product_warehouses where product_id = products.id', 'amount')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);
@@ -304,10 +308,9 @@ class ProductController extends Controller
                     ->join('users', 'requests.vstore_id', '=', 'users.id')
                     ->selectRaw('requests.code,products.id,requests.id as re_id,price,
                     requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
-                    users.name as user_name,requests.vat')
+                    users.name as user_name,requests.vat,products.amount_product_sold')
                     ->where('requests.id', $request->id)
                     ->first();
-                $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id =" . $this->v['request']->id))[0]->amount;
                 return view('screens.manufacture.product.detail', $this->v);
             }
         } catch (\Exception $e) {
@@ -587,7 +590,7 @@ class ProductController extends Controller
             foreach (json_decode($request->images) as $image) {
                 try {
                     if (strpos($image, 'storage/products') !== false) {
-                        $photo_gallery[] = explode(config('domain.ncc')  . "/", $image)[1];
+                        $photo_gallery[] = explode(config('domain.ncc') . "/", $image)[1];
                     } else {
                         $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
 

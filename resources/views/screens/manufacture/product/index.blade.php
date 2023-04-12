@@ -165,8 +165,8 @@
                                     <td>
                                         {{$product->vStore->name ?? '-'}}
                                     </td>
-                                    <td class="text-center">{{$product->amount_product ?? '-'}}</td>
-                                    <td class="text-center">-</td>
+                                    <td class="text-center">{{$product->amount_product != 0 ? $product->amount_product : '-'}}</td>
+                                    <td class="text-center">{{$product->amount_product_sold != 0 ? $product->amount_product_sold : '-'}}</td>
                                     <td>
                                         <a href="#" data-id="{{$product->id}}"
                                            class="more-details text-primary underline"> Chi tiết</a>
