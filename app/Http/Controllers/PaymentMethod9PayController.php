@@ -94,7 +94,7 @@ class PaymentMethod9PayController extends Controller
 
             if ($status === 5) {
                 $order = Order::where('no', $payment->invoice_no)
-                    ->where('status', config('constants.orderStatus.confirmation'))
+                    ->where('status', config('constants.payStatus.pay'))
                     ->where('payment_status', config('constants.paymentStatus.no_done'))
                     ->first();
 
@@ -267,10 +267,11 @@ class PaymentMethod9PayController extends Controller
             }
             if ($status === 5) {
                 $order = OrderService::where('no', $payment->invoice_no)
-                    ->where('status', config('constants.orderServiceStatus.confirmation'))
+                    ->where('status', config('constants.orderServiceStatus.wait_for_confirmation'))
                     ->where('payment_status', config('constants.paymentStatus.no_done'))
                     ->first();
                 if ($order) {
+                    $order->status = 1;
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     $user = User::find($order->user_id);
@@ -483,8 +484,8 @@ class PaymentMethod9PayController extends Controller
             ], 404);
         }
         $orderItems = OrderItem::where('order_id', $order->id)->first(); // Hiện tại đang làm 1
-//        $order->status = config('constants.orderStatus.confirmation');
         if ($method === 'COD') {
+            $order->status = config('constants.orderStatus.confirmation');
             $order->method_payment = $method;
             $order->save();
             $cart = CartV2::where('user_id', $order->user_id)
