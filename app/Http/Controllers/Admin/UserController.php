@@ -40,6 +40,7 @@ class UserController extends Controller
             $this->v['users'] = $this->v['users']
                 ->where(function ($query) use ($request) {
                     $query->where('name', 'like', '%' . $request->keyword . '%')
+                        ->orWhere('role_id', 3)
                         ->orwhere('company_name', 'like', '%' . $request->keyword . '%')
                         ->orwhere('email', 'like', '%' . $request->keyword . '%')
                         ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
