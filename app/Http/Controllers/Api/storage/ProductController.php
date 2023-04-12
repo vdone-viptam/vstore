@@ -189,7 +189,7 @@ class ProductController extends Controller
                 'order.created_at',
                 'order.id'
             )
-            ->orderBy('order.id', 'desc');
+            ->orderBy($field, $type);
         $order = $order->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $warehouses->id);
         if ($request->code) {
