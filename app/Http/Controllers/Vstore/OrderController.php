@@ -28,7 +28,7 @@ class OrderController extends Controller
                 $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
                     $query->where('nick_name', 'like', '%' . $key_search . '%');
                 })
-                    ->orWhereHas('orderItem.vshop', function ($query) use ($key_search) {
+                    ->orWhereHas('orderItem.product', function ($query) use ($key_search) {
                         $query->where('name', 'like', '%' . $key_search . '%');
                     })
                     ->orWhere('no', 'like', '%' . $key_search . '%');
