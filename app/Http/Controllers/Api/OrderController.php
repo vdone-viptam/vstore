@@ -574,7 +574,9 @@ class OrderController extends Controller
                 'price',
                 'discount_ncc',
                 'discount_vstore',
-                'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at');
+                'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
+                'order.total'
+            );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
                 ->where('order.status', '!=', 2)
@@ -611,7 +613,7 @@ class OrderController extends Controller
                 $order->no = $parentOrder->no;
                 $order->order_number = $parentOrder->order_number;
                 $order->total_product = 1;
-                $order->total = $order->productInfo['price'] * $order->productInfo['quantity'];
+
                 unset($order->order);
                 unset($order->product);
             }
