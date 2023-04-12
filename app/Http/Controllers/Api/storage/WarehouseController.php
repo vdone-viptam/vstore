@@ -164,7 +164,7 @@ class WarehouseController extends Controller
                     'message' => 'Không tìm thấy đơn hàng'
                 ], 404);
             }
-
+            $order->export_status = 2;
             $order->cancel_status = 1;
             $order->save();
 
