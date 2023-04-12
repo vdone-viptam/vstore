@@ -96,7 +96,7 @@ class FinanceController extends Controller
     public function transferMoney(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
@@ -113,7 +113,7 @@ class FinanceController extends Controller
     public function history(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
             ->where('user_id', Auth::id())
