@@ -69,7 +69,7 @@ class BigSaleController extends Controller
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
                 ->where('type', '!=', 3)
-                ->groupBy($selected)
+                ->groupBy('discountVStore')
                 ->where('products.status', 2)
                 ->paginate($limit);
             foreach ($products as $product) {
