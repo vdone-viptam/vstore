@@ -48,6 +48,7 @@ class ProductController extends Controller
             ->selectSub('select IFNULL(SUM(quantity),0) from request_warehouses
                      where request_warehouses.product_id = products.id
                        and request_warehouses.ware_id = warehouses.id  and request_warehouses.type = 2 and request_warehouses.status = 0', 'pause_product')
+            ->selectSub('select name from users where id = products.user_id', 'name')
             ->join('products', 'categories.id', '=', 'products.category_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
