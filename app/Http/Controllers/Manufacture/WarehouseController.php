@@ -153,8 +153,10 @@ class WarehouseController extends Controller
     {
 
         $kho = ProductWarehouses::select('products.name as name', 'product_id', DB::raw('(amount -export) as amount_product'))
-            ->join('products', 'product_warehouses.product_id', '=', 'products.id')->groupBy(['product_id', 'products.name']
+            ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+            ->groupBy(['product_id', 'products.name']
             )->where('ware_id', $request->id)
+            ->where('products.user_id', Auth::id())
             ->where('product_warehouses.status', 1)
             ->get();
 
