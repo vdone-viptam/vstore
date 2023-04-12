@@ -45,7 +45,7 @@ if($order && $user) {
         <div
                 class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">
                 <div class="relative">
-                    <img src="{{asset('home/img/NCC.png')}}" alt="Logo Nhà Cung Cấp">
+                    <img src="{{asset('home/img/titleK.png')}}" alt="Logo Nhà Cung Cấp">
                     <h2 class="font-medium text-2xl mt-4">Thông tin thanh toán</h2>
 
                     <button class="closeModalPayment absolute top-0 right-0">
@@ -94,9 +94,9 @@ if($order && $user) {
                         <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
                             <h3 class="font-extrabold text-xl">Chi tiết sản phẩm</h3>
                             @php
-                                $price = (float) config('constants.orderService.price_ncc');
+                                $price = (float) config('constants.orderService.price_kho');
                                 $priceFormat = number_format($price, 0, '', '.');
-                                $vat = (float) config('constants.orderService.price_ncc')*10/100;
+                                $vat = (float) config('constants.orderService.price_kho')*10/100;
                                 $vatFormat = number_format($vat, 0, '', '.');
 
                                 $total = $price + $vat;
@@ -225,7 +225,7 @@ if($order && $user) {
                     <div class="max-w-[320px] w-full">
             <button
                 class="bg-[#1E90FF] text-center w-full rounded-[10px] text-[#FFF] py-4 font-semibold text-base md:text-2xl transition-all duration-200 hover:opacity-70 ">
-                <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký ngay</a></button>
+                <a class="block w-full h-full" href="{{route('register_storage')}}">Đăng ký mua</a></button>
         </div>
                 </div>
        <div></div>
