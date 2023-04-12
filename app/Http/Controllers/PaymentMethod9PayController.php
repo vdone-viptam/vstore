@@ -476,7 +476,6 @@ class PaymentMethod9PayController extends Controller
             ->where('status', 2)
             ->first();
 
-
         if (!$order) {
             return response()->json([
                 "status_code" => 404,
@@ -484,7 +483,7 @@ class PaymentMethod9PayController extends Controller
             ], 404);
         }
         $orderItems = OrderItem::where('order_id', $order->id)->first(); // Hiện tại đang làm 1
-        $order->status = config('constants.orderStatus.confirmation');
+//        $order->status = config('constants.orderStatus.confirmation');
         if ($method === 'COD') {
             $order->method_payment = $method;
             $order->save();
@@ -540,7 +539,7 @@ class PaymentMethod9PayController extends Controller
 //        date_default_timezone_set('UTC');
             $time = time();
             $invoiceNo = $order->no;
-            $amount = $order->total;
+            $amount = ceil($order->total);
             $merchantKey = config('payment9Pay.merchantKey');
             $merchantKeySecret = config('payment9Pay.merchantKeySecret');
             $merchantEndPoint = config('payment9Pay.merchantEndPoint');
@@ -550,7 +549,7 @@ class PaymentMethod9PayController extends Controller
                 'time' => $time,
                 'invoice_no' => $invoiceNo,
                 'description' => 'Đơn hàng Vdone',
-                'amount' => (float)$amount,
+                'amount' => $amount,
                 'back_url' => $backUrl,
                 'return_url' => $returnUrl,
                 'method' => $method,
@@ -582,7 +581,7 @@ class PaymentMethod9PayController extends Controller
             try {
                 $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
                 return response()->json([
-                    'redirectUrl' => $redirectUrl,
+                    'redirectUrl'=>$redirectUrl,
                     'time' => $time,
                     'invoice_no' => $invoiceNo,
                     'amount' => $amount,
