@@ -122,62 +122,73 @@ class ProductController extends Controller
                 'message' => 'Trạng thái cập nhật chỉ là 1,5 hoặc 10',
             ], 400);
         }
-
-        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->first();
-        if (!$requestIm) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Không tìm thấy yêu cầu',
-            ], 404);
-        } else {
-            if ($requestIm->status == 1 || $requestIm->status == 2) {
+        DB::beginTransaction();
+        try {
+            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->first();
+            if (!$requestIm) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Không tìm thấy yêu cầu',
                 ], 404);
+            } else {
+                if ($requestIm->status == 1 || $requestIm->status == 2) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy yêu cầu',
+                    ], 404);
+                }
             }
+            if ($requestIm->status == 5) {
+                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+                if (!$ware) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy sản phẩm',
+                    ], 404);
+                }
+                if ($ware->status == 0) {
+                    $ware->status = 1;
+                }
+                $ware->amount = $ware->amount + $requestIm->quantity;
+                $ware->save();
+
+                DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
+            }
+            if ($requestIm->status == 7) {
+                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+                if (!$ware) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy sản phẩm',
+                    ], 404);
+                }
+                $ware->export = $ware->export - (int)$requestIm->quantity;
+                $ware->save();
+            }
+
+            $requestIm->status = $status;
+            $requestIm->save();
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật yêu cầu thành công',
+
+            ], 201);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ], 500);
         }
-        if ($requestIm->status == 5) {
-            $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
-            if (!$ware) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Không tìm thấy sản phẩm',
-                ], 404);
-            }
-            if ($ware->status == 0) {
-                $ware->status = 1;
-            }
-            $ware->amount = $ware->amount + $requestIm->quantity;
-            $ware->save();
-
-            DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
-        }
-        if ($requestIm->status == 7) {
-            $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
-            if (!$ware) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Không tìm thấy sản phẩm',
-                ], 404);
-            }
-            $ware->export = $ware->export - (int)$requestIm->quantity;
-            $ware->save();
-        }
-
-        $requestIm->status = $status;
-        $requestIm->save();
-        return response()->json([
-            'success' => true,
-            'message' => 'Cập nhật đơn gửi hàng thành công',
-
-        ], 201);
-
-
     }
 
     public function requestOut(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => \Carbon\Carbon::now()]);
+        }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
         $field = $request->field ?? 'order.id';

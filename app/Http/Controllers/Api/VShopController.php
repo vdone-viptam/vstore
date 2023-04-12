@@ -8,12 +8,15 @@ use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\BuyMoreDiscount;
 use App\Models\Category;
 use App\Models\Discount;
+use App\Models\District;
 use App\Models\Order;
 use App\Models\PreOrderVshop;
 use App\Models\Product;
+use App\Models\Province;
 use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
+use App\Models\Ward;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -580,7 +583,8 @@ class  VShopController extends Controller
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
             'district' => 'required|min:1',
-            'province' => 'required|min:1'
+            'province' => 'required|min:1',
+            'wards'=>'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -601,6 +605,7 @@ class  VShopController extends Controller
                     'phone_number' => $request->phone_number,
                     'district' => $request->district,
                     'province' => $request->province,
+                    'wards'=>$request->wards,
                     'created_at' => Carbon::now()
                 ]);
             } else {
@@ -610,6 +615,7 @@ class  VShopController extends Controller
                 $vshop->district = $request->district;
                 $vshop->province = $request->province;
                 $vshop->name_address = $request->name_address;
+                $vshop->wards = $request->wards;
                 $vshop->save();
 
             }
@@ -641,12 +647,12 @@ class  VShopController extends Controller
         try {
             $address = DB::table('vshop')
                 ->select('name', 'name_address', 'province', 'wards', 'district', 'address', 'phone_number',
-                    'vshop.id', 'province.province_name', 'district.district_name', 'wards.wards_name')
-                ->join('province', 'vshop.province', '=', 'province.province_id')
-                ->join('district', 'province.province_id', '=', 'district.province_id')
-                ->join('wards', 'district.district_id', '=', 'wards.district_id')
-                ->where('vshop.pdone_id', $id)->first();
+                    'vshop.id')
 
+                ->where('vshop.pdone_id', $id)->first();
+            $address->province_name= Province::where('province_id',$address->province)->first()->province_name;
+            $address->district_name= District::where('district_id',$address->district)->first()->district_name;
+            $address->wards_name= Ward::where('wards_id',$address->wards)->first()->wards_name;
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,

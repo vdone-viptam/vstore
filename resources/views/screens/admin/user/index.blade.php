@@ -118,7 +118,7 @@
                             <th>Địa chỉ</th>
                             <th>Ngày đăng ký</th>
                             <th>Ngày duyệt</th>
-                            <th>Quyền</th>
+                            <th>Vai trò</th>
                             <th>Mã giới thiệu</th>
                             <th>
                                 Hành động

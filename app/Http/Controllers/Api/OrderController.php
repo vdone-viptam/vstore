@@ -649,6 +649,7 @@ class OrderController extends Controller
                 'messageError' => $validator->errors(),
             ], 401);
         }
+        DB::beginTransaction();
         try {
             $order = Order::find($request->order_id);
             if (!$order) {
@@ -695,8 +696,32 @@ class OrderController extends Controller
                 'ORDER_NUMBER' => $order->order_number,
                 'NOTE' => "Hủy đơn do khách hàng",
             ]);
+//            $order_item = OrderItem::select('product_id', 'quantity')->where('order_id', $order->id)->first();
+//            $product = Product::find($order_item->product_id);
+//
+//            $product->amount_product_sold = $product->amount_product_sold - $order_item->quantity;
+//
+//            $product->save();
+//            $vshop_Id = OrderItem::select('vshop_id')->where('order_id', $order->id)->first();
+//
+//            $vshop_product = VshopProduct::where('vshop_id', $vshop_Id)->first();
+//
+//            $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $order_item->quantity;
+//
+//            $vshop_product->save();
+//
+//            $vshop = Vshop::find($vshop_Id);
+//            $vshop->products_sold = $vshop->products_sold + $order_item->quantity;
+//            $vshop->save();
+            DB::commit();
+
+            return response()->json([
+                'status_code' => 201,
+                'message' => 'Hủy đơn thành công'
+            ], 201);
 
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'status_code' => 500,
                 'message' => $e->getMessage()

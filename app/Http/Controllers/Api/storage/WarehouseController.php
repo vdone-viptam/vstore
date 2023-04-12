@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -161,10 +164,24 @@ class WarehouseController extends Controller
                     'message' => 'Không tìm thấy đơn hàng'
                 ], 404);
             }
-
+            $order->export_status = 2;
             $order->cancel_status = 1;
             $order->save();
 
+            $product = Product::find($requestEx->product_id);
+            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
+            $product->save();
+
+            $vshop_Id = OrderItem::select('vshop_id')->where('order_id', $order->id)->first();
+
+            $vshop_product = VshopProduct::where('vshop_id', $vshop_Id->vshop_id)->where('product_id', $requestEx->product_id)->first();
+            $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $requestEx->quantity;
+
+            $vshop_product->save();
+
+            $vshop = Vshop::find($vshop_Id->vshop_id);
+            $vshop->products_sold = $vshop->products_sold + $requestEx->quantity;
+            $vshop->save();
             DB::commit();
             return response()->json([
                 'success' => true,

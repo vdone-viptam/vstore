@@ -163,7 +163,8 @@ class PaymentMethod9PayController extends Controller
         }
     }
 
-    function paymentOrderServiceReturn(Request $request) {
+    function paymentOrderServiceReturn(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -177,13 +178,13 @@ class PaymentMethod9PayController extends Controller
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
-        if($hashChecksum === $checksum){
+        if ($hashChecksum === $checksum) {
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
 //            $statusLabel = status9Pay($status);
-            if(!$checkPayment) {
+            if (!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
                 $paymentHistory->amount = $payment->amount;
@@ -216,7 +217,9 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-    function paymentOrderServiceBack(Request $request) {
+
+    function paymentOrderServiceBack(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -232,12 +235,12 @@ class PaymentMethod9PayController extends Controller
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
 
-        if($hashChecksum === $checksum){
+        if ($hashChecksum === $checksum) {
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
-            if(!$checkPayment) {
+            if (!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
                 $paymentHistory->amount = $payment->amount;
@@ -262,18 +265,18 @@ class PaymentMethod9PayController extends Controller
                 $paymentHistory->save();
                 //End Tạo lịch sử hoá đơn
             }
-            if($status === 5) {
+            if ($status === 5) {
                 $order = OrderService::where('no', $payment->invoice_no)
                     ->where('status', config('constants.orderServiceStatus.confirmation'))
                     ->where('payment_status', config('constants.paymentStatus.no_done'))
                     ->first();
-                if($order) {
+                if ($order) {
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     $user = User::find($order->user_id);
 
-                    if($order->type == "NCC") {
-                        return redirect()->route('landingpagencc',[
+                    if ($order->type == "NCC") {
+                        return redirect()->route('landingpagencc', [
                             "order" => $order,
                             "user" => $user
                         ]);
@@ -311,7 +314,9 @@ class PaymentMethod9PayController extends Controller
             ]);
         }
     }
-    function paymentPreOrderReturn(Request $request) {
+
+    function paymentPreOrderReturn(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -325,13 +330,13 @@ class PaymentMethod9PayController extends Controller
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
-        if($hashChecksum === $checksum){
+        if ($hashChecksum === $checksum) {
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
 //            $statusLabel = status9Pay($status);
-            if(!$checkPayment) {
+            if (!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
                 $paymentHistory->amount = $payment->amount;
@@ -356,12 +361,12 @@ class PaymentMethod9PayController extends Controller
                 $paymentHistory->save();
                 //End Tạo lịch sử hoá đơn
             }
-            if($status === 5) {
+            if ($status === 5) {
                 $order = PreOrderVshop::where('no', $payment->invoice_no)
                     ->where('status', 2)
                     ->where('payment_deposit_money_status', 2)
                     ->first();
-                if($order) {
+                if ($order) {
                     $order->payment_deposit_money_status = 1;
                     $order->save();
                     return redirect()->route('paymentSuccess');
@@ -380,7 +385,9 @@ class PaymentMethod9PayController extends Controller
             return redirect()->route('payment500');
         }
     }
-    function paymentPreOrderBack(Request $request) {
+
+    function paymentPreOrderBack(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'result' => 'required',
             'checksum' => 'required',
@@ -395,13 +402,13 @@ class PaymentMethod9PayController extends Controller
         $checksum = $request->checksum;
         $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
         $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
-        if($hashChecksum === $checksum){
+        if ($hashChecksum === $checksum) {
             $result = base64_decode($request->result);
             $payment = json_decode($result);
             $status = $payment->status;
             $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
 //            $statusLabel = status9Pay($status);
-            if(!$checkPayment) {
+            if (!$checkPayment) {
                 // Tạo lịch sử hoá đơn
                 $paymentHistory = new PaymentHistory();
                 $paymentHistory->amount = $payment->amount;
@@ -446,7 +453,8 @@ class PaymentMethod9PayController extends Controller
      * @param $method_payment "ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD"
      * @return JsonResponse
      */
-    function payment(Request $request, $id) {
+    function payment(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD',
             'user_id' => 'required',
@@ -469,7 +477,7 @@ class PaymentMethod9PayController extends Controller
             ->first();
 
 
-        if(!$order) {
+        if (!$order) {
             return response()->json([
                 "status_code" => 404,
                 "message" => "Hoá đơn không tồn tại"
@@ -477,7 +485,7 @@ class PaymentMethod9PayController extends Controller
         }
         $orderItems = OrderItem::where('order_id', $order->id)->first(); // Hiện tại đang làm 1
         $order->status = config('constants.orderStatus.confirmation');
-        if( $method === 'COD' ) {
+        if ($method === 'COD') {
             $order->method_payment = $method;
             $order->save();
             $cart = CartV2::where('user_id', $order->user_id)
@@ -485,6 +493,35 @@ class PaymentMethod9PayController extends Controller
             CartItemV2::where('cart_id', $cart->id)
                 ->where('product_id', $orderItems->product_id)
                 ->delete();
+
+            $requestEx = new RequestWarehouse();
+
+            $requestEx->ncc_id = 0;
+            $requestEx->product_id = $orderItems->product_id;
+            $requestEx->status = 0;
+            $requestEx->type = 10;
+            $requestEx->ware_id = $order->warehouse_id;
+            $requestEx->quantity = $orderItems->quantity;
+            $code = $order->no;
+            $requestEx->order_number = '';
+            $requestEx->code = $code;
+            $requestEx->note = 'Đơn hàng mới';
+            $requestEx->save();
+
+            $order->request_warehouse_id = $requestEx->id;
+
+            $order->save();
+
+            $ware_user = Warehouses::select('user_id')->where('id', $order->warehouse_id)->first();
+            $user = User::find($ware_user->user_id);
+            $data = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => '',
+                'message' => 'Bạn vừa có đơn hàng mới',
+                'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
+            ];
+            $user->notify(new AppNotification($data));
             return response()->json([
                 "status_code" => 200,
                 "message" => "Đặt hàng thành công"
@@ -495,7 +532,7 @@ class PaymentMethod9PayController extends Controller
             $returnUrl = $http . config("domain.payment") . "/payment/return";
             $backUrl = $http . config("domain.payment") . "/payment/back";
 
-            if($request->return_url && $request->back_url) {
+            if ($request->return_url && $request->back_url) {
                 $returnUrl = $returnUrl . "?url=" . $request->return_url;
                 $backUrl = $backUrl . "?url=" . $request->back_url;
             }
@@ -536,7 +573,7 @@ class PaymentMethod9PayController extends Controller
             $cart = CartV2::where('user_id', $order->user_id)
                 ->first();
 
-            if($cart) {
+            if ($cart) {
                 CartItemV2::where('cart_id', $cart->id)
                     ->where('product_id', $orderItems->product_id)
                     ->delete();
@@ -545,7 +582,7 @@ class PaymentMethod9PayController extends Controller
             try {
                 $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
                 return response()->json([
-                    'redirectUrl'=>$redirectUrl,
+                    'redirectUrl' => $redirectUrl,
                     'time' => $time,
                     'invoice_no' => $invoiceNo,
                     'amount' => $amount,
