@@ -33,11 +33,11 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Giảm giá (nếu có):</span>
-                        <span class="text-title">{{number_format($order->discount,'0','.','.')}}</span>
+                        <span class="text-title">{{number_format($order->discount,'0','.','.')}}%</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Số lượng sản phẩm:</span>
-                        <span class="text-title">{{$order->quantity}}%</span>
+                        <span class="text-title">{{$order->quantity}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tiền đặt cọc (nếu có):</span>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tổng tiền:</span>
-                        <span class="text-title">{{number_format($order->total,'0','.','.')}} đ</span>
+                        <span class="text-title">{{number_format( ($order->total/100 * (100 -$order->discount ))   ,'0','.','.')}} đ</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Trạng thái:</span>
