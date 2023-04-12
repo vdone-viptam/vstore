@@ -94,7 +94,7 @@ class PaymentMethod9PayController extends Controller
 
             if ($status === 5) {
                 $order = Order::where('no', $payment->invoice_no)
-                    ->where('status', config('constants.payStatus.pay'))
+                    ->where('status', config('constants.orderStatus.wait_for_confirmation'))
                     ->where('payment_status', config('constants.paymentStatus.no_done'))
                     ->first();
 
