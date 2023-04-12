@@ -126,19 +126,23 @@ class ChartRepository implements ChartRepositoryInterface
     public function orderRangeTimeMonth()
     {
         $checkRole = User::where('id',Auth::id())->first()->role_id;
-        $data = Order::where('status',1);
-        if($checkRole != 1){
-            $data = $data ->where('user_id',Auth::id());
-        }
+
+        $data = Order::where('order.status',1);
         $data = $data->select(
                         DB::raw('count(*) as countOrder'),
-                        DB::raw("(DATE_FORMAT(created_at, '%d/%m/%Y')) as my_date")
+                        DB::raw("(DATE_FORMAT(order.created_at, '%d/%m/%Y')) as my_date")
                 )
-                ->where('created_at','>=', Carbon::now()->subDays(30))
-                ->orderByDesc('created_at')
+                ->where('order.created_at','>=', Carbon::now()->subDays(30))
+                ->join('order_item','order_item.order_id','order.id')
+                ->join('products','products.id','order_item.product_id');
+        if($checkRole == 2){
+            $data = $data ->where('products.user_id',Auth::id());
+        }else if ($checkRole == 3){
+            $data = $data ->where('products.vstore_id',Auth::id());
+        }
+        $data = $data ->orderByDesc('order.created_at')
                 ->groupBy('my_date')
                 ->get()->toArray();
-        // dd($data);
         $dataChart = [];
 
         // đơn hàng trong 1 tuần và 1 tháng
@@ -182,16 +186,20 @@ class ChartRepository implements ChartRepositoryInterface
     public function orderRangeTimeYear()
     {
         $checkRole = User::where('id',Auth::id())->first()->role_id;
-        $data = Order::where('status',1);
-        if($checkRole != 1){
-            $data = $data ->where('user_id',Auth::id());
-        }
+        $data = Order::where('order.status',1);
         $data = $data->select(
                         DB::raw('count(*) as countOrder'),
-                        DB::raw("(DATE_FORMAT(created_at, '%m/%Y')) as my_date")
+                        DB::raw("(DATE_FORMAT(order.created_at, '%m/%Y')) as my_date")
                 )
-                ->where('created_at','>=', Carbon::now()->subMonths(36))
-                ->orderByDesc('created_at')
+                ->where('order.created_at','>=', Carbon::now()->subMonths(36))
+                ->join('order_item','order_item.order_id','order.id')
+                ->join('products','products.id','order_item.product_id');
+        if($checkRole == 2){
+            $data = $data ->where('products.user_id',Auth::id());
+        }else if ($checkRole == 3){
+            $data = $data ->where('products.vstore_id',Auth::id());
+        }
+        $data = $data->orderByDesc('order.created_at')
                 ->groupBy('my_date')
                 ->get()->toArray();
         // dd($data);
