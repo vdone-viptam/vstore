@@ -410,7 +410,7 @@ class  VShopController extends Controller
 
         $order->total = $total;
         $order->discount = $buyMoreDiscount['discount'];
-        $order->deposit_money= $buyMoreDiscount['deposit_money'];
+        $order->deposit_money=  $buyMoreDiscount['deposit_money'];
         $order->save();
         $order->prepayment_rate = $buyMoreDiscount['deposit_money'];
 
