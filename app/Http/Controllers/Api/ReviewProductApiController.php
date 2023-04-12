@@ -62,7 +62,7 @@ class ReviewProductApiController extends Controller
             $data = Order::join('order_item','order_item.order_id','order.id')
                 ->where('order_item.id',$request->order_item_id)
                 ->where('order_item.product_id',$request->product_id)
-                ->where('order.export_status',4)
+                // ->where('order.export_status',4)
                 ->select('product_id','order_item.id')
                 ->first();
             if($data){
@@ -74,7 +74,7 @@ class ReviewProductApiController extends Controller
             }
             return response()->json([
                 'success' => false,
-                'message' => 'Không tìm thấy đơn hàng hoặc đơn hàng chưa giao thành công'
+                'message' => 'Không tìm thấy đơn hàng'
             ], 500);
         } catch (\Exception $e) {
             return response()->json([
