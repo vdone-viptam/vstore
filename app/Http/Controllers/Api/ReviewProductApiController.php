@@ -184,7 +184,7 @@ class ReviewProductApiController extends Controller
             $totalReviews = Point::query()
                             ->with(['pointRep'])
                             ->where('product_id', $product_id)
-                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id')
+                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id','status')
                             ->orderBy('updated_at', 'desc');
             if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
@@ -236,7 +236,7 @@ class ReviewProductApiController extends Controller
                 ], 400);
             }
 
-            $status_rep = $request->status_rep;
+            $status_rep  = $request->status_rep;
 
             $limit = $request->limit ?? 3;
 
@@ -253,8 +253,9 @@ class ReviewProductApiController extends Controller
                                 'points.updated_at',
                                 'points.descriptions',
                                 'points.images',
+                                'points.status',
                                 'points.id');
-            if($status_rep){
+            if(isset($status_rep)){
                  $totalReviews->where('points.status',$status_rep);
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
