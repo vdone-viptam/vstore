@@ -67,15 +67,7 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
                 <div class="flex justify-start items-start gap-2 flex-wrap">
-                    <select name="" id=""
-                            class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                        <option value="1" selected>Mã đơn hàng</option>
-                        <option value="1" selected>Tên sản phẩm</option>
-                        <option value="1" selected>Tên kho hàng</option>
-                        <option value="1" selected>V-Shop bán hàng</option>
-                    </select>
-
-                    <input type="text" id="key_search"
+                    <input type="text" id="key_search" name="key_search"
                            class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                            placeholder="Nhập từ khóa">
                     <button type="submit"
@@ -234,7 +226,7 @@
                                 </option>
                                 <option
                                     value="50"
-                                    @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >
+                                    @if(app('request')->input('limit') && app('request')->input('limit') ==50)selected @endif >
                                     50
                                     hàng / trang
                                 </option>
