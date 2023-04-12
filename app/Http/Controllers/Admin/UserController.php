@@ -50,9 +50,7 @@ class UserController extends Controller
                 })
                 ->join('order_service', 'users.id', '=', 'order_service.user_id')
                 ->where('order_service.status', 1)
-                ->orWhere(function ($query) {
-                    $query->where('role_id', 3);
-                })
+                ->orWhere('role_id', 3)
                 ->where('payment_status', 1);
         }
         $this->v['count'] = $this->v['users']->count();
