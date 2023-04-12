@@ -59,7 +59,7 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
                 $totalVat = $totalVat / 100 ;
             }
             $amount_to_pay = $totalProduct  -  (  $totalProduct * $totalDiscount );
-            $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
+            // $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
             $array['amount_to_pay'] = $amount_to_pay;
             $array['price_product'] = $totalProduct;
             $array['price'] = $totalProduct;
@@ -110,7 +110,7 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
                 $totalVat = $totalVat / 100 ;
             }
             $amount_to_pay = $totalProduct  -  (  $totalProduct * $totalDiscount );
-            $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
+            // $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
             $array['amount_to_pay'] = $amount_to_pay;
             $array['price'] = $totalProduct;
         }
