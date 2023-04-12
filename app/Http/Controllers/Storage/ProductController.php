@@ -178,6 +178,9 @@ class ProductController extends Controller
 
     public function requestOut(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => \Carbon\Carbon::now()]);
+        }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
         $field = $request->field ?? 'order.id';
