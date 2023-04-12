@@ -103,7 +103,7 @@ class ReviewProductApiController extends Controller
             'product_id' => 'required|exists:products,id',
             'order_item_id' => 'required|exists:order_item,id',
             'customer_id' => 'required',
-            'descriptions' => 'required|max:200',
+            'descriptions' => 'max:200',
             'point_evaluation' => 'required|integer|between:1,5',
             "images" => ["array","max:3"],
         ]);
@@ -258,7 +258,7 @@ class ReviewProductApiController extends Controller
                  $totalReviews->where('points.status',$status_rep);
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
-//            return $totalReviews;
+        //    return $totalReviews;
             foreach($totalReviews as $key => $value){
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
                 $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
