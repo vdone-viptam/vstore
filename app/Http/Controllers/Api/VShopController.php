@@ -604,6 +604,7 @@ class  VShopController extends Controller
                     'phone_number' => $request->phone_number,
                     'district' => $request->district,
                     'province' => $request->province,
+                    'wards'=>$request->wards,
                     'created_at' => Carbon::now()
                 ]);
             } else {
@@ -613,6 +614,7 @@ class  VShopController extends Controller
                 $vshop->district = $request->district;
                 $vshop->province = $request->province;
                 $vshop->name_address = $request->name_address;
+                $vshop->wards = $request->wards;
                 $vshop->save();
 
             }
