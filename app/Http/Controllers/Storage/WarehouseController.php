@@ -261,6 +261,13 @@ class WarehouseController extends Controller
             $productWare->save();
 
             $requestEx->save();
+
+            $product = Product::find($requestEx->product_id);
+
+            $product->amount_product_sold = $product->amount_product_sold - $requestEx->quantity;
+
+            $product->save();
+
             $order = Order::where('order_number', $requestEx->order_number)->first();
             if (!$order) {
                 return response()->json([
