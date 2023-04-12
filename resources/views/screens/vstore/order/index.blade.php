@@ -21,7 +21,7 @@
                     <option value="1" selected>V-Shop bán hàng</option>
                 </select>
 
-                <input type="text" name="key_word" value="{{$key_word}}" id="key_search"
+                <input type="text" name="key_word" value="{{$key_search}}" id="key_search"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Nhập từ khóa">
                 <button type="submit"
@@ -78,7 +78,7 @@
                             <th>
                                 Số lượng
                             </th>
-                            {{--                        <th>Kho hàng</th>--}}
+                                                    <th>Kho hàng</th>
                             <th>
                                 Ngày đặt hàng
                             </th>
@@ -99,26 +99,38 @@
                         @if(count($orders) > 0)
                             @foreach($orders as $order)
                                 <tr>
-                                    <td>{{$order->order->no}}</td>
-                                    <td>{{$order->product->name}}</td>
+                                    <td>{{$order->no}}</td>
+                                    <td>{{$order->orderItem[0]->product->name}}</td>
                                     <td>
-                                        @if($order->order->status == 0)
+                                        @if($order->export_status == 0)
                                             <span class="text-yellow-400">Chờ xác nhận</span>
-                                        @elseif($order->order->status == 1)
+                                        @elseif($order->export_status == 1)
                                             <span class="text-blue-600">Chờ giao hàng</span>
-                                        @elseif($order->order->status == 2)
+                                        @elseif($order->export_status == 2)
                                             <span class="text-blue-600">Đang giao hàng</span>
                                         @else
                                             <span class="text-green-600">Hoàn thành</span>
                                         @endif
                                     </td>
-                                    <td>{{$order->product->price}}</td>
-                                    <td>{{$order->quantity}}</td>
-                                    <td>{{\Carbon\Carbon::parse($order->order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td>{{number_format($order->price * $order->quantity,0,'.','.')}} đ</td>
-                                    <td>{{$order->vshop->nick_name}}</td>
-
-                                    <td>{{number_format($order->price * $order->quantity * $order->product->discount / 100,0,'.','.')}}
+                                    <td>{{number_format($order->orderItem[0]->price,'0','.','.')}} đ</td>
+                                    <td>{{$order->orderItem[0]->quantity}}</td>
+                                    <td>{{$order->orderItem[0]->warehouse->name}}</td>
+                                    <td>{{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y h:i')}}</td>
+                                    <td>
+                                        @if($order->export_status == 4)
+                                            {{\Carbon\Carbon::now()->format('d/m/Y h:i')}}
+                                        @else
+                                            Chưa xác định
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity,0,'.','.')}} đ
+                                    </td>
+                                    <td>
+                                        {{$order->orderItem[0]->vshop->name ?? 'Viptam'}}
+                                    </td>
+                                    <td>
+                                        {{number_format(($order->orderItem[0]->price * $order->orderItem[0]->quantity) * (100 - $order->orderItem[0]->product->discount - $order->orderItem[0]->discount_vShop) / 100,0,'.','.')}}
                                         đ
                                     </td>
                                 </tr>
