@@ -167,7 +167,7 @@
                                 <tr>
                                     <td>{{$ord->no}}</td>
                                     <td>{{$ord->publish_id}}</td>
-                                    <td>{{$ord->name}}</td>
+                                    <td title="{{$ord->name}}">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
                                     <td>{{$ord->quantity}}</td>
                                     <td>
                                         @if($ord->method_payment == 'COD')
@@ -320,8 +320,8 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                            <label for="name">Mã yêu cầu:</label>
-                            <input type="text" class="form-control form-control-lg" id="code" value="${data.data.code}" readonly>
+                            <label for="name">Mã đơn hàng:</label>
+                            <input type="text" class="form-control form-control-lg" id="code" value="${data.data.no}" readonly>
                         </div>
                             </div>
                             <div class="col-6">
@@ -331,20 +331,14 @@
                         </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
+
                                 <div class="form-group">
                             <label for="product_name">Tên sản phẩm:</label>
-                            <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.product_name}" readonly>
+                            <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.name}" readonly>
                         </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                            <label for="ncc_name">Nhà cung cấp:</label>
-                            <input type="text" class="form-control form-control-lg" id="ncc_name" value="${data.data.ncc_name}" readonly>
-                        </div>
-                            </div>
-                        </div>
+
+
+
 
 
                         <div class="form-group">

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserReferral;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use PHPUnit\Exception;
 use SKAgarwal\GoogleApi\PlacesApi;
 
 class TestController extends Controller
@@ -197,5 +199,20 @@ class TestController extends Controller
                 $order->save();
             }
             return 'Ok rồi đấy';
+    }
+    public function testChia(){
+
+
+//        try {
+//            DB::beginTransaction();
+
+
+
+
+//        }catch (\Exception $e){
+//            DB::rollBack();
+//            Log::error($e->getMessage());
+//        }
+
     }
 }

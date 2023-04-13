@@ -42,7 +42,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Số lượng bán:</span>
-                    <span class="text-title">{{$request->amount_product ?? 0 }}</span>
+                    <span class="text-title">{{$request->amount_product_sold ?? 0 }}</span>
                 </div>
             </div>
             <div class="flex justify-end items-center gap-4 ">

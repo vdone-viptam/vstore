@@ -123,7 +123,7 @@
                                 <tr>
                                     <td>{{$request->no}}</td>
                                     <td>{{$request->publish_id}}</td>
-                                    <td>{{$request->product_name}}</td>
+                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
                                     <td>

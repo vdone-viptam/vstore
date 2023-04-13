@@ -106,7 +106,7 @@
                                             <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
                                         @endif
                                     @else
-                                            <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
                             </th>
@@ -184,7 +184,7 @@
                                 <tr>
                                     <td>{{$product->code}}</td>
                                     <td>{{$product->publish_id}}</td>
-                                    <td>{{$product->product_name}}</td>
+                                    <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td>{{$product->ncc_name}}</td>
                                     <td>{{$product->quantity}}</td>
                                     <td>0</td>

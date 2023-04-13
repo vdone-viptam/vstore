@@ -31,7 +31,7 @@ class AccountController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
 //        return 1;
         if (isset($request->noti_id)) {

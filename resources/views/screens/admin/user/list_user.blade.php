@@ -100,7 +100,7 @@
                             <th>Số điện thoại</th>
                             <th>Mã số thuế</th>
                             <th>Địa chỉ</th>
-                            <th>Quyền</th>
+                            <th>Vai trò</th>
                             <th></th>
                         </tr>
                         </thead>

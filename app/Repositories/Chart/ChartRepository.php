@@ -243,6 +243,47 @@ class ChartRepository implements ChartRepositoryInterface
 
         return $dashboardChart;
     }
+    public function revenueToday(){
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+        $data = BlanceChange::where('type',1)->where('status',1);
+        if($checkRole != 1){
+            $data = $data ->where('user_id',Auth::id());
+        }
+        $data = $data->whereDate('created_at', date('Y-m-d'))
+                ->sum('money_history');
+        return $data;
+    }
+    public function orderToday()
+    {
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+
+        $data = Order::where('order.status',1)
+                ->whereDate('order.created_at', date('Y-m-d'))
+                ->join('order_item','order_item.order_id','order.id')
+                ->join('products','products.id','order_item.product_id');
+        if($checkRole == 2){
+            $data = $data ->where('products.user_id',Auth::id());
+        }else if ($checkRole == 3){
+            $data = $data ->where('products.vstore_id',Auth::id());
+        }
+        $data = $data->count();
+        return $data;
+    }
+    public function orderSuccessToday()
+    {
+        $checkRole = User::where('id',Auth::id())->first()->role_id;
+        $data = Order::where('order.status',1)->where('order.export_status',4)
+                ->whereDate('order.updated_at', date('Y-m-d'))
+                ->join('order_item','order_item.order_id','order.id')
+                ->join('products','products.id','order_item.product_id');
+        if($checkRole == 2){
+            $data = $data ->where('products.user_id',Auth::id());
+        }else if ($checkRole == 3){
+            $data = $data ->where('products.vstore_id',Auth::id());
+        }
+        $data = $data->count();
+        return $data;
+    }
 }
 
 

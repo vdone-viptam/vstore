@@ -39,6 +39,7 @@ Route::get('/els', [\App\Http\Controllers\Api\ElasticsearchController::class, 'i
 //        "req" => $req
 //    ]);
 //});
+Route::get('/test-chia', [\App\Http\Controllers\TestController::class, 'testChia']);
 Route::post('/tuyet-test-ngu', [\App\Http\Controllers\TestController::class, 'tuyet']);
 
 Route::prefix('bill')->group(function () {
@@ -82,6 +83,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::post('/accept-review', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'acceptReviewProduct']);
         Route::get('/review-detail-product/{point_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'reviewDetailProduct']);
+        Route::get('/info-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'infoReviewProduct']);
         Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
         Route::get('/list-review-vdone/{done_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
         Route::post('/rep-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'repReviewProduct']);

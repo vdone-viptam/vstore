@@ -21,11 +21,20 @@ class DashboardController extends Controller
         $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
         $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
         $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
+
+        $dataRevenueToday = $this->chartRepository->revenueToday();
+        $dataOrderToday = $this->chartRepository->orderToday();
+        $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
+
         return view('screens.admin.dashboard.index', [
             'dataRevenueChartMonth' => $dataRevenueChartMonth,
             'dataRevenueChartYear' => $dataRevenueChartYear,
             'dataOrderChartMonth' => $dataOrderChartMonth,
             'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+
+            'dataRevenueToday' => $dataRevenueToday,
+            'dataOrderToday' => $dataOrderToday,
+            'dataOrderSuccessToday' => $dataOrderSuccessToday,
         ]);
     }
 }

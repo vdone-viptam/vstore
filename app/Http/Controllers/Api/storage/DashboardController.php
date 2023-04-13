@@ -57,7 +57,7 @@ class DashboardController extends Controller
                                                             AND type = 2 AND ware_id = $warehouses->id
                                                             AND product_id = product_warehouses.product_id) as 'total'
         FROM product_warehouses
-        WHERE ware_id = $warehouses->id AND product_warehouses,status = 1 HAVING total <= 10
+        WHERE ware_id = $warehouses->id AND product_warehouses.status = 1 HAVING total <= 10
         "))) ?? 0;
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'request_warehouses.id';

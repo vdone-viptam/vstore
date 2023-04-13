@@ -177,7 +177,7 @@
                             <tr>
                                 <td> {{$product->code}}</td>
                                 <td>{{$product->publish_id}}</td>
-                                <td>{{$product->product_name}}</td>
+                                <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                 <td>{{$product->ncc_name}}</td>
                                 <td>{{$product->quantity}}</td>
                                 <td>0</td>
@@ -204,12 +204,14 @@
                                             </a></div>
                                     @else
                                         <div style="display:flex; justify-content:center; gap:10px"><a
-                                                href="javascript:void(0)" onclick="upDateStatus('{{$product->code}}',1,7)"
+                                                href="javascript:void(0)"
+                                                onclick="upDateStatus('{{$product->code}}',1,7)"
                                                 style="text-decoration:underline"
                                                 class="text-primary  text-white font-medium  rounded">
                                                 Đồng ý
                                             </a>
-                                            <a href="javascript:void(0)" onclick="upDateStatus('{{$product->code}}',3,7)"
+                                            <a href="javascript:void(0)"
+                                               onclick="upDateStatus('{{$product->code}}',3,7)"
                                                style="text-decoration:underline"
                                                class="text-danger  text-white font-medium  rounded">
                                                 Từ chối
@@ -324,9 +326,11 @@
                 }
                 interval = setInterval(() => barcode = '', 20);
             });
+
             function call(code) {
-               $('#search').val(code);
+                $('#search').val(code);
             }
+
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {

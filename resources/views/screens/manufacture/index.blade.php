@@ -94,8 +94,7 @@
             </div>
                 <div class="flex justify-center md:justify-start items-center gap-6">
                     <a href="{{route('register_ncc')}}"
-                       class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng
-                        ký ngay</a>
+                       class="text-xs md:text-base rounded-[4px] text-[#00A8DB]  hover:opacity-70 transition-all duration-200 px-4 py-[6px] md:py-[10px]  font-semibold bg-[#fff] border-[#FFF] border-[1px] md:px-10">Đăng ký mua</a>
 
         <a class="text-xs md:text-base text-center  rounded-[4px] text-[#FFF] px-4 py-[6px] md:py-[10px] bg-[#5AC3ED]  border-[#FFF] border-[1px] md:px-10 font-semibold transition-all duration-200 hover:opacity-70"  href="{{route('login_ncc')}}">Đăng nhập</a>
 

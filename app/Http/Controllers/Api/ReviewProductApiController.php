@@ -39,6 +39,51 @@ class ReviewProductApiController extends Controller
         $this->callApiRepositoryInterface = $callApiRepositoryInterface;
     }
     /**
+     * lấy thông tin sản phẩm trước khi đánh giá
+     *
+     * @bodyParam product_id ID product
+     * @bodyParam order_item_id ID order_item
+     * API dùng để lấy thông tin sản phẩm trước khi đánh giá
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+     public function infoReviewProduct(Request $request){
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|exists:products,id',
+            'order_item_id' => 'required|exists:order_item,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 400);
+        }
+        try {
+            $data = Order::join('order_item','order_item.order_id','order.id')
+                ->where('order_item.id',$request->order_item_id)
+                ->where('order_item.product_id',$request->product_id)
+                // ->where('order.export_status',4)
+                ->select('product_id','order_item.id')
+                ->first();
+            if($data){
+                $data['product'] = $this->reviewProductRepository->calculatorFeeProductOrder($request->product_id,$request->order_item_id);
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ], 200);
+            }
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng'
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    /**
      * lưu đánh giá sản phẩm
      *
      * @bodyParam product_id ID product
@@ -58,7 +103,7 @@ class ReviewProductApiController extends Controller
             'product_id' => 'required|exists:products,id',
             'order_item_id' => 'required|exists:order_item,id',
             'customer_id' => 'required',
-            'descriptions' => 'required|max:200',
+            'descriptions' => 'max:200',
             'point_evaluation' => 'required|integer|between:1,5',
             "images" => ["array","max:3"],
         ]);
@@ -139,7 +184,7 @@ class ReviewProductApiController extends Controller
             $totalReviews = Point::query()
                             ->with(['pointRep'])
                             ->where('product_id', $product_id)
-                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id')
+                            ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id','status')
                             ->orderBy('updated_at', 'desc');
             if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
@@ -191,7 +236,7 @@ class ReviewProductApiController extends Controller
                 ], 400);
             }
 
-            $status_rep = $request->status_rep;
+            $status_rep  = $request->status_rep;
 
             $limit = $request->limit ?? 3;
 
@@ -208,12 +253,13 @@ class ReviewProductApiController extends Controller
                                 'points.updated_at',
                                 'points.descriptions',
                                 'points.images',
+                                'points.status',
                                 'points.id');
-            if($status_rep){
+            if(isset($status_rep)){
                  $totalReviews->where('points.status',$status_rep);
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
-//            return $totalReviews;
+        //    return $totalReviews;
             foreach($totalReviews as $key => $value){
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
                 $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
