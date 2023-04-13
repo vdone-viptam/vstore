@@ -53,7 +53,7 @@
                         <span class="text-title">
                                 @if($order->status == 1)
                                 <span class="text-green-600"> Đã hoàn thành</span>
-                            @elseif($order->status == 3)
+                            @elseif($order->status == 2)
                                 <span class="text-blue-600">Đơn hàng mới</span>
                             @elseif($order->status == 4)
                                 <span class="text-yellow-400">Đang giao hàng</span>

@@ -85,7 +85,7 @@ class OrderController extends Controller
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
-            ->where('pre_order_vshop.status', '!=', 2)
+            ->where('pre_order_vshop.status', '!=', 3)
             ->orderBy('pre_order_vshop.id', 'desc')
             ->paginate($limit);;
         return view('screens.manufacture.order.order', [
@@ -102,7 +102,7 @@ class OrderController extends Controller
                 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
             ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
-            ->where('pre_order_vshop.status', '!=', 2)
+            ->where('pre_order_vshop.status', '!=', 3)
             ->where('pre_order_vshop.id', $id)
             ->first();
         return view('screens.manufacture.order.detail', [
