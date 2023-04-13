@@ -3,7 +3,7 @@
 @section('page_title','Tất cả đơn hàng')
 
 @section('content')
-    <form>
+    <form id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
             <span class="text-secondary">Quản lý đơn hàng</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,28 +142,24 @@
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option
-                                {{--                            value="10" {{isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>10--}}
-                                {{--                            hàng / trang--}}
-                                value="10"
+                            <option value="10" {{isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>10 hàng / trang
+                                {{-- value="10"
                                 @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >
                                 10
-                                hàng / trang
+                                hàng / trang --}}
                                 {{--                            {{ app('request')->input('limit') }}--}}
                             </option>
-                            <option
-                                {{--                            value="25" {{isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>25--}}
-                                {{--                            hàng / trang--}}
-                                value="25"
+                            <option value="25" {{isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>25 hàng / trang
+                                {{-- value="25"
                                 @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >
                                 25
-                                hàng / trang
+                                hàng / trang --}}
                             </option>
-                            <option
-                                value="50"
+                            <option value="50" {{isset($params['limit']) && $params['limit'] == 50 ? 'selected' : ''}}>50 hàng / trang
+                                {{-- value="50"
                                 @if(app('request')->input('limit') && app('request')->input('limit') ==50)selected @endif >
                                 50
-                                hàng / trang
+                                hàng / trang --}}
                             </option>
                         </select>
 
