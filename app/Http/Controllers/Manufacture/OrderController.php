@@ -74,9 +74,11 @@ class OrderController extends Controller
 
     }
 
-    public function order()
+    public function order(Request $request)
     {
         $limit = $request->limit ?? 10;
+        $key_search = $request->key_search ?? '';
+
         $orders = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
                 'place_name', 'fullname', 'phone', 'address', 'no',
@@ -85,8 +87,14 @@ class OrderController extends Controller
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
-            ->orderBy('pre_order_vshop.id', 'desc')
-            ->paginate($limit);;
+            ->orderBy('pre_order_vshop.id', 'desc');
+        if ($key_search && strlen(($key_search) > 0)) {
+            $orders->where(function ($sub) use ($key_search) {
+                $sub->where('products.name', 'like', '%' . $key_search . '%')
+                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            });
+        }
+        $orders = $orders->paginate($limit);;
         return view('screens.manufacture.order.order', [
             'orders' => $orders
         ]);
