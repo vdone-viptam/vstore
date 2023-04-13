@@ -250,9 +250,9 @@
                             <label class="w-full text-[#6A6A6A]  text-sm" for="val-username">Số tiền cần
                                 rút<strong class="text-[#FF4D4F]">*</strong>
                             </label>
-                            <input type="number" name="money" id="money" data-value="0"
+                            <input required type="number" name="money" id="money" data-value="0"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#F1F1F4] focus:border-primary transition-all duration-200 rounded-sm"
-                                   min="1" placeholder="0đ" style="border-radius: 0.25rem">
+                                   min="100000" placeholder="0đ" style="border-radius: 0.25rem">
                         </div>
                         <div class="flex flex-col items-start w-full flex-wrap md:flex-nowrap">
                             <label class="w-full text-[#6A6A6A]  text-sm" for="val-username">Phương thức nhận tiền:

@@ -183,8 +183,8 @@
                                 <div class="form-group">
                                     <label for="val-username">Số tiền cần rút <strong
                                             class="text-[#FF4D4F]">*</strong></label>
-                                    <input required type="number" class="form-control" name="money" id="money"
-                                           data-value="0" min="1" placeholder="0đ" max="{{Auth::user()->money}}">
+                                    <input required type="number" class="only-number form-control only-number" name="money" id="money"
+                                           data-value="0" min="100000" placeholder="0đ" max="{{Auth::user()->money}}">
                                 </div>
                             </div>
                             <div class="d-flex flex-column items-start w-100 flex-wrap md:flex-nowrap my-4">

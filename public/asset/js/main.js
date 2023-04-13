@@ -286,6 +286,12 @@ function swalNoti(position, icon, title, width, showConfirmButton, timer) {
 function convertVND(params) {
     return params.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
 }
+document.querySelector(".only-number").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
 // MENU
 
 

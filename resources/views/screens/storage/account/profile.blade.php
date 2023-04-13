@@ -66,7 +66,7 @@
                                             @endif
                                             <div class="form-g">
                                                 <div class="form-group">
-                                                    <label for="name">Tên V-Kho:</label>
+                                                    <label for="name">Tên Kho:</label>
                                                     <input required type="text" class="form-control form-control-lg"
                                                            name="name" id="name" value="{{$infoAccount->name}}">
                                                     @error('name')
