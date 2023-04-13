@@ -76,7 +76,7 @@
                                                     @if($history->status == 0)
                                                         <p class="text-red-600">Thất bại</p>
                                                     @else
-                                                        <p class="text-green-600">Thành công</p>
+                                                        <p class="text-green-600">Đang chờ duyệt</p>
                                                     @endif
                                                 </td>
                                                 <td>
