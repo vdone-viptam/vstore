@@ -15,8 +15,8 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                <input type="text" value="{{isset($params['keyword']) ? $params['keyword'] : ''}}"
-                       name="keyword" id="key_search"
+                <input type="text" value="{{isset($params['key_search']) ? $params['key_search'] : ''}}"
+                       name="key_search" id="key_search"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                        placeholder="Tìm kiếm">
                 <button type="submit"

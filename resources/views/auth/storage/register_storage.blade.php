@@ -243,7 +243,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Diện tích sàn (m2)</span>
-                <input required type="text" name="floor_area" id="" placeholder="Nhập diện tích"
+                <input required type="number" name="floor_area" id="" placeholder="Nhập diện tích"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('floor_area')
                 <p class="text-red-600">{{$message}}</p>
@@ -252,7 +252,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích(m3)</span>
-                <input required type="text" name="volume" id="" placeholder="Nhập thể tích"
+                <input required type="number" name="volume" id="" placeholder="Nhập thể tích"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('volume')
                 <p class="text-red-600">{{$message}}</p>

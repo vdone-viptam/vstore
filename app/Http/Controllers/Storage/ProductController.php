@@ -62,7 +62,7 @@ class ProductController extends Controller
             $products->where(function ($query) use ($request) {
                 $query->where('products.publish_id', $request->key_search)
                     ->orWhere('products.sku_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search)
                     ->orWhere('categories.name', $request->key_search);
             });
@@ -101,7 +101,7 @@ class ProductController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -213,7 +213,7 @@ class ProductController extends Controller
             $order->where(function ($query) use ($request) {
                 $query->where('order.no', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search);
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
             });
         }
         $order = $order->paginate($limit);
@@ -345,7 +345,7 @@ class ProductController extends Controller
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
             $product = Product::where('id', $order_item->product_id)->first();
-            DB::table('request_warehouses')->where('code', $order->no)->where('type', 10)->delete();
+            RequestWarehouse::destroy($order->request_warehouse_id);
 
             if ($status == 1) {
 //            return $order->total;

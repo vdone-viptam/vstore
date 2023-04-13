@@ -100,6 +100,7 @@ class PaymentMethod9PayController extends Controller
 
                 if ($order) {
                     $order->payment_status = config('constants.paymentStatus.done');
+                    $order->status = 1;
 
                     $order_item = OrderItem::where('order_id', $order->id)->first();
                     $requestEx = new RequestWarehouse();

@@ -34,27 +34,28 @@ class UserController extends Controller
 
     public function getListRegisterAccount(Request $request)
     {
-        $this->v['users'] = User::select();
+        $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
+            'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
         $limit = $request->limit ?? 10;
-        if (isset($request->keyword)) {
+        if (isset($request->key_search)) {
             $this->v['users'] = $this->v['users']
                 ->where(function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('company_name', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('email', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('tax_code', '=', $request->keyword)
-                        ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('address', 'like', '%' . $request->keyword . '%');
-                })
-                ->join('order_service', 'users.id', '=', 'order_service.user_id')
-                ->where('order_service.status', 1)
-                ->orWhere('role_id', 3)
-                ->where('payment_status', 1);
+                    $query->where('name', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('company_name', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('email', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('tax_code', '=', $request->key_search)
+                        ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('address', 'like', '%' . $request->key_search . '%');
+                });
         }
         $this->v['count'] = $this->v['users']->count();
-        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
+        $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
+            ->where('order_service.status', 1)
+            ->orWhere('role_id', 3)
+            ->where('payment_status', 1)
+            ->orderBy('users.id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
 
         $this->v['params'] = $request->all();
         return view('screens.admin.user.index', $this->v);
@@ -64,15 +65,15 @@ class UserController extends Controller
     {
         $this->v['users'] = User::select();
         $limit = $request->limit ?? 10;
-        if (isset($request->keyword)) {
-            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('email', 'like', '%' . $request->keyword . '%')
-                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
-                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
-                ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
-                ->orwhere('address', 'like', '%' . $request->keyword . '%');
+        if (isset($request->key_search)) {
+            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->key_search . '%')
+                ->orwhere('name', 'like', '%' . $request->key_search . '%')
+                ->orwhere('email', 'like', '%' . $request->key_search . '%')
+                ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
+                ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
+                ->orwhere('tax_code', '=', $request->key_search)
+                ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
+                ->orwhere('address', 'like', '%' . $request->key_search . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
@@ -183,7 +184,9 @@ class UserController extends Controller
 
     public function detail(Request $request)
     {
-        $user = User::select('name', 'email', 'id_vdone', 'phone_number', 'tax_code', 'address', 'created_at', 'storage_information')->where('id', $request->id)->first();
+        $user = User::select('name', 'email',
+            'id_vdone', 'phone_number', 'tax_code',
+            'address', 'created_at', 'storage_information')->where('id', $request->id)->first();
         if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
         }
