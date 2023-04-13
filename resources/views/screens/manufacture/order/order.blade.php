@@ -94,13 +94,13 @@
                                         <td>{{number_format( $order->total * ($order->deposit_money / 100),0,'.','.')}}
                                             đ
                                         </td>
-                                        <td>{{number_format( $order->total - ($order->total * ($order->discount / 100)) - ($order->total * ($order->deposit_money / 100)),0,'.','.')}}
+                                        <td>{{number_format( $order->total - ($order->total * ($order->discount / 100)) - (($order->total - ($order->total * ($order->discount / 100))) * ($order->deposit_money / 100)),0,'.','.')}}
                                             đ
                                         </td>
                                         <td>
                                             @if($order->status == 1)
                                                 <span class="text-green-600"> Đã hoàn thành</span>
-                                            @elseif($order->status == 2)
+                                            @elseif($order->status == 3)
                                                 <span class="text-blue-600">Đơn hàng mới</span>
                                             @elseif($order->status == 4)
                                                 <span class="text-yellow-400">Đang giao hàng</span>

@@ -64,19 +64,19 @@ class  VShopController extends Controller
         $preOrder->status = config('constants.statusPreOrder.done');
         $preOrder->save();
 
-        $vshop = Vshop::select('id')->where('pdone_id',$request->user_id)->first();
+        $vshop = Vshop::select('id')->where('pdone_id', $request->user_id)->first();
 //        return $preOrder->product_id;
-        if ($vshop){
-            $vshop_product = VshopProduct::where('vshop_id',$vshop->id)->where('product_id',$preOrder->product_id)->first();
+        if ($vshop) {
+            $vshop_product = VshopProduct::where('vshop_id', $vshop->id)->where('product_id', $preOrder->product_id)->first();
 //            return $vshop_product;
-            if ($vshop_product){
-                $vshop_product->status=2;
+            if ($vshop_product) {
+                $vshop_product->status = 2;
                 $vshop_product->amount += $preOrder->quantity;
                 $vshop_product->save();
-            }else{
+            } else {
                 $vshop_product = new VshopProduct();
-                $vshop_product->vshop_id= $vshop->id;
-                $vshop_product->status=2;
+                $vshop_product->vshop_id = $vshop->id;
+                $vshop_product->status = 2;
                 $vshop_product->amount += $preOrder->quantity;
                 $vshop_product->save();
             }
@@ -131,7 +131,7 @@ class  VShopController extends Controller
         foreach ($preOrder as $value) {
             $value->prepayment_rate = $value->deposit_money;
             $value->order_value_minus_discount = $value->total - $value->total * ($value->discount / 100);
-            $value->deposit_payable = $value->total - $value->total * ($value->deposit_money / 100);
+            $value->deposit_payable = $value->order_value_minus_discount - ($value->order_value_minus_discount * ($value->deposit_money / 100));
 
             $value->status_text = statusPreOrder($value->status);
 
@@ -410,7 +410,7 @@ class  VShopController extends Controller
 
         $order->total = $total;
         $order->discount = $buyMoreDiscount['discount'];
-        $order->deposit_money= $buyMoreDiscount['deposit_money'];
+        $order->deposit_money = $buyMoreDiscount['deposit_money'];
         $order->save();
         $order->prepayment_rate = $buyMoreDiscount['deposit_money'];
 
@@ -478,7 +478,7 @@ class  VShopController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $vshop = Vshop::select('id', 'pdone_id', 'phone_number','vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
+        $vshop = Vshop::select('id', 'pdone_id', 'phone_number', 'vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
@@ -585,7 +585,7 @@ class  VShopController extends Controller
             'phone_number' => 'required|max:255',
             'district' => 'required|min:1',
             'province' => 'required|min:1',
-            'wards'=>'required|min:1'
+            'wards' => 'required|min:1'
 
         ], []);
         if ($validator->fails()) {
@@ -606,7 +606,7 @@ class  VShopController extends Controller
                     'phone_number' => $request->phone_number,
                     'district' => $request->district,
                     'province' => $request->province,
-                    'wards'=>$request->wards,
+                    'wards' => $request->wards,
                     'created_at' => Carbon::now()
                 ]);
             } else {
@@ -649,11 +649,10 @@ class  VShopController extends Controller
             $address = DB::table('vshop')
                 ->select('name', 'name_address', 'province', 'wards', 'district', 'address', 'phone_number',
                     'vshop.id')
-
                 ->where('vshop.pdone_id', $id)->first();
-            $address->province_name= Province::where('province_id',$address->province)->first()->province_name;
-            $address->district_name= District::where('district_id',$address->district)->first()->district_name;
-            $address->wards_name= Ward::where('wards_id',$address->wards)->first()->wards_name;
+            $address->province_name = Province::where('province_id', $address->province)->first()->province_name;
+            $address->district_name = District::where('district_id', $address->district)->first()->district_name;
+            $address->wards_name = Ward::where('wards_id', $address->wards)->first()->wards_name;
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
@@ -757,8 +756,8 @@ class  VShopController extends Controller
                 return response()->json([
                     'status_code' => 400,
                     'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . $discount_vshop / 100 * 95,
-                    'discount_limit'=>$discount_vshop / 100 * 95,
-                    'discount_price_limit'=> $product->price /100 * ($discount_vshop / 100 * 95)
+                    'discount_limit' => $discount_vshop / 100 * 95,
+                    'discount_price_limit' => $product->price / 100 * ($discount_vshop / 100 * 95)
                 ], 400);
 
             } else {
@@ -839,8 +838,8 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 400,
                 'error' => 'Phần trăm giảm giá nhỏ hơn hoặc bằng ' . $discount / 100 * 95,
-                'discount_limit'=>$discount / 100 * 95,
-                'discount_price_limit'=> $product->price /100 * ($discount / 100 * 95)
+                'discount_limit' => $discount / 100 * 95,
+                'discount_price_limit' => $product->price / 100 * ($discount / 100 * 95)
             ], 400);
         } else {
             DB::table('discounts')->insert([
@@ -935,7 +934,7 @@ class  VShopController extends Controller
         $vshop = Vshop::where('pdone_id', $pdone_id)
             ->select('id', 'pdone_id', 'avatar', 'vshop_name', 'nick_name', 'description', 'vshop_id')
             ->first();
-        $total_product = VshopProduct::where('vshop_id', $vshop->id)->whereIn('status',[1,2])->count();
+        $total_product = VshopProduct::where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->count();
         if (!$vshop) {
             return response()->json([
                 'status_code' => 400,
