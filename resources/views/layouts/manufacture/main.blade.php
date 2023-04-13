@@ -190,13 +190,6 @@
             document.querySelector('.btnA').classList.add('bg-slate-300');
             document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
         }
-
-    }
-    else
-    {
-        document.querySelector('.btnA').setAttribute('disabled', 'true');
-        document.querySelector('.btnA').classList.add('bg-slate-300');
-        document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
     }
     if ($('#key_search')) {
         document.querySelector('#key_search').addEventListener('keyup', (e) => {
