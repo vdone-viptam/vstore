@@ -187,7 +187,7 @@ class UserController extends Controller
         $user = User::select('name', 'email',
             'id_vdone', 'phone_number', 'tax_code',
             'address', 'created_at', 'storage_information')->where('id', $request->id)->first();
-        if ($user->role_id != 4) {
+        if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
         }
         $this->v['user'] = json_decode($user->storage_information);
