@@ -345,7 +345,7 @@ class ProductController extends Controller
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
             $product = Product::where('id', $order_item->product_id)->first();
-            DB::table('request_warehouses')->where('code', $order->no)->where('type', 10)->delete();
+            DB::table('request_warehouses')->where('id', $order->request_warehouse_id)->where('type', 10)->delete();
 
             if ($status == 1) {
 //            return $order->total;
