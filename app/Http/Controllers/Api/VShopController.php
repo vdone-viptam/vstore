@@ -716,7 +716,10 @@ class  VShopController extends Controller
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
-        ], []);
+        ], [
+            'start_date.after' => 'Thời gian bắt đầu giảm giá phải sau thời gian hiên tại 10 phút',
+            'end_date.after' => 'Thời điểm kết thúc giảm giá phải sau thời điểm bắt đầu'
+        ]);
         if ($validator->fails()) {
             return response()->json([
                 'status_code' => 400,
@@ -804,7 +807,10 @@ class  VShopController extends Controller
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
-        ], []);
+        ], [
+            'start_date.after' => 'Thời gian bắt đầu giảm giá phải sau thời gian hiên tại 10 phút',
+            'end_date.after' => 'Thời điểm kết thúc giảm giá phải sau thời điểm bắt đầu'
+        ]);
         if ($validator->fails()) {
             return response()->json([
                 'status_code' => 400,
