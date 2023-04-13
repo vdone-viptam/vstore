@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <form action="">
+    <form action="" id="form">
         <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
             <span class="text-secondary">Quản lý đơn hàng</span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,19 +89,23 @@
                                         <td>{{$order->no}}</td>
                                         <td>{{$order->product->name}}</td>
                                         <td>{{number_format($order->product->price,0,'.','.')}} đ</td>
-                                        <td>{{number_format($order->discount,0,'.','.')}} %</td>
+                                        <td>{{number_format($order->total * ($order->discount / 100),0,'.','.')}} đ</td>
                                         <td>{{$order->quantity}}</td>
-                                        <td>{{number_format($order->deposti_money,0,'.','.')}} đ</td>
-                                        <td>{{number_format($order->total,0,'.','.')}} đ</td>
+                                        <td>{{number_format( $order->total * ($order->deposit_money / 100),0,'.','.')}}
+                                            đ
+                                        </td>
+                                        <td>{{number_format( $order->total - ($order->total * ($order->discount / 100)) - ($order->total * ($order->deposit_money / 100)),0,'.','.')}}
+                                            đ
+                                        </td>
                                         <td>
                                             @if($order->status == 1)
-                                                Đã hoàn thành
+                                                <span class="text-green-600"> Đã hoàn thành</span>
                                             @elseif($order->status == 3)
-                                                Chờ xác nhận
+                                                <span class="text-blue-600">Đơn hàng mới</span>
                                             @elseif($order->status == 4)
-                                                Đang giao hàng
+                                                <span class="text-yellow-400">Đang giao hàng</span>
                                             @else
-                                                Hủy
+                                                <span class="text-red-600">Hủy</span>
                                             @endif
                                         </td>
                                         <td>{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
@@ -127,9 +131,29 @@
                         <div class="flex justify-start items-center gap-2 flex-wrap">
                             <select name="limit"
                                     class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                                <option value="">10 hàng / trang</option>
-                                <option value="">25 hàng / trang</option>
-                                <option value="">50 hàng / trang</option>
+                                <option
+                                    {{--                            value="10" {{isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>10--}}
+                                    {{--                            hàng / trang--}}
+                                    value="10"
+                                    @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >
+                                    10
+                                    hàng / trang
+                                    {{--                            {{ app('request')->input('limit') }}--}}
+                                </option>
+                                <option
+                                    {{--                            value="25" {{isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>25--}}
+                                    {{--                            hàng / trang--}}
+                                    value="25"
+                                    @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >
+                                    25
+                                    hàng / trang
+                                </option>
+                                <option
+                                    value="50"
+                                    @if(app('request')->input('limit') && app('request')->input('limit') ==50)selected @endif >
+                                    50
+                                    hàng / trang
+                                </option>
                             </select>
                             {{--                        <div class="flex justify-start items-center gap-2">--}}
                             {{--                            <span class="text-title text-sm">Đi đến</span>--}}

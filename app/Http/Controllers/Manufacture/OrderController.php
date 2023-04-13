@@ -76,12 +76,18 @@ class OrderController extends Controller
 
     public function order()
     {
+        $limit = $request->limit ?? 10;
         $orders = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money', 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
-            ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
+            ->select('pre_order_vshop.status', 'quantity',
+                'place_name', 'fullname', 'phone', 'address', 'no',
+                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->join('products', 'pre_order_vshop.product_id', '=',
+                'products.id')
             ->where('products.user_id', Auth::id())
+            ->where('pre_order_vshop.status', '!=', 2)
             ->orderBy('pre_order_vshop.id', 'desc')
-            ->paginate(10);;
+            ->paginate($limit);;
         return view('screens.manufacture.order.order', [
             'orders' => $orders
         ]);
@@ -90,9 +96,13 @@ class OrderController extends Controller
     public function detailOrder($id)
     {
         $orders = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money', 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->select('pre_order_vshop.status', 'quantity', 'place_name',
+                'fullname', 'phone', 'address', 'no', 'total',
+                'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
             ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
+            ->where('pre_order_vshop.status', '!=', 2)
             ->where('pre_order_vshop.id', $id)
             ->first();
         return view('screens.manufacture.order.detail', [
