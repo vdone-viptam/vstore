@@ -38,12 +38,14 @@ class ProductController extends Controller
             ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at');
 
 
-        if (isset($request->keyword)) {
-            $this->v['requests'] = $this->v['requests']
-                ->orWhere('products.name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('publish_id', $request->keyword)
-                ->orWhere('categories.name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('users.name', 'like', '%' . $request->keyword . '%');
+        if (isset($request->key_search)) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
+                $query->orWhere('products.name', 'like', '%' . $request->key_search . '%')
+                    ->orWhere('publish_id', $request->keyword)
+                    ->orWhere('categories.name', 'like', '%' . $request->key_search . '%')
+                    ->orWhere('users.name', 'like', '%' . $request->key_search . '%');
+            });
+
         }
         $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy('requests.id', 'desc')
             ->paginate($limit);

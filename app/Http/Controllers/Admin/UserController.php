@@ -39,14 +39,14 @@ class UserController extends Controller
         if (isset($request->keyword)) {
             $this->v['users'] = $this->v['users']
                 ->where(function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('company_name', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('email', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('tax_code', '=', $request->keyword)
-                        ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
-                        ->orwhere('address', 'like', '%' . $request->keyword . '%');
+                    $query->where('name', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('company_name', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('email', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('tax_code', '=', $request->key_search)
+                        ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('address', 'like', '%' . $request->key_search . '%');
                 })
                 ->join('order_service', 'users.id', '=', 'order_service.user_id')
                 ->where('order_service.status', 1)
@@ -64,15 +64,15 @@ class UserController extends Controller
     {
         $this->v['users'] = User::select();
         $limit = $request->limit ?? 10;
-        if (isset($request->keyword)) {
-            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('name', 'like', '%' . $request->keyword . '%')
-                ->orwhere('email', 'like', '%' . $request->keyword . '%')
-                ->orwhere('id_vdone', 'like', '%' . $request->keyword . '%')
-                ->orwhere('phone_number', 'like', '%' . $request->keyword . '%')
-                ->orwhere('tax_code', '=', $request->keyword)
-                ->orwhere('account_code', 'like', '%' . $request->keyword . '%')
-                ->orwhere('address', 'like', '%' . $request->keyword . '%');
+        if (isset($request->key_search)) {
+            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->key_search . '%')
+                ->orwhere('name', 'like', '%' . $request->key_search . '%')
+                ->orwhere('email', 'like', '%' . $request->key_search . '%')
+                ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
+                ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
+                ->orwhere('tax_code', '=', $request->key_search)
+                ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
+                ->orwhere('address', 'like', '%' . $request->key_search . '%');
         }
         $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
