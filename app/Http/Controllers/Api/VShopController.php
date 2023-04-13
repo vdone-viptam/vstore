@@ -212,21 +212,22 @@ class  VShopController extends Controller
         $order->deposit_payable = $order->total - $order->total * ($order->deposit_money / 100);
 
 
-//        $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
-//            ->where('product_id', $order->product_id)
-//            ->first();
-//
-//        if ($checkNewVshopProduct) {
-//            $checkNewVshopProduct->status = 2;
-//            $checkNewVshopProduct->save();
-//        } else {
-//            $newVshopProduct = new VshopProduct();
-//            $newVshopProduct->vshop_id = $user_id;
-//            $newVshopProduct->product_id = $order->product_id;
-//            $newVshopProduct->amount = $order->quantity;
-//            $newVshopProduct->status = 2;
-//            $newVshopProduct->save();
-//        }
+        $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
+            ->where('product_id', $order->product_id)
+            ->first();
+
+        if ($checkNewVshopProduct) {
+            $checkNewVshopProduct->status = 2;
+            $checkNewVshopProduct->amount += $order->quantity;
+            $checkNewVshopProduct->save();
+        } else {
+            $newVshopProduct = new VshopProduct();
+            $newVshopProduct->vshop_id = $user_id;
+            $newVshopProduct->product_id = $order->product_id;
+            $newVshopProduct->amount = $order->quantity;
+            $newVshopProduct->status = 2;
+            $newVshopProduct->save();
+        }
 
 
         return response()->json([
@@ -583,9 +584,9 @@ class  VShopController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
-            'district' => 'required|min:1',
-            'province' => 'required|min:1',
-            'wards' => 'required|min:1'
+            'district' => 'required|numeric|min:1',
+            'province' => 'required|numeric|min:1',
+            'wards' => 'required|numeric|min:1'
 
         ], []);
         if ($validator->fails()) {
