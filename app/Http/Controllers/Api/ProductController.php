@@ -58,7 +58,7 @@ class ProductController extends Controller
             $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay', 'discount_vShop as discountVstore',
                 DB::raw('price - (price * IFNULL((SELECT SUM(discount /100)
                         FROM discounts WHERE start_date <= NOW() and end_date >= NOW()
-                                        AND product_id = products.id),0)) as order_price')];
+                                        AND product_id = products.id AND type != 3),0)) as order_price')];
             $request->option = $request->option ?? 'desc';
 
             if ($request->pdone_id) {
