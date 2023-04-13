@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $this->v['users'] = User::select();
         $limit = $request->limit ?? 10;
-        if (isset($request->keyword)) {
+        if (isset($request->key_search)) {
             $this->v['users'] = $this->v['users']
                 ->where(function ($query) use ($request) {
                     $query->where('name', 'like', '%' . $request->key_search . '%')
