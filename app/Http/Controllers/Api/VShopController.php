@@ -456,7 +456,7 @@ class  VShopController extends Controller
         $vshop->avatar = $request->avatar ?? '';
         $vshop->nick_name = $request->nick_name;
         $vshop->vshop_id = $request->vshop_id;
-
+        $vshop->vshop_name = $request->nick_name;
         $vshop->save();
         return response()->json([
             'status_code' => 200,

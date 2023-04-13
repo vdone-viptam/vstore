@@ -14,7 +14,7 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <a href="{{route('screens.vstore.product.request')}}" class="text-blueMain font-medium italic">Tất cả sản
+            <a href="{{route('screens.vstore.product.index')}}" class="text-blueMain font-medium italic">Tất cả sản
                 phẩm</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">

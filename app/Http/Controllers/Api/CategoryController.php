@@ -131,7 +131,6 @@ class CategoryController extends Controller
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
                 $data_vstore[] = $pr->vstore_id;
-                return $data_vstore;
                 unset($pr->vstore_id);
                 if ($request->pdone_id) {
                     $pr->is_affiliate = DB::table('vshop_products')
