@@ -57,7 +57,7 @@ class OrderController extends Controller
             ->where('product_id', $request->product_id)
             ->first();
         if (!$checkVshopId) {
-            $vshopId = Vshop::where('pdone_id', 247)->first();
+            $vshopId = Vshop::where('pdone_id', 247)->first()->id;
         }
 
         $product = Product::where('products.id', $request->product_id)

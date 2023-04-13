@@ -7,6 +7,8 @@ use App\Models\Application;
 use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,12 +40,14 @@ class ProductController extends Controller
             ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at');
 
 
-        if (isset($request->keyword)) {
-            $this->v['requests'] = $this->v['requests']
-                ->orWhere('products.name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('publish_id', $request->keyword)
-                ->orWhere('categories.name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('users.name', 'like', '%' . $request->keyword . '%');
+        if (isset($request->key_search)) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
+                $query->orWhere('products.name', 'like', '%' . $request->key_search . '%')
+                    ->orWhere('publish_id', $request->keyword)
+                    ->orWhere('categories.name', 'like', '%' . $request->key_search . '%')
+                    ->orWhere('users.name', 'like', '%' . $request->key_search . '%');
+            });
+
         }
         $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy('requests.id', 'desc')
             ->paginate($limit);
@@ -88,6 +92,12 @@ class ProductController extends Controller
             $currentRequest->save();
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+            $vshop = Vshop::where('pdone_id',247)->first();
+            $vshop_product = new VshopProduct();
+            $vshop_product->vshop_id = $vshop->id;
+            $vshop_product->product_id = $currentRequest->product_id;
+            $vshop_product->status=1;
+            $vshop_product->save();
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 3) {
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';

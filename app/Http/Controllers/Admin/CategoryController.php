@@ -25,8 +25,8 @@ class CategoryController extends Controller
         $limit = $request->limit ?? 10;
         $page = $request->page ?? 1;
         $this->v['categories'] = Category::select('id', 'name', 'img');
-        if (isset($request->keyword)) {
-            $this->v['categories'] = $this->v['categories']->orwhere('name', 'like', '%' . $request->keyword . '%');
+        if (isset($request->key_search)) {
+            $this->v['categories'] = $this->v['categories']->orwhere('name', 'like', '%' . $request->key_search . '%');
         }
         $this->v['params'] = $request->all();
         $this->v['categories'] = $this->v['categories']->paginate($limit);
