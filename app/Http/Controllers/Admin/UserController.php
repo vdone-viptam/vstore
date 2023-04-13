@@ -47,14 +47,14 @@ class UserController extends Controller
                         ->orwhere('tax_code', '=', $request->key_search)
                         ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
                         ->orwhere('address', 'like', '%' . $request->key_search . '%');
-                })
-                ->join('order_service', 'users.id', '=', 'order_service.user_id')
-                ->where('order_service.status', 1)
-                ->orWhere('role_id', 3)
-                ->where('payment_status', 1);
+                });
         }
         $this->v['count'] = $this->v['users']->count();
-        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
+        $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
+            ->where('order_service.status', 1)
+            ->orWhere('role_id', 3)
+            ->where('payment_status', 1)
+            ->orderBy('users.id', 'desc')->where('role_id', '!=', 1)->paginate($limit);
 
         $this->v['params'] = $request->all();
         return view('screens.admin.user.index', $this->v);
