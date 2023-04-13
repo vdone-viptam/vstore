@@ -34,7 +34,7 @@
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Giảm giá (nếu có):</span>
                         <span
-                            class="text-title">{{$order->discount}} %</span>
+                            class="text-title">{{(int)$order->discount}} %</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Số lượng sản phẩm:</span>
