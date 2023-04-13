@@ -279,7 +279,7 @@
     <script src="{{asset('asset/js/main.js')}}"></script>
     <script>
         document.getElementsByName('name').forEach(item => {
-            item.querySelector('#price').addEventListener("keypress", (e) => {
+            item.addEventListener("keypress", (e) => {
                 var regex = new RegExp("/[a-zA-Z]/g");
                 var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
                 if (!regex.test(key)) {
