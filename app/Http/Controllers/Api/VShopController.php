@@ -584,9 +584,9 @@ class  VShopController extends Controller
             'name' => 'required|max:255',
             'address' => 'required|max:255',
             'phone_number' => 'required|max:255',
-            'district' => 'required|numeric|min:1',
-            'province' => 'required|numeric|min:1',
-            'wards' => 'required|numeric|min:1'
+            'district' => 'required|min:1',
+            'province' => 'required|min:1',
+            'wards' => 'required|min:1'
 
         ], []);
         if ($validator->fails()) {
