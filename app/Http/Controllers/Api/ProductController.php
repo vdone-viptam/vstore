@@ -94,7 +94,6 @@ class ProductController extends Controller
             }
 
             $products= $products->paginate($limit);
-            $arr = [];
 
             foreach ($products as $pro) {
                 $pro->image = asset(json_decode($pro->images)[0]);
@@ -105,12 +104,6 @@ class ProductController extends Controller
                     ->where('end_date', '>=', Carbon::now())
                     ->first()->sum;
                 $pro->discount = $discount ?? 0;
-
-                if ($pro->discount > 0) {
-                    $pro->order_price = $pro->price - ($pro->price * ($pro->discount / 100));
-                } elseif ($pro->discount == 0) {
-                    $pro->order_price = $pro->price;
-                }
                 if ($request->pdone_id) {
                     $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                             ->where('product_id', $pro->id)
