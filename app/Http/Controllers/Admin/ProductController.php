@@ -7,6 +7,8 @@ use App\Models\Application;
 use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -88,6 +90,12 @@ class ProductController extends Controller
             $currentRequest->save();
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+            $vshop = Vshop::where('pdone_id',247)->first();
+            $vshop_product = new VshopProduct();
+            $vshop_product->vshop_id = $vshop->id;
+            $vshop_product->product_id = $currentRequest->product_id;
+            $vshop_product->status=1;
+            $vshop_product->save();
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 3) {
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
