@@ -91,7 +91,6 @@ class ProductController extends Controller
             }
 
             $products= $products->paginate($limit);
-            $data = $products;
             $arr = [];
 
             foreach ($products as $pro) {
@@ -717,7 +716,7 @@ class ProductController extends Controller
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->where('vshop_products.status', 1)
+            ->whereIn('vshop_products.status', [1,2])
             ->where('products.availability_status', 1)
             ->where('pdone_id', $pdone_id);
         $total_product = $products->count();
