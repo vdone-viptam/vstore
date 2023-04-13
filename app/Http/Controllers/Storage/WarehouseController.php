@@ -49,7 +49,7 @@ class WarehouseController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -92,7 +92,7 @@ class WarehouseController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -136,7 +136,7 @@ class WarehouseController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -173,7 +173,7 @@ class WarehouseController extends Controller
             $request->key_search = trim($request->key_search);
             $orders->where(function ($query) use ($request) {
                 $query->where('order.no', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('products.publish_id', $request->key_search);
             });
         }
