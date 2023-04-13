@@ -69,6 +69,10 @@ class ProductController extends Controller
 
                 $products = $products->orderBy('admin_confirm_date', 'desc');
             }
+            if ($request->order_by == 2) {
+
+                $products = $products->orderBy('price',$request->option );
+            }
             if ($request->order_by == 3) {
 
                 $products = $products->orderBy('amount_product_sold', 'desc');
@@ -86,7 +90,10 @@ class ProductController extends Controller
                 }
             }
 
-            $products = $products->paginate($limit);
+            $products= $products->paginate($limit);
+            $data = $products;
+            $arr = [];
+
             foreach ($products as $pro) {
                 $pro->image = asset(json_decode($pro->images)[0]);
                 $pro->images = asset(json_decode($pro->images)[0]);
@@ -99,7 +106,6 @@ class ProductController extends Controller
 
                 if ( $pro->discount >0){
                     $pro->order_price = $pro->price - ($pro->price * ($pro->discount /100));
-//                    return  ($pro->discount /100);
                 }elseif ($pro->discount == 0){
                     $pro->order_price = $pro->price ;
                 }
@@ -114,17 +120,23 @@ class ProductController extends Controller
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                     $pro->available_discount = $more_dis ?? 0;
                 }
-
+                $arr[]= $pro;
 //
             }
+
+
+//
+             $arr = collect($arr);
             if ($request->order_by == 2) {
                 if ($request->option == 'desc'){
-                    $products = $products->sortByDesc('order_price');
+                    $arr = $arr->sortByDesc('order_price');
                 }elseif ($request->option == 'asc'){
-                    $products = $products->sortBy('order_price');
+                    $arr = $arr->sortBy('order_price');
                 }
 
             }
+            $products->data = $arr;
+
             return response()->json([
                 'success' => true,
                 'data' => $products
