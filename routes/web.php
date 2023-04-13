@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/els', [\App\Http\Controllers\Api\ProductController::class, 'indexProduct']);
 
 Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
@@ -53,6 +55,41 @@ Route::get('check-date', [\App\Http\Controllers\Manufacture\ProductController::c
 // Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
+    Route::get('test', function () {
+        $citys = \App\Models\Province::all();
+
+        foreach ($citys as $city) {
+            $name = explode(' ', $city->province_name);
+            $arr = [];
+            foreach ($name as $char) {
+                $char = ucfirst(mb_strtolower($char, 'UTF-8'));
+                $arr[] = $char;
+            }
+            $city->province_name = implode(' ', $arr);
+            $city->province_name = str_replace('đ', 'Đ', $city->province_name);
+            $city->save();
+        }
+        $dic = \App\Models\District::all();
+
+        foreach ($dic as $di) {
+            $di->district_name = str_replace('đ', 'Đ', $di->district_name);
+            $di->save();
+        }
+        $wards = \App\Models\Ward::all();
+
+        foreach ($wards as $ward) {
+            $name = explode(' ', $ward->wards_name);
+            $arr = [];
+            foreach ($name as $char) {
+                $char = ucfirst(mb_strtolower($char, 'UTF-8'));
+                $arr[] = $char;
+            }
+            $ward->wards_name = implode(' ', $arr);
+            $ward->wards_name = str_replace('đ', 'Đ',$ward->wards_name);
+
+            $ward->save();
+        }
+    });
     Route::get('/', function () {
         return redirect()->route('login_admin');
     });
