@@ -274,7 +274,7 @@
             </button>
             <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
                                                                              class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
-        </div>chị 
+        </div>chị
     </form>
 </div>
 @if($isOrder)
@@ -525,7 +525,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
         })
         .catch(console.error);
 
