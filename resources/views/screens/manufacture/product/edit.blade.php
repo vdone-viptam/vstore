@@ -130,7 +130,7 @@
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" placeholder="Nhập giá sản phẩm" id="price"
-                                   value="{{number_format($product->price,0,',',',')}}"
+                                   value="{{number_format($product->price,0,'.','.')}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
                             <p class="text-red-600">{{$message}}</p>
@@ -567,12 +567,12 @@
                     style: "currency",
                     currency: "USD",
                     maximumFractionDigits: 0
-                }).format((e.target.value.replaceAll(',', '')));
+                }).format((e.target.value.replaceAll(',', '').replaceAll('.', '')));
                 // document.getElementById('price').value = value.replaceAll('$', '');
 
-                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '');
+                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '').replaceAll(',', '');
                 ;
-                document.getElementById('price').value = value.replaceAll('$', '')
+                document.getElementById('price').value = value.replaceAll('$', '').replaceAll(',', '.')
             }
         });
     </script>

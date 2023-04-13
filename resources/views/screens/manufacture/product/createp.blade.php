@@ -571,12 +571,12 @@
                     style: "currency",
                     currency: "USD",
                     maximumFractionDigits: 0
-                }).format((e.target.value.replaceAll(',', '')));
+                }).format((e.target.value.replaceAll(',', '').replaceAll('.', '')));
                 // document.getElementById('price').value = value.replaceAll('$', '');
 
-                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '');
+                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '').replaceAll(',', '');
                 ;
-                document.getElementById('price').value = value.replaceAll('$', '')
+                document.getElementById('price').value = value.replaceAll('$', '').replaceAll(',', '.')
             }
         });
 
