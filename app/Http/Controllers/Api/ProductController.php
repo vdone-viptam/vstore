@@ -71,6 +71,8 @@ class ProductController extends Controller
             if ($request->order_by == 1) {
 
                 $products = $products->orderBy('admin_confirm_date', 'desc');
+            }elseif(!$request->order_by){
+                $products = $products->orderBy('admin_confirm_date', 'desc');
             }
             if ($request->order_by == 2) {
 
