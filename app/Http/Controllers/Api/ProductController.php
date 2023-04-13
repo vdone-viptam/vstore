@@ -73,9 +73,7 @@ class ProductController extends Controller
 
                 $products = $products->orderBy('amount_product_sold', 'desc');
             }
-            if ($request->order_by == 2) {
-                $products = $products->orderBy('price', $request->option);
-            }
+
             if ($request->type_pay) {
                 $products = $products->where('type_pay', $request->type_pay);
             }
@@ -98,6 +96,13 @@ class ProductController extends Controller
                     ->where('end_date', '>=', Carbon::now())
                     ->first()->sum;
                 $pro->discount = $discount ?? 0;
+
+                if ( $pro->discount >0){
+                    $pro->order_price = $pro->price - ($pro->price * ($pro->discount /100));
+//                    return  ($pro->discount /100);
+                }elseif ($pro->discount == 0){
+                    $pro->order_price = $pro->price ;
+                }
                 if ($request->pdone_id) {
                     $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                             ->where('product_id', $pro->id)
@@ -111,6 +116,14 @@ class ProductController extends Controller
                 }
 
 //
+            }
+            if ($request->order_by == 2) {
+                if ($request->option == 'desc'){
+                    $products = $products->sortByDesc('order_price');
+                }elseif ($request->option == 'asc'){
+                    $products = $products->sortBy('order_price');
+                }
+
             }
             return response()->json([
                 'success' => true,
@@ -333,7 +346,7 @@ class ProductController extends Controller
 
         $products = Product::where('vstore_id', $id)->where('status', 2)
             ->where('availability_status', 1)
-            ->select('id', 'publish_id', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length', 'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id', 'user_id', 'discount_vShop');
+            ->select('id', 'publish_id', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length', 'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id', 'user_id', 'discount_vShop as discountVstore');
 
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
@@ -417,7 +430,7 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $products = Product::where('user_id', $id)->where('status', 2)
             ->where('availability_status', 1)
-            ->select('id', 'price', 'publish_id', 'category_id', 'name', 'images', 'discount_vShop as discount_vstore');
+            ->select('id', 'price', 'publish_id', 'category_id', 'name', 'images', 'discount_vShop as discountVstore');
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
         }
