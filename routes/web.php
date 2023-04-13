@@ -56,25 +56,25 @@ Route::get('check-date', [\App\Http\Controllers\Manufacture\ProductController::c
 //role_id = 1 Quyền Admin
 Route::group(['domain' => config('domain.admin')], function () {
     Route::get('test', function () {
-        $citys = \App\Models\Province::all();
-
-        foreach ($citys as $city) {
-            $name = explode(' ', $city->province_name);
-            $arr = [];
-            foreach ($name as $char) {
-                $char = ucfirst(mb_strtolower($char, 'UTF-8'));
-                $arr[] = $char;
-            }
-            $city->province_name = implode(' ', $arr);
-            $city->province_name = str_replace('đ', 'Đ', $city->province_name);
-            $city->save();
-        }
-        $dic = \App\Models\District::all();
-
-        foreach ($dic as $di) {
-            $di->district_name = str_replace('đ', 'Đ', $di->district_name);
-            $di->save();
-        }
+//        $citys = \App\Models\Province::all();
+//
+//        foreach ($citys as $city) {
+//            $name = explode(' ', $city->province_name);
+//            $arr = [];
+//            foreach ($name as $char) {
+//                $char = ucfirst(mb_strtolower($char, 'UTF-8'));
+//                $arr[] = $char;
+//            }
+//            $city->province_name = implode(' ', $arr);
+//            $city->province_name = str_replace('đ', 'Đ', $city->province_name);
+//            $city->save();
+//        }
+//        $dic = \App\Models\District::all();
+//
+//        foreach ($dic as $di) {
+//            $di->district_name = str_replace('đ', 'Đ', $di->district_name);
+//            $di->save();
+//        }
         $wards = \App\Models\Ward::all();
 
         foreach ($wards as $ward) {

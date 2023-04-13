@@ -92,12 +92,6 @@ class ProductController extends Controller
             $currentRequest->save();
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $vshop = Vshop::where('pdone_id',247)->first();
-            $vshop_product = new VshopProduct();
-            $vshop_product->vshop_id = $vshop->id;
-            $vshop_product->product_id = $currentRequest->product_id;
-            $vshop_product->status=1;
-            $vshop_product->save();
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 3) {
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
@@ -112,7 +106,6 @@ class ProductController extends Controller
                     'deposit_money' => $currentRequest->deposit_money,
                     'type_pay' => $currentRequest->type_pay,
                 ]);
-                DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),

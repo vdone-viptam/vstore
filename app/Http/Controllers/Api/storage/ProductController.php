@@ -14,6 +14,8 @@ use App\Models\ProductWarehouses;
 use App\Models\Province;
 use App\Models\RequestWarehouse;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -266,7 +268,14 @@ class ProductController extends Controller
             }
             $ware->amount = $ware->amount + $requestIm->quantity;
             $ware->save();
-
+            $vshop = Vshop::where('pdone_id', 247)->first();
+            if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->where('status', 1)->first()) {
+                $vshop_product = new VshopProduct();
+                $vshop_product->vshop_id = $vshop->id;
+                $vshop_product->product_id = $requestIm->product_id;
+                $vshop_product->status = 1;
+                $vshop_product->save();
+            }
             DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
         }
         if ($requestIm->status == 7) {
