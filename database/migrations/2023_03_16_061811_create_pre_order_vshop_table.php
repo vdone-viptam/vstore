@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string("address");
             $table->string("no");
 
-            $table->decimal("total", 11, 3);
+            $table->double("total", 20, 2);
             $table->decimal("discount", 11, 3);
             $table->decimal("deposit_money", 11, 3);
 
