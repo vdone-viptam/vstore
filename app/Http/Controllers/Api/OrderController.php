@@ -580,7 +580,7 @@ class OrderController extends Controller
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
                 ->where('order.status', '!=', 2)
-                ->orderBy('order.updated_at', 'desc')
+                ->orderBy('order.id', 'desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10 && $status != 5 && $status != 4) {
                 $orders = $orders->where('export_status', $status);
