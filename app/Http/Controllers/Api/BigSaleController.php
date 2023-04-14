@@ -34,8 +34,7 @@ class BigSaleController extends Controller
         try {
             $limit = $request->limit ?? 12;
             $products = DB::table('products')
-                ->where('availability_status',1)
-            ;
+                ->where('availability_status', 1);
             $selected = ['products.id', 'images', 'publish_id', 'price', 'products.name'];
             if ($request->pdone_id) {
                 $selected[] = 'discount_vShop as discountVstore';
@@ -73,13 +72,13 @@ class BigSaleController extends Controller
                 ->where('products.status', 2)
                 ->paginate($limit);
             foreach ($products as $product) {
-                $product->discount = DB::table('discounts')
+                $product->discount = round(DB::table('discounts')
                     ->selectRaw('SUM(discount) as dis')
                     ->where('start_date', '<=', Carbon::now())
                     ->where('end_date', '>=', Carbon::now())
                     ->where('product_id', $product->id)
                     ->whereIn('type', [1, 2])
-                    ->first()->dis;
+                    ->first()->dis, 2);
                 $product->image = asset(json_decode($product->images)[0]);
                 if ($request->pdone_id) {
                     $product->is_affiliate = DB::table('vshop_products')

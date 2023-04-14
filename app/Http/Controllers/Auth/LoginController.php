@@ -505,8 +505,8 @@ class LoginController extends Controller
                 $order = new OrderService();
                 $order->user_id = $user->id;
                 $order->type = "VSTORE";
-                $order->status = 2; // 2 là chưa hoàn thành
-                $order->payment_status = 2; // 2 là chưa thanh toán
+                $order->status = 1; // 2 là chưa hoàn thành
+                $order->payment_status = 3; // 2 là chưa thanh toán
                 $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
                 $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
                 $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
