@@ -26,7 +26,6 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
             ->where('type', 1)
             ->first();
-
         return view('screens.storage.finance.index', $this->v);
     }
 
@@ -35,24 +34,24 @@ class FinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'account_number' => 'required',
-            'bank_id' => 'required',
+            'bank_id' => 'required|numeric|min:0',
             'name' => 'required',
         ], [
             'account_number.required' => 'Số tài khoản bắt buộc nhập',
             'bank_id.required' => 'Ngân hàng bắt buộc chọn',
+            'bank_id.numeric' => 'Ngân hàng bắt buộc chọn',
             'name.required' => 'Tên chủ tài khoản bắt buộc nhập',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateCreate', 'failed');
         }
 
-        DB::table('wallets')->insert([
-            'account_number' => $request->account_number,
-            'bank_id' => $request->bank_id,
-            'user_id' => Auth::id(),
-            'name' => $request->name
-        ]);
+        $wallets = new Wallet();
+        $wallets->account_number = $request->account_number;
+        $wallets->bank_id = $request->bank_id;
+        $wallets->name = $request->name;
+        $wallets->user_id = Auth::id();
+        $wallets->save();
 
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
     }
@@ -61,7 +60,7 @@ class FinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'account_number' => 'required',
-            'bank_id' => 'required',
+            'bank_id' => 'required|numeric|min:0',
             'name' => 'required',
         ], [
             'account_number.required' => 'Số tài khoản bắt buộc nhập',
@@ -69,7 +68,6 @@ class FinanceController extends Controller
             'name.required' => 'Tên chủ tài khoản bắt buộc nhập',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateUpdate', 'failed');
         }
         DB::table('wallets')->where('id', $id)->update([
@@ -82,26 +80,35 @@ class FinanceController extends Controller
         return redirect()->back()->with('success', 'Cập nhật ngân hàng thành công');
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
+            ->paginate(10);
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
         return view('screens.storage.finance.history', $this->v);
     }
 
     public function transferMoney()
     {
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at', 'code')
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
-            ->where('vshop_id', '!=', Auth::id())
+            ->orderBy($field, $type)
             ->paginate(10);
-
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
         return view('screens.storage.finance.revenue', $this->v);
     }
 
     public function deposit(Request $request)
     {
         DB::beginTransaction();
-
         try {
             $wallet = DB::table('wallets')->where('id', $request->bank)->first();
             $code = Str::random(12);
@@ -111,6 +118,9 @@ class FinanceController extends Controller
                 } else {
                     break;
                 }
+            }
+            if ($request->money > Auth::user()->money) {
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,

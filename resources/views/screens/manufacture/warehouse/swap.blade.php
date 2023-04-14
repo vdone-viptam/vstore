@@ -101,7 +101,7 @@
                     <thead>
                     <tr>
                         <th>
-                           Mã
+                            Mã
                         </th>
                         <th>
                             Tên kho hàng
@@ -131,18 +131,24 @@
                                     {{$product->name}}
                                 </td>
                                 <td>
-                                    @if($product->status == 1 && $product->type ==1)
-                                        <span class="text-green-600">Đã nhập</span>
-                                    @elseif($product->status == 1 && $product->type ==2)
-                                        <span class="text-green-600">Đã xuất</span>
-                                    @elseif($product->status == 2 &&  $product->type ==2)
-                                        <span class="text-red-500"> Từ chối xuất</span>
-                                    @elseif($product->status == 2 && $product->type ==1)
-                                        <span class="text-red-600">Từ chối nhập</span>
-                                    @elseif($product->status == 0 && $product->type ==1)
-                                        <span class="text-yellow-400">Chờ nhập</span>
-                                    @elseif($product->status == 0 && $product->type ==2)
-                                        <span class="text-yellow-400">Chờ xuất</span>
+                                    @if($product->type == 1)
+                                        @if($product->status == 0)
+                                            <span class="text-yellow-400">Đang chờ kho duyệt</span>
+                                        @elseif($product->status == 5)
+                                            <span class="text-blue-600">Đang chờ nhập kho</span>
+                                        @elseif($product->status == 1)
+                                            <span class="text-green-600">Đã nhập kho</span>
+                                        @else
+                                            <span class="text-red-600">Kho từ chối nhập</span>
+                                        @endif
+                                    @else
+                                        @if($product->status == 0)
+                                            <span class="text-yellow-400">Đang chờ kho duyệt</span>
+                                        @elseif($product->status == 1)
+                                            <span class="text-green-600">Đã xuất kho</span>
+                                        @else
+                                            <span class="text-red-600">Kho từ chối xuất</span>
+                                        @endif
                                     @endif
                                 </td>
                                 <td>
@@ -168,14 +174,6 @@
             <div class="flex justify-end items-center gap-4 flex-wrap">
                 <span class="text-sm text-title">Tổng: <strong class="font-bold">{{$products->total()}}</strong></span>
                 {{$products->withQueryString()->links()}}
-                <div class="flex justify-start items-center gap-2 flex-wrap">
-                    <select name=""
-                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                        <option value="">10 hàng / trang</option>
-                        <option value="">25 hàng / trang</option>
-                        <option value="">50 hàng / trang</option>
-                    </select>
-                </div>
             </div>
         </div>
         <div></div>

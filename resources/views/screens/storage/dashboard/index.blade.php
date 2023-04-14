@@ -1,30 +1,5 @@
 @extends('layouts.storage.main')
-@section('custom_css')
-    <link rel="stylesheet" href="{{asset('asset/bootstrap.min.css')}}">
-    <link href="{{asset('asset/assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('asset/style.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('asset/assets/vendor/datatables/css/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('asset/assets/vendor/datatables/css/buttons.bootstrap4.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('asset/assets/vendor/datatables/css/select.bootstrap4.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('asset/assets/vendor/datatables/css/fixedHeader.bootstrap4.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/charts/chartist-bundle/chartist.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/assets/vendor/charts/morris-bundle/morris.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/assets/vendor/charts/c3charts/c3.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('asset/assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-            integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-@endsection
+@section('page_title','Tổng quan')
 
 
 @section('page')
@@ -47,9 +22,33 @@
     </div>
 @endsection
 
+@section('modal')
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn thực hiện thao tác này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-accept">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
 @section('dash')
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./requestAcp.html" class="item-dash">
+        <a href="{{route('screens.storage.product.requestOut')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Đơn hàng chưa xác nhận</h5>
@@ -63,7 +62,7 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./request.html" class="item-dash">
+        <a href="{{route('screens.storage.product.request')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Yêu cầu nhập kho</h5>
@@ -77,7 +76,7 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-        <a href="./product.html" class="item-dash">
+        <a href="{{route('screens.storage.product.index')}}" class="item-dash">
             <div class="card border-3 border-top border-top-primary">
                 <div class="card-body">
                     <h5 class="text-muted">Số mặt hàng sắp hết</h5>
@@ -99,19 +98,83 @@
             </h5>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table id="example2" class="table table-striped table-bordered second" style="width:100%">
+                    <table id="partner-datatables" class="table table-striped table-bordered second" style="width:100%">
                         <thead class="bg-light">
                         <tr class="border-0">
                             <th class="border-0">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="border-0">Mã sản phẩm</th>
-                            <th class="border-0">Tên sản phẩm</th>
-                            <th class="border-0">Nhà cung cấp</th>
-                            <th class="border-0">Số lượng</th>
+                            <th class="border-0">Tên sản phẩm
+                                @if($field == 'product_name')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="product_name"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th class="border-0">Nhà cung cấp
+                                @if($field == 'ncc_name')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="ncc_name"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th class="border-0">Số lượng
+                                @if($field == 'quantity')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="quantity"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
                             <th class="border-0">Chiết khấu</th>
-                            <th class="border-0">Thời gian</th>
-                            <th class="border-0">Phân loại</th>
+                            <th class="border-0">Thời gian
+                                @if($field == 'created_at')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="created_at"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
+                            <th class="border-0">Phân loại
+                                @if($field == 'type')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="type"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="type"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="type"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
+                            </th>
                             <th class="border-0">Xác nhận/từ chối</th>
-                            <th class="border-0"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -125,10 +188,39 @@
                                 <td>0</td>
                                 <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 <td>
-                                    1
+                                    @if($product->type == 1)
+                                        <span class="text-success">Yêu cầu nhập</span>
+                                    @else
+                                        <span style="color:#005d1d;">Xác nhận đơn hàng</span>
+                                    @endif
                                 </td>
-                                <td>2</td>
-                                <td>3</td>
+                                <td>
+                                    @if($product->type == 1)
+                                        <div style="display:flex; justify-content:center; gap:10px"><a
+                                                href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"
+                                                style="text-decoration:underline"
+                                                class="text-primary  text-white font-medium  rounded">
+                                                Đồng ý
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10,1)"
+                                               style="text-decoration:underline"
+                                               class="text-danger  text-white font-medium  rounded">
+                                                Từ chối
+                                            </a></div>
+                                    @else
+                                        <div style="display:flex; justify-content:center; gap:10px"><a
+                                                href="javascript:void(0)" onclick="upDateStatus({{$product->code}},1,7)"
+                                                style="text-decoration:underline"
+                                                class="text-primary  text-white font-medium  rounded">
+                                                Đồng ý
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$product->code}},3,7)"
+                                               style="text-decoration:underline"
+                                               class="text-danger  text-white font-medium  rounded">
+                                                Từ chối
+                                            </a></div>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
 
@@ -148,68 +240,94 @@
 @endsection
 
 @section('custom_js')
-
-    <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
-    <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
-    <script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
-    <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('asset/assets/vendor/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-    <script src="{{asset('asset/assets/vendor/datatables/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('asset/assets/vendor/datatables/js/data-table.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-    <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
-    <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     <script>
-        if ($("#example2").length) {
+        $('.btn-accept').on('click', async function () {
+                const status = $('.btn-accept').data('status');
+                const id = $('.btn-accept').data('key');
+                const type = $('.btn-accept').data('type');
+                if (type == 1) {
+                    await $.ajax({
+                        type: "PUT",
+                        url: `{{route('screens.storage.product.updateRequest')}}/${status}?_token={{csrf_token()}}`,
+                        data: {
+                            id: id
+                        },
 
-            $(document).ready(function () {
-                $(document).ready(function () {
-                    var groupColumn = 2;
-                    var table = $('#example2').DataTable({
-                        "columnDefs": [
-                            {"visible": false, "targets": groupColumn}
-                        ],
-                        "order": [
-                            [groupColumn, 'asc']
-                        ],
-                        "displayLength": 25,
-                        "drawCallback": function (settings) {
-                            var api = this.api();
-                            var rows = api.rows({page: 'current'}).nodes();
-                            var last = null;
-
-                            api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
-                                if (last !== group) {
-                                    $(rows).eq(i).before(
-                                        '<tr class="group"><td colspan="5">' + group + '</td></tr>'
-                                    );
-
-                                    last = group;
-                                }
-                            });
+                        error: function (jqXHR, error, errorThrown) {
+                            $('#requestModal').modal('hide')
+                            var error0 = JSON.parse(jqXHR.responseText)
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Cập nhật yêu cầu không thành công !',
+                                text: error0.message,
+                            })
                         }
-                    });
+                    }).done(function (data) {
+                        Swal.fire(
+                            data.message,
+                            'Click vào nút bên dưới để đóng',
+                            'success'
+                        ).then(() => location.reload())
 
-                    // Order by the grouping
-                    $('#example2 tbody').on('click', 'tr.group', function () {
-                        var currentOrder = table.order()[0];
-                        if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
-                            table.order([groupColumn, 'desc']).draw();
-                        } else {
-                            table.order([groupColumn, 'asc']).draw();
+                    })
+                } else {
+                    await $.ajax({
+                        type: "PUT",
+                        url: `{{route('screens.storage.product.updateRequestOut')}}/${status}?_token={{csrf_token()}}`,
+                        data: {
+                            id: id
+                        },
+
+                        error: function (jqXHR, error, errorThrown) {
+                            $('#requestModal').modal('hide')
+                            var error0 = JSON.parse(jqXHR.responseText)
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Xác nhận đơn hàng không thành công !',
+                                text: error0.message,
+                            })
                         }
-                    });
+                    }).done(function (data) {
+                        Swal.fire(
+                            data.message,
+                            'Click vào nút bên dưới để đóng',
+                            'success'
+                        ).then(() => location.reload())
+
+
+                    })
+                }
+
+
+            }
+        )
+
+
+        function upDateStatus(id, status, type) {
+            $('.btn-accept').data('key', id);
+            $('.btn-accept').data('status', status);
+            $('.btn-accept').data('type', type);
+            $('#requestModal').modal('show')
+        }
+
+        $(document).ready(function () {
+
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.dashboard.index')}}?type=' + orderBy +
+                            '&field=' + sort
+                    }, 200);
                 });
             });
-        }
+        });
     </script>
+
 @endsection

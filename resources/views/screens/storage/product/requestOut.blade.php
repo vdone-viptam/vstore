@@ -1,296 +1,469 @@
 @extends('layouts.storage.main')
 
-@section('modal')
-    <div id="modal5">
+@section('page_title','Xác nhận đơn hàng')
 
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-update" data-dismiss="modal">Cập nhập</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn thực hiện thao tác này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary btn-accept">Xác nhận</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
-@section('page_title','Yêu cầu xuât kho')
+
+@section('page')
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Xác nhận đơn hàng</h2>
+
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Hàng hóa</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Xác nhận đơn hàng
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
 
 @section('content')
-    <form action="" id="form">
-        <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Sản phẩm</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                      stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <a href="" class="text-blueMain font-medium italic">Quản lý
-                yêu cầu xuất kho</a>
-        </div>
-        <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
-
-            <div class="flex justify-start items-start gap-2 flex-wrap">
-{{--                <select name="condition" id=""--}}
-{{--                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">--}}
-{{--                    <option value="0">Tất cả</option>--}}
-{{--                    <option--}}
-{{--                        value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>--}}
-{{--                        Mã sản phẩm--}}
-{{--                    </option>--}}
-{{--                    <option--}}
-{{--                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>--}}
-{{--                        Tên sản phẩm--}}
-{{--                    </option>--}}
-{{--                    <option--}}
-{{--                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>--}}
-{{--                        Thương hiệu--}}
-{{--                    </option>--}}
-{{--                    <option--}}
-{{--                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>--}}
-{{--                        Ngành hàng--}}
-{{--                    </option>--}}
-{{--                </select>--}}
-
-{{--                <input type="text" name="key_search" value="{{$params['key_search'] ?? ''}}"--}}
-{{--                       class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"--}}
-{{--                       placeholder="Nhập từ khóa">--}}
-{{--                <button type="submit"--}}
-{{--                        class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "--}}
-{{--                >--}}
-{{--                    <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                        <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z"--}}
-{{--                              fill="white"/>--}}
-{{--                        <path d="M13 11H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                        <path d="M13 15H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                        <path d="M13 19H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                        <path--}}
-{{--                            d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"--}}
-{{--                            stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                    </svg>--}}
-{{--                    Lọc--}}
-{{--                </button>--}}
-            </div>
-            <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
-                <div class="flex justify-between items-center flex-wrap gap-4">
-                    <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
-                        <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path opacity="0.4"
-                                  d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
-                                  fill="url(#paint0_linear_98_611)"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
-                                  fill="url(#paint1_linear_98_611)"/>
-                            <defs>
-                                <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449"
-                                                y2="24.5684" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                                <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
-                                                gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-
-                        Yêu cầu xuất kho
-                    </h2>
-                    {{--                    <a href="{{route('screens.manufacture.product.create')}}"--}}
-                    {{--                       class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}
-                    {{--                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-                    {{--                            <g clip-path="url(#clip0_4_2870)">--}}
-                    {{--                                <rect width="20" height="20" fill="white" fill-opacity="0.01"/>--}}
-                    {{--                                <path--}}
-                    {{--                                    d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"--}}
-                    {{--                                    fill="white"/>--}}
-                    {{--                            </g>--}}
-                    {{--                            <defs>--}}
-                    {{--                                <clipPath id="clip0_4_2870">--}}
-                    {{--                                    <rect width="20" height="20" fill="white"/>--}}
-                    {{--                                </clipPath>--}}
-                    {{--                            </defs>--}}
-                    {{--                        </svg>--}}
-                    {{--                        <span>Thêm mới</span>--}}
-                    {{--                    </a>--}}
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <form action="">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                    <h5 class="mb-0" style="font-size:18px;">Xác nhận đơn hàng</h5>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="w-full overflow-scroll">
-                    <table class="w-full dsth">
+            </form>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered second"
+                           style="width:100%">
                         <thead>
                         <tr>
-
-                            <th>
-                                Mã yêu cầu
+                            <th>Mã đơn hàng</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm @if($field == 'name')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="name"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="name"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif</th>
+                            <th>Số lượng @if($field == 'quantity')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="quantity"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif</th>
+                            <th>Trạng thái thanh toán
+                                @if($field == 'method_payment')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="method_payment"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="method_payment"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="method_payment"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif
                             </th>
-                            <th>
-                                Địa chỉ
-                            </th>
-                            <th>
-                                Tổng tiền đơn hàng
-                            </th>
-                            <th>
-                                Ngày yêu cầu
-                            </th>
-                            <th>Chi tiêt</th>
-                            <th>
-                                Trạng thái yêu cầu
-                            </th>
-                            <th>Xét duyệt</th>
-
+                            <th>Ngày đặt hàng @if($field == 'created_at')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="created_at"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif</th>
+                            <th>Xác nhận / Từ chối @if($field == 'export_status')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="export_status"
+                                           style="float: right;cursor: pointer"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="export_status"
+                                           style="float: right;cursor: pointer"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="export_status"
+                                       style="float: right;cursor: pointer"></i>
+                                @endif</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-
                         @if(count($order) > 0)
-                            @foreach($order as $value)
+                            @foreach($order as $ord)
                                 <tr>
-
-                                    <td>{{$value->no}}</td>
-                                    <td>{{$value->address}}</td>
-                                    <td>{{$value->total}}</td>
-                                    <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d-m-Y')}}</td>
-                                    <td><a href="#" data-id="{{$value->id}}"
-                                           class="more-details text-primary underline"> Xem</a></td>
+                                    <td>{{$ord->no}}</td>
+                                    <td>{{$ord->publish_id}}</td>
+                                    <td>{{$ord->name}}</td>
+                                    <td>{{$ord->quantity}}</td>
                                     <td>
-
-                                        @if($value->export_status==0 )
+                                        @if($ord->method_payment == 'COD')
+                                            <span class="text-danger">Chưa thanh toán</span>
+                                        @else
+                                            <span class="text-success">Đã thanh toán</span>
+                                        @endif
+                                    </td>
+                                    <td>{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="status{{$ord->id}}">
+                                        @if($ord->export_status == 0)
+                                            <div style="display:flex; justify-content:center; gap:10px"><a
+                                                    href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},1)"
+                                                    style="text-decoration:underline"
+                                                    class="text-primary  text-white font-medium  rounded">
+                                                    Đồng ý
+                                                </a>
+                                                <a href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},3)"
+                                                   style="text-decoration:underline"
+                                                   class="text-danger  text-white font-medium  rounded">
+                                                    Từ chối
+                                                </a></div>
+                                        @elseif($ord->export_status == 1)
                                             <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                style="gap:14px;">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Đồng ý
+                                            </div>
+                                        @else
+                                            <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
-                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                                        fill="white"/>
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
                                                 </svg>
-                                                Đang chờ xét duyệt
+                                                Từ chối
                                             </div>
-                                        @elseif($value->export_status == 1)
 
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                Xác nhận đơn
-                                            </div>
-                                        @elseif($value->export_status == 2)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                đã xuất kho
-                                            </div>
-                                        @elseif($value->export_status == 3)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                hủy
-                                            </div>
-                                        @elseif($value->export_status == 4)
-                                            <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                giao thành công
-                                            </div>
                                         @endif
-
                                     </td>
-                                    <td>
-                                        @if($value->export_status==0 )
-                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>1,'id' => $value->id])}}">
-                                                <button type="button"
-                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                    Xác nhận đơn
-                                                </button>
-                                            </a>
-                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>3,'id' => $value->id])}}">
-                                                <button type="button"
-                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                    Từ chối
-                                                </button>
-                                            </a>
-                                        @elseif($value->export_status==1)
-                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>2,'id' => $value->id])}}">
-                                                <button type="button"
-                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                    xuất kho
-                                                </button>
-                                            </a>
-                                            <a href="{{route('screens.storage.product.updateRequestOut',['status'=>3,'id' => $value->id])}}">
-                                                <button type="button"
-                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                    hủy
-                                                </button>
-                                            </a>
-                                        @endif
+                                    <td><a href="#" class="btn btn-link" onclick="showDetail({{$ord->id}})">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7">Không có dữ liệu phù hợp</td>
+                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                             </tr>
                         @endif
-
-
                         </tbody>
                     </table>
                 </div>
-                <div class="flex justify-end items-center gap-4 flex-wrap">
-{{--                    <span class="text-sm text-title">{{$bill_detai->total()}}</span>--}}
+                <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$order->withQueryString()->links()}}
-                    <div class="flex justify-start items-center gap-2 flex-wrap">
-                        <select name="limit"
-                                class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option
-                                value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>10
-                                hàng / trang
-                            </option>
-                            <option
-                                value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>25
-                                hàng / trang
-                            </option>
-                            <option
-                                value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
-                                50 hàng / trang
-                            </option>
-                        </select>
-
-                    </div>
                 </div>
             </div>
-            <div></div>
         </div>
-    </form>
+    </div>
 @endsection
 
 @section('custom_js')
     <script>
-        const form = document.getElementById('form');
-        const limit = document.getElementsByName('limit')[0];
-        limit.addEventListener('change', (e) => {
-            form.submit();
-        });
-
-    </script>
-    <script>
-        $('.more-details').each(function (i, e) {
-            $(this).on('click', (o) => {
-                $.ajax({
-                    url: '{{route('screens.storage.product.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&product=abc',
-                    success: function (result) {
-                        // $('#modal5').html('');
-                        $('#modal5').html(result);
-                        $('.modal-details').toggleClass('show-modal')
+        $('.btn-accept').on('click', async function () {
+                const status = $('.btn-accept').data('status');
+                const id = $('.btn-accept').data('key');
+                await $.ajax({
+                    type: "PUT",
+                    url: `{{route('screens.storage.product.updateRequestOut')}}/${$('.btn-accept').data('status')}?_token={{csrf_token()}}`,
+                    data: {
+                        id: $('.btn-accept').data('key')
                     },
+
+                    error: function (jqXHR, error, errorThrown) {
+                        $('#requestModal').modal('hide')
+                        var error0 = JSON.parse(jqXHR.responseText)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Cập nhật yêu cầu không thành công !',
+                            text: error0.message,
+                        })
+                    }
+                }).done(function (data) {
+                    Swal.fire(
+                        data.message,
+                        'Click vào nút bên dưới để đóng',
+                        'success'
+                    )
+                    $('#requestModal').modal('hide')
+                    if (+status === 1) {
+                        $('.status' + id).html(`
+                       <div
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                style="gap:14px;">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Đồng ý
+                                            </div>
+                    `);
+                    } else {
+                        $('.status' + id).html(`
+                   <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
+                                                </svg>
+                                                Từ chối
+                                            </div>
+                    `)
+
+                    }
+                })
+
+            }
+        )
+
+
+        function upDateStatus(id, status) {
+            $('.btn-accept').data('key', id);
+            $('.btn-accept').data('status', status);
+            $('#requestModal').modal('show')
+        }
+
+        function showDetail(id) {
+            var formData = {
+                id: id,
+            }
+            $.ajax({
+                type: "GET",
+                url: `{{route('screens.storage.product.detailRequestOut')}}?id=` + id,
+                dataType: "json",
+            }).done(function (data) {
+                var htmlData = ``;
+                if (data.data) {
+                    htmlData += `<form method="post" key=${id}>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="name">Mã yêu cầu:</label>
+                            <input type="text" class="form-control form-control-lg" id="code" value="${data.data.code}" readonly>
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="publish_id">Mã sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="publish_id" value="${data.data.publish_id}" readonly>
+                        </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="product_name">Tên sản phẩm:</label>
+                            <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.product_name}" readonly>
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                            <label for="ncc_name">Nhà cung cấp:</label>
+                            <input type="text" class="form-control form-control-lg" id="ncc_name" value="${data.data.ncc_name}" readonly>
+                        </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="quantity">Số lượng nhập:</label>
+                            <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_vdone">Chiết khấu: </label>
+                            <input type="text" class="form-control form-control-lg" id="id_vdone" value="0" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="created_at">Ngày yêu cầu: </label>
+                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertDate(data.data.created_at)}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_vdone">Trạng thái</label>
+                            ${data.data.export_status != 0 ? ` <select class="custom-select" id="inputGroupSelect01" disabled>
+                                <option selected >${data.data.export_status == 1 ? 'Đã xác nhận' : 'Đã từ chối'}</option>
+                            </select>` : ` <select class="custom-select" id="inputGroupSelect01">
+                                <option  value="1">Đồng ý</option>
+  <option  value="3" >Từ chối</option>
+                            </select>`}
+
+                        </div>
+                   </form>     `;
+                    $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+                    if (data.data.status == 1) {
+                        $('.btn-update').addClass('hidden');
+                    } else {
+                        $('.btn-update').removeClass('hidden');
+                        $('.btn-update').on('click', async function () {
+                            const id = data.data.id;
+                            await $.ajax({
+                                type: "PUT",
+                                url: `{{route('screens.storage.product.updateRequestOut')}}/${$('#inputGroupSelect01').val()}?_token={{csrf_token()}}`,
+                                data: {
+                                    id: data.data.id
+                                },
+
+                                error: function (jqXHR, error, errorThrown) {
+                                    $('#requestModal').modal('hide')
+                                    var error0 = JSON.parse(jqXHR.responseText)
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Xác nhận đơn hàng không thành công !',
+                                        text: error0.message,
+                                    })
+                                }
+                            }).done(function (data) {
+                                Swal.fire(
+                                    data.message,
+                                    'Click vào nút bên dưới để đóng',
+                                    'success'
+                                )
+                                $('#requestModal').modal('hide')
+                                if (+$('#inputGroupSelect01').val() === 1) {
+                                    $('.status' + id).html(`
+                       <div
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                style="gap:14px;">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Đồng ý
+                                            </div>
+                    `);
+                                } else {
+                                    $('.status' + id).html(`
+                   <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
+                                                </svg>
+                                                Từ chối
+                                            </div>
+                    `)
+
+                                }
+                            })
+                        });
+                    }
+
+                    $('.btn-update').on('click', function () {
+                        $('#requestModalmore').modal('show');
+                        $('#modalDetail').modal('hide');
+                        $(this).data('key', id);
+                    })
+
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.storage.product.requestOut',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
                 });
             });
         });
     </script>
+
 @endsection

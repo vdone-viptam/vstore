@@ -60,9 +60,15 @@ class FinanceController extends Controller
 
     public function transferMoney()
     {
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at', 'code')
-            ->where('user_id', Auth::id())
-            ->where('vshop_id', '!=', Auth::id())
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+            ->where(function ($query) {
+                $query->where('user_id', Auth::id())
+                    ->whereNull('vshop_id');
+            })
+            ->orWhere(function ($query) {
+                $query->where('vshop_id', Auth::id())
+                    ->whereNull('user_id');
+            })
             ->paginate(10);
 
         return view('screens.manufacture.finance.revenue', $this->v);
@@ -112,6 +118,9 @@ class FinanceController extends Controller
                 } else {
                     break;
                 }
+            }
+            if ($request->money > Auth::user()->money) {
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,

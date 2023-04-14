@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderService;
 use App\Models\District;
+use App\Models\District;
 use App\Models\Otp;
 use App\Models\PasswordReset;
 use App\Models\Province;
@@ -349,11 +350,15 @@ class LoginController extends Controller
                 $normal_storage = $request->normal_storage ?? $request->volume;
                 $file = [];
                 if ($request->hasFile('image_storage')) {
+
+
                     foreach ($request->file('image_storage') as $img) {
                         $filestorage = date('YmdHi') . $img->getClientOriginalName();
                         $img->move(public_path('image/users'), $filestorage);
                         $file[] = 'image/users/' . $filestorage;
                     }
+
+
                 }
                 $file1 = [];
                 if ($request->hasFile('image_pccc')) {
@@ -527,7 +532,7 @@ class LoginController extends Controller
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
         }
-        if ($domain == config('domain.vstore')) {
+        if ($domain == config('domain.storage')) {
             $role_id = 4;
         }
         return view('auth.forgotPassword', ['role_id' => $role_id]);
