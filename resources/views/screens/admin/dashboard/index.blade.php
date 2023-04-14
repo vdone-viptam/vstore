@@ -38,8 +38,8 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
-                                        <p class="text-[#AEAEAE] text-sm font-normal">Doanh thu</p>
-                                        <p class="text-black text-base font-bold">{{number_format($dataRevenueToday,0,'.','.')}}</p>
+                                        <p class="text-[#AEAEAE] text-sm font-normal">Số đơn đăng ký tài khoản</p>
+                                        <p class="text-black text-base font-bold">{{number_format($dataRegisterToday,0,'.','.')}}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -62,8 +62,9 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
-                                        <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng</p>
-                                        <p class="text-black text-base font-bold">{{number_format($dataOrderToday,0,'.','.')}}</p>
+                                        <p class="text-[#AEAEAE] text-sm font-normal">Yêu cầu xét duyệt sản phẩm chưa
+                                            xác nhân</p>
+                                        <p class="text-black text-base font-bold">{{number_format($dataRequestProductToday,0,'.','.')}}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -86,8 +87,8 @@
                                         </svg>
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
-                                        <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng giao thành công</p>
-                                        <p class="text-black text-base font-bold">{{number_format($dataOrderSuccessToday,0,'.','.')}}</p>
+                                        <p class="text-[#AEAEAE] text-sm font-normal">Yêu cầu cập nhật mã số thuế</p>
+                                        <p class="text-black text-base font-bold">{{number_format($dataRequestTaxCodeToday,0,'.','.')}}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -113,7 +114,7 @@
                                                 fill="#4062FF"/>
                                         </svg>
                                         <span
-                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase"> Doanh thu trong <span
+                                            class="text-title md:font-medium font-bold md:text-xl text-sm uppercase"> Số tài khoản đăng ký <span
                                                 class="date">1 tuần</span></span></span>
                                     </div>
                                     <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
@@ -153,7 +154,8 @@
                                     fill="#4062FF"/>
                             </svg>
                             <div
-                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Đơn hàng trong
+                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Số yêu cầu xét
+                                duyệt sản phẩm
                                 <span class="date">1 tuần </span>
                             </div>
                             <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
@@ -177,5 +179,163 @@
 
 @endsection
 @section('custom_js')
-    @include('layouts.custom.includeSt.chart-script');
+    <script src="{{asset('asset/assets/vendor/charts/chart/chart.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            let dataRegisterMonth = @json($dataRegisterMonth) ;
+            let dataRegisterYear = @json($dataRegisterYear) ;
+            let dataOrderChartMonth = @json($requestProductMonth) ;
+            let dataOrderRangeTimeYear = @json($requestProductYear) ;
+
+            // lấy data từ dữ liệu bên BE
+            let data_chart_week = pushValueChart(dataRegisterMonth, "week");
+            let data_chart_month = pushValueChart(dataRegisterMonth, "month");
+            let data_chart_one_year = pushValueChart(dataRegisterYear, "one_year");
+            console.log(data_chart_one_year);
+            let data_chart_three_year = pushValueChart(dataRegisterYear, "three_year");
+
+            let data_order_chart_week = pushValueChart(dataOrderChartMonth, "week");
+            let data_order_chart_month = pushValueChart(dataOrderChartMonth, "month");
+            let data_order_chart_one_year = pushValueChart(dataOrderRangeTimeYear, "one_year");
+            let data_order_chart_three_year = pushValueChart(dataOrderRangeTimeYear, "three_year");
+
+
+            // doanh thu trong 1 tuần, 1 tháng, 1 năm, 3 năm
+            let revenue_week = dataRegisterMonth['registerTotal7Days'];
+            let revenue_month = dataRegisterMonth['registerTotal30Days'];
+            let revenue_year = dataRegisterYear['registerTotalOneYear'];
+            let revenue_three_year = dataRegisterYear['registerTotalThreeYear'];
+
+            // order trong 1 tuần, 1 tháng, 1 năm, 3 năm
+            let order_week = dataOrderChartMonth['registerTotal7Days'];
+            let order_month = dataOrderChartMonth['registerTotal30Days'];
+            let order_year = dataOrderRangeTimeYear['registerTotalOneYear'];
+            let order_three_year = dataOrderRangeTimeYear['registerTotalThreeYear'];
+
+            console.log(revenue_week);
+            $('.money-revenue').html(convertVND(revenue_week));
+            $('.count-order').html(order_week);
+
+            // push data và 1 mảng chứa time và money
+            function pushValueChart(dataChartFromBE, param) {
+                if (dataChartFromBE) {
+                    let dataSub = [];
+                    let labels = [];
+                    let money = [];
+                    let dataChart = dataChartFromBE[param];
+                    dataChart.forEach(element => {
+                        labels.push(element.time)
+                        money.push(element.money)
+                    });
+                    dataSub.push(labels, money);
+                    return dataSub;
+                }
+                return [];
+            }
+
+            // từ 1 mảng chứa time và money => gán nó vào data để chart có thể sử dụng
+            function pushValueLabelData(data_chart, label) {
+                let data_chart_sub =
+                    {
+                        labels: data_chart[0],
+                        datasets: [
+                            {
+                                label: label,
+                                backgroundColor: "#3e95cd",
+                                data: data_chart[1]
+                            }
+                        ]
+                    };
+                return data_chart_sub;
+            }
+
+            data_chart_week = pushValueLabelData(data_chart_week, 'VNĐ');
+            data_chart_month = pushValueLabelData(data_chart_month, 'VNĐ');
+            data_chart_one_year = pushValueLabelData(data_chart_one_year, 'VNĐ');
+            data_chart_three_year = pushValueLabelData(data_chart_three_year, 'VNĐ');
+
+            data_order_chart_week = pushValueLabelData(data_order_chart_week, 'Số lượng');
+            data_order_chart_month = pushValueLabelData(data_order_chart_month, 'Số lượng');
+            data_order_chart_one_year = pushValueLabelData(data_order_chart_one_year, 'Số lượng');
+            data_order_chart_three_year = pushValueLabelData(data_order_chart_three_year, 'Số lượng');
+
+
+            var chartObject = new Chart(document.getElementById("bar-chart-grouped"), {
+                type: 'bar',
+                data: data_chart_week,
+                options: {
+                    title: {
+                        display: true,
+                        text: '-'
+                    }, legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                console.log(tooltipItem)
+                                return tooltipItem.yLabel;
+                            }
+                        }
+                    },
+                }
+            });
+
+            var chartOrderObject = new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: data_order_chart_week,
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: '-'
+                    }
+                }
+            });
+            $('.select-date').change(function () {
+                $value = $('.select-date option:selected').text();
+                $('.date').html($value);
+                let value_check = $(this).find(":selected").val();
+                switch (value_check) {
+                    case "0":
+                        changeDataChart(chartObject, data_chart_week);
+                        changeDataChart(chartOrderObject, data_order_chart_week);
+                        $('.money-revenue').html(convertVND(revenue_week));
+                        $('.count-order').html(order_week);
+                        break;
+                    case "1":
+                        changeDataChart(chartObject, data_chart_month);
+                        changeDataChart(chartOrderObject, data_order_chart_month);
+                        $('.money-revenue').html(convertVND(revenue_month));
+                        $('.count-order').html(order_month);
+                        break;
+                    case "2":
+                        changeDataChart(chartObject, data_chart_one_year);
+                        changeDataChart(chartOrderObject, data_order_chart_one_year);
+                        $('.money-revenue').html(convertVND(revenue_year));
+                        $('.count-order').html(order_year);
+                        break;
+                    case "3":
+                        changeDataChart(chartObject, data_chart_three_year);
+                        changeDataChart(chartOrderObject, data_order_chart_three_year);
+                        $('.money-revenue').html(convertVND(revenue_three_year));
+                        $('.count-order').html(order_three_year);
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            function changeDataChart(chart, data) {
+                if (data) {
+                    chart.data = data;
+                    chart.update();
+                }
+            }
+
+        })
+
+    </script>
+
 @endsection

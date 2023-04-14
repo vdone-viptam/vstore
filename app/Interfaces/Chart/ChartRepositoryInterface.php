@@ -10,6 +10,15 @@ interface ChartRepositoryInterface
     public function orderRangeTimeMonth();
     public function orderRangeTimeYear();
 
+    //amdin
+    public function requestProductToday();
+    public function requestTaxCodeToday();
+    public function registerToday();
+
+    public function registerMonth();
+    public function registerYear();
+    public function requestProductMonth();
+    public function requestProductYear();
     // cho biểu doanh số today
     public function revenueToday();
     public function orderToday();
