@@ -273,7 +273,7 @@ class PaymentMethod9PayController extends Controller
             if ($status === 5) {
                 if ($order) {
                     $user = User::find($order->user_id);
-                    $order->status = 1;
+                    $order->status = config('constants.orderServiceStatus.done');
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     return redirect()->route('landingpagencc', [
@@ -307,7 +307,6 @@ class PaymentMethod9PayController extends Controller
             ]);
         }
     }
-
 
     function paymentOrderServiceBackKHO(Request $request)
     {
@@ -363,7 +362,7 @@ class PaymentMethod9PayController extends Controller
             if ($status === 5) {
                 if ($order) {
                     $user = User::find($order->user_id);
-                    $order->status = 1;
+                    $order->status = config('constants.orderServiceStatus.done');
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     return redirect()->route('screens.storage.index', [
