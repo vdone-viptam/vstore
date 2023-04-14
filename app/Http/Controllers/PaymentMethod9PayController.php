@@ -583,7 +583,7 @@ class PaymentMethod9PayController extends Controller
             try {
                 $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
                 return response()->json([
-                    'redirectUrl'=>$redirectUrl,
+                    'redirectUrl' => $redirectUrl,
                     'time' => $time,
                     'invoice_no' => $invoiceNo,
                     'amount' => $amount,
