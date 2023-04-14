@@ -53,8 +53,7 @@ class UserController extends Controller
         $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
             ->where('order_service.status', 1)
-            ->where('payment_status', 1)
-            ->orWhere('type', 'VSTORE')
+            ->where('payment_status', 3)
             ->orderBy('users.id', 'desc')
             ->where('role_id', '!=', 1)->paginate($limit);
 
