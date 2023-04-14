@@ -633,7 +633,7 @@ class LoginController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8|max:30|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password' => 'required|min:8|max:30|confirmed|regex:'.config('regex.password'),
             'password_confirmation' => 'required',
             'role_id' => 'required',
         ], [

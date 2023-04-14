@@ -84,8 +84,10 @@
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong>Mật khẩu mới </span>
                     <div class="pass w-full relative">
                         <input type="password" name="password" placeholder="Mật khẩu mới"
-                               class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <div class="password">
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
+                                title="Mật khẩu ít nhất 8 ký tự, ít nhất 1 chữ hoa, 1 chữ thường, 1 ký tự đặc biệt, 1 chữ số"
+                               class="pass usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <div class="icon-password">
                             <svg width="16" height="16" class="icon cursor-pointer absolute top-[13px] right-[10px]"
                                  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -108,8 +110,10 @@
                     <span class="text-sm"><strong class="text-[#FF4D4F]">*</strong> Xác nhận mật khẩu </span>
                     <div class="pass w-full relative">
                         <input type="password" name="   password_confirmation" placeholder="Xác nhận mật khẩu mới"
-                               class="usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                        <div class="password">
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
+                                title="Mật khẩu ít nhất 8 ký tự, ít nhất 1 chữ hoa, 1 chữ thường, 1 ký tự đặc biệt, 1 chữ số"
+                               class="pass usr-email outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                        <div class="icon-password">
                             <svg width="16" height="16" class="icon cursor-pointer absolute top-[13px] right-[10px]"
                                  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -149,7 +153,7 @@
 </div>
 {{--<script src="{{asset('asset/js/main.js')}}"></script>--}}
 
-
+<script src="{{asset('asset/js/main.js')}}"></script>
 <script>
     document.querySelector('.btnA').setAttribute('disabled', 'true');
     document.querySelector('.btnA').classList.add('bg-slate-300');

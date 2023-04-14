@@ -120,7 +120,6 @@
                                         class="flex justify-start items-center gap-4 w-full flex-wrap md:flex-nowrap">
                                         <span class="min-w-[200px]  text-title font-medium">Xác nhận mật khẩu</span>
                                         <div class="flex flex-col gap-2 w-full">
-
                                             <input type="password" name="password_confirmation"
                                                    value="{{old('password_confirmation')}}"
                                                    class=" text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">

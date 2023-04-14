@@ -157,7 +157,7 @@
                 <input required type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
                         pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                        value="{{old('tax_code')}}"
-                       class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                       class="only-number maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('tax_code')
                 <p class="text-danger text-red-500">{{$message}}</p>
                 @enderror

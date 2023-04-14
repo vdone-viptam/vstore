@@ -39,7 +39,7 @@ class OrderController extends Controller
 //        $query->where('title', 'like', 'PHP%');
 //    })
 
-        return view('screens.vstore.order.index', compact('orders', 'key_search'));
+        return view('screens.vstore.order.index', compact('orders', 'key_search','limit'));
     }
 
     public function new()
