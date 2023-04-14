@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -94,6 +95,19 @@ class ProductController extends Controller
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 3) {
+                $vstore = User::join('products','users.id','=','products.vstore_id')->where('products.vstore_id',$currentRequest->vstore_id)
+                    ->where('products.id',$currentRequest->product_id)
+                ->select('products.id','products.publish_id','users.account_code')->first();
+
+                $repon = Http::post(config('domain.domain_vdone').'notifications/send-all',
+                [
+                    "message"=> "Sản phẩm".$vstore->publish_id ."đã được niêm yết tại V-Store ".$vstore->account_code,
+                     "productId"=> $vstore->id,
+                      "type"=> 9
+                ]
+                );
+
+
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
