@@ -5,12 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Lib9Pay\HMACSignature;
 use App\Http\Lib9Pay\MessageBuilder;
-use App\Models\CartItemV2;
-use App\Models\CartV2;
-use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\OrderService;
-use App\Models\District;
 use App\Models\District;
 use App\Models\Otp;
 use App\Models\PasswordReset;
@@ -23,7 +18,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -408,6 +402,18 @@ class LoginController extends Controller
             }
 
             if ($role_id == 3) {
+
+                $order = new OrderService();
+                $order->user_id = $user->id;
+                $order->type = "VSTORE";
+                $order->status = 2; // 2 là chưa hoàn thành
+                $order->payment_status = 2; // 2 là chưa thanh toán
+                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                $order->total = config('constants.orderService.price_ncc');
+                $order->save();
+
                 return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
             }
 
