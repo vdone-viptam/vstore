@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Số thẻ:</label>
                                         <input required type="text" name="account_number"
-                                               value="{{$wallet->account_number}}" class="stk form-control"
+                                               value="{{$wallet->account_number}}" class="stk form-control only-number"
                                                id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                                         @error('account_number')
                                         <p class="text-red-600 mt-2">{{$message}}</p>
@@ -183,7 +183,8 @@
                                 <div class="form-group">
                                     <label for="val-username">Số tiền cần rút <strong
                                             class="text-[#FF4D4F]">*</strong></label>
-                                    <input required type="number" class="only-number form-control only-number" name="money" id="money"
+                                    <input required type="number" class="only-number form-control only-number"
+                                           name="money" id="money"
                                            data-value="0" min="100000" placeholder="0đ" max="{{Auth::user()->money}}">
                                 </div>
                             </div>

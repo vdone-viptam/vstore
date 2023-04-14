@@ -57,7 +57,7 @@
 
                             <div class="w-full">
                                 <input type="text" name="account_number"
-                                       class=" outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                       class="only-number outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                 @error('account_number')
                                 <p class="text-red-600 mt-2">{{$message}}</p>
                                 @enderror
@@ -135,7 +135,7 @@
 
                                 <div class="w-full">
                                     <input type="text" name="account_number" value="{{$wallet->account_number}}"
-                                           class=" outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                           class="only-number outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                     @error('account_number')
                                     <p class="text-red-600 mt-2">{{$message}}</p>
                                     @enderror
