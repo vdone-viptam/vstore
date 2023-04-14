@@ -36,15 +36,38 @@ class LoginController extends Controller
 
     public function getFormRegisterNCC(Request $request)
     {
+        $user = false;
+        $order = false;
+        if($request->order && $request->user) {
+            $user = User::find($request->user);
+            $order = OrderService::find($request->order);
+            $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+            $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+            $order->status = 2;
+            $order->save();
+        }
+
         $referral_code = $request->referral_code ?? '';
-        return view('auth.NCC.register_ncc', ['referral_code' => $referral_code]);
+        return view('auth.NCC.register_ncc', compact(['referral_code', 'user', 'order']));
     }
 
     public function getFormRegisterVstorage(Request $request)
     {
+
+        $user = false;
+        $order = false;
+        if($request->order && $request->user) {
+            $user = User::find($request->user);
+            $order = OrderService::find($request->order);
+            $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+            $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+            $order->status = 2;
+            $order->save();
+        }
+
         $referral_code = $request->referral_code ?? '';
 
-        return view('auth.storage.register_storage', ['referral_code' => $referral_code]);
+        return view('auth.storage.register_storage', compact(['referral_code', 'user', 'order']));
     }
 
     public function getFormLoginVstorage()
@@ -76,7 +99,7 @@ class LoginController extends Controller
         return view('auth.admin.login');
     }
 
-    public function postRegisterOrder(Request $request){
+    public function postRegisterOrderNcc(Request $request){
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER',
             'order_id' => 'required',
@@ -84,7 +107,9 @@ class LoginController extends Controller
 
         $order_id = $request->order_id;
 
-        if ($validator->fails()) {}
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
 
         $method = $request->method_payment;
 
@@ -100,8 +125,82 @@ class LoginController extends Controller
         $order->status = config('constants.orderServiceStatus.confirmation');
         $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
 
-        $returnUrl = $http . config("domain.payment") . "/payment/order-service/back";
-        $backUrl = $http . config("domain.payment") . "/payment/order-service/return";
+        $returnUrl = $http . config("domain.payment") . "/payment/order-service-ncc/back";
+        $backUrl = $http . config("domain.payment") . "/payment/order-service-ncc/return";
+
+        $time = time();
+        $invoiceNo = $order->no;
+        $amount = (float)$order->total;
+
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $data = array(
+            'merchantKey' => $merchantKey,
+            'time' => $time,
+            'invoice_no' => $invoiceNo,
+            'description' => 'Mua dịch vụ',
+            'amount' => $amount + ($amount*(10/100)),
+            'back_url' => $backUrl,
+            'return_url' => $returnUrl,
+            'method' => $method,
+            'is_customer_pay_fee' => 1 // Đối tượng chịu phí. 0: người bán chịu phí, 1: khách hàng chịu phí
+        );
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/payments/create', 'POST')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+        $httpData = [
+            'baseEncode' => base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)),
+            'signature' => $signature,
+        ];
+
+        $order->method_payment = $method;
+        $order->save();
+
+        try {
+            $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
+            return redirect()->to($redirectUrl);
+        } catch (Exception $e) {
+            Log::error($e);
+            return response()->json([
+                "message" => "500 Internal Server Error",
+                "errors" => $e
+            ], 500);
+        }
+
+    }
+    public function postRegisterOrderKho(Request $request){
+        $validator = Validator::make($request->all(), [
+            'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER',
+            'order_id' => 'required',
+        ]);
+
+        $order_id = $request->order_id;
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+
+        $method = $request->method_payment;
+
+        $order = OrderService::where('id', $order_id)
+            ->where('status', 2)
+            ->first();
+
+        if(!$order) {
+            return redirect()->back()->withErrors([
+                "orderErr" => "Hành động không được thực hiện, vui lòng thử lại"
+            ]);
+        }
+        $order->status = config('constants.orderServiceStatus.confirmation');
+        $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
+
+        $returnUrl = $http . config("domain.payment") . "/payment/order-service-kho/back";
+        $backUrl = $http . config("domain.payment") . "/payment/order-service-kho/return";
 
         $time = time();
         $invoiceNo = $order->no;

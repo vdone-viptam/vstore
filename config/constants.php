@@ -10,7 +10,7 @@ return [
     'orderServiceStatus' => [
         'wait_for_confirmation' => 2, // đợi ng dùng thanh toán
         'confirmation' => 1, // người dùng
-        'done' => 3, // hàng đến tay người dùng
+        'done' => 3, // Đăng ký thành công
     ],
     // ORDER
     'orderStatus' => [
