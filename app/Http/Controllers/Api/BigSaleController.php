@@ -78,7 +78,7 @@ class BigSaleController extends Controller
                     ->where('end_date', '>=', Carbon::now())
                     ->where('product_id', $product->id)
                     ->whereIn('type', [1, 2])
-                    ->first()->dis, 2);
+                    ->first()->dis ?? 0, 2);
                 $product->image = asset(json_decode($product->images)[0]);
                 if ($request->pdone_id) {
                     $product->is_affiliate = DB::table('vshop_products')
