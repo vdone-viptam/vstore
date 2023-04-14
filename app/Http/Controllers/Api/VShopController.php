@@ -201,7 +201,7 @@ class  VShopController extends Controller
             return response()->json([
                 "status_code" => 404,
                 "message" => "Hoá đơn không tồn tại"
-            ]);
+            ],404);
         }
 
         $order->status = config('constants.statusPreOrder.user_confirm');;
