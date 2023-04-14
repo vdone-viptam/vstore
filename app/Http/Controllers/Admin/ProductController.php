@@ -101,7 +101,7 @@ class ProductController extends Controller
 
                 $repon = Http::post(config('domain.domain_vdone').'notifications/send-all',
                 [
-                    "message"=> "Sản phẩm ".$vstore->publish_id ."đã được niêm yết tại V-Store ".$vstore->account_code,
+                    "message"=> "Sản phẩm ".$vstore->publish_id ." đã được niêm yết tại V-Store ".$vstore->account_code,
                      "productId"=> $vstore->id,
                       "type"=> 9
                 ]
