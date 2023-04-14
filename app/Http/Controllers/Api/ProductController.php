@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\BillCurrent;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
+use App\Models\DetailBillCurrent;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -115,23 +117,9 @@ class ProductController extends Controller
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                     $pro->available_discount = $more_dis ?? 0;
                 }
-//                $arr[] = $pro;
+
 //
             }
-
-
-//
-//            $arr = collect($arr);
-//            if ($request->order_by == 2) {
-//                if ($request->option == 'desc') {
-//                    $arr = $arr->sortByDesc('order_price');
-//                } elseif ($request->option == 'asc') {
-//                    $arr = $arr->sortBy('order_price');
-//                }
-//
-//            }
-//            $products->data = $arr;
-
             return response()->json([
                 'success' => true,
                 'data' => $products
@@ -649,7 +637,7 @@ class ProductController extends Controller
 //        return $checkVshop;
         if ($checkVshop) {
             if ($checkVshop->status == 3) {
-                $checkVshop->status == 1;
+                $checkVshop->status = 1;
                 $checkVshop->save();
             } else {
                 return response()->json([
@@ -897,6 +885,8 @@ class ProductController extends Controller
             $vstore = [];
             $vshop = [];
             $ncc = [];
+            $arrayDetailBillCurrent = [];
+            $total_price_all = 0;
             foreach ($request->infomation as $pro) {
                 $products = DB::table('vshop_products')
                     ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
@@ -935,15 +925,53 @@ class ProductController extends Controller
                     'pdone_id' => $pdone_id
                 ];
 
+                $total_price = $price * $pro['amount'] - ($price * $pro['amount'] * $product->discount / 100) - ($price * $pro['amount'] * $product->discount_vShop / 100);
+                $total_price_all += $total_price;
                 $ncc[] = [
-                    'total' => $price * $pro['amount'] - ($price * $pro['amount'] * $product->discount / 100) - ($price * $pro['amount'] * $product->discount_vShop / 100),
+                    'total' => $total_price,
                     'ncc_id' => $product->user_id
                 ];
+                // bill vãng lai chi tiết
+                $arrayDetailBillCurrent[] = [
+                    'product_id' => $pro['product_id'],
+                    'amount' => $pro['amount'],
+                    'price' => $total_price,
+                    'status' => 0,
+                ];
+            }
+            $vshop = Vshop::where('pdone_id',$pdone_id)->first();
+            if($vshop){
+                $billCurrent = new BillCurrent();
+                while (true) {
+                    $code = 'bill-current' . Str::random(10);
+                    if (!BillCurrent::where('code_bill', $code)->first()) {
+                        break;
+                    }
+                }
+                $billCurrent->code_bill = $code;
+                $billCurrent->vshop_id = $vshop->id;
+                $billCurrent->price = $total_price_all;
+                $billCurrent->status = 0 ;
+                $billCurrent->save();
+                $idBillCurrent = $billCurrent->id;
 
+                foreach( $arrayDetailBillCurrent as $key => $value){
+                    $value['bill_current_id'] = $idBillCurrent;
+                    $value['created_at'] = Carbon::now();
+                    $value['updated_at'] = Carbon::now();
+                    DetailBillCurrent::create($value);
 
+                    $increment = DB::table('vshop_products')
+                    ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                    ->where('pdone_id', $pdone_id)
+                    ->where('product_id', $value['product_id'])
+                    ->where('vshop_products.amount', '>=', $value['amount'])
+                    ->increment('vshop_products.amount', -$value['amount']);
+                }
             }
 
-//            return [$vstore, $vshop, $ncc, $bills];
+        //    return [$vstore, $vshop, $ncc, $bills];
+            DB::commit();
             return response()->json([
                 'status_code' => 200,
                 'message' => 'tạo mới thành công'
