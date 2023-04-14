@@ -21,9 +21,10 @@
 
     td {
         text-align: left;
-
     }
-
+    th {
+        text-align: left;
+    }
     .page-link {
         width: 100%;
         text-align: center;

@@ -25,6 +25,9 @@
     td {
         text-align: left;
     }
+    th {
+        text-align: left;
+    }
 </style>
 <body id="body">
 @yield('modal')
