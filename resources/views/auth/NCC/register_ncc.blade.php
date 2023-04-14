@@ -1,7 +1,15 @@
 @php
-    $isOrder = \Illuminate\Support\Facades\Session::has('order');
-    $order = \Illuminate\Support\Facades\Session::get('order');
-    $user = \Illuminate\Support\Facades\Session::get('user');
+
+    if($order && $user) {
+        $isOrder = true;
+    } else {
+        $isOrder = \Illuminate\Support\Facades\Session::has('order');
+        $order = \Illuminate\Support\Facades\Session::get('order');
+        $user = \Illuminate\Support\Facades\Session::get('user');
+    }
+
+
+
 //    dump($order);
 //    dump($user);
 //    dump($_GET['orderErr']);
@@ -274,12 +282,12 @@
             </button>
             <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
                                                                              class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
-        </div>chị
+        </div>
     </form>
 </div>
 @if($isOrder)
 <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
-    <form method="POST" action="{{route('post_register_order',['order_id' => $order->id])}}">
+    <form method="POST" action="{{route('post_register_order_ncc',['order_id' => $order->id])}}">
         @csrf
         <div
             class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">

@@ -27,8 +27,11 @@ Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
 
-    Route::get('/payment/order-service/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBack']);
-    Route::get('/payment/order-service/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceReturn']);
+    Route::get('/payment/order-service-ncc/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBackNCC']);
+    Route::get('/payment/order-service-ncc/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBackNCC']);
+
+    Route::get('/payment/order-service-kho/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBackKHO']);
+    Route::get('/payment/order-service-kho/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBackKHO']);
 
     Route::get('/payment/pre-order/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentPreOrderReturn']);
     Route::get('/payment/pre-order/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentPreOrderBack']);
@@ -40,7 +43,8 @@ Route::group(['domain' => config('domain.payment')], function () {
 // END THANH TOÁN APP
 
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
-Route::post('/register/order', [\App\Http\Controllers\Auth\LoginController::class, 'postRegisterOrder'])->name('post_register_order');
+Route::post('/register/order/ncc', [\App\Http\Controllers\Auth\LoginController::class, 'postRegisterOrderNcc'])->name('post_register_order_ncc');
+Route::post('/register/order/kho', [\App\Http\Controllers\Auth\LoginController::class, 'postRegisterOrderKho'])->name('post_register_order_kho');
 
 Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'formForgotPassword'])->name('form_forgot_password');
 Route::post('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'postForgotPassword']);
