@@ -30,7 +30,7 @@ return new class extends Migration
             $table->decimal('total', 20, 3)->comment('Tổng tiền');
             $table->string('fullname');
             $table->string('phone')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->integer('export_status')->default(0)->comment('trạng thái xuất kho 1,xác nhận đơn ,2 xuất kho giao cho vận chuyển , 3 kho hủy,4 hoàn thành, 5 khách hàng huỷ');
             $table->integer('cancel_status')->nullable()->comment('trạng thái huỷ kho bởi khách,mac dinh null, khi khach huy cap nhat len 1, nhap kho cap nhat thanh 2');
             $table->string('note')->nullable()->comment('ghi chú khi khach hang huy (khi huy cap nhat export_status = 5 )');
