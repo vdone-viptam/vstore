@@ -25,6 +25,10 @@ class ViettelpostController extends Controller
             $order->export_status =4;
             $order->updated_at= Carbon::now();
         }
+        if ($order->order_status == 503 ){
+            $order->export_status =5;
+            $order->updated_at= Carbon::now();
+        }
 ;        $order->save();
 
 //        $billdetail->status = 'abc';
