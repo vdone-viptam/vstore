@@ -10,7 +10,7 @@ class CallApiRepository implements CallApiRepositoryInterface
     public function callApiCustomerProfile($customerId)
     {
         // $response = Http::get( 'de-vdone.vdone.vn/api/users/conversation-participant/'.$customerId);
-        $response = Http::get( 'be-vdone.vdone.vn/api/users/conversation-participant/'.$customerId);
+        $response = Http::get(config('domain.domain_vdone').'users/conversation-participant/'.$customerId);
         $customer = $response->object();
         if(!empty($customer)){
             if(!empty($customer->data)){
