@@ -138,6 +138,7 @@
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Mã số thuế</span>
                 <input required type="text" name="tax_code" id="tax_code" placeholder="Nhập mã số thuế"
+                        onkeypress='validateNumber(event)'
                         pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                        value="{{old('tax_code')}}"
                        class="maV outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
