@@ -153,7 +153,7 @@ class ProductController extends Controller
                 }
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
-                $vshop = Vshop::where('pdone_id', 247)->first();
+                $vshop = Vshop::where('pdone_id', 262)->first();
                 if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->where('status', 1)->first()) {
                     $vshop_product = new VshopProduct();
                     $vshop_product->vshop_id = $vshop->id;

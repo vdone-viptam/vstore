@@ -102,7 +102,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-    //    dd( $request->all());
+        //    dd( $request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'price' => 'required',
@@ -137,7 +137,8 @@ class ProductController extends Controller
             'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
             'with.required' => 'Chiều dài bắt buộc nhập',
             'material.required' => 'Chất liệu bắt buộc nhập',
-            'origin.required' => 'Xuất xứ bắt buộc nhập'
+            'origin.required' => 'Xuất xứ bắt buộc nhập',
+            'short_content.max' => 'Mô tả ngắn ít hơn 500 ký tự'
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -525,7 +526,8 @@ class ProductController extends Controller
             'packing_type' => 'required',
             'with' => 'required',
             'material' => 'required',
-            'origin' => 'required'
+            'origin' => 'required',
+            'short_content' => 'required|max:500'
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -541,7 +543,9 @@ class ProductController extends Controller
             'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
             'with.required' => 'Chiều dài bắt buộc nhập',
             'material.required' => 'Chất liệu bắt buộc nhập',
-            'origin.required' => 'Xuất xứ bắt buộc nhập'
+            'origin.required' => 'Xuất xứ bắt buộc nhập',
+            'short_content.max' => 'Mô tả ngắn ít hơn 500 ký tự',
+            'short_content.required' => 'Mô tả ngắn bắt buộc nhập'
         ]);
 
         if ($validator->fails()) {
