@@ -362,8 +362,6 @@ class LoginController extends Controller
                 'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ',
                 'ward_id.required' => 'Phường (xã) bắt buộc chọn',
-
-
             ]);
         }
 
@@ -377,6 +375,8 @@ class LoginController extends Controller
             $checkEmail = DB::table('users')
                 ->where('email', $request->email)
                 ->where('role_id', $role_id)
+                ->whereNotNull("account_code")
+                ->whereNotNull("confirm_date")
                 ->count();
             $error = null;
             if ($checkEmail > 0) {
@@ -385,6 +385,8 @@ class LoginController extends Controller
             if ($role_id != 4) {
                 $checkTax = DB::table('users')
                     ->where('tax_code', $request->tax_code)
+                    ->whereNotNull("account_code")
+                    ->whereNotNull("confirm_date")
                     ->where('role_id', $role_id)
                     ->count();
                 if ($checkTax > 0) {
@@ -395,6 +397,8 @@ class LoginController extends Controller
                 $checkTax = DB::table('users')
                     ->where('company_name', $request->company_name)
                     ->where('role_id', $role_id)
+                    ->whereNotNull("account_code")
+                    ->whereNotNull("confirm_date")
                     ->count();
                 if ($checkTax > 0) {
                     $error['company_name'] = 'Tên công ty đã được đăng ký';
@@ -404,6 +408,8 @@ class LoginController extends Controller
             $checkTax2 = DB::table('users')
                 ->where('name', $request->name)
                 ->where('role_id', $role_id)
+                ->whereNotNull("account_code")
+                ->whereNotNull("confirm_date")
                 ->count();
             if ($checkTax2 > 0) {
                 $error['name'] = 'Tên đã được đăng ký';
@@ -411,6 +417,8 @@ class LoginController extends Controller
             $checkTax3 = DB::table('users')
                 ->where('phone_number', $request->phone_number)
                 ->where('role_id', $role_id)
+                ->whereNotNull("account_code")
+                ->whereNotNull("confirm_date")
                 ->count();
             if ($checkTax3 > 0) {
                 $error['phone_number'] = 'Số điện thoại đã được đăng ký';
@@ -418,6 +426,7 @@ class LoginController extends Controller
             if ($error !== null) {
                 return redirect()->back()->withErrors($error)->withInput($request->all());
             }
+
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
@@ -437,6 +446,7 @@ class LoginController extends Controller
             $user->address = $request->address;
             $user->role_id = $role_id;
             $user->slug = Str::slug($request->name);
+
             if ($role_id == 4) {
                 $cold_storage = $request->cold_storage ?? '';
                 $warehouse = $request->warehouse ?? '';
@@ -476,11 +486,19 @@ class LoginController extends Controller
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
             $user->ward_id = $request->ward_id;
-            $user->save();
+
+//            $user->save();
 
             DB::commit();
 
             if ($role_id == 2) {
+                $userUpdateOrCreate = User::updateOrCreate([
+                    "email" => $request->email,
+                    "role_id" => 2,
+                    "confirm_date" => null,
+                    "account_code" => null
+                ], $user->toArray());
+                $user->id = $userUpdateOrCreate->id;
                 $order = new OrderService();
                 $order->user_id = $user->id;
                 $order->type = "NCC";
@@ -502,6 +520,8 @@ class LoginController extends Controller
 
             if ($role_id == 3) {
 
+                $user->save();
+
                 $order = new OrderService();
                 $order->user_id = $user->id;
                 $order->type = "VSTORE";
@@ -517,7 +537,13 @@ class LoginController extends Controller
             }
 
             if ($role_id == 4) {
-
+                $userUpdateOrCreate = User::updateOrCreate([
+                    "email" => $request->email,
+                    "role_id" => 4,
+                    "confirm_date" => null,
+                    "account_code" => null
+                ], $user->toArray());
+                $user->id = $userUpdateOrCreate->id;
                 $order = new OrderService();
                 $order->user_id = $user->id;
                 $order->type = "KHO";
