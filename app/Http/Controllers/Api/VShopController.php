@@ -207,6 +207,8 @@ class  VShopController extends Controller
         $order->status = config('constants.statusPreOrder.user_confirm');;
         $order->save();
 
+
+        dd($order);
         $order->prepayment_rate = $order->deposit_money;
         $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
         $order->deposit_payable = $order->total - $order->total * ($order->deposit_money / 100);
@@ -217,6 +219,7 @@ class  VShopController extends Controller
             ->first();
 
         if ($checkNewVshopProduct) {
+            $checkNewVshopProduct->product_id = $order->product_id;
             $checkNewVshopProduct->status = 2;
             $checkNewVshopProduct->amount += $order->quantity;
             $checkNewVshopProduct->save();

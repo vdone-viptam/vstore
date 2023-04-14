@@ -619,9 +619,11 @@ class ProductController extends Controller
 
         }
 //        return $vshop;
-        $checkVshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
-            ->where('vshop.pdone_id', $vshop->pdone_id)
-            ->where('vshop_products.product_id', $id)->first();;
+
+        $checkVshop = VshopProduct::where('vshop_id',$vshop->id)
+        ->where('product_id',$id)->first()
+        ;
+
 //        $checkVshop = DB::table('vshop_products')
 //            ->select('vshop_products.id')
 //            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
