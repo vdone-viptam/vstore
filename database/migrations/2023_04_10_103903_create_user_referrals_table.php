@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('user_id');
             $table->string('vshop_id');
+            $table->integer('is_split')->default(0);
             $table->timestamps();
         });
     }
