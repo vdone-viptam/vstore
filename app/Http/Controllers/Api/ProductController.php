@@ -59,7 +59,7 @@ class ProductController extends Controller
                 ->where('availability_status', 1);
             $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay', 'discount_vShop as discountVstore',
                 DB::raw("price - (price * IFNULL((SELECT SUM(discount /100)
-                        FROM discounts WHERE start_date <= NOW() and end_date >= NOW()
+                        FROM discounts WHERE start_date <= '" . Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
                                         AND product_id = products.id AND type != 3 GROUP BY product_id),0)) as order_price")];
             $request->option = $request->option ?? 'desc';
             $request->order_by = $request->order_by ?? 1;
@@ -620,9 +620,8 @@ class ProductController extends Controller
         }
 //        return $vshop;
 
-        $checkVshop = VshopProduct::where('vshop_id',$vshop->id)
-        ->where('product_id',$id)->first()
-        ;
+        $checkVshop = VshopProduct::where('vshop_id', $vshop->id)
+            ->where('product_id', $id)->first();
 
 //        $checkVshop = DB::table('vshop_products')
 //            ->select('vshop_products.id')
@@ -960,6 +959,7 @@ class ProductController extends Controller
                     $increment = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('pdone_id', $pdone_id)
+                        ->where('status', 2)
                         ->where('product_id', $value['product_id'])
                         ->where('vshop_products.amount', '>=', $value['amount'])
                         ->increment('vshop_products.amount', -$value['amount']);
