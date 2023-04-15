@@ -259,7 +259,7 @@ class ReviewProductApiController extends Controller
                  $totalReviews->where('points.status',$status_rep);
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
-            return $totalReviews;
+
         //    return $totalReviews;
             foreach($totalReviews as $key => $value){
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
