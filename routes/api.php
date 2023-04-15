@@ -177,7 +177,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
 
         Route::get('/get_money_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
-
+        Route::post('delivery_off/{product_id}/{pdone_id}',[\App\Http\Controllers\Api\VShopController::class,'delivery_off']);
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
             Route::post('/store/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);

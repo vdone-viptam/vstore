@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('product_id')->nullable();
             $table->integer('status')->nullable();
             $table->integer('amount')->default(0);
+            $table->integer('delivery_off')->default(0);
             $table->timestamps();
         });
     }

@@ -781,7 +781,7 @@ class ProductController extends Controller
         $products = DB::table('vshop')
             ->selectRaw('products.name as product_name,publish_id,price,
                 images, products.id, discount_vShop ,vshop_products.amount_product_sold,
-                vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le')
+                vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le','vshop_products.delivery_off')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('availability_status', 1)
@@ -963,6 +963,17 @@ class ProductController extends Controller
                         ->where('product_id', $value['product_id'])
                         ->where('vshop_products.amount', '>=', $value['amount'])
                         ->increment('vshop_products.amount', -$value['amount']);
+
+                    $change = VshopProduct::join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                        ->where('pdone_id', $pdone_id)
+                        ->where('status', 2)
+                        ->where('product_id', $value['product_id'])
+                        ->where('vshop_products.amount',0)
+                        ->update([
+                            'status'=>1
+                        ]);
+
+
                 }
             }
 

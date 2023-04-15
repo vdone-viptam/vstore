@@ -1133,4 +1133,30 @@ class  VShopController extends Controller
 
     }
 
+    public function delivery_off( $product_id,$pdone_id){
+
+        $vshop_product = VshopProduct::join('vshop','vshop_products.vshop_id','=','vshop.id')
+            ->where('vshop_products.status',2)
+            ->where('vshop_products.product_id',$product_id)
+            ->where('vshop.pdone_id',$pdone_id)->first();
+
+
+        if (!$vshop_product){
+            return response()->json([
+                'status_code' => 404,
+                'message' => 'sản phẩm chưa được Vshop tiếp thị hoặc không tìm thấy',
+            ], 404);
+        }else{
+            if ($vshop_product->delivery_off==1){
+                $vshop_product->delivery_off = 0 ;
+            }else{
+                $vshop_product->delivery_off = 1 ;
+            }
+            $vshop_product->save();
+        }
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'Thay đổi trạng thái giao nhận thành công'
+        ], 200);
+    }
 }
