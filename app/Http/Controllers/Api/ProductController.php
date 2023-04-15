@@ -786,8 +786,7 @@ class ProductController extends Controller
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('availability_status', 1)
-            ->where('vshop_products.status', $request->status)
-            ->where('pdone_id', $pdone_id);
+            ->where('vshop_products.status', $request->status);
         if ($request->orderBy == 1) {
             $products = $products->orderBy('vshop_products.amount', $type);
         }
@@ -890,6 +889,7 @@ class ProductController extends Controller
                     ->where('product_id', $pro['product_id'])
                     ->where('amount', '>=', $pro['amount'])
                     ->count();
+
                 if ($products == 0) {
                     return response()->json([
                         'status_code' => 400,

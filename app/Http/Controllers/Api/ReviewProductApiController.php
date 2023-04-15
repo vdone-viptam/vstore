@@ -105,7 +105,7 @@ class ReviewProductApiController extends Controller
             'customer_id' => 'required',
             'descriptions' => 'max:200',
             'point_evaluation' => 'required|integer|between:1,5',
-            "images" => ["array","max:3"],
+            "images" => ["array","max:5"],
         ]);
         if ($validator->fails()) {
             return response()->json([
