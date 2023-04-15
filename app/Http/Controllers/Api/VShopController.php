@@ -735,7 +735,7 @@ class  VShopController extends Controller
         }
         $to = Carbon::make($request->start_date);
         $from = Carbon::make($request->end_date);
-        if ($from->diffInMinutes($to) < 10) {
+        if ($from->diffInMinutes($to) < 9) {
             return response()->json([
                 'status_code' => 400,
                 'error' => [
@@ -810,7 +810,7 @@ class  VShopController extends Controller
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required',
             'product_id' => 'required|exists:products,id',
-            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(10),
+            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(9),
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
@@ -826,7 +826,7 @@ class  VShopController extends Controller
         }
         $to = Carbon::make($request->start_date);
         $from = Carbon::make($request->end_date);
-        if ($from->diffInMinutes($to) < 10) {
+        if ($from->diffInMinutes($to) < 9) {
             return response()->json([
                 'status_code' => 400,
                 'error' => [
@@ -1136,24 +1136,30 @@ class  VShopController extends Controller
     public function delivery_off( $product_id,$pdone_id){
 
         $vshop_product = VshopProduct::join('vshop','vshop_products.vshop_id','=','vshop.id')
+            ->select('vshop_products.id')
             ->where('vshop_products.status',2)
             ->where('vshop_products.product_id',$product_id)
             ->where('vshop.pdone_id',$pdone_id)->first();
-
 
         if (!$vshop_product){
             return response()->json([
                 'status_code' => 404,
                 'message' => 'sản phẩm chưa được Vshop tiếp thị hoặc không tìm thấy',
             ], 404);
-        }else{
-            if ($vshop_product->delivery_off==1){
-                $vshop_product->delivery_off = 0 ;
-            }else{
-                $vshop_product->delivery_off = 1 ;
-            }
-            $vshop_product->save();
         }
+        $insert_vshop_product = VshopProduct::find($vshop_product->id);
+            if ($insert_vshop_product->delivery_off == 1){
+
+
+                $insert_vshop_product->delivery_off = 0 ;
+                $insert_vshop_product->save();
+
+            }else{
+
+                $insert_vshop_product->delivery_off = 1 ;
+                $insert_vshop_product->save();
+            }
+
         return response()->json([
             'status_code' => 200,
             'message' => 'Thay đổi trạng thái giao nhận thành công'
