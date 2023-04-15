@@ -192,6 +192,10 @@ class ReviewProductApiController extends Controller
             $totalReviews = $totalReviews->paginate($limit);
 
             foreach($totalReviews as $key => $value){
+                if (!empty($value['point_rep'])){
+                    $totalReviews[$key]['point_rep']['created_at_iso'] = Carbon::parse($value['point_rep']->created_at);
+                    $totalReviews[$key]['point_rep']['updated_at_iso'] = Carbon::parse($value['point_rep']->created_at);
+                }
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
                 $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
@@ -262,6 +266,10 @@ class ReviewProductApiController extends Controller
 
         //    return $totalReviews;
             foreach($totalReviews as $key => $value){
+                if (!empty($value['point_rep'])){
+                    $totalReviews[$key]['point_rep']['created_at_iso'] = Carbon::parse($value['point_rep']->created_at);
+                    $totalReviews[$key]['point_rep']['updated_at_iso'] = Carbon::parse($value['point_rep']->created_at);
+                }
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
                 $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
