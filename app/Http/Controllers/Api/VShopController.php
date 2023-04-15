@@ -201,7 +201,7 @@ class  VShopController extends Controller
             return response()->json([
                 "status_code" => 404,
                 "message" => "Hoá đơn không tồn tại"
-            ],404);
+            ], 404);
         }
 
         $order->status = config('constants.statusPreOrder.user_confirm');;
@@ -215,12 +215,15 @@ class  VShopController extends Controller
 
 
         $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
+            ->where('status', '!=', 3)
             ->where('product_id', $order->product_id)
             ->first();
 
         if ($checkNewVshopProduct) {
             $checkNewVshopProduct->product_id = $order->product_id;
-            $checkNewVshopProduct->status = 2;
+            if ($checkNewVshopProduct->status == 1) {
+                $checkNewVshopProduct->status = 2;
+            }
             $checkNewVshopProduct->amount += $order->quantity;
             $checkNewVshopProduct->save();
         } else {

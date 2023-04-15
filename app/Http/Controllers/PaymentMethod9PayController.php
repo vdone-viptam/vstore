@@ -568,10 +568,11 @@ class PaymentMethod9PayController extends Controller
             $order->save();
             $cart = CartV2::where('user_id', $order->user_id)
                 ->first();
-            CartItemV2::where('cart_id', $cart->id)
-                ->where('product_id', $orderItems->product_id)
-                ->delete();
-
+            if($cart) {
+                CartItemV2::where('cart_id', $cart->id)
+                    ->where('product_id', $orderItems->product_id)
+                    ->delete();
+            }
             $requestEx = new RequestWarehouse();
 
             $requestEx->ncc_id = 0;
