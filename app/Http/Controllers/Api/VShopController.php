@@ -201,7 +201,7 @@ class  VShopController extends Controller
             return response()->json([
                 "status_code" => 404,
                 "message" => "Hoá đơn không tồn tại"
-            ],404);
+            ], 404);
         }
 
         $order->status = config('constants.statusPreOrder.user_confirm');;
@@ -215,12 +215,15 @@ class  VShopController extends Controller
 
 
         $checkNewVshopProduct = VshopProduct::where('vshop_id', $user_id)
+            ->where('status', '!=', 3)
             ->where('product_id', $order->product_id)
             ->first();
 
         if ($checkNewVshopProduct) {
             $checkNewVshopProduct->product_id = $order->product_id;
-            $checkNewVshopProduct->status = 2;
+            if ($checkNewVshopProduct->status == 1) {
+                $checkNewVshopProduct->status = 2;
+            }
             $checkNewVshopProduct->amount += $order->quantity;
             $checkNewVshopProduct->save();
         } else {
@@ -1130,4 +1133,30 @@ class  VShopController extends Controller
 
     }
 
+    public function delivery_off( $product_id,$pdone_id){
+
+        $vshop_product = VshopProduct::join('vshop','vshop_products.vshop_id','=','vshop.id')
+            ->where('vshop_products.status',2)
+            ->where('vshop_products.product_id',$product_id)
+            ->where('vshop.pdone_id',$pdone_id)->first();
+
+
+        if (!$vshop_product){
+            return response()->json([
+                'status_code' => 404,
+                'message' => 'sản phẩm chưa được Vshop tiếp thị hoặc không tìm thấy',
+            ], 404);
+        }else{
+            if ($vshop_product->delivery_off==1){
+                $vshop_product->delivery_off = 0 ;
+            }else{
+                $vshop_product->delivery_off = 1 ;
+            }
+            $vshop_product->save();
+        }
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'Thay đổi trạng thái giao nhận thành công'
+        ], 200);
+    }
 }

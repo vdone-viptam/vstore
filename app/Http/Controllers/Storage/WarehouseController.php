@@ -349,7 +349,6 @@ class WarehouseController extends Controller
             ->join('warehouses', 'order_item.warehouse_id', '=', 'warehouses.id')
             ->join('users', 'warehouses.user_id', '=', 'users.id')
             ->where('order.status', '!=', 2)
-            ->where('export_status', 1)
             ->where('order.id', $request->order_id)
             ->first();
 

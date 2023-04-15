@@ -433,7 +433,7 @@ class OrderController extends Controller
             }
             $orders = $orders
                 ->where('status', '!=', 2)
-                ->orderBy('order.updated_at', 'desc')
+                ->orderBy('order.id', 'desc')
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
