@@ -719,7 +719,7 @@ class  VShopController extends Controller
     {
 //        return 1;
         $validator = Validator::make($request->all(), [
-            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(10),
+            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(9),
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
@@ -735,7 +735,7 @@ class  VShopController extends Controller
         }
         $to = Carbon::make($request->start_date);
         $from = Carbon::make($request->end_date);
-        if ($from->diffInMinutes($to) < 9) {
+        if ($from->diffInMinutes($to) <= 9) {
             return response()->json([
                 'status_code' => 400,
                 'error' => [
@@ -826,7 +826,7 @@ class  VShopController extends Controller
         }
         $to = Carbon::make($request->start_date);
         $from = Carbon::make($request->end_date);
-        if ($from->diffInMinutes($to) < 9) {
+        if ($from->diffInMinutes($to) <= 9) {
             return response()->json([
                 'status_code' => 400,
                 'error' => [
