@@ -127,6 +127,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('categories')->group(function () {
         //list danh mục
+        Route::get('search', [\App\Http\Controllers\Api\CategoryController::class, 'searchCategoryByKeyword']);
         Route::get('', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
         Route::get('get-category-by-vstore/{vstore_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getCategoryByVstore']);
         Route::get('get-product-vstore-by-category/{category_id}', [\App\Http\Controllers\Api\CategoryController::class, 'getProductAndVstoreByCategory']);
@@ -139,6 +140,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/get-list', [\App\Http\Controllers\Api\ManufactureController::class, 'index']);
         Route::get('/profile/{ncc_id}', [\App\Http\Controllers\Api\ManufactureController::class, 'profileNCC']);
 
+        Route::get('search', [\App\Http\Controllers\Api\ManufactureController::class, 'searchManufacturesByKeyword']);
     });
     Route::prefix('finances')->group(function () {
         Route::get('get-list-bank', [\App\Http\Controllers\Api\FinanceController::class, 'getListBank']);
@@ -162,7 +164,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
     Route::prefix('vshop')->group(function () {
         Route::get('/products/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'adminGetProductByvShop']);
-
+        Route::get('search', [\App\Http\Controllers\Api\VShopController::class, 'searchShopByKeyword']);
 
         Route::get('', [\App\Http\Controllers\Api\VShopController::class, 'index']);
         Route::match(['put', 'post'], 'create', [\App\Http\Controllers\Api\VShopController::class, 'create']);
