@@ -35,7 +35,7 @@ class AffUser extends Command
     public function handle()
     {
         $user_re = UserReferral::where('is_split','!=',1)
-            ->where('created_at','<=',Carbon::now()->addDay(-7))
+            ->where('created_at','<=',Carbon::now()->addDay(-5))
             ->get();
         if (count($user_re)>0){
 
