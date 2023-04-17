@@ -82,7 +82,9 @@ class AccountController extends Controller
                 DB::commit();
             } catch (ClientResponseException $exception) {
                 DB::rollBack();
-                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+
+                dd($exception->getMessage());
+                return redirect()->back()->with('error', );
             }
             return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
         } catch (\Exception $e) {
@@ -132,7 +134,7 @@ class AccountController extends Controller
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->back()->withErrors(['old_password' => "Mật khẩu cũ không chính xác"])->withInput($request->all())->with('validate', 'failed');
         }
-        
+
         $validator = Validator::make($request->all(), [
             'password' => 'required|confirmed|min:8|regex:'.config('regex.password'),
         ], [
