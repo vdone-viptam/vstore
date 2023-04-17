@@ -226,8 +226,8 @@
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
             </div>
             <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium">Mã giới thiệu</span>
-                <input type="text" name="referral_code" placeholder="Mã giới thiệu" readonly
+                <span class="text-sm font-medium">Người giới thiệu</span>
+                <input type="text" name="referral_code" placeholder="V-Shop giới thiệu" readonly
                        value="{{$referral_code}}"
 
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
@@ -243,7 +243,7 @@
     <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
         <button type="submit"
                 class="active btn-sub text-center w-full text-grey text-xl font-medium  text-[#FFF] rounded-lg py-4 bg-sky-500/100"
-        >Mua ngay
+        >Đăng ký mua
         </button>
         <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_vstore')}}"
                                                                          class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
@@ -251,82 +251,9 @@
 </form>
 
 <script src="{{asset('asset/js/main.js')}}"></script>
-<script>
-    // $('#formRegister-V').validate({
-    //     rules: {
-    //         name: {
-    //             required: true,
-    //         },
-    //         id_vdone: {
-    //             required: true,
-    //         },
-    //         email: {
-    //             required: true,
-    //         },
-    //         company_name: {
-    //             required: true,
-    //         },
-    //         tax_code: {
-    //             required: true,
-    //         },
-    //         address: {
-    //             required: true,
-    //         },
-    //         phone_number: {
-    //             required: true,
-    //         },
-    //         password: {
-    //             required: true,
-
-    //         },
-    //         password_confirmation: {
-    //             required: true,
-    //             equalTo: '#password'
-    //         },
-    //         terms_of_use: {
-    //             required: true,
-    //         }
-    //     },
-    //     messages: {
-    //         name: {
-    //             required: 'Bạn cần nhập tên V-Store'
-    //         },
-    //         id_vdone: {
-    //             required: 'Bạn cần nhập ID người đại diện'
-    //         },
-    //         email: {
-    //             required: 'Bạn cần nhập địa chỉ Email'
-    //         },
-    //         company_name: {
-    //             required: 'Bạn cần nhập tên công ty'
-    //         },
-    //         tax_code: {
-    //             required: 'Bạn cần nhập mã số thuế'
-    //         },
-    //         address: {
-    //             required: 'Bạn cần nhập địa chỉ'
-    //         },
-    //         password: {
-    //             required: 'Bạn phải nhập mật khẩu',
-
-    //         },
-    //         password_confirmation: {
-    //             required: 'Bạn phải nhập lại mật khẩu',
-    //             equalTo: 'Mật khẩu không khớp'
-    //         },
-    //         phone_number: {
-    //             required: 'Số điện thoại bắt buộc nhập',
-    //         },
-    //         terms_of_use: {
-    //             required: 'Bạn cần đồng ý điều khoản sử dụng của chúng tôi',
-    //         },
-    //     },
-    //     submitHandler: function (form) {
-    //         form.submit();
-    //     }
-    // });
-</script>
 <script !src="">
+    document.querySelector('.active').setAttribute('disabled', 'true');
+    document.querySelector('.active').classList.add('bg-slate-300');
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
     const divWard = document.getElementById('ward_id');
@@ -349,6 +276,14 @@
 
             .then((data) => {
                 if (data.length > 0) {
+                    const check = checkEmpty(inputs);
+                    if (check && divCity.value && divDistrict.value && divWard.value) {
+                        document.querySelector('.active').removeAttribute('disabled');
+                        document.querySelector('.active').classList.remove('bg-slate-300');
+                    } else {
+                        document.querySelector('.active').setAttribute('disabled', 'true');
+                        document.querySelector('.active').classList.add('bg-slate-300');
+                    }
                     divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
 
                 } else {
@@ -366,6 +301,14 @@
             .then((response) => response.json())
             .then((data) => {
                 if (data.length > 0) {
+                    const check = checkEmpty(inputs);
+                    if (check && divCity.value && divDistrict.value && divWard.value) {
+                        document.querySelector('.active').removeAttribute('disabled');
+                        document.querySelector('.active').classList.remove('bg-slate-300');
+                    } else {
+                        document.querySelector('.active').setAttribute('disabled', 'true');
+                        document.querySelector('.active').classList.add('bg-slate-300');
+                    }
                     divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
 
                 } else {
@@ -376,7 +319,32 @@
             )
     });
 
-    // divWard.addEventListener('')
+    function checkEmpty(inputs) {
+        let check1 = true
+        inputs.forEach((item1, index1) => {
+            if (!item1.value && index1 > 0 && index1 != 8 &&  index1 != 9) {
+                check1 = false;
+            }
+        });
+
+        return check1;
+    }
+
+    const inputs = document.querySelectorAll('input');
+    console.log(inputs[9]);
+    inputs.forEach((item, index) => {
+        item.setAttribute('autocomplete','off')
+        item.addEventListener('change', (e) => {
+            const check = checkEmpty(inputs);
+            if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked) {
+                document.querySelector('.active').removeAttribute('disabled');
+                document.querySelector('.active').classList.remove('bg-slate-300');
+            } else {
+                document.querySelector('.active').setAttribute('disabled', 'true');
+                document.querySelector('.active').classList.add('bg-slate-300');
+            }
+        })
+    });
 </script>
 @if(old('city_id') != '')
     <script>

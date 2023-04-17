@@ -86,6 +86,7 @@ class WarehouseController extends Controller
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
+            ->whereNotIn('order.export_status', [3, 5])
             ->orderBy($field, $type);
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
@@ -205,6 +206,7 @@ class WarehouseController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('request_warehouses.id', $request->id)
             ->orWhere('request_warehouses.code', $request->id)
+
             ->first();
         if ($requests->type == 2) {
             $requests->order_number = RequestWarehouse::select('order_number')

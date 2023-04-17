@@ -277,28 +277,28 @@
                                                name="length"
                                                value="{{old('length')}}"
                                                id="length"
-                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                               class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         @error('length')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
                                     </div>
 
                                     <div class="flex flex-col">
-                                        <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)"
+                                        <input type="number" id="chieu_rong" min="0" max="" placeholder="Nhập chiều rộng (cm)"
                                                name="with"
                                                value="{{old('with')}}"
                                                id="with"
-                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                               class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         @error('with')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col">
-                                        <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)"
+                                        <input type="number"  min="0" max="" placeholder="Nhập chiều cao (cm)"
                                                name="height"
                                                value="{{old('height')}}"
                                                id="height"
-                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                               class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         @error('height')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
@@ -557,6 +557,22 @@
         })
     </script>
     <script>
+        document.querySelector('#chieu_rong').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        document.querySelector('#height').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
         document.querySelector('#price').addEventListener("keypress", (e) => {
             var regex = new RegExp("^[0-9]+$");
             var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
