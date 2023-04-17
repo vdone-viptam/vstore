@@ -263,27 +263,27 @@
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-none transition-all duration-200 rounded-sm ">
             </div>
 
-            </div>
         </div>
-        <div class="text-center my-4">
-            <input id="terms_of_use" type="checkbox" value="1" required>
-            <label for="terms_of_use">
-                Bạn đồng ý với điều khoản sử dụng của chúng tôi.
-            </label>
-            <a
-                href="#"
-                onclick="$('.modal-hd').toggleClass('show-modal')"
-                class="underline text-blue-700">Xem
-                thêm</a></div>
-        <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
-            <button type="submit"
-                    class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
-            >Đăng ký mua
-            </button>
-            <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
-                                                                             class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
-        </div>
-    </form>
+</div>
+<div class="text-center my-4">
+    <input id="terms_of_use" type="checkbox" value="1" required>
+    <label for="terms_of_use">
+        Bạn đồng ý với điều khoản sử dụng của chúng tôi.
+    </label>
+    <a
+        href="#"
+        onclick="$('.modal-hd').toggleClass('show-modal')"
+        class="underline text-blue-700">Xem
+        thêm</a></div>
+<div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
+    <button type="submit"
+            class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
+    >Mua ngay
+    </button>
+    <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_ncc')}}"
+                                                                     class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
+</div>
+</form>
 </div>
 @if($isOrder)
     <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
@@ -414,7 +414,7 @@
                                     <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">
                                     <label class="cursor-pointer" for="paymentInput2">Thẻ nội địa</label>
                                 </div>
-                                <input value="ATM_CARD" class="cursor-pointer"  id="paymentInput2" name="method_payment"
+                                <input value="ATM_CARD" class="cursor-pointer" id="paymentInput2" name="method_payment"
                                        type="radio">
                             </div>
                             <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">
@@ -544,7 +544,7 @@
     function checkEmpty(inputs) {
         let check1 = true
         inputs.forEach((item1, index1) => {
-            if (!item1.value && index1 > 0 && index1 != 8 &&  index1 != 9) {
+            if (!item1.value && index1 > 0 && index1 != 8 && index1 != 9) {
                 check1 = false;
             }
         });
@@ -555,7 +555,7 @@
     const inputs = document.querySelectorAll('input');
     console.log(inputs[9]);
     inputs.forEach((item, index) => {
-        item.setAttribute('autocomplete','off')
+        item.setAttribute('autocomplete', 'off')
         item.addEventListener('change', (e) => {
             const check = checkEmpty(inputs);
             if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked) {
