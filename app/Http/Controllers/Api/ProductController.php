@@ -111,7 +111,7 @@ class ProductController extends Controller
                 if ($request->pdone_id) {
                     $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                             ->where('product_id', $pro->id)
-                            ->where('vshop_products.status', 1)
+                            ->whereIn('vshop_products.status', [1, 2])
                             ->where('vshop.pdone_id', $request->pdone_id)
                             ->count() ?? 0;
                     $pro->is_affiliate = $pro->is_affiliate > 0 ? 1 : 0;
@@ -226,7 +226,7 @@ class ProductController extends Controller
             if ($request->pdone_id) {
                 $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                         ->where('product_id', $pro->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count() ?? 0;
                 $pro->is_affiliate = $pro->is_affiliate > 0 ? 1 : 0;
@@ -261,7 +261,8 @@ class ProductController extends Controller
     {
         try {
             $limit = $request->limit ?? 8;
-            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'discount_vShop as discountVstore')
+            $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'discount_vShop as discountVstore'
+            )
                 ->where('category_id', $id)
                 ->where('availability_status', 1)
                 ->where('status', 2);
@@ -301,7 +302,7 @@ class ProductController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
@@ -465,7 +466,7 @@ class ProductController extends Controller
                 $value->is_affiliate = DB::table('vshop_products')
                     ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                     ->where('product_id', $value->id)
-                    ->where('vshop_products.status', 1)
+                    ->whereIn('vshop_products.status', [1, 2])
                     ->where('vshop.pdone_id', $request->pdone_id)
                     ->count();
                 $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $value->id)->first()->max;
@@ -506,7 +507,8 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->select('publish_id',
             'id', 'name', 'images', 'price', 'discount_vShop as discountVstore',
             'type_pay', 'video', 'description as content', 'user_id', 'category_id',
-            'amount_product_sold', 'short_content', 'vat')
+            'amount_product_sold', 'short_content', 'vat',
+            DB::raw("(SELECT IFNULL(AVG(point_evaluation),0) FROM points WHERE product_id = $id) as rating"))
             ->where('availability_status', 1)
             ->first();
 
@@ -526,7 +528,6 @@ class ProductController extends Controller
         $products_available = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2 AND product_id =" . $product->id . " ) as amount FROM product_warehouses where status = 1 AND product_id = " . $product->id . ""))[0]->amount ?? 0;
         $product->products_available = $products_available;
         $product->available_discount = BuyMoreDiscount::Where('end', 0)->where('product_id', $product->id)->select('discount')->first()->discount;
-        $product->rating = 5;
         //check đã tiếp thị hay chưa
         if ($request->pdone_id) {
 //            return 1;
@@ -745,7 +746,7 @@ class ProductController extends Controller
                         ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
                 $pr->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count() ?? 0;
             }

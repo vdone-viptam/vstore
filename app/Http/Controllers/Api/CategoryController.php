@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Validator;
  */
 class CategoryController extends Controller
 {
-    public function searchCategoryByKeyword(Request $request) {
+    public function searchCategoryByKeyword(Request $request)
+    {
 
 
         $validator = Validator::make($request->all(), [
@@ -179,7 +180,7 @@ class CategoryController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
@@ -266,7 +267,7 @@ class CategoryController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1,2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
