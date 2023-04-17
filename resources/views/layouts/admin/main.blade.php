@@ -141,7 +141,6 @@
         const ul = item.querySelector('ul');
 
         if (ul && ul.classList.contains('pagination')) {
-            console.log(ul);
             ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })

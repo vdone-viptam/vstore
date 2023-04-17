@@ -108,13 +108,10 @@ class WarehouseController extends Controller
 //        return $amount;h
     }
 
-    public function index()
+    public function index(Request $request)
     {
-//        return 1;
-//        $products = DB::table('warehouses')->selectRaw('name,address,phone_number,SUM(amount) as amount_product,count(product_id) as amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->groupByRaw('name,address,phone_number')->paginate(10);
-//        foreach ($products as $product) {
-//        }
-//        dd($products);
+        $limit = $request->limit ?? 10;
+        $condition = $request->condition ?? 'warehouses.name';
         $ware = DB::table('warehouses')
             ->selectRaw('warehouses.name as ware_name,warehouses.id,
             phone_number,
@@ -122,30 +119,32 @@ class WarehouseController extends Controller
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
-            ->where('product_warehouses.status', 1)
-            ->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
-        return view('screens.manufacture.warehouse.index', ['warehouses' => $ware]);
+            ->where('product_warehouses.status', 1);
+        if ($request->condition && $request->condition != 0) {
+            $ware = $ware->where($request->condition, 'like', '%' . trim($request->key_search) . '%');
+        }
+        $ware = $ware->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate($limit);
+        return view('screens.manufacture.warehouse.index', ['warehouses' => $ware, 'key_search' => trim($request->key_search) ?? '', 'condition' => $condition]);
     }
 
-    public function swap()
+    public function swap(Request $request)
     {
-//        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->where('product_warehouses.status','!=',3)->orderBy('product_warehouses.id', 'desc')->paginate(10);
-//        $products = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
-//            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
-//            ->select()
-//            ->paginate(10);
-
+        $limit = $request->limit ?? 10;
+        $condition = $request->condition ?? 'request_warehouses.code';
         $products = Warehouses::select('request_warehouses.code', 'warehouses.name as ware_name',
             'products.name', 'request_warehouses.status',
             'request_warehouses.quantity',
             'request_warehouses.created_at', 'request_warehouses.type')
             ->join('request_warehouses', 'warehouses.id', '=', 'request_warehouses.ware_id')
-            ->join("products", 'request_warehouses.product_id', '=', 'products.id')
-            ->orderBy('request_warehouses.id', 'desc')
+            ->join("products", 'request_warehouses.product_id', '=', 'products.id');
+        if ($request->condition && $request->condition != 0) {
+            $products = $products->where($request->condition, 'like', '%' . trim($request->key_search) . '%');
+        }
+        $products = $products->orderBy('request_warehouses.id', 'desc')
             ->where('products.user_id', Auth::id())
-            ->paginate(10);
+            ->paginate($limit);
 //        $products = Product::where('user_id',Auth::user()->id)->paginate(10);
-        return view('screens.manufacture.warehouse.swap', ['products' => $products]);
+        return view('screens.manufacture.warehouse.swap', ['products' => $products, 'key_search' => trim($request->key_search) ?? '', 'condition' => $condition]);
 
     }
 
