@@ -51,7 +51,7 @@ class ViettelpostController extends Controller
                         if ($vstore){
                             $data_vstore = [
                                 'title' => 'Bạn vừa có 1 thông báo mới',
-                                'avatar' => asset('home/img/NCC.png'  ) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+                                'avatar' => asset('home/img/Logo.png'  ) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                                 'message' =>   'Đơn hàng '.$order->no . ' đã giao thành công',
                                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
                                 'href' => route('screens.vstore.order.index',)

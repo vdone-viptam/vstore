@@ -35,7 +35,9 @@ class BigSaleController extends Controller
             $limit = $request->limit ?? 12;
             $products = DB::table('products')
                 ->where('availability_status', 1);
-            $selected = ['products.id', 'images', 'publish_id', 'price', 'products.name'];
+            $selected = ['products.id', 'images', 'publish_id', 'price', 'products.name',DB::raw("price - (price * IFNULL((SELECT SUM(discount /100)
+                        FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
+                                        AND product_id = products.id AND type != 3 GROUP BY product_id),0)) as order_price")];
             if ($request->pdone_id) {
                 $selected[] = 'discount_vShop as discountVstore';
             }
@@ -49,7 +51,7 @@ class BigSaleController extends Controller
             }
             if ($request->order_by == 2) {
                 $order_by_price = $request->option == 'asc' ? 'asc' : 'desc';
-                $products = $products->orderBy('price', $order_by_price);
+                $products = $products->orderBy('order_price', $order_by_price);
             }
             if ($request->order_by == 3) {
                 $order_by_sold = $request->option == 'asc' ? 'asc' : 'desc';
