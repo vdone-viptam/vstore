@@ -12,5 +12,4 @@ return [
     'vstore' => 'vstore',
     'vshop' => 'vshop',
     'supplier' => 'supplier',
-    'category' => 'category'
 ];

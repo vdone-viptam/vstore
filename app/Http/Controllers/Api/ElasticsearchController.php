@@ -164,7 +164,7 @@ class ElasticsearchController extends Controller
     public function createDocCategory($id, $name)
     {
         $params = [
-            'index' => config('elasticsearch.category'),
+            'index' => config('elasticsearch.vstore_categories'),
             'id' => $id,
             'body' => [
                 "name" => $name
@@ -176,7 +176,7 @@ class ElasticsearchController extends Controller
     public function updateDocCategory($id, $name)
     {
         $params = [
-            'index' => config('elasticsearch.category'),
+            'index' => config('elasticsearch.vstore_categories'),
             'id' => $id,
             'body' => [
                 'doc' => [
