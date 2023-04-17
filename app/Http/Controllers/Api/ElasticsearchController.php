@@ -176,7 +176,7 @@ class ElasticsearchController extends Controller
     public function updateDocCategory($id, $name)
     {
         $params = [
-            'index' => 'category',
+            'index' => config('elasticsearch.category'),
             'id' => $id,
             'body' => [
                 'doc' => [
