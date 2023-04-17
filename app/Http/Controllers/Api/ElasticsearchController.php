@@ -100,7 +100,7 @@ class ElasticsearchController extends Controller
     public function updateDocVStore($id, $name)
     {
         $params = [
-            'index' => 'vstore',
+            'index' =>  config('elasticsearch.vstore_products'),
             'id' => $id,
             'body' => [
                 'doc' => [
