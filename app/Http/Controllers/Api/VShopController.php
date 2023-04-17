@@ -1028,13 +1028,20 @@ class  VShopController extends Controller
             ->where('vshop.pdone_id', $vshop->pdone_id)
             ->groupBy('categories.name')
             ->get();
-        $data = [];
-        foreach ($cate as $c) {
-            $data[] = $c->name;
+        if ($cate) {
+            $data = [];
+            foreach ($cate as $c) {
+                $data[] = $c->name;
+            }
+            if (count($data) > 0) {
+                $vshop->categories = implode(', ', $data) ?? '';
+            } else {
+                $vshop->categories = '';
+            }
+        } else {
+            $vshop->categories = '';
         }
-        if (count($data) > 0) {
-            $vshop->categories = implode(', ', $data) ?? '';
-        }
+
 
         return response()->json([
             'status_code' => 201,
