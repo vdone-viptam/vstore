@@ -1033,7 +1033,7 @@ class  VShopController extends Controller
             $data[] = $c->name;
         }
         if (count($data) > 0) {
-            $vshop->categories = implode(', ', $data);
+            $vshop->categories = implode(', ', $data) ?? '';
         }
 
         return response()->json([
