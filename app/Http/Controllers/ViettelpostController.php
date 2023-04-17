@@ -12,6 +12,7 @@ use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\View\View;
 
 class ViettelpostController extends Controller
 {
@@ -113,8 +114,16 @@ class ViettelpostController extends Controller
                 $order_id
         ]
         ]);
+//        return "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill=".$respon['message']."=&showPostage=1";
         if ($respon !=''){
-            $data =  "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill=".$respon['message']."=&showPostage=1";
+//
+
+            $data = file_get_contents("https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill=".$respon['message']."=&showPostage=1",0);
+//            $data =  json_decode($data);
+//            $data =  json_decode($data);
+
+
+
             return response()->json([
                 'success' => true,
                 'data' => $data
