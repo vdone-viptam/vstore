@@ -44,7 +44,7 @@
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm giảm giá (%):</span>
-                        <input name="discount" id="discount"
+                        <input name="discount" id="discount" type="number"
                                class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
