@@ -292,7 +292,9 @@ class ElasticsearchController extends Controller
             'index' => config('elasticsearch.vshop'),
             'id' => $id,
             'body' => [
-                "name" => $name
+                'doc' => [
+                    'name' => $name
+                ]
             ],
         ];
         return $this->client->update($params);
