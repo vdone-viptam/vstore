@@ -84,13 +84,10 @@ class ViettelpostController extends Controller
                             'orderId'=> $order->id,
                             'type'=>10
                         ]);
-                        return $mess_vshop;
 
                     }
 
-                    return $order_item;
                 }
-                return $order->order_status;
             }
             if ($order->order_status == 503 || $order->order_status == 507 ){
                 $order->export_status =5;
