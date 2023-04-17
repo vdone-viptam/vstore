@@ -499,7 +499,7 @@ class  VShopController extends Controller
             $elasticsearchController = new ElasticsearchController();
 
             try {
-                $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->name);
+                $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
                 DB::commit();
             } catch (ClientResponseException $exception) {
                 DB::rollBack();
@@ -509,7 +509,7 @@ class  VShopController extends Controller
             $elasticsearchController = new ElasticsearchController();
 
             try {
-                $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->name);
+                $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
                 DB::commit();
             } catch (ClientResponseException $exception) {
                 DB::rollBack();
