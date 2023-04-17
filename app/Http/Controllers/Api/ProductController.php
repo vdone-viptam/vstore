@@ -381,11 +381,11 @@ class ProductController extends Controller
                 $value->available_discount = $available_discount->discount;
             }
 
-            $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $value->id)
+            $discount = round(DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $value->id)
                     ->where('start_date', '<=', Carbon::now())
                     ->where('end_date', '>=', Carbon::now())
                     ->whereIn('type', [1, 2])
-                    ->first()->sum ?? 0;
+                    ->first()->sum ?? 0, 2);
             $value->discount = $discount;
 
 
@@ -785,7 +785,7 @@ class ProductController extends Controller
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('availability_status', 1)
             ->where('vshop_products.status', $request->status)
-            ->where('vshop.pdone_id',$pdone_id);
+            ->where('vshop.pdone_id', $pdone_id);
 
         if ($request->orderBy == 1) {
             $products = $products->orderBy('vshop_products.amount', $type);
@@ -970,9 +970,9 @@ class ProductController extends Controller
                         ->where('pdone_id', $pdone_id)
                         ->where('status', 2)
                         ->where('product_id', $value['product_id'])
-                        ->where('vshop_products.amount',0)
+                        ->where('vshop_products.amount', 0)
                         ->update([
-                            'status'=>1
+                            'status' => 1
                         ]);
 
 
