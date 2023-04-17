@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +52,6 @@ class OrderController extends Controller
         $productId = $request->product_id;
         $vshopId = $request->vshop_id;
         $quantity = $request->quantity;
-
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.vshop_id', $vshopId)
@@ -308,7 +308,7 @@ class OrderController extends Controller
                     $totalVat += $vat;
                     $price = $price + $vat;
                 }
-                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId);
+                $warehouse = calculateShippingByProductID($item['products']->id, $districtId, $provinceId, $wardId);
                 if (!$warehouse) {
                     return response()->json([
                         "status_code" => 400,
@@ -422,7 +422,7 @@ class OrderController extends Controller
             }
             $orders = $orders
                 ->where('status', '!=', 2)
-                ->orderBy('order.updated_at', 'desc')
+                ->orderBy('order.id', 'desc')
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
@@ -557,17 +557,19 @@ class OrderController extends Controller
                 ], 404);
             }
             $orders = OrderItem::select(
-                'id as order_item_id',
+                'order_item.id as order_item_id',
                 'product_id',
                 'discount_vshop',
                 'price',
                 'discount_ncc',
                 'discount_vstore',
-                'quantity', 'order_id', 'product_id', 'export_status', 'order.updated_at');
+                'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
+                'order.total'
+            );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
-                ->where('status', '!=', 2)
-                ->orderBy('order.updated_at', 'desc')
+                ->where('order.status', '!=', 2)
+                ->orderBy('order.id', 'desc')
                 ->where('vshop_id', $vshop_id->id);
             if ($status !== 10 && $status != 5 && $status != 4) {
                 $orders = $orders->where('export_status', $status);
@@ -600,7 +602,7 @@ class OrderController extends Controller
                 $order->no = $parentOrder->no;
                 $order->order_number = $parentOrder->order_number;
                 $order->total_product = 1;
-                $order->total = $order->productInfo['price'] * $order->productInfo['quantity'];
+
                 unset($order->order);
                 unset($order->product);
             }
@@ -638,6 +640,7 @@ class OrderController extends Controller
                 'messageError' => $validator->errors(),
             ], 401);
         }
+        DB::beginTransaction();
         try {
             $order = Order::find($request->order_id);
             if (!$order) {
@@ -684,8 +687,32 @@ class OrderController extends Controller
                 'ORDER_NUMBER' => $order->order_number,
                 'NOTE' => "Hủy đơn do khách hàng",
             ]);
+//            $order_item = OrderItem::select('product_id', 'quantity')->where('order_id', $order->id)->first();
+//            $product = Product::find($order_item->product_id);
+//
+//            $product->amount_product_sold = $product->amount_product_sold - $order_item->quantity;
+//
+//            $product->save();
+//            $vshop_Id = OrderItem::select('vshop_id')->where('order_id', $order->id)->first();
+//
+//            $vshop_product = VshopProduct::where('vshop_id', $vshop_Id)->first();
+//
+//            $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $order_item->quantity;
+//
+//            $vshop_product->save();
+//
+//            $vshop = Vshop::find($vshop_Id);
+//            $vshop->products_sold = $vshop->products_sold + $order_item->quantity;
+//            $vshop->save();
+            DB::commit();
+
+            return response()->json([
+                'status_code' => 201,
+                'message' => 'Hủy đơn thành công'
+            ], 201);
 
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'status_code' => 500,
                 'message' => $e->getMessage()
