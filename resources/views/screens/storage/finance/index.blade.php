@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Số thẻ:</label>
-                                    <input required type="text" name="account_number" value="" class="stk0 form-control"
+                                    <input required type="text" name="account_number" value="" class="stk0 form-control only-number"
                                            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                                     @error('account_number')
                                     <p class="text-red-600 mt-2">{{$message}}</p>
