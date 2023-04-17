@@ -342,7 +342,11 @@ class ProductController extends Controller
 
         $products = Product::where('vstore_id', $id)->where('status', 2)
             ->where('availability_status', 1)
-            ->select('id', 'publish_id', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length', 'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id', 'user_id', 'discount_vShop as discountVstore');
+            ->select('id', 'publish_id', 'name', 'category_id', 'description', 'images', 'brand', 'weight', 'length',
+                'height', 'volume', 'price', 'amount_product_sold', 'prepay', 'payment_on_delivery', 'vstore_id',
+                'user_id', 'discount_vShop as discountVstore', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100)
+                        FROM discounts WHERE start_date <= '" . Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
+                                        AND product_id = products.id AND type != 3 GROUP BY product_id),0)) as order_price"));
 
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
@@ -368,7 +372,7 @@ class ProductController extends Controller
             $products = $products->orderBy('amount_product_sold', 'desc');
         }
         if ($request->order_by == 2) {
-            $products = $products->orderBy('price', $request->option);
+            $products = $products->orderBy('order_price', $request->option);
         }
         if ($request->payments == 1) {
             $products = $products->where('prepay', 1);
@@ -426,7 +430,9 @@ class ProductController extends Controller
         $limit = $request->limit ?? 10;
         $products = Product::where('user_id', $id)->where('status', 2)
             ->where('availability_status', 1)
-            ->select('id', 'price', 'publish_id', 'category_id', 'name', 'images', 'discount_vShop as discountVstore');
+            ->select('id', 'price', 'publish_id', 'category_id', 'name', 'images', 'discount_vShop as discountVstore', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100)
+                        FROM discounts WHERE start_date <= '" . Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
+                                        AND product_id = products.id AND type != 3 GROUP BY product_id),0)) as order_price"));
         if ($request->publish_id) {
             $products = $products->where('publish_id', 'like' . $request->publish_id . '%');
         }
@@ -451,7 +457,7 @@ class ProductController extends Controller
             $products = $products->orderBy('amount_product_sold', 'desc');
         }
         if ($request->order_by == 2) {
-            $products = $products->orderBy('price', $request->option);
+            $products = $products->orderBy('order_price', $request->option);
         }
         if ($request->payments == 1) {
             $products = $products->where('prepay', 1);
