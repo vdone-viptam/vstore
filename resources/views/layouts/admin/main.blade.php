@@ -22,9 +22,11 @@
     td {
         text-align: left;
     }
+
     th {
         text-align: left;
     }
+
     .page-link {
         width: 100%;
         text-align: center;
@@ -170,6 +172,13 @@
             }
         });
     }
+    const x = document.querySelectorAll('input[type="number"]');
+    x.addEventListener("keypress", function (evt) {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
+        }
+    });
 </script>
 </body>
 
