@@ -99,4 +99,21 @@ class ViettelpostController extends Controller
 
 
     }
+    public function linkin(){
+
+        $login = Http::post('https://partner.viettelpost.vn/v2/user/Login',[
+            "USERNAME"=>config('domain.TK_VAN_CHUYEN'),
+            "PASSWORD"=>config('domain.MK_VAN_CHUYEN')
+        ]);
+
+        $respon = Http::withHeaders([
+            'Token' =>  $login['data']['token'],
+        ])->post('https://partner.viettelpost.vn/v2/order/printing-code',[
+            "EXPIRY_TIME"=>0,
+            "ORDER_ARRAY"=>[
+                "17805501284"
+        ]
+        ]);
+        return "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill=".$respon['message']."=&showPostage=1";
+    }
 }

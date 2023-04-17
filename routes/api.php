@@ -50,7 +50,7 @@ Route::prefix('bill')->group(function () {
 });
 
 Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
-
+Route::get('viettel-post-linkin', [\App\Http\Controllers\ViettelpostController::class, 'linkin']);
 
 //Route::get('/', function () {
 //    return config('domain.api');
