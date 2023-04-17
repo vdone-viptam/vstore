@@ -109,11 +109,22 @@ class ViettelpostController extends Controller
         $respon = Http::withHeaders([
             'Token' =>  $login['data']['token'],
         ])->post('https://partner.viettelpost.vn/v2/order/printing-code',[
-            "EXPIRY_TIME"=>0,
             "ORDER_ARRAY"=>[
                 $order_id
         ]
         ]);
-        return "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill=".$respon['message']."=&showPostage=1";
+        if ($respon !=''){
+            $data =  "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill=".$respon['message']."=&showPostage=1";
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => false,
+                'data' => 'Lỗi không tìm thấy'
+            ], 400);
+        }
+
     }
 }

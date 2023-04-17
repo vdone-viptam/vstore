@@ -116,6 +116,7 @@ class  VShopController extends Controller
                 $vshop_product->vshop_id = $vshop->id;
                 $vshop_product->status = 2;
                 $vshop_product->amount += $preOrder->quantity;
+                $vshop_product->product_id = $preOrder->product_id;
                 $vshop_product->save();
             }
 
@@ -246,7 +247,6 @@ class  VShopController extends Controller
         $order->save();
 
 
-        dd($order);
         $order->prepayment_rate = $order->deposit_money;
         $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
         $order->deposit_payable = $order->total - $order->total * ($order->deposit_money / 100);
@@ -262,6 +262,7 @@ class  VShopController extends Controller
             if ($checkNewVshopProduct->status == 1) {
                 $checkNewVshopProduct->status = 2;
             }
+
             $checkNewVshopProduct->amount += $order->quantity;
             $checkNewVshopProduct->save();
         } else {
@@ -271,6 +272,7 @@ class  VShopController extends Controller
             $newVshopProduct->amount = $order->quantity;
             $newVshopProduct->status = 2;
             $newVshopProduct->save();
+
         }
 
 
