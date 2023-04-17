@@ -632,13 +632,7 @@ class ProductController extends Controller
         $checkVshop = VshopProduct::where('vshop_id', $vshop->id)
             ->where('product_id', $id)->first();
 
-//        $checkVshop = DB::table('vshop_products')
-//            ->select('vshop_products.id')
-//            ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
-//            ->where('status', 1)
-//            ->where('vshop.pdone_id', $vshop->pdone_id)
-//            ->where('product_id', $id)->count();
-//        return $checkVshop;
+
         if ($checkVshop) {
             if ($checkVshop->status == 3) {
                 $checkVshop->status = 1;
@@ -650,28 +644,24 @@ class ProductController extends Controller
             }
 
 
+        }else{
+            try {
+                $newVshopProduct = new VshopProduct();
+                $newVshopProduct->vshop_id = $vshop->id;
+                $newVshopProduct->product_id = $id;
+                $newVshopProduct->status = 1;
+                $newVshopProduct->save();
+
+                return response()->json([
+                    'message' => 'Tiếp thị sản phẩm thành công',
+                ], 200);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => $e->getMessage()
+                ], 400);
+            }
         }
-        try {
-//            return $vshop;
-            $newVshopProduct = new VshopProduct();
-            $newVshopProduct->vshop_id = $vshop->id;
-            $newVshopProduct->product_id = $id;
-            $newVshopProduct->status = 1;
-            $newVshopProduct->save();
-//            DB::table('vshop_products')->insert([
-//                'vshop_id' => $vshop->id,
-//                'product_id' => $id,
-//                'status' => 1,
-//                'created_at' => Carbon::now()
-//            ]);
-            return response()->json([
-                'message' => 'Tiếp thị sản phẩm thành công',
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ], 400);
-        }
+
 
     }
 
