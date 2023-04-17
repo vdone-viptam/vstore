@@ -255,7 +255,7 @@
     <div class="flex flex-col justify-start items-start gap-6 w-full">
         <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium"><strong
-                            class="text-[#FF4D4F]">*</strong> Diện tích sàn (m2)</span>
+                            class="text-[#FF4D4F]">*</strong>Diện tích Kho (m2)</span>
             <input required type="number" name="floor_area" id="floor_area" placeholder="Nhập diện tích"
                    class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             @error('floor_area')
@@ -264,7 +264,7 @@
         </div>
 
         <div class="flex flex-col justify-start items-start gap-2 w-full">
-            <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích(m3)</span>
+            <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Thể tích Kho (m3)</span>
             <input required type="number" name="volume" id="volume" placeholder="Nhập thể tích"
                    class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             @error('volume')
@@ -302,7 +302,7 @@
     <div class="flex flex-col justify-start items-start gap-6 w-full">
         <div class="w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
-                <span class="text-sm font-medium">Kích thước (m)</span>
+                <span class="text-sm font-medium">Kích thước Kho (m)</span>
 
                 <div class="flex justify-between items-center w-full gap-6">
                     <input type="number" min="0" max="" placeholder="Nhập chiều dài (m)" name="length" value=""
