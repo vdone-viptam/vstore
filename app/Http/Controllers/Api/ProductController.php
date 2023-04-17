@@ -76,6 +76,10 @@ class ProductController extends Controller
 
                 $products = $products->orderBy('admin_confirm_date', 'desc');
             }
+            if ($request->order_by == 2) {
+
+                $products = $products->orderBy('order_price', $request->option);
+            }
             if ($request->order_by == 3) {
 
                 $products = $products->orderBy('amount_product_sold', 'desc');
