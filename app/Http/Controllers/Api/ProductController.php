@@ -774,18 +774,19 @@ class ProductController extends Controller
     public
     function getProductAvailableByVshop(Request $request, $pdone_id)
     {
-
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'asc';
         $data = null;
         $products = DB::table('vshop')
-            ->selectRaw('products.name as product_name,publish_id,price,
+            ->selectRaw('products.name as product_name,vshop_products.delivery_off,vshop_products.status as vstatus,publish_id,price,
                 images, products.id, discount_vShop ,vshop_products.amount_product_sold,
-                vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le','vshop_products.delivery_off')
+                vshop_products.amount as in_stock, view,(vshop_products.amount_product_sold /  vshop_products.amount) as ty_le')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('availability_status', 1)
-            ->where('vshop_products.status', $request->status);
+            ->where('vshop_products.status', $request->status)
+            ->where('vshop.pdone_id',$pdone_id);
+
         if ($request->orderBy == 1) {
             $products = $products->orderBy('vshop_products.amount', $type);
         }
@@ -823,6 +824,7 @@ class ProductController extends Controller
             $pr->vshop_discount = DB::table('discounts')
                     ->select('id', 'discount', 'start_date', 'end_date')->where('type', 3)->where('product_id', $pr->id)->where('user_id', $pdone_id)->first() ?? null;
         }
+
         return response()->json([
             'status_code' => 200,
             'total_product' => $total_product,
