@@ -18,6 +18,50 @@ use Illuminate\Support\Facades\Validator;
  */
 class CategoryController extends Controller
 {
+    public function searchCategoryByKeyword(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
+
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocCategory($request->key_word);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+        $categories = Category::where('status', 1)
+            ->whereIn('id', $res)
+            ->select('id', 'name', 'img');
+
+        $categories = $categories->paginate($limit);
+        if ($categories) {
+            foreach ($categories as $value) {
+                if ($value->img == null) {
+                    $value->img = asset('home/img/logo-06.png');
+                } else {
+                    $value->img = asset($value->img);
+                }
+            }
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $categories,
+        ]);
+
+    }
+
     /**
      * Danh sách danh mục
      *
@@ -136,7 +180,7 @@ class CategoryController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
@@ -223,7 +267,7 @@ class CategoryController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1,2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;

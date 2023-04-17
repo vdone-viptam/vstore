@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\storage;
 
+use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
@@ -17,6 +18,7 @@ use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Warehouses;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -276,7 +278,26 @@ class ProductController extends Controller
                 $vshop_product->status = 1;
                 $vshop_product->save();
             }
-            DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
+
+            $product = Product::with(['category'])->where('id', $requestIm->product_id)->where('availability_status', 0)->first();
+            if ($product) {
+                $product->availability_status = 1;
+                $product->save();
+                $elasticsearchController = new ElasticsearchController();
+
+                try {
+                    $res = $elasticsearchController
+                        ->createDocProduct((string)$product->id,
+                            $product->name, $product->short_content, $product->category->name, $product->publish_id);
+                    DB::commit();
+                } catch (ClientResponseException $exception) {
+                    DB::rollBack();
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Có lỗi xảy ra vui lòng thử lại',
+                    ], 500);
+                }
+            }
         }
         if ($requestIm->status == 7) {
             $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();

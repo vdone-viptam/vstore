@@ -46,8 +46,8 @@
                         <div class="flex flex-col md:flex-row justify-start items-center gap-4 w-full">
                             <span class="text-secondary w-full md:w-[280px]">Tên V-Store:</span>
                             <div class="w-full flex flex-col justify-start items-start gap-2">
-                                <input type="text" id="name" name="name"
-                                       class="w-full outline-none py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"
+                                <input type="text" id="name" name="name" @if($infoAccount->branch == 2) disabled @endif
+                                class="w-full outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-gray-200 focus:border-primary transition-all duration-200 rounded-sm"
                                        value="{{$infoAccount->name}}">
                                 @error('name')
                                 <p class="text-red-600">{{$message}}</p>

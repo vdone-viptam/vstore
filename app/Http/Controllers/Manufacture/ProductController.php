@@ -203,37 +203,10 @@ class ProductController extends Controller
                 }
             }
             $product->images = json_encode($photo_gallery);
-//            $photo_gallery = [];
-//            foreach (json_decode($request->unitImages) as $image) {
-//                $photo_gallery[] = 'storage / products / ' . $this->saveImgBase64($image, 'products');
-//            }
-//            $product->unit_images = json_encode($photo_gallery);
+
             $product->user_id = Auth::id();
             $product->save();
 
-//            $dataInsert = [];
-//            $amount = 0;
-//            for ($i = 0; $i < count($request->ward_id); $i++) {
-//                $dataInsert[] = [
-//                    'product_id' => $product->id,
-//                    'ward_id' => $request->ward_id[$i],
-//                    'amount' => $request->amount[$i],
-//                    'created_at' => Carbon::now(),
-//                    'status' => 1];
-//                $amount += $request->amount[$i];
-//            }
-//            ProductWarehouses::insert($dataInsert);
-//            Product::where('id', $product->id)->update(['amount_product' => $amount]);
-//            $userLogin = Auth::user();
-//            $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-//            $data = [
-//                'title' => 'Bạn vừa có 1 thông báo mới',
-//                'avatar' => $userLogin->avatar ?? '',
-//                'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
-//                'created_at' => Carbon::now()->format('h:i A d / m / Y'),
-//                'href' => route('screens . vstore . product . request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
-//            ];
-//            $user->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {

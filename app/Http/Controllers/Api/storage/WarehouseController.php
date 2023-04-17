@@ -76,7 +76,11 @@ class WarehouseController extends Controller
             ->where('request_warehouses.id', $request->id)
             ->orWhere('request_warehouses.code', $request->id)
             ->first();
-
+        if ($requests->type == 2) {
+            $requests->order_number = RequestWarehouse::select('order_number')
+                    ->where('id', $requests->id)->orWhere('code', $request->id)
+                    ->first()->order_number ?? 'Chưa có mã vận chuyển';
+        }
         return response()->json([
             'success' => true,
             'data' => $requests

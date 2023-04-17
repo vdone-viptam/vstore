@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\DepositExport;
 use App\Exports\UserExport;
+use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Product;
@@ -15,6 +16,7 @@ use App\Models\Ward;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -52,8 +54,8 @@ class UserController extends Controller
         }
         $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
-            ->where('order_service.status', 3)
-            ->where('payment_status', 1)
+            ->where('order_service.status', 1)
+            ->where('payment_status', 3)
             ->orderBy('users.id', 'desc')
             ->where('role_id', '!=', 1)->paginate($limit);
 
@@ -160,12 +162,28 @@ class UserController extends Controller
                     $message->to($user->email);
                     $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản Nhà cung cấp');
                 });
+                $elasticsearchController = new ElasticsearchController();
+                try {
+                    $res = $elasticsearchController->createDocNCC((string)$user->id, $user->name);
+                    DB::commit();
+                } catch (ClientResponseException $exception) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+                }
             }
             if ($user->role_id == 3) {
                 Mail::send('email.active_vstore', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
                     $message->subject('Chào mừng quý khách hàng đã đăng ký tài khoản V-Store');
                 });
+                $elasticsearchController = new ElasticsearchController();
+                try {
+                    $res = $elasticsearchController->createDocVStore((string)$user->id, $user->name);
+                    DB::commit();
+                } catch (ClientResponseException $exception) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+                }
             }
             if ($user->role_id == 4) {
                 Mail::send('email.active_kho', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {

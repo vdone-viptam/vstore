@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -30,9 +32,9 @@ class CategoryController extends Controller
         }
         $this->v['params'] = $request->all();
         $this->v['categories'] = $this->v['categories']->paginate($limit);
-        if($page >1){
-            $this->v['limit_limit'] = $limit *($page -1)+1;
-        }else{
+        if ($page > 1) {
+            $this->v['limit_limit'] = $limit * ($page - 1) + 1;
+        } else {
             $this->v['limit_limit'] = 1;
         }
 
@@ -74,6 +76,14 @@ class CategoryController extends Controller
             $file->move(public_path('image/category'), $filename);
             $category->img = 'image/category/' . $filename;
             $category->save();
+            $elasticsearchController = new ElasticsearchController();
+            try {
+                $res = $elasticsearchController->createDocCategory((string)$category->id, $request->name);
+                DB::commit();
+            } catch (ClientResponseException $exception) {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -117,6 +127,15 @@ class CategoryController extends Controller
                 $category->img = 'image/category/' . $filename;
             }
             $category->save();
+            $elasticsearchController = new ElasticsearchController();
+
+            try {
+                $res = $elasticsearchController->updateDocCategory((string)$category->id, $request->name);
+                DB::commit();
+            } catch (ClientResponseException $exception) {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
