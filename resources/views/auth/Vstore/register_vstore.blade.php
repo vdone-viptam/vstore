@@ -252,6 +252,14 @@
 
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script !src="">
+    const x = document.querySelectorAll('input[type="number"]');
+    x.forEach(item => {
+        item.addEventListener("keypress", function (evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+            }
+        });
+    })
     document.querySelector('.active').setAttribute('disabled', 'true');
     document.querySelector('.active').classList.add('bg-slate-300');
     const divCity = document.getElementById('city_id');
