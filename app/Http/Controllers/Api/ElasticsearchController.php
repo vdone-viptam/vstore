@@ -286,6 +286,18 @@ class ElasticsearchController extends Controller
         return $this->client->index($params);
     }
 
+    public function updateDocVShop($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.vshop'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->update($params);
+    }
+
     public function searchDocCategory($keyword, $from = 0, $size = 10): array
     {
         $params = [

@@ -509,7 +509,7 @@ class  VShopController extends Controller
             $elasticsearchController = new ElasticsearchController();
 
             try {
-                $res = $elasticsearchController->updateDocVStore((string)$vshop->id, $request->name);
+                $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->name);
                 DB::commit();
             } catch (ClientResponseException $exception) {
                 DB::rollBack();
