@@ -57,7 +57,8 @@ class OrderController extends Controller
             'orderItem'])->select(
             'no', 'id', 'export_status', 'created_at'
         )
-            ->where('order.status', '!=', 2)->where('export_status', '!=', 4);
+            ->where('order.status', '!=', 2)
+            ->where('export_status', '!=', 4);
         if ($key_search && strlen(($key_search) > 0)) {
             $orders->where(function ($sub) use ($key_search) {
                 $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
