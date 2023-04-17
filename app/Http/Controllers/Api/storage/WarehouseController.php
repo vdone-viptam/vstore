@@ -112,6 +112,7 @@ class WarehouseController extends Controller
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
+            ->whereNotIn('order.export_status', [3, 5])
             ->orderBy($field, $type);
         if ($request->code) {
             $requests = $requests->where('request_warehouses.code', $request->code);
