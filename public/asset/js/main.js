@@ -297,6 +297,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 })
+
+function setValueById(id,value) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.value = value ?? '';
+    }
+
+}
 // MENU
 
 

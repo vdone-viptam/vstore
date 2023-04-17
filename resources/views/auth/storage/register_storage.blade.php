@@ -196,7 +196,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
-                <input required type="text" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
+                <input required type="text" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}"
                     pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
                        class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('phone_number')
@@ -219,7 +219,7 @@
                             fill="black" fill-opacity="0.45"/>
                         </svg>
                         </span>
-                <input required type="text" name="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
+                <input required type="text" name="id_vdone" id="id_vdone" placeholder="Nhập ID người đại diện" value="{{old('id_vdone')}}"
                        class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('id_vdone')
                 <p class="text-red-600">{{$message}}</p>
@@ -228,7 +228,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium">Người đại diện (khác)</span>
-                <input type="text" name="id_vdone_diff" placeholder="Nhập ID người đại diện (khác)"
+                <input type="text" name="id_vdone_diff" id="id_vdone_diff" placeholder="Nhập ID người đại diện (khác)"
                        value="{{old('id_vdone_diff')}}"
                        class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
             </div>
@@ -247,7 +247,7 @@
         <div class="flex flex-col justify-start items-start gap-6 w-full">
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Diện tích sàn (m2)</span>
-                <input required type="number" name="floor_area" id="" placeholder="Nhập diện tích"
+                <input required type="number" name="floor_area" id="floor_area" placeholder="Nhập diện tích"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('floor_area')
                 <p class="text-red-600">{{$message}}</p>
@@ -256,7 +256,7 @@
 
             <div class="flex flex-col justify-start items-start gap-2 w-full">
                 <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong> Thể tích(m3)</span>
-                <input required type="number" name="volume" id="" placeholder="Nhập thể tích"
+                <input required type="number" name="volume" id="volume" placeholder="Nhập thể tích"
                        class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 @error('volume')
                 <p class="text-red-600">{{$message}}</p>
@@ -298,7 +298,7 @@
                                id="length"
                                class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         <input type="number" min="0" max="" placeholder="Nhập chiều rộng (m)" name="with" value=""
-                               id="with"
+                               id="width"
                                class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                         <input type="number" min="0" max="" placeholder="Nhập chiều cao (m)" name="height" value=""
                                id="height"
@@ -313,13 +313,12 @@
                 <span class="text-sm font-medium">Diện tích loại kho (m2)</span>
 
                 <div class="flex justify-between items-center w-full gap-6">
-                    <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage" value=""
-                           id="length"
+                    <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage" id="cold_storage" value=""
                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                    <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value="" id="with"
+                    <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value="" id="warehouse"
                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     <input type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value=""
-                           id="height"
+                           id="normal_storage"
                            class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                 </div>
 
@@ -499,86 +498,7 @@
 </div>
 
 <script src="{{asset('asset/js/main.js')}}"></script>
-@if(!$isOrder)
-    <script>
-        const formRegister = document.querySelector('#formRegister');
-        const payment = document.querySelector('#payment');
-        const closeModalPayment = document.querySelectorAll('.closeModalPayment');
 
-        for (i = 0; i < closeModalPayment.length; i++) {
-            closeModalPayment[i].addEventListener('click', function() {
-                payment.classList.add("hidden");
-                formRegister.classList.remove("fixed");
-            });
-        }
-    </script>
-@endif
-<script>
-    // $('#formRegister-V').validate({
-    //     rules: {
-    //         name: {
-    //             required: true,
-    //         },
-    //         id_vdone: {
-    //             required: true,
-    //         },
-    //         email: {
-    //             required: true,
-    //         },
-    //         company_name: {
-    //             required: true,
-    //         },
-    //         tax_code: {
-    //             required: true,
-    //         },
-    //         address: {
-    //             required: true,
-    //         },
-    //         phone_number: {
-    //             required: true,
-    //         },
-    //         password: {
-    //             required: true,
-    //
-    //         },
-    //         password_confirmation: {
-    //             required: true,
-    //             equalTo: '#password'
-    //         },
-    //
-    //     },
-    //     messages: {
-    //         name: {
-    //             required: 'Bạn cần nhập tên Kho'
-    //         },
-    //         id_vdone: {
-    //             required: 'Bạn cần nhập ID người đại diện'
-    //         },
-    //         email: {
-    //             required: 'Bạn cần nhập địa chỉ Email'
-    //         },
-    //         company_name: {
-    //             required: 'Bạn cần nhập tên công ty'
-    //         },
-    //         tax_code: {
-    //             required: 'Bạn cần nhập mã số thuế'
-    //         },
-    //         address: {
-    //             required: 'Bạn cần nhập địa chỉ'
-    //         },
-    //         password: {
-    //             required: 'Bạn phải nhập mật khẩu',
-    //
-    //         },
-    //         phone_number: {
-    //             required: 'Số điện thoại bắt buộc nhập',
-    //         },
-    //     },
-    //     submitHandler: function (form) {
-    //         form.submit();
-    //     }
-    // });
-</script>
 <script !src="">
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
@@ -629,6 +549,30 @@
             )
     });
 
+    //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
+    setSessionStorageThreeType();
+    function setSessionStorageThreeType() {
+        let length = document.getElementById("length");
+        if (length) {
+            length.addEventListener("change", function (evt) {
+                sessionStorage.setItem("length_storage", length.value);
+            });
+        }
+        let width = document.getElementById("width");
+        if (width) {
+            width.addEventListener("change", function (evt) {
+                sessionStorage.setItem("width_storage", width.value);
+            });
+        }
+        let height = document.getElementById("height");
+        if (height) {
+            height.addEventListener("change", function (evt) {
+                sessionStorage.setItem("height_storage", height.value);
+            });
+        }
+    }
+
+
     // divWard.addEventListener('')
 </script>
 @if(old('city_id') != '')
@@ -648,6 +592,99 @@
             })
             .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
             );
+    </script>
+@endif
+@if($isOrder)
+    <script>
+        const formRegister = document.querySelector('#formRegister-V');
+        const payment = document.querySelector('#payment');
+        const closeModalPayment = document.querySelectorAll('.closeModalPayment');
+
+        for (i = 0; i < closeModalPayment.length; i++) {
+            closeModalPayment[i].addEventListener('click', function() {
+                payment.classList.add("hidden");
+                formRegister.classList.remove("fixed");
+            });
+        }
+
+
+        getInfoVstorage();
+        function getInfoVstorage() {
+            const infoNCC = @json($user) ;
+            setValueById("email", infoNCC.email);
+            setValueById("name", infoNCC.name);
+            setValueById("company_name", infoNCC.company_name);
+            setValueById("tax_code", infoNCC.tax_code);
+            setValueById("city_id", infoNCC.provinceId);
+            setValueById("district_id", infoNCC.district_id);
+            setValueById("ward_id", infoNCC.ward_id);
+            setValueById("address", infoNCC.address);
+            setValueById("phone_number", infoNCC.phone_number);
+            setValueById("id_vdone", infoNCC.id_vdone);
+            setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
+            setValueById("referral_code", infoNCC.referral_code);
+
+            loadAddress( infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);
+
+            // info storage
+            let storage_information = infoNCC.storage_information;
+            if( storage_information){
+                storage_information = JSON.parse(storage_information);
+                setValueById("floor_area", storage_information.floor_area);
+                setValueById("volume", storage_information.volume);
+                setValueById("cold_storage", storage_information.cold_storage);
+                setValueById("warehouse", storage_information.warehouse);
+                setValueById("normal_storage", storage_information.normal_storage);
+            }
+
+        }
+        function loadAddress(provinceId,district_id,ward_id) {
+            fetch('{{route('get_city')}}', {
+                mode: 'no-cors',
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == provinceId ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+            })
+            .catch(console.error);
+            fetch('{{route('get_city')}}?type=2&value=' + provinceId, {
+                mode: 'no-cors',
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == district_id ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                }
+            })
+            .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+            );
+            fetch('{{route('get_city')}}?type=3&value=' + district_id, {
+                mode: 'no-cors',
+            }).then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+                } else {
+                    divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
+                }
+            })
+            .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
+            );
+        }
+        getDataStorageThreeType();
+        function getDataStorageThreeType(){
+            let length = sessionStorage.getItem("length_storage");
+            let width = sessionStorage.getItem("width_storage");
+            let height = sessionStorage.getItem("height_storage");
+
+            setValueById("length", length);
+            setValueById("width", width);
+            setValueById("height", height);
+        }
+
     </script>
 @endif
 </body>
