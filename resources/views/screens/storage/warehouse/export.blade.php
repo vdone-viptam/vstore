@@ -276,6 +276,12 @@
                                 <div class="form-group">
                             <label for="product_name">Tên sản phẩm:</label>
                             <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.product_name}" readonly>
+                            </div>
+                        <div class="form-group">
+                            <label for="quantity">Mã vận chuyển: </label>
+                            <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.order_number || 'Chưa có mã vận chuyển'}" readonly>
+                        </div>
+
                         <div class="form-group">
                             <label for="quantity">Số lượng xuất:</label>
                             <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
