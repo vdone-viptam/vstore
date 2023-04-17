@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Ward;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -33,7 +34,44 @@ use Illuminate\Support\Str;
  */
 class  VShopController extends Controller
 {
+    public function searchShopByKeyword(Request $request)
+    {
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocVShop($request->key_word);
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
 
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+        $user = Vshop::whereIn('id', $res)
+            ->select('id', 'nick_name', 'avatar');
+
+        $user = $user->paginate($limit);
+        if ($user) {
+            foreach ($user as $value) {
+                if ($value->avatar == null) {
+                    $value->avatar = asset('home/img/logo-06.png');
+                } else
+                    $value->avatar = $value->avatar;
+
+            }
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $user,
+        ]);
+    }
 
     public function updateStatusDonePreOrder(Request $request, $orderID)
     {
@@ -454,10 +492,29 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ], 403);
         }
+        DB::beginTransaction();
         $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
         if (!$vshop) {
             $vshop = new Vshop();
+            $elasticsearchController = new ElasticsearchController();
 
+            try {
+                $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
+                DB::commit();
+            } catch (ClientResponseException $exception) {
+                DB::rollBack();
+                return response()->json(['message' => $exception->getMessage()], 500);
+            }
+        } else {
+            $elasticsearchController = new ElasticsearchController();
+
+            try {
+                $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
+                DB::commit();
+            } catch (ClientResponseException $exception) {
+                DB::rollBack();
+                return response()->json(['message' => $exception->getMessage()], 500);
+            }
         }
         $vshop->pdone_id = $request->pdone_id;
         $vshop->avatar = $request->avatar ?? '';
@@ -719,7 +776,7 @@ class  VShopController extends Controller
     {
 //        return 1;
         $validator = Validator::make($request->all(), [
-            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(10),
+            'start_date' => 'required|date_format:Y/m/d H:i|after:' . Carbon::now()->addMinutes(9),
             'end_date' => 'required|date_format:Y/m/d H:i|after:start_date',
             "discount" => 'required|min:0|max:100'
 
@@ -735,7 +792,7 @@ class  VShopController extends Controller
         }
         $to = Carbon::make($request->start_date);
         $from = Carbon::make($request->end_date);
-        if ($from->diffInMinutes($to) < 9) {
+        if ($from->diffInMinutes($to) <= 9) {
             return response()->json([
                 'status_code' => 400,
                 'error' => [
@@ -826,7 +883,7 @@ class  VShopController extends Controller
         }
         $to = Carbon::make($request->start_date);
         $from = Carbon::make($request->end_date);
-        if ($from->diffInMinutes($to) < 9) {
+        if ($from->diffInMinutes($to) <= 9) {
             return response()->json([
                 'status_code' => 400,
                 'error' => [
@@ -1133,32 +1190,33 @@ class  VShopController extends Controller
 
     }
 
-    public function delivery_off( $product_id,$pdone_id){
+    public function delivery_off($product_id, $pdone_id)
+    {
 
-        $vshop_product = VshopProduct::join('vshop','vshop_products.vshop_id','=','vshop.id')
+        $vshop_product = VshopProduct::join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
             ->select('vshop_products.id')
-            ->where('vshop_products.status',2)
-            ->where('vshop_products.product_id',$product_id)
-            ->where('vshop.pdone_id',$pdone_id)->first();
+            ->where('vshop_products.status', 2)
+            ->where('vshop_products.product_id', $product_id)
+            ->where('vshop.pdone_id', $pdone_id)->first();
 
-        if (!$vshop_product){
+        if (!$vshop_product) {
             return response()->json([
                 'status_code' => 404,
                 'message' => 'sản phẩm chưa được Vshop tiếp thị hoặc không tìm thấy',
             ], 404);
         }
         $insert_vshop_product = VshopProduct::find($vshop_product->id);
-            if ($insert_vshop_product->delivery_off == 1){
+        if ($insert_vshop_product->delivery_off == 1) {
 
 
-                $insert_vshop_product->delivery_off = 0 ;
-                $insert_vshop_product->save();
+            $insert_vshop_product->delivery_off = 0;
+            $insert_vshop_product->save();
 
-            }else{
+        } else {
 
-                $insert_vshop_product->delivery_off = 1 ;
-                $insert_vshop_product->save();
-            }
+            $insert_vshop_product->delivery_off = 1;
+            $insert_vshop_product->save();
+        }
 
         return response()->json([
             'status_code' => 200,

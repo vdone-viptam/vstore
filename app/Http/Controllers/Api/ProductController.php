@@ -8,6 +8,7 @@ use App\Models\BillCurrent;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
+use App\Models\Category;
 use App\Models\DetailBillCurrent;
 use App\Models\Discount;
 use App\Models\Order;
@@ -15,6 +16,7 @@ use App\Models\OrderItem;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Warehouses;
@@ -94,6 +96,7 @@ class ProductController extends Controller
                     $products = $products->where('prepay', 1);
                 }
             }
+//        return 1;
 
             $products = $products->paginate($limit);
 
@@ -202,14 +205,13 @@ class ProductController extends Controller
         if ($request->type_pay) {
             $products = $products->where('type_pay', $request->type_pay);
         }
-        if ($request->payment) {
-            if ($request->payment == 1) {
-                $products = $products->where('payment_on_delivery', 1);
-
-            } else {
-                $products = $products->where('prepay', 1);
-            }
-        }
+//        if ($request->payment) {
+//            if ($request->payment == 1) {
+//                $products = $products->where('payment_on_delivery', 1);
+//            } else {
+//                $products = $products->where('prepay', 1);
+//            }
+//        }
 //        return 1;
 
         $products = $products->paginate($limit);
@@ -381,11 +383,11 @@ class ProductController extends Controller
                 $value->available_discount = $available_discount->discount;
             }
 
-            $discount = DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $value->id)
+            $discount = round(DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $value->id)
                     ->where('start_date', '<=', Carbon::now())
                     ->where('end_date', '>=', Carbon::now())
                     ->whereIn('type', [1, 2])
-                    ->first()->sum ?? 0;
+                    ->first()->sum ?? 0, 2);
             $value->discount = $discount;
 
 
@@ -547,10 +549,10 @@ class ProductController extends Controller
                 ->first()->sum ?? 0, 2);
 //        $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
+        $list_vshop = VshopProduct::where('product_id', $id)->get();
 //        $list_vshop = Vshop::
         $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
-            ->whereIn('status', [1, 2])
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 
@@ -785,7 +787,7 @@ class ProductController extends Controller
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('availability_status', 1)
             ->where('vshop_products.status', $request->status)
-            ->where('vshop.pdone_id',$pdone_id);
+            ->where('vshop.pdone_id', $pdone_id);
 
         if ($request->orderBy == 1) {
             $products = $products->orderBy('vshop_products.amount', $type);
@@ -970,9 +972,9 @@ class ProductController extends Controller
                         ->where('pdone_id', $pdone_id)
                         ->where('status', 2)
                         ->where('product_id', $value['product_id'])
-                        ->where('vshop_products.amount',0)
+                        ->where('vshop_products.amount', 0)
                         ->update([
-                            'status'=>1
+                            'status' => 1
                         ]);
 
 
@@ -1253,7 +1255,6 @@ class ProductController extends Controller
     public
     function destroyAffProduct($pdone_id, $product_id)
     {
-
         try {
             DB::table('vshop_products')
                 ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
