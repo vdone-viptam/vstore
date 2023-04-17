@@ -85,7 +85,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/review-detail-product/{point_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'reviewDetailProduct']);
         Route::get('/info-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'infoReviewProduct']);
         Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
-        Route::get('/list-review-vdone/{done_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
+        Route::get('/list-review-vdone/{vdone_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
         Route::post('/rep-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'repReviewProduct']);
     });
     // CART
@@ -177,7 +177,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
 
         Route::get('/get_money_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
-
+        Route::post('delivery_off/{product_id}/{pdone_id}',[\App\Http\Controllers\Api\VShopController::class,'delivery_off']);
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
             Route::post('/store/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);

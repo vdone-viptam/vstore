@@ -328,6 +328,14 @@
 
 @section('custom_js')
     <script>
+        document.querySelector('.only-number').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
         $('#btnAddBank').on('click', (o) => {
             $('.modal-details').toggleClass('show-modal')
         });
@@ -356,5 +364,6 @@
                 }
             });
         })
+
     </script>
 @endsection

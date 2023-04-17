@@ -105,7 +105,7 @@ class ReviewProductApiController extends Controller
             'customer_id' => 'required',
             'descriptions' => 'max:200',
             'point_evaluation' => 'required|integer|between:1,5',
-            "images" => ["array","max:3"],
+            "images" => ["array","max:5"],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -192,8 +192,12 @@ class ReviewProductApiController extends Controller
             $totalReviews = $totalReviews->paginate($limit);
 
             foreach($totalReviews as $key => $value){
+                if (!empty($value['pointRep'])){
+                    $totalReviews[$key]['pointRep']['created_at_iso'] = Carbon::parse($value['pointRep']->created_at);
+                    $totalReviews[$key]['pointRep']['updated_at_iso'] = Carbon::parse($value['pointRep']->updated_at);
+                }
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
-                $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
+                $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->updated_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
                 $totalReviews[$key]['product'] = $calculatorFeeProductPoint;
                 $totalReviews[$key]['customer'] = $this->callApiRepositoryInterface->callApiCustomerProfile($value->customer_id) ?? null;
@@ -259,10 +263,15 @@ class ReviewProductApiController extends Controller
                  $totalReviews->where('points.status',$status_rep);
             }
             $totalReviews = $totalReviews->orderBy('points.updated_at', 'desc')->paginate($limit);
+
         //    return $totalReviews;
             foreach($totalReviews as $key => $value){
+                if (!empty($value['pointRep'])){
+                    $totalReviews[$key]['pointRep']['created_at_iso'] = Carbon::parse($value['pointRep']->created_at);
+                    $totalReviews[$key]['pointRep']['updated_at_iso'] = Carbon::parse($value['pointRep']->updated_at);
+                }
                 $totalReviews[$key]['created_at_iso'] = Carbon::parse($value->created_at);
-                $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->created_at);
+                $totalReviews[$key]['updated_at_iso'] = Carbon::parse($value->updated_at);
                 $calculatorFeeProductPoint = $this->reviewProductRepository->calculatorFeeProductPoint($value->product_id,$value->id);
 
                 $totalReviews[$key]['product'] = $calculatorFeeProductPoint;

@@ -478,7 +478,7 @@
                                         <div class="d-flex flex-column " style="gap:4px">
                                             <span class="font-medium">Phí ship: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(data.message.shipping)} VNĐ</span></span>
                                             <span class="font-medium">Thanh toán phí ship: <span class="font-normal">Người nhận</span></span>
-                                            <span class="font-medium">Số tiền phải thu: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(data.message.total.toFixed(3))} VNĐ</span></span>
+                                            <span class="font-medium">Số tiền phải thu: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(Math.round(data.message.total))} VNĐ</span></span>
                                         </div>
                                     </div>
 
