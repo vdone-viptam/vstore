@@ -248,7 +248,6 @@
             </div>
 
         </div>
-</div>
 
 <div
     class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
@@ -597,7 +596,7 @@
         function checkEmpty(inputs) {
             let check1 = true
             inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 <= 20 && index1 != 12 && index1 != 13 && index1 !== 8 && index1 !== 9) {
+                if (!item1.value && index1 > 0 && index1 <= 20 && ![12,13,8,9,14,15,16,17,18,19].includes(index1)) {
                     check1 = false;
                 }
             });
