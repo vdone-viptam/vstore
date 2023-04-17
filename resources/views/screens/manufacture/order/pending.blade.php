@@ -156,9 +156,9 @@
                                         @elseif($order->export_status == 2)
                                             <span class="text-blue-600">Đang giao hàng</span>
                                         @elseif($order->export_status == 3)
-                                            <span class="text-blue-600">Kho hủy</span>
+                                            <span class="text-red-500">Kho hủy</span>
                                         @elseif($order->export_status == 5)
-                                            <span class="text-blue-600">Khách hủy</span>
+                                            <span class="text-red-500">Khách hủy</span>
                                         @else
                                             <span class="text-green-600">Hoàn thành</span>
                                         @endif
