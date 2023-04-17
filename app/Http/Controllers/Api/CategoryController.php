@@ -18,6 +18,49 @@ use Illuminate\Support\Facades\Validator;
  */
 class CategoryController extends Controller
 {
+    public function searchCategoryByKeyword(Request $request) {
+
+
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
+
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocCategory($request->key_word);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+        $categories = Category::where('status', 1)
+            ->whereIn('id', $res)
+            ->select('id', 'name', 'img');
+
+        $categories = $categories->paginate($limit);
+        if ($categories) {
+            foreach ($categories as $value) {
+                if ($value->img == null) {
+                    $value->img = asset('home/img/logo-06.png');
+                } else {
+                    $value->img = asset($value->img);
+                }
+            }
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $categories,
+        ]);
+
+    }
+
     /**
      * Danh sách danh mục
      *

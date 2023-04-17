@@ -148,6 +148,7 @@ class ElasticsearchController extends Controller
         return $arrIdVStore;
     }
 
+
     public function createDocNCC($id, $name)
     {
         $params = [
@@ -182,6 +183,95 @@ class ElasticsearchController extends Controller
     {
         $params = [
             "index" => config('elasticsearch.supplier'),
+            "body" => [
+                "from" => $from,
+                "size" => $size,
+                "fields" => ["id"],
+                "query" => [
+                    "multi_match" => [
+                        "query" => $keyword,
+                        "fields" => [
+                            "name"
+                        ],
+                    ],
+                ]
+            ],
+        ];
+        try {
+            $response = $this->client->search($params);
+        } catch (ClientResponseException $e) {
+            if ($e->getCode() == 400) {
+                return ['BAD_REQUEST'];
+            }
+        }
+        $hits = $response['hits']['hits'];
+        $arrIdVStore = [];
+        foreach ($hits as $hit) {
+            array_push($arrIdVStore, $hit['_id']);
+        }
+        return $arrIdVStore;
+    }
+
+    public function searchDocVShop($keyword, $from = 0, $size = 10): array
+    {
+        $params = [
+            "index" => config('elasticsearch.vshop'),
+            "body" => [
+                "from" => $from,
+                "size" => $size,
+                "fields" => ["id"],
+                "query" => [
+                    "multi_match" => [
+                        "query" => $keyword,
+                        "fields" => [
+                            "name"
+                        ],
+                    ],
+                ]
+            ],
+        ];
+        try {
+            $response = $this->client->search($params);
+        } catch (ClientResponseException $e) {
+            if ($e->getCode() == 400) {
+                return ['BAD_REQUEST'];
+            }
+        }
+        $hits = $response['hits']['hits'];
+        $arrIdVStore = [];
+        foreach ($hits as $hit) {
+            array_push($arrIdVStore, $hit['_id']);
+        }
+        return $arrIdVStore;
+    }
+
+    public function createDocVShop($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.vshop'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->index($params);
+    }
+    public function createDocCategory($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.vstore_categories'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->index($params);
+    }
+
+    public function searchDocCategory($keyword, $from = 0, $size = 10): array
+    {
+        $params = [
+            "index" => config('elasticsearch.vstore_categories'),
             "body" => [
                 "from" => $from,
                 "size" => $size,

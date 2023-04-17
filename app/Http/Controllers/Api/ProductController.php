@@ -8,6 +8,7 @@ use App\Models\BillCurrent;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\BuyMoreDiscount;
+use App\Models\Category;
 use App\Models\DetailBillCurrent;
 use App\Models\Discount;
 use App\Models\Order;
@@ -15,6 +16,7 @@ use App\Models\OrderItem;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Warehouses;
@@ -74,10 +76,6 @@ class ProductController extends Controller
 
                 $products = $products->orderBy('admin_confirm_date', 'desc');
             }
-            if ($request->order_by == 2) {
-
-                $products = $products->orderBy('order_price', $request->option);
-            }
             if ($request->order_by == 3) {
 
                 $products = $products->orderBy('amount_product_sold', 'desc');
@@ -94,6 +92,7 @@ class ProductController extends Controller
                     $products = $products->where('prepay', 1);
                 }
             }
+//        return 1;
 
             $products = $products->paginate($limit);
 
@@ -202,14 +201,13 @@ class ProductController extends Controller
         if ($request->type_pay) {
             $products = $products->where('type_pay', $request->type_pay);
         }
-        if ($request->payment) {
-            if ($request->payment == 1) {
-                $products = $products->where('payment_on_delivery', 1);
-
-            } else {
-                $products = $products->where('prepay', 1);
-            }
-        }
+//        if ($request->payment) {
+//            if ($request->payment == 1) {
+//                $products = $products->where('payment_on_delivery', 1);
+//            } else {
+//                $products = $products->where('prepay', 1);
+//            }
+//        }
 //        return 1;
 
         $products = $products->paginate($limit);
@@ -547,10 +545,10 @@ class ProductController extends Controller
                 ->first()->sum ?? 0, 2);
 //        $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
+        $list_vshop = VshopProduct::where('product_id', $id)->get();
 //        $list_vshop = Vshop::
         $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
-            ->whereIn('status', [1, 2])
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
             ->get();
 
@@ -1253,7 +1251,6 @@ class ProductController extends Controller
     public
     function destroyAffProduct($pdone_id, $product_id)
     {
-
         try {
             DB::table('vshop_products')
                 ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')

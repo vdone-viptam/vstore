@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\CodeCleaner\UseStatementPass;
+use Illuminate\Support\Facades\Validator;
 
 
 /**
@@ -18,6 +20,49 @@ use Psy\CodeCleaner\UseStatementPass;
  */
 class ManufactureController extends Controller
 {
+
+    public function searchManufacturesByKeyword(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
+
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocNCC($request->key_word);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+        $user = User::where('role_id', 2)->where('account_code', '!=', null)
+            ->whereIn('id', $res)
+            ->where('status', '!=', 0)
+            ->select('id', 'name', 'avatar');
+
+        $user = $user->paginate($limit);
+        if ($user) {
+            foreach ($user as $value) {
+                if ($value->avatar == null) {
+                    $value->avatar = asset('home/img/logo-06.png');
+                } else
+                    $value->avatar = asset('image/users/' . $value->avatar);
+
+            }
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $user,
+        ]);
+    }
+
     /**
      * Danh sách nhà cung cấp
      *

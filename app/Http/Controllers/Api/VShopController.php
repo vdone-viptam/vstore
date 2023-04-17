@@ -33,7 +33,43 @@ use Illuminate\Support\Str;
  */
 class  VShopController extends Controller
 {
+    public function searchShopByKeyword(Request $request) {
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocVShop($request->key_word);
+        $validator = Validator::make($request->all(), [
+            'key_word' => 'required'
+        ],
+            [
+                'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
+            ]
+        );
 
+        if ($validator->fails()) {
+            return response()->json([
+                'status_code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
+        $user = Vshop::whereIn('id', $res)
+            ->select('id', 'nick_name', 'avatar');
+
+        $user = $user->paginate($limit);
+        if ($user) {
+            foreach ($user as $value) {
+                if ($value->avatar == null) {
+                    $value->avatar = asset('home/img/logo-06.png');
+                } else
+                    $value->avatar = $value->avatar;
+
+            }
+        }
+        return response()->json([
+            'status_code' => 200,
+            'data' => $user,
+        ]);
+    }
 
     public function updateStatusDonePreOrder(Request $request, $orderID)
     {
