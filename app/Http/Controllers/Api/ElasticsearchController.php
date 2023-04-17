@@ -161,6 +161,35 @@ class ElasticsearchController extends Controller
         return $this->client->index($params);
     }
 
+    public function createDocCategory($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.category'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->index($params);
+    }
+
+    public function updateDocCategory($id, $name)
+    {
+        $params = [
+            'index' => 'category',
+            'id' => $id,
+            'body' => [
+                'doc' => [
+                    'name' => $name
+                ]
+            ]
+        ];
+
+        $response = $this->client->update($params);
+
+        return $response;
+    }
+
     public function updateDocNCC($id, $name)
     {
         $params = [
@@ -249,17 +278,6 @@ class ElasticsearchController extends Controller
     {
         $params = [
             'index' => config('elasticsearch.vshop'),
-            'id' => $id,
-            'body' => [
-                "name" => $name
-            ],
-        ];
-        return $this->client->index($params);
-    }
-    public function createDocCategory($id, $name)
-    {
-        $params = [
-            'index' => config('elasticsearch.vstore_categories'),
             'id' => $id,
             'body' => [
                 "name" => $name

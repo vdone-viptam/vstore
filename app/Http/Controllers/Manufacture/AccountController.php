@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Manufacture;
 
+use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Warehouses;
 use Carbon\Carbon;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +74,14 @@ class AccountController extends Controller
         $user->phone_number = trim($request->phone_number);
         if ($request->link_website) {
             $user->slug = trim($request->link_website);
+        }
+        $elasticsearchController = new ElasticsearchController();
+        try {
+            $res = $elasticsearchController->updateDocNCC((string)$user->id, $request->name);
+            DB::commit();
+        } catch (ClientResponseException $exception) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
         $user->description = $request->description;
         $user->save();

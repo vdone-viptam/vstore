@@ -11,5 +11,6 @@ return [
     'vstore_categories' => 'vstore_categories',
     'vstore' => 'vstore',
     'vshop' => 'vshop',
-    'supplier' => 'supplier'
+    'supplier' => 'supplier',
+    'category' => 'category'
 ];

@@ -19,6 +19,7 @@ use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Carbon\Carbon;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -154,7 +155,7 @@ class ProductController extends Controller
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
                 $vshop = Vshop::where('pdone_id', 262)->first();
-                if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->where('status', 1)->first()) {
+                if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
                     $vshop_product = new VshopProduct();
                     $vshop_product->vshop_id = $vshop->id;
                     $vshop_product->product_id = $requestIm->product_id;
@@ -162,8 +163,25 @@ class ProductController extends Controller
                     $vshop_product->save();
                 }
 
+                $product = Product::with(['category'])->where('id', $requestIm->product_id)->where('availability_status', 0)->first();
+                if ($product) {
+                    $product->availability_status = 1;
+                    $product->save();
+                    $elasticsearchController = new ElasticsearchController();
 
-                DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
+                    try {
+                        $res = $elasticsearchController
+                            ->createDocProduct((string)$product->id,
+                                $product->name, $product->short_content, $product->category->name, $product->publish_id);
+                        DB::commit();
+                    } catch (ClientResponseException $exception) {
+                        DB::rollBack();
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Có lỗi xảy ra vui lòng thử lại',
+                        ], 500);
+                    }
+                }
             }
             if ($requestIm->status == 7) {
                 $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
