@@ -221,7 +221,7 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="number" name="weight" id="weight" min="0" max=""
                                    placeholder="Nhập trọng lượng sản phẩm (Gram)" value="{{old('weight')}}"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                   class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('weight')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
@@ -311,10 +311,10 @@
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Thể tích (ml</span>
+                            <span class="text-title font-medium">Thể tích (ml)</span>
                             <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
                                    value="{{old('volume')}}"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                   class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('volume')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror

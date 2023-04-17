@@ -44,8 +44,8 @@
                     </div>
                     <div class="gap-4 w-full">
                         <span class="text-title font-medium  ">Phần trăm giảm giá (%):</span>
-                        <input name="discount" id="discount"
-                               class="h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
+                        <input name="discount" id="discount" type="text"
+                               class="number-percent h-[42px] choose-vstore outline-none w-full px-3 border-[1px] border-[#D9D9D9]  focus:border-primary transition-all duration-200 rounded-sm">
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <div>
@@ -86,6 +86,7 @@
 
 </form>
 
+<script src="{{asset('asset/js/main.js')}}"></script>
 <script>
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);

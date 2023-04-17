@@ -297,6 +297,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 })
+var onlyNumberVer1 = document.querySelector('.only-number');
+if(onlyNumberVer1){
+    onlyNumberVer1.addEventListener("keypress", (e) => {
+        var regex = new RegExp("^[0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+}
+var numberPercent = document.querySelector('.number-percent');
+if(numberPercent){
+    numberPercent.addEventListener("keypress", (e) => {
+        var regex = new RegExp("^[0-9,.]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+}
 
 function setValueById(id,value) {
     const el = document.getElementById(id);
