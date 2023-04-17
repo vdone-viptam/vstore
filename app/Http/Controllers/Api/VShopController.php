@@ -494,23 +494,25 @@ class  VShopController extends Controller
         }
         DB::beginTransaction();
         $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
+        $elasticsearchController = new ElasticsearchController();
         if (!$vshop) {
             $vshop = new Vshop();
-            $elasticsearchController = new ElasticsearchController();
 
-            try {
-                $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
-                DB::commit();
-            } catch (ClientResponseException $exception) {
-                DB::rollBack();
-                return response()->json(['message' => $exception->getMessage()], 500);
-            }
         } else {
-            $elasticsearchController = new ElasticsearchController();
-
             try {
+                $vshop->pdone_id = $request->pdone_id;
+                $vshop->avatar = $request->avatar ?? '';
+                $vshop->nick_name = $request->nick_name;
+                $vshop->vshop_id = $request->vshop_id;
+                $vshop->vshop_name = $request->nick_name;
+                $vshop->save();
                 $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
                 DB::commit();
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Tạo Vshop Thành công',
+                    'data' => $vshop
+                ], 200);
             } catch (ClientResponseException $exception) {
                 DB::rollBack();
                 return response()->json(['message' => $exception->getMessage()], 500);
@@ -522,6 +524,13 @@ class  VShopController extends Controller
         $vshop->vshop_id = $request->vshop_id;
         $vshop->vshop_name = $request->nick_name;
         $vshop->save();
+        try {
+            $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
+            DB::commit();
+        } catch (ClientResponseException $exception) {
+            DB::rollBack();
+            return response()->json(['message' => $exception->getMessage()], 500);
+        }
         return response()->json([
             'status_code' => 200,
             'message' => 'Tạo Vshop Thành công',
