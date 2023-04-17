@@ -52,14 +52,6 @@ class OrderController extends Controller
         $productId = $request->product_id;
         $vshopId = $request->vshop_id;
         $quantity = $request->quantity;
-
-        $checkVshopId = VshopProduct::where('vshop_id', $vshopId)
-            ->where('product_id', $request->product_id)
-            ->first();
-        if (!$checkVshopId) {
-            $vshopId = Vshop::where('pdone_id', 247)->first()->id;
-        }
-
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.vshop_id', $vshopId)
@@ -93,11 +85,11 @@ class OrderController extends Controller
         $districtId = $request->district_id;
         $provinceId = $request->province_id;
         $wardId = $request->wards_id;
-        $address = explode(', ', $request->address);
-        if (count($address) == 4) {
-            unset($address[0]);
-        }
-        $address = implode(', ', $address);
+        $address = $request->address;
+//        if (count($address) == 4) {
+//            unset($address[0]);
+//        }
+//        $address = implode(', ', $address);
         // NEW ORDER
         $order = new Order();
         $order->pay = 2;
