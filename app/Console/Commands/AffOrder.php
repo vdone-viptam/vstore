@@ -104,20 +104,18 @@ class AffOrder extends Command
                         $new_vshop_blance->money_history= $price_vshop * 0.95;
                         $new_vshop_blance->save();
 //                    $hmac = 'ukey='.$order->no .'&value='. $price_vshop .'&orderId='.$order->id. '&userId=' . $vshop->pdone_id;
-                        $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . $price_vshop.'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
+                        $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0) .'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
+//                        return $hmac;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
                         $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
                         $new_vshop_blance->code=$sig;
                         $new_vshop_blance->save();
-                        if ($order->user_id==''){
-                            return 1;
-                        }
 
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
                             [
                                 'orderId'=>$order->id,
                                 'userId'=>$vshop->pdone_id,
-                                'value'=>$price_vshop,
+                                'value'=>round($price_vshop,0),
                                 'ukey'=>$order->no,
                                 'sellerPDoneId'=>$vshop->vshop_id,
                                 'buyerId'=>$order->user_id,
@@ -134,9 +132,6 @@ class AffOrder extends Command
 
                     ));
                 }
-
-
-
             }
             DB::commit();
 
