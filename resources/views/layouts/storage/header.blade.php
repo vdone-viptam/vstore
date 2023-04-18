@@ -1,9 +1,17 @@
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white fixed-top navbar-icon ">
-        <a class="navbar-brand" href="{{route('screens.storage.dashboard.index')}}">
-            <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/titleK.png')}}"
-                 alt="logo">
-        </a>
+        @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+            <a class="navbar-brand" href="{{route('screens.storage.dashboard.index')}}">
+                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/titleK.png')}}"
+                     alt="logo">
+            </a>
+        @else
+            <a class="navbar-brand" href="{{route('screens.manufacture.dashboard.index')}}">
+                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"
+                     alt="logo">
+            </a>
+        @endif
+
         <button class="navbar-toggler top-menu-mb" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">

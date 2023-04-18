@@ -24,7 +24,7 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="product" href="#">Tất cả sản phẩm</a>
+                                            <a class="nav-link" id="product" href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="addSp" href="#">Thêm sản phẩm</a>
@@ -33,7 +33,7 @@
                                             <a class="nav-link" id="request" href="#">Yêu cầu xét duyệt sản phẩm</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="reAcp" href="#">Quản lý yêu cầu xét duyệt</a>
+                                            <a class="nav-link" id="reAcp" href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu xét duyệt</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="discount" href="#">Quản lý giảm giá</a>
@@ -59,7 +59,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="proDel" href="#">Quản lý xuất nhập sản phẩm</a>
                                         </li>
-                                      
+
                                     </ul>
                                 </div>
                             </li>
@@ -72,7 +72,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="listVstore" href="#">Danh sách V-Store liên kết</a>
                                         </li>
-                                    
+
                                     </ul>
                                 </div>
                             </li>
@@ -113,7 +113,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="listGetm" href="#">Quản lý yêu cầu rút tiền</a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </li>
