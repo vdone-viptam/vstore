@@ -312,7 +312,7 @@
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
                             <span class="text-title font-medium">Thể tích (ml)</span>
-                            <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
+                            <input type="number" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
                                    value="{{old('volume')}}"
                                    class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('volume')

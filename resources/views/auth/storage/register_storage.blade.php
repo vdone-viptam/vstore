@@ -286,7 +286,7 @@
 
         <div class="flex flex-col justify-start items-start gap-2 w-full">
             <span class="text-sm font-medium">Giấy chứng nhận PCCC/ Chứng nhận khác </span>
-            <input required type="file" multiple accept="image/png, image/gif, image/jpeg" name="image_pccc[]"
+            <input type="file" multiple accept="image/png, image/gif, image/jpeg" name="image_pccc[]"
                    id="" placeholder="Nhập địa chỉ thư điện tử"
                    class="mail outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             @error('image_pccc')
@@ -320,16 +320,16 @@
         </div>
 
         <div class="flex flex-col justify-start items-start gap-2 w-full">
-            <span class="text-sm font-medium">Diện tích loại kho (m2)</span>
+            <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Diện tích loại kho (m2)</span>
 
             <div class="flex justify-between items-center w-full gap-6">
-                <input type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage"
+                <input required type="number" min="0" max="" placeholder="Kho lạnh (m)" name="cold_storage"
                        id="cold_storage" value=""
                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                <input type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value=""
+                <input required type="number" min="0" max="" placeholder="Kho bãi (m)" name="warehouse" value=""
                        id="warehouse"
                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
-                <input type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value=""
+                <input required type="number" min="0" max="" placeholder="Kho thường (m)" name="normal_storage" value=""
                        id="normal_storage"
                        class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
             </div>
@@ -348,7 +348,7 @@
 <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
     <button type="submit"
             class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
-    >Mua ngay
+    >Đăng ký mua
     </button>
     <span class="text-xl font-medium w-full">Bạn đã có tài khoản? <a href="{{route('login_storage')}}"
                                                                      class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>

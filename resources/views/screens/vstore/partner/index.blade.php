@@ -24,13 +24,12 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                                 <select name="condition" id=""
                                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-
                                     <option
-                                        value="users.account_code" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
+                                        value="users.account_code" {{isset($params['condition']) && $params['condition'] == 'users.account_code ' ? 'selected' : ''}}>
                                         Mã Nhà Cung Cấp
                                     </option>
                                     <option
-                                        value=users.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                                        value=users.name {{isset($params['condition']) && $params['condition'] == 'users.name' ? 'selected' : ''}}>
                                         Tên Nhà Cung Cấp
                                     </option>
 
@@ -93,27 +92,23 @@
                             <th>
                                 Số sản phẩm liên kết
                             </th>
-                            {{--                            <th>--}}
-                            {{--                                Chi tiết--}}
-                            {{--                            </th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($users) > 0)
                             @foreach($users as $val)
-
                                 <tr>
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {{$val->account_code}}
                                     </td>
-                                    <td>
+                                    <td class="text-left">
                                         {{$val->name}}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {{$val->phone_number}}
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {{$val->sl}}
                                     </td>
 
