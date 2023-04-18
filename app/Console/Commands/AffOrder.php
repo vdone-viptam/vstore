@@ -98,7 +98,7 @@ class AffOrder extends Command
                         $price_vshop = $total /100 * $vshop_con_lai;
                         $new_vshop_blance = new BlanceChange();
                         $new_vshop_blance->vshop_id=$vshop->id;
-                        $new_vshop_blance->type=2;
+                        $new_vshop_blance->type=1;
                         $new_vshop_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vshop_blance->status=1;
                         $new_vshop_blance->money_history= $price_vshop * 0.95;
