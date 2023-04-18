@@ -29,30 +29,21 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-//        return 1;
-        $this->v['products'] = Product::select('products.id',
+        $this->v['field'] = $request->field ?? 'products.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['products'] = ProductWarehouses::query()->select('products.id',
             'publish_id', 'images', 'products.name', 'brand',
-            'category_id', 'price', 'products.status', 'vstore_id', 'amount_product_sold')
-            ->join("categories", 'products.category_id', '=', 'categories.id')
-            ->orderBy('id', 'desc');
-        $limit = $request->limit ?? 10;
-        if ($request->condition && $request->condition != 0) {
-
-            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . trim($request->key_search) . '%');
-        }
-
-        $this->v['products'] = $this->v['products']->orderBy('id', 'desc')
+            'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
+            'amount_product_sold', DB::raw('SUM(amount) - SUM(export) as amount')
+        )->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
+            ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+            ->join("categories", 'products.category_id', '=', 'categories.id');
+        $this->v['products'] = $this->v['products']->groupBy('products.id')
             ->where('user_id', Auth::id())
-            ->paginate($limit);
-
-        foreach ($this->v['products'] as $val) {
-//            return $val->id;
-            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount) - SUM(export) AS amount FROM product_warehouses WHERE product_id =" . $val->id))[0]->amount;
-//                return $val->amount_product;
-//            $val->amount_product = DB::select(DB::raw("SELECT SUM(amount)  - (SELECT IFNULL(SUM(amount),0) FROM product_warehouses WHERE status = 2
-//                    AND product_id = " . $val->id . ") as amount FROM product_warehouses
-//                    where status = 1 AND product_id = " . $val->id))[0]->amount ?? 0;
-        }
+            ->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($limit ?? 10);
+        $this->v['key_search'] = '';
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
     }
@@ -241,21 +232,18 @@ class ProductController extends Controller
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
+        $this->v['field'] = $request->field ?? 'requests.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['key_search'] = $request->key_search ?? '';
         $limit = $request->limit ?? 10;
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.vstore_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name');
-        if ($request->condition && $request->condition != 0) {
-
-            $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
-        }
-
         $this->v['requests'] = $this->v['requests']
             ->where('requests.user_id', Auth::id())
-            ->orderBy('requests.id', 'desc')
+            ->orderBy($this->v['field'], $this->v['type'])
             ->paginate($limit);
-//        dd($this->v['requests']);
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.request', $this->v);
 
@@ -268,13 +256,23 @@ class ProductController extends Controller
 
             if ($request->product) {
 
-                $this->v['product'] = Product::query()->select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id',
-                    'discount', 'discount_vShop', 'description', 'vat', 'amount_product_sold')
-                    ->selectSub('select amount - export from product_warehouses where product_id = products.id', 'amount')
-                    ->where('id', $request->id)
-                    ->first();
-                return view('screens.manufacture.product.detail_product', $this->v);
+                try {
+                    $product = Product::query()->select('products.id', 'publish_id', 'images',
+                        'products.name', 'brand', 'category_id', 'price', 'products.status', 'vstore_id',
+                        'discount', 'discount_vShop', 'description', 'vat', 'amount_product_sold', 'availability_status', 'categories.name as cate_name')
+                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                        ->where('products.id', $request->product_id)
+                        ->first();
+                    return response()->json([
+                        'success' => true,
+                        'data' => $product
+                    ], 200);
+                } catch (\Exception $exception) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => $exception->getMessage()
+                    ], 500);
+                }
 
             } else {
                 $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
