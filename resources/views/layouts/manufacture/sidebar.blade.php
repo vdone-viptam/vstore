@@ -78,11 +78,11 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                                    data-target="#submenu-6" aria-controls="submenu-6"><i
+                                    data-target="#submenu-5" aria-controls="submenu-5"><i
                                         class="fas fa-clipboard-list"></i>
                                         Quản lý đơn hàng
                                     </a>
-                                <div id="submenu-6" class="collapse submenu" style="">
+                                <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" id="keyP" href="#">Yêu cầu nhập sẵn sản phẩm</a>
@@ -97,23 +97,22 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                                    data-target="#submenu-6" aria-controls="submenu-6"><i
+                                <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('finances*')) ? 'true' : 'false' }}"
+                                   data-target="#submenu-6" aria-controls="submenu-6"><i
                                         class="fas fa-fw fa-dollar-sign"></i>
-                                        Tài chính
-                                    </a>
-                                <div id="submenu-6" class="collapse submenu" style="">
+                                    Tài chính</a>
+                                <div id="submenu-6" class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="finance" href="#">Ví</a>
+                                            <a class="nav-link {{ (request()->is('finances')) ? 'active1' : '' }}" href="{{ route('screens.manufacture.finance.index') }}">Ví</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="history" href="#">Lịch sử thay đổi số dư</a>
+                                            <a class="nav-link {{ (request()->is('finances/history')) ? 'active1' : '' }}" href="{{ route('screens.manufacture.finance.history') }}">Yêu cầu rút tiền</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="listGetm" href="#">Quản lý yêu cầu rút tiền</a>
+                                            <a class="nav-link {{ (request()->is('finances/revenue')) ? 'active1' : '' }}" href="{{ route('screens.manufacture.finance.revenue') }}">Lịch sử biến động số
+                                                dư</a>
                                         </li>
-
                                     </ul>
                                 </div>
                             </li>
