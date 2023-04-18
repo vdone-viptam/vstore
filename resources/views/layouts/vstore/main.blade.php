@@ -23,10 +23,10 @@
 </head>
 <style>
     td {
-        text-align: left;
+        text-align: left !important;
     }
     th {
-        text-align: left;
+        text-align: left !important;
     }
 </style>
 <body id="body">
