@@ -49,6 +49,7 @@ class AccountController extends Controller
             'city_id' => 'required',
             'district_id' => 'required',
             'ward_id' => 'required',
+            'link_website' => 'unique:users,slug,'.$id,
 
         ], [
             'name.required' => 'Tên  bắt buộc nhập',
@@ -63,6 +64,7 @@ class AccountController extends Controller
             'city_id.required' => 'Trường này không được trống',
             'district_id.required' => 'Trường này không được trống',
             'ward_id.required' => 'Trường này không được trống',
+            'link_website.unique' => 'Slug đã tồn tại',
 
         ]);
         if ($validator->fails()) {
