@@ -174,7 +174,7 @@ class AccountController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|confirmed|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password' => 'required|confirmed|min:8|regex:' . config('regex.password'),
             'password_confirmation' => 'required'
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',

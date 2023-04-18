@@ -251,11 +251,13 @@ class AccountController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+            'password' => 'required|confirmed|min:8|regex:' . config('regex.password'),
+            'password_confirmation' => 'required'
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',
             'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
+            'password.confirmed' => 'Mật khẩu không khớp',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
