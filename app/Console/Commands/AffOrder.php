@@ -63,7 +63,7 @@ class AffOrder extends Command
 //                            tong_tien /100 * (100 - (discount + discount_vShop + diss_ncc))
                         $new_ncc_blance = new BlanceChange();
                         $new_ncc_blance->user_id=$ncc->id;
-                        $new_ncc_blance->type=2;
+                        $new_ncc_blance->type=1;
                         $new_ncc_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_ncc_blance->status=1;
                         $new_ncc_blance->money_history=$price_ncc;
@@ -83,7 +83,7 @@ class AffOrder extends Command
                         }
                         $new_vstore_blance = new BlanceChange();
                         $new_vstore_blance->user_id=$vstore->id;
-                        $new_vstore_blance->type=2;
+                        $new_vstore_blance->type=1;
                         $new_vstore_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vstore_blance->status=1;
                         $new_vstore_blance->money_history=$price_vstore;
