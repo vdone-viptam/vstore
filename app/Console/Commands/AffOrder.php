@@ -108,7 +108,6 @@ class AffOrder extends Command
 //                        return $hmac;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
                         $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
-                        $new_vshop_blance->code=$sig;
                         $new_vshop_blance->save();
 
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
