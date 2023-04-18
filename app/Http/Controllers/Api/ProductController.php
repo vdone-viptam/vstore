@@ -111,10 +111,12 @@ class ProductController extends Controller
                 if ($request->pdone_id) {
                     $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                             ->where('product_id', $pro->id)
-                            ->whereIn('vshop_products.status', [1, 2])
+                            ->whereIn('vshop_products.status', [1,2])
                             ->where('vshop.pdone_id', $request->pdone_id)
                             ->count() ?? 0;
-                    $pro->is_affiliate = $pro->is_affiliate > 0 ? 1 : 0;
+                    if ($pro->is_affiliate > 0){
+                        $pro->is_affiliate = 1;
+                    }
 
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                     $pro->available_discount = $more_dis ?? 0;

@@ -154,7 +154,12 @@
                                                 <span class="text-blue-600">Chờ giao hàng</span>
                                             @elseif($order->export_status == 2)
                                                 <span class="text-blue-600">Đang giao hàng</span>
+                                            @elseif($order->export_status == 3)
+                                                <span class="text-red-600">kho hủy</span>
+                                            @elseif($order->export_status == 5)
+                                                <span class="text-red-600">khách hủy</span>
                                             @else
+
                                                 <span class="text-green-600">Hoàn thành</span>
                                             @endif
                                         </td>
@@ -164,7 +169,7 @@
                                         <td>{{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y h:i')}}</td>
                                         <td>
                                             @if($order->export_status == 4)
-                                                {{\Carbon\Carbon::now()->format('d/m/Y h:i')}}
+                                                {{\Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y h:i')}}
                                             @else
                                                 Chưa xác định
                                             @endif

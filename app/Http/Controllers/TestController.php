@@ -200,7 +200,7 @@ class TestController extends Controller
             }
             return 'Ok rồi đấy';
     }
-    public function chia(){
+    public function testChia(){
         try {
 
 
@@ -295,9 +295,6 @@ class TestController extends Controller
 
                     ));
                 }
-
-
-
             }
             DB::commit();
 

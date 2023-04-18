@@ -23,7 +23,7 @@ class OrderController extends Controller
             'orderItem.vshop',
             'orderItem.warehouse',
             'orderItem'])->select(
-            'no', 'id', 'export_status', 'created_at'
+            'no', 'id', 'export_status', 'created_at','estimated_date'
         )
             ->where('order.status', '!=', 2);
         if ($key_search && strlen(($key_search) > 0)) {
