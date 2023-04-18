@@ -164,6 +164,7 @@ class  VShopController extends Controller
                 "district.district_name",
                 "wards.wards_name"
             )
+            ->orderBy('pre_order_vshop.created_at','desc')
             ->distinct()
             ->simplePaginate($limit);
 
