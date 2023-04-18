@@ -197,7 +197,37 @@
 
 
                                         </tbody>
-                                    </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+                                </div>
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button page-item previous disabled" id="example_previous">
+                                                <a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                            </li><li class="paginate_button page-item next disabled" id="example_next">
+                                                <a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                                        <form>
+                                            <div class="form-group">
+                                                <select class="form-control form-control-lg">
+                                                    <option>10 phần tử / trang</option>
+                                                    <option>25 phần tử / trang</option>
+                                                    <option>50 phần tử / trang</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -215,8 +245,8 @@
                 $.ajax({
                     url: '{{route('screens.manufacture.warehouse.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
                     success: function (result) {
+
                         $('#modal8').html(result);
-                        // $('.modal-details').toggleClass('show-modal')
                     },
                 });
             });
