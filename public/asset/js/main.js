@@ -273,11 +273,12 @@ $(document).ready(function () {
 
 
 })
-function swalNoti(position, icon, title, width, showConfirmButton, timer) {
+function swalNoti(position, icon, title,text, width, showConfirmButton, timer) {
     Swal.fire({
         position: position,
         icon: icon,
         title: title,
+        text: text,
         width: width,
         showConfirmButton: showConfirmButton,
         timer: timer

@@ -208,13 +208,6 @@
             }
         }
     })
-    for (let i = 0; i < tm.length; i++) {
-        if (tm[i].classList.contains("active")) {
-            tm[i].classList.remove("tab__hover")
-        } else {
-            tm[i].classList.add("tab__hover")
-        }
-    }
     const nav1 = document.querySelectorAll('nav');
     nav1.forEach(item => {
         const ul = item.querySelector('ul');

@@ -59,7 +59,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="proDel" href="#">Quản lý xuất nhập sản phẩm</a>
                                         </li>
-                                      
+
                                     </ul>
                                 </div>
                             </li>
@@ -72,7 +72,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="listVstore" href="#">Danh sách V-Store liên kết</a>
                                         </li>
-                                    
+
                                     </ul>
                                 </div>
                             </li>
@@ -113,22 +113,21 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="listGetm" href="#">Quản lý yêu cầu rút tiền</a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                <a class="nav-link {{ (request()->is('account*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('account*')) ? 'true' : 'false' }}"
                                     data-target="#submenu-7" aria-controls="submenu-7"><i
                                         class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
-                                <div id="submenu-7" class="collapse submenu" style="">
+                                <div id="submenu-7" class="{{ (request()->is('account*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="profile" href="./profile.html">Hồ sơ của tôi</a>
+                                            <a class="nav-link {{ (request()->is('account')) ? 'active1' : '' }}" href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="change-password" href="./change-password.html">Đổi
-                                                mật khẩu</a>
+                                            <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}" href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
                                         </li>
                                     </ul>
                                 </div>

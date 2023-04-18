@@ -638,7 +638,6 @@
                 .then((data) => {
                     if (data.length > 0) {
                         divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
-                        console.log(1);
                     } else {
                         divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                     }
