@@ -9,60 +9,24 @@
 
 
 @section('content')
-    <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-        <span class="text-secondary">Kho hàng</span>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                  stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <a href="#" class="text-blueMain font-medium italic">Quản lý kho hàng</a>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">Quản lý kho hàng</h2>
+
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý kho hàng</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
     <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
-{{--        <div class="flex justify-start items-start gap-2 flex-wrap">--}}
-{{--            <select name="" id=""--}}
-{{--                    class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">--}}
-{{--                <option value="0" selected>Tất cả</option>--}}
-{{--                <option value="1">Mã sản phẩm</option>--}}
-{{--                <option value="2">Tên sản phẩm</option>--}}
-{{--                <option value="3">Thương hiệu</option>--}}
-{{--                <option value="4">Ngành hàng</option>--}}
-{{--            </select>--}}
-{{--            --}}{{--        <div class="flex justify-start items-start gap-2 flex-wrap">--}}
-{{--            --}}{{--            <select name="" id=""--}}
-{{--            --}}{{--                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">--}}
-{{--            --}}{{--                <option value="0" selected>Tất cả</option>--}}
-{{--            --}}{{--                <option value="1">Mã sản phẩm</option>--}}
-{{--            --}}{{--                <option value="2">Tên sản phẩm</option>--}}
-{{--            --}}{{--                <option value="3">Thương hiệu</option>--}}
-{{--            --}}{{--                <option value="4">Ngành hàng</option>--}}
-{{--            --}}{{--            </select>--}}
 
-{{--            <input type="text"--}}
-{{--                   class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"--}}
-{{--                   placeholder="Nhập từ khóa">--}}
-{{--            <button type="submit"--}}
-{{--                    class="flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "--}}
-{{--            >--}}
-{{--                <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                    <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z" fill="white"/>--}}
-{{--                    <path d="M13 11H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                    <path d="M13 15H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                    <path d="M13 19H18" stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                    <path--}}
-{{--                        d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"--}}
-{{--                        stroke="white" stroke-width="2" stroke-linecap="round"/>--}}
-{{--                </svg>--}}
-{{--                Lọc--}}
-{{--            </button>--}}
-{{--        </div>--}}
-        {{--            <input type="text"--}}
-        {{--                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"--}}
-        {{--                   placeholder="Nhập từ khóa">--}}
-        {{--            <input type="submit"--}}
-        {{--                   class="text-blue-700  cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px]"--}}
-        {{--                   value="Lọc">--}}
-        {{--        </div>--}}
         <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
             <div class="flex justify-between items-center flex-wrap gap-4">
                 <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
@@ -182,6 +146,65 @@
             </div>
         </div>
         <div></div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                    <h5 class="mb-0" style="font-size:18px;">Quản lý kho hàng</h5>
+                    <!-- <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                            </div>
+                        </li>
+                    </ul> -->
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons">          <button class="btn btn-outline-light buttons-copy buttons-html5" tabindex="0" aria-controls="example" type="button"><span>Copy</span></button> <button class="btn btn-outline-light buttons-excel buttons-html5" tabindex="0" aria-controls="example" type="button"><span>Excel</span></button> <button class="btn btn-outline-light buttons-pdf buttons-html5" tabindex="0" aria-controls="example" type="button"><span>PDF</span></button> <button class="btn btn-outline-light buttons-print" tabindex="0" aria-controls="example" type="button"><span>Print</span></button> <button class="btn btn-outline-light buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example" type="button" aria-haspopup="true"><span>Column visibility</span></button> </div></div><div class="col-sm-12 col-md-6"><div id="example_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example" class="table table-striped table-bordered second dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                        <thead>
+                                        <tr role="row">
+                                        </tr><tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Tên Kho Hàng: activate to sort column descending" style="width: 287px;">Tên kho hàng</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Số điện thoại: activate to sort column ascending" style="width: 294px;">Số điện thoại</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Địa chỉ: activate to sort column ascending" style="width: 170px;">Địa chỉ</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Số loại sản phẩm: activate to sort column ascending" style="width: 283px;">Số loại sản phẩm</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Số lượng tồn: activate to sort column ascending" style="width: 225px;">Số lượng tồn</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 51px;"></th></tr>
+
+                                        </thead>
+                                        <tbody>
+
+                                        @foreach($warehouses as $ware)
+                                            <tr>
+                                                <td>{{$ware->ware_name}}</td>
+                                                <td>
+                                                    {{$ware->phone_number}}
+                                                </td>
+                                                <td>
+                                                    {{$ware->address}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{$ware->amount}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{$ware->amount_product}}
+                                                </td>
+                                                <td>
+                                                    <a href="#" data-id="{{$ware->id}}" data-kho=""
+                                                       class="more-details text-primary underline"> Chi
+                                                        tiết</a>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+
+
+
+                                        </tbody>
+                                    </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end data table  -->
+        <!-- ============================================================== -->
     </div>
 @endsection
 

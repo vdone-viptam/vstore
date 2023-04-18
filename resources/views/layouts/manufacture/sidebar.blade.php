@@ -51,7 +51,7 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="proIn" href="#">Danh sách kho hàng</a>
+                                            <a class="nav-link" id="proIn" href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="proOut" href="#">Yêu cầu thêm sản phẩm vào kho</a>
@@ -59,7 +59,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="proDel" href="#">Quản lý xuất nhập sản phẩm</a>
                                         </li>
-                                      
+
                                     </ul>
                                 </div>
                             </li>
@@ -72,7 +72,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="listVstore" href="#">Danh sách V-Store liên kết</a>
                                         </li>
-                                    
+
                                     </ul>
                                 </div>
                             </li>
@@ -113,7 +113,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" id="listGetm" href="#">Quản lý yêu cầu rút tiền</a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                             </li>
