@@ -64,13 +64,13 @@
                                 </div>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href="" data-toggle="collapse" aria-expanded="{{ (request()->is('partners*')) ? 'true' : 'false' }}"
                                     data-target="#submenu-4" aria-controls="submenu-4"><i
                                         class="fab fa-fw fas fa-users"></i>Liên kết V-Store</a>
-                                <div id="submenu-4" class="collapse submenu" style="">
+                                <div id="submenu-4" class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="listVstore" href="#">Danh sách V-Store liên kết</a>
+                                            <a class="nav-link {{ (request()->is('partners')) ? 'active1' : '' }}" id="listVstore" href="{{route('screens.manufacture.partner.index')}}">Danh sách V-Store liên kết</a>
                                         </li>
 
                                     </ul>
