@@ -211,6 +211,15 @@
                                                        <p class="text-danger">{{$message}}</p>
                                                        @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="description">Giới thiệu</label>
+                                                <textarea type="text" class="form-control form-control-lg" style="max-height: 150px"
+                                                       id="description" name="description">{{$infoAccount->description}}</textarea>
+                                                    @error('description')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                            </div>
                                         </div>
                                         <div class="d-flex justify-content-end align-items-center"
                                              style="gap:10px">
