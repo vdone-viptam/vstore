@@ -325,6 +325,7 @@ class LoginController extends Controller
                 'volume.required' => 'Thể tích kho bắt buộc nhập',
                 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
                 'image_storage.image' => 'Không đúng định dạng ảnh',
+                'image_storage.*' => 'Không đúng định dạng ảnh !',
                 'image_pccc.image' => 'Không đúng định dạng ảnh',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
