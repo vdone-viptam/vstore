@@ -54,7 +54,7 @@
                 <div class="grid grid-cols-2 gap-4 w-full">
                     <span class="text-title font-medium ">Ngày đăng ký:</span>
                     <span
-                        class="text-title">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y h:i A')}}</span>
+                        class="text-title">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i A')}}</span>
                 </div>
             </div>
         </div>

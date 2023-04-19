@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Lịch sử biến động só dư')
+@section('page_title','Lịch sử biến động số dư')
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
 
@@ -11,7 +11,7 @@
                           stroke="black"
                           stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
-                <a href="" class="text-blueMain font-medium italic">Lịch sử biến động só dư</a>
+                <a href="" class="text-blueMain font-medium italic">Lịch sử biến động số dư</a>
             </div>
 
             <div class="box w-full">
