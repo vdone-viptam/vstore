@@ -644,7 +644,7 @@ class ProductController extends Controller
             }
 
 
-        }else{
+        } else {
             try {
                 $newVshopProduct = new VshopProduct();
                 $newVshopProduct->vshop_id = $vshop->id;
@@ -886,6 +886,7 @@ class ProductController extends Controller
                 $products = DB::table('vshop_products')
                     ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                     ->where('pdone_id', $pdone_id)
+                    ->where('vshop_products.status', 2)
                     ->where('product_id', $pro['product_id'])
                     ->where('amount', '>=', $pro['amount'])
                     ->count();
@@ -964,7 +965,12 @@ class ProductController extends Controller
                         ->where('product_id', $value['product_id'])
                         ->where('vshop_products.amount', '>=', $value['amount'])
                         ->increment('vshop_products.amount', -$value['amount']);
-
+                    $increment = DB::table('vshop_products')
+                        ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
+                        ->where('pdone_id', $pdone_id)
+                        ->where('status', 2)
+                        ->where('product_id', $value['product_id'])
+                        ->increment('vshop_products.amount_product_sold', $value['amount']);
                     $change = VshopProduct::join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('pdone_id', $pdone_id)
                         ->where('status', 2)

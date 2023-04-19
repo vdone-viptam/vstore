@@ -215,57 +215,15 @@
                 })
             }
         }
-    })
-    const nav1 = document.querySelectorAll('nav');
-    nav1.forEach(item => {
-        const ul = item.querySelector('ul');
-
-        if (ul && ul.classList.contains('pagination')) {
-            ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
-        }
-    })
-    var url_string = window.location.href;
-    var url2 = new URL(url_string);
-    var c = url2.searchParams.get("key_search");
-    if (c) {
-        $('#key_search').val(c);
-    } else {
-        if ($('.btnA')) {
-            const btnA = document.querySelector('.btnA');
-            if(btnA){
-                btnA.classList.add('bg-slate-300');
-                btnA.classList.remove('bg-[#40BAFF]');
-                btnA.setAttribute('disabled', 'true');
-            }
-        }
-    }
-    if ($('#key_search')) {
-        const key_search = document.querySelector('#key_search');
-        if(key_search){
-            document.querySelector('#key_search').addEventListener('keyup', (e) => {
-                const btnA = document.querySelector('.btnA');
-                if(btnA){
-                    if (e.target.value) {
-                        btnA.removeAttribute('disabled');
-                        btnA.classList.remove('bg-slate-300');
-                    btnA.classList.add('bg-[#40BAFF]');
-                    } else {
-                        btnA.setAttribute('disabled', 'true');
-                        btnA.classList.add('bg-slate-300');
-                        btnA.classList.remove('bg-[#40BAFF]');
-                    }
-                }
-            });
-        }
-    }
-    const x = document.querySelectorAll('input[type="number"]');
-    x.forEach(item => {
-        item.addEventListener("keypress", function (evt) {
-            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                evt.preventDefault();
-            }
-        });
-    })
+    });
+    // const x = document.querySelectorAll('input[type="number"]');
+    // x.forEach(item => {
+    //     item.addEventListener("keypress", function (evt) {
+    //         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+    //             evt.preventDefault();
+    //         }
+    //     });
+    // })
 </script>
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 {{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}
