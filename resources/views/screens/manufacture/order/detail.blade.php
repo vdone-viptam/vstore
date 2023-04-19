@@ -3,7 +3,6 @@
         <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
         @csrf
         <div
-
             class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
             <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                 <div></div>
@@ -76,7 +75,7 @@
 
                                     class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                 <option value="4">Đồng ý</option>
-                                <option value=5"">Từ chối</option>
+                                <option value="5">Từ chối</option>
                             </select>
                         </div>
                     @endif

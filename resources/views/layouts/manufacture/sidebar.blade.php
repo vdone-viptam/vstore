@@ -87,18 +87,18 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                <a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('orders*')) ? 'true' : 'false' }}"
                                     data-target="#submenu-5" aria-controls="submenu-5"><i
                                         class="fas fa-clipboard-list"></i>
                                         Quản lý đơn hàng
                                     </a>
-                                <div id="submenu-5" class="collapse submenu" style="">
+                                <div id="submenu-5" class="{{ (request()->is('orders*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" id="keyP" href="#">Yêu cầu nhập sẵn sản phẩm</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="orderIn" href="#">Đơn hàng nhập sẵn</a>
+                                            <a class="nav-link {{ (request()->is('orders/orders')) ? 'active1' : '' }}" id="orderIn" href="{{route('screens.manufacture.order.order')}}">Đơn hàng nhập sẵn</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="orBuy" href="#">Đơn hàng khách mua sản phẩm</a>
