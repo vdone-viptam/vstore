@@ -314,17 +314,19 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
 
     });
     Route::prefix('products')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Manufacture\ProductController::class, 'index'])->name('screens.manufacture.product.index');
+        Route::get('/index', [\App\Http\Controllers\Manufacture\ProductController::class, 'index'])->name('screens.manufacture.product.index');
         Route::get('/create', [\App\Http\Controllers\Manufacture\ProductController::class, 'create'])->name('screens.manufacture.product.create');
         Route::post('/create', [\App\Http\Controllers\Manufacture\ProductController::class, 'store'])->name('screens.manufacture.product.store');
         Route::get('/create-request', [\App\Http\Controllers\Manufacture\ProductController::class, 'createRequest'])->name('screens.manufacture.product.createRequest');
+        Route::get('/request-delete', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestDeleteProduct'])->name('screens.manufacture.product.requestDeleteProduct');
+
         Route::post('/store-request', [\App\Http\Controllers\Manufacture\ProductController::class, 'storeRequest'])->name('screens.manufacture.product.storeRequest');
         Route::get('/lay-du-lieu', [\App\Http\Controllers\Manufacture\ProductController::class, 'getDataProduct'])->name('screens.manufacture.product.getDataProduct');
         Route::post('/upload-image', [\App\Http\Controllers\Manufacture\ProductController::class, 'uploadImagePost'])->name('upload');
         Route::get('/request', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestProduct'])->name('screens.manufacture.product.request');
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
-        Route::get('/edit/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
+        Route::get('/edit/{id?}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
         Route::post('/update/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'update'])->name('screens.manufacture.product.update');
         Route::prefix('discount')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');

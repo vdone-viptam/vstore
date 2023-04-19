@@ -239,7 +239,10 @@ class ProductController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.vstore_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,requests.created_at,requests.status,categories.name,products.name as product_name,users.name as user_name');
+            ->selectRaw('requests.code,
+            requests.id,requests.created_at,requests.status,
+            categories.name,products.name as product_name,
+            users.name as user_name');
         $this->v['requests'] = $this->v['requests']
             ->where('requests.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type'])
@@ -275,20 +278,35 @@ class ProductController extends Controller
                 }
 
             } else {
-                $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
-                    ->join('requests', 'products.id', '=', 'requests.product_id')
-                    ->join('users', 'requests.vstore_id', '=', 'users.id')
-                    ->selectRaw('requests.code,products.id,requests.id as re_id,price,
+                try {
+                    $request = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+                        ->join('requests', 'products.id', '=', 'requests.product_id')
+                        ->join('users', 'requests.vstore_id', '=', 'users.id')
+                        ->selectRaw('requests.code,products.id,requests.id as re_id,price,
                     requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
                     users.name as user_name,requests.vat,products.amount_product_sold')
-                    ->where('requests.id', $request->id)
-                    ->first();
-                return view('screens.manufacture.product.detail', $this->v);
+                        ->where('requests.id', $request->id)
+                        ->first();
+                    return response()->json([
+                        'success' => true,
+                        'data' => $request
+                    ], 200);
+                } catch (\Exception $exception) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => $exception->getMessage()
+                    ], 500);
+                }
             }
         } catch (\Exception $e) {
             return $e->getMessage();
 //            dd($e->getMessage());
         }
+    }
+
+    public function requestDeleteProduct()
+    {
+        return view('screens.manufacture.product.request_delete');
     }
 
     public function createp()
@@ -465,7 +483,7 @@ class ProductController extends Controller
         return $product->price;
     }
 
-    public function edit($id)
+    public function edit($id = null)
     {
         $categories = Category::all();
         $product = Product::find($id);

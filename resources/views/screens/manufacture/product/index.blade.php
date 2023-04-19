@@ -210,6 +210,11 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$products->withQueryString()->links()}}
+                    <select name="" id="" class="form-control col-1">
+                        <option value="">10 hàng / trang</option>
+                        <option value="">25 hàng / trang</option>
+                        <option value="">50 hàng / trang</option>
+                    </select>
                 </div>
 
 
@@ -305,7 +310,7 @@
                         $(".btnDelete").html('');
                     } else {
                         document.querySelector('.btnDestroy').innerHTML = ``;
-                        $(".btnDelete").html('<a class="btn btn-warning btnEdit mx-2" href="">Sửa sản phẩm</a><button  class="btn btn-danger">Xóa sản phẩm</button>');
+                        $(".btnDelete").html(`<a class="btn btn-warning btnEdit mx-2" href="{{route('screens.manufacture.product.edit')}}/${data.data.id}">Sửa sản phẩm</a><button  class="btn btn-danger">Xóa sản phẩm</button>`);
                     }
                 } else {
                     $('#modalDetail').modal('show');

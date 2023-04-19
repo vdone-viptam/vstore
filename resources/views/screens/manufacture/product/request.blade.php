@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Tất cả sản phẩm')
+@section('page_title','Quản lý yêu cầu xét duyệt')
 
 
 
@@ -220,7 +220,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button class="btn btn-link">Chi tiết</button>
+                                        <button class="btn btn-link" type="button"
+                                                onclick="showDetail({{$request->id}})">Chi tiết
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -235,6 +237,11 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$requests->withQueryString()->links()}}
+                    <select name="" id="" class="form-control col-1">
+                        <option value="">10 hàng / trang</option>
+                        <option value="">25 hàng / trang</option>
+                        <option value="">50 hàng / trang</option>
+                    </select>
                 </div>
 
 
@@ -250,7 +257,7 @@
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
-                url: `{{route('screens.manufacture.product.detail')}}?product_id=` + id + '&product=true',
+                url: `{{route('screens.manufacture.product.detail')}}?id=` + id,
                 dataType: "json",
                 encode: true,
                 error: function (jqXHR, error, errorThrown) {
@@ -271,34 +278,26 @@
 
 
                            <div class="form-group">
-                    <span class="text-title font-medium ">Mã yêu cầu:</span>
-                    <span class="text-title">{{$request->code}}</span>
-                </div>
+                    <label >Mã yêu cầu :</label>
+                  <input class="form-control form-control-lg" disabled value="${data.data.code}" />           </div>
 
                 <div class="form-group">
-                    <span class="text-title font-medium ">Tên sản phẩm:</span>
-                    <span class="text-title">{{$request->product_name}}</span>
+                    <span >Tên sản phẩm :</label>
+                  <input class="form-control form-control-lg" disabled value="${data.data.product_name}">
                 </div>
                 <div class="form-group">
-                    <span class="text-title font-medium ">V-Store:</span>
-                    <span class="text-title">{{$request->user_name ?? ''}}</span>
+                    <span >V-Store niêm yết:</label>
+                  <input class="form-control form-control-lg" disabled value="${data.data.user_name}" >
                 </div>
                 <div class="form-group">
-                    <span class="text-title font-medium ">Giá bán:</span>
-                    <span class="text-title">{{number_format($request->price,0,'.','.')}} đ</span>
-                </div>
+                    <an >Giá bán :</label>
+                  <input class="form-control form-control-lg" disabled value="${data.data.price + 'đ'}">
                 <div class="form-group">
-                    <span class="text-title font-medium ">Vat:</span>
-                    <span class="text-title">{{$request->vat}} %</span>
-                </div>
+                    <label>Vat :</label>
+                  <input class="form-control form-control-lg" disabled value="${data.data.vat}" >        </div>
                 <div class="form-group">
-                    <span class="text-title font-medium ">Chiết khấu V-Store:</span>
-                    <span class="text-title">{{$request->discount}}%</span>
-                </div>
-                <div class="form-group">
-                    <span class="text-title font-medium ">Số lượng bán:</span>
-                    <span class="text-title">{{$request->amount_product_sold ?? 0 }}</span>
-                </div>
+                    <span >Chiết khấu V-Store :</label>
+                  <input class="form-control form-control-lg" disabled value="${data.data.discount}" >
                    </form>
 
                         `;
