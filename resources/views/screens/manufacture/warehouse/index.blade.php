@@ -1,8 +1,24 @@
 @extends('layouts.manufacture.main')
 
 @section('modal')
-    <div id="modal8">
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('page_title','Quản lý kho hàng')
@@ -186,9 +202,9 @@
                                                     {{$ware->amount_product}}
                                                 </td>
                                                 <td>
-                                                    <a href="#" data-id="{{$ware->id}}" data-kho=""
-                                                       class="more-details text-primary underline"> Chi
-                                                        tiết</a>
+                                                    <button type="button" class="btn btn-link"
+                                                            onclick="showDetail({{$ware->id}})">Chi tiết
+                                                    </button>
                                                 </td>
 
                                             </tr>
@@ -202,7 +218,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+                                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite"></div>
                                 </div>
                                 <div class="col-sm-12 col-md-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
@@ -240,16 +256,64 @@
 
 @section('custom_js')
     <script>
-        $('.more-details').each(function (i, e) {
-            $(this).on('click', (o) => {
-                $.ajax({
-                    url: '{{route('screens.manufacture.warehouse.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
-                    success: function (result) {
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.manufacture.warehouse.detail')}}`,
+                dataType: "json",
+                data: {"id":id},
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
 
-                        $('#modal8').html(result);
-                    },
-                });
-            });
-        });
+                    // console.log(jqXHR.responseText);
+                    $('#requestModal').modal('hide')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                    })
+                }
+            }).done(function (data) {
+                console.log(data)
+                var htmlData = ``;
+
+                if (data.data) {
+                    htmlData += `<div class="form-group">`
+
+                    $.each(data.data,function (key,value){
+
+                        htmlData += `
+                        <div class="d-flex">
+ <div>
+                        <label for="name">Tên sản phẩm:</label>
+                        <input type="text" class="form-control form-control-lg" disabled id="code" value="${value.name}" readonly>
+                        </div>
+<div>
+                            <label for="name">Số lượng:</label>
+                        <input type="text" class="form-control form-control-lg" disabled id="code" value="${value.amount_product}" readonly>
+                        </div>
+</div>`
+
+                    }
+                )
+
+
+
+                htmlData += `</div>`;
+                        ;
+                    $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+        }
+
+
+
+
     </script>
 @endsection

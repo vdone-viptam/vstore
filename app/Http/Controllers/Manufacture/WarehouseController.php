@@ -151,7 +151,6 @@ class WarehouseController extends Controller
 
     public function detail(Request $request)
     {
-
         $kho = ProductWarehouses::select('products.name as name', 'product_id', DB::raw('(amount -export) as amount_product'))
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
             ->groupBy(['product_id', 'products.name']
@@ -161,7 +160,8 @@ class WarehouseController extends Controller
             ->get();
 
 
-        return view('screens.manufacture.warehouse.detail', ['products1' => $kho]);
+        return response()->json(['success' => true, 'data' => $kho]);
+//        return view('screens.manufacture.warehouse.detail', ['products1' => $kho]);
 
     }
 
