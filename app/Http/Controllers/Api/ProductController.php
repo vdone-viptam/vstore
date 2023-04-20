@@ -552,32 +552,32 @@ class ProductController extends Controller
             }
         }
         $product->discount = round(DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $product->id)
-                ->where('start_date', '<=', Carbon::now())
-                ->where('end_date', '>=', Carbon::now())
-                ->whereIn('type', [1, 2])
-                ->first()->sum ?? 0, 2);
+            ->where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->whereIn('type', [1, 2])
+            ->first()->sum ?? 0, 2);
 //        $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
         $list_vshop = VshopProduct::where('product_id', $id)->get();
 //        $list_vshop = Vshop::
-        $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+        $list_vshop = Vshop::query()->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->where('vshop_products.product_id', $id)
-            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name',
+                'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount',
+                'vshop_products.product_id')
+            ->selectSub("SELECT discount FROM discounts where start_date <= '" . Carbon::now() . "' and
+            end_date >= '" . Carbon::now() . "' and type=3 and user_id = vshop.id", 'vshop_discount')
+            ->orderBy('vshop_discount', 'desc')
             ->get();
 
-        if (count($list_vshop) == 0) {
-            $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
-                ->where('vshop_products.product_id', $id)
-                ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
-                ->get();
-        }
+//        if (count($list_vshop) == 0) {
+//            $list_vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
+//                ->where('vshop_products.product_id', $id)
+//                ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount', 'vshop_products.product_id')
+//                ->get();
+//        }
         foreach ($list_vshop as $list) {
-
-            $list->vshop_discount = round(Discount::where('product_id', $id)->where('user_id', $list->pdone_id)
-                    ->where('start_date', '<=', Carbon::now())
-                    ->where('end_date', '>=', Carbon::now())
-                    ->where('type', 3)
-                    ->first()->discount ?? 0, 2);
+            $list->vshop_discount = round($list->vshop_discount,2) ?? 0;
         }
         if (count($list_vshop) == 0) {
             $list_vshop = Vshop::where('pdone_id', 247)
