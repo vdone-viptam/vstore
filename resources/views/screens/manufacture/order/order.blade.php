@@ -22,8 +22,102 @@
 @endsection
 
 
+@section('modal')
+<div class="modal-order">
+</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-order-oder">
+    <form action="" method="POST">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-size: 20px;">Thông tin đơn hàng nhập sẵn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Mã đơn hàng: </label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="Nhập tên sản phẩm">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tên sản phẩm:</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Giá sản phẩm:</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Giảm giá (nếu có):</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Số lượng sản phẩm</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tiền đặt cọc (nếu có):</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tổng tiền:</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Trạng thái:</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Ngày tạo đơn:</label>
+                                <input type="text" class="form-control form-control-lg" id="name"
+                                    value="${data.data.name}" placeholder="0">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                    lại</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+@endsection
+
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <form act method="POST">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
                 <h5 class="mb-0" style="font-size:18px;">Quản lý đơn hàng</h5>
@@ -43,8 +137,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered second    "
-                    >
+                    <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
                             <th>Mã đơn hàng
@@ -137,8 +230,8 @@
                                     </td>
                                     <td>{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
-                                        <a href="#" data-id="{{$order->id}}" class="text-blue-600 more-details">Chi
-                                            tiết</a>
+                                        <a href="#" data-toggle="modal"
+                                        data-target=".bd-example-modal-lg" data-id="{{$order->id}}" class="text-blue-600 more-details">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -154,13 +247,11 @@
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$orders->withQueryString()->links()}}
                 </div>
-
-
             </div>
 
         </div>
+    </form>
     </div>
-    <p id="hdisi"></p>
 @endsection
 
 
@@ -182,113 +273,17 @@
                     })
                 });
             });
-
             document.querySelectorAll('.more-details').forEach(item => {
                 item.addEventListener('click', (e) => {
                     $.ajax({
-                        url: '{{route('screens.manufacture.order.detail')}}/' + item.dataset.id + '&_token={{csrf_token()}}',
+                        url: '{{route('screens.manufacture.order.detail')}}/' + item.dataset.id,
                         success: function (result) {
-                            $('#modal2').html('');
-                            $('#modal2').append(result);
-                            $('.modal-details').toggleClass('show-modal')
+                            console.log(result);
                         },
                     });
                 })
             })
-            async function showDetail(id) {
-            await $.ajax({
-                type: "GET",
-                url: `{{route('screens.manufacture.product.detail')}}?product_id=` + id + '&product=true',
-                dataType: "json",
-                encode: true,
-                error: function (jqXHR, error, errorThrown) {
-                    $('#requestModal').modal('hide')
-                    var error0 = JSON.parse(jqXHR.responseText)
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Xem chi tiết sản phẩm thất bại !',
-                        text: error0.message,
-                    })
-                }
-            }).done(function (data) {
-                var htmlData = ``;
-
-                if (data.data) {
-                    htmlData += `
-                    <form method="post" key=${id}>
-                                <div class="form-group">
-                            <label for="name">Mã sản phẩm:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="code" value="${data.data.publish_id}" readonly>
-                        </div>
-
-
-                                <div class="form-group">
-                            <label for="publish_id">Tên sản phẩm:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="publish_id" value="${data.data.name}" readonly>
-
-                            </div>
-
-                                <div class="form-group">
-                            <label for="product_name">Giá bán:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="product_name" value="${data.data.price}" readonly>
-                            </div>
-                     <div class="row">
-                        <div class="form-group col-6">
-                            <label for="quantity">VAT: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="quantity" value="${data.data.vat}" readonly>
-                        </div>
-
-                        <div class="form-group col-6">
-                            <label for="quantity">Thương hiệu:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="quantity" value="${data.data.brand}" readonly>
-                        </div>
-                    </div>
-
-                        <div class="form-group">
-                            <label for="created_at">Ngành hàng: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.cate_name}" readonly>
-                        </div>
-                       <div class="row">
-                        <div class="form-group col-6">
-                            <label for="created_at">Chiết khấu V-Store nhận được: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.discount}" readonly>
-                        </div>
-                         <div class="form-group col-6">
-                            <label for="created_at">Chiết khấu V-Shop nhận được: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.disount_vShop || 0}" readonly>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                            <label for="created_at">Số sản phẩm đã bán: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.amount_product_sold}" readonly>
-                        </div>
-                   </form>
-
-                        `;
-                    $('.md-content').html(htmlData)
-                    $('#modalDetail').modal('show');
-                    if (data.data.availability_status == 1) {
-                        document.querySelector('.btnDestroy').innerHTML =
-                            `<button class="btn btn-danger">Hủy niêm yết</button>
-
-`;
-                        $(".btnDelete").html('');
-                    } else {
-                        document.querySelector('.btnDestroy').innerHTML = ``;
-                        $(".btnDelete").html(`<a class="btn btn-warning btnEdit mx-2" href="{{route('screens.manufacture.product.edit')}}/${data.data.id}">Sửa sản phẩm</a><button  class="btn btn-danger">Xóa sản phẩm</button>`);
-                    }
-                } else {
-                    $('#modalDetail').modal('show');
-                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
-                    setTimeout(() => {
-                        $('#modalDetail').modal('hide');
-                    }, 1000);
-                }
-            })
-
-
-        }
         });
+
     </script>
 @endsection
