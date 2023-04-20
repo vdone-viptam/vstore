@@ -54,8 +54,8 @@ class UserController extends Controller
         }
         $this->v['count'] = $this->v['users']->count();
         $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
-            ->where('order_service.status', 1)
-            ->where('payment_status', 3)
+            ->where('order_service.status', 3)
+            ->where('payment_status', 1)
             ->orderBy('users.id', 'desc')
             ->where('role_id', '!=', 1)->paginate($limit);
 
@@ -161,28 +161,28 @@ class UserController extends Controller
                     $message->to($user->email);
                     $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản Nhà cung cấp');
                 });
-                $elasticsearchController = new ElasticsearchController();
-                try {
-                    $res = $elasticsearchController->createDocNCC((string)$user->id, $user->name);
-                    DB::commit();
-                } catch (ClientResponseException $exception) {
-                    DB::rollBack();
-                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
-                }
+//                $elasticsearchController = new ElasticsearchController();
+//                try {
+//                    $res = $elasticsearchController->createDocNCC((string)$user->id, $user->name);
+//                    DB::commit();
+//                } catch (ClientResponseException $exception) {
+//                    DB::rollBack();
+//                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+//                }
             }
             if ($user->role_id == 3) {
                 Mail::send('email.active_vstore', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
                     $message->subject('Chào mừng quý khách hàng đã đăng ký tài khoản V-Store');
                 });
-                $elasticsearchController = new ElasticsearchController();
-                try {
-                    $res = $elasticsearchController->createDocVStore((string)$user->id, $user->name);
-                    DB::commit();
-                } catch (ClientResponseException $exception) {
-                    DB::rollBack();
-                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
-                }
+//                $elasticsearchController = new ElasticsearchController();
+//                try {
+//                    $res = $elasticsearchController->createDocVStore((string)$user->id, $user->name);
+//                    DB::commit();
+//                } catch (ClientResponseException $exception) {
+//                    DB::rollBack();
+//                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+//                }
             }
 
             if ($user->role_id == 4) {

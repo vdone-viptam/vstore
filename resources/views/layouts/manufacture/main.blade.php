@@ -216,14 +216,14 @@
             }
         }
     });
-    const x = document.querySelectorAll('input[type="number"]');
-    x.forEach(item => {
-        item.addEventListener("keypress", function (evt) {
-            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                evt.preventDefault();
-            }
-        });
-    })
+    // const x = document.querySelectorAll('input[type="number"]');
+    // x.forEach(item => {
+    //     item.addEventListener("keypress", function (evt) {
+    //         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+    //             evt.preventDefault();
+    //         }
+    //     });
+    // })
 </script>
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 {{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}

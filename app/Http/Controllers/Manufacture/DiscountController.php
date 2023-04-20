@@ -22,20 +22,16 @@ class DiscountController extends Controller
 
     public function discount(Request $request)
     {
-        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date')
+        $this->v['field'] = $request->field ?? 'discounts.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount',
+            'products.name', 'discounts.created_at', 'start_date', 'end_date')
             ->join('products', 'discounts.product_id', '=', 'products.id')
+            ->orderBy($this->v['field'], $this->v['type'])
             ->where('discounts.user_id', Auth::id());
-        if ($request->input('key_search')) {
-            $this->v['discounts'] = $this->v['discounts']->where('products.name', 'like', '%' . trim($request->key_search) . '%');
-        }
-        $this->v['discounts'] = $this->v['discounts']->paginate(10);
+        $this->v['discounts'] = $this->v['discounts']->paginate($request->limit ?? 10);
         $this->v['params'] = $request->all();
-        return view('screens.manufacture.discount.discount', $this->v);
-
-    }
-
-    public function createDis()
-    {
         $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
         $data = [];
         foreach ($product as $pr) {
@@ -44,6 +40,13 @@ class DiscountController extends Controller
             }
         }
         $this->v['products'] = $data;
+        return view('screens.manufacture.discount.discount', $this->v);
+
+    }
+
+    public function createDis()
+    {
+
 
         return view('screens.manufacture.discount.createDis', $this->v);
 
