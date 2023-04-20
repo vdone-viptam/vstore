@@ -95,14 +95,14 @@ class OrderController extends Controller
                 'products.id')
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
-        // if ($key_search && strlen(($key_search) > 0)) {
-        //     $this->v['products'] = $this->v['products']->where(function ($sub) use ($key_search) {
-        //         $sub->where('products.name', 'like', '%' . $key_search . '%')
-        //             ->orWhere('no', 'like', '%' . $key_search . '%');
-        //     });
-        // }
+        if ($key_search && strlen(($key_search) > 0)) {
+            $this->v['orders'] = $this->v['orders']->where(function ($sub) use ($key_search) {
+                $sub->where('products.name', 'like', '%' . $key_search . '%')
+                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            });
+        }
         $this->v['orders'] = $this->v['orders']->paginate($limit);;
-        $this->v['key_search'] = '';
+        $this->v['key_search'] = $request->key_search ?? '';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['params'] = $request->all();
         return view('screens.manufacture.order.order', $this->v);
@@ -119,9 +119,10 @@ class OrderController extends Controller
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.id', $id)
             ->first();
-        return view('screens.manufacture.order.detail', [
-            'order' => $orders
-        ]);
+        return $orders ;
+        // return view('screens.manufacture.order.detail', [
+        //     'order' => $orders
+        // ]);
     }
 
     public function updateOrder($id, Request $request)

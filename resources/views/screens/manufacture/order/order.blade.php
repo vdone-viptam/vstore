@@ -41,64 +41,55 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Mã đơn hàng: </label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="Nhập tên sản phẩm">
+                                <input type="text" class="form-control form-control-lg" id="no">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Tên sản phẩm:</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="name">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Giá sản phẩm:</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="price">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Giảm giá (nếu có):</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="discount">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Số lượng sản phẩm</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="quantity">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Tiền đặt cọc (nếu có):</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="deposits">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Tổng tiền:</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="total">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Trạng thái:</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="text" class="form-control form-control-lg" id="status">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Ngày tạo đơn:</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                    value="${data.data.name}" placeholder="0">
+                                <input type="datetime-local" class="form-control form-control-lg" id="created_at">
                             </div>
                         </div>
 
@@ -117,7 +108,7 @@
 
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <form act method="POST">
+
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
                 <h5 class="mb-0" style="font-size:18px;">Quản lý đơn hàng</h5>
@@ -134,7 +125,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second">
@@ -184,14 +174,14 @@
                             <th>
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'request_warehouses.quantity')
+                                    @if($field == 'pre_order_vshop.quantity')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="request_warehouses.quantity"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.quantity"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="request_warehouses.quantity"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.quantity"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="request_warehouses.quantity"></i>
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.quantity"></i>
                                     @endif
                                 </span>
                             </th>
@@ -250,7 +240,6 @@
             </div>
 
         </div>
-    </form>
     </div>
 @endsection
 
@@ -279,10 +268,31 @@
                         url: '{{route('screens.manufacture.order.detail')}}/' + item.dataset.id,
                         success: function (result) {
                             console.log(result);
+                            if(result){
+                                $("#no").val(result.no);
+                                $("#name").val(result.product.name);
+                                $("#price").val(result.product.price);
+                                const deposits = (result.total - (result.total * result.discount / 100)) * (result.deposit_money / 100);
+                                const total = result.total - (result.total * result.discount / 100);
+                                const today = (datetimeLocal(result.created_at));
+                                const status = result.status == 1 ? 'Đã hoàn thành' : result.status == 3  ? 'Đơn hàng mới' : result.status == 4 ? 'Đang giao hàng' : 'Hủy' ;
+
+                                $("#discount").val(parseInt(result.discount) + ' %');
+                                $("#quantity").val(result.quantity);
+                                $("#deposits").val(convertVND(deposits));
+                                $("#total").val(convertVND(total));
+                                $("#status").val(status);
+                                $("#created_at").val(today);
+                            }
                         },
                     });
                 })
             })
+            function datetimeLocal(datetime) {
+                const dt = new Date(datetime);
+                dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+                return dt.toISOString().slice(0, 16);
+            }
         });
 
     </script>
