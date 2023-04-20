@@ -472,7 +472,7 @@
                             <div class="d-flex justify-content-between align-items-center" style="gap:4px">
                                 <span class="font-medium">Tên sản phẩm: <span class="font-normal">${data.message.name}</span></span>
                                 <span class="font-medium">Số lượng: <span class="font-normal">${data.message.quantity}</span></span>
-                                <span class="font-medium">Khối lượng: <span class="font-normal">${data.message.weight} Gam</span></span>
+                                <span class="font-medium">Khối lượng: <span class="font-normal">${data.message.weight * data.message.quantity} Gam</span></span>
                             </div>
 
                             </div>
