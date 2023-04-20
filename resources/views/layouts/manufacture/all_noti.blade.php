@@ -18,7 +18,7 @@
                                     </div>
                                     <div class="w-[150px] flex justify-start md:justify-end items-center gap-2">
                                         <span
-                                            class="text-title font-medium">{{\Carbon\Carbon::parse($notification->created_at)->format('d/m/Y h:i')}}</span>
+                                            class="text-title font-medium">{{\Carbon\Carbon::parse($notification->created_at)->format('d/m/Y H:i')}}</span>
                                     </div>
                                 </div>
                             @endforeach

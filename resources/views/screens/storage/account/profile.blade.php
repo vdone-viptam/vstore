@@ -134,24 +134,37 @@
                                                     <input required type="text" class="form-control form-control-lg"
                                                            id="address" name="address"
                                                            value="{{$infoAccount->address}}">
+                                                           @error('address')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                            @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="phone_number">Số điện thoại:</label>
                                                     <input required type="text" class="form-control form-control-lg"
                                                            id="phone_number" name="phone_number"
+                                                           pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
                                                            value="{{$infoAccount->phone_number}}">
+                                                           @error('phone_number')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                            @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="id_vdone">ID Người đại diện:</label>
                                                     <input required type="text" class="form-control form-control-lg"
                                                            id="id_vdone" name="id_vdone"
                                                            value="{{$infoAccount->id_vdone}}">
+                                                           @error('id_vdone')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                            @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="id_vdone_diff">ID Người đại diện (khác):</label>
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="id_vdone_diff" name="id_vdone_diff"
                                                            value="{{$infoAccount->id_vdone_diff}}">
+                                                           @error('id_vdone_diff')
+                                                            <p class="text-danger">{{$message}}</p>
+                                                            @enderror
                                                 </div>
                                                 <span style="font-size:18px; font-weight:600">Thông tin kho:</span>
                                                 <div class="form-group">
@@ -383,7 +396,7 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == '{{(int) $infoAccount->provinceId}}' ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+                document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == '{{(int) $infoAccount->provinceId}}' ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME}</option>`);
             })
             .catch(console.error);
         fetch('{{route('get_city')}}?type=2&value=' + '{{(int) $infoAccount->provinceId}}', {

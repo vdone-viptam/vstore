@@ -166,10 +166,10 @@
                                     <td>{{number_format($order->orderItem[0]->price,'0','.','.')}} đ</td>
                                     <td>{{$order->orderItem[0]->quantity}}</td>
                                     <td>{{$order->orderItem[0]->warehouse->name}}</td>
-                                    <td>{{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y h:i')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
                                         @if($order->export_status == 4)
-                                            {{\Carbon\Carbon::now()->format('d/m/Y h:i')}}
+                                            {{\Carbon\Carbon::now()->format('d/m/Y H:i')}}
                                         @else
                                             Chưa xác định
                                         @endif
