@@ -51,7 +51,7 @@ class ManufactureController extends Controller
         if ($user) {
             foreach ($user as $value) {
                 if ($value->avatar == null) {
-                    $value->avatar = asset('home/img/logo-06.png');
+                    $value->avatar = asset('home/img/NCC.png');
                 } else
                     $value->avatar = asset('image/users/' . $value->avatar);
 

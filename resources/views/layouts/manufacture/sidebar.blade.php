@@ -101,7 +101,7 @@
                                             <a class="nav-link {{ (request()->is('orders/orders')) ? 'active1' : '' }}" id="orderIn" href="{{route('screens.manufacture.order.order')}}">Đơn hàng nhập sẵn</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="orBuy" href="#">Đơn hàng khách mua sản phẩm</a>
+                                            <a class="nav-link" id="orBuy" href="{{route('screens.manufacture.order.index')}}">Đơn hàng khách mua sản phẩm</a>
                                         </li>
                                     </ul>
                                 </div>
