@@ -349,45 +349,43 @@ class ProductController extends Controller
             $validator = Validator::make($request->all(), [
                 'vstore_id' => 'required',
                 'product_id' => 'required',
-                'discount' => 'required',
+                'discountA' => 'required',
                 'role' => 'min:1',
                 'prepay' => 'required',
                 'vat' => 'required|min:1|max:99',
-                'deposit_money' => 'required|min:1',
 
 
             ], [
-                'vstore_id.required' => 'V-store bắt buộc chọn',
+                'vstore_id.required' => 'V-Store bắt buộc chọn',
                 'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
-                'discount.required' => 'Chiết khấu bắt buộc nhập',
+                'discountA.required' => 'Chiết khấu bắt buộc nhập',
                 'role.min' => 'Vai trò với sản phẩm bắt buộc chọn',
                 'prepay.required' => 'Phương thức thanh toán bắt buộc chọn',
                 'vat.required' => 'VAT bắt buộc nhâp',
                 'vat.min' => 'VAT nhỏ nhất 1',
                 'vat.max' => 'VAT lớn nhất 99',
-                'deposit_money.required' => 'Tiền cọc khi nhập sẵn bắt buộc nhập',
-                'deposit_money.min' => 'Tiền cọc khi nhập sẵn không được nhỏ hơn hoặc bằng 0',
-
 
             ]);
-
             if ($request->sl[0] == '' || $request->moneyv[0] == '') {
+                dd(1);
                 return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn'])->withInput($request->all());
             }
 
             if ($validator->fails()) {
+                dd($validator->errors());
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
 
             $object = new Application();
             $object->product_id = $request->product_id;
-            $object->discount = $request->discount;
+            $object->discount = $request->discountA;
             $object->role = $request->role;
             $object->status = 0;
             $object->vstore_id = $request->vstore_id;
             $object->vat = $request->vat;
             $object->user_id = Auth::id();
-            $object->type_pay = $request->prepay == 1 ? 2 : 1;
+            $object->type_pay = $request->prepay;
+            $object->prepay = $request->prepay;
 //            $object->prepay = $request->prepay[0] == 1 ? 1 : 0;
 //            $object->payment_on_delivery = isset($request->prepay[1]) && $request->prepay[1] == 2 || $request->prepay[0] == 2 ? 1 : 0;
             $code = rand(100000000000, 999999999999);
@@ -403,19 +401,18 @@ class ProductController extends Controller
             $object->code = $code;
             $images = [];
             if ($request->hasFile('images')) {
-                foreach ($request->images as $file) {
+                foreach ($request->file('images') as $file) {
                     $filenameWithExt = $file->getClientOriginalName();
                     //Get just filename
                     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                     // Get just ext
                     $extension = $file->getClientOriginalExtension();
                     // Filename to store
-                    $fileNameToStore = $filename . '_' . time() . ' . ' . $extension;
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
                     $path = $file->storeAs('public/products', str_replace(' ', '', $fileNameToStore));
 
                     $path = str_replace('public/', '', $path);
-
-                    $images[] = 'storage / ' . $path;
+                    $images[] = 'storage/' . $path;
                 }
             }
 
@@ -461,24 +458,12 @@ class ProductController extends Controller
                     } else {
                         $sl[$i]['end'] = 0;
                     }
-//                   $end = $sl[$i+1]??0;
+
 
                 }
 
                 DB::table('buy_more_discount')->insert($sl);
-
-//                return $product;
             }
-//            $dataInsert = [];
-//            for ($i = 0; $i < count($request->ward_id); $i++) {
-//                $dataInsert[] = [
-//                    'product_id' => $request->product_id,
-//                    'ward_id' => $request->ward_id[$i],
-//                    'amount' => $request->amount[$i],
-//                    'created_at' => Carbon::now(),
-//                    'status' => 3];
-//            }
-//            ProductWarehouses::insert($dataInsert);
             DB::table('products')->where('id', $request->product_id)->update(['status' => 1]);
             $userLogin = Auth::user();
             $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
@@ -492,12 +477,11 @@ class ProductController extends Controller
             ];
             $user->notify(new AppNotification($data));
             DB::commit();
-            return redirect()->back()->with('success', 'Thêm mới yêu cầu đăng ký thành công');
+            return redirect()->back()->with('success', 'Thêm mới yêu cầu niêm yết thành công');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
-            return redirect()->back()->with('error', 'Thêm mới yêu cầu đăng ký thất bại');
+            return redirect()->back()->with('error', 'Thêm mới yêu cầu niêm yết thất bại');
 
         }
 

@@ -37,11 +37,11 @@
                                        href="{{route('screens.manufacture.product.createRequest')}}">Yêu cầu xét duyệt
                                         sản phẩm</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/request-delete')) ? 'active1' : '' }}" id="request"
-                                       href="{{route('screens.manufacture.product.requestDeleteProduct')}}">Yêu cầu hủy
-                                        niêm yết sản phẩm</a>
-                                </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link {{ (request()->is('products/request-delete')) ? 'active1' : '' }}" id="request"--}}
+{{--                                       href="{{route('screens.manufacture.product.requestDeleteProduct')}}">Yêu cầu hủy--}}
+{{--                                        niêm yết sản phẩm</a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/request')) ? 'active1' : '' }}" id="reAcp"
                                        href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu xét

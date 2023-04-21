@@ -131,7 +131,8 @@
                             <div class="mb-3 col-12 col-xl-6">
                                 <label for="formFileMultiple" class="form-label">Hình ảnh sản phẩm<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control form-control-lg" accept="image/*" type="file" name="images[]" id="images"
+                                <input class="form-control form-control-lg" accept="image/*" type="file" name="images[]"
+                                       id="images"
                                        multiple>
                                 @error('images')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
@@ -140,7 +141,8 @@
                             <div class="col-12 mb-3 col-xl-6">
                                 <div class="form-group">
                                     <label for="name">Video sản phẩm<span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control form-control-lg" accept="video/mp4" id="video" name="video">
+                                    <input type="file" class="form-control form-control-lg" accept="video/mp4"
+                                           id="video" name="video">
                                 </div>
                                 @error('video')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
@@ -188,7 +190,7 @@
                                             <input type="text" class="form-control form-control-lg number" id="length"
                                                    name="length"
                                                    value="{{old('length')}}"
-                                                   placeholder="Nhập chiều dài (Cm)">
+                                                   placeholder="Nhập chiều dài">
                                             @error('length')
                                             <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                             @enderror
@@ -197,7 +199,7 @@
                                             <input type="text" class="form-control form-control-lg number" id="with"
                                                    name="with"
                                                    value="{{old('with')}}"
-                                                   placeholder="Nhập chiều rộng (Cm)">
+                                                   placeholder="Nhập chiều rộng">
                                             @error('with')
                                             <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                             @enderror
@@ -206,7 +208,7 @@
                                             <input type="text" class="form-control form-control-lg number" id="height"
                                                    name="height"
                                                    value="{{old('height')}}"
-                                                   placeholder="Nhập chiều cao (Cm)">
+                                                   placeholder="Nhập chiều cao">
                                             @error('height')
                                             <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                             @enderror
@@ -220,7 +222,7 @@
                                     <input type="text" class="form-control form-control-lg number" id="weight"
                                            name="weight"
                                            value="{{old('weight')}}"
-                                           placeholder="Nhập trọng lượng sản phẩm (Gram)">
+                                           placeholder="Nhập trọng lượng sản phẩm">
                                     @error('weight')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror
@@ -284,7 +286,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Ngày sản xuất / ngày nhập khẩu</label>
+                                    <label for="name">Ngày sản xuất</label>
                                     <input type="date" class="form-control form-control-lg" id="import_date"
                                            name="import_date"
                                            value="{{old('import_date')}}" placeholder="Nhập tên thương hiệu">
