@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('warehouse_type', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->tinyInteger('type')->comment('1 kho lanh, 2 kho bãi, 3 kho thuong');
+            $table->tinyInteger('type')->comment('1 kho thuong, 2 kho lanh, 3 kho bãi');
             $table->double('acreage',12,2)->comment('dien tich');
             $table->double('volume',12,2)->comment('the tich');
             $table->double('length',12,2)->comment('chieu dai');

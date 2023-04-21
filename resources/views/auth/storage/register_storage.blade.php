@@ -11,25 +11,29 @@
     <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký KHO</title>
-    <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-            integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
-    <meta property="og:title" content="Kho | Hệ thống quản lý kho chuyên nghiệp"/>
-    <meta property="og:description"
-          content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng Kho."/>
-    <meta property="og:url" content="{{asset('')}}"/>
-    <meta property="og:image" content="{{asset('home/img/kho11.png')}}"/>
-    <meta property="og:image:width" content="120">
-    <meta property="og:image:height" content="100">
-    @vite('resources/css/app.css')
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng ký kho</title>
+
+    <link rel="stylesheet" href="{{asset('asset/css/register/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/css/register/style.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/css/register/fontawesome-all.css')}}">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
 @if(\Illuminate\Support\Facades\Session::has('success'))
@@ -53,7 +57,7 @@
         </div>
     </div>
 @endif
-
+{{--
 <div class="modal modal-hd">
     <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
     <div
@@ -249,8 +253,7 @@
 
         </div>
 
-<div
-    class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
+<div class="flex flex-col lg:flex-row justify-between item-start gap-6 xl:gap-28 xl:px-32 p-10 pt-0 px-4 lg:px-10">
     <div class="flex flex-col justify-start items-start gap-6 w-full">
         <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium"><strong
@@ -343,8 +346,8 @@
     <label for="terms_of_use"> Bạn đồng ý với điều khoản sử dụng của chúng tôi.</label>
     <a href="#"
        onclick="$('.modal-hd').toggleClass('show-modal')"
-       class="underline text-blue-700">Xem
-        thêm</a></div>
+       class="underline text-blue-700">Xem thêm</a>
+</div>
 <div class="flex flex-col gap-5 max-w-[600px] text-center mx-auto px-4 lg:px-10">
     <button type="submit"
             class="active btn-sub text-center w-full text-grey text-xl font-medium bg-btnGrey rounded-lg py-4 bg-sky-500/100 text-[#FFF]"
@@ -354,6 +357,426 @@
                                                                      class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
 </div>
 </form>
+
+</div> --}}
+<form class="splash-container splash-register" action="{{route('post_register',['role_id' => 4])}}" id="formRegister-V" enctype="multipart/form-data" method="POST">
+    @csrf
+    <div class="card">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <div>
+                <h3 class="mb-1">Đăng ký</h3>
+                <p>Vui lòng nhập thông tin để đăng ký tài khoản.</p>
+            </div>
+
+            <img src="{{asset('asset/images/titleK.png')}}" style="object-fit: contain; height: 40px;" alt="Logo">
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <h3 style="font-size: 20px;">Thông tin tài khoản</h3>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="email"><span class="text-danger">*</span>Email</label>
+                        <input class="form-control form-control-lg" type="email" name="email" id="email" required=""
+                            value="{{old('email')}}"
+                            placeholder="Nhập email (VD: example@gmail.com)" autocomplete="off">
+                        @error('email')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="telephone"><span class="text-danger">*</span>Số điện
+                            thoại công ty</label>
+                        <input class="sdt form-control form-control-lg" required=""
+                            type="text" name="phone_number" id="phone_number"
+                            value="{{old('phone_number')}}"
+                            pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
+                            placeholder="Nhập số điện thoại (VD: 0365855342)">
+                        @error('phone_number')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="kho"><span class="text-danger">*</span>Tên Kho</label>
+                        <input class="form-control form-control-lg" type="text" required=""
+                            name="name" id="name" placeholder="Nhập tên kho (VD: Kho Kiên Giang)" value="{{old('name')}}"
+                            autocomplete="off">
+                        @error('name')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="idpDone"><span class="text-danger">*</span>ID P-Done
+                            người đại diện <svg style="cursor: pointer;" width="14" height="14" viewBox="0 0 14 14"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <title>Vui lòng nhập ID P-Done của người đại diện của bạn</title>
+                                <path
+                                    d="M7 0C3.13437 0 0 3.13437 0 7C0 10.8656 3.13437 14 7 14C10.8656 14 14 10.8656 14 7C14 3.13437 10.8656 0 7 0ZM7 12.8125C3.79063 12.8125 1.1875 10.2094 1.1875 7C1.1875 3.79063 3.79063 1.1875 7 1.1875C10.2094 1.1875 12.8125 3.79063 12.8125 7C12.8125 10.2094 10.2094 12.8125 7 12.8125Z"
+                                    fill="black" fill-opacity="0.45"></path>
+                                <path
+                                    d="M6.24976 4.25C6.24976 4.44891 6.32877 4.63968 6.46943 4.78033C6.61008 4.92098 6.80084 5 6.99976 5C7.19867 5 7.38943 4.92098 7.53009 4.78033C7.67074 4.63968 7.74976 4.44891 7.74976 4.25C7.74976 4.05109 7.67074 3.86032 7.53009 3.71967C7.38943 3.57902 7.19867 3.5 6.99976 3.5C6.80084 3.5 6.61008 3.57902 6.46943 3.71967C6.32877 3.86032 6.24976 4.05109 6.24976 4.25ZM7.37476 6H6.62476C6.55601 6 6.49976 6.05625 6.49976 6.125V10.375C6.49976 10.4438 6.55601 10.5 6.62476 10.5H7.37476C7.44351 10.5 7.49976 10.4438 7.49976 10.375V6.125C7.49976 6.05625 7.44351 6 7.37476 6Z"
+                                    fill="black" fill-opacity="0.45"></path>
+                            </svg></label>
+                        <input class="form-control form-control-lg" type="text" required=""
+                            name="id_vdone" id="id_vdone"
+                            value="{{old('id_vdone')}}"
+                            placeholder="Nhập ID P-Done người đại diện (VD: 76)">
+                        @error('id_vdone')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="company"><span class="text-danger">*</span>Tên công ty, hợp tác xã, hộ kinh doanh cá thể</label>
+                        <input class="form-control form-control-lg" type="text" required=""
+                            name="company_name" id="company_name"
+                            placeholder="Nhập tên công ty, hợp tác xã, hộ kinh doanh cá thể (VD: CTTNHH ...)"
+                            value="{{old('company_name')}}"
+                            autocomplete="off">
+                        @error('company_name')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="idpDonemore">ID P-Done người đại diện (khác)</label>
+                        <input class="form-control form-control-lg" type="text" required=""
+                            name="id_vdone_diff" id="id_vdone_diff"
+                            value="{{old('id_vdone_diff')}}"
+                            placeholder="Nhập ID P-Done người đại diện khác (VD: 11)">
+                        @error('id_vdone_diff')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số
+                            thuế</label>
+                        <input class="form-control form-control-lg" type="text" required=""
+                            name="tax_code" id="tax_code" placeholder="Nhập mã số thuế (VD: 6565656656)"
+                            pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
+                            value="{{old('tax_code')}}"
+                            autocomplete="off">
+                        @error('tax_code')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label style="font-weight: 600;">ID P-Done
+                                người giới thiệu</label>
+                            <input class="form-control form-control-lg" type="text"
+                                name="referral_code"
+                                value="{{$referral_code}}"
+                                placeholder="ID P-Done người giới thiệu" readonly autocomplete="off">
+                        @error('referral_code')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-2 col-lg-4 col-md-4">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="city_id"><span class="text-danger">*</span>Tỉnh (Thành
+                            phố)</label>
+                        <select class="form-control form-control-lg" required name="city_id" id="city_id">
+                            <option value="" hidden>Lựa chọn tỉnh (thành phố)</option>
+                        </select>
+                        @error('city_id')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-4 col-md-4">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for=""><span class="text-danger">*</span>Quận
+                            (Huyện)</label>
+                        <select class="form-control form-control-lg" required name="district_id" id="district_id">
+                            <option value="" hidden>Lựa chọn quận (huyện)</option>
+                        </select>
+                        @error('district_id')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-4 col-md-4">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for=""><span class="text-danger">*</span>Phường
+                            (Xã)</label>
+                        <select class="form-control form-control-lg" required name="ward_id" id="ward_id">
+                            <option value="" hidden>Lựa chọn Phường (xã)</option>
+                        </select>
+                        @error('ward_id')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi tiết</label>
+                        <input class="form-control form-control-lg" type="text" name="address" id="address" required=""
+                            value="{{old('address')}}"
+                            placeholder="Nhập địa chỉ chi tiết (VD: 67 Khúc Thừa Dụ)">
+                        @error('address')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <h3 style="font-size: 20px;">Thông tin kho</h3>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <h4 style="font-weight: 600;">Chọn loại kho: <span class="text-danger">*</span></h4>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
+                    <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
+                        <label class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage"><span
+                                class="custom-control-label">Kho thường</span>
+                        </label>
+                        <div class="">
+                            <div class="row">
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label style="font-weight: 600;" for="acreage_normal_storage"><span
+                                                class="text-danger">*</span>Diện tích sàn
+                                            (m2)</label>
+                                        <input class="form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
+                                            placeholder="Nhập diện tích (m2)">
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <label style="font-weight: 600;" for="kt">Kích
+                                        thước
+                                        (m)</label>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="length_normal_storage" id="length_normal_storage"
+                                                    placeholder="Chiều dài">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="width_normal_storage" id="width_normal_storage"
+                                                    placeholder="Chiều rộng">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="height_normal_storage" id="height_normal_storage"
+                                                    placeholder="Chiều cao">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label style="font-weight: 600;" for="volume_normal_storage">Thể tích
+                                            (m3)</label>
+                                        <input class="form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
+                                            placeholder="Nhập thể tích (m3)">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label style="font-weight: 600;" for="tts"><span
+                                            class="text-danger">*</span>Hình ảnh kho thường</label>
+                                    <input class="form-control form-control-lg" type="file" name="tts"
+                                        placeholder="Nhập hình ảnh kho" multiple>
+                                </div>
+                                <div class="col-12 my-4">
+                                    <label style="font-weight: 600;" for="tts">Giấy chứng nhận
+                                        PCCC/Chứng nhận khác</label>
+                                    <input class="form-control form-control-lg" type="file" name="tts"
+                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
+                    <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(168, 168, 207, 0.22);">
+                        <label class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage"><span
+                                class="custom-control-label">Kho lạnh</span>
+                        </label>
+                        <div class="">
+                            <div class="row">
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label style="font-weight: 600;" for="dts"><span
+                                                class="text-danger">*</span>Diện tích sàn
+                                            (m2)</label>
+                                        <input class="form-control form-control-lg" type="text" name="acreage_cold_storage" name="acreage_cold_storage"
+                                            placeholder="Nhập diện tích (m2)">
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <label style="font-weight: 600;" for="kt">Kích
+                                        thước
+                                        (m)</label>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="length_cold_storage" id="length_cold_storage"
+                                                    placeholder="Chiều dài">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="width_cold_storage" id="width_cold_storage"
+                                                    placeholder="Chiều rộng">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="height_cold_storage" id="height_cold_storage"
+                                                    placeholder="Chiều cao">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label style="font-weight: 600;" for="tts">Thể tích
+                                            (m3)</label>
+                                        <input class="form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
+                                            placeholder="Nhập thể tích (m3)">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label style="font-weight: 600;" for="tts"><span
+                                            class="text-danger">*</span>Hình ảnh kho lạnh</label>
+                                    <input class="form-control form-control-lg" type="file" name="tts"
+                                        placeholder="Nhập hình ảnh kho" multiple>
+                                </div>
+                                <div class="col-12 my-4">
+                                    <label style="font-weight: 600;" for="tts">Giấy chứng nhận
+                                        PCCC/Chứng nhận khác</label>
+                                    <input class="form-control form-control-lg" type="file" name="tts"
+                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
+                    <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
+                        <label class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" name="warehouse" value="warehouse"><span
+                                class="custom-control-label">Kho bãi</span>
+                        </label>
+                        <div class="">
+                            <div class="row">
+                                <div class=" col-12">
+                                    <div class="form-group">
+                                        <label style="font-weight: 600;" for="dts"><span
+                                                class="text-danger">*</span>Diện tích sàn
+                                            (m2)</label>
+                                        <input class="form-control form-control-lg" type="text" name="warehouse" id="warehouse"
+                                            placeholder="Nhập diện tích (m2)">
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <label style="font-weight: 600;" for="kt">Kích
+                                        thước
+                                        (m)</label>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="length_warehouse" id="length_warehouse"
+                                                    placeholder="Chiều dài">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="width_warehouse" id="width_warehouse"
+                                                    placeholder="Chiều rộng">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input class="form-control form-control-lg" type="text" name="height_warehouse" id="height_warehouse"
+                                                    placeholder="Chiều cao">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label style="font-weight: 600;" for="tts">Thể tích
+                                            (m3)</label>
+                                        <input class="form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
+                                            placeholder="Nhập thể tích (m3)">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label style="font-weight: 600;" for="tts"><span
+                                            class="text-danger">*</span>Hình ảnh kho bãi</label>
+                                    <input class="form-control form-control-lg" type="file" name="tts"
+                                        placeholder="Nhập hình ảnh kho" multiple>
+                                </div>
+                                <div class="col-12 my-4">
+                                    <label style="font-weight: 600;" for="tts">Giấy chứng nhận
+                                        PCCC/Chứng nhận khác</label>
+                                    <input class="form-control form-control-lg" type="file" name="tts"
+                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4" style="max-width: 450px; margin: 0 auto;">
+                <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" required type="checkbox"><span class="custom-control-label">Tôi đồng
+                        ý với <a href="#" style="text-decoration: underline;">Điều khoản sử dụng dịch vụ.</a></span>
+                </label>
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary active" type="submit">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            <p>Bạn đã có tài khoản? <a href="./login.html" class="text-secondary">Đăng nhập ngay</a></p>
+        </div>
+    </div>
+</form>
+
+
 @if($isOrder)
     <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
         <form method="POST" action="{{route('post_register_order_kho',['order_id' => $order->id])}}">
@@ -520,10 +943,10 @@
             </div>
         </form>
     </div>
-    @endif
-    </div>
-
-    <script src="{{asset('asset/js/main.js')}}"></script>
+@endif
+</body>
+<script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('asset/js/main.js')}}"></script>
 
     <script !src="">
         const x = document.querySelectorAll('input[type="number"]');
@@ -538,7 +961,7 @@
         const divDistrict = document.getElementById('district_id');
         const divWard = document.getElementById('ward_id');
         document.querySelector('.active').setAttribute('disabled', 'true');
-        document.querySelector('.active').classList.add('bg-slate-300');
+        document.querySelector('.active').classList.add('btn-secondary');
         fetch('{{route('get_city')}}', {
             mode: 'no-cors',
 
@@ -559,13 +982,13 @@
                 .then((data) => {
                     if (data.length > 0) {
                         const check = checkEmpty(inputs);
-                        if (check && divCity.value && divDistrict.value && divWard.value) {
-                            document.querySelector('.active').removeAttribute('disabled');
-                            document.querySelector('.active').classList.remove('bg-slate-300');
-                        } else {
-                            document.querySelector('.active').setAttribute('disabled', 'true');
-                            document.querySelector('.active').classList.add('bg-slate-300');
-                        }
+                        // if (check && divCity.value && divDistrict.value && divWard.value) {
+                        //     document.querySelector('.active').removeAttribute('disabled');
+                        //     document.querySelector('.active').classList.remove('bg-slate-300');
+                        // } else {
+                        //     document.querySelector('.active').setAttribute('disabled', 'true');
+                        //     document.querySelector('.active').classList.add('bg-slate-300');
+                        // }
                         divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
 
                     } else {
@@ -584,13 +1007,13 @@
                 .then((data) => {
                     if (data.length > 0) {
                         const check = checkEmpty(inputs);
-                        if (check && divCity.value && divDistrict.value && divWard.value) {
-                            document.querySelector('.active').removeAttribute('disabled');
-                            document.querySelector('.active').classList.remove('bg-slate-300');
-                        } else {
-                            document.querySelector('.active').setAttribute('disabled', 'true');
-                            document.querySelector('.active').classList.add('bg-slate-300');
-                        }
+                        // if (check && divCity.value && divDistrict.value && divWard.value) {
+                        //     document.querySelector('.active').removeAttribute('disabled');
+                        //     document.querySelector('.active').classList.remove('bg-slate-300');
+                        // } else {
+                        //     document.querySelector('.active').setAttribute('disabled', 'true');
+                        //     document.querySelector('.active').classList.add('bg-slate-300');
+                        // }
                         divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
 
                     } else {
@@ -612,19 +1035,34 @@
             return check1;
         }
 
-        const inputs = document.querySelectorAll('input');
+        $("input").each(function() {
+            var element = $(this);
+            if (element.val() == "") {
+                isValid = false;
+            }
+        });
+        const inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
+        console.log(inputs);
+        // const inputs = document.querySelectorAll('input');
         inputs.forEach((item, index) => {
             item.setAttribute('autocomplete', 'off')
             item.addEventListener('change', (e) => {
-                const check = checkEmpty(inputs);
-
-                if (check && divCity.value && divDistrict.value && divWard.value && inputs[20].checked) {
+                console.log(item,item.value);
+                if(item.value){
                     document.querySelector('.active').removeAttribute('disabled');
-                    document.querySelector('.active').classList.remove('bg-slate-300');
-                } else {
+                    document.querySelector('.active').classList.remove('btn-secondary');
+                }else{
                     document.querySelector('.active').setAttribute('disabled', 'true');
-                    document.querySelector('.active').classList.add('bg-slate-300');
+                    document.querySelector('.active').classList.add('btn-secondary');
                 }
+                // const check = checkEmpty(inputs);
+                // if (check && divCity.value && divDistrict.value && divWard.value && inputs[20].checked) {
+                //     document.querySelector('.active').removeAttribute('disabled');
+                //     document.querySelector('.active').classList.remove('btn-secondary');
+                // } else {
+                //     document.querySelector('.active').setAttribute('disabled', 'true');
+                //     document.querySelector('.active').classList.add('btn-secondary');
+                // }
             })
         });
 
@@ -652,6 +1090,13 @@
             }
         }
 
+        // check empty de disable but submit
+        // checkEmptyInput();
+        // function checkEmptyInput() {
+        //     let abc = document.getElementById('formRegister-V').querySelectorAll("[required]");
+        //     console.log(abc);
+        // }
+
 
         // divWard.addEventListener('')
     </script>
@@ -674,7 +1119,7 @@
                 );
         </script>
     @endif
-    @if($isOrder)
+@if($isOrder)
         <script>
             const formRegister = document.querySelector('#formRegister-V');
             const payment = document.querySelector('#payment');
@@ -770,6 +1215,6 @@
             }
 
         </script>
-    @endif
-</body>
+@endif
+
 </html>

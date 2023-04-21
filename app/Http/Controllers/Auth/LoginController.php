@@ -497,7 +497,7 @@ class LoginController extends Controller
                 // if(isset($request->cold_storage)){
                 //     $warehouseType = new WarehouseType();
                 //     $warehouseType->user_id = $user->id;
-                //     $warehouseType->type = 1 ;
+                //     $warehouseType->type = 2 ;
                 //     $warehouseType->acreage = $request->acreage_cold_storage;
                 //     $warehouseType->volume = $request->volume_cold_storage;
                 //     $warehouseType->length = $request->length_cold_storage;
@@ -509,7 +509,7 @@ class LoginController extends Controller
                 // if(isset($request->warehouse)){
                 //     $warehouseType = new WarehouseType();
                 //     $warehouseType->user_id = $user->id;
-                //     $warehouseType->type = 2 ;
+                //     $warehouseType->type = 3 ;
                 //     $warehouseType->acreage = $request->acreage_warehouse;
                 //     $warehouseType->volume = $request->volume_warehouse;
                 //     $warehouseType->length = $request->length_warehouse;
@@ -521,7 +521,7 @@ class LoginController extends Controller
                 // if(isset($request->normal_storage)){
                 //     $warehouseType = new WarehouseType();
                 //     $warehouseType->user_id = $user->id;
-                //     $warehouseType->type = 3 ;
+                //     $warehouseType->type = 1 ;
                 //     $warehouseType->acreage = $request->acreage_normal_storage;
                 //     $warehouseType->volume = $request->volume_normal_storage;
                 //     $warehouseType->length = $request->length_normal_storage;

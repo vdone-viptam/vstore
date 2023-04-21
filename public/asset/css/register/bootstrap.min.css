@@ -275,7 +275,9 @@ button,
 input {
     overflow: visible
 }
-
+.text-red-600{
+    color: var(--red);
+}
 button,
 select {
     text-transform: none
