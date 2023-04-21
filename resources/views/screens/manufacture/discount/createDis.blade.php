@@ -143,14 +143,16 @@
     document.getElementById('end_date').addEventListener('change', (e) => {
         if (document.getElementById('start_date').value) {
             $.ajax({
-                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + e.target.value + '&start_date=' + document.getElementById('start_date').value,
+                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + e.target.value
+                    + '&start_date=' + document.getElementById('start_date').value,
                 success: function (result) {
                     if (result.validated === false) {
                         document.getElementById('message').innerHTML = result.error.end_date;
                         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                         document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     } else {
-                        if (document.getElementById('discount').value && document.getElementById('discount').value < 100 - document.querySelector('#discount_vshop').value - document.querySelector('#discount_ncc').value) {
+                        if (document.getElementById('discount').value && document.getElementById('discount').value <
+                            100 - document.querySelector('#discount_vshop').value - document.querySelector('#discount_ncc').value) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                             document.getElementById('message').innerHTML = '';
@@ -185,14 +187,18 @@
                         if (value < 100 - Number(result.pro.discount + result.pro.buy_more) && value > 0 &&
                             document.getElementById('start_date').value && document.getElementById('end_date').value) {
                             $.ajax({
-                                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' + document.getElementById('start_date').value,
+                                url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' +
+                                    document.getElementById('end_date').value + '&start_date=' + document.getElementById('start_date').value,
                                 success: function (result) {
                                     if (result.validated === false) {
                                         document.getElementById('message').innerHTML = result.error.end_date;
                                         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                                         document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                                     } else {
-                                        if (document.getElementById('discount').value && document.getElementById('discount').value < 100 - document.querySelector('#discount_vshop').value - document.querySelector('#discount_ncc').value) {
+                                        if (document.getElementById('discount').value &&
+                                            document.getElementById('discount').value <
+                                            100 - document.querySelector('#discount_vshop').value -
+                                            document.querySelector('#discount_ncc').value) {
                                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                                             document.getElementById('message').innerHTML = '';
@@ -223,7 +229,6 @@
                     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     document.getElementById('message').innerHTML = 'Phần trăm giảm giá phải nhỏ hơn phần trăm còn lại sau chiết khấu';
                 }
-                // console.log(result);
             },
         });
     });

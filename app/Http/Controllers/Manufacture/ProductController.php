@@ -31,18 +31,28 @@ class ProductController extends Controller
     {
         $this->v['field'] = $request->field ?? 'products.id';
         $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
             'publish_id', 'images', 'products.name', 'brand',
             'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
-            'amount_product_sold')->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
+            'amount_product_sold')
+            ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
             ->join("categories", 'products.category_id', '=', 'categories.id');
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        if (strlen($this->v['key_search'])) {
+            $this->v['products'] = $this->v['products']->where(function ($query) {
+                $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+//                    ->orWhere('vstore_name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('brand', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
         $this->v['products'] = $this->v['products']->groupBy('products.id')
             ->where('user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type'])
-            ->paginate($limit ?? 10);
-        $this->v['key_search'] = '';
-        $this->v['limit'] = $request->limit ?? 10;
+            ->paginate($this->v['limit']);
+
         $this->v['params'] = $request->all();
         return view('screens.manufacture.product.index', $this->v);
     }
@@ -266,11 +276,18 @@ class ProductController extends Controller
             requests.id,requests.created_at,requests.status,
             categories.name,products.name as product_name,
             users.name as user_name');
+        if (strlen($this->v['key_search'])) {
+            $this->v['requests'] =  $this->v['requests']->where(function ($query) {
+                $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
         $this->v['requests'] = $this->v['requests']
             ->where('requests.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type'])
             ->paginate($limit);
-        $this->v['params'] = $request->all();
+        $this->v['limit'] = $limit;
         return view('screens.manufacture.product.request', $this->v);
 
     }
@@ -366,13 +383,13 @@ class ProductController extends Controller
                 'vat.max' => 'VAT lớn nhất 99',
 
             ]);
+
             if ($request->sl[0] == '' || $request->moneyv[0] == '') {
-                dd(1);
                 return redirect()->back()->withErrors(['sl' => 'Vui lòng nhập chiết khấu hàng nhập sẵn'])->withInput($request->all());
             }
 
             if ($validator->fails()) {
-                dd($validator->errors());
+
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
 

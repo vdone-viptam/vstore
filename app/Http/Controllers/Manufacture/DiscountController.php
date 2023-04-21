@@ -71,6 +71,7 @@ class DiscountController extends Controller
 
     public function storeDis(Request $request)
     {
+
         DB::table('discounts')->insert([
             'product_id' => $request->product_id,
             'discount' => $request->discount,

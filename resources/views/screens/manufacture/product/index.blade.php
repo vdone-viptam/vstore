@@ -61,6 +61,9 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
@@ -213,10 +216,10 @@
                     <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
                         <form>
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option>10 phần tử / trang</option>
-                                    <option>25 phần tử / trang</option>
-                                    <option>50 phần tử / trang</option>
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
                                 </select>
                             </div>
                         </form>
@@ -294,6 +297,7 @@
 
         }
 
+        let limit = document.getElementById('limit');
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
@@ -306,11 +310,18 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.manufacture.product.index',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort
-                    })
+                            '&field=' + sort + '&limit=' + limit.value
+                    }, 200)
                 });
             });
         });
+
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.manufacture.product.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 
 @endsection
