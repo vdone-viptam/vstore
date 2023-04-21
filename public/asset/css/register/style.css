@@ -321,7 +321,7 @@ label {
 input[type=file] {
     color           : #71748d;
     background-color: #fff;
-    outline         : 0;    
+    outline         : 0;
 }
 
 .col-form-label {
@@ -343,7 +343,7 @@ select.form-control {
     background-position: 96% 52%;
     background-size    : auto;
     background-repeat  : no-repeat;
-    background-image   : url(assets/images/down-arrow.png);
+    /* background-image   : url(assets/images/down-arrow.png); */
     padding-right      : 20px;
     border             : 1px solid #d2d2e4;
     border-radius      : 2px;
@@ -2589,7 +2589,7 @@ Pageheader
     display: flex;
     justify-content: center;
     align-items: center;
- 
+
 }
 .indicato span{
     color: white;

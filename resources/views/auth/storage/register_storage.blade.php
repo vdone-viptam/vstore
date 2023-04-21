@@ -390,7 +390,7 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="telephone"><span class="text-danger">*</span>Số điện
                             thoại công ty</label>
-                        <input class="sdt form-control form-control-lg" required=""
+                        <input class="only-number form-control form-control-lg" required=""
                             type="text" name="phone_number" id="phone_number"
                             value="{{old('phone_number')}}"
                             pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
@@ -424,7 +424,7 @@
                                     d="M6.24976 4.25C6.24976 4.44891 6.32877 4.63968 6.46943 4.78033C6.61008 4.92098 6.80084 5 6.99976 5C7.19867 5 7.38943 4.92098 7.53009 4.78033C7.67074 4.63968 7.74976 4.44891 7.74976 4.25C7.74976 4.05109 7.67074 3.86032 7.53009 3.71967C7.38943 3.57902 7.19867 3.5 6.99976 3.5C6.80084 3.5 6.61008 3.57902 6.46943 3.71967C6.32877 3.86032 6.24976 4.05109 6.24976 4.25ZM7.37476 6H6.62476C6.55601 6 6.49976 6.05625 6.49976 6.125V10.375C6.49976 10.4438 6.55601 10.5 6.62476 10.5H7.37476C7.44351 10.5 7.49976 10.4438 7.49976 10.375V6.125C7.49976 6.05625 7.44351 6 7.37476 6Z"
                                     fill="black" fill-opacity="0.45"></path>
                             </svg></label>
-                        <input class="form-control form-control-lg" type="text" required=""
+                        <input class="form-control form-control-lg" type="number" required=""
                             name="id_vdone" id="id_vdone"
                             value="{{old('id_vdone')}}"
                             placeholder="Nhập ID P-Done người đại diện (VD: 76)">
@@ -449,7 +449,7 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
                         <label style="font-weight: 600;" for="idpDonemore">ID P-Done người đại diện (khác)</label>
-                        <input class="form-control form-control-lg" type="text" required=""
+                        <input class="form-control form-control-lg" type="number"
                             name="id_vdone_diff" id="id_vdone_diff"
                             value="{{old('id_vdone_diff')}}"
                             placeholder="Nhập ID P-Done người đại diện khác (VD: 11)">
@@ -462,7 +462,7 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số
                             thuế</label>
-                        <input class="form-control form-control-lg" type="text" required=""
+                        <input class="form-control form-control-lg" type="text" required
                             name="tax_code" id="tax_code" placeholder="Nhập mã số thuế (VD: 6565656656)"
                             pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                             value="{{old('tax_code')}}"
@@ -477,7 +477,7 @@
                         <div class="form-group">
                             <label style="font-weight: 600;">ID P-Done
                                 người giới thiệu</label>
-                            <input class="form-control form-control-lg" type="text"
+                            <input class="form-control form-control-lg" type="number"
                                 name="referral_code"
                                 value="{{$referral_code}}"
                                 placeholder="ID P-Done người giới thiệu" readonly autocomplete="off">
@@ -549,14 +549,14 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage"><span
+                            <input type="checkbox" class="custom-control-input" name="normal_storage" value="normal_storage" id="normal_storage"><span
                                 class="custom-control-label">Kho thường</span>
                         </label>
                         <div class="">
                             <div class="row">
                                 <div class=" col-12">
                                     <div class="form-group">
-                                        <label style="font-weight: 600;" for="acreage_normal_storage"><span
+                                        <label style="font-weight: 600;"><span
                                                 class="text-danger">*</span>Diện tích sàn
                                             (m2)</label>
                                         <input class="form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
@@ -619,7 +619,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(168, 168, 207, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage"><span
+                            <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage" id="cold_storage"><span
                                 class="custom-control-label">Kho lạnh</span>
                         </label>
                         <div class="">
@@ -629,7 +629,7 @@
                                         <label style="font-weight: 600;" for="dts"><span
                                                 class="text-danger">*</span>Diện tích sàn
                                             (m2)</label>
-                                        <input class="form-control form-control-lg" type="text" name="acreage_cold_storage" name="acreage_cold_storage"
+                                        <input class="form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
                                             placeholder="Nhập diện tích (m2)">
                                     </div>
                                 </div>
@@ -691,7 +691,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" name="warehouse" value="warehouse"><span
+                            <input type="checkbox" class="custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
                                 class="custom-control-label">Kho bãi</span>
                         </label>
                         <div class="">
@@ -701,7 +701,7 @@
                                         <label style="font-weight: 600;" for="dts"><span
                                                 class="text-danger">*</span>Diện tích sàn
                                             (m2)</label>
-                                        <input class="form-control form-control-lg" type="text" name="warehouse" id="warehouse"
+                                        <input class="form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
                                             placeholder="Nhập diện tích (m2)">
                                     </div>
                                 </div>
@@ -766,7 +766,7 @@
                         ý với <a href="#" style="text-decoration: underline;">Điều khoản sử dụng dịch vụ.</a></span>
                 </label>
                 <div class="form-group pt-2">
-                    <button class="btn btn-block btn-primary active" type="submit">Mua ngay</button>
+                    <button class="btn btn-block btn-primary btn-secondary active" disabled type="submit">Mua ngay</button>
                 </div>
             </div>
         </div>
@@ -945,6 +945,7 @@
     </div>
 @endif
 </body>
+
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 
@@ -960,8 +961,8 @@
         const divCity = document.getElementById('city_id');
         const divDistrict = document.getElementById('district_id');
         const divWard = document.getElementById('ward_id');
-        document.querySelector('.active').setAttribute('disabled', 'true');
-        document.querySelector('.active').classList.add('btn-secondary');
+        // document.querySelector('.active').setAttribute('disabled', 'true');
+        // document.querySelector('.active').classList.add('btn-secondary');
         fetch('{{route('get_city')}}', {
             mode: 'no-cors',
 
@@ -982,13 +983,13 @@
                 .then((data) => {
                     if (data.length > 0) {
                         const check = checkEmpty(inputs);
-                        // if (check && divCity.value && divDistrict.value && divWard.value) {
-                        //     document.querySelector('.active').removeAttribute('disabled');
-                        //     document.querySelector('.active').classList.remove('bg-slate-300');
-                        // } else {
-                        //     document.querySelector('.active').setAttribute('disabled', 'true');
-                        //     document.querySelector('.active').classList.add('bg-slate-300');
-                        // }
+                        if (check && divCity.value && divDistrict.value && divWard.value) {
+                            document.querySelector('.active').removeAttribute('disabled');
+                            document.querySelector('.active').classList.remove('btn-secondary');
+                        } else {
+                            document.querySelector('.active').setAttribute('disabled', 'true');
+                            document.querySelector('.active').classList.add('btn-secondary');
+                        }
                         divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
 
                     } else {
@@ -1007,13 +1008,13 @@
                 .then((data) => {
                     if (data.length > 0) {
                         const check = checkEmpty(inputs);
-                        // if (check && divCity.value && divDistrict.value && divWard.value) {
-                        //     document.querySelector('.active').removeAttribute('disabled');
-                        //     document.querySelector('.active').classList.remove('bg-slate-300');
-                        // } else {
-                        //     document.querySelector('.active').setAttribute('disabled', 'true');
-                        //     document.querySelector('.active').classList.add('bg-slate-300');
-                        // }
+                        if (check && divCity.value && divDistrict.value && divWard.value) {
+                            document.querySelector('.active').removeAttribute('disabled');
+                            document.querySelector('.active').classList.remove('btn-secondary');
+                        } else {
+                            document.querySelector('.active').setAttribute('disabled', 'true');
+                            document.querySelector('.active').classList.add('btn-secondary');
+                        }
                         divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
 
                     } else {
@@ -1027,7 +1028,7 @@
         function checkEmpty(inputs) {
             let check1 = true
             inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 <= 20 && ![12,13,8,9,14,15,16,17,18,19].includes(index1)) {
+                if (!item1.value && index1 > 0 && index1 <= 11 ) {
                     check1 = false;
                 }
             });
@@ -1035,36 +1036,43 @@
             return check1;
         }
 
-        $("input").each(function() {
-            var element = $(this);
-            if (element.val() == "") {
-                isValid = false;
-            }
-        });
         const inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
-        console.log(inputs);
         // const inputs = document.querySelectorAll('input');
+        // console.log(inputs);
         inputs.forEach((item, index) => {
             item.setAttribute('autocomplete', 'off')
             item.addEventListener('change', (e) => {
-                console.log(item,item.value);
-                if(item.value){
+                const check = checkEmpty(inputs);
+                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked) {
                     document.querySelector('.active').removeAttribute('disabled');
                     document.querySelector('.active').classList.remove('btn-secondary');
-                }else{
+                } else {
                     document.querySelector('.active').setAttribute('disabled', 'true');
                     document.querySelector('.active').classList.add('btn-secondary');
                 }
-                // const check = checkEmpty(inputs);
-                // if (check && divCity.value && divDistrict.value && divWard.value && inputs[20].checked) {
-                //     document.querySelector('.active').removeAttribute('disabled');
-                //     document.querySelector('.active').classList.remove('btn-secondary');
-                // } else {
-                //     document.querySelector('.active').setAttribute('disabled', 'true');
-                //     document.querySelector('.active').classList.add('btn-secondary');
-                // }
             })
         });
+
+
+        // check thêm 3 cái loại kho
+        // tao 1 hàm để 3 loại kho đều dùng đc ~~, mục đích check nếu ko bấm thì thôi, bấm thì phải điền nút
+
+        function checkThreeTypeStorage(idCheckBox, acreageStorage) {
+            $(idCheckBox).click(function() {
+                if( $(idCheckBox).is(':checked')){
+                    if( $(acreageStorage).val() == ''){
+                        document.querySelector('.active').setAttribute('disabled', 'true');
+                        document.querySelector('.active').classList.add('btn-secondary');
+                    }else{
+                        document.querySelector('.active').removeAttribute('disabled');
+                        document.querySelector('.active').classList.remove('btn-secondary');
+                    }
+                }
+            });
+        };
+        checkThreeTypeStorage('#normal_storage','#acreage_normal_storage');
+        checkThreeTypeStorage('#cold_storage','#acreage_cold_storage');
+        checkThreeTypeStorage('#warehouse','#acreage_warehouse');
 
         //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
         setSessionStorageThreeType();
@@ -1090,15 +1098,6 @@
             }
         }
 
-        // check empty de disable but submit
-        // checkEmptyInput();
-        // function checkEmptyInput() {
-        //     let abc = document.getElementById('formRegister-V').querySelectorAll("[required]");
-        //     console.log(abc);
-        // }
-
-
-        // divWard.addEventListener('')
     </script>
     @if(old('city_id') != '')
         <script>
