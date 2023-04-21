@@ -164,6 +164,7 @@
                                 </span>
                             </th>
                             <th>Số lượng đã bán
+                                <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                     @if($type == 'desc')
                                         <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
