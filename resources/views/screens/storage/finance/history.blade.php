@@ -143,7 +143,7 @@
     <script>
         $(document).ready(function () {
             if ($('#check-success').val() == 1) {
-                swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công', 500, true, 2200);
+                swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công','', 500, true, 2200);
             }
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

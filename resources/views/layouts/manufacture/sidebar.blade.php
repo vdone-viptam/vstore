@@ -70,85 +70,85 @@
                                     <a class="nav-link" id="proDel" href="#">Quản lý xuất nhập sản phẩm</a>
                                 </li>
 
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                           data-target="#submenu-4" aria-controls="submenu-4"><i
-                                class="fab fa-fw fas fa-users"></i>Liên kết V-Store</a>
-                        <div id="submenu-4" class="collapse submenu" style="">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="listVstore" href="#">Danh sách V-Store liên kết</a>
-                                </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href="" data-toggle="collapse" aria-expanded="{{ (request()->is('partners*')) ? 'true' : 'false' }}"
+                                    data-target="#submenu-4" aria-controls="submenu-4"><i
+                                        class="fab fa-fw fas fa-users"></i>Liên kết V-Store</a>
+                                <div id="submenu-4" class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('partners')) ? 'active1' : '' }}" id="listVstore" href="{{route('screens.manufacture.partner.index')}}">Danh sách V-Store liên kết</a>
+                                        </li>
 
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                           data-target="#submenu-6" aria-controls="submenu-6"><i
-                                class="fas fa-clipboard-list"></i>
-                            Quản lý đơn hàng
-                        </a>
-                        <div id="submenu-6" class="collapse submenu" style="">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="keyP" href="#">Yêu cầu nhập sẵn sản phẩm</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="orderIn" href="#">Đơn hàng nhập sẵn</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="orBuy" href="#">Đơn hàng khách mua sản phẩm</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                           data-target="#submenu-6" aria-controls="submenu-6"><i
-                                class="fas fa-fw fa-dollar-sign"></i>
-                            Tài chính
-                        </a>
-                        <div id="submenu-6" class="collapse submenu" style="">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="finance" href="#">Ví</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="history" href="#">Lịch sử thay đổi số dư</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="listGetm" href="#">Quản lý yêu cầu rút tiền</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
-                           data-target="#submenu-7" aria-controls="submenu-7"><i
-                                class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
-                        <div id="submenu-7" class="collapse submenu" style="">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile" href="./profile.html">Hồ sơ của tôi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="change-password" href="./change-password.html">Đổi
-                                        mật khẩu</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link logout" aria-expanded="false" data-target="#submenu-8"
-                           aria-controls="submenu-8" style="color:#FF4D4F"><i class="fas fa-fw fa-sign-out-alt"
-                                                                              style="color:#FF4D4F"></i>Đăng xuất</a>
-                    </li>
-                </ul>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('orders*')) ? 'true' : 'false' }}"
+                                    data-target="#submenu-5" aria-controls="submenu-5"><i
+                                        class="fas fa-clipboard-list"></i>
+                                        Quản lý đơn hàng
+                                    </a>
+                                <div id="submenu-5" class="{{ (request()->is('orders*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('orders/request')) ? 'active1' : '' }}" id="keyP" href="{{route('screens.manufacture.order.request')}}">Yêu cầu nhập sẵn sản phẩm</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('orders/orders')) ? 'active1' : '' }}" id="orderIn" href="{{route('screens.manufacture.order.order')}}">Đơn hàng nhập sẵn</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="orBuy" href="#">Đơn hàng khách mua sản phẩm</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('finances*')) ? 'true' : 'false' }}"
+                                   data-target="#submenu-6" aria-controls="submenu-6"><i
+                                        class="fas fa-fw fa-dollar-sign"></i>
+                                    Tài chính</a>
+                                <div id="submenu-6" class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('finances')) ? 'active1' : '' }}" href="{{ route('screens.manufacture.finance.index') }}">Ví</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('finances/history')) ? 'active1' : '' }}" href="{{ route('screens.manufacture.finance.history') }}">Yêu cầu rút tiền</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('finances/revenue')) ? 'active1' : '' }}" href="{{ route('screens.manufacture.finance.revenue') }}">Lịch sử biến động số
+                                                dư</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is('account*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('account*')) ? 'true' : 'false' }}"
+                                    data-target="#submenu-7" aria-controls="submenu-7"><i
+                                        class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
+                                <div id="submenu-7" class="{{ (request()->is('account*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('account')) ? 'active1' : '' }}" href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}" href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link logout" aria-expanded="false" data-target="#submenu-8"
+                                    aria-controls="submenu-8" style="color:#FF4D4F"><i class="fas fa-fw fa-sign-out-alt"
+                                        style="color:#FF4D4F"></i>Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </nav>
     </div>

@@ -21,7 +21,7 @@ class AuthController extends Controller
                 'email' => 'required|email',
                 'name' => 'required',
                 'company_name' => 'required',
-                'tax_code' => 'required|digits:10',
+                'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required|max:255',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
@@ -47,7 +47,7 @@ class AuthController extends Controller
                 'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 ký tự',
+                'tax_code.regex' => 'Mã số phải có độ dài 10 hoặc ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ'
             ]);
 

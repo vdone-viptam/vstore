@@ -300,6 +300,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/orders/{id?}', [\App\Http\Controllers\Manufacture\OrderController::class, 'detailOrder'])->name('screens.manufacture.order.detail');
         Route::post('/orders/{id?}', [\App\Http\Controllers\Manufacture\OrderController::class, 'updateOrder'])->name('screens.manufacture.order.update');
 
+        Route::get('/request', [\App\Http\Controllers\Manufacture\OrderController::class, 'requestOrders'])->name('screens.manufacture.order.request');
 
     });
 //         Cập nhật thông tin tài khoản nhà cung cấp

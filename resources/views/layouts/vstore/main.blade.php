@@ -145,7 +145,6 @@
         const ul = item.querySelector('ul');
 
         if (ul && ul.classList.contains('pagination')) {
-            console.log(ul);
             ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })
@@ -156,23 +155,32 @@
         $('#key_search').val(c);
     } else {
         if ($('.btnA')) {
-            document.querySelector('.btnA').setAttribute('disabled', 'true');
-            document.querySelector('.btnA').classList.add('bg-slate-300');
-            document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
+            const btnA = document.querySelector('.btnA');
+            if(btnA){
+                btnA.classList.add('bg-slate-300');
+                btnA.classList.remove('bg-[#40BAFF]');
+                btnA.setAttribute('disabled', 'true');
+            }
         }
     }
     if ($('#key_search')) {
-        document.querySelector('#key_search').addEventListener('keyup', (e) => {
-            if (e.target.value) {
-                document.querySelector('.btnA').removeAttribute('disabled');
-                document.querySelector('.btnA').classList.remove('bg-slate-300');
-                document.querySelector('.btnA').classList.add('bg-[#40BAFF]');
-            } else {
-                document.querySelector('.btnA').setAttribute('disabled', 'true');
-                document.querySelector('.btnA').classList.add('bg-slate-300');
-                document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
-            }
-        });
+        const key_search = document.querySelector('#key_search');
+        if(key_search){
+            document.querySelector('#key_search').addEventListener('keyup', (e) => {
+                const btnA = document.querySelector('.btnA');
+                if(btnA){
+                    if (e.target.value) {
+                        btnA.removeAttribute('disabled');
+                        btnA.classList.remove('bg-slate-300');
+                    btnA.classList.add('bg-[#40BAFF]');
+                    } else {
+                        btnA.setAttribute('disabled', 'true');
+                        btnA.classList.add('bg-slate-300');
+                        btnA.classList.remove('bg-[#40BAFF]');
+                    }
+                }
+            });
+        }
     }
     const x = document.querySelectorAll('input[type="number"]');
     x.forEach(item => {

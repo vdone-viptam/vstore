@@ -165,10 +165,10 @@ class AccountController extends Controller
     public function saveChangeTaxCode(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'tax_code' => 'required|digits:10',
+            'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
         ], [
             'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-            'tax_code.digits' => 'Mã số thuế không hợp lệ'
+            'tax_code.regex' => 'Mã số thuế không hợp lệ'
         ]);
 
 

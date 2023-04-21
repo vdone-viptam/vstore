@@ -1,5 +1,5 @@
 @extends('layouts.storage.main')
-@section('page_title','Lịch sử biến động só dư')
+@section('page_title','Lịch sử biến động số dư')
 
 @section('custom_css')
 
@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Lịch sử biến động só dư</h2>
+                    <h2 class="pageheader-title">Lịch sử biến động số dư</h2>
 
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Tài
                                         chính</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Lịch sử biến động só dư</li>
+                                <li class="breadcrumb-item active" aria-current="page">Lịch sử biến động số dư</li>
                             </ol>
                         </nav>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
                          style="gap:10px">
-                        <h5 class="mb-0" style="font-size:18px;">Lịch sử biến động só dư</h5>
+                        <h5 class="mb-0" style="font-size:18px;">Lịch sử biến động số dư</h5>
                         {{-- <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
@@ -156,7 +156,7 @@
     <script>
         $(document).ready(function () {
             if ($('#check-success').val() == 1) {
-                swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công', 500, true, 2200);
+                swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công','', 500, true, 2200);
             }
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

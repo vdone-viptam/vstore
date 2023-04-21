@@ -228,7 +228,7 @@
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium flex justify-start items-center gap-1"><strong
-                            class="text-[#FF4D4F]">*</strong> Người đại diện <svg class="cursor-pointer" width="14"
+                            class="text-[#FF4D4F]">*</strong> ID Vdone người đại diện <svg class="cursor-pointer" width="14"
                                                                                   height="14" viewBox="0 0 14 14"
                                                                                   fill="none"
                                                                                   xmlns="http://www.w3.org/2000/svg">
@@ -250,7 +250,7 @@
                 </div>
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm font-medium">Người đại diện (khác)</span>
+                    <span class="text-sm font-medium">ID Vdone người đại diện (khác)</span>
                     <input type="text" name="id_vdone_diff" id="id_vdone_diff"
                            placeholder="Nhập ID người đại diện (khác)"
                            value="{{old('id_vdone_diff')}}"
@@ -638,7 +638,6 @@
                 .then((data) => {
                     if (data.length > 0) {
                         divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
-                        console.log(1);
                     } else {
                         divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                     }

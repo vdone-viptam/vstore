@@ -40,7 +40,8 @@ class PartnerController extends Controller
             $val->sl = Product::where('user_id', $val->id)->where('vstore_id', Auth::id())->count();
         }
         $count = count($users);
-        return view('screens.vstore.partner.index', compact('users', 'count'));
+        $params = $request->all();
+        return view('screens.vstore.partner.index', compact('users', 'count','params'));
 
     }
 

@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->v = [];
+    }
     public function index(Request $request)
     {
         $key_search = $request->key_search ?? '';
@@ -77,10 +80,13 @@ class OrderController extends Controller
 
     public function order(Request $request)
     {
+        $this->v['field'] = $request->field ?? 'pre_order_vshop.id';
+        $this->v['type'] = $request->type ?? 'desc';
+
         $limit = $request->limit ?? 10;
         $key_search = $request->key_search ?? '';
 
-        $orders = PreOrderVshop::with(['product'])
+        $this->v['orders'] = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
                 'place_name', 'fullname', 'phone', 'address', 'no',
                 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
@@ -88,18 +94,53 @@ class OrderController extends Controller
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
-            ->orderBy('pre_order_vshop.id', 'desc');
+            ->orderBy($this->v['field'], $this->v['type']);
         if ($key_search && strlen(($key_search) > 0)) {
-            $orders->where(function ($sub) use ($key_search) {
+            $this->v['orders'] = $this->v['orders']->where(function ($sub) use ($key_search) {
                 $sub->where('products.name', 'like', '%' . $key_search . '%')
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->paginate($limit);;
-        return view('screens.manufacture.order.order', [
-            'orders' => $orders
-        ]);
+        $this->v['orders'] = $this->v['orders']->paginate($limit);;
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['params'] = $request->all();
+        return view('screens.manufacture.order.order', $this->v);
     }
+
+    // clone from order
+    public function requestOrders(Request $request)
+    {
+        // kiểm tra thêm status = 3 là đơn hàng mới và cần duyệt
+        $this->v['field'] = $request->field ?? 'pre_order_vshop.id';
+        $this->v['type'] = $request->type ?? 'desc';
+
+        $limit = $request->limit ?? 10;
+        $key_search = $request->key_search ?? '';
+
+        $this->v['orders'] = PreOrderVshop::with(['product'])
+            ->select('pre_order_vshop.status', 'quantity',
+                'place_name', 'fullname', 'phone', 'address', 'no',
+                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->join('products', 'pre_order_vshop.product_id', '=',
+                'products.id')
+            ->where('products.user_id', Auth::id())
+            ->where('pre_order_vshop.status', 3)
+            ->orderBy($this->v['field'], $this->v['type']);
+        if ($key_search && strlen(($key_search) > 0)) {
+            $this->v['orders'] = $this->v['orders']->where(function ($sub) use ($key_search) {
+                $sub->where('products.name', 'like', '%' . $key_search . '%')
+                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            });
+        }
+        $this->v['orders'] = $this->v['orders']->paginate($limit);;
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['params'] = $request->all();
+        return view('screens.manufacture.order.request', $this->v);
+    }
+
 
     public function detailOrder($id)
     {
@@ -112,9 +153,10 @@ class OrderController extends Controller
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.id', $id)
             ->first();
-        return view('screens.manufacture.order.detail', [
-            'order' => $orders
-        ]);
+        return $orders ;
+        // return view('screens.manufacture.order.detail', [
+        //     'order' => $orders
+        // ]);
     }
 
     public function updateOrder($id, Request $request)
@@ -123,7 +165,10 @@ class OrderController extends Controller
         try {
             PreOrderVshop::where('id', $id)->update(['status' => $request->status]);
             DB::commit();
-            return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
+            return response()->json([
+                'message' => 'update success'
+            ]);
+            // return redirect()->back()->with('success', 'Cập nhật đơn hàng thành công');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
