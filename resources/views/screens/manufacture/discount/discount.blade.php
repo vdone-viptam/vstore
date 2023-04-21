@@ -55,14 +55,17 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
-                                <input name="key_search" value="" class="form-control"
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
                     </li>
-                </ul>
+                </ul> 
             </div>
 
             <div class="card-body">
@@ -446,5 +449,30 @@
             });
         });
 
+        let limit = document.getElementById('limit');
+        console.log(limit)
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.manufacture.product.discount',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
+                    })
+                });
+            });
+        });
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.manufacture.product.discount',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection

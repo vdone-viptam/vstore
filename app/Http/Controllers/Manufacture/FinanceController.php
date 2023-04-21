@@ -69,7 +69,7 @@ class FinanceController extends Controller
             ->paginate(10);
         $this->v['field'] = $field;
         $this->v['type'] = $type;
-
+        $this->v['key_search'] = $request->key_search ?? '';
         return view('screens.manufacture.finance.revenue', $this->v);
     }
 
@@ -105,6 +105,7 @@ class FinanceController extends Controller
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
+        $this->v['key_search'] = $request->key_search ?? '';
         $this->v['field'] = $field;
         $this->v['type'] = $type;
         $limit = $request->limit ?? 10;

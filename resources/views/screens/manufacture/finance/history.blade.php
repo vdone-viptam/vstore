@@ -34,6 +34,17 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">Yêu cầu rút tiền</h5>
+                        <ul class="navbar-nav ">
+                            <li class="nav-item">
+                                <div id="custom-search" class="top-search-bar">
+                                    <form>
+                                        <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control"
+                                            type="search" placeholder="Tìm kiếm..">
+                                    </form>
+        
+                                </div>
+                            </li>
+                        </ul>
                         {{-- <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
@@ -175,5 +186,11 @@
                 });
             });
         });
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.manufacture.finance.history',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection
