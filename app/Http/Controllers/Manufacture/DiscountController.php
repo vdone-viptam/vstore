@@ -31,6 +31,7 @@ class DiscountController extends Controller
             ->orderBy($this->v['field'], $this->v['type'])
             ->where('discounts.user_id', Auth::id());
         $this->v['discounts'] = $this->v['discounts']->paginate($request->limit ?? 10);
+     
         $this->v['params'] = $request->all();
         $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
         $data = [];

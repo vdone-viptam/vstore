@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class FinanceController extends Controller
 {
-    //
+    private $v;
 
     public function __construct()
     {
@@ -62,7 +62,7 @@ class FinanceController extends Controller
     {
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'id';
-        // dd($type,$field);
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
@@ -107,7 +107,8 @@ class FinanceController extends Controller
             ->paginate(10);
         $this->v['field'] = $field;
         $this->v['type'] = $type;
-
+        $limit = $request->limit ?? 10;
+        $this->v['limit'] = $limit;
         return view('screens.manufacture.finance.history', $this->v);
     }
 
@@ -126,7 +127,7 @@ class FinanceController extends Controller
                 }
             }
             if ($request->money > Auth::user()->money) {
-                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
@@ -145,7 +146,7 @@ class FinanceController extends Controller
                 'type' => 0,
                 'title' => 'Rút tiền về ngân hàng',
                 'status' => 1,
-                'money_history' => (double)$request->money,
+                'money_history' => (float)$request->money,
                 'created_at' => Carbon::now()
             ]);
             DB::table('users')->where('id', Auth::id())->update(['money' => Auth::user()->money - $request->money]);
@@ -155,7 +156,6 @@ class FinanceController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Tạo yêu cầu rút tiền thất bại');
-
         }
     }
 }

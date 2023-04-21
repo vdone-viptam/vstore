@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    private $v;
     public function __construct()
     {
         $this->v = [];
@@ -41,7 +42,7 @@ class OrderController extends Controller
             });
         }
         $orders = $orders->orderBy('id', 'desc')->paginate($limit);
-        return view('screens.manufacture.order.index', ['orders' => $orders]);
+        return view('screens.manufacture.order.index',compact('key_search','limit') ,['orders' => $orders]);
     }
 
     public function destroy()

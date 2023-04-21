@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Danh sách V-store liên kết')
+@section('page_title', 'Danh sách V-store liên kết')
 
 @section('page')
     <div class="row">
@@ -31,9 +31,8 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
-                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
-                                       type="search"
-                                       placeholder="Tìm kiếm..">
+                                <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control" type="search"
+                                    placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
@@ -45,98 +44,110 @@
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
-                        <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                            <tr>
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == 'products.name')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>Giá bán
-                                <span style="float: right;cursor:pointer">
-                                    @if($field == 'price')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                    </span>
+                                </th>
+                                <th>Giá bán
+                                    <span style="float: right;cursor:pointer">
+                                        @if ($field == 'price')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                            <i class="fas fa-sort sort" data-sort="price"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="price"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>V-Store niêm yết
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'vstore_name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                    </span>
+                                </th>
+                                <th>V-Store niêm yết
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == 'vstore_name')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>Chiết khấu cho V-Store(%)
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'discount')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                    </span>
+                                </th>
+                                <th>Chiết khấu cho V-Store(%)
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == 'discount')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                            <i class="fas fa-sort sort" data-sort="discount"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="discount"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>Số lượng đã bán
-                                <span style="float: right;cursor: pointer">
-                                @if($field == 'amount_product_sold')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                </span>
-                            </th>
-                        </tr>
+                                    </span>
+                                </th>
+                                <th>Số lượng đã bán
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == 'amount_product_sold')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                        @endif
+                                    </span>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @if(count($products) > 0)
-                            @foreach($products as $value)
+                            @if (count($products) > 0)
+                                @foreach ($products as $value)
+                                    <tr>
+                                        <td>{{ $value->publish_id }}</td>
+                                        <td class="td_name">{{ $value->name }}</td>
+                                        <td>{{ number_format($value->price, 0, ',', '.') }}</td>
+                                        <td>{{ $value->vstore_name }}</td>
+                                        <td>{{ $value->discount }}</td>
+                                        <td>{{ $value->amount_product_sold != null ? $value->amount_product_sold : '-' }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
                                 <tr>
-                                    <td>{{$value->publish_id}}</td>
-                                    <td class="td_name">{{$value->name}}</td>
-                                    <td>{{ number_format($value->price,0,',','.')  }}</td>
-                                    <td>{{$value->vstore_name}}</td>
-                                    <td>{{$value->discount}}</td>
-                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                                    <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                                 </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
-                            </tr>
-                        @endif
+                            @endif
                         </tbody>
                     </table>
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{ $products->withQueryString()->links() }}
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 phần tử / trang</option>
+                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 phần tử / trang</option>
+                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 phần tử / trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -150,9 +161,11 @@
 
 @section('custom_js')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             document.querySelectorAll('.sort').forEach(item => {
-                const {sort} = item.dataset;
+                const {
+                    sort
+                } = item.dataset;
                 item.addEventListener('click', () => {
                     let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
                     if (orderBy === 'asc') {
@@ -161,7 +174,9 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.manufacture.partner.index',['key_search' => $key_search])}}&type=' + orderBy +
+                        document.location =
+                            '{{ route('screens.manufacture.partner.index', ['key_search' => $key_search]) }}&type=' +
+                            orderBy +
                             '&field=' + sort
                     })
                 });
