@@ -240,5 +240,12 @@
 <script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
 </body>
 </html>

@@ -95,7 +95,7 @@
                                 <div id="submenu-5" class="{{ (request()->is('orders*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="keyP" href="#">Yêu cầu nhập sẵn sản phẩm</a>
+                                            <a class="nav-link {{ (request()->is('orders/request')) ? 'active1' : '' }}" id="keyP" href="{{route('screens.manufacture.order.request')}}">Yêu cầu nhập sẵn sản phẩm</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link {{ (request()->is('orders/orders')) ? 'active1' : '' }}" id="orderIn" href="{{route('screens.manufacture.order.order')}}">Đơn hàng nhập sẵn</a>

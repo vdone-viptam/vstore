@@ -1,18 +1,18 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Đơn hàng nhập sẵn')
+@section('page_title','Yêu cầu nhập sẵn sản phẩm')
 
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Đơn hàng nhập sẵn</h2>
+                <h2 class="pageheader-title">Yêu cầu nhập sẵn sản phẩm</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý đơn hàng</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Đơn hàng nhập sẵn</li>
+                            <li class="breadcrumb-item active" aria-current="page">Yêu cầu nhập sẵn sản phẩm</li>
                         </ol>
                     </nav>
                 </div>
@@ -30,7 +30,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="font-size: 20px;">Thông tin đơn hàng nhập sẵn</h5>
+                <h5 class="modal-title" style="font-size: 20px;">Thông tin Yêu cầu nhập sẵn sản phẩm</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -96,9 +96,9 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
-                    lại</button>
+            <div class="modal-footer flex justify-content-center">
+                <button type="button" class="btn btn-secondary update-request" data-status="4" data-id>Đồng ý</button>
+                <button type="button" class="btn btn-secondary update-request" data-status="5" data-id>Từ chối</button>
             </div>
         </div>
     </div>
@@ -267,7 +267,6 @@
                     $.ajax({
                         url: '{{route('screens.manufacture.order.detail')}}/' + item.dataset.id,
                         success: function (result) {
-                            console.log(result);
                             if(result){
                                 $("#no").val(result.no);
                                 $("#name").val(result.product.name);
@@ -283,8 +282,14 @@
                                 $("#total").val(convertVND(total));
                                 $("#status").val(status);
                                 $("#created_at").val(today);
+
+                                $(".update-request").attr('data-id',result.id);
+
                             }
                         },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            swalNoti('center', 'error', 'Error, Please try again','', 500, true, 3000);
+                        }
                     });
                 })
             })
@@ -293,6 +298,29 @@
                 dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
                 return dt.toISOString().slice(0, 16);
             }
+            $('.update-request').click(function (e) {
+                e.preventDefault();
+                const status = $(this).attr('data-status')
+                const id = $(this).attr('data-id')
+                $.ajax({
+                    type: "POST",
+                    url: '{{route('screens.manufacture.order.update')}}/' + id,
+                    data: {
+                        status : status,
+                    },
+                    success: function (result) {
+                        if(result){
+                            swalNoti('center', 'success', 'Cập nhật đơn hàng thành công','', 500, true, 3000);
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        swalNoti('center', 'error', 'Error, Please try again','', 500, true, 3000);
+                    }
+                });
+            });
         });
 
     </script>
