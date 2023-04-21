@@ -89,7 +89,7 @@ Route::group(['domain' => config('domain.admin')], function () {
                 $arr[] = $char;
             }
             $ward->wards_name = implode(' ', $arr);
-            $ward->wards_name = str_replace('đ', 'Đ',$ward->wards_name);
+            $ward->wards_name = str_replace('đ', 'Đ', $ward->wards_name);
 
             $ward->save();
         }
@@ -326,6 +326,8 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/request', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestProduct'])->name('screens.manufacture.product.request');
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
+        Route::get('/delete/{id?}', [\App\Http\Controllers\Manufacture\ProductController::class, 'destroy'])->name('screens.manufacture.product.destroy');
+
         Route::get('/edit/{id?}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
         Route::post('/update/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'update'])->name('screens.manufacture.product.update');
         Route::prefix('discount')->group(function () {

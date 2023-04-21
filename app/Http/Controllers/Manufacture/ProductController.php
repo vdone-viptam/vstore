@@ -31,12 +31,11 @@ class ProductController extends Controller
     {
         $this->v['field'] = $request->field ?? 'products.id';
         $this->v['type'] = $request->type ?? 'desc';
-        $this->v['products'] = ProductWarehouses::query()->select('products.id',
+        $this->v['products'] = Product::query()->select('products.id',
             'publish_id', 'images', 'products.name', 'brand',
             'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
-            'amount_product_sold', DB::raw('SUM(amount) - SUM(export) as amount')
-        )->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
-            ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+            'amount_product_sold')->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
+            ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
             ->join("categories", 'products.category_id', '=', 'categories.id');
         $this->v['products'] = $this->v['products']->groupBy('products.id')
             ->where('user_id', Auth::id())
@@ -95,41 +94,56 @@ class ProductController extends Controller
     {
         //    dd( $request->all());
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'price' => 'required',
-            'brand' => 'required',
+            'name' => 'required|max:255',
             'category_id' => 'required',
-            'weight' => 'required',
-            'video' => 'max:512000',
-            'images' => 'required',
+            'price' => 'required|min:1',
+            'sku_id' => 'required|max:255',
             'description' => 'required',
             'short_content' => 'required|max:500',
-            'sku' => 'required',
-            'length' => 'required',
-            'height' => 'required',
+            'brand' => 'required|max:255',
+            'origin' => 'required|max:255',
+            'material' => 'required|max:255',
+            'weight' => 'required|max:13',
+            'length' => 'required|max:13',
+            'height' => 'required|max:13',
             'packing_type' => 'required',
-            'with' => 'required',
-            'material' => 'required',
-            'origin' => 'required'
-
+            'with' => 'required|max:13',
+            'volume' => 'max:15',
+            'manufacturer_name' => 'max:255',
+            'manufacturer_address' => 'max:255',
+            'import_unit' => 'max:255',
+            'import_address' => 'max:255',
         ], [
-            'name.required' => 'Trường này không được trống',
-            'price.required' => 'Trường này không được trống',
-            'brand.required' => 'Trường này không được trống',
-            'category_id.required' => 'Trường này không được trống',
-            'weight.required' => 'Trường này không được trống',
-            'video.max' => 'Video vượt quá dung lượng cho phép',
-            'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
+            'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
+            'name.required' => 'Tên sản phẩm bắt buộc nhập',
+            'category_id.required' => 'Ngành hàng bắt buộc chọn',
+            'price.required' => 'Giá sản phẩm bắt buộc nhập',
+            'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
+            'sku_id.required' => 'Mã SKU bắt buộc nhập',
+            'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
-            'short_content.required' => 'Mô tả sản phẩm bắt buộc nhập',
-            'sku.required' => 'Mã SKU sản phẩm bắt buộc nhập',
-            'length.required' => 'Chiều dài bắt buộc nhập',
-            'height.required' => 'Chiều cao bắt buộc nhập',
-            'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
-            'with.required' => 'Chiều dài bắt buộc nhập',
-            'material.required' => 'Chất liệu bắt buộc nhập',
-            'origin.required' => 'Xuất xứ bắt buộc nhập',
-            'short_content.max' => 'Mô tả ngắn ít hơn 500 ký tự'
+            'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
+            'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
+            'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
+            'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
+            'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
+            'origin.max' => 'Xuất xứ sản phẩm ít hơn 255 ký tự',
+            'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
+            'material.max' => 'Chất liệu sản phẩm ít hơn 255 ký tự',
+            'weight.required' => 'Trọng lượng sản phẩm bắt buộc nhập',
+            'weight.max' => 'Trọng lượng sản phẩm ít hơn 10.000.000 gram',
+            'length.required' => 'Chiều dài sản phẩm bắt buộc nhập',
+            'length.max' => 'Chiều dài sản phẩm ít hơn 10.000.000 cm',
+            'height.required' => 'Chiều cao sản phẩm bắt buộc nhập',
+            'height.max' => 'Chiều cao sản phẩm ít hơn 10.000.000 cm',
+            'packing_type.required' => 'Kiều đóng gói bắt buộc chọn',
+            'with.required' => 'Chiều rộng sản phẩm bắt buộc nhập',
+            'with.max' => 'Chiều rộng sản phẩm ít hơn 10.000.000 cm',
+            'volume.max' => 'Thể tích sản phẩm ít hơn 100.000.000.000 ml',
+            'manufacturer_name.max' => 'Tên nhà sản xuất ít hơn 255 ký tự',
+            'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
+            'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
+            'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -141,25 +155,26 @@ class ProductController extends Controller
             $product = new Product();
             $product->name = $request->name;
             $product->category_id = $request->category_id;
-            $product->price = $request->price;
+            $product->price = str_replace('.', '', $request->price);
             $product->description = trim($request->description);
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = $request->weight;
+            $product->weight = str_replace('.', '', $request->weight);
             $product->short_content = trim($request->short_content);
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
             $product->import_date = $request->import_date;
             $product->origin = $request->origin;
-            $product->length = $request->length ?? 0;
-            $product->with = $request->with ?? 0;
-            $product->height = $request->height ?? 0;
-            $product->volume = $request->volume ?? 0;
+            $product->length = str_replace('.', '', $request->length) ?? 0;
+            $product->with = str_replace('.', '', $request->with) ?? 0;
+            $product->height = str_replace('.', '', $request->height) ?? 0;
+            $product->volume = str_replace('.', '', $request->volume) ?? 0;
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->packing_type = $request->packing_type;
+            $product->availability_status = 0;
             $product->status = 0;
-            $product->sku_id = $request->sku;
+            $product->sku_id = $request->sku_id;
             // Upload Image
             if ($request->hasFile('video')) {
                 $filenameWithExt = $request->file('video')->getClientOriginalName();
@@ -168,7 +183,7 @@ class ProductController extends Controller
                 // Get just ext
                 $extension = $request->file('video')->getClientOriginalExtension();
                 // Filename to store
-                $fileNameToStore = $filename . '_' . time() . ' . ' . $extension;
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
                 $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
 
                 $path = str_replace('public/', '', $path);
@@ -184,22 +199,30 @@ class ProductController extends Controller
                 }
             }
             $photo_gallery = [];
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $filenameWithExt = $image->getClientOriginalName();
+                    //Get just filename
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $image->getClientOriginalExtension();
+                    // Filename to store
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $path = $image->storeAs('public/products', $fileNameToStore);
 
-            foreach (json_decode($request->images) as $image) {
-                try {
-                    $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
-                } catch (\Exception $exception) {
-                    return redirect()->back();
-//                    dd($exception->getMessage());
+                    $path = str_replace('public/', '', $path);
+
+                    $photo_gallery[] = 'storage/' . $path;
                 }
+                $product->images = json_encode($photo_gallery);
             }
-            $product->images = json_encode($photo_gallery);
+
 
             $product->user_id = Auth::id();
             $product->save();
 
             DB::commit();
-            return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
+            return redirect()->back()->with('success', 'Cập nhật sản phẩm thành công');
         } catch (\Exception $e) {
 
             DB::rollBack();
@@ -260,16 +283,20 @@ class ProductController extends Controller
             if ($request->product) {
 
                 try {
-                    $product = Product::query()->select('products.id', 'publish_id', 'images',
-                        'products.name', 'brand', 'category_id', 'price', 'products.status', 'vstore_id',
-                        'discount', 'discount_vShop', 'description', 'vat', 'amount_product_sold', 'availability_status', 'categories.name as cate_name')
+                    $product = Product::query()->select('products.id', 'products.name', 'categories.name as cate_name',
+                        'products.price', 'sku_id', 'products.description', 'short_content', 'images', 'video',
+                        'brand', 'origin', 'material', 'length', 'with', 'height', 'weight', 'volume',
+                        'manufacturer_name', 'manufacturer_address', 'import_unit', 'import_address', 'import_date', 'packing_type', 'availability_status')
                         ->join('categories', 'products.category_id', '=', 'categories.id')
                         ->where('products.id', $request->product_id)
                         ->first();
-                    return response()->json([
-                        'success' => true,
-                        'data' => $product
-                    ], 200);
+
+                    return response()->json(['data' =>
+                        view('screens.manufacture.product.detail_product',
+                            ['product' => $product])->render(),
+                        'id' => $product->id,
+                        'availability_status' => $product->availability_status,
+                    ]);
                 } catch (\Exception $exception) {
                     return response()->json([
                         'success' => false,
@@ -501,43 +528,68 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
+        DB::beginTransaction();
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'price' => 'required',
-            'brand' => 'required',
+            'name' => 'required|max:255',
             'category_id' => 'required',
-            'weight' => 'required',
-            'images' => 'required',
+            'price' => 'required|min:1',
+            'sku_id' => 'required|max:255',
             'description' => 'required',
-            'sku' => 'required',
-            'length' => 'required',
-            'height' => 'required',
+            'short_content' => 'required|max:500',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'video' => 'max:512000|required',
+            'brand' => 'required|max:255',
+            'origin' => 'required|max:255',
+            'material' => 'required|max:255',
+            'weight' => 'required|max:13',
+            'length' => 'required|max:13',
+            'height' => 'required|max:13',
             'packing_type' => 'required',
-            'with' => 'required',
-            'material' => 'required',
-            'origin' => 'required',
-            'short_content' => 'required|max:500'
-
+            'with' => 'required|max:13',
+            'volume' => 'max:15',
+            'manufacturer_name' => 'max:255',
+            'manufacturer_address' => 'max:255',
+            'import_unit' => 'max:255',
+            'import_address' => 'max:255',
         ], [
-            'name.required' => 'Trường này không được trống',
-            'price.required' => 'Trường này không được trống',
-            'brand.required' => 'Trường này không được trống',
-            'category_id.required' => 'Trường này không được trống',
-            'weight.required' => 'Trường này không được trống',
+            'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
+            'name.required' => 'Tên sản phẩm bắt buộc nhập',
+            'category_id.required' => 'Ngành hàng bắt buộc chọn',
+            'price.required' => 'Giá sản phẩm bắt buộc nhập',
+            'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
+            'sku_id.required' => 'Mã SKU bắt buộc nhập',
+            'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
+            'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
+            'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
+            'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
             'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
-            'description.required' => 'Mô tả bắt buộc nhập',
-            'sku.required' => 'Mã SKU sản phẩm bắt buộc nhập',
-            'length.required' => 'Chiều dài bắt buộc nhập',
-            'height.required' => 'Chiều cao bắt buộc nhập',
-            'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
-            'with.required' => 'Chiều dài bắt buộc nhập',
-            'material.required' => 'Chất liệu bắt buộc nhập',
-            'origin.required' => 'Xuất xứ bắt buộc nhập',
-            'short_content.max' => 'Mô tả ngắn ít hơn 500 ký tự',
-            'short_content.required' => 'Mô tả ngắn bắt buộc nhập'
+            'images.image' => 'File nhập không phải định dạng ảnh',
+            'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
+            'video.required' => 'Video sản phẩm bắt buộc nhập ',
+            'video.max' => 'Video sản phẩm vượt quá dung lượng cho phép 5GB',
+            'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
+            'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
+            'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
+            'origin.max' => 'Xuất xứ sản phẩm ít hơn 255 ký tự',
+            'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
+            'material.max' => 'Chất liệu sản phẩm ít hơn 255 ký tự',
+            'weight.required' => 'Trọng lượng sản phẩm bắt buộc nhập',
+            'weight.max' => 'Trọng lượng sản phẩm ít hơn 10.000.000 gram',
+            'length.required' => 'Chiều dài sản phẩm bắt buộc nhập',
+            'length.max' => 'Chiều dài sản phẩm ít hơn 10.000.000 cm',
+            'height.required' => 'Chiều cao sản phẩm bắt buộc nhập',
+            'height.max' => 'Chiều cao sản phẩm ít hơn 10.000.000 cm',
+            'packing_type.required' => 'Kiều đóng gói bắt buộc chọn',
+            'with.required' => 'Chiều rộng sản phẩm bắt buộc nhập',
+            'with.max' => 'Chiều rộng sản phẩm ít hơn 10.000.000 cm',
+            'volume.max' => 'Thể tích sản phẩm ít hơn 100.000.000.000 ml',
+            'manufacturer_name.max' => 'Tên nhà sản xuất ít hơn 255 ký tự',
+            'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
+            'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
+            'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ]);
-
         if ($validator->fails()) {
+//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         try {
@@ -545,23 +597,23 @@ class ProductController extends Controller
             $product = Product::find($id);
             $product->name = $request->name;
             $product->category_id = $request->category_id;
-            $product->price = $request->price;
+            $product->price = str_replace('.', '', $request->price);
             $product->description = $request->description;
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = $request->weight;
+            $product->weight = str_replace('.', '', $request->weight);
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
             $product->import_date = $request->import_date;
             $product->origin = $request->origin;
-            $product->length = $request->length ?? 0;
-            $product->with = $request->with ?? 0;
-            $product->height = $request->height ?? 0;
-            $product->volume = $request->volume ?? 0;
+            $product->length = str_replace('.', '', $request->length) ?? 0;
+            $product->with = str_replace('.', '', $request->with) ?? 0;
+            $product->height = str_replace('.', '', $request->height) ?? 0;
+            $product->volume = str_replace('.', '', $request->volume) ?? 0;
             $product->import_unit = $request->import_unit ?? '';
             $product->import_address = $request->import_address ?? '';
             $product->packing_type = $request->packing_type;
-            $product->sku_id = $request->sku;
+            $product->sku_id = $request->sku_id;
             $product->status = 0;
             // Upload Image
             if ($request->hasFile('video')) {
@@ -571,28 +623,34 @@ class ProductController extends Controller
                 // Get just ext
                 $extension = $request->file('video')->getClientOriginalExtension();
                 // Filename to store
-                $fileNameToStore = $filename . '_' . time() . ' . ' . $extension;
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
                 $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
 
                 $path = str_replace('public/', '', $path);
 
                 $product->video = 'storage/' . $path;
             }
-            $photo_gallery = [];
 
-            foreach (json_decode($request->images) as $image) {
-                try {
-                    if (strpos($image, 'storage/products') !== false) {
-                        $photo_gallery[] = explode(config('domain.ncc') . "/", $image)[1];
-                    } else {
-                        $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
 
-                    }
-                } catch (\Exception $exception) {
-                    return redirect()->back();
+            if ($request->hasFile('images') && count($request->file('images') > 0)) {
+                $photo_gallery = [];
+                foreach ($request->file('images') as $image) {
+                    $filenameWithExt = $image->getClientOriginalName();
+                    //Get just filename
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $image->getClientOriginalExtension();
+                    // Filename to store
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $path = $image->storeAs('public/products', $fileNameToStore);
+
+                    $path = str_replace('public/', '', $path);
+
+                    $photo_gallery[] = 'storage/' . $path;
                 }
+                $product->images = json_encode($photo_gallery);
             }
-            $product->images = json_encode($photo_gallery);
+
             $product->save();
 
             return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
@@ -645,5 +703,19 @@ class ProductController extends Controller
                 'end_date' => ''
             ],
         ], 200);
+    }
+
+    public function destroy($id = null)
+    {
+        $product = Product::where('id', $id)->first();
+        if (!$product) {
+            return redirect()->back()->with('error', 'Sản phẩm không có trong hệ thống, không thể xóa');
+        }
+        if ($product->availability_status == 1) {
+            return redirect()->back()->with('error', 'Sản phẩm đã niêm yết không thể xóa');
+        }
+
+        Product::destroy($id);
+        return redirect()->back()->with('success', 'Xóa sản phẩm thành công');
     }
 }

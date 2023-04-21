@@ -253,6 +253,7 @@
                             <input required type="number" name="money" id="money" data-value="0"
                                    class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#F1F1F4] focus:border-primary transition-all duration-200 rounded-sm"
                                    min="100000" placeholder="0đ" style="border-radius: 0.25rem">
+                            <p class="text-red-500" id="messageMoney"></p>
                         </div>
                         <div class="flex flex-col items-start w-full flex-wrap md:flex-nowrap">
                             <label class="w-full text-[#6A6A6A]  text-sm" for="val-username">Phương thức nhận tiền:
@@ -339,10 +340,15 @@
         document.querySelector('.btnGra').classList.add('opacity-70');
         const money = document.getElementById('money');
         money.addEventListener('keyup', (e) => {
-            if (e.target.value >= Number(document.querySelector('#money1').dataset.money) || !e.target.value) {
+            if (+e.target.value >= Number(document.querySelector('#money1').dataset.money) || !e.target.value) {
                 document.querySelector('.btnGra').setAttribute('disabled', 'true');
                 document.querySelector('.btnGra').classList.add('opacity-70');
+                const money = new Intl.NumberFormat().format(Number(document.querySelector('#money1').dataset.money));
+                $('#messageMoney').html(`Số tiền rút phải nhỏ hơn ${money.replaceAll(',', '.')} đ`);
             } else {
+                if (+e.target.value < 100000) {
+                    $('#messageMoney').html(`Số tiền rút phải lớn hơn 100.000 đ`);
+                }
                 document.querySelector('.btnGra').removeAttribute('disabled');
                 document.querySelector('.btnGra').classList.remove('opacity-70');
             }

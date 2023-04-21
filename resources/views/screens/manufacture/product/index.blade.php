@@ -6,7 +6,7 @@
 @section('modal')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
@@ -210,14 +210,18 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$products->withQueryString()->links()}}
-                    <select name="" id="" class="form-control col-1">
-                        <option value="">10 hàng / trang</option>
-                        <option value="">25 hàng / trang</option>
-                        <option value="">50 hàng / trang</option>
-                    </select>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>10 phần tử / trang</option>
+                                    <option>25 phần tử / trang</option>
+                                    <option>50 phần tử / trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-
             </div>
 
         </div>
@@ -226,7 +230,26 @@
 @endsection
 
 @section('custom_js')
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{\Illuminate\Support\Facades\Session::get('success')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{\Illuminate\Support\Facades\Session::get('error')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
     <script>
+
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
@@ -246,63 +269,10 @@
                 var htmlData = ``;
 
                 if (data.data) {
-                    htmlData += `
-<form method="post" key=${id}>
-
-
-                                <div class="form-group">
-                            <label for="name">Mã sản phẩm:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="code" value="${data.data.publish_id}" readonly>
-                        </div>
-
-
-                                <div class="form-group">
-                            <label for="publish_id">Tên sản phẩm:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="publish_id" value="${data.data.name}" readonly>
-
-                            </div>
-
-                                <div class="form-group">
-                            <label for="product_name">Giá bán:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="product_name" value="${data.data.price}" readonly>
-                            </div>
-                     <div class="row">
-                        <div class="form-group col-6">
-                            <label for="quantity">VAT: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="quantity" value="${data.data.vat}" readonly>
-                        </div>
-
-                        <div class="form-group col-6">
-                            <label for="quantity">Thương hiệu:</label>
-                            <input type="text" class="form-control form-control-lg" disabled id="quantity" value="${data.data.brand}" readonly>
-                        </div>
-</div>
-
-                        <div class="form-group">
-                            <label for="created_at">Ngành hàng: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.cate_name}" readonly>
-                        </div>
-                       <div class="row">
- <div class="form-group col-6">
-                            <label for="created_at">Chiết khấu V-Store nhận được: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.discount}" readonly>
-                        </div>
-                         <div class="form-group col-6">
-                            <label for="created_at">Chiết khấu V-Shop nhận được: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.disount_vShop || 0}" readonly>
-                        </div>
-
-</div>
-   <div class="form-group">
-                            <label for="created_at">Số sản phẩm đã bán: </label>
-                            <input type="text" class="form-control form-control-lg" disabled id="created_at" value="${data.data.amount_product_sold}" readonly>
-                        </div>
-                   </form>
-
-                        `;
+                    htmlData = data.data;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.data.availability_status == 1) {
+                    if (data.availability_status == 1) {
                         document.querySelector('.btnDestroy').innerHTML =
                             `<button class="btn btn-danger">Hủy niêm yết</button>
 
@@ -310,7 +280,7 @@
                         $(".btnDelete").html('');
                     } else {
                         document.querySelector('.btnDestroy').innerHTML = ``;
-                        $(".btnDelete").html(`<a class="btn btn-warning btnEdit mx-2" href="{{route('screens.manufacture.product.edit')}}/${data.data.id}">Sửa sản phẩm</a><button  class="btn btn-danger">Xóa sản phẩm</button>`);
+                        $(".btnDelete").html(`<a class="btn btn-warning btnEdit mx-2" href="{{route('screens.manufacture.product.edit')}}/${data.id}">Sửa sản phẩm</a><a href="{{route('screens.manufacture.product.destroy')}}/${data.id}"  class="btn btn-danger">Xóa sản phẩm</a>`);
                     }
                 } else {
                     $('#modalDetail').modal('show');
