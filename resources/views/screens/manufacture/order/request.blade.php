@@ -96,8 +96,8 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer flex justify-content-center">
-                <button type="button" class="btn btn-secondary update-request" data-status="4" data-id>Đồng ý</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary update-request" data-status="4" data-id>Đồng ý</button>
                 <button type="button" class="btn btn-secondary update-request" data-status="5" data-id>Từ chối</button>
             </div>
         </div>
