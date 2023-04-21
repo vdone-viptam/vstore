@@ -260,7 +260,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6">Không có dữ liệu phù hợp</td>
+                                <td class="text-center" colspan="7">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
@@ -272,11 +272,11 @@
                     <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
                         <form>
                             <div class="form-group">
-                                {{-- <select class="form-control" id="limit">
+                                <select class="form-control" id="limit">
                                     <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
                                     <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
                                     <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
-                                </select> --}}
+                                </select>
                             </div>
                         </form>
                     </div>

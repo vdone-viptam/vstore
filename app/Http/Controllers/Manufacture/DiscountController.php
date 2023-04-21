@@ -25,6 +25,7 @@ class DiscountController extends Controller
         $this->v['field'] = $request->field ?? 'discounts.id';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? '';
         $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount',
             'products.name', 'discounts.created_at', 'start_date', 'end_date')
             ->join('products', 'discounts.product_id', '=', 'products.id')
