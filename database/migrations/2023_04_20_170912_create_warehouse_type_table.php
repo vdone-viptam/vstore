@@ -15,17 +15,18 @@ return new class extends Migration
     {
         Schema::create('warehouse_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('ware_id')->unsigned();
-            $table->tinyInteger('type');
-            $table->double('acreage',12,2);
-            $table->double('length',12,2);
-            $table->double('width',12,2);
-            $table->double('height',12,2);
+            $table->bigInteger('user_id')->unsigned();
+            $table->tinyInteger('type')->comment('1 kho lanh, 2 kho bãi, 3 kho thuong');
+            $table->double('acreage',12,2)->comment('dien tich');
+            $table->double('volume',12,2)->comment('the tich');
+            $table->double('length',12,2)->comment('chieu dai');
+            $table->double('width',12,2)->comment('chieu rong');
+            $table->double('height',12,2)->comment('chieu cao');
             $table->longText('images');
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
-            $table->foreign('ware_id')->references('id')->on('warehouses')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

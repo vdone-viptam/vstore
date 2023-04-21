@@ -12,6 +12,7 @@ use App\Models\PasswordReset;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\Ward;
+use App\Models\WarehouseType;
 use Carbon\Carbon;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
@@ -481,12 +482,61 @@ class LoginController extends Controller
                     'normal_storage' => $normal_storage,
                 ];
                 $user->storage_information = json_encode($storage_information);
+
+
+                // // lưu thông tin vào bảng warehouse type
+                // $userUpdateOrCreate = User::updateOrCreate([
+                //     "email" => $request->email,
+                //     "role_id" => 4,
+                //     "confirm_date" => null,
+                //     "account_code" => null
+                // ], $user->toArray());
+                // $user->id = $userUpdateOrCreate->id;
+
+
+                // if(isset($request->cold_storage)){
+                //     $warehouseType = new WarehouseType();
+                //     $warehouseType->user_id = $user->id;
+                //     $warehouseType->type = 1 ;
+                //     $warehouseType->acreage = $request->acreage_cold_storage;
+                //     $warehouseType->volume = $request->volume_cold_storage;
+                //     $warehouseType->length = $request->length_cold_storage;
+                //     $warehouseType->width = $request-> width_cold_storage;
+                //     $warehouseType->height = $request->height_cold_storage;
+                //     $warehouseType->images = '';
+                //     $warehouseType->save();
+                // }
+                // if(isset($request->warehouse)){
+                //     $warehouseType = new WarehouseType();
+                //     $warehouseType->user_id = $user->id;
+                //     $warehouseType->type = 2 ;
+                //     $warehouseType->acreage = $request->acreage_warehouse;
+                //     $warehouseType->volume = $request->volume_warehouse;
+                //     $warehouseType->length = $request->length_warehouse;
+                //     $warehouseType->width = $request-> width_warehouse;
+                //     $warehouseType->height = $request->height_warehouse;
+                //     $warehouseType->images = '';
+                //     $warehouseType->save();
+                // }
+                // if(isset($request->normal_storage)){
+                //     $warehouseType = new WarehouseType();
+                //     $warehouseType->user_id = $user->id;
+                //     $warehouseType->type = 3 ;
+                //     $warehouseType->acreage = $request->acreage_normal_storage;
+                //     $warehouseType->volume = $request->volume_normal_storage;
+                //     $warehouseType->length = $request->length_normal_storage;
+                //     $warehouseType->width = $request-> width_normal_storage;
+                //     $warehouseType->height = $request->height_normal_storage;
+                //     $warehouseType->images = '';
+                //     $warehouseType->save();
+                // }
+
             }
             $user->provinceId = $request->city_id;
             $user->district_id = $request->district_id;
             $user->ward_id = $request->ward_id;
 
-//            $user->save();
+            //            $user->save();
 
             DB::commit();
 
