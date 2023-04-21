@@ -558,7 +558,7 @@
                                         <label style="font-weight: 600;"><span
                                                 class="text-danger">*</span>Diện tích sàn
                                             (m2)</label>
-                                        <input class="form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
+                                        <input class="only-number form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
                                             placeholder="Nhập diện tích (m2)">
                                     </div>
                                 </div>
@@ -569,19 +569,19 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="length_normal_storage" id="length_normal_storage"
+                                                <input class="only-number form-control form-control-lg" type="text" name="length_normal_storage" id="length_normal_storage"
                                                     placeholder="Chiều dài">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="width_normal_storage" id="width_normal_storage"
+                                                <input class="only-number form-control form-control-lg" type="text" name="width_normal_storage" id="width_normal_storage"
                                                     placeholder="Chiều rộng">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="height_normal_storage" id="height_normal_storage"
+                                                <input class="only-number form-control form-control-lg" type="text" name="height_normal_storage" id="height_normal_storage"
                                                     placeholder="Chiều cao">
                                             </div>
                                         </div>
@@ -593,7 +593,7 @@
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="volume_normal_storage">Thể tích
                                             (m3)</label>
-                                        <input class="form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
+                                        <input class="only-number form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
                                             placeholder="Nhập thể tích (m3)">
                                     </div>
                                 </div>
@@ -628,7 +628,7 @@
                                         <label style="font-weight: 600;" for="dts"><span
                                                 class="text-danger">*</span>Diện tích sàn
                                             (m2)</label>
-                                        <input class="form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
+                                        <input class="only-number form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
                                             placeholder="Nhập diện tích (m2)">
                                     </div>
                                 </div>
@@ -639,19 +639,19 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="length_cold_storage" id="length_cold_storage"
+                                                <input class="only-number form-control form-control-lg" type="text" name="length_cold_storage" id="length_cold_storage"
                                                     placeholder="Chiều dài">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="width_cold_storage" id="width_cold_storage"
+                                                <input class="only-number form-control form-control-lg" type="text" name="width_cold_storage" id="width_cold_storage"
                                                     placeholder="Chiều rộng">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="height_cold_storage" id="height_cold_storage"
+                                                <input class="only-number form-control form-control-lg" type="text" name="height_cold_storage" id="height_cold_storage"
                                                     placeholder="Chiều cao">
                                             </div>
                                         </div>
@@ -663,7 +663,7 @@
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="tts">Thể tích
                                             (m3)</label>
-                                        <input class="form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
+                                        <input class="only-number form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
                                             placeholder="Nhập thể tích (m3)">
                                     </div>
                                 </div>
@@ -690,7 +690,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
+                            <input type="checkbox" class="only-number custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
                                 class="custom-control-label">Kho bãi</span>
                         </label>
                         <div class="">
@@ -700,7 +700,7 @@
                                         <label style="font-weight: 600;" for="dts"><span
                                                 class="text-danger">*</span>Diện tích sàn
                                             (m2)</label>
-                                        <input class="form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
+                                        <input class="only-number form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
                                             placeholder="Nhập diện tích (m2)">
                                     </div>
                                 </div>
@@ -711,19 +711,19 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="length_warehouse" id="length_warehouse"
+                                                <input class="only-number form-control form-control-lg" type="text" name="length_warehouse" id="length_warehouse"
                                                     placeholder="Chiều dài">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="width_warehouse" id="width_warehouse"
+                                                <input class="only-number form-control form-control-lg" type="text" name="width_warehouse" id="width_warehouse"
                                                     placeholder="Chiều rộng">
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="form-control form-control-lg" type="text" name="height_warehouse" id="height_warehouse"
+                                                <input class="only-number form-control form-control-lg" type="text" name="height_warehouse" id="height_warehouse"
                                                     placeholder="Chiều cao">
                                             </div>
                                         </div>
@@ -735,7 +735,7 @@
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="tts">Thể tích
                                             (m3)</label>
-                                        <input class="form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
+                                        <input class="only-number form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
                                             placeholder="Nhập thể tích (m3)">
                                     </div>
                                 </div>
@@ -1025,14 +1025,43 @@
             return check1;
         }
 
+        function checckInputRequired() {
+            const inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
+
+            inputs.forEach((item, index) => {
+                item.setAttribute('autocomplete', 'off')
+                item.addEventListener('change', (e) => {
+                    const check = checkEmpty(inputs);
+
+                    // check phải ít nhất 1 trong 3 loại kho !
+                    const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '';
+                    const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '';
+                    const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '';
+
+                    const condition2 = checkTypeStorage1 || checkTypeStorage2 || checkTypeStorage3;
+
+                    if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 ) {
+                        document.querySelector('.active').removeAttribute('disabled');
+                        document.querySelector('.active').classList.remove('btn-secondary');
+                    } else {
+                        document.querySelector('.active').setAttribute('disabled', 'true');
+                        document.querySelector('.active').classList.add('btn-secondary');
+                    }
+                })
+            });
+        }
+
         const inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
-        // const inputs = document.querySelectorAll('input');
-        // console.log(inputs);
+
         inputs.forEach((item, index) => {
             item.setAttribute('autocomplete', 'off')
             item.addEventListener('change', (e) => {
                 const check = checkEmpty(inputs);
-                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked) {
+
+                // check phải ít nhất 1 trong 3 loại kho !
+                const condition2 = checkThreeCondition();
+                console.log(condition2);
+                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 ) {
                     document.querySelector('.active').removeAttribute('disabled');
                     document.querySelector('.active').classList.remove('btn-secondary');
                 } else {
@@ -1042,6 +1071,15 @@
             })
         });
 
+        // phải check ít nhất 1 trong 3 loại kho !
+        function checkThreeCondition() {
+            const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '';
+            const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '';
+            const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '';
+
+            const condition2 = checkTypeStorage1 || checkTypeStorage2 || checkTypeStorage3;
+            return condition2;
+        }
 
         // check thêm 3 cái loại kho
         // tao 1 hàm để 3 loại kho đều dùng đc ~~, mục đích check nếu ko bấm thì thôi, bấm thì phải điền nút
@@ -1055,6 +1093,7 @@
                     }else{
                         document.querySelector('.active').removeAttribute('disabled');
                         document.querySelector('.active').classList.remove('btn-secondary');
+                        checckInputRequired();
                     }
                 }
             });
