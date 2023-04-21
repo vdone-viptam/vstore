@@ -167,20 +167,20 @@ class ProductController extends Controller
                 if ($product) {
                     $product->availability_status = 1;
                     $product->save();
-                    $elasticsearchController = new ElasticsearchController();
-
-                    try {
-                        $res = $elasticsearchController
-                            ->createDocProduct((string)$product->id,
-                                $product->name, $product->short_content, $product->category->name, $product->publish_id);
-                        DB::commit();
-                    } catch (ClientResponseException $exception) {
-                        DB::rollBack();
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Có lỗi xảy ra vui lòng thử lại',
-                        ], 500);
-                    }
+//                    $elasticsearchController = new ElasticsearchController();
+//
+//                    try {
+//                        $res = $elasticsearchController
+//                            ->createDocProduct((string)$product->id,
+//                                $product->name, $product->short_content, $product->category->name, $product->publish_id);
+//                        DB::commit();
+//                    } catch (ClientResponseException $exception) {
+//                        DB::rollBack();
+//                        return response()->json([
+//                            'success' => false,
+//                            'message' => 'Có lỗi xảy ra vui lòng thử lại',
+//                        ], 500);
+//                    }
                 }
             }
             if ($requestIm->status == 7) {

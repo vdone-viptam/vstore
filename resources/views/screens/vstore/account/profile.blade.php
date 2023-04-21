@@ -295,6 +295,7 @@
             // input.name = 'img'
             input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'img');
+            input.setAttribute('accept', '"image/*"');
             input.click();
 
             input.onchange = _ => {
@@ -324,6 +325,7 @@
             input.type = 'file';
             input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'banner');
+            input.setAttribute('accept', '"image/*"');
             input.click();
             input.onchange = _ => {
                 var files = Array.from(input.files);

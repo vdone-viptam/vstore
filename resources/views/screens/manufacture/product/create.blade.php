@@ -3,27 +3,6 @@
 
 
 
-@section('modal')
-    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body md-content">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -47,271 +26,365 @@
 
 
 @section('content')
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h5 class="card-header" style="font-size: 20px;">Yêu cầu xét duyệt sản phẩm</h5>
+    <form method="POST" action="{{route('screens.manufacture.product.storeRequest')}}" enctype="multipart/form-data">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header" style="font-size: 20px;">Yêu cầu xét duyệt sản phẩm</h5>
 
-            <div class="card-body">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-12">
-                            <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
-                        </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
+                            </div>
 
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
-                                <select class="form-control form-control-lg">
-                                    <option>10 phần tử / trang</option>
-                                    <option>25 phần tử / trang</option>
-                                    <option>50 phần tử / trang</option>
-                                </select>
-                                <button class="btn btn-primary mt-2">Thay đổi</button>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" id="div1">
+                                <div class="form-group">
+                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" disabled name="vstore_id">
+                                        <option value="{{$vstore->id}}">{{$vstore->name}}</option>
+                                    </select>
+                                    <button onclick="changeHidden(1)" class="btn btn-primary mt-2" type="button">Thay
+                                        đổi
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">VAT (%) <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="Nhập VAT (%)">
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Mức chiết khấu (%) <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="Mức chiết khấu (%)">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Chọn sản phẩm xét duyệt<span class="text-danger">*</span></label>
-                                <select class="form-control form-control-lg">
-                                    <option>10 phần tử / trang</option>
-                                    <option>25 phần tử / trang</option>
-                                    <option>50 phần tử / trang</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Giá (đồng) </label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="0 đ" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Mức chiết khấu (Thành tiền) </label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="0 đ" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Vai trò đối với sản phẩm<span class="text-danger">*</span></label>
-                                <select class="form-control form-control-lg">
-                                    <option>10 phần tử / trang</option>
-                                    <option>25 phần tử / trang</option>
-                                    <option>50 phần tử / trang</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tài liệu sản phẩm<span class="text-danger">*</span></label>
-                                <input type="file" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <h3 style="font-size: 18px;">Chiết khấu hàng nhập sẵn <span class="text-danger">*</span>
-                            </h3>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Số lượng sản phẩm</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Chiết khấu (%)</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Phần trăm cọc nhập hàng sẵn</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Số lượng sản phẩm</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Chiết khấu (%)</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Phần trăm cọc nhập hàng sẵn</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Số lượng sản phẩm</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Chiết khấu (%)</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Phần trăm cọc nhập hàng sẵn</label>
-                                <input type="text" class="form-control form-control-lg" id="name"
-                                       value="${data.data.name}" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <h3 style="font-size: 24px;">Thanh toán </h3>
-                            <span style="font-size: 18px;">Phương thức thanh toán <span
-                                    class="text-danger">*</span></span>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 ">
-                            <label class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" name="radio-inline" checked="" class="custom-control-input"><span
-                                    class="custom-control-label"> Chỉ thanh toán trước</span>
-                            </label>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="display: none" id="div2">
+                                <div class="form-group">
+                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" name="vstore_id" id="selectVs">
+                                        @foreach($v_stores as $v)
+                                            <option value="{{$v->id}}">{{$v->name}}</option>
 
-                            <label class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" name="radio-inline" class="custom-control-input"><span
-                                    class="custom-control-label">Tất cả phương thức thanh toán</span>
-                            </label>
-                        </div>
-                        <div class="mx-auto my-4 col-12 text-center">
-                            <button class="btn btn-secondary">Hủy bỏ</button>
-                            <button class="btn btn-primary ml-2">Tạo yêu cầu</button>
-                        </div>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="changeHidden(2)">Thay
+                                        đổi
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">VAT (%) <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg number discountA" id="vat"
+                                           name="vat"
+                                           value="{{old('vat')}}" placeholder="Nhập VAT (%)">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="VAT"></p>
+                                    @error('vat')
+                                    <p class="text-danger ml-1 mt-2">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Mức chiết khấu (%) <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg number discountA"
+                                           id="discountA"
+                                           name="discountA"
+                                           value="{{old('discountA')}}" placeholder="Mức chiết khấu (%)">
+                                    <p data-title="Chiết khấu" class="ml-1 mt-2 messageE text-danger"></p>
+                                    @error('discountA')
+                                    <p class="text-danger ml-1 mt-2">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chọn sản phẩm xét duyệt
+                                        <sp an class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-control form-control-lg" style="height: 50px !important;"
+                                            name="product_id" id="product_id">
+                                        <option value="" disabled selected>Lựa chọn sản phẩm xét duyệt</option>
+                                        @foreach($products as $product)
+                                            <option
+                                                value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}> {{$product->name}}</option>
+                                        @endforeach
 
-                    </div>
-                </form>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Giá (đồng) </label>
+                                    <input type="text" class="form-control form-control-lg" id="price" name="price"
+                                           value="{{old('price')}}" placeholder="0 đ" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Mức chiết khấu (Thành tiền) </label>
+                                    <input type="text" class="form-control form-control-lg" id="money_discountA"
+                                           name="money_discountA"
+                                           value="{{old('money_discountA')}}" placeholder="0 đ" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Vai trò đối với sản phẩm<span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" name="role">
+                                        <option value="" disabled selected>Lựa chọn vai trò đối với sản phẩm</option>
+                                        <option value="1" {{old('role') == 1 ? 'selected' : ''}}>Nhà sản xuất</option>
+                                        <option value="2" {{old('role') == 2 ? 'selected' : ''}}>Nhà nhập khẩu</option>
+                                        <option value="3" {{old('role') == 3 ? 'selected' : ''}}>Nhà phân phối</option>
+                                    </select>
+                                    @error('role')
+                                    <p class="text-danger ml-1 mt-2">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Tài liệu sản phẩm<span class="text-danger">*</span></label>
+                                    <input type="file" accept=
+                                        "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                                        text/plain, application/pdf, image/*" class="form-control form-control-lg"
+                                           id="images" name="images[]" multiple>
+                                    @error('images')
+                                    <p class="text-danger ml-1 mt-2">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            @csrf
+                            <div class="col-12">
+                                <h3 style="font-size: 18px;">Chiết khấu hàng nhập sẵn <span class="text-danger">*</span>
+                                </h3>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Số lượng sản phẩm</label>
+                                    <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
+                                           value="{{number_format(old('sl')[0],0,'.','.') ?? ''}}"
+                                           placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 1">
+                                    <p class="ml-1 mt-2 text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chiết khấu (%)</label>
+                                    <input type="text" class="form-control form-control-lg number discountA"
+                                           name="moneyv[]"
+                                           id="moneyv[]"
+                                           value="{{old('money')[0] ?? ''}}"
+                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Phần trăm cọc nhập hàng sẵn</label>
+                                    <input type="text" class="form-control form-control-lg number discountA sp"
+                                           id="deposit_money[]"
+                                           name="deposit_money[]"
+                                           value="{{old('deposit_money') ?? ''}}"
+                                           placeholder="Nhập phần trăm cọc mức 1">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Số lượng sản phẩm</label>
+                                    <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
+                                           value="{{number_format(old('sl'),0,'.','.')}}"
+                                           placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 2">
+                                    <p class="ml-1 mt-2 text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chiết khấu (%)</label>
+                                    <input type="text" class="form-control form-control-lg number discountA"
+                                           name="moneyv[]"
+                                           id="moneyv[]"
+                                           value="{{old('text') ?? ''}}"
+                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Phần trăm cọc nhập hàng sẵn</label>
+                                    <input type="text" class="form-control form-control-lg number discountA sp"
+                                           id="deposit_money[]"
+                                           name="deposit_money[]"
+                                           value="{{old('deposit_money') ?? ''}}"
+                                           placeholder="Nhập phần trăm cọc mức 2">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Số lượng sản phẩm</label>
+                                    <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
+                                           value="{{number_format(old('sl'),0,'.','.')}}"
+                                           placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 3">
+                                    <p class="ml-1 mt-2 text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chiết khấu (%)</label>
+                                    <input type="text" class="form-control form-control-lg number discountA"
+                                           name="moneyv[]"
+                                           id="moneyv[]"
+                                           value="{{old('moneyv')}} ?? '"
+                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Phần trăm cọc nhập hàng sẵn</label>
+                                    <input type="text" class="form-control form-control-lg number discountA sp"
+                                           id="deposit_money[]"
+                                           name="deposit_money[]"
+                                           value="{{old('deposit_money') ?? ''}}"
+                                           placeholder="Nhập phần trăm cọc mức 3">
+                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h3 style="font-size: 24px;">Thanh toán </h3>
+                                <span style="font-size: 18px;">Phương thức thanh toán <span
+                                        class="text-danger">*</span></span>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 ">
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="prepay" checked="" value="1"
+                                           class="custom-control-input"><span
+                                        class="custom-control-label"> Chỉ thanh toán trước</span>
+                                </label>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
+
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="prepay" value="2" class="custom-control-input"><span
+                                        class="custom-control-label">Tất cả phương thức thanh toán</span>
+                                </label>
+                            </div>
+                            <div class="mx-auto my-4 col-12 text-center">
+                                <button class="btn btn-secondary">Hủy bỏ</button>
+                                <button class="btn btn-primary ml-2" id="appect">Tạo yêu cầu</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
+    </form>
 @endsection
 
 @section('custom_js')
-    {{--    <script>--}}
-    {{--        async function showDetail(id) {--}}
-    {{--            await $.ajax({--}}
-    {{--                type: "GET",--}}
-    {{--                url: `{{route('screens.manufacture.product.detail')}}?id=` + id,--}}
-    {{--                dataType: "json",--}}
-    {{--                encode: true,--}}
-    {{--                error: function (jqXHR, error, errorThrown) {--}}
-    {{--                    $('#requestModal').modal('hide')--}}
-    {{--                    var error0 = JSON.parse(jqXHR.responseText)--}}
-    {{--                    Swal.fire({--}}
-    {{--                        icon: 'error',--}}
-    {{--                        title: 'Xem chi tiết sản phẩm thất bại !',--}}
-    {{--                        text: error0.message,--}}
-    {{--                    })--}}
-    {{--                }--}}
-    {{--            }).done(function (data) {--}}
-    {{--                var htmlData = ``;--}}
-
-    {{--                if (data.data) {--}}
-    {{--                    htmlData += `--}}
-    {{--<form method="post" key=${id}>--}}
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{\Illuminate\Support\Facades\Session::get('success')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{\Illuminate\Support\Facades\Session::get('error')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    <script>
 
 
-    {{--                           <div class="form-group">--}}
-    {{--                    <label >Mã yêu cầu :</label>--}}
-    {{--                  <input class="form-control form-control-lg" disabled value="${data.data.code}" />           </div>--}}
+        document.querySelector('#appect').setAttribute('disabled', 'true');
 
-    {{--                <div class="form-group">--}}
-    {{--                    <span >Tên sản phẩm :</label>--}}
-    {{--                  <input class="form-control form-control-lg" disabled value="${data.data.product_name}">--}}
-    {{--                </div>--}}
-    {{--                <div class="form-group">--}}
-    {{--                    <span >V-Store niêm yết:</label>--}}
-    {{--                  <input class="form-control form-control-lg" disabled value="${data.data.user_name}" >--}}
-    {{--                </div>--}}
-    {{--                <div class="form-group">--}}
-    {{--                    <an >Giá bán :</label>--}}
-    {{--                  <input class="form-control form-control-lg" disabled value="${data.data.price + 'đ'}">--}}
-    {{--                <div class="form-group">--}}
-    {{--                    <label>Vat :</label>--}}
-    {{--                  <input class="form-control form-control-lg" disabled value="${data.data.vat}" >        </div>--}}
-    {{--                <div class="form-group">--}}
-    {{--                    <span >Chiết khấu V-Store :</label>--}}
-    {{--                  <input class="form-control form-control-lg" disabled value="${data.data.discount}" >--}}
-    {{--                   </form>--}}
+        document.querySelectorAll('.discountA').forEach((item, index) => {
+            item.addEventListener('keypress', (e) => {
+                if (e.target.value !== null) {
+                    const currentValue = e.target.value.replaceAll('.', '');
+                    if (item.classList.contains('sp')) {
+                        if (currentValue > 100) {
+                            document.querySelectorAll('.messageE')[index].innerHTML = document.querySelectorAll('.messageE')[index].dataset.title + ' không được vượt quá 100 %';
+                            item.value = 10;
+                            document.querySelector('#appect').setAttribute('disabled', 'true');
+                        } else {
+                            document.querySelectorAll('.messageE')[index].innerHTML = '';
+                            document.querySelector('#appect').removeAttribute('disabled');
 
-    {{--                        `;--}}
-    {{--                    $('.md-content').html(htmlData)--}}
-    {{--                    $('#modalDetail').modal('show');--}}
-    {{--                    if (data.data.availability_status == 1) {--}}
-    {{--                        document.querySelector('.btnDestroy').innerHTML =--}}
-    {{--                            `<button class="btn btn-danger">Hủy niêm yết</button>--}}
+                        }
+                    } else {
+                        if (currentValue >= 100) {
+                            document.querySelectorAll('.messageE')[index].innerHTML = document.querySelectorAll('.messageE')[index].dataset.title + ' không được vượt quá 100 %';
+                            item.value = 10;
+                            document.querySelector('#appect').setAttribute('disabled', 'true');
+                        } else {
+                            document.querySelectorAll('.messageE')[index].innerHTML = '';
+                            document.querySelector('#appect').removeAttribute('disabled');
 
-    {{--`;--}}
-    {{--                        $(".btnDelete").html('');--}}
-    {{--                    } else {--}}
-    {{--                        document.querySelector('.btnDestroy').innerHTML = ``;--}}
-    {{--                        $(".btnDelete").html('<a class="btn btn-warning btnEdit mx-2" href="">Sửa sản phẩm</a><button  class="btn btn-danger">Xóa sản phẩm</button>');--}}
-    {{--                    }--}}
-    {{--                } else {--}}
-    {{--                    $('#modalDetail').modal('show');--}}
-    {{--                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')--}}
-    {{--                    setTimeout(() => {--}}
-    {{--                        $('#modalDetail').modal('hide');--}}
-    {{--                    }, 1000);--}}
-    {{--                }--}}
-    {{--            })--}}
+                        }
+                    }
+
+                }
+            })
+        });
+
+        function changeHidden(type) {
+            if (type === 1) {
+                document.querySelector('#div1').style.display = 'none';
+                document.querySelector('#div2').style.display = 'block';
+            } else {
+                document.querySelector('#div2').style.display = 'none';
+                document.querySelector('#div1').style.display = 'block';
+            }
+        }
+
+        let price = 0;
+        let discount = 0;
+        const VND = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+        });
 
 
-    {{--        }--}}
+        document.querySelector('#product_id').addEventListener('change', (e) => {
+            if (e.target.value) {
+                $.ajax({
+                    url: '{{route('screens.manufacture.product.getDataProduct')}}?product_id=' + e.target.value + '&_token=XMq2eSZnk6BkEYFCh0NbP91gCQz4AaVYtQjOAO6T',
+                    success: function (result) {
+                        price = result;
+                        document.getElementById('price').value = VND.format(price);
+                        document.getElementById('money_discountA').value = VND.format((discount / 100) * price);
+                    },
+                });
+            } else {
+                price = 0;
+                document.getElementById('price').value = VND.format(price);
+                document.getElementById('money').value = VND.format((discount / 100) * price);
 
-    {{--        $(document).ready(function () {--}}
-    {{--            document.querySelectorAll('.sort').forEach(item => {--}}
-    {{--                const {sort} = item.dataset;--}}
-    {{--                item.addEventListener('click', () => {--}}
-    {{--                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';--}}
-    {{--                    if (orderBy === 'asc') {--}}
-    {{--                        localStorage.setItem('orderBy', JSON.stringify('desc'));--}}
-    {{--                    } else {--}}
-    {{--                        localStorage.setItem('orderBy', JSON.stringify('asc'));--}}
-    {{--                    }--}}
-    {{--                    setTimeout(() => {--}}
-    {{--                        document.location = '{{route('screens.manufacture.product.index',['key_search' => $key_search])}}&type=' + orderBy +--}}
-    {{--                            '&field=' + sort--}}
-    {{--                    })--}}
-    {{--                });--}}
-    {{--            });--}}
-    {{--        });--}}
-    {{--    </script>--}}
+            }
+        })
+
+        document.querySelector('#vat').addEventListener('keyup', (e) => {
+            document.querySelector('#money_vat').value = VND.format(price * e.target.value / 100) || 0 + ' đ';
+
+        });
+        document.getElementById('discountA').addEventListener('keyup', (e) => {
+            discount = e.target.value;
+            if (discount > 100) {
+                document.getElementById('discountA').value = 100;
+            }
+            if (discount) {
+                document.getElementById('money_discountA').value = VND.format((e.target.value / 100) * price);
+
+            } else {
+                document.getElementById('money_discountA').value = '0 đ';
+            }
+
+        })
+
+    </script>
 
 @endsection

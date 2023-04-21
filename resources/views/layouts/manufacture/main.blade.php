@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     @include('layouts.storage.css')
     @yield('custom_css')
     <style>
@@ -49,7 +50,8 @@
             min-width: 250px !important;
             white-space: pre-wrap !important;
         }
-        th{
+
+        th {
             min-width: 150px;
         }
     </style>
@@ -178,56 +180,11 @@
     <!-- end wrapper  -->
     <!-- ============================================================== -->
 </div>
-@yield('custom_js')
+<script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
 
-<script>
-    function convertDate(inputFormat) {
-        function pad(s) {
-            return (s < 10) ? '0' + s : s;
-        }
-
-        var d = new Date(inputFormat)
-        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
-    }
-
-    $(document).keypress(async function (event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13') {
-            if ($('#search').val().length > 0) {
-                await $.ajax({
-                    type: "GET",
-                    url: `{{route('screens.storage.dashboard.searchAllByKeyword')}}?_token={{csrf_token()}}`,
-                    data: {
-                        key_search: $('#search').val().trim()
-                    },
-
-                    error: function (jqXHR, error, errorThrown) {
-                        $('#requestModal').modal('hide')
-                        var error0 = JSON.parse(jqXHR.responseText)
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Tìm kiếm không thành công !',
-                            text: error0.message,
-                        })
-                    }
-                }).done(function (data) {
-                    document.location = data.href;
-                })
-            }
-        }
-    });
-    // const x = document.querySelectorAll('input[type="number"]');
-    // x.forEach(item => {
-    //     item.addEventListener("keypress", function (evt) {
-    //         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-    //             evt.preventDefault();
-    //         }
-    //     });
-    // })
-</script>
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
-{{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}
-{{-- <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}" ></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
@@ -240,6 +197,38 @@
 <script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
+@yield('custom_js')
+
+<script>
+    function convertDate(inputFormat) {
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
+
+        var d = new Date(inputFormat)
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
+    }
+
+    document.querySelectorAll('.number').forEach(item => {
+        item.addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9.]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    })
+    document.querySelectorAll('.number').forEach(item => {
+        item.addEventListener("keyup", (e) => {
+            const currentValue = e.target.value.replaceAll('.','');
+            item.value = new Intl.NumberFormat("de-DE").format(currentValue).replaceAll(',','.')
+        });
+    })
+
+
+</script>
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
