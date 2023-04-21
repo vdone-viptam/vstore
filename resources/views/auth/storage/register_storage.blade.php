@@ -424,7 +424,7 @@
                                     d="M6.24976 4.25C6.24976 4.44891 6.32877 4.63968 6.46943 4.78033C6.61008 4.92098 6.80084 5 6.99976 5C7.19867 5 7.38943 4.92098 7.53009 4.78033C7.67074 4.63968 7.74976 4.44891 7.74976 4.25C7.74976 4.05109 7.67074 3.86032 7.53009 3.71967C7.38943 3.57902 7.19867 3.5 6.99976 3.5C6.80084 3.5 6.61008 3.57902 6.46943 3.71967C6.32877 3.86032 6.24976 4.05109 6.24976 4.25ZM7.37476 6H6.62476C6.55601 6 6.49976 6.05625 6.49976 6.125V10.375C6.49976 10.4438 6.55601 10.5 6.62476 10.5H7.37476C7.44351 10.5 7.49976 10.4438 7.49976 10.375V6.125C7.49976 6.05625 7.44351 6 7.37476 6Z"
                                     fill="black" fill-opacity="0.45"></path>
                             </svg></label>
-                        <input class="form-control form-control-lg" type="number" required=""
+                        <input class="only-number form-control form-control-lg" required="" type="text"
                             name="id_vdone" id="id_vdone"
                             value="{{old('id_vdone')}}"
                             placeholder="Nhập ID P-Done người đại diện (VD: 76)">
@@ -449,7 +449,7 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
                         <label style="font-weight: 600;" for="idpDonemore">ID P-Done người đại diện (khác)</label>
-                        <input class="form-control form-control-lg" type="number"
+                        <input class="only-number form-control form-control-lg" type="text"
                             name="id_vdone_diff" id="id_vdone_diff"
                             value="{{old('id_vdone_diff')}}"
                             placeholder="Nhập ID P-Done người đại diện khác (VD: 11)">
@@ -460,9 +460,8 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số
-                            thuế</label>
-                        <input class="form-control form-control-lg" type="text" required
+                        <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số thuế</label>
+                        <input class='only-number form-control form-control-lg' type="text" required=""
                             name="tax_code" id="tax_code" placeholder="Nhập mã số thuế (VD: 6565656656)"
                             pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                             value="{{old('tax_code')}}"
@@ -477,7 +476,7 @@
                         <div class="form-group">
                             <label style="font-weight: 600;">ID P-Done
                                 người giới thiệu</label>
-                            <input class="form-control form-control-lg" type="number"
+                            <input class="form-control form-control-lg" type="text"
                                 name="referral_code"
                                 value="{{$referral_code}}"
                                 placeholder="ID P-Done người giới thiệu" readonly autocomplete="off">
@@ -949,20 +948,10 @@
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 
-    <script !src="">
-        const x = document.querySelectorAll('input[type="number"]');
-        x.forEach(item => {
-            item.addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault();
-                }
-            });
-        })
+    <script>
         const divCity = document.getElementById('city_id');
         const divDistrict = document.getElementById('district_id');
         const divWard = document.getElementById('ward_id');
-        // document.querySelector('.active').setAttribute('disabled', 'true');
-        // document.querySelector('.active').classList.add('btn-secondary');
         fetch('{{route('get_city')}}', {
             mode: 'no-cors',
 
