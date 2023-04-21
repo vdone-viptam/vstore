@@ -26,6 +26,7 @@ class OrderController extends Controller
             'no', 'id', 'export_status', 'created_at'
         )
             ->where('order.status', '!=', 2);
+   
         if ($key_search && strlen(($key_search) > 0)) {
             $orders->where(function ($sub) use ($key_search) {
                 $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
@@ -38,7 +39,7 @@ class OrderController extends Controller
             });
         }
         $orders = $orders->orderBy('id', 'desc')->paginate($limit);
-        return view('screens.manufacture.order.index', ['orders' => $orders]);
+        return view('screens.manufacture.order.index',compact('key_search'), ['orders' => $orders]);
     }
 
     public function destroy()
@@ -71,6 +72,7 @@ class OrderController extends Controller
             });
         }
         $orders = $orders->orderBy('id', 'desc')->paginate($limit);
+      
         return view('screens.manufacture.order.pending', ['orders' => $orders]);
 
     }
@@ -95,7 +97,7 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->paginate($limit);;
+        $orders = $orders->paginate($limit);
         return view('screens.manufacture.order.order', [
             'orders' => $orders
         ]);
@@ -129,4 +131,6 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
+
+  
 }
