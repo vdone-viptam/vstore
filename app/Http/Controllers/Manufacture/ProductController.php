@@ -44,7 +44,7 @@ class ProductController extends Controller
             $this->v['products'] = $this->v['products']->where(function ($query) {
                 $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
                     ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
-//                    ->orWhere('vstore_name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('publish_id', '=', $this->v['key_search'])
                     ->orWhere('brand', 'like', '%' . $this->v['key_search'] . '%');
             });
         }
@@ -277,9 +277,10 @@ class ProductController extends Controller
             categories.name,products.name as product_name,
             users.name as user_name');
         if (strlen($this->v['key_search'])) {
-            $this->v['requests'] =  $this->v['requests']->where(function ($query) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) {
                 $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
                     ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('requests.code', '=', $this->v['key_search'])
                     ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
             });
         }
