@@ -30,8 +30,19 @@ class DiscountController extends Controller
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->orderBy($this->v['field'], $this->v['type'])
             ->where('discounts.user_id', Auth::id());
-        $this->v['discounts'] = $this->v['discounts']->paginate($request->limit ?? 10);
-        $this->v['params'] = $request->all();
+        if (strlen($this->v['key_search'])) {
+            $this->v['discounts'] = $this->v['discounts']->where(function ($query) {
+                $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['discounts'] = $this->v['discounts']->paginate($this->v['limit']);
+        return view('screens.manufacture.discount.discount', $this->v);
+
+    }
+
+    public function createDis()
+    {
         $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
         $data = [];
         foreach ($product as $pr) {
@@ -40,15 +51,9 @@ class DiscountController extends Controller
             }
         }
         $this->v['products'] = $data;
-        return view('screens.manufacture.discount.discount', $this->v);
-
-    }
-
-    public function createDis()
-    {
-
-
-        return view('screens.manufacture.discount.createDis', $this->v);
+        return response()->json([
+            'view' => view('screens.manufacture.discount.createDis', $this->v)->render()
+        ]);
 
     }
 
@@ -71,16 +76,22 @@ class DiscountController extends Controller
 
     public function storeDis(Request $request)
     {
-        DB::table('discounts')->insert([
-            'product_id' => $request->product_id,
-            'discount' => $request->discount,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'type' => 1,
-            'user_id' => Auth::id()
-        ]);
 
-        return redirect()->route('screens.manufacture.product.discount')->with('success', 'Thêm mới giảm giá thành công');
+        try {
+            DB::table('discounts')->insert([
+                'product_id' => $request->product_id,
+                'discount' => $request->discount,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'type' => 1,
+                'user_id' => Auth::id()
+            ]);
+
+            return redirect()->route('screens.manufacture.product.discount')->with('success', 'Thêm mới giảm giá thành công');
+        } catch (\Exception $exception) {
+            return redirect()->route('screens.manufacture.product.discount')->with('error', 'Thêm mới giảm giá thất bại');
+
+        }
     }
 
     public function editDis(Request $request)
@@ -100,23 +111,30 @@ class DiscountController extends Controller
         $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['product1']->id)->first();
         $this->v['product1']->buy_more = $buy_more->discount ?? 0;
         $this->v['product1']->price = number_format($this->v['product1']->price, 0, '.', '.');
-
-        return view('screens.manufacture.discount.editDis', $this->v);
+        return response()->json([
+            'view' => view('screens.manufacture.discount.editDis', $this->v)->render(),
+            'id' => $this->v['discount']->id
+        ]);
 
     }
 
-    public function updateDis($id, Request $request)
+    public function updateDis(Request $request, $id = null)
     {
 
-        DB::table('discounts')
-            ->where('id', $id)
-            ->update([
-                'product_id' => $request->product_id,
-                'discount' => $request->discount,
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date,
-            ]);
+        try {
+            DB::table('discounts')
+                ->where('id', $id)
+                ->update([
+                    'product_id' => $request->product_id,
+                    'discount' => $request->discount,
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date,
+                ]);
 
-        return redirect()->route('screens.manufacture.product.discount')->with('success', 'Cập nhật giảm giá thành công');
+            return redirect()->route('screens.manufacture.product.discount')->with('success', 'Cập nhật giảm giá thành công');
+        } catch (\Exception $exception) {
+            return redirect()->route('screens.manufacture.product.discount')->with('error', 'Cập nhật giảm giá thất bại');
+
+        }
     }
 }

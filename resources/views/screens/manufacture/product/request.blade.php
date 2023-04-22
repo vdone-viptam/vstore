@@ -55,6 +55,9 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
@@ -101,40 +104,40 @@
 
                             <th>Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'cate_name')
+                                    @if($field == 'requests.created_at')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="cate_name"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="requests.created_at"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="cate_name"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="requests.created_at"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="cate_name"></i>
+                                        <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
                                     @endif
                                 </span>
                             </th>
                             <th>V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'vstore_name')
+                                    @if($field == 'users.name')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="users.name"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="users.name"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
+                                        <i class="fas fa-sort sort" data-sort="users.name"></i>
                                     @endif
                                 </span>
                             </th>
                             <th>Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
-                                    @if($field == 'price')
+                                    @if($field == 'requests.status')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="requests.status"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="requests.status"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="price"></i>
+                                        <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                     @endif
                                 </span>
                             </th>
@@ -237,10 +240,10 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$requests->withQueryString()->links()}}
-                    <select name="" id="" class="form-control col-1">
-                        <option value="">10 hàng / trang</option>
-                        <option value="">25 hàng / trang</option>
-                        <option value="">50 hàng / trang</option>
+                    <select id="limit" class="form-control col-1">
+                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
+                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
+                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
                     </select>
                 </div>
 
@@ -325,6 +328,8 @@
 
         }
 
+        let limit = document.getElementById('limit');
+        console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
@@ -336,12 +341,18 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.manufacture.product.index',['key_search' => $key_search])}}&type=' + orderBy +
+                        document.location = '{{route('screens.manufacture.product.request',['key_search' => $key_search])}}&type=' + orderBy +
                             '&field=' + sort
                     })
                 });
             });
         });
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.manufacture.product.request',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 
 @endsection

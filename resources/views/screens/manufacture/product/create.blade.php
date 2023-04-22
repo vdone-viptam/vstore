@@ -26,6 +26,7 @@
 
 
 @section('content')
+
     <form method="POST" action="{{route('screens.manufacture.product.storeRequest')}}" enctype="multipart/form-data">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
@@ -150,11 +151,12 @@
                                 <h3 style="font-size: 18px;">Chiết khấu hàng nhập sẵn <span class="text-danger">*</span>
                                 </h3>
                             </div>
+
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Số lượng sản phẩm</label>
                                     <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
-                                           value="{{number_format(old('sl')[0],0,'.','.') ?? ''}}"
+                                           value="{{isset(old('sl')[0]) ?(int)old('sl')[0] : ''}}"
                                            placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 1">
                                     <p class="ml-1 mt-2 text-danger"></p>
                                 </div>
@@ -165,7 +167,7 @@
                                     <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
-                                           value="{{old('money')[0] ?? ''}}"
+                                           value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
                                            placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
@@ -176,7 +178,7 @@
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
                                            name="deposit_money[]"
-                                           value="{{old('deposit_money') ?? ''}}"
+                                           value="{{isset(old('deposit_money')[0]) ? old('deposit_money')[0] : ''}}"
                                            placeholder="Nhập phần trăm cọc mức 1">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
                                 </div>
@@ -185,7 +187,7 @@
                                 <div class="form-group">
                                     <label for="name">Số lượng sản phẩm</label>
                                     <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
-                                           value="{{number_format(old('sl'),0,'.','.')}}"
+                                           value="{{isset(old('sl')[1]) ? (int)old('sl')[1]  : '' }}"
                                            placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 2">
                                     <p class="ml-1 mt-2 text-danger"></p>
                                 </div>
@@ -196,7 +198,7 @@
                                     <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
-                                           value="{{old('text') ?? ''}}"
+                                           value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}"
                                            placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
@@ -207,7 +209,7 @@
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
                                            name="deposit_money[]"
-                                           value="{{old('deposit_money') ?? ''}}"
+                                           value="{{isset(old('deposit_money')[1]) ? old('deposit_money')[1] : ''}}"
                                            placeholder="Nhập phần trăm cọc mức 2">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
                                 </div>
@@ -216,7 +218,7 @@
                                 <div class="form-group">
                                     <label for="name">Số lượng sản phẩm</label>
                                     <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
-                                           value="{{number_format(old('sl'),0,'.','.')}}"
+                                           value="{{isset(old('sl')[2]) ?(int)old('sl')[2]: ''}}"
                                            placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 3">
                                     <p class="ml-1 mt-2 text-danger"></p>
                                 </div>
@@ -227,7 +229,7 @@
                                     <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
-                                           value="{{old('moneyv')}} ?? '"
+                                           value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}"
                                            placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
@@ -238,7 +240,7 @@
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
                                            name="deposit_money[]"
-                                           value="{{old('deposit_money') ?? ''}}"
+                                           value="{{isset(old('deposit_money')[2]) ? old('deposit_money')[2] : ''}}"
                                            placeholder="Nhập phần trăm cọc mức 3">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
                                 </div>
@@ -273,6 +275,7 @@
                 </div>
             </div>
         </div>
+
 
     </form>
 @endsection
