@@ -551,6 +551,9 @@
                             <input type="checkbox" class="custom-control-input" name="normal_storage" value="normal_storage" id="normal_storage"><span
                                 class="custom-control-label">Kho thường</span>
                         </label>
+                        @error('normal_storage')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                         <div class="">
                             <div class="row">
                                 <div class=" col-12">
@@ -601,7 +604,7 @@
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho thường</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_normal_storage[]"
+                                    <input class="form-control form-control-lg" type="file" name="image_normal_storage[]" id="image_normal_storage"
                                         placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
                                     @error('image_normal_storage')
                                     <p class="text-red-600">{{$message}}</p>
@@ -633,6 +636,9 @@
                             <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage" id="cold_storage"><span
                                 class="custom-control-label">Kho lạnh</span>
                         </label>
+                        @error('cold_storage')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                         <div class="">
                             <div class="row">
                                 <div class=" col-12">
@@ -683,7 +689,7 @@
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho lạnh</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_cold_storage[]"
+                                    <input class="form-control form-control-lg" type="file" name="image_cold_storage[]" id="image_cold_storage"
                                         placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
                                     @error('image_cold_storage')
                                     <p class="text-red-600">{{$message}}</p>
@@ -717,6 +723,9 @@
                             <input type="checkbox" class="only-number custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
                                 class="custom-control-label">Kho bãi</span>
                         </label>
+                        @error('warehouse')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                         <div class="">
                             <div class="row">
                                 <div class=" col-12">
@@ -767,7 +776,7 @@
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho bãi</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_warehouse[]"
+                                    <input class="form-control form-control-lg" type="file" name="image_warehouse[]" id="image_warehouse"
                                         placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
                                     @error('image_warehouse')
                                     <p class="text-red-600">{{$message}}</p>
@@ -798,7 +807,7 @@
             <div class="form-group mt-4" style="max-width: 450px; margin: 0 auto;">
                 <label class="custom-control custom-checkbox">
                     <input class="custom-control-input" required type="checkbox"><span class="custom-control-label">Tôi đồng
-                        ý với <a href="#" style="text-decoration: underline;">Điều khoản sử dụng dịch vụ.</a></span>
+                        ý với <span style="text-decoration: underline;cursor: pointer;" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
                 </label>
                 <div class="form-group pt-2">
                     <button class="btn btn-block btn-primary btn-secondary active" disabled type="submit">Mua ngay</button>
@@ -810,6 +819,57 @@
         </div>
     </div>
 </form>
+
+{{-- modal terms --}}
+<div class="modal fade modal-terms" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-size: 20px;">Điều khoản sử dụng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="content col-12 my-4">
+                VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây
+                dựng cộng đồng cũng như phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc
+                bạn sử dụng các sản phẩm, tính năng, ứng dụng, dịch vụ, công nghệ cũng như phần mềm
+                khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi nêu rõ là áp dụng
+                các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do
+                VipTam, Inc. cung cấp cho bạn.
+                Bạn không mất phí sử dụng các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của
+                những Điều khoản này, trừ khi chúng tôi có quy định khác. Thay vào đó, doanh nghiệp,
+                tổ chức và những cá nhân khác sẽ phải trả tiền cho chúng tôi để hiển thị quảng cáo
+                về sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của chúng tôi, bạn đồng
+                ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng có thể phù hợp với bạn và sở
+                thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để xác định những quảng cáo
+                được cá nhân hóa sẽ hiển thị cho bạn.
+                Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo, cũng không chia
+                sẻ thông tin trực tiếp nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông
+                tin liên hệ khác) với những đơn vị này trừ khi được bạn cho phép cụ thể. Thay vào
+                đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu đối tượng mà họ
+                muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người
+                có thể quan tâm.
+                Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những đơn vị này nắm được
+                cách mọi người tương tác với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ
+                hơn cách chúng tôi hiển thị quảng cáo được cá nhân hóa trên Sản phẩm của VDONE theo
+                các điều khoản này. Chính sách quyền riêng tư của chúng tôi giải thích cách chúng
+                tôi thu thập và sử dụng dữ liệu cá nhân của bạn để quyết định hiển thị cho bạn quảng
+                cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được mô tả bên dưới. Bạn cũng
+                có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào
+                để xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ
+                liệu của bạn.
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                    lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- modal terms --}}
 
 
 @if($isOrder)
@@ -982,6 +1042,7 @@
 </body>
 
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 
     <script>
@@ -1092,9 +1153,9 @@
         function checkThreeCondition() {
             let countCheck = 0;
 
-            const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '';
-            const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '';
-            const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '';
+            const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '' && $('#image_normal_storage').val() != '' ;
+            const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '' && $('#image_cold_storage').val() != '';
+            const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '' && $('#image_warehouse').val() != '';
 
             if(checkTypeStorage1)
                 countCheck++;
@@ -1135,6 +1196,41 @@
         checkThreeTypeStorage('#normal_storage','#acreage_normal_storage');
         checkThreeTypeStorage('#cold_storage','#acreage_cold_storage');
         checkThreeTypeStorage('#warehouse','#acreage_warehouse');
+
+        // check input file # null
+
+        function checkThreeImageStorage(idCheckBox, inputFile, ) {
+            $(inputFile).change(function() {
+                const condition2 = checkThreeCondition();
+                const check = checkEmpty(inputs);
+                if( $(inputFile).val() != ''){
+                    if( $(idCheckBox).is(':checked')){
+                        if( $(inputFile).val() != ''){
+                            btnSubmit.setAttribute('disabled', 'true');
+                            btnSubmit.classList.add('btn-secondary');
+                        }else if(check){
+                            btnSubmit.removeAttribute('disabled');
+                            btnSubmit.classList.remove('btn-secondary');
+                        }
+                    }else{
+                        if( condition2 > 0 && check ){
+                            btnSubmit.removeAttribute('disabled');
+                            btnSubmit.classList.remove('btn-secondary');
+                        }else{
+                            btnSubmit.setAttribute('disabled', 'true');
+                            btnSubmit.classList.add('btn-secondary');
+                        }
+                    }
+                }else{
+                    btnSubmit.setAttribute('disabled', 'true');
+                    btnSubmit.classList.add('btn-secondary');
+                }
+            });
+        };
+        checkThreeImageStorage('#normal_storage','#image_normal_storage');
+        checkThreeImageStorage('#cold_storage', '#image_cold_storage');
+        checkThreeImageStorage('#warehouse', '#image_warehouse');
+
 
         //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
         setSessionStorageThreeType();

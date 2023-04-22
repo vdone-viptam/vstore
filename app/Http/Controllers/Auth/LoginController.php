@@ -305,6 +305,14 @@ class LoginController extends Controller
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
 
+                // phai chon it nhat 1 trong 3 loai kho
+                'normal_storage' => 'required_without_all:cold_storage,warehouse',
+                'cold_storage' => 'required_without_all:normal_storage,warehouse',
+                'warehouse' => 'required_without_all:normal_storage,cold_storage',
+                // normal_storage
+                // cold_storage
+                // warehouse
+
                 // kiểm tra thông tin kho
                 'acreage_normal_storage' => 'integer|min:1|nullable',
                 'length_normal_storage' => 'integer|min:1|nullable',
@@ -325,10 +333,15 @@ class LoginController extends Controller
                 'volume_warehouse' => 'integer|min:1|nullable',
 
                 // kiểm tra thông tin ảnh kho
-                'image_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_normal_storage' => 'required_with:normal_storage',
+                'image_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg|required_with:normal_storage',
                 'image_pccc_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+
+                'image_cold_storage' => 'required_with:cold_storage',
                 'image_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
                 'image_pccc_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+
+                'image_warehouse' => 'required_with:warehouse',
                 'image_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
                 'image_pccc_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
 
@@ -348,7 +361,11 @@ class LoginController extends Controller
                 'id_vdone.required' => 'ID P-Done người đại điện bắt buộc nhập',
 
 
+                'normal_storage.required_without_all' => 'Hãy chọn 1 loại kho',
+                'cold_storage.required_without_all' => 'Hãy chọn 1 loại kho',
+                'warehouse.required_without_all' => 'Hãy chọn 1 loại kho',
 
+                'image_normal_storage.required_with' => 'Hãy thêm ảnh kho !',
                 'image_normal_storage.*' => 'Không đúng định dạng ảnh !',
                 'image_pccc_normal_storage.*' => 'Không đúng định dạng ảnh !',
                 'image_cold_storage.*' => 'Không đúng định dạng ảnh !',
@@ -394,6 +411,7 @@ class LoginController extends Controller
         }
 
         if ($validator->fails()) {
+            // dd($validator->errors()  );
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
         }
 
@@ -452,7 +470,6 @@ class LoginController extends Controller
                 $error['phone_number'] = 'Số điện thoại đã được đăng ký';
             }
             if ($error !== null) {
-                dd(123);
                 return redirect()->back()->withErrors($error)->withInput($request->all());
             }
 
