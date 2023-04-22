@@ -236,6 +236,17 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$orders->withQueryString()->links()}}
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -247,6 +258,7 @@
 @section('custom_js')
     <script>
         $(document).ready(function () {
+            let limit = document.getElementById('limit');
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {
@@ -258,10 +270,17 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.manufacture.order.order',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort
+                            '&field=' + sort+ '&limit=' + limit.value
                     })
                 });
             });
+
+            limit.addEventListener('change', (e) => {
+                setTimeout(() => {
+                    document.location = '{{route('screens.manufacture.order.order',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                        '&field=' + '{{$field}}' + '&limit=' + e.target.value
+                }, 200)
+            })
             document.querySelectorAll('.more-details').forEach(item => {
                 item.addEventListener('click', (e) => {
                     $.ajax({
