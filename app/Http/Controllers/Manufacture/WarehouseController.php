@@ -108,25 +108,33 @@ class WarehouseController extends Controller
 //        return $amount;h
     }
 
-    public function index()
+    public function index(Request $request)
     {
-//        return 1;
-//        $products = DB::table('warehouses')->selectRaw('name,address,phone_number,SUM(amount) as amount_product,count(product_id) as amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->groupByRaw('name,address,phone_number')->paginate(10);
-//        foreach ($products as $product) {
-//        }
-//        dd($products);
+        $limit= $request->limit??10;
+
+
+
+
         $ware = DB::table('warehouses')
             ->selectRaw('warehouses.name as ware_name,warehouses.id,
             phone_number,
-            address,SUM(product_warehouses.amount - export) as amount_product,count(products.id) as amount')
+            address,SUM(product_warehouses.amount - export) as amount_product,count(products.id) as amount,product_warehouses.code')
             ->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
             ->join('products', 'product_warehouses.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
             ->where('product_warehouses.status', 1)
-            ->groupByRaw('ware_name,warehouses.id,phone_number,address')->paginate(10);
+
+            ->orderBy('amount_product','desc')
+            ->groupByRaw('ware_name,warehouses.id,phone_number,address')
+
+            ->paginate($limit);
+
+
         return view('screens.manufacture.warehouse.index', ['warehouses' => $ware]);
     }
+    public function store(Request $request){
 
+    }
     public function swap()
     {
 //        $products = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,products.name,product_warehouses.status,product_warehouses.created_at,amount')->join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')->join('products', 'product_warehouses.product_id', '=', 'products.id')->where('warehouses.user_id', Auth::id())->where('product_warehouses.status','!=',3)->orderBy('product_warehouses.id', 'desc')->paginate(10);

@@ -213,6 +213,7 @@ class TestController extends Controller
             foreach ($orders as $order) {
 
                 $item = OrderItem::where('order_id',$order->id)->first();
+
                 if ($item){
                     $product = Product::select('discount', 'discount_vShop', 'price', 'user_id', 'vstore_id')->where('id', $item->product_id)->first();
                     $ncc= User::where('id',$product->user_id)->first();
@@ -271,21 +272,24 @@ class TestController extends Controller
                         $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
                         $new_vshop_blance->code=$sig;
                         $new_vshop_blance->save();
+                        $data_res = [
+                            'orderId'=>$order->id,
+                            'userId'=>$vshop->pdone_id,
+                            'value'=>round($price_vshop,0),
+                            'ukey'=>$order->no,
+                            'sellerPDoneId'=>$vshop->vshop_id,
+                            'buyerId'=>$order->user_id,
+                            'signature'=>$sig
+                        ];
+                        $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',$data_res
 
-                        $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
-                            [
-                                'orderId'=>$order->id,
-                                'userId'=>$vshop->pdone_id,
-                                'value'=>round($price_vshop,0),
-                                'ukey'=>$order->no,
-                                'sellerPDoneId'=>$vshop->vshop_id,
-                                'buyerId'=>$order->user_id,
-                                'signature'=>$sig
-                            ]
                         );
+
 //                                ukey=ukey&value=value&orderId=orderId&userId=userId
                         $vshop->money += $price_vshop/100 *95;
                         $vshop->save();
+                        return $data_res;
+
                     }
 
                     DB::table('order')->where('id',$order->id)->update(array(

@@ -61,7 +61,7 @@
                         <div id="submenu-3" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="proIn" href="#">Danh sách kho hàng</a>
+                                    <a class="nav-link" id="proIn" href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="proOut" href="#">Yêu cầu thêm sản phẩm vào kho</a>

@@ -34,216 +34,84 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý kho hàng</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a
+                                href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a></li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
-    <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
 
-        <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
-            <div class="flex justify-between items-center flex-wrap gap-4">
-                <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
-                    <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path opacity="0.4"
-                              d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
-                              fill="url(#paint0_linear_98_611)"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
-                              fill="url(#paint1_linear_98_611)"/>
-                        <defs>
-                            <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449"
-                                            y2="24.5684" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#7280FD"/>
-                                <stop offset="0.0001" stop-color="#1E90FF"/>
-                                <stop offset="1" stop-color="#4062FF"/>
-                            </linearGradient>
-                            <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
-                                            gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#7280FD"/>
-                                <stop offset="0.0001" stop-color="#1E90FF"/>
-                                <stop offset="1" stop-color="#4062FF"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-
-                    Quản lý kho hàng
-                </h2>
-
-                <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-                    {{--                    <button--}}
-                    {{--                        class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}
-                    {{--                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-                    {{--                            <g clip-path="url(#clip0_4_2870)">--}}
-                    {{--                                <rect width="20" height="20" fill="white" fill-opacity="0.01"/>--}}
-                    {{--                                <path--}}
-                    {{--                                    d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"--}}
-                    {{--                                    fill="white"/>--}}
-                    {{--                            </g>--}}
-                    {{--                            <defs>--}}
-                    {{--                                <clipPath id="clip0_4_2870">--}}
-                    {{--                                    <rect width="20" height="20" fill="white"/>--}}
-                    {{--                                </clipPath>--}}
-                    {{--                            </defs>--}}
-                    {{--                        </svg>--}}
-                    {{--                        <span>Thêm mới</span>--}}
-                    {{--                    </button>--}}
-
-                </div>
-
-            </div>
-            <div class="w-full overflow-scroll">
-                <table class="w-full dsth">
-                    <thead>
-                    <tr>
-                        <th>
-                            Tên kho hàng
-                        </th>
-                        <th>
-                            Số điện thoại
-                        </th>
-                        <th>
-                            Địa chỉ
-                        </th>
-                        <th>
-                            Tổng số mặt hàng
-                        </th>
-                        <th>
-                            Sản phẩm có trong kho
-                        </th>
-                        <th>
-
-                        </th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($warehouses as $ware)
-                        <tr>
-                            <td>{{$ware->ware_name}}</td>
-                            <td>
-                                {{$ware->phone_number}}
-                            </td>
-                            <td>
-                                {{$ware->address}}
-                            </td>
-                            <td class="text-center">
-                                {{$ware->amount}}
-                            </td>
-                            <td class="text-center">
-                                {{$ware->amount_product}}
-                            </td>
-                            <td>
-                                <a href="#" data-id="{{$ware->id}}" data-kho=""
-                                   class="more-details text-primary underline"> Chi
-                                    tiết</a>
-                            </td>
-
-                        </tr>
-                    @endforeach
-
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="flex justify-end items-center gap-4 flex-wrap">
-
-                {{$warehouses->withQueryString()->links()}}
-                <div class="flex justify-start items-center gap-2 flex-wrap">
-                    <select name=""
-                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                        <option value="">10 hàng / trang</option>
-                        <option value="">25 hàng / trang</option>
-                        <option value="">50 hàng / trang</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div></div>
-    </div>
-    <div class="row">
+    <div class="row w-100">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                    <h5 class="mb-0" style="font-size:18px;">Quản lý kho hàng</h5>
-                    <!-- <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm..">
-                            </div>
-                        </li>
-                    </ul> -->
+                    <h5 class="mb-0" style="font-size:18px;">Danh sách kho giao nhận</h5>
+                    <form method="POST">
+                        <ul class="navbar-nav flex-row align-items-center " style="gap: 10px;">
+                            <li class="nav-item">
+                                <div id="custom-search" class="top-search-bar">
+                                    <input name="account_code" class="form-control" type="search" placeholder="Nhập ID Kho">
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-primary">Thêm kho</button>
+                            </li>
+                        </ul>
+                    </form>
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons">          <button class="btn btn-outline-light buttons-copy buttons-html5" tabindex="0" aria-controls="example" type="button"><span>Copy</span></button> <button class="btn btn-outline-light buttons-excel buttons-html5" tabindex="0" aria-controls="example" type="button"><span>Excel</span></button> <button class="btn btn-outline-light buttons-pdf buttons-html5" tabindex="0" aria-controls="example" type="button"><span>PDF</span></button> <button class="btn btn-outline-light buttons-print" tabindex="0" aria-controls="example" type="button"><span>Print</span></button> <button class="btn btn-outline-light buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example" type="button" aria-haspopup="true"><span>Column visibility</span></button> </div></div><div class="col-sm-12 col-md-6"><div id="example_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example" class="table table-striped table-bordered second dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="example_info">
-                                        <thead>
-                                        <tr role="row">
-                                        </tr><tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Tên Kho Hàng: activate to sort column descending" style="width: 287px;">Tên kho hàng</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Số điện thoại: activate to sort column ascending" style="width: 294px;">Số điện thoại</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Địa chỉ: activate to sort column ascending" style="width: 170px;">Địa chỉ</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Số loại sản phẩm: activate to sort column ascending" style="width: 283px;">Số loại sản phẩm</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Số lượng tồn: activate to sort column ascending" style="width: 225px;">Số lượng tồn</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 51px;"></th></tr>
+                        <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Tên kho hàng</th>
+                                <th>Số điện thoại</th>
+                                <th class="th th_product_name">Địa chỉ
 
-                                        </thead>
-                                        <tbody>
-
-                                        @foreach($warehouses as $ware)
-                                            <tr>
-                                                <td>{{$ware->ware_name}}</td>
-                                                <td>
-                                                    {{$ware->phone_number}}
-                                                </td>
-                                                <td>
-                                                    {{$ware->address}}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{$ware->amount}}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{$ware->amount_product}}
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-link"
-                                                            onclick="showDetail({{$ware->id}})">Chi tiết
-                                                    </button>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
+                                </th>
+                                <th class="th th_ncc_name">Tổng số mặt hàng
+                                    <span style="float: right;cursor: pointer">
+                                <a href="#">
+                                <i id="sort-mh" class="fas fa-sort sort" data-sort="products.name"></i>
+                                </a>
 
 
+                                                                    </span>
+                                </th>
+                                <th class="th th_quantity">Sản phẩm có trong kho
+                                    <span style="float: right;cursor: pointer">
+                                                                            <i class="fas fa-sort sort"
+                                                                               data-sort="products.name"></i>
+                                                                    </span>
+                                </th>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite"></div>
-                                </div>
-                                <div class="col-sm-12 col-md-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                        <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled" id="example_previous">
-                                                <a href="#" aria-controls="example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                            </li><li class="paginate_button page-item next disabled" id="example_next">
-                                                <a href="#" aria-controls="example" data-dt-idx="1" tabindex="0" class="page-link">Next</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                                        <form>
-                                            <div class="form-group">
-                                                <select class="form-control form-control-lg">
-                                                    <option>10 phần tử / trang</option>
-                                                    <option>25 phần tử / trang</option>
-                                                    <option>50 phần tử / trang</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <th class="th th_status">Thao tác
+
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($warehouses as $val)
+                                <tr>
+                                    <td>{{$val->ware_name}}</td>
+                                    <td>{{$val->phone_number}}</td>
+                                    <td>{{$val->address}}</td>
+                                    <td>{{$val->amount}}</td>
+                                    <td>{{$val->amount_product}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-link"
+                                                onclick="showDetail({{$val->id}})">Chi tiết
+                                        </button>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -261,7 +129,7 @@
                 type: "GET",
                 url: `{{route('screens.manufacture.warehouse.detail')}}`,
                 dataType: "json",
-                data: {"id":id},
+                data: {"id": id},
                 encode: true,
                 error: function (jqXHR, error, errorThrown) {
 
@@ -277,29 +145,49 @@
                 var htmlData = ``;
 
                 if (data.data) {
-                    htmlData += `<div class="form-group">`
+                    htmlData += `<div class="modal-content">
 
-                    $.each(data.data,function (key,value){
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                        htmlData += `
-                        <div class="d-flex">
- <div>
-                        <label for="name">Tên sản phẩm:</label>
-                        <input type="text" class="form-control form-control-lg" disabled id="code" value="${value.name}" readonly>
-                        </div>
-<div>
-                            <label for="name">Số lượng:</label>
-                        <input type="text" class="form-control form-control-lg" disabled id="code" value="${value.amount_product}" readonly>
-                        </div>
-</div>`
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-striped table-bordered first dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 186.844px;">Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 304.078px;">Position</th>
 
-                    }
-                )
+                            </tr>
+                            </thead>
+                            <tbody>`
+
+                    $.each(data.data, function (key, value) {
+
+                            htmlData += `
+<tr role="row" class="odd">
+                                <td class="sorting_1">${value.name}</td>
+                                <td>${value.amount_product}</td>
+
+                            </tr>
+
+`
+
+                        }
+                    )
 
 
+                    htmlData += `</tbody>
 
-                htmlData += `</div>`;
-                        ;
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   `;
+                    ;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
                 } else {
@@ -313,7 +201,14 @@
         }
 
 
-
-
+    </script>
+    <script>
+        $('.sort').click(function (){
+           var a= $(this).data("sort");
+           alert(a);
+        });
     </script>
 @endsection
+
+
+
