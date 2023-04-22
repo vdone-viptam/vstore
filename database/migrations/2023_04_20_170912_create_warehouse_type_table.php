@@ -18,11 +18,12 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->tinyInteger('type')->comment('1 kho thuong, 2 kho lanh, 3 kho bãi');
             $table->double('acreage',12,2)->comment('dien tich');
-            $table->double('volume',12,2)->comment('the tich');
-            $table->double('length',12,2)->comment('chieu dai');
-            $table->double('width',12,2)->comment('chieu rong');
-            $table->double('height',12,2)->comment('chieu cao');
-            $table->longText('images');
+            $table->double('volume',12,2)->comment('the tich')->nullable();
+            $table->double('length',12,2)->comment('chieu dai')->nullable();
+            $table->double('width',12,2)->comment('chieu rong')->nullable();
+            $table->double('height',12,2)->comment('chieu cao')->nullable();
+            $table->longText('image_storage')->nullable();
+            $table->longText('image_pccc')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

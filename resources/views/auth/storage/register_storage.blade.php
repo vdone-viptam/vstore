@@ -601,14 +601,26 @@
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho thường</label>
-                                    <input class="form-control form-control-lg" type="file" name="tts"
-                                        placeholder="Nhập hình ảnh kho" multiple>
+                                    <input class="form-control form-control-lg" type="file" name="image_normal_storage[]"
+                                        placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
+                                    @error('image_normal_storage')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    @if ($errors->has('image_normal_storage.*'))
+                                        <p class="text-red-600">{{ $errors->first('image_normal_storage.*')}}</p>
+                                    @endif
                                 </div>
                                 <div class="col-12 my-4">
                                     <label style="font-weight: 600;" for="tts">Giấy chứng nhận
                                         PCCC/Chứng nhận khác</label>
-                                    <input class="form-control form-control-lg" type="file" name="tts"
-                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác">
+                                    <input class="form-control form-control-lg" type="file" name="image_pccc_normal_storage[]"
+                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple accept="image/png, image/gif, image/jpeg">
+                                    @error('image_pccc_normal_storage')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    @if ($errors->has('image_pccc_normal_storage.*'))
+                                        <p class="text-red-600">{{ $errors->first('image_pccc_normal_storage.*')}}</p>
+                                    @endif
                                 </div>
                             </div>
 
@@ -671,14 +683,26 @@
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho lạnh</label>
-                                    <input class="form-control form-control-lg" type="file" name="tts"
-                                        placeholder="Nhập hình ảnh kho" multiple>
+                                    <input class="form-control form-control-lg" type="file" name="image_cold_storage[]"
+                                        placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
+                                    @error('image_cold_storage')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    @if ($errors->has('image_cold_storage.*'))
+                                        <p class="text-red-600">{{ $errors->first('image_cold_storage.*')}}</p>
+                                    @endif
                                 </div>
                                 <div class="col-12 my-4">
                                     <label style="font-weight: 600;" for="tts">Giấy chứng nhận
                                         PCCC/Chứng nhận khác</label>
-                                    <input class="form-control form-control-lg" type="file" name="tts"
-                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác">
+                                    <input class="form-control form-control-lg" type="file" name="image_pccc_cold_storage[]"
+                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple accept="image/png, image/gif, image/jpeg">
+                                    @error('image_pccc_cold_storage')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    @if ($errors->has('image_pccc_cold_storage.*'))
+                                        <p class="text-red-600">{{ $errors->first('image_pccc_cold_storage.*')}}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -743,14 +767,26 @@
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho bãi</label>
-                                    <input class="form-control form-control-lg" type="file" name="tts"
-                                        placeholder="Nhập hình ảnh kho" multiple>
+                                    <input class="form-control form-control-lg" type="file" name="image_warehouse[]"
+                                        placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
+                                    @error('image_warehouse')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    @if ($errors->has('image_warehouse.*'))
+                                        <p class="text-red-600">{{ $errors->first('image_warehouse.*')}}</p>
+                                    @endif
                                 </div>
                                 <div class="col-12 my-4">
                                     <label style="font-weight: 600;" for="tts">Giấy chứng nhận
                                         PCCC/Chứng nhận khác</label>
-                                    <input class="form-control form-control-lg" type="file" name="tts"
-                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác">
+                                    <input class="form-control form-control-lg" type="file" name="image_pccc_warehouse[]"
+                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple accept="image/png, image/gif, image/jpeg">
+                                    @error('image_pccc_warehouse')
+                                    <p class="text-red-600">{{$message}}</p>
+                                    @enderror
+                                    @if ($errors->has('image_pccc_warehouse.*'))
+                                        <p class="text-red-600">{{ $errors->first('image_pccc_warehouse.*')}}</p>
+                                    @endif
                                 </div>
                             </div>
 

@@ -251,7 +251,7 @@ class LoginController extends Controller
 
     public function postFormRegister(Request $request) // FORM SUBMIT ĐĂNG kÝ
     {
-        dd($request->all());
+        // dd($request->all());
         $domain = $request->getHttpHost();
         $role_id = 0;
         if ($domain == config('domain.admin')) {
@@ -304,11 +304,34 @@ class LoginController extends Controller
                 'address' => 'required|max:255',
                 'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
                 'id_vdone' => 'required|max:255',
-                // 'floor_area' => 'required',
-                // 'volume' => 'required',
-                // 'image_storage' => 'required',
-                // 'image_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-                // 'image_pccc.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+
+                // kiểm tra thông tin kho
+                'acreage_normal_storage' => 'integer|min:1|nullable',
+                'length_normal_storage' => 'integer|min:1|nullable',
+                'width_normal_storage' => 'integer|min:1|nullable',
+                'height_normal_storage' => 'integer|min:1|nullable',
+                'volume_normal_storage' => 'integer|min:1|nullable',
+
+                'acreage_cold_storage' => 'integer|min:1|nullable',
+                'length_cold_storage' => 'integer|min:1|nullable',
+                'width_cold_storage' => 'integer|min:1|nullable',
+                'height_cold_storage' => 'integer|min:1|nullable',
+                'volume_cold_storage' => 'integer|min:1|nullable',
+
+                'acreage_warehouse' => 'integer|min:1|nullable',
+                'length_warehouse' => 'integer|min:1|nullable',
+                'width_warehouse' => 'integer|min:1|nullable',
+                'height_warehouse' => 'integer|min:1|nullable',
+                'volume_warehouse' => 'integer|min:1|nullable',
+
+                // kiểm tra thông tin ảnh kho
+                'image_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_pccc_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_pccc_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_pccc_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+
                 'city_id' => 'required',
                 'district_id' => 'required',
                 'ward_id' => 'required'
@@ -323,12 +346,16 @@ class LoginController extends Controller
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID P-Done người đại điện bắt buộc nhập',
-                // 'floor_area.required' => 'Diện tích kho bắt buộc nhập',
-                // 'volume.required' => 'Thể tích kho bắt buộc nhập',
-                // 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
-                // 'image_storage.image' => 'Không đúng định dạng ảnh',
-                // 'image_storage.*' => 'Không đúng định dạng ảnh !',
-                // 'image_pccc.image' => 'Không đúng định dạng ảnh',
+
+
+
+                'image_normal_storage.*' => 'Không đúng định dạng ảnh !',
+                'image_pccc_normal_storage.*' => 'Không đúng định dạng ảnh !',
+                'image_cold_storage.*' => 'Không đúng định dạng ảnh !',
+                'image_pccc_cold_storage.*' => 'Không đúng định dạng ảnh !',
+                'image_warehouse.*' => 'Không đúng định dạng ảnh !',
+                'image_pccc_warehouse.*' => 'Không đúng định dạng ảnh !',
+
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'ward_id' => 'Phường (xã) bắt buộc chọn',
@@ -425,6 +452,7 @@ class LoginController extends Controller
                 $error['phone_number'] = 'Số điện thoại đã được đăng ký';
             }
             if ($error !== null) {
+                dd(123);
                 return redirect()->back()->withErrors($error)->withInput($request->all());
             }
 
@@ -449,41 +477,6 @@ class LoginController extends Controller
             $user->slug = Str::slug($request->name);
 
             if ($role_id == 4) {
-                // $cold_storage = $request->cold_storage ?? '';
-                // $warehouse = $request->warehouse ?? '';
-                // $normal_storage = $request->normal_storage ?? $request->volume;
-                // $file = [];
-                // if ($request->hasFile('image_storage')) {
-
-
-                //     foreach ($request->file('image_storage') as $img) {
-                //         $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                //         $img->move(public_path('image/users'), $filestorage);
-                //         $file[] = 'image/users/' . $filestorage;
-                //     }
-
-
-                // }
-                // $file1 = [];
-                // if ($request->hasFile('image_pccc')) {
-
-                //     foreach ($request->file('image_pccc') as $img) {
-                //         $filepccc = date('YmdHi') . $img->getClientOriginalName();
-                //         $img->move(public_path('image/users'), $filepccc);
-                //         $file1[] = 'image/users/' . $filepccc;
-                //     }
-                // }
-                // $storage_information = [
-                //     'floor_area' => $request->floor_area,
-                //     'volume' => $request->volume,
-                //     'image_storage' => json_encode($file),
-                //     'image_pccc' => json_encode($file1),
-                //     'cold_storage' => $cold_storage,
-                //     'warehouse' => $warehouse,
-                //     'normal_storage' => $normal_storage,
-                // ];
-                // $user->storage_information = json_encode($storage_information);
-
 
                 // // lưu thông tin vào bảng warehouse type
                 $userUpdateOrCreate = User::updateOrCreate([
@@ -495,41 +488,107 @@ class LoginController extends Controller
                 $user->id = $userUpdateOrCreate->id;
 
                 if(isset($request->normal_storage)){
-                    $warehouseType = new WarehouseType();
-                    $warehouseType->user_id = $user->id;
-                    $warehouseType->type = 1 ;
-                    $warehouseType->acreage = $request->acreage_normal_storage;
-                    $warehouseType->volume = $request->volume_normal_storage;
-                    $warehouseType->length = $request->length_normal_storage;
-                    $warehouseType->width = $request-> width_normal_storage;
-                    $warehouseType->height = $request->height_normal_storage;
-                    $warehouseType->images = '';
-                    $warehouseType->save();
+                    if(!empty($request->acreage_normal_storage)){
+                        $warehouseType = new WarehouseType();
+                        $warehouseType->user_id = $user->id;
+                        $warehouseType->type = 1 ;
+                        $warehouseType->acreage = $request->acreage_normal_storage;
+                        $warehouseType->volume = $request->volume_normal_storage;
+                        $warehouseType->length = $request->length_normal_storage;
+                        $warehouseType->width = $request-> width_normal_storage;
+                        $warehouseType->height = $request->height_normal_storage;
+
+                        $file = [];
+                        if ($request->hasFile('image_normal_storage')) {
+                            foreach ($request->file('image_normal_storage') as $img) {
+                                $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                                $img->storeAs(('public/image/users/storage/normal/image_storage/'.$user->id.'/'), $filestorage);
+                                $file[] = 'public/image/users/storage/normal/image_storage/'.$user->id.'/' . $filestorage;
+                            }
+                        }
+                        $file1 = [];
+                        if ($request->hasFile('image_pccc_normal_storage')) {
+                            foreach ($request->file('image_pccc_normal_storage') as $img) {
+                                $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                                $img->storeAs(('public/image/users/storage/normal/image_pccc/'.$user->id.'/'), $filestorage);
+                                $file1[] = 'public/image/users/storage/normal/image_pccc/'.$user->id.'/' . $filestorage;
+                            }
+                        }
+
+                        $warehouseType->image_storage = json_encode($file);
+                        $warehouseType->image_pccc = json_encode($file1);
+                        $warehouseType->save();
+                    }
                 }
 
                 if(isset($request->cold_storage)){
-                    $warehouseType = new WarehouseType();
-                    $warehouseType->user_id = $user->id;
-                    $warehouseType->type = 2 ;
-                    $warehouseType->acreage = $request->acreage_cold_storage;
-                    $warehouseType->volume = $request->volume_cold_storage;
-                    $warehouseType->length = $request->length_cold_storage;
-                    $warehouseType->width = $request-> width_cold_storage;
-                    $warehouseType->height = $request->height_cold_storage;
-                    $warehouseType->images = '';
-                    $warehouseType->save();
+                    if(!empty($request->acreage_cold_storage)){
+
+                        $warehouseType = new WarehouseType();
+                        $warehouseType->user_id = $user->id;
+                        $warehouseType->type = 2 ;
+                        $warehouseType->acreage = $request->acreage_cold_storage;
+                        $warehouseType->volume = $request->volume_cold_storage;
+                        $warehouseType->length = $request->length_cold_storage;
+                        $warehouseType->width = $request-> width_cold_storage;
+                        $warehouseType->height = $request->height_cold_storage;
+
+                        $file2 = [];
+                        if ($request->hasFile('image_cold_storage')) {
+                            foreach ($request->file('image_cold_storage') as $img) {
+                                $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                                $img->storeAs(('public/image/users/storage/cold/image_storage/'.$user->id.'/'), $filestorage);
+                                $file2[] = 'public/image/users/storage/cold/image_storage/'.$user->id.'/' . $filestorage;
+                            }
+                        }
+                        $file3 = [];
+                        if ($request->hasFile('image_pccc_cold_storage')) {
+                            foreach ($request->file('image_pccc_cold_storage') as $img) {
+                                $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                                $img->storeAs(('public/image/users/storage/cold/image_pccc/'.$user->id.'/'), $filestorage);
+                                $file3[] = 'public/image/users/storage/cold/image_pccc/'.$user->id.'/' . $filestorage;
+                            }
+                        }
+
+                        $warehouseType->image_storage = json_encode($file2);
+                        $warehouseType->image_pccc = json_encode($file3);
+
+
+                        $warehouseType->save();
+                    }
                 }
                 if(isset($request->warehouse)){
-                    $warehouseType = new WarehouseType();
-                    $warehouseType->user_id = $user->id;
-                    $warehouseType->type = 3 ;
-                    $warehouseType->acreage = $request->acreage_warehouse;
-                    $warehouseType->volume = $request->volume_warehouse;
-                    $warehouseType->length = $request->length_warehouse;
-                    $warehouseType->width = $request-> width_warehouse;
-                    $warehouseType->height = $request->height_warehouse;
-                    $warehouseType->images = '';
-                    $warehouseType->save();
+                    if(!empty($request->acreage_warehouse)){
+                        $warehouseType = new WarehouseType();
+                        $warehouseType->user_id = $user->id;
+                        $warehouseType->type = 3 ;
+                        $warehouseType->acreage = $request->acreage_warehouse;
+                        $warehouseType->volume = $request->volume_warehouse;
+                        $warehouseType->length = $request->length_warehouse;
+                        $warehouseType->width = $request-> width_warehouse;
+                        $warehouseType->height = $request->height_warehouse;
+
+                        $file4 = [];
+                        if ($request->hasFile('image_warehouse')) {
+                            foreach ($request->file('image_warehouse') as $img) {
+                                $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                                $img->storeAs(('public/image/users/storage/warehouse/image_storage/'.$user->id.'/'), $filestorage);
+                                $file4[] = 'public/image/users/storage/warehouse/image_storage/'.$user->id.'/' . $filestorage;
+                            }
+                        }
+                        $file5 = [];
+                        if ($request->hasFile('image_pccc_cold_storage')) {
+                            foreach ($request->file('image_pccc_cold_storage') as $img) {
+                                $filestorage = date('YmdHi') . $img->getClientOriginalName();
+                                $img->storeAs(('public/image/users/storage/warehouse/image_pccc/'.$user->id.'/'), $filestorage);
+                                $file5[] = 'public/image/users/storage/warehouse/image_pccc/'.$user->id.'/' . $filestorage;
+                            }
+                        }
+
+                        $warehouseType->image_storage = json_encode($file4);
+                        $warehouseType->image_pccc = json_encode($file5);
+                        $warehouseType->save();
+                    }
                 }
 
 

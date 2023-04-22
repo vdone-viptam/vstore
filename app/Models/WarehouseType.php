@@ -20,6 +20,7 @@ class WarehouseType extends Model
         "length",
         "width",
         "height",
-        "images",
+        "image_storage",
+        "image_pccc",
     ];
 }
