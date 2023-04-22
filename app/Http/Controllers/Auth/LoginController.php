@@ -314,19 +314,19 @@ class LoginController extends Controller
                 // warehouse
 
                 // kiểm tra thông tin kho
-                'acreage_normal_storage' => 'integer|min:1|nullable',
+                'acreage_normal_storage' => 'integer|min:1|nullable|required_with:normal_storage',
                 'length_normal_storage' => 'integer|min:1|nullable',
                 'width_normal_storage' => 'integer|min:1|nullable',
                 'height_normal_storage' => 'integer|min:1|nullable',
                 'volume_normal_storage' => 'integer|min:1|nullable',
 
-                'acreage_cold_storage' => 'integer|min:1|nullable',
+                'acreage_cold_storage' => 'integer|min:1|nullable|required_with:cold_storage',
                 'length_cold_storage' => 'integer|min:1|nullable',
                 'width_cold_storage' => 'integer|min:1|nullable',
                 'height_cold_storage' => 'integer|min:1|nullable',
                 'volume_cold_storage' => 'integer|min:1|nullable',
 
-                'acreage_warehouse' => 'integer|min:1|nullable',
+                'acreage_warehouse' => 'integer|min:1|nullable|required_with:warehouse',
                 'length_warehouse' => 'integer|min:1|nullable',
                 'width_warehouse' => 'integer|min:1|nullable',
                 'height_warehouse' => 'integer|min:1|nullable',
@@ -360,6 +360,10 @@ class LoginController extends Controller
                 'phone_number.required' => 'Số điện thoại bất buộc nhập',
                 'id_vdone.required' => 'ID P-Done người đại điện bắt buộc nhập',
 
+
+                'acreage_normal_storage.required_with' => 'Hãy thêm diện tích kho thường!',
+                'acreage_cold_storage.required_with' => 'Hãy thêm diện tích kho lạnh!',
+                'acreage_warehouse.required_with' => 'Hãy thêm diện tích kho bãi!',
 
                 'normal_storage.required_without_all' => 'Hãy chọn 1 loại kho',
                 'cold_storage.required_without_all' => 'Hãy chọn 1 loại kho',

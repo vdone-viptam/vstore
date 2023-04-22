@@ -563,6 +563,9 @@
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
                                             placeholder="Nhập diện tích (m2)">
+                                        @error('acreage_normal_storage')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -648,6 +651,9 @@
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
                                             placeholder="Nhập diện tích (m2)">
+                                        @error('acreage_cold_storage')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -735,6 +741,9 @@
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
                                             placeholder="Nhập diện tích (m2)">
+                                        @error('acreage_warehouse')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -1199,7 +1208,7 @@
 
         // check input file # null
 
-        function checkThreeImageStorage(idCheckBox, inputFile, ) {
+        function checkThreeInputStorage(idCheckBox, inputFile, ) {
             $(inputFile).change(function() {
                 const condition2 = checkThreeCondition();
                 const check = checkEmpty(inputs);
@@ -1227,9 +1236,14 @@
                 }
             });
         };
-        checkThreeImageStorage('#normal_storage','#image_normal_storage');
-        checkThreeImageStorage('#cold_storage', '#image_cold_storage');
-        checkThreeImageStorage('#warehouse', '#image_warehouse');
+        checkThreeInputStorage('#normal_storage','#image_normal_storage');
+        checkThreeInputStorage('#cold_storage', '#image_cold_storage');
+        checkThreeInputStorage('#warehouse', '#image_warehouse');
+
+        checkThreeInputStorage('#normal_storage','#acreage_normal_storage');
+        checkThreeInputStorage('#cold_storage', '#acreage_cold_storage');
+        checkThreeInputStorage('#warehouse', '#acreage_warehouse');
+
 
 
         //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
