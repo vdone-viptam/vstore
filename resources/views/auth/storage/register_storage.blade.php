@@ -1205,7 +1205,7 @@
                 const check = checkEmpty(inputs);
                 if( $(inputFile).val() != ''){
                     if( $(idCheckBox).is(':checked')){
-                        if( $(inputFile).val() != ''){
+                        if( $(inputFile).val() == ''){
                             btnSubmit.setAttribute('disabled', 'true');
                             btnSubmit.classList.add('btn-secondary');
                         }else if(check){
