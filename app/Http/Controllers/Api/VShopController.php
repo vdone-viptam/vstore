@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Ward;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -33,7 +34,8 @@ use Illuminate\Support\Str;
  */
 class  VShopController extends Controller
 {
-    public function searchShopByKeyword(Request $request) {
+    public function searchShopByKeyword(Request $request)
+    {
         $limit = $request->limit ?? 12;
         $elasticsearchController = new ElasticsearchController();
         $res = $elasticsearchController->searchDocVShop($request->key_word);
@@ -114,6 +116,7 @@ class  VShopController extends Controller
                 $vshop_product->vshop_id = $vshop->id;
                 $vshop_product->status = 2;
                 $vshop_product->amount += $preOrder->quantity;
+                $vshop_product->product_id = $preOrder->product_id;
                 $vshop_product->save();
             }
 
@@ -153,6 +156,7 @@ class  VShopController extends Controller
                 "pre_order_vshop.no",
                 "pre_order_vshop.status",
                 "pre_order_vshop.created_at",
+                "products.id as product_id",
                 "products.images",
                 "products.name",
                 "products.price",
@@ -161,6 +165,7 @@ class  VShopController extends Controller
                 "district.district_name",
                 "wards.wards_name"
             )
+            ->orderBy('pre_order_vshop.created_at','desc')
             ->distinct()
             ->simplePaginate($limit);
 
@@ -244,7 +249,6 @@ class  VShopController extends Controller
         $order->save();
 
 
-        dd($order);
         $order->prepayment_rate = $order->deposit_money;
         $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
         $order->deposit_payable = $order->total - $order->total * ($order->deposit_money / 100);
@@ -260,6 +264,7 @@ class  VShopController extends Controller
             if ($checkNewVshopProduct->status == 1) {
                 $checkNewVshopProduct->status = 2;
             }
+
             $checkNewVshopProduct->amount += $order->quantity;
             $checkNewVshopProduct->save();
         } else {
@@ -269,6 +274,7 @@ class  VShopController extends Controller
             $newVshopProduct->amount = $order->quantity;
             $newVshopProduct->status = 2;
             $newVshopProduct->save();
+
         }
 
 
@@ -490,10 +496,31 @@ class  VShopController extends Controller
                 'error' => $validator->errors(),
             ], 403);
         }
+        DB::beginTransaction();
         $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
+        $elasticsearchController = new ElasticsearchController();
         if (!$vshop) {
             $vshop = new Vshop();
 
+        } else {
+            try {
+                $vshop->pdone_id = $request->pdone_id;
+                $vshop->avatar = $request->avatar ?? '';
+                $vshop->nick_name = $request->nick_name;
+                $vshop->vshop_id = $request->vshop_id;
+                $vshop->vshop_name = $request->nick_name;
+                $vshop->save();
+                $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
+                DB::commit();
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Tạo Vshop Thành công',
+                    'data' => $vshop
+                ], 200);
+            } catch (ClientResponseException $exception) {
+                DB::rollBack();
+                return response()->json(['message' => $exception->getMessage()], 500);
+            }
         }
         $vshop->pdone_id = $request->pdone_id;
         $vshop->avatar = $request->avatar ?? '';
@@ -501,6 +528,13 @@ class  VShopController extends Controller
         $vshop->vshop_id = $request->vshop_id;
         $vshop->vshop_name = $request->nick_name;
         $vshop->save();
+        try {
+            $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
+            DB::commit();
+        } catch (ClientResponseException $exception) {
+            DB::rollBack();
+            return response()->json(['message' => $exception->getMessage()], 500);
+        }
         return response()->json([
             'status_code' => 200,
             'message' => 'Tạo Vshop Thành công',
@@ -998,13 +1032,20 @@ class  VShopController extends Controller
             ->where('vshop.pdone_id', $vshop->pdone_id)
             ->groupBy('categories.name')
             ->get();
-        $data = [];
-        foreach ($cate as $c) {
-            $data[] = $c->name;
+        if ($cate) {
+            $data = [];
+            foreach ($cate as $c) {
+                $data[] = $c->name;
+            }
+            if (count($data) > 0) {
+                $vshop->categories = implode(', ', $data) ?? '';
+            } else {
+                $vshop->categories = '';
+            }
+        } else {
+            $vshop->categories = '';
         }
-        if (count($data) > 0) {
-            $vshop->categories = implode(', ', $data);
-        }
+
 
         return response()->json([
             'status_code' => 201,
@@ -1169,32 +1210,33 @@ class  VShopController extends Controller
 
     }
 
-    public function delivery_off( $product_id,$pdone_id){
+    public function delivery_off($product_id, $pdone_id)
+    {
 
-        $vshop_product = VshopProduct::join('vshop','vshop_products.vshop_id','=','vshop.id')
+        $vshop_product = VshopProduct::join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
             ->select('vshop_products.id')
-            ->where('vshop_products.status',2)
-            ->where('vshop_products.product_id',$product_id)
-            ->where('vshop.pdone_id',$pdone_id)->first();
+            ->where('vshop_products.status', 2)
+            ->where('vshop_products.product_id', $product_id)
+            ->where('vshop.pdone_id', $pdone_id)->first();
 
-        if (!$vshop_product){
+        if (!$vshop_product) {
             return response()->json([
                 'status_code' => 404,
                 'message' => 'sản phẩm chưa được Vshop tiếp thị hoặc không tìm thấy',
             ], 404);
         }
         $insert_vshop_product = VshopProduct::find($vshop_product->id);
-            if ($insert_vshop_product->delivery_off == 1){
+        if ($insert_vshop_product->delivery_off == 1) {
 
 
-                $insert_vshop_product->delivery_off = 0 ;
-                $insert_vshop_product->save();
+            $insert_vshop_product->delivery_off = 0;
+            $insert_vshop_product->save();
 
-            }else{
+        } else {
 
-                $insert_vshop_product->delivery_off = 1 ;
-                $insert_vshop_product->save();
-            }
+            $insert_vshop_product->delivery_off = 1;
+            $insert_vshop_product->save();
+        }
 
         return response()->json([
             'status_code' => 200,
