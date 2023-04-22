@@ -952,6 +952,8 @@
         const divCity = document.getElementById('city_id');
         const divDistrict = document.getElementById('district_id');
         const divWard = document.getElementById('ward_id');
+        const btnSubmit = document.querySelector('.active');
+
         fetch('{{route('get_city')}}', {
             mode: 'no-cors',
 
@@ -973,11 +975,11 @@
                     if (data.length > 0) {
                         const check = checkEmpty(inputs);
                         if (check && divCity.value && divDistrict.value && divWard.value) {
-                            document.querySelector('.active').removeAttribute('disabled');
-                            document.querySelector('.active').classList.remove('btn-secondary');
+                            btnSubmit.removeAttribute('disabled');
+                            btnSubmit.classList.remove('btn-secondary');
                         } else {
-                            document.querySelector('.active').setAttribute('disabled', 'true');
-                            document.querySelector('.active').classList.add('btn-secondary');
+                            btnSubmit.setAttribute('disabled', 'true');
+                            btnSubmit.classList.add('btn-secondary');
                         }
                         divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
 
@@ -998,11 +1000,11 @@
                     if (data.length > 0) {
                         const check = checkEmpty(inputs);
                         if (check && divCity.value && divDistrict.value && divWard.value) {
-                            document.querySelector('.active').removeAttribute('disabled');
-                            document.querySelector('.active').classList.remove('btn-secondary');
+                            btnSubmit.removeAttribute('disabled');
+                            btnSubmit.classList.remove('btn-secondary');
                         } else {
-                            document.querySelector('.active').setAttribute('disabled', 'true');
-                            document.querySelector('.active').classList.add('btn-secondary');
+                            btnSubmit.setAttribute('disabled', 'true');
+                            btnSubmit.classList.add('btn-secondary');
                         }
                         divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
 
@@ -1017,41 +1019,21 @@
         function checkEmpty(inputs) {
             let check1 = true
             inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 <= 11 ) {
+                if (!item1.value && index1 > 0 && index1 <= 10 ) {
                     check1 = false;
+                }
+                if(index1 == 10){
+                    if ( !item1.checked ){
+                        check1 = false;
+                    }
+
                 }
             });
 
             return check1;
         }
 
-        function checckInputRequired() {
-            const inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
-
-            inputs.forEach((item, index) => {
-                item.setAttribute('autocomplete', 'off')
-                item.addEventListener('change', (e) => {
-                    const check = checkEmpty(inputs);
-
-                    // check phải ít nhất 1 trong 3 loại kho !
-                    const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '';
-                    const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '';
-                    const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '';
-
-                    const condition2 = checkTypeStorage1 || checkTypeStorage2 || checkTypeStorage3;
-
-                    if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 ) {
-                        document.querySelector('.active').removeAttribute('disabled');
-                        document.querySelector('.active').classList.remove('btn-secondary');
-                    } else {
-                        document.querySelector('.active').setAttribute('disabled', 'true');
-                        document.querySelector('.active').classList.add('btn-secondary');
-                    }
-                })
-            });
-        }
-
-        const inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
+        var inputs = document.getElementById('formRegister-V').querySelectorAll("[required]");
 
         inputs.forEach((item, index) => {
             item.setAttribute('autocomplete', 'off')
@@ -1060,25 +1042,31 @@
 
                 // check phải ít nhất 1 trong 3 loại kho !
                 const condition2 = checkThreeCondition();
-                console.log(condition2);
-                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 ) {
-                    document.querySelector('.active').removeAttribute('disabled');
-                    document.querySelector('.active').classList.remove('btn-secondary');
+                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 >0) {
+                    btnSubmit.removeAttribute('disabled');
+                    btnSubmit.classList.remove('btn-secondary');
                 } else {
-                    document.querySelector('.active').setAttribute('disabled', 'true');
-                    document.querySelector('.active').classList.add('btn-secondary');
+                    btnSubmit.setAttribute('disabled', 'true');
+                    btnSubmit.classList.add('btn-secondary');
                 }
             })
         });
 
         // phải check ít nhất 1 trong 3 loại kho !
         function checkThreeCondition() {
+            let countCheck = 0;
+
             const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '';
             const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '';
             const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '';
 
-            const condition2 = checkTypeStorage1 || checkTypeStorage2 || checkTypeStorage3;
-            return condition2;
+            if(checkTypeStorage1)
+                countCheck++;
+            if(checkTypeStorage2)
+                countCheck++;
+            if(checkTypeStorage3)
+                countCheck++;
+            return countCheck;
         }
 
         // check thêm 3 cái loại kho
@@ -1086,14 +1074,24 @@
 
         function checkThreeTypeStorage(idCheckBox, acreageStorage) {
             $(idCheckBox).click(function() {
+                const condition2 = checkThreeCondition();
+                const check = checkEmpty(inputs);
+
                 if( $(idCheckBox).is(':checked')){
                     if( $(acreageStorage).val() == ''){
-                        document.querySelector('.active').setAttribute('disabled', 'true');
-                        document.querySelector('.active').classList.add('btn-secondary');
+                        btnSubmit.setAttribute('disabled', 'true');
+                        btnSubmit.classList.add('btn-secondary');
+                    }else if(check){
+                        btnSubmit.removeAttribute('disabled');
+                        btnSubmit.classList.remove('btn-secondary');
+                    }
+                }else{
+                    if( condition2 > 0 && check ){
+                        btnSubmit.removeAttribute('disabled');
+                        btnSubmit.classList.remove('btn-secondary');
                     }else{
-                        document.querySelector('.active').removeAttribute('disabled');
-                        document.querySelector('.active').classList.remove('btn-secondary');
-                        checckInputRequired();
+                        btnSubmit.setAttribute('disabled', 'true');
+                        btnSubmit.classList.add('btn-secondary');
                     }
                 }
             });
