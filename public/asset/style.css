@@ -7788,3 +7788,18 @@ div.table-responsive>div.dataTables_wrapper>div.row {
 .hidden {
     display: none !important;
 }
+.gr-arrow {
+    display       : flex;
+    flex-direction: column;
+    float         : right;
+}
+
+.gr-arrow i:nth-child(1),
+.gr-arrow i:nth-child(2) {
+    opacity: 0.5;
+}
+
+.gr-arrow i:nth-child(1):hover,
+.gr-arrow i:nth-child(2):hover {
+    opacity: 1;
+}

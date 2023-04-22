@@ -115,7 +115,6 @@ class UserController extends Controller
             } else {
                 $ID = 'vnvst' . $ID;
             }
-
             $password = rand(1000000, 9999999);
             $user->account_code = $ID;
             $user->password = Hash::make($password);
@@ -185,6 +184,7 @@ class UserController extends Controller
 //                    return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
 //                }
             }
+
             if ($user->role_id == 4) {
                 Mail::send('email.active_kho', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
