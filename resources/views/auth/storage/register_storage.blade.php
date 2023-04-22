@@ -577,18 +577,27 @@
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="length_normal_storage" id="length_normal_storage"
                                                     placeholder="Chiều dài">
+                                                @error('length_normal_storage')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="width_normal_storage" id="width_normal_storage"
                                                     placeholder="Chiều rộng">
+                                                @error('width_normal_storage')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="height_normal_storage" id="height_normal_storage"
                                                     placeholder="Chiều cao">
+                                                @error('height_normal_storage')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -601,6 +610,9 @@
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
                                             placeholder="Nhập thể tích (m3)">
+                                            @error('volume_normal_storage')
+                                            <p class="text-red-600">{{$message}}</p>
+                                            @enderror
                                     </div>
                                 </div>
 
@@ -665,18 +677,27 @@
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="length_cold_storage" id="length_cold_storage"
                                                     placeholder="Chiều dài">
+                                                @error('length_cold_storage')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="width_cold_storage" id="width_cold_storage"
                                                     placeholder="Chiều rộng">
+                                                @error('width_cold_storage')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="height_cold_storage" id="height_cold_storage"
                                                     placeholder="Chiều cao">
+                                                @error('height_cold_storage')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -689,6 +710,9 @@
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
                                             placeholder="Nhập thể tích (m3)">
+                                            @error('volume_cold_storage')
+                                            <p class="text-red-600">{{$message}}</p>
+                                            @enderror
                                     </div>
                                 </div>
 
@@ -755,18 +779,27 @@
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="length_warehouse" id="length_warehouse"
                                                     placeholder="Chiều dài">
+                                                @error('length_warehouse')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="width_warehouse" id="width_warehouse"
                                                     placeholder="Chiều rộng">
+                                                @error('width_warehouse')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="height_warehouse" id="height_warehouse"
                                                     placeholder="Chiều cao">
+                                                @error('height_warehouse')
+                                                <p class="text-red-600">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -779,6 +812,9 @@
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
                                             placeholder="Nhập thể tích (m3)">
+                                            @error('volume_warehouse')
+                                            <p class="text-red-600">{{$message}}</p>
+                                            @enderror
                                     </div>
                                 </div>
 
