@@ -5,6 +5,11 @@
                 <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/titleK.png')}}"
                      alt="logo">
             </a>
+        @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
+            <a class="navbar-brand" href="{{route('screens.vstore.dashboard.index')}}">
+                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
+                     alt="logo">
+            </a>
         @else
             <a class="navbar-brand" href="{{route('screens.manufacture.dashboard.index')}}">
                 <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"

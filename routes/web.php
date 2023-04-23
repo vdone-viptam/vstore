@@ -364,7 +364,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 
     });
     Route::prefix('order')->group(function () {
-        Route::get('', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
+        Route::get('index', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
         Route::get('new', [\App\Http\Controllers\Vstore\OrderController::class, 'new'])->name('screens.vstore.order.new');
     });
     Route::prefix('account')->group(function () {
@@ -377,7 +377,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::post('/save-tax-code', [\App\Http\Controllers\Vstore\AccountController::class, 'saveChangeTaxCode'])->name('screens.vstore.account.saveChangeTaxCode');
     });
     Route::prefix('products')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
+        Route::get('/index', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
         Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
         Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
@@ -390,7 +390,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 
     });
     Route::prefix('partners')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');
+        Route::get('/index', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');
         Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         Route::get('/vshop/detail', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshopDetail'])->name('screens.vstore.partner.vshopDetail');
         Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');

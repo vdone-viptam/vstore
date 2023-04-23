@@ -13,79 +13,58 @@
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link {{ (request()->is('dashboard*')) ? 'active' : '' }}"
-                           href="{{route('screens.manufacture.dashboard.index')}}" aria-expanded="false"
+                           href="{{route('screens.vstore.dashboard.index')}}" aria-expanded="false"
                            data-target="#submenu-1" aria-controls="submenu-1"><i
                                 class="fa fa-fw fas fa-home"></i>Tổng quan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('products*')) ? 'active' : '' }}"
-                           href="{{route('screens.manufacture.product.index')}}" data-toggle="collapse"
+                           href="{{route('screens.vstore.product.index')}}" data-toggle="collapse"
                            aria-expanded="{{ (request()->is('products*')) ? 'true' : 'false' }}"
                            data-target="#submenu-2" aria-controls="submenu-2"><i
-                                class="fab fa-product-hunt"></i>Quản lý sản phẩm
+                                class="fab fa-product-hunt"></i>Sản phẩm
                         </a>
                         <div id="submenu-2"
                              class="{{ (request()->is('products*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/index')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('products/index*')) ? 'active1' : '' }}"
                                        id="product"
-                                       href="{{route('screens.manufacture.product.index')}}">Tất cả sản phẩm</a>
+                                       href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/create')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('products/create*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.manufacture.product.create')}}">Thêm sản phẩm</a>
+                                       href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu xét duyệt</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/create-request')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('products/destroy*')) ? 'active1' : '' }}"
+                                       id="addSp"
+                                       href="#">Quản lý yêu cầu hủy niêm yết</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('products/discount*')) ? 'active1' : '' }}"
                                        id="request"
-                                       href="{{route('screens.manufacture.product.createRequest')}}">Yêu cầu xét duyệt
+                                       href="{{route('screens.vstore.product.discount')}}">Yêu cầu xét duyệt
                                         sản phẩm</a>
-                                </li>
-                                {{--                                <li class="nav-item">--}}
-                                {{--                                    <a class="nav-link {{ (request()->is('products/request-delete')) ? 'active1' : '' }}" id="request"--}}
-                                {{--                                       href="{{route('screens.manufacture.product.requestDeleteProduct')}}">Yêu cầu hủy--}}
-                                {{--                                        niêm yết sản phẩm</a>--}}
-                                {{--                                </li>--}}
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/request')) ? 'active1' : '' }}"
-                                       id="reAcp"
-                                       href="{{route('screens.manufacture.product.request')}}">Quản lý yêu cầu xét
-                                        duyệt</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/discount')) ? 'active1' : '' }}"
-                                       id="discount"
-                                       href="{{route('screens.manufacture.product.discount')}}">Quản lý giảm giá</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('warehouses*')) ? 'active' : '' }}" href="#"
+                        <a class="nav-link {{ (request()->is('order*')) ? 'active' : '' }}" href="#"
                            data-toggle="collapse"
                            aria-expanded="{{ (request()->is('warehouses*')) ? 'true' : 'false' }}"
                            data-target="#submenu-3" aria-controls="submenu-3"><i
-                                class="fas fa-fw fas fa-warehouse"></i>Quản lý kho hàng</a>
+                                class="fas fa-fw fas fa-warehouse"></i>Quản lý đơn hàng</a>
                         <div id="submenu-3"
-                             class="{{ (request()->is('warehouses*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                             class="{{ (request()->is('order*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('warehouses/index*')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('order/index*')) ? 'active1' : '' }}"
                                        id="proIn"
-                                       href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a>
+                                       href="{{route('screens.vstore.order.index')}}">Tất cả đơn hàng</a>
                                 </li>
-                                {{--                                <li class="nav-item">--}}
-                                {{--                                    <a class="nav-link" id="proOut" href="#">Yêu cầu thêm sản phẩm vào kho</a>--}}
-                                {{--                                </li>--}}
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('warehouses/swap*')) ? 'active1' : '' }}"
-                                       id="proDel"
-                                       href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý xuất nhập sản
-                                        phẩm</a>
-                                </li>
-
                             </ul>
                         </div>
                     </li>
@@ -93,42 +72,17 @@
                         <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href=""
                            data-toggle="collapse" aria-expanded="{{ (request()->is('partners*')) ? 'true' : 'false' }}"
                            data-target="#submenu-4" aria-controls="submenu-4"><i
-                                class="fab fa-fw fas fa-users"></i>Liên kết V-Store</a>
+                                class="fab fa-fw fas fa-users"></i>Đốt tác</a>
                         <div id="submenu-4"
                              class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('partners')) ? 'active1' : '' }}"
-                                       id="listVstore" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                        V-Store liên kết</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="#"
-                           data-toggle="collapse" aria-expanded="{{ (request()->is('orders*')) ? 'true' : 'false' }}"
-                           data-target="#submenu-5" aria-controls="submenu-5"><i
-                                class="fas fa-clipboard-list"></i>
-                            Quản lý đơn hàng
-                        </a>
-                        <div id="submenu-5" class="{{ (request()->is('orders*')) ? 'collapshow' : 'collapse' }} submenu"
-                             style="">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('orders/request')) ? 'active1' : '' }}"
-                                       id="keyP" href="{{route('screens.manufacture.order.request')}}">Yêu cầu nhập sẵn
-                                        sản phẩm</a>
+                                    <a class="nav-link {{ (request()->is('partners/index*')) ? 'active1' : '' }}"
+                                       id="listVstore" href="{{route('screens.vstore.partner.index')}}">Nhà cung cấp</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('orders/orders')) ? 'active1' : '' }}"
-                                       id="orderIn" href="{{route('screens.manufacture.order.order')}}">Đơn hàng nhập
-                                        sẵn</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="orBuy" href="{{route('screens.manufacture.order.index')}}">Đơn
-                                        hàng khách mua sản phẩm</a>
+                                    <a class="nav-link {{ (request()->is('partners/vshop*')) ? 'active1' : '' }}"
+                                       id="listVstore" href="{{route('screens.vstore.partner.vshop')}}">V-Shop</a>
                                 </li>
                             </ul>
                         </div>
@@ -144,15 +98,15 @@
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('finances')) ? 'active1' : '' }}"
-                                       href="{{ route('screens.manufacture.finance.index') }}">Ví</a>
+                                       href="{{ route('screens.vstore.finance.index') }}">Ví</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('finances/history')) ? 'active1' : '' }}"
-                                       href="{{ route('screens.manufacture.finance.history') }}">Yêu cầu rút tiền</a>
+                                       href="{{ route('screens.vstore.finance.history') }}">Yêu cầu rút tiền</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('finances/revenue')) ? 'active1' : '' }}"
-                                       href="{{ route('screens.manufacture.finance.revenue') }}">Lịch sử biến động số
+                                       href="{{ route('screens.vstore.finance.revenue') }}">Lịch sử biến động số
                                         dư</a>
                                 </li>
                             </ul>
@@ -168,11 +122,11 @@
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('account')) ? 'active1' : '' }}"
-                                       href="{{route('screens.manufacture.account.profile')}}">Hồ sơ của tôi</a>
+                                       href="{{route('screens.vstore.account.profile')}}">Hồ sơ của tôi</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}"
-                                       href="{{route('screens.manufacture.account.changePassword')}}">Đổi mật khẩu</a>
+                                       href="{{route('screens.vstore.account.changePassword')}}">Đổi mật khẩu</a>
                                 </li>
                             </ul>
                         </div>

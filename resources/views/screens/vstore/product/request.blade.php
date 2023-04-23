@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.vstore_old.main')
 
 @section('modal')
     <div id="modal2"></div>
@@ -24,19 +24,19 @@
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
 
                     <option
-                        value="requests.code" {{isset($params['condition']) && $params['condition'] == 'requests.code' ? 'selected' : ''}}>
+                            value="requests.code" {{isset($params['condition']) && $params['condition'] == 'requests.code' ? 'selected' : ''}}>
                         Mã yêu cầu
                     </option>
                     <option
-                        value="products.name" {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                            value="products.name" {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
                         Tên sản phẩm
                     </option>
                     <option
-                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
+                            value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
                         Thương hiệu
                     </option>
                     <option
-                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
+                            value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
                         Ngành hàng
                     </option>
                 </select>
@@ -141,40 +141,40 @@
                                     <td class="w-[200px]">
                                         @if($request->status == 0)
                                             <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
-                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                                        fill="white"/>
+                                                            d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
+                                                            fill="white"/>
                                                 </svg>
                                                 Đang chờ duyệt
                                             </div>
                                         @elseif($request->status == 1)
                                             <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#F5C002] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
-                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
-                                                        fill="white"/>
+                                                            d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
+                                                            fill="white"/>
                                                 </svg>
                                                 Đã duyệt - chờ hệ thống duyệt
                                             </div>
                                         @elseif($request->status == 2)
                                             <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
-                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-                                                        fill="white"/>
+                                                            d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                            fill="white"/>
                                                 </svg>
                                                 Từ chối
                                             </div>
                                         @elseif($request->status == 3)
                                             <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#2CC09C] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
@@ -184,12 +184,12 @@
                                             </div>
                                         @else
                                             <div
-                                                class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
+                                                    class="text-white font-medium flex justify-center items-center gap-4 bg-[#FF0101] rounded-[4px] px-[11px] py-[6px] whitespace-nowrap">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
-                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-                                                        fill="white"/>
+                                                            d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                            fill="white"/>
                                                 </svg>
                                                 Hệ thống từ chối
                                             </div>
@@ -213,21 +213,24 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                     <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">{{$requests->total()}}</strong></span>
+                                class="font-bold">{{$requests->total()}}</strong></span>
                     {{$requests->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
                             <option
-                                value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>10
+                                    value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
+                                10
                                 hàng / trang
                             </option>
                             <option
-                                value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>25
+                                    value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
+                                25
                                 hàng / trang
                             </option>
                             <option
-                                value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>50
+                                    value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
+                                50
                                 hàng / trang
                             </option>
                         </select>

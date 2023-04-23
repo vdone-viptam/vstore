@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.vstore_old.main')
 
 @section('page_title','Tất cả đơn hàng')
 
@@ -10,7 +10,8 @@
                 <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                       stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"></path>
             </svg>
-            <a href="{{Route('screens.vstore.order.index')}}" class="text-blueMain font-medium italic">Tất cả đơn hàng</a>
+            <a href="{{Route('screens.vstore.order.index')}}" class="text-blueMain font-medium italic">Tất cả đơn
+                hàng</a>
         </div>
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
             <div class="flex justify-start items-start gap-2 flex-wrap">
@@ -71,7 +72,7 @@
                             <th>
                                 Số lượng
                             </th>
-                                                    <th>Kho hàng</th>
+                            <th>Kho hàng</th>
                             <th>
                                 Ngày đặt hàng
                             </th>
@@ -120,7 +121,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity,0,'.','.')}} đ
+                                        {{number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity,0,'.','.')}}
+                                        đ
                                     </td>
                                     <td>
                                         {{$order->orderItem[0]->vshop->name ?? 'Viptam'}}

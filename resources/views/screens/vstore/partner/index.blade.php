@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.vstore_old.main')
 
 @section('modal')
     <div id="modal5">
@@ -22,18 +22,18 @@
         <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
-                                <select name="condition" id=""
-                                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                                    <option
-                                        value="users.account_code" {{isset($params['condition']) && $params['condition'] == 'users.account_code ' ? 'selected' : ''}}>
-                                        Mã Nhà Cung Cấp
-                                    </option>
-                                    <option
-                                        value=users.name {{isset($params['condition']) && $params['condition'] == 'users.name' ? 'selected' : ''}}>
-                                        Tên Nhà Cung Cấp
-                                    </option>
+                <select name="condition" id=""
+                        class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
+                    <option
+                            value="users.account_code" {{isset($params['condition']) && $params['condition'] == 'users.account_code ' ? 'selected' : ''}}>
+                        Mã Nhà Cung Cấp
+                    </option>
+                    <option
+                            value=users.name {{isset($params['condition']) && $params['condition'] == 'users.name' ? 'selected' : ''}}>
+                        Tên Nhà Cung Cấp
+                    </option>
 
-                                </select>
+                </select>
 
                 <input type="text" name="key_search" value="{{$params['key_search'] ?? '' }}" id="key_search"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
@@ -126,21 +126,24 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 flex-wrap">
                                         <span class="text-sm text-title">Tổng: <strong
-                                                class="font-bold">{{$count}}</strong></span>
+                                                    class="font-bold">{{$count}}</strong></span>
                     {{$users->withQueryString()->links()}}
                     <div class="flex justify-start items-center gap-2 flex-wrap">
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
                             <option
-                                value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>10
+                                    value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
+                                10
                                 hàng / trang
                             </option>
                             <option
-                                value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>25
+                                    value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
+                                25
                                 hàng / trang
                             </option>
                             <option
-                                value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>50
+                                    value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
+                                50
                                 hàng / trang
                             </option>
                         </select>

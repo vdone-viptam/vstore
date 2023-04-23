@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.vstore_old.main')
 
 @section('modal')
     <div id="modal5">
@@ -26,19 +26,19 @@
                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
                     <option value="0">Tất cả</option>
                     <option
-                        value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
+                            value="publish_id" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
                         Mã sản phẩm
                     </option>
                     <option
-                        value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                            value=products.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
                         Tên sản phẩm
                     </option>
                     <option
-                        value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
+                            value="brand" {{isset($params['condition']) && $params['condition'] == 'brand' ? 'selected' : ''}}>
                         Thương hiệu
                     </option>
                     <option
-                        value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
+                            value="categories.name" {{isset($params['condition']) && $params['condition'] == 'categories.name' ? 'selected' : ''}}>
                         Ngành hàng
                     </option>
                 </select>
@@ -129,15 +129,18 @@
                         <select name="limit"
                                 class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
                             <option
-                                value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>10
+                                    value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
+                                10
                                 hàng / trang
                             </option>
                             <option
-                                value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>25
+                                    value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
+                                25
                                 hàng / trang
                             </option>
                             <option
-                                value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>50
+                                    value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
+                                50
                                 hàng / trang
                             </option>
                         </select>

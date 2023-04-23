@@ -1,23 +1,23 @@
-@extends('layouts.vstore.main')
+@extends('layouts.vstore_old.main')
 
 @section('page_title','Ví')
 
 @section('modal')
     <form action="{{route('screens.vstore.finance.storeWall')}}" method="POST">
         <div
-            class="modal modal-details @if(\Illuminate\Support\Facades\Session::has('validateCreate')) show-modal @endif">
+                class="modal modal-details @if(\Illuminate\Support\Facades\Session::has('validateCreate')) show-modal @endif">
             @csrf
             <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
             <div
-                class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
+                    class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
                 <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                     <h2 class="text-base text-title font-medium">Thêm ngân hàng</h2>
                     <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                          onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
-                            d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"
-                            fill="black" fill-opacity="0.45"/>
+                                d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"
+                                fill="black" fill-opacity="0.45"/>
                     </svg>
                 </div>
                 <div class="content  max-h-[600px] overflow-y-auto">
@@ -43,7 +43,7 @@
                                     <option value="" selected disabled>Lựa chọn ngân hàng</option>
                                     @foreach($banks as $bank)
                                         <option
-                                            value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
+                                                value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
                                     @endforeach
                                 </select>
                                 @error('bank_id')
@@ -71,7 +71,7 @@
                                 onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại
                         </button>
                         <button
-                            class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                                class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                             Lưu lại
                         </button>
                     </div>
@@ -83,19 +83,19 @@
     @if($wallet)
         <form action="{{route('screens.vstore.finance.updateWall',['id' => $wallet->id])}}" method="POST">
             <div
-                class="modal modal-detailsedit @if(\Illuminate\Support\Facades\Session::has('validateUpdate')) show-modal @endif">
+                    class="modal modal-detailsedit @if(\Illuminate\Support\Facades\Session::has('validateUpdate')) show-modal @endif">
                 @csrf
                 <div class="over-lay-modal" onclick="$('.modal-detailsedit').toggleClass('show-modal')"></div>
                 <div
-                    class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
+                        class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
                     <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
                         <h2 class="text-base text-title font-medium">Cập nhật ngân hàng</h2>
                         <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
                              onclick="$('.modal-detailsedit').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"
-                                fill="black" fill-opacity="0.45"/>
+                                    d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"
+                                    fill="black" fill-opacity="0.45"/>
                         </svg>
                     </div>
                     <div class="content  max-h-[600px] overflow-y-auto">
@@ -121,7 +121,7 @@
                                         <option value="" selected disabled>Lựa chọn ngân hàng</option>
                                         @foreach($banks as $bank)
                                             <option
-                                                {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
+                                                    {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
                                         @endforeach
                                     </select>
                                     @error('bank_id')
@@ -149,7 +149,7 @@
                                     onclick="$('.modal-detailsedit').toggleClass('show-modal')">Đóng lại
                             </button>
                             <button
-                                class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                                    class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
                                 Lưu lại
                             </button>
                         </div>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-12">
                     <div
-                        class="finance col-span-6 rounded-tl-3xl rounded-tr-3xl bg-[#E8ECFD] px-[20px] md:pl-[60px] py-6">
+                            class="finance col-span-6 rounded-tl-3xl rounded-tr-3xl bg-[#E8ECFD] px-[20px] md:pl-[60px] py-6">
                         <h3 class="captilize font-medium text-xl text-title flex items-center gap-4">
                             <svg width="20" height="25" viewBox="0 0 20 25" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -214,7 +214,7 @@
                     </div>
                 </div>
                 <div
-                    class="col-span-12 box rounded-tr-none md:rounded-tr-[30px] rounded-tl-none grid grid-cols-1 md:grid-cols-2 place-items-center gap-32 w-full px-[20px] md:px-[60px] py-10">
+                        class="col-span-12 box rounded-tr-none md:rounded-tr-[30px] rounded-tl-none grid grid-cols-1 md:grid-cols-2 place-items-center gap-32 w-full px-[20px] md:px-[60px] py-10">
                     <div class="flex flex-col items-start gap-6  w-full ">
                         <h3 class="text-title text-lg font-bold flex items-center gap-4">
                             <svg width="20" height="25" viewBox="0 0 20 25" fill="none"
@@ -272,7 +272,7 @@
                                             <div>
                                                 <h4 class="m-0">{{$wallet->bank->name}}</h4>
                                                 <span
-                                                    style="font-size: 12px; line-height: 14px">
+                                                        style="font-size: 12px; line-height: 14px">
                                                 @for($i = 0;$i < strlen($wallet->account_number) - 4;$i++)
                                                         *
                                                     @endfor
@@ -282,19 +282,19 @@
                                     @else
                                         <a href="javascript:void(0)" id="btnAddBank" class="btn-add-bank  w-full">
                                             <div
-                                                style="border: 1px dashed #1E90FF; border-radius: 0.25rem; padding: 0.375rem 0.75rem; margin-top: 20px;">
+                                                    style="border: 1px dashed #1E90FF; border-radius: 0.25rem; padding: 0.375rem 0.75rem; margin-top: 20px;">
                                                 <div class="flex justify-start items-center w-full" style="gap: 20px;">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path
-                                                            d="M18.5714 11.4286H11.4286V18.5714C11.4286 18.9503 11.2781 19.3137 11.0102 19.5816C10.7422 19.8495 10.3789 20 10 20C9.62112 20 9.25776 19.8495 8.98985 19.5816C8.72194 19.3137 8.57143 18.9503 8.57143 18.5714V11.4286H1.42857C1.04969 11.4286 0.686328 11.2781 0.418419 11.0102C0.15051 10.7422 0 10.3789 0 10C0 9.62112 0.15051 9.25776 0.418419 8.98985C0.686328 8.72194 1.04969 8.57143 1.42857 8.57143H8.57143V1.42857C8.57143 1.04969 8.72194 0.686328 8.98985 0.418419C9.25776 0.150509 9.62112 0 10 0C10.3789 0 10.7422 0.150509 11.0102 0.418419C11.2781 0.686328 11.4286 1.04969 11.4286 1.42857V8.57143H18.5714C18.9503 8.57143 19.3137 8.72194 19.5816 8.98985C19.8495 9.25776 20 9.62112 20 10C20 10.3789 19.8495 10.7422 19.5816 11.0102C19.3137 11.2781 18.9503 11.4286 18.5714 11.4286Z"
-                                                            fill="#FF9A62"/>
+                                                                d="M18.5714 11.4286H11.4286V18.5714C11.4286 18.9503 11.2781 19.3137 11.0102 19.5816C10.7422 19.8495 10.3789 20 10 20C9.62112 20 9.25776 19.8495 8.98985 19.5816C8.72194 19.3137 8.57143 18.9503 8.57143 18.5714V11.4286H1.42857C1.04969 11.4286 0.686328 11.2781 0.418419 11.0102C0.15051 10.7422 0 10.3789 0 10C0 9.62112 0.15051 9.25776 0.418419 8.98985C0.686328 8.72194 1.04969 8.57143 1.42857 8.57143H8.57143V1.42857C8.57143 1.04969 8.72194 0.686328 8.98985 0.418419C9.25776 0.150509 9.62112 0 10 0C10.3789 0 10.7422 0.150509 11.0102 0.418419C11.2781 0.686328 11.4286 1.04969 11.4286 1.42857V8.57143H18.5714C18.9503 8.57143 19.3137 8.72194 19.5816 8.98985C19.8495 9.25776 20 9.62112 20 10C20 10.3789 19.8495 10.7422 19.5816 11.0102C19.3137 11.2781 18.9503 11.4286 18.5714 11.4286Z"
+                                                                fill="#FF9A62"/>
                                                     </svg>
 
                                                     <div>
                                                         <h4 class="m-0 text-[#1E90FF]">Thêm ngân hàng</h4>
                                                         <span
-                                                            style="font-size: 12px; line-height: 14px; color:#AEAEAE;">Miễn phí nạp, rút tiền</span>
+                                                                style="font-size: 12px; line-height: 14px; color:#AEAEAE;">Miễn phí nạp, rút tiền</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,7 +309,7 @@
                         </div>
                         <div class="text-center md:text-right w-full">
                             <button
-                                class="btnGra cursor-pointer outline-none  transition-all duration-200 rounded-xl py-3 px-10 text-center text-[#FFFFFF] hover:opacity-70">
+                                    class="btnGra cursor-pointer outline-none  transition-all duration-200 rounded-xl py-3 px-10 text-center text-[#FFFFFF] hover:opacity-70">
                                 Rút tiền
                             </button>
                         </div>

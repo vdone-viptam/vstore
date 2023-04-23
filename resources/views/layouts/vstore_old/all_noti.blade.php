@@ -1,4 +1,4 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.vstore_old.main')
 @section('page_title','Tất cả thông báo')
 
 @section('content')
@@ -12,19 +12,19 @@
                         @if(count(Auth::user()->notifications) > 0)
                             @foreach (Auth::user()->notifications as $index =>$notification)
                                 <div
-                                    class="flex justify-between items-start md:gap-6 w-full flex-wrap gap-2 md:flex-nowrap">
+                                        class="flex justify-between items-start md:gap-6 w-full flex-wrap gap-2 md:flex-nowrap">
                                     <div class="w-full">
                                         <span>{{$notification['data']['message']}}</span>
                                     </div>
                                     <div class="w-[150px] flex justify-start md:justify-end items-center gap-2">
                                         <span
-                                            class="text-title font-medium">{{\Carbon\Carbon::parse($notification->created_at)->format('d/m/Y h:i')}}</span>
+                                                class="text-title font-medium">{{\Carbon\Carbon::parse($notification->created_at)->format('d/m/Y h:i')}}</span>
                                     </div>
                                 </div>
                             @endforeach
                         @else
                             <div
-                                class="flex justify-between items-start md:gap-6 w-full flex-wrap gap-2 md:flex-nowrap">
+                                    class="flex justify-between items-start md:gap-6 w-full flex-wrap gap-2 md:flex-nowrap">
                                 <p>Bạn chưa có thông báo mới nào</p></div>
                         @endif
 
