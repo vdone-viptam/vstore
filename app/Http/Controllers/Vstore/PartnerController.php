@@ -12,6 +12,7 @@ use App\Models\VshopProduct;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PartnerController extends Controller
 {
@@ -28,22 +29,35 @@ class PartnerController extends Controller
         $this->v['field'] = $request->field ?? 'products.id';
         $this->v['type'] = $request->type ?? 'desc';
         $key_search = $request->key_search ?? '';
-        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
-            ->where('products.vstore_id', Auth::id())
-            ->where('products.status', 2);
-        if ($key_search && strlen(($key_search) > 0)) {
-            $this->v['products'] = $this->v['products']->where(function ($sub) use ($key_search) {
-                $sub->where('products.name', 'like', '%' . $key_search . '%')
-                    ->orWhere('products.publish_id', 'like', '%' . $key_search . '%');
-            });
-        }
-        $this->v['products'] = $this->v['products']->select('products.publish_id', 'products.name as name', 'products.price', 'users.name as vstore_name', 'products.discount', 'products.amount_product_sold')
-            ->orderBy($this->v['field'], $this->v['type'])
-            ->paginate($request->limit ?? 10);
-
+//        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
+//            ->where('products.vstore_id', Auth::id())
+//            ->where('products.status', 2);
+//        if ($key_search && strlen(($key_search) > 0)) {
+//            $this->v['products'] = $this->v['products']->where(function ($sub) use ($key_search) {
+//                $sub->where('products.name', 'like', '%' . $key_search . '%')
+//                    ->orWhere('products.publish_id', 'like', '%' . $key_search . '%');
+//            });
+//        }
+//        $this->v['products'] = $this->v['products']->select('products.publish_id', 'products.name as name', 'products.price', 'users.name as vstore_name', 'products.discount', 'products.amount_product_sold')
+//            ->orderBy($this->v['field'], $this->v['type'])
+//            ->paginate($request->limit ?? 10);
+//
         $this->v['key_search'] = $request->key_search ?? '';
-        $this->v['limit'] = $request->limit ?? 10;
-        $this->v['params'] = $request->all();
+//        $this->v['limit'] = $request->limit ?? 10;
+//        $this->v['params'] = $request->all();
+
+        $this->v['users']= User::join('products','users.id','=','products.vstore_id')
+            ->leftJoin('order_item','products.id','=','order_item.product_id')
+            ->leftJoin('order','order_item.order_id','=','order.id')
+            ->select('users.name as name','account_code',DB::raw("count(order.id) as countOrder"),DB::raw("count(products.id) as count"))
+//            ->selectSub('')
+
+            ->groupBy('users.id')
+            ->where('products.vstore_id',Auth::id())
+            ->where('order.export_status',4)
+            ->paginate(10);
+
+//        return  $this->v['users'];
         return view('screens.vstore.partner.index', $this->v);
 
     }

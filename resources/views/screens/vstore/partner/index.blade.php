@@ -46,8 +46,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th>Mã NCC</th>
+                            <th>Tên NCC
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -60,7 +60,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giá bán
+                            <th>Số sản phẩm liên kết
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -73,7 +73,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>NCC niêm yết
+                            <th>Tổng số đơn hàng hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -86,44 +86,54 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chiết khấu cho NCC(%)
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'discount')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="discount"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>Số lượng đã bán
-                                <span style="float: right;cursor: pointer">
-                                @if($field == 'amount_product_sold')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                </span>
-                            </th>
+{{--                            <th>Tỷ lệ đơn hàng hoàn thành--}}
+{{--                                (%)--}}
+{{--                                <span style="float: right;cursor: pointer">--}}
+{{--                                    @if($field == 'discount')--}}
+{{--                                        @if($type == 'desc')--}}
+{{--                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>--}}
+{{--                                        @else--}}
+{{--                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>--}}
+{{--                                        @endif--}}
+{{--                                    @else--}}
+{{--                                        <i class="fas fa-sort sort" data-sort="discount"></i>--}}
+{{--                                    @endif--}}
+{{--                                </span>--}}
+{{--                            </th>--}}
+{{--                            <th>Tổng chiết khấu V-Store nhận được (Thành tiền)--}}
+{{--                                <span style="float: right;cursor: pointer">--}}
+{{--                                @if($field == 'amount_product_sold')--}}
+{{--                                        @if($type == 'desc')--}}
+{{--                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>--}}
+{{--                                        @else--}}
+{{--                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>--}}
+{{--                                        @endif--}}
+{{--                                    @else--}}
+{{--                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>--}}
+{{--                                    @endif--}}
+{{--                                </span>--}}
+{{--                            </th>--}}
+                            <th>Thao Tác</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($products) > 0)
-                            @foreach($products as $value)
+                        @if(count($users) > 0)
+                            @foreach($users as $value)
                                 <tr>
-                                    <td>{{$value->publish_id}}</td>
+{{--                                    <td>{{$value->publish_id}}</td>--}}
+{{--                                    <td class="td_name">{{$value->name}}</td>--}}
+{{--                                    <td>{{ number_format($value->price,0,',','.')  }}</td>--}}
+{{--                                    <td>{{$value->vstore_name}}</td>--}}
+{{--                                    <td>{{$value->discount}}</td>--}}
+{{--                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>--}}
+{{--                                    <td></td>--}}
+                                    <td>{{$value->account_code}}</td>
                                     <td class="td_name">{{$value->name}}</td>
-                                    <td>{{ number_format($value->price,0,',','.')  }}</td>
-                                    <td>{{$value->vstore_name}}</td>
-                                    <td>{{$value->discount}}</td>
-                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                                    <td>{{$value->count}}</td>
+                                    <td>{{$value->countOrder ??0}}</td>
+{{--                                    <td></td>--}}
+{{--                                    <td></td>--}}
+                                    <td></td>
                                 </tr>
                             @endforeach
                         @else
@@ -136,7 +146,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{$users->withQueryString()->links()}}
                 </div>
             </div>
 
