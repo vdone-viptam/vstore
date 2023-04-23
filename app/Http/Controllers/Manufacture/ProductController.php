@@ -33,8 +33,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
-            'publish_id', 'images', 'products.name', 'brand',
-            'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
+            'publish_id', 'images', 'products.name','category_id', 'price', 'products.status', 'vstore_id','categories.name as cate_name','status',
             'amount_product_sold')
             ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
