@@ -186,6 +186,7 @@ class  VShopController extends Controller
                 "place_name" => $value->place_name,
             ];
             $value->product = [
+                "id" => $value->product_id,
                 "name" => $value->name,
                 "images" => json_decode($value->images),
                 "price" => $value->price,
