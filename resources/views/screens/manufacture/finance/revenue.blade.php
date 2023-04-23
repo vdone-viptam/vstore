@@ -1,6 +1,5 @@
 @extends('layouts.manufacture.main')
 @section('page_title','Lịch sử biến động số dư')
-
 @section('content')
     <div class="container-fluid dashboard-content ">
         <!-- ============================================================== -->
@@ -11,6 +10,15 @@
                 <div class="page-header">
                     <h2 class="pageheader-title">Lịch sử biến động số dư</h2>
 
+        <div class="col-span-12 ">
+            <div class="brc flex justify-start items-center gap-2 py-4">
+                <span class="text-secondary">Tài chính</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18"
+                          stroke="black"
+                          stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <a href="" class="text-blueMain font-medium italic">Lịch sử biến động số dư</a>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">

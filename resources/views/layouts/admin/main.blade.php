@@ -20,10 +20,11 @@
     }
 
     td {
-        text-align: left !important;
+        text-align: left;
     }
+
     th {
-        text-align: left !important;
+        text-align: left;
     }
 
     .page-link {

@@ -1,5 +1,5 @@
-@extends('layouts.vstore_old.main')
-@section('page_title','Lịch sử biến động số dư')
+@extends('layouts.vstore.main')
+@section('page_title','Lịch sử biến động só dư')
 @section('content')
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 xl:gap-10 px-5 xl:px-16 py-4">
 
@@ -112,17 +112,17 @@
                                     <select name="limit"
                                             class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
                                         <option
-                                                value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
+                                            value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
                                             10
                                             hàng / trang
                                         </option>
                                         <option
-                                                value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
+                                            value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
                                             25
                                             hàng / trang
                                         </option>
                                         <option
-                                                value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
+                                            value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
                                             50
                                             hàng / trang
                                         </option>
