@@ -76,18 +76,19 @@ class AccountController extends Controller
             $user->description = $request->description;
             $user->save();
 
-            $elasticsearchController = new ElasticsearchController();
-            try {
-                $res = $elasticsearchController->updateDocVStore((string)$user->id, $request->name);
-                DB::commit();
-            } catch (ClientResponseException $exception) {
-                DB::rollBack();
-                return redirect()->back()->with('error', $exception->getMessage());
-            }
+//            $elasticsearchController = new ElasticsearchController();
+//            try {
+//                $res = $elasticsearchController->updateDocVStore((string)$user->id, $request->name);
+//                DB::commit();
+//
+//            } catch (ClientResponseException $exception) {
+//                DB::rollBack();
+//                return redirect()->back()->with('error', $exception->getMessage());
+//            }
             return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return redirect()->back()->with('error', $e->getMessage());
 
         }
 
