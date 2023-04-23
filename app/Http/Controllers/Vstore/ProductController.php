@@ -26,24 +26,27 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 //        return $request->condition;
-        $limit = $request->limit ?? 10;
+        $this->v['field'] = $request->field ?? 'products.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->where('products.status', 2)
             ->where('vstore_id', Auth::id())
-            ->select('products.publish_id', 'products.brand', 'products.name as name',
-                'users.name as user_name', 'products.price', 'categories.name as cate_name',
-                'products.discount as discount', 'products.vat', 'products.id');
-
-        if ($request->condition && $request->condition != 0) {
-            $this->v['products'] = $this->v['products']->where($request->condition, 'like', '%' . $request->key_search . '%');
-        }
-
-        $this->v['products'] = $this->v['products']->orderBy('products.id', 'desc')
-            ->paginate($limit);
-//        return $this->v['products'] ;
-//return  $this->v['products'];
-        $this->v['params'] = $request->all();
+            ->select('products.publish_id',
+                'products.name as name', '
+                categories.name as cate_name',
+                'brand',
+                'users.name as user_name',
+                'admin_confirm_date',
+                'products.price',
+                'vat',
+                'products.discount as discount',
+                'discount_vShop',
+                'products.id');
+        $this->v['products'] = $this->v['products']->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($this->v['limit']);
 
         return view('screens.vstore.product.index', $this->v);
     }
@@ -53,7 +56,10 @@ class ProductController extends Controller
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $limit = $request->limit ?? 10;
+        $this->v['field'] = $request->field ?? 'requests.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
@@ -62,10 +68,9 @@ class ProductController extends Controller
         if ($request->condition && $request->condition != 0) {
             $this->v['requests'] = $this->v['requests']->where($request->condition, 'like', '%' . $request->key_search . '%');
         }
-        $this->v['requests'] = $this->v['requests']->orderBy('requests.id', 'desc')
-            ->paginate($limit);
+        $this->v['requests'] = $this->v['requests']->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($this->v['limit']);
 
-        $this->v['params'] = $request->all();
         return view('screens.vstore.product.request', $this->v);
     }
 
