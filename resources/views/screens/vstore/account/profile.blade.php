@@ -239,7 +239,8 @@
                                             @if(Session::has('success'))
                                                 <div class="alert alert-success collapshow" role="alert"
                                                      id="alert-succ">
-                                                    Thông tin của bạn đã được cập nhập thành công!
+                                                    {{Session::get('success')}}
+{{--                                                    Thông tin của bạn đã được cập nhập thành công!--}}
                                                 </div>
                                             @endif
                                             @if(\Illuminate\Support\Facades\Session::has('error'))

@@ -74,7 +74,7 @@ class AccountController extends Controller
             if ($request->link_website) {
                 $user->slug = trim($request->link_website);
             }
-            $user->description = $request->description ?? '';
+            $user->description = $request->description;
             $user->save();
 //            return $user;
 //            $elasticsearchController = new ElasticsearchController();
@@ -86,7 +86,7 @@ class AccountController extends Controller
 //                DB::rollBack();
 //                return redirect()->back()->with('error', $exception->getMessage());
 //            }
-            return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+            return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công2');
         } catch (\Exception $e) {
 //            DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());

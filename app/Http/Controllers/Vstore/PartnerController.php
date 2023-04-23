@@ -25,23 +25,26 @@ class PartnerController extends Controller
 
     public function index(Request $request)
     {
-        $limit = $request->limit ?? 10;
-        $users = User::join('products', 'users.id', '=', 'products.user_id')
+        $this->v['field'] = $request->field ?? 'products.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $key_search = $request->key_search ?? '';
+        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
             ->where('products.vstore_id', Auth::id())
-            ->groupBy('users.id')
-            ->select('users.id', 'users.account_code', 'users.name', 'users.phone_number');
-        if ($request->key_search && $request->condition) {
-            $users = $users->Where($request->condition, 'like', '%' . $request->key_search . '%');
+            ->where('products.status', 2);
+        if ($key_search && strlen(($key_search) > 0)) {
+            $this->v['products'] = $this->v['products']->where(function ($sub) use ($key_search) {
+                $sub->where('products.name', 'like', '%' . $key_search . '%')
+                    ->orWhere('products.publish_id', 'like', '%' . $key_search . '%');
+            });
         }
-        $users = $users->paginate($limit);
+        $this->v['products'] = $this->v['products']->select('products.publish_id', 'products.name as name', 'products.price', 'users.name as vstore_name', 'products.discount', 'products.amount_product_sold')
+            ->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($request->limit ?? 10);
 
-//
-        foreach ($users as $val) {
-            $val->sl = Product::where('user_id', $val->id)->where('vstore_id', Auth::id())->count();
-        }
-        $count = count($users);
-        $params = $request->all();
-        return view('screens.vstore.partner.index', compact('users', 'count','params'));
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['params'] = $request->all();
+        return view('screens.vstore.partner.index', $this->v);
 
     }
 
