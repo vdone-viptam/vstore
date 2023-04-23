@@ -61,9 +61,10 @@ class AccountController extends Controller
         }
         DB::beginTransaction();
         try {
-            $user = \App\Models\User::find($id);
+           $user = User::find($id);
 
-            $user->name = trim($request->name);
+            $user->name =trim($request->name) ;
+
             $user->company_name = trim($request->company_name);
 //        $user->tax_code = trim($request->tax_code);
             $user->address = trim($request->address);
@@ -75,19 +76,21 @@ class AccountController extends Controller
             }
             $user->description = $request->description;
             $user->save();
-
-            $elasticsearchController = new ElasticsearchController();
-            try {
-                $res = $elasticsearchController->updateDocVStore((string)$user->id, $request->name);
-                DB::commit();
-            } catch (ClientResponseException $exception) {
-                DB::rollBack();
-                return redirect()->back()->with('error', $exception->getMessage());
-            }
-            return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+//            return $user;
+//            $elasticsearchController = new ElasticsearchController();
+//            try {
+//                $res = $elasticsearchController->updateDocVStore((string)$user->id, $request->name);
+//                DB::commit();
+//
+//            } catch (ClientResponseException $exception) {
+//                DB::rollBack();
+//                return redirect()->back()->with('error', $exception->getMessage());
+//            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công2');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return redirect()->back()->with('error', $e->getMessage());
 
         }
 

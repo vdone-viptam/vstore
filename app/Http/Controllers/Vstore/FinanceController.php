@@ -29,7 +29,7 @@ class FinanceController extends Controller
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
-            ->where('type', 1)
+//            ->where('type', 2)
             ->first();
         return view('screens.vstore.finance.index', $this->v);
     }
@@ -86,25 +86,30 @@ class FinanceController extends Controller
         return redirect()->back()->with('success', 'Cập nhật ngân hàng thành công');
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
+            ->paginate(10);
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
         return view('screens.vstore.finance.history', $this->v);
     }
 
-    public function transferMoney()
+    public function transferMoney(Request $request)
     {
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'id';
+        // dd($type,$field);
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
-            ->where(function ($query) {
-                $query->where('user_id', Auth::id())
-                    ->whereNull('vshop_id');
-            })
-            ->orWhere(function ($query) {
-                $query->where('vshop_id', Auth::id())
-                    ->whereNull('user_id');
-            })
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
             ->paginate(10);
-
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
         return view('screens.vstore.finance.revenue', $this->v);
     }
 
