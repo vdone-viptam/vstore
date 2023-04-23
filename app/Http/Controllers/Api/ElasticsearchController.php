@@ -100,7 +100,7 @@ class ElasticsearchController extends Controller
     public function updateDocVStore($id, $name)
     {
         $params = [
-            'index' =>  config('elasticsearch.vstore_products'),
+            'index' => config('elasticsearch.vstore_products'),
             'id' => $id,
             'body' => [
                 'doc' => [
@@ -229,9 +229,7 @@ class ElasticsearchController extends Controller
         try {
             $response = $this->client->search($params);
         } catch (ClientResponseException $e) {
-            if ($e->getCode() == 400) {
-                return ['BAD_REQUEST'];
-            }
+            return ['BAD_REQUEST', $e->getMessage()];
         }
         $hits = $response['hits']['hits'];
         $arrIdVStore = [];
