@@ -89,6 +89,19 @@
                                     @endif
                                 </span>
                             </th>
+                            <th>Số lượng
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'order_item.quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order_item.quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order_item.quantity"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="order_item.quantity"></i>
+                                    @endif
+                             </span>
+                            </th>
                             <th style="min-width: 250px">Giá trị đơn hàng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'total')
@@ -128,7 +141,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th colspan="2">Chiết khấu nhận được</th>
+                            <th colspan="2" style="min-width: 250px">Chiết khấu nhận được
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="money"></i>
+                                    @endif
+                             </span>
+                            </th>
 
                             <th>
                                 Chi tiết
@@ -143,6 +168,7 @@
                                     <td>{{$order->name}}</td>
                                     <td>{{$order->cate_name}}</td>
                                     <td>{{number_format($order->price,'0','.','.')}}</td>
+                                    <td>{{number_format($order->quantity,0,'.','.')}}</td>
                                     <td>{{number_format($order->total,'0','.','.')}}</td>
                                     <td> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
@@ -153,11 +179,12 @@
                                         @endif
                                     </td>
                                     <td>
-
+                                        {{$order->discount.' %'}}
                                     </td>
                                     <td>
-
+                                        {{number_format($order->discount * $order->total,0,'.','.')}} đ
                                     </td>
+                                    <td><a href="" class="btn btn-link">Chi tiết</a></td>
                                 </tr>
                             @endforeach
                         @else

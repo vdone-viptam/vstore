@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -30,7 +31,7 @@ class OrderController extends Controller
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('no', 'products.name', 'categories.name as cate_name',
                 'products.price', 'quantity', 'total', 'order.created_at',
-                'estimated_date', 'products.discount', 'export_status')->where('order.status', '!=', 2);
+                'estimated_date', 'products.discount', 'export_status',DB::raw('(products.discount * total) as money'))->where('order.status', '!=', 2);
         $this->v['orders'] = $this->v['orders']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
 
         return view('screens.vstore.order.index', $this->v);
