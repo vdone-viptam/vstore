@@ -40,7 +40,7 @@ Route::get('/els', [\App\Http\Controllers\Api\ElasticsearchController::class, 'i
 //    ]);
 //});
 Route::get('/test-chia', [\App\Http\Controllers\TestController::class, 'testChia']);
-Route::post('/tuyet-test-ngu', [\App\Http\Controllers\TestController::class, 'tuyet']);
+Route::post('/tuyet-test-don', [\App\Http\Controllers\TestController::class, 'tuyet']);
 
 Route::prefix('bill')->group(function () {
     Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);

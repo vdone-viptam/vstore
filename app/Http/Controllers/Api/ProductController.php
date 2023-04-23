@@ -566,7 +566,7 @@ class ProductController extends Controller
                 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount',
                 'vshop_products.product_id')
             ->selectSub("SELECT discount FROM discounts where start_date <= '" . Carbon::now() . "' and
-            end_date >= '" . Carbon::now() . "' and type=3 and user_id = vshop.id", 'vshop_discount')
+            end_date >= '" . Carbon::now() . "' and type= 3 and user_id=vshop.pdone_id and product_id=$id", 'vshop_discount')
             ->orderBy('vshop_discount', 'desc')
             ->get();
 
@@ -965,7 +965,10 @@ class ProductController extends Controller
                         ->where('status', 2)
                         ->where('product_id', $value['product_id'])
                         ->where('vshop_products.amount', '>=', $value['amount'])
-                        ->increment('vshop_products.amount', -$value['amount']);
+                        ->update([
+                            'vshop_products.amount' => DB::raw('vshop_products.amount +'. -$value['amount']),
+                            'vshop_products.amount_product_sold' => DB::raw('vshop_products.amount_product_sold +'. $value['amount']),
+                        ]);
 
                     $change = VshopProduct::join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('pdone_id', $pdone_id)

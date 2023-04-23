@@ -8,6 +8,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ class ViettelpostController extends Controller
 
                 $order_item =OrderItem::where('order_id',$order->id)->first();
                 if ($order_item){
+                    $vshop_product = VshopProduct::where('vshop_id',$order_item->vshop_id)->where('product_id',$order_item->product_id)->first();
+                    if ($vshop_product){
+                        $vshop_product->amount_product_sold += $order_item->quantity;
+                        $vshop_product->save();
+                    }
                     $product = Product::where('id',$order_item->product_id)->first();
                     if ($product){
                         $ncc = User::where('id',$product->user_id)->first();
@@ -58,28 +64,33 @@ class ViettelpostController extends Controller
                                 'href' => route('screens.vstore.order.index',)
                             ];
                             $vstore->notify(new AppNotification($data_vstore));
+
                         }
                         $vshop = Vshop::where('id',$order_item->vshop_id)->first();
                         $my_boss = Http::get(config('domain.domain_vdone').'group/'.$vshop->pdone_id .'/my-boss');
-                         $my_boss = json_decode($my_boss);
-                         $my_boss_data = $my_boss->data;
+                        if (count($my_boss['data'])>0){
+                            $my_boss = json_decode($my_boss);
+                            $my_boss_data = $my_boss->data;
+                            if ($my_boss_data[0]->bossTeamId){
+                                $mess_boss_team = Http::post(config('domain.domain_vdone').'notifications/'.$my_boss_data[0]->bossTeamId ,[
+                                    'message'=>'Đơn hàng '.$order->no . ' đã giao thành công ',
+                                    'orderId'=> $order->id,
+                                    'type'=>10
+                                ]);
 
-                         if ($my_boss_data[0]->bossTeamId){
-                             $mess_boss_team = Http::post(config('domain.domain_vdone').'notifications/'.$my_boss_data[0]->bossTeamId ,[
-                                 'message'=>'Đơn hàng '.$order->no . ' đã giao thành công ',
-                                 'orderId'=> $order->id,
-                                 'type'=>10
-                             ]);
 
-
-                         }
-                        if ($my_boss_data[0]->bossGroupId){
-                            $mess_boss_group = Http::post(config('domain.domain_vdone').'notifications/'.$my_boss_data[0]->bossGroupId ,[
-                                'message'=>'Đơn hàng '.$order->no . ' đã giao thành công ',
-                                'orderId'=> $order->id,
-                                'type'=>10
-                            ]);
+                            }
+                            if ($my_boss_data[0]->bossGroupId){
+                                $mess_boss_group = Http::post(config('domain.domain_vdone').'notifications/'.$my_boss_data[0]->bossGroupId ,[
+                                    'message'=>'Đơn hàng '.$order->no . ' đã giao thành công ',
+                                    'orderId'=> $order->id,
+                                    'type'=>10
+                                ]);
+                            }
                         }
+
+
+
                         $mess_vshop = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id ,[
                             'message'=>'Đơn hàng '.$order->no . ' đã giao thành công ',
                             'orderId'=> $order->id,
