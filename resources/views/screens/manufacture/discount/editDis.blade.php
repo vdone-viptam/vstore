@@ -16,18 +16,39 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
-            <input disabled name="discount_ncc" id="discount_ncc"
+            {{-- <input disabled name="discount_ncc" id="discount_ncc"
+                   class="form-control-lg form-control" value="{{$product1->discount}}"> --}}
+            <div class="input-group mb-3">
+                <input disabled name="discount_ncc" id="discount_ncc"
                    class="form-control-lg form-control" value="{{$product1->discount}}">
+                <span class="input-group-text percent-to-vnd">
+                    {{number_format($product1->price * $product1->discount *10,0,'.','.')}} đ
+                </span>
+            </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
-            <input disabled name="buy_more" id="buy_more" value="{{$product1->buy_more}}"
+            {{-- <input disabled name="buy_more" id="buy_more" value="{{$product1->buy_more}}"
+                   class="form-control form-control-lg"> --}}
+            <div class="input-group mb-3">
+                <input disabled name="buy_more" id="buy_more" value="{{$product1->buy_more}}"
                    class="form-control form-control-lg">
+                <span class="input-group-text percent-to-vnd">
+                    {{number_format($product1->price * $product1->buy_more *10,0,'.','.')}} đ
+                </span>
+            </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm giảm giá (%):</label>
-            <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
+            {{-- <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
+                   class="form-control form-control-lg"> --}}
+            <div class="input-group mb-3">
+                <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
                    class="form-control form-control-lg">
+                <span class="input-group-text percent-to-vnd">
+                    {{number_format($product1->price * $discount->discount *10,0,'.','.')}} đ
+                </span>
+            </div>
         </div>
         <div class="row">
             <div class="col-6 form-group">
@@ -61,6 +82,10 @@
 </div>
 
 <script>
+    var VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -165,6 +190,12 @@
             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
             document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
 
+        }
+        const price1 = $('#price').val();
+        const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
+        if(priceTrue > 0){
+            let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
+            $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
         }
 
     });

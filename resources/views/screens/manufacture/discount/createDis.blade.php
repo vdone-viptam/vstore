@@ -18,13 +18,23 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
-            <input disabled name="discount_ncc" id="discount_ncc"
+            {{-- <input disabled name="discount_ncc" id="discount_ncc"
+                   class="form-control-lg form-control"> --}}
+            <div class="input-group mb-3">
+                <input disabled name="discount_ncc" id="discount_ncc"
                    class="form-control-lg form-control">
+                <span class="input-group-text percent-to-vnd">0</span>
+            </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
-            <input disabled name="buy_more" id="buy_more"
+            {{-- <input disabled name="buy_more" id="buy_more"
+                   class="form-control form-control-lg"> --}}
+            <div class="input-group mb-3">
+                <input disabled name="buy_more" id="buy_more"
                    class="form-control form-control-lg">
+                <span class="input-group-text percent-to-vnd">0</span>
+            </div>
         </div>
         <div class="form-group">
             {{--                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>--}}
@@ -33,8 +43,13 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm giảm giá (%):</label>
-            <input name="discount" id="discount1" type="number"
+            {{-- <input name="discount" id="discount1" type="number"
+                   class="form-control form-control-lg"> --}}
+            <div class="input-group mb-3">
+                <input name="discount" id="discount1" type="number"
                    class="form-control form-control-lg">
+                <span class="input-group-text percent-to-vnd">0</span>
+            </div>
         </div>
         <div class="row">
             <div class="col-6 form-group">
@@ -68,6 +83,10 @@
 </div>
 
 <script>
+    var VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -174,6 +193,12 @@
 
         }
 
+        const price1 = $('#price').val();
+        const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
+        if(priceTrue > 0){
+            let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
+            $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
+        }
     });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
@@ -188,6 +213,16 @@
                     document.querySelector('#price').value = result.pro.price;
                     document.querySelector('#discount_ncc').value = result.pro.discount;
                     document.querySelector('#buy_more').value = result.pro.buy_more;
+                    if(result.pro.discount > 0){
+                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
+                        let subMoney1 = VND.format(priceTrue * result.pro.discount / 100) || 0 + ' đ';
+                        $('#discount_ncc').siblings(".percent-to-vnd").html(subMoney1);
+                    }
+                    if(result.pro.buy_more > 0){
+                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
+                        let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + ' đ';
+                        $('#buy_more').siblings(".percent-to-vnd").html(subMoney2);
+                    }
 
                 } else {
                     document.querySelector('#price').value = 0 + ' đ';
