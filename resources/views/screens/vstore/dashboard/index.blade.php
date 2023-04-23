@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Doanh thu</p>
-                                        <p class="text-black text-base font-bold">-</p>
+                                        <p class="text-black text-base font-bold">{{number_format($dataRevenueToday,0,'.','.')}}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng</p>
-                                        <p class="text-black text-base font-bold">-</p>
+                                        <p class="text-black text-base font-bold">{{number_format($dataOrderToday,0,'.','.')}}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="flex flex-col justify-center gap-[5px]">
                                         <p class="text-[#AEAEAE] text-sm font-normal">Đơn hàng giao thành công</p>
-                                        <p class="text-black text-base font-bold">-</p>
+                                        <p class="text-black text-base font-bold">{{number_format($dataOrderSuccessToday,0,'.','.')}}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col items-center gap-[5px]">
@@ -335,17 +335,17 @@
                                             class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Doanh thu trong <span
                                                 class="date">1 tuần</span></span>
                                     </div>
-{{--                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M9 17.4736C13.6318 17.4736 17.4668 13.6304 17.4668 9.00684C17.4668 4.375 13.6235 0.540039 8.9917 0.540039C4.36816 0.540039 0.533203 4.375 0.533203 9.00684C0.533203 13.6304 4.37646 17.4736 9 17.4736ZM9 13.896C8.76758 13.896 8.59326 13.73 8.59326 13.4893V12.875C7.44775 12.7671 6.49316 12.1362 6.25244 11.1484C6.22754 11.0654 6.21094 10.9741 6.21094 10.8828C6.21094 10.584 6.41846 10.3765 6.70898 10.3765C6.96631 10.3765 7.14062 10.5093 7.24023 10.8081C7.38135 11.3726 7.82959 11.8042 8.59326 11.9121V9.38867L8.53516 9.37207C7.10742 9.03174 6.36865 8.38428 6.36865 7.29688C6.36865 6.12646 7.29834 5.31299 8.59326 5.17188V4.58252C8.59326 4.3418 8.76758 4.17578 9 4.17578C9.23242 4.17578 9.40674 4.3418 9.40674 4.58252V5.17188C10.5024 5.29639 11.3823 5.93555 11.6064 6.85693C11.623 6.94824 11.6479 7.03955 11.6479 7.12256C11.6479 7.42139 11.4321 7.62891 11.1416 7.62891C10.8677 7.62891 10.7017 7.46289 10.6187 7.20557C10.4443 6.63281 10.021 6.26758 9.40674 6.15967V8.54199L9.52295 8.56689C11.0088 8.83252 11.7642 9.53809 11.7642 10.7002C11.7642 11.9951 10.7266 12.7671 9.40674 12.8916V13.4893C9.40674 13.73 9.23242 13.896 9 13.896ZM8.59326 8.32617V6.15967C7.87109 6.28418 7.43115 6.72412 7.43115 7.23877C7.43115 7.74512 7.77148 8.08545 8.53516 8.30957L8.59326 8.32617ZM9.40674 9.58789V11.9121C10.2783 11.8125 10.7017 11.356 10.7017 10.7583C10.7017 10.2188 10.4194 9.86182 9.58936 9.6377L9.40674 9.58789Z"--}}
-{{--                                            fill="#FAAD14"/>--}}
-{{--                                    </svg>--}}
-{{--                                    <span class="text-primary font-medium">159,243,900</span>--}}
+                                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9 17.4736C13.6318 17.4736 17.4668 13.6304 17.4668 9.00684C17.4668 4.375 13.6235 0.540039 8.9917 0.540039C4.36816 0.540039 0.533203 4.375 0.533203 9.00684C0.533203 13.6304 4.37646 17.4736 9 17.4736ZM9 13.896C8.76758 13.896 8.59326 13.73 8.59326 13.4893V12.875C7.44775 12.7671 6.49316 12.1362 6.25244 11.1484C6.22754 11.0654 6.21094 10.9741 6.21094 10.8828C6.21094 10.584 6.41846 10.3765 6.70898 10.3765C6.96631 10.3765 7.14062 10.5093 7.24023 10.8081C7.38135 11.3726 7.82959 11.8042 8.59326 11.9121V9.38867L8.53516 9.37207C7.10742 9.03174 6.36865 8.38428 6.36865 7.29688C6.36865 6.12646 7.29834 5.31299 8.59326 5.17188V4.58252C8.59326 4.3418 8.76758 4.17578 9 4.17578C9.23242 4.17578 9.40674 4.3418 9.40674 4.58252V5.17188C10.5024 5.29639 11.3823 5.93555 11.6064 6.85693C11.623 6.94824 11.6479 7.03955 11.6479 7.12256C11.6479 7.42139 11.4321 7.62891 11.1416 7.62891C10.8677 7.62891 10.7017 7.46289 10.6187 7.20557C10.4443 6.63281 10.021 6.26758 9.40674 6.15967V8.54199L9.52295 8.56689C11.0088 8.83252 11.7642 9.53809 11.7642 10.7002C11.7642 11.9951 10.7266 12.7671 9.40674 12.8916V13.4893C9.40674 13.73 9.23242 13.896 9 13.896ZM8.59326 8.32617V6.15967C7.87109 6.28418 7.43115 6.72412 7.43115 7.23877C7.43115 7.74512 7.77148 8.08545 8.53516 8.30957L8.59326 8.32617ZM9.40674 9.58789V11.9121C10.2783 11.8125 10.7017 11.356 10.7017 10.7583C10.7017 10.2188 10.4194 9.86182 9.58936 9.6377L9.40674 9.58789Z"
+                                            fill="#FAAD14"/>
+                                    </svg>
+                                    <span class="text-primary font-medium money-revenue">0</span>
                                 </div>
                                 <div class="relative ">
                                     <select name=""
-                                            class="slect-date outline-none appearance-none  border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
+                                            class="select-date outline-none appearance-none  border-[1px] rounded-[11px] border-[#c4cdd5] pl-3 pr-5 PY-[9PX] py-[6px] focus:border-primary transition-all duration-200 box-shadow text-[#919EAB] text-sm font-normal">
                                         <option value="0" selected>1 tuần</option>
                                         <option value="1">1 Tháng</option>
                                         <option value="2">1 năm</option>
@@ -361,19 +361,23 @@
                             </div>
                             <div class="char p-4 xl:p-10 w-full">
                                 <canvas id="bar-chart-grouped" width="800" height="315"></canvas>
-                                <!-- <canvas id="line-chart" width="800" height="350"></canvas> -->
                             </div>
                         </div>
-                        <div class="flex items-center gap-[5px]">
+                        <div class="flex items-center gap-[5px] my-5">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M25.7497 6.30054C25.683 6.71721 25.6497 7.13387 25.6497 7.55054C25.6497 11.3005 28.683 14.3322 32.4163 14.3322C32.833 14.3322 33.233 14.2839 33.6497 14.2172V27.6655C33.6497 33.3172 30.3163 36.6672 24.6497 36.6672H12.3347C6.66634 36.6672 3.33301 33.3172 3.33301 27.6655V15.3339C3.33301 9.66721 6.66634 6.30054 12.3347 6.30054H25.7497ZM26.0847 16.4339C25.633 16.3839 25.1847 16.5839 24.9163 16.9505L20.8847 22.1672L16.2663 18.5339C15.983 18.3172 15.6497 18.2322 15.3163 18.2672C14.9847 18.3172 14.6847 18.4989 14.483 18.7655L9.55134 25.1839L9.44967 25.3339C9.16634 25.8655 9.29967 26.5489 9.79967 26.9172C10.033 27.0672 10.283 27.1672 10.5663 27.1672C10.9513 27.1839 11.3163 26.9822 11.5497 26.6672L15.733 21.2822L20.483 24.8505L20.633 24.9489C21.1663 25.2322 21.833 25.1005 22.2163 24.5989L27.033 18.3839L26.9663 18.4172C27.233 18.0505 27.283 17.5839 27.0997 17.1672C26.918 16.7505 26.5163 16.4672 26.0847 16.4339ZM32.6498 3.33337C34.8665 3.33337 36.6665 5.13337 36.6665 7.35004C36.6665 9.56671 34.8665 11.3667 32.6498 11.3667C30.4332 11.3667 28.6332 9.56671 28.6332 7.35004C28.6332 5.13337 30.4332 3.33337 32.6498 3.33337Z"
                                     fill="#4062FF"/>
                             </svg>
-                            <span
-                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Đơn hàng trong <span
-                                    class="date">1 tuần</span></span>
+                            <div
+                                class="text-title md:font-medium font-bold md:text-xl text-sm uppercase">Đơn hàng trong
+                                <span class="date">1 tuần </span>
+                            </div>
+                            <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 17.4736C13.6318 17.4736 17.4668 13.6304 17.4668 9.00684C17.4668 4.375 13.6235 0.540039 8.9917 0.540039C4.36816 0.540039 0.533203 4.375 0.533203 9.00684C0.533203 13.6304 4.37646 17.4736 9 17.4736ZM9 13.896C8.76758 13.896 8.59326 13.73 8.59326 13.4893V12.875C7.44775 12.7671 6.49316 12.1362 6.25244 11.1484C6.22754 11.0654 6.21094 10.9741 6.21094 10.8828C6.21094 10.584 6.41846 10.3765 6.70898 10.3765C6.96631 10.3765 7.14062 10.5093 7.24023 10.8081C7.38135 11.3726 7.82959 11.8042 8.59326 11.9121V9.38867L8.53516 9.37207C7.10742 9.03174 6.36865 8.38428 6.36865 7.29688C6.36865 6.12646 7.29834 5.31299 8.59326 5.17188V4.58252C8.59326 4.3418 8.76758 4.17578 9 4.17578C9.23242 4.17578 9.40674 4.3418 9.40674 4.58252V5.17188C10.5024 5.29639 11.3823 5.93555 11.6064 6.85693C11.623 6.94824 11.6479 7.03955 11.6479 7.12256C11.6479 7.42139 11.4321 7.62891 11.1416 7.62891C10.8677 7.62891 10.7017 7.46289 10.6187 7.20557C10.4443 6.63281 10.021 6.26758 9.40674 6.15967V8.54199L9.52295 8.56689C11.0088 8.83252 11.7642 9.53809 11.7642 10.7002C11.7642 11.9951 10.7266 12.7671 9.40674 12.8916V13.4893C9.40674 13.73 9.23242 13.896 9 13.896ZM8.59326 8.32617V6.15967C7.87109 6.28418 7.43115 6.72412 7.43115 7.23877C7.43115 7.74512 7.77148 8.08545 8.53516 8.30957L8.59326 8.32617ZM9.40674 9.58789V11.9121C10.2783 11.8125 10.7017 11.356 10.7017 10.7583C10.7017 10.2188 10.4194 9.86182 9.58936 9.6377L9.40674 9.58789Z" fill="#FAAD14"></path>
+                            </svg>
+                            <span class="count-order"></span>
                         </div>
                         <div class="char p-4 xl:p-10 w-full">
                             <canvas id="bar-chart" width="800" height="315"></canvas>
@@ -386,81 +390,5 @@
     </div>
 @endsection
 @section('custom_js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            new Chart(document.getElementById("bar-chart-grouped"), {
-                type: 'bar',
-                data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
-                    datasets: [
-                        {
-                            label: "Africa",
-                            backgroundColor: "#3e95cd",
-                            data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
-                        }
-                    ]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: '-'
-                    }, legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem) {
-                                console.log(tooltipItem)
-                                return tooltipItem.yLabel;
-                            }
-                        }
-                    }
-                }
-            });
-            new Chart(document.getElementById("bar-chart"), {
-                type: 'bar',
-                data: {
-                    labels: ["01/2021", "02/2021", "03/2021", "04/2021", "05/2021", "06/2021", "07/2021", "08/2021", "09/2021", "10/2021", "11/2021", "12/2021"],
-                    datasets: [
-                        {
-                            label: "Population (millions)",
-                            backgroundColor: "#3e95cd",
-                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                        }
-                    ]
-                },
-                options: {
-                    legend: {display: false},
-                    title: {
-                        display: true,
-                        text: '-'
-                    }
-                }
-            });
-        })
-        $('.slect-date').change(function () {
-            $value = $('.slect-date option:selected').text();
-            $('.date').html($value);
-        });
-    </script>
-    <script>
-        // $('body').on('click', function(){
-        //     // console.log('tesst')
-        //
-        //     $('.sub-nav-notify').toggleClass('activeTb')
-        //
-        // })
-        // $('.notify').on('click', function(){
-        //     $('.sub-nav-notify').toggleClass('activeTb')
-        //     $('.screen').removeClass('hidden')
-        // })
-
-        // $('.screen').on('click', function (){
-        //     $('.sub-nav-notify').toggleClass('active')
-        //     $(this).addClass('hidden')
-        // })
-
-
-    </script>
+    @include('layouts.custom.includeSt.chart-script');
 @endsection

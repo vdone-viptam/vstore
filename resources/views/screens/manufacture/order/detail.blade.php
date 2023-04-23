@@ -33,31 +33,33 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Giảm giá (nếu có):</span>
-                        <span class="text-title">{{number_format($order->discount,'0','.','.')}}</span>
+                        <span
+                            class="text-title">{{(int)$order->discount}} %</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Số lượng sản phẩm:</span>
-                        <span class="text-title">{{$order->quantity}}%</span>
+                        <span class="text-title">{{$order->quantity}}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tiền đặt cọc (nếu có):</span>
-                        <span class="text-title">{{$order->deposit_money}}</span>
+                        <span class="text-title">{{number_format(($order->total - ($order->total * $order->discount / 100)) * ($order->deposit_money / 100) ,0,'.','.')}}
+                                            đ</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Tổng tiền:</span>
-                        <span class="text-title">{{number_format($order->total,'0','.','.')}} đ</span>
+                        <span class="text-title">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium ">Trạng thái:</span>
                         <span class="text-title">
-                         @if($order->status == 1)
-                                Đã hoàn thành
-                            @elseif($order->status == 2)
-                                Chờ xác nhận
+                                @if($order->status == 1)
+                                <span class="text-green-600"> Đã hoàn thành</span>
+                            @elseif($order->status == 3)
+                                <span class="text-blue-600">Đơn hàng mới</span>
                             @elseif($order->status == 4)
-                                Đang giao hàng
+                                <span class="text-yellow-400">Đang giao hàng</span>
                             @else
-                                Hủy
+                                <span class="text-red-600">Hủy</span>
                             @endif
                     </span>
                     </div>
@@ -81,10 +83,10 @@
                 </div>
                 <div class="flex justify-end items-center gap-4 ">
                     @if($order->status == 3)
-                    <button id="btnConfirm"
-                            class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
-                        Lưu thay đổi
-                    </button>
+                        <button id="btnConfirm"
+                                class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
+                            Lưu thay đổi
+                        </button>
                     @endif
                     <a
                         class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"

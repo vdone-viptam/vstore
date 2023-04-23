@@ -16,22 +16,13 @@
 
             <div class="flex justify-start items-start gap-2 flex-wrap">
                 <input type="text" value="{{isset($params['keyword']) ? $params['keyword'] : ''}}"
-                       name="keyword" id="key_search"
+                       name="key_search" id="key_search"
                        class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
                 >
-                <button type="submit"
+                <button type="submit" id="btnSearch"
                         class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
-                    <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z"
-                              fill="white"/>
-                        <path d="M13 11H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 15H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 19H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path
-                            d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"
-                            stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+
                     Tìm kiếm
                 </button>
             </div>
@@ -109,7 +100,7 @@
                             <th>Số điện thoại</th>
                             <th>Mã số thuế</th>
                             <th>Địa chỉ</th>
-                            <th>Quyền</th>
+                            <th>Vai trò</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -139,7 +130,8 @@
                                     </td>
                                     <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
-                                            <a class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                            <a onclick="return confirm('Vui lòng xác nhận')"
+                                               class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                                href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>
@@ -192,11 +184,10 @@
 
 @section('custom_js')
     <script>
-        const name = document.getElementById('name');
-        const id = document.getElementById('id');
-        const limit = document.getElementById('limit');
-        const page = document.getElementById('page1');
-        const form = document.getElementById('form');
+        let name = document.getElementById('name');
+        let id = document.getElementById('id');
+        let limit = document.getElementById('limit');
+        let form = document.getElementById('form');
         document.getElementById('btnSearch').addEventListener('click', () => {
                 form.submit();
             }
@@ -204,5 +195,6 @@
         limit.addEventListener('change', (e) => {
             form.submit();
         });
+
     </script>
 @endsection

@@ -31,7 +31,7 @@ class AccountController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
 //        return 1;
         if (isset($request->noti_id)) {
@@ -107,14 +107,13 @@ class AccountController extends Controller
 
             $address = $user->ward->wards_name . ',' . $user->district->district_name . ', ' . $user->province->province_name;
 
-            $result = app('geocoder')->geocode($address)->get();
-            if (!isset($result[0])) {
+            $result = getLatLongByAddress($address);
+            if (!$result) {
                 return redirect()->back()->with('error', 'Địa chỉ không hợp lệ');
             }
-            $coordinates = $result[0]->getCoordinates();
 
-            $lat = $coordinates->getLatitude();
-            $long = $coordinates->getLongitude();
+            $lat = $result['lat'];
+            $long = $result['lng'];
 
             $warehouse = Warehouses::where('user_id', $user->id)->first();
             $warehouse->name = $user->name;

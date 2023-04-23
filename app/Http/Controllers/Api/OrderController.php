@@ -94,7 +94,10 @@ class OrderController extends Controller
         $provinceId = $request->province_id;
         $wardId = $request->wards_id;
         $address = $request->address;
-
+//        if (count($address) == 4) {
+//            unset($address[0]);
+//        }
+//        $address = implode(', ', $address);
         // NEW ORDER
         $order = new Order();
         $order->pay = 2;
@@ -127,7 +130,6 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $address;
             $warehouse = calculateShippingByProductID($product->id, $districtId, $provinceId, $wardId);
             if (!$warehouse) {
                 return response()->json([
@@ -280,7 +282,7 @@ class OrderController extends Controller
             $order->district_id = $districtId;
             $order->ward_id = $wardId;
             $order->province_id = $provinceId;
-            $order->address = $address;
+            $order->address = $request->address;
             $result = [];
             foreach ($orderItems as $item) {
                 $result[$item['vshop_id']]['vshop'] = [

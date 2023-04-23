@@ -125,7 +125,7 @@
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" placeholder="Nhập giá sản phẩm" id="price" autocomplete="off"
-                                   value="{{old('price')}}"
+                                   value="{{number_format(old('price'),0,'.','.')}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
                             <p class="text-red-600">{{$message}}</p>
@@ -221,7 +221,7 @@
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="number" name="weight" id="weight" min="0" max=""
                                    placeholder="Nhập trọng lượng sản phẩm (Gram)" value="{{old('weight')}}"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                   class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('weight')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
@@ -277,28 +277,28 @@
                                                name="length"
                                                value="{{old('length')}}"
                                                id="length"
-                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                               class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         @error('length')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
                                     </div>
 
                                     <div class="flex flex-col">
-                                        <input type="number" min="0" max="" placeholder="Nhập chiều rộng (cm)"
+                                        <input type="number" id="chieu_rong" min="0" max="" placeholder="Nhập chiều rộng (cm)"
                                                name="with"
                                                value="{{old('with')}}"
                                                id="with"
-                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                               class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         @error('with')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
                                     </div>
                                     <div class="flex flex-col">
-                                        <input type="number" min="0" max="" placeholder="Nhập chiều cao (cm)"
+                                        <input type="number"  min="0" max="" placeholder="Nhập chiều cao (cm)"
                                                name="height"
                                                value="{{old('height')}}"
                                                id="height"
-                                               class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                               class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                                         @error('height')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
@@ -311,11 +311,10 @@
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Thể tích (ml) <strong
-                                    class="text-[#FF4D4F]">*</strong></span>
-                            <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
+                            <span class="text-title font-medium">Thể tích (ml)</span>
+                            <input type="number" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
                                    value="{{old('volume')}}"
-                                   class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
+                                   class="only-number outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('volume')
                             <p class="text-red-600">{{$message}}</p>
                             @enderror
@@ -378,19 +377,13 @@
 @endsection
 
 @section('custom_js')
-    <script src="https://cdn.tiny.cloud/1/7v46ob448fd1i42e0fle8qsifky50i9gg368joxi55dlp64h/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script async>
         tinymce.init({
             selector: '#description',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                {value: 'First.Name', title: 'First Name'},
-                {value: 'Email', title: 'Email'},
-            ],
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
             image_title: true,
             /* enable automatic uploads of images represented by blob or data URIs*/
             automatic_uploads: true,
@@ -564,6 +557,22 @@
         })
     </script>
     <script>
+        document.querySelector('#chieu_rong').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        document.querySelector('#height').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
         document.querySelector('#price').addEventListener("keypress", (e) => {
             var regex = new RegExp("^[0-9]+$");
             var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
@@ -578,12 +587,12 @@
                     style: "currency",
                     currency: "USD",
                     maximumFractionDigits: 0
-                }).format((e.target.value.replaceAll(',', '')));
+                }).format((e.target.value.replaceAll(',', '').replaceAll('.', '')));
                 // document.getElementById('price').value = value.replaceAll('$', '');
 
-                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '');
+                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '').replaceAll(',', '');
                 ;
-                document.getElementById('price').value = value.replaceAll('$', '')
+                document.getElementById('price').value = value.replaceAll('$', '').replaceAll(',', '.')
             }
         });
 

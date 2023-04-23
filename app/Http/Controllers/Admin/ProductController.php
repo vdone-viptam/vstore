@@ -7,11 +7,14 @@ use App\Models\Application;
 use App\Models\BuyMoreDiscount;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -38,12 +41,14 @@ class ProductController extends Controller
             ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at');
 
 
-        if (isset($request->keyword)) {
-            $this->v['requests'] = $this->v['requests']
-                ->orWhere('products.name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('publish_id', $request->keyword)
-                ->orWhere('categories.name', 'like', '%' . $request->keyword . '%')
-                ->orWhere('users.name', 'like', '%' . $request->keyword . '%');
+        if (isset($request->key_search)) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
+                $query->orWhere('products.name', 'like', '%' . $request->key_search . '%')
+                    ->orWhere('publish_id', $request->keyword)
+                    ->orWhere('categories.name', 'like', '%' . $request->key_search . '%')
+                    ->orWhere('users.name', 'like', '%' . $request->key_search . '%');
+            });
+
         }
         $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy('requests.id', 'desc')
             ->paginate($limit);
@@ -90,6 +95,19 @@ class ProductController extends Controller
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 3) {
+                $vstore = User::join('products','users.id','=','products.vstore_id')->where('products.vstore_id',$currentRequest->vstore_id)
+                    ->where('products.id',$currentRequest->product_id)
+                ->select('products.id','products.publish_id','users.account_code')->first();
+
+                $repon = Http::post(config('domain.domain_vdone').'notifications/send-all',
+                [
+                    "message"=> "Sản phẩm ".$vstore->publish_id ." đã được niêm yết tại V-Store ".$vstore->account_code,
+                     "productId"=> $vstore->id,
+                      "type"=> 9
+                ]
+                );
+
+
                 $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
@@ -102,7 +120,6 @@ class ProductController extends Controller
                     'deposit_money' => $currentRequest->deposit_money,
                     'type_pay' => $currentRequest->type_pay,
                 ]);
-                DB::table('product_warehouses')->where('product_id', $currentRequest->product_id)->where('status', 3)->update(['status' => 1]);
             } else {
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),

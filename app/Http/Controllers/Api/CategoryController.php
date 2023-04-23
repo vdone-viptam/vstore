@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Validator;
  */
 class CategoryController extends Controller
 {
-    public function searchCategoryByKeyword(Request $request) {
+    public function searchCategoryByKeyword(Request $request)
+    {
 
 
         $validator = Validator::make($request->all(), [
@@ -75,7 +76,7 @@ class CategoryController extends Controller
     {
         $limit = $request->limit ?? 48;
         try {
-            $categories = Category::select('id', 'name', 'img')->orderBy('name','asc')->paginate($limit);
+            $categories = Category::select('id', 'name', 'img')->orderBy('name', 'asc')->paginate($limit);
             if ($categories) {
                 foreach ($categories as $value) {
                     $value->img = asset($value->img);
@@ -157,19 +158,19 @@ class CategoryController extends Controller
             $product = Product::select('images', 'name', 'publish_id', 'price', 'id', 'vstore_id', 'discount_vShop as discountVstore')
                 ->where('category_id', $category_id)
                 ->where('status', 2)
-                ->where('availability_status',1);
+                ->where('availability_status', 1);
             $product = $product->limit(8)->get();
 
             $data_vstore = [];
 
             foreach ($product as $pr) {
-                $pr->discount = DB::table('discounts')
+                $pr->discount = round(DB::table('discounts')
                         ->selectRaw('SUM(discount) as sum')
                         ->where('product_id', $pr->id)
                         ->whereIn('type', [1, 2])
                         ->whereDate('start_date', '<=', Carbon::now())
                         ->whereDate('end_date', '>=', Carbon::now())
-                        ->first()->sum ?? 0;
+                        ->first()->sum ?? 0, 2);
 
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
@@ -179,7 +180,7 @@ class CategoryController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
@@ -188,10 +189,10 @@ class CategoryController extends Controller
             }
             $users = User::select('id', 'name', 'avatar')->whereIn('id', $data_vstore)->limit(8)->get();
             foreach ($users as $user) {
-                if ($user->avatar != ''){
+                if ($user->avatar != '') {
                     $user->avatar = asset('image/users/' . $user->avatar);
 
-                }else{
+                } else {
                     $user->avatar = asset('home/img/logo-06.png');
                 }
             }
@@ -252,13 +253,13 @@ class CategoryController extends Controller
 
 
             foreach ($product as $pr) {
-                $pr->discount = DB::table('discounts')
+                $pr->discount = round(DB::table('discounts')
                         ->selectRaw('SUM(discount) as sum')
                         ->where('product_id', $pr->id)
                         ->whereIn('type', [1, 2])
                         ->whereDate('start_date', '<=', Carbon::now())
                         ->whereDate('end_date', '>=', Carbon::now())
-                        ->first()->sum ?? 0;
+                        ->first()->sum ?? 0, 2);
 
                 $pr->image = asset(json_decode($pr->images)[0]);
                 unset($pr->images);
@@ -266,7 +267,7 @@ class CategoryController extends Controller
                     $pr->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $pr->id)
-                        ->where('vshop_products.status', 1)
+                        ->whereIn('vshop_products.status', [1,2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pr->id)->first()->max;
@@ -295,13 +296,13 @@ class CategoryController extends Controller
             $users = Product::select('avatar', 'users.name', 'users.id')
                 ->join('users', 'products.vstore_id', '=', 'users.id')
                 ->where('category_id', $category_id)
-                ->where('availability_status',1)
+                ->where('availability_status', 1)
                 ->groupBy(['avatar', 'users.name', 'users.id'])
                 ->get();
             foreach ($users as $user) {
-                if ($user->avatar !=''){
+                if ($user->avatar != '') {
                     $user->avatar = asset('image/users/' . $user->avatar);
-                }else{
+                } else {
                     $user->avatar = asset('home/img/logo-06.png');
                 }
 

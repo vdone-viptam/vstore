@@ -40,7 +40,8 @@ Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, '
 //        "req" => $req
 //    ]);
 //});
-Route::post('/tuyet-test-ngu', [\App\Http\Controllers\TestController::class, 'tuyet']);
+Route::get('/test-chia', [\App\Http\Controllers\TestController::class, 'testChia']);
+Route::post('/tuyet-test-don', [\App\Http\Controllers\TestController::class, 'tuyet']);
 
 Route::prefix('bill')->group(function () {
     Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
@@ -50,7 +51,7 @@ Route::prefix('bill')->group(function () {
 });
 
 Route::post('callback-viettel-post', [\App\Http\Controllers\ViettelpostController::class, 'index']);
-
+Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostController::class, 'linkin']);
 
 //Route::get('/', function () {
 //    return config('domain.api');
@@ -83,8 +84,9 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::post('/accept-review', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'acceptReviewProduct']);
         Route::get('/review-detail-product/{point_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'reviewDetailProduct']);
+        Route::get('/info-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'infoReviewProduct']);
         Route::get('/list-review-product/{product_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewProduct']);
-        Route::get('/list-review-vdone/{done_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
+        Route::get('/list-review-vdone/{vdone_id}', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'showListReviewVDone']);
         Route::post('/rep-review-product', [\App\Http\Controllers\Api\ReviewProductApiController::class, 'repReviewProduct']);
     });
     // CART
@@ -178,7 +180,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
 
         Route::get('/get_money_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
-
+        Route::post('delivery_off/{product_id}/{pdone_id}',[\App\Http\Controllers\Api\VShopController::class,'delivery_off']);
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
             Route::post('/store/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
@@ -254,6 +256,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
                 Route::post('/store-wallet', [\App\Http\Controllers\Api\storage\FinanceController::class, 'storeWall']);
                 Route::put('/update-wallet/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'updateWall']);
                 Route::post('/create-deposit', [\App\Http\Controllers\Api\storage\FinanceController::class, 'deposit']);
+                Route::get('revenue', [\App\Http\Controllers\Api\storage\FinanceController::class, 'transferMoney']);
 
                 Route::get('/history', [\App\Http\Controllers\Api\storage\FinanceController::class, 'history']);
                 Route::delete('/destroy-wa/{id}', [\App\Http\Controllers\Api\storage\FinanceController::class, 'destoryWa']);
@@ -274,6 +277,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
 
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+    Route::get('/chia',[\App\Http\Controllers\TestController::class,'chia']);
 
 });
 

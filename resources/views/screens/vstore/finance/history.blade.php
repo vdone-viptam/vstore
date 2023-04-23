@@ -73,7 +73,7 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td>GD-{{$history->code}}</td>
+                                            <td>{{$history->code}}</td>
 
                                             @if($history->status == 0)
                                                 <td class="text-yellow-400">

@@ -50,7 +50,7 @@
                 </div>
                 <div class="flex items-start gap-4 w-full">
                     <span class="text-title font-medium w-[150px]">Số lượng bán:</span>
-                    <span class="text-title ">{{$product->amount_product ?? 0 }}</span>
+                    <span class="text-title ">{{$product->amount_product_sold ?? 0 }}</span>
                 </div>
             </div>
             <div class="flex justify-end items-center gap-4 ">

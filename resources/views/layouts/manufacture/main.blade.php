@@ -56,7 +56,12 @@
     .validate-fail .input-code li input {
         border-color: #D90000;
     }
-    td{
+
+    td {
+        text-align: left;
+    }
+
+    th {
         text-align: left;
     }
 
@@ -90,36 +95,36 @@
     const l = document.getElementsByClassName("list")
     const param = url[3];
     const a = url[4] || '/';
-    if (param === "dashboard") {
+    if (param.includes('dashboard')) {
         tm[0].classList.toggle("active")
     }
-    if (param === "products") {
+    if (param.includes('products')) {
         tm[1].classList.toggle("active");
         l[0].classList.remove("hidden");
 
         checkUnder(tm[1], a)
     }
-    if (param === "warehouses") {
+    if (param.includes('warehouses')) {
         tm[2].classList.toggle("active")
         l[1].classList.remove("hidden");
         checkUnder(tm[2], a)
     }
-    if (param === "partners") {
+    if (param.includes('partners')) {
         tm[3].classList.toggle("active");
         l[2].classList.remove("hidden");
         checkUnder(tm[3], a)
     }
-    if (param === "orders") {
+    if (param.includes('orders')) {
         tm[4].classList.toggle("active");
         l[3].classList.remove("hidden");
         checkUnder(tm[4], a)
     }
-    if (param === "finances") {
+    if (param.includes('finances')) {
         tm[5].classList.toggle("active");
         l[4].classList.remove("hidden");
         checkUnder(tm[5], a)
     }
-    if (param === "account") {
+    if (param.includes('account')) {
         tm[6].classList.toggle("active")
         l[5].classList.remove("hidden");
         checkUnder(tm[6], a)
@@ -174,24 +179,51 @@
         const ul = item.querySelector('ul');
 
         if (ul && ul.classList.contains('pagination')) {
-            console.log(ul);
             ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })
-    document.querySelector('.btnA').setAttribute('disabled', 'true');
-    document.querySelector('.btnA').classList.add('bg-slate-300');
-    document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
-    document.querySelector('#key_search').addEventListener('keyup', (e) => {
-        if (e.target.value) {
-            document.querySelector('.btnA').removeAttribute('disabled');
-            document.querySelector('.btnA').classList.remove('bg-slate-300');
-            document.querySelector('.btnA').classList.add('bg-[#40BAFF]');
-        } else {
-            document.querySelector('.btnA').setAttribute('disabled', 'true');
-            document.querySelector('.btnA').classList.add('bg-slate-300');
-            document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
+    var url_string = window.location.href;
+    var url2 = new URL(url_string);
+    var c = url2.searchParams.get("key_search");
+    if (c) {
+        $('#key_search').val(c);
+    } else {
+        if ($('.btnA')) {
+            const btnA = document.querySelector('.btnA');
+            if(btnA){
+                btnA.classList.add('bg-slate-300');
+                btnA.classList.remove('bg-[#40BAFF]');
+                btnA.setAttribute('disabled', 'true');
+            }
         }
-    });
+    }
+    if ($('#key_search')) {
+        const key_search = document.querySelector('#key_search');
+        if(key_search){
+            document.querySelector('#key_search').addEventListener('keyup', (e) => {
+                const btnA = document.querySelector('.btnA');
+                if(btnA){
+                    if (e.target.value) {
+                        btnA.removeAttribute('disabled');
+                        btnA.classList.remove('bg-slate-300');
+                    btnA.classList.add('bg-[#40BAFF]');
+                    } else {
+                        btnA.setAttribute('disabled', 'true');
+                        btnA.classList.add('bg-slate-300');
+                        btnA.classList.remove('bg-[#40BAFF]');
+                    }
+                }
+            });
+        }
+    }
+    const x = document.querySelectorAll('input[type="number"]');
+    x.forEach(item => {
+        item.addEventListener("keypress", function (evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+            }
+        });
+    })
 </script>
 </body>
 </html>

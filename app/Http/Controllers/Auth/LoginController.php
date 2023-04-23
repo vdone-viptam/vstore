@@ -306,7 +306,6 @@ class LoginController extends Controller
                 'volume' => 'required',
                 'image_storage' => 'required',
                 'image_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'image_pccc' => 'required',
                 'image_pccc.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
                 'city_id' => 'required',
                 'district_id' => 'required',
@@ -326,7 +325,7 @@ class LoginController extends Controller
                 'volume.required' => 'Thể tích kho bắt buộc nhập',
                 'image_storage.required' => 'Ảnh kho bắt buộc nhập',
                 'image_storage.image' => 'Không đúng định dạng ảnh',
-                'image_pccc.required' => 'Ảnh chứng minh bắt buộc nhập',
+                'image_storage.*' => 'Không đúng định dạng ảnh !',
                 'image_pccc.image' => 'Không đúng định dạng ảnh',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
@@ -525,8 +524,8 @@ class LoginController extends Controller
                 $order = new OrderService();
                 $order->user_id = $user->id;
                 $order->type = "VSTORE";
-                $order->status = 2; // 2 là chưa hoàn thành
-                $order->payment_status = 2; // 2 là chưa thanh toán
+                $order->status = 1; // 2 là chưa hoàn thành
+                $order->payment_status = 3; // 2 là chưa thanh toán
                 $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
                 $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
                 $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
@@ -907,18 +906,18 @@ class LoginController extends Controller
     {
         if ($request->type == 2) {
 
-            $response = District::select('district_id as DISTRICT_ID','district_name as DISTRICT_NAME','district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
-            ->where('province_id',$request->value)->get();
+            $response = District::select('district_id as DISTRICT_ID', 'district_name as DISTRICT_NAME', 'district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
+                ->where('province_id', $request->value)->get();
 //            return  $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
-          return $response;
+            return $response;
         } elseif ($request->type == 3) {
-            $response = Ward::select('wards_id as WARDS_ID','district_id as DISTRICT_ID','wards_name as WARDS_NAME')->where('district_id',$request->value)->get();
+            $response = Ward::select('wards_id as WARDS_ID', 'district_id as DISTRICT_ID', 'wards_name as WARDS_NAME')->where('district_id', $request->value)->get();
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
             return $response;
         } else {
-            $response = Province::select('province_id as PROVINCE_ID','province_code as PROVINCE_CODE','province_name as PROVINCE_NAME')->get();
-            return  $response;
+            $response = Province::select('province_id as PROVINCE_ID', 'province_code as PROVINCE_CODE', 'province_name as PROVINCE_NAME')->get();
+            return $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 //            return $response->json('data');
 

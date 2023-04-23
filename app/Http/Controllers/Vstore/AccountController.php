@@ -82,7 +82,7 @@ class AccountController extends Controller
                 DB::commit();
             } catch (ClientResponseException $exception) {
                 DB::rollBack();
-                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+                return redirect()->back()->with('error', $exception->getMessage());
             }
             return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
         } catch (\Exception $e) {
@@ -134,11 +134,12 @@ class AccountController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$@#%]).*$/',
+            'password' => 'required|confirmed|min:8|regex:' . config('regex.password'),
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',
             'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
+            'password.confirmed' => 'Mật khẩu không khớp',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');

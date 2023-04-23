@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +49,7 @@ class WarehouseController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -83,13 +86,14 @@ class WarehouseController extends Controller
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
             ->where('type', 2)
             ->where('request_warehouses.ware_id', $warehouses->id)
+            ->whereNotIn('order.export_status', [3, 5])
             ->orderBy($field, $type);
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -133,7 +137,7 @@ class WarehouseController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -170,7 +174,7 @@ class WarehouseController extends Controller
             $request->key_search = trim($request->key_search);
             $orders->where(function ($query) use ($request) {
                 $query->where('order.no', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('products.publish_id', $request->key_search);
             });
         }
@@ -202,8 +206,13 @@ class WarehouseController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('request_warehouses.id', $request->id)
             ->orWhere('request_warehouses.code', $request->id)
-            ->first();
 
+            ->first();
+        if ($requests->type == 2) {
+            $requests->order_number = RequestWarehouse::select('order_number')
+                    ->where('id', $requests->id)->orWhere('code', $request->id)
+                    ->first()->order_number ?? 'Chưa có mã vận chuyển';
+        }
         return response()->json([
             'success' => true,
             'data' => $requests
@@ -261,6 +270,13 @@ class WarehouseController extends Controller
             $productWare->save();
 
             $requestEx->save();
+
+            $product = Product::find($requestEx->product_id);
+
+            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
+
+            $product->save();
+
             $order = Order::where('order_number', $requestEx->order_number)->first();
             if (!$order) {
                 return response()->json([
@@ -268,10 +284,23 @@ class WarehouseController extends Controller
                     'message' => 'Không tìm thấy đơn hàng'
                 ], 404);
             }
-
+            $order->export_status = 2;
             $order->cancel_status = 1;
             $order->save();
+            $product = Product::find($requestEx->product_id);
+            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
+            $product->save();
 
+            $vshop_Id = OrderItem::select('vshop_id')->where('order_id', $order->id)->first();
+
+            $vshop_product = VshopProduct::where('vshop_id', $vshop_Id->vshop_id)->where('product_id', $requestEx->product_id)->first();
+            $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $requestEx->quantity;
+
+            $vshop_product->save();
+
+            $vshop = Vshop::find($vshop_Id->vshop_id);
+            $vshop->products_sold = $vshop->products_sold + $requestEx->quantity;
+            $vshop->save();
             DB::commit();
             return response()->json([
                 'success' => true,
@@ -326,7 +355,6 @@ class WarehouseController extends Controller
             ->join('warehouses', 'order_item.warehouse_id', '=', 'warehouses.id')
             ->join('users', 'warehouses.user_id', '=', 'users.id')
             ->where('order.status', '!=', 2)
-            ->where('export_status', 1)
             ->where('order.id', $request->order_id)
             ->first();
 

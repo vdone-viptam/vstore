@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Validator;
 class ManufactureController extends Controller
 {
 
-    public function searchManufacturesByKeyword(Request $request) {
-
+    public function searchManufacturesByKeyword(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'key_word' => 'required'
         ],
@@ -30,11 +30,6 @@ class ManufactureController extends Controller
                 'key_word.required' => 'Từ khóa tìm kiếm không được để trông'
             ]
         );
-
-        $limit = $request->limit ?? 12;
-        $elasticsearchController = new ElasticsearchController();
-        $res = $elasticsearchController->searchDocNCC($request->key_word);
-
         if ($validator->fails()) {
             return response()->json([
                 'status_code' => 400,
@@ -42,6 +37,9 @@ class ManufactureController extends Controller
             ], 400);
         }
 
+        $limit = $request->limit ?? 12;
+        $elasticsearchController = new ElasticsearchController();
+        $res = $elasticsearchController->searchDocNCC($request->key_word);
         $user = User::where('role_id', 2)->where('account_code', '!=', null)
             ->whereIn('id', $res)
             ->where('status', '!=', 0)
@@ -51,7 +49,7 @@ class ManufactureController extends Controller
         if ($user) {
             foreach ($user as $value) {
                 if ($value->avatar == null) {
-                    $value->avatar = asset('home/img/logo-06.png');
+                    $value->avatar = asset('home/img/NCC.png');
                 } else
                     $value->avatar = asset('image/users/' . $value->avatar);
 
@@ -93,8 +91,6 @@ class ManufactureController extends Controller
     }
 
 
-
-
     /**
      * chi tiết nhà cung cấp
      *
@@ -108,36 +104,36 @@ class ManufactureController extends Controller
 
         try {
 
-            $user = User::select('avatar','name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
-           if ($user){
-               $user->total_product = $user->products()->where('status', 2)->count();
-                $user->avatar = ($user->avatar !='') ? asset('image/users/'.$user->avatar): asset('home/img/NCC.png');
-               $cate = Category::select('categories.name')
-                   ->join('products', 'categories.id', '=', 'products.category_id')
-                   ->where('user_id', $ncc_id)
-                   ->where('products.status',2)
-                   ->groupBy('categories.name')
-                   ->get();
-               $products = Product::select('images')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
-               $images = [];
-               for ($i = 0; $i < count($products); $i++) {
-                   $images[] = asset(json_decode($products[$i]->images)[0]);
-               }
-               $data = [];
-               foreach ($cate as $c) {
-                   $data[] = $c->name;
-               }
-               $user->description = [
-                   'text' => $user->description,
-                   'images' => $images
-               ];
-               $user->categories = implode(', ', $data);
+            $user = User::select('avatar', 'name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
+            if ($user) {
+                $user->total_product = $user->products()->where('status', 2)->count();
+                $user->avatar = ($user->avatar != '') ? asset('image/users/' . $user->avatar) : asset('home/img/NCC.png');
+                $cate = Category::select('categories.name')
+                    ->join('products', 'categories.id', '=', 'products.category_id')
+                    ->where('user_id', $ncc_id)
+                    ->where('products.status', 2)
+                    ->groupBy('categories.name')
+                    ->get();
+                $products = Product::select('images')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
+                $images = [];
+                for ($i = 0; $i < count($products); $i++) {
+                    $images[] = asset(json_decode($products[$i]->images)[0]);
+                }
+                $data = [];
+                foreach ($cate as $c) {
+                    $data[] = $c->name;
+                }
+                $user->description = [
+                    'text' => $user->description,
+                    'images' => $images
+                ];
+                $user->categories = implode(', ', $data);
 
-               return response()->json([
-                   'status' => 200,
-                   'data' => $user
-               ]);
-           }
+                return response()->json([
+                    'status' => 200,
+                    'data' => $user
+                ]);
+            }
 
         } catch (\Exception $e) {
 

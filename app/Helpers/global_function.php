@@ -295,7 +295,8 @@ function statusPreOrder($status)
         {
             return "Đơn huỷ";
         }
-        default: {
+        default:
+        {
             return "Đơn hàng chưa được xử lý";
         }
     }

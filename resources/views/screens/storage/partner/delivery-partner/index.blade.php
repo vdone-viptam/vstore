@@ -68,61 +68,66 @@
                                 <thead>
                                 <tr>
                                     <th>Mã đối tác</th>
-                                    <th>Tên đối tác @if($field == 'name_partner')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="name_partner"
-                                                   style="float: right;cursor: pointer"></i>
+                                    <th>Tên đối tác
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name_partner')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name_partner"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name_partner"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="name_partner"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="name_partner"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="name_partner"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif</th>
+                                        </span>
+                                    </th>
                                     <th>Tổng đơn hàng đã giao
-                                        @if($field == 'count_product')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="count_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'count_product')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="count_product"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="count_product"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="count_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="count_product"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="count_product"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
                                     <th>Số đơn hàng không hoàn thành
-                                        @if($field == 'destroy_order')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="destroy_order"
-                                                   style="float: right;cursor: pointer"></i>
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'destroy_order')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="destroy_order"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="destroy_order"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="destroy_order"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="destroy_order"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="destroy_order"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                        </span>
                                     </th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($deliveryPartners as $deliveryPartners)
+                                @if(count($deliveryPartners) > 0)
+                                    @foreach($deliveryPartners as $deliveryPartners)
+                                        <tr>
+                                            <td>{{$deliveryPartners->code_partner}}</td>
+                                            <td>{{$deliveryPartners->name_partner}}</td>
+                                            <td>{{$deliveryPartners->count_product}}</td>
+                                            <td>{{$deliveryPartners->destroy_order}}</td>
+                                            <td><a class="text-primary underline" href="#"
+                                                onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
+                                                    tiết</a></td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$deliveryPartners->code_partner}}</td>
-                                        <td>{{$deliveryPartners->name_partner}}</td>
-                                        <td>{{$deliveryPartners->count_product}}</td>
-                                        <td>{{$deliveryPartners->destroy_order}}</td>
-                                        <td><a class="text-primary underline" href="#"
-                                               onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
-                                                tiết</a></td>
+                                        <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                                     </tr>
-                                @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

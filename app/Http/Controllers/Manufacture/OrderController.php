@@ -17,19 +17,27 @@ class OrderController extends Controller
     //
     public function index(Request $request)
     {
+        $key_search = $request->key_search ?? '';
         $limit = $request->limit ?? 10;
-        $orders = OrderItem::with(['product', 'vshop', 'warehouse', 'order'])->select('order_id',
-            'product_id',
-            'order_item.price',
-            'quantity',
-            'warehouse_id',
-            'order_id',
-            'vshop_id',
-            'warehouse_id'
-        )->join('products', 'order_item.product_id', '=', 'products.id')
-            ->where('products.user_id', Auth::id())
-            ->orderBy('order_item.id', 'desc')->paginate($limit);
-
+        $orders = Order::with(['orderItem.product',
+            'orderItem.vshop',
+            'orderItem.warehouse',
+            'orderItem'])->select(
+            'no', 'id', 'export_status', 'created_at','estimated_date'
+        )
+            ->where('order.status', '!=', 2);
+        if ($key_search && strlen(($key_search) > 0)) {
+            $orders->where(function ($sub) use ($key_search) {
+                $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
+                    $query->where('nick_name', 'like', '%' . $key_search . '%');
+                })
+                    ->orWhereHas('orderItem.product', function ($query) use ($key_search) {
+                        $query->where('name', 'like', '%' . $key_search . '%');
+                    })
+                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            });
+        }
+        $orders = $orders->orderBy('id', 'desc')->paginate($limit);
         return view('screens.manufacture.order.index', ['orders' => $orders]);
     }
 
@@ -39,34 +47,55 @@ class OrderController extends Controller
 
     }
 
-    public function pending()
+    public function pending(Request $request)
     {
+        $key_search = $request->key_search ?? '';
         $limit = $request->limit ?? 10;
-
-        $orders = OrderItem::with(['product', 'vshop', 'warehouse', 'order'])->select('order_id',
-            'product_id',
-            'order_item.price',
-            'quantity',
-            'warehouse_id',
-            'order_id',
-            'vshop_id',
-            'warehouse_id'
-        )->where('products.user_id', Auth::id())
-            ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->orderBy('order_item.id', 'desc')
-            ->paginate($limit);
+        $orders = Order::with(['orderItem.product',
+            'orderItem.vshop',
+            'orderItem.warehouse',
+            'orderItem'])->select(
+            'no', 'id', 'export_status', 'created_at'
+        )
+            ->where('order.status', '!=', 2)
+            ->where('export_status', '!=', 4);
+        if ($key_search && strlen(($key_search) > 0)) {
+            $orders->where(function ($sub) use ($key_search) {
+                $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
+                    $query->where('nick_name', 'like', '%' . $key_search . '%');
+                })
+                    ->orWhereHas('orderItem.product', function ($query) use ($key_search) {
+                        $query->where('name', 'like', '%' . $key_search . '%');
+                    })
+                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            });
+        }
+        $orders = $orders->orderBy('id', 'desc')->paginate($limit);
         return view('screens.manufacture.order.pending', ['orders' => $orders]);
 
     }
 
-    public function order()
+    public function order(Request $request)
     {
+        $limit = $request->limit ?? 10;
+        $key_search = $request->key_search ?? '';
+
         $orders = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money', 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
-            ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
+            ->select('pre_order_vshop.status', 'quantity',
+                'place_name', 'fullname', 'phone', 'address', 'no',
+                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->join('products', 'pre_order_vshop.product_id', '=',
+                'products.id')
             ->where('products.user_id', Auth::id())
-            ->orderBy('pre_order_vshop.id', 'desc')
-            ->paginate(10);;
+            ->orderBy('pre_order_vshop.id', 'desc');
+        if ($key_search && strlen(($key_search) > 0)) {
+            $orders->where(function ($sub) use ($key_search) {
+                $sub->where('products.name', 'like', '%' . $key_search . '%')
+                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            });
+        }
+        $orders = $orders->paginate($limit);;
         return view('screens.manufacture.order.order', [
             'orders' => $orders
         ]);
@@ -75,7 +104,10 @@ class OrderController extends Controller
     public function detailOrder($id)
     {
         $orders = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity', 'place_name', 'fullname', 'phone', 'address', 'no', 'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money', 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->select('pre_order_vshop.status', 'quantity', 'place_name',
+                'fullname', 'phone', 'address', 'no', 'total',
+                'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
             ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.id', $id)

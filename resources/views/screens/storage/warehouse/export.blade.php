@@ -112,74 +112,69 @@
                             <th>Mã xuất hàng</th>
                             <th>Mã sản phẩm</th>
                             <th>Tên sản phẩm
-                                @if($field == 'product_name')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="product_name"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="product_name"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="product_name"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Nhà cung cấp
-                                @if($field == 'ncc_name')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'ncc_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="ncc_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="ncc_name"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="ncc_name"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="ncc_name"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Số lượng
-                                @if($field == 'quantity')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'quantity')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="quantity"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="quantity"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="quantity"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="quantity"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Ngày xuất hàng
-                                @if($field == 'created_at')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="created_at"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Thao tác/Trạng thái
-                                @if($field == 'status')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="status"
-                                           style="float: right;cursor: pointer"></i>
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="status"
-                                           style="float: right;cursor: pointer"></i>
+                                        <i class="fas fa-sort sort" data-sort="status"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="status"
-                                       style="float: right;cursor: pointer"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>Xuất hóa đơn</th>
                             <th></th>
@@ -191,7 +186,7 @@
                                 <tr>
                                     <td>{{$request->code}}</td>
                                     <td>{{$request->publish_id}}</td>
-                                    <td>{{$request->product_name}}</td>
+                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td>{{$request->ncc_name}}</td>
                                     <td>{{$request->quantity}}</td>
                                     <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
@@ -281,6 +276,12 @@
                                 <div class="form-group">
                             <label for="product_name">Tên sản phẩm:</label>
                             <input type="text" class="form-control form-control-lg" id="product_name" value="${data.data.product_name}" readonly>
+                            </div>
+                        <div class="form-group">
+                            <label for="quantity">Mã vận chuyển: </label>
+                            <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.order_number || 'Chưa có mã vận chuyển'}" readonly>
+                        </div>
+
                         <div class="form-group">
                             <label for="quantity">Số lượng xuất:</label>
                             <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
@@ -471,7 +472,7 @@
                             <div class="d-flex justify-content-between align-items-center" style="gap:4px">
                                 <span class="font-medium">Tên sản phẩm: <span class="font-normal">${data.message.name}</span></span>
                                 <span class="font-medium">Số lượng: <span class="font-normal">${data.message.quantity}</span></span>
-                                <span class="font-medium">Khối lượng: <span class="font-normal">${data.message.weight} Gam</span></span>
+                                <span class="font-medium">Khối lượng: <span class="font-normal">${data.message.weight * data.message.quantity} Gam</span></span>
                             </div>
 
                             </div>
@@ -481,9 +482,9 @@
                                 <div class="col-6 py-2 px-0">
                                         <h4 class="font-medium " style="margin-bottom:8px">Thanh toán</h4>
                                         <div class="d-flex flex-column " style="gap:4px">
-                                            <span class="font-medium">Phí ship: <span class="font-normal">${data.message.shipping} VNĐ</span></span>
+                                            <span class="font-medium">Phí ship: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(data.message.shipping)} VNĐ</span></span>
                                             <span class="font-medium">Thanh toán phí ship: <span class="font-normal">Người nhận</span></span>
-                                            <span class="font-medium">Số tiền phải thu: <span class="font-normal">${data.message.total} VNĐ</span></span>
+                                            <span class="font-medium">Số tiền phải thu: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(Math.round(data.message.total))} VNĐ</span></span>
                                         </div>
                                     </div>
 

@@ -15,8 +15,11 @@ use App\Models\ProductWarehouses;
 use App\Models\Province;
 use App\Models\RequestWarehouse;
 use App\Models\User;
+use App\Models\Vshop;
+use App\Models\VshopProduct;
 use App\Models\Warehouses;
 use Carbon\Carbon;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +43,6 @@ class ProductController extends Controller
             products.sku_id,
             products.name as product_name,
             categories.name as cate_name,
-            users.name,
             (product_warehouses.amount - product_warehouses.export) as in_stock,
             warehouses.id as warehouse_id,
             products.id as product_id'
@@ -48,6 +50,7 @@ class ProductController extends Controller
             ->selectSub('select IFNULL(SUM(quantity),0) from request_warehouses
                      where request_warehouses.product_id = products.id
                        and request_warehouses.ware_id = warehouses.id  and request_warehouses.type = 2 and request_warehouses.status = 0', 'pause_product')
+            ->selectSub('select name from users where id = products.user_id', 'name')
             ->join('products', 'categories.id', '=', 'products.category_id')
             ->join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
             ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
@@ -55,18 +58,14 @@ class ProductController extends Controller
             ->where('product_warehouses.status', 1)
             ->orderBy($field, $type)
             ->groupBy(['products.id'])
-            ->where('warehouses.user_id', Auth::id())//        ->where('product_name','like','%'.$request->key_search .'%')
-        ;
-//        if ($request->publish_id) {
-//            $products = $products->where('products.publish_id', $request->publish_id);
-//        }
+            ->where('warehouses.user_id', Auth::id());
 
         if ($request->key_search) {
             $request->key_search = trim($request->key_search);
             $products->where(function ($query) use ($request) {
                 $query->where('products.publish_id', $request->key_search)
                     ->orWhere('products.sku_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search)
                     ->orWhere('categories.name', $request->key_search);
             });
@@ -105,7 +104,7 @@ class ProductController extends Controller
             $requests->where(function ($query) use ($request) {
                 $query->where('request_warehouses.code', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search)
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%')
                     ->orWhere('users.name', $request->key_search);
             });
         }
@@ -126,62 +125,99 @@ class ProductController extends Controller
                 'message' => 'Trạng thái cập nhật chỉ là 1,5 hoặc 10',
             ], 400);
         }
-
-        $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->first();
-        if (!$requestIm) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Không tìm thấy yêu cầu',
-            ], 404);
-        } else {
-            if ($requestIm->status == 1 || $requestIm->status == 2) {
+        DB::beginTransaction();
+        try {
+            $requestIm = RequestWarehouse::where('id', $request->id)->where('type', 1)->first();
+            if (!$requestIm) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Không tìm thấy yêu cầu',
                 ], 404);
+            } else {
+                if ($requestIm->status == 1 || $requestIm->status == 2) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy yêu cầu',
+                    ], 404);
+                }
             }
+            if ($requestIm->status == 5) {
+                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+                if (!$ware) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy sản phẩm',
+                    ], 404);
+                }
+                if ($ware->status == 0) {
+                    $ware->status = 1;
+                }
+                $ware->amount = $ware->amount + $requestIm->quantity;
+                $ware->save();
+                $vshop = Vshop::where('pdone_id', 262)->first();
+                if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
+                    $vshop_product = new VshopProduct();
+                    $vshop_product->vshop_id = $vshop->id;
+                    $vshop_product->product_id = $requestIm->product_id;
+                    $vshop_product->status = 1;
+                    $vshop_product->save();
+                }
+
+                $product = Product::with(['category'])->where('id', $requestIm->product_id)->where('availability_status', 0)->first();
+                if ($product) {
+                    $product->availability_status = 1;
+                    $product->save();
+                    $elasticsearchController = new ElasticsearchController();
+
+                    try {
+                        $res = $elasticsearchController
+                            ->createDocProduct((string)$product->id,
+                                $product->name, $product->short_content, $product->category->name, $product->publish_id);
+                        DB::commit();
+                    } catch (ClientResponseException $exception) {
+                        DB::rollBack();
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Có lỗi xảy ra vui lòng thử lại',
+                        ], 500);
+                    }
+                }
+            }
+            if ($requestIm->status == 7) {
+                $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
+                if (!$ware) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy sản phẩm',
+                    ], 404);
+                }
+                $ware->export = $ware->export - (int)$requestIm->quantity;
+                $ware->save();
+            }
+
+            $requestIm->status = $status;
+            $requestIm->save();
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật yêu cầu thành công',
+
+            ], 201);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ], 500);
         }
-        if ($requestIm->status == 5) {
-            $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
-            if (!$ware) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Không tìm thấy sản phẩm',
-                ], 404);
-            }
-            if ($ware->status == 0) {
-                $ware->status = 1;
-            }
-            $ware->amount = $ware->amount + $requestIm->quantity;
-            $ware->save();
-
-            DB::table('products')->where('id', $requestIm->product_id)->where('availability_status', 0)->update(['availability_status' => 1]);
-        }
-        if ($requestIm->status == 7) {
-            $ware = ProductWarehouses::where('ware_id', $requestIm->ware_id)->where('product_id', $requestIm->product_id)->first();
-            if (!$ware) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Không tìm thấy sản phẩm',
-                ], 404);
-            }
-            $ware->export = $ware->export - (int)$requestIm->quantity;
-            $ware->save();
-        }
-
-        $requestIm->status = $status;
-        $requestIm->save();
-        return response()->json([
-            'success' => true,
-            'message' => 'Cập nhật đơn gửi hàng thành công',
-
-        ], 201);
-
-
     }
 
     public function requestOut(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => \Carbon\Carbon::now()]);
+        }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
         $field = $request->field ?? 'order.id';
@@ -198,6 +234,7 @@ class ProductController extends Controller
                 'order.updated_at as created_at',
                 'order.id'
             )
+            ->orderBy('created_at','DESC')
             ->orderBy($field, $type);
         $order = $order->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $warehouses->id);
@@ -206,7 +243,7 @@ class ProductController extends Controller
             $order->where(function ($query) use ($request) {
                 $query->where('order.no', $request->key_search)
                     ->orWhere('products.publish_id', $request->key_search)
-                    ->orWhere('products.name', $request->key_search);
+                    ->orWhere('products.name', 'like', '%' . $request->key_search . '%');
             });
         }
         $order = $order->paginate($limit);
@@ -338,7 +375,7 @@ class ProductController extends Controller
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
             $product = Product::where('id', $order_item->product_id)->first();
-            DB::table('request_warehouses')->where('code', $order->no)->where('type', 10)->delete();
+            RequestWarehouse::destroy($order->request_warehouse_id);
 
             if ($status == 1) {
 //            return $order->total;
@@ -408,7 +445,7 @@ class ProductController extends Controller
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => null,
-                    "ORDER_NOTE" => "",
+                    "ORDER_NOTE" => $order_item['quantity'] ." x ". $product->name,
                     "MONEY_COLLECTION" => 0,
                     "LIST_ITEM" => $list_item,
                 ]);

@@ -739,7 +739,7 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 400,
                 'message' => $e->getMessage(),
-            ]);
+            ],400);
         }
 
     }

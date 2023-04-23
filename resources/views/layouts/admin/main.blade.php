@@ -18,11 +18,16 @@
         background: linear-gradient(180deg, #7280FD 0%, #7280FD 0.01%, #4C5DF4 100%);
 
     }
-    td{
-        text-align: left;
 
+    td {
+        text-align: left;
     }
-    .page-link{
+
+    th {
+        text-align: left;
+    }
+
+    .page-link {
         width: 100%;
         text-align: center;
     }
@@ -38,11 +43,11 @@
 
 </div>
 <div class="grid grid-cols-12">
-<div class="md:col-span-3 2xl:col-span-2 md:block hidden ">
-    @include('layouts.admin.menu')
-</div>
-{{--    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">--}}
-{{--    </div>--}}
+    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">
+        @include('layouts.admin.menu')
+    </div>
+    {{--    <div class="md:col-span-3 2xl:col-span-2 md:block hidden ">--}}
+    {{--    </div>--}}
     <div class="w-full col-span-12 md:col-span-9 2xl:col-span-10">
         @include('layouts.admin.header')
         @include('layouts.admin.header_mobile')
@@ -50,42 +55,39 @@
     </div>
 </div>
 @include('layouts.js')
-@yield('custom_js')
-</body>
-<script>
-    $('.more-details').on('click', function () {
-        $('.modal-details').toggleClass('show-modal');
-    })
 
-    const url = window.location.href.split('/');
-    const tm = document.querySelectorAll(".tab__menu")
-    const l = document.getElementsByClassName("list")
-    const param = url[3];
-    const a = url[4] || '/';
-    if (param === "dashboard") {
+@yield('custom_js')
+
+<script>
+    let url = window.location.href.split('/');
+    let tm = document.querySelectorAll(".tab__menu")
+    let l = document.getElementsByClassName("list")
+    let param = url[3];
+    let a = url[4] || '/';
+    if (param.includes('dashboard')) {
         tm[0].classList.toggle("active")
     }
-    if (param === "product") {
+    if (param.includes('product')) {
         tm[1].classList.toggle("active");
         l[0].classList.remove("hidden");
         checkUnder(tm[1], a)
     }
-    if (param === "categories") {
+    if (param.includes('categories')) {
         tm[2].classList.toggle("active")
         checkUnder(tm[2], a)
     }
-    if (param === "users") {
+    if (param.includes('users')) {
         tm[3].classList.toggle("active")
         l[1].classList.remove("hidden");
         checkUnder(tm[3], a)
 
     }
-    if (param === "finances") {
+    if (param.includes('finances')) {
         tm[4].classList.toggle("active")
         l[2].classList.remove("hidden");
         checkUnder(tm[4], a)
     }
-    if (param === "account") {
+    if (param.includes('account')) {
         tm[5].classList.toggle("active")
         l[3].classList.remove("hidden");
         checkUnder(tm[5], a)
@@ -141,24 +143,52 @@
         const ul = item.querySelector('ul');
 
         if (ul && ul.classList.contains('pagination')) {
-            console.log(ul);
             ul.setAttribute('class', 'pagination flex justify-start items-center gap-2 flex-wrap')
         }
     })
-    document.querySelector('.btnA').setAttribute('disabled', 'true');
-    document.querySelector('.btnA').classList.add('bg-slate-300');
-    document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
-    document.querySelector('#key_search').addEventListener('keyup', (e) => {
-        if (e.target.value) {
-            document.querySelector('.btnA').removeAttribute('disabled');
-            document.querySelector('.btnA').classList.remove('bg-slate-300');
-            document.querySelector('.btnA').classList.add('bg-[#40BAFF]');
-        } else {
-            document.querySelector('.btnA').setAttribute('disabled', 'true');
-            document.querySelector('.btnA').classList.add('bg-slate-300');
-            document.querySelector('.btnA').classList.remove('bg-[#40BAFF]');
+    var url_string = window.location.href;
+    var url2 = new URL(url_string);
+    var c = url2.searchParams.get("key_search");
+    if (c) {
+        $('#key_search').val(c);
+    } else {
+        if ($('.btnA')) {
+            const btnA = document.querySelector('.btnA');
+            if(btnA){
+                btnA.classList.add('bg-slate-300');
+                btnA.classList.remove('bg-[#40BAFF]');
+                btnA.setAttribute('disabled', 'true');
+            }
+        }
+    }
+    if ($('#key_search')) {
+        const key_search = document.querySelector('#key_search');
+        if(key_search){
+            document.querySelector('#key_search').addEventListener('keyup', (e) => {
+                const btnA = document.querySelector('.btnA');
+                if(btnA){
+                    if (e.target.value) {
+                        btnA.removeAttribute('disabled');
+                        btnA.classList.remove('bg-slate-300');
+                    btnA.classList.add('bg-[#40BAFF]');
+                    } else {
+                        btnA.setAttribute('disabled', 'true');
+                        btnA.classList.add('bg-slate-300');
+                        btnA.classList.remove('bg-[#40BAFF]');
+                    }
+                }
+            });
+        }
+    }
+    const x = document.querySelectorAll('input[type="number"]');
+    x.addEventListener("keypress", function (evt) {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
         }
     });
 </script>
+</body>
+
 
 </html>

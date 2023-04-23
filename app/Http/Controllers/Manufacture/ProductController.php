@@ -30,7 +30,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 //        return 1;
-        $this->v['products'] = Product::select('products.id', 'publish_id', 'images', 'products.name', 'brand', 'category_id', 'price', 'products.status', 'vstore_id')
+        $this->v['products'] = Product::select('products.id',
+            'publish_id', 'images', 'products.name', 'brand',
+            'category_id', 'price', 'products.status', 'vstore_id', 'amount_product_sold')
             ->join("categories", 'products.category_id', '=', 'categories.id')
             ->orderBy('id', 'desc');
         $limit = $request->limit ?? 10;
@@ -69,10 +71,10 @@ class ProductController extends Controller
 //        return 1;
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
-        $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
+        $this->v['vstore'] = User::where('id', 800)->first();
 
         if (!$this->v['vstore']) {
-            $this->v['vstore'] = User::where('id',800)->first();
+            $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
         }
 //        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
@@ -100,7 +102,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-//        dd( $request->all());
+        //    dd( $request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'price' => 'required',
@@ -115,7 +117,6 @@ class ProductController extends Controller
             'length' => 'required',
             'height' => 'required',
             'packing_type' => 'required',
-            'volume' => 'required',
             'with' => 'required',
             'material' => 'required',
             'origin' => 'required'
@@ -134,10 +135,10 @@ class ProductController extends Controller
             'length.required' => 'Chiều dài bắt buộc nhập',
             'height.required' => 'Chiều cao bắt buộc nhập',
             'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
-            'volume.required' => 'Thể tích bắt buộc nhập',
             'with.required' => 'Chiều dài bắt buộc nhập',
             'material.required' => 'Chất liệu bắt buộc nhập',
-            'origin.required' => 'Xuất xứ bắt buộc nhập'
+            'origin.required' => 'Xuất xứ bắt buộc nhập',
+            'short_content.max' => 'Mô tả ngắn ít hơn 500 ký tự'
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -202,37 +203,10 @@ class ProductController extends Controller
                 }
             }
             $product->images = json_encode($photo_gallery);
-//            $photo_gallery = [];
-//            foreach (json_decode($request->unitImages) as $image) {
-//                $photo_gallery[] = 'storage / products / ' . $this->saveImgBase64($image, 'products');
-//            }
-//            $product->unit_images = json_encode($photo_gallery);
+
             $product->user_id = Auth::id();
             $product->save();
 
-//            $dataInsert = [];
-//            $amount = 0;
-//            for ($i = 0; $i < count($request->ward_id); $i++) {
-//                $dataInsert[] = [
-//                    'product_id' => $product->id,
-//                    'ward_id' => $request->ward_id[$i],
-//                    'amount' => $request->amount[$i],
-//                    'created_at' => Carbon::now(),
-//                    'status' => 1];
-//                $amount += $request->amount[$i];
-//            }
-//            ProductWarehouses::insert($dataInsert);
-//            Product::where('id', $product->id)->update(['amount_product' => $amount]);
-//            $userLogin = Auth::user();
-//            $user = User::find($request->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-//            $data = [
-//                'title' => 'Bạn vừa có 1 thông báo mới',
-//                'avatar' => $userLogin->avatar ?? '',
-//                'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
-//                'created_at' => Carbon::now()->format('h:i A d / m / Y'),
-//                'href' => route('screens . vstore . product . request', ['condition' => 'sku_id', 'key_search' => $product->sku_id])
-//            ];
-//            $user->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
         } catch (\Exception $e) {
@@ -294,8 +268,10 @@ class ProductController extends Controller
 
             if ($request->product) {
 
-                $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat')
+                $this->v['product'] = Product::query()->select('id', 'publish_id', 'images',
+                    'name', 'brand', 'category_id', 'price', 'status', 'vstore_id',
+                    'discount', 'discount_vShop', 'description', 'vat', 'amount_product_sold')
+                    ->selectSub('select amount - export from product_warehouses where product_id = products.id', 'amount')
                     ->where('id', $request->id)
                     ->first();
                 return view('screens.manufacture.product.detail_product', $this->v);
@@ -306,10 +282,9 @@ class ProductController extends Controller
                     ->join('users', 'requests.vstore_id', '=', 'users.id')
                     ->selectRaw('requests.code,products.id,requests.id as re_id,price,
                     requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
-                    users.name as user_name,requests.vat')
+                    users.name as user_name,requests.vat,products.amount_product_sold')
                     ->where('requests.id', $request->id)
                     ->first();
-                $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id =" . $this->v['request']->id))[0]->amount;
                 return view('screens.manufacture.product.detail', $this->v);
             }
         } catch (\Exception $e) {
@@ -522,10 +497,10 @@ class ProductController extends Controller
             'length' => 'required',
             'height' => 'required',
             'packing_type' => 'required',
-            'volume' => 'required',
             'with' => 'required',
             'material' => 'required',
-            'origin' => 'required'
+            'origin' => 'required',
+            'short_content' => 'required|max:500'
 
         ], [
             'name.required' => 'Trường này không được trống',
@@ -539,10 +514,11 @@ class ProductController extends Controller
             'length.required' => 'Chiều dài bắt buộc nhập',
             'height.required' => 'Chiều cao bắt buộc nhập',
             'packing_type.required' => 'Kiểu đóng gói bắt buộc nhập',
-            'volume.required' => 'Thể tích bắt buộc nhập',
             'with.required' => 'Chiều dài bắt buộc nhập',
             'material.required' => 'Chất liệu bắt buộc nhập',
-            'origin.required' => 'Xuất xứ bắt buộc nhập'
+            'origin.required' => 'Xuất xứ bắt buộc nhập',
+            'short_content.max' => 'Mô tả ngắn ít hơn 500 ký tự',
+            'short_content.required' => 'Mô tả ngắn bắt buộc nhập'
         ]);
 
         if ($validator->fails()) {
@@ -591,7 +567,7 @@ class ProductController extends Controller
             foreach (json_decode($request->images) as $image) {
                 try {
                     if (strpos($image, 'storage/products') !== false) {
-                        $photo_gallery[] = explode(config('domain.ncc')  . "/", $image)[1];
+                        $photo_gallery[] = explode(config('domain.ncc') . "/", $image)[1];
                     } else {
                         $photo_gallery[] = 'storage/products/' . $this->saveImgBase64($image, 'products');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlanceChange;
 use App\Models\Deposit;
 use App\Models\Wallet;
 use Carbon\Carbon;
@@ -92,21 +93,37 @@ class FinanceController extends Controller
         ], 201);
     }
 
+    public function transferMoney(Request $request)
+    {
+        $limit = $request->limit ?? 10;
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'id';
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
+            ->paginate($limit);
+        return response()->json([
+            'success' => true,
+            'data' => $this->v['histories'],
+            'field' => $field,
+            'type' => $type
+        ]);
+    }
+
     public function history(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $this->v['histories'] = Deposit::with(['bank'])->select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+        $type = $request->type ?? 'desc';
+        $field = $request->field ?? 'id';
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
             ->where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc');
-
-        if ($request->code) {
-            $this->v['histories'] = $this->v['histories']->where('code', $request->code);
-        }
-
-        $this->v['histories'] = $this->v['histories']->paginate($limit);
+            ->orderBy($field, $type)
+            ->paginate($limit);
         return response()->json([
             'success' => true,
-            'data' => $this->v['histories']
+            'data' => $this->v['histories'],
+            'field' => $field,
+            'type' => $type
         ]);
     }
 
@@ -147,7 +164,7 @@ class FinanceController extends Controller
             if ($request->money > Auth::user()->money) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ'
+                    'message' => 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ'
                 ], 400);
             }
             DB::table('deposits')->insert([

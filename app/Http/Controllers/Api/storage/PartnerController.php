@@ -64,7 +64,7 @@ class PartnerController extends Controller
             // $ncc = $ncc->groupBy(['users.name', 'account_code'])
             //     ->paginate($limit);
             // return $search.'```````'.$limit;
-            $type = $request->type ?? 'asc';
+            $type = $request->type ?? 'desc';
             $field = $request->field ?? 'users.id';
             $ncc = $this->partnerRepository->index($search, $limit, $type, $field);
             return response()->json(['success' => true, 'data' => $ncc]);
@@ -176,8 +176,8 @@ class PartnerController extends Controller
             //     ->where('order.export_status', 4);
             // $ncc = $ncc->groupBy(['delivery_partner_id'])
             //     ->paginate($limit);
-            $type = $request->type ?? 'asc';
-            $field = $request->field ?? 'users.id';
+            $type = $request->type ?? 'desc';
+            $field = $request->field ?? 'delivery_partner.id';
             $ncc = $this->partnerRepository->deliveryPartner($search ?? '', $limit, $type, $field);
             return response()->json(['success' => true, 'data' => $ncc]);
         } catch (\Exception $e) {

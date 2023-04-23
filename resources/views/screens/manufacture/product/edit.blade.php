@@ -130,7 +130,7 @@
                         <span class="text-title font-medium">Giá sản phẩm<strong
                                 class="text-[#FF4D4F]">*</strong></span>
                             <input type="text" placeholder="Nhập giá sản phẩm" id="price"
-                                   value="{{number_format($product->price,0,',',',')}}"
+                                   value="{{number_format($product->price,0,'.','.')}}"
                                    class="h-[42px] outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                             @error('price')
                             <p class="text-red-600">{{$message}}</p>
@@ -306,8 +306,7 @@
 
                         </div>
                         <div class="flex flex-col justify-start items-start gap-2 w-full">
-                            <span class="text-title font-medium">Thể tích (ml)<strong
-                                    class="text-[#FF4D4F]">*</strong></span>
+                            <span class="text-title font-medium">Thể tích (ml)</span>
                             <input type="text" placeholder="Nhập thể tích sản phẩm" name="volume" id="volume"
                                    value="{{$product->volume}}"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
@@ -374,19 +373,13 @@
 @endsection
 
 @section('custom_js')
-    <script src="https://cdn.tiny.cloud/1/7v46ob448fd1i42e0fle8qsifky50i9gg368joxi55dlp64h/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script async>
         tinymce.init({
             selector: '#description',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                {value: 'First.Name', title: 'First Name'},
-                {value: 'Email', title: 'Email'},
-            ],
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
             image_title: true,
             /* enable automatic uploads of images represented by blob or data URIs*/
             automatic_uploads: true,
@@ -574,12 +567,12 @@
                     style: "currency",
                     currency: "USD",
                     maximumFractionDigits: 0
-                }).format((e.target.value.replaceAll(',', '')));
+                }).format((e.target.value.replaceAll(',', '').replaceAll('.', '')));
                 // document.getElementById('price').value = value.replaceAll('$', '');
 
-                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '');
+                document.getElementsByName('price')[0].value = value.replaceAll('$', '').replaceAll(',', '').replaceAll(',', '');
                 ;
-                document.getElementById('price').value = value.replaceAll('$', '')
+                document.getElementById('price').value = value.replaceAll('$', '').replaceAll(',', '.')
             }
         });
     </script>

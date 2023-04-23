@@ -2,32 +2,42 @@
 @section('page_title','Quản lý xuất - nhập kho')
 
 @section('content')
+<form action="" id="form">
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
         <span class="text-secondary">Kho hàng</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="" class="text-blueMain font-medium italic">Quản lý xuất - nhập kho</a>
+        <a href="{{route('screens.manufacture.warehouse.swap')}}" class="text-blueMain font-medium italic">Quản lý xuất - nhập kho</a>
     </div>
     <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
-        {{--        <div class="flex justify-start items-start gap-2 flex-wrap">--}}
-        {{--            <select name="" id=""--}}
-        {{--                    class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">--}}
-        {{--                <option value="0" selected>Tất cả</option>--}}
-        {{--                <option value="1">Mã sản phẩm</option>--}}
-        {{--                <option value="2">Tên sản phẩm</option>--}}
-        {{--                <option value="3">Thương hiệu</option>--}}
-        {{--                <option value="4">Ngành hàng</option>--}}
-        {{--            </select>--}}
+        <div class="flex justify-start items-start gap-2 flex-wrap">
+            <select name="condition"
+                    class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
+                <option
+                    value="request_warehouses.code" {{isset($condition) && $condition == 'request_warehouses.code' ? 'selected' : ''}}>
+                    Mã
+                </option>
+                <option
+                    value="products.name" {{isset($condition) && $condition == 'products.name' ? 'selected' : ''}}>
+                    Tên sản phẩm
+                </option>
+                <option
+                    value="warehouses.name" {{isset($condition) && $condition == 'warehouses.name' ? 'selected' : ''}}>
+                    Tên kho hàng
+                </option>
+            </select>
 
-        {{--            <input type="text"--}}
-        {{--                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[5px] focus:border-primary transition-all duration-200"--}}
-        {{--                   placeholder="Nhập từ khóa">--}}
-        {{--            <input type="submit"--}}
-        {{--                   class="text-blue-700  cursor-pointer transition-all duration-200 hover:bg-[#FFF] hover:text-blueMain outline-none rounded-sm border-[1px] border-blueMain bg-blueMain px-4 py-[5px] text-[#FFF]"--}}
-        {{--                   value="Lọc">--}}
-        {{--        </div>--}}
+            <input type="text" name="key_search" value="{{$key_search ?? '' }}" id="key_search"
+                   class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
+                   placeholder="Nhập từ khóa">
+            <button type="submit"
+                    class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
+            >
+                Tìm kiếm
+            </button>
+        </div>
         <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
             <div class="flex justify-between items-center flex-wrap gap-4">
                 <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
@@ -172,10 +182,52 @@
                 </table>
             </div>
             <div class="flex justify-end items-center gap-4 flex-wrap">
-                <span class="text-sm text-title">Tổng: <strong class="font-bold">{{$products->total()}}</strong></span>
                 {{$products->withQueryString()->links()}}
+                <div class="flex justify-start items-center gap-2 flex-wrap">
+                    <select name="limit"
+                            class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
+                        <option
+                                                       {{-- value="10" {{isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>10
+                                                       hàng / trang --}}
+                            value="10"
+                            @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >
+                            10
+                            hàng / trang
+                            {{--                            {{ app('request')->input('limit') }}--}}
+                        </option>
+                        <option
+                                                       {{-- value="25" {{isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>25
+                                                       hàng / trang --}}
+                            value="25"
+                            @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif >
+                            25
+                            hàng / trang
+                        </option>
+                        <option
+                            {{-- value="50" {{isset($params['limit']) && $params['limit'] == 50 ? 'selected' : ''}}>50
+                                                       hàng / trang --}}
+                            value="50"
+                            @if(app('request')->input('limit') && app('request')->input('limit') ==50)selected @endif >
+                            50
+                            hàng / trang
+                        </option>
+                    </select>
+
+                </div>
             </div>
         </div>
         <div></div>
     </div>
+</form>
+@endsection
+
+@section('custom_js')
+    <script>
+        const form = document.getElementById('form');
+        const limit = document.getElementsByName('limit')[0];
+        const page = document.getElementById('page1');
+        limit.addEventListener('change', (e) => {
+            form.submit();
+        });
+    </script>
 @endsection

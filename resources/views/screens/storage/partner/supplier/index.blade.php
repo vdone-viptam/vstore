@@ -71,62 +71,66 @@
                                     <th>Mã nhà cung cấp</th>
                                     <th>Tên nhà cung cấp</th>
                                     <th>Khu vực
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'province_name')
                                             @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="province_name"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fa-solid fa-sort-down sort" data-sort="province_name"></i>
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="province_name"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fa-solid fa-sort-up sort" data-sort="province_name"></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="province_name"
-                                               style="float: right;cursor: pointer"></i>
+                                            <i class="fas fa-sort sort" data-sort="province_name"></i>
                                         @endif
+                                        </span>
                                     </th>
                                     <th>Số loại sản phẩm
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'count_product')
                                             @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="count_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fa-solid fa-sort-down sort" data-sort="count_product"></i>
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="count_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fa-solid fa-sort-up sort" data-sort="count_product"></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="count_product"
-                                               style="float: right;cursor: pointer"></i>
-                                        @endif
+                                            <i class="fas fa-sort sort" data-sort="count_product"></i>
+                                            @endif
+                                        </span>
                                     </th>
                                     <th>Số lượng tồn
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'amount_product')
                                             @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="amount_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fa-solid fa-sort-down sort" data-sort="amount_product"></i>
                                             @else
                                                 <i class="fa-solid fa-sort-up sort" data-sort="amount_product"
                                                    style="float: right;cursor: pointer"></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="amount_product"
-                                               style="float: right;cursor: pointer"></i>
+                                            <i class="fas fa-sort sort" data-sort="amount_product"></i>
                                         @endif
+                                        </span>
                                     </th>
                                     <th>Chi tiết</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($suppliers as $supplier)
+                                @if(count($suppliers) > 0)
+                                    @foreach($suppliers as $supplier)
+                                        <tr>
+                                            <td>{{$supplier->account_code}}</td>
+                                            <td> {{$supplier->name}}</td>
+                                            <td>{{$supplier->province_name}}</td>
+                                            <td>{{$supplier->count_product}}</td>
+                                            <td>{{$supplier->amount_product}}</td>
+                                            <td><a class="text-primary underline" href="#"
+                                                onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$supplier->account_code}}</td>
-                                        <td> {{$supplier->name}}</td>
-                                        <td>{{$supplier->province_name}}</td>
-                                        <td>{{$supplier->count_product}}</td>
-                                        <td>{{$supplier->amount_product}}</td>
-                                        <td><a class="text-primary underline" href="#"
-                                               onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
+                                        <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
                                     </tr>
-                                @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

@@ -57,7 +57,7 @@
 
                             <div class="w-full">
                                 <input type="text" name="account_number"
-                                       class=" outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                       class="only-number outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                 @error('account_number')
                                 <p class="text-red-600 mt-2">{{$message}}</p>
                                 @enderror
@@ -135,7 +135,7 @@
 
                                 <div class="w-full">
                                     <input type="text" name="account_number" value="{{$wallet->account_number}}"
-                                           class=" outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
+                                           class="only-number outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
                                     @error('account_number')
                                     <p class="text-red-600 mt-2">{{$message}}</p>
                                     @enderror
@@ -250,9 +250,9 @@
                             <label class="w-full text-[#6A6A6A]  text-sm" for="val-username">Số tiền cần
                                 rút<strong class="text-[#FF4D4F]">*</strong>
                             </label>
-                            <input type="number" name="money" id="money" data-value="0"
+                            <input required type="number" name="money" id="money" data-value="0"
                                    class=" outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#F1F1F4] focus:border-primary transition-all duration-200 rounded-sm"
-                                   min="1" placeholder="0đ" style="border-radius: 0.25rem">
+                                   min="100000" placeholder="0đ" style="border-radius: 0.25rem">
                         </div>
                         <div class="flex flex-col items-start w-full flex-wrap md:flex-nowrap">
                             <label class="w-full text-[#6A6A6A]  text-sm" for="val-username">Phương thức nhận tiền:
@@ -328,6 +328,14 @@
 
 @section('custom_js')
     <script>
+        document.querySelector('.only-number').addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
         $('#btnAddBank').on('click', (o) => {
             $('.modal-details').toggleClass('show-modal')
         });
@@ -346,5 +354,16 @@
                 document.querySelector('.btnGra').classList.remove('opacity-70');
             }
         });
+        document.getElementsByName('name').forEach(item => {
+            item.addEventListener("keypress", (e) => {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        })
+
     </script>
 @endsection

@@ -24,13 +24,12 @@
             <div class="flex justify-start items-start gap-2 flex-wrap">
                                 <select name="condition" id=""
                                         class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-
                                     <option
-                                        value="users.account_code" {{isset($params['condition']) && $params['condition'] == 'publish_id' ? 'selected' : ''}}>
+                                        value="users.account_code" {{isset($params['condition']) && $params['condition'] == 'users.account_code ' ? 'selected' : ''}}>
                                         Mã Nhà Cung Cấp
                                     </option>
                                     <option
-                                        value=users.name {{isset($params['condition']) && $params['condition'] == 'name' ? 'selected' : ''}}>
+                                        value=users.name {{isset($params['condition']) && $params['condition'] == 'users.name' ? 'selected' : ''}}>
                                         Tên Nhà Cung Cấp
                                     </option>
 
@@ -42,16 +41,7 @@
                 <button type="submit"
                         class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
                 >
-                    <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 6H4L6.28571 11.1316V19.8158L7.80952 21L9.33333 19.8158V11.1316L12 6Z"
-                              fill="white"/>
-                        <path d="M13 11H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 15H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 19H18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path
-                            d="M1.21336 2.32558L6.69784 10.7209V17.7907C6.69784 18.6744 6.69784 20 7.9635 20C8.97602 20 9.281 18.5271 9.30692 17.7907V10.7209C10.8279 8.36434 14.0386 3.38605 14.7136 2.32558C15.3886 1.26512 14.7136 1 14.2918 1H2.05712C0.707096 1 0.9321 1.88372 1.21336 2.32558Z"
-                            stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+
                     Tìm kiếm
                 </button>
             </div>
@@ -102,27 +92,23 @@
                             <th>
                                 Số sản phẩm liên kết
                             </th>
-                            {{--                            <th>--}}
-                            {{--                                Chi tiết--}}
-                            {{--                            </th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($users) > 0)
                             @foreach($users as $val)
-
                                 <tr>
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {{$val->account_code}}
                                     </td>
-                                    <td>
+                                    <td class="text-left">
                                         {{$val->name}}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {{$val->phone_number}}
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {{$val->sl}}
                                     </td>
 
@@ -186,5 +172,15 @@
                 });
             });
         });
+        document.getElementsByName('name').forEach(item => {
+            item.addEventListener("keypress", (e) => {
+                var regex = new RegExp("/[a-zA-Z]/g");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        })
     </script>
 @endsection

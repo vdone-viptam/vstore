@@ -19,7 +19,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('products*')) ? 'active' : '' }}" href="#"
-                           data-toggle="collapse" aria-expanded="false"
+                           data-toggle="collapse" aria-expanded="{{ (request()->is('products*')) ? 'true' : 'false' }}"
                            data-target="#submenu-2" aria-controls="submenu-2"><i
                                 class="fa fa-fw fas fa-truck"></i>Hàng hóa
                         </a>
@@ -49,7 +49,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('warehouses*')) ? 'active' : '' }}" href="#"
-                           data-toggle="collapse" aria-expanded="false"
+                           data-toggle="collapse" aria-expanded="{{ (request()->is('warehouses*')) ? 'true' : 'false' }}"
                            data-target="#submenu-3" aria-controls="submenu-3"><i
                                 class="fas fa-fw fas fa-warehouse"></i>Quản lý kho</a>
                         <div id="submenu-3"
@@ -78,7 +78,7 @@
                         </div>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('partners*')) ? 'true' : 'false' }}"
                            data-target="#submenu-4" aria-controls="submenu-4"><i
                                 class="fab fa-fw fas fa-users"></i>Đối tác</a>
                         <div id="submenu-4" class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
@@ -93,7 +93,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('finances*')) ? 'true' : 'false' }}"
                            data-target="#submenu-6" aria-controls="submenu-6"><i
                                 class="fas fa-fw fa-dollar-sign"></i>
                             Tài chính</a>
@@ -113,7 +113,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('account*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('account*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('account*')) ? 'true' : 'false' }}"
                            data-target="#submenu-7" aria-controls="submenu-7"><i
                                 class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
                         <div id="submenu-7" class="{{ (request()->is('account*')) ? 'collapshow' : 'collapse' }} submenu" style="">

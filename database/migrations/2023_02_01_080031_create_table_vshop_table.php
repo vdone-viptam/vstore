@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('pdone_id')->nullable()->comment('Id pdone');
             $table->string('name')->nullable()->comment('tên vshop');
-            $table->string('name_adress')->nullable()->comment('tên địa chỉ');
+            $table->string('name_address')->nullable()->comment('tên địa chỉ');
             $table->string('phone_number')->nullable()->comment('số điện thoại');
             $table->string('district')->nullable()->comment('quận,huyện');
             $table->integer('province')->nullable()->comment('tỉnh thành');
@@ -24,10 +24,10 @@ return new class extends Migration {
             $table->double('money', 20, 2)->default(0);
             $table->integer('products_sold')->default(0);
             $table->string('nick_name')->nullable();
-            $table->integer('vshop_id')->default(0);
+            $table->integer('vshop_id')->nullable();
             $table->integer('wards')->default(0);
-            $table->integer('description')->default(0);
-            $table->integer('vshop_name')->default(0);
+            $table->integer('description')->nullable();
+            $table->integer('vshop_name')->nullable();
             $table->string('avatar')->nullable();
             // $table->string('avatar')->nullable();
             $table->timestamps();

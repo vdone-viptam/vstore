@@ -283,6 +283,50 @@ function swalNoti(position, icon, title, width, showConfirmButton, timer) {
         timer: timer
     });
 }
+function convertVND(params) {
+    return params.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+}
+window.addEventListener("DOMContentLoaded", (event) => {
+    const el = document.querySelector(".only-number");
+    if (el) {
+        el.addEventListener("keypress", function (evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+            {
+                evt.preventDefault();
+            }
+        });
+    }
+})
+var onlyNumberVer1 = document.querySelector('.only-number');
+if(onlyNumberVer1){
+    onlyNumberVer1.addEventListener("keypress", (e) => {
+        var regex = new RegExp("^[0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+}
+var numberPercent = document.querySelector('.number-percent');
+if(numberPercent){
+    numberPercent.addEventListener("keypress", (e) => {
+        var regex = new RegExp("^[0-9,.]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+}
+
+function setValueById(id,value) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.value = value ?? '';
+    }
+
+}
 // MENU
 
 

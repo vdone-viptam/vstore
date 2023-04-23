@@ -136,6 +136,7 @@ class PaymentMethod9PayController extends Controller
 
                 if ($order) {
                     $order->payment_status = config('constants.paymentStatus.done');
+                    $order->status = 1;
 
                     $order_item = OrderItem::where('order_id', $order->id)->first();
                     $requestEx = new RequestWarehouse();
@@ -308,7 +309,7 @@ class PaymentMethod9PayController extends Controller
             if ($status === 5) {
                 if ($order) {
                     $user = User::find($order->user_id);
-                    $order->status = 1;
+                    $order->status = config('constants.orderServiceStatus.done');
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     return redirect()->route('landingpagencc', [
@@ -342,7 +343,6 @@ class PaymentMethod9PayController extends Controller
             ]);
         }
     }
-
 
     function paymentOrderServiceBackKHO(Request $request)
     {
@@ -398,7 +398,7 @@ class PaymentMethod9PayController extends Controller
             if ($status === 5) {
                 if ($order) {
                     $user = User::find($order->user_id);
-                    $order->status = 1;
+                    $order->status = config('constants.orderServiceStatus.done');
                     $order->payment_status = config('constants.paymentStatus.done');
                     $order->save();
                     return redirect()->route('screens.storage.index', [
@@ -604,10 +604,11 @@ class PaymentMethod9PayController extends Controller
             $order->save();
             $cart = CartV2::where('user_id', $order->user_id)
                 ->first();
-            CartItemV2::where('cart_id', $cart->id)
-                ->where('product_id', $orderItems->product_id)
-                ->delete();
-
+            if($cart) {
+                CartItemV2::where('cart_id', $cart->id)
+                    ->where('product_id', $orderItems->product_id)
+                    ->delete();
+            }
             $requestEx = new RequestWarehouse();
 
             $requestEx->ncc_id = 0;
@@ -695,7 +696,7 @@ class PaymentMethod9PayController extends Controller
             try {
                 $redirectUrl = $merchantEndPoint . '/portal?' . http_build_query($httpData);
                 return response()->json([
-                    'redirectUrl'=>$redirectUrl,
+                    'redirectUrl' => $redirectUrl,
                     'time' => $time,
                     'invoice_no' => $invoiceNo,
                     'amount' => $amount,

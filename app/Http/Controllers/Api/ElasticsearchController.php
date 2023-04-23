@@ -100,7 +100,7 @@ class ElasticsearchController extends Controller
     public function updateDocVStore($id, $name)
     {
         $params = [
-            'index' => 'vstore',
+            'index' => config('elasticsearch.vstore_products'),
             'id' => $id,
             'body' => [
                 'doc' => [
@@ -161,6 +161,35 @@ class ElasticsearchController extends Controller
         return $this->client->index($params);
     }
 
+    public function createDocCategory($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.vstore_categories'),
+            'id' => $id,
+            'body' => [
+                "name" => $name
+            ],
+        ];
+        return $this->client->index($params);
+    }
+
+    public function updateDocCategory($id, $name)
+    {
+        $params = [
+            'index' => config('elasticsearch.vstore_categories'),
+            'id' => $id,
+            'body' => [
+                'doc' => [
+                    'name' => $name
+                ]
+            ]
+        ];
+
+        $response = $this->client->update($params);
+
+        return $response;
+    }
+
     public function updateDocNCC($id, $name)
     {
         $params = [
@@ -200,9 +229,7 @@ class ElasticsearchController extends Controller
         try {
             $response = $this->client->search($params);
         } catch (ClientResponseException $e) {
-            if ($e->getCode() == 400) {
-                return ['BAD_REQUEST'];
-            }
+            return ['BAD_REQUEST', $e->getMessage()];
         }
         $hits = $response['hits']['hits'];
         $arrIdVStore = [];
@@ -256,16 +283,19 @@ class ElasticsearchController extends Controller
         ];
         return $this->client->index($params);
     }
-    public function createDocCategory($id, $name)
+
+    public function updateDocVShop($id, $name)
     {
         $params = [
-            'index' => config('elasticsearch.vstore_categories'),
+            'index' => config('elasticsearch.vshop'),
             'id' => $id,
             'body' => [
-                "name" => $name
+                'doc' => [
+                    'name' => $name
+                ]
             ],
         ];
-        return $this->client->index($params);
+        return $this->client->update($params);
     }
 
     public function searchDocCategory($keyword, $from = 0, $size = 10): array
