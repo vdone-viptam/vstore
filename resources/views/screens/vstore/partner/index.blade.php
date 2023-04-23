@@ -1,4 +1,4 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.vstore.main')
 @section('page_title','Danh sách NCC liên kết')
 
 @section('page')
