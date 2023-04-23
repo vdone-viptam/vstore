@@ -337,7 +337,7 @@
             <div class="form-group">
                <label>Chiết khấu cho V-Shop</label>
 <input class="form-control number" name="discount_vShop" id="discount_vShop">
-            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2}</p>
+            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
             </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)

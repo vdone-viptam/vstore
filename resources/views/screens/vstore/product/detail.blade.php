@@ -76,7 +76,8 @@
     </div>
 </div>
 <div class="row">
-    <div class=" @if($product->status == 2) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
+    <div
+        class=" @if($product->status == 2) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
         <div class="form-group">
             <label for="name">Trạng thái yêu cầu</label>
             <select name="status" id="status" class="form-control" @if($product->status != 0) disabled @endif>
@@ -88,22 +89,22 @@
     @if($product->status == 2)
         <div class="col -12">
             <div class="form-group">
-                <label for="name">Chiết khấu cho V-Shop</label>
-                <textarea name="" disabled class="form-control" id="">{{$product->note}}</textarea>
+                <label for="name">Lý do từ chối</label>
+                <textarea name="" disabled class="form-control number" id="">{{$product->note}}</textarea>
             </div>
         </div>
     @else
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="name">Chiết khấu cho V-Shop</label>
-                <input type="text" class="form-control form-control-lg number"
+                <input type="text" class="form-control form-control-lg number-percent"
                        value="{{$product->discount_vshop ?? ''}}"
                        {{isset($product->discount_vshop) || $product->status == 2 ? 'disabled' : ''}} name="discount_vShop"
                        id="discount_vShop"
                        placeholder="Nhập chiết khẩu cho V-Shop">
                 <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được
                     nhỏ
-                    hơn {{$product->discount / 2    }}</p>
+                    hơn {{$product->discount / 2}} và lớn hơn {{$product->discount}}</p>
             </div>
         </div>
     @endif
@@ -115,13 +116,14 @@
 
 <script>
     document.getElementById('btnConfirm').style.display = 'none';
-    // document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-    //     if (e.target.value) {
-    //         document.getElementById('btnConfirm').style.display = 'none';
-    //     } else {
-    //         document.getElementById('messageDis').style.display = 'block';
-    //     }
-    // })
+    document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
+        var regex = new RegExp("^[0-9.]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 2) {
             document.getElementById('btnConfirm').style.display = 'block';
@@ -137,7 +139,7 @@
 
         }
     })
-    if(document.getElementsByName('discount_vShop')[0]){
+    if (document.getElementsByName('discount_vShop')[0]) {
         document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
             if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                 document.getElementById('messageDis').style.display = 'none';

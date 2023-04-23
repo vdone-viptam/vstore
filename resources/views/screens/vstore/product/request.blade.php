@@ -248,8 +248,8 @@
             </div>
             <div class="form-group">
                <label>Chiết khấu cho V-Shop</label>
-<input class="form-control number" name="discount_vShop" id="discount_vShop">
-            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2}</p>
+<input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
+            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
             </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
@@ -265,6 +265,14 @@
                 }
 
             })
+            document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
+                var regex = new RegExp("^[0-9.]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
             $('#modalDetail').modal('show');
 
         }
