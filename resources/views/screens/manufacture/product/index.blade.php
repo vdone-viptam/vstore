@@ -95,19 +95,6 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thương hiệu
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'brand')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="brand"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="brand"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="brand"></i>
-                                    @endif
-                                </span>
-                            </th>
 
                             <th>Ngành hàng
                                 <span style="float: right;cursor: pointer">
@@ -149,7 +136,33 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng sản phẩm
+                            <th>Tỉ lệ chiết khấu cho V-Store
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'products.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.discount"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Số lượng đã bán
+                                <span style="float: right;cursor: pointer">
+                                @if($field == 'amount_product_sold')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                    @endif
+                                    </span>
+                            </th>
+                            <th>Số lượng trong kho
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                         @if($type == 'desc')
@@ -162,21 +175,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng đã bán
-                                <span style="float: right;cursor: pointer">
-                                @if($field == 'amount_product_sold')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                    </span>
-                            </th>
                             <th>
-                                Chức năng
+                                Chi tiết
                             </th>
                         </tr>
                         </thead>
@@ -189,7 +189,6 @@
                                                                  src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>
                                     </td>
                                     <td class="td_name">{{$product->name}}</td>
-                                    <td>{{$product->brand}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{number_format($product->price,0,'.','.')}} đ</td>
                                     <td>{{$product->vstore_name ?? 'Sản phẩm chưa niêm yết'}}</td>

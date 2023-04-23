@@ -4,7 +4,7 @@
     <div id="modal5"></div>
 @endsection
 
-@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận')
+@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -18,7 +18,6 @@
                                                            class="breadcrumb-link">Sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản phẩm
-                                chưa xác nhận
                             </li>
                         </ol>
                     </nav>
@@ -31,13 +30,15 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận</h5>
+                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt sản phẩm</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <input type="search" name="key_search" value="{{$key_search}}"
-                                   class="form-control"
-                                   placeholder="Nhập từ khóa tìm kiếm">
+                            <form action="">
+                                <input type="search" name="key_search" value="{{$key_search}}"
+                                       class="form-control"
+                                       placeholder="Nhập từ khóa tìm kiếm">
+                            </form>
 
                         </div>
                     </li>
@@ -129,7 +130,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái</th>
+                            <th>Trạng thái
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'requests.status')
+                                        @if($type == 'products.price')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="requests.status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="requests.status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="requests.status"></i>
+                                    @endif
+                                </span>
+                            </th>
 
                             <th>
                                 Chức năng
@@ -158,13 +171,66 @@
                                     </td>
 
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td><span class="text-warning">Yêu cầu mới</span></td>
+                                    <td>
+                                        @if($product->status == 0)
+                                            <div
+                                                class="alert alert-warning">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
+                                                        fill="white"/>
+                                                </svg>
+                                                Đang chờ duyệt
+                                            </div>
+                                        @elseif($product->status == 1)
+                                            <div
+                                                class="alert alert-warning">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6ZM7 0C7.91925 0 8.8295 0.18106 9.67878 0.532843C10.5281 0.884626 11.2997 1.40024 11.9497 2.05025C12.5998 2.70026 13.1154 3.47194 13.4672 4.32122C13.8189 5.17049 14 6.08075 14 7C14 8.85651 13.2625 10.637 11.9497 11.9497C10.637 13.2625 8.85651 14 7 14C3.129 14 0 10.85 0 7C0 5.14348 0.737498 3.36301 2.05025 2.05025C3.36301 0.737498 5.14348 0 7 0ZM7.35 3.5V7.175L10.5 9.044L9.975 9.905L6.3 7.7V3.5H7.35Z"
+                                                        fill="white"/>
+                                                </svg>
+                                                Đã duyệt - chờ hệ thống duyệt
+                                            </div>
+                                        @elseif($product->status == 2)
+                                            <div
+                                                class="alert alert-danger">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="white"/>
+                                                </svg>
+                                                Từ chối
+                                            </div>
+                                        @elseif($product->status == 3)
+                                            <div
+                                                class="alert alert-success">
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="white"
+                                                          stroke-linecap="round"/>
+                                                </svg>
+                                                Hệ thống đồng ý
+                                            </div>
+                                        @else
+                                            <div
+                                                class="alert alert-danger">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="white"/>
+                                                </svg>
+                                                Hệ thống từ chối
+                                            </div>
+                                        @endif
+                                    </td>
 
                                     <td>
-                                        <a href="{{route('screens.vstore.product.confirm',['id' => $product->id,'status' => 1])}}"
-                                           class="btn btn-success">Đồng ý</a>
-                                        <a href="{{route('screens.vstore.product.confirm',['id' => $product->id,'status' => 2])}}"
-                                           class="btn btn-danger">Từ chối</a>
+                                        <a href="" class="btn btn-link">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -227,7 +293,7 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.vstore.product.request',['key_search' => $key_search])}}&type=' + orderBy +
+                        document.location = '{{route('screens.vstore.product.requestAll',['key_search' => $key_search])}}&type=' + orderBy +
                             '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
@@ -235,7 +301,7 @@
         });
         limit.addEventListener('change', (e) => {
             setTimeout(() => {
-                document.location = '{{route('screens.vstore.product.request',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                document.location = '{{route('screens.vstore.product.requestAll',['key_search' => $key_search])}}&type=' + '{{$type}}' +
                     '&field=' + '{{$field}}' + '&limit=' + e.target.value
             }, 200)
         })

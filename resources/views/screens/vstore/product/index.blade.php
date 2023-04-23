@@ -64,11 +64,47 @@
                             </th>
                             <th>
                                 Ngành hàng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'categories.name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="categories.name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="categories.name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="categories.name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th style="min-width: 200px" >
+                                Giá sản phẩm (chưa VAT)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'products.price')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.price"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.price"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.price"></i>
+                                    @endif
+                                </span>
                             </th>
                             <th>
-                                Thương hiệu
+                                VAT (%)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'vat')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="vat"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="vat"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="vat"></i>
+                                    @endif
+                                </span>
                             </th>
-                            <th>Tên NCC
+                            <th>Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -81,12 +117,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Giá bán chưa VAT
-                            </th>
-                            <th>
-                                VAT
-                            </th>
+
+
                             <th>Chiết khấu từ NCC
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
@@ -100,16 +132,31 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chiết khấu cho V-SHOP
+                            <th>
+                                Ngày xét duyệt
+                                <span style="float: right;cursor: pointer">
+
+                                @if($field == 'admin_confirm_date')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
+                                @endif
+                                </span>
+                            </th>
+                            <th style="min-width: 200px">Chiết khấu cho V-SHOP
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discount_vShop"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discount_vShop"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="discount"></i>
+                                        <i class="fas fa-sort sort" data-sort="discount_vShop"></i>
                                     @endif
                                 </span>
                             </th>
@@ -128,15 +175,18 @@
                                     <td>
                                         {{$product->name}}
                                     </td>
+                                    <td>{{$product->cate_name}}</td>
+                                    <td>
+                                        {{number_format($product->price,0,'.','.')}}
+                                    </td>
+                                    <td>{{$product->vat}}</td>
                                     <td>
                                         {{$product->user_name}}
                                     </td>
                                     <td>
-                                        {{number_format($product->price,0,'.','.')}}
-                                    </td>
-                                    <td>
                                         {{$product->discount}}
                                     </td>
+                                    <td>{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
                                     <td>
                                         {{number_format($product->amount_product_sold,0,'.','.')}}
                                     </td>

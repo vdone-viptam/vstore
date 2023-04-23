@@ -379,14 +379,16 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     Route::prefix('products')->group(function () {
         Route::get('/index', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
         Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
+        Route::get('/request-all', [\App\Http\Controllers\Vstore\ProductController::class, 'requestAll'])->name('screens.vstore.product.requestAll');
+
         Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
-        Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
+        Route::match(['GET', 'POST'], '/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
         Route::get('/discount', [\App\Http\Controllers\Vstore\ProductController::class, 'discount'])->name('screens.vstore.product.discount');
         Route::get('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'createDis'])->name('screens.vstore.product.createDis');
         Route::get('/choose-product', [\App\Http\Controllers\Vstore\ProductController::class, 'chooseProduct'])->name('screens.vstore.product.chooseProduct');
         Route::post('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'storeDis'])->name('screens.vstore.product.storeDis');
-        Route::get('/edit-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'editDis'])->name('screens.vstore.product.editDis');
-        Route::post('/update-discount/{id}', [\App\Http\Controllers\Vstore\ProductController::class, 'updateDis'])->name('screens.vstore.product.updateDis');
+        Route::get('/edit-discount/{id?}', [\App\Http\Controllers\Vstore\ProductController::class, 'editDis'])->name('screens.vstore.product.editDis');
+        Route::post('/update-discount/{id?}', [\App\Http\Controllers\Vstore\ProductController::class, 'updateDis'])->name('screens.vstore.product.updateDis');
 
     });
     Route::prefix('partners')->group(function () {

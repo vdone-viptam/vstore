@@ -1,198 +1,325 @@
-@extends('layouts.vstore_old.main')
+@extends('layouts.manufacture.main')
+@section('page_title','Quản lý giảm giá')
+
+
 
 @section('modal')
-    <div id="modal2"></div>
-@endsection
-
-@section('page_title','Giảm giá')
-
-@section('content')
-    <form action="" id="form">
-        <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Sản phẩm</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                      stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <a href="{{route('screens.vstore.product.discount')}}" class="text-blueMain font-medium italic">Quản lý giảm
-                giá</a>
-        </div>
-        <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
-
-            <div class="flex justify-start items-start gap-2 flex-wrap">
-                <input type="hidden" name="products.name">
-
-                <input type="text" name="key_search" value="{{$params['key_search'] ?? ''}}" id="key_search"
-                       class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="Nhập từ khóa">
-                <button type="submit"
-                        class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
-                >
-
-                    Tìm kiếm
-                </button>
-            </div>
-            <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
-                <div class="flex justify-between items-center flex-wrap gap-4">
-                    <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
-                        <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path opacity="0.4"
-                                  d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
-                                  fill="url(#paint0_linear_98_611)"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
-                                  fill="url(#paint1_linear_98_611)"/>
-                            <defs>
-                                <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449"
-                                                y2="24.5684" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                                <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
-                                                gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        Sản phẩm giảm giá
-                    </h2>
-                    <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-                        <a href="#"
-                           class="btnAddDis bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_4_2870)">
-                                    <rect width="20" height="20" fill="white" fill-opacity="0.01"/>
-                                    <path
-                                            d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"
-                                            fill="white"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4_2870">
-                                        <rect width="20" height="20" fill="white"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <span>Thêm mới giảm giá</span>
-                        </a>
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="" id="form-AC" method="POST">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Sửa mã giảm giá</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body md-content">
 
                     </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success btnSubmit" id="btnAC"></button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
 
+                    </div>
                 </div>
-                <div class="w-full overflow-scroll">
-                    @if(\Illuminate\Support\Facades\Session::has('success'))
-                        <p class="text-green-600">{{\Illuminate\Support\Facades\Session::get('success')}}</p>
-                    @endif
-                    <table class="w-full dsth">
+            </div>
+        </form>
+    </div>
+@endsection
+@section('page')
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Quản lý giảm giá</h2>
+
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Sản phẩm</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý giảm giá</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
+
+@section('content')
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                <h5 class="mb-0" style="font-size:18px;">Quản lý giảm giá</h5>
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <div id="custom-search" class="top-search-bar">
+                            <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input name="key_search" value="" class="form-control"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
+                            </form>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <button type="button" id="btnA" class="btn btn-primary my-2">
+                        Thêm mới giảm giá
+                    </button>
+                    <table id="example" class="table table-striped table-bordered second    "
+                    >
                         <thead>
                         <tr>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'products.name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Phần trăm giảm giá
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discounts.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discounts.discount"></i>
+                                    @endif
+                                </span>
+                            </th>
 
-                            <th>
-                                STT
+                            <th>Ngày bắt đầu
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discounts.start_date')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.start_date"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.start_date"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discounts.start_date"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Ngày kết thúc
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discounts.end_date')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.end_date"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.end_date"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discounts.end_date"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo giảm giá
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discounts.created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discounts.created_at"></i>
+                                    @endif
+                                </span>
                             </th>
                             <th>
-                                Tên sản phẩm
-                            </th>
-                            <th>
-                                Phần trăm giảm giá
-                            </th>
-                            <th>Ngày bắt đầu</th>
-                            <th>Ngày kết thúc</th>
-                            <th>
-                                Ngày tạo
-                            </th>
-                            <th>
-                                Hành động
+                                Chức năng
                             </th>
                         </tr>
                         </thead>
                         <tbody>
+                        <tr>
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$discount->name}}</td>
                                     <td>{{$discount->discount}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
+                                    <td>
+                                        @if($discount->start_date < \Carbon\Carbon::now() && $discount->end_date > \Carbon\Carbon::now())
+                                            <span class="text-success">Đang áp dụng</span>
+                                        @else
+                                            <span class="text-danger">Không áp dụng</span>
+                                        @endif
+                                    </td>
                                     <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
                                     <td><a href="#" data-id="{{$discount->id}}"
-                                           class="text-blue-700 more-details">Sửa</a></td>
+                                           class="btn btn-warning more-details"
+                                           onclick="edit({{$discount->id}})">Sửa</a></td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5">Không có dữ liệu phù hợp</td>
+                                <td colspan="6" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
+
                 </div>
-                <div class="flex justify-end items-center gap-4 flex-wrap">
-                                        <span class="text-sm text-title">Tổng: <strong
-                                                    class="font-bold">{{$discounts->total()}}</strong></span>
+                <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$discounts->withQueryString()->links()}}
-
-                    <div class="flex justify-start items-center gap-2 flex-wrap">
-                        <select name="limit"
-                                class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option
-                                    value="10" {{isset($params['limit']) && $params['limit'] == '10' ? 'selected' : ''}}>
-                                10
-                                hàng / trang
-                            </option>
-                            <option
-                                    value="25" {{isset($params['limit']) && $params['limit'] == '25' ? 'selected' : ''}}>
-                                25
-                                hàng / trang
-                            </option>
-                            <option
-                                    value="50" {{isset($params['limit']) && $params['limit'] == '50' ? 'selected' : ''}}>
-                                50
-                                hàng / trang
-                            </option>
-                        </select>
-
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
+
+
             </div>
-            <div></div>
+
         </div>
-    </form>
+    </div>
+
 @endsection
 
 @section('custom_js')
     <script>
-        $('.more-details').each(function (i, e) {
-            $(this).on('click', (o) => {
-                $.ajax({
-                    url: '{{route('screens.vstore.product.editDis')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}',
-                    success: function (result) {
-                        $('#modal2').html(result);
-                        $('.modal-details').toggleClass('show-modal')
-                    },
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.vstore.product.discount',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort + '&limit={{$limit}}'
+                    })
                 });
             });
         });
-        $('.btnAddDis').on('click', (o) => {
-            $.ajax({
-                url: '{{route('screens.vstore.product.createDis')}}?_token={{csrf_token()}}',
-                success: function (result) {
-                    $('#modal2').html(result);
-                    $('.modal-details').toggleClass('show-modal')
-                },
-            });
+
+        document.querySelector('#btnA').addEventListener('click', async () => {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.product.createDis')}}`,
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    $('#requestModal').modal('hide')
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thêm mới giảm giá thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = ``;
+
+                if (data.view) {
+                    htmlData += data.view;
+                    $('.md-content').html(htmlData)
+                    document.getElementById('form-AC').setAttribute('action', '{{route('screens.vstore.product.createDis')}}')
+                    $("#btnAC").html('Thêm mới');
+                    $('#modalDetail').modal('show');
+
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
         });
-        const form = document.getElementById('form');
-        const limit = document.getElementsByName('limit')[0];
+
+        const edit = async (id) => {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.product.editDis')}}?id=` + id,
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    $('#requestModal').modal('hide')
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thêm mới giảm giá thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = ``;
+
+                if (data.view) {
+                    htmlData += data.view;
+                    $('.md-content').html(htmlData)
+                    $("#btnAC").html('Lưu thay đổi');
+                    $('#modalDetail').modal('show');
+                    document.getElementById('form-AC').setAttribute('action', '{{route('screens.vstore.product.updateDis')}}/' + id)
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+        };
+        let limit = document.getElementById('limit');
         limit.addEventListener('change', (e) => {
-            form.submit();
-        });
-        // page.addEventListener('change', (e) => {
-        //     form.submit();
-        // });
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.product.discount',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
+
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{\Illuminate\Support\Facades\Session::get('success')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{\Illuminate\Support\Facades\Session::get('error')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
 @endsection
