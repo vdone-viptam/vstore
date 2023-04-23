@@ -86,9 +86,10 @@ class AccountController extends Controller
 //                DB::rollBack();
 //                return redirect()->back()->with('error', $exception->getMessage());
 //            }
+            DB::commit();
             return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công2');
         } catch (\Exception $e) {
-//            DB::rollBack();
+            DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
 
         }
