@@ -1,4 +1,4 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.vstore.main')
 @section('page_title','Quản lý giảm giá')
 
 
@@ -265,7 +265,7 @@
         const edit = async (id) => {
             await $.ajax({
                 type: "GET",
-                url: `{{route('screens.vstore.product.editDis')}}?id=` + id,
+                url: `{{route('screens.vstore.product.editDis')}}/` + id,
                 dataType: "json",
                 encode: true,
                 error: function (jqXHR, error, errorThrown) {

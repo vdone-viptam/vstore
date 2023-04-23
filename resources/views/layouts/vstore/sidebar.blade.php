@@ -60,7 +60,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('order*')) ? 'active' : '' }}" href="#"
                            data-toggle="collapse"
-                           aria-expanded="{{ (request()->is('warehouses*')) ? 'true' : 'false' }}"
+                           aria-expanded="{{ (request()->is('order*')) ? 'true' : 'false' }}"
                            data-target="#submenu-3" aria-controls="submenu-3"><i
                                 class="fas fa-fw fas fa-warehouse"></i>Quản lý đơn hàng</a>
                         <div id="submenu-3"
