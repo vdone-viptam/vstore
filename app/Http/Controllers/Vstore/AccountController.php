@@ -61,9 +61,10 @@ class AccountController extends Controller
         }
         DB::beginTransaction();
         try {
-            $user = \App\Models\User::find($id);
+           $user = User::find($id);
 
-            $user->name = trim($request->name);
+            $user->name =trim($request->name) ;
+
             $user->company_name = trim($request->company_name);
 //        $user->tax_code = trim($request->tax_code);
             $user->address = trim($request->address);
@@ -73,9 +74,9 @@ class AccountController extends Controller
             if ($request->link_website) {
                 $user->slug = trim($request->link_website);
             }
-            $user->description = $request->description;
+            $user->description = $request->description ?? '';
             $user->save();
-
+//            return $user;
 //            $elasticsearchController = new ElasticsearchController();
 //            try {
 //                $res = $elasticsearchController->updateDocVStore((string)$user->id, $request->name);
@@ -87,7 +88,7 @@ class AccountController extends Controller
 //            }
             return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
         } catch (\Exception $e) {
-            DB::rollBack();
+//            DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
 
         }
