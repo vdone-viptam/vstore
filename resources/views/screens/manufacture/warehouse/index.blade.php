@@ -1,24 +1,75 @@
 @extends('layouts.manufacture.main')
 
 @section('modal')
-    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body md-content">
+    <div
+        class="modal fade"
+        id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form method="post" action="{{route('screens.manufacture.warehouse.addProduct')}}">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thêm sản phẩm vào kho</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body md-content">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chọn sản phẩm <span class="text-danger">*</span></label>
+                                        <select class="form-control form-control-lg" name="product_id">
+                                            <option value="" selected disabled>Lựa chọn sản phẩm thêm vào kho</option>
+                                            @foreach($products as $product)
+                                                <option
+                                                    value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('product_id')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chọn kho liên kết <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control form-control-lg" name="ware_id">
+                                            <option value="" selected disabled>Lựa chọn kho liên kết</option>
+                                            @foreach($warehouses as $ware)
+                                                <option
+                                                    value="{{$ware->id}}" {{old('ware_id') == $ware->id ? 'selected' : ''}}>{{$ware->ware_name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('ware_id')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @csrf
+                                <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Nhập số lượng <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg number" id="quantity"
+                                               name="quantity"
+                                               value="{{old('quantity')}}" placeholder="Nhập Số lượng sản phẩm">
+                                        @error('quantity')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnAddPro" class="btn btn-success">Gửi yêu cầu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 @section('page_title','Quản lý kho hàng')
@@ -52,11 +103,18 @@
                         <ul class="navbar-nav flex-row align-items-center " style="gap: 10px;">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
-                                    <input name="account_code" class="form-control" type="search" placeholder="Nhập ID Kho">
+                                    <input id="account_code" class="form-control" type="text"
+                                           placeholder="Nhập ID Kho">
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <button class="btn btn-primary">Thêm kho</button>
+                                <button class="btn btn-primary" id="btnAffWa" type="button" onclick="affWarehouse()">
+                                    Thêm kho
+                                </button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"
+                                        type="button">
+                                    Thêm sản phẩm vào kho
+                                </button>
                             </li>
                         </ul>
                     </form>
@@ -74,18 +132,29 @@
                                 </th>
                                 <th class="th th_ncc_name">Tổng số mặt hàng
                                     <span style="float: right;cursor: pointer">
-                                <a href="#">
-                                <i id="sort-mh" class="fas fa-sort sort" data-sort="products.name"></i>
-                                </a>
-
-
-                                                                    </span>
+                                    @if($field == 'amount')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="amount"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="amount"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="amount"></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th class="th th_quantity">Sản phẩm có trong kho
                                     <span style="float: right;cursor: pointer">
-                                                                            <i class="fas fa-sort sort"
-                                                                               data-sort="products.name"></i>
-                                                                    </span>
+                                    @if($field == 'amount_product')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="amount_product"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="amount_product"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="amount_product"></i>
+                                        @endif
+                                </span>
                                 </th>
 
                                 <th class="th th_status">Thao tác
@@ -99,8 +168,8 @@
                                     <td>{{$val->ware_name}}</td>
                                     <td>{{$val->phone_number}}</td>
                                     <td>{{$val->address}}</td>
-                                    <td>{{$val->amount}}</td>
-                                    <td>{{$val->amount_product}}</td>
+                                    <td>{{$val->amount ?? 0}}</td>
+                                    <td>{{$val->amount_product ?? 0}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$val->id}})">Chi tiết
@@ -113,6 +182,20 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="d-flex align-items-end justify-content-end mt-4">
+                        {{$warehouses->withQueryString()->links()}}
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                            <form>
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,7 +206,36 @@
 @endsection
 
 @section('custom_js')
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{\Illuminate\Support\Facades\Session::get('success')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{\Illuminate\Support\Facades\Session::get('error')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            $('#exampleModalCenter').modal('show');
+        </script>
+    @endif
     <script>
+
+    </script>
+    <script>
+
+        document.getElementById('btnAffWa').setAttribute('disabled', 'true');
+
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
@@ -200,12 +312,64 @@
             })
         }
 
+        async function affWarehouse() {
+            const account_code = $("#account_code").val().trim();
 
-    </script>
-    <script>
-        $('.sort').click(function (){
-           var a= $(this).data("sort");
-           alert(a);
+            await $.ajax({
+                type: "POST",
+                url: `{{route('screens.manufacture.warehouse.affWarehouse')}}`,
+                dataType: "json",
+                data: {"account_code": account_code},
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Liên kết kho không thành công',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                Swal.fire({
+                    icon: 'success',
+                    title: data.message,
+                    text: 'Click nút bên dưới để đóng',
+                }).then(() => location.reload())
+            })
+        }
+
+        document.getElementById('account_code').addEventListener('keyup', (e) => {
+            if (e.target.value) {
+                document.getElementById('btnAffWa').removeAttribute('disabled');
+            } else {
+                document.getElementById('btnAffWa').setAttribute('disabled', 'true');
+
+            }
+        });
+        let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.manufacture.warehouse.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.manufacture.warehouse.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort + '&limit=' + limit.value
+                    }, 200)
+                });
+            });
         });
     </script>
 @endsection
