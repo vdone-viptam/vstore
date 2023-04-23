@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
     {
 
 //        $schedule->command('order:affProduct')->everyMinute();
-        $schedule->command('orders:split')->daily();
-        $schedule->command('users:split')->daily();
+        $schedule->command('orders:split')->everyMinute();
+        $schedule->command('users:split')->everyMinute();
     }
 
     /**

@@ -113,7 +113,7 @@ class AffOrder extends Command
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
                             [
                                 'orderId'=>$order->id,
-                                'userId'=>$vshop->pdone_id,
+                                'userId'=>(int)$vshop->pdone_id,
                                 'value'=>round($price_vshop,0),
                                 'ukey'=>$order->no,
                                 'sellerPDoneId'=>$vshop->vshop_id,
