@@ -207,10 +207,13 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
             ->where('products.user_id', Auth::id())
             ->whereIn('request_warehouses.type', [1, 2]);
         if (strlen($this->v['key_search']) > 0) {
-            $this->v['products'] = $this->v['products']->where(function ( fr))
+            $this->v['products'] = $this->v['products']->where(function ($query) {
+                $this->v['products']->where('request_warehouses.code', $this->v['key_search'])
+                    ->orWhere('warehouses.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
         }
-//            ->paginate($this->v['limit']);
-//        $products = Product::where('user_id',Auth::user()->id)->paginate(10);
+        $this->v['products'] = $this->v['products']->paginate($this->v['limit']);
         return view('screens.manufacture.warehouse.swap', $this->v);
 
     }

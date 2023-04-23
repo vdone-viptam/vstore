@@ -63,20 +63,20 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('warehouses*')) ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ (request()->is('warehouses*')) ? 'true' : 'false' }}"
                            data-target="#submenu-3" aria-controls="submenu-3"><i
                                 class="fas fa-fw fas fa-warehouse"></i>Quản lý kho hàng</a>
-                        <div id="submenu-3" class="collapse submenu" style="">
+                        <div id="submenu-3" class="{{ (request()->is('warehouses*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="proIn"
+                                    <a class="nav-link {{ (request()->is('warehouses/index*')) ? 'active1' : '' }}" id="proIn"
                                        href="{{route('screens.manufacture.warehouse.index')}}">Danh sách kho hàng</a>
                                 </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link" id="proOut" href="#">Yêu cầu thêm sản phẩm vào kho</a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
-                                    <a class="nav-link" id="proOut" href="#">Yêu cầu thêm sản phẩm vào kho</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="proDel"
+                                    <a class="nav-link {{ (request()->is('warehouses/swap*')) ? 'active1' : '' }}" id="proDel"
                                        href="{{route('screens.manufacture.warehouse.swap')}}">Quản lý xuất nhập sản
                                         phẩm</a>
                                 </li>

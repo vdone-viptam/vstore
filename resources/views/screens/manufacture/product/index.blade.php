@@ -76,7 +76,6 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <a href="" class="btn btn-success my-2">Thêm sản phẩm vào kho</a>
                     <table id="example" class="table table-striped table-bordered second    "
                     >
                         <thead>
