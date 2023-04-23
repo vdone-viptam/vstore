@@ -181,15 +181,20 @@ class ProductController extends Controller
 
     public function discount(Request $request)
     {
-        $this->v['field'] = $request->field ?? 'requests.id';
+        $this->v['field'] = $request->field ?? 'discounts.id';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->where('discounts.user_id', Auth::id());
-        $this->v['discounts'] = $this->v['discounts']->paginate($this->v['limit']);
-        $this->v['params'] = $request->all();
+        if (strlen($this->v['key_search'])) {
+            $this->v['discounts'] = $this->v['discounts']->where(function ($query) {
+                $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
+        $this->v['discounts'] = $this->v['discounts']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
+
         return view('screens.vstore.product.discount', $this->v);
 
     }
@@ -260,7 +265,7 @@ class ProductController extends Controller
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
         $this->v['product1']->price = number_format($this->v['product1']->price, 0, '.', '.');
         return response()->json([
-            'view' => view('screens.vstore.product.editDis', $this->v),
+            'view' => view('screens.vstore.product.editDis', $this->v)->render(),
             'id' => $this->v['discount']->id
         ]);
 
