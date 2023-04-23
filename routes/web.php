@@ -366,6 +366,8 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     Route::prefix('order')->group(function () {
         Route::get('index', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
         Route::get('new', [\App\Http\Controllers\Vstore\OrderController::class, 'new'])->name('screens.vstore.order.new');
+        Route::get('detail', [\App\Http\Controllers\Vstore\OrderController::class, 'detail'])->name('screens.vstore.order.detail');
+
     });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Vstore\AccountController::class, 'profile'])->name('screens.vstore.account.profile');
@@ -378,11 +380,11 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     });
     Route::prefix('products')->group(function () {
         Route::get('/index', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
-        Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
-        Route::get('/request-all', [\App\Http\Controllers\Vstore\ProductController::class, 'requestAll'])->name('screens.vstore.product.requestAll');
+        Route::get('/request-confirm', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
+        Route::get('/requestAll', [\App\Http\Controllers\Vstore\ProductController::class, 'requestAll'])->name('screens.vstore.product.requestAll');
 
         Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
-        Route::match(['GET', 'POST'], '/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
+        Route::match(['GET', 'POST'], '/confirm/{id?}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
         Route::get('/discount', [\App\Http\Controllers\Vstore\ProductController::class, 'discount'])->name('screens.vstore.product.discount');
         Route::get('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'createDis'])->name('screens.vstore.product.createDis');
         Route::get('/choose-product', [\App\Http\Controllers\Vstore\ProductController::class, 'chooseProduct'])->name('screens.vstore.product.chooseProduct');

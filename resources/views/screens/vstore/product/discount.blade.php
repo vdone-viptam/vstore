@@ -135,7 +135,7 @@
                                 </span>
                             </th>
                             <th>Trạng thái</th>
-                            <th>Ngày tạo giảm giá
+                            <th style="min-width: 250px">Thời gian tạo giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
                                         @if($type == 'desc')
@@ -169,7 +169,7 @@
                                             <span class="text-danger">Không áp dụng</span>
                                         @endif
                                     </td>
-                                    <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
                                     <td><a href="#" data-id="{{$discount->id}}"
                                            class="btn btn-warning more-details"
                                            onclick="edit({{$discount->id}})">Sửa</a></td>

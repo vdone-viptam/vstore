@@ -218,12 +218,6 @@
             }
         });
     })
-    document.querySelectorAll('.number').forEach(item => {
-        item.addEventListener("keyup", (e) => {
-            const currentValue = e.target.value.replaceAll('.','');
-            item.value = new Intl.NumberFormat("de-DE").format(currentValue).replaceAll(',','.')
-        });
-    })
 
 
 </script>

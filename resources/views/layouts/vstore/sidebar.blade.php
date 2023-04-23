@@ -33,13 +33,13 @@
                                        href="{{route('screens.vstore.product.index')}}">Tất cả sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/request*')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('products/request-confirm*')) ? 'active1' : '' }}"
                                        id="addSp"
                                        href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu chưa xét xét
                                         duyệt</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/request-all*')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('products/requestAll*')) ? 'active1' : '' }}"
                                        id="addSp"
                                        href="{{route('screens.vstore.product.requestAll')}}">Quản lý yêu cầu xét duyệt
                                         sản phẩm</a>

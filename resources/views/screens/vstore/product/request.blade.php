@@ -1,7 +1,29 @@
 @extends('layouts.vstore.main')
 
 @section('modal')
-    <div id="modal5"></div>
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="" method="POST" id="form">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @csrf
+                    <div class="modal-body md-content">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnConfirm" class="btn btn-success">Cập nhật yêu cầu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @section('page_title','Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận')
@@ -129,6 +151,7 @@
                                     @endif
                                 </span>
                             </th>
+
                             <th>Trạng thái</th>
 
                             <th>
@@ -151,7 +174,7 @@
                                     </td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>
-                                        {{number_format($product->price,0,'.','.')}}
+                                        {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td>
                                         {{$product->discount}}
@@ -161,9 +184,9 @@
                                     <td><span class="text-warning">Yêu cầu mới</span></td>
 
                                     <td>
-                                        <a href="{{route('screens.vstore.product.confirm',['id' => $product->id,'status' => 1])}}"
+                                        <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
                                            class="btn btn-success">Đồng ý</a>
-                                        <a href="{{route('screens.vstore.product.confirm',['id' => $product->id,'status' => 2])}}"
+                                        <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                            class="btn btn-danger">Từ chối</a>
                                     </td>
                                 </tr>
@@ -215,7 +238,51 @@
     @endif
     <script>
         let limit = document.getElementById('limit');
-        console.log(limit)
+        document.getElementById('btnConfirm').style.display = 'none';
+
+        function appect(id, discount, status) {
+            $('.md-content').html(`
+ <div class="form-group">
+               <label>Chiết khấu được từ nhà cung cấp</label>
+<input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
+            </div>
+            <div class="form-group">
+               <label>Chiết khấu cho V-Shop</label>
+<input class="form-control number" name="discount_vShop" id="discount_vShop">
+            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2}</p>
+            </div>
+            `);
+            document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
+
+            document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
+                if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                    document.getElementById('messageDis').style.display = 'none';
+                    document.getElementById('btnConfirm').style.display = 'block';
+
+                } else {
+                    document.getElementById('messageDis').style.display = 'block';
+                    document.getElementById('btnConfirm').style.display = 'none';
+                }
+
+            })
+            $('#modalDetail').modal('show');
+
+        }
+
+        function unAppect(id, discount, status){
+            $('.md-content').html(`
+ <div class="form-group">
+              <label for="name">Lý do từ chối</label>
+<textarea name="note" placeholder="Lý do từ chối"
+                             class="form-control" ></textarea>
+            </div>
+            `);
+            document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
+            $('#modalDetail').modal('show');
+            document.getElementById('btnConfirm').style.display = 'block';
+
+        }
+
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

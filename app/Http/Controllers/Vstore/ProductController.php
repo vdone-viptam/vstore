@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vstore;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\BuyMoreDiscount;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\AppNotification;
@@ -91,7 +92,7 @@ class ProductController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status')
+            ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,products.vstore_confirm_date')
             ->where('requests.vstore_id', Auth::id());
         $this->v['requests'] = $this->v['requests']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
 
@@ -102,21 +103,34 @@ class ProductController extends Controller
     {
         $type = $request->type ?? 1;
         if ($type == 1) {
-            $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+            $this->v['product'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
                 ->join('requests', 'products.id', '=', 'requests.product_id')
                 ->join('users', 'requests.user_id', '=', 'users.id')
-                ->selectRaw('requests.code,requests.id,price,requests.discount,requests.discount_vshop,requests.status,products.name as product_name,users.name as user_name,requests.note,requests.vat')
+                ->selectRaw('requests.code,
+                requests.id,price,
+                requests.discount,
+                requests.discount_vshop,
+                requests.status,
+                products.name,
+                products.images,products.video,
+                categories.name as cate_name,
+                users.name as user_name,
+                short_content,
+                requests.note,
+                requests.vat')
                 ->where('requests.id', $request->id)
                 ->first();
-            $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = $request->id"))[0]->amount;
-            return view('screens.vstore.product.detail', $this->v);
+            return response()->json(['view' => view('screens.vstore.product.detail', $this->v)->render()]);
 
         } else {
-            $this->v['product'] = Product::select('id', 'publish_id', 'images',
-                'name', 'brand', 'category_id', 'price', 'status', 'vstore_id', 'discount', 'discount_vShop', 'description', 'vat', 'products.amount_product_sold')
-                ->where('id', $request->id)
+            $this->v['product'] = Category::select('publish_id', 'images',
+                'products.name', 'brand', 'categories.name as cate_name', 'price', 'vat', 'short_content',
+                'video', 'discount', 'admin_confirm_date', 'discount_vShop', 'users.name as user_name')
+                ->join('products', 'categories.id', '=', 'products.category_id')
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->where('products.id', $request->id)
                 ->first();
-            return view('screens.vstore.product.detail2', $this->v);
+            return response()->json(['view' => view('screens.vstore.product.detail2', $this->v)->render()]);
 
         }
     }
