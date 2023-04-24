@@ -505,7 +505,7 @@ class OrderController extends Controller
     public function getDetailOrderByUser($order_id)
     {
         try {
-            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number')
+            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number','method_payment')
                 ->where('id', $order_id)
                 ->where('status', '!=', 2)
                 ->orderBy('updated_at', 'desc')
@@ -521,6 +521,7 @@ class OrderController extends Controller
                 'phone' => $order->phone,
                 'address' => $order->address
             ];
+
             unset($order->fullname);
             unset($order->phone);
             unset($order->address);
@@ -532,6 +533,17 @@ class OrderController extends Controller
                             + $order->detail->discount_vshop) / 100)) / 100 * $order->detail->quantity;
             $order->detail->price = $product->price;
             $order->detail->product_name = $product->name;
+            if ($order->method_payment == '9PAY'){
+                $order->method_payment= 1;
+            }elseif ($order->method_payment == 'ATM_CARD'){
+                $order->method_payment= 2;
+            }elseif ($order->method_payment == 'CREDIT_CARD'){
+                $order->method_payment= 3;
+            }elseif ($order->method_payment == 'BANK_TRANSFER'){
+                $order->method_payment= 4;
+            }elseif ($order->method_payment == 'COD'){
+                $order->method_payment= 5;
+            }
             return response()->json([
                 'success' => true,
                 'data' => $order
