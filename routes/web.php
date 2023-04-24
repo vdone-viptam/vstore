@@ -41,6 +41,7 @@ Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/success', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentSuccess'])->name('paymentSuccess');
 });
 // END THANH TOÁN APP
+Route::get('viettel-post-linkin/{order_id?}', [\App\Http\Controllers\ViettelpostController::class, 'linkin'])->name('billViet');
 
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
 Route::post('/register/order/ncc', [\App\Http\Controllers\Auth\LoginController::class, 'postRegisterOrderNcc'])->name('post_register_order_ncc');
@@ -129,6 +130,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
         Route::get('/search', [\App\Http\Controllers\Storage\DashboardController::class, 'searchAllByKeyword'])->name('screens.storage.dashboard.searchAllByKeyword');
+        Route::get('/off', [\App\Http\Controllers\Storage\DashboardController::class, 'offWarehouse'])->name('screens.storage.dashboard.offWarehouse');
 
     });
     Route::prefix('products')->group(function () {
@@ -267,6 +269,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/swap', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'swap'])->name('screens.manufacture.warehouse.swap');
         Route::get('/detail', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'detail'])->name('screens.manufacture.warehouse.detail');
         Route::post('/aff-warehouses', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'affWarehouse'])->name('screens.manufacture.warehouse.affWarehouse');
+        Route::get('/get-type', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'getTypeWarehouse'])->name('screens.manufacture.warehouse.getTypeWarehouse');
 
         Route::get('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'addProduct'])->name('screens.manufacture.warehouse.addProduct');
         Route::post('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'postAddProduct']);

@@ -92,7 +92,7 @@
                                                 </td>
                                             @elseif($history->status == 1)
                                                 <td class="text-green-700">
-                                                    Thành công
+                                                    Đang chờ duyệt
                                                 </td>
                                             @else
                                                 <td class="text-red-600">

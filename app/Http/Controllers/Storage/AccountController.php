@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Models\WarehouseType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class AccountController extends Controller
     {
         $this->v['infoAccount'] = Auth::user();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
+
         return response()->json([
             'success' => true,
             'data' => $this->v['infoAccount']
@@ -39,7 +41,8 @@ class AccountController extends Controller
         }
         $this->v['infoAccount'] = User::with(['province', 'district', 'ward'])->where('id', Auth::id())->first();
         $this->v['infoAccount']->storage_information = json_decode($this->v['infoAccount']->storage_information);
-        // dd ($this->v['infoAccount']);
+        $this->v['infoWarehouse'] = WarehouseType::select('type', 'acreage', 'volume', 'length', 'width', 'height')->where('user_id', Auth::id())->get();
+
         return view('screens.storage.account.profile', $this->v);
 
     }
@@ -116,7 +119,7 @@ class AccountController extends Controller
             $long = $result['lng'];
 
             $warehouse = Warehouses::where('user_id', $user->id)->first();
-            $warehouse->name = $user->name;
+            $warehouse->name = $request->name;
             $warehouse->ward_id = $request->ward_id;
             $warehouse->city_id = $request->city_id;
             $warehouse->district_id = $request->district_id;

@@ -8,6 +8,7 @@ use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Models\WarehouseType;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Dotenv\Util\Str;
@@ -77,18 +78,15 @@ class WarehouseController extends Controller
 
     public function postAddProduct(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'ware_id' => 'required',
-            'quantity' => 'required|min:0|not_in:0',
-
-
+            'quantity' => 'required|min:1|not_in:0',
         ], [
             'product_id.required' => 'Trường này không được trống',
             'ware_id.required' => 'Trường này không được trống',
             'quantity.required' => 'Trường này không được trống',
-            'quantity.min' => 'Không được nhỏ hơn hoặc băng 0',
+            'quantity.min' => 'Không được nhỏ hơn 1',
             'quantity.not_in' => 'Không được nhỏ hơn hoặc bằng 0',
         ]);
         if ($validator->fails()) {
@@ -103,6 +101,7 @@ class WarehouseController extends Controller
                 $model->status = 0;
                 $model->code = \Illuminate\Support\Str::random(12);
                 $model->export = 0;
+                $model->type_warehouses = $request->type ?? 1;
                 $model->save();
             }
 
@@ -113,6 +112,7 @@ class WarehouseController extends Controller
             $requestIm->product_id = $request->product_id;
             $requestIm->status = 0;
             $requestIm->type = 1;
+            $requestIm->type_warehouses = $request->type;
             $requestIm->ware_id = $request->ware_id;
             $requestIm->quantity = str_replace('.', '', $request->quantity);
             $code = 'YCN' . rand(100000000, 999999999);
@@ -237,6 +237,30 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
     public function test()
     {
         return view('screens.vstore.product.test');
+    }
+
+    public function getTypeWarehouse(Request $request)
+    {
+
+        try {
+            $ware_type = WarehouseType::select('warehouse_type.type')
+                ->join('warehouses', 'warehouse_type.user_id', '=', 'warehouses.user_id')
+                ->where('warehouses.id', $request->id)
+                ->get();
+
+            $product_ware = ProductWarehouses::select('type_warehouses')->where('product_id', $request->product_id)
+                    ->where('ware_id', $request->id)
+                    ->first()->type_warehouses ?? 0;
+
+            return response()->json([
+                'ware_type' => $ware_type,
+                'product_ware' => $product_ware
+            ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => $exception->getMessage()
+            ], 500);
+        }
     }
 }
 

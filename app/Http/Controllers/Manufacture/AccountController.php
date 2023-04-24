@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Models\WarehouseType;
 use Carbon\Carbon;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class AccountController extends Controller
             'city_id' => 'required',
             'district_id' => 'required',
             'ward_id' => 'required',
-            'link_website' => 'unique:users,slug,'.$id,
+            'link_website' => 'unique:users,slug,' . $id,
 
         ], [
             'name.required' => 'Tên  bắt buộc nhập',

@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('code')->nullable()->comment('mã xuất, nhập');
             $table->integer('note')->nullable()->comment('ghi chú');
             $table->string('order_number')->nullable()->comment('ghi chú');
+            $table->integer('type_warehouses')->default(1);
             $table->timestamps();
         });
     }

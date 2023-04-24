@@ -9,58 +9,69 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thêm sản phẩm vào kho</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thêm sản phẩm vào
+                            kho</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body md-content">
 
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Chọn sản phẩm <span class="text-danger">*</span></label>
-                                        <select class="form-control form-control-lg" name="product_id">
-                                            <option value="" selected disabled>Lựa chọn sản phẩm thêm vào kho</option>
-                                            @foreach($products as $product)
-                                                <option
-                                                    value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('product_id')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chọn sản phẩm <span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" id="product_id" name="product_id">
+                                        <option value="" selected disabled>Lựa chọn sản phẩm thêm vào kho</option>
+                                        @foreach($products as $product)
+                                            <option
+                                                value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('product_id')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </div>
-                                <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Chọn kho liên kết <span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-control form-control-lg" name="ware_id">
-                                            <option value="" selected disabled>Lựa chọn kho liên kết</option>
-                                            @foreach($warehouses as $ware)
-                                                <option
-                                                    value="{{$ware->id}}" {{old('ware_id') == $ware->id ? 'selected' : ''}}>{{$ware->ware_name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('ware_id')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chọn kho liên kết <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" id="ware_id" name="ware_id">
+                                        <option value="" selected disabled>Lựa chọn kho liên kết</option>
+                                        @foreach($warehouses as $ware)
+                                            <option
+                                                value="{{$ware->id}}" {{old('ware_id') == $ware->id ? 'selected' : ''}}>{{$ware->ware_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('ware_id')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </div>
-                                @csrf
-                                <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Nhập số lượng <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-control-lg number" id="quantity"
-                                               name="quantity"
-                                               value="{{old('quantity')}}" placeholder="Nhập Số lượng sản phẩm">
-                                        @error('quantity')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
+                            </div>
+                            @csrf
+
+                            <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Nhập số lượng <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg number" id="quantity"
+                                           name="quantity"
+                                           value="{{old('quantity')}}" placeholder="Nhập Số lượng sản phẩm">
+                                    @error('quantity')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </div>
+
+                            </div>
+                            <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Loại kho <span class="text-danger">*</span></label>
+                                    <div id="selectType" class="form-group row">
+                                        <p class="text-danger ml-4">Chọn kho để hiện thị thông tin loại kho</p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -76,6 +87,7 @@
 
 
 @section('content')
+
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
             <h2 class="pageheader-title">Quản lý kho hàng</h2>
@@ -122,6 +134,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr>
@@ -143,7 +156,7 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th class="th th_quantity">Sản phẩm có trong kho
+                                <th class="th th_quantity" style="min-width: 250px">Sản phẩm có trong kho
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                             @if($type == 'desc')
@@ -224,16 +237,61 @@
             })
         </script>
     @endif
-    @if(\Illuminate\Support\Facades\Session::has('error'))
+
+    @if(\Illuminate\Support\Facades\Session::has('validate') & old('ware_id') && old('product_id'))
         <script>
             $('#exampleModalCenter').modal('show');
+            $.ajax({
+                type: "GET",
+                url: `{{route('screens.manufacture.warehouse.getTypeWarehouse')}}`,
+                dataType: "json",
+                data: {
+                    "id": {{old('ware_id')}}, "product_id": {{old('product_id')}}
+                },
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Liên kết kho không thành công',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                const html = data.ware_type.map((item, index) => {
+                    let name = '';
+                    if (item.type === 1) {
+                        name = 'Kho thường';
+                    } else if (item.type === 2) {
+                        name = 'Kho lạnh';
+                    } else {
+                        name = 'Kho bãi';
+                    }
+                    return `
+<div class="col-4">
+<label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">
+                                                            <input type="radio" name="type" value="${item.type}" ${item.type == data.product_ware || data.ware_type.length == 1 ? 'checked' : 'disabled'}  id="type${index}" class="custom-control-input"><span class="custom-control-label">${name}</span>
+                                                        </label>
+</div>`;
+                }).join("");
+                $('#selectType').html(html);
+            })
+
         </script>
     @endif
     <script>
+        $('#btnAddPro').attr('disabled', 'true')
 
-    </script>
-    <script>
+        $('#quantity').on('keyup', (e) => {
+                if (!e.target.value) {
+                    $('#btnAddPro').attr('disabled', 'true')
+                } else {
+                    $('#btnAddPro').removeAttr('disabled')
 
+                }
+            }
+        );
         document.getElementById('btnAffWa').setAttribute('disabled', 'true');
 
         async function showDetail(id) {
@@ -311,6 +369,106 @@
                 }
             })
         }
+
+        document.querySelector('#product_id').addEventListener('change', async (e) => {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.manufacture.warehouse.getTypeWarehouse')}}`,
+                dataType: "json",
+                data: {"product_id": e.target.value, "id": $('#ware_id').val()},
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Liên kết kho không thành công',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                if ($('#ware_id').val()) {
+                    const html = data.ware_type.map((item, index) => {
+                        let name = '';
+                        if (item.type === 1) {
+                            name = 'Kho thường';
+                        } else if (item.type === 2) {
+                            name = 'Kho lạnh';
+                        } else {
+                            name = 'Kho bãi';
+                        }
+                        let checked = '';
+                        if (data.product_ware == 0 && index == 0) {
+                            checked = 'checked';
+                        } else if (data.product_ware == 0 && index != 0) {
+                            checked = '';
+                        } else if (item.type == data.product_ware) {
+                            checked = 'checked';
+                        } else {
+                            checked = 'disabled';
+                        }
+                        console.log(checked);
+
+                        return `
+<div class="col-4">
+<label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">
+                                                            <input type="radio" name="type" value="${item.type}" ${checked}   id="type${index}" class="custom-control-input"><span class="custom-control-label">${name}</span>
+                                                        </label>
+</div>`;
+                    }).join("");
+
+                    $('#selectType').html(html);
+                }
+            })
+        });
+
+        document.querySelector('#ware_id').addEventListener('change', async (e) => {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.manufacture.warehouse.getTypeWarehouse')}}`,
+                dataType: "json",
+                data: {"id": e.target.value, "product_id": $('#product_id').val()},
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Liên kết kho không thành công',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                const html = data.ware_type.map((item, index) => {
+                    let name = '';
+                    if (item.type === 1) {
+                        name = 'Kho thường';
+                    } else if (item.type === 2) {
+                        name = 'Kho lạnh';
+                    } else {
+                        name = 'Kho bãi';
+                    }
+                    let checked = '';
+                    if (data.product_ware == 0 && index == 0) {
+                        checked = 'checked';
+                    } else if (data.product_ware == 0 && index != 0) {
+                        checked = '';
+                    } else if (item.type == data.product_ware) {
+                        checked = 'checked';
+                    } else {
+                        checked = 'disabled';
+                    }
+                    console.log(checked);
+                    return `
+<div class="col-4">
+<label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">
+                                                            <input type="radio" name="type" value="${item.type}" ${checked}   id="type${index}" class="custom-control-input"><span class="custom-control-label">${name}</span>
+                                                        </label>
+</div>`;
+                }).join("");
+                $('#selectType').html(html);
+            })
+        });
 
         async function affWarehouse() {
             const account_code = $("#account_code").val().trim();

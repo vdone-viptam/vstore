@@ -215,6 +215,49 @@
             }
         });
     })
+
+    $('#switch12').on('change', (e) => {
+
+        Swal.fire({
+            title: 'Bạn có chắc muốn thay đổi trạng thái hoạt động của kho ?',
+            text: "",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Tôi đồng ý',
+            cancelButtonText: 'Hủy bỏ'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "GET",
+                    url: `{{route('screens.storage.dashboard.offWarehouse')}}`,
+                    dataType: "json",
+                    data: {"value": e.target.value},
+                    encode: true,
+                    error: function (jqXHR, error, errorThrown) {
+
+                        var error0 = JSON.parse(jqXHR.responseText)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Liên kết kho không thành công',
+                            text: error0.message,
+                        })
+                    }
+                }).done(function (data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                        text: 'Click vào nút bên dưới để đóng',
+                    }).then(() => location.reload())
+                })
+            } else {
+                location.reload()
+            }
+        })
+    });
+
+
 </script>
 <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
 {{-- <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script> --}}
