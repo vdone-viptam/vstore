@@ -176,4 +176,18 @@ class DashboardController extends Controller
             ], 404);
         }
     }
+
+    public function offWarehouse(Request $request)
+    {
+
+        $warehouse = Warehouses::where('user_id', Auth::id())->first();
+        $warehouse->is_off = $warehouse->is_off == 1 ? 0 : 1;
+        $warehouse->save();
+        if ($request->value == 'on') {
+            return response()->json(['message' => 'Bật trạng thái hoạt động kho thành công']);
+        } else {
+            return response()->json(['message' => 'Tắt trạng thái hoạt động kho thành công']);
+        }
+
+    }
 }

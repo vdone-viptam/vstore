@@ -1,5 +1,5 @@
 @extends('layouts.storage.main')
-@section('page_title','Hồ sơ của tôi')
+@section('page_title','Ví')
 
 @section('custom_css')
 
@@ -255,7 +255,7 @@
                             </div>
                             <div class="text-center md:text-right w-100">
                                 <button type="submit"
-                                        class="btn btn-primary rounded-6 btnGra btn-withdrawl bg-primary">
+                                        class="btn btn-primary rounded-6 btnGra btn-withdrawl bg-primary withdraw-money">
                                     Rút tiền
                                 </button>
                             </div>
@@ -290,6 +290,11 @@
             });
         })
         $(document).ready(function () {
+            const money = {{ Auth::user()->money}};
+            if( money < 100000 ){
+                document.querySelector('.withdraw-money').setAttribute('disabled', 'true');
+                document.querySelector('.withdraw-money').classList.add('opacity-70');
+            }
             @if(Session::has('success'))
             const textSuccess = '{{ Session::get('success')}}';
             Swal.fire(

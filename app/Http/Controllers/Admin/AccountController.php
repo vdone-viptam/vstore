@@ -29,7 +29,7 @@ class   AccountController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'company_name' => 'required',
-            'tax_code' => 'required|digits:10',
+            'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',

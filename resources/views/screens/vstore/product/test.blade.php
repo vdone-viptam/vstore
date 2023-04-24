@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.vstore_old.main')
 
 @section('modal')
     <div id="modal2"></div>
@@ -54,7 +54,7 @@
 
             </form>
             <button
-                class="mb-4 w-full btn-verify uppercase text-white text-lg font-semibold bg-logan py-[15px] rounded-[10px] cursor-pointer">
+                    class="mb-4 w-full btn-verify uppercase text-white text-lg font-semibold bg-logan py-[15px] rounded-[10px] cursor-pointer">
                 Xác
                 nhận
             </button>

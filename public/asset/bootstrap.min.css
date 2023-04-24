@@ -5939,11 +5939,17 @@ button.close {
     .modal-sm {
         max-width: 300px
     }
+    .modal-xl {
+        max-width: 1240px;
+    }
 }
 
 @media (min-width:992px) {
     .modal-lg {
         max-width: 800px
+    }
+    .modal-xl {
+        max-width: 1240px;
     }
 }
 

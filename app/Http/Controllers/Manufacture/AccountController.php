@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Warehouses;
+use App\Models\WarehouseType;
 use Carbon\Carbon;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
@@ -38,14 +39,18 @@ class AccountController extends Controller
 
     public function editProfile(Request $request, $id)
     {
-//        return $request;
+        // dd ($request->All());
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:30',
             'company_name' => 'required|max:100',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-            'description' => 'max:500'
+            'description' => 'max:500',
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'ward_id' => 'required',
+            'link_website' => 'unique:users,slug,' . $id,
 
         ], [
             'name.required' => 'Tên  bắt buộc nhập',
@@ -57,6 +62,10 @@ class AccountController extends Controller
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
             'description.max' => 'Giới thiệu ít hơn 500 ký tự',
+            'city_id.required' => 'Trường này không được trống',
+            'district_id.required' => 'Trường này không được trống',
+            'ward_id.required' => 'Trường này không được trống',
+            'link_website.unique' => 'Slug đã tồn tại',
 
         ]);
         if ($validator->fails()) {
@@ -67,6 +76,9 @@ class AccountController extends Controller
 
         $user->name = trim($request->name);
         $user->company_name = trim($request->company_name);
+        $user->provinceId = $request->city_id;
+        $user->district_id = $request->district_id;
+        $user->ward_id = $request->ward_id;
 //        $user->tax_code = trim($request->tax_code);
         $user->address = trim($request->address);
         $user->id_vdone = trim($request->id_vdone);
@@ -75,6 +87,7 @@ class AccountController extends Controller
         if ($request->link_website) {
             $user->slug = trim($request->link_website);
         }
+        // dd(1);
         $elasticsearchController = new ElasticsearchController();
         try {
             $res = $elasticsearchController->updateDocNCC((string)$user->id, $request->name);
@@ -91,17 +104,17 @@ class AccountController extends Controller
 
     public function uploadImage($id, Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'img' => 'size:20000000',
-//            'banner' => 'size:20000000',
-//
-//        ], [
-//            'img.size' => 'Qúa kíc cỡ',
-//            'banner.banner' => 'Qúa kíc cỡ',
-//        ]);
-//        if ($validator->fails()) {
-//            return redirect()->back();
-//        }
+        $validator = Validator::make($request->all(), [
+            'img' => 'max:200000|mimes:jpeg,png,jpg,gif',
+            'banner' => 'max:200000|mimes:jpeg,png,jpg,gif',
+        ], [
+            'img.max' => 'Quá kích cỡ',
+            'img.mimes' => 'Hãy chọn ảnh định dạng jpeg,png,jpg,gif',
+            'banner.max' => 'Quá kích cỡ',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
         $user = User::find($id);
         if ($request->hasFile('img')) {
             $file = $request->file('img');
@@ -115,8 +128,6 @@ class AccountController extends Controller
             $file->move(public_path('image/users'), $filename);
             $user->banner = $filename;
         }
-
-
         $user->save();
 
         return redirect()->back();
@@ -241,11 +252,13 @@ class AccountController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+            'password' => 'required|confirmed|min:8|regex:' . config('regex.password'),
+            'password_confirmation' => 'required'
         ], [
             'password.min' => 'Mật khẩu không đúng định dạng',
             'password.regex' => 'Mật khẩu không đúng định dạng',
             'password.required' => 'Mật khẩu mới bắt buộc nhập',
+            'password.confirmed' => 'Mật khẩu không khớp',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
