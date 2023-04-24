@@ -79,7 +79,7 @@ class DashboardController extends Controller
             ->whereIn('request_warehouses.type', [1, 10])
             ->where('request_warehouses.ware_id', $warehouses->id)
             ->where('request_warehouses.status', 0)
-            ->orderBy($field, $type)->paginate($request->limit);
+            ->orderBy($field, $type)->paginate($request->limit ?? 10);
         return view('screens.storage.dashboard.index', [
             'success' => true,
             'requestEx' => $requestEx,
