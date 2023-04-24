@@ -61,6 +61,24 @@
             max-width: 279px !important;
             height   : 396px;
         }
+
+        .barcodeTarget {
+            width : 300px !important;
+            height: 52px !important;
+        }
+
+        .page img:nth-child(1) {
+            width        : 17px !important;
+            height       : 10px !important;
+            margin-bottom: 1px !important;
+        }
+
+        .page {
+            color    : black !important;
+            margin   : 4px 35px;
+            max-width: 279px !important;
+            height   : 396px;
+        }
     </style>
 
 </head>

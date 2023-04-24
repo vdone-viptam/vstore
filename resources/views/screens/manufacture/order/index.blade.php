@@ -137,14 +137,14 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{ number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity, 0, '.', '.') }}
+                                            {{ number_format($order->total, 0, '.', '.') }}
                                             đ
                                         </td>
                                         <td>
                                             {{ $order->orderItem[0]->vshop->name ?? 'Viptam' }}
                                         </td>
                                         <td>
-                                            {{ number_format(($order->orderItem[0]->price * $order->orderItem[0]->quantity * (100 - $order->orderItem[0]->product->discount - $order->orderItem[0]->discount_vShop)) / 100, 0, '.', '.') }}
+                                            {{ number_format($order->orderItem[0]->product->discount * $order->total / 1000, 0, '.', '.') }}
                                             đ
                                         </td>
                                     </tr>
