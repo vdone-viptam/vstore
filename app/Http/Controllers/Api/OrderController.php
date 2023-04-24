@@ -533,10 +533,16 @@ class OrderController extends Controller
                             + $order->detail->discount_vshop) / 100)) / 100 * $order->detail->quantity;
             $order->detail->price = $product->price;
             $order->detail->product_name = $product->name;
-            if ($order->method_payment == 'COD'){
-                $order->method_payment= 0;
-            }else{
+            if ($order->method_payment == '9PAY'){
                 $order->method_payment= 1;
+            }elseif ($order->method_payment == 'ATM_CARD'){
+                $order->method_payment= 2;
+            }elseif ($order->method_payment == 'CREDIT_CARD'){
+                $order->method_payment= 3;
+            }elseif ($order->method_payment == 'BANK_TRANSFER'){
+                $order->method_payment= 4;
+            }elseif ($order->method_payment == 'COD'){
+                $order->method_payment= 5;
             }
             return response()->json([
                 'success' => true,
