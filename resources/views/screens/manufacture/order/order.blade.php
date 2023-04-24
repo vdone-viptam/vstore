@@ -171,7 +171,19 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th>Giảm giá (nếu có)</th>
+                                <th>Giảm giá (nếu có)<span style="float: right;cursor: pointer">
+                                    @if ($field == 'pre_order_vshop.discount')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort"
+                                                data-sort="pre_order_vshop.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort"
+                                                data-sort="pre_order_vshop.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
+                                    @endif
+                                </span></th>
                                 <th>
                                     Số lượng
                                     <span style="float: right;cursor: pointer">

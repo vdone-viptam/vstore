@@ -27,6 +27,7 @@ class PreOrderVshop extends Model
         "address",
         "discount",
         "deposit_money",
+
     ];
 
     public function product()

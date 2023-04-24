@@ -149,6 +149,7 @@
                                 <th>Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                         @if ($field == 'products.name')
+
                                             @if ($type == 'desc')
                                                 <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
                                             @else
@@ -163,6 +164,7 @@
                                     Giá sản phẩm
                                     <span style="float: right;cursor:pointer">
                                         @if ($field == 'price')
+
                                             @if ($type == 'desc')
                                                 <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
                                             @else
@@ -173,7 +175,19 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th>Giảm giá (nếu có)</th>
+                                <th>Giảm giá (nếu có)
+                                    @if ($field == 'pre_order_vshop.discount')
+                                  
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort"
+                                                data-sort="pre_order_vshop.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
+                                    @endif
+                                </th>
                                 <th>
                                     Số lượng
                                     <span style="float: right;cursor: pointer">

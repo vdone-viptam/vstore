@@ -8,6 +8,7 @@ use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PreOrderVshop;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,23 +22,36 @@ class OrderController extends Controller
     }
     public function index(Request $request)
     {
-        $this->v['field'] = $request->field ?? 'products.id';
+        $this->v['field'] = $request->field ?? 'products.name';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $key_search = $request->key_search ?? '';
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        $orders = Order::with([
-            'orderItem.product',
-            'orderItem.vshop',
-            'orderItem.warehouse',
-            'orderItem'
-        ])->select(
-            'no',
-            'id',
-            'export_status',
-            'created_at'
-        )
-            ->where('order.status', '!=', 2);
+        //     $orders = Order::with([
+        //         'orderItem.product',
+        //         'orderItem.vshop',
+        //         'orderItem.warehouse',
+        //         'orderItem',
+
+        //     ])->select(
+        //         'no',
+        //         'id',
+        //         'export_status',
+        //         'created_at'
+        //     )
+        //         ->where('order.status', '!=', 2)
+          
+        // ;
+      
+        $orders = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->join('products', 'order_item.product_id', '=', 'products.id')
+            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name','order_item.price')
+            ->where('order.status', '!=', 2)->groupBy('order.id')
+            ->where('products.user_id',Auth::id())
+            ->groupBy('order.id')
+            ->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($this->v['limit']);
+
         if ($key_search && strlen(($key_search) > 0)) {
             $orders->where(function ($sub) use ($key_search) {
                 $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
@@ -49,8 +63,7 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->orderBy('id', 'desc')->paginate(($this->v['limit']));
-        // return $orders;
+        // $orders = $orders->orderBy('id', 'desc')->paginate(($this->v['limit']));
         return view('screens.manufacture.order.index', $this->v, ['orders' => $orders]);
     }
 
@@ -68,6 +81,7 @@ class OrderController extends Controller
             'orderItem.vshop',
             'orderItem.warehouse',
             'orderItem'
+
         ])->select(
             'no',
             'id',
@@ -158,7 +172,8 @@ class OrderController extends Controller
                 'pre_order_vshop.deposit_money',
                 'pre_order_vshop.created_at',
                 'product_id',
-                'pre_order_vshop.id'
+                'pre_order_vshop.id',
+
             )
             ->join(
                 'products',
@@ -175,10 +190,11 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $this->v['orders'] = $this->v['orders']->paginate($limit);;
+        $this->v['orders'] = $this->v['orders']->paginate($limit);
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['params'] = $request->all();
+
         return view('screens.manufacture.order.request', $this->v);
     }
 
