@@ -20,16 +20,16 @@ class DashboardController extends Controller
         $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
         $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
-        $dataRevenueToday = $this->chartRepository->revenueToday();
-        $dataOrderToday = $this->chartRepository->orderToday();
-        $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
+        $dataRevenueToday = $this->chartRepository->revenue30Day();
+        $dataOrderToday = $this->chartRepository->productRunningOut();
+        $dataOrderSuccessToday = $this->chartRepository->unapprovedOrder();
 
         return view('screens.manufacture.dashboard.index', [
             'dataRevenueChartMonth' => $dataRevenueChartMonth,
             'dataRevenueChartYear' => $dataRevenueChartYear,
             'dataOrderChartMonth' => $dataOrderChartMonth,
             'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
-            
+
             'dataRevenueToday' => $dataRevenueToday,
             'dataOrderToday' => $dataOrderToday,
             'dataOrderSuccessToday' => $dataOrderSuccessToday,
