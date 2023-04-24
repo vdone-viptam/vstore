@@ -40,9 +40,8 @@ Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, '
 //        "req" => $req
 //    ]);
 //});
-Route::get('/test-chia', [\App\Http\Controllers\TestController::class, 'testChia']);
-Route::post('/tuyet-test-don', [\App\Http\Controllers\TestController::class, 'tuyet']);
 
+//Route::get('/noti/{order_id}', [\App\Http\Controllers\PaymentMethod9PayController::class, 'noti']);
 Route::prefix('bill')->group(function () {
     Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
     Route::get('/detail/{id}', [\App\Http\Controllers\Api\BillController::class, 'detail']);
@@ -280,8 +279,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 //        return $request->user();
     });
 
-    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
-    Route::get('/chia',[\App\Http\Controllers\TestController::class,'chia']);
+//    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+//    Route::get('/chia',[\App\Http\Controllers\TestController::class,'chia']);
 
 });
 

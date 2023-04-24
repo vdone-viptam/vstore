@@ -170,15 +170,8 @@ class PaymentMethod9PayController extends Controller
                         'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
                     ];
                     $user->notify(new AppNotification($data));
-                    $vshop = Vshop::find($order_item->vshop_id);
-                    if ($vshop){
-                        $mess_vshop = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id ,[
-                            'message'=>'Đơn hàng '.$order->no . ' đã được taọ mới ',
-                            'orderId'=> $order->id,
-                            'type'=>10
-                        ]);
-                    }
 
+                    $this->noti($order->id);
                     // nếu tồn tại URL return
                     if ($request->url) {
                         return redirect()->to($request->url . "?result=" . $request->result);
@@ -723,5 +716,43 @@ class PaymentMethod9PayController extends Controller
                 ], 500);
             }
         }
+    }
+
+    public function noti($order_id){
+        $order = Order::join('order_item','order.id','=','order_item.order_id')
+            ->select('order.id','order_item.vshop_id','order.no','order_item.product_id')
+            ->where('order.id',$order_id)
+            ->first();
+        $vshop = Vshop::where('id',$order->vshop_id)->first();
+        $product = Product::find($order->product_id)->first();
+        $ncc = User::where('id',$product->user_id)->first();
+        $vstore = User::where('id',$product->vstore_id)->first();
+        if ($vshop){
+            $mess_vshop = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id ,[
+            'message'=>'Đơn hàng '.$order->no . ' đã được tạo mới ',
+            'orderId'=> $order->id,
+            'type'=>10
+        ]);
+        }
+
+
+        $data_ncc = [
+            'title' => 'Bạn vừa có 1 thông báo mới',
+            'avatar' => '',
+            'message' => 'Đơn hàng '.$order->no . ' đã được tạo mới ',
+            'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+            'href' => route('screens.manufacture.order.order')
+        ];
+        $ncc->notify(new AppNotification($data_ncc));
+
+        $data_vstore = [
+            'title' => 'Bạn vừa có 1 thông báo mới',
+            'avatar' => '',
+            'message' => 'Đơn hàng '.$order->no . ' đã được tạo mới ',
+            'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+            'href' => route('screens.vstore.order.index')
+        ];
+        $vstore->notify(new AppNotification($data_vstore));
+
     }
 }

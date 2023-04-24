@@ -42,7 +42,7 @@ class AffUser extends Command
             foreach ($user_re as $val){
 
                 $user = User::where('id',$val->user_id)->first();
-                $vshop = Vshop::where('pdone_id',$val->vshop_id)->first();
+                $vshop = Vshop::where('pdone_id',$val->vshop_id)->orWhere('vshop_id',$val->vshop_id)->first();
                 if ($user && $vshop){
                     $type =0;
                     $money=0;

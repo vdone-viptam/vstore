@@ -116,9 +116,10 @@ class CartController extends Controller
             ->where('status', config('constants.statusCart.cart'))->first();
         if(!$cart) {
             return response()->json([
-                'status_code' => 404,
-                'message' => "Giỏ hàng trống"
-            ], 404);
+                'status_code' => 200,
+                'message' => "Giỏ hàng trống",
+                'carts'=>[]
+            ], 200);
         }
         $cartItems = CartItemV2::where('cart_id', $cart->id)
             ->join('products', 'products.id', '=', 'cart_items_v2.product_id')
@@ -169,9 +170,10 @@ class CartController extends Controller
         $result = array_values($result);
         if($result===[]) {
             return response()->json([
-                'status_code' => 404,
-                'message' => "Giỏ hàng trống"
-            ], 404);
+                'status_code' => 200,
+                'message' => "Giỏ hàng trống",
+                'carts'=>[]
+            ], 200);
         }
 
         return response()->json([
