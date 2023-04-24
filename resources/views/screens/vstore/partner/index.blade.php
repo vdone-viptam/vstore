@@ -1,4 +1,4 @@
-@extends('layouts.manufacture.main')
+@extends('layouts.vstore.main')
 @section('page_title','Danh sách NCC liên kết')
 
 @section('page')
@@ -10,7 +10,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết NCC</a>
+                            <li class="breadcrumb-item"><a href="{{route('screens.vstore.partner.index')}}" class="breadcrumb-link">Liên kết NCC</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Danh sách NCC liên kết</li>
                         </ol>
@@ -20,7 +20,12 @@
         </div>
     </div>
 @endsection
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
 
+    </div>
+@endsection
 
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -46,34 +51,14 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                </span>
+                            <th>Mã nhà cung cấp</th>
+                            <th>Tên nhà cung cấp
+
                             </th>
-                            <th>Giá bán
-                                <span style="float: right;cursor:pointer">
-                                    @if($field == 'price')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="price"></i>
-                                    @endif
-                                </span>
+                            <th>Số điện thoại
+
                             </th>
-                            <th>NCC niêm yết
+                            <th>Khu vực
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -86,7 +71,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chiết khấu cho NCC(%)
+                            <th>Tổng số sản phẩm
+
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -99,7 +85,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng đã bán
+                            <th>Sản phẩm liên kết
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
@@ -112,18 +98,29 @@
                                     @endif
                                 </span>
                             </th>
+                            <th>Thao Tác</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($products) > 0)
-                            @foreach($products as $value)
+                        @if(count($users) > 0)
+                            @foreach($users as $value)
                                 <tr>
-                                    <td>{{$value->publish_id}}</td>
+{{--                                    <td>{{$value->publish_id}}</td>--}}
+{{--                                    <td class="td_name">{{$value->name}}</td>--}}
+{{--                                    <td>{{ number_format($value->price,0,',','.')  }}</td>--}}
+{{--                                    <td>{{$value->vstore_name}}</td>--}}
+{{--                                    <td>{{$value->discount}}</td>--}}
+{{--                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>--}}
+{{--                                    <td></td>--}}
+                                    <td>{{$value->account_code}}</td>
                                     <td class="td_name">{{$value->name}}</td>
-                                    <td>{{ number_format($value->price,0,',','.')  }}</td>
-                                    <td>{{$value->vstore_name}}</td>
-                                    <td>{{$value->discount}}</td>
-                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                                    <td>{{$value->phone_number}}</td>
+                                    <td>{{$value->khu_vuc }}</td>
+                                    <td></td>
+                                    <td>{{$value->countProduct}}</td>
+                                    <td> <button type="button" class="btn btn-link"
+                                                 onclick="showDetail({{$value->id}})">Chi tiết
+                                        </button></td></td>
                                 </tr>
                             @endforeach
                         @else
@@ -136,7 +133,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{$users->withQueryString()->links()}}
                 </div>
             </div>
 
@@ -167,5 +164,33 @@
                 });
             });
         });
+    </script>
+    <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.partner.detail')}}`,
+                dataType: "json",
+                data: {"id": id},
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+
+                    console.log(jqXHR.responseText);
+                    $('#requestModal').modal('hide')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                    })
+                }
+            }).done(function (data) {
+                console.log(data)
+
+   ;
+;
+                    // $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+
+            })
+        }
     </script>
 @endsection

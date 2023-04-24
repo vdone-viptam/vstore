@@ -401,6 +401,7 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         Route::get('/vshop/detail', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshopDetail'])->name('screens.vstore.partner.vshopDetail');
         Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
+        Route::get('/detail', [\App\Http\Controllers\Vstore\PartnerController::class, 'detail'])->name('screens.vstore.partner.detail');
 
 //        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
