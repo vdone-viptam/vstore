@@ -410,16 +410,16 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         return view('layouts.vstore.all_noti', []);
     })->name('vstore_all_noti');
 
-    Route::get('/create', function () {
-        $users = \App\Models\User::select('id')->where('role_id', 4)->where('account_code', '!=', null)->get();
-        foreach ($users as $user)
-            for ($i = 0; $i < 3; $i++) {
-                \Illuminate\Support\Facades\DB::table('warehouse_type')->insert(
-                    ['user_id' => $user->id, 'type' => $i + 1, 'acreage' => 1, 'volume' => 1, 'length' => 1, 'width' => 1, 'height' => 1, 'image_storage' => 1, 'image_pccc' => 1]
-                );
-            }
-
-    });
+//    Route::get('/create', function () {
+//        $users = \App\Models\User::select('id')->where('role_id', 4)->where('account_code', '!=', null)->get();
+//        foreach ($users as $user)
+//            for ($i = 0; $i < 3; $i++) {
+//                \Illuminate\Support\Facades\DB::table('warehouse_type')->insert(
+//                    ['user_id' => $user->id, 'type' => $i + 1, 'acreage' => 1, 'volume' => 1, 'length' => 1, 'width' => 1, 'height' => 1, 'image_storage' => 1, 'image_pccc' => 1]
+//                );
+//            }
+//
+//    });
 });
 
 
