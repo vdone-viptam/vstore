@@ -1,7 +1,25 @@
 @extends('layouts.vstore.main')
 
 @section('modal')
-    <div id="modal5"></div>
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('page_title','Tất cả sản phẩm')
@@ -76,7 +94,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 200px" >
+                            <th style="min-width: 200px">
                                 Giá sản phẩm (chưa VAT)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
@@ -90,8 +108,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                VAT (%)
+                            <th style="min-width: 250px">
+                                Thuế giá trị gia tăng (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vat')
                                         @if($type == 'desc')
@@ -137,14 +155,14 @@
                                 <span style="float: right;cursor: pointer">
 
                                 @if($field == 'admin_confirm_date')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                        <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
-                                @endif
                                 </span>
                             </th>
                             <th style="min-width: 200px">Chiết khấu cho V-SHOP
@@ -191,7 +209,8 @@
                                         {{number_format($product->amount_product_sold,0,'.','.')}}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-link">Chi tiết</a>
+                                        <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link">Chi
+                                            tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -223,6 +242,29 @@
 
 @section('custom_js')
     <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.product.detail')}}?id=` + id + '&type=2',
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = `${data.view}`;
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
+            })
+
+
+        }
+
         let limit = document.getElementById('limit');
         console.log(limit)
         $(document).ready(function () {

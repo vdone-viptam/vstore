@@ -208,22 +208,6 @@
         return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
 
-    document.querySelectorAll('.number').forEach(item => {
-        item.addEventListener("keypress", (e) => {
-            var regex = new RegExp("^[0-9.]+$");
-            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-            if (!regex.test(key)) {
-                event.preventDefault();
-                return false;
-            }
-        });
-    })
-    document.querySelectorAll('.number').forEach(item => {
-        item.addEventListener("keyup", (e) => {
-            const currentValue = e.target.value.replaceAll('.','');
-            item.value = new Intl.NumberFormat("de-DE").format(currentValue).replaceAll(',','.')
-        });
-    })
 
 
 </script>

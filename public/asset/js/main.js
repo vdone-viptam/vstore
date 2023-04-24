@@ -287,10 +287,10 @@ function swalNoti(position, icon, title,text, width, showConfirmButton, timer) {
 function convertVND(params) {
     return params.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
 }
-window.addEventListener("DOMContentLoaded", (event) => {
-    const el = document.querySelector(".only-number");
-    if (el) {
-        el.addEventListener("keypress", function (evt) {
+var onlyNumberVer1 = document.querySelectorAll('.only-number');
+onlyNumberVer1.forEach(item => {
+    if (item) {
+        item.addEventListener("keypress", function (evt) {
             if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
             {
                 evt.preventDefault();
@@ -298,17 +298,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 })
-var onlyNumberVer1 = document.querySelector('.only-number');
-if(onlyNumberVer1){
-    onlyNumberVer1.addEventListener("keypress", (e) => {
-        var regex = new RegExp("^[0-9]+$");
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-}
 var numberPercent = document.querySelector('.number-percent');
 if(numberPercent){
     numberPercent.addEventListener("keypress", (e) => {

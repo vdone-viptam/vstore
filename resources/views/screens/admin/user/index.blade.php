@@ -137,8 +137,8 @@
                                     <td>{{$user->phone_number}}</td>
                                     <td>{{$user->tax_code}}</td>
                                     <td>{{$user->address}}</td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y h:i A')}}</td>
-                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y h:i A') : 'Chưa được duyệt'}}</td>
+                                    <td>{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i A')}}</td>
+                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i A') : 'Chưa được duyệt'}}</td>
                                     <td>
                                         @if($user->role_id == 2)
                                             Nhà cung cấp

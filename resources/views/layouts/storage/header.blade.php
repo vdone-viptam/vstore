@@ -56,7 +56,7 @@
                                                     <div
                                                         class="notification-list-user-block">{{$notification['data']['message']}}
                                                         <div
-                                                            class="notification-date">{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y h:i A')}}
+                                                            class="notification-date">{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y H:i A')}}
                                                         </div>
                                                     </div>
                                                 </div>

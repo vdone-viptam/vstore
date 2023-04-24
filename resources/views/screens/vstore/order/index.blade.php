@@ -6,24 +6,27 @@
 
 @section('page_title','Tất cả đơn hàng')
 @section('page')
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="page-header">
-                <h2 class="pageheader-title">Đơn hàng</h2>
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="" method="POST" id="form">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @csrf
+                    <div class="modal-body md-content">
 
-                <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('screens.vstore.product.request')}}"
-                                                           class="breadcrumb-link">Đơn hàng</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Tất cả đơn hàng
-                            </li>
-                        </ol>
-                    </nav>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 @section('content')
@@ -182,9 +185,10 @@
                                         {{$order->discount.' %'}}
                                     </td>
                                     <td>
-                                        {{number_format($order->discount * $order->total,0,'.','.')}} đ
+                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}} đ
                                     </td>
-                                    <td><a href="" class="btn btn-link">Chi tiết</a></td>
+                                    <td><a href="#" onclick="showDetail({{$order->id}})" class="btn btn-link">Chi
+                                            tiết</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -233,6 +237,29 @@
         </script>
     @endif
     <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.order.detail')}}?id=` + id,
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết đơn hàng thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = `${data.view}`;
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
+            })
+
+
+        }
+
         let limit = document.getElementById('limit');
         console.log(limit)
         $(document).ready(function () {
