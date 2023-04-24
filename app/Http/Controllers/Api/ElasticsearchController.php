@@ -44,6 +44,36 @@ class ElasticsearchController extends Controller
         return $this->client->index($params);
     }
 
+    public function searchAll($keyword, $from = 0, $size = 10): array
+    {
+        $params = [
+            "index" => [
+                config('elasticsearch.vstore_products'),
+                config('elasticsearch.supplier'),
+                config('elasticsearch.vstore_categories'),
+                config('elasticsearch.vshop'),
+            ],
+            "body" => [
+                "from" => $from,
+                "size" => $size,
+                "fields" => ["id"],
+                "query" => [
+                    "multi_match" => [
+                        "query" => $keyword
+                    ],
+                ]
+            ],
+        ];
+        try {
+            $response = $this->client->search($params);
+        } catch (ClientResponseException $e) {
+            if ($e->getCode() == 400) {
+                return ['BAD_REQUEST'];
+            }
+        }
+        $hits = $response['hits']['hits'];
+        return $hits;
+    }
     public function searchDocProduct($keyword, $from = 0, $size = 10): array
     {
         $params = [
