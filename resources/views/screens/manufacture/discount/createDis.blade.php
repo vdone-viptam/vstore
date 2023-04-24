@@ -223,6 +223,10 @@
                         let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + ' đ';
                         $('#buy_more').siblings(".percent-to-vnd").html(subMoney2);
                     }
+                    $(selector).click(function (e) {
+                        e.preventDefault();
+
+                    });
 
                 } else {
                     document.querySelector('#price').value = 0 + ' đ';
