@@ -980,7 +980,11 @@ class ProductController extends Controller
                             'status' => 1
                         ]);
 
-
+                $pro = Product::find($value['product_id']);
+                if ($pro){
+                    $pro->amount_product_sold += $value['amount'];
+                    $pro->save();
+                }
                 }
             }
 

@@ -261,7 +261,7 @@
                                                 <div class="form-group">
                                                     <label for="name">Tên V-Store:</label>
                                                     <input required type="text" class="form-control form-control-lg"
-                                                           name="name" id="name" value="{{$infoAccount->name}}">
+                                                           name="name" id="name" @if($infoAccount->branch == 2) readonly @endif value="{{$infoAccount->name}}">
                                                     @error('name')
                                                     <p class="text-danger">{{$message}}</p>
                                                     @enderror

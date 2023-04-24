@@ -27,10 +27,9 @@
                     <div class="grid grid-cols-2 gap-4 w-full">
                         <span class="text-title font-medium  ">Số điện thoại :  {{$vshop->phone_number}}</span>
                     </div>
-
-
             </div>
         </div>
+    </div>
     </div>
 </form>
 
