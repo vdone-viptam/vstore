@@ -80,7 +80,8 @@
         class=" @if($product->status == 2) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
         <div class="form-group">
             <label for="name">Trạng thái yêu cầu</label>
-            <select name="status" id="status" class="form-control" @if($product->status != 0) disabled @endif>
+            <select name="status" id="status" class="form-control form-control-lg"
+                    @if($product->status != 0) disabled @endif>
                 <option value="1" {{$product->status != 0 && $product->status != 2 ? 'selected' : ''}}>Đống ý</option>
                 <option value="2" {{$product->status == 2 ? 'selected' : ''}}>Từ chối</option>
             </select>
@@ -109,6 +110,12 @@
         </div>
     @endif
 
+</div>
+<div class="form-group text-center mt-4">
+    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
+        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
+            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+    </label>
 </div>
 <div id="note">
 
@@ -139,11 +146,23 @@
 
         }
     })
+    $('#appect').on('change', (e) => {
+        if (e.target.checked && $('#discount_vShop').val()) {
+            document.getElementById('btnConfirm').style.display = 'block';
+        } else {
+            document.getElementById('btnConfirm').style.display = 'none';
+        }
+    });
     if (document.getElementsByName('discount_vShop')[0]) {
         document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
             if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                 document.getElementById('messageDis').style.display = 'none';
-                document.getElementById('btnConfirm').style.display = 'block';
+                if($('#appect').is(":checked")){
+                    document.getElementById('btnConfirm').style.display = 'block';
+                }else{
+                    document.getElementById('btnConfirm').style.display = 'none';
+
+                }
 
             } else {
                 document.getElementById('messageDis').style.display = 'block';

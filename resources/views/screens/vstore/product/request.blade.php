@@ -251,6 +251,12 @@
 <input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
             <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
             </div>
+<div class="form-group text-center mt-4">
+    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
+        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
+            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+    </label>
+</div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
 
@@ -284,6 +290,12 @@
 <textarea name="note" placeholder="Lý do từ chối"
                              class="form-control" ></textarea>
             </div>
+<div class="form-group text-center mt-4">
+    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
+        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
+            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+    </label>
+</div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
             $('#modalDetail').modal('show');
