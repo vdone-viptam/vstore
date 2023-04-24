@@ -36,8 +36,10 @@ class PartnerController extends Controller
 //        $this->v['params'] = $request->all();
 
         $this->v['users'] = User::join('products', 'users.id', '=', 'products.user_id')
-            ->select('users.id', 'users.name as name', 'users.phone_number', 'account_code', 'users.provinceId', DB::raw('COUNT(products.id) as countProduct'))
+            ->select('users.id', 'users.name as name', 'users.phone_number', 'account_code', 'users.provinceId',
+                DB::raw('COUNT(products.id) as countProduct'))
             ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId', 'khu_vuc')
+            ->selectSub('SELECT SUM(amount - export) from products JOIN product_warehouses where products.user_id = users.id and vstore_id = '.Auth::id(),'amount')
             ->groupBy('users.id')
             ->where('products.vstore_id', Auth::id())
         ->orderBy($this->v['field'] ,$this->v['type']);
