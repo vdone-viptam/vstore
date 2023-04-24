@@ -90,7 +90,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 mb-2">
                     <h3 style="font-size: 20px;">Thông tin tài khoản</h3>
                 </div>
                 <div class="col-xl-6 col-lg-6">
@@ -131,7 +131,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="idpDone"><span class="text-danger">*</span>ID P-Done
+                        <label style="font-weight: 600; display:flex; gap:6px; align-items:center" for="idpDone"><span class="text-danger">*</span>ID P-Done
                             người đại diện <svg style="cursor: pointer;" width="14" height="14" viewBox="0 0 14 14"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <title>Vui lòng nhập ID P-Done của người đại diện của bạn</title>
@@ -260,7 +260,7 @@
                 <div class="col-12 mt-4">
                     <h3 style="font-size: 20px;">Thông tin kho</h3>
                 </div>
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-3 mb-2">
                     <h4 style="font-weight: 600;">Chọn loại kho: <span class="text-danger">*</span></h4>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
