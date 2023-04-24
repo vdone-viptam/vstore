@@ -18,18 +18,33 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu từ nhà cung cấp (%):</label>
-            <input disabled name="discount_ncc" id="discount_ncc"
+            {{-- <input disabled name="discount_ncc" id="discount_ncc"
+                   class="form-control-lg form-control"> --}}
+            <div class="input-group mb-3">
+                <input disabled name="discount_ncc" id="discount_ncc"
                    class="form-control-lg form-control">
+                <span class="input-group-text percent-to-vnd">0</span>
+            </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Shop (%):</label>
-            <input disabled name="discount_vshop" id="discount_vshop"
+            {{-- <input disabled name="discount_vshop" id="discount_vshop"
+                   class="form-control form-control-lg"> --}}
+            <div class="input-group mb-3">
+                <input disabled name="discount_vshop" id="discount_vshop"
                    class="form-control form-control-lg">
+                <span class="input-group-text percent-to-vnd">0</span>
+            </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm giảm giá (%):</label>
-            <input name="discount" id="discount1" type="number"
+            {{-- <input name="discount" id="discount1" type="number"
+                   class="form-control form-control-lg"> --}}
+            <div class="input-group mb-3">
+                <input name="discount" id="discount1" type="number"
                    class="form-control form-control-lg">
+                <span class="input-group-text percent-to-vnd">0</span>
+            </div>
         </div>
         <div class="row">
             <div class="col-6 form-group">
@@ -63,6 +78,10 @@
 </div>
 
 <script>
+    var VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -168,6 +187,12 @@
             document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${document.querySelector('#discount_ncc').value - document.querySelector('#discount_vshop').value}`;
 
         }
+        const price1 = $('#price').val();
+        const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
+        if(priceTrue > 0){
+            let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
+            $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
+        }
 
     });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
@@ -183,6 +208,16 @@
                     document.querySelector('#price').value = result.price;
                     document.querySelector('#discount_ncc').value = result.discount;
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
+                    if(result.discount > 0){
+                        const priceTrue = (result.price).replaceAll('.', '').replaceAll(',', '');
+                        let subMoney1 = VND.format(priceTrue * result.discount / 100) || 0 + ' đ';
+                        $('#discount_ncc').siblings(".percent-to-vnd").html(subMoney1);
+                    }
+                    if(result.discount_vShop > 0){
+                        const priceTrue = (result.price).replaceAll('.', '').replaceAll(',', '');
+                        let subMoney2 = VND.format(priceTrue * result.discount_vShop / 100) || 0 + ' đ';
+                        $('#discount_vshop').siblings(".percent-to-vnd").html(subMoney2);
+                    }
 
                 } else {
                     document.querySelector('#price').value = 0 + ' đ';
