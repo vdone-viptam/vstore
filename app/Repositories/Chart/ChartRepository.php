@@ -5,6 +5,9 @@ namespace App\Repositories\Chart;
 use App\Interfaces\Chart\ChartRepositoryInterface;
 use App\Models\BlanceChange;
 use App\Models\Order;
+use App\Models\PreOrderVshop;
+use App\Models\Product;
+use App\Models\ProductWarehouses;
 use App\Models\RequestChangeTaxCode;
 use App\Models\RequestProduct;
 use App\Models\User;
@@ -375,7 +378,6 @@ class ChartRepository implements ChartRepositoryInterface
             ->orderByDesc('created_at')
             ->groupBy('my_date')
             ->get()->toArray();
-//        dd($data);
         $dataChart = [];
 
         // đơn hàng trong 1 năm và 3 năm
@@ -479,7 +481,6 @@ class ChartRepository implements ChartRepositoryInterface
             ->orderByDesc('created_at')
             ->groupBy('my_date')
             ->get()->toArray();
-//        dd($data);
         $dataChart = [];
 
         // đơn hàng trong 1 năm và 3 năm
@@ -519,6 +520,34 @@ class ChartRepository implements ChartRepositoryInterface
         $dashboardChart['registerTotalThreeYear'] = $orderTotalThreeYear;
 
         return $dashboardChart;
+    }
+    public function revenue30Day(){
+        $checkRole = User::where('id', Auth::id())->first()->role_id;
+        $data = BlanceChange::where('type', 1)->where('status', 1);
+        if ($checkRole != 1) {
+            $data = $data->where('user_id', Auth::id());
+        }
+        $data = $data->where('created_at', '>=', Carbon::now()->subDays(30))
+                ->sum('money_history');
+        return $data;
+    }
+    public function productRunningOut(){
+        $data = ProductWarehouses::query()
+            ->select('products.id')
+            ->join("products", 'products.id', '=', 'product_warehouses.product_id')
+            ->where('user_id', Auth::id())
+            ->whereRaw('amount-export < 10')
+            ->count();
+        return $data;
+    }
+    public function unapprovedOrder(){
+        $data = PreOrderVshop::query()
+            ->join('products', 'pre_order_vshop.product_id', '=',
+                'products.id')
+            ->where('products.user_id', Auth::id())
+            ->where('pre_order_vshop.status', 3)
+            ->count();
+        return $data;
     }
 }
 

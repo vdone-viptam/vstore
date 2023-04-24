@@ -46,8 +46,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th>Mã V-Store</th>
+                            <th>Tên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -60,7 +60,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giá bán
+                            <th>Số điện thoại V-Store
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -73,7 +73,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>V-Store niêm yết
+                            <th>Tổng số sản phẩm niêm yết trên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -86,7 +86,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chiết khấu cho V-Store(%)
+                            <th>Số loại sản phẩm niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -99,7 +99,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng đã bán
+                            <th>Chức năng
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                     @if($type == 'desc')
@@ -118,12 +118,23 @@
                         @if(count($products) > 0)
                             @foreach($products as $value)
                                 <tr>
-                                    <td>{{$value->publish_id}}</td>
-                                    <td class="td_name">{{$value->name}}</td>
-                                    <td>{{ number_format($value->price,0,',','.')  }}</td>
+                                    <td>{{$value->account_code}}</td>
                                     <td>{{$value->vstore_name}}</td>
-                                    <td>{{$value->discount}}</td>
-                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                                    <td>{{$value->phone_number}}</td>
+                                    <td>{{$value->total_product}}</td>
+                                    <td>{{$value->total_category}}</td>
+                                    <td><a href="#" data-toggle="modal"
+                                        data-target=".bd-example-modal-lg"
+                                        data-account_code="{{$value->account_code}}"
+                                        data-vstore_name="{{$value->vstore_name}}"
+                                        data-phone_number="{{$value->phone_number}}"
+                                        data-company_name="{{$value->company_name}}"
+                                        data-address="{{$value->address}}"
+                                        data-total_product="{{$value->total_product}}"
+                                        data-total_category="{{$value->total_category}}"
+                                        data-id="{{$value->vstore_id}}" class="btn btn-link more-details">Chi tiết</a>
+                                    </td>
+
                                 </tr>
                             @endforeach
                         @else
@@ -157,6 +168,84 @@
 @endsection
 
 
+@section('modal')
+<div class="modal-order">
+</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-order-oder">
+    <form action="" method="POST">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-size: 20px;">Thông tin V-Store niêm yết sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Mã V-Store: </label>
+                                <input type="text" class="form-control form-control-lg" id="account_code" readonly>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tên V-Store:</label>
+                                <input type="text" class="form-control form-control-lg" id="name" readonly>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Số điện thoại V-Store:</label>
+                                <input type="text" class="form-control form-control-lg" id="phone" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tên công ty:</label>
+                                <input type="text" class="form-control form-control-lg" id="name_company" readonly>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Địa chỉ:</label>
+                                <input type="text" class="form-control form-control-lg" id="address" readonly>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tổng số sản phẩm niêm yết trên V-Store:</label>
+                                <input type="text" class="form-control form-control-lg" id="total-product" readonly>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Số loại sản phẩm niêm yết</label>
+                                <input type="text" class="form-control form-control-lg" id="total-category" readonly>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Tổng chiết khấu đã nhận</label>
+                                <input type="text" class="form-control form-control-lg" id="total-money-discount" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                    lại</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+@endsection
 
 
 @section('custom_js')
@@ -178,6 +267,27 @@
                     })
                 });
             });
+            document.querySelectorAll('.more-details').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    $.ajax({
+                        url: '{{route('screens.manufacture.partner.detail')}}',
+                        data: { vstore_id : item.dataset.id },
+                        success: function (result) {
+                            if(result){
+                                $("#account_code").val(item.dataset.account_code);
+                                $("#name").val(item.dataset.vstore_name);
+                                $("#phone").val(item.dataset.phone_number);
+                                $("#name_company").val(item.dataset.company_name);
+                                $("#address").val(item.dataset.address);
+                                $("#total-product").val(parseInt(item.dataset.total_product));
+                                $("#total-category").val(item.dataset.total_category);
+                                $("#total-money-discount").val(convertVND(result.money));
+                            }
+                        },
+                    });
+                })
+            })
+
         });
         limit.addEventListener('change', (e) => {
             setTimeout(() => {

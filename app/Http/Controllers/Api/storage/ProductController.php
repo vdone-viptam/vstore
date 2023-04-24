@@ -364,7 +364,7 @@ class ProductController extends Controller
             if ($status == 1) {
 //            return $order->total;
                 if ($order->method_payment == 'COD') {
-                    $money_colection = (int)$order->total;
+                    $money_colection = (int)$order->total - (int)$order->shipping;
                     $order_payment = 2;
                 } else {
                     $money_colection = 0;
