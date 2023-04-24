@@ -10,7 +10,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết NCC</a>
+                            <li class="breadcrumb-item"><a href="{{route('screens.vstore.partner.index')}}" class="breadcrumb-link">Liên kết NCC</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Danh sách NCC liên kết</li>
                         </ol>
@@ -20,7 +20,12 @@
         </div>
     </div>
 @endsection
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
 
+    </div>
+@endsection
 
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -46,34 +51,14 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã NCC</th>
-                            <th>Tên NCC
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                </span>
+                            <th>Mã nhà cung cấp</th>
+                            <th>Tên nhà cung cấp
+
                             </th>
-                            <th>Số sản phẩm liên kết
-                                <span style="float: right;cursor:pointer">
-                                    @if($field == 'price')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="price"></i>
-                                    @endif
-                                </span>
+                            <th>Số điện thoại
+
                             </th>
-                            <th>Tổng số đơn hàng hoàn thành
+                            <th>Khu vực
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -86,33 +71,33 @@
                                     @endif
                                 </span>
                             </th>
-{{--                            <th>Tỷ lệ đơn hàng hoàn thành--}}
-{{--                                (%)--}}
-{{--                                <span style="float: right;cursor: pointer">--}}
-{{--                                    @if($field == 'discount')--}}
-{{--                                        @if($type == 'desc')--}}
-{{--                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>--}}
-{{--                                        @else--}}
-{{--                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>--}}
-{{--                                        @endif--}}
-{{--                                    @else--}}
-{{--                                        <i class="fas fa-sort sort" data-sort="discount"></i>--}}
-{{--                                    @endif--}}
-{{--                                </span>--}}
-{{--                            </th>--}}
-{{--                            <th>Tổng chiết khấu V-Store nhận được (Thành tiền)--}}
-{{--                                <span style="float: right;cursor: pointer">--}}
-{{--                                @if($field == 'amount_product_sold')--}}
-{{--                                        @if($type == 'desc')--}}
-{{--                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>--}}
-{{--                                        @else--}}
-{{--                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>--}}
-{{--                                        @endif--}}
-{{--                                    @else--}}
-{{--                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>--}}
-{{--                                    @endif--}}
-{{--                                </span>--}}
-{{--                            </th>--}}
+                            <th>Tổng số sản phẩm
+
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discount"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Sản phẩm liên kết
+                                <span style="float: right;cursor: pointer">
+                                @if($field == 'amount_product_sold')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>Thao Tác</th>
                         </tr>
                         </thead>
@@ -129,11 +114,13 @@
 {{--                                    <td></td>--}}
                                     <td>{{$value->account_code}}</td>
                                     <td class="td_name">{{$value->name}}</td>
-                                    <td>{{$value->count}}</td>
-                                    <td>{{$value->countOrder ??0}}</td>
-{{--                                    <td></td>--}}
-{{--                                    <td></td>--}}
+                                    <td>{{$value->phone_number}}</td>
+                                    <td>{{$value->khu_vuc }}</td>
                                     <td></td>
+                                    <td>{{$value->countProduct}}</td>
+                                    <td> <button type="button" class="btn btn-link"
+                                                 onclick="showDetail({{$value->id}})">Chi tiết
+                                        </button></td></td>
                                 </tr>
                             @endforeach
                         @else
@@ -177,5 +164,33 @@
                 });
             });
         });
+    </script>
+    <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.partner.detail')}}`,
+                dataType: "json",
+                data: {"id": id},
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+
+                    console.log(jqXHR.responseText);
+                    $('#requestModal').modal('hide')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                    })
+                }
+            }).done(function (data) {
+                console.log(data)
+
+   ;
+;
+                    // $('.md-content').html(htmlData)
+                    $('#modalDetail').modal('show');
+
+            })
+        }
     </script>
 @endsection

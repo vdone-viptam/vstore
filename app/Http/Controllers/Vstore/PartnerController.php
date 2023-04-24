@@ -29,19 +29,8 @@ class PartnerController extends Controller
         $this->v['field'] = $request->field ?? 'products.id';
         $this->v['type'] = $request->type ?? 'desc';
         $key_search = $request->key_search ?? '';
-//        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
-//            ->where('products.vstore_id', Auth::id())
-//            ->where('products.status', 2);
-//        if ($key_search && strlen(($key_search) > 0)) {
-//            $this->v['products'] = $this->v['products']->where(function ($sub) use ($key_search) {
-//                $sub->where('products.name', 'like', '%' . $key_search . '%')
-//                    ->orWhere('products.publish_id', 'like', '%' . $key_search . '%');
-//            });
-//        }
-//        $this->v['products'] = $this->v['products']->select('products.publish_id', 'products.name as name', 'products.price', 'users.name as vstore_name', 'products.discount', 'products.amount_product_sold')
-//            ->orderBy($this->v['field'], $this->v['type'])
-//            ->paginate($request->limit ?? 10);
-//
+
+
         $this->v['key_search'] = $request->key_search ?? '';
 //        $this->v['limit'] = $request->limit ?? 10;
 //        $this->v['params'] = $request->all();
@@ -49,13 +38,16 @@ class PartnerController extends Controller
         $this->v['users']= User::join('products','users.id','=','products.vstore_id')
             ->leftJoin('order_item','products.id','=','order_item.product_id')
             ->leftJoin('order','order_item.order_id','=','order.id')
-            ->select('users.name as name','account_code',DB::raw("count(order.id) as countOrder"),DB::raw("count(products.id) as count"))
-//            ->selectSub('')
-
+            ->select('users.id','users.name as name','users.phone_number','account_code','users.provinceId',DB::raw('COUNT(products.id) as countProduct'))
+            ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId','khu_vuc')
             ->groupBy('users.id')
             ->where('products.vstore_id',Auth::id())
-            ->where('order.export_status',4)
-            ->paginate(10);
+            ->where('order.export_status',4);
+            if ($this->v['key_search'] != ''){
+                $this->v['users'] = $this->v['users']->where('account_code','like','%'.$this->v['key_search'].'%');
+            };
+
+        $this->v['users']=$this->v['users']->paginate(10);
 
 //        return  $this->v['users'];
         return view('screens.vstore.partner.index', $this->v);
@@ -65,6 +57,7 @@ class PartnerController extends Controller
     public function vshop(Request $request)
     {
         $limit = $request->limit ?? 10;
+        $field = $request->field ?? 'products.id';
         $vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vstore_id', Auth::id())
@@ -109,11 +102,13 @@ class PartnerController extends Controller
             }
             $value->thu_nhap = $money;
             $value->count = $count;
+
         }
 
         $count = count($vshop);
         $params = $request->all();
-        return view('screens.vstore.partner.vshop', compact('vshop', 'count', 'params'));
+//        return $vshop;
+        return view('screens.vstore.partner.vshop', compact('vshop', 'count', 'params','field'));
 
     }
 
@@ -125,7 +120,31 @@ class PartnerController extends Controller
     public function vshopDetail(Request $request){
 
         $vshop = Vshop::find($request->id);
-
+        return $vshop;
         return view('screens.vstore.partner.vshop-detail',compact('vshop') );
+    }
+    public function detail(Request $request){
+//        return $request;
+        $this->v['field'] = $request->field ?? 'products.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $key_search = $request->key_search ?? '';
+
+
+        $this->v['key_search'] = $request->key_search ?? '';
+//        $this->v['limit'] = $request->limit ?? 10;
+//        $this->v['params'] = $request->all();
+
+        $this->v['user']= User::join('products','users.id','=','products.vstore_id')
+            ->leftJoin('order_item','products.id','=','order_item.product_id')
+            ->leftJoin('order','order_item.order_id','=','order.id')
+            ->select('users.name as name','users.phone_number','account_code','users.provinceId',DB::raw('COUNT(products.id) as countProduct'))
+            ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId','khu_vuc')
+            ->groupBy('users.id')
+            ->where('products.vstore_id',Auth::id())
+            ->where('users.id',$request->id)
+            ->first();
+//            dd(1);
+//        return  $this->v['users'];
+        return view('screens.vstore.partner.detail', $this->v);
     }
 }
