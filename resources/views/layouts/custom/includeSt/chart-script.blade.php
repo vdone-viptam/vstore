@@ -109,6 +109,60 @@
                 }
             }
         });
+        $('.select-revenue').change(function () {
+            $value = $('.select-revenue option:selected').text();
+            $('.date-revenue').html($value);
+            let value_check = $(this).find(":selected").val();
+            switch (value_check) {
+                case "0":
+                    changeDataChart(chartObject, data_chart_week);
+                    $('.money-revenue').html(convertVND(revenue_week));
+                    break;
+                case "1":
+                    changeDataChart(chartObject,data_chart_month);
+                    $('.money-revenue').html(convertVND(revenue_month));
+                    break;
+                case "2":
+                    changeDataChart(chartObject,data_chart_one_year);
+
+                    $('.money-revenue').html(convertVND(revenue_year));
+
+                    break;
+                case "3":
+                    changeDataChart(chartObject,data_chart_three_year);
+
+                    $('.money-revenue').html(convertVND(revenue_three_year));
+
+                    break;
+                default:
+                    break;
+            }
+        });
+        $('.select-order').change(function () {
+            $value = $('.select-order option:selected').text();
+            $('.date-order').html($value);
+            let value_check = $(this).find(":selected").val();
+            switch (value_check) {
+                case "0":
+                    changeDataChart(chartOrderObject, data_order_chart_week);
+                    $('.count-order').html(order_week);
+                    break;
+                case "1":
+                    changeDataChart(chartOrderObject, data_order_chart_month);
+                    $('.count-order').html(order_month);
+                    break;
+                case "2":
+                    changeDataChart(chartOrderObject, data_order_chart_one_year);
+                    $('.count-order').html(order_year);
+                    break;
+                case "3":
+                    changeDataChart(chartOrderObject, data_order_chart_three_year);
+                    $('.count-order').html(order_three_year);
+                    break;
+                default:
+                    break;
+            }
+        });
         $('.select-date').change(function () {
             $value = $('.select-date option:selected').text();
             $('.date').html($value);

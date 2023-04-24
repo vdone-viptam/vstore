@@ -394,10 +394,10 @@
             }
         })
 
-        document.querySelector('#vat').addEventListener('keyup', (e) => {
-            document.querySelector('#money_vat').value = VND.format(price * e.target.value / 100) || 0 + ' đ';
+        // document.querySelector('#vat').addEventListener('keyup', (e) => {
+        //     document.querySelector('#money_vat').value = VND.format(price * e.target.value / 100) || 0 + ' đ';
 
-        });
+        // });
         document.getElementById('discountA').addEventListener('keyup', (e) => {
             discount = e.target.value;
             if (discount > 100) {
