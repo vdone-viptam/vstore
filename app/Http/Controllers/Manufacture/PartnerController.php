@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PartnerController extends Controller
 {
+    private $v;
     public function __construct()
     {
         $this->v = [];
