@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -19,12 +20,21 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $data = Product::select('products.images', 'name', 'product_id', 'products.discount')
+        // $data = Product::select('products.images', 'name', 'product_id', 'products.discount')
+        //     ->join('requests', 'products.id', '=', 'requests.product_id')
+        //     ->where('requests.status', 0)
+        //     ->groupBy(['products.images', 'name', 'product_id', 'products.discount'])
+        //     ->where('products.vstore_id',Auth::id())
+        //     ->limit(10)->get();
+
+        $data = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->join('users', 'requests.user_id', '=', 'users.id')
+            ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount')
+            ->limit(10)
+            ->where('requests.vstore_id', Auth::id())
             ->where('requests.status', 0)
-            ->groupBy(['products.images', 'name', 'product_id', 'products.discount'])
-            ->where('products.vstore_id',Auth::id())
-            ->limit(10)->get();
+            ->get();
                 $vshop  = [];
 
         $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();

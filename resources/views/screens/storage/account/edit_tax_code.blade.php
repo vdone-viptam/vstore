@@ -96,11 +96,7 @@
     <script>
         $(document).ready(function () {
             if ($('#check-success').val() == 1) {
-                Swal.fire(
-                    'Gủi yêu cầu cập nhật mã số thuế thành công',
-                    'Click vào nút bên dưới để đóng',
-                    'success'
-                )
+                swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công','', 500, true, 2200);
             }
         });
     </script>

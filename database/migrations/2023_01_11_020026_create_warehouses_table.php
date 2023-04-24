@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('ward_id')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->integer('is_off')->default(1)->comment('1 bật và 2 tắt');
             $table->timestamps();
         });
     }

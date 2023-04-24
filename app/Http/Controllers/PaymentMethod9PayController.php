@@ -12,8 +12,10 @@ use App\Models\OrderItem;
 use App\Models\OrderService;
 use App\Models\PaymentHistory;
 use App\Models\PreOrderVshop;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\RequestWarehouse;
+use App\Models\Vshop;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
@@ -22,6 +24,7 @@ use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -167,6 +170,15 @@ class PaymentMethod9PayController extends Controller
                         'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
                     ];
                     $user->notify(new AppNotification($data));
+                    $vshop = Vshop::find($order_item->vshop_id);
+                    if ($vshop){
+                        $mess_vshop = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id ,[
+                            'message'=>'Đơn hàng '.$order->no . ' đã được taọ mới ',
+                            'orderId'=> $order->id,
+                            'type'=>10
+                        ]);
+                    }
+
                     // nếu tồn tại URL return
                     if ($request->url) {
                         return redirect()->to($request->url . "?result=" . $request->result);

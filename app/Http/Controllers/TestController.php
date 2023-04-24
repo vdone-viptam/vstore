@@ -201,8 +201,8 @@ class TestController extends Controller
             return 'Ok rồi đấy';
     }
     public function chia(){
-        try {
 
+        try {
 
             DB::beginTransaction();
             $orders = Order::select('id','no','user_id')
@@ -210,10 +210,10 @@ class TestController extends Controller
                 ->where('status', '!=',2)
                 ->where('is_split','!=',1)
                 ->get();
-
             foreach ($orders as $order) {
 
                 $item = OrderItem::where('order_id',$order->id)->first();
+
                 if ($item){
                     $product = Product::select('discount', 'discount_vShop', 'price', 'user_id', 'vstore_id')->where('id', $item->product_id)->first();
                     $ncc= User::where('id',$product->user_id)->first();
@@ -226,7 +226,7 @@ class TestController extends Controller
 //                            tong_tien /100 * (100 - (discount + discount_vShop + diss_ncc))
                         $new_ncc_blance = new BlanceChange();
                         $new_ncc_blance->user_id=$ncc->id;
-                        $new_ncc_blance->type=2;
+                        $new_ncc_blance->type=1;
                         $new_ncc_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_ncc_blance->status=1;
                         $new_ncc_blance->money_history=$price_ncc;
@@ -246,7 +246,7 @@ class TestController extends Controller
                         }
                         $new_vstore_blance = new BlanceChange();
                         $new_vstore_blance->user_id=$vstore->id;
-                        $new_vstore_blance->type=2;
+                        $new_vstore_blance->type=1;
                         $new_vstore_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vstore_blance->status=1;
                         $new_vstore_blance->money_history=$price_vstore;
@@ -261,32 +261,35 @@ class TestController extends Controller
                         $price_vshop = $total /100 * $vshop_con_lai;
                         $new_vshop_blance = new BlanceChange();
                         $new_vshop_blance->vshop_id=$vshop->id;
-                        $new_vshop_blance->type=2;
+                        $new_vshop_blance->type=1;
                         $new_vshop_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vshop_blance->status=1;
-                        $new_vshop_blance->money_history= $price_vshop * 0.95;
+                        $new_vshop_blance->money_history= round($price_vshop,0) * 0.95;
                         $new_vshop_blance->save();
 //                    $hmac = 'ukey='.$order->no .'&value='. $price_vshop .'&orderId='.$order->id. '&userId=' . $vshop->pdone_id;
-                        $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0) .'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
-//                        return $hmac;
+                        $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0).'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
                         $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
+                        $new_vshop_blance->code=$sig;
                         $new_vshop_blance->save();
+                        $data_res = [
+                            'orderId'=>$order->id,
+                            'userId'=>$vshop->pdone_id,
+                            'value'=>round($price_vshop,0),
+                            'ukey'=>$order->no,
+                            'sellerPDoneId'=>$vshop->vshop_id,
+                            'buyerId'=>$order->user_id,
+                            'signature'=>$sig
+                        ];
+                        $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',$data_res
 
-                        $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
-                            [
-                                'orderId'=>$order->id,
-                                'userId'=>(int)$vshop->pdone_id,
-                                'value'=>round($price_vshop,0),
-                                'ukey'=>$order->no,
-                                'sellerPDoneId'=>$vshop->vshop_id,
-                                'buyerId'=>$order->user_id,
-                                'signature'=>$sig
-                            ]
                         );
+
 //                                ukey=ukey&value=value&orderId=orderId&userId=userId
                         $vshop->money += $price_vshop/100 *95;
                         $vshop->save();
+                        return $data_res;
+
                     }
 
                     DB::table('order')->where('id',$order->id)->update(array(
@@ -294,6 +297,9 @@ class TestController extends Controller
 
                     ));
                 }
+
+
+
             }
             DB::commit();
 
@@ -302,8 +308,6 @@ class TestController extends Controller
             return $e->getMessage();
             Log::error($e->getMessage());
         }
+
     }
-
-
-
 }

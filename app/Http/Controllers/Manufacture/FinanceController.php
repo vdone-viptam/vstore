@@ -36,15 +36,15 @@ class FinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'account_number' => 'required',
-            'bank_id' => 'required',
+            'bank_id' => 'required|numeric|min:0',
             'name' => 'required',
         ], [
             'account_number.required' => 'Số tài khoản bắt buộc nhập',
             'bank_id.required' => 'Ngân hàng bắt buộc chọn',
             'name.required' => 'Tên chủ tài khoản bắt buộc nhập',
+            'bank_id.numeric' => 'Ngân hàng bắt buộc chọn',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateCreate', 'failed');
         }
 
@@ -58,18 +58,21 @@ class FinanceController extends Controller
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
     }
 
-    public function transferMoney()
+    public function transferMoney(Request $request)
     {
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
+        $limit = $request->limit ?? 10;
+        // dd($type,$field);
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
-            ->where(function ($query) {
-                $query->where('user_id', Auth::id())
-                    ->whereNull('vshop_id');
-            })
-            ->orWhere(function ($query) {
-                $query->where('vshop_id', Auth::id())
-                    ->whereNull('user_id');
-            })
-            ->paginate(10);
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
+            ->paginate($limit);
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['params'] = $request->all();
 
         return view('screens.manufacture.finance.revenue', $this->v);
     }
@@ -78,7 +81,7 @@ class FinanceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'account_number' => 'required',
-            'bank_id' => 'required',
+            'bank_id' => 'required|numeric|min:0',
             'name' => 'required',
         ], [
             'account_number.required' => 'Số tài khoản bắt buộc nhập',
@@ -86,7 +89,6 @@ class FinanceController extends Controller
             'name.required' => 'Tên chủ tài khoản bắt buộc nhập',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateUpdate', 'failed');
         }
         DB::table('wallets')->where('id', $id)->update([
@@ -99,9 +101,23 @@ class FinanceController extends Controller
         return redirect()->back()->with('success', 'Cập nhật ngân hàng thành công');
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id')->where('user_id', Auth::id())->paginate(10);
+        $type = $request->type ?? 'asc';
+        $field = $request->field ?? 'id';
+        $limit = $request->limit ?? 10;
+        $key_search = $request->key_search ?? '';
+
+        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->where('user_id', Auth::id())
+            ->orderBy($field, $type)
+            ->paginate($limit);
+        $this->v['field'] = $field;
+        $this->v['type'] = $type;
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['params'] = $request->all();
+
         return view('screens.manufacture.finance.history', $this->v);
     }
 

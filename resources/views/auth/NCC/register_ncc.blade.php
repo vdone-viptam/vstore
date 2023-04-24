@@ -219,8 +219,8 @@
             </div>
             <div class="flex flex-col justify-start items-start gap-6 w-full">
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại</span>
-                    <input required type="text" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
+                    <span class="text-sm font-medium"><strong class="text-[#FF4D4F]">*</strong>Số điện thoại công ty</span>
+                    <input required type="text" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại công ty"
                            value="{{old('phone_number')}}"
                            pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
                            class="sdt outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm"> @error('phone_number')
@@ -231,11 +231,11 @@
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
                     <span class="text-sm font-medium flex justify-start items-center gap-1"><strong
-                            class="text-[#FF4D4F]">*</strong> Người đại diện <svg class="cursor-pointer" width="14"
+                            class="text-[#FF4D4F]">*</strong> ID P-Done người đại diện <svg class="cursor-pointer" width="14"
                                                                                   height="14" viewBox="0 0 14 14"
                                                                                   fill="none"
                                                                                   xmlns="http://www.w3.org/2000/svg">
-                        <title>Vui lòng nhập ID của người đại diện cho V-Store của bạn</title>
+                        <title>Vui lòng nhập ID P-Done của người đại diện cho V-Store của bạn</title>
                         <path
                             d="M7 0C3.13437 0 0 3.13437 0 7C0 10.8656 3.13437 14 7 14C10.8656 14 14 10.8656 14 7C14 3.13437 10.8656 0 7 0ZM7 12.8125C3.79063 12.8125 1.1875 10.2094 1.1875 7C1.1875 3.79063 3.79063 1.1875 7 1.1875C10.2094 1.1875 12.8125 3.79063 12.8125 7C12.8125 10.2094 10.2094 12.8125 7 12.8125Z"
                             fill="black" fill-opacity="0.45"/>
@@ -244,7 +244,7 @@
                             fill="black" fill-opacity="0.45"/>
                         </svg>
                         </span>
-                    <input required type="text" name="id_vdone" id="id_vdone" placeholder="Nhập ID người đại diện"
+                    <input required type="text" name="id_vdone" id="id_vdone" placeholder="Nhập ID P-Done người đại diện"
                            value="{{old('id_phone')}}"
                            class="nameDD outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm">
                     @error('id_vdone')
@@ -253,9 +253,9 @@
                 </div>
 
                 <div class="flex flex-col justify-start items-start gap-2 w-full">
-                    <span class="text-sm font-medium">Người đại diện (khác)</span>
+                    <span class="text-sm font-medium">ID P-Done người đại diện (khác)</span>
                     <input type="text" name="id_vdone_diff" id="id_vdone_diff"
-                           placeholder="Nhập ID người đại diện (khác)"
+                           placeholder="Nhập ID P-Done người đại diện (khác)"
                            value="{{old('id_vdone_diff')}}"
                            class="nameDDM outline-none w-full py-2 px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm ">
                 </div>

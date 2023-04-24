@@ -243,6 +243,7 @@
             // input.name = 'img'
             input.setAttribute('hidden', 'true')
             input.setAttribute('name', 'img');
+            input.setAttribute('accept', '"image/*"');
             input.click();
 
             input.onchange = _ => {

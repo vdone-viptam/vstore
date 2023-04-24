@@ -1,197 +1,189 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Quản lý hàng tại V-Store')
+@section('page_title','Danh sách V-store liên kết')
 
-@section('modal')
-    <div class="modal modal-details">
-        <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
-        <div
-            class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
-            <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
-                <h2 class="text-base text-title font-medium">Thông tin chi tiết</h2>
-                <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
-                     onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"
-                        fill="black" fill-opacity="0.45"/>
-                </svg>
-            </div>
-            <div class="content  max-h-[600px] overflow-y-auto">
-                <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title w-[200px] font-medium ">Mã kho hàng:</span>
-                        <span class="text-title ">VSC1232</span>
-                    </div>
+@section('page')
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Liên kết V-store</h2>
 
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title w-[200px] font-medium ">Tên kho hàng:</span>
-                        <span class="text-title ">Nhà Kho Hải Đăng</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title w-[200px] font-medium ">Địa chỉ: </span>
-                        <span class="text-title ">Việt Nam</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title w-[200px] font-medium ">Tổng sản phẩm trong tồn kho: </span>
-                        <span class="text-title ">100</span>
-                    </div>
-                </div>
-                <div class="flex justify-end items-center gap-4 ">
-                    <button
-                        class=" cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"
-                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại
-                    </button>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết V-store</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách V-store liên kết</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
 
 @section('content')
-<form action="" id="form">
-    <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-        <span class="text-secondary">Quản lý V-Store</span>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                  stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <a href="{{route('screens.manufacture.partner.index')}}" class="text-blueMain font-medium italic">Quản lý hàng tại V-Store</a>
-    </div>
-    <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
-        <div class="flex justify-start items-start gap-2 flex-wrap">
-            <select name="condition"
-                    class="outline-none rounded-xl border-[1px] border-[#C4CDD5] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                <option
-                    value="products.publish_id" {{isset($condition) && $condition == 'products.publish_id' ? 'selected' : ''}}>
-                    Mã sản phẩm
-                </option>
-                <option
-                    value="products.name" {{isset($condition) && $condition == 'products.name' ? 'selected' : ''}}>
-                    Tên sản phẩm
-                </option>
-            </select>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                <h5 class="mb-0" style="font-size:18px;">Danh sách V-store liên kết</h5>
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <div id="custom-search" class="top-search-bar">
+                            <form>
+                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
+                            </form>
 
-            <input type="text" name="key_search" value="{{$key_search ?? '' }}" id="key_search"
-                   class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200 "
-                   placeholder="Nhập từ khóa">
-            <button type="submit"
-                    class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
-            >
-                Tìm kiếm
-            </button>
-        </div>
-        <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
-            <div class="flex justify-between items-center flex-wrap gap-4">
-                <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
-                    <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path opacity="0.4"
-                              d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
-                              fill="url(#paint0_linear_98_611)"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
-                              fill="url(#paint1_linear_98_611)"/>
-                        <defs>
-                            <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449"
-                                            y2="24.5684" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#7280FD"/>
-                                <stop offset="0.0001" stop-color="#1E90FF"/>
-                                <stop offset="1" stop-color="#4062FF"/>
-                            </linearGradient>
-                            <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
-                                            gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#7280FD"/>
-                                <stop offset="0.0001" stop-color="#1E90FF"/>
-                                <stop offset="1" stop-color="#4062FF"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-
-                    Quản lý hàng tại V-Store
-                </h2>
-
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div class="w-full overflow-scroll">
-                <table class="w-full dsth">
-                    <thead>
-                    <tr>
-                        <th>
-                            Mã sản phẩm
-                        </th>
-                        <th>
-                            Tên sản phẩm
-                        </th>
-                        <th>
-                            Giá bán
-                        </th>
-                        <th>
-                            Tên V-Store
-                        </th>
-                        <th>
-                            Chiết khấu cho V-Store(%)
-                        </th>
-                        <th>
-                            Số lượng đã bán
-                        </th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @if(count($products) > 0)
-                    @foreach($products as $value)
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered second">
+                        <thead>
                         <tr>
-                            <td>{{$value->publish_id}}</td>
-                            <td>{{$value->name}}</td>
-                            <td>{{ number_format($value->price,0,',','.')  }}</td>
-                            <td>{{$value->user_name}}</td>
-                            <td class="text-center">{{$value->discount}}</td>
-                            <td class="text-center">{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'products.name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Giá bán
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'price')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="price"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>V-Store niêm yết
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'vstore_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Chiết khấu cho V-Store(%)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discount"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Số lượng đã bán
+                                <span style="float: right;cursor: pointer">
+                                @if($field == 'amount_product_sold')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                    @endif
+                                </span>
+                            </th>
                         </tr>
-                    @endforeach
-                    @else
-                        <tr>
-                            <td colspan="5">Không tìm thấy dữ liệu phù hợp</td>
-                        </tr>
-                    @endif
+                        </thead>
+                        <tbody>
+                        @if(count($products) > 0)
+                            @foreach($products as $value)
+                                <tr>
+                                    <td>{{$value->publish_id}}</td>
+                                    <td class="td_name">{{$value->name}}</td>
+                                    <td>{{ number_format($value->price,0,',','.')  }}</td>
+                                    <td>{{$value->vstore_name}}</td>
+                                    <td>{{$value->discount}}</td>
+                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
+                        @endif
+                        </tbody>
+                    </table>
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="flex justify-end items-center gap-4 flex-wrap">
-                {{--                <span class="text-sm text-title">Tổng: <strong class="font-bold">1.241</strong></span>--}}
-                {{$products->withQueryString()->links()}}
-                <div class="flex justify-start items-center gap-2 flex-wrap">
-                    <select name="limit" class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                        <option
-                            value="10"
-                            @if(app('request')->input('limit') && app('request')->input('limit') ==10)selected @endif >10 hàng / trang
-                        </option>
-                        <option value="25"
-                            @if(app('request')->input('limit') && app('request')->input('limit') ==25)selected @endif > 25 hàng / trang
-                        </option>
-                        <option
-                            value="50" @if(app('request')->input('limit') && app('request')->input('limit') ==50)selected @endif > 50 hàng / trang
-                        </option>
-                    </select>
+                </div>
+                <div class="d-flex align-items-end justify-content-end mt-4">
+                    {{$products->withQueryString()->links()}}
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div></div>
+
         </div>
-</form>
+    </div>
+
 @endsection
+
+
+
 
 @section('custom_js')
     <script>
-        const form = document.getElementById('form');
-        const limit = document.getElementsByName('limit')[0];
-        const page = document.getElementById('page1');
-        limit.addEventListener('change', (e) => {
-            form.submit();
-        });
-        $('.more-details').each(function () {
-            $(this).on('click', function () {
-                // console.log(1)
-                $('.modal-details').toggleClass('show-modal');
+        let limit = document.getElementById('limit');
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.manufacture.partner.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort+ '&limit=' + limit.value
+                    })
+                });
             });
+        });
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.manufacture.partner.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
         })
     </script>
 @endsection

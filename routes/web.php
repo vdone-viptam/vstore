@@ -41,6 +41,7 @@ Route::group(['domain' => config('domain.payment')], function () {
     Route::get('/payment/success', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentSuccess'])->name('paymentSuccess');
 });
 // END THANH TOÁN APP
+Route::get('viettel-post-linkin/{order_id?}', [\App\Http\Controllers\ViettelpostController::class, 'linkin'])->name('billViet');
 
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
 Route::post('/register/order/ncc', [\App\Http\Controllers\Auth\LoginController::class, 'postRegisterOrderNcc'])->name('post_register_order_ncc');
@@ -89,7 +90,7 @@ Route::group(['domain' => config('domain.admin')], function () {
                 $arr[] = $char;
             }
             $ward->wards_name = implode(' ', $arr);
-            $ward->wards_name = str_replace('đ', 'Đ',$ward->wards_name);
+            $ward->wards_name = str_replace('đ', 'Đ', $ward->wards_name);
 
             $ward->save();
         }
@@ -129,6 +130,7 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\DashboardController::class, 'index'])->name('screens.storage.dashboard.index');
         Route::get('/search', [\App\Http\Controllers\Storage\DashboardController::class, 'searchAllByKeyword'])->name('screens.storage.dashboard.searchAllByKeyword');
+        Route::get('/off', [\App\Http\Controllers\Storage\DashboardController::class, 'offWarehouse'])->name('screens.storage.dashboard.offWarehouse');
 
     });
     Route::prefix('products')->group(function () {
@@ -262,9 +264,12 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/', [\App\Http\Controllers\Manufacture\DashboardController::class, 'index'])->name('screens.manufacture.dashboard.index');
     });
     Route::prefix('warehouses')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'index'])->name('screens.manufacture.warehouse.index');
+        Route::get('/index', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'index'])->name('screens.manufacture.warehouse.index');
+        Route::post('/', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'store'])->name('screens.manufacture.warehouse.store');
         Route::get('/swap', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'swap'])->name('screens.manufacture.warehouse.swap');
         Route::get('/detail', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'detail'])->name('screens.manufacture.warehouse.detail');
+        Route::post('/aff-warehouses', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'affWarehouse'])->name('screens.manufacture.warehouse.affWarehouse');
+        Route::get('/get-type', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'getTypeWarehouse'])->name('screens.manufacture.warehouse.getTypeWarehouse');
 
         Route::get('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'addProduct'])->name('screens.manufacture.warehouse.addProduct');
         Route::post('/add-product-warehouse', [\App\Http\Controllers\Manufacture\WarehouseController::class, 'postAddProduct']);
@@ -300,6 +305,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
         Route::get('/orders/{id?}', [\App\Http\Controllers\Manufacture\OrderController::class, 'detailOrder'])->name('screens.manufacture.order.detail');
         Route::post('/orders/{id?}', [\App\Http\Controllers\Manufacture\OrderController::class, 'updateOrder'])->name('screens.manufacture.order.update');
 
+        Route::get('/request', [\App\Http\Controllers\Manufacture\OrderController::class, 'requestOrders'])->name('screens.manufacture.order.request');
 
     });
 //         Cập nhật thông tin tài khoản nhà cung cấp
@@ -314,17 +320,21 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
 
     });
     Route::prefix('products')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Manufacture\ProductController::class, 'index'])->name('screens.manufacture.product.index');
+        Route::get('/index', [\App\Http\Controllers\Manufacture\ProductController::class, 'index'])->name('screens.manufacture.product.index');
         Route::get('/create', [\App\Http\Controllers\Manufacture\ProductController::class, 'create'])->name('screens.manufacture.product.create');
         Route::post('/create', [\App\Http\Controllers\Manufacture\ProductController::class, 'store'])->name('screens.manufacture.product.store');
         Route::get('/create-request', [\App\Http\Controllers\Manufacture\ProductController::class, 'createRequest'])->name('screens.manufacture.product.createRequest');
+        Route::get('/request-delete', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestDeleteProduct'])->name('screens.manufacture.product.requestDeleteProduct');
+
         Route::post('/store-request', [\App\Http\Controllers\Manufacture\ProductController::class, 'storeRequest'])->name('screens.manufacture.product.storeRequest');
         Route::get('/lay-du-lieu', [\App\Http\Controllers\Manufacture\ProductController::class, 'getDataProduct'])->name('screens.manufacture.product.getDataProduct');
         Route::post('/upload-image', [\App\Http\Controllers\Manufacture\ProductController::class, 'uploadImagePost'])->name('upload');
         Route::get('/request', [\App\Http\Controllers\Manufacture\ProductController::class, 'requestProduct'])->name('screens.manufacture.product.request');
         Route::get('/detail', [\App\Http\Controllers\Manufacture\ProductController::class, 'detail'])->name('screens.manufacture.product.detail');
         Route::get('/createp', [\App\Http\Controllers\Manufacture\ProductController::class, 'createp'])->name('screens.manufacture.product.createp');
-        Route::get('/edit/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
+        Route::get('/delete/{id?}', [\App\Http\Controllers\Manufacture\ProductController::class, 'destroy'])->name('screens.manufacture.product.destroy');
+
+        Route::get('/edit/{id?}', [\App\Http\Controllers\Manufacture\ProductController::class, 'edit'])->name('screens.manufacture.product.edit');
         Route::post('/update/{id}', [\App\Http\Controllers\Manufacture\ProductController::class, 'update'])->name('screens.manufacture.product.update');
         Route::prefix('discount')->group(function () {
             Route::get('/', [\App\Http\Controllers\Manufacture\DiscountController::class, 'discount'])->name('screens.manufacture.product.discount');
@@ -332,7 +342,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
             Route::get('/choose-product', [\App\Http\Controllers\Manufacture\DiscountController::class, 'chooseProduct'])->name('screens.manufacture.product.chooseProduct');
             Route::post('/create-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'storeDis'])->name('screens.manufacture.product.storeDis');
             Route::get('/edit-discount', [\App\Http\Controllers\Manufacture\DiscountController::class, 'editDis'])->name('screens.manufacture.product.editDis');
-            Route::post('/update-discount/{id}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
+            Route::post('/update-discount/{id?}', [\App\Http\Controllers\Manufacture\DiscountController::class, 'updateDis'])->name('screens.manufacture.product.updateDis');
         });
     });
 
@@ -357,8 +367,10 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
 
     });
     Route::prefix('order')->group(function () {
-        Route::get('', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
+        Route::get('index', [\App\Http\Controllers\Vstore\OrderController::class, 'index'])->name('screens.vstore.order.index');
         Route::get('new', [\App\Http\Controllers\Vstore\OrderController::class, 'new'])->name('screens.vstore.order.new');
+        Route::get('detail', [\App\Http\Controllers\Vstore\OrderController::class, 'detail'])->name('screens.vstore.order.detail');
+
     });
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Vstore\AccountController::class, 'profile'])->name('screens.vstore.account.profile');
@@ -370,23 +382,26 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
         Route::post('/save-tax-code', [\App\Http\Controllers\Vstore\AccountController::class, 'saveChangeTaxCode'])->name('screens.vstore.account.saveChangeTaxCode');
     });
     Route::prefix('products')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
-        Route::get('/request', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
+        Route::get('/index', [\App\Http\Controllers\Vstore\ProductController::class, 'index'])->name('screens.vstore.product.index');
+        Route::get('/request-confirm', [\App\Http\Controllers\Vstore\ProductController::class, 'request'])->name('screens.vstore.product.request');
+        Route::get('/requestAll', [\App\Http\Controllers\Vstore\ProductController::class, 'requestAll'])->name('screens.vstore.product.requestAll');
+
         Route::get('/detail', [\App\Http\Controllers\Vstore\ProductController::class, 'detail'])->name('screens.vstore.product.detail');
-        Route::post('/confirm/{id}}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
+        Route::match(['GET', 'POST'], '/confirm/{id?}', [\App\Http\Controllers\Vstore\ProductController::class, 'confirm'])->name('screens.vstore.product.confirm');
         Route::get('/discount', [\App\Http\Controllers\Vstore\ProductController::class, 'discount'])->name('screens.vstore.product.discount');
         Route::get('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'createDis'])->name('screens.vstore.product.createDis');
         Route::get('/choose-product', [\App\Http\Controllers\Vstore\ProductController::class, 'chooseProduct'])->name('screens.vstore.product.chooseProduct');
         Route::post('/create-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'storeDis'])->name('screens.vstore.product.storeDis');
-        Route::get('/edit-discount', [\App\Http\Controllers\Vstore\ProductController::class, 'editDis'])->name('screens.vstore.product.editDis');
-        Route::post('/update-discount/{id}', [\App\Http\Controllers\Vstore\ProductController::class, 'updateDis'])->name('screens.vstore.product.updateDis');
+        Route::get('/edit-discount/{id?}', [\App\Http\Controllers\Vstore\ProductController::class, 'editDis'])->name('screens.vstore.product.editDis');
+        Route::post('/update-discount/{id?}', [\App\Http\Controllers\Vstore\ProductController::class, 'updateDis'])->name('screens.vstore.product.updateDis');
 
     });
     Route::prefix('partners')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');
+        Route::get('/index', [\App\Http\Controllers\Vstore\PartnerController::class, 'index'])->name('screens.vstore.partner.index');
         Route::get('/vshop', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshop'])->name('screens.vstore.partner.vshop');
         Route::get('/vshop/detail', [\App\Http\Controllers\Vstore\PartnerController::class, 'vshopDetail'])->name('screens.vstore.partner.vshopDetail');
         Route::get('/ship', [\App\Http\Controllers\Vstore\PartnerController::class, 'ship'])->name('screens.vstore.partner.ship');
+        Route::get('/detail', [\App\Http\Controllers\Vstore\PartnerController::class, 'detail'])->name('screens.vstore.partner.detail');
 
 //        Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
