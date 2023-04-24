@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-12 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">SKU sản phẩm<span class="text-danger">*</span></label>
+                                    <label for="name">Mã SKU sản phẩm<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg" id="sku_id" name="sku_id"
                                            value="{{$product->sku_id}}" placeholder="Nhập mã SKU của sản phẩm">
                                     @error('sku_id')
