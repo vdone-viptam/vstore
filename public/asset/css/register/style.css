@@ -7858,7 +7858,4 @@ th {
 
 .md-bill {}
 
-@page {
-    size        : A6;
-    /* transform: scale(0.5); */
-}
+

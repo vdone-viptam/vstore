@@ -24,7 +24,7 @@ Route::get('/getWarehouse', function () {
 });
 // THANH TOÁN APP
 Route::group(['domain' => config('domain.payment')], function () {
-    Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
+    Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
 
     Route::get('/payment/order-service-ncc/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBackNCC']);
@@ -285,6 +285,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\PartnerController::class, 'index'])->name('screens.manufacture.partner.index');
+        Route::get('/detail-partner', [\App\Http\Controllers\Manufacture\PartnerController::class, 'detail'])->name('screens.manufacture.partner.detail');
         Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
     });
@@ -409,6 +410,17 @@ Route::group(['domain' => config('domain.vstore'), 'middleware' => 'vStore'], fu
     Route::get('/notifications', function () {
         return view('layouts.vstore.all_noti', []);
     })->name('vstore_all_noti');
+
+//    Route::get('/create', function () {
+//        $users = \App\Models\User::select('id')->where('role_id', 4)->where('account_code', '!=', null)->get();
+//        foreach ($users as $user)
+//            for ($i = 0; $i < 3; $i++) {
+//                \Illuminate\Support\Facades\DB::table('warehouse_type')->insert(
+//                    ['user_id' => $user->id, 'type' => $i + 1, 'acreage' => 1, 'volume' => 1, 'length' => 1, 'width' => 1, 'height' => 1, 'image_storage' => 1, 'image_pccc' => 1]
+//                );
+//            }
+//
+//    });
 });
 
 

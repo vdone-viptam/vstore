@@ -73,7 +73,7 @@ class AffUser extends Command
                             'accountCode'=>$user->account_code,
                             'accountId'=>$user->id,
                             'pDoneId'=>$vshop->vshop_id,
-                            'userId'=>$vshop->pdone_id,
+                            'userId'=>(int)$vshop->pdone_id,
                             'value'=>$money,
                             'type'=>$type,
                             'signature'=>$sig

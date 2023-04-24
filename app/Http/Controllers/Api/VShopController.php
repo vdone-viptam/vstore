@@ -156,6 +156,7 @@ class  VShopController extends Controller
                 "pre_order_vshop.no",
                 "pre_order_vshop.status",
                 "pre_order_vshop.created_at",
+                "products.id as product_id",
                 "products.images",
                 "products.name",
                 "products.price",
@@ -185,6 +186,7 @@ class  VShopController extends Controller
                 "place_name" => $value->place_name,
             ];
             $value->product = [
+                "id" => $value->product_id,
                 "name" => $value->name,
                 "images" => json_decode($value->images),
                 "price" => $value->price,
@@ -737,7 +739,7 @@ class  VShopController extends Controller
             return response()->json([
                 'status_code' => 400,
                 'message' => $e->getMessage(),
-            ]);
+            ],400);
         }
 
     }

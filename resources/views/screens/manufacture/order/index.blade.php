@@ -49,6 +49,7 @@
 
 
 @section('content')
+
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
@@ -57,9 +58,13 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
-                                <input name="key_search" value="{{ $key_search }}" class="form-control" type="search"
+                                <input type="hidden" name="type" value="{{ $type }}">
+                                <input type="hidden" name="field" value="{{ $field }}">
+                                <input type="hidden" name="limit" value="{{ $limit }}">
+                                <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control" type="search"
                                     placeholder="Tìm kiếm..">
                             </form>
+
 
                         </div>
                     </li>
@@ -78,27 +83,128 @@
                                 <th>
                                     Tên sản phẩm
 
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
                                 </th>
-                                <th>Tình trạng</th>
+                                <th>Tình trạng
+                                    @if ($field == '')
+                                    @if ($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort=""></i>
+                                @endif
+                                </th>
                                 <th>
                                     Giá bán
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th>
                                     Số lượng
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
                                 </th>
-                                <th>Kho hàng</th>
-                                <th>Ngày đặt hàng</th>
+                                <th>Kho hàng
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
+                                </th>
+                                <th>Ngày đặt hàng
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
+                                </th>
                                 <th>
                                     Ngày hoàn thành
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th>
                                     Giá trị đơn hàng
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th>
                                     V-Shop bán hàng
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == '')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th>
                                     Giá trị trừ chiết khấu
+
                                 </th>
                             </tr>
                         </thead>
@@ -132,14 +238,14 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{ number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity, 0, '.', '.') }}
+                                            {{ number_format($order->total, 0, '.', '.') }}
                                             đ
                                         </td>
                                         <td>
                                             {{ $order->orderItem[0]->vshop->name ?? 'Viptam' }}
                                         </td>
                                         <td>
-                                            {{ number_format(($order->orderItem[0]->price * $order->orderItem[0]->quantity * (100 - $order->orderItem[0]->product->discount - $order->orderItem[0]->discount_vShop)) / 100, 0, '.', '.') }}
+                                            {{ number_format($order->orderItem[0]->product->discount * $order->total / 1000, 0, '.', '.') }}
                                             đ
                                         </td>
                                     </tr>
@@ -156,9 +262,23 @@
                     </table>
 
                 </div>
+
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{ $orders->withQueryString()->links() }}
-
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 phần tử / trang
+                                    </option>
+                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 phần tử / trang
+                                    </option>
+                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 phần tử / trang
+                                    </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
 
@@ -166,4 +286,39 @@
 
         </div>
     </div>
+@endsection
+@section('custom_js')
+    <script>
+        let limit = document.getElementById('limit');
+        console.log(limit)
+        $(document).ready(function() {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {
+                    sort
+                } = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location =
+                            '{{ route('screens.manufacture.order.index', ['key_search' => $key_search]) }}&type=' +
+                            orderBy +
+                            '&field=' + sort
+                    })
+                });
+            });
+        });
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location =
+                    '{{ route('screens.manufacture.order.index', ['key_search' => $key_search]) }}&type=' +
+                    '{{ $type }}' +
+                    '&field=' + '{{ $field }}' + '&limit=' + e.target.value
+            }, 200)
+        })
+    </script>
 @endsection

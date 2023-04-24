@@ -220,7 +220,7 @@ class ProductController extends Controller
         }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $field = $request->field ?? 'order.id';
+        $field = $request->field ?? 'order.created_at';
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
@@ -234,7 +234,6 @@ class ProductController extends Controller
                 'order.updated_at as created_at',
                 'order.id'
             )
-            ->orderBy('created_at','DESC')
             ->orderBy($field, $type);
         $order = $order->where('order.status', '!=', 2)
             ->where('order_item.warehouse_id', $warehouses->id);
@@ -347,6 +346,7 @@ class ProductController extends Controller
         try {
 
             $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
+
             if (!$order) {
                 return response()->json([
                     'success' => false,
@@ -387,7 +387,6 @@ class ProductController extends Controller
                     $order_payment = 1;
                 }
 
-
                 $get_list = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -414,13 +413,14 @@ class ProductController extends Controller
                 $quan_huyen_nhan = District::where('district_id', $order->district_id)->first()->district_name ?? '';
 //            return $quan_huyen_nhan;
 //            return $warehouse->address .',' .$quan_huyen_gui.','.$tinh_thanh_gui;
+
                 $list_item[] = [
                     'PRODUCT_NAME' => $product->name,
                     'PRODUCT_QUANTITY' => $order_item['quantity'],
                     'PRODUCT_PRICE' => $product->price,
-                    'PRODUCT_WEIGHT' => $product->price * $order_item['quantity']
+                    'PRODUCT_WEIGHT' => $product->weight * $order_item['quantity'] / 1000
                 ];
-//            return $get_list[0]['MA_DV_CHINH'];
+
                 $taodon = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -434,19 +434,19 @@ class ProductController extends Controller
                     "RECEIVER_FULLNAME" => $order->fullname,
                     "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
                     "RECEIVER_PHONE" => $order->phone,
-                    "PRODUCT_NAME" => $order->no,
-                    "PRODUCT_DESCRIPTION" => "",
-                    "PRODUCT_QUANTITY" => 1,
+                    "PRODUCT_NAME" => $product->name,
+                    "PRODUCT_DESCRIPTION" => $order_item['quantity'] . " x " . $product->name,
+                    "PRODUCT_QUANTITY" => $order_item->quantity,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
-                    "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
+                    "PRODUCT_WEIGHT" => $product->weight * $order_item['quantity'] / 1000,
                     "PRODUCT_LENGTH" => null,
                     "PRODUCT_WIDTH" => null,
                     "PRODUCT_HEIGHT" => null,
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => null,
-                    "ORDER_NOTE" => $order_item['quantity'] ." x ". $product->name,
-                    "MONEY_COLLECTION" => 0,
+                    "ORDER_NOTE" => $order_item['quantity'] . " x " . $product->name,
+                    "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
 

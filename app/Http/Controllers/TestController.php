@@ -270,7 +270,6 @@ class TestController extends Controller
                         $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0).'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
                         $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
-                        $new_vshop_blance->code=$sig;
                         $new_vshop_blance->save();
                         $data_res = [
                             'orderId'=>$order->id,
@@ -283,6 +282,19 @@ class TestController extends Controller
                         ];
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',$data_res
 
+<<<<<<<<< Temporary merge branch 1
+                        $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
+                            [
+                                'orderId'=>$order->id,
+                                'userId'=>(int)$vshop->pdone_id,
+                                'value'=>round($price_vshop,0),
+                                'ukey'=>$order->no,
+                                'sellerPDoneId'=>$vshop->vshop_id,
+                                'buyerId'=>$order->user_id,
+                                'signature'=>$sig
+                            ]
+=========
+>>>>>>>>> Temporary merge branch 2
                         );
 
 //                                ukey=ukey&value=value&orderId=orderId&userId=userId
@@ -297,9 +309,6 @@ class TestController extends Controller
 
                     ));
                 }
-
-
-
             }
             DB::commit();
 
@@ -308,6 +317,12 @@ class TestController extends Controller
             return $e->getMessage();
             Log::error($e->getMessage());
         }
-
     }
+
+
+<<<<<<<<< Temporary merge branch 1
+
+=========
+    }
+>>>>>>>>> Temporary merge branch 2
 }

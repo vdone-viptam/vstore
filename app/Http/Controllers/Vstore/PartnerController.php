@@ -26,6 +26,7 @@ class PartnerController extends Controller
 
     public function index(Request $request)
     {
+
         $this->v['field'] = $request->field ?? 'countProduct';
         $this->v['type'] = $request->type ?? 'desc';
         $key_search = $request->key_search ?? '';
@@ -47,7 +48,7 @@ class PartnerController extends Controller
             $this->v['users'] = $this->v['users']->where('account_code', 'like', '%' . $this->v['key_search'] . '%')->orwhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
         };
 
-        $this->v['users'] = $this->v['users']->paginate(10);
+        $this->v['users'] = $this->v['users']->paginate($request->limit ?? 10);
 
 //        return  $this->v['users'];
         return view('screens.vstore.partner.index', $this->v);

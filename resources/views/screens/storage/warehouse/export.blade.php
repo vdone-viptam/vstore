@@ -258,7 +258,7 @@
             }).done(function (data) {
                 var htmlData = ``;
                 if (data.data) {
-                    htmlData += `<form method="post" key=${id}>
+                    htmlData = `<form method="post" key=${id}>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -307,8 +307,8 @@
                         $('.btn-update').addClass('hidden');
                     } else {
                         $('.btn-update').removeClass('hidden');
-                        $('.btn-update').on('click', async function () {
-                            await $.ajax({
+                        $('.btn-update').on('click',  function () {
+                             $.ajax({
                                 type: "PUT",
                                 url: `{{route('screens.storage.warehouse.confirmExportProduct')}}?_token={{csrf_token()}}`,
                                 data: {
@@ -322,6 +322,8 @@
                                         icon: 'error',
                                         title: 'Cập nhật yêu cầu không thành công !',
                                         text: error0.message,
+                                    }).then(()=>{
+                                        location.reload()
                                     })
                                 }
                             }).done(function (data) {

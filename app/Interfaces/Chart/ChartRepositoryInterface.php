@@ -24,4 +24,8 @@ interface ChartRepositoryInterface
     public function orderToday();
     public function orderSuccessToday();
 
+    // cho ncc
+    public function revenue30Day();
+    public function productRunningOut();
+    public function unapprovedOrder();
 }

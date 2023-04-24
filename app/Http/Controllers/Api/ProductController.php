@@ -111,7 +111,7 @@ class ProductController extends Controller
                 if ($request->pdone_id) {
                     $pro->is_affiliate = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
                             ->where('product_id', $pro->id)
-                            ->whereIn('vshop_products.status', [1, 2])
+                            ->whereIn('vshop_products.status', [1,2])
                             ->where('vshop.pdone_id', $request->pdone_id)
                             ->count() ?? 0;
                     $pro->is_affiliate = $pro->is_affiliate > 0 ? 1 : 0;
@@ -550,10 +550,10 @@ class ProductController extends Controller
             }
         }
         $product->discount = round(DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $product->id)
-                ->where('start_date', '<=', Carbon::now())
-                ->where('end_date', '>=', Carbon::now())
-                ->whereIn('type', [1, 2])
-                ->first()->sum ?? 0, 2);
+            ->where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->whereIn('type', [1, 2])
+            ->first()->sum ?? 0, 2);
 //        $product->discount = 10;
         $product->price_discount = $product->price - ($product->price / 100 * $product->discount);
         $list_vshop = VshopProduct::where('product_id', $id)->get();
@@ -564,7 +564,7 @@ class ProductController extends Controller
                 'vshop.vshop_name', 'vshop.pdone_id', 'vshop_products.amount',
                 'vshop_products.product_id')
             ->selectSub("SELECT discount FROM discounts where start_date <= '" . Carbon::now() . "' and
-            end_date >= '" . Carbon::now() . "' and type=3 and user_id = vshop.id", 'vshop_discount')
+            end_date >= '" . Carbon::now() . "' and type= 3 and user_id=vshop.pdone_id and product_id=$id", 'vshop_discount')
             ->orderBy('vshop_discount', 'desc')
             ->get();
 
@@ -644,7 +644,7 @@ class ProductController extends Controller
             }
 
 
-        } else {
+        }else{
             try {
                 $newVshopProduct = new VshopProduct();
                 $newVshopProduct->vshop_id = $vshop->id;
@@ -964,13 +964,11 @@ class ProductController extends Controller
                         ->where('status', 2)
                         ->where('product_id', $value['product_id'])
                         ->where('vshop_products.amount', '>=', $value['amount'])
-                        ->increment('vshop_products.amount', -$value['amount']);
-                    $increment = DB::table('vshop_products')
-                        ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
-                        ->where('pdone_id', $pdone_id)
-                        ->where('status', 2)
-                        ->where('product_id', $value['product_id'])
-                        ->increment('vshop_products.amount_product_sold', $value['amount']);
+                        ->update([
+                            'vshop_products.amount' => DB::raw('vshop_products.amount +'. -$value['amount']),
+                            'vshop_products.amount_product_sold' => DB::raw('vshop_products.amount_product_sold +'. $value['amount']),
+                        ]);
+
                     $change = VshopProduct::join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('pdone_id', $pdone_id)
                         ->where('status', 2)
@@ -980,11 +978,7 @@ class ProductController extends Controller
                             'status' => 1
                         ]);
 
-                $pro = Product::find($value['product_id']);
-                if ($pro){
-                    $pro->amount_product_sold += $value['amount'];
-                    $pro->save();
-                }
+
                 }
             }
 
