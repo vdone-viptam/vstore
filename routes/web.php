@@ -285,6 +285,7 @@ Route::group(['domain' => config('domain.ncc'), 'middleware' => 'NCC'], function
     });
     Route::prefix('partners')->group(function () {
         Route::get('/', [\App\Http\Controllers\Manufacture\PartnerController::class, 'index'])->name('screens.manufacture.partner.index');
+        Route::get('/detail-partner', [\App\Http\Controllers\Manufacture\PartnerController::class, 'detail'])->name('screens.manufacture.partner.detail');
         Route::get('/report', [\App\Http\Controllers\Manufacture\PartnerController::class, 'report'])->name('screens.manufacture.partner.report');
 
     });
