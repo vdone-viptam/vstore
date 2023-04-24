@@ -50,7 +50,8 @@ class AffOrder extends Command
 
                 $item = OrderItem::where('order_id',$order->id)->first();
                 if ($item){
-                    $product = Product::select('discount', 'discount_vShop', 'price', 'user_id', 'vstore_id')->where('id', $item->product_id)->first();
+                    $product = Product::select('discount', 'discount_vShop', 'price', 'user_id', 'vstore_id','amount_product_sold')->where('id', $item->product_id)->first();
+                    $product->amount_product_sold += $item->quantity;
                     $ncc= User::where('id',$product->user_id)->first();
                     $total = $item->price * $item->quantity;
 //                    chia tiền ncc

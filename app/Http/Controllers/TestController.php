@@ -280,9 +280,9 @@ class TestController extends Controller
                             'buyerId'=>$order->user_id,
                             'signature'=>$sig
                         ];
-                        $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',$data_res
 
-<<<<<<<<< Temporary merge branch 1
+
+
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
                             [
                                 'orderId'=>$order->id,
@@ -293,8 +293,7 @@ class TestController extends Controller
                                 'buyerId'=>$order->user_id,
                                 'signature'=>$sig
                             ]
-=========
->>>>>>>>> Temporary merge branch 2
+
                         );
 
 //                                ukey=ukey&value=value&orderId=orderId&userId=userId
@@ -320,9 +319,5 @@ class TestController extends Controller
     }
 
 
-<<<<<<<<< Temporary merge branch 1
 
-=========
-    }
->>>>>>>>> Temporary merge branch 2
 }
