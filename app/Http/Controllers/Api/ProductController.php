@@ -169,6 +169,7 @@ class ProductController extends Controller
                 'message' => $validator->errors()
             ], 400);
         }
+
         $limit = $request->limit ?? 12;
         $elasticsearchController = new ElasticsearchController();
         $res = $elasticsearchController->searchDocProduct($request->key_word);
@@ -182,7 +183,6 @@ class ProductController extends Controller
             ->where('availability_status', 1)->whereIn('id', $res);
         $selected = ['id', 'name', 'publish_id', 'images', 'price', 'category_id', 'type_pay'];
         $request->option = $request->option == 'asc' ? 'asc' : 'desc';
-
         if ($request->pdone_id) {
             $selected[] = 'discount';
             $selected[] = 'discount_vShop as discountVstore';
@@ -192,11 +192,9 @@ class ProductController extends Controller
             $products = $products->where('category_id', $request->category_id);
         }
         if ($request->order_by == 1) {
-
             $products = $products->orderBy('id', 'desc');
         }
         if ($request->order_by == 3) {
-
             $products = $products->orderBy('amount_product_sold', 'desc');
         }
         if ($request->order_by == 2) {
@@ -205,17 +203,7 @@ class ProductController extends Controller
         if ($request->type_pay) {
             $products = $products->where('type_pay', $request->type_pay);
         }
-//        if ($request->payment) {
-//            if ($request->payment == 1) {
-//                $products = $products->where('payment_on_delivery', 1);
-//            } else {
-//                $products = $products->where('prepay', 1);
-//            }
-//        }
-//        return 1;
-
         $products = $products->paginate($limit);
-
         foreach ($products as $pro) {
             $pro->images = asset(json_decode($pro->images)[0]);
             $pro->discount = round(DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
@@ -234,8 +222,6 @@ class ProductController extends Controller
                 $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $pro->id)->first()->max;
                 $pro->available_discount = $more_dis ?? 0;
             }
-
-//
         }
 
 
