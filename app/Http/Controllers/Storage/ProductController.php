@@ -220,7 +220,7 @@ class ProductController extends Controller
         }
         $limit = $request->limit ?? 10;
         $type = $request->type ?? 'desc';
-        $field = $request->field ?? 'order.id';
+        $field = $request->field ?? 'order.created_at';
         $warehouses = Warehouses::select('id')->where('user_id', Auth::id())->first();
         $order = Product::join('order_item', 'products.id', '=', 'order_item.product_id')
             ->join('order', 'order_item.order_id', '=', 'order.id')
@@ -375,7 +375,6 @@ class ProductController extends Controller
 
             $product = Product::where('id', $order_item->product_id)->first();
             RequestWarehouse::destroy($order->request_warehouse_id);
-
             if ($status == 1) {
 //            return $order->total;
                 if ($order->method_payment == 'COD') {
@@ -419,7 +418,6 @@ class ProductController extends Controller
                     'PRODUCT_PRICE' => $product->price,
                     'PRODUCT_WEIGHT' => $product->price * $order_item['quantity']
                 ];
-//            return $get_list[0]['MA_DV_CHINH'];
                 $taodon = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -435,7 +433,7 @@ class ProductController extends Controller
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $order->no,
                     "PRODUCT_DESCRIPTION" => "",
-                    "PRODUCT_QUANTITY" => 1,
+                    "PRODUCT_QUANTITY" => $order_item->quantity,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
                     "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
                     "PRODUCT_LENGTH" => null,
@@ -444,7 +442,7 @@ class ProductController extends Controller
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => null,
-                    "ORDER_NOTE" => $order_item['quantity'] ." x ". $product->name,
+                    "ORDER_NOTE" => $order_item['quantity'] . " x " . $product->name,
                     "MONEY_COLLECTION" => 0,
                     "LIST_ITEM" => $list_item,
                 ]);
