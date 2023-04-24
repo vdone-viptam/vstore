@@ -8,7 +8,6 @@ if($order && $user) {
     $isUser = false;
 }
 @endphp
-
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +26,6 @@ if($order && $user) {
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
     {{--    <link rel="stylesheet" href="../../dist/output.css">--}}
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -246,6 +244,7 @@ if($order && $user) {
         </div>
     </div>
 @endif
+
 <div class="bg-kho w-full relative h-auto ">
     <div
         class=" w-full md:max-w-[1440px] mx-auto flex flex-col justify-between gap-6 md:gap-20 py-10 md:h-screen xl:px-20 px-[20px]">
@@ -514,6 +513,206 @@ if($order && $user) {
 </footer>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="{{asset('asset/js/bootstrap.bundle.js')}}"></script>
+
+@if($isOrder && $isUser)
+    <div class="modal fade modal-details-tt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex flex-column" style="gap:6px">
+                        <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
+                        <h5 class="modal-title" style="font-size: 20px;">Chi tiết thanh toán</h5>
+                    </div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="content m-4">
+                    <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
+                        <div class="col-12">
+                            <h3 style="font-weight: 600; padding-top: 15px; ">Thông tin bên mua</h3>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                                </div>
+                                <div class="col-6">
+                                    <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                                </div>
+                                <div class="col-6">
+                                    <span style="font-size: 16px;">{{$user->tax_code}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                                </div>
+                                <div class="col-6">
+                                    <span style="font-size: 16px;">{{$user->name}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                                </div>
+                                <div class="col-6">
+                                    <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                                </div>
+                                <div class="col-6">
+                                    <span style="font-size: 16px;">{{$user->phone_number}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                                </div>
+                                <div class="col-6">
+                                    <span style="font-size: 16px;">{{$user->email}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        @if($user->referral_code)
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 style="font-size:18px;font-weight: 600;">ID P-Done người giới thiệu</h4>
+                                    </div>
+                                    <div class="col-6">
+                                        <span style="font-size: 16px;">{{$user->referral_code}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 my-3">
+                            <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                                <div class="col-12">
+                                    <h3 style="font-weight: 600; padding-top: 15px;">Chi tiết sản phẩm</h3>
+                                </div>
+                                @php
+                                    $price = (float) config('constants.orderService.price_kho');
+                                    $priceFormat = number_format($price, 0, '', '.');
+                                    $vat = (float) config('constants.orderService.price_kho')*10/100;
+                                    $vatFormat = number_format($vat, 0, '', '.');
+
+                                    $total = $price + $vat;
+                                    $totalFormat = number_format($total, 0, '', '.');
+
+                                    $chiTietThanhToan = array(
+                                        [
+                                            "title" => "Ngày tạo",
+                                            "value" => $order->created_at,
+                                            "class" => ""
+                                        ],
+                                        [
+                                            "title" => "Tài khoản",
+                                            "value" => "KHO",
+                                            "class" => ""
+                                        ],
+                                        [
+                                            "title" => "Thời hạn",
+                                            "value" => "1 năm",
+                                            "class" => ""
+                                        ],
+                                        [
+                                            "title" => "Giá sản phẩm",
+                                            "value" => $priceFormat . "đ",
+                                            "class" => ""
+                                        ],
+                                        [
+                                            "title" => "VAT",
+                                            "value" => $vatFormat . "đ",
+                                            "class" => ""
+                                        ],
+                                        [
+                                            "title" => "Tổng số tiền",
+                                            "value" => $totalFormat . "đ",
+                                            "class" => "text-danger"
+                                        ]);
+                                @endphp
+                                <div class="col-12">
+                                    @foreach($chiTietThanhToan as $value)
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h4 style="font-size:18px;">{{$value['title']}}</h4>
+                                            </div>
+                                            <div class="col-6">
+                                                <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 my-3">
+                            <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                                <div class="col-12">
+                                    <h3 style="font-weight: 600; padding-top: 15px;">Phương thức thanh toán</h3>
+                                </div>
+                                <div class="col-12" style="padding-bottom:15px ;">
+                                                    <span>
+                                                        @switch($order->method_payment)
+                                                            @case("ATM_CARD")
+                                                                Thẻ nội địa
+                                                                @break
+                                                            @case("CREDIT_CARD")
+                                                                Thẻ quốc tế
+                                                                @break
+                                                            @case("9PAY")
+                                                                Thanh toán ngay qua 9Pay
+                                                                @break
+                                                            @case("BANK_TRANSFER")
+                                                                Chuyển khoản ngân hàng
+                                                                @break
+                                                        @endswitch
+                                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <div class="w-100 mx-auto text-right">
+                        <button type="button" class="btn-cust" data-dismiss="modal">Đóng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 @if($isOrder && $isUser)
     <script type="text/javascript">
         $(window).on('load', function() {
