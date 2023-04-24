@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
+use App\Models\VshopProduct;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,11 @@ class AffOrder extends Command
                     $add_product = Product::find($item->product_id);
                     $add_product->amount_product_sold +=$item->quantity;
                     $add_product->save();
+                    $vshop_product = VshopProduct::where('vshop_id',$item->vshop_id)->where('product_id',$item->product_id)->first();
+                    if ($vshop_product){
+                        $vshop_product->amount_product_sold += $item->quantity;
+                        $vshop_product->save();
+                    }
                     $ncc= User::where('id',$product->user_id)->first();
                     $total = $item->price * $item->quantity;
 //                    chia tiền ncc

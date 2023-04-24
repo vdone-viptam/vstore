@@ -35,11 +35,7 @@ class ViettelpostController extends Controller
 
                 $order_item =OrderItem::where('order_id',$order->id)->first();
                 if ($order_item){
-                    $vshop_product = VshopProduct::where('vshop_id',$order_item->vshop_id)->where('product_id',$order_item->product_id)->first();
-                    if ($vshop_product){
-                        $vshop_product->amount_product_sold += $order_item->quantity;
-                        $vshop_product->save();
-                    }
+
                     $product = Product::where('id',$order_item->product_id)->first();
                     if ($product){
                         $ncc = User::where('id',$product->user_id)->first();

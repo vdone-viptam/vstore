@@ -977,7 +977,9 @@ class ProductController extends Controller
                         ->update([
                             'status' => 1
                         ]);
-
+                    $add_product = Product::find($value['product_id']);
+                    $add_product->amount_product_sold += $value['amount'];
+                    $add_product->save();
 
                 }
             }
