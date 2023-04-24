@@ -860,7 +860,7 @@
             </div>
         </div>
         <div class="card-footer bg-white">
-            <p>Bạn đã có tài khoản? <a href="./login.html" class="text-secondary">Đăng nhập ngay</a></p>
+            <p>Bạn đã có tài khoản? <a href="{{route('login_storage')}}" class="text-secondary">Đăng nhập ngay</a></p>
         </div>
     </div>
 </form>
