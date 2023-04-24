@@ -389,7 +389,7 @@
                                                 <button type="button" class="btn btn-success"
                                                     {{-- data-toggle="modal" data-target="#modal-tax-code" --}}
                                                 >
-                                                    <a href="{{route('screens.manufacture.account.editTaxCode')}}"
+                                                    <a href="{{route('screens.vstore.account.editTaxCode')}}"
                                                        class="text-white">
                                                         Cập nhật mã số thuế
                                                     </a>
