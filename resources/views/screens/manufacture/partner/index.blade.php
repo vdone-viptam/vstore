@@ -128,6 +128,8 @@
                                         data-account_code="{{$value->account_code}}"
                                         data-vstore_name="{{$value->vstore_name}}"
                                         data-phone_number="{{$value->phone_number}}"
+                                        data-company_name="{{$value->company_name}}"
+                                        data-address="{{$value->address}}"
                                         data-total_product="{{$value->total_product}}"
                                         data-total_category="{{$value->total_category}}"
                                         data-id="{{$value->vstore_id}}" class="btn btn-link more-details">Chi tiết</a>
@@ -271,16 +273,15 @@
                         url: '{{route('screens.manufacture.partner.detail')}}',
                         data: { vstore_id : item.dataset.id },
                         success: function (result) {
-                            console.log(result);
                             if(result){
                                 $("#account_code").val(item.dataset.account_code);
                                 $("#name").val(item.dataset.vstore_name);
                                 $("#phone").val(item.dataset.phone_number);
-                                $("#name_company").val(item.dataset.id);
-                                $("#address").val(item.dataset.id);
+                                $("#name_company").val(item.dataset.company_name);
+                                $("#address").val(item.dataset.address);
                                 $("#total-product").val(parseInt(item.dataset.total_product));
                                 $("#total-category").val(item.dataset.total_category);
-                                $("#total-money-discount").val(convertVND(item.dataset.id));
+                                $("#total-money-discount").val(convertVND(result.money));
                             }
                         },
                     });

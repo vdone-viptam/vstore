@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class PartnerController extends Controller
         //     });
         // }
         $this->v['products'] = $this->v['products']
-            ->select('users.name as vstore_name','users.account_code','users.phone_number','vstore_id',
+            ->select('users.name as vstore_name','users.account_code','users.phone_number','vstore_id','users.company_name','users.address',
                     DB::raw('COUNT(products.id) as total_product'),
                 )
             // ->selectSub('select count(id) from categories
@@ -65,12 +66,21 @@ class PartnerController extends Controller
     }
     public function detail(Request $request)
     {
-        $data = Product::where('products.user_id', Auth::id())
+
+        $data = Order::join('order_item','order_item.order_id','order.id')
+                ->join('products','products.id','order_item.product_id')
+                ->where('order.export_status',4)
+                ->where('products.user_id', Auth::id())
                 ->where('products.vstore_id',$request->vstore_id)
                 ->where('products.status', 2)
-                ->select('discount','price')
+                ->select('products.discount','order.total')
                 ->get();
-        dd($data);
-
+        $money = 0 ;
+        foreach ($data as $key => $value) {
+            $money = $value->discount * $value->total;
+        };
+        return response()->json([
+            'money' => $money,
+        ]);
     }
 }
