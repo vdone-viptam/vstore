@@ -261,7 +261,7 @@
                                                 <div class="form-group">
                                                     <label for="name">Tên V-Store:</label>
                                                     <input required type="text" class="form-control form-control-lg"
-                                                           name="name" id="name" value="{{$infoAccount->name}}">
+                                                           name="name" id="name" @if($infoAccount->branch == 2) readonly @endif value="{{$infoAccount->name}}">
                                                     @error('name')
                                                     <p class="text-danger">{{$message}}</p>
                                                     @enderror
@@ -389,7 +389,7 @@
                                                 <button type="button" class="btn btn-success"
                                                     {{-- data-toggle="modal" data-target="#modal-tax-code" --}}
                                                 >
-                                                    <a href="{{route('screens.manufacture.account.editTaxCode')}}"
+                                                    <a href="{{route('screens.vstore.account.editTaxCode')}}"
                                                        class="text-white">
                                                         Cập nhật mã số thuế
                                                     </a>

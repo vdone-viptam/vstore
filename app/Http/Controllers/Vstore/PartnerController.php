@@ -26,7 +26,7 @@ class PartnerController extends Controller
 
     public function index(Request $request)
     {
-        $this->v['field'] = $request->field ?? 'products.id';
+        $this->v['field'] = $request->field ?? 'countProduct';
         $this->v['type'] = $request->type ?? 'desc';
         $key_search = $request->key_search ?? '';
 
@@ -35,19 +35,19 @@ class PartnerController extends Controller
 //        $this->v['limit'] = $request->limit ?? 10;
 //        $this->v['params'] = $request->all();
 
-        $this->v['users']= User::join('products','users.id','=','products.vstore_id')
-            ->leftJoin('order_item','products.id','=','order_item.product_id')
-            ->leftJoin('order','order_item.order_id','=','order.id')
-            ->select('users.id','users.name as name','users.phone_number','account_code','users.provinceId',DB::raw('COUNT(products.id) as countProduct'))
-            ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId','khu_vuc')
+        $this->v['users'] = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select('users.id', 'users.name as name', 'users.phone_number', 'account_code', 'users.provinceId',
+                DB::raw('COUNT(products.id) as countProduct'))
+            ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId', 'khu_vuc')
+            ->selectSub('SELECT SUM(amount - export) from products JOIN product_warehouses where products.user_id = users.id and vstore_id = '.Auth::id(),'amount')
             ->groupBy('users.id')
-            ->where('products.vstore_id',Auth::id())
-            ->where('order.export_status',4);
-            if ($this->v['key_search'] != ''){
-                $this->v['users'] = $this->v['users']->where('account_code','like','%'.$this->v['key_search'].'%');
-            };
+            ->where('products.vstore_id', Auth::id())
+        ->orderBy($this->v['field'] ,$this->v['type']);
+        if ($this->v['key_search'] != '') {
+            $this->v['users'] = $this->v['users']->where('account_code', 'like', '%' . $this->v['key_search'] . '%')->orwhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
+        };
 
-        $this->v['users']=$this->v['users']->paginate(10);
+        $this->v['users'] = $this->v['users']->paginate(10);
 
 //        return  $this->v['users'];
         return view('screens.vstore.partner.index', $this->v);
@@ -58,57 +58,26 @@ class PartnerController extends Controller
     {
         $limit = $request->limit ?? 10;
         $field = $request->field ?? 'products.id';
+        $key_search = $request->key_search??'';
+        $type = $request->type ?? 'desc';
         $vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vstore_id', Auth::id())
-            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number','vshop.vshop_id')
-            ->groupBy('vshop.pdone_id');
+            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number', 'vshop.vshop_id')
+            ->selectSub('SELECT SUM(order_item.price * quantity)   FROM `order` JOIN order_item on `order`.id = order_item.order_id JOIN products ON order_item.product_id = products.id WHERE export_status = 4 AND order_item.vshop_id = vshop.id AND products.vstore_id=' .Auth::id(),'doanh_thu')
+            ->selectSub('SELECT SUM(order_item.price * quantity)  * (products.discount_vShop /100) FROM `order` JOIN order_item on `order`.id = order_item.order_id JOIN products ON order_item.product_id = products.id WHERE export_status = 4 AND order_item.vshop_id = vshop.id AND products.vstore_id=' .Auth::id(),'chiet_khau')
+            ->selectSub('SELECT COUNT(vshop_products.id) FROM vshop JOIN vshop_products ON vshop.id = vshop_products.vshop_id JOIN products ON vshop_products.product_id = products.id WHERE vshop.id = vshop.id AND products.vstore_id = '.Auth::id(),'amount_product')
+            ->selectSub('SELECT COUNT(`order`.id) from `order` JOIN order_item on `order`.id = order_item.order_id join products ON order_item.product_id = products.id  WHERE export_status = 4 AND vshop_id = vshop.id AND products.vstore_id = '.Auth::id(),'count_order')
+            ->groupBy('vshop.pdone_id')
+            ->orderBy($field,$type);
         if ($request->key_search) {
-            $vshop = $vshop->where($request->condition, 'like', '%' . trim($request->key_search) . '%');
+            $vshop = $vshop->where('vshop.nick_name', 'like', '%' . trim($request->key_search) . '%')
+            ->orWhere('vshop.vshop_id', 'like', '%' . trim($request->key_search) . '%')
+            ;
         }
         $vshop = $vshop->paginate($limit);
-        foreach ($vshop as $value) {
-
-            $count = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
-                ->join('products', 'vshop_products.product_id', '=', 'products.id')
-                ->where('vshop.id', $value->id)
-                ->where('products.vstore_id', Auth::id())
-                ->count();
-
-            $order_item = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
-                ->where('export_status',4)
-                ->where('order.updated_at','<=',Carbon::now()->addDay(-7))
-                ->where('vshop_id', $value->id)->sum('quantity') ?? 0;
-
-            $money = 0;
-            $order_tinh = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
-                ->where('export_status',4)
-                ->where('order.updated_at','<=',Carbon::now()->addDay(-7))
-                ->where('vshop_id', $value->id)->get();
-            foreach ($order_tinh as $val){
-                // lấy chiết khấu vshop trong product;
-                $product_dis_vshop= Product::where('id',$val->product_id)->first()->discount_vShop??0;
-//                return $val->discount_vshop;
-                if ($product_dis_vshop !=0){
-                    $money += (($val->price * $val->quantity) /100 * ($product_dis_vshop - $val->discount_vshop))/100*85;
-                }else{
-                    $money+=0;
-                }
-//                    (100000 /100 * (10 -1)) /100 * 85
-            }
-            $value->sum_sl = $order_item;
-            if ($money <0){
-                $money =0;
-            }
-            $value->thu_nhap = $money;
-            $value->count = $count;
-
-        }
-
-        $count = count($vshop);
-        $params = $request->all();
 //        return $vshop;
-        return view('screens.vstore.partner.vshop', compact('vshop', 'count', 'params','field'));
+        return view('screens.vstore.partner.vshop', compact('vshop',  'field','key_search','type'));
 
     }
 
@@ -117,13 +86,17 @@ class PartnerController extends Controller
         return view('screens.vstore.partner.ship', $this->v);
 
     }
-    public function vshopDetail(Request $request){
+
+    public function vshopDetail(Request $request)
+    {
 
         $vshop = Vshop::find($request->id);
         return $vshop;
-        return view('screens.vstore.partner.vshop-detail',compact('vshop') );
+        return view('screens.vstore.partner.vshop-detail', compact('vshop'));
     }
-    public function detail(Request $request){
+
+    public function detail(Request $request)
+    {
 //        return $request;
         $this->v['field'] = $request->field ?? 'products.id';
         $this->v['type'] = $request->type ?? 'desc';
@@ -134,17 +107,14 @@ class PartnerController extends Controller
 //        $this->v['limit'] = $request->limit ?? 10;
 //        $this->v['params'] = $request->all();
 
-        $this->v['user']= User::join('products','users.id','=','products.vstore_id')
-            ->leftJoin('order_item','products.id','=','order_item.product_id')
-            ->leftJoin('order','order_item.order_id','=','order.id')
-            ->select('users.name as name','users.phone_number','account_code','users.provinceId',DB::raw('COUNT(products.id) as countProduct'))
-            ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId','khu_vuc')
+        $this->v['user'] = User::join('products', 'users.id', '=', 'products.user_id')
+            ->select('users.name as name', 'users.phone_number', 'users.account_code', 'users.provinceId', DB::raw('COUNT(products.id) as countProduct'))
+            ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId', 'khu_vuc')
             ->groupBy('users.id')
-            ->where('products.vstore_id',Auth::id())
-            ->where('users.id',$request->id)
+            ->where('products.vstore_id', Auth::id())
+            ->where('users.id', $request->id)
             ->first();
-//            dd(1);
-//        return  $this->v['users'];
-        return view('screens.vstore.partner.detail', $this->v);
+
+        return response()->json(['view' => view('screens.vstore.partner.detail', $this->v)->render()]);
     }
 }

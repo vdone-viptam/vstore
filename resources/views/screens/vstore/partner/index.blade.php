@@ -23,7 +23,22 @@
 @section('modal')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content">
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -59,17 +74,7 @@
 
                             </th>
                             <th>Khu vực
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'vstore_name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
-                                    @endif
-                                </span>
+
                             </th>
                             <th>Tổng số sản phẩm
 
@@ -89,12 +94,12 @@
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="countProduct"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="countProduct"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                        <i class="fas fa-sort sort" data-sort="countProduct"></i>
                                     @endif
                                 </span>
                             </th>
@@ -116,7 +121,7 @@
                                     <td class="td_name">{{$value->name}}</td>
                                     <td>{{$value->phone_number}}</td>
                                     <td>{{$value->khu_vuc }}</td>
-                                    <td></td>
+                                    <td>{{$value->amount}}</td>
                                     <td>{{$value->countProduct}}</td>
                                     <td> <button type="button" class="btn btn-link"
                                                  onclick="showDetail({{$value->id}})">Chi tiết
@@ -151,6 +156,7 @@
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {
+
                     let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
                     if (orderBy === 'asc') {
                         localStorage.setItem('orderBy', JSON.stringify('desc'));
@@ -158,7 +164,7 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.manufacture.partner.index',['key_search' => $key_search])}}&type=' + orderBy +
+                        document.location = '{{route('screens.vstore.partner.index',['key_search' => $key_search])}}&type=' + orderBy +
                             '&field=' + sort
                     })
                 });
@@ -169,28 +175,26 @@
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
-                url: `{{route('screens.vstore.partner.detail')}}`,
+                url: `{{route('screens.vstore.partner.detail')}}?id=` + id ,
                 dataType: "json",
-                data: {"id": id},
                 encode: true,
                 error: function (jqXHR, error, errorThrown) {
-
-                    console.log(jqXHR.responseText);
-                    $('#requestModal').modal('hide')
+                    var error0 = JSON.parse(jqXHR.responseText)
                     Swal.fire({
                         icon: 'error',
                         title: 'Xem chi tiết sản phẩm thất bại !',
+                        text: error0.message,
                     })
                 }
             }).done(function (data) {
-                console.log(data)
-
-   ;
-;
-                    // $('.md-content').html(htmlData)
-                    $('#modalDetail').modal('show');
-
+                var htmlData = `${data.view}`;
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
             })
+
+
         }
     </script>
+
+
 @endsection

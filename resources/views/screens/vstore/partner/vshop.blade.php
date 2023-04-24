@@ -50,50 +50,60 @@
                             <th>Tên V-Shop
 
                             </th>
-                            <th>Số điện thoại
-
-                            </th>
-                            <th>Số sản phẩm liên kết
+                            <th>Số sản phẩm tiếp thị
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'vstore_name')
+                                    @if($field == 'amount_product')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
+                                        <i class="fas fa-sort sort" data-sort="amount_product"></i>
                                     @endif
                                 </span>
                             </th>
-                                                        <th>Số lượng sản phẩm đã bán
+                            <th>Đơn hàng hoàn thành
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'count_order')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="count_order"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="count_order"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="count_order"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Doanh thu
 
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'doanh_thu')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="doanh_thu"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="doanh_thu"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="doanh_thu"></i>
+                                    @endif
+                                </span>
+                                                        </th>
+                                                        <th>Chiết khấu nhận được
                                                             <span style="float: right;cursor: pointer">
-                                                                @if($field == 'discount')
+                                                            @if($field == 'chiet_khau')
                                                                     @if($type == 'desc')
-                                                                        <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                                                        <i class="fa-solid fa-sort-down sort" data-sort="chiet_khau"></i>
                                                                     @else
-                                                                        <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                                                        <i class="fa-solid fa-sort-up sort" data-sort="chiet_khau"></i>
                                                                     @endif
                                                                 @else
-                                                                    <i class="fas fa-sort sort" data-sort="discount"></i>
+                                                                    <i class="fas fa-sort sort" data-sort="chiet_khau"></i>
                                                                 @endif
                                                             </span>
                                                         </th>
-                            {{--                            <th>Tổng chiết khấu V-Store nhận được (Thành tiền)--}}
-                            {{--                                <span style="float: right;cursor: pointer">--}}
-                            {{--                                @if($field == 'amount_product_sold')--}}
-                            {{--                                        @if($type == 'desc')--}}
-                            {{--                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>--}}
-                            {{--                                        @else--}}
-                            {{--                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>--}}
-                            {{--                                        @endif--}}
-                            {{--                                    @else--}}
-                            {{--                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>--}}
-                            {{--                                    @endif--}}
-                            {{--                                </span>--}}
-                            {{--                            </th>--}}
-                            <th>Thao Tác</th>
+{{--                            <th>Thao Tác</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -103,11 +113,11 @@
 
                                     <td>{{$value->vshop_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
-                                    <td>{{$value->phone_number}}</td>
-                                    <td>{{$value->count }}</td>
+                                    <td>{{$value->amount_product}}</td>
+                                    <td>{{$value->count_order }}</td>
+                                    <td>{{round($value->doanh_thu,0)}}</td>
+                                    <td>{{round($value->chiet_khau,0)}}</td>
 
-                                                                        <td>{{$value->sum_sl}}</td>
-                                    <td>
 
                                 </tr>
                             @endforeach
@@ -135,10 +145,13 @@
 
 @section('custom_js')
     <script>
+        console.log(document.querySelectorAll('.sort'))
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
+
                 item.addEventListener('click', () => {
+                    console.log(sort)
                     let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
                     if (orderBy === 'asc') {
                         localStorage.setItem('orderBy', JSON.stringify('desc'));
@@ -146,8 +159,8 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        {{--document.location = '{{route('screens.vstore.partner.index',['key_search' => $key_search])}}&type=' + orderBy +--}}
-                        {{--    '&field=' + sort--}}
+                        document.location = '{{route('screens.vstore.partner.vshop',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort
                     })
                 });
             });
