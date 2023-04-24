@@ -164,19 +164,19 @@
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Chiết khấu (%)</label>
-                                    <input type="text" class="form-control form-control-lg number discountA"
+                                    {{-- <input type="text" class="form-control form-control-lg number discountA"
+                                           name="moneyv[]"
+                                           id="moneyv[]"
+                                           value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
+                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1"> --}}
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
                                            value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
                                            placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1">
-                                    {{-- <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-control-lg number discountA"
-                                        name="moneyv[]"
-                                        id="moneyv[]"
-                                        value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
-                                        placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1">
                                         <span class="input-group-text sub-moneyv">0</span>
-                                    </div> --}}
+                                    </div>
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
                             </div>
@@ -203,19 +203,19 @@
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Chiết khấu (%)</label>
-                                    <input type="text" class="form-control form-control-lg number discountA"
+                                    {{-- <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
                                            value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2">
-                                    {{-- <div class="input-group mb-3">
+                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2"> --}}
+                                    <div class="input-group mb-3">
                                         <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
                                            value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}"
                                            placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2">
                                         <span class="input-group-text sub-moneyv">0</span>
-                                    </div> --}}
+                                    </div>
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
                             </div>
@@ -242,19 +242,19 @@
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Chiết khấu (%)</label>
-                                    <input type="text" class="form-control form-control-lg number discountA"
+                                    {{-- <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
                                            value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3">
-                                    {{-- <div class="input-group mb-3">
+                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3"> --}}
+                                    <div class="input-group mb-3">
                                         <input type="text" class="form-control form-control-lg number discountA"
                                            name="moneyv[]"
                                            id="moneyv[]"
                                            value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}"
                                            placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3">
                                         <span class="input-group-text sub-moneyv">0</span>
-                                    </div> --}}
+                                    </div>
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
                             </div>
