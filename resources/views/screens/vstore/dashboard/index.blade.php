@@ -31,7 +31,7 @@
             <a href="#" class="item-dash">
                 <div class="card border-3 border-top border-top-primary">
                     <div class="card-body">
-                        <h5 class="text-muted">Doanh thu</h5>
+                        <h5 class="text-muted">Doanh thu trong ngày</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1">{{number_format($dataRevenueToday,0,'.','.')}}</h1>
                         </div>
@@ -44,7 +44,7 @@
             <a href="#" class="item-dash">
                 <div class="card border-3 border-top border-top-primary">
                     <div class="card-body">
-                        <h5 class="text-muted">Đơn hàng</h5>
+                        <h5 class="text-muted">Đơn hàng trong ngày</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1">{{number_format($dataOrderToday,0,'.','.')}}</h1>
                         </div>
@@ -58,7 +58,7 @@
             <a href="#" class="item-dash">
                 <div class="card border-3 border-top border-top-primary">
                     <div class="card-body">
-                        <h5 class="text-muted">Đơn hàng giao thành công</h5>
+                        <h5 class="text-muted">Đơn hàng giao thành công trong ngày</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1">{{number_format($dataOrderSuccessToday,0,'.','.')}}</h1>
                         </div>
