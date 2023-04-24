@@ -29,16 +29,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+            integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+{{--    css thêm sau --}}
+
+<link rel="stylesheet" href="{{asset('asset/bootstrap.min.css')}}">
+
+{{--    END css thêm sau --}}
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
     body{
         font-family: 'Nunito Sans', serif;
     }
+
+    .btn-cust {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        width: 300px;
+        height: 52px;
+        background: #258AFF !important;
+        border-radius: 8px;
+        align-self: stretch;
+        flex-grow: 0;
+        color: white;
+    }
+
 </style>
     @vite('resources/css/app.css')
 </head>
@@ -213,60 +238,113 @@
 </a>
     </div>
 </div>
-
 @if($isOrder && $isUser)
-    <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
-        <div
-                class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">
-                <div class="relative">
-                    <img src="{{asset('home/img/NCC.png')}}" alt="Logo Nhà Cung Cấp">
-                    <h2 class="font-medium text-2xl mt-4">Thông tin thanh toán</h2>
-
-                    <button class="closeModalPayment absolute top-0 right-0">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M23.0726 0.553704C22.9071 0.383748 22.7104 0.248911 22.4939 0.156911C22.2774 0.064912 22.0453 0.0175566 21.8109 0.0175566C21.5765 0.0175566 21.3444 0.064912 21.1279 0.156911C20.9114 0.248911 20.7147 0.383748 20.5492 0.553704L11.7976 9.50037L3.04608 0.535371C2.88038 0.365637 2.68368 0.230997 2.46719 0.139138C2.2507 0.0472788 2.01867 1.78843e-09 1.78435 0C1.55003 -1.78843e-09 1.318 0.0472788 1.10151 0.139138C0.885021 0.230997 0.688316 0.365637 0.522624 0.535371C0.356931 0.705104 0.225497 0.906607 0.135825 1.12837C0.0461531 1.35014 -1.74585e-09 1.58783 0 1.82787C1.74585e-09 2.06791 0.0461531 2.3056 0.135825 2.52737C0.225497 2.74913 0.356931 2.95064 0.522624 3.12037L9.27417 12.0854L0.522624 21.0504C0.356931 21.2201 0.225497 21.4216 0.135825 21.6434C0.0461531 21.8651 0 22.1028 0 22.3429C0 22.5829 0.0461531 22.8206 0.135825 23.0424C0.225497 23.2641 0.356931 23.4656 0.522624 23.6354C0.688316 23.8051 0.885021 23.9397 1.10151 24.0316C1.318 24.1235 1.55003 24.1707 1.78435 24.1707C2.01867 24.1707 2.2507 24.1235 2.46719 24.0316C2.68368 23.9397 2.88038 23.8051 3.04608 23.6354L11.7976 14.6704L20.5492 23.6354C20.7149 23.8051 20.9116 23.9397 21.1281 24.0316C21.3445 24.1235 21.5766 24.1707 21.8109 24.1707C22.0452 24.1707 22.2773 24.1235 22.4937 24.0316C22.7102 23.9397 22.9069 23.8051 23.0726 23.6354C23.2383 23.4656 23.3698 23.2641 23.4594 23.0424C23.5491 22.8206 23.5952 22.5829 23.5952 22.3429C23.5952 22.1028 23.5491 21.8651 23.4594 21.6434C23.3698 21.4216 23.2383 21.2201 23.0726 21.0504L14.3211 12.0854L23.0726 3.12037C23.7527 2.4237 23.7527 1.25037 23.0726 0.553704Z" fill="black"/>
-                        </svg>
-                    </button>
+<div class="modal fade modal-details-tt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex flex-column" style="gap:6px">
+                    <img src="{{asset('home/img/NCC.png')}}" alt="" style="object-fit: contain; height: 40px;">
+                    <h5 class="modal-title" style="font-size: 20px;">Chi tiết thanh toán</h5>
                 </div>
-                <div class="w-full">
-                    <div class="flex flex-col md:flex-row gap-[30px] pt-8">
-                        <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
-                            <h3 class="font-extrabold text-xl">Thông tin bên mua</h3>
-                            <div class="mt-6 table w-full">
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Tên công ty</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->company_name}}</p>
-                                </div>
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Email</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->email}}</p>
-                                </div>
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Số điện thoại</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->phone_number}}</p>
-                                </div>
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Tên nhà cung cấp</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->name}}</p>
-                                </div>
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Mã số thuế</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->tax_code}}</p>
-                                </div>
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Người đại diện</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->id_vdone}}</p>
-                                </div>
-                                @if($user->referral_code)
-                                    <div class="table-row">
-                                        <p class="font-medium text-xl leading-8 table-cell">Mã người giới thiệu</p>
-                                        <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->referral_code}}</p>
-                                    </div>
-                                @endif
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="content m-4">
+                <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
+                    <div class="col-12">
+                        <h3 style="font-weight: 600; padding-top: 15px; ">Thông tin bên mua</h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
                             </div>
                         </div>
-                        <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
-                            <h3 class="font-extrabold text-xl">Chi tiết sản phẩm</h3>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-size: 16px;">{{$user->tax_code}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-size: 16px;">{{$user->name}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-size: 16px;">{{$user->phone_number}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-size: 16px;">{{$user->email}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    @if($user->referral_code)
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="font-size:18px;font-weight: 600;">ID P-Done người giới thiệu</h4>
+                            </div>
+                            <div class="col-6">
+                                <span style="font-size: 16px;">{{$user->referral_code}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12 my-3">
+                        <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                            <div class="col-12">
+                                <h3 style="font-weight: 600; padding-top: 15px;">Chi tiết sản phẩm</h3>
+                            </div>
                             @php
                                 $price = (float) config('constants.orderService.price_ncc');
                                 $priceFormat = number_format($price, 0, '', '.');
@@ -305,54 +383,59 @@
                                     [
                                         "title" => "Tổng số tiền",
                                         "value" => $totalFormat . "đ",
-                                        "class" => "text-red-500"
+                                        "class" => "text-danger"
                                     ]);
                             @endphp
-                            <div class="mt-6 table w-full">
+                            <div class="col-12">
                                 @foreach($chiTietThanhToan as $value)
-                                    <div class="table-row">
-                                        <p class="font-medium text-xl leading-8 table-cell">{{$value['title']}}</p>
-                                        <p class=" {{$value['class']}} font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$value['value']}}</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 style="font-size:18px;">{{$value['title']}}</h4>
                                     </div>
+                                    <div class="col-6">
+                                        <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
+                                    </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-col md:flex-row gap-[30px] pt-8">
-                    <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
-                        <h3 class="font-extrabold text-xl">Phương thức thanh toán</h3>
-                        <p class="mt-4">
-
-                            @switch($order->method_payment)
-                                @case("ATM_CARD")
-                                    Thẻ nội địa
-                                    @break
-                                @case("CREDIT_CARD")
-                                    Thẻ quốc tế
-                                    @break
-                                @case("9PAY")
-                                    Thanh toán ngay qua 9Pay
-                                    @break
-                                @case("BANK_TRANSFER")
-                                    Chuyển khoản ngân hàng
-                                    @break
-                            @endswitch
-
-                        </p>
+                    <div class="col-12 my-3">
+                        <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                            <div class="col-12">
+                                <h3 style="font-weight: 600; padding-top: 15px;">Phương thức thanh toán</h3>
+                            </div>
+                            <div class="col-12" style="padding-bottom:15px ;">
+                                                    <span>
+                                                        @switch($order->method_payment)
+                                                            @case("ATM_CARD")
+                                                                Thẻ nội địa
+                                                                @break
+                                                            @case("CREDIT_CARD")
+                                                                Thẻ quốc tế
+                                                                @break
+                                                            @case("9PAY")
+                                                                Thanh toán ngay qua 9Pay
+                                                                @break
+                                                            @case("BANK_TRANSFER")
+                                                                Chuyển khoản ngân hàng
+                                                                @break
+                                                        @endswitch
+                                                    </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="w-full flex justify-center mt-8">
-                    <p class="w-full text-center lg:w-6/12">
-                        Thông tin đăng nhập của bạn sẽ được gửi về email đăng ký trong vòng 24 tiếng.
-                        Vui lòng kiểm tra lại email để sử dụng tài khoản.
-                    </p>
-                </div>
-                <div class="flex flex-wrap justify-center mt-8">
-                    <button type="submit" class="closeModalPayment order-first md:order-last text-white border border-[#258AFF] rounded-2xl py-[10px] w-[300px] bg-[#258AFF]">Đóng</button>
+            </div>
+            <div class="modal-footer ">
+                <div class="w-100 mx-auto text-right">
+                    <button type="button" class="btn-cust" data-dismiss="modal">Đóng
+                    </button>
                 </div>
             </div>
+        </div>
     </div>
+</div>
 @endif
 
 <div class="bg-[#D4F0FF]">
@@ -502,7 +585,6 @@
     </div>
 </div>
 
-
 <footer class="bg-[#1E90FF]">
     <div class="grid grid-cols-1 md:grid-cols-2 place-items-center md:place-items-start  w-full md:max-w-[1440px] mx-auto py-4 xl:px-20 px-[20px] gap-y-4">
         <ul class="flex items-center gap-14">
@@ -529,18 +611,13 @@
     </div>
 </footer>
 
-@if($isOrder && $isUser)
-    <script>
-        const formRegister = document.querySelector('#formRegister');
-        const payment = document.querySelector('#payment');
-        const closeModalPayment = document.querySelectorAll('.closeModalPayment');
+<script src="{{asset('asset/js/bootstrap.bundle.js')}}"></script>
 
-        for (i = 0; i < closeModalPayment.length; i++) {
-            closeModalPayment[i].addEventListener('click', function() {
-                payment.classList.add("hidden");
-                formRegister.classList.remove("fixed");
-            });
-        }
+@if($isOrder && $isUser)
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('.modal-details-tt').modal('show');
+        });
     </script>
 @endif
 

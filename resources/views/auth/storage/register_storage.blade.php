@@ -27,6 +27,11 @@
           content="Hãy đồng hành cùng 20.000+ người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng Kho."/>
     <meta property="og:url" content="{{asset('')}}"/>
     <meta property="og:image" content="{{asset('home/img/kho11.png')}}"/>
+    {{--    css thêm sau --}}
+
+    <link rel="stylesheet" href="{{asset('asset/bootstrap.min.css')}}">
+
+    {{--    END css thêm sau --}}
     <meta property="og:image:width" content="120">
     <meta property="og:image:height" content="100">
     @vite('resources/css/app.css')
@@ -54,7 +59,7 @@
     </div>
 @endif
 
-<div class="modal modal-hd">
+<div class="modal2 modal-hd">
     <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
     <div
         class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
@@ -354,318 +359,622 @@
                                                                      class="text-primary hover:opacity-70 transition-all duration-500">Đăng nhập</a></span>
 </div>
 </form>
-@if($isOrder)
-    <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">
-        <form method="POST" action="{{route('post_register_order_kho',['order_id' => $order->id])}}">
-            @csrf
-            <div
-                class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">
-                <div class="relative">
-                    <img src="{{asset('home/img/titleK.png')}}" alt="Logo Kho">
-                    <h2 class="font-medium text-2xl mt-4">Thông tin thanh toán</h2>
+{{--    @if($isOrder)--}}
+{{--    <div id="payment" class="fixed w-screen h-screen bg-white top-0" style="background: rgba(0, 0, 0, 0.5);">--}}
+{{--        <form method="POST" action="{{route('post_register_order_kho',['order_id' => $order->id])}}">--}}
+{{--            @csrf--}}
+{{--            <div--}}
+{{--                class="absolute p-4 lg:p-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[50%] md:-translate-y-[55%] bg-white rounded-2xl w-11/12 lg:w-10/12 h-[95%] md:h-[80%] overflow-auto">--}}
+{{--                <div class="relative">--}}
+{{--                    <img src="{{asset('home/img/titleK.png')}}" alt="Logo Kho">--}}
+{{--                    <h2 class="font-medium text-2xl mt-4">Thông tin thanh toán</h2>--}}
 
-                    <button type="button" class="closeModalPayment absolute top-0 right-0">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M23.0726 0.553704C22.9071 0.383748 22.7104 0.248911 22.4939 0.156911C22.2774 0.064912 22.0453 0.0175566 21.8109 0.0175566C21.5765 0.0175566 21.3444 0.064912 21.1279 0.156911C20.9114 0.248911 20.7147 0.383748 20.5492 0.553704L11.7976 9.50037L3.04608 0.535371C2.88038 0.365637 2.68368 0.230997 2.46719 0.139138C2.2507 0.0472788 2.01867 1.78843e-09 1.78435 0C1.55003 -1.78843e-09 1.318 0.0472788 1.10151 0.139138C0.885021 0.230997 0.688316 0.365637 0.522624 0.535371C0.356931 0.705104 0.225497 0.906607 0.135825 1.12837C0.0461531 1.35014 -1.74585e-09 1.58783 0 1.82787C1.74585e-09 2.06791 0.0461531 2.3056 0.135825 2.52737C0.225497 2.74913 0.356931 2.95064 0.522624 3.12037L9.27417 12.0854L0.522624 21.0504C0.356931 21.2201 0.225497 21.4216 0.135825 21.6434C0.0461531 21.8651 0 22.1028 0 22.3429C0 22.5829 0.0461531 22.8206 0.135825 23.0424C0.225497 23.2641 0.356931 23.4656 0.522624 23.6354C0.688316 23.8051 0.885021 23.9397 1.10151 24.0316C1.318 24.1235 1.55003 24.1707 1.78435 24.1707C2.01867 24.1707 2.2507 24.1235 2.46719 24.0316C2.68368 23.9397 2.88038 23.8051 3.04608 23.6354L11.7976 14.6704L20.5492 23.6354C20.7149 23.8051 20.9116 23.9397 21.1281 24.0316C21.3445 24.1235 21.5766 24.1707 21.8109 24.1707C22.0452 24.1707 22.2773 24.1235 22.4937 24.0316C22.7102 23.9397 22.9069 23.8051 23.0726 23.6354C23.2383 23.4656 23.3698 23.2641 23.4594 23.0424C23.5491 22.8206 23.5952 22.5829 23.5952 22.3429C23.5952 22.1028 23.5491 21.8651 23.4594 21.6434C23.3698 21.4216 23.2383 21.2201 23.0726 21.0504L14.3211 12.0854L23.0726 3.12037C23.7527 2.4237 23.7527 1.25037 23.0726 0.553704Z"
-                                fill="black"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="bg-[#F2F8FF] w-full p-[24px] pt-2 lg:pt-8 mt-2 lg:mt-8 rounded-xl">
-                    <h3 class="font-extrabold text-xl">Thông tin bên mua</h3>
-                    <div class="flex flex-col justify-between lg:flex-row gap-4 mt-6">
-                        <div class="table w-full">
-                            <div class="table-row">
-                                <p class="font-medium text-xl leading-8 table-cell">Tên công ty</p>
-                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->company_name}}</p>
+{{--                    <button type="button" class="closeModalPayment absolute top-0 right-0">--}}
+{{--                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none"--}}
+{{--                             xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path--}}
+{{--                                d="M23.0726 0.553704C22.9071 0.383748 22.7104 0.248911 22.4939 0.156911C22.2774 0.064912 22.0453 0.0175566 21.8109 0.0175566C21.5765 0.0175566 21.3444 0.064912 21.1279 0.156911C20.9114 0.248911 20.7147 0.383748 20.5492 0.553704L11.7976 9.50037L3.04608 0.535371C2.88038 0.365637 2.68368 0.230997 2.46719 0.139138C2.2507 0.0472788 2.01867 1.78843e-09 1.78435 0C1.55003 -1.78843e-09 1.318 0.0472788 1.10151 0.139138C0.885021 0.230997 0.688316 0.365637 0.522624 0.535371C0.356931 0.705104 0.225497 0.906607 0.135825 1.12837C0.0461531 1.35014 -1.74585e-09 1.58783 0 1.82787C1.74585e-09 2.06791 0.0461531 2.3056 0.135825 2.52737C0.225497 2.74913 0.356931 2.95064 0.522624 3.12037L9.27417 12.0854L0.522624 21.0504C0.356931 21.2201 0.225497 21.4216 0.135825 21.6434C0.0461531 21.8651 0 22.1028 0 22.3429C0 22.5829 0.0461531 22.8206 0.135825 23.0424C0.225497 23.2641 0.356931 23.4656 0.522624 23.6354C0.688316 23.8051 0.885021 23.9397 1.10151 24.0316C1.318 24.1235 1.55003 24.1707 1.78435 24.1707C2.01867 24.1707 2.2507 24.1235 2.46719 24.0316C2.68368 23.9397 2.88038 23.8051 3.04608 23.6354L11.7976 14.6704L20.5492 23.6354C20.7149 23.8051 20.9116 23.9397 21.1281 24.0316C21.3445 24.1235 21.5766 24.1707 21.8109 24.1707C22.0452 24.1707 22.2773 24.1235 22.4937 24.0316C22.7102 23.9397 22.9069 23.8051 23.0726 23.6354C23.2383 23.4656 23.3698 23.2641 23.4594 23.0424C23.5491 22.8206 23.5952 22.5829 23.5952 22.3429C23.5952 22.1028 23.5491 21.8651 23.4594 21.6434C23.3698 21.4216 23.2383 21.2201 23.0726 21.0504L14.3211 12.0854L23.0726 3.12037C23.7527 2.4237 23.7527 1.25037 23.0726 0.553704Z"--}}
+{{--                                fill="black"/>--}}
+{{--                        </svg>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <div class="bg-[#F2F8FF] w-full p-[24px] pt-2 lg:pt-8 mt-2 lg:mt-8 rounded-xl">--}}
+{{--                    <h3 class="font-extrabold text-xl">Thông tin bên mua</h3>--}}
+{{--                    <div class="flex flex-col justify-between lg:flex-row gap-4 mt-6">--}}
+{{--                        <div class="table w-full">--}}
+{{--                            <div class="table-row">--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell">Tên công ty</p>--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->company_name}}</p>--}}
+{{--                            </div>--}}
+{{--                            <div class="table-row">--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell">Email</p>--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->email}}</p>--}}
+{{--                            </div>--}}
+{{--                            <div class="table-row">--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell">Số điện thoại</p>--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->phone_number}}</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="table w-full">--}}
+{{--                            <div class="table-row">--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell">Tên nhà cung cấp</p>--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->name}}</p>--}}
+{{--                            </div>--}}
+{{--                            <div class="table-row">--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell">Mã số thuế</p>--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->tax_code}}</p>--}}
+{{--                            </div>--}}
+{{--                            <div class="table-row">--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell">Người đại diện</p>--}}
+{{--                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->id_vdone}}</p>--}}
+{{--                            </div>--}}
+{{--                            @if($user->referral_code)--}}
+{{--                                <div class="table-row">--}}
+{{--                                    <p class="font-medium text-xl leading-8 table-cell">Mã người giới thiệu</p>--}}
+{{--                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->referral_code}}</p>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="flex flex-col md:flex-row gap-[30px] pt-8">--}}
+{{--                    <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">--}}
+{{--                        <h3 class="font-extrabold text-xl">Chi tiết sản phẩm</h3>--}}
+{{--                        @php--}}
+
+{{--                            $price = (float) config('constants.orderService.price_kho');--}}
+{{--                            $priceFormat = number_format($price, 0, '', '.');--}}
+{{--                            $vat = (float) config('constants.orderService.price_kho')*10/100;--}}
+{{--                            $vatFormat = number_format($vat, 0, '', '.');--}}
+
+{{--                            $total = $price + $vat;--}}
+{{--                            $totalFormat = number_format($total, 0, '', '.');--}}
+
+{{--                            $chiTietThanhToan = array(--}}
+{{--                                [--}}
+{{--                                    "title" => "Ngày tạo",--}}
+{{--                                    "value" => $order->created_at,--}}
+{{--                                    "class"=> ""--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    "title" => "Tài khoản",--}}
+{{--                                    "value" => "KHO",--}}
+{{--                                    "class"=> ""--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    "title" => "Thời hạn",--}}
+{{--                                    "value" => "1 năm",--}}
+{{--                                    "class"=> ""--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    "title" => "Giá sản phẩm",--}}
+{{--                                    "value" => $priceFormat . "đ",--}}
+{{--                                    "class"=> ""--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    "title" => "VAT",--}}
+{{--                                    "value" => $vatFormat . "đ",--}}
+{{--                                    "class"=> ""--}}
+{{--                                ],--}}
+{{--                                [--}}
+{{--                                    "title" => "Tổng số tiền",--}}
+{{--                                    "value" => $totalFormat . "đ",--}}
+{{--                                    "class"=> "text-red-500"--}}
+{{--                                ]);--}}
+{{--                        @endphp--}}
+{{--                        <div class="mt-6 table w-full">--}}
+{{--                            @foreach($chiTietThanhToan as $value)--}}
+{{--                                <div class="table-row">--}}
+{{--                                    <p class="font-medium text-xl leading-8 table-cell">{{$value['title']}}</p>--}}
+{{--                                    <p class=" {{$value['class']}} font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$value['value']}}</p>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">--}}
+{{--                        <h3 class="font-extrabold text-xl">Phương thức thanh toán</h3>--}}
+{{--                        <div class="mt-8">--}}
+{{--                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">--}}
+{{--                                <div class="flex gap-2">--}}
+{{--                                    <img src="{{asset('asset/icons/payment/icon_9pay.png')}}" alt="">--}}
+{{--                                    <label class="cursor-pointer" for="paymentInput1">Thanh toán ngay qua--}}
+{{--                                        9Pay</label>--}}
+{{--                                </div>--}}
+{{--                                <input value="9PAY" class="cursor-pointer" checked id="paymentInput1"--}}
+{{--                                       name="method_payment" type="radio">--}}
+{{--                            </div>--}}
+
+{{--                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">--}}
+{{--                                <div class="flex gap-2">--}}
+{{--                                    <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">--}}
+{{--                                    <label class="cursor-pointer" for="paymentInput2">Thẻ nội địa</label>--}}
+{{--                                </div>--}}
+{{--                                <input value="ATM_CARD" class="cursor-pointer" id="paymentInput2"--}}
+{{--                                       name="method_payment" type="radio">--}}
+{{--                            </div>--}}
+{{--                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">--}}
+{{--                                <div class="flex gap-2">--}}
+{{--                                    <img src="{{asset('asset/icons/payment/icon_cart_2.png')}}" alt="">--}}
+{{--                                    <label class="cursor-pointer" for="paymentInput3">Thẻ quốc tế</label>--}}
+{{--                                </div>--}}
+{{--                                <input value="CREDIT_CARD" class="cursor-pointer" id="paymentInput3"--}}
+{{--                                       name="method_payment" type="radio">--}}
+{{--                            </div>--}}
+
+{{--                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">--}}
+{{--                                <div class="flex gap-2">--}}
+{{--                                    <img src="{{asset('asset/icons/payment/icon_bank.png')}}" alt="">--}}
+{{--                                    <label class="cursor-pointer" for="paymentInput4">Chuyển khoản ngân hàng</label>--}}
+{{--                                </div>--}}
+{{--                                <input value="BANK_TRANSFER" class="cursor-pointer" id="paymentInput4"--}}
+{{--                                       name="method_payment" type="radio">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">--}}
+{{--                    <button type="button"--}}
+{{--                            class="order-last md:order-first text-[#258AFF] border border-[#258AFF] rounded-2xl py-[10px] w-[300px] closeModalPayment">--}}
+{{--                        Đóng--}}
+{{--                    </button>--}}
+{{--                    <button type="submit"--}}
+{{--                            class="order-first md:order-last text-white border border-[#258AFF] rounded-2xl py-[10px] w-[300px] bg-[#258AFF]">--}}
+{{--                        Thanh Toán--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </form>--}}
+{{--    </div>--}}
+{{--    @endif--}}
+    @if($isOrder)
+        <div class="modal fade modal-tt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+             aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <form method="POST" action="{{route('post_register_order_kho',['order_id' => $order->id])}}">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="d-flex flex-column" style="gap:6px">
+                                <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
+                                <h5 class="modal-title" style="font-size: 20px;">Thông tin thanh toán</h5>
                             </div>
-                            <div class="table-row">
-                                <p class="font-medium text-xl leading-8 table-cell">Email</p>
-                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->email}}</p>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="content m-4">
+                            <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
+                                <div class="col-12">
+                                    <h3 style="font-weight: 600; padding-top: 15px; ">Thông tin bên mua</h3>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-size: 16px;">{{$user->tax_code}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-size: 16px;">{{$user->name}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-size: 16px;">{{$user->phone_number}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-size: 16px;">{{$user->email}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 style="font-size:18px;font-weight: 600;">Mã người giới thiệu</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-size: 16px;">{{$user->referral_code}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div class="table-row">
-                                <p class="font-medium text-xl leading-8 table-cell">Số điện thoại</p>
-                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->phone_number}}</p>
+                            <div class="row ">
+                                <div class="col-xl-6 col-lg-6 col-md-12 my-3">
+                                    <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                                        <div class="col-12">
+                                            <h3 style="font-weight: 600; padding-top: 15px;">Chi tiết sản phẩm</h3>
+                                        </div>
+                                        @php
+
+                                            $price = (float) config('constants.orderService.price_kho');
+                                            $priceFormat = number_format($price, 0, '', '.');
+                                            $vat = (float) config('constants.orderService.price_kho')*10/100;
+                                            $vatFormat = number_format($vat, 0, '', '.');
+
+                                            $total = $price + $vat;
+                                            $totalFormat = number_format($total, 0, '', '.');
+
+
+                                            $chiTietThanhToan = array(
+                                                [
+                                                    "title" => "Ngày tạo",
+                                                    "value" => $order->created_at,
+                                                    "class"=> ""
+                                                ],
+                                                [
+                                                    "title" => "Tài khoản",
+                                                    "value" => "KHO",
+                                                    "class"=> ""
+                                                ],
+                                                [
+                                                    "title" => "Thời hạn",
+                                                    "value" => "1 năm",
+                                                    "class"=> ""
+                                                ],
+                                                [
+                                                    "title" => "Giá sản phẩm",
+                                                    "value" => $priceFormat . "đ",
+                                                    "class"=> ""
+                                                ],
+                                                [
+                                                    "title" => "VAT",
+                                                    "value" => $vatFormat . "đ",
+                                                    "class"=> ""
+                                                ],
+                                                [
+                                                    "title" => "Tổng số tiền",
+                                                    "value" => $totalFormat . "đ",
+                                                    "class"=> "text-danger"
+                                                ]);
+                                        @endphp
+                                        <div class="col-12">
+                                            @foreach($chiTietThanhToan as $value)
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <h4 style="font-size:18px;">{{$value['title']}}</h4>
+                                                    </div>
+                                                    <div class="col-6 text-right">
+                                                        <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 my-3" >
+                                    <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                                        <div class="col-12">
+                                            <h3 style="font-weight: 600; padding-top: 15px;">Phương thức thanh toán</h3>
+                                        </div>
+                                        <div class="col-12" style="padding-bottom: 15px;">
+                                            <div class="d-flex justify-content-between align-items-center w-100" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                                    <div style="width: 26px; height: 26px;">
+                                                        <img src="{{asset('asset/icons/payment/icon_9pay.png')}}" alt="">
+                                                    </div>
+                                                    <span>Thanh toán ngay qua 9Pay</span>
+                                                </div>
+                                                <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
+                                                    <input type="radio" value="9PAY" name="method_payment" checked class="custom-control-input"><span class="custom-control-label"></span>
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center w-100 my-2" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                                    <div style="width: 26px; height: 26px;">
+                                                        <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">
+                                                    </div>
+                                                    <span>Thẻ nội địa</span>
+                                                </div>
+                                                <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
+                                                    <input type="radio" value="ATM_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center w-100" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                                    <div style="width: 26px; height: 26px;">
+                                                        <img src="{{asset('asset/icons/payment/icon_cart_2.png')}}" alt="">
+                                                    </div>
+                                                    <span>Thẻ quốc tế</span>
+                                                </div>
+                                                <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
+                                                    <input type="radio" value="CREDIT_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center w-100 mt-2 " style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                                    <div style="width: 26px; height: 26px;">
+                                                        <img src="{{asset('asset/icons/payment/icon_bank.png')}}" alt="">
+                                                    </div>
+                                                    <span>Chuyển khoản ngân hàng</span>
+                                                </div>
+                                                <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
+                                                    <input type="radio" value="BANK_TRANSFER" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="table w-full">
-                            <div class="table-row">
-                                <p class="font-medium text-xl leading-8 table-cell">Tên nhà cung cấp</p>
-                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->name}}</p>
+                        <div class="modal-footer ">
+                            <div class="w-100 mx-auto text-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                                </button>
+                                <button type="submit" class="btn btn-primary" >Thanh toán
+                                </button>
                             </div>
-                            <div class="table-row">
-                                <p class="font-medium text-xl leading-8 table-cell">Mã số thuế</p>
-                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->tax_code}}</p>
-                            </div>
-                            <div class="table-row">
-                                <p class="font-medium text-xl leading-8 table-cell">Người đại diện</p>
-                                <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->id_vdone}}</p>
-                            </div>
-                            @if($user->referral_code)
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">Mã người giới thiệu</p>
-                                    <p class="font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$user->referral_code}}</p>
-                                </div>
-                            @endif
                         </div>
                     </div>
-                </div>
-                <div class="flex flex-col md:flex-row gap-[30px] pt-8">
-                    <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
-                        <h3 class="font-extrabold text-xl">Chi tiết sản phẩm</h3>
-                        @php
-
-                            $price = (float) config('constants.orderService.price_kho');
-                            $priceFormat = number_format($price, 0, '', '.');
-                            $vat = (float) config('constants.orderService.price_kho')*10/100;
-                            $vatFormat = number_format($vat, 0, '', '.');
-
-                            $total = $price + $vat;
-                            $totalFormat = number_format($total, 0, '', '.');
-
-                            $chiTietThanhToan = array(
-                                [
-                                    "title" => "Ngày tạo",
-                                    "value" => $order->created_at,
-                                    "class"=> ""
-                                ],
-                                [
-                                    "title" => "Tài khoản",
-                                    "value" => "KHO",
-                                    "class"=> ""
-                                ],
-                                [
-                                    "title" => "Thời hạn",
-                                    "value" => "1 năm",
-                                    "class"=> ""
-                                ],
-                                [
-                                    "title" => "Giá sản phẩm",
-                                    "value" => $priceFormat . "đ",
-                                    "class"=> ""
-                                ],
-                                [
-                                    "title" => "VAT",
-                                    "value" => $vatFormat . "đ",
-                                    "class"=> ""
-                                ],
-                                [
-                                    "title" => "Tổng số tiền",
-                                    "value" => $totalFormat . "đ",
-                                    "class"=> "text-red-500"
-                                ]);
-                        @endphp
-                        <div class="mt-6 table w-full">
-                            @foreach($chiTietThanhToan as $value)
-                                <div class="table-row">
-                                    <p class="font-medium text-xl leading-8 table-cell">{{$value['title']}}</p>
-                                    <p class=" {{$value['class']}} font-medium text-xl leading-8 table-cell text-right lg:text-left">{{$value['value']}}</p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="bg-[#F2F8FF] w-full p-[24px] rounded-xl">
-                        <h3 class="font-extrabold text-xl">Phương thức thanh toán</h3>
-                        <div class="mt-8">
-                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">
-                                <div class="flex gap-2">
-                                    <img src="{{asset('asset/icons/payment/icon_9pay.png')}}" alt="">
-                                    <label class="cursor-pointer" for="paymentInput1">Thanh toán ngay qua
-                                        9Pay</label>
-                                </div>
-                                <input value="9PAY" class="cursor-pointer" checked id="paymentInput1"
-                                       name="method_payment" type="radio">
-                            </div>
-
-                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">
-                                <div class="flex gap-2">
-                                    <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">
-                                    <label class="cursor-pointer" for="paymentInput2">Thẻ nội địa</label>
-                                </div>
-                                <input value="ATM_CARD" class="cursor-pointer" id="paymentInput2"
-                                       name="method_payment" type="radio">
-                            </div>
-                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">
-                                <div class="flex gap-2">
-                                    <img src="{{asset('asset/icons/payment/icon_cart_2.png')}}" alt="">
-                                    <label class="cursor-pointer" for="paymentInput3">Thẻ quốc tế</label>
-                                </div>
-                                <input value="CREDIT_CARD" class="cursor-pointer" id="paymentInput3"
-                                       name="method_payment" type="radio">
-                            </div>
-
-                            <div class="bg-white items-center py-[10px] flex justify-between px-8 rounded-2xl mt-4">
-                                <div class="flex gap-2">
-                                    <img src="{{asset('asset/icons/payment/icon_bank.png')}}" alt="">
-                                    <label class="cursor-pointer" for="paymentInput4">Chuyển khoản ngân hàng</label>
-                                </div>
-                                <input value="BANK_TRANSFER" class="cursor-pointer" id="paymentInput4"
-                                       name="method_payment" type="radio">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">
-                    <button type="button"
-                            class="order-last md:order-first text-[#258AFF] border border-[#258AFF] rounded-2xl py-[10px] w-[300px] closeModalPayment">
-                        Đóng
-                    </button>
-                    <button type="submit"
-                            class="order-first md:order-last text-white border border-[#258AFF] rounded-2xl py-[10px] w-[300px] bg-[#258AFF]">
-                        Thanh Toán
-                    </button>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
     @endif
-    </div>
+</div>
 
-    <script src="{{asset('asset/js/main.js')}}"></script>
+<script src="{{asset('asset/js/bootstrap.bundle.js')}}"></script>
+<script src="{{asset('asset/js/main.js')}}"></script>
 
-    <script !src="">
-        const x = document.querySelectorAll('input[type="number"]');
-        x.forEach(item => {
-            item.addEventListener("keypress", function (evt) {
-                if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
-                    evt.preventDefault();
-                }
-            });
+<script !src="">
+    const x = document.querySelectorAll('input[type="number"]');
+    x.forEach(item => {
+        item.addEventListener("keypress", function (evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+            }
+        });
+    })
+    const divCity = document.getElementById('city_id');
+    const divDistrict = document.getElementById('district_id');
+    const divWard = document.getElementById('ward_id');
+    document.querySelector('.active').setAttribute('disabled', 'true');
+    document.querySelector('.active').classList.add('bg-slate-300');
+    fetch('{{route('get_city')}}', {
+        mode: 'no-cors',
+
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
         })
-        const divCity = document.getElementById('city_id');
-        const divDistrict = document.getElementById('district_id');
-        const divWard = document.getElementById('ward_id');
-        document.querySelector('.active').setAttribute('disabled', 'true');
-        document.querySelector('.active').classList.add('bg-slate-300');
-        fetch('{{route('get_city')}}', {
+        .catch(console.error);
+
+    divCity.addEventListener('change', (e) => {
+        fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+
+            .then((data) => {
+                if (data.length > 0) {
+                    const check = checkEmpty(inputs);
+                    if (check && divCity.value && divDistrict.value && divWard.value) {
+                        document.querySelector('.active').removeAttribute('disabled');
+                        document.querySelector('.active').classList.remove('bg-slate-300');
+                    } else {
+                        document.querySelector('.active').setAttribute('disabled', 'true');
+                        document.querySelector('.active').classList.add('bg-slate-300');
+                    }
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                }
+            })
+            .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+            )
+    });
+    divDistrict.addEventListener('change', (e) => {
+        fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
             mode: 'no-cors',
 
         })
             .then((response) => response.json())
             .then((data) => {
-                document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
-            })
-            .catch(console.error);
-
-        divCity.addEventListener('change', (e) => {
-            fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
-                mode: 'no-cors',
-
-            })
-                .then((response) => response.json())
-
-                .then((data) => {
-                    if (data.length > 0) {
-                        const check = checkEmpty(inputs);
-                        if (check && divCity.value && divDistrict.value && divWard.value) {
-                            document.querySelector('.active').removeAttribute('disabled');
-                            document.querySelector('.active').classList.remove('bg-slate-300');
-                        } else {
-                            document.querySelector('.active').setAttribute('disabled', 'true');
-                            document.querySelector('.active').classList.add('bg-slate-300');
-                        }
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
-
+                if (data.length > 0) {
+                    const check = checkEmpty(inputs);
+                    if (check && divCity.value && divDistrict.value && divWard.value) {
+                        document.querySelector('.active').removeAttribute('disabled');
+                        document.querySelector('.active').classList.remove('bg-slate-300');
                     } else {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                        document.querySelector('.active').setAttribute('disabled', 'true');
+                        document.querySelector('.active').classList.add('bg-slate-300');
                     }
-                })
-                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
-                )
-        });
-        divDistrict.addEventListener('change', (e) => {
-            fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
-                mode: 'no-cors',
+                    divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
 
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.length > 0) {
-                        const check = checkEmpty(inputs);
-                        if (check && divCity.value && divDistrict.value && divWard.value) {
-                            document.querySelector('.active').removeAttribute('disabled');
-                            document.querySelector('.active').classList.remove('bg-slate-300');
-                        } else {
-                            document.querySelector('.active').setAttribute('disabled', 'true');
-                            document.querySelector('.active').classList.add('bg-slate-300');
-                        }
-                        divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
-
-                    } else {
-                        divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`;
-                    }
-                })
-                .catch(() => divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`
-                )
-        });
-
-        function checkEmpty(inputs) {
-            let check1 = true
-            inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 <= 20 && ![12,13,8,9,14,15,16,17,18,19].includes(index1)) {
-                    check1 = false;
-                }
-            });
-
-            return check1;
-        }
-
-        const inputs = document.querySelectorAll('input');
-        console.log(inputs);
-        inputs.forEach((item, index) => {
-            item.setAttribute('autocomplete', 'off')
-            item.addEventListener('change', (e) => {
-                const check = checkEmpty(inputs);
-
-                if (check && divCity.value && divDistrict.value && divWard.value && inputs[20].checked) {
-                    document.querySelector('.active').removeAttribute('disabled');
-                    document.querySelector('.active').classList.remove('bg-slate-300');
                 } else {
-                    document.querySelector('.active').setAttribute('disabled', 'true');
-                    document.querySelector('.active').classList.add('bg-slate-300');
+                    divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`;
                 }
             })
+            .catch(() => divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`
+            )
+    });
+
+    function checkEmpty(inputs) {
+        let check1 = true
+        inputs.forEach((item1, index1) => {
+            if (!item1.value && index1 > 0 && index1 <= 20 && ![12,13,8,9,14,15,16,17,18,19].includes(index1)) {
+                check1 = false;
+            }
         });
 
-        //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
-        setSessionStorageThreeType();
+        return check1;
+    }
 
-        function setSessionStorageThreeType() {
-            let length = document.getElementById("length");
-            if (length) {
-                length.addEventListener("change", function (evt) {
-                    sessionStorage.setItem("length_storage", length.value);
-                });
+    const inputs = document.querySelectorAll('input');
+    console.log(inputs);
+    inputs.forEach((item, index) => {
+        item.setAttribute('autocomplete', 'off')
+        item.addEventListener('change', (e) => {
+            const check = checkEmpty(inputs);
+
+            if (check && divCity.value && divDistrict.value && divWard.value && inputs[20].checked) {
+                document.querySelector('.active').removeAttribute('disabled');
+                document.querySelector('.active').classList.remove('bg-slate-300');
+            } else {
+                document.querySelector('.active').setAttribute('disabled', 'true');
+                document.querySelector('.active').classList.add('bg-slate-300');
             }
-            let width = document.getElementById("width");
-            if (width) {
-                width.addEventListener("change", function (evt) {
-                    sessionStorage.setItem("width_storage", width.value);
-                });
-            }
-            let height = document.getElementById("height");
-            if (height) {
-                height.addEventListener("change", function (evt) {
-                    sessionStorage.setItem("height_storage", height.value);
-                });
-            }
+        })
+    });
+
+    //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
+    setSessionStorageThreeType();
+
+    function setSessionStorageThreeType() {
+        let length = document.getElementById("length");
+        if (length) {
+            length.addEventListener("change", function (evt) {
+                sessionStorage.setItem("length_storage", length.value);
+            });
+        }
+        let width = document.getElementById("width");
+        if (width) {
+            width.addEventListener("change", function (evt) {
+                sessionStorage.setItem("width_storage", width.value);
+            });
+        }
+        let height = document.getElementById("height");
+        if (height) {
+            height.addEventListener("change", function (evt) {
+                sessionStorage.setItem("height_storage", height.value);
+            });
+        }
+    }
+
+
+    // divWard.addEventListener('')
+</script>
+@if(old('city_id') != '')
+    <script>
+        fetch('{{route('get_city')}}?type=2&value={{old('city_id')}}', {
+            mode: 'no-cors',
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
+
+                } else {
+                    divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                }
+            })
+            .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+            );
+    </script>
+@endif
+@if($isOrder)
+    <script>
+        const formRegister = document.querySelector('#formRegister-V');
+        const payment = document.querySelector('#payment');
+        const closeModalPayment = document.querySelectorAll('.closeModalPayment');
+
+        for (i = 0; i < closeModalPayment.length; i++) {
+            closeModalPayment[i].addEventListener('click', function () {
+                payment.classList.add("hidden");
+                formRegister.classList.remove("fixed");
+            });
         }
 
 
-        // divWard.addEventListener('')
-    </script>
-    @if(old('city_id') != '')
-        <script>
-            fetch('{{route('get_city')}}?type=2&value={{old('city_id')}}', {
-                mode: 'no-cors',
+        getInfoVstorage();
 
+        function getInfoVstorage() {
+            const infoNCC = @json($user) ;
+            setValueById("email", infoNCC.email);
+            setValueById("name", infoNCC.name);
+            setValueById("company_name", infoNCC.company_name);
+            setValueById("tax_code", infoNCC.tax_code);
+            setValueById("city_id", infoNCC.provinceId);
+            setValueById("district_id", infoNCC.district_id);
+            setValueById("ward_id", infoNCC.ward_id);
+            setValueById("address", infoNCC.address);
+            setValueById("phone_number", infoNCC.phone_number);
+            setValueById("id_vdone", infoNCC.id_vdone);
+            setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
+            setValueById("referral_code", infoNCC.referral_code);
+
+            loadAddress(infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);
+
+            // info storage
+            let storage_information = infoNCC.storage_information;
+            if (storage_information) {
+                storage_information = JSON.parse(storage_information);
+                setValueById("floor_area", storage_information.floor_area);
+                setValueById("volume", storage_information.volume);
+                setValueById("cold_storage", storage_information.cold_storage);
+                setValueById("warehouse", storage_information.warehouse);
+                setValueById("normal_storage", storage_information.normal_storage);
+            }
+
+        }
+
+        function loadAddress(provinceId, district_id, ward_id) {
+            fetch('{{route('get_city')}}', {
+                mode: 'no-cors',
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == provinceId ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+                })
+                .catch(console.error);
+            fetch('{{route('get_city')}}?type=2&value=' + provinceId, {
+                mode: 'no-cors',
             })
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.length > 0) {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
+                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == district_id ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
 
                     } else {
                         divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
@@ -673,104 +982,42 @@
                 })
                 .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
                 );
-        </script>
-    @endif
-    @if($isOrder)
-        <script>
-            const formRegister = document.querySelector('#formRegister-V');
-            const payment = document.querySelector('#payment');
-            const closeModalPayment = document.querySelectorAll('.closeModalPayment');
-
-            for (i = 0; i < closeModalPayment.length; i++) {
-                closeModalPayment[i].addEventListener('click', function () {
-                    payment.classList.add("hidden");
-                    formRegister.classList.remove("fixed");
-                });
-            }
-
-
-            getInfoVstorage();
-
-            function getInfoVstorage() {
-                const infoNCC = @json($user) ;
-                setValueById("email", infoNCC.email);
-                setValueById("name", infoNCC.name);
-                setValueById("company_name", infoNCC.company_name);
-                setValueById("tax_code", infoNCC.tax_code);
-                setValueById("city_id", infoNCC.provinceId);
-                setValueById("district_id", infoNCC.district_id);
-                setValueById("ward_id", infoNCC.ward_id);
-                setValueById("address", infoNCC.address);
-                setValueById("phone_number", infoNCC.phone_number);
-                setValueById("id_vdone", infoNCC.id_vdone);
-                setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
-                setValueById("referral_code", infoNCC.referral_code);
-
-                loadAddress(infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);
-
-                // info storage
-                let storage_information = infoNCC.storage_information;
-                if (storage_information) {
-                    storage_information = JSON.parse(storage_information);
-                    setValueById("floor_area", storage_information.floor_area);
-                    setValueById("volume", storage_information.volume);
-                    setValueById("cold_storage", storage_information.cold_storage);
-                    setValueById("warehouse", storage_information.warehouse);
-                    setValueById("normal_storage", storage_information.normal_storage);
-                }
-
-            }
-
-            function loadAddress(provinceId, district_id, ward_id) {
-                fetch('{{route('get_city')}}', {
-                    mode: 'no-cors',
+            fetch('{{route('get_city')}}?type=3&value=' + district_id, {
+                mode: 'no-cors',
+            }).then((response) => response.json())
+                .then((data) => {
+                    if (data.length > 0) {
+                        divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+                    } else {
+                        divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
+                    }
                 })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == provinceId ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
-                    })
-                    .catch(console.error);
-                fetch('{{route('get_city')}}?type=2&value=' + provinceId, {
-                    mode: 'no-cors',
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.length > 0) {
-                            divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == district_id ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+                .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
+                );
+        }
 
-                        } else {
-                            divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
-                        }
-                    })
-                    .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
-                    );
-                fetch('{{route('get_city')}}?type=3&value=' + district_id, {
-                    mode: 'no-cors',
-                }).then((response) => response.json())
-                    .then((data) => {
-                        if (data.length > 0) {
-                            divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
-                        } else {
-                            divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
-                        }
-                    })
-                    .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
-                    );
-            }
+        getDataStorageThreeType();
 
-            getDataStorageThreeType();
+        function getDataStorageThreeType() {
+            let length = sessionStorage.getItem("length_storage");
+            let width = sessionStorage.getItem("width_storage");
+            let height = sessionStorage.getItem("height_storage");
 
-            function getDataStorageThreeType() {
-                let length = sessionStorage.getItem("length_storage");
-                let width = sessionStorage.getItem("width_storage");
-                let height = sessionStorage.getItem("height_storage");
+            setValueById("length", length);
+            setValueById("width", width);
+            setValueById("height", height);
+        }
 
-                setValueById("length", length);
-                setValueById("width", width);
-                setValueById("height", height);
-            }
+    </script>
+@endif
 
-        </script>
-    @endif
+@if($isOrder)
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('.modal-tt').modal('show');
+        });
+    </script>
+@endif
+
 </body>
 </html>

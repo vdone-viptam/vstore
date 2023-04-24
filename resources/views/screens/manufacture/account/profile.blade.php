@@ -24,7 +24,7 @@
             </div>
         </div>
     @endif
-    <div class="modal modal-hd  @if(\Illuminate\Support\Facades\Session::has('validate')) show-modal @endif">
+    <div class="modal2 modal-hd  @if(\Illuminate\Support\Facades\Session::has('validate')) show-modal @endif">
         <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
         <form action="{{route('screens.manufacture.account.editPro',['id' => $infoAccount->id])}}" method="POST">
             <div

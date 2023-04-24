@@ -166,6 +166,7 @@ class LoginController extends Controller
             return redirect()->to($redirectUrl);
         } catch (Exception $e) {
             Log::error($e);
+            dd($e);
             return response()->json([
                 "message" => "500 Internal Server Error",
                 "errors" => $e

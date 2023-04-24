@@ -44,7 +44,7 @@
     </div>
 @endif
 
-<div class="modal modal-hd">
+<div class="modal2 modal-hd">
     <div class="over-lay-modal" onclick="$('.modal-hd').toggleClass('show-modal')"></div>
     <div
         class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-10 md:mt-24">
