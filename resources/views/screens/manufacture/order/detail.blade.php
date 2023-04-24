@@ -18,7 +18,7 @@
             <div class="content  max-h-[600px] overflow-y-auto">
                 <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
                     <div class="grid grid-cols-2 gap-4 w-full">
-                        <span class="text-title font-medium ">Mã đơn hàng:</span>
+                        <span class="text-title font-medium ">Mã đơn nhập sẵn:</span>
                         <span class="text-title">{{$order->no}}</span>
                     </div>
 

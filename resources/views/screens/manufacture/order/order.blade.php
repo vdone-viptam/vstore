@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label for="name">Mã đơn hàng: </label>
+                                <label for="name">Mã đơn nhập sẵn: </label>
                                 <input type="text" class="form-control form-control-lg" id="no" readonly>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label for="name">Giảm giá (nếu có):</label>
+                                <label for="name">Chiết khấu nhập sẵn (nếu có):</label>
                                 <input type="text" class="form-control form-control-lg" id="discount" readonly>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label for="name">Tiền đặt cọc (nếu có):</label>
+                                <label for="name">Tiền cọc trước đơn nhập sãn (nếu có):</label>
                                 <input type="text" class="form-control form-control-lg" id="deposits" readonly>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                                     <td>{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
                                         <a href="#" data-toggle="modal"
-                                        data-target=".bd-example-modal-lg" data-id="{{$order->id}}" class="text-blue-600 more-details">Chi tiết</a>
+                                        data-target=".bd-example-modal-lg" data-id="{{$order->id}}" class="btn btn-link more-details">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach

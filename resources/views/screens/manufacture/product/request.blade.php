@@ -6,8 +6,8 @@
 @section('modal')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content ">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -273,56 +273,10 @@
                     })
                 }
             }).done(function (data) {
-                var htmlData = ``;
+                var htmlData = `${data.view}`;
 
-                if (data.data) {
-                    htmlData += `
-<form method="post" key=${id}>
-
-
-                           <div class="form-group">
-                    <label >Mã yêu cầu :</label>
-                  <input class="form-control form-control-lg" disabled value="${data.data.code}" />           </div>
-
-                <div class="form-group">
-                    <span >Tên sản phẩm :</label>
-                  <input class="form-control form-control-lg" disabled value="${data.data.product_name}">
-                </div>
-                <div class="form-group">
-                    <span >V-Store niêm yết:</label>
-                  <input class="form-control form-control-lg" disabled value="${data.data.user_name}" >
-                </div>
-                <div class="form-group">
-                    <an >Giá bán :</label>
-                  <input class="form-control form-control-lg" disabled value="${data.data.price + 'đ'}">
-                <div class="form-group">
-                    <label>Vat :</label>
-                  <input class="form-control form-control-lg" disabled value="${data.data.vat}" >        </div>
-                <div class="form-group">
-                    <span >Chiết khấu V-Store :</label>
-                  <input class="form-control form-control-lg" disabled value="${data.data.discount}" >
-                   </form>
-
-                        `;
-                    $('.md-content').html(htmlData)
-                    $('#modalDetail').modal('show');
-                    if (data.data.availability_status == 1) {
-                        document.querySelector('.btnDestroy').innerHTML =
-                            `<button class="btn btn-danger">Hủy niêm yết</button>
-
-`;
-                        $(".btnDelete").html('');
-                    } else {
-                        document.querySelector('.btnDestroy').innerHTML = ``;
-                        $(".btnDelete").html('<a class="btn btn-warning btnEdit mx-2" href="">Sửa sản phẩm</a><button  class="btn btn-danger">Xóa sản phẩm</button>');
-                    }
-                } else {
-                    $('#modalDetail').modal('show');
-                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
-                    setTimeout(() => {
-                        $('#modalDetail').modal('hide');
-                    }, 1000);
-                }
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
             })
 
 

@@ -33,7 +33,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
-            'publish_id', 'images', 'products.name','category_id', 'price', 'products.status', 'vstore_id','categories.name as cate_name','status',
+            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
             'amount_product_sold')
             ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
@@ -301,11 +301,10 @@ class ProductController extends Controller
 
                 try {
                     $product = Product::query()->select('products.id', 'products.name', 'categories.name as cate_name',
-                        'products.price', 'sku_id', 'products.description', 'short_content', 'images', 'video',
-                        'brand', 'origin', 'material', 'length', 'with', 'height', 'weight', 'volume',
-                        'manufacturer_name', 'manufacturer_address', 'import_unit', 'import_address', 'import_date', 'packing_type', 'availability_status')
+                        'products.price', 'short_content', 'images', 'video', 'availability_status', 'discount', 'discount_vShop', 'amount_product_sold', 'publish_id')
                         ->join('categories', 'products.category_id', '=', 'categories.id')
                         ->where('products.id', $request->product_id)
+                        ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id=' . $request->product_id, 'amount')
                         ->first();
 
                     return response()->json(['data' =>
@@ -328,13 +327,13 @@ class ProductController extends Controller
                         ->join('users', 'requests.vstore_id', '=', 'users.id')
                         ->selectRaw('requests.code,products.id,requests.id as re_id,price,
                     requests.discount,requests.discount_vshop,requests.status,products.name as product_name,
-                    users.name as user_name,requests.vat,products.amount_product_sold')
+                    users.name as user_name,requests.note,publish_id,requests.created_at')
                         ->where('requests.id', $request->id)
                         ->first();
-                    return response()->json([
-                        'success' => true,
-                        'data' => $request
-                    ], 200);
+                    return response()->json(['view' =>
+                        view('screens.manufacture.product.detail',
+                            ['product' => $request])->render(),
+                    ]);
                 } catch (\Exception $exception) {
                     return response()->json([
                         'success' => false,

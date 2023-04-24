@@ -136,7 +136,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tỉ lệ chiết khấu cho V-Store
+                            <th style="min-width: 250px">Tỉ lệ chiết khấu cho V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.discount')
                                         @if($type == 'desc')
@@ -192,8 +192,10 @@
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{number_format($product->price,0,'.','.')}} đ</td>
                                     <td>{{$product->vstore_name ?? 'Sản phẩm chưa niêm yết'}}</td>
-                                    <td>{{number_format($product->amount,0,'.','.')}}</td>
+                                    <td>{{$product->discount > 0 ? $product->discount : 'Chưa niêm yết'}}</td>
+
                                     <td>{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                    <td>{{number_format($product->amount,0,'.','.')}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$product->id}})">Chi tiết
