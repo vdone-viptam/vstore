@@ -273,7 +273,7 @@
 <label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">
                                                             <input type="radio" name="type" value="${item.type}" ${item.type == data.product_ware || data.ware_type.length == 1 ? 'checked' : 'disabled'}  id="type${index}" class="custom-control-input"><span class="custom-control-label">${name}</span>
                                                         </label>
-</div>`;
+</div>k`;
                 }).join("");
                 $('#selectType').html(html);
             })
@@ -281,6 +281,18 @@
         </script>
     @endif
     <script>
+        $('#appect').on('change', (e) => {
+            if (e.target.checked && $('#discount_vShop').val()) {
+                if($('#appect').is(":checked")){
+                    document.getElementById('btnConfirm').style.display = 'block';
+                }else{
+                    document.getElementById('btnConfirm').style.display = 'none';
+
+                }
+            } else {
+                document.getElementById('btnConfirm').style.display = 'none';
+            }
+        });
         $('#btnAddPro').attr('disabled', 'true')
 
         $('#quantity').on('keyup', (e) => {
