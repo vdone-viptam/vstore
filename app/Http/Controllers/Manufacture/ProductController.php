@@ -22,6 +22,7 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    private $v;
     public function __construct()
     {
         $this->v = [];
@@ -65,18 +66,19 @@ class ProductController extends Controller
 
     }
 
-    public function createRequest()
+    public function createRequest(Request $request)
     {
 //        return 1;
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
         $this->v['vstore'] = User::where('id', 800)->first();
-
+       
         if (!$this->v['vstore']) {
             $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
         }
 //        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
+       
         $vstores = [];
         foreach ($listVstores as $list) {
             $vstores[] = $list;
@@ -85,6 +87,7 @@ class ProductController extends Controller
         if ($v) {
             $vstores[] = $v;
         }
+       
         $this->v['v_stores'] = array_unique($vstores);
 //        return $this->v['v_stores'];
         return view('screens.manufacture.product.create', $this->v);
@@ -347,7 +350,7 @@ class ProductController extends Controller
         }
     }
 
-    public function requestDeleteProduct()
+    public function requestDeleteProduct( )
     {
         return view('screens.manufacture.product.request_delete');
     }

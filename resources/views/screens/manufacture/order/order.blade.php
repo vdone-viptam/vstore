@@ -235,14 +235,17 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$orders->withQueryString()->links()}}
+                    {{ $orders->withQueryString()->links() }}
                     <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
                         <form>
                             <div class="form-group">
                                 <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 phần tử / trang
+                                    </option>
+                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 phần tử / trang
+                                    </option>
+                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 phần tử / trang
+                                    </option>
                                 </select>
                             </div>
                         </form>
@@ -257,8 +260,7 @@
 
 @section('custom_js')
     <script>
-        $(document).ready(function () {
-            let limit = document.getElementById('limit');
+        $(document).ready(function() {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {
@@ -269,32 +271,32 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.manufacture.order.order',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort+ '&limit=' + limit.value
+                        document.location =
+                            '{{ route('screens.manufacture.order.order', ['key_search' => $key_search]) }}&type=' +
+                            orderBy +
+                            '&field=' + sort
                     })
                 });
             });
-
-            limit.addEventListener('change', (e) => {
-                setTimeout(() => {
-                    document.location = '{{route('screens.manufacture.order.order',['key_search' => $key_search])}}&type=' + '{{$type}}' +
-                        '&field=' + '{{$field}}' + '&limit=' + e.target.value
-                }, 200)
-            })
             document.querySelectorAll('.more-details').forEach(item => {
                 item.addEventListener('click', (e) => {
                     $.ajax({
-                        url: '{{route('screens.manufacture.order.detail')}}/' + item.dataset.id,
-                        success: function (result) {
+                        url: '{{ route('screens.manufacture.order.detail') }}/' + item
+                            .dataset.id,
+                        success: function(result) {
                             console.log(result);
-                            if(result){
+                            if (result) {
                                 $("#no").val(result.no);
                                 $("#name").val(result.product.name);
                                 $("#price").val(result.product.price);
-                                const deposits = (result.total - (result.total * result.discount / 100)) * (result.deposit_money / 100);
-                                const total = result.total - (result.total * result.discount / 100);
+                                const deposits = (result.total - (result.total * result
+                                    .discount / 100)) * (result.deposit_money / 100);
+                                const total = result.total - (result.total * result
+                                    .discount / 100);
                                 const today = (datetimeLocal(result.created_at));
-                                const status = result.status == 1 ? 'Đã hoàn thành' : result.status == 3  ? 'Đơn hàng mới' : result.status == 4 ? 'Đang giao hàng' : 'Hủy' ;
+                                const status = result.status == 1 ? 'Đã hoàn thành' :
+                                    result.status == 3 ? 'Đơn hàng mới' : result
+                                    .status == 4 ? 'Đang giao hàng' : 'Hủy';
 
                                 $("#discount").val(parseInt(result.discount) + ' %');
                                 $("#quantity").val(result.quantity);
