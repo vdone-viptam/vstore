@@ -19,6 +19,7 @@ use App\Models\Vshop;
 use App\Models\Warehouses;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -32,6 +33,41 @@ use Illuminate\Support\Str;
 
 class PaymentMethod9PayController extends Controller
 {
+
+    public function historyPayment9Pay() {
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $invoice_no = "lti4r00000644";
+        $return_url = "https://sand-payment.9pay.vn/v2/payments/$invoice_no/inquire";
+        $timestamp = time();
+        $signature = base64_encode(hash_hmac("sha256",
+            "GET
+            $return_url
+            $timestamp",
+            $merchantKeySecret,
+            true));
+
+//        merchantKey=$merchantKey&invoice_no=$invoice_no
+
+        $algorithm = "HS256";
+        $signedHeaders = "";
+        $authorizationHeader = "Signature Algorithm=$algorithm,Credential=$merchantKey,SignedHeaders=$signedHeaders,Signature=$signature";
+
+        $client = new Client();
+        $headers = [
+            'Authorization' => $authorizationHeader,
+            'Date' => $timestamp
+        ];
+        $request = $client->get($return_url, $headers);
+        dd($authorizationHeader, $request);
+//
+//        dd($request, $headers);
+
+
+    }
+
     public function payment9PayErr500()
     {
         return view('payment.payment500');
@@ -635,7 +671,6 @@ class PaymentMethod9PayController extends Controller
             $merchantKey = config('payment9Pay.merchantKey');
             $merchantKeySecret = config('payment9Pay.merchantKeySecret');
             $merchantEndPoint = config('payment9Pay.merchantEndPoint');
-
             $data = array(
                 'merchantKey' => $merchantKey,
                 'time' => $time,

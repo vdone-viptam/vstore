@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/els', [\App\Http\Controllers\Api\ElasticsearchController::class, 'index']);
+//Route::get('/els', [\App\Http\Controllers\Api\ElasticsearchController::class, 'index']);
+Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, 'historyPayment9Pay']);
 
 //Route::post('callback-viettel-post', function (Request $req) {
 //

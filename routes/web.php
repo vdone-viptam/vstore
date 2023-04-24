@@ -24,7 +24,7 @@ Route::get('/getWarehouse', function () {
 });
 // THANH TOÁN APP
 Route::group(['domain' => config('domain.payment')], function () {
-    Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentBack']);
+    Route::get('/payment/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
     Route::get('/payment/return', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentReturn']);
 
     Route::get('/payment/order-service-ncc/back', [\App\Http\Controllers\PaymentMethod9PayController::class, 'paymentOrderServiceBackNCC']);

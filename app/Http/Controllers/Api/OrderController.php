@@ -52,6 +52,14 @@ class OrderController extends Controller
         $productId = $request->product_id;
         $vshopId = $request->vshop_id;
         $quantity = $request->quantity;
+
+        $checkVshopId = VshopProduct::where('vshop_id', $vshopId)
+            ->where('product_id', $request->product_id)
+            ->first();
+        if (!$checkVshopId) {
+            $vshopId = Vshop::where('pdone_id', 247)->first()->id;
+        }
+
         $product = Product::where('products.id', $request->product_id)
             ->join('vshop_products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vshop_products.vshop_id', $vshopId)
