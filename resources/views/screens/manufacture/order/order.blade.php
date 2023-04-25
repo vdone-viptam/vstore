@@ -199,14 +199,14 @@
                             </th>
                             <th>Tiền đặt cọc
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'pre_order_vshop.deposit_money')
+                                    @if($field == 'deposit_money')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.deposit_money"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="=deposit_money"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.deposit_money"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="=deposit_money"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.deposit_money"></i>
+                                        <i class="fas fa-sort sort" data-sort="deposit_money"></i>
                                     @endif
                                 </span>
                             </th>
