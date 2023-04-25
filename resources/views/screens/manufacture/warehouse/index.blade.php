@@ -354,12 +354,14 @@
 
 
 
-                    <div class="col-sm-12">
-                        <table class="table table-striped table-bordered first dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                    <div class="col-12">
+                    <div class="table-responsive">
+
+                        <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc"  style="width: 186.844px;">Tên sản phẩm</th>
-                                <th style="width: 304.078px;">Số lượng</th>
+                                <th class="sorting_asc"  style="width: 250px;">Tên sản phẩm</th>
+                                <th style="min-width: 250px;">Số lượng</th>
 
                             </tr>
                             </thead>
@@ -369,7 +371,7 @@
 
                             htmlData += `
 <tr role="row" class="odd">
-                                <td class="sorting_1">${value.name}</td>
+                                <td class="text-nowrap" >${value.name}</td>
                                 <td>${value.amount_product}</td>
 
                             </tr>
@@ -383,6 +385,7 @@
                     htmlData += `</tbody>
 
                         </table>
+</div>
 </div>
    `;
                     ;
