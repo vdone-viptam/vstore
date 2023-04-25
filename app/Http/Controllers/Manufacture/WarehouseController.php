@@ -168,7 +168,7 @@ class WarehouseController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        $this->v['products'] = Product::select('id', 'name')->where('user_id', Auth::id())->where('availability_status', 1)->get();
+        $this->v['products'] = Product::select('id', 'name')->where('user_id', Auth::id())->where('status', 2)->get();
         $this->v['warehouses'] = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,warehouses.id,
             warehouses.phone_number,
             warehouses.address')

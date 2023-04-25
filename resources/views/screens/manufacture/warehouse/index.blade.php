@@ -82,6 +82,29 @@
             </div>
         </form>
     </div>
+    <div
+        class="modal fade"
+        id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form method="post" action="{{route('screens.manufacture.warehouse.addProduct')}}">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Sản phẩm trong kho</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body md-content1">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 @section('page_title','Quản lý kho hàng')
 
@@ -197,7 +220,7 @@
                     </div>
                     <div class="d-flex align-items-end justify-content-end mt-4">
                         {{$warehouses->withQueryString()->links()}}
-                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                        <div class="mt-4">
                             <form>
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
@@ -327,19 +350,18 @@
                 var htmlData = ``;
 
                 if (data.data) {
-                    htmlData += `<div class="modal-content">
+                    htmlData += `
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-striped table-bordered first dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+
+                    <div class="col-12">
+                    <div class="table-responsive">
+
+                        <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 186.844px;">Name</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 304.078px;">Position</th>
+                                <th class="sorting_asc"  style="width: 250px;">Tên sản phẩm</th>
+                                <th style="min-width: 250px;">Số lượng</th>
 
                             </tr>
                             </thead>
@@ -349,7 +371,7 @@
 
                             htmlData += `
 <tr role="row" class="odd">
-                                <td class="sorting_1">${value.name}</td>
+                                <td class="text-nowrap" >${value.name}</td>
                                 <td>${value.amount_product}</td>
 
                             </tr>
@@ -363,18 +385,16 @@
                     htmlData += `</tbody>
 
                         </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+</div>
+</div>
    `;
                     ;
-                    $('.md-content').html(htmlData)
+                    $('.md-content1').html(htmlData)
                     $('#modalDetail').modal('show');
                 } else {
+
                     $('#modalDetail').modal('show');
-                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    $('.md-content1').html('Chưa có dữ liệu của sản phẩm!')
                     setTimeout(() => {
                         $('#modalDetail').modal('hide');
                     }, 1000);

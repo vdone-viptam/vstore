@@ -191,8 +191,8 @@
                                     <td class="td_name">{{$product->name}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{number_format($product->price,0,'.','.')}} đ</td>
-                                    <td>{{$product->vstore_name ?? 'Sản phẩm chưa niêm yết'}}</td>
-                                    <td>{{$product->discount > 0 ? $product->discount : 'Chưa niêm yết'}}</td>
+                                    <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
+                                    <td>{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
 
                                     <td>{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                     <td>{{number_format($product->amount,0,'.','.')}}</td>

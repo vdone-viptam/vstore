@@ -676,7 +676,7 @@ class ProductController extends Controller
         $cate = [];
 
         $products = DB::table('vshop')
-            ->select('products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop as discountVstore', 'categories.name as cate_name')
+            ->select('vshop_products.amount_product_sold','products.name', 'publish_id', 'price', 'images', 'products.id', 'discount_vShop as discountVstore', 'categories.name as cate_name')
             ->join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')

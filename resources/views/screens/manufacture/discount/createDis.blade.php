@@ -46,8 +46,8 @@
             {{-- <input name="discount" id="discount1" type="number"
                    class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
-                <input name="discount" id="discount1" type="number"
-                   class="form-control form-control-lg">
+                <input name="discount" id="discount1" type="text"
+                   class="form-control form-control-lg number">
                 <span class="input-group-text percent-to-vnd">0</span>
             </div>
         </div>
@@ -83,6 +83,16 @@
 </div>
 
 <script>
+    document.querySelectorAll('.number').forEach(item => {
+        item.addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9.]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    })
     var VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
@@ -223,10 +233,6 @@
                         let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + ' đ';
                         $('#buy_more').siblings(".percent-to-vnd").html(subMoney2);
                     }
-                    $(selector).click(function (e) {
-                        e.preventDefault();
-
-                    });
 
                 } else {
                     document.querySelector('#price').value = 0 + ' đ';

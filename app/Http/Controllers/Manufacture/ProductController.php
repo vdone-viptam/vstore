@@ -23,6 +23,7 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     private $v;
+
     public function __construct()
     {
         $this->v = [];
@@ -34,7 +35,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
-            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
+            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name','discount',
             'amount_product_sold')
             ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
@@ -109,7 +110,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255',
+            'sku_id' => 'required|max:255|unique:products,sku_id',
             'description' => 'required',
             'short_content' => 'required|max:500',
             'brand' => 'required|max:255',
@@ -119,6 +120,8 @@ class ProductController extends Controller
             'length' => 'required|max:13',
             'height' => 'required|max:13',
             'packing_type' => 'required',
+            'images' => 'required',
+            'video' => 'required|max:102400',
             'with' => 'required|max:13',
             'volume' => 'max:15',
             'manufacturer_name' => 'max:255',
@@ -133,6 +136,7 @@ class ProductController extends Controller
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
+            'sku_id.unique' => 'Mã SKU đã tồn tại',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
@@ -156,6 +160,9 @@ class ProductController extends Controller
             'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
+            'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
+            'video.required' => 'Video sản phẩm bắt buộc chọn',
+            'video.max' => 'Video sản phẩm không vượt quá 100MB',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -350,7 +357,7 @@ class ProductController extends Controller
         }
     }
 
-    public function requestDeleteProduct( )
+    public function requestDeleteProduct()
     {
         return view('screens.manufacture.product.request_delete');
     }
@@ -540,11 +547,11 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255',
+            'sku_id' => 'required|max:255|unique:products,sku_id,' . $id,
             'description' => 'required',
             'short_content' => 'required|max:500',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'video' => 'max:512000|required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'video' => 'max:102400',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -566,14 +573,13 @@ class ProductController extends Controller
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
+            'sku_id.unique' => 'Mã sku sản phẩm đã tồn tại',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
-            'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
             'images.image' => 'File nhập không phải định dạng ảnh',
             'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
-            'video.required' => 'Video sản phẩm bắt buộc nhập ',
-            'video.max' => 'Video sản phẩm vượt quá dung lượng cho phép 5GB',
+            'video.max' => 'Video sản phẩm không vượt quá 100MB',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',

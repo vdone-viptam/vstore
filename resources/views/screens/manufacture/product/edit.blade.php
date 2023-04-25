@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Giá sản phẩm (đ):<span class="text-danger">*</span></label>
+                                    <label for="name">Giá sản phẩm chưa VAT(đ):<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg number" id="price"
                                            name="price"
                                            value="{{number_format($product->price,0,'.','.')}}" placeholder="0">

@@ -22,7 +22,7 @@
                    class="form-control-lg form-control"> --}}
             <div class="input-group mb-3">
                 <input disabled name="discount_ncc" id="discount_ncc"
-                   class="form-control-lg form-control">
+                       class="form-control-lg form-control">
                 <span class="input-group-text percent-to-vnd">0</span>
             </div>
         </div>
@@ -32,7 +32,7 @@
                    class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
                 <input disabled name="discount_vshop" id="discount_vshop"
-                   class="form-control form-control-lg">
+                       class="form-control form-control-lg">
                 <span class="input-group-text percent-to-vnd">0</span>
             </div>
         </div>
@@ -41,8 +41,8 @@
             {{-- <input name="discount" id="discount1" type="number"
                    class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
-                <input name="discount" id="discount1" type="number"
-                   class="form-control form-control-lg">
+                <input name="discount" id="discount1" type="text"
+                       class="form-control form-control-lg number">
                 <span class="input-group-text percent-to-vnd">0</span>
             </div>
         </div>
@@ -82,6 +82,16 @@
         style: 'currency',
         currency: 'VND',
     });
+    document.querySelectorAll('.number').forEach(item => {
+        item.addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9.]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    })
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -189,7 +199,7 @@
         }
         const price1 = $('#price').val();
         const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
-        if(priceTrue > 0){
+        if (priceTrue > 0) {
             let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
             $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
         }
@@ -208,12 +218,12 @@
                     document.querySelector('#price').value = result.price;
                     document.querySelector('#discount_ncc').value = result.discount;
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
-                    if(result.discount > 0){
+                    if (result.discount > 0) {
                         const priceTrue = (result.price).replaceAll('.', '').replaceAll(',', '');
                         let subMoney1 = VND.format(priceTrue * result.discount / 100) || 0 + ' đ';
                         $('#discount_ncc').siblings(".percent-to-vnd").html(subMoney1);
                     }
-                    if(result.discount_vShop > 0){
+                    if (result.discount_vShop > 0) {
                         const priceTrue = (result.price).replaceAll('.', '').replaceAll(',', '');
                         let subMoney2 = VND.format(priceTrue * result.discount_vShop / 100) || 0 + ' đ';
                         $('#discount_vshop').siblings(".percent-to-vnd").html(subMoney2);

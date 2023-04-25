@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\BlanceChange;
 use App\Models\BuyMoreDiscount;
 use App\Models\Order;
@@ -38,61 +39,61 @@ class TestController extends Controller
 //        return $login;
         $loginLong = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
         )->post('https://partner.viettelpost.vn/v2/user/ownerconnect', [
             'USERNAME' => env('TK_VAN_CHUYEN'),
             'PASSWORD' => env('MK_VAN_CHUYEN'),
-        ] );
+        ]);
 //        return $loginLong['data'];
         // lấy danh sách phù hợp với hành chình
 
         $get_list = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
-        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
-            'SENDER_DISTRICT'=>12,
-            'SENDER_PROVINCE'=>1,
-            'RECEIVER_DISTRICT'=>12,
-            'RECEIVER_PROVINCE'=>1,
-            'PRODUCT_TYPE'=>'HH',
-            'PRODUCT_WEIGHT'=>100000,
-            'PRODUCT_PRICE'=>500000,
-            'MONEY_COLLECTION'=>"500000",
-            'TYPE'=>1,
+        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', [
+            'SENDER_DISTRICT' => 12,
+            'SENDER_PROVINCE' => 1,
+            'RECEIVER_DISTRICT' => 12,
+            'RECEIVER_PROVINCE' => 1,
+            'PRODUCT_TYPE' => 'HH',
+            'PRODUCT_WEIGHT' => 100000,
+            'PRODUCT_PRICE' => 500000,
+            'MONEY_COLLECTION' => "500000",
+            'TYPE' => 1,
 
-        ] );
+        ]);
 //            return $get_list[0]['MA_DV_CHINH'];
-            // tính cước
+        // tính cước
         $tinh_cuoc = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
-        )->post('https://partner.viettelpost.vn/v2/order/getPrice' ,[
-            "PRODUCT_WEIGHT"=>100,
-            "PRODUCT_PRICE"=>96000,
-            "MONEY_COLLECTION"=>0,
-            "ORDER_SERVICE_ADD"=>"",
-            "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
-            "SENDER_DISTRICT"=>12,
-            "SENDER_PROVINCE"=>1,
-            "RECEIVER_DISTRICT"=>12,
-            "RECEIVER_PROVINCE"=>1,
-            "PRODUCT_TYPE"=>"HH",
-            "NATIONAL_TYPE"=>1
+        )->post('https://partner.viettelpost.vn/v2/order/getPrice', [
+            "PRODUCT_WEIGHT" => 100,
+            "PRODUCT_PRICE" => 96000,
+            "MONEY_COLLECTION" => 0,
+            "ORDER_SERVICE_ADD" => "",
+            "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+            "SENDER_DISTRICT" => 12,
+            "SENDER_PROVINCE" => 1,
+            "RECEIVER_DISTRICT" => 12,
+            "RECEIVER_PROVINCE" => 1,
+            "PRODUCT_TYPE" => "HH",
+            "NATIONAL_TYPE" => 1
         ]);
 //        return json_decode($tinh_cuoc) ;
         // tạo đơn
         $create = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
-        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' );
+        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp');
 //        return $create;
         $tinh_thanh = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 //        foreach ($tinh_thanh['data'] as $va){
@@ -107,37 +108,37 @@ class TestController extends Controller
 
         $taodon = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
-        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
-            "ORDER_NUMBER"=>'',
-            "SENDER_FULLNAME"=>"Duong An-04",
-            "SENDER_ADDRESS"=>"Soso18, Phường Thạnh Xuân, Quận 12,Hồ Chí Minh",
-            "SENDER_PHONE"=>"09335656565",
-            "RECEIVER_FULLNAME"=>"Nguyễn Văn A",
+        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
+            "ORDER_NUMBER" => '',
+            "SENDER_FULLNAME" => "Duong An-04",
+            "SENDER_ADDRESS" => "Soso18, Phường Thạnh Xuân, Quận 12,Hồ Chí Minh",
+            "SENDER_PHONE" => "09335656565",
+            "RECEIVER_FULLNAME" => "Nguyễn Văn A",
 //            "RECEIVER_FULLNAME"=>$get_list[0]['MA_DV_CHINH'],
-            "RECEIVER_ADDRESS"=>"Soso18, Phường Thạnh Xuân, Quận 12,Hồ Chí Minh",
-            "RECEIVER_PHONE"=>"0987654321",
-            "PRODUCT_NAME"=>"hàng test",
-            "PRODUCT_DESCRIPTION"=>"",
-            "PRODUCT_QUANTITY"=>1,
-            "PRODUCT_PRICE"=>100000,
-            "PRODUCT_WEIGHT"=>10000,
-            "PRODUCT_LENGTH"=>0,
-            "PRODUCT_WIDTH"=>0,
-            "PRODUCT_HEIGHT"=>0,
-            "ORDER_PAYMENT"=>0,
-            "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
-            "ORDER_SERVICE_ADD"=>null,
-            "ORDER_NOTE"=>"",
-            "MONEY_COLLECTION"=>56827,
-            "LIST_ITEM"=>[
+            "RECEIVER_ADDRESS" => "Soso18, Phường Thạnh Xuân, Quận 12,Hồ Chí Minh",
+            "RECEIVER_PHONE" => "0987654321",
+            "PRODUCT_NAME" => "hàng test",
+            "PRODUCT_DESCRIPTION" => "",
+            "PRODUCT_QUANTITY" => 1,
+            "PRODUCT_PRICE" => 100000,
+            "PRODUCT_WEIGHT" => 10000,
+            "PRODUCT_LENGTH" => 0,
+            "PRODUCT_WIDTH" => 0,
+            "PRODUCT_HEIGHT" => 0,
+            "ORDER_PAYMENT" => 0,
+            "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+            "ORDER_SERVICE_ADD" => null,
+            "ORDER_NOTE" => "",
+            "MONEY_COLLECTION" => 56827,
+            "LIST_ITEM" => [
                 [
-                    "PRODUCT_NAME"=>"Hàng test",
-                    "PRODUCT_QUANTITY"=>1,
-                    "PRODUCT_PRICE"=>10000000,
-                    "PRODUCT_WEIGHT"=>10000
+                    "PRODUCT_NAME" => "Hàng test",
+                    "PRODUCT_QUANTITY" => 1,
+                    "PRODUCT_PRICE" => 10000000,
+                    "PRODUCT_WEIGHT" => 10000
                 ]
             ]
         ]);
@@ -162,48 +163,50 @@ class TestController extends Controller
         return $angle * $earthRadius;
     }
 
-    public function get_lat_long($address){
+    public function get_lat_long($address)
+    {
 
 //        $going=$this->input->post('going');
 //
 //        $address =$going; // Google HQ
-        $prepAddr = str_replace(' ','+',$address);
+        $prepAddr = str_replace(' ', '+', $address);
         $apiKey = 'AIzaSyCaBHNoze8nddzONgQDZkFPtEheSWnlYzQ'; // Google maps now requires an API key.
         try {
-            $geocode=file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?
-   address='.urlencode($address).'&sensor=false&key='.$apiKey);
-        }
-        catch (\Exception $e){
+            $geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?
+   address=' . urlencode($address) . '&sensor=false&key=' . $apiKey);
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
 
 
         //print_r($geocode);
 
-        $output= json_decode($geocode);
+        $output = json_decode($geocode);
         $latitude = $output->results[0]->geometry->location->lat;
         $longitude = $output->results[0]->geometry->location->lng;
-        return [$latitude,$longitude];
+        return [$latitude, $longitude];
     }
 
 
-    public function tuyet(Request $request){
+    public function tuyet(Request $request)
+    {
 //        $request->order_id =
-        if (empty($request->order_id)){
+        if (empty($request->order_id)) {
             return 'Nhập order_id';
         }
-            $order = Order::Where('no',$request->order_id)->where('export_status','!=',4)->first();
-            if ($order){
-                $order->export_status=4;
-                $order->updated_at = Carbon::now();
-                $order->save();
-            }
-            return 'Ok rồi đấy';
+        $order = Order::Where('no', $request->order_id)->where('export_status', '!=', 4)->first();
+        if ($order) {
+            $order->export_status = 4;
+            $order->updated_at = Carbon::now();
+            $order->save();
+        }
+        return 'Ok rồi đấy';
     }
-    public function chia(){
+
+    public function testchia()
+    {
 
         try {
-
             DB::beginTransaction();
             $orders = Order::select('id','no','user_id')
                 ->where('export_status', 4)
@@ -211,11 +214,17 @@ class TestController extends Controller
                 ->where('is_split','!=',1)
                 ->get();
             foreach ($orders as $order) {
-
                 $item = OrderItem::where('order_id',$order->id)->first();
-
                 if ($item){
-                    $product = Product::select('discount', 'discount_vShop', 'price', 'user_id', 'vstore_id')->where('id', $item->product_id)->first();
+                    $product = Product::select('id','discount', 'discount_vShop', 'price', 'user_id', 'vstore_id')->where('id', $item->product_id)->first();
+                    $add_product = Product::find($item->product_id);
+                    $add_product->amount_product_sold +=$item->quantity;
+                    $add_product->save();
+                    $vshop_product = VshopProduct::where('vshop_id',$item->vshop_id)->where('product_id',$item->product_id)->first();
+                    if ($vshop_product){
+                        $vshop_product->amount_product_sold += $item->quantity;
+                        $vshop_product->save();
+                    }
                     $ncc= User::where('id',$product->user_id)->first();
                     $total = $item->price * $item->quantity;
 //                    chia tiền ncc
@@ -269,20 +278,8 @@ class TestController extends Controller
 //                    $hmac = 'ukey='.$order->no .'&value='. $price_vshop .'&orderId='.$order->id. '&userId=' . $vshop->pdone_id;
                         $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0).'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-                        $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
+                        $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
                         $new_vshop_blance->save();
-                        $data_res = [
-                            'orderId'=>$order->id,
-                            'userId'=>$vshop->pdone_id,
-                            'value'=>round($price_vshop,0),
-                            'ukey'=>$order->no,
-                            'sellerPDoneId'=>$vshop->vshop_id,
-                            'buyerId'=>$order->user_id,
-                            'signature'=>$sig
-                        ];
-
-
-
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
                             [
                                 'orderId'=>$order->id,
@@ -293,14 +290,10 @@ class TestController extends Controller
                                 'buyerId'=>$order->user_id,
                                 'signature'=>$sig
                             ]
-
                         );
-
 //                                ukey=ukey&value=value&orderId=orderId&userId=userId
                         $vshop->money += $price_vshop/100 *95;
                         $vshop->save();
-                        return $data_res;
-
                     }
 
                     DB::table('order')->where('id',$order->id)->update(array(
@@ -308,6 +301,9 @@ class TestController extends Controller
 
                     ));
                 }
+
+
+
             }
             DB::commit();
 
@@ -317,7 +313,4 @@ class TestController extends Controller
             Log::error($e->getMessage());
         }
     }
-
-
-
 }
