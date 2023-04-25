@@ -277,7 +277,6 @@ class ProductController extends Controller
         $this->v['products'] = $data;
         $this->v['discount'] = DB::table('discounts')->select('id', 'product_id', 'start_date', 'end_date', 'start_date', 'discount')->where('id', $id)->first();
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
-        $this->v['product1']->price = number_format($this->v['product1']->price, 0, '.', '.');
         return response()->json([
             'view' => view('screens.vstore.product.editDis', $this->v)->render(),
             'id' => $this->v['discount']->id

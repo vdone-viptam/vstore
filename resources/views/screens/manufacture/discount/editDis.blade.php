@@ -1,5 +1,6 @@
 <div class="">
     @csrf
+
     <div class="col-12">
         <div class="form-group">
             <label>Lựa chọn sản phẩm tạo giảm giá</label>
@@ -12,7 +13,7 @@
         <div class="form-group">
             <label class="">Giá sản phẩm (đ):</label>
             <input disabled name="price" id="price"
-                   class="form-control form-control-lg" value="{{$product1->price}}">
+                   class="form-control form-control-lg" value="{{number_format($product1->price,0,'.','.')}}">
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
@@ -20,7 +21,7 @@
                 <input disabled name="discount_ncc" id="discount_ncc"
                        class="form-control-lg form-control" value="{{$product1->discount}}">
                 <span class="input-group-text percent-to-vnd">
-                        {{(double)$product1->price * $product1->discount *10}} đ
+                        {{number_format($product1->price * $product1->discount *10,0,'.','.')}} đ
                     </span>
             </div>
         </div>
@@ -30,7 +31,7 @@
                 <input disabled name="buy_more" id="buy_more" value="{{$product1->buy_more}}"
                        class="form-control form-control-lg">
                 <span class="input-group-text percent-to-vnd">
-                        {{number_format($product1->price * $product1->buy_more *10,0,'.','.')}} đ
+                        {{number_format($product1->price * $product1->buy_more *10,0,'.','.') }} đ
                     </span>
             </div>
         </div>
@@ -41,7 +42,7 @@
                 <input name="discount" id="discount1" type="text" value="{{$discount->discount}}"
                        class="form-control form-control-lg">
                 <span class="input-group-text percent-to-vnd">
-                    {{(double)$product1->price * $discount->discount *10}} đ
+                    {{number_format($product1->price * $discount->discount *10,0,'.','.')}} đ
                 </span>
             </div>
         </div>

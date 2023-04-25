@@ -96,22 +96,11 @@ class DiscountController extends Controller
 
     public function editDis(Request $request)
     {
-
-        $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
-        $data = [];
-        foreach ($product as $pr) {
-            if (DB::table('discounts')->where('user_id', Auth::id())->where('product_id', $pr->id)->count() == 0) {
-                $data[] = $pr;
-            }
-        }
-
-        $this->v['products'] = $data;
         $this->v['discount'] = DB::table('discounts')->select('id', 'product_id', 'start_date', 'end_date', 'start_date', 'discount')->where('id', $request->id)->first();
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
         $buy_more = BuyMoreDiscount::where('end', 0)->where('product_id', $this->v['product1']->id)->first();
-        $this->v['product1']->buy_more = $buy_more->discount ?? 0;
-        $this->v['product1']->price = number_format($this->v['product1']->price, 0, '.', '.');
 
+        $this->v['product1']->buy_more = $buy_more->discount ?? 0;
         return response()->json([
             'view' => view('screens.manufacture.discount.editDis', $this->v)->render(),
             'id' => $this->v['discount']->id

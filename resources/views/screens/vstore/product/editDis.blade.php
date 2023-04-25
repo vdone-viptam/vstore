@@ -12,7 +12,7 @@
         <div class="form-group">
             <label class="">Giá sản phẩm (đ):</label>
             <input disabled name="price" id="price"
-                   class="form-control form-control-lg" value="{{$product1->price}}">
+                   class="form-control form-control-lg" value="{{number_format($product1->price,0,'.','.')}}">
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu từ nhà cung cấp (%):</label>
