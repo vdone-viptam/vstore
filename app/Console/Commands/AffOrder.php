@@ -40,7 +40,6 @@ class AffOrder extends Command
     public function handle()
     {
         try {
-
             DB::beginTransaction();
             $orders = Order::select('id','no','user_id')
                 ->where('export_status', 4)
@@ -48,7 +47,6 @@ class AffOrder extends Command
                 ->where('is_split','!=',1)
                 ->get();
             foreach ($orders as $order) {
-
                 $item = OrderItem::where('order_id',$order->id)->first();
                 if ($item){
                     $product = Product::select('id','discount', 'discount_vShop', 'price', 'user_id', 'vstore_id')->where('id', $item->product_id)->first();
@@ -113,9 +111,8 @@ class AffOrder extends Command
 //                    $hmac = 'ukey='.$order->no .'&value='. $price_vshop .'&orderId='.$order->id. '&userId=' . $vshop->pdone_id;
                         $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0).'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-                        $sig = hash_hmac('sha256',$hmac, 'vshopDevSecretKey');
+                        $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
                         $new_vshop_blance->save();
-
                         $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/commission',
                             [
                                 'orderId'=>$order->id,
