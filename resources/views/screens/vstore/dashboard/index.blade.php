@@ -88,7 +88,7 @@
                                 <th>Tên sản phẩm</th>
                                 <th>Ngành hàng</th>
                                 <th>Giá sản phẩm (chưa VAT)</th>
-                                <th>Chiết khấu tù Nhà cung cấp</th>
+                                <th>Chiết khấu từ Nhà cung cấp</th>
                                 <th>Ngày yêu cầu</th>
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
@@ -140,46 +140,6 @@
         <!-- end data table  -->
         <!-- ============================================================== -->
     </div>
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-right">
-                            <select class="custom-select select-revenue">
-                                <option value="0" selected>1 Tuần</option>
-                                <option value="1">1 tháng</option>
-                                <option value="2">1 năm</option>
-                                <option value="3">3 năm</option>
-                            </select>
-                        </div>
-                        <h5  style="font-size: 18px;">Doanh thu trong <span
-                            class="date-revenue">1 tuần</span></h5>
-                </div>
-                <div class="card-body">
-                    <canvas id="bar-chart-grouped" width="800" height="315"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-right">
-                            <select class="custom-select select-order">
-                                <option value="0" selected>1 Tuần</option>
-                                <option value="1">1 tháng</option>
-                                <option value="2">1 năm</option>
-                                <option value="3">3 năm</option>
-                            </select>
-                        </div>
-                        <h5  style="font-size: 18px;">Đơn hàng trong <span class="date-order">1 tuần</span></h5>
-                </div>
-                <div class="card-body">
-                    <canvas id="bar-chart" width="800" height="315"></canvas>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
 </div>
 
@@ -213,7 +173,6 @@
 
 @section('custom_js')
 
-@include('layouts.custom.includeSt.chart-script');
 @if(\Illuminate\Support\Facades\Session::has('success'))
     <script>
         Swal.fire({

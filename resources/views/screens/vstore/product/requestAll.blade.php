@@ -126,7 +126,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Chiết khấu tù Nhà cung cấp
+                            <th style="min-width: 250px">Chiết khấu từ Nhà cung cấp
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                         @if($type == 'desc')
