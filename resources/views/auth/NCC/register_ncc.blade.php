@@ -442,7 +442,7 @@
                                     @foreach($chiTietThanhToan as $value)
                                         <div class="row">
                                             <div class="col-6">
-                                                <h4 style="font-size:18px; margin-bottom:15px;">{{$value['title']}}</h4>
+                                                <h4 style="font-size:18px; margin-bottom:15px; font-weight:500">{{$value['title']}}</h4>
                                             </div>
                                             <div class="col-6 text-right">
                                                 <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -463,7 +463,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_9pay.png')}}" alt="">
                                             </div>
-                                            <span>Thanh toán ngay qua 9Pay</span>
+                                            <span style='font-size:14px'>Thanh toán ngay qua 9Pay</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="9PAY" name="method_payment" checked class="custom-control-input"><span class="custom-control-label"></span>
@@ -474,7 +474,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">
                                             </div>
-                                            <span>Thẻ nội địa</span>
+                                            <span style='font-size:14px'>Thẻ nội địa</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="ATM_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
@@ -485,7 +485,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_cart_2.png')}}" alt="">
                                             </div>
-                                            <span>Thẻ quốc tế</span>
+                                            <span style='font-size:14px'>Thẻ quốc tế</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="CREDIT_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
@@ -496,7 +496,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_bank.png')}}" alt="">
                                             </div>
-                                            <span>Chuyển khoản ngân hàng</span>
+                                            <span style='font-size:14px'>Chuyển khoản ngân hàng</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="BANK_TRANSFER" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
