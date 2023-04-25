@@ -46,6 +46,13 @@ class ProductController extends Controller
                 'admin_confirm_date',
                 'discount_vShop',
                 'products.id');
+        if (strlen($this->v['key_search'])) {
+            $this->v['products'] = $this->v['products']->where(function ($query) {
+                $query->where('products.publish_id', $this->v['key_search'])
+                    ->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
         $this->v['products'] = $this->v['products']->orderBy($this->v['field'], $this->v['type'])
             ->paginate($this->v['limit']);
 

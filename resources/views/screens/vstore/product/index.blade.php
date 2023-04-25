@@ -51,9 +51,11 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
+                            <form>
                             <input type="search" name="key_search" value="{{$key_search}}"
                                    class="form-control"
                                    placeholder="Nhập từ khóa tìm kiếm">
+                            </form>
 
                         </div>
                     </li>
