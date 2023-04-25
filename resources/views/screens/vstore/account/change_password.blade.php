@@ -102,7 +102,7 @@
 
                                     <div class="d-flex justify-content-center align-items-center"
                                          style="gap:10px">
-                                        <button class="btn btn-primary btn-acp">Cập nhập mật khẩu</button>
+                                        <button class="btn btn-primary btn-acp">Cập nhật mật khẩu</button>
 
                                     </div>
 

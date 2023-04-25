@@ -724,7 +724,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">Mã người giới thiệu</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">ID P-Done người giới thiệu</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->referral_code}}</span>

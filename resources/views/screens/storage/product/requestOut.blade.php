@@ -18,7 +18,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary btn-update" data-dismiss="modal">Cập nhập</button>
+                    <button type="button" class="btn btn-primary btn-update" data-dismiss="modal">Cập nhật</button>
                 </div>
             </div>
         </div>

@@ -6750,9 +6750,9 @@ paths:
         - Vshop
       security: []
     put:
-      summary: 'Cập nhập thông tin Vshop'
+      summary: 'Cập nhật thông tin Vshop'
       operationId: cpNhpThngTinVshop
-      description: 'API này dùng để cập nhập tin cá nhân'
+      description: 'API này dùng để cập nhật tin cá nhân'
       parameters:
         -
           in: header
@@ -6857,9 +6857,9 @@ paths:
             value: quidem
   /api/vshop/get_money_history:
     get:
-      summary: 'Cập nhập thông tin Vshop'
+      summary: 'Cập nhật thông tin Vshop'
       operationId: cpNhpThngTinVshop
-      description: 'API này dùng để cập nhập tin cá nhân'
+      description: 'API này dùng để cập nhật tin cá nhân'
       parameters:
         -
           in: header

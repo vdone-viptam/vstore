@@ -80,7 +80,7 @@
                                         @if(Session::has('success'))
                                             <div class="alert alert-success collapshow" role="alert"
                                                  id="alert-succ">
-                                                Thông tin của bạn đã được cập nhập thành công!
+                                                Thông tin của bạn đã được cập nhật thành công!
                                             </div>
                                         @endif
                                         @if(\Illuminate\Support\Facades\Session::has('error'))
@@ -223,7 +223,7 @@
                                         </div>
                                         <div class="d-flex justify-content-end align-items-center"
                                              style="gap:10px">
-                                            <button type="submit" class="btn btn-primary btn-submit ">Cập nhập
+                                            <button type="submit" class="btn btn-primary btn-submit ">Cập nhật
                                                 thông tin
                                             </button>
                                             <button type="button" class="btn btn-success"
@@ -253,7 +253,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cập nhập mã số thuế</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cập nhật mã số thuế</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

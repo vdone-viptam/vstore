@@ -1,5 +1,5 @@
 @extends('layouts.vstore.main')
-@section('page_title','Cập nhập mã số thuế')
+@section('page_title','Cập nhật mã số thuế')
 
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
@@ -14,14 +14,14 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Cập nhập mã số thuế </h2>
+                    <h2 class="pageheader-title">Cập nhật mã số thuế </h2>
 
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Tài
                                         khoản</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cập nhập mã số thuế</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cập nhật mã số thuế</li>
                             </ol>
                         </nav>
                     </div>
@@ -38,7 +38,7 @@
             <!-- ============================================================== -->
             <div class="influence-profile-content pills-regular">
                 <div class="card">
-                    <h5 class="card-header" style="font-size: 18px;">Cập nhập mã số thuế</h5>
+                    <h5 class="card-header" style="font-size: 18px;">Cập nhật mã số thuế</h5>
                     <div class="card-body">
                         <form action="{{route('screens.vstore.account.saveChangeTaxCode')}}" method="POST">
                             @csrf
@@ -77,7 +77,7 @@
 
                                     <div class="d-flex justify-content-center align-items-center"
                                          style="gap:10px">
-                                        <button class="btn btn-primary btn-acp">Cập nhập mã số thuế</button>
+                                        <button class="btn btn-primary btn-acp">Cập nhật mã số thuế</button>
 
                                     </div>
 
@@ -100,7 +100,7 @@
     <script>
         $(document).ready(function () {
             @if(Session::has('success'))
-            swalNoti('center', 'success', 'Yêu cầu cập nhập mã số thuế','', 500, true, 2200);
+            swalNoti('center', 'success', 'Yêu cầu cập nhật mã số thuế','', 500, true, 2200);
             @endif
         });
 
