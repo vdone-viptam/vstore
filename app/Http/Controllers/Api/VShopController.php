@@ -482,7 +482,7 @@ class  VShopController extends Controller
      * @bodyParam  pdone_id id của Vshop
      * @bodyParam vshop_id mã user dạng string
      * @bodyParam  avatar url ảnh đại diện có thể rỗng
-     * @bodyParam nick_name nick_name của vvshop
+     * @bodyParam nick_name nick_name của vshop
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request)
