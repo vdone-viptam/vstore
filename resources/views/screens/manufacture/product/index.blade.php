@@ -85,6 +85,7 @@
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
+
                                         @if($type == 'desc')
                                             <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
                                         @else

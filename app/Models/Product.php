@@ -10,7 +10,9 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
-
+    protected $fillable = [
+        "name"
+    ];
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -31,4 +33,9 @@ class Product extends Model
         return $this->hasMany(Discount::class, 'product_id');
     }
 
+    public function orderitem()
+    {
+        return $this->belongsToMany(Order::class,'id',OrderItem::class,'order_id');
+    }
+   
 }

@@ -80,6 +80,7 @@
                                 <th>
                                     Mã đơn hàng
                                     <span style="float: right;cursor: pointer">
+
                                         @if ($field == 'order.no')
                                             @if ($type == 'desc')
                                                 <i class="fa-solid fa-sort-down sort" data-sort="order.no"></i>
@@ -88,6 +89,7 @@
                                             @endif
                                         @else
                                             <i class="fas fa-sort sort" data-sort="order.no"></i>
+
                                         @endif
                                     </span>
                                 </th>
