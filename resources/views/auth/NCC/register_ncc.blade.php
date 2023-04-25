@@ -306,14 +306,14 @@
                     </button>
                 </div>
                 <div class="content m-4">
-                    <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
+                    <div class="w-100 h-100" style="background-color: #F2F8FF; border-radius: 10px;">
                         <div class="col-12">
-                            <h3 style="font-weight: 600; padding-top: 15px; ">Thông tin bên mua</h3>
+                            <h3 style="font-weight: 600; padding-top: 15px; font-size:22px; margin-bottom:15px;">Thông tin bên mua</h3>
                         </div>
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên công ty</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
@@ -324,7 +324,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã số thuế</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->tax_code}}</span>
@@ -335,7 +335,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->name}}</span>
@@ -346,7 +346,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->id_vdone}}</span>
@@ -357,7 +357,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Số điện thoại công ty</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->phone_number}}</span>
@@ -368,7 +368,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Email</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->email}}</span>
@@ -379,7 +379,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Mã người giới thiệu</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã người giới thiệu</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->referral_code}}</span>
@@ -391,9 +391,9 @@
                     </div>
                     <div class="row ">
                         <div class="col-xl-6 col-lg-6 col-md-12 my-3">
-                            <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                            <div class="w-100 h-100" style="background-color: #F2F8FF; border-radius: 10px;">
                                 <div class="col-12">
-                                    <h3 style="font-weight: 600; padding-top: 15px;">Chi tiết sản phẩm</h3>
+                                    <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px">Chi tiết sản phẩm</h3>
                                 </div>
                                 @php
 
@@ -442,7 +442,7 @@
                                     @foreach($chiTietThanhToan as $value)
                                         <div class="row">
                                             <div class="col-6">
-                                                <h4 style="font-size:18px;">{{$value['title']}}</h4>
+                                                <h4 style="font-size:18px; margin-bottom:15px; font-weight:500">{{$value['title']}}</h4>
                                             </div>
                                             <div class="col-6 text-right">
                                                 <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -455,7 +455,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-12 my-3" >
                             <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                 <div class="col-12">
-                                    <h3 style="font-weight: 600; padding-top: 15px;">Phương thức thanh toán</h3>
+                                    <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">Phương thức thanh toán</h3>
                                 </div>
                                 <div class="col-12" style="padding-bottom: 15px;">
                                     <div class="d-flex justify-content-between align-items-center w-100" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
@@ -463,7 +463,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_9pay.png')}}" alt="">
                                             </div>
-                                            <span>Thanh toán ngay qua 9Pay</span>
+                                            <span style='font-size:14px'>Thanh toán ngay qua 9Pay</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="9PAY" name="method_payment" checked class="custom-control-input"><span class="custom-control-label"></span>
@@ -474,7 +474,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">
                                             </div>
-                                            <span>Thẻ nội địa</span>
+                                            <span style='font-size:14px'>Thẻ nội địa</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="ATM_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
@@ -485,7 +485,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_cart_2.png')}}" alt="">
                                             </div>
-                                            <span>Thẻ quốc tế</span>
+                                            <span style='font-size:14px'>Thẻ quốc tế</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="CREDIT_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
@@ -496,7 +496,7 @@
                                             <div style="width: 26px; height: 26px;">
                                                 <img src="{{asset('asset/icons/payment/icon_bank.png')}}" alt="">
                                             </div>
-                                            <span>Chuyển khoản ngân hàng</span>
+                                            <span style='font-size:14px'>Chuyển khoản ngân hàng</span>
                                         </div>
                                         <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
                                             <input type="radio" value="BANK_TRANSFER" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
