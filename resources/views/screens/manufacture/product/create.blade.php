@@ -67,8 +67,10 @@
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">VAT (%) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number discountA" id="vat"
+                                    <input type="text" class="form-control form-control-lg number discountA" id="vat" required
                                            name="vat"
+                                           pattern="^[1-9][0-9]?$|^100$"
+                                           title="Giá trị thích hợp từ 1 => 100"
                                            value="{{old('vat')}}" placeholder="Nhập VAT (%)">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="VAT"></p>
                                     @error('vat')
@@ -79,9 +81,11 @@
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Mức chiết khấu (%) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number discountA"
+                                    <input type="text" class="form-control form-control-lg number discountA" required
                                            id="discountA"
                                            name="discountA"
+                                           pattern="^[1-9][0-9]?$|^100$"
+                                           title="Giá trị thích hợp từ 1 => 100"
                                            value="{{old('discountA')}}" placeholder="Mức chiết khấu (%)">
                                     <p data-title="Chiết khấu" class="ml-1 mt-2 messageE text-danger"></p>
                                     @error('discountA')
@@ -92,9 +96,9 @@
                             <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Chọn sản phẩm xét duyệt
-                                        <sp an class="text-danger">*</span>
+                                        <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-control form-control-lg" style="height: 50px !important;"
+                                    <select class="form-control form-control-lg" style="height: 50px !important;" required
                                             name="product_id" id="product_id">
                                         <option value="" disabled selected>Lựa chọn sản phẩm xét duyệt</option>
                                         @foreach($products as $product)
@@ -123,7 +127,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Vai trò đối với sản phẩm<span class="text-danger">*</span></label>
-                                    <select class="form-control form-control-lg" name="role">
+                                    <select class="form-control form-control-lg" name="role" required>
                                         <option value="" disabled selected>Lựa chọn vai trò đối với sản phẩm</option>
                                         <option value="1" {{old('role') == 1 ? 'selected' : ''}}>Nhà sản xuất</option>
                                         <option value="2" {{old('role') == 2 ? 'selected' : ''}}>Nhà nhập khẩu</option>
@@ -137,7 +141,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Tài liệu sản phẩm<span class="text-danger">*</span></label>
-                                    <input type="file" accept=
+                                    <input type="file" required  accept=
                                         "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
                                         text/plain, application/pdf, image/*" class="form-control form-control-lg"
                                            id="images" name="images[]" multiple>
@@ -156,36 +160,44 @@
                                 <div class="form-group">
                                     <label for="name">Số lượng sản phẩm</label>
                                     <input type="text" class="form-control form-control-lg number" id="sl[]" name="sl[]"
-                                           value="{{isset(old('sl')[0]) ?(int)old('sl')[0] : ''}}"
+                                           value="{{isset(old('sl')[0]) ?(int)old('sl')[0] : ''}}" required
                                            placeholder="Nhập số lượng sản phẩm nhập sẵn chiết khấu mức 1">
                                     <p class="ml-1 mt-2 text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Chiết khấu (%)</label>
-                                    {{-- <input type="text" class="form-control form-control-lg number discountA"
-                                           name="moneyv[]"
-                                           id="moneyv[]"
-                                           value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1"> --}}
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-control-lg number discountA"
-                                           name="moneyv[]"
-                                           id="moneyv[]"
-                                           value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 1">
-                                        <span class="input-group-text sub-moneyv">0</span>
+                                <div class="w-100">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="name">Chiết khấu (%)</label>
+                                                <div class="input-group mb-3" style="gap: 12px">
+                                                    <input type="text" class="form-control form-control-lg number discountA"
+                                                        name="moneyv[]"
+                                                        pattern="^[1-9][0-9]?$|^100$"
+                                                        title="Giá trị thích hợp từ 1 => 100"
+                                                        id="moneyv[]" required
+                                                        value="{{isset(old('moneyv')[0]) ? old('moneyv')[0] : ''}}"
+                                                        placeholder="% chiết khẩu nhập sẵn mức 1">
+                                                </div>
+                                                <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="name">Số tiền</label>
+                                            <input type="text" class="form-control form-control-lg number sub-moneyv" value="0 đ" readonly style="pointer-events: none">
+                                        </div>
                                     </div>
-                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Phần trăm cọc nhập hàng sẵn</label>
                                     <input type="text" class="form-control form-control-lg number discountA sp"
-                                           id="deposit_money[]"
+                                           id="deposit_money[]" required
                                            name="deposit_money[]"
+                                           pattern="^[1-9][0-9]?$|^100$"
+                                           title="Giá trị thích hợp từ 1 => 100"
                                            value="{{isset(old('deposit_money')[0]) ? old('deposit_money')[0] : ''}}"
                                            placeholder="Nhập phần trăm cọc mức 1">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
@@ -201,23 +213,30 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Chiết khấu (%)</label>
-                                    {{-- <input type="text" class="form-control form-control-lg number discountA"
-                                           name="moneyv[]"
-                                           id="moneyv[]"
-                                           value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2"> --}}
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-control-lg number discountA"
-                                           name="moneyv[]"
-                                           id="moneyv[]"
-                                           value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 2">
-                                        <span class="input-group-text sub-moneyv">0</span>
+                                <div class="w-100">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="name">Chiết khấu (%)</label>
+                                                <div class="input-group mb-3" style="gap: 12px">
+                                                    <input type="text" class="form-control form-control-lg number discountA"
+                                                       name="moneyv[]"
+                                                       id="moneyv[]"
+                                                       pattern="^[1-9][0-9]?$|^100$"
+                                                        title="Giá trị thích hợp từ 1 => 100"
+                                                       value="{{isset(old('moneyv')[1]) ? old('moneyv')[1] : ''}}"
+                                                       placeholder="% chiết khẩu nhập sẵn mức 2">
+                                                </div>
+                                                <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="name">Số tiền</label>
+                                            <input type="text" class="form-control form-control-lg number sub-moneyv" value="0 đ" readonly style="pointer-events: none">
+                                        </div>
                                     </div>
-                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
+
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
@@ -225,6 +244,8 @@
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
                                            name="deposit_money[]"
+                                           pattern="^[1-9][0-9]?$|^100$"
+                                           title="Giá trị thích hợp từ 1 => 100"
                                            value="{{isset(old('deposit_money')[1]) ? old('deposit_money')[1] : ''}}"
                                            placeholder="Nhập phần trăm cọc mức 2">
                                     <p class="ml-1 mt-2 messageE text-danger" data-title="Phần trăm cọc"></p>
@@ -240,22 +261,28 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Chiết khấu (%)</label>
-                                    {{-- <input type="text" class="form-control form-control-lg number discountA"
-                                           name="moneyv[]"
-                                           id="moneyv[]"
-                                           value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3"> --}}
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-control-lg number discountA"
-                                           name="moneyv[]"
-                                           id="moneyv[]"
-                                           value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}"
-                                           placeholder="Nhập số phần trăm chiết khẩu nhập sẵn mức 3">
-                                        <span class="input-group-text sub-moneyv">0</span>
+                                <div class="w-100">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="name">Chiết khấu (%)</label>
+                                                <div class="input-group mb-3" style="gap: 12px">
+                                                    <input type="text" class="form-control form-control-lg number discountA"
+                                                        name="moneyv[]"
+                                                        id="moneyv[]"
+                                                        pattern="^[1-9][0-9]?$|^100$"
+                                                        title="Giá trị thích hợp từ 1 => 100"
+                                                        value="{{isset(old('moneyv')[2]) ? old('moneyv')[2] : ''}}"
+                                                        placeholder="% chiết khẩu nhập sẵn mức 3">
+                                                </div>
+                                                <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="name">Số tiền</label>
+                                            <input type="text" class="form-control form-control-lg number sub-moneyv" value="0 đ" readonly style="pointer-events: none">
+                                        </div>
                                     </div>
-                                    <p class="ml-1 mt-2 messageE text-danger" data-title="Số phần trăm chiết khẩu"></p>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
@@ -263,6 +290,8 @@
                                     <label for="name">Phần trăm cọc nhập hàng sẵn</label>
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
+                                           pattern="^[1-9][0-9]?$|^100$"
+                                           title="Giá trị thích hợp từ 1 => 100"
                                            name="deposit_money[]"
                                            value="{{isset(old('deposit_money')[2]) ? old('deposit_money')[2] : ''}}"
                                            placeholder="Nhập phần trăm cọc mức 3">
@@ -290,8 +319,8 @@
                                 </label>
                             </div>
                             <div class="mx-auto my-4 col-12 text-center">
-                                <button class="btn btn-secondary">Hủy bỏ</button>
-                                <button class="btn btn-primary ml-2" id="appect">Tạo yêu cầu</button>
+                                <button type="button" class="btn btn-secondary" onClick="window.location.reload();">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary ml-2" id="appect">Tạo yêu cầu</button>
                             </div>
 
                         </div>
@@ -313,6 +342,15 @@
                 text: 'Click vào nút bên dưới để đóng',
             })
         </script>
+    @endif
+    @if ($errors->has('moneyv.*'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '{{ $errors->first('moneyv.*')}}',
+            text: 'Click vào nút bên dưới để đóng',
+        })
+    </script>
     @endif
     @if(\Illuminate\Support\Facades\Session::has('error'))
         <script>
@@ -384,6 +422,12 @@
                         price = result;
                         document.getElementById('price').value = VND.format(price);
                         document.getElementById('money_discountA').value = VND.format((discount / 100) * price);
+
+                        $(".sub-moneyv" ).each(function( index ) {
+                            let percent = $(this).closest(".w-100").find('.discountA').val();
+                            let subMoney = VND.format(price * percent / 100) || 0 + ' đ';
+                            $(this).val(subMoney);
+                        });
                     },
                 });
             } else {
@@ -412,10 +456,33 @@
 
         })
         $("[name='moneyv[]']").keyup(function (e) {
+            if( $('#discountA').val() > 100 || $('#discountA').val() < 0  || $('#discountA').val() == '' ){
+                return;
+            }
             let subMoney = VND.format(price * $(this).val() / 100) || 0 + ' đ';
-            $(this).siblings(".sub-moneyv").html(subMoney);
+            $(this).closest(".w-100").find('.sub-moneyv').val(subMoney);
         });
+        $("[name='moneyv[]']").change(function (e) {
+            if( $('#discountA').val() <= 100 || $('#discountA').val() >= 0){
+                if( 100 - $('#discountA').val() - $(this).val() >= 0 && 100 - $('#discountA').val() - $(this).val() <= 100 ){
+                    $(this).closest(".form-group").find('.messageE').hide();
+                    return;
+                }
+                let percent = 100 - $('#discountA').val();
+                $(this).closest(".form-group").find('.messageE').html(`Chiết khấu không được vượt quá ${percent} %`);
+                $(this).closest(".form-group").find('.messageE').show();
+                $(this).focus();
+            }else{
+                $(this).closest(".form-group").find('.messageE').hide();
+            }
 
+            let subMoney = VND.format(price * $(this).val() / 100) || 0 + ' đ';
+            $(this).closest(".w-100").find('.sub-moneyv').val(subMoney);
+        });
+        // $('#form').submit(function (evt) {
+        //     evt.preventDefault();
+        //     window.history.back();
+        // });
     </script>
 
 @endsection

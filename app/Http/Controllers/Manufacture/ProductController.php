@@ -72,13 +72,13 @@ class ProductController extends Controller
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
         $this->v['vstore'] = User::where('id', 800)->first();
-       
+
         if (!$this->v['vstore']) {
             $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
         }
 //        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
-       
+
         $vstores = [];
         foreach ($listVstores as $list) {
             $vstores[] = $list;
@@ -87,7 +87,7 @@ class ProductController extends Controller
         if ($v) {
             $vstores[] = $v;
         }
-       
+
         $this->v['v_stores'] = array_unique($vstores);
 //        return $this->v['v_stores'];
         return view('screens.manufacture.product.create', $this->v);
@@ -362,7 +362,7 @@ class ProductController extends Controller
 
     public function storeRequest(Request $request)
     {
-
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
@@ -372,8 +372,12 @@ class ProductController extends Controller
                 'role' => 'min:1',
                 'prepay' => 'required',
                 'vat' => 'required|min:1|max:99',
-
-
+                'moneyv' => 'array',
+                'moneyv.*' => function ($attribute, $value, $fail) use ($request) {
+                    if ( $request->discountA + $value > 100 || $request->discountA + $value < 0 ) {
+                        $fail('Phần trăm chiết khấu ko hợp lệ');
+                    }
+                },
             ], [
                 'vstore_id.required' => 'V-Store bắt buộc chọn',
                 'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
@@ -391,7 +395,7 @@ class ProductController extends Controller
             }
 
             if ($validator->fails()) {
-
+                // dd($validator->errors());
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
 
