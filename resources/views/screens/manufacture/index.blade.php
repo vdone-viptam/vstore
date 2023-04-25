@@ -83,7 +83,6 @@
         </div>
         <div class="flex flex-col justify-center w-full md:justify-start gap-8 md:max-w-[750px] text-center md:text-left">
             <h2 class="font-extrabold text-[#FFF] md:text-[64px] md:leading-[90px] text-2xl ">Trở thành Nhà cung cấp</h2>
-            <span class="text-[#FFF] max-w-[450px]">Tham gia vào hệ thống Thương mại điện tử V-Store để mang sản phẩm của bạn đến tay người tiêu dùng.</span>
             <div class="max-w-[625px] relative">
                 <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
                 <div
@@ -91,7 +90,7 @@
                     12.000.000đ
                 </div>
                 <div class="absolute text-center top-3/4 center-content w-full px-2 md:px-10 md:py-8 py-5 ">
-                    <div class="flex items-center md:gap-2">
+                    <div class="flex items-center md:gap-2 pl-4">
                         <div class="w-[25px]">
                             <div class="w-[24px] h-[24px]">
                                 <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
