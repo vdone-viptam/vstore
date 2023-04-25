@@ -16,8 +16,6 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu từ nhà cung cấp (%):</label>
-            {{-- <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
-                   class="form-control-lg form-control"> --}}
             <div class="input-group mb-3">
                 <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
                    class="form-control-lg form-control">
@@ -28,8 +26,6 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Shop (%):</label>
-            {{-- <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
-                   class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
                 <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
                    class="form-control form-control-lg">
@@ -40,11 +36,9 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm giảm giá (%):</label>
-            {{-- <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
-                   class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
-                <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
-                   class="form-control form-control-lg">
+                <input name="discount" id="discount1" type="text" value="{{$discount->discount}}"
+                   class="form-control form-control-lg number">
                 <span class="input-group-text percent-to-vnd">
                     {{number_format($product1->price * $product1->discount *10,0,'.','.')}} đ
                 </span>
@@ -86,6 +80,16 @@
         style: 'currency',
         currency: 'VND',
     });
+    document.querySelectorAll('.number').forEach(item => {
+        item.addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9.]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    })
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
