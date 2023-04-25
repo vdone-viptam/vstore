@@ -251,7 +251,7 @@
                                     <td>{{number_format($order->product->price,0,'.','.')}} đ</td>
                                     <td>{{(int)$order->discount}} %</td>
                                     <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format(($order->total - ($order->total * $order->discount / 100)) * ($order->deposit_money / 100) ,0,'.','.')}}
+                                    <td>{{number_format($order->deposit_money ,0,'.','.')}}
                                         đ
                                     </td>
                                     <td>{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>

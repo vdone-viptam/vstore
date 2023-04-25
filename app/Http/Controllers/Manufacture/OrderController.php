@@ -98,7 +98,7 @@ class OrderController extends Controller
         $this->v['orders'] = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
                 'place_name', 'fullname', 'phone', 'address', 'no',
-                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'total', 'pre_order_vshop.discount',DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
                 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id',DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
@@ -129,7 +129,7 @@ class OrderController extends Controller
         $this->v['orders'] = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
                 'place_name', 'fullname', 'phone', 'address', 'no',
-                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
+                'total', 'pre_order_vshop.discount', DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
                 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id',DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
