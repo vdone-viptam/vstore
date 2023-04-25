@@ -170,7 +170,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giảm giá (nếu có)</th>
+                            <th>Giảm giá (nếu có)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -185,10 +197,46 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tiền đặt cọc</th>
-                            <th>Tổng tiền</th>
+                            <th>Tiền đặt cọc
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.deposit_money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.deposit_money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.deposit_money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.deposit_money"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Tổng tiền
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="money"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>Trạng thái</th>
-                            <th>Ngày tạo đơn</th>
+                            <th>Ngày tạo đơn
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>
                                 Chức năng
                             </th>
@@ -269,14 +317,14 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.manufacture.order.order',['key_search' => $key_search])}}&type=' + orderBy +
+                        document.location = '{{route('screens.manufacture.order.request',['key_search' => $key_search])}}&type=' + orderBy +
                             '&field=' + sort + '&limit=' + limit.value
                     })
                 });
             });
             limit.addEventListener('change', (e) => {
                 setTimeout(() => {
-                    document.location = '{{route('screens.manufacture.order.order',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    document.location = '{{route('screens.manufacture.order.request',['key_search' => $key_search])}}&type=' + '{{$type}}' +
                         '&field=' + '{{$field}}' + '&limit=' + e.target.value
                 }, 200)
             })
