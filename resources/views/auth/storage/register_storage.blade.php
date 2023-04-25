@@ -98,7 +98,7 @@
                         <label style="font-weight: 600;" for="email"><span class="text-danger">*</span>Email</label>
                         <input class="form-control form-control-lg" type="email" name="email" id="email" required=""
                                value="{{old('email')}}"
-                               placeholder="Nhập email (VD: example@gmail.com)" autocomplete="off">
+                               placeholder="Nhập email (VD: example@address.com)" autocomplete="off">
                         @error('email')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -112,7 +112,7 @@
                                type="text" name="phone_number" id="phone_number"
                                value="{{old('phone_number')}}"
                                pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
-                               placeholder="Nhập số điện thoại (VD: 0365855342)">
+                               placeholder="Nhập số điện thoại (VD: 0123456789)">
                         @error('phone_number')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -131,8 +131,8 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600; display:flex; gap:6px; align-items:center" for="idpDone"><span class="text-danger">*</span>ID P-Done
-                            người đại diện <svg style="cursor: pointer;" width="14" height="14" viewBox="0 0 14 14"
+                        <label style="font-weight: 600; display:flex;align-items:center" for="idpDone"><span class="text-danger">*</span>ID P-Done
+                            người đại diện <svg style="cursor: pointer;margin-left: 3px;" width="14" height="14" viewBox="0 0 14 14"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <title>Vui lòng nhập ID P-Done của người đại diện của bạn</title>
                                 <path
@@ -145,7 +145,7 @@
                         <input class="only-number form-control form-control-lg" required="" type="text"
                                name="id_vdone" id="id_vdone"
                                value="{{old('id_vdone')}}"
-                               placeholder="Nhập ID P-Done người đại diện (VD: 76)">
+                               placeholder="Nhập ID P-Done người đại diện (VD: VN1234567891)">
                         @error('id_vdone')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -153,10 +153,10 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="company"><span class="text-danger">*</span>Tên công ty, hợp tác xã, hộ kinh doanh cá thể</label>
+                        <label style="font-weight: 600;" for="company"><span class="text-danger">*</span>Tên công ty/ hợp tác xã/ hộ kinh doanh cá thể</label>
                         <input class="form-control form-control-lg" type="text" required=""
                                name="company_name" id="company_name"
-                               placeholder="Nhập tên công ty, hợp tác xã, hộ kinh doanh cá thể (VD: CTTNHH ...)"
+                               placeholder="Nhập tên công ty/ hợp tác xã/ hộ kinh doanh cá thể"
                                value="{{old('company_name')}}"
                                autocomplete="off">
                         @error('company_name')
@@ -166,11 +166,11 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="idpDonemore">ID P-Done người đại diện (khác)</label>
+                        <label style="font-weight: 600;" for="idpDonemore">&nbsp;ID P-Done người đại diện (khác)</label>
                         <input class="only-number form-control form-control-lg" type="text"
                                name="id_vdone_diff" id="id_vdone_diff"
                                value="{{old('id_vdone_diff')}}"
-                               placeholder="Nhập ID P-Done người đại diện khác (VD: 11)">
+                               placeholder="Nhập ID P-Done người đại diện khác (VD: VN12345678)">
                         @error('id_vdone_diff')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -180,7 +180,7 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số thuế</label>
                         <input class='only-number form-control form-control-lg' type="text" required=""
-                               name="tax_code" id="tax_code" placeholder="Nhập mã số thuế (VD: 6565656656)"
+                               name="tax_code" id="tax_code" placeholder="Nhập mã số thuế (VD: 1234567891)"
                                pattern="^[0-9]{10,13}$" title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số"
                                value="{{old('tax_code')}}"
                                autocomplete="off">
@@ -192,7 +192,7 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
                         <div class="form-group">
-                            <label style="font-weight: 600;">ID P-Done
+                            <label style="font-weight: 600;">&nbsp;ID P-Done
                                 người giới thiệu</label>
                             <input class="form-control form-control-lg" type="text"
                                    name="referral_code"
@@ -248,7 +248,7 @@
                         <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi tiết</label>
                         <input class="form-control form-control-lg" type="text" name="address" id="address" required=""
                             value="{{old('address')}}"
-                            placeholder="Nhập địa chỉ chi tiết (VD: 67 Khúc Thừa Dụ)">
+                            placeholder="Nhập địa chỉ chi tiết (VD: Phường 13 Quận 4)">
                         @error('address')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -261,7 +261,7 @@
                     <h3 style="font-size: 20px;">Thông tin kho</h3>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-3 mb-2">
-                    <h4 style="font-weight: 600;">Chọn loại kho: <span class="text-danger">*</span></h4>
+                    <h4 style="font-weight: 600;">Phân loại kho: <span class="text-danger">*</span></h4>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
@@ -277,7 +277,7 @@
                                 <div class=" col-12">
                                     <div class="form-group">
                                         <label style="font-weight: 600;"><span
-                                                class="text-danger">*</span>Diện tích sàn
+                                                class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
                                             placeholder="Nhập diện tích (m2)">
@@ -288,7 +288,7 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <label style="font-weight: 600;" for="kt">Kích
-                                        thước
+                                        thước kho
                                         (m)</label>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
@@ -324,7 +324,7 @@
 
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label style="font-weight: 600;" for="volume_normal_storage">Thể tích
+                                        <label style="font-weight: 600;" for="volume_normal_storage">Thể tích kho
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
                                             placeholder="Nhập thể tích (m3)">
@@ -336,7 +336,7 @@
 
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
-                                            class="text-danger">*</span>Hình ảnh kho thường</label>
+                                            class="text-danger">*</span>Hình ảnh kho</label>
                                     <input class="form-control form-control-lg" type="file" name="image_normal_storage[]" id="image_normal_storage"
                                         placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
                                     @error('image_normal_storage')
@@ -377,7 +377,7 @@
                                 <div class=" col-12">
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="dts"><span
-                                                class="text-danger">*</span>Diện tích sàn
+                                                class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
                                             placeholder="Nhập diện tích (m2)">
@@ -388,7 +388,7 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <label style="font-weight: 600;" for="kt">Kích
-                                        thước
+                                        thước kho
                                         (m)</label>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
@@ -424,7 +424,7 @@
 
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label style="font-weight: 600;" for="tts">Thể tích
+                                        <label style="font-weight: 600;" for="tts">Thể tích kho
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
                                             placeholder="Nhập thể tích (m3)">
@@ -436,7 +436,7 @@
 
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
-                                            class="text-danger">*</span>Hình ảnh kho lạnh</label>
+                                            class="text-danger">*</span>Hình ảnh kho</label>
                                     <input class="form-control form-control-lg" type="file" name="image_cold_storage[]" id="image_cold_storage"
                                         placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
                                     @error('image_cold_storage')
@@ -479,7 +479,7 @@
                                 <div class=" col-12">
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="dts"><span
-                                                class="text-danger">*</span>Diện tích sàn
+                                                class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
                                             placeholder="Nhập diện tích (m2)">
@@ -490,7 +490,7 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <label style="font-weight: 600;" for="kt">Kích
-                                        thước
+                                        thước kho
                                         (m)</label>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
@@ -526,7 +526,7 @@
 
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label style="font-weight: 600;" for="tts">Thể tích
+                                        <label style="font-weight: 600;" for="tts">Thể tích kho
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
                                             placeholder="Nhập thể tích (m3)">
@@ -538,7 +538,7 @@
 
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
-                                            class="text-danger">*</span>Hình ảnh kho bãi</label>
+                                            class="text-danger">*</span>Hình ảnh kho</label>
                                     <input class="form-control form-control-lg" type="file" name="image_warehouse[]" id="image_warehouse"
                                         placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
                                     @error('image_warehouse')
