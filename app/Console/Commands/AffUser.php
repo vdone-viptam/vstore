@@ -65,7 +65,7 @@ class AffUser extends Command
 
 
 //                    representativePDoneId=VN1234598760&accountCode=gf3d34r34hg6&accountId=111&pDoneId=VN2678123123&userId=63&value=600000&type=1
-                    $sig = hash_hmac('sha256',$string_hmac, 'vshopDevSecretKey');
+                    $sig = hash_hmac('sha256',$string_hmac,config('domain.key_split'));
                     $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/register-commission',
                         [
 //

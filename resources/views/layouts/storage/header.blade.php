@@ -419,7 +419,8 @@
                 </li>
 
                 <li class="nav-item dropdown nav-user">
-                    <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                    <a class="nav-link nav-user-img" href=""
+                     id="navbarDropdownMenuLink2" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <div class="w-[24px]">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -443,7 +444,13 @@
                         <div class="nav-user-info">
 
                         </div>
-                        <a class="dropdown-item" href="./profile.html"><i class="fas fa-user mr-2"></i>Hồ sơ</a>
+                        <a class="dropdown-item" href=@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+                     "{{route('screens.storage.account.profile')}}"
+                        @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
+                            "{{route('screens.vstore.account.profile')}}"
+                        @elseif(\Illuminate\Support\Facades\Auth::user()->role_id ==2 )
+                            "{{route('screens.manufacture.account.profile')}}"
+                        @endif><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         <!-- <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Cài đặt</a> -->
                         <a class="dropdown-item logout" style="color:#FF4D4F"><i class="fas fa-power-off mr-2"></i>Đăng
                             xuất</a>
