@@ -157,7 +157,7 @@ input[type="submit"].active{
 .error{
     color: #FF4D4F;
 }
-.modal2{
+.modal{
     position: fixed;
     width: 100%;
     height: 100%;

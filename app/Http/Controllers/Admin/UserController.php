@@ -6,7 +6,10 @@ use App\Exports\DepositExport;
 use App\Exports\UserExport;
 use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
+use App\Http\Lib9Pay\HMACSignature;
+use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\District;
+use App\Models\OrderService;
 use App\Models\Product;
 use App\Models\Province;
 use App\Models\RequestChangeTaxCode;
@@ -17,9 +20,11 @@ use App\Models\Warehouses;
 use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -306,5 +311,128 @@ class UserController extends Controller
     public function exportUser()
     {
         return Excel::download(new UserExport, Carbon::now()->format('d-m-Y') . ' -danh_sach_tai_khoan' . '.xlsx');
+    }
+
+    public function historyPayment(Request $request)
+    {
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_word'] = trim($request->key_search) ?? '';
+        $this->v['histories'] = User::join('order_service', 'users.id', '=', 'order_service.user_id')
+            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'order_service.payment_status', 'order_service.created_at')
+            ->where('order_service.type', '!=', 'VSTORE');
+        if (strlen($this->v['key_word']) > 0) {
+            $this->v['histories'] = $this->v['histories']->where(function ($query) {
+                $query->where('users.name', 'like', '%' . $this->v['key_word'] . '%')
+                    ->orWhere('order_service.no', $this->v['key_word']);
+            });
+        }
+        $this->v['histories'] = $this->v['histories']->paginate($this->v['limit']);
+        return view('screens.admin.user.payment', $this->v);
+    }
+
+    public function callAPI($method, $url, $data, $headers = false)
+    {
+        $curl = curl_init();
+        switch ($method) {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            default:
+                if ($data)
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
+        }
+        // OPTIONS:
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        // EXECUTE:
+        $result = curl_exec($curl);
+        if (!$result) {
+            die("Connection Failure");
+        }
+        curl_close($curl);
+        return $result;
+    }
+
+    public function checkPayment(Request $request)
+    {
+        $orderService = OrderService::select('no', 'users.name', 'tax_code', 'phone_number', 'payment_status', 'order_service.status')->join('users', 'order_service.user_id', '=', 'users.id')->where('order_service.id', $request->id)->first();
+
+
+//        $timestamp = time();
+
+        $invoice_no = $orderService->no;
+        $return_url = "https://sand-payment.9pay.vn/v2/payments/$invoice_no/inquire";
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $time = time();
+        $data = [];
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/v2/payments/' . $invoice_no . '/inquire', 'GET')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+
+        $headers = array(
+            'Date: ' . $time,
+            'Authorization: Signature Algorithm=HS256,Credential=' . $merchantKey . ',SignedHeaders=,Signature=' . $signature
+        );
+
+        $response = $this->callAPI('GET', $return_url, false, $headers);
+
+        return response()->json(['request' => $response, 'name' => $orderService->name,
+            'tax_code' => $orderService->tax_code,
+            'phone_number' => $orderService->phone_number, 'status' => $orderService->status, 'payment_status' => $orderService->payment_status]);
+
+
+    }
+
+    public function resultCheckPayment(Request $request)
+    {
+        function urlSafeB64encode($string)
+        {
+            $data = base64_encode($string);
+            $data = str_replace(array('+', '/', '='), array('-', '_', ''), $data);
+            return $data;
+        }
+
+        $status = 0;
+        $payment = [];
+
+        if (isset($_GET['result'])) {
+            $result = urlSafeB64encode($request->result);
+            $payment = json_decode($result);
+            $status = $payment->status;
+
+            return response()->json(['result' => $status]);
+        }
+
+
+    }
+
+    public function updatePayment(Request $request)
+    {
+        $order_service = OrderService::find($request->id);
+        if (!$order_service) {
+            return redirect()->back()->with('error', 'Không tìm thấy giao dịch');
+        }
+        if ($order_service->payment_status == 1 && $order_service->status == 3) {
+            return redirect()->back()->with('error', 'Không thể chuyển trạng thái giao dịch này');
+        }
+        $order_service->status = 3;
+        $order_service->payment_status = 1;
+        $order_service->save();
+
+        return redirect()->back()->with('success', 'Thay đổi trạng thái giao dịch thành công');
     }
 }

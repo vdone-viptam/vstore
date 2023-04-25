@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/create', function () {
+    $users = \App\Models\User::select('id')->where('role_id', 4)->where('account_code', '!=', null)->get();
+    foreach ($users as $user)
+        for ($i = 0; $i < 3; $i++) {
+            \Illuminate\Support\Facades\DB::table('warehouse_type')->insert(
+                ['user_id' => $user->id, 'type' => $i + 1, 'acreage' => 1, 'volume' => 1, 'length' => 1, 'width' => 1, 'height' => 1, 'image_storage' => 1, 'image_pccc' => 1]
+            );
+        }
+
+});
+
 Route::get('/els', [\App\Http\Controllers\Api\ProductController::class, 'indexProduct']);
 
 Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
@@ -213,6 +224,10 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
 
     Route::prefix('users')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
+        Route::get('/history-payment', [\App\Http\Controllers\Admin\UserController::class, 'historyPayment'])->name('screens.admin.user.historyPayment');
+        Route::get('/check-payment', [\App\Http\Controllers\Admin\UserController::class, 'checkPayment'])->name('screens.admin.user.checkPayment');
+        Route::get('/result-payment', [\App\Http\Controllers\Admin\UserController::class, 'resultCheckPayment'])->name('screens.admin.user.resultCheckPayment');
+        Route::get('/update-payment', [\App\Http\Controllers\Admin\UserController::class, 'updatePayment'])->name('screens.admin.user.updatePayment');
         Route::get('/register-account', [\App\Http\Controllers\Admin\UserController::class, 'getListRegisterAccount'])->name('screens.admin.user.index');
         Route::get('/confirm/{id}', [\App\Http\Controllers\Admin\UserController::class, 'confirm'])->name('screens.admin.user.confirm');
         Route::get('/chi-tiet', [\App\Http\Controllers\Admin\UserController::class, 'detail'])->name('screens.admin.user.detail');

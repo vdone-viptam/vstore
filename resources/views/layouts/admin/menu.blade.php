@@ -202,6 +202,10 @@
                                                            href="{{route('screens.admin.user.tax_code')}}">Yêu cầu cập
                         nhật mã số thuế</a>
                 </li>
+                <li data-page="history-payment"><a class="hover:underline"
+                                                           href="{{route('screens.admin.user.historyPayment')}}">Lịch sử mua tài khoản</a>
+                </li>
+
             </ul>
         </div>
 
