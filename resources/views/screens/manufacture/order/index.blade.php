@@ -79,128 +79,78 @@
                             <tr>
                                 <th>
                                     Mã đơn hàng
+                                    <span style="float: right;cursor: pointer">
+                                        @if ($field == 'order.no')
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="order.no"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="order.no"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="order.no"></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th>
                                     Tên sản phẩm
 
                                     <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
+                                        @if ($field == 'products.name')
                                             @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                            <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                     </span>
                                 </th>
                                 <th>Tình trạng
-                                    @if ($field == '')
-                                    @if ($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                    @if ($field == 'order.export_status')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order.export_status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order.export_status"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                        <i class="fas fa-sort sort" data-sort="order.export_status"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort=""></i>
-                                @endif
                                 </th>
                                 <th>
                                     Giá bán
                                     <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
+                                        @if ($field == 'order_item.price')
                                             @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
+                                                <i class="fa-solid fa-sort-down sort" data-sort="order_item.price"></i>
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
+                                                <i class="fa-solid fa-sort-up sort" data-sort="order_item.price"></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
+                                            <i class="fas fa-sort sort" data-sort="order_item.price"></i>
                                         @endif
                                     </span>
                                 </th>
                                 <th>
                                     Số lượng
-                                    <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
-                                        @endif
-                                    </span>
+
                                 </th>
                                 <th>Kho hàng
-                                    <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
-                                        @endif
-                                    </span>
+
                                 </th>
                                 <th>Ngày đặt hàng
-                                    <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
-                                        @endif
-                                    </span>
+
                                 </th>
                                 <th>
                                     Ngày hoàn thành
-                                    <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
-                                        @endif
-                                    </span>
+
                                 </th>
                                 <th>
                                     Giá trị đơn hàng
-                                    <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
-                                        @endif
-                                    </span>
+
                                 </th>
                                 <th>
                                     V-Shop bán hàng
-                                    <span style="float: right;cursor: pointer">
-                                        @if ($field == '')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort=""></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort=""></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort=""></i>
-                                        @endif
-                                    </span>
                                 </th>
                                 <th>
                                     Giá trị trừ chiết khấu
@@ -238,14 +188,14 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{ number_format($order->total, 0, '.', '.') }}
+                                            {{ number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity, 0, '.', '.') }}
                                             đ
                                         </td>
                                         <td>
                                             {{ $order->orderItem[0]->vshop->name ?? 'Viptam' }}
                                         </td>
                                         <td>
-                                            {{ number_format($order->orderItem[0]->product->discount * $order->total / 1000, 0, '.', '.') }}
+                                            {{ number_format(($order->orderItem[0]->price * $order->orderItem[0]->quantity * (100 - $order->orderItem[0]->product->discount - $order->orderItem[0]->discount_vShop)) / 100, 0, '.', '.') }}
                                             đ
                                         </td>
                                     </tr>

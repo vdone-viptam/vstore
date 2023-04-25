@@ -14,21 +14,42 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    private $v;
     public function __construct()
     {
         $this->v = [];
     }
     public function index(Request $request)
     {
+        $this->v['field'] = $request->field ?? 'products.name';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
         $key_search = $request->key_search ?? '';
-        $limit = $request->limit ?? 10;
-        $orders = Order::with(['orderItem.product',
-            'orderItem.vshop',
-            'orderItem.warehouse',
-            'orderItem'])->select(
-            'no', 'id', 'export_status', 'created_at','estimated_date','total'
-        )
-            ->where('order.status', '!=', 2);
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        //     $orders = Order::with([
+        //         'orderItem.product',
+        //         'orderItem.vshop',
+        //         'orderItem.warehouse',
+        //         'orderItem',
+
+        //     ])->select(
+        //         'no',
+        //         'id',
+        //         'export_status',
+        //         'created_at'
+        //     )
+        //         ->where('order.status', '!=', 2)
+          
+        // ;
+      
+        $orders = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->join('products', 'order_item.product_id', '=', 'products.id')
+            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name','order_item.price')
+            ->where('order.status', '!=', 2)->groupBy('order.id')
+            ->where('products.user_id',Auth::id())
+            ->groupBy('order.id')
+            ->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($this->v['limit']);
 
         if ($key_search && strlen(($key_search) > 0)) {
             $orders->where(function ($sub) use ($key_search) {
@@ -41,25 +62,29 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        $orders = $orders->orderBy('id', 'desc')->paginate($limit);
-        return view('screens.manufacture.order.index',compact('key_search'), ['orders' => $orders]);
+        // $orders = $orders->orderBy('id', 'desc')->paginate(($this->v['limit']));
+        return view('screens.manufacture.order.index', $this->v, ['orders' => $orders]);
     }
 
     public function destroy()
     {
         return view('screens.manufacture.order.destroy', []);
-
     }
 
     public function pending(Request $request)
     {
         $key_search = $request->key_search ?? '';
         $limit = $request->limit ?? 10;
-        $orders = Order::with(['orderItem.product',
+        $orders = Order::with([
+            'orderItem.product',
             'orderItem.vshop',
             'orderItem.warehouse',
-            'orderItem'])->select(
-            'no', 'id', 'export_status', 'created_at'
+            'orderItem'
+        ])->select(
+            'no',
+            'id',
+            'export_status',
+            'created_at'
         )
             ->where('order.status', '!=', 2)
             ->where('export_status', '!=', 4);
@@ -77,7 +102,6 @@ class OrderController extends Controller
         $orders = $orders->orderBy('id', 'desc')->paginate($limit);
 
         return view('screens.manufacture.order.pending', ['orders' => $orders]);
-
     }
 
     public function order(Request $request)
@@ -89,12 +113,27 @@ class OrderController extends Controller
         $key_search = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity',
-                'place_name', 'fullname', 'phone', 'address', 'no',
-                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
-                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
-            ->join('products', 'pre_order_vshop.product_id', '=',
-                'products.id')
+            ->select(
+                'pre_order_vshop.status',
+                'quantity',
+                'place_name',
+                'fullname',
+                'phone',
+                'address',
+                'no',
+                'total',
+                'pre_order_vshop.discount',
+                'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at',
+                'product_id',
+                'pre_order_vshop.id'
+            )
+            ->join(
+                'products',
+                'pre_order_vshop.product_id',
+                '=',
+                'products.id'
+            )
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if ($key_search && strlen(($key_search) > 0)) {
@@ -121,12 +160,27 @@ class OrderController extends Controller
         $key_search = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity',
-                'place_name', 'fullname', 'phone', 'address', 'no',
-                'total', 'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
-                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
-            ->join('products', 'pre_order_vshop.product_id', '=',
-                'products.id')
+            ->select(
+                'pre_order_vshop.status',
+                'quantity',
+                'place_name',
+                'fullname',
+                'phone',
+                'address',
+                'no',
+                'total',
+                'pre_order_vshop.discount',
+                'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at',
+                'product_id',
+                'pre_order_vshop.id'
+            )
+            ->join(
+                'products',
+                'pre_order_vshop.product_id',
+                '=',
+                'products.id'
+            )
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.status', 3)
             ->orderBy($this->v['field'], $this->v['type']);
@@ -147,15 +201,26 @@ class OrderController extends Controller
     public function detailOrder($id)
     {
         $orders = PreOrderVshop::with(['product'])
-            ->select('pre_order_vshop.status', 'quantity', 'place_name',
-                'fullname', 'phone', 'address', 'no', 'total',
-                'pre_order_vshop.discount', 'pre_order_vshop.deposit_money',
-                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id')
+            ->select(
+                'pre_order_vshop.status',
+                'quantity',
+                'place_name',
+                'fullname',
+                'phone',
+                'address',
+                'no',
+                'total',
+                'pre_order_vshop.discount',
+                'pre_order_vshop.deposit_money',
+                'pre_order_vshop.created_at',
+                'product_id',
+                'pre_order_vshop.id'
+            )
             ->join('products', 'pre_order_vshop.product_id', '=', 'products.id')
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.id', $id)
             ->first();
-        return $orders ;
+        return $orders;
         // return view('screens.manufacture.order.detail', [
         //     'order' => $orders
         // ]);
@@ -176,6 +241,4 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
-
-
 }
