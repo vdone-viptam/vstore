@@ -121,6 +121,7 @@ class AccountController extends Controller
 
             $warehouse = Warehouses::where('user_id', $user->id)->first();
             $warehouse->name = $request->name;
+            $warehouse->address = $request->address;
             $warehouse->ward_id = $request->ward_id;
             $warehouse->city_id = $request->city_id;
             $warehouse->district_id = $request->district_id;

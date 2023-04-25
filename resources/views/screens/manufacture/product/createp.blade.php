@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Giá sản phẩm (đ):<span class="text-danger">*</span></label>
+                                    <label for="name">Giá sản phẩm chưa VAT(đ):<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg number" id="price"
                                            name="price"
                                            value="{{old('price')}}" placeholder="0">
@@ -112,7 +112,7 @@
                                     <label for="name">Chi tiết sản phẩm <span class="text-danger">*</span></label>
                                     <textarea name="description" class="form-control form-control-lg" id="editor"
                                               cols="30" rows="10"
-                                              placeholder="Nhập chi tiết sản phẩm"></textarea>
+                                              placeholder="Nhập chi tiết sản phẩm">{{old('description')}}</textarea>
                                     @error('description')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror
@@ -122,7 +122,7 @@
                                     <textarea name="short_content" class="form-control form-control-lg"
                                               id="short_content"
                                               cols="30" rows="4"
-                                              placeholder="Nhập tóm tắt sản phẩm"></textarea>
+                                              placeholder="Nhập tóm tắt sản phẩm">{{old('short_content')}}</textarea>
                                     @error('short_content')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror

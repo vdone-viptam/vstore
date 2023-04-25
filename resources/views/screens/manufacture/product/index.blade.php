@@ -212,11 +212,11 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                <div class="d-flex align-items-end justify-content-end mt-4 col-12">
+                        {{$products->withQueryString()->links()}}
+                    <div class=" mt-4">
                         <form>
-                            <div class="form-group">
+                            <div class="form-group col-4">
                                 <select class="form-control" id="limit">
                                     <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
                                     <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>

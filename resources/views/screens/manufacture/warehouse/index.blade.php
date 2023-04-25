@@ -82,6 +82,29 @@
             </div>
         </form>
     </div>
+    <div
+        class="modal fade"
+        id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form method="post" action="{{route('screens.manufacture.warehouse.addProduct')}}">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Sản phẩm trong kho</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body md-content1">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 @section('page_title','Quản lý kho hàng')
 
@@ -327,19 +350,16 @@
                 var htmlData = ``;
 
                 if (data.data) {
-                    htmlData += `<div class="modal-content">
+                    htmlData += `
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                <div class="row">
+
                     <div class="col-sm-12">
                         <table class="table table-striped table-bordered first dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 186.844px;">Name</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 304.078px;">Position</th>
+                                <th class="sorting_asc"  style="width: 186.844px;">Tên sản phẩm</th>
+                                <th style="width: 304.078px;">Số lượng</th>
 
                             </tr>
                             </thead>
@@ -363,14 +383,10 @@
                     htmlData += `</tbody>
 
                         </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+</div>
    `;
                     ;
-                    $('.md-content').html(htmlData)
+                    $('.md-content1').html(htmlData)
                     $('#modalDetail').modal('show');
                 } else {
                     $('#modalDetail').modal('show');

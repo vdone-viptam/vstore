@@ -1,4 +1,4 @@
-@extends('layouts.manufacture.main')
+    @extends('layouts.manufacture.main')
 @section('page_title','Yêu cầu xét duyệt sản phẩm')
 
 
