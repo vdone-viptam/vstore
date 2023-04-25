@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group pas pass w-full ">
                                         <label for="name">Mã số thuế mới</label>
-                                        <input required type="text" class="form-control form-control-lg"
+                                        <input required type="text" class="only-number form-control form-control-lg"
                                                id="new_tax_code" name="tax_code"
                                                pattern="^[0-9]{10,13}$"
                                                title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số">

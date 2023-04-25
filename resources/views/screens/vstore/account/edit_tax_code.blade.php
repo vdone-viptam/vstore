@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="form-group conf pass w-full relative">
                                         <label for="name">Mã số thuế mới</label>
-                                        <input required type="number" class="form-control form-control-lg pass"
+                                        <input required type="number" class="only-number form-control form-control-lg pass"
                                                autocomplete="off"
                                                pattern="/^[0-9]{10,13}$/"
                                                title="Mã số thuế phải là kí tự số và 10 hoặc 13 kí tự"

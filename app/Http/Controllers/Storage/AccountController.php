@@ -56,11 +56,11 @@ class AccountController extends Controller
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-            'floor_area' => 'required',
-            'volume' => 'required',
-            'cold_storage' => 'required',
-            'warehouse' => 'required',
-            'normal_storage' => 'required',
+            // 'floor_area' => 'required',
+            // 'volume' => 'required',
+            // 'cold_storage' => 'required',
+            // 'warehouse' => 'required',
+            // 'normal_storage' => 'required',
             'city_id' => 'required',
             'district_id' => 'required',
             'ward_id' => 'required',
@@ -73,17 +73,18 @@ class AccountController extends Controller
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-            'floor_area.required' => 'trường này không được trống',
-            'volume.required' => 'Trường này không được trống',
-            'cold_storage.required' => 'Trường này không được trống',
-            'warehouse.required' => 'Trường này không được trống',
-            'normal_storage.required' => 'Trường này không được trống',
+            // 'floor_area.required' => 'trường này không được trống',
+            // 'volume.required' => 'Trường này không được trống',
+            // 'cold_storage.required' => 'Trường này không được trống',
+            // 'warehouse.required' => 'Trường này không được trống',
+            // 'normal_storage.required' => 'Trường này không được trống',
             'city_id.required' => 'Trường này không được trống',
             'district_id.required' => 'Trường này không được trống',
             'ward_id.required' => 'Trường này không được trống',
 
         ]);
         if ($validator->fails()) {
+            // dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         try {

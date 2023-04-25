@@ -141,7 +141,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="phone_number">Số điện thoại:</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <input required type="text" class="only-number form-control form-control-lg"
                                                            id="phone_number" name="phone_number"
                                                            pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
                                                            value="{{$infoAccount->phone_number}}">
