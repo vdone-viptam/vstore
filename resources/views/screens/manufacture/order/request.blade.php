@@ -318,7 +318,7 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.manufacture.order.request',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort + '&limit=' + limit.value
+                            '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
             });

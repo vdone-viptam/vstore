@@ -289,7 +289,7 @@
                         document.location =
                             '{{ route('screens.manufacture.order.index', ['key_search' => $key_search]) }}&type=' +
                             orderBy +
-                            '&field=' + sort+'&limit='+limit
+                            '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
             });
