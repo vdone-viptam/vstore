@@ -201,9 +201,9 @@
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'deposit_money')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="=deposit_money"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="deposit_money"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="=deposit_money"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="deposit_money"></i>
                                         @endif
                                     @else
                                         <i class="fas fa-sort sort" data-sort="deposit_money"></i>
