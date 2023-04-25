@@ -256,7 +256,7 @@
             <div class="content m-4">
                 <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
                     <div class="col-12">
-                        <h3 style="font-weight: 600; padding-top: 15px; ">Thông tin bên mua</h3>
+                        <h3 style="font-weight: 600; padding-top: 15px; font-size:22px; margin-bottom:15px;">Thông tin bên mua</h3>
                     </div>
                     <div class="col-12">
                         <div class="row">
@@ -343,7 +343,7 @@
                     <div class="col-12 my-3">
                         <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                             <div class="col-12">
-                                <h3 style="font-weight: 600; padding-top: 15px;">Chi tiết sản phẩm</h3>
+                                <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px">Chi tiết sản phẩm</h3>
                             </div>
                             @php
                                 $price = (float) config('constants.orderService.price_ncc');
@@ -400,10 +400,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 my-3">
+                    <div class="col-12 mb-3">
                         <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                             <div class="col-12">
-                                <h3 style="font-weight: 600; padding-top: 15px;">Phương thức thanh toán</h3>
+                                <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">Phương thức thanh toán</h3>
                             </div>
                             <div class="col-12" style="padding-bottom:15px ;">
                                                     <span>
@@ -425,10 +425,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 mb-3">
+                        <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
+                            <div class="col-12">
+                                <h3 style="font-weight: 600; padding-top: 15px;">Bạn đã gửi thông tin đăng ký thành công</h3>
+                            </div>
+                            <div class="col-12" style="padding-bottom:15px ;">
+                                Thông tin đăng ký của bạn đang chờ duyệt. Vui lòng chờ kết quả trong vòng (24 giờ)
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer ">
-                <div class="w-100 mx-auto text-right">
+                <div class="mx-auto">
                     <button type="button" class="btn-cust" data-dismiss="modal">Đóng
                     </button>
                 </div>
