@@ -480,7 +480,9 @@ class  VShopController extends Controller
      * API để thêm 1 Vshop
      *
      * @bodyParam  pdone_id id của Vshop
-     * @bodyParam  avatar url ảnh đại diện
+     * @bodyParam vshop_id mã user dạng string
+     * @bodyParam  avatar url ảnh đại diện có thể rỗng
+     * @bodyParam nick_name nick_name của vvshop
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request)
