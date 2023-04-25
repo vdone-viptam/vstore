@@ -80,14 +80,14 @@
                             <th>
                                 Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
-                                        @if ($field == 'orders.no')
+                                        @if ($field == 'order.no')
                                         @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="orders.no"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order.no"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="orders.no"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order.no"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="orders.no"></i>
+                                        <i class="fas fa-sort sort" data-sort="order.no"></i>
                                     @endif
                                     </span>
                             </th>
