@@ -258,7 +258,7 @@
                 </div>
                      <div class="grid grid-cols-2 gap-4 w-full">
                     ${
-                        status == 5 && (payment_status != 1 && present_status != 3) ? `<a href="{{route('screens.admin.user.updatePayment')}}?id=${id}" onclick="return confirm('Bạn có chắc muốn thay đổi trạng thái giao dịch này')" class="w-48 bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Chuyển trạng thái</a>` : ''
+                        status == 5 && !(payment_status == 1 && present_status == 3) ? `<a href="{{route('screens.admin.user.updatePayment')}}?id=${id}" onclick="return confirm('Bạn có chắc muốn thay đổi trạng thái giao dịch này')" class="w-48 bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Chuyển trạng thái</a>` : ''
                     }
                 </div>
             </div>
