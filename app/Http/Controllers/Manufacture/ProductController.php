@@ -542,6 +542,7 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
+        // dd($request->all(),$id);
         DB::beginTransaction();
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
@@ -602,12 +603,13 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
+           dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         try {
 
             $product = Product::find($id);
+            // dd($product);
             $product->name = $request->name;
             $product->category_id = $request->category_id;
             $product->price = str_replace('.', '', $request->price);
@@ -645,7 +647,7 @@ class ProductController extends Controller
             }
 
 
-            if ($request->hasFile('images') && count($request->file('images') > 0)) {
+            if ($request->hasFile('images') && count($request->file('images')) > 0 ) {
                 $photo_gallery = [];
                 foreach ($request->file('images') as $image) {
                     $filenameWithExt = $image->getClientOriginalName();
@@ -665,10 +667,11 @@ class ProductController extends Controller
             }
 
             $product->save();
-
+            DB::commit();
             return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $e) {
             dd($e->getMessage());
+            DB::rollback();
         }
 
     }
