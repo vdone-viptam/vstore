@@ -389,8 +389,9 @@
                     $('.md-content1').html(htmlData)
                     $('#modalDetail').modal('show');
                 } else {
+
                     $('#modalDetail').modal('show');
-                    $('.md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    $('.md-content1').html('Chưa có dữ liệu của sản phẩm!')
                     setTimeout(() => {
                         $('#modalDetail').modal('hide');
                     }, 1000);
