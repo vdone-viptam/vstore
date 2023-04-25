@@ -334,17 +334,20 @@ class LoginController extends Controller
                 'volume_warehouse' => 'integer|min:1|nullable',
 
                 // kiểm tra thông tin ảnh kho
-                'image_normal_storage' => 'required_with:normal_storage',
-                'image_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg|required_with:normal_storage',
-                'image_pccc_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_normal_storage' => 'required_with:normal_storage|array|max:5',
+                'image_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg|required_with:normal_storage|max:5000',
+                'image_pccc_normal_storage' => 'array|max:5|',
+                'image_pccc_normal_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
 
-                'image_cold_storage' => 'required_with:cold_storage',
-                'image_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'image_pccc_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_cold_storage' => 'required_with:cold_storage|array|max:5',
+                'image_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+                'image_pccc_cold_storage' => 'array|max:5',
+                'image_pccc_cold_storage.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
 
-                'image_warehouse' => 'required_with:warehouse',
-                'image_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-                'image_pccc_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                'image_warehouse' => 'required_with:warehouse|array|max:5',
+                'image_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+                'image_pccc_warehouse' => 'array|max:5',
+                'image_pccc_warehouse.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
 
                 'city_id' => 'required',
                 'district_id' => 'required',
@@ -371,11 +374,30 @@ class LoginController extends Controller
                 'warehouse.required_without_all' => 'Hãy chọn 1 loại kho',
 
                 'image_normal_storage.required_with' => 'Hãy thêm ảnh kho !',
+                'image_normal_storage.max' => 'Tối đa chọn 5 ảnh!',
+                'image_normal_storage.*.max' => 'Kích thước ảnh tối đa 5MB',
                 'image_normal_storage.*' => 'Không đúng định dạng ảnh !',
+
+                'image_pccc_normal_storage.max' => 'Tối đa chọn 5 ảnh!',
+                'image_pccc_normal_storage.*.max' => 'Kích thước ảnh tối đa 5MB',
                 'image_pccc_normal_storage.*' => 'Không đúng định dạng ảnh !',
+
+                'image_cold_storage.required_with' => 'Hãy thêm ảnh kho !',
+                'image_cold_storage.max' => 'Tối đa chọn 5 ảnh!',
+                'image_cold_storage.*.max' => 'Kích thước ảnh tối đa 5MB',
                 'image_cold_storage.*' => 'Không đúng định dạng ảnh !',
+
+                'image_pccc_cold_storage.max' => 'Tối đa chọn 5 ảnh!',
+                'image_pccc_cold_storage.*.max' => 'Kích thước ảnh tối đa 5MB',
                 'image_pccc_cold_storage.*' => 'Không đúng định dạng ảnh !',
+
+                'image_warehouse.required_with' => 'Hãy thêm ảnh kho !',
+                'image_warehouse.max' => 'Tối đa chọn 5 ảnh!',
+                'image_warehouse.*.max' => 'Kích thước ảnh tối đa 5MB',
                 'image_warehouse.*' => 'Không đúng định dạng ảnh !',
+
+                'image_pccc_warehouse.max' => 'Tối đa chọn 5 ảnh!',
+                'image_pccc_warehouse.*.max' => 'Kích thước ảnh tối đa 5MB',
                 'image_pccc_warehouse.*' => 'Không đúng định dạng ảnh !',
 
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
