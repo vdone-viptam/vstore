@@ -67,7 +67,6 @@
                     d="M12 20.4736C16.6318 20.4736 20.4668 16.6304 20.4668 12.0068C20.4668 7.375 16.6235 3.54004 11.9917 3.54004C7.36816 3.54004 3.5332 7.375 3.5332 12.0068C3.5332 16.6304 7.37646 20.4736 12 20.4736ZM9.21094 15.4932C8.8291 15.4932 8.53027 15.186 8.53027 14.8042C8.53027 14.6216 8.59668 14.4473 8.72949 14.3228L11.0288 12.0151L8.72949 9.71582C8.59668 9.58301 8.53027 9.41699 8.53027 9.23438C8.53027 8.84424 8.8291 8.55371 9.21094 8.55371C9.40186 8.55371 9.55127 8.62012 9.68408 8.74463L12 11.0522L14.3325 8.73633C14.4736 8.59521 14.623 8.53711 14.8057 8.53711C15.1875 8.53711 15.4946 8.83594 15.4946 9.21777C15.4946 9.40869 15.4365 9.55811 15.2871 9.70752L12.9795 12.0151L15.2788 14.3145C15.4199 14.439 15.4863 14.6133 15.4863 14.8042C15.4863 15.186 15.1792 15.4932 14.7891 15.4932C14.5981 15.4932 14.4238 15.4268 14.2993 15.2939L12 12.9863L9.70898 15.2939C9.57617 15.4268 9.40186 15.4932 9.21094 15.4932Z"
                     fill="white"/>
             </svg>
-
             <div class="content pt-3 px-3 text-center pb-2 md:pb-12">
                 <h2 class="text-title text-2xl font-medium">Bạn đã gửi thông tin đăng ký thành công</h2>
                 <span
@@ -654,12 +653,12 @@
                     <div class="content m-4">
                         <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
                             <div class="col-12">
-                                <h3 style="font-weight: 600; padding-top: 15px; ">Thông tin bên mua</h3>
+                                <h3 style="font-weight: 600; padding-top: 15px; font-size:22px; margin-bottom:15px;">Thông tin bên mua</h3>
                             </div>
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">Tên công ty</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
@@ -670,7 +669,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">Mã số thuế</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->tax_code}}</span>
@@ -681,7 +680,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">Tên Nhà cung cấp</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->name}}</span>
@@ -692,7 +691,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">ID P-Done người đại diện</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->id_vdone}}</span>
@@ -703,7 +702,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">Số điện thoại công ty</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->phone_number}}</span>
@@ -714,7 +713,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">Email</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->email}}</span>
@@ -725,7 +724,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">Mã người giới thiệu</h4>
+                                        <h4 style="font-size:18px;font-weight: 600;margin-bottom:15px;">ID P-Done người giới thiệu</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->referral_code}}</span>
@@ -739,7 +738,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-12 my-3">
                                 <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                     <div class="col-12">
-                                        <h3 style="font-weight: 600; padding-top: 15px;">Chi tiết sản phẩm</h3>
+                                        <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px">Chi tiết sản phẩm</h3>
                                     </div>
                                     @php
 
@@ -788,7 +787,7 @@
                                         @foreach($chiTietThanhToan as $value)
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <h4 style="font-size:18px;">{{$value['title']}}</h4>
+                                                    <h4 style="font-size:18px; margin-bottom:15px; font-weight:500">{{$value['title']}}</h4>
                                                 </div>
                                                 <div class="col-6 text-right">
                                                     <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -801,7 +800,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-12 my-3" >
                                 <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                     <div class="col-12">
-                                        <h3 style="font-weight: 600; padding-top: 15px;">Phương thức thanh toán</h3>
+                                        <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">Phương thức thanh toán</h3>
                                     </div>
                                     <div class="col-12" style="padding-bottom: 15px;">
                                         <div class="d-flex justify-content-between align-items-center w-100" style="background-color: white; border-radius: 10px; padding: 13px 20px;">

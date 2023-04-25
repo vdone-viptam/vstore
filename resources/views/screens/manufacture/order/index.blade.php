@@ -62,7 +62,7 @@
                                 <input type="hidden" name="field" value="{{ $field }}">
                                 <input type="hidden" name="limit" value="{{ $limit }}">
                                 <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control" type="search"
-                                    placeholder="Tìm kiếm..">
+                                       placeholder="Tìm kiếm..">
                             </form>
 
 
@@ -131,6 +131,7 @@
                                         @else
                                             <i class="fas fa-sort sort" data-sort="order_item.price"></i>
                                         @endif
+                                  
                                     </span>
                                 </th>
                                 <th>
@@ -157,8 +158,29 @@
                                 <th>
                                     Giá trị trừ chiết khấu
 
-                                </th>
-                            </tr>
+                            </th>
+                            <th>Kho hàng
+
+                            </th>
+                            <th>Ngày đặt hàng
+
+                            </th>
+                            <th>
+                                Ngày hoàn thành
+
+                            </th>
+                            <th>
+                                Giá trị đơn hàng
+
+                            </th>
+                            <th>
+                                V-Shop bán hàng
+                            </th>
+                            <th>
+                                Giá trị trừ chiết khấu
+
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
 
@@ -202,11 +224,12 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="11">Không có dữ liệu phù hợp</td>
-                                </tr>
-                            @endif
+                          
+                        @else
+                            <tr>
+                                <td colspan="11">Không có dữ liệu phù hợp</td>
+                            </tr>
+                        @endif
 
 
 

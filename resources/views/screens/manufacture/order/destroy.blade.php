@@ -107,7 +107,7 @@ Tìm kiếm</button>
 
             </div>
             <div class="w-full">
-                <span class="text-title text-lg font-medium">Dữ liệu đang được cập nhập, vui lòng quay lại sau!</span>
+                <span class="text-title text-lg font-medium">Dữ liệu đang được cập nhật, vui lòng quay lại sau!</span>
             </div>
             <!-- <div class="w-full overflow-scroll">
                 <table class="w-full dsth">

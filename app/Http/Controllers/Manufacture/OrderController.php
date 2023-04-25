@@ -147,7 +147,6 @@ class OrderController extends Controller
         $this->v['orders'] = $this->v['orders']->paginate($limit);;
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['limit'] = $request->limit ?? 10;
-        $this->v['params'] = $request->all();
         return view('screens.manufacture.order.order', $this->v);
     }
 
