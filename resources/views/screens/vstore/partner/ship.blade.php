@@ -107,7 +107,7 @@
                                 Trạng thái
                             </th>
                             <th>
-                                Cập nhập
+                                Cập nhật
                             </th>
                             <th>
                                 Hoạt động

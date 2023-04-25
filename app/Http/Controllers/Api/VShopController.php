@@ -1055,9 +1055,9 @@ class  VShopController extends Controller
     }
 
     /**
-     * Cập nhập thông tin Vshop
+     * Cập nhật thông tin Vshop
      *
-     * API này dùng để cập nhập tin cá nhân
+     * API này dùng để cập nhật tin cá nhân
      *
      * @param $id id Vshop
      * @bodyParam avatar Ảnh đại diện
@@ -1101,9 +1101,9 @@ class  VShopController extends Controller
     }
 
     /**
-     * Cập nhập thông tin Vshop
+     * Cập nhật thông tin Vshop
      *
-     * API này dùng để cập nhập tin cá nhân
+     * API này dùng để cập nhật tin cá nhân
      *
      * @param Request $request
      * @urlParam  id id vshop
