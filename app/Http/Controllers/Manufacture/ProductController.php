@@ -34,7 +34,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
-            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
+            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name','discount',
             'amount_product_sold')
             ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
@@ -72,13 +72,13 @@ class ProductController extends Controller
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
         $this->v['vstore'] = User::where('id', 800)->first();
-       
+
         if (!$this->v['vstore']) {
             $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
         }
 //        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
-       
+
         $vstores = [];
         foreach ($listVstores as $list) {
             $vstores[] = $list;
@@ -87,7 +87,7 @@ class ProductController extends Controller
         if ($v) {
             $vstores[] = $v;
         }
-       
+
         $this->v['v_stores'] = array_unique($vstores);
 //        return $this->v['v_stores'];
         return view('screens.manufacture.product.create', $this->v);

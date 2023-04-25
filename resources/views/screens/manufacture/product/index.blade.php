@@ -191,8 +191,8 @@
                                     <td class="td_name">{{$product->name}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{number_format($product->price,0,'.','.')}} đ</td>
-                                    <td>{{$product->vstore_name ?? 'Sản phẩm chưa niêm yết'}}</td>
-                                    <td>{{$product->discount > 0 ? $product->discount : 'Chưa niêm yết'}}</td>
+                                    <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
+                                    <td>{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
 
                                     <td>{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                     <td>{{number_format($product->amount,0,'.','.')}}</td>
@@ -214,7 +214,7 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$products->withQueryString()->links()}}
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
+                    <div class="mt-4">
                         <form>
                             <div class="form-group">
                                 <select class="form-control" id="limit">
