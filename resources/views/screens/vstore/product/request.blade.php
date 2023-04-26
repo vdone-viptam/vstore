@@ -26,7 +26,7 @@
     </div>
 @endsection
 
-@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận')
+@section('page_title','Quản lý yêu cầu chưa xét duyệt')
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -39,8 +39,7 @@
                             <li class="breadcrumb-item"><a href="{{route('screens.vstore.product.request')}}"
                                                            class="breadcrumb-link">Sản phẩm</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản phẩm
-                                chưa xác nhận
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu chưa xét duyệt
                             </li>
                         </ol>
                     </nav>
@@ -53,7 +52,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận</h5>
+                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu chưa xét duyệt</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
