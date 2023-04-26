@@ -109,7 +109,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 90px;">Giá bán
+                            <th class="white-space-90">Giá bán (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -122,7 +122,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 110px;">Thuế giá trị gia tăng (%)
+                            <th class="white-space-110">Thuế giá trị gia tăng (%)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'vat')
                                         @if($type == 'desc')
@@ -135,7 +135,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 110px;">Trạng thái
+                            <th class="white-space-100">Trạng thái
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'status')
                                         @if($type == 'desc')
@@ -149,7 +149,7 @@
                                 </span>
                             </th>
 
-                            <th style="white-space: unset;width: 100px !important;min-width: 100px;">V-Store niêm yết
+                            <th class="white-space-100">V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -162,7 +162,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space: unset;width: 120px !important;min-width: 120px;">Chiết khấu cho V-Store (%)
+                            <th class="white-space-120">Chiết khấu cho V-Store (%)
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'products.discount')
                                             @if($type == 'desc')
@@ -175,7 +175,7 @@
                                         @endif
                                     </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 100px;">Số lượng đã bán
+                            <th class="white-space-100">Số lượng đã bán
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
@@ -188,7 +188,7 @@
                                     @endif
                                     </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 100px;">Số lượng trong kho
+                            <th class="white-space-100">Số lượng trong kho
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                         @if($type == 'desc')
@@ -202,7 +202,6 @@
                                 </span>
                             </th>
                             <th style="min-width: 70px">
-                                Chi tiết
                             </th>
                         </tr>
                         </thead>
@@ -210,14 +209,14 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td style="white-space: unset;width: 100px !important;min-width: 90px;">{{$product->publish_id}}</td>
+                                    <td class="white-space-90">{{$product->publish_id}}</td>
                                     <td class="text-center"><img style="height: 125px;"
                                                                  src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>
                                     </td>
                                     <td class="td_name">{{$product->name}}</td>
                                     <td>{{$product->cate_name}}</td>
-                                    <td>{{number_format($product->price,0,'.','.')}} đ</td>
-                                    <td>{{$product->vat}}</td>
+                                    <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
+                                    <td class="text-right">{{$product->vat}}</td>
                                     <td>
                                         @if($product->status == 0)
                                             <span>Chưa xét duyệt</span>
@@ -228,10 +227,10 @@
                                         @endif
                                     </td>
                                     <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : ''}}</td>
-                                    <td>{{$product->discount != null ? $product->discount : ''}}</td>
+                                    <td class="text-right">{{$product->discount != null ? $product->discount : ''}}</td>
 
-                                    <td>{{number_format($product->amount_product_sold,0,'.','.')}}</td>
-                                    <td>{{number_format($product->amount,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($product->amount,0,'.','.')}}</td>
                                     <td style="min-width: 70px">
                                         <button type="button" class="btn btn-link pl-0"
                                                 onclick="showDetail({{$product->id}})">Chi tiết

@@ -130,7 +130,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-100">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -165,8 +165,8 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{$product->code}}</td>
-                                    <td>{{$product->ware_name}}</td>
-                                    <td>{{$product->name}}</td>
+                                    <td class="white-space-300">{{$product->ware_name}}</td>
+                                    <td class="white-space-300">{{$product->name}}</td>
                                     <td>
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>
@@ -193,7 +193,7 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td>{{number_format($product->quantity,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($product->quantity,0,'.','.')}}</td>
                                     <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 </tr>
                             @endforeach

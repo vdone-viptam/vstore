@@ -10,15 +10,6 @@
                 <div class="page-header">
                     <h2 class="pageheader-title">Lịch sử biến động số dư</h2>
 
-        <div class="col-span-12 ">
-            <div class="brc flex justify-start items-center gap-2 py-4">
-                <span class="text-secondary">Tài chính</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18"
-                          stroke="black"
-                          stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <a href="" class="text-blueMain font-medium italic">Lịch sử biến động số dư</a>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -67,7 +58,7 @@
                                         </span>
                                     </th>
                                     <th>
-                                        Số tiền
+                                        Số tiền (đ)
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'money_history')
                                                 @if($type == 'desc')
@@ -112,17 +103,17 @@
                                                     <p class="text-green-600">Đang chờ duyệt</p>
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td class="white-space-150 text-right">
                                                 @if($history->type == 1)
                                                     <p class="text-green-600">
                                                         +{{number_format($history->money_history,0,'.','.')}}
-                                                        đ</p>
+                                                        </p>
                                                 @else
                                                     <p class="text-red-600">
                                                         -{{number_format($history->money_history,0,'.','.')}}</p>
                                                 @endif
                                             </td>
-                                            <th>{{$history->title}}</th>
+                                            <th class="white-space-400">{{$history->title}}</th>
                                             <td>
                                                 {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
@@ -131,17 +122,17 @@
                                 @else
                                     <tr>
                                         <td colspan="5" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
-                                    </tr>
-                                @endif
+                                        </tr>
+                                    @endif
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
-                            {{$histories->withQueryString()->links()}}
-                            <div class="mt-4">
-                                <form>
-                                    <div class="form-group">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex align-items-end justify-content-end mt-4">
+                                {{$histories->withQueryString()->links()}}
+                                <div class="mt-4">
+                                    <form>
+                                        <div class="form-group">
                                         <select class="form-control" id="limit">
                                             <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
                                             <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>

@@ -208,17 +208,15 @@
                                    style="width:100%">
                                 <thead>
                                 <th>Mã sản phẩm</th>
-                                <th>Tên sản phẩm</th>
+                                <th class="white-space-400">Tên sản phẩm</th>
                                 <th>Ngành hàng</th>
-                                <th>Giá bán</th>
-                                <th>V-Store niêm yết</th>
-                                <th style="white-space: pre-wrap;width: 100px !important;min-width: 120px;">Chiết khấu
-                                    cho V-Store (%)
-                                </th>
+                                <th class="white-space-90">Giá bán (đ)</th>
+                                <th class="white-space-150">V-Store niêm yết</th>
+                                <th class="white-space-120">Chiết khấu cho V-Store (%)</th>
                                 <th>Ngày xét duyệt</th>
-                                <th>Số lượng đã bán</th>
-                                <th style="white-space: pre-wrap;width: 100px !important;min-width: 10px;">Số lượng trong kho</th>
-                                <th>Chức năng</th>
+                                <th class="white-space-90">Số lượng đã bán</th>
+                                <th class="white-space-90">Số lượng trong kho</th>
+                                <th class="white-space-100"></th>
                             </thead>
                             <tbody>
                                 @if(count($data) > 0)
@@ -227,13 +225,13 @@
                                             <td>{{$product->publish_id}}</td>
                                             <td style="white-space: pre-wrap">{{$product->name}}</td>
                                             <td>{{$product->cate_name}}</td>
-                                            <td>{{number_format($product->price,0,'.','.')}} đ</td>
+                                            <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
                                             <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
-                                            <td>{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
+                                            <td class="text-right">{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
-                                            <td>{{number_format($product->amount_product_sold,0,'.','.')}}</td>
-                                            <td>{{number_format($product->amount,0,'.','.')}}</td>
-                                            <td style="min-width: 70px">
+                                            <td class="text-right">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                            <td class="text-right">{{number_format($product->amount,0,'.','.')}}</td>
+                                            <td>
                                                 <button type="button" class="btn btn-link pl-0"
                                                         onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi tiết
                                                 </button>

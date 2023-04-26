@@ -166,7 +166,7 @@
                                 <th class="th th_product_name">Địa chỉ
 
                                 </th>
-                                <th class="th th_ncc_name">Tổng số mặt hàng
+                                <th class="th th_ncc_name ">Tổng số mặt hàng
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                             @if($type == 'desc')
@@ -179,7 +179,7 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th class="th th_quantity" style="min-width: 250px">Sản phẩm có trong kho
+                                <th class="th th_quantity">Sản phẩm có trong kho
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                             @if($type == 'desc')
@@ -193,19 +193,17 @@
                                 </span>
                                 </th>
 
-                                <th class="th th_status">Thao tác
-
-                                </th>
+                                <th class="th th_status"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($warehouses as $val)
                                 <tr>
-                                    <td>{{$val->ware_name}}</td>
+                                    <td class="white-space-400">{{$val->ware_name}}</td>
                                     <td>{{$val->phone_number}}</td>
-                                    <td>{{$val->address}}</td>
-                                    <td>{{$val->amount ?? 0}}</td>
-                                    <td>{{$val->amount_product ?? 0}}</td>
+                                    <td class="white-space-400">{{$val->address}}</td>
+                                    <td class="text-right">{{$val->amount ?? 0}}</td>
+                                    <td class="text-right">{{$val->amount_product ?? 0}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$val->id}})">Chi tiết

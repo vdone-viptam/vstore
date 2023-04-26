@@ -73,7 +73,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tổng số sản phẩm niêm yết trên V-Store
+                            <th class="white-space-200">Tổng số sản phẩm niêm yết trên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -86,7 +86,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số loại sản phẩm niêm yết
+                            <th class="white-space-200">Số loại sản phẩm niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -99,18 +99,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chức năng
-                                <span style="float: right;cursor: pointer">
-                                @if($field == 'amount_product_sold')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
-                                    @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                </span>
+                            <th class="white-space-80">
                             </th>
                         </tr>
                         </thead>
@@ -118,11 +107,11 @@
                         @if(count($products) > 0)
                             @foreach($products as $value)
                                 <tr>
-                                    <td>{{$value->account_code}}</td>
-                                    <td>{{$value->vstore_name}}</td>
+                                    <td class="white-space-300">{{$value->account_code}}</td>
+                                    <td class="white-space-400">{{$value->vstore_name}}</td>
                                     <td>{{$value->phone_number}}</td>
-                                    <td>{{$value->total_product}}</td>
-                                    <td>{{$value->total_category}}</td>
+                                    <td class="text-right">{{$value->total_product}}</td>
+                                    <td class="text-right">{{$value->total_category}}</td>
                                     <td><a href="#" data-toggle="modal"
                                         data-target=".bd-example-modal-lg"
                                         data-account_code="{{$value->account_code}}"
