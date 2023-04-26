@@ -151,16 +151,14 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$products->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class=" mt-4">
-                        <form>
-                            <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
-                                </select>
-                            </div>
-                        </form>
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,82 +170,89 @@
 
 
 @section('modal')
-<div class="modal-order">
-</div>
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-order-oder">
-    <form action="" method="POST">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" style="font-size: 20px;">Thông tin V-Store niêm yết sản phẩm</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="card-body">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Mã V-Store: </label>
-                                <input type="text" class="form-control form-control-lg" id="account_code" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tên V-Store:</label>
-                                <input type="text" class="form-control form-control-lg" id="name" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Số điện thoại V-Store:</label>
-                                <input type="text" class="form-control form-control-lg" id="phone" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tên công ty:</label>
-                                <input type="text" class="form-control form-control-lg" id="name_company" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Địa chỉ:</label>
-                                <input type="text" class="form-control form-control-lg" id="address" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tổng số sản phẩm niêm yết trên V-Store:</label>
-                                <input type="text" class="form-control form-control-lg" id="total-product" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Số loại sản phẩm niêm yết</label>
-                                <input type="text" class="form-control form-control-lg" id="total-category" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tổng chiết khấu đã nhận</label>
-                                <input type="text" class="form-control form-control-lg" id="total-money-discount" readonly>
-                            </div>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
-                    lại</button>
-            </div>
-        </div>
+    <div class="modal-order">
     </div>
-    </form>
-</div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true" id="modal-order-oder">
+        <form action="" method="POST">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-size: 20px;">Thông tin V-Store niêm yết sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Mã V-Store: </label>
+                                        <input type="text" class="form-control form-control-lg" id="account_code"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên V-Store:</label>
+                                        <input type="text" class="form-control form-control-lg" id="name" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Số điện thoại V-Store:</label>
+                                        <input type="text" class="form-control form-control-lg" id="phone" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên công ty:</label>
+                                        <input type="text" class="form-control form-control-lg" id="name_company"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Địa chỉ:</label>
+                                        <input type="text" class="form-control form-control-lg" id="address" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tổng số sản phẩm niêm yết trên V-Store:</label>
+                                        <input type="text" class="form-control form-control-lg" id="total-product"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Số loại sản phẩm niêm yết</label>
+                                        <input type="text" class="form-control form-control-lg" id="total-category"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tổng chiết khấu đã nhận</label>
+                                        <input type="text" class="form-control form-control-lg"
+                                               id="total-money-discount" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                            lại
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 
 
@@ -266,7 +271,7 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.manufacture.partner.index',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort+ '&limit=' + limit.value
+                            '&field=' + sort + '&limit=' + limit.value
                     })
                 });
             });
@@ -274,9 +279,9 @@
                 item.addEventListener('click', (e) => {
                     $.ajax({
                         url: '{{route('screens.manufacture.partner.detail')}}',
-                        data: { vstore_id : item.dataset.id },
+                        data: {vstore_id: item.dataset.id},
                         success: function (result) {
-                            if(result){
+                            if (result) {
                                 $("#account_code").val(item.dataset.account_code);
                                 $("#name").val(item.dataset.vstore_name);
                                 $("#phone").val(item.dataset.phone_number);

@@ -1,16 +1,16 @@
 @extends('layouts.vstore.main')
-@section('page_title','Danh sách NCC liên kết')
+@section('page_title','Danh sách Vshop liên kết')
 
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Liên kết Vshop</h2>
+                <h2 class="pageheader-title">Danh sách Vshop liên kết</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết Vshop</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Đối tác</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Danh sách Vshop liên kết</li>
                         </ol>
@@ -26,7 +26,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Danh sách NCC liên kết</h5>
+                <h5 class="mb-0" style="font-size:18px;">Danh sách Vshop liên kết</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -101,9 +101,9 @@
 
                                     <td>{{$value->vshop_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
-                                    <td class="text-right">{{$value->amount_product}}</td>
-                                    <td class="text-right">{{$value->count_order }}</td>
-                                    <td class="text-right">{{number_format(round($value->doanh_thu,0),0,'.','.')}}</td>
+                                    <td>{{number_format($value->amount_product,0,'.','.')}}</td>
+                                    <td>{{number_format($value->count_order,0,'.','.') }}</td>
+                                    <td>{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
                                 </tr>
                             @endforeach
                         @else
@@ -117,16 +117,14 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$vshop->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4">
-                        <form>
+                    <div class="mt-4 ml-4">
                             <div class="form-group">
                                 <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
                                 </select>
                             </div>
-                        </form>
                     </div>
                 </div>
 

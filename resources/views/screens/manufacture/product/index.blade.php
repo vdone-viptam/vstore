@@ -163,16 +163,16 @@
                                 </span>
                             </th>
                             <th class="white-space-120">Chiết khấu cho V-Store (%)
-                                    <span style="float: right;cursor: pointer">
+                                <span style="float: right;cursor: pointer">
                                         @if($field == 'products.discount')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
-                                            @endif
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="products.discount"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
                                         @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.discount"></i>
+                                    @endif
                                     </span>
                             </th>
                             <th class="white-space-100">Số lượng đã bán
@@ -249,16 +249,14 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$products->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                        <form>
-                            <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
-                                </select>
-                            </div>
-                        </form>
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

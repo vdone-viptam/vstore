@@ -57,7 +57,7 @@ class PartnerController extends Controller
 
     public function vshop(Request $request)
     {
-        $limit = $request->limit ?? 10;
+        $limit = $request->limit ?? 1;
         $field = $request->field ?? 'products.id';
         $key_search = $request->key_search ?? '';
         $type = $request->type ?? 'desc';
