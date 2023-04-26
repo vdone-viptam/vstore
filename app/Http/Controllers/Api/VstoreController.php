@@ -170,7 +170,7 @@ class VstoreController extends Controller
                 $user->avatar = asset('image/users/' . $user->avatar);
             }
 //            $user->total_product = $user->products()->where('status', 2)->count();
-            $user->total_product = Product::where('vstore_id', $user->id)
+            $user->total_product = Product::where('vstore_id', $user->id)->where('availability_status',1)
                 ->where('status', 2)->count();
 
             $cate = Category::select('categories.name')
