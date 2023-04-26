@@ -89,7 +89,8 @@
                             </div>
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Giá sản phẩm chưa VAT(đ):<span class="text-danger">*</span></label>
+                                    <label for="name">Giá sản phẩm chưa VAT(đ):<span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg number" id="price"
                                            name="price"
                                            value="{{number_format($product->price,0,'.','.')}}" placeholder="0">
@@ -140,14 +141,19 @@
                                 @enderror
                             </div>
                             <div class="col-12 mb-3 col-xl-6">
-                                <div class="form-group">
+                                <div class="form-group" id="file-input">
                                     <label for="name">Video sản phẩm<span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control form-control-lg" accept="video/mp4"
-                                           id="video" name="video">
+                                    <input type="file" id="pickfiles" class="form-control form-control-lg"
+                                           accept="video/mp4">
+                                    <div id="filelist"></div>
                                 </div>
+                                <input type="hidden" name="video" id="videoSuccess" value="{{$product->video}}">
                                 @error('video')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                 @enderror
+                            </div>
+                            <div class="form-group" id="filelist">
+
                             </div>
                             <div class="col-12">
                                 <h3 style="font-size: 18px;">Thông tin chi tiết</h3>
@@ -316,7 +322,7 @@
                             <div class="mx-auto my-4">
                                 <button class="btn btn-secondary" type="button" onclick="location.reload()">Hủy bỏ
                                 </button>
-                                <button class="btn btn-primary ml-2">Lưu thay đổi</button>
+                                <button class="btn btn-primary ml-2" id="btnSave">Lưu thay đổi</button>
                             </div>
 
                         </div>
@@ -329,6 +335,8 @@
 @endsection
 
 @section('custom_js')
+    <script src="{{ asset('plupload/js/plupload.full.min.js') }}"></script>
+
     <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script async>
@@ -416,4 +424,88 @@
             })
         </script>
     @endif
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var path = "{{ asset('/plupload/js/') }}";
+
+            var uploader = new plupload.Uploader({
+                browse_button: 'pickfiles',
+                container: document.getElementById('file-input'),
+                url: '{{ route("chunk.store") }}',
+                chunk_size: '1MB', // 1 MB
+                max_retries: 2,
+                filters: {
+                    max_file_size: '200mb'
+                },
+                multipart_params: {
+                    // Extra Parameter
+                    "_token": "{{ csrf_token() }}"
+                },
+                init: {
+                    PostInit: function () {
+                        document.getElementById('filelist').innerHTML = '';
+                    },
+                    FilesAdded: function (up, files) {
+                        plupload.each(files, function (file) {
+                            console.log('FilesAdded');
+                            console.log(file);
+                            document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                        });
+                        uploader.start();
+                    },
+                    UploadProgress: function (up, file) {
+                        console.log('UploadProgress');
+                        console.log(file);
+                        document.querySelector('#btnSave').setAttribute('disabled', 'true');
+                        document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                    },
+                    FileUploaded: function (up, file, result) {
+
+                        console.log('FileUploaded');
+                        console.log(file);
+                        console.log(JSON.parse(result.response));
+                        responseResult = JSON.parse(result.response);
+
+                        if (responseResult.ok == 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Xem chi tiết sản phẩm thất bại !',
+                                text: responseResult.info,
+                            })
+                        }
+                        if (result.status != 200) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Upload video không thành công !',
+                                text: '',
+                            })
+                        }
+                        if (responseResult.ok == 1 && result.status == 200) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Upload video thành công !',
+                                text: '',
+                            })
+                            document.querySelector('#btnSave').removeAttribute('disabled');
+                            $('#videoSuccess').val("storage/products/" + JSON.parse(result.response).video)
+
+                        }
+                    },
+                    UploadComplete: function (up, file) {
+                        // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {timeOut: 5000});
+                    },
+                    Error: function (up, err) {
+                        // DO YOUR ERROR HANDLING!
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Upload video không thành công !',
+                            text: '',
+                        })
+                        console.log(err);
+                    }
+                }
+            });
+            uploader.init();
+        });
+    </script>
 @endsection
