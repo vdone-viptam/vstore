@@ -44,40 +44,41 @@
         .pagination {
             gap: 8px;
         }
+
         .barcodeTarget {
-            width : 300px !important;
+            width: 300px !important;
             height: 52px !important;
         }
 
         .page img:nth-child(1) {
-            width        : 17px !important;
-            height       : 10px !important;
+            width: 17px !important;
+            height: 10px !important;
             margin-bottom: 1px !important;
         }
 
         .page {
-            color    : black !important;
-            margin   : 4px 35px;
+            color: black !important;
+            margin: 4px 35px;
             max-width: 279px !important;
-            height   : 396px;
+            height: 396px;
         }
 
         .barcodeTarget {
-            width : 300px !important;
+            width: 300px !important;
             height: 52px !important;
         }
 
         .page img:nth-child(1) {
-            width        : 17px !important;
-            height       : 10px !important;
+            width: 17px !important;
+            height: 10px !important;
             margin-bottom: 1px !important;
         }
 
         .page {
-            color    : black !important;
-            margin   : 4px 35px;
+            color: black !important;
+            margin: 4px 35px;
             max-width: 279px !important;
-            height   : 396px;
+            height: 396px;
         }
     </style>
 
@@ -303,5 +304,6 @@
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
 </body>
 </html>
