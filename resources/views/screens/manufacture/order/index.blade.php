@@ -82,7 +82,7 @@
                             <th class="white-space-120">
                                 Mã đơn hàng
                             </th>
-                            <th>
+                            <th class="white-space-350">
                                 Tên sản phẩm
                             </th>
                             <th class="white-space-120">Tình trạng
@@ -207,10 +207,10 @@
                                         @endif
                                     </td>
                                     <td class="white-space-100 text-right">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }}</td>
-                                    <td class="text-right">{{ $order->orderItem[0]->quantity }}</td>
+                                    <td class="text-center">{{ $order->orderItem[0]->quantity }}</td>
                                     <td class="white-space-100">{{ $order->orderItem[0]->warehouse->name }}</td>
                                     <td class="white-space-120">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($order->export_status == 2 || $order->export_status == 4)
                                             {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y') }}
                                         @else
@@ -230,7 +230,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="11">Không có dữ liệu phù hợp</td>
+                                <td colspan="11" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
 

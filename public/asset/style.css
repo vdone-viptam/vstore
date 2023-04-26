@@ -421,7 +421,7 @@ address {}
 
 table thead th{
     vertical-align: middle !important;
-    /* text-align: center; */
+    text-align: center;
 }
 
 .white-space-50{
@@ -516,6 +516,12 @@ table thead th{
     white-space: unset !important;
     width: 500px !important;
     min-width: 500px !important;
+}
+.white-space-600{
+    gap: 4px;
+    white-space: unset !important;
+    width: 600px !important;
+    min-width: 600px !important;
 }
 
 /* custom table */
