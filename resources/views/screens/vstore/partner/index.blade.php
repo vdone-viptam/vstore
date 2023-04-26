@@ -125,8 +125,8 @@
                                     <td class="td_name">{{$value->name}}</td>
                                     <td>{{$value->phone_number}}</td>
                                     <td>{{$value->khu_vuc }}</td>
-                                    <td>{{$value->amount}}</td>
-                                    <td>{{$value->countProduct}}</td>
+                                    <td>{{number_format($value->amount,0,'.','.')}}</td>
+                                    <td>{{number_format($value->countProduct,0,'.','.')}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$value->id}})">Chi tiết
