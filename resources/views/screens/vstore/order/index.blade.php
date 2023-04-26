@@ -206,7 +206,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$orders->withQueryString()->onEachSide(10)->links()}}
+                    {{$orders->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="float-right mt-4 ml-3">
                         <form>
                             <div class="form-group">
