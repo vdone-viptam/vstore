@@ -57,8 +57,8 @@
                     >
                         <thead>
                         <tr>
-                            <th rowspan="2">Mã đơn hàng</th>
-                            <th rowspan="2">Tên sản phẩm
+                            <th>Mã đơn hàng</th>
+                            <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -71,7 +71,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th rowspan="2">Ngành hàng
+                            <th>Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -84,7 +84,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th rowspan="2">Giá sản phẩm
+                            <th>Giá sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -97,7 +97,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th rowspan="2">Số lượng
+                            <th>Số lượng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order_item.quantity')
                                         @if($type == 'desc')
@@ -110,7 +110,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th style="min-width: 250px" rowspan="2">Giá trị đơn hàng
+                            <th style="min-width: 250px">Giá trị đơn hàng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'total')
                                         @if($type == 'desc')
@@ -123,7 +123,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px" rowspan="2">Thời gian đặt hàng
+                            <th style="min-width: 250px">Thời gian đặt hàng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order.created_at')
                                         @if($type == 'desc')
@@ -136,7 +136,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th rowspan="2">Thời gian hoàn thành
+                            <th>Thời gian hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'order.estimated_date')
                                         @if($type == 'order.estimated_date')
@@ -149,7 +149,20 @@
                                     @endif
                                 </span>
                             </th>
-                            <th colspan="2" class="text-center" style="min-width: 250px">Chiết khấu nhận được
+                            <th  class="text-center" style="min-width: 250px">Phần trăm chiết khấu nhận được
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'products.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.discount"></i>
+                                    @endif
+                             </span>
+                            </th>
+                            <th  class="text-center" style="min-width: 250px">Chiết khấu nhận được (thành tiền)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
                                         @if($type == 'desc')
@@ -162,14 +175,9 @@
                                     @endif
                              </span>
                             </th>
-
-                            <th rowspan="2">
+                            <th>
                                 Chi tiết
                             </th>
-                        </tr>
-                        <tr>
-                            <th>Phần trăm chiết khấu nhận được</th>
-                            <th>Chiết khấu nhận được (thành tiền)</th>
                         </tr>
                         </thead>
                         <tbody>
