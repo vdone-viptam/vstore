@@ -100,7 +100,7 @@
                             @foreach($vshop as $value)
                                 <tr>
 
-                                    <td>{{$value->vshop_id}}</td>
+                                    <td>{{$value->pdone_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
                                     <td>{{$value->amount_product}}</td>
                                     <td>{{$value->count_order }}</td>
