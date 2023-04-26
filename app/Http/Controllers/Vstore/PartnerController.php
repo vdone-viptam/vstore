@@ -73,7 +73,7 @@ class PartnerController extends Controller
             ->orderBy($field, $type);
         if ($request->key_search) {
             $vshop = $vshop->where('vshop.nick_name', 'like', '%' . trim($request->key_search) . '%')
-                ->orWhere('vshop.vshop_id', 'like', '%' . trim($request->key_search) . '%');
+                ->orWhere('vshop.vshop_id', trim($request->key_search));
         }
         $vshop = $vshop->paginate($limit);
 //        return $vshop;
