@@ -110,7 +110,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name">Tên V-Store:</label>
-                                                    <input required type="text" @if($infoAccount->role_id == 2) readonly
+                                                    <input required type="text" @if($infoAccount->branch == 2) readonly
                                                            @endif class="form-control form-control-lg"
                                                            name="name" id="name" value="{{$infoAccount->name}}">
                                                     @error('name')
