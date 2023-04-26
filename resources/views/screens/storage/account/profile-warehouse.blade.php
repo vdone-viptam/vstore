@@ -129,7 +129,7 @@ aria-hidden="true">
                                                     <div class="form-group">
                                                         <label style="font-weight: 600;" for="dts">Diện tích
                                                             (m2)</label>
-                                                        <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required="" placeholder="Nhập diện tích">
+                                                        <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
                                                     </div>
                                                 </div>
 
@@ -138,7 +138,7 @@ aria-hidden="true">
                                                     <div class="form-group">
                                                         <label style="font-weight: 600;" for="tts">Thể tích
                                                             (m3)</label>
-                                                        <input class="form-control form-control-lg only-number" value="{{ $value['volume'] }}" type="text" name="volume" required="" placeholder="Nhập thể tích">
+                                                        <input class="form-control form-control-lg only-number" value="{{ $value['volume'] }}" type="text" name="volume" placeholder="Nhập thể tích">
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12">
@@ -149,19 +149,19 @@ aria-hidden="true">
                                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                             <div class="form-group">
                                                                 <label for="">Chiều dài:</label>
-                                                                <input class="form-control form-control-lg only-number" value="{{ $value['length'] }}" type="text" name="length" required="" placeholder="Nhập chiều dài">
+                                                                <input class="form-control form-control-lg only-number" value="{{ $value['length'] }}" type="text" name="length" placeholder="Nhập chiều dài">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                             <div class="form-group">
                                                                 <label for="">Chiều rộng:</label>
-                                                                <input class="form-control form-control-lg only-number" value="{{ $value['width'] }}" type="text" name="width" required="" placeholder="Nhập chiều rộng">
+                                                                <input class="form-control form-control-lg only-number" value="{{ $value['width'] }}" type="text" name="width" placeholder="Nhập chiều rộng">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                             <div class="form-group">
                                                                 <label for="">Chiều cao:</label>
-                                                                <input class="form-control form-control-lg only-number" value="{{ $value['height'] }}" type="text" name="height" required="" placeholder="Nhập chiều cao">
+                                                                <input class="form-control form-control-lg only-number" value="{{ $value['height'] }}" type="text" name="height" placeholder="Nhập chiều cao">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -278,7 +278,7 @@ aria-hidden="true">
                                                 <div class="form-group">
                                                     <label style="font-weight: 600;" for="dts">Diện tích
                                                         (m2)</label>
-                                                    <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required="" placeholder="Nhập diện tích">
+                                                    <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
                                                 </div>
                                             </div>
 
@@ -287,7 +287,7 @@ aria-hidden="true">
                                                 <div class="form-group">
                                                     <label style="font-weight: 600;" for="tts">Thể tích
                                                         (m3)</label>
-                                                    <input class="form-control form-control-lg only-number" value="{{ $value['volume'] }}" type="text" name="volume" required="" placeholder="Nhập thể tích">
+                                                    <input class="form-control form-control-lg only-number" value="{{ $value['volume'] }}" type="text" name="volume" placeholder="Nhập thể tích">
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
@@ -298,19 +298,19 @@ aria-hidden="true">
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="">Chiều dài:</label>
-                                                            <input class="form-control form-control-lg only-number" value="{{ $value['length'] }}" type="text" name="length" required="" placeholder="Nhập chiều dài">
+                                                            <input class="form-control form-control-lg only-number" value="{{ $value['length'] }}" type="text" name="length" placeholder="Nhập chiều dài">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="">Chiều rộng:</label>
-                                                            <input class="form-control form-control-lg only-number" value="{{ $value['width'] }}" type="text" name="width" required="" placeholder="Nhập chiều rộng">
+                                                            <input class="form-control form-control-lg only-number" value="{{ $value['width'] }}" type="text" name="width" placeholder="Nhập chiều rộng">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="">Chiều cao:</label>
-                                                            <input class="form-control form-control-lg only-number" value="{{ $value['height'] }}" type="text" name="height" required="" placeholder="Nhập chiều cao">
+                                                            <input class="form-control form-control-lg only-number" value="{{ $value['height'] }}" type="text" name="height" placeholder="Nhập chiều cao">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -427,7 +427,7 @@ aria-hidden="true">
                                                 <div class="form-group">
                                                     <label style="font-weight: 600;" for="dts">Diện tích
                                                         (m2)</label>
-                                                    <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required="" placeholder="Nhập diện tích">
+                                                    <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
                                                 </div>
                                             </div>
 
@@ -436,7 +436,7 @@ aria-hidden="true">
                                                 <div class="form-group">
                                                     <label style="font-weight: 600;" for="tts">Thể tích
                                                         (m3)</label>
-                                                        <input class="form-control form-control-lg only-number" value="{{ $value['volume'] }}" type="text" name="volume" required="" placeholder="Nhập thể tích">
+                                                        <input class="form-control form-control-lg only-number" value="{{ $value['volume'] }}" type="text" name="volume" placeholder="Nhập thể tích">
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
@@ -447,19 +447,19 @@ aria-hidden="true">
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="">Chiều dài:</label>
-                                                            <input class="form-control form-control-lg only-number" value="{{ $value['length'] }}" type="text" name="length" required="" placeholder="Nhập chiều dài">
+                                                            <input class="form-control form-control-lg only-number" value="{{ $value['length'] }}" type="text" name="length" placeholder="Nhập chiều dài">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="">Chiều rộng:</label>
-                                                            <input class="form-control form-control-lg only-number" value="{{ $value['width'] }}" type="text" name="width" required="" placeholder="Nhập chiều rộng">
+                                                            <input class="form-control form-control-lg only-number" value="{{ $value['width'] }}" type="text" name="width" placeholder="Nhập chiều rộng">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="">Chiều cao:</label>
-                                                            <input class="form-control form-control-lg only-number" value="{{ $value['height'] }}" type="text" name="height" required="" placeholder="Nhập chiều cao">
+                                                            <input class="form-control form-control-lg only-number" value="{{ $value['height'] }}" type="text" name="height" placeholder="Nhập chiều cao">
                                                         </div>
                                                     </div>
                                                 </div>
