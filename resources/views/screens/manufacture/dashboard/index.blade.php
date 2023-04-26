@@ -253,7 +253,7 @@
                             </table>
                         </div>
                         <div class="d-flex align-items-end justify-content-end mt-4">
-                            {{$data->withQueryString()->links()}}
+                            {{$data->withQueryString()->links('layouts.custom.paginator')}}
                             <div class="mt-4 ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">

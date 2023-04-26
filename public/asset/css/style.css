@@ -164,9 +164,9 @@ input[type="submit"].active{
     overflow: hidden;
     z-index: -1;
     transform: translateY(10px);
-    opacity: 0;
+    /* opacity: 0; */
     transition: 0.5s all;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .show-modal{
