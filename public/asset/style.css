@@ -155,7 +155,7 @@
 /* 0.1. Body / Typography
    ========================================================================== */
 .pagination li {
- padding: .75rem .75rem;
+ padding: .75rem;
 }
 .indicato{
     content         : '';
