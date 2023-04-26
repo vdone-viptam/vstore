@@ -109,8 +109,9 @@
                                                            value="{{$infoAccount->email}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="name">Tên NCC:</label>
-                                                    <input required type="text" class="form-control form-control-lg"
+                                                    <label for="name">Tên V-Store:</label>
+                                                    <input required type="text" @if($infoAccount->role_id == 2) readonly
+                                                           @endif class="form-control form-control-lg"
                                                            name="name" id="name" value="{{$infoAccount->name}}">
                                                     @error('name')
                                                     <p class="text-danger">{{$message}}</p>
