@@ -80,7 +80,7 @@
                             <th>Khu vực
 
                             </th>
-                            <th>Tổng số sản phẩm
+                            <th class="white-space-150">Tổng số sản phẩm
 
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
@@ -94,7 +94,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Sản phẩm liên kết
+                            <th class="white-space-150">Sản phẩm liên kết
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
@@ -125,8 +125,8 @@
                                     <td class="td_name">{{$value->name}}</td>
                                     <td>{{$value->phone_number}}</td>
                                     <td>{{$value->khu_vuc }}</td>
-                                    <td>{{number_format($value->amount,0,'.','.')}}</td>
-                                    <td>{{number_format($value->countProduct,0,'.','.')}}</td>
+                                    <td class="text-right"> {{number_format($value->amount,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($value->countProduct,0,'.','.')}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$value->id}})">Chi tiết

@@ -53,7 +53,7 @@
                             <th>Tên V-Shop
 
                             </th>
-                            <th>Số sản phẩm tiếp thị
+                            <th class="white-space-200">Số sản phẩm tiếp thị
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                         @if($type == 'desc')
@@ -66,7 +66,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Đơn hàng hoàn thành
+                            <th class="white-space-200">Đơn hàng hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'count_order')
                                         @if($type == 'desc')
@@ -79,8 +79,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Doanh thu
-
+                            <th class="white-space-200">Doanh thu (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'doanh_thu')
                                         @if($type == 'desc')

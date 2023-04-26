@@ -74,7 +74,7 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã yêu cầu</th>
+                            <th class="white-space-150">Mã yêu cầu</th>
                             <th>Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -114,7 +114,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Giá sản phẩm (chưa VAT)
+                            <th class="white-space-140">Giá sản phẩm (đ) chưa VAT
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -127,7 +127,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Chiết khấu từ Nhà cung cấp
+                            <th class="white-space-140">Chiết khấu từ Nhà cung cấp (%)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                         @if($type == 'desc')
@@ -140,7 +140,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày yêu cầu
+                            <th class="white-space-120">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'products.price')
@@ -153,11 +153,8 @@
                                     @endif
                                 </span>
                             </th>
-
-                            <th>Trạng thái</th>
-
+                            <th class="white-space-100">Trạng thái</th>
                             <th>
-                                Chức năng
                             </th>
                         </tr>
                         </thead>
@@ -165,25 +162,25 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td>
+                                    <td class="white-space-150">
                                         {{$product->code}}
                                     </td>
                                     <td>
                                         {{$product->user_name}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-400">
                                         {{$product->name}}
                                     </td>
                                     <td>{{$product->cate_name}}</td>
-                                    <td>
-                                        {{number_format($product->price,0,'.','.')}} đ
+                                    <td class="text-right">
+                                        {{number_format($product->price,0,'.','.')}}
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         {{$product->discount}}
                                     </td>
 
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td><span class="text-warning">Yêu cầu mới</span></td>
+                                    <td class="white-space-100"><span class="text-warning">Yêu cầu mới</span></td>
 
                                     <td>
                                         <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
