@@ -102,9 +102,9 @@
 
                                     <td>{{$value->vshop_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
-                                    <td>{{$value->amount_product}}</td>
-                                    <td>{{$value->count_order }}</td>
-                                    <td>{{number_format(round($value->doanh_thu,0),0,'.','.')}} đ</td>
+                                    <td>{{number_format($value->amount_product,0,'.','.')}}</td>
+                                    <td>{{number_format($value->count_order,0,'.','.') }}</td>
+                                    <td>{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
                                 </tr>
                             @endforeach
                         @else
