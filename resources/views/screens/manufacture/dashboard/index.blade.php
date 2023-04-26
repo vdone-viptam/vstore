@@ -6,9 +6,11 @@
         .header {
             display: none !important;
         }
+
         .modal:nth-of-type(even) {
             z-index: 1052 !important;
         }
+
         .modal-backdrop.show:nth-of-type(even) {
             z-index: 1051 !important;
         }
@@ -34,7 +36,9 @@
                         <button class="btn btn-danger">Xóa sản phẩm</button>
                         <a class="btn btn-warning btnEdit" href="">Sửa sản phẩm</a>
                     </div>
-                    <button class="btn btn-success add-product-warehouse" href="#myModal2"  data-toggle="modal" >Thêm sản phẩm vào kho</button>
+                    <button class="btn btn-success add-product-warehouse" href="#myModal2" data-toggle="modal">Thêm sản
+                        phẩm vào kho
+                    </button>
                     <div class="btnDestroy"></div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
@@ -94,7 +98,8 @@
                             <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Nhập số lượng <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="quantity"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="quantity"
                                            name="quantity"
                                            value="{{old('quantity')}}" placeholder="Nhập Số lượng sản phẩm">
                                     @error('quantity')
@@ -217,8 +222,8 @@
                                 <th class="white-space-90">Số lượng đã bán</th>
                                 <th class="white-space-90">Số lượng trong kho</th>
                                 <th class="white-space-100"></th>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 @if(count($data) > 0)
                                     @foreach($data as $product)
                                         <tr>
@@ -233,7 +238,8 @@
                                             <td class="text-right">{{number_format($product->amount,0,'.','.')}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-link pl-0"
-                                                        onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi tiết
+                                                        onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi
+                                                    tiết
                                                 </button>
                                             </td>
                                         </tr>
@@ -248,16 +254,14 @@
                         </div>
                         <div class="d-flex align-items-end justify-content-end mt-4">
                             {{$data->withQueryString()->links()}}
-                            <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                                <form>
-                                    <div class="form-group">
-                                        <select class="form-control" id="limit">
-                                            <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
-                                            <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
-                                            <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
-                                        </select>
-                                    </div>
-                                </form>
+                            <div class="mt-4 ml-4">
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -273,7 +277,7 @@
 @endsection
 
 @section('custom_js')
-@if(\Illuminate\Support\Facades\Session::has('success'))
+    @if(\Illuminate\Support\Facades\Session::has('success'))
         <script>
             Swal.fire({
                 icon: 'success',
@@ -299,7 +303,8 @@
                 document.location = '{{route('screens.manufacture.dashboard.index',[])}}?limit=' + e.target.value
             }, 200)
         })
-        async function showDetail(id,name) {
+
+        async function showDetail(id, name) {
             await $.ajax({
                 type: "GET",
                 url: `{{route('screens.manufacture.product.detail')}}?product_id=` + id + '&product=true',
@@ -341,6 +346,7 @@
 
 
         }
+
         $('.add-product-warehouse').click(function (e) {
             e.preventDefault();
             $('#modalDetail').modal('hide');
