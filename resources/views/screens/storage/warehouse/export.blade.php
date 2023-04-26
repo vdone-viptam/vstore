@@ -219,7 +219,7 @@
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_number}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">
-                                                Xuất hóa đơn
+                                                In hóa đơn
                                             </a>
                                         </div>
                                     </td>
