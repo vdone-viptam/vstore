@@ -51,7 +51,7 @@
                                                 @if($type == 'desc')
                                                     <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="status" ></i>
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
                                                 @endif
                                             @else
                                                 <i class="fas fa-sort sort" data-sort="status"></i>
@@ -129,11 +129,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="example_paginate">
-                            <ul class="pagination d-flex justify-content-end align-items-center"
-                                style="gap:8px ;margin-top:10px;margin-right: 10px;">
-                                {{$histories->withQueryString()->links()}}
-                            </ul>
+                        <div class="d-flex align-items-end justify-content-end mt-4">
+                            {{$histories->withQueryString()->links()}}
+                            <select id="limit" class="form-control col-1">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -165,6 +167,12 @@
                 });
             });
         });
-
+        let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.finance.revenue',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection

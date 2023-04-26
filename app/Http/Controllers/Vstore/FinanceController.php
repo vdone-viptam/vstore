@@ -90,10 +90,12 @@ class FinanceController extends Controller
     {
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'id';
+        $this->v['limit'] = $request->limit ?? 10;
+
         $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
-            ->paginate(10);
+            ->paginate($this->v['limit']);
         $this->v['field'] = $field;
         $this->v['type'] = $type;
         return view('screens.vstore.finance.history', $this->v);
@@ -128,7 +130,7 @@ class FinanceController extends Controller
                 }
             }
             if ($request->money > Auth::user()->money) {
-                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,

@@ -203,9 +203,9 @@
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$orders->withQueryString()->links()}}
                     <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
                     </select>
                 </div>
 
@@ -261,6 +261,12 @@
         }
 
         let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.order.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
         console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
@@ -279,11 +285,6 @@
                 });
             });
         });
-        limit.addEventListener('change', (e) => {
-            setTimeout(() => {
-                document.location = '{{route('screens.vstore.order.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
-                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
-            }, 200)
-        })
+
     </script>
 @endsection

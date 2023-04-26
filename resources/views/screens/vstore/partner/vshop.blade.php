@@ -132,7 +132,19 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$vshop->withQueryString()->links()}}
+                    <div class="mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -165,5 +177,12 @@
                 });
             });
         });
+        let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.partner.vshop',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection

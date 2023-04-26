@@ -288,12 +288,9 @@
                         <form>
                             <div class="form-group">
                                 <select class="form-control" id="limit">
-                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 hàng / trang
-                                    </option>
-                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 hàng / trang
-                                    </option>
-                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 hàng / trang
-                                    </option>
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
                                 </select>
                             </div>
                         </form>

@@ -10,7 +10,8 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('screens.vstore.partner.index')}}" class="breadcrumb-link">Liên kết NCC</a>
+                            <li class="breadcrumb-item"><a href="{{route('screens.vstore.partner.index')}}"
+                                                           class="breadcrumb-link">Liên kết NCC</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Danh sách NCC liên kết</li>
                         </ol>
@@ -110,22 +111,25 @@
                         @if(count($users) > 0)
                             @foreach($users as $value)
                                 <tr>
-{{--                                    <td>{{$value->publish_id}}</td>--}}
-{{--                                    <td class="td_name">{{$value->name}}</td>--}}
-{{--                                    <td>{{ number_format($value->price,0,',','.')  }}</td>--}}
-{{--                                    <td>{{$value->vstore_name}}</td>--}}
-{{--                                    <td>{{$value->discount}}</td>--}}
-{{--                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>--}}
-{{--                                    <td></td>--}}
+                                    {{--                                    <td>{{$value->publish_id}}</td>--}}
+                                    {{--                                    <td class="td_name">{{$value->name}}</td>--}}
+                                    {{--                                    <td>{{ number_format($value->price,0,',','.')  }}</td>--}}
+                                    {{--                                    <td>{{$value->vstore_name}}</td>--}}
+                                    {{--                                    <td>{{$value->discount}}</td>--}}
+                                    {{--                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>--}}
+                                    {{--                                    <td></td>--}}
                                     <td>{{$value->account_code}}</td>
                                     <td class="td_name">{{$value->name}}</td>
                                     <td>{{$value->phone_number}}</td>
                                     <td>{{$value->khu_vuc }}</td>
                                     <td>{{$value->amount}}</td>
                                     <td>{{$value->countProduct}}</td>
-                                    <td> <button type="button" class="btn btn-link"
-                                                 onclick="showDetail({{$value->id}})">Chi tiết
-                                        </button></td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-link"
+                                                onclick="showDetail({{$value->id}})">Chi tiết
+                                        </button>
+                                    </td>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
@@ -139,6 +143,17 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$users->withQueryString()->links()}}
+                    <div class="mt-4">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -165,17 +180,24 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.vstore.partner.index',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort
+                            '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
             });
         });
+        let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.partner.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
     <script>
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
-                url: `{{route('screens.vstore.partner.detail')}}?id=` + id ,
+                url: `{{route('screens.vstore.partner.detail')}}?id=` + id,
                 dataType: "json",
                 encode: true,
                 error: function (jqXHR, error, errorThrown) {
@@ -195,6 +217,5 @@
 
         }
     </script>
-
 
 @endsection
