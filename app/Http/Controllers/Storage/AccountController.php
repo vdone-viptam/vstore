@@ -48,10 +48,20 @@ class AccountController extends Controller
                     $arrImgStorage = [];
                     if(!empty($imageStorage)){
                         foreach ($imageStorage as $keyImg => $valueImg) {
-                            $arrImgStorage[] = asset ($valueImg);
+                            $arrImgStorage[] = asset('storage/'.$valueImg);
                         }
                     }
                     $this->v['infoWarehouse'][$key]['image_storage'] = $arrImgStorage;
+                }
+                if(!empty($value->image_pccc)){
+                    $imageStorage = json_decode( $value->image_pccc );
+                    $arrImgStorage = [];
+                    if(!empty($imageStorage)){
+                        foreach ($imageStorage as $keyImg => $valueImg) {
+                            $arrImgStorage[] = asset('storage/'.$valueImg);
+                        }
+                    }
+                    $this->v['infoWarehouse'][$key]['image_pccc'] = $arrImgStorage;
                 }
             }
         }
@@ -116,7 +126,46 @@ class AccountController extends Controller
 
         $dataUpdate = WarehouseType::where('user_id', Auth::id())
                                     ->where('type',$request->type)
-                                    ->update(['image_storage' => $arrNormalImageStorage]);
+                                    ->update(
+                                        [
+                                            'acreage' => $request->acreage,
+                                            'volume' => $request->volume,
+                                            'length' => $request->length,
+                                            'width' => $request->width,
+                                            'height' => $request->height,
+                                        ]);
+        if(!empty($arrNormalImageStorage)){
+            $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_storage' => $arrNormalImageStorage ?? null]);
+        }
+        if(!empty($arrNormalImagePccc)){
+            $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_pccc' => $arrNormalImagePccc ?? null]);
+        }
+        if(!empty($arrColdImageStorage)){
+            $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_storage' => $arrColdImageStorage ?? null]);
+        }
+        if(!empty($arrColdImagePccc)){
+            $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_pccc' => $arrColdImagePccc ?? null]);
+        }
+        if(!empty($arrWarehouseImageStorage)){
+            $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_storage' => $arrWarehouseImageStorage ?? null]);
+        }
+        if(!empty($arrWarehouseImagePccc)){
+            $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_pccc' => $arrWarehouseImagePccc ?? null]);
+        }
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin kho thành công');
         } catch (\Exception $exception) {
             dd($exception->getMessage());
         }
