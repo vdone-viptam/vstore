@@ -109,7 +109,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giá bán
+                            <th style="white-space: unset;width: 100px !important;min-width: 90px;">Giá bán
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -122,8 +122,34 @@
                                     @endif
                                 </span>
                             </th>
+                            <th style="white-space: unset;width: 100px !important;min-width: 110px;">Thuế giá trị gia tăng (%)
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'vat')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="vat"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="vat"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="vat"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th style="white-space: unset;width: 100px !important;min-width: 110px;">Trạng thái
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="status"></i>
+                                    @endif
+                                </span>
+                            </th>
 
-                            <th>V-Store niêm yết
+                            <th style="white-space: unset;width: 100px !important;min-width: 100px;">V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -136,7 +162,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 120px;">Chiết khấu cho V-Store (%)
+                            <th style="white-space: unset;width: 120px !important;min-width: 120px;">Chiết khấu cho V-Store (%)
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'products.discount')
                                             @if($type == 'desc')
@@ -149,7 +175,7 @@
                                         @endif
                                     </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 120px;">Số lượng đã bán
+                            <th style="white-space: unset;width: 100px !important;min-width: 100px;">Số lượng đã bán
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
@@ -162,7 +188,7 @@
                                     @endif
                                     </span>
                             </th>
-                            <th style="white-space: unset;width: 100px !important;min-width: 120px;">Số lượng trong kho
+                            <th style="white-space: unset;width: 100px !important;min-width: 100px;">Số lượng trong kho
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                         @if($type == 'desc')
@@ -184,15 +210,25 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{$product->publish_id}}</td>
+                                    <td style="white-space: unset;width: 100px !important;min-width: 90px;">{{$product->publish_id}}</td>
                                     <td class="text-center"><img style="height: 125px;"
                                                                  src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>
                                     </td>
                                     <td class="td_name">{{$product->name}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{number_format($product->price,0,'.','.')}} đ</td>
-                                    <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
-                                    <td>{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
+                                    <td>{{$product->vat}}</td>
+                                    <td>
+                                        @if($product->status == 0)
+                                            <span>Chưa xét duyệt</span>
+                                        @elseif($product->status == 1)
+                                            <span>Đang xét duyệt</span>
+                                        @elseif($product->status == 2)
+                                            <span>Đã xét duyệt</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : ''}}</td>
+                                    <td>{{$product->discount != null ? $product->discount : ''}}</td>
 
                                     <td>{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                     <td>{{number_format($product->amount,0,'.','.')}}</td>

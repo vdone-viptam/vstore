@@ -31,6 +31,20 @@ class DashboardController extends Controller
             ->orderBy('products.id','desc')
             ->paginate($limit);
 
+        // copy from app\Http\Controllers\Manufacture\WarehouseController\index()
+        $warehouse_aff = json_decode(Auth::user()->warehouse_aff) ?? [];
+        $warehouses = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,warehouses.id,
+                                warehouses.phone_number,
+                                warehouses.address')
+            ->selectSub('select IFNULL(SUM(amount),0) - IFNULL(SUM(export),0)
+                from product_warehouses where ware_id = warehouses.id and product_warehouses.status = 1 group by ware_id', 'amount_product')
+            ->selectSub('select IFNULL(COUNT(product_warehouses.product_id),0)
+                            from product_warehouses where ware_id = warehouses.id and product_warehouses.status = 1  limit 1', 'amount')
+            ->join('users', 'warehouses.user_id', '=', 'users.id')
+            // ->orderBy($this->v['field'], $this->v['type'])
+            ->whereIn('warehouses.user_id', $warehouse_aff)
+            ->paginate(10);
+
         $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
         $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
         $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
@@ -43,6 +57,7 @@ class DashboardController extends Controller
         return view('screens.manufacture.dashboard.index', [
             'data' => $data,
             'limit' => $limit,
+            'warehouses' => $warehouses,
 
             'dataRevenueChartMonth' => $dataRevenueChartMonth,
             'dataRevenueChartYear' => $dataRevenueChartYear,
