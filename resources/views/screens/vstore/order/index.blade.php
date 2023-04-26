@@ -52,8 +52,8 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-150">Mã đơn hàng</th>
+                            <th class="white-space-300">Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -66,7 +66,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngành hàng
+                            <th class="white-space-130">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -79,7 +79,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giá sản phẩm
+                            <th class="white-space-140">Giá sản phẩm (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -92,7 +92,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-90">Số lượng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order_item.quantity')
                                         @if($type == 'desc')
@@ -105,7 +105,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th style="min-width: 250px">Giá trị đơn hàng
+                            <th class="white-space-150">Giá trị đơn hàng (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'total')
                                         @if($type == 'desc')
@@ -118,7 +118,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Thời gian đặt hàng
+                            <th class="white-space-130">Thời gian đặt hàng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order.created_at')
                                         @if($type == 'desc')
@@ -131,7 +131,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thời gian hoàn thành
+                            <th class="white-space-130">Thời gian hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'order.estimated_date')
                                         @if($type == 'order.estimated_date')
@@ -144,7 +144,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th colspan="2" style="min-width: 250px">Chiết khấu nhận được
+                            <th colspan="2" class="white-space-130">Chiết khấu nhận được
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
                                         @if($type == 'desc')
@@ -157,9 +157,7 @@
                                     @endif
                              </span>
                             </th>
-
                             <th>
-                                Chi tiết
                             </th>
                         </tr>
                         </thead>
@@ -168,13 +166,13 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->no}}</td>
-                                    <td>{{$order->name}}</td>
-                                    <td>{{$order->cate_name}}</td>
-                                    <td>{{number_format($order->price,'0','.','.')}} đ</td>
-                                    <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format($order->total,'0','.','.')}} đ</td>
-                                    <td> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td>
+                                    <td class="white-space-300">{{$order->name}}</td>
+                                    <td class="white-space-130">{{$order->cate_name}}</td>
+                                    <td class="white-space-120 text-right">{{number_format($order->price,'0','.','.')}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="white-space-130 text-right">{{number_format($order->total,'0','.','.')}}</td>
+                                    <td class="white-space-150"> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="white-space-130">
                                         @if($order->export_status == 4 && \Carbon\Carbon::parse($order->estimated_date)->diffInDays(\Carbon\Carbon::now()) >= 7)
                                             {{\Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i')}}
                                         @else

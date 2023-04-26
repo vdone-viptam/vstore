@@ -83,12 +83,12 @@
                             <table id="example" class="table table-striped table-bordered second"
                                    style="width:100%">
                                 <thead>
-                                <th>Mã yêu cầu</th>
-                                <th>Nhà cung cấp</th>
-                                <th>Tên sản phẩm</th>
+                                <th class="white-space-120">Mã yêu cầu</th>
+                                <th class="white-space-150">Nhà cung cấp</th>
+                                <th class="white-space-300">Tên sản phẩm</th>
                                 <th>Ngành hàng</th>
-                                <th>Giá sản phẩm (chưa VAT)</th>
-                                <th>Chiết khấu từ Nhà cung cấp</th>
+                                <th class="white-space-150">Giá sản phẩm (đ) chưa VAT</th>
+                                <th class="white-space-150">Chiết khấu từ Nhà cung cấp (%)</th>
                                 <th>Ngày yêu cầu</th>
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
@@ -97,20 +97,20 @@
                                 @if(count($data) > 0)
                                     @foreach($data as $product)
                                         <tr>
-                                            <td>
+                                            <td class="white-space-120">
                                                 {{$product->code}}
                                             </td>
-                                            <td>
+                                            <td class="white-space-150">
                                                 {{$product->user_name}}
                                             </td>
-                                            <td>
+                                            <td class="white-space-300">
                                                 {{$product->name}}
                                             </td>
-                                            <td>{{$product->cate_name}}</td>
-                                            <td>
-                                                {{number_format($product->price,0,'.','.')}} đ
+                                            <td class="white-space-150">{{$product->cate_name}}</td>
+                                            <td class="white-space-150 text-right">
+                                                {{number_format($product->price,0,'.','.')}}
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 {{$product->discount}}
                                             </td>
 

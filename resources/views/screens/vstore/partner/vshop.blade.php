@@ -50,7 +50,7 @@
                             <th>Tên V-Shop
 
                             </th>
-                            <th>Số sản phẩm tiếp thị
+                            <th class="white-space-200">Số sản phẩm tiếp thị
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                         @if($type == 'desc')
@@ -63,7 +63,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Đơn hàng hoàn thành
+                            <th class="white-space-200">Đơn hàng hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'count_order')
                                         @if($type == 'desc')
@@ -76,8 +76,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Doanh thu
-
+                            <th class="white-space-200">Doanh thu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'doanh_thu')
                                         @if($type == 'desc')
@@ -90,7 +89,7 @@
                                     @endif
                                 </span>
                                                         </th>
-                                                        <th>Chiết khấu nhận được
+                                                        <th class="white-space-200">Chiết khấu nhận được
                                                             <span style="float: right;cursor: pointer">
                                                             @if($field == 'chiet_khau')
                                                                     @if($type == 'desc')
@@ -113,10 +112,10 @@
 
                                     <td>{{$value->vshop_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
-                                    <td>{{$value->amount_product}}</td>
-                                    <td>{{$value->count_order }}</td>
-                                    <td>{{round($value->doanh_thu,0)}}</td>
-                                    <td>{{round($value->chiet_khau,0)}}</td>
+                                    <td class="text-right">{{$value->amount_product}}</td>
+                                    <td class="text-right">{{$value->count_order }}</td>
+                                    <td class="text-right">{{number_format(round($value->doanh_thu,0),0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format(round($value->chiet_khau,0),0,'.','.')}}</td>
 
 
                                 </tr>
