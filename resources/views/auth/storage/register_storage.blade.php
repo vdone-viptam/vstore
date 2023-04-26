@@ -121,7 +121,7 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="kho"><span class="text-danger">*</span>Tên Kho</label>
                         <input class="form-control form-control-lg" type="text" required=""
-                               name="name" id="name" placeholder="Nhập tên kho (VD: Kho Kiên Giang)" value="{{old('name')}}"
+                               name="name" id="name" placeholder="Nhập tên kho" value="{{old('name')}}"
                                autocomplete="off">
                         @error('name')
                         <p class="text-red-600">{{$message}}</p>

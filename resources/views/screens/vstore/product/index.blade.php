@@ -51,9 +51,14 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <input type="search" name="key_search" value="{{$key_search}}"
-                                   class="form-control"
-                                   placeholder="Nhập từ khóa tìm kiếm">
+                            <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input type="search" name="key_search" value="{{$key_search}}"
+                                       class="form-control"
+                                       placeholder="Nhập từ khóa tìm kiếm">
+                            </form>
 
                         </div>
                     </li>
@@ -66,7 +71,7 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
+                            <th class="white-space-150">Mã sản phẩm</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -94,8 +99,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 200px">
-                                Giá sản phẩm (chưa VAT)
+                            <th class="white-space-120">
+                                Giá sản phẩm (đ) chưa VAT
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -108,7 +113,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">
+                            <th class="white-space-120">
                                 Thuế giá trị gia tăng (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vat')
@@ -122,7 +127,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Nhà cung cấp
+                            <th class="white-space-120">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -135,9 +140,7 @@
                                     @endif
                                 </span>
                             </th>
-
-
-                            <th>Chiết khấu từ NCC
+                            <th class="white-space-120">Chiết khấu từ NCC (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -150,7 +153,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
+                            <th class="white-space-120">
                                 Ngày xét duyệt
                                 <span style="float: right;cursor: pointer">
 
@@ -165,7 +168,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 200px">Chiết khấu cho V-SHOP
+                            <th class="white-space-120">Chiết khấu cho V-SHOP (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -178,8 +181,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Chi tiết
+                            <th class="white-space-80">
                             </th>
                         </tr>
                         </thead>
@@ -187,26 +189,26 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td>
+                                    <td class="white-space-150">
                                         {{$product->publish_id}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-350">
                                         {{$product->name}}
                                     </td>
-                                    <td>{{$product->cate_name}}</td>
-                                    <td>
+                                    <td class="white-space-150">{{$product->cate_name}}</td>
+                                    <td class="text-right">
                                         {{number_format($product->price,0,'.','.')}}
                                     </td>
-                                    <td>{{$product->vat}}</td>
+                                    <td class="text-right">{{$product->vat}}</td>
                                     <td>
                                         {{$product->user_name}}
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         {{$product->discount}}
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
-                                    <td>
-                                        {{number_format($product->amount_product_sold,0,'.','.')}}
+                                    <td class="text-right">
+                                        {{$product->discount_vShop}}
                                     </td>
                                     <td>
                                         <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link">Chi
@@ -224,12 +226,16 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
-                    <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
-                    </select>
+                    {{$products->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
 

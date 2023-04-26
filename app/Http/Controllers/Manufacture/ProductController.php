@@ -23,6 +23,7 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     private $v;
+
     public function __construct()
     {
         $this->v = [];
@@ -34,8 +35,8 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
-            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name',
-            'amount_product_sold')
+            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name','discount',
+            'amount_product_sold','products.vat')
             ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
             ->join("categories", 'products.category_id', '=', 'categories.id');
@@ -72,13 +73,13 @@ class ProductController extends Controller
         $this->v['wareHouses'] = Warehouses::select('name', 'id')->where('user_id', Auth::id())->get();
         $this->v['products'] = Product::select('id', 'name')->where('status', 0)->where('user_id', Auth::id())->get();
         $this->v['vstore'] = User::where('id', 800)->first();
-       
+
         if (!$this->v['vstore']) {
             $this->v['vstore'] = User::select('id', 'name')->where('provinceId', Auth::user()->provinceId)->where('branch', 2)->where('role_id', 3)->first();
         }
 //        return $this->v['vstore'];
         $listVstores = User::select('id', 'name', 'account_code')->where('account_code', '!=', null)->where('id', '!=', $this->v['vstore']->id ?? 0)->where('role_id', 3)->where('branch', 2)->orderBy('id', 'desc')->get();
-       
+
         $vstores = [];
         foreach ($listVstores as $list) {
             $vstores[] = $list;
@@ -87,7 +88,7 @@ class ProductController extends Controller
         if ($v) {
             $vstores[] = $v;
         }
-       
+
         $this->v['v_stores'] = array_unique($vstores);
 //        return $this->v['v_stores'];
         return view('screens.manufacture.product.create', $this->v);
@@ -109,7 +110,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255',
+            'sku_id' => 'required|max:255|unique:products,sku_id',
             'description' => 'required',
             'short_content' => 'required|max:500',
             'brand' => 'required|max:255',
@@ -119,6 +120,8 @@ class ProductController extends Controller
             'length' => 'required|max:13',
             'height' => 'required|max:13',
             'packing_type' => 'required',
+            'images' => 'required',
+            'video' => 'required|max:15360',
             'with' => 'required|max:13',
             'volume' => 'max:15',
             'manufacturer_name' => 'max:255',
@@ -133,6 +136,7 @@ class ProductController extends Controller
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
+            'sku_id.unique' => 'Mã SKU sản phẩm đã đăng ký',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
@@ -156,6 +160,9 @@ class ProductController extends Controller
             'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
+            'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
+            'video.required' => 'Video sản phẩm bắt buộc chọn',
+            'video.max' => 'Video sản phẩm không vượt quá 15MB',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -350,7 +357,7 @@ class ProductController extends Controller
         }
     }
 
-    public function requestDeleteProduct( )
+    public function requestDeleteProduct()
     {
         return view('screens.manufacture.product.request_delete');
     }
@@ -362,7 +369,7 @@ class ProductController extends Controller
 
     public function storeRequest(Request $request)
     {
-
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
@@ -372,8 +379,12 @@ class ProductController extends Controller
                 'role' => 'min:1',
                 'prepay' => 'required',
                 'vat' => 'required|min:1|max:99',
-
-
+                'moneyv' => 'array',
+                'moneyv.*' => function ($attribute, $value, $fail) use ($request) {
+                    if ( $request->discountA + $value > 100 || $request->discountA + $value < 0 ) {
+                        $fail('Phần trăm chiết khấu ko hợp lệ');
+                    }
+                },
             ], [
                 'vstore_id.required' => 'V-Store bắt buộc chọn',
                 'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
@@ -391,7 +402,7 @@ class ProductController extends Controller
             }
 
             if ($validator->fails()) {
-
+                // dd($validator->errors());
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
             }
 
@@ -531,16 +542,17 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
+        // dd($request->all(),$id);
         DB::beginTransaction();
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255',
+            'sku_id' => 'required|max:255|unique:products,sku_id,' . $id,
             'description' => 'required',
             'short_content' => 'required|max:500',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'video' => 'max:512000|required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'video' => 'max:15360',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -562,14 +574,13 @@ class ProductController extends Controller
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
+            'sku_id.unique' => 'Mã SKU sản phẩm đã đăng ký',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
-            'images.required' => 'Ảnh sản phẩm bắt buộc nhập',
             'images.image' => 'File nhập không phải định dạng ảnh',
             'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
-            'video.required' => 'Video sản phẩm bắt buộc nhập ',
-            'video.max' => 'Video sản phẩm vượt quá dung lượng cho phép 5GB',
+            'video.max' => 'Video sản phẩm không vượt quá 15MB',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
@@ -592,12 +603,13 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ]);
         if ($validator->fails()) {
-//            dd($validator->errors());
+           dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         try {
 
             $product = Product::find($id);
+            // dd($product);
             $product->name = $request->name;
             $product->category_id = $request->category_id;
             $product->price = str_replace('.', '', $request->price);
@@ -635,7 +647,7 @@ class ProductController extends Controller
             }
 
 
-            if ($request->hasFile('images') && count($request->file('images') > 0)) {
+            if ($request->hasFile('images') && count($request->file('images')) > 0 ) {
                 $photo_gallery = [];
                 foreach ($request->file('images') as $image) {
                     $filenameWithExt = $image->getClientOriginalName();
@@ -655,10 +667,11 @@ class ProductController extends Controller
             }
 
             $product->save();
-
+            DB::commit();
             return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $e) {
             dd($e->getMessage());
+            DB::rollback();
         }
 
     }

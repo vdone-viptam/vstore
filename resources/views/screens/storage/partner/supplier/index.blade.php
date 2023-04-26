@@ -53,10 +53,11 @@
                         <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
-                                    <form>
-                                        <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
-                                               type="search"
-                                               placeholder="Tìm kiếm..">
+                                    <form action="">
+                                        <input type="hidden" name="type" value="{{$type}}">
+                                        <input type="hidden" name="field" value="{{$field}}">
+                                        <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                               type="search" placeholder="Tìm kiếm..">
                                     </form>
                                 </div>
                             </li>
@@ -73,41 +74,42 @@
                                     <th>Khu vực
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'province_name')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="province_name"></i>
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="province_name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="province_name"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="province_name"></i>
+                                                <i class="fas fa-sort sort" data-sort="province_name"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="province_name"></i>
-                                        @endif
                                         </span>
                                     </th>
                                     <th>Số loại sản phẩm
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'count_product')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="count_product"></i>
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="count_product"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="count_product"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="count_product"></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="count_product"></i>
+                                                <i class="fas fa-sort sort" data-sort="count_product"></i>
                                             @endif
                                         </span>
                                     </th>
                                     <th>Số lượng tồn
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'amount_product')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="amount_product"></i>
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="amount_product"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="amount_product"
+                                                       style="float: right;cursor: pointer"></i>
+                                                @endif
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="amount_product"
-                                                   style="float: right;cursor: pointer"></i>
+                                                <i class="fas fa-sort sort" data-sort="amount_product"></i>
                                             @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="amount_product"></i>
-                                        @endif
                                         </span>
                                     </th>
                                     <th>Chi tiết</th>
@@ -123,7 +125,7 @@
                                             <td>{{$supplier->count_product}}</td>
                                             <td>{{$supplier->amount_product}}</td>
                                             <td><a class="text-primary underline" href="#"
-                                                onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
+                                                   onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -137,7 +139,7 @@
                         <div id="example_paginate">
                             <ul class="pagination d-flex justify-content-end align-items-center"
                                 style="gap:8px ;margin-top:10px;margin-right: 10px;">
-                                {{$suppliers->render()}}
+                                {{$suppliers->withQueryString()->links('layouts.custom.paginator')}}
                             </ul>
                         </div>
                     </div>

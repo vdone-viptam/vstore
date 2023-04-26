@@ -238,10 +238,13 @@
 
 @section('custom_js')
     <script>
+
         $('.btn-accept').on('click', async function () {
-                const status = $('.btn-accept').data('status');
-                const id = $('.btn-accept').data('key');
-                const type = $('.btn-accept').data('type');
+            const btn = document.querySelector('.btn-accept');
+
+            const status = btn.dataset.status;
+                const id = btn.dataset.key;
+                const type = btn.dataset.type;
                 if (type == 1) {
                     await $.ajax({
                         type: "PUT",
@@ -301,9 +304,11 @@
 
 
         function upDateStatus(id, status, type) {
-            $('.btn-accept').data('key', id);
-            $('.btn-accept').data('status', status);
-            $('.btn-accept').data('type', type);
+            const btn = document.querySelector('.btn-accept');
+
+            btn.setAttribute('data-key', id);
+            btn.setAttribute('data-status', status);
+            btn.setAttribute('data-type', type);
             $('#requestModal').modal('show')
         }
 

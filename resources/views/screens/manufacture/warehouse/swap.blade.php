@@ -130,7 +130,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-100">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -165,8 +165,8 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{$product->code}}</td>
-                                    <td>{{$product->ware_name}}</td>
-                                    <td>{{$product->name}}</td>
+                                    <td class="white-space-300">{{$product->ware_name}}</td>
+                                    <td class="white-space-300">{{$product->name}}</td>
                                     <td>
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>
@@ -193,7 +193,7 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td>{{number_format($product->quantity,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($product->quantity,0,'.','.')}}</td>
                                     <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 </tr>
                             @endforeach
@@ -207,12 +207,16 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
-                    <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
-                    </select>
+                    {{$products->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
 

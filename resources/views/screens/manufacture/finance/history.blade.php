@@ -51,7 +51,7 @@
                                 <tr>
                                     <th>Mã giao dịch</th>
                                     <th>Trạng thái</th>
-                                    <th>Số tiền
+                                    <th class="white-space-150">Số tiền (đ)
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -99,7 +99,7 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td>
+                                            <td class="white-space-150 text-right">
                                                 {{number_format($history->amount,0,'.','.')}}
                                             </td>
                                             <td>
@@ -123,17 +123,15 @@
                             </table>
                         </div>
                         <div class="d-flex align-items-end justify-content-end mt-4">
-                            {{$histories->withQueryString()->links()}}
-                            <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                                <form>
-                                    <div class="form-group">
-                                        <select class="form-control" id="limit">
-                                            <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                                            <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                                            <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
-                                        </select>
-                                    </div>
-                                </form>
+                            {{$histories->withQueryString()->links('layouts.custom.paginator')}}
+                            <div class="mt-4 ml-4">
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

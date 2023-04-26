@@ -188,14 +188,14 @@ class BillController extends Controller
 
                 }
 //                return $warehouses;
-                $sum =  DB::table('discounts')->selectRaw("SUM(discount) + (select IFNULL(SUM(discount),0)
-                from discounts where type = 3 and product_id = " . $product->id . " and user_id = '".$value['id_vshop']."'
+                $sum = DB::table('discounts')->selectRaw("SUM(discount) + (select IFNULL(SUM(discount),0)
+                from discounts where type = 3 and product_id = " . $product->id . " and user_id = '" . $value['id_vshop'] . "'
                 )
                  as sum")
                     ->where('product_id', $product->id)
                     ->where('type', '!=', 3)
-                    ->where('start_date','<=',Carbon::now())
-                    ->where('end_date','>=',Carbon::now())
+                    ->where('start_date', '<=', Carbon::now())
+                    ->where('end_date', '>=', Carbon::now())
                     ->first()
                     ->sum;
 //                return $sum;
@@ -204,19 +204,19 @@ class BillController extends Controller
                 $bill_product->publish_id = $product->publish_id;
                 $bill_product->vshop_id = $value['id_vshop'];
                 $bill_product->quantity = $value['quantity'];
-                $bill_product->price = $product->price - ($product->price /100 * $sum);
+                $bill_product->price = $product->price - ($product->price / 100 * $sum);
                 $bill_product->bill_detail_id = $bill_detail->id;
                 $bill_product->vstore_id = $product->vstore_id;
                 $bill_product->product_id = $product->id;
                 $bill_product->ward_id = $min->id;
                 $bill_product->status = 1;
-                $bill_product->weight = $product->weight * $value['quantity'];
+                $bill_product->weight = ($product->weight / 1000) * $value['quantity'];
                 $bill_product->save();
 
 
                 $bill_detail->total += $bill_product->price * $bill_product->quantity;
                 $bill_detail->weight += $bill_product->weight;
-                $bill->total += $bill_detail->total ;
+                $bill->total += $bill_detail->total;
                 $bill->save();
                 $bill_detail->save();
             }
@@ -225,110 +225,109 @@ class BillController extends Controller
                 'PASSWORD' => env('MK_VAN_CHUYEN'),
             ]);
 //
-                $createBillDetail = BillDetail::where('bill_id',$bill->id)->get();
-                foreach ($createBillDetail as $createBdt){
-                    $createWare = Warehouses::find($createBdt->ward_id);
-                    $createPro = BillDetail::join('bill_product','bill_details.id','=','bill_product.bill_detail_id')
-                        ->join('products','bill_product.product_id','=','products.id')
-                        ->where('bill_product.bill_detail_id',$createBdt->id)
-                        ->select('bill_product.quantity as quantity','bill_product.price as billProductPrice','products.name','bill_product.weight')
-                        ->get();
+            $createBillDetail = BillDetail::where('bill_id', $bill->id)->get();
+            foreach ($createBillDetail as $createBdt) {
+                $createWare = Warehouses::find($createBdt->ward_id);
+                $createPro = BillDetail::join('bill_product', 'bill_details.id', '=', 'bill_product.bill_detail_id')
+                    ->join('products', 'bill_product.product_id', '=', 'products.id')
+                    ->where('bill_product.bill_detail_id', $createBdt->id)
+                    ->select('bill_product.quantity as quantity', 'bill_product.price as billProductPrice', 'products.name', 'bill_product.weight')
+                    ->get();
 
                 $list_item = [];
-                foreach ($createPro as $cp){
-                    $list_item[] =[
-                        'PRODUCT_NAME'=>$cp->name,
-                        'PRODUCT_QUANTITY'=>$cp->quantity,
-                        'PRODUCT_PRICE'=>$cp->billProductPrice,
-                        'PRODUCT_WEIGHT'=>$cp->weight
-                        ];
-
+                foreach ($createPro as $cp) {
+                    $list_item[] = [
+                        'PRODUCT_NAME' => $cp->name,
+                        'PRODUCT_QUANTITY' => $cp->quantity,
+                        'PRODUCT_PRICE' => $cp->billProductPrice,
+                        'PRODUCT_WEIGHT' => $cp->weight
+                    ];
 
 
                 }
 //                return $list_item;
 //                    return $createPro;
-                    $get_list = Http::withHeaders(
-                        [
-                            'Content-Type'=>' application/json',
-                            'Token'=>$login['data']['token']
-                        ]
-                    )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
-                        'SENDER_DISTRICT'=>$createBdt->ware_district,
-                        'SENDER_PROVINCE'=>$createBdt->ware_province,
-                        'RECEIVER_DISTRICT'=>$request->district,
-                        'RECEIVER_PROVINCE'=>$request->province,
-                        'PRODUCT_TYPE'=>'HH',
-                        'PRODUCT_WEIGHT'=>$createBdt->weight,
-                        'PRODUCT_PRICE'=>$createBdt->price,
-                        'MONEY_COLLECTION'=>0,
-                        'TYPE'=>1,
-                    ] );
+                $get_list = Http::withHeaders(
+                    [
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', [
+                    'SENDER_DISTRICT' => $createBdt->ware_district,
+                    'SENDER_PROVINCE' => $createBdt->ware_province,
+                    'RECEIVER_DISTRICT' => $request->district,
+                    'RECEIVER_PROVINCE' => $request->province,
+                    'PRODUCT_TYPE' => 'HH',
+                    'PRODUCT_WEIGHT' => $createBdt->weight,
+                    'PRODUCT_PRICE' => $createBdt->price,
+                    'MONEY_COLLECTION' => 0,
+                    'TYPE' => 1,
+                ]);
 //            return $get_list[0]['MA_DV_CHINH'];
 
 
-                    $tinh_thanh = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
-                    foreach ($tinh_thanh['data'] as $tt){
-                        if ($tt['PROVINCE_ID'] ==$createBdt->ware_province){
-                            $tinh_thanh_gui =  $tt['PROVINCE_NAME'];
-                            $quan_huyen = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId='. $tt['PROVINCE_ID']);
+                $tinh_thanh = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
+                foreach ($tinh_thanh['data'] as $tt) {
+                    if ($tt['PROVINCE_ID'] == $createBdt->ware_province) {
+                        $tinh_thanh_gui = $tt['PROVINCE_NAME'];
+                        $quan_huyen = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $tt['PROVINCE_ID']);
 //                            return $quan_huyen['data'];
-                            foreach ($quan_huyen['data'] as $qh){
-                                if ($qh['DISTRICT_ID']== $createBdt->ware_district){
-                                    $quan_huyen_gui = $qh['DISTRICT_NAME'];
-                                }
-
+                        foreach ($quan_huyen['data'] as $qh) {
+                            if ($qh['DISTRICT_ID'] == $createBdt->ware_district) {
+                                $quan_huyen_gui = $qh['DISTRICT_NAME'];
                             }
-                        }
-                        if ($tt['PROVINCE_ID'] == $request->province){
-                            $tinh_thanh_nhan =  $tt['PROVINCE_NAME'];
-                            $quan_huyen_n = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId='. $tt['PROVINCE_ID']);
-                            foreach ($quan_huyen_n['data'] as $qhn){
-                                if ($qhn['DISTRICT_ID']== $request->district){
-                                    $quan_huyen_nhan = $qhn['DISTRICT_NAME'];
-                                }
 
-                            }
                         }
                     }
+                    if ($tt['PROVINCE_ID'] == $request->province) {
+                        $tinh_thanh_nhan = $tt['PROVINCE_NAME'];
+                        $quan_huyen_n = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $tt['PROVINCE_ID']);
+                        foreach ($quan_huyen_n['data'] as $qhn) {
+                            if ($qhn['DISTRICT_ID'] == $request->district) {
+                                $quan_huyen_nhan = $qhn['DISTRICT_NAME'];
+                            }
 
-                    $taodon = Http::withHeaders(
-                        [
-                            'Content-Type'=>' application/json',
-                            'Token'=>$login['data']['token']
-                        ]
-                    )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
-                        "ORDER_NUMBER"=>'',
-                        "SENDER_FULLNAME"=>$createWare->name,
-                        "SENDER_ADDRESS"=>" ".$quan_huyen_gui.', '.$tinh_thanh_gui,
-                        "SENDER_PHONE"=>$createWare->phone_number,
-                        "RECEIVER_FULLNAME"=>$request->name,
-                        "RECEIVER_ADDRESS"=>$request->address. ", ".$quan_huyen_nhan.', ' . $tinh_thanh_nhan,
-                        "RECEIVER_PHONE"=>$request->phone_number,
-                        "PRODUCT_NAME"=>"hàng test",
-                        "PRODUCT_DESCRIPTION"=>"",
-                        "PRODUCT_QUANTITY"=>1,
-                        "PRODUCT_PRICE"=>$createBdt->total,
-                        "PRODUCT_WEIGHT"=>$createBdt->weight,
-                        "PRODUCT_LENGTH"=>0,
-                        "PRODUCT_WIDTH"=>0,
-                        "PRODUCT_HEIGHT"=>0,
-                        "ORDER_PAYMENT"=>1,
-                        "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
-                        "ORDER_SERVICE_ADD"=>null,
-                        "ORDER_NOTE"=>"",
-                        "MONEY_COLLECTION"=>0,
-                        "LIST_ITEM"=>$list_item,
-                    ]);
+                        }
+                    }
+                }
+
+                $taodon = Http::withHeaders(
+                    [
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
+                    "ORDER_NUMBER" => '',
+                    "SENDER_FULLNAME" => $createWare->name,
+                    "SENDER_ADDRESS" => " " . $quan_huyen_gui . ', ' . $tinh_thanh_gui,
+                    "SENDER_PHONE" => $createWare->phone_number,
+                    "RECEIVER_FULLNAME" => $request->name,
+                    "RECEIVER_ADDRESS" => $request->address . ", " . $quan_huyen_nhan . ', ' . $tinh_thanh_nhan,
+                    "RECEIVER_PHONE" => $request->phone_number,
+                    "PRODUCT_NAME" => "hàng test",
+                    "PRODUCT_DESCRIPTION" => "",
+                    "PRODUCT_QUANTITY" => 1,
+                    "PRODUCT_PRICE" => $createBdt->total,
+                    "PRODUCT_WEIGHT" => $createBdt->weight,
+                    "PRODUCT_LENGTH" => 0,
+                    "PRODUCT_WIDTH" => 0,
+                    "PRODUCT_HEIGHT" => 0,
+                    "ORDER_PAYMENT" => 1,
+                    "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+                    "ORDER_SERVICE_ADD" => null,
+                    "ORDER_NOTE" => "",
+                    "MONEY_COLLECTION" => 0,
+                    "LIST_ITEM" => $list_item,
+                ]);
 //                    return $list_item;
-                    $createBdt->code = $taodon['data']['ORDER_NUMBER'];
-                    $createBdt->transport_fee=
+                $createBdt->code = $taodon['data']['ORDER_NUMBER'];
+                $createBdt->transport_fee =
                     $createBdt->save();
-                    $saveBillProduct = BillProduct::where('bill_detail_id',$createBdt->id)->update(['code'=>$taodon['data']['ORDER_NUMBER']]);
+                $saveBillProduct = BillProduct::where('bill_detail_id', $createBdt->id)->update(['code' => $taodon['data']['ORDER_NUMBER']]);
 //                    return $taodon['data']['ORDER_NUMBER'];
 
 //                    return $createBdt . $tinh_thanh_gui . $quan_huyen_gui.$tinh_thanh_nhan .$quan_huyen_nhan;
-                }
+            }
 
             DB::commit();
 
@@ -383,7 +382,9 @@ class BillController extends Controller
                 cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
         return $angle * $earthRadius;
     }
-    public function checkout(Request $request){
+
+    public function checkout(Request $request)
+    {
 //        return 1;
         foreach ($request->data as $value) {
             $product = Product::where('id', $value['id'])->where('status', 2)->first();
@@ -445,54 +446,54 @@ class BillController extends Controller
 //        return $product->price;
         $get_list = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
-        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll',[
-            'SENDER_DISTRICT'=>$min->district_id,
-            'SENDER_PROVINCE'=>$min->city_id,
-            'RECEIVER_DISTRICT'=>$min->district_id,
-            'RECEIVER_PROVINCE'=>$min->city_id,
-            'PRODUCT_TYPE'=>'HH',
-            'PRODUCT_WEIGHT'=>1000,
-            'PRODUCT_PRICE'=>$product->price,
-            'MONEY_COLLECTION'=>0,
-            'TYPE'=>1,
-        ] );
+        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', [
+            'SENDER_DISTRICT' => $min->district_id,
+            'SENDER_PROVINCE' => $min->city_id,
+            'RECEIVER_DISTRICT' => $min->district_id,
+            'RECEIVER_PROVINCE' => $min->city_id,
+            'PRODUCT_TYPE' => 'HH',
+            'PRODUCT_WEIGHT' => 1000,
+            'PRODUCT_PRICE' => $product->price,
+            'MONEY_COLLECTION' => 0,
+            'TYPE' => 1,
+        ]);
 //        return $get_list;
-        $list_item[] =[
-            'PRODUCT_NAME'=>$product->name,
-            'PRODUCT_QUANTITY'=>$value['quantity'],
-            'PRODUCT_PRICE'=>$product->price,
-            'PRODUCT_WEIGHT'=>$product->price *$value['quantity']
+        $list_item[] = [
+            'PRODUCT_NAME' => $product->name,
+            'PRODUCT_QUANTITY' => $value['quantity'],
+            'PRODUCT_PRICE' => $product->price,
+            'PRODUCT_WEIGHT' => $product->price * $value['quantity']
         ];
         $taodon = Http::withHeaders(
             [
-                'Content-Type'=>' application/json',
-                'Token'=>$login['data']['token']
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
             ]
-        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp' ,[
-            "ORDER_NUMBER"=>'',
-            "SENDER_FULLNAME"=>'nguyễn Đức Anh',
-            "SENDER_ADDRESS"=>" Hoàn kiếm,Hà Nội ",
-            "SENDER_PHONE"=>'0913635868',
-            "RECEIVER_FULLNAME"=>'Nguyễn Đức Banh',
-            "RECEIVER_ADDRESS"=>'Hoàn kiếm,Hà Nội ,',
-            "RECEIVER_PHONE"=>'0713536471',
-            "PRODUCT_NAME"=>"hàng test",
-            "PRODUCT_DESCRIPTION"=>"",
-            "PRODUCT_QUANTITY"=>1,
-            "PRODUCT_PRICE"=>100000,
-            "PRODUCT_WEIGHT"=>10000,
-            "PRODUCT_LENGTH"=>0,
-            "PRODUCT_WIDTH"=>0,
-            "PRODUCT_HEIGHT"=>0,
-            "ORDER_PAYMENT"=>1,
-            "ORDER_SERVICE"=>$get_list[0]['MA_DV_CHINH'],
-            "ORDER_SERVICE_ADD"=>null,
-            "ORDER_NOTE"=>"",
-            "MONEY_COLLECTION"=>0,
-            "LIST_ITEM"=>$list_item,
+        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
+            "ORDER_NUMBER" => '',
+            "SENDER_FULLNAME" => 'nguyễn Đức Anh',
+            "SENDER_ADDRESS" => " Hoàn kiếm,Hà Nội ",
+            "SENDER_PHONE" => '0913635868',
+            "RECEIVER_FULLNAME" => 'Nguyễn Đức Banh',
+            "RECEIVER_ADDRESS" => 'Hoàn kiếm,Hà Nội ,',
+            "RECEIVER_PHONE" => '0713536471',
+            "PRODUCT_NAME" => "hàng test",
+            "PRODUCT_DESCRIPTION" => "",
+            "PRODUCT_QUANTITY" => 1,
+            "PRODUCT_PRICE" => 100000,
+            "PRODUCT_WEIGHT" => 10000,
+            "PRODUCT_LENGTH" => 0,
+            "PRODUCT_WIDTH" => 0,
+            "PRODUCT_HEIGHT" => 0,
+            "ORDER_PAYMENT" => 1,
+            "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+            "ORDER_SERVICE_ADD" => null,
+            "ORDER_NOTE" => "",
+            "MONEY_COLLECTION" => 0,
+            "LIST_ITEM" => $list_item,
         ]);
         return $taodon['data']['MONEY_TOTAL'];
 //        return $list_item;

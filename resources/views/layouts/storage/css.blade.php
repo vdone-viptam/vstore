@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{asset('asset/bootstrap.min.css')}}">
-<link href="{{asset('asset/assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
+{{--<link href="{{asset('asset/assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">--}}
 <link rel="stylesheet" href="{{asset('asset/style.css')}}">
 <link rel="stylesheet" type="text/css"
       href="{{asset('asset/assets/vendor/datatables/css/dataTables.bootstrap4.css')}}">

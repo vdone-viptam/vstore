@@ -51,7 +51,7 @@
                                 <tr>
                                     <th>Mã giao dịch</th>
                                     <th>Trạng thái</th>
-                                    <th>Số tiền
+                                    <th class="white-space-150">Số tiền (đ)
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -99,7 +99,7 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td>
+                                            <td class="white-space-150 text-right">
                                                 {{number_format($history->amount,0,'.','.')}}
                                             </td>
                                             <td>
@@ -122,11 +122,17 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="example_paginate">
-                            <ul class="pagination d-flex justify-content-end align-items-center"
-                                style="gap:8px ;margin-top:10px;margin-right: 10px;">
-                                {{$histories->withQueryString()->links()}}
-                            </ul>
+                        <div class="d-flex align-items-end justify-content-end mt-4">
+                            {{$histories->withQueryString()->links('layouts.custom.paginator')}}
+                            <div class="mt-4 ml-4">
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -154,11 +160,17 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.vstore.finance.history')}}?type=' + orderBy +
-                            '&field=' + sort
+                            '&field=' + sort + 'limit={{$limit}}'
                     }, 200)
                 });
             });
         });
-
+        let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.finance.history',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection

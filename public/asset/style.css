@@ -154,6 +154,31 @@
 
 /* 0.1. Body / Typography
    ========================================================================== */
+.pagination li {
+ padding: .75rem;
+}
+.indicato{
+    content         : '';
+    position        : absolute;
+    top             : 12px;
+    right           : 14px;
+    display         : inline-block;
+    font-size: 10px;
+    width           : 16px;
+    height          : 16px;
+    border-radius   : 100%;
+    text-align: center;
+    background-color: #ef172c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.indicato span{
+    color: white;
+    font-size: 8px;
+    font-weight: 600;
+}
 
 body {
     font-family           : sans-serif;
@@ -390,6 +415,89 @@ address {}
 .form-control-lg {
     padding: 12px;
 }
+
+
+/* custom table */
+
+
+.white-space-50{
+    white-space: unset !important;
+    width: 50px !important;
+    min-width: 50px !important;
+}
+.white-space-80{
+    white-space: unset !important;
+    width: 80px !important;
+    min-width: 80px !important;
+}
+.white-space-90{
+    white-space: unset !important;
+    width: 90px !important;
+    min-width: 90px !important;
+}
+.white-space-100{
+    white-space: unset !important;
+    width: 100px !important;
+    min-width: 100px !important;
+}
+.white-space-110{
+    white-space: unset !important;
+    width: 110px !important;
+    min-width: 110px !important;
+}
+.white-space-120{
+    white-space: unset !important;
+    width: 120px !important;
+    min-width: 120px !important;
+}
+.white-space-130{
+    white-space: unset !important;
+    width: 130px !important;
+    min-width: 130px !important;
+}
+.white-space-140{
+    white-space: unset !important;
+    width: 140px !important;
+    min-width: 140px !important;
+}
+.white-space-150{
+    white-space: unset !important;
+    width: 150px !important;
+    min-width: 150px !important;
+}
+.white-space-200{
+    white-space: unset !important;
+    width: 200px !important;
+    min-width: 200px !important;
+}
+.white-space-300{
+    white-space: unset !important;
+    width: 300px !important;
+    min-width: 300px !important;
+}
+.white-space-350{
+    white-space: unset !important;
+    width: 350px !important;
+    min-width: 350px !important;
+}
+.white-space-400{
+    white-space: unset !important;
+    width: 400px !important;
+    min-width: 400px !important;
+}
+.white-space-450{
+    white-space: unset !important;
+    width: 450px !important;
+    min-width: 450px !important;
+}
+.white-space-500{
+    white-space: unset !important;
+    width: 500px !important;
+    min-width: 500px !important;
+}
+
+/* custom table */
+
 
 
 /* Custom-Chekbox

@@ -57,6 +57,9 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form action="">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input type="search" name="key_search" value="{{$key_search}}"
                                        class="form-control"
                                        placeholder="Nhập từ khóa tìm kiếm">
@@ -73,8 +76,8 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã yêu cầu</th>
-                            <th>Nhà cung cấp
+                            <th class="white-space-100">Mã yêu cầu</th>
+                            <th class="white-space-80">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -100,7 +103,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngành hàng
+                            <th class="white-space-110">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -113,7 +116,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Giá sản phẩm (chưa VAT)
+                            <th class="white-space-120">Giá sản phẩm (đ) chưa VAT
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -126,7 +129,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Chiết khấu tù Nhà cung cấp
+                            <th class="white-space-120">Chiết khấu từ Nhà cung cấp
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                         @if($type == 'desc')
@@ -139,7 +142,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày yêu cầu
+                            <th class="white-space-120">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'products.price')
@@ -152,7 +155,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày xét duyệt
+                            <th class="white-space-120">Ngày xét duyệt
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.vstore_confirm_date')
                                         @if($type == 'products.vstore_confirm_date')
@@ -190,27 +193,26 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td>
+                                    <td class="white-space-100">
                                         {{$product->code}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-80">
                                         {{$product->user_name}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-300">
                                         {{$product->name}}
                                     </td>
-                                    <td>{{$product->cate_name}}</td>
-                                    <td>
-                                        {{number_format($product->price,0,'.','.')}} đ
+                                    <td class="white-space-110">{{$product->cate_name}}</td>
+                                    <td class="white-space-120 text-right">
+                                        {{number_format($product->price,0,'.','.')}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-120 text-right">
                                         {{$product->discount}}
                                     </td>
-
-                                    <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td>{{$product->vstore_confirm_date ?
-\Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y H:i') : 'Chưa xét duyệt'}}</td>
-                                    <td>
+                                    <td class="white-space-120">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
+                                    <td class="white-space-120">{{$product->vstore_confirm_date ?
+\Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y') : 'Chưa xét duyệt'}}</td>
+                                    <td class="white-space-200">
                                         @if($product->status == 0)
                                             <div
                                                 class="alert alert-warning">
@@ -268,7 +270,7 @@
                                         @endif
                                     </td>
 
-                                    <td >
+                                    <td>
                                         @if($product->status == 0)
                                             <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
                                                class="btn btn-success">Đồng ý</a>
@@ -290,12 +292,16 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->withQueryString()->links()}}
-                    <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
-                    </select>
+                    {{$requests->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
 

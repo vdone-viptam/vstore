@@ -1,16 +1,16 @@
 @extends('layouts.vstore.main')
-@section('page_title','Danh sách NCC liên kết')
+@section('page_title','Danh sách Vshop liên kết')
 
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Liên kết Vshop</h2>
+                <h2 class="pageheader-title">Danh sách Vshop liên kết</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết Vshop</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Đối tác</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Danh sách Vshop liên kết</li>
                         </ol>
@@ -26,11 +26,14 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Danh sách NCC liên kết</h5>
+                <h5 class="mb-0" style="font-size:18px;">Danh sách Vshop liên kết</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
@@ -50,7 +53,7 @@
                             <th>Tên V-Shop
 
                             </th>
-                            <th>Số sản phẩm tiếp thị
+                            <th class="white-space-200">Số sản phẩm tiếp thị
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                         @if($type == 'desc')
@@ -63,7 +66,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Đơn hàng hoàn thành
+                            <th class="white-space-200">Đơn hàng hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'count_order')
                                         @if($type == 'desc')
@@ -76,8 +79,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Doanh thu
-
+                            <th class="white-space-200">Doanh thu (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'doanh_thu')
                                         @if($type == 'desc')
@@ -89,21 +91,7 @@
                                         <i class="fas fa-sort sort" data-sort="doanh_thu"></i>
                                     @endif
                                 </span>
-                                                        </th>
-                                                        <th>Chiết khấu nhận được
-                                                            <span style="float: right;cursor: pointer">
-                                                            @if($field == 'chiet_khau')
-                                                                    @if($type == 'desc')
-                                                                        <i class="fa-solid fa-sort-down sort" data-sort="chiet_khau"></i>
-                                                                    @else
-                                                                        <i class="fa-solid fa-sort-up sort" data-sort="chiet_khau"></i>
-                                                                    @endif
-                                                                @else
-                                                                    <i class="fas fa-sort sort" data-sort="chiet_khau"></i>
-                                                                @endif
-                                                            </span>
-                                                        </th>
-{{--                            <th>Thao Tác</th>--}}
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -113,12 +101,9 @@
 
                                     <td>{{$value->vshop_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
-                                    <td>{{$value->amount_product}}</td>
-                                    <td>{{$value->count_order }}</td>
-                                    <td>{{round($value->doanh_thu,0)}}</td>
-                                    <td>{{round($value->chiet_khau,0)}}</td>
-
-
+                                    <td>{{number_format($value->amount_product,0,'.','.')}}</td>
+                                    <td>{{number_format($value->count_order,0,'.','.') }}</td>
+                                    <td>{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
                                 </tr>
                             @endforeach
                         @else
@@ -131,8 +116,18 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$vshop->withQueryString()->links()}}
+                    {{$vshop->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                </select>
+                            </div>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -165,5 +160,12 @@
                 });
             });
         });
+        let limit = document.getElementById('limit');
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.partner.vshop',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection

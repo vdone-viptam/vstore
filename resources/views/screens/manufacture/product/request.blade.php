@@ -141,9 +141,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Chức năng
-                            </th>
+                            <th class="white-space-90"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -153,7 +151,7 @@
                                     <td>
                                         {{$request->code}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-400">
                                         {{$request->product_name}}
                                     </td>
                                     <td>
@@ -239,21 +237,19 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->withQueryString()->links()}}
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                        <form>
-                            <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
-                                </select>
-                            </div>
-                        </form>
+                    {{$requests->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 

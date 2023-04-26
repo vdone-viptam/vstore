@@ -62,9 +62,10 @@ class AccountController extends Controller
         DB::beginTransaction();
         try {
            $user = User::find($id);
+            if ($user->branch != 2){
+                $user->name =trim($request->name) ;
 
-            $user->name =trim($request->name) ;
-
+            }
             $user->company_name = trim($request->company_name);
 //        $user->tax_code = trim($request->tax_code);
             $user->address = trim($request->address);

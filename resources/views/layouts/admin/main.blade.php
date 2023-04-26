@@ -11,6 +11,9 @@
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     @include('layouts.css')
     @yield('custom_css')
+    <style>
+
+    </style>
     @vite('resources/css/app.css')
 </head>
 <style>
@@ -154,7 +157,7 @@
     } else {
         if ($('.btnA')) {
             const btnA = document.querySelector('.btnA');
-            if(btnA){
+            if (btnA) {
                 btnA.classList.add('bg-slate-300');
                 btnA.classList.remove('bg-[#40BAFF]');
                 btnA.setAttribute('disabled', 'true');
@@ -163,14 +166,14 @@
     }
     if ($('#key_search')) {
         const key_search = document.querySelector('#key_search');
-        if(key_search){
+        if (key_search) {
             document.querySelector('#key_search').addEventListener('keyup', (e) => {
                 const btnA = document.querySelector('.btnA');
-                if(btnA){
+                if (btnA) {
                     if (e.target.value) {
                         btnA.removeAttribute('disabled');
                         btnA.classList.remove('bg-slate-300');
-                    btnA.classList.add('bg-[#40BAFF]');
+                        btnA.classList.add('bg-[#40BAFF]');
                     } else {
                         btnA.setAttribute('disabled', 'true');
                         btnA.classList.add('bg-slate-300');
@@ -182,8 +185,7 @@
     }
     const x = document.querySelectorAll('input[type="number"]');
     x.addEventListener("keypress", function (evt) {
-        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-        {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
             evt.preventDefault();
         }
     });

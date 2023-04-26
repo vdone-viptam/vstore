@@ -46,6 +46,13 @@ class ProductController extends Controller
                 'admin_confirm_date',
                 'discount_vShop',
                 'products.id');
+        if (strlen($this->v['key_search'])) {
+            $this->v['products'] = $this->v['products']->where(function ($query) {
+                $query->where('products.publish_id', $this->v['key_search'])
+                    ->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
         $this->v['products'] = $this->v['products']->orderBy($this->v['field'], $this->v['type'])
             ->paginate($this->v['limit']);
 
@@ -277,7 +284,6 @@ class ProductController extends Controller
         $this->v['products'] = $data;
         $this->v['discount'] = DB::table('discounts')->select('id', 'product_id', 'start_date', 'end_date', 'start_date', 'discount')->where('id', $id)->first();
         $this->v['product1'] = Product::select('discount', 'discount_vShop', 'price', 'name', 'id')->where('id', $this->v['discount']->product_id)->first();
-        $this->v['product1']->price = number_format($this->v['product1']->price, 0, '.', '.');
         return response()->json([
             'view' => view('screens.vstore.product.editDis', $this->v)->render(),
             'id' => $this->v['discount']->id

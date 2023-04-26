@@ -96,8 +96,12 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                       type="search" placeholder="Tìm kiếm..">
+                                <form action="">
+                                    <input type="hidden" name="type" value="{{$type}}">
+                                    <input type="hidden" name="field" value="{{$field}}">
+                                    <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                           type="search" placeholder="Tìm kiếm..">
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -232,7 +236,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->withQueryString()->links()}}
+                    {{$requests->withQueryString()->links('layouts.custom.paginator')}}
                 </div>
             </div>
         </div>
@@ -307,8 +311,8 @@
                         $('.btn-update').addClass('hidden');
                     } else {
                         $('.btn-update').removeClass('hidden');
-                        $('.btn-update').on('click',  function () {
-                             $.ajax({
+                        $('.btn-update').on('click', function () {
+                            $.ajax({
                                 type: "PUT",
                                 url: `{{route('screens.storage.warehouse.confirmExportProduct')}}?_token={{csrf_token()}}`,
                                 data: {
@@ -322,7 +326,7 @@
                                         icon: 'error',
                                         title: 'Cập nhật yêu cầu không thành công !',
                                         text: error0.message,
-                                    }).then(()=>{
+                                    }).then(() => {
                                         location.reload()
                                     })
                                 }
@@ -416,115 +420,11 @@
                 dataType: "json",
                 encode: true,
             }).done(function (data) {
-                var href = window.location.href
-                var body = $("body").html()
-                $("body").html(`${data.data}`);
-                setTimeout(() => {
-                    window.print();
-                    $("body").html(`${body}`);
-                    window.location.href = `${href}`
-                }, 1000);
+                window.open(data.href, "_blank");
             })
 
         }
 
-        {{--async function showBill(id) {--}}
-        {{--    await $.ajax({--}}
-        {{--        type: "GET",--}}
-        {{--        url: `{{route('screens.storage.warehouse.exportBill')}}?order_id=${id}`,--}}
-        {{--        error: function (jqXHR, error, errorThrown) {--}}
-        {{--            $('#requestModal').modal('hide')--}}
-        {{--            var error0 = JSON.parse(jqXHR.responseText)--}}
-        {{--            Swal.fire({--}}
-        {{--                icon: 'error',--}}
-        {{--                title: 'In hóa đơn thất bại !',--}}
-        {{--                text: error0.message,--}}
-        {{--            })--}}
-        {{--        }--}}
-        {{--    }).done(function (data) {--}}
-        {{--        let htmlData = ``;--}}
-
-        {{--        if (data.message) {--}}
-        {{--            htmlData = `--}}
-        {{--                <div class="row align-items-center" style="gap:10px; flex-wrap:nowrap">--}}
-        {{--                    <div class="col-4">--}}
-        {{--                        <svg id="barcode"></svg>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="col-4">--}}
-        {{--                        <h2>Phiếu gửi</h2>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="col-4">--}}
-        {{--                        <span>Viettel Post</span>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--                <div class="row">--}}
-        {{--                <div class="col-12 py-2">--}}
-        {{--                    <h4 class="font-medium" style="margin-bottom:8px">Người gửi:</h4>--}}
-        {{--                    <div class="d-flex" style="gap:4px">--}}
-        {{--                        <span class="font-medium" >Họ tên người gửi:  </span>--}}
-        {{--                        <span>${data.message.storage_name}</span>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="d-flex" style="gap:4px">--}}
-        {{--                        <span class="font-medium line-clamp-1">Địa chỉ: </span>--}}
-        {{--                        <span class="font-normal"> ${data.message.ward_id_boss_storage}, ${data.message.district_id_boss_storage}, ${data.message.province_boss_storage}</span>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="d-flex" style="gap:4px">--}}
-        {{--                        <span class="font-medium line-clamp-1">Điện thoại: </span>--}}
-        {{--                        <span class="font-normal"> ${data.message.storage_phone}</span>--}}
-        {{--                    </div>--}}
-        {{--                    </div>--}}
-        {{--                <div class="col-12 py-2">--}}
-        {{--                        <h4 class="font-medium" style="margin-bottom:8px">Người nhận:</h4>--}}
-        {{--                    <div class="d-flex" style="gap:4px">--}}
-        {{--                        <span class="font-medium">Họ tên người nhận:  </span>--}}
-        {{--                        <span>${data.message.name_customer}</span>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="d-flex" style="gap:4px">--}}
-        {{--                        <span class="font-medium line-clamp-1">Địa chỉ: </span>--}}
-        {{--                        <span class="font-normal"> ${data.message.address_customer}</span>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="d-flex" style="gap:4px">--}}
-        {{--                        <span class="font-medium line-clamp-1">Điện thoại: </span>--}}
-        {{--                        <span class="font-normal"> ${data.message.phone_customer}</span>--}}
-        {{--                    </div>--}}
-        {{--                    </div>--}}
-        {{--                    <div class="col-12 py-2">--}}
-        {{--                        <h4 class="font-medium" style="margin-bottom:8px">Nội dung hàng hóa:</h4>--}}
-        {{--                    <div class="d-flex justify-content-between align-items-center" style="gap:4px">--}}
-        {{--                        <span class="font-medium">Tên sản phẩm: <span class="font-normal">${data.message.name}</span></span>--}}
-        {{--                        <span class="font-medium">Số lượng: <span class="font-normal">${data.message.quantity}</span></span>--}}
-        {{--                        <span class="font-medium">Khối lượng: <span class="font-normal">${data.message.weight} Gam</span></span>--}}
-        {{--                    </div>--}}
-
-        {{--                    </div>--}}
-        {{--                    <div class="col-12 d-flex py-2" style="border-top:1px solid grey;">--}}
-        {{--                        <div class="col-6"> <img src="https://chart.googleapis.com/chart?cht=qr&chl=${data.message.no}&chs=160x160&chld=L|0"--}}
-        {{-- class="qr-code img-thumbnail img-responsive"></div>--}}
-        {{--                        <div class="col-6 py-2 px-0">--}}
-        {{--                                <h4 class="font-medium " style="margin-bottom:8px">Thanh toán</h4>--}}
-        {{--                                <div class="d-flex flex-column " style="gap:4px">--}}
-        {{--                                    <span class="font-medium">Phí ship: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(data.message.shipping)} VNĐ</span></span>--}}
-        {{--                                    <span class="font-medium">Thanh toán phí ship: <span class="font-normal">Người nhận</span></span>--}}
-        {{--                                    <span class="font-medium">Số tiền phải thu: <span class="font-normal">${Intl.NumberFormat('vi-VN').format(Math.round(data.message.total))} VNĐ</span></span>--}}
-        {{--                                </div>--}}
-        {{--                            </div>--}}
-
-
-
-        {{--                    </div>--}}
-
-        {{--                </div>--}}
-
-        {{--        `--}}
-
-        {{--            $('#modalBill .md-content').html(htmlData)--}}
-        {{--            $('#modalBill').modal('show');--}}
-        {{--            generateBarcode(data.message.order_number)--}}
-
-        {{--        }--}}
-
-        {{--    })--}}
-        {{--}--}}
 
         async function generateBarcode(item) {
 

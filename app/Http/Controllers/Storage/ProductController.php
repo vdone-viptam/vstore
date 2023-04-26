@@ -341,7 +341,6 @@ class ProductController extends Controller
     {
 
 
-//        return $request;
 
         try {
 
@@ -398,12 +397,14 @@ class ProductController extends Controller
                     'RECEIVER_DISTRICT' => $order->district_id,
                     'RECEIVER_PROVINCE' => $order->province_id,
                     'PRODUCT_TYPE' => 'HH',
-                    'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
+                    'PRODUCT_WEIGHT' => ($product->weight / 1000) * $order_item->quantity,
                     'PRODUCT_PRICE' => $order->total - $order->shipping,
                     'MONEY_COLLECTION' => $money_colection,
                     'TYPE' => 1,
 
                 ]);
+
+
                 $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
                 $order->estimated_date = \Illuminate\Support\Carbon::now()->addHours((int)$date);
 

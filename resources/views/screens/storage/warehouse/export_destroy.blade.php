@@ -77,10 +77,12 @@
                         <div class="d-flex justify-content-start align-items-center" style="gap:8px">
                             <ul class="navbar-nav ">
                                 <li class="nav-item">
-                                    <div id="custom-search" class="top-search-bar">
+                                    <form action="">
+                                        <input type="hidden" name="type" value="{{$type}}">
+                                        <input type="hidden" name="field" value="{{$field}}">
                                         <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
                                                type="search" placeholder="Tìm kiếm..">
-                                    </div>
+                                    </form>
                                 </li>
                             </ul>
                             <button type="button" class="btn btn-primary btn-create">Xuất hủy</button>
@@ -149,7 +151,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$requests->withQueryString()->links()}}
+                    {{$requests->withQueryString()->links('layouts.custom.paginator')}}
                 </div>
             </div>
         </div>

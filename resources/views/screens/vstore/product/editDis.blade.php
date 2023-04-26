@@ -6,47 +6,41 @@
             <select name="product_id" id="product_id" readonly
                     class="form-control-lg form-control choose-product">
                 <option
-                    value="{{$product1->id}}" selected >{{$product1->name}}</option>
+                    value="{{$product1->id}}" selected>{{$product1->name}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="">Giá sản phẩm (đ):</label>
             <input disabled name="price" id="price"
-                   class="form-control form-control-lg" value="{{$product1->price}}">
+                   class="form-control form-control-lg" value="{{number_format($product1->price,0,'.','.')}}">
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu từ nhà cung cấp (%):</label>
-            {{-- <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
-                   class="form-control-lg form-control"> --}}
             <div class="input-group mb-3">
                 <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
-                   class="form-control-lg form-control">
+                       class="form-control-lg form-control">
                 <span class="input-group-text percent-to-vnd">
-                    {{number_format($product1->price * $product1->discount *10,0,'.','.')}} đ
+                    {{number_format($product1->price * ($product1->discount / 100),0,'.','.')}} đ
                 </span>
             </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Shop (%):</label>
-            {{-- <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
-                   class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
                 <input disabled name="discount_vshop" id="discount_vshop" value="{{$product1->discount_vShop}}"
-                   class="form-control form-control-lg">
+                       class="form-control form-control-lg">
                 <span class="input-group-text percent-to-vnd">
-                    {{number_format($product1->price * $product1->discount_vShop *10,0,'.','.')}} đ
+                    {{number_format($product1->price * ($product1->discount_vShop / 100),0,'.','.')}} đ
                 </span>
             </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm giảm giá (%):</label>
-            {{-- <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
-                   class="form-control form-control-lg"> --}}
             <div class="input-group mb-3">
-                <input name="discount" id="discount1" type="number" value="{{$discount->discount}}"
-                   class="form-control form-control-lg">
+                <input name="discount" id="discount1" type="text" value="{{$discount->discount}}"
+                       class="form-control form-control-lg number">
                 <span class="input-group-text percent-to-vnd">
-                    {{number_format($product1->price * $product1->discount *10,0,'.','.')}} đ
+                    {{number_format($product1->price * ($product1->discount / 100),0,'.','.')}} đ
                 </span>
             </div>
         </div>
@@ -86,6 +80,16 @@
         style: 'currency',
         currency: 'VND',
     });
+    document.querySelectorAll('.number').forEach(item => {
+        item.addEventListener("keypress", (e) => {
+            var regex = new RegExp("^[0-9.]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    })
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -193,7 +197,7 @@
         }
         const price1 = $('#price').val();
         const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
-        if(priceTrue > 0){
+        if (priceTrue > 0) {
             let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
             $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
         }
@@ -213,12 +217,12 @@
                     document.querySelector('#discount_ncc').value = result.discount;
                     document.querySelector('#discount_vshop').value = result.discount_vShop;
 
-                    if(result.discount > 0){
+                    if (result.discount > 0) {
                         const priceTrue = (result.price).replaceAll('.', '').replaceAll(',', '');
                         let subMoney1 = VND.format(priceTrue * result.discount / 100) || 0 + ' đ';
                         $('#discount_ncc').siblings(".percent-to-vnd").html(subMoney1);
                     }
-                    if(result.discount_vShop > 0){
+                    if (result.discount_vShop > 0) {
                         const priceTrue = (result.price).replaceAll('.', '').replaceAll(',', '');
                         let subMoney2 = VND.format(priceTrue * result.discount_vShop / 100) || 0 + ' đ';
                         $('#discount_vshop').siblings(".percent-to-vnd").html(subMoney2);

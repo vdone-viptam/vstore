@@ -115,10 +115,12 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <form>
-                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
-                                       type="search"
-                                       placeholder="Tìm kiếm..">
+                            <form action="">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search" placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
@@ -143,7 +145,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tên sản phẩm
+                            <th >Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -156,8 +158,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Giá sản phẩm
+                            <th class="white-space-140">
+                                Giá sản phẩm (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -170,8 +172,20 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giảm giá (nếu có)</th>
-                            <th>
+                            <th class="white-space-120">Giảm giá (%)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="white-space-120">
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.quantity')
@@ -185,13 +199,47 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tiền đặt cọc</th>
-                            <th>Tổng tiền</th>
-                            <th>Trạng thái</th>
-                            <th>Ngày tạo đơn</th>
-                            <th>
-                                Chức năng
+                            <th class="white-space-150">Tiền đặt cọc (đ)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'deposit_money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="deposit_money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="deposit_money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="deposit_money"></i>
+                                    @endif
+                                </span>
                             </th>
+                            <th class="white-space-150">Tổng tiền (đ)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="money"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="white-space-120">Trạng thái</th>
+                            <th>Ngày tạo đơn
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="white-space-50"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -199,14 +247,12 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->no}}</td>
-                                    <td>{{$order->product->name}}</td>
-                                    <td>{{number_format($order->product->price,0,'.','.')}} đ</td>
-                                    <td>{{(int)$order->discount}} %</td>
-                                    <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format(($order->total - ($order->total * $order->discount / 100)) * ($order->deposit_money / 100) ,0,'.','.')}}
-                                        đ
-                                    </td>
-                                    <td>{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
+                                    <td class="white-space-350">{{$order->product->name}}</td>
+                                    <td class="text-right">{{number_format($order->product->price,0,'.','.')}}</td>
+                                    <td class="text-right">{{(int)$order->discount}}</td>
+                                    <td class="text-right">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}</td>
                                     <td>
                                         @if($order->status == 1)
                                             <span class="text-green-600"> Đã hoàn thành</span>
@@ -235,20 +281,15 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{ $orders->withQueryString()->links() }}
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                        <form>
-                            <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 phần tử / trang
-                                    </option>
-                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 phần tử / trang
-                                    </option>
-                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 phần tử / trang
-                                    </option>
-                                </select>
-                            </div>
-                        </form>
+                    {{$orders->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -260,6 +301,8 @@
 
 @section('custom_js')
     <script>
+        let limit = document.getElementById('limit');
+
         $(document).ready(function() {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
@@ -274,10 +317,18 @@
                         document.location =
                             '{{ route('screens.manufacture.order.order', ['key_search' => $key_search]) }}&type=' +
                             orderBy +
-                            '&field=' + sort
+                            '&field=' + sort+'&limit={{$limit}}'
                     })
                 });
             });
+            limit.addEventListener('change', (e) => {
+                setTimeout(() => {
+                    document.location =
+                        '{{ route('screens.manufacture.order.order', ['key_search' => $key_search]) }}&type=' +
+                        '{{ $type }}' +
+                        '&field=' + '{{ $field }}' + '&limit=' + e.target.value
+                }, 200)
+            })
             document.querySelectorAll('.more-details').forEach(item => {
                 item.addEventListener('click', (e) => {
                     $.ajax({
@@ -288,7 +339,7 @@
                             if (result) {
                                 $("#no").val(result.no);
                                 $("#name").val(result.product.name);
-                                $("#price").val(result.product.price);
+                                $("#price").val(convertVND(result.product.price));
                                 const deposits = (result.total - (result.total * result
                                     .discount / 100)) * (result.deposit_money / 100);
                                 const total = result.total - (result.total * result

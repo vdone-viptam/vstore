@@ -480,7 +480,9 @@ class  VShopController extends Controller
      * API để thêm 1 Vshop
      *
      * @bodyParam  pdone_id id của Vshop
-     * @bodyParam  avatar url ảnh đại diện
+     * @bodyParam vshop_id mã user dạng string
+     * @bodyParam  avatar url ảnh đại diện có thể rỗng
+     * @bodyParam nick_name nick_name của vshop
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request)
@@ -1031,6 +1033,7 @@ class  VShopController extends Controller
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
             ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
             ->where('vshop.pdone_id', $vshop->pdone_id)
+            ->whereIn('vshop_products.status',[1,2])
             ->groupBy('categories.name')
             ->get();
         if ($cate) {

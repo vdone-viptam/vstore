@@ -37,9 +37,14 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <input type="search" name="key_search" value="{{$key_search}}"
-                                   class="form-control"
-                                   placeholder="Nhập từ khóa tìm kiếm">
+                            <form action="">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="search" name="key_search" value="{{$key_search}}"
+                                       class="form-control"
+                                       placeholder="Nhập từ khóa tìm kiếm">
+                            </form>
 
                         </div>
                     </li>
@@ -52,8 +57,8 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-150">Mã đơn hàng</th>
+                            <th class="white-space-300">Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -66,7 +71,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngành hàng
+                            <th class="white-space-130">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -79,7 +84,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giá sản phẩm
+                            <th class="white-space-90">Giá sản phẩm (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -92,7 +97,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-90">Số lượng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order_item.quantity')
                                         @if($type == 'desc')
@@ -105,7 +110,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th style="min-width: 250px">Giá trị đơn hàng
+                            <th class="white-space-90">Giá trị đơn hàng (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'total')
                                         @if($type == 'desc')
@@ -118,7 +123,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="min-width: 250px">Thời gian đặt hàng
+                            <th class="white-space-130">Thời gian đặt hàng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order.created_at')
                                         @if($type == 'desc')
@@ -131,7 +136,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thời gian hoàn thành
+                            <th class="white-space-130">Thời gian hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'order.estimated_date')
                                         @if($type == 'order.estimated_date')
@@ -144,7 +149,20 @@
                                     @endif
                                 </span>
                             </th>
-                            <th colspan="2" style="min-width: 250px">Chiết khấu nhận được
+                            <th class="white-space-130">Phần trăm chiết khấu nhận được
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'products.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.discount"></i>
+                                    @endif
+                             </span>
+                            </th>
+                            <th class="white-space-140">Chiết khấu nhận được (thành tiền)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
                                         @if($type == 'desc')
@@ -157,9 +175,7 @@
                                     @endif
                              </span>
                             </th>
-
-                            <th>
-                                Chi tiết
+                            <th class="white-space-50">
                             </th>
                         </tr>
                         </thead>
@@ -168,26 +184,26 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->no}}</td>
-                                    <td>{{$order->name}}</td>
-                                    <td>{{$order->cate_name}}</td>
-                                    <td>{{number_format($order->price,'0','.','.')}}</td>
-                                    <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format($order->total,'0','.','.')}}</td>
-                                    <td> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td>
+                                    <td class="white-space-300">{{$order->name}}</td>
+                                    <td class="white-space-130">{{$order->cate_name}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->price,'0','.','.')}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->total,'0','.','.')}}</td>
+                                    <td class="white-space-150"> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="white-space-130">
                                         @if($order->export_status == 4 && \Carbon\Carbon::parse($order->estimated_date)->diffInDays(\Carbon\Carbon::now()) >= 7)
                                             {{\Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i')}}
                                         @else
                                             Đơn hàng chưa hoàn thành
                                         @endif
                                     </td>
-                                    <td>
-                                        {{$order->discount.' %'}}
+                                    <td class="text-right">
+                                        {{$order->discount}}
                                     </td>
-                                    <td>
-                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}} đ
+                                    <td class="text-right">
+                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}}
                                     </td>
-                                    <td><a href="#" onclick="showDetail({{$order->id}})" class="btn btn-link">Chi
+                                    <td class="white-space-50"><a href="#" onclick="showDetail({{$order->id}})" class="btn btn-link">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
@@ -201,12 +217,16 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$orders->withQueryString()->links()}}
-                    <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử / trang</option>
-                    </select>
+                    {{$orders->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="mt-4 ml-4">
+                        <div class="form-group">
+                            <select class="form-control" id="limit">
+                                <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
 

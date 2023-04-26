@@ -88,7 +88,9 @@ class FinanceController extends Controller
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
+        $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['field'] = $field;
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['type'] = $type;
         return view('screens.storage.finance.history', $this->v);
     }
@@ -97,12 +99,15 @@ class FinanceController extends Controller
     {
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'id';
-        // dd($type,$field);
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
         $this->v['field'] = $field;
+        $this->v['limit'] = $request->limit ?? 10;
+
         $this->v['type'] = $type;
         return view('screens.storage.finance.revenue', $this->v);
     }

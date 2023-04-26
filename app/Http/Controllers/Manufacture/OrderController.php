@@ -20,6 +20,7 @@ class OrderController extends Controller
     {
         $this->v = [];
     }
+
     public function index(Request $request)
     {
         $this->v['field'] = $request->field ?? 'products.name';
@@ -45,13 +46,14 @@ class OrderController extends Controller
       
         $orders = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name','order_item.price')
+            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total',DB::raw('total * (100 - products.discount - products.discount_vShop) / 100 as money'))
             ->where('order.status', '!=', 2)->groupBy('order.id')
-            ->where('products.user_id',Auth::id())
+            ->where('products.user_id', Auth::id())
+            ->where('products.discount', '!=', null)
+            ->where('products.discount_vShop', '!=', null)
             ->groupBy('order.id')
             ->orderBy($this->v['field'], $this->v['type'])
             ->paginate($this->v['limit']);
-
         if ($key_search && strlen(($key_search) > 0)) {
             $orders->where(function ($sub) use ($key_search) {
                 $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
@@ -80,13 +82,8 @@ class OrderController extends Controller
             'orderItem.product',
             'orderItem.vshop',
             'orderItem.warehouse',
-            'orderItem'
-
-        ])->select(
-            'no',
-            'id',
-            'export_status',
-            'created_at'
+            'orderItem'])->select(
+            'no', 'id', 'export_status', 'created_at', 'total'
         )
             ->where('order.status', '!=', 2)
             ->where('export_status', '!=', 4);
@@ -115,27 +112,12 @@ class OrderController extends Controller
         $key_search = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
-            ->select(
-                'pre_order_vshop.status',
-                'quantity',
-                'place_name',
-                'fullname',
-                'phone',
-                'address',
-                'no',
-                'total',
-                'pre_order_vshop.discount',
-                'pre_order_vshop.deposit_money',
-                'pre_order_vshop.created_at',
-                'product_id',
-                'pre_order_vshop.id'
-            )
-            ->join(
-                'products',
-                'pre_order_vshop.product_id',
-                '=',
-                'products.id'
-            )
+            ->select('pre_order_vshop.status', 'quantity',
+                'place_name', 'fullname', 'phone', 'address', 'no',
+                'total', 'pre_order_vshop.discount',DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id',DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
+            ->join('products', 'pre_order_vshop.product_id', '=',
+                'products.id')
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if ($key_search && strlen(($key_search) > 0)) {
@@ -161,28 +143,12 @@ class OrderController extends Controller
         $key_search = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
-            ->select(
-                'pre_order_vshop.status',
-                'quantity',
-                'place_name',
-                'fullname',
-                'phone',
-                'address',
-                'no',
-                'total',
-                'pre_order_vshop.discount',
-                'pre_order_vshop.deposit_money',
-                'pre_order_vshop.created_at',
-                'product_id',
-                'pre_order_vshop.id',
-
-            )
-            ->join(
-                'products',
-                'pre_order_vshop.product_id',
-                '=',
-                'products.id'
-            )
+            ->select('pre_order_vshop.status', 'quantity',
+                'place_name', 'fullname', 'phone', 'address', 'no',
+                'total', 'pre_order_vshop.discount', DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id',DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
+            ->join('products', 'pre_order_vshop.product_id', '=',
+                'products.id')
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.status', 3)
             ->orderBy($this->v['field'], $this->v['type']);

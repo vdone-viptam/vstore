@@ -10,9 +10,61 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
+
     protected $fillable = [
-        "name"
+        "id",
+        "publish_id",
+        "discount",
+        "discount_vShop",
+        "name",
+        "category_id",
+        "description",
+        "images",
+        "brand",
+        "weight",
+        "length",
+        "height",
+        "packing_type",
+        "volume",
+        "manufacturer_name",
+        "manufacturer_address",
+        "import_unit",
+        "price",
+        "unit",
+        "min_product_sale",
+        "prepay",
+        "payment_on_delivery",
+        "status",
+        "admin_confirm_date",
+        "vstore_confirm_date",
+        "amount_product_sold",
+        "vstore_id",
+        "user_id",
+        "origin",
+        "with",
+        "sku_id",
+        "note",
+        "amount_product",
+        "import_date",
+        "vat",
+        "code",
+        "unit_name",
+        "unit_images",
+        "video",
+        "material",
+        "percent_discount",
+        "import_address",
+        "view",
+        "number",
+        "deposit_money",
+        "type_pay",
+        "short_content",
+        "availability_status",
+        "created_at",
+        "updated_at",
+
     ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

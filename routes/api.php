@@ -40,7 +40,8 @@ Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, '
 //        "req" => $req
 //    ]);
 //});
-
+Route::post('/duyet',[\App\Http\Controllers\TestController::class,'tuyet']);
+Route::post('/hoan-thanh',[\App\Http\Controllers\TestController::class,'tuyethoanthanh']);
 //Route::get('/noti/{order_id}', [\App\Http\Controllers\PaymentMethod9PayController::class, 'noti']);
 Route::prefix('bill')->group(function () {
     Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
@@ -57,6 +58,8 @@ Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostC
 //});
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
+
+//    Route::post('wallet-update',[\App\Http\Controllers\Api\WalletController::class,'updateStatus']);
 
     Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
     Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
@@ -280,7 +283,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
 
 //    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
-//    Route::get('/chia',[\App\Http\Controllers\TestController::class,'chia']);
+    Route::get('/chia',[\App\Http\Controllers\TestController::class,'testchia']);
 
 });
 

@@ -191,7 +191,7 @@
 <script src="{{asset('asset/assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/multi-select/js/jquery.multi-select.js')}}"></script>
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
-<script src="{{asset('asset/js/main.js')}}"></script>
+
 <script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/charts-bundle/Chart.bundle.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/charts-bundle/chartjs.js')}}"></script>
@@ -202,6 +202,7 @@
 @yield('custom_js')
 
 <script>
+
     function convertDate(inputFormat) {
         function pad(s) {
             return (s < 10) ? '0' + s : s;
@@ -211,16 +212,7 @@
         return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
     }
 
-    document.querySelectorAll('.number').forEach(item => {
-        item.addEventListener("keypress", (e) => {
-            var regex = new RegExp("^[0-9.]+$");
-            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-            if (!regex.test(key)) {
-                event.preventDefault();
-                return false;
-            }
-        });
-    })
+
 
     document.querySelectorAll('.number').forEach(item => {
         item.addEventListener("keyup", (e) => {
@@ -231,6 +223,7 @@
 
 
 </script>
+<script src="{{asset('asset/js/main.js')}}"></script>
 
 <script type="text/javascript">
     $.ajaxSetup({

@@ -35,19 +35,13 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/request-confirm*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu chưa xét xét
-                                        duyệt</a>
+                                       href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu chưa xét duyệt sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/requestAll*')) ? 'active1' : '' }}"
                                        id="addSp"
                                        href="{{route('screens.vstore.product.requestAll')}}">Quản lý yêu cầu xét duyệt
                                         sản phẩm</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/request-all*')) ? 'active1' : '' }}"
-                                       id="addSp"
-                                       href="{{route('screens.vstore.product.requestAll')}}"></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('discount*')) ? 'active1' : '' }}"
@@ -94,24 +88,24 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#"
-                           data-toggle="collapse" aria-expanded="{{ (request()->is('finances*')) ? 'true' : 'false' }}"
+                        <a class="nav-link {{ (request()->is('finance*')) ? 'active' : '' }}" href="#"
+                           data-toggle="collapse" aria-expanded="{{ (request()->is('finance*')) ? 'true' : 'false' }}"
                            data-target="#submenu-6" aria-controls="submenu-6"><i
                                 class="fas fa-fw fa-dollar-sign"></i>
                             Tài chính</a>
                         <div id="submenu-6"
-                             class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                             class="{{ (request()->is('finance*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('finances')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('finance')) ? 'active1' : '' }}"
                                        href="{{ route('screens.vstore.finance.index') }}">Ví</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('finances/history')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('finance/history')) ? 'active1' : '' }}"
                                        href="{{ route('screens.vstore.finance.history') }}">Yêu cầu rút tiền</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('finances/revenue')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('finance/revenue')) ? 'active1' : '' }}"
                                        href="{{ route('screens.vstore.finance.revenue') }}">Lịch sử biến động số
                                         dư</a>
                                 </li>
