@@ -403,17 +403,7 @@ class ProductController extends Controller
                     'TYPE' => 1,
 
                 ]);
-                $da = [
-                    'SENDER_DISTRICT' => $warehouse->district_id,
-                    'SENDER_PROVINCE' => $warehouse->city_id,
-                    'RECEIVER_DISTRICT' => $order->district_id,
-                    'RECEIVER_PROVINCE' => $order->province_id,
-                    'PRODUCT_TYPE' => 'HH',
-                    'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
-                    'PRODUCT_PRICE' => $order->total - $order->shipping,
-                    'MONEY_COLLECTION' => $money_colection,
-                    'TYPE' => 1,
-                ];
+
 
                 $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
                 $order->estimated_date = \Illuminate\Support\Carbon::now()->addHours((int)$date);
