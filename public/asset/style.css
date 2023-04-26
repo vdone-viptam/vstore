@@ -419,78 +419,100 @@ address {}
 
 /* custom table */
 
+table thead th{
+    vertical-align: middle !important;
+    /* text-align: center; */
+}
 
 .white-space-50{
     white-space: unset !important;
     width: 50px !important;
     min-width: 50px !important;
+
+    gap: 4px;
 }
 .white-space-80{
+
+    gap: 4px;
     white-space: unset !important;
     width: 80px !important;
     min-width: 80px !important;
 }
 .white-space-90{
+
+    gap: 4px;
     white-space: unset !important;
     width: 90px !important;
     min-width: 90px !important;
 }
 .white-space-100{
+    gap: 4px;
     white-space: unset !important;
     width: 100px !important;
     min-width: 100px !important;
 }
 .white-space-110{
+    gap: 4px;
     white-space: unset !important;
     width: 110px !important;
     min-width: 110px !important;
 }
 .white-space-120{
+    gap: 4px;
     white-space: unset !important;
     width: 120px !important;
     min-width: 120px !important;
 }
 .white-space-130{
+    gap: 4px;
     white-space: unset !important;
     width: 130px !important;
     min-width: 130px !important;
 }
 .white-space-140{
+    gap: 4px;
     white-space: unset !important;
     width: 140px !important;
     min-width: 140px !important;
 }
 .white-space-150{
+    gap: 4px;
     white-space: unset !important;
     width: 150px !important;
     min-width: 150px !important;
 }
 .white-space-200{
+    gap: 4px;
     white-space: unset !important;
     width: 200px !important;
     min-width: 200px !important;
 }
 .white-space-300{
+    gap: 4px;
     white-space: unset !important;
     width: 300px !important;
     min-width: 300px !important;
 }
 .white-space-350{
+    gap: 4px;
     white-space: unset !important;
     width: 350px !important;
     min-width: 350px !important;
 }
 .white-space-400{
+    gap: 4px;
     white-space: unset !important;
     width: 400px !important;
     min-width: 400px !important;
 }
 .white-space-450{
+    gap: 4px;
     white-space: unset !important;
     width: 450px !important;
     min-width: 450px !important;
 }
 .white-space-500{
+    gap: 4px;
     white-space: unset !important;
     width: 500px !important;
     min-width: 500px !important;
