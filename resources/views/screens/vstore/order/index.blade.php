@@ -202,11 +202,17 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$orders->withQueryString()->links()}}
-                    <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
-                    </select>
+                    <div class="float-right mt-4 ml-3">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
 
