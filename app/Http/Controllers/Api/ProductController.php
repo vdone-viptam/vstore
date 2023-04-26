@@ -500,7 +500,7 @@ class ProductController extends Controller
             'id', 'name', 'images', 'price', 'discount_vShop as discountVstore',
             'type_pay', 'video', 'description as content', 'user_id', 'category_id',
             'amount_product_sold', 'short_content', 'vat',
-            DB::raw("(SELECT IFNULL(AVG(point_evaluation),0) FROM points WHERE product_id = $id) as rating"))
+            DB::raw("(SELECT ROUND( IFNULL(AVG(point_evaluation),0),1) FROM points WHERE product_id = $id) as rating"))
             ->where('availability_status', 1)
             ->first();
 
