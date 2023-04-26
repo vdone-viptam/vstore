@@ -105,13 +105,14 @@ class FinanceController extends Controller
     {
         $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
-        $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
         $this->v['field'] = $field;
         $this->v['type'] = $type;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+
         return view('screens.vstore.finance.revenue', $this->v);
     }
 
