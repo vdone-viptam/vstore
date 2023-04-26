@@ -35,8 +35,8 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['products'] = Product::query()->select('products.id',
-            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name','discount',
-            'amount_product_sold','products.vat')
+            'publish_id', 'images', 'products.name', 'category_id', 'price', 'products.status', 'vstore_id', 'categories.name as cate_name', 'discount',
+            'amount_product_sold', 'products.vat')
             ->selectSub('select name from users where id = products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id= products.id', 'amount')
             ->join("categories", 'products.category_id', '=', 'categories.id');
@@ -121,7 +121,7 @@ class ProductController extends Controller
             'height' => 'required|max:13',
             'packing_type' => 'required',
             'images' => 'required',
-            'video' => 'required|max:15360',
+            'video' => 'required',
             'with' => 'required|max:13',
             'volume' => 'max:15',
             'manufacturer_name' => 'max:255',
@@ -162,7 +162,6 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
             'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
             'video.required' => 'Video sản phẩm bắt buộc chọn',
-            'video.max' => 'Video sản phẩm không vượt quá 15MB',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -195,20 +194,7 @@ class ProductController extends Controller
             $product->status = 0;
             $product->sku_id = $request->sku_id;
             // Upload Image
-            if ($request->hasFile('video')) {
-                $filenameWithExt = $request->file('video')->getClientOriginalName();
-                //Get just filename
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                // Get just ext
-                $extension = $request->file('video')->getClientOriginalExtension();
-                // Filename to store
-                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
-
-                $path = str_replace('public/', '', $path);
-
-                $product->video = 'storage/' . $path;
-            }
+            $product->video = $request->video;
 
             while (true) {
                 $code = 'VN-' . Str::random(10);
@@ -381,7 +367,7 @@ class ProductController extends Controller
                 'vat' => 'required|min:1|max:99',
                 'moneyv' => 'array',
                 'moneyv.*' => function ($attribute, $value, $fail) use ($request) {
-                    if ( $request->discountA + $value > 100 || $request->discountA + $value < 0 ) {
+                    if ($request->discountA + $value > 100 || $request->discountA + $value < 0) {
                         $fail('Phần trăm chiết khấu ko hợp lệ');
                     }
                 },
@@ -552,7 +538,7 @@ class ProductController extends Controller
             'description' => 'required',
             'short_content' => 'required|max:500',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'video' => 'max:15360',
+            'video' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -580,7 +566,7 @@ class ProductController extends Controller
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
             'images.image' => 'File nhập không phải định dạng ảnh',
             'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
-            'video.max' => 'Video sản phẩm không vượt quá 15MB',
+            'video.required' => 'Video sản phẩm bắt buộc chọn',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
@@ -603,7 +589,7 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ]);
         if ($validator->fails()) {
-           dd($validator->errors());
+            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         try {
@@ -631,23 +617,10 @@ class ProductController extends Controller
             $product->sku_id = $request->sku_id;
             $product->status = 0;
             // Upload Image
-            if ($request->hasFile('video')) {
-                $filenameWithExt = $request->file('video')->getClientOriginalName();
-                //Get just filename
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                // Get just ext
-                $extension = $request->file('video')->getClientOriginalExtension();
-                // Filename to store
-                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                $path = $request->file('video')->storeAs('public/products', $fileNameToStore);
-
-                $path = str_replace('public/', '', $path);
-
-                $product->video = 'storage/' . $path;
-            }
+            $product->video = $request->video;
 
 
-            if ($request->hasFile('images') && count($request->file('images')) > 0 ) {
+            if ($request->hasFile('images') && count($request->file('images')) > 0) {
                 $photo_gallery = [];
                 foreach ($request->file('images') as $image) {
                     $filenameWithExt = $image->getClientOriginalName();

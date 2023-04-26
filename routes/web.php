@@ -68,8 +68,8 @@ Route::get('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 
 Route::post('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
 Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
 Route::get('check-date', [\App\Http\Controllers\Manufacture\ProductController::class, 'checkDate'])->name('check_date');
-// Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
-//role_id = 1 Quyền Admin
+Route::post('chunk-store', [\App\Http\Controllers\ChunkFileController::class, 'chunkStore'])->name('chunk.store');
+
 Route::group(['domain' => config('domain.admin')], function () {
     Route::get('test', function () {
 //        $citys = \App\Models\Province::all();
