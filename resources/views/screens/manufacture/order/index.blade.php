@@ -1,7 +1,8 @@
 @extends('layouts.manufacture.main')
-@section('page_title', 'Tất cả đơn hàng')
+@section('page_title', 'Danh sách đơn hàng khách mua sản phẩm')
 @section('modal')
-    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -37,7 +38,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý đơn hàng </a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng</li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng khách mua sản phẩm</li>
                         </ol>
                     </nav>
                 </div>
@@ -61,7 +62,8 @@
                                 <input type="hidden" name="type" value="{{ $type }}">
                                 <input type="hidden" name="field" value="{{ $field }}">
                                 <input type="hidden" name="limit" value="{{ $limit }}">
-                                <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control" type="search"
+                                <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control"
+                                       type="search"
                                        placeholder="Tìm kiếm..">
                             </form>
 
@@ -79,43 +81,24 @@
                         <tr>
                             <th>
                                 Mã đơn hàng
-                                <span style="float: right;cursor: pointer">
-                                        @if ($field == 'order.no')
-                                        @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="order.no"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="order.no"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="order.no"></i>
-                                    @endif
-                                    </span>
+
                             </th>
                             <th>
                                 Tên sản phẩm
-
-                                <span style="float: right;cursor: pointer">
-                                        @if ($field == 'products.name')
-                                        @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                    </span>
                             </th>
                             <th>Tình trạng
+                                <span style="float: right;cursor: pointer">
+
                                 @if ($field == 'order.export_status')
-                                    @if ($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="order.export_status"></i>
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order.export_status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order.export_status"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="order.export_status"></i>
+                                        <i class="fas fa-sort sort" data-sort="order.export_status"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="order.export_status"></i>
-                                @endif
+                                </span>
                             </th>
                             <th>
                                 Giá bán
@@ -133,28 +116,78 @@
                             </th>
                             <th>
                                 Số lượng
-
+                                <span style="float: right;cursor: pointer">
+                                        @if ($field == 'order_item.quantity')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order_item.quantity"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order_item.quantity"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="order_item.quantity"></i>
+                                    @endif
+                                    </span>
                             </th>
                             <th>Kho hàng
 
                             </th>
                             <th>Ngày đặt hàng
-
+                                <span style="float: right;cursor: pointer">
+                                        @if ($field == 'order.created_at')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order.created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order.created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="order.created_at"></i>
+                                    @endif
+                                    </span>
                             </th>
-                            <th>
-                                Ngày hoàn thành
-
+                            <th style="min-width: 250px">
+                                Ngày dự kiến giao hàng
+                                <span style="float: right;cursor: pointer">
+                                        @if ($field == 'order.estimated_date')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order.estimated_date"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order.estimated_date"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="order.estimated_date"></i>
+                                    @endif
+                                    </span>
                             </th>
                             <th>
                                 Giá trị đơn hàng
-
+                                <span style="float: right;cursor: pointer">
+                                        @if ($field == 'order.total')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order.total"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order.total"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="order.total"></i>
+                                    @endif
+                                    </span>
                             </th>
                             <th>
                                 V-Shop bán hàng
                             </th>
-                            <th>
+                            <th style="min-width: 250px">
                                 Giá trị trừ chiết khấu
-
+                                <span style="float: right;cursor: pointer">
+                                        @if ($field == 'money')
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="money"></i>
+                                    @endif
+                                    </span>
                             </th>
                         </tr>
                         </thead>
@@ -179,23 +212,23 @@
                                     <td>{{ number_format($order->orderItem[0]->price, '0', '.', '.') }} đ</td>
                                     <td>{{ $order->orderItem[0]->quantity }}</td>
                                     <td>{{ $order->orderItem[0]->warehouse->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y h:i') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
                                     <td>
-                                        @if ($order->export_status == 4)
-                                            {{ \Carbon\Carbon::now()->format('d/m/Y h:i') }}
+                                        @if($order->export_status == 2 || $order->export_status == 4)
+                                            {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i') }}
                                         @else
                                             Chưa xác định
                                         @endif
                                     </td>
                                     <td>
-                                        {{ number_format($order->orderItem[0]->price * $order->orderItem[0]->quantity, 0, '.', '.') }}
+                                        {{ number_format($order->total, 0, '.', '.') }}
                                         đ
                                     </td>
                                     <td>
                                         {{ $order->orderItem[0]->vshop->name ?? 'Viptam' }}
                                     </td>
                                     <td>
-                                        {{ number_format(($order->orderItem[0]->price * $order->orderItem[0]->quantity * (100 - $order->orderItem[0]->product->discount - $order->orderItem[0]->discount_vShop)) / 100, 0, '.', '.') }}
+                                        {{ number_format($order->money , 0, '.', '.') }}
                                         đ
                                     </td>
                                 </tr>
@@ -205,7 +238,6 @@
                                 <td colspan="11">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
-
 
 
                         </tbody>
@@ -219,12 +251,9 @@
                         <form>
                             <div class="form-group">
                                 <select class="form-control" id="limit">
-                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 hàng / trang
-                                    </option>
-                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 hàng / trang
-                                    </option>
-                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 hàng / trang
-                                    </option>
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
                                 </select>
                             </div>
                         </form>
@@ -241,7 +270,7 @@
     <script>
         let limit = document.getElementById('limit');
         console.log(limit)
-        $(document).ready(function() {
+        $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {
                     sort
@@ -257,7 +286,7 @@
                         document.location =
                             '{{ route('screens.manufacture.order.index', ['key_search' => $key_search]) }}&type=' +
                             orderBy +
-                            '&field=' + sort
+                            '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
             });

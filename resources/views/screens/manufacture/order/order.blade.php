@@ -170,7 +170,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giảm giá (nếu có)</th>
+                            <th>Giảm giá (nếu có)
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -185,10 +197,46 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tiền đặt cọc</th>
-                            <th>Tổng tiền</th>
+                            <th>Tiền đặt cọc
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'deposit_money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="deposit_money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="deposit_money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="deposit_money"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th>Tổng tiền
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'money')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="money"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>Trạng thái</th>
-                            <th>Ngày tạo đơn</th>
+                            <th>Ngày tạo đơn
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th>
                                 Chức năng
                             </th>
@@ -203,7 +251,7 @@
                                     <td>{{number_format($order->product->price,0,'.','.')}} đ</td>
                                     <td>{{(int)$order->discount}} %</td>
                                     <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format(($order->total - ($order->total * $order->discount / 100)) * ($order->deposit_money / 100) ,0,'.','.')}}
+                                    <td>{{number_format($order->deposit_money ,0,'.','.')}}
                                         đ
                                     </td>
                                     <td>{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
@@ -240,12 +288,9 @@
                         <form>
                             <div class="form-group">
                                 <select class="form-control" id="limit">
-                                    <option value="10" {{ $limit == 10 ? 'selected' : '' }}>10 hàng / trang
-                                    </option>
-                                    <option value="25" {{ $limit == 25 ? 'selected' : '' }}>25 hàng / trang
-                                    </option>
-                                    <option value="50" {{ $limit == 50 ? 'selected' : '' }}>50 hàng / trang
-                                    </option>
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
                                 </select>
                             </div>
                         </form>
@@ -260,6 +305,8 @@
 
 @section('custom_js')
     <script>
+        let limit = document.getElementById('limit');
+
         $(document).ready(function() {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
@@ -274,10 +321,18 @@
                         document.location =
                             '{{ route('screens.manufacture.order.order', ['key_search' => $key_search]) }}&type=' +
                             orderBy +
-                            '&field=' + sort
+                            '&field=' + sort+'&limit={{$limit}}'
                     })
                 });
             });
+            limit.addEventListener('change', (e) => {
+                setTimeout(() => {
+                    document.location =
+                        '{{ route('screens.manufacture.order.order', ['key_search' => $key_search]) }}&type=' +
+                        '{{ $type }}' +
+                        '&field=' + '{{ $field }}' + '&limit=' + e.target.value
+                }, 200)
+            })
             document.querySelectorAll('.more-details').forEach(item => {
                 item.addEventListener('click', (e) => {
                     $.ajax({
@@ -288,7 +343,7 @@
                             if (result) {
                                 $("#no").val(result.no);
                                 $("#name").val(result.product.name);
-                                $("#price").val(result.product.price);
+                                $("#price").val(convertVND(result.product.price));
                                 const deposits = (result.total - (result.total * result
                                     .discount / 100)) * (result.deposit_money / 100);
                                 const total = result.total - (result.total * result

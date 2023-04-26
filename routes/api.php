@@ -40,7 +40,8 @@ Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, '
 //        "req" => $req
 //    ]);
 //});
-
+Route::post('/duyet',[\App\Http\Controllers\TestController::class,'tuyet']);
+Route::post('/hoan-thanh',[\App\Http\Controllers\TestController::class,'tuyethoanthanh']);
 //Route::get('/noti/{order_id}', [\App\Http\Controllers\PaymentMethod9PayController::class, 'noti']);
 Route::prefix('bill')->group(function () {
     Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);

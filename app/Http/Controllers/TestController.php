@@ -202,7 +202,19 @@ class TestController extends Controller
         }
         return 'Ok rồi đấy';
     }
-
+    public function tuyethoanthanh(Request $request)
+    {
+//        $request->order_id =
+        if (empty($request->order_id)) {
+            return 'Nhập order_id';
+        }
+        $order = Order::Where('no', $request->order_id)->where('export_status', '!=', 4)->first();
+        if ($order) {
+            $order->updated_at = Carbon::now()->addDay(-7);
+            $order->save();
+        }
+        return 'Ok rồi đấy';
+    }
     public function testchia()
     {
 

@@ -416,14 +416,7 @@
                 dataType: "json",
                 encode: true,
             }).done(function (data) {
-                var href = window.location.href
-                var body = $("body").html()
-                $("body").html(`${data.data}`);
-                setTimeout(() => {
-                    window.print();
-                    $("body").html(`${body}`);
-                    window.location.href = `${href}`
-                }, 1000);
+                window.open( data.href, "_blank");
             })
 
         }

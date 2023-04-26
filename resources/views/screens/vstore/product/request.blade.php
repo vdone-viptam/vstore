@@ -26,7 +26,7 @@
     </div>
 @endsection
 
-@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận')
+@section('page_title','Quản lý yêu cầu chưa xét duyệt')
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -39,8 +39,7 @@
                             <li class="breadcrumb-item"><a href="{{route('screens.vstore.product.request')}}"
                                                            class="breadcrumb-link">Sản phẩm</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản phẩm
-                                chưa xác nhận
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu chưa xét duyệt sản phẩm
                             </li>
                         </ol>
                     </nav>
@@ -53,7 +52,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt sản phẩm chưa xác nhận</h5>
+                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu chưa xét duyệt sản phẩm</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -202,11 +201,17 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$requests->withQueryString()->links()}}
-                    <select id="limit" class="form-control col-1">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
-                    </select>
+                    <div class="float-right mt-4 ml-3">
+                        <form>
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 phần tử/trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 phần tử/trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 phần tử/trang</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
 
