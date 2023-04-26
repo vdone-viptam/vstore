@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     private $v;
+
     public function __construct()
     {
         $this->v = [];
@@ -28,25 +29,9 @@ class OrderController extends Controller
         $this->v['limit'] = $request->limit ?? 10;
         $key_search = $request->key_search ?? '';
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        //     $orders = Order::with([
-        //         'orderItem.product',
-        //         'orderItem.vshop',
-        //         'orderItem.warehouse',
-        //         'orderItem',
-
-        //     ])->select(
-        //         'no',
-        //         'id',
-        //         'export_status',
-        //         'created_at'
-        //     )
-        //         ->where('order.status', '!=', 2)
-          
-        // ;
-      
         $orders = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total',DB::raw('total * (100 - products.discount - products.discount_vShop) / 100 as money'))
+            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total', DB::raw('total * (100 - products.discount - products.discount_vShop) / 100 as money'))
             ->where('order.status', '!=', 2)->groupBy('order.id')
             ->where('products.user_id', Auth::id())
             ->where('products.discount', '!=', null)
@@ -65,7 +50,6 @@ class OrderController extends Controller
                     ->orWhere('no', 'like', '%' . $key_search . '%');
             });
         }
-        // $orders = $orders->orderBy('id', 'desc')->paginate(($this->v['limit']));
         return view('screens.manufacture.order.index', $this->v, ['orders' => $orders]);
     }
 
@@ -114,8 +98,8 @@ class OrderController extends Controller
         $this->v['orders'] = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
                 'place_name', 'fullname', 'phone', 'address', 'no',
-                'total', 'pre_order_vshop.discount',DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
-                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id',DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
+                'total', 'pre_order_vshop.discount', DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id', DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
@@ -123,7 +107,7 @@ class OrderController extends Controller
         if ($key_search && strlen(($key_search) > 0)) {
             $this->v['orders'] = $this->v['orders']->where(function ($sub) use ($key_search) {
                 $sub->where('products.name', 'like', '%' . $key_search . '%')
-                    ->orWhere('no', 'like', '%' . $key_search . '%');
+                    ->orWhere('no', $key_search);
             });
         }
         $this->v['orders'] = $this->v['orders']->paginate($limit);;
@@ -146,7 +130,7 @@ class OrderController extends Controller
             ->select('pre_order_vshop.status', 'quantity',
                 'place_name', 'fullname', 'phone', 'address', 'no',
                 'total', 'pre_order_vshop.discount', DB::raw('(total - (total * pre_order_vshop.discount / 100)) * (pre_order_vshop.deposit_money / 100) as deposit_money'),
-                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id',DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
+                'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id', DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
