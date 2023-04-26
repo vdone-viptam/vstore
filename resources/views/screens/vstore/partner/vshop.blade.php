@@ -118,8 +118,8 @@
                                     <td class="td_name">{{$value->nick_name}}</td>
                                     <td>{{$value->amount_product}}</td>
                                     <td>{{$value->count_order }}</td>
-                                    <td>{{round($value->doanh_thu,0)}}</td>
-                                    <td>{{round($value->chiet_khau,0)}}</td>
+                                    <td>{{number_format(round($value->doanh_thu,0),0,'.','.')}} đ</td>
+                                    <td>{{$value->chiet_khau}} %</td>
 
 
                                 </tr>
