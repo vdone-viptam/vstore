@@ -181,16 +181,8 @@
     </div>
 @endsection
 @section('content')
-
-    <!-- ============================================================== -->
-    <!-- pageheader  -->
-    <!-- ============================================================== -->
-
-    <!-- ============================================================== -->
-    <!-- end pageheader  -->
-    <!-- ============================================================== -->
     <div class="row ">
-        <div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 col-12">
+        <div class="col-3">
             <div class="card profile">
                 <form action="{{route('screens.vstore.account.upload',['id' => $infoAccount->id])}}"
                       id="form" method="POST" enctype="multipart/form-data">
@@ -235,7 +227,6 @@
 
             </div>
         </div>
-
         <div class="col-xl-9 col-lg-7 col-md-12 col-sm-12 col-12">
             <div class="influence-profile-content pills-regular">
                 <div class="card">
@@ -424,9 +415,10 @@
 
             </div>
         </div>
+
     </div>
 
-    <!-- Modal tax-code -->
+
     <div class="modal fade" id="modal-tax-code" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
