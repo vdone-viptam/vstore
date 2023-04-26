@@ -59,6 +59,8 @@ Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostC
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
+//    Route::post('wallet-update',[\App\Http\Controllers\Api\WalletController::class,'updateStatus']);
+
     Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
     Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
     Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getWards']);
@@ -281,7 +283,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
 
 //    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
-//    Route::get('/chia',[\App\Http\Controllers\TestController::class,'chia']);
+    Route::get('/chia',[\App\Http\Controllers\TestController::class,'testchia']);
 
 });
 

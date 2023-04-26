@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
@@ -76,7 +79,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">Doanh thu
+                            <th class="white-space-200">Doanh thu (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'doanh_thu')
                                         @if($type == 'desc')
@@ -88,21 +91,7 @@
                                         <i class="fas fa-sort sort" data-sort="doanh_thu"></i>
                                     @endif
                                 </span>
-                                                        </th>
-                                                        <th class="white-space-200">Chiết khấu nhận được
-                                                            <span style="float: right;cursor: pointer">
-                                                            @if($field == 'chiet_khau')
-                                                                    @if($type == 'desc')
-                                                                        <i class="fa-solid fa-sort-down sort" data-sort="chiet_khau"></i>
-                                                                    @else
-                                                                        <i class="fa-solid fa-sort-up sort" data-sort="chiet_khau"></i>
-                                                                    @endif
-                                                                @else
-                                                                    <i class="fas fa-sort sort" data-sort="chiet_khau"></i>
-                                                                @endif
-                                                            </span>
-                                                        </th>
-{{--                            <th>Thao Tác</th>--}}
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -115,9 +104,6 @@
                                     <td class="text-right">{{$value->amount_product}}</td>
                                     <td class="text-right">{{$value->count_order }}</td>
                                     <td class="text-right">{{number_format(round($value->doanh_thu,0),0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format(round($value->chiet_khau,0),0,'.','.')}}</td>
-
-
                                 </tr>
                             @endforeach
                         @else
@@ -130,7 +116,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$vshop->withQueryString()->links()}}
+                    {{$vshop->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="mt-4">
                         <form>
                             <div class="form-group">

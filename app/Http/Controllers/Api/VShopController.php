@@ -1033,6 +1033,7 @@ class  VShopController extends Controller
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')
             ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
             ->where('vshop.pdone_id', $vshop->pdone_id)
+            ->whereIn('vshop_products.status',[1,2])
             ->groupBy('categories.name')
             ->get();
         if ($cate) {

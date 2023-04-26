@@ -37,9 +37,14 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <input type="search" name="key_search" value="{{$key_search}}"
-                                   class="form-control"
-                                   placeholder="Nhập từ khóa tìm kiếm">
+                            <form action="">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="search" name="key_search" value="{{$key_search}}"
+                                       class="form-control"
+                                       placeholder="Nhập từ khóa tìm kiếm">
+                            </form>
 
                         </div>
                     </li>
@@ -79,7 +84,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-140">Giá sản phẩm (đ)
+                            <th class="white-space-90">Giá sản phẩm (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -105,7 +110,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th class="white-space-150">Giá trị đơn hàng (đ)
+                            <th class="white-space-90">Giá trị đơn hàng (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'total')
                                         @if($type == 'desc')
@@ -144,7 +149,20 @@
                                     @endif
                                 </span>
                             </th>
-                            <th colspan="2" class="white-space-130">Chiết khấu nhận được
+                            <th class="white-space-130">Phần trăm chiết khấu nhận được
+                                <span style="float: right;cursor:pointer">
+                                    @if($field == 'products.discount')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.discount"></i>
+                                    @endif
+                             </span>
+                            </th>
+                            <th class="white-space-140">Chiết khấu nhận được (thành tiền)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
                                         @if($type == 'desc')
@@ -157,7 +175,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th>
+                            <th class="white-space-50">
                             </th>
                         </tr>
                         </thead>
@@ -168,9 +186,9 @@
                                     <td>{{$order->no}}</td>
                                     <td class="white-space-300">{{$order->name}}</td>
                                     <td class="white-space-130">{{$order->cate_name}}</td>
-                                    <td class="white-space-120 text-right">{{number_format($order->price,'0','.','.')}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->price,'0','.','.')}}</td>
                                     <td class="white-space-90 text-right">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="white-space-130 text-right">{{number_format($order->total,'0','.','.')}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->total,'0','.','.')}}</td>
                                     <td class="white-space-150"> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="white-space-130">
                                         @if($order->export_status == 4 && \Carbon\Carbon::parse($order->estimated_date)->diffInDays(\Carbon\Carbon::now()) >= 7)
@@ -179,13 +197,13 @@
                                             Đơn hàng chưa hoàn thành
                                         @endif
                                     </td>
-                                    <td>
-                                        {{$order->discount.' %'}}
+                                    <td class="text-right">
+                                        {{$order->discount}}
                                     </td>
-                                    <td>
-                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}} đ
+                                    <td class="text-right">
+                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}}
                                     </td>
-                                    <td><a href="#" onclick="showDetail({{$order->id}})" class="btn btn-link">Chi
+                                    <td class="white-space-50"><a href="#" onclick="showDetail({{$order->id}})" class="btn btn-link">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
@@ -199,7 +217,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$orders->withQueryString()->links()}}
+                    {{$orders->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="float-right mt-4 ml-3">
                         <form>
                             <div class="form-group">

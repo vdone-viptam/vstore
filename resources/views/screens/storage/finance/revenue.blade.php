@@ -138,7 +138,7 @@
                         <div id="example_paginate">
                             <ul class="pagination d-flex justify-content-end align-items-center"
                                 style="gap:8px ;margin-top:10px;margin-right: 10px;">
-                                {{$histories->withQueryString()->links()}}
+                                {{$histories->withQueryString()->links('layouts.custom.paginator')}}
                             </ul>
                         </div>
                     </div>

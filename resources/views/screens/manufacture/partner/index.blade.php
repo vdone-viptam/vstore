@@ -30,10 +30,12 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <form>
-                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
-                                       type="search"
-                                       placeholder="Tìm kiếm..">
+                            <form action="">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search" placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
@@ -99,7 +101,18 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-80">
+                            <th class="white-space-80">Chức năng
+                                <span style="float: right;cursor: pointer">
+                                @if($field == 'amount_product_sold')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                    @endif
+                                </span>
                             </th>
                         </tr>
                         </thead>
@@ -113,15 +126,16 @@
                                     <td class="text-right">{{$value->total_product}}</td>
                                     <td class="text-right">{{$value->total_category}}</td>
                                     <td><a href="#" data-toggle="modal"
-                                        data-target=".bd-example-modal-lg"
-                                        data-account_code="{{$value->account_code}}"
-                                        data-vstore_name="{{$value->vstore_name}}"
-                                        data-phone_number="{{$value->phone_number}}"
-                                        data-company_name="{{$value->company_name}}"
-                                        data-address="{{$value->address}}"
-                                        data-total_product="{{$value->total_product}}"
-                                        data-total_category="{{$value->total_category}}"
-                                        data-id="{{$value->vstore_id}}" class="btn btn-link more-details">Chi tiết</a>
+                                           data-target=".bd-example-modal-lg"
+                                           data-account_code="{{$value->account_code}}"
+                                           data-vstore_name="{{$value->vstore_name}}"
+                                           data-phone_number="{{$value->phone_number}}"
+                                           data-company_name="{{$value->company_name}}"
+                                           data-address="{{$value->address}}"
+                                           data-total_product="{{$value->total_product}}"
+                                           data-total_category="{{$value->total_category}}"
+                                           data-id="{{$value->vstore_id}}" class="btn btn-link more-details">Chi
+                                            tiết</a>
                                     </td>
 
                                 </tr>
@@ -136,7 +150,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{$products->withQueryString()->links('layouts.custom.paginator')}}
                     <div class=" mt-4">
                         <form>
                             <div class="form-group">

@@ -217,7 +217,7 @@
                         </table>
                     </div>
                     <div class="d-flex align-items-end justify-content-end mt-4">
-                        {{$warehouses->withQueryString()->links()}}
+                        {{$warehouses->withQueryString()->links('layouts.custom.paginator')}}
                         <div class="mt-4">
                             <form>
                                 <div class="form-group">
@@ -304,9 +304,9 @@
     <script>
         $('#appect').on('change', (e) => {
             if (e.target.checked && $('#discount_vShop').val()) {
-                if($('#appect').is(":checked")){
+                if ($('#appect').is(":checked")) {
                     document.getElementById('btnConfirm').style.display = 'block';
-                }else{
+                } else {
                     document.getElementById('btnConfirm').style.display = 'none';
 
                 }

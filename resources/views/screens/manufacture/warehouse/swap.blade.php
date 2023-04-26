@@ -207,7 +207,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{$products->withQueryString()->links('layouts.custom.paginator')}}
                     <select id="limit" class="form-control col-1">
                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
                         <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>

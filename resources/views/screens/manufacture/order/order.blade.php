@@ -115,10 +115,12 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
-                            <form>
-                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
-                                       type="search"
-                                       placeholder="Tìm kiếm..">
+                            <form action="">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                       type="search" placeholder="Tìm kiếm..">
                             </form>
 
                         </div>
@@ -279,7 +281,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{ $orders->withQueryString()->links() }}
+                    {{$orders->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="mt-4">
                         <form>
                             <div class="form-group">
