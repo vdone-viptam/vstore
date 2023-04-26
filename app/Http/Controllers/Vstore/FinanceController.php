@@ -111,6 +111,7 @@ class FinanceController extends Controller
             ->paginate(10);
         $this->v['field'] = $field;
         $this->v['type'] = $type;
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
 
         return view('screens.vstore.finance.revenue', $this->v);

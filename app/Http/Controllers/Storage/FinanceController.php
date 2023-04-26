@@ -90,6 +90,7 @@ class FinanceController extends Controller
             ->paginate(10);
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['field'] = $field;
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['type'] = $type;
         return view('screens.storage.finance.history', $this->v);
     }
@@ -105,6 +106,8 @@ class FinanceController extends Controller
             ->orderBy($field, $type)
             ->paginate(10);
         $this->v['field'] = $field;
+        $this->v['limit'] = $request->limit ?? 10;
+
         $this->v['type'] = $type;
         return view('screens.storage.finance.revenue', $this->v);
     }

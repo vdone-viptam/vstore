@@ -112,8 +112,9 @@ class FinanceController extends Controller
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate($limit);
-        $this->v['field'] = $field;
         $this->v['type'] = $type;
+        $this->v['field'] = $field;
+
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['params'] = $request->all();
