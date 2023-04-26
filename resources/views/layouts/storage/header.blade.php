@@ -61,7 +61,7 @@
                                     <div class="list-group">
                                         @if(count(Auth::user()->unreadNotifications) > 0)
                                             @foreach (Auth::user()->unreadNotifications as $index =>$notification)
-                                                <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}"
+                                                <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}"
                                                    class="list-group-item list-group-item-action @if($index == 0) active @endif">
                                                     <div class="notification-info">
                                                         <div class="notification-list-user-img"><img
