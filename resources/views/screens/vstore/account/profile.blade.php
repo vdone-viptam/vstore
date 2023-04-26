@@ -182,7 +182,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-3">
+        <div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 col-12">
             <div class="card profile">
                 <form action="{{route('screens.vstore.account.upload',['id' => $infoAccount->id])}}"
                       id="form" method="POST" enctype="multipart/form-data">
