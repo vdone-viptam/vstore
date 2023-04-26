@@ -101,18 +101,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-80">Chức năng
-                                <span style="float: right;cursor: pointer">
-                                @if($field == 'amount_product_sold')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
-                                    @endif
-                                </span>
+                            <th class="white-space-80">Chức <năng></năng>
                             </th>
                         </tr>
                         </thead>
