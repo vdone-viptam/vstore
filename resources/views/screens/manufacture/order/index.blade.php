@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title', 'Tất cả đơn hàng')
+@section('page_title', 'Danh sách đơn hàng khách mua sản phẩm')
 @section('modal')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -38,7 +38,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý đơn hàng </a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng</li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng khách mua sản phẩm</li>
                         </ol>
                     </nav>
                 </div>
