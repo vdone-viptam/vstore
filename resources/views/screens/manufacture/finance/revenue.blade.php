@@ -7,26 +7,18 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="page-header">
-                    <h2 class="pageheader-title">Lịch sử biến động số dư</h2>
 
-                    <div class="col-span-12 ">
-                        <div class="brc flex justify-start items-center gap-2 py-4">
-                            <span class="text-secondary">Tài chính</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18"
-                                      stroke="black"
-                                      stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                            <a href="" class="text-blueMain font-medium italic">Lịch sử biến động số dư</a>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">Lịch sử biến động số dư</h2>
+
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Tài
                                                 chính</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Lịch sử biến động số dư
-                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Lịch sử biến động số dư</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -57,16 +49,16 @@
                                             <th>
                                                 Trạng thái
                                                 <span style="float: right;cursor: pointer">
-                                            @if($field == 'status')
-                                                        @if($type == 'desc')
-                                                            <i class="fa-solid fa-sort-down sort"
-                                                               data-sort="status"></i>
-                                                        @else
-                                                            <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
-                                                        @endif
+                                                @if($field == 'status')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort"
+                                                            data-sort="status"></i>
                                                     @else
-                                                        <i class="fas fa-sort sort" data-sort="status"></i>
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
                                                     @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="status"></i>
+                                                @endif
                                         </span>
                                             </th>
                                             <th>
@@ -119,18 +111,18 @@
                                                             <p class="text-green-600">Đang chờ duyệt</p>
                                                         @endif
                                                     </td>
-                                                    <td>
+                                                    <td class="text-right">
                                                         @if($history->type == 1)
                                                             <p class="text-green-600">
                                                                 +{{number_format($history->money_history,0,'.','.')}}
-                                                                đ</p>
+                                                                </p>
                                                         @else
                                                             <p class="text-red-600">
                                                                 -{{number_format($history->money_history,0,'.','.')}}</p>
                                                         @endif
                                                     </td>
                                                     <th>{{$history->title}}</th>
-                                                    <td>
+                                                    <td class="text-center">
                                                         {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                                     </td>
                                                 </tr>
@@ -145,7 +137,7 @@
                             </table>
                         </div>
                         <div class="d-flex align-items-end justify-content-end mt-4">
-                            {{$histories->withQueryString()->links()}}
+                            {{$histories->withQueryString()->links('layouts.custom.paginator')}}
                             <div class="mt-4 ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
