@@ -213,17 +213,10 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('screens.admin.dashboard.index');
     });
-    Route::prefix('categories')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('screens.admin.category.index');
-        Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('screens.admin.category.create');
-        Route::post('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('screens.admin.category.store');
-        Route::get('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('screens.admin.category.edit');
-        Route::post('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('screens.admin.category.update');
-//        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('screens.admin.category.destroy');
-    });
+
 
     Route::prefix('users')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
+        Route::get('/list', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
         Route::get('/history-payment', [\App\Http\Controllers\Admin\UserController::class, 'historyPayment'])->name('screens.admin.user.historyPayment');
         Route::get('/check-payment', [\App\Http\Controllers\Admin\UserController::class, 'checkPayment'])->name('screens.admin.user.checkPayment');
         Route::get('/result-payment', [\App\Http\Controllers\Admin\UserController::class, 'resultCheckPayment'])->name('screens.admin.user.resultCheckPayment');
@@ -253,12 +246,19 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
 
         });
     });
-    Route::prefix('product')->group(function () {
+    Route::prefix('products')->group(function () {
         Route::get('index', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('screens.admin.product.index');
         Route::get('/detail', [\App\Http\Controllers\Admin\ProductController::class, 'detail'])->name('screens.admin.product.detail');
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
         Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
-
+        Route::prefix('categories')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('screens.admin.category.index');
+            Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('screens.admin.category.create');
+            Route::post('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('screens.admin.category.store');
+            Route::get('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('screens.admin.category.edit');
+            Route::post('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('screens.admin.category.update');
+//        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('screens.admin.category.destroy');
+        });
     });
     Route::prefix('finances')->group(function () {
         Route::get('/request-deposit', [\App\Http\Controllers\Admin\FinanceController::class, 'index'])->name('screens.admin.finance.index');
