@@ -30,9 +30,20 @@ class LoginController extends Controller
 
     public function getFormRegisterVstore(Request $request)
     {
+        $user = false;
+        $order = false;
+        if($request->order && $request->user) {
+            $user = User::find($request->user);
+            $order = OrderService::find($request->order);
+            $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+            $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+            $order->status = 2;
+            $order->save();
+        }
+
         $referral_code = $request->referral_code ?? '';
 
-        return view('auth.Vstore.register_vstore', ['referral_code' => $referral_code]);
+        return view('auth.Vstore.register_vstore',compact(['referral_code', 'user', 'order']));
     }
 
     public function getFormRegisterNCC(Request $request)

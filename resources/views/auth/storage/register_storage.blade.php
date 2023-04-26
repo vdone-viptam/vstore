@@ -247,7 +247,7 @@
                         <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi tiết</label>
                         <input class="form-control form-control-lg" type="text" name="address" id="address" required=""
                             value="{{old('address')}}"
-                            placeholder="Nhập địa chỉ chi tiết (VD: Phường 13 Quận 4)">
+                            placeholder="Nhập địa chỉ chi tiết (VD:Số nhà 89, phố Tô Vĩnh Diễn, phường Khương Trung, quận Thanh Xuân, thành phố Hà Nội)">
                         @error('address')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -569,7 +569,7 @@
             <div class="form-group mt-4" style="max-width: 450px; margin: 0 auto;">
                 <label class="custom-control custom-checkbox">
                     <input class="custom-control-input" required type="checkbox"><span class="custom-control-label">Tôi đồng
-                        ý với <span style="text-decoration: underline;cursor: pointer;" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
+                        ý với <span style="text-decoration: underline;cursor: pointer;"  class="underline text-blue-700" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
                 </label>
                 <div class="form-group pt-2">
                     <button class="btn btn-block btn-primary btn-secondary active" disabled type="submit">Mua ngay</button>
