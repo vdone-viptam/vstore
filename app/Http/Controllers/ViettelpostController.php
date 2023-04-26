@@ -134,7 +134,7 @@ class ViettelpostController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => $data,
-                "href" => "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=a6_1&bill=" . $respon['message'] . "=&showPostage=1",
+                "href" => "https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=100&bill=" . $respon['message'] . "=&showPostage=1",
             ], 200);
         } else {
             return response()->json([

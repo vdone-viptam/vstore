@@ -45,11 +45,6 @@
                                         sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('products/request-all*')) ? 'active1' : '' }}"
-                                       id="addSp"
-                                       href="{{route('screens.vstore.product.requestAll')}}"></a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('discount*')) ? 'active1' : '' }}"
                                        id="addSp"
                                        href="{{route('screens.vstore.product.discount')}}">Quản lý giảm giá</a>

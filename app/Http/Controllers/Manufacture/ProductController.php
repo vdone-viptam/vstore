@@ -121,7 +121,7 @@ class ProductController extends Controller
             'height' => 'required|max:13',
             'packing_type' => 'required',
             'images' => 'required',
-            'video' => 'required|max:102400',
+            'video' => 'required|max:15360',
             'with' => 'required|max:13',
             'volume' => 'max:15',
             'manufacturer_name' => 'max:255',
@@ -162,7 +162,7 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
             'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
             'video.required' => 'Video sản phẩm bắt buộc chọn',
-            'video.max' => 'Video sản phẩm không vượt quá 100MB',
+            'video.max' => 'Video sản phẩm không vượt quá 15MB',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -552,7 +552,7 @@ class ProductController extends Controller
             'description' => 'required',
             'short_content' => 'required|max:500',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'video' => 'max:102400',
+            'video' => 'max:15360',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -580,7 +580,7 @@ class ProductController extends Controller
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
             'images.image' => 'File nhập không phải định dạng ảnh',
             'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
-            'video.max' => 'Video sản phẩm không vượt quá 100MB',
+            'video.max' => 'Video sản phẩm không vượt quá 15MB',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
