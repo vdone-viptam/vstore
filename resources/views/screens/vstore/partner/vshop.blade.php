@@ -93,20 +93,6 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chiết khấu nhận được
-                                <span style="float: right;cursor: pointer">
-                                                            @if($field == 'chiet_khau')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="chiet_khau"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="chiet_khau"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="chiet_khau"></i>
-                                    @endif
-                                                            </span>
-                            </th>
-                            {{--                            <th>Thao Tác</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -119,9 +105,6 @@
                                     <td>{{$value->amount_product}}</td>
                                     <td>{{$value->count_order }}</td>
                                     <td>{{number_format(round($value->doanh_thu,0),0,'.','.')}} đ</td>
-                                    <td>{{$value->chiet_khau}} %</td>
-
-
                                 </tr>
                             @endforeach
                         @else

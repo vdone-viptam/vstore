@@ -45,7 +45,7 @@ class PartnerController extends Controller
             ->where('products.vstore_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if ($this->v['key_search'] != '') {
-            $this->v['users'] = $this->v['users']->where('account_code',$this->v['key_search'])->orwhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
+            $this->v['users'] = $this->v['users']->where('account_code', $this->v['key_search'])->orwhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
         };
 
         $this->v['users'] = $this->v['users']->paginate($this->v['limit']);
@@ -65,8 +65,7 @@ class PartnerController extends Controller
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vstore_id', Auth::id())
             ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number', 'vshop.vshop_id')
-            ->selectSub('SELECT SUM(order_item.price * quantity)   FROM `order` JOIN order_item on `order`.id = order_item.order_id JOIN products ON order_item.product_id = products.id WHERE export_status = 4 AND order_item.vshop_id = vshop.id AND products.vstore_id=' . Auth::id(), 'doanh_thu')
-            ->selectSub('SELECT SUM(order_item.price * quantity)  * (products.discount_vShop /100) FROM `order` JOIN order_item on `order`.id = order_item.order_id JOIN products ON order_item.product_id = products.id WHERE export_status = 4 AND order_item.vshop_id = vshop.id AND products.vstore_id=' . Auth::id(), 'chiet_khau')
+            ->selectSub('SELECT SUM(`order`.total) FROM `order` JOIN order_item on `order`.id = order_item.order_id  WHERE export_status = 4 AND order_item.vshop_id = vshop.id AND products.vstore_id=' . Auth::id(), 'doanh_thu')
             ->selectSub('SELECT COUNT(vshop_products.id) FROM vshop JOIN vshop_products ON vshop.id = vshop_products.vshop_id JOIN products ON vshop_products.product_id = products.id WHERE vshop.id = vshop.id AND products.vstore_id = ' . Auth::id(), 'amount_product')
             ->selectSub('SELECT COUNT(`order`.id) from `order` JOIN order_item on `order`.id = order_item.order_id join products ON order_item.product_id = products.id  WHERE export_status = 4 AND vshop_id = vshop.id AND products.vstore_id = ' . Auth::id(), 'count_order')
             ->groupBy('vshop.pdone_id')
