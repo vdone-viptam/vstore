@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Liên kết NCC</h2>
+                <h2 class="pageheader-title">Danh sách NCC liên kết</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('screens.vstore.partner.index')}}"
-                                                           class="breadcrumb-link">Liên kết NCC</a>
+                                                           class="breadcrumb-link">Đối tác</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Danh sách NCC liên kết</li>
                         </ol>
