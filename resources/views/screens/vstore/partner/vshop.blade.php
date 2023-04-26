@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form>
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
@@ -89,21 +92,21 @@
                                         <i class="fas fa-sort sort" data-sort="doanh_thu"></i>
                                     @endif
                                 </span>
-                                                        </th>
-                                                        <th>Chiết khấu nhận được
-                                                            <span style="float: right;cursor: pointer">
+                            </th>
+                            <th>Chiết khấu nhận được
+                                <span style="float: right;cursor: pointer">
                                                             @if($field == 'chiet_khau')
-                                                                    @if($type == 'desc')
-                                                                        <i class="fa-solid fa-sort-down sort" data-sort="chiet_khau"></i>
-                                                                    @else
-                                                                        <i class="fa-solid fa-sort-up sort" data-sort="chiet_khau"></i>
-                                                                    @endif
-                                                                @else
-                                                                    <i class="fas fa-sort sort" data-sort="chiet_khau"></i>
-                                                                @endif
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="chiet_khau"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="chiet_khau"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="chiet_khau"></i>
+                                    @endif
                                                             </span>
-                                                        </th>
-{{--                            <th>Thao Tác</th>--}}
+                            </th>
+                            {{--                            <th>Thao Tác</th>--}}
                         </tr>
                         </thead>
                         <tbody>

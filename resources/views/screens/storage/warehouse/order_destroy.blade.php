@@ -58,9 +58,12 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" value="{{$key_search ?? ''}}" name="key_search"
-                                       type="search"
-                                       placeholder="Tìm kiếm..">
+                                <form action="">
+                                    <input type="hidden" name="type" value="{{$type}}">
+                                    <input type="hidden" name="field" value="{{$field}}">
+                                    <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
+                                           type="search" placeholder="Tìm kiếm..">
+                                </form>
                             </div>
                         </li>
                     </ul>

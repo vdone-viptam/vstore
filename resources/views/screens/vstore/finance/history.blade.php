@@ -156,7 +156,7 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.vstore.finance.history')}}?type=' + orderBy +
-                            '&field=' + sort+'limit'
+                            '&field=' + sort + 'limit={{$limit}}'
                     }, 200)
                 });
             });

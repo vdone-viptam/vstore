@@ -57,6 +57,9 @@
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
                             <form action="">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
                                 <input type="search" name="key_search" value="{{$key_search}}"
                                        class="form-control"
                                        placeholder="Nhập từ khóa tìm kiếm">

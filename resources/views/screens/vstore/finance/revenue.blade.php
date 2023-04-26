@@ -162,7 +162,7 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.vstore.finance.revenue')}}?type=' + orderBy +
-                            '&field=' + sort
+                            '&field=' + sort + '&limit={{$limit}}'
                     }, 200)
                 });
             });
