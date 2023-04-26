@@ -79,14 +79,13 @@
                     <table id="example" class="table table-striped table-bordered second    ">
                         <thead>
                         <tr>
-                            <th>
+                            <th class="white-space-120">
                                 Mã đơn hàng
-
                             </th>
                             <th>
                                 Tên sản phẩm
                             </th>
-                            <th>Tình trạng
+                            <th class="white-space-120">Tình trạng
                                 <span style="float: right;cursor: pointer">
 
                                 @if ($field == 'order.export_status')
@@ -100,8 +99,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Giá bán
+                            <th class="white-space-100">
+                                Giá bán (đ)
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order_item.price')
                                         @if ($type == 'desc')
@@ -114,7 +113,7 @@
                                     @endif
                                     </span>
                             </th>
-                            <th>
+                            <th class="white-space-90">
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order_item.quantity')
@@ -128,10 +127,8 @@
                                     @endif
                                     </span>
                             </th>
-                            <th>Kho hàng
-
-                            </th>
-                            <th>Ngày đặt hàng
+                            <th class="white-space-120">Kho hàng</th>
+                            <th class="white-space-120">Ngày đặt hàng
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.created_at')
                                         @if ($type == 'desc')
@@ -144,7 +141,7 @@
                                     @endif
                                     </span>
                             </th>
-                            <th style="min-width: 250px">
+                            <th class="white-space-130">
                                 Ngày dự kiến giao hàng
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.estimated_date')
@@ -158,8 +155,8 @@
                                     @endif
                                     </span>
                             </th>
-                            <th>
-                                Giá trị đơn hàng
+                            <th class="white-space-110">
+                                Giá trị đơn hàng (đ)
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.total')
                                         @if ($type == 'desc')
@@ -172,11 +169,11 @@
                                     @endif
                                     </span>
                             </th>
-                            <th>
+                            <th class="white-space-150">
                                 V-Shop bán hàng
                             </th>
-                            <th style="min-width: 250px">
-                                Giá trị trừ chiết khấu
+                            <th class="white-space-120">
+                                Giá trị trừ chiết khấu (đ)
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'money')
                                         @if ($type == 'desc')
@@ -196,9 +193,9 @@
                         @if (count($orders) > 0)
                             @foreach ($orders as $order)
                                 <tr>
-                                    <td>{{ $order->no }}</td>
-                                    <td>{{ $order->orderItem[0]->product->name }}</td>
-                                    <td>
+                                    <td class="white-space-120">{{ $order->no }}</td>
+                                    <td class="white-space-350">{{ $order->orderItem[0]->product->name }}</td>
+                                    <td class="white-space-120">
                                         @if ($order->export_status == 0)
                                             <span class="text-yellow-400">Chờ xác nhận</span>
                                         @elseif($order->export_status == 1)
@@ -209,27 +206,25 @@
                                             <span class="text-green-600">Hoàn thành</span>
                                         @endif
                                     </td>
-                                    <td>{{ number_format($order->orderItem[0]->price, '0', '.', '.') }} đ</td>
-                                    <td>{{ $order->orderItem[0]->quantity }}</td>
-                                    <td>{{ $order->orderItem[0]->warehouse->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
+                                    <td class="white-space-100 text-right">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }}</td>
+                                    <td class="text-right">{{ $order->orderItem[0]->quantity }}</td>
+                                    <td class="white-space-100">{{ $order->orderItem[0]->warehouse->name }}</td>
+                                    <td class="white-space-120">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
                                     <td>
                                         @if($order->export_status == 2 || $order->export_status == 4)
-                                            {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i') }}
+                                            {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y') }}
                                         @else
                                             Chưa xác định
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         {{ number_format($order->total, 0, '.', '.') }}
-                                        đ
                                     </td>
-                                    <td>
+                                    <td class="white-space-150">
                                         {{ $order->orderItem[0]->vshop->name ?? 'Viptam' }}
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         {{ number_format($order->money , 0, '.', '.') }}
-                                        đ
                                     </td>
                                 </tr>
                             @endforeach

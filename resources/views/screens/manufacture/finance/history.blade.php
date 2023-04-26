@@ -51,7 +51,7 @@
                                 <tr>
                                     <th>Mã giao dịch</th>
                                     <th>Trạng thái</th>
-                                    <th>Số tiền
+                                    <th class="white-space-150">Số tiền (đ)
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -99,7 +99,7 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td>
+                                            <td class="white-space-150 text-right">
                                                 {{number_format($history->amount,0,'.','.')}}
                                             </td>
                                             <td>

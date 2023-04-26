@@ -141,9 +141,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Chức năng
-                            </th>
+                            <th class="white-space-90"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -153,7 +151,7 @@
                                     <td>
                                         {{$request->code}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-400">
                                         {{$request->product_name}}
                                     </td>
                                     <td>

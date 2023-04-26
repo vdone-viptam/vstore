@@ -158,8 +158,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Giá sản phẩm
+                            <th class="white-space-140">
+                                Giá sản phẩm (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -172,7 +172,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Giảm giá (nếu có)
+                            <th class="white-space-120">Giảm giá (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.discount')
                                         @if($type == 'desc')
@@ -185,7 +185,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
+                            <th class="white-space-100">
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.quantity')
@@ -199,7 +199,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tiền đặt cọc
+                            <th class="white-space-120">Tiền đặt cọc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'deposit_money')
                                         @if($type == 'desc')
@@ -212,7 +212,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tổng tiền
+                            <th class="white-space-120">Tổng tiền
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.money')
                                         @if($type == 'desc')
@@ -225,8 +225,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái</th>
-                            <th>Ngày tạo đơn
+                            <th class="white-space-140">Trạng thái</th>
+                            <th class="white-space-140">Ngày tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
                                         @if($type == 'desc')
@@ -239,24 +239,20 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Chức năng
-                            </th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($orders) > 0)
                             @foreach($orders as $order)
                                 <tr>
-                                    <td>{{$order->no}}</td>
-                                    <td>{{$order->product->name}}</td>
-                                    <td>{{number_format($order->product->price,0,'.','.')}} đ</td>
-                                    <td>{{(int)$order->discount}} %</td>
-                                    <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format($order->deposit_money ,0,'.','.')}}
-                                        đ
-                                    </td>
-                                    <td>{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
+                                    <td class="white-space-100">{{$order->no}}</td>
+                                    <td class="white-space-400">{{$order->product->name}}</td>
+                                    <td class="white-space-120 text-right">{{number_format($order->product->price,0,'.','.')}}</td>
+                                    <td class="text-right">{{(int)$order->discount}}</td>
+                                    <td class="text-right">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}</td>
                                     <td>
                                         @if($order->status == 1)
                                             <span class="text-green-600"> Đã hoàn thành</span>

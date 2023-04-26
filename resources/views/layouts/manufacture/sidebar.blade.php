@@ -127,7 +127,7 @@
                                         sẵn</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="orBuy" href="{{route('screens.manufacture.order.index')}}">Đơn
+                                    <a class="nav-link {{ (request()->is('orders')) ? 'active1' : '' }}" id="orBuy" href="{{route('screens.manufacture.order.index')}}">Đơn
                                         hàng khách mua sản phẩm</a>
                                 </li>
                             </ul>

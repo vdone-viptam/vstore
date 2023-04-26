@@ -81,7 +81,7 @@
                     >
                         <thead>
                         <tr>
-                            <th>STT</th>
+                            <th class="white-space-50">STT</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -148,8 +148,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                                Chức năng
+                            <th class="white-space-100">
                             </th>
                         </tr>
                         </thead>
@@ -158,13 +157,13 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$discount->name}}</td>
-                                    <td>{{$discount->discount}}</td>
+                                    <td class="white-space-50">{{$loop->iteration}}</td>
+                                    <td class="white-space-500">{{$discount->name}}</td>
+                                    <td class="text-right">{{$discount->discount}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
-                                    <td><a href="#" data-id="{{$discount->id}}"
+                                    <td class="white-space-100"><a href="#" data-id="{{$discount->id}}"
                                            class="btn btn-warning more-details"
                                            onclick="edit({{$discount->id}})">Sửa</a></td>
                                 </tr>
