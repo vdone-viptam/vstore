@@ -143,6 +143,7 @@
                         </div>
 
                     </div>
+                </div>
                     <div class="flex justify-center md:justify-end items-center mt-6 gap-4 px-6">
                         <button type="button"
                                 class=" cursor-pointer outline-none bg-[#FFF] transition-all duration-200 rounded-sm py-2 px-3 text-center text-title hover:opacity-70 border-[1px] border-secondary"
@@ -154,7 +155,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+
         </form>
     </div>
 
