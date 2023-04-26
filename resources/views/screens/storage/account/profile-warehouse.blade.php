@@ -173,6 +173,7 @@ aria-hidden="true">
 
                                                         <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                             <div class="file-sp img-sp">
+                                                                @if(!empty($value['image_storage']))
                                                                 @foreach ($value['image_storage'] as $key => $img)
                                                                 <div class="item" key={{$key}}>
                                                                     <div class="over-lay-img"></div>
@@ -184,10 +185,10 @@ aria-hidden="true">
                                                                     <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
                                                                     </svg> --}}
                                                                     </div>
-                                                                    <img src="{{$img}}" class="w-100"/>
+                                                                    <img src="{{$img}}" class="w-100 img-old img-old-1"/>
                                                                 </div>
                                                                 @endforeach
-
+                                                                @endif
                                                             </div>
                                                             <input type="hidden" class="input-image" name="normalImageStorage">
                                                             <div class=" add-img-SP add-imgSP" data-arrImg="1">
@@ -198,7 +199,7 @@ aria-hidden="true">
                                                                         fill="black" fill-opacity="0.85"/>
                                                                 </svg>
                                                                 <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                                <span class="countImage" style="font-size: 12px;"> 0/5</span>
+                                                                <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count($value['image_storage']) : 0 }}/5</span>
                                                             </div>
                                                         </div>
 
@@ -211,6 +212,7 @@ aria-hidden="true">
                                                         PCCC/Chứng nhận khác</label>
                                                         <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                             <div class="file-sp img-sp">
+                                                                @if(!empty($value['image_pccc']))
                                                                 @foreach ($value['image_pccc'] as $key => $img)
                                                                 <div class="item" key={{$key}}>
                                                                     <div class="over-lay-img"></div>
@@ -222,9 +224,10 @@ aria-hidden="true">
                                                                     <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
                                                                     </svg> --}}
                                                                     </div>
-                                                                    <img src="{{$img}}" class="w-100"/>
+                                                                    <img src="{{$img}}" class="w-100 img-old img-old-2"/>
                                                                 </div>
                                                                 @endforeach
+                                                                @endif
                                                             </div>
                                                             <input type="hidden" class="input-image" name="normalImagePccc">
                                                             <div class=" add-img-SP add-imgSP" data-arrImg="2">
@@ -235,7 +238,7 @@ aria-hidden="true">
                                                                         fill="black" fill-opacity="0.85"/>
                                                                 </svg>
                                                                 <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                                <span class="countImage" style="font-size: 12px;"> 0/5</span>
+                                                                <span class="countImage" style="font-size: 12px;"> {{ $value['image_pccc'] ? count($value['image_pccc']) : 0 }}/5</span>
                                                             </div>
                                                         </div>
                                                 </div>
@@ -319,6 +322,7 @@ aria-hidden="true">
 
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
+                                                            @if(!empty($value['image_storage']))
                                                             @foreach ($value['image_storage'] as $key => $img)
                                                                 <div class="item" key={{$key}}>
                                                                     <div class="over-lay-img"></div>
@@ -330,9 +334,10 @@ aria-hidden="true">
                                                                     <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
                                                                     </svg> --}}
                                                                     </div>
-                                                                    <img src="{{$img}}" class="w-100"/>
+                                                                    <img src="{{$img}}" class="w-100 img-old img-old-3"/>
                                                                 </div>
                                                             @endforeach
+                                                            @endif
                                                         </div>
                                                         <input type="hidden" class="input-image" name="coldImageStorage">
                                                         <div class=" add-img-SP add-imgSP" data-arrImg="3">
@@ -343,7 +348,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> 0/5</span>
+                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count($value['image_storage']) : 0 }}/5</span>
                                                         </div>
                                                     </div>
 
@@ -356,6 +361,7 @@ aria-hidden="true">
                                                     PCCC/Chứng nhận khác</label>
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
+                                                            @if(!empty($value['image_pccc']))
                                                             @foreach ($value['image_pccc'] as $key => $img)
                                                                 <div class="item" key={{$key}}>
                                                                     <div class="over-lay-img"></div>
@@ -367,9 +373,10 @@ aria-hidden="true">
                                                                     <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
                                                                     </svg> --}}
                                                                     </div>
-                                                                    <img src="{{$img}}" class="w-100"/>
+                                                                    <img src="{{$img}}" class="w-100 img-old img-old-4"/>
                                                                 </div>
                                                             @endforeach
+                                                            @endif
                                                         </div>
                                                         <input type="hidden" class="input-image" name="coldImagePccc">
                                                         <div class=" add-img-SP add-imgSP" data-arrImg="4">
@@ -380,7 +387,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> 0/5</span>
+                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_pccc'] ? count($value['image_pccc']) : 0 }}/5</span>
                                                         </div>
                                                     </div>
                                             </div>
@@ -464,6 +471,7 @@ aria-hidden="true">
 
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
+                                                            @if(!empty($value['image_storage']))
                                                             @foreach ($value['image_storage'] as $key => $img)
                                                                 <div class="item" key={{$key}}>
                                                                     <div class="over-lay-img"></div>
@@ -475,9 +483,10 @@ aria-hidden="true">
                                                                     <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
                                                                     </svg> --}}
                                                                     </div>
-                                                                    <img src="{{$img}}" class="w-100"/>
+                                                                    <img src="{{$img}}" class="w-100 img-old img-old-5"/>
                                                                 </div>
                                                             @endforeach
+                                                            @endif
                                                         </div>
                                                         <input type="hidden" class="input-image" name="warehouseImageStorage">
                                                         <div class=" add-img-SP add-imgSP" data-arrImg="5">
@@ -488,7 +497,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> 0/5</span>
+                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count($value['image_storage']) : 0 }}/5</span>
                                                         </div>
                                                     </div>
 
@@ -501,6 +510,7 @@ aria-hidden="true">
                                                     PCCC/Chứng nhận khác</label>
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
+                                                            @if(!empty($value['image_pccc']))
                                                             @foreach ($value['image_pccc'] as $key => $img)
                                                                 <div class="item" key={{$key}}>
                                                                     <div class="over-lay-img"></div>
@@ -512,9 +522,10 @@ aria-hidden="true">
                                                                     <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
                                                                     </svg> --}}
                                                                     </div>
-                                                                    <img src="{{$img}}" class="w-100"/>
+                                                                    <img src="{{$img}}" class="w-100 img-old img-old-6"/>
                                                                 </div>
                                                             @endforeach
+                                                            @endif
                                                         </div>
                                                         <input type="hidden" class="input-image" name="warehouseImagePccc">
                                                         <div class=" add-img-SP add-imgSP" data-arrImg="6">
@@ -525,7 +536,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> 0/5</span>
+                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_pccc'] ? count($value['image_pccc']) : 0 }}/5</span>
                                                         </div>
                                                     </div>
                                             </div>
@@ -587,7 +598,6 @@ aria-hidden="true">
             default:
                 break;
         }
-        // console.log($(this).attr('data-arrImg'));
         let input = document.createElement('input');
         input.type = 'file';
         input.onchange = _ => {
@@ -626,7 +636,6 @@ aria-hidden="true">
     $('#modalDetail').modal('show');
     }
     function render(data, elementInput) {
-
         const html = data.map((item, index) => {
             return `<div class="item" key=${index}>
                 <div class="over-lay-img"></div>
@@ -652,9 +661,8 @@ aria-hidden="true">
             item.addEventListener('click', (e) => {
                 data = data.filter((item1, index1) => index1 !== +index);
                 if (data.length < 5) {
-                    console.log(data);
-                    // document.querySelector('.add-img-SP').classList.remove('hidden');
-                    // $(this).removeClass("hidden");
+                    document.querySelector('.add-img-SP').classList.remove('hidden');
+                    $(this).removeClass("hidden");
                 }
                 render(data,elementInput);
             })
@@ -665,7 +673,56 @@ aria-hidden="true">
         const textSuccess = '{{ Session::get('success')}}';
         swalNoti('center', 'success', textSuccess,'', 500, true, 2200);
         @endif
+
+        @if(Session::has('error'))
+        swalNoti('center', 'error', 'Ảnh kho chưa có ','', 500, true, 2200);
+        @endif
+
+        function getBase64Image(img) {
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            var dataURL = canvas.toDataURL("image/png");
+            // return dataURL;
+            return dataURL.replace(/^data:image\/?[A-z]*;base64,/);
+        }
+        function getBase64Imagev2(img) {
+            var c = document.createElement('canvas');
+            var img = document.getElementById('Img1');
+            c.height = img.naturalHeight;
+            c.width = img.naturalWidth;
+            var ctx = c.getContext('2d');
+
+            ctx.drawImage(img, 0, 0, c.width, c.height);
+            var base64String = c.toDataURL();
+        }
+        oldImage('.img-old-1',arrImage1, 'normalImageStorage');
+        oldImage('.img-old-2',arrImage2,'normalImagePccc');
+        oldImage('.img-old-3',arrImage3, 'coldImageStorage');
+        oldImage('.img-old-4',arrImage4, 'coldImagePccc');
+        oldImage('.img-old-5',arrImage5, 'warehouseImageStorage');
+        oldImage('.img-old-6',arrImage6, 'warehouseImagePccc');
+        function oldImage(elementOldImage,arrImg, nameInput) {
+            let inputs = document.querySelectorAll(elementOldImage);
+            var arrRequest = []
+            inputs.forEach((item, index) => {
+                let c = document.createElement('canvas');
+                let img = item;
+                c.height = img.naturalHeight;
+                c.width = img.naturalWidth;
+                let ctx = c.getContext('2d');
+                ctx.drawImage(img, 0, 0, c.width, c.height);
+                let base64String = c.toDataURL();
+                arrImg.push(base64String);
+                document.getElementsByName(nameInput)[0].value = JSON.stringify(arrImg);
+            });
+
+        }
+
     });
+
     </script>
 
 @endsection

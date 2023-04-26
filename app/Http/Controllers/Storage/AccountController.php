@@ -71,12 +71,20 @@ class AccountController extends Controller
     public function updateProfileWarehouse(Request $request)
     {
         // dd($request->all());
-        try {
-        $photo_gallery = [];
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|integer|between:1,3',
+            // 'normalImageStorage' => 'required_if:type,1|array|min:1',
+            // 'coldImageStorage' => 'required_if:type,2|array|min:1',
+            // 'warehouseImageStorage' => 'required_if:type,3|array|min:1',
+        ], [
 
-        // dd(
-        //     json_decode($request->normalImageStorage)
-        // );
+        ]);
+        if ($validator->fails()) {
+            // dd($validator->errors());
+            // return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+            return redirect()->back()->with('error', 'Ảnh kho chưa có');
+        }
+        try {
 
         $pathNormalImageStorage = 'image/users/storage/normal/image_storage/'. Auth::id();
         $pathNormalImagePccc = 'image/users/storage/normal/image_pccc/'. Auth::id();
