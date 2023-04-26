@@ -232,7 +232,7 @@
                     </table>
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$order->withQueryString()->links()}}
+                    {{$order->withQueryString()->links('layouts.custom.paginator')}}
                 </div>
             </div>
         </div>

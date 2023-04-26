@@ -169,7 +169,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{$products->withQueryString()->links('layouts.custom.paginator')}}
                 </div>
 
 

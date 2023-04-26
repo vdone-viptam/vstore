@@ -179,7 +179,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$discounts->withQueryString()->links()}}
+                    {{$discounts->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="mt-4">
                         <form>
                             <div class="form-group">

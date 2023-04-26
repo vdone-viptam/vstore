@@ -229,7 +229,7 @@
 
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
-                    {{$products->withQueryString()->links()}}
+                    {{$products->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="float-right mt-4 ml-3">
                         <form>
                             <div class="form-group">
