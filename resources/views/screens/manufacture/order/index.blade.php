@@ -111,7 +111,7 @@
                                         @else
                                             <i class="fas fa-sort sort" data-sort="order_item.price"></i>
                                         @endif
-                                  
+
                                     </span>
                             </th>
                             <th class="white-space-90">
@@ -231,7 +231,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="11">Không có dữ liệu phù hợp</td>
+                                <td colspan="11" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
 

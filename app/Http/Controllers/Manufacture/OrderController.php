@@ -27,9 +27,8 @@ class OrderController extends Controller
         $this->v['field'] = $request->field ?? 'products.name';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
-        $key_search = $request->key_search ?? '';
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        $orders = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+        $this->v['orders'] = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
             ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total', DB::raw('total * (100 - products.discount - products.discount_vShop) / 100 as money'))
             ->where('order.status', '!=', 2)->groupBy('order.id')
@@ -37,20 +36,17 @@ class OrderController extends Controller
             ->where('products.discount', '!=', null)
             ->where('products.discount_vShop', '!=', null)
             ->groupBy('order.id')
-            ->orderBy($this->v['field'], $this->v['type'])
-            ->paginate($this->v['limit']);
-        if ($key_search && strlen(($key_search) > 0)) {
-            $orders->where(function ($sub) use ($key_search) {
-                $sub->whereHas('orderItem.vshop', function ($query) use ($key_search) {
-                    $query->where('nick_name', 'like', '%' . $key_search . '%');
-                })
-                    ->orWhereHas('orderItem.product', function ($query) use ($key_search) {
-                        $query->where('name', 'like', '%' . $key_search . '%');
-                    })
-                    ->orWhere('no', 'like', '%' . $key_search . '%');
+            ->orderBy($this->v['field'], $this->v['type']);
+
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['orders'] = $this->v['orders']->where(function ($sub) {
+                $sub->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('order.no', $this->v['key_search']);
             });
         }
-        return view('screens.manufacture.order.index', $this->v, ['orders' => $orders]);
+        $this->v['orders'] = $this->v['orders']->paginate($this->v['limit']);
+
+        return view('screens.manufacture.order.index', $this->v);
     }
 
     public function destroy()
@@ -79,7 +75,7 @@ class OrderController extends Controller
                     ->orWhereHas('orderItem.product', function ($query) use ($key_search) {
                         $query->where('name', 'like', '%' . $key_search . '%');
                     })
-                    ->orWhere('no', 'like', '%' . $key_search . '%');
+                    ->orWhere('no', $key_search);
             });
         }
         $orders = $orders->orderBy('id', 'desc')->paginate($limit);
@@ -92,8 +88,8 @@ class OrderController extends Controller
         $this->v['field'] = $request->field ?? 'pre_order_vshop.id';
         $this->v['type'] = $request->type ?? 'desc';
 
-        $limit = $request->limit ?? 10;
-        $key_search = $request->key_search ?? '';
+        $this->v['limit'] = $request->limit ?? 1;
+        $this->v['key_search'] = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
@@ -104,15 +100,13 @@ class OrderController extends Controller
                 'products.id')
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
-        if ($key_search && strlen(($key_search) > 0)) {
-            $this->v['orders'] = $this->v['orders']->where(function ($sub) use ($key_search) {
-                $sub->where('products.name', 'like', '%' . $key_search . '%')
-                    ->orWhere('no', $key_search);
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['orders'] = $this->v['orders']->where(function ($sub) {
+                $sub->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('pre_order_vshop.no', $this->v['key_search']);
             });
         }
-        $this->v['orders'] = $this->v['orders']->paginate($limit);;
-        $this->v['key_search'] = $request->key_search ?? '';
-        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['orders'] = $this->v['orders']->paginate($this->v['limit']);;
         return view('screens.manufacture.order.order', $this->v);
     }
 
@@ -124,7 +118,7 @@ class OrderController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
 
         $limit = $request->limit ?? 10;
-        $key_search = $request->key_search ?? '';
+        $this->v['key_search'] = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
             ->select('pre_order_vshop.status', 'quantity',
@@ -136,14 +130,13 @@ class OrderController extends Controller
             ->where('products.user_id', Auth::id())
             ->where('pre_order_vshop.status', 3)
             ->orderBy($this->v['field'], $this->v['type']);
-        if ($key_search && strlen(($key_search) > 0)) {
-            $this->v['orders'] = $this->v['orders']->where(function ($sub) use ($key_search) {
-                $sub->where('products.name', 'like', '%' . $key_search . '%')
-                    ->orWhere('no', 'like', '%' . $key_search . '%');
+        if (strlen(($this->v['key_search']) > 0)) {
+            $this->v['orders'] = $this->v['orders']->where(function ($sub) {
+                $sub->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('no', $this->v['key_search']);
             });
         }
         $this->v['orders'] = $this->v['orders']->paginate($limit);
-        $this->v['key_search'] = $request->key_search ?? '';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['params'] = $request->all();
 
