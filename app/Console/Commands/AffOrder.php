@@ -99,6 +99,7 @@ class AffOrder extends Command
 //                        chia vshop
                     $vshop = Vshop::where('id',$item->vshop_id)->first();
                     if ($vshop){
+
                         $vshop_con_lai = $product->discount_vShop - $item->discount_vshop;
                         $price_vshop = $total /100 * $vshop_con_lai;
                         $new_vshop_blance = new BlanceChange();

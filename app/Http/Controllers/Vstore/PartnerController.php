@@ -45,7 +45,7 @@ class PartnerController extends Controller
             ->where('products.vstore_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if ($this->v['key_search'] != '') {
-            $this->v['users'] = $this->v['users']->where('account_code', 'like', '%' . $this->v['key_search'] . '%')->orwhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
+            $this->v['users'] = $this->v['users']->where('account_code',$this->v['key_search'])->orwhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
         };
 
         $this->v['users'] = $this->v['users']->paginate($this->v['limit']);

@@ -170,9 +170,9 @@
                                     <td>{{$order->no}}</td>
                                     <td>{{$order->name}}</td>
                                     <td>{{$order->cate_name}}</td>
-                                    <td>{{number_format($order->price,'0','.','.')}}</td>
+                                    <td>{{number_format($order->price,'0','.','.')}} đ</td>
                                     <td>{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td>{{number_format($order->total,'0','.','.')}}</td>
+                                    <td>{{number_format($order->total,'0','.','.')}} đ</td>
                                     <td> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
                                         @if($order->export_status == 4 && \Carbon\Carbon::parse($order->estimated_date)->diffInDays(\Carbon\Carbon::now()) >= 7)
@@ -261,12 +261,6 @@
         }
 
         let limit = document.getElementById('limit');
-        limit.addEventListener('change', (e) => {
-            setTimeout(() => {
-                document.location = '{{route('screens.vstore.order.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
-                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
-            }, 200)
-        })
         console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
@@ -285,6 +279,11 @@
                 });
             });
         });
-
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.order.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
     </script>
 @endsection
