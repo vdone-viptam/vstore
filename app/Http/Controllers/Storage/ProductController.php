@@ -341,7 +341,6 @@ class ProductController extends Controller
     {
 
 
-
         try {
 
             $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
@@ -419,7 +418,7 @@ class ProductController extends Controller
                     'PRODUCT_NAME' => $product->name,
                     'PRODUCT_QUANTITY' => $order_item['quantity'],
                     'PRODUCT_PRICE' => $product->price,
-                    'PRODUCT_WEIGHT' => $product->weight * $order_item['quantity'] / 1000
+                    'PRODUCT_WEIGHT' => ($product->weight / 1000) * $order_item['quantity']
                 ];
 
                 $taodon = Http::withHeaders(
