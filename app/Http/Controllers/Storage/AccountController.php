@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PHPUnit\Exception;
@@ -31,6 +32,113 @@ class AccountController extends Controller
             'success' => true,
             'data' => $this->v['infoAccount']
         ]);
+    }
+    public function detailProfileWarehouse(Request $request)
+    {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
+        $this->v['infoWarehouse'] = WarehouseType::select('type', 'acreage', 'volume', 'length', 'width', 'height','image_storage','image_pccc')
+                                    ->where('user_id', Auth::id())->get();
+        // dd(Auth::id());
+        if(!empty($this->v['infoWarehouse'])){
+            foreach ($this->v['infoWarehouse'] as $key => $value) {
+                if(!empty($value->image_storage)){
+                    $imageStorage = json_decode( $value->image_storage );
+                    $arrImgStorage = [];
+                    if(!empty($imageStorage)){
+                        foreach ($imageStorage as $keyImg => $valueImg) {
+                            $arrImgStorage[] = asset ($valueImg);
+                        }
+                    }
+                    $this->v['infoWarehouse'][$key]['image_storage'] = $arrImgStorage;
+                }
+            }
+        }
+        // dd($this->v);
+        return view('screens.storage.account.profile-warehouse', $this->v);
+    }
+    public function updateProfileWarehouse(Request $request)
+    {
+        // dd($request->all());
+        try {
+        $photo_gallery = [];
+
+        // dd(
+        //     json_decode($request->normalImageStorage)
+        // );
+
+        $pathNormalImageStorage = 'image/users/storage/normal/image_storage/'. Auth::id();
+        $pathNormalImagePccc = 'image/users/storage/normal/image_pccc/'. Auth::id();
+        $pathColdImageStorage = 'image/users/storage/cold/image_storage/'. Auth::id();
+        $pathColdImagePccc = 'image/users/storage/cold/image_pccc/'. Auth::id();
+        $pathWarehouseImageStorage = 'image/users/storage/warehouse/image_storage/'. Auth::id();
+        $pathWarehouseImagePccc = 'image/users/storage/warehouse/image_pccc/'. Auth::id();
+
+
+        $arrNormalImageStorage = [];
+        $arrNormalImagePccc = [];
+        $arrColdImageStorage = [];
+        $arrColdImagePccc = [];
+        $arrWarehouseImageStorage = [];
+        $arrWarehouseImagePccc = [];
+
+        if(!empty($request->normalImageStorage)){
+            foreach (json_decode($request->normalImageStorage) as $image) {
+                $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
+            }
+        }
+        if(!empty($request->normalImagePccc)){
+            foreach (json_decode($request->normalImagePccc) as $image) {
+                $arrNormalImagePccc[] = $this->saveImgBase64($image, $pathNormalImagePccc);
+            }
+        }
+        if(!empty($request->coldImageStorage)){
+            foreach (json_decode($request->coldImageStorage) as $image) {
+                $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
+            }
+        }
+        if(!empty($request->coldImagePccc)){
+            foreach (json_decode($request->coldImagePccc) as $image) {
+                $arrColdImagePccc[] = $this->saveImgBase64($image, $pathColdImagePccc);
+            }
+        }
+        if(!empty($request->warehouseImageStorage)){
+            foreach (json_decode($request->warehouseImageStorage) as $image) {
+                $arrWarehouseImageStorage[] = $this->saveImgBase64($image, $pathWarehouseImageStorage);
+            }
+        }
+        if(!empty($request->warehouseImagePccc)){
+            foreach (json_decode($request->warehouseImagePccc) as $image) {
+                $arrWarehouseImagePccc[] = $this->saveImgBase64($image, $pathWarehouseImagePccc);
+            }
+        }
+
+        $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                                    ->where('type',$request->type)
+                                    ->update(['image_storage' => $arrNormalImageStorage]);
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+        }
+    }
+    protected function saveImgBase64($param, $folder)
+    {
+        list($extension, $content) = explode(';', $param);
+        $tmpExtension = explode('/', $extension);
+        preg_match('/.([0-9]+) /', microtime(), $m);
+        $fileName = sprintf('img%s%s.%s', date('YmdHis'), $m[1], $tmpExtension[1]);
+        $content = explode(',', $content)[1];
+        $storage = Storage::disk('public');
+
+        $checkDirectory = $storage->exists($folder);
+
+        if (!$checkDirectory) {
+            $storage->makeDirectory($folder);
+        }
+
+        $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
+
+        return $folder . '/' .$fileName;
     }
 
     public function profile(Request $request)
