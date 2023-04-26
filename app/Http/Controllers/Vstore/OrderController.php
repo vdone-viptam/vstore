@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         $this->v['field'] = $request->field ?? 'order.id';
         $this->v['type'] = $request->type ?? 'desc';
-        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['limit'] = $request->limit ?? 1;
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['orders'] = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
