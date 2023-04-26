@@ -45,7 +45,7 @@
                         </a>
                     @endif
                 </li>
-                <li class="nav-item dropdown notification">
+                <li class="nav-item dropdown notification ">
                     <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i>
                         <div class="indicato">
