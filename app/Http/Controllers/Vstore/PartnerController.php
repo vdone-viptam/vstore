@@ -64,7 +64,7 @@ class PartnerController extends Controller
         $vshop = Vshop::join('vshop_products', 'vshop.id', '=', 'vshop_products.vshop_id')
             ->join('products', 'vshop_products.product_id', '=', 'products.id')
             ->where('vstore_id', Auth::id())
-            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number')
+            ->select('vshop.id', 'vshop.pdone_id', 'vshop.nick_name', 'vshop.name as name', 'vshop.phone_number','vshop.vshop_id')
             ->selectSub('SELECT SUM(`order`.total) FROM `order` JOIN order_item on `order`.id = order_item.order_id  WHERE export_status = 4 AND order_item.vshop_id = vshop.id AND products.vstore_id=' . Auth::id(), 'doanh_thu')
             ->selectSub('SELECT COUNT(vshop_products.product_id) FROM vshop_products JOIN products ON vshop_products.product_id = products.id WHERE vshop_products.vshop_id = vshop.id AND products.vstore_id =' . Auth::id().' AND vshop_products.status != 3 group by vshop_products.vshop_id', 'amount_product')
             ->selectSub('SELECT COUNT(`order`.id) from `order` JOIN order_item on `order`.id = order_item.order_id   WHERE export_status = 4 AND vshop_id = vshop.id AND products.vstore_id = ' . Auth::id(), 'count_order')
