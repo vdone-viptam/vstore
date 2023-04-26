@@ -59,7 +59,7 @@
                                         </span>
                                     </th>
                                     <th>
-                                        Số tiền
+                                        Số tiền (đ)
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'money_history')
                                                 @if($type == 'desc')
@@ -104,11 +104,11 @@
                                                     <p class="text-green-600">Chưa xử lý</p>
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td class="white-space-150 text-right">
                                                 @if($history->type == 1)
                                                     <p class="text-green-600">
                                                         +{{number_format($history->money_history,0,'.','.')}}
-                                                        đ</p>
+                                                        </p>
                                                 @else
                                                     <p class="text-red-600">
                                                         -{{number_format($history->money_history,0,'.','.')}}</p>
