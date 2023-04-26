@@ -154,6 +154,28 @@
 
 /* 0.1. Body / Typography
    ========================================================================== */
+.indicato{
+    content         : '';
+    position        : absolute;
+    top             : 12px;
+    right           : 14px;
+    display         : inline-block;
+    font-size: 10px;
+    width           : 16px;
+    height          : 16px;
+    border-radius   : 100%;
+    text-align: center;
+    background-color: #ef172c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.indicato span{
+    color: white;
+    font-size: 8px;
+    font-weight: 600;
+}
 
 body {
     font-family           : sans-serif;
