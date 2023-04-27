@@ -22,9 +22,14 @@ class FinanceController extends Controller
 
     public function index(Request $request)
     {
+        $this->v['field']=$request->field?? 'id';
+        $this->v['type']= $request->type ?? 'desc';
+        $this->v['key_search']= $request->key_search ?? '';
         $limit = $request->limit ?? 10;
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
-            ->orderBy('id', 'desc');
+
+        $this->v['histories'] = Deposit::select('deposits.name', 'amount', 'deposits.id', 'deposits.status', 'account_number', 'deposits.code', 'old_money', 'bank_id', 'deposits.created_at','user_id','users.account_code' )
+            ->join('users','deposits.user_id','=','users.id')
+            ->orderBy($this->v['field'], $this->v['type']);
 //            ->paginate(10);
         if ($request->start_date) {
             $this->v['histories'] = $this->v['histories']->whereDate('created_at', '>=', $request->start_date);
@@ -34,8 +39,15 @@ class FinanceController extends Controller
             $this->v['histories'] = $this->v['histories']->whereDate('created_at', '<=', $request->end_date);
             $this->v['end_date'] = $request->end_date;
         }
+        if ($request->key_search){
+            $this->v['histories']= $this->v['histories']->where('deposits.code','like','%'.$this->v['key_search'].'%')
+                ->orWhere('users.account_code','like','%'.$this->v['key_search'].'%')
+                ->orWhere('deposits.name','like','%'.$this->v['key_search'].'%')
+            ;
+        }
         $this->v['histories'] = $this->v['histories']->paginate($limit);
         $this->v['limit'] = $limit;
+//        return $this->v['histories'];
         return view('screens.admin.finance.index', $this->v);
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.admin.main')
+ @extends('layouts.admin.main')
 @section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
 
 @section('modal')
