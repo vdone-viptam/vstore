@@ -184,7 +184,7 @@
                                 <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 <td>
                                     @if($product->type == 1)
-                                        <span class="text-success">Đơn hàng mới</span>
+                                        <span class="text-success">Yêu cầu nhập kho</span>
                                     @else
                                         <span style="color:#005d1d;">Đơn hàng mới</span>
                                     @endif
