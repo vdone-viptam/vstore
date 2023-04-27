@@ -279,14 +279,14 @@
                                         @endif
                                     </td>
 
-                                    <td>
+                                    <td class="text-center">
                                         @if($product->status == 0)
-
-                                        @endif
                                             <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
                                                class="btn btn-success">Đồng ý</a>
                                             <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                                class="btn btn-danger">Từ chối</a>
+                                        @endif
+
                                         <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link">Chi
                                             tiết</a>
                                     </td>
