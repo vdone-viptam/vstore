@@ -110,9 +110,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-90">
+                            <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Giá bán
+                                    Giá bán (đ)
                                     <span style="float: right;cursor:pointer">
                                         @if($field == 'price')
                                             @if($type == 'desc')
