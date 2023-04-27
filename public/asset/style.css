@@ -154,6 +154,41 @@
 
 /* 0.1. Body / Typography
    ========================================================================== */
+.cardFinance {
+    min-width: 785px;
+}
+
+.number-cost{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    font-family: 'SVN-Gilroy' !important;
+}
+.number-cost h3{
+    margin: 0;
+    font-family: 'SVN-Gilroy' !important;
+}
+@media only screen and (max-width:480px) {
+    .fiNumber {
+        flex-direction: column;
+    }
+
+    .fiNumber div:nth-child(2) {
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-left: none !important;
+        border-right: none !important;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+
+    .cardFinance {
+        min-width: 375px;
+    }
+}
 .pagination li {
  padding: .75rem;
 }
