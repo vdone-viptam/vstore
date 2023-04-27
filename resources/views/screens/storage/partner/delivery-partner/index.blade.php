@@ -117,8 +117,8 @@
                                         <tr>
                                             <td>{{$deliveryPartners->code_partner}}</td>
                                             <td>{{$deliveryPartners->name_partner}}</td>
-                                            <td>{{$deliveryPartners->count_product}}</td>
-                                            <td>{{$deliveryPartners->destroy_order}}</td>
+                                            <td class="text-center">{{$deliveryPartners->count_product}}</td>
+                                            <td class="text-center">{{$deliveryPartners->destroy_order}}</td>
                                             <td><a class="text-primary underline" href="#"
                                                 onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
                                                     tiết</a></td>

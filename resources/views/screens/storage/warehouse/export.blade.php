@@ -192,8 +192,8 @@
                                     <td>{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td>{{$request->ncc_name}}</td>
-                                    <td>{{$request->quantity}}</td>
-                                    <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{$request->quantity}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$request->id}} text-center">
                                         @if($request->status == 0)
                                             <a href="javascript:void(0)"
@@ -219,7 +219,7 @@
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_number}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">
-                                                Xuất hóa đơn
+                                                In hóa đơn
                                             </a>
                                         </div>
                                     </td>

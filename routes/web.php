@@ -68,8 +68,8 @@ Route::get('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 
 Route::post('/otp/{token1}', [\App\Http\Controllers\Auth\LoginController::class, 'post_OTP'])->name('post_otp');
 Route::get('reOtp', [\App\Http\Controllers\Auth\LoginController::class, 'reOtp'])->name('re_otp');
 Route::get('check-date', [\App\Http\Controllers\Manufacture\ProductController::class, 'checkDate'])->name('check_date');
-// Chia các website thành 3 phần có các chức năng tưởng ứng với quyền
-//role_id = 1 Quyền Admin
+Route::post('chunk-store', [\App\Http\Controllers\ChunkFileController::class, 'chunkStore'])->name('chunk.store');
+
 Route::group(['domain' => config('domain.admin')], function () {
     Route::get('test', function () {
 //        $citys = \App\Models\Province::all();
@@ -178,6 +178,8 @@ Route::group(['domain' => config('domain.storage'), 'middleware' => 'storage'], 
     Route::prefix('account')->group(function () {
         Route::get('/', [\App\Http\Controllers\Storage\AccountController::class, 'profile'])->name('screens.storage.account.profile');
         Route::get('/detail-profile', [\App\Http\Controllers\Storage\AccountController::class, 'detailProfile'])->name('screens.storage.account.profile.detail');
+        Route::get('/detail-profile-warehouse', [\App\Http\Controllers\Storage\AccountController::class, 'detailProfileWarehouse'])->name('screens.storage.warehouse.profile');
+        Route::post('/update-profile-warehouse', [\App\Http\Controllers\Storage\AccountController::class, 'updateProfileWarehouse'])->name('update.storage.warehouse.profile');
         Route::post('/edit/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'editProfile'])->name('screens.storage.account.editPro');
         Route::post('/upload/{id}', [\App\Http\Controllers\Storage\AccountController::class, 'uploadImage'])->name('screens.storage.account.upload');
         Route::get('/change-password', [\App\Http\Controllers\Storage\AccountController::class, 'changePassword'])->name('screens.storage.account.changePassword');
@@ -213,17 +215,10 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('screens.admin.dashboard.index');
     });
-    Route::prefix('categories')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('screens.admin.category.index');
-        Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('screens.admin.category.create');
-        Route::post('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('screens.admin.category.store');
-        Route::get('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('screens.admin.category.edit');
-        Route::post('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('screens.admin.category.update');
-//        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('screens.admin.category.destroy');
-    });
+
 
     Route::prefix('users')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
+        Route::get('/list', [\App\Http\Controllers\Admin\UserController::class, 'getListUser'])->name('screens.admin.user.list_user');
         Route::get('/history-payment', [\App\Http\Controllers\Admin\UserController::class, 'historyPayment'])->name('screens.admin.user.historyPayment');
         Route::get('/check-payment', [\App\Http\Controllers\Admin\UserController::class, 'checkPayment'])->name('screens.admin.user.checkPayment');
         Route::get('/result-payment', [\App\Http\Controllers\Admin\UserController::class, 'resultCheckPayment'])->name('screens.admin.user.resultCheckPayment');
@@ -253,12 +248,19 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
 
         });
     });
-    Route::prefix('product')->group(function () {
+    Route::prefix('products')->group(function () {
         Route::get('index', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('screens.admin.product.index');
         Route::get('/detail', [\App\Http\Controllers\Admin\ProductController::class, 'detail'])->name('screens.admin.product.detail');
         Route::post('/confirm/{id}}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
         Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
-
+        Route::prefix('categories')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('screens.admin.category.index');
+            Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('screens.admin.category.create');
+            Route::post('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('screens.admin.category.store');
+            Route::get('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('screens.admin.category.edit');
+            Route::post('/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('screens.admin.category.update');
+//        Route::get('/delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('screens.admin.category.destroy');
+        });
     });
     Route::prefix('finances')->group(function () {
         Route::get('/request-deposit', [\App\Http\Controllers\Admin\FinanceController::class, 'index'])->name('screens.admin.finance.index');

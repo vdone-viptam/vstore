@@ -122,6 +122,9 @@
                                     <a class="nav-link {{ (request()->is('account')) ? 'active1' : '' }}" href="{{route('screens.storage.account.profile')}}">Hồ sơ của tôi</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('account/information-warehouse')) ? 'active1' : '' }}" href="{{route('screens.storage.warehouse.profile')}}">Thông tin kho</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}" href="{{route('screens.storage.account.changePassword')}}">Đổi mật khẩu</a>
                                 </li>
                             </ul>

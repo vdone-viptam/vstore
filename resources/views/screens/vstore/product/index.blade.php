@@ -100,7 +100,8 @@
                                 </span>
                             </th>
                             <th class="white-space-120">
-                                Giá sản phẩm (đ) chưa VAT
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Giá sản phẩm chưa VAT
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -112,8 +113,10 @@
                                         <i class="fas fa-sort sort" data-sort="products.price"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th class="white-space-120">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Thuế giá trị gia tăng (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vat')
@@ -126,6 +129,7 @@
                                         <i class="fas fa-sort sort" data-sort="vat"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th class="white-space-120">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -140,7 +144,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">Chiết khấu từ NCC (%)
+                            <th class="white-space-120">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Chiết khấu từ NCC (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -152,6 +158,7 @@
                                         <i class="fas fa-sort sort" data-sort="discount"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th class="white-space-120">
                                 Ngày xét duyệt
@@ -168,7 +175,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">Chiết khấu cho V-SHOP (%)
+                            <th class="white-space-130">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Chiết khấu cho V-SHOP (%)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -180,6 +189,7 @@
                                         <i class="fas fa-sort sort" data-sort="discount_vShop"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th class="white-space-80">
                             </th>
@@ -218,7 +228,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="10" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>

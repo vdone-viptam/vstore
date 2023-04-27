@@ -17,71 +17,83 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
-            <div class="input-group mb-3">
-                <input disabled name="discount_ncc" id="discount_ncc"
-                       class="form-control-lg form-control" value="{{$product1->discount}}">
-                <span class="input-group-text percent-to-vnd">
-                        {{number_format($product1->price * ($product1->discount / 100),0,'.','.')}} đ
-                    </span>
+            <div class="row">
+                <div class="col-6">
+                    <input disabled name="discount_ncc" id="discount_ncc"
+                           class="form-control-lg form-control" value="{{$product1->discount}}">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control form-control-lg" id="moneyDis" disabled
+                           placeholder="Chiết khấu cho V-Store thành tiền"
+                           value="{{number_format($product1->price * ($product1->discount / 100),0,'.','.') }} đ">
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
-            <div class="input-group mb-3">
-                <input disabled name="buy_more" id="buy_more" value="{{$product1->buy_more}}"
-                       class="form-control form-control-lg">
-                <span class="input-group-text percent-to-vnd">
-                        {{number_format($product1->price * ($product1->buy_more / 100),0,'.','.') }} đ
-                    </span>
+            <div class="row">
+                <div class="col-6">
+                    <input disabled name="buy_more" id="buy_more"
+                           class="form-control-lg form-control" value="{{$product1->discount}}">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control form-control-lg" id="moneyMore" disabled
+                           placeholder="Chiết khấu mua nhiều thành tiền"
+                           value="{{number_format($product1->price * ($product1->buy_more / 100),0,'.','.') }} đ">
+                </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="">Phần trăm giảm giá (%):</label>
-            <div class="input-group mb-3">
-                <input name="discount" id="discount1" type="text" value="{{$discount->discount}}"
-                       class="form-control form-control-lg">
-                <span class="input-group-text percent-to-vnd">
-                    {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ
-                </span>
+            <label class="">Phần trăm giảm giá (%):</label>>
+            <div class="row">
+                <div class="col-6">
+                    <input name="discount" id="discount1"
+                           class="form-control-lg form-control" value="{{$discount->discount}}">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control form-control-lg" id="moneyPrice" disabled
+                           placeholder="Chiết khấu cho V-Store thành tiền"
+                           value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ đ">
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6 form-group">
-                <span class="">Ngày bắt đầu:</span>
-                <input type="datetime-local" name="start_date" id="start_date"
-                       required value="{{$discount->start_date}}"
-                       min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
-                       class="form-control-lg form-control ">
-                @error('start_date')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="col-6 form-group">
-                <span class="">Ngày kết thúc:</span>
-                <input type="datetime-local" id="end_date" name="end_date"
-                       required value="{{$discount->end_date}}"
-                       min="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}"
-                       class="form-control-lg form-control">
-                @error('end_date')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <span class="">Ngày bắt đầu:</span>
+                    <input type="datetime-local" name="start_date" id="start_date"
+                           required value="{{$discount->start_date}}"
+                           min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
+                           class="form-control-lg form-control ">
+                    @error('start_date')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-6">
+                    <span class="">Ngày kết thúc:</span>
+                    <input type="datetime-local" id="end_date" name="end_date"
+                           required value="{{$discount->end_date}}"
+                           min="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}"
+                           class="form-control-lg form-control">
+                    @error('end_date')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
 
+                </div>
             </div>
 
         </div>
         <p class="text-danger" id="message">Phần trăm giảm giá phải nhỏ hơn phần
             trăm còn lại sau chiết
             khấu <span class="discountFinal"></span></p>
-
     </div>
+
+
+</div>
 </div>
 
 <script>
-    var VND = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-    });
     document.querySelectorAll('.number').forEach(item => {
         item.addEventListener("keypress", (e) => {
             var regex = new RegExp("^[0-9.]+$");
@@ -92,6 +104,10 @@
             }
         });
     })
+    var VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -197,13 +213,13 @@
             document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
 
         }
+
         const price1 = $('#price').val();
         const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
         if (priceTrue > 0) {
             let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
-            $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
+            $('#moneyPrice').val(subMoney1);
         }
-
     });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
         const value = e.target.value;
@@ -218,6 +234,16 @@
                     document.querySelector('#price').value = result.pro.price;
                     document.querySelector('#discount_ncc').value = result.pro.discount;
                     document.querySelector('#buy_more').value = result.pro.buy_more;
+                    if (result.pro.discount > 0) {
+                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
+                        let subMoney1 = VND.format(priceTrue * result.pro.discount / 100) || 0 + ' đ';
+                        $('#moneyDis').val(subMoney1);
+                    }
+                    if (result.pro.buy_more > 0) {
+                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
+                        let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + ' đ';
+                        $('#moneyMore').val(subMoney2);
+                    }
 
                 } else {
                     document.querySelector('#price').value = 0 + ' đ';

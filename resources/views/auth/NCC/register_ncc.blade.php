@@ -1,5 +1,5 @@
 @php
-    
+
     if ($order && $user) {
         $isOrder = true;
     } else {
@@ -7,7 +7,7 @@
         $order = \Illuminate\Support\Facades\Session::get('order');
         $user = \Illuminate\Support\Facades\Session::get('user');
     }
-    
+
 @endphp
 
 <!DOCTYPE html>
@@ -84,7 +84,7 @@
             </div>
         </div>
     @endif
-   
+
     <form class="splash-container splash-register" action="{{ route('post_register', ['role_id' => 2]) }}"
         id="formRegister-V" enctype="multipart/form-data" method="POST">
         @csrf
@@ -234,8 +234,8 @@
                             @enderror
                         </div>
                     </div>
-    
-                   
+
+
                 </div>
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12">
@@ -432,15 +432,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                                 Chi tiết sản phẩm</h3>
                                         </div>
                                         @php
-                                            
+
                                             $price = (float) config('constants.orderService.price_ncc');
                                             $priceFormat = number_format($price, 0, '', '.');
                                             $vat = ((float) config('constants.orderService.price_ncc') * 10) / 100;
                                             $vatFormat = number_format($vat, 0, '', '.');
-                                            
+
                                             $total = $price + $vat;
                                             $totalFormat = number_format($total, 0, '', '.');
-                                            
+
                                             $chiTietThanhToan = [
                                                 [
                                                     'title' => 'Ngày tạo',
@@ -868,7 +868,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         function checkEmpty(inputs) {
             let check1 = true
             inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 != 8 && index1 != 9) {
+                if (!item1.value && index1 > 0 && index1 != 8 && index1 != 6 ) {
                     check1 = false;
                 }
                 if(index1 == 6){
@@ -883,8 +883,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         }
 
         const inputs = document.querySelectorAll('input');
-        console.log(inputs);
-       
+
         inputs.forEach((item, index) => {
             item.setAttribute('autocomplete', 'off')
             item.addEventListener('change', (e) => {
@@ -971,7 +970,6 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 .map(item =>
                                     `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`
                                     );
-                            console.log(1);
                         } else {
                             divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                         }

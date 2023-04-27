@@ -116,7 +116,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="8">Không có dữ liệu phù hợp</td>
+                            <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                         </tr>
                         </tbody>
                     </table>

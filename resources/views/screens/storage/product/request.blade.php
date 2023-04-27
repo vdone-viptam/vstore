@@ -188,9 +188,9 @@
                                     <td>{{$product->publish_id}}</td>
                                     <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td>{{$product->ncc_name}}</td>
-                                    <td>{{$product->quantity}}</td>
-                                    <td>0</td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
+                                    <td class="text-center">{{$product->quantity}}</td>
+                                    <td class="text-center">0</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
                                     <td class="status{{$product->id}}">
                                         @if($product->status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a

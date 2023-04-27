@@ -94,7 +94,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
         <div class="card">
-            <h5 class="card-header" style="font-size: 18px;">Những sản phẩm và đơn hàng gần đây
+            <h5 class="card-header" style="font-size: 18px;">Đơn hàng mới/Yêu cầu nhập kho chưa xác nhận
             </h5>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -179,14 +179,14 @@
                                 <td>{{$product->publish_id}}</td>
                                 <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                 <td>{{$product->ncc_name}}</td>
-                                <td>{{$product->quantity}}</td>
-                                <td>0</td>
-                                <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                <td class="text-center">{{$product->quantity}}</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 <td>
                                     @if($product->type == 1)
-                                        <span class="text-success">Yêu cầu nhập</span>
+                                        <span class="text-success">Đơn hàng mới</span>
                                     @else
-                                        <span style="color:#005d1d;">Xác nhận đơn hàng</span>
+                                        <span style="color:#005d1d;">Đơn hàng mới</span>
                                     @endif
                                 </td>
                                 <td>

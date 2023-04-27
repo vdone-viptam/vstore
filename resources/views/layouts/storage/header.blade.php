@@ -10,6 +10,11 @@
                 <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
                      alt="logo">
             </a>
+        @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
+            <a class="navbar-brand" href="{{route('screens.vstore.dashboard.index')}}">
+                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
+                     alt="logo">
+            </a>
         @else
             <a class="navbar-brand" href="{{route('screens.manufacture.dashboard.index')}}">
                 <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"
@@ -39,7 +44,8 @@
                             <div class="switch-button switch-button-success switch-button-xs">
                                 <input type="checkbox" data-checked="{{\Illuminate\Support\Facades\DB::table('warehouses')
 ->select('is_off')->where('user_id',\Illuminate\Support\Facades\Auth::id())->first()->is_off}}" {{\Illuminate\Support\Facades\DB::table('warehouses')
-->select('is_off')->where('user_id',\Illuminate\Support\Facades\Auth::id())->first()->is_off == 1 ? 'checked' : ''}} name="switch12" id="switch12"><span>
+->select('is_off')->where('user_id',\Illuminate\Support\Facades\Auth::id())->first()->is_off == 1 ? 'checked' : ''}} name="switch12"
+                                       id="switch12"><span>
                                         <label for="switch12"></label></span>
                             </div>
                         </a>
@@ -56,8 +62,8 @@
                         <li>
                             <div class="notification-title"> Thông báo</div>
                             <div class="slimScrollDiv"
-                                 style="position: relative; overflow: hidden; width: auto; height: 250px;">
-                                <div class="notification-list" style="overflow: hidden; width: auto; height: 250px;">
+                                 style="position: relative; overflow: scroll; width: auto; height: 300px;">
+                                <div class="notification-list" style="overflow: hidden; width: auto;">
                                     <div class="list-group">
                                         @if(count(Auth::user()->unreadNotifications) > 0)
                                             @foreach (Auth::user()->unreadNotifications as $index =>$notification)
@@ -71,7 +77,7 @@
                                                         <div
                                                             class="notification-list-user-block">{{$notification['data']['message']}}
                                                             <div
-                                                                class="notification-date">{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y H:i A')}}
+                                                                class="notification-date">{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y H:i')}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -413,14 +419,16 @@
                             </div>
                         </li>
                         <li>
-                            <div class="list-footer"><a href="#">Xem tất cả</a></div>
+                            <div class="list-footer"><a href="#" data-toggle="modal" data-target="#noti">Xem tất cả</a>
+                            </div>
+
                         </li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown nav-user">
                     <a class="nav-link nav-user-img" href=""
-                     id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                       id="navbarDropdownMenuLink2" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <div class="w-[24px]">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -462,4 +470,32 @@
     </nav>
 
 
+</div>
+<div class="modal fade" id="noti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tất cả thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="position: relative; overflow: scroll; width: auto; height: 500px;">
+                @foreach(Auth::user()->notifications as $notification)
+                    <p>
+                        <img style="width: 32px;height: 32px"
+                             src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png">
+                        {{$notification['data']['message']}}
+                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem chi tiết</a>
+
+                    </p>
+                    <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y H:i')}}</span>
+                    <hr>
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
 </div>

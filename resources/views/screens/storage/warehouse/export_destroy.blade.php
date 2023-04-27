@@ -136,7 +136,7 @@
                                     <td>{{$request->code}}</td>
                                     <td>{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
-                                    <td>{{$request->quantity}}</td>
+                                    <td class="text-center">{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
                                     <td><a href="#" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi
                                             tiết</a></td>

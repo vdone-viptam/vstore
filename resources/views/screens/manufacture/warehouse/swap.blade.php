@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Quản lý yêu cầu xét duyệt')
+@section('page_title','Quản lý xuất - nhập sản phẩm')
 
 
 
@@ -28,14 +28,14 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Quản lý yêu cầu xét duyệt</h2>
+                <h2 class="pageheader-title">Quản lý xuất - nhập sản phẩm</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Sản phẩm</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý kho hàng</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt</li>
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý xuất - nhập sản phẩm</li>
                         </ol>
                     </nav>
                 </div>
@@ -49,8 +49,8 @@
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt</h5>
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="    gap:10px">
+                <h5 class="mb-0" style="font-size:18px;">Quản lý xuất - nhập sản phẩm</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -166,7 +166,7 @@
                                 <tr>
                                     <td>{{$product->code}}</td>
                                     <td class="white-space-300">{{$product->ware_name}}</td>
-                                    <td class="white-space-300">{{$product->name}}</td>
+                                    <td class="white-space-400">{{$product->name}}</td>
                                     <td>
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>
@@ -193,8 +193,8 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td class="text-right">{{number_format($product->quantity,0,'.','.')}}</td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{number_format($product->quantity,0,'.','.')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 </tr>
                             @endforeach
                         @else
@@ -242,7 +242,7 @@
                     }
                     setTimeout(() => {
                         document.location = '{{route('screens.manufacture.warehouse.swap',['key_search' => $key_search])}}&type=' + orderBy +
-                            '&field=' + sort+'&limit={{$limit}}'
+                            '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
             });

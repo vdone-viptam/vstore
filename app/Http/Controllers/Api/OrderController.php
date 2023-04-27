@@ -148,7 +148,7 @@ class OrderController extends Controller
                 'RECEIVER_PROVINCE' => $provinceId,
 
                 'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
-                'PRODUCT_WEIGHT' => ($product->weight) / 1000 * $quantity,
+                'PRODUCT_WEIGHT' => ($product->weight / 1000) * $quantity,
                 'PRODUCT_PRICE' => $order->total,
                 'MONEY_COLLECTION' => $methodPayment === 'COD' ? $order->total : 0,
                 'TYPE' => config('viettelPost.nationalType.domesticType'),
@@ -298,7 +298,7 @@ class OrderController extends Controller
                 $price = 0;
                 $weight = 0;
                 foreach ($item['products'] as $pro) {
-                    $weight += $pro->weight * $pro->quantity;
+                    $weight += ($pro->weight / 1000) * $pro->quantity;
                     $priceDiscount = $pro->price * $pro->quantity;
                     $totalDiscountSuppliersAndVStore = 0;
                     if ($pro->discount_ncc) {
@@ -505,7 +505,7 @@ class OrderController extends Controller
     public function getDetailOrderByUser($order_id)
     {
         try {
-            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number','method_payment')
+            $order = Order::select('no', 'id', 'created_at', 'shipping', 'total', 'fullname', 'phone', 'address', 'export_status', 'order_number', 'method_payment')
                 ->where('id', $order_id)
                 ->where('status', '!=', 2)
                 ->orderBy('updated_at', 'desc')
@@ -533,16 +533,16 @@ class OrderController extends Controller
                             + $order->detail->discount_vshop) / 100)) / 100 * $order->detail->quantity;
             $order->detail->price = $product->price;
             $order->detail->product_name = $product->name;
-            if ($order->method_payment == '9PAY'){
-                $order->method_payment= 1;
-            }elseif ($order->method_payment == 'ATM_CARD'){
-                $order->method_payment= 2;
-            }elseif ($order->method_payment == 'CREDIT_CARD'){
-                $order->method_payment= 3;
-            }elseif ($order->method_payment == 'BANK_TRANSFER'){
-                $order->method_payment= 4;
-            }elseif ($order->method_payment == 'COD'){
-                $order->method_payment= 5;
+            if ($order->method_payment == '9PAY') {
+                $order->method_payment = 1;
+            } elseif ($order->method_payment == 'ATM_CARD') {
+                $order->method_payment = 2;
+            } elseif ($order->method_payment == 'CREDIT_CARD') {
+                $order->method_payment = 3;
+            } elseif ($order->method_payment == 'BANK_TRANSFER') {
+                $order->method_payment = 4;
+            } elseif ($order->method_payment == 'COD') {
+                $order->method_payment = 5;
             }
             return response()->json([
                 'success' => true,

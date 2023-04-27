@@ -136,7 +136,7 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã đơn hàng
+                            <th class="white-space-110">Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
                                         @if($type == 'desc')
@@ -149,7 +149,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-400">Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -258,9 +258,9 @@
                                 <tr>
                                     <td class="white-space-100">{{$order->no}}</td>
                                     <td class="white-space-400">{{$order->product->name}}</td>
-                                    <td class="white-space-120 text-right">{{number_format($order->product->price,0,'.','.')}}</td>
-                                    <td class="text-right">{{(int)$order->discount}}</td>
-                                    <td class="text-right">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="white-space-140 text-right">{{number_format($order->product->price,0,'.','.')}}</td>
+                                    <td class="text-center">{{(int)$order->discount}}</td>
+                                    <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
                                     <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}}</td>
                                     <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}</td>
                                     <td>
@@ -275,7 +275,7 @@
                                         @endif
                                     </td>
                                     <td>{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="#" data-toggle="modal"
                                            data-target=".bd-example-modal-lg" data-id="{{$order->id}}"
                                            class="text-blue-600 more-details">Chi tiết</a>

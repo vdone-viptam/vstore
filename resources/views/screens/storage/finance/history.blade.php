@@ -99,7 +99,7 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td>
+                                            <td class="text-right">
                                                 {{number_format($history->amount,0,'.','.')}}
                                             </td>
                                             <td>
@@ -107,7 +107,7 @@
                                             </td>
 
 
-                                            <td>
+                                            <td class="text-center">
                                                 {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
                                             </td>
                                         </tr>

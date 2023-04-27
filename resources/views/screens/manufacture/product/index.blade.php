@@ -110,22 +110,28 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-90">Giá bán (đ)
-                                <span style="float: right;cursor:pointer">
-                                    @if($field == 'price')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                            <th class="white-space-90">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Giá bán
+                                    <span style="float: right;cursor:pointer">
+                                        @if($field == 'price')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                            <i class="fas fa-sort sort" data-sort="price"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="price"></i>
-                                    @endif
-                                </span>
+                                    </span>
+                                </div>
+
                             </th>
-                            <th class="white-space-110">Thuế giá trị gia tăng (%)
+                            <th class="white-space-120">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Thuế giá trị gia tăng (%)
                                 <span style="float: right;cursor:pointer">
-                                    @if($field == 'vat')
+                                @if($field == 'vat')
                                         @if($type == 'desc')
                                             <i class="fa-solid fa-sort-down sort" data-sort="vat"></i>
                                         @else
@@ -135,8 +141,11 @@
                                         <i class="fas fa-sort sort" data-sort="vat"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
-                            <th class="white-space-100">Trạng thái
+                            <th class="white-space-100">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Trạng thái
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'status')
                                         @if($type == 'desc')
@@ -148,9 +157,12 @@
                                         <i class="fas fa-sort sort" data-sort="status"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
 
-                            <th class="white-space-100">V-Store niêm yết
+                            <th class="white-space-100">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -162,8 +174,11 @@
                                         <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
-                            <th class="white-space-120">Chiết khấu cho V-Store (%)
+                            <th class="white-space-130">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Chiết khấu cho V-Store (%)
                                 <span style="float: right;cursor: pointer">
                                         @if($field == 'products.discount')
                                         @if($type == 'desc')
@@ -175,8 +190,11 @@
                                         <i class="fas fa-sort sort" data-sort="products.discount"></i>
                                     @endif
                                     </span>
+                                </div>
                             </th>
-                            <th class="white-space-100">Số lượng đã bán
+                            <th class="white-space-100">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Số lượng đã bán
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
@@ -188,8 +206,11 @@
                                         <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
                                     @endif
                                     </span>
+                                </div>
                             </th>
-                            <th class="white-space-100">Số lượng trong kho
+                            <th class="white-space-100">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Số lượng trong kho
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                         @if($type == 'desc')
@@ -201,6 +222,7 @@
                                         <i class="fas fa-sort sort" data-sort="amount"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th style="min-width: 70px">
                             </th>
@@ -217,8 +239,8 @@
                                     <td class="td_name">{{$product->name}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
-                                    <td class="text-right">{{$product->vat}}</td>
-                                    <td>
+                                    <td class="text-center">{{$product->vat}}</td>
+                                    <td class="white-space-100">
                                         @if($product->status == 0)
                                             <span>Chưa xét duyệt</span>
                                         @elseif($product->status == 1)
@@ -228,10 +250,10 @@
                                         @endif
                                     </td>
                                     <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : ''}}</td>
-                                    <td class="text-right">{{$product->discount != null ? $product->discount : ''}}</td>
+                                    <td class="text-center">{{$product->discount != null ? $product->discount : ''}}</td>
 
-                                    <td class="text-right">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($product->amount,0,'.','.')}}</td>
+                                    <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                    <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
                                     <td style="min-width: 70px">
                                         <button type="button" class="btn btn-link pl-0"
                                                 onclick="showDetail({{$product->id}})">Chi tiết
