@@ -1,5 +1,5 @@
 @php
-    
+
     if ($order && $user) {
         $isOrder = true;
     } else {
@@ -7,7 +7,7 @@
         $order = \Illuminate\Support\Facades\Session::get('order');
         $user = \Illuminate\Support\Facades\Session::get('user');
     }
-    
+
 @endphp
 
 <!DOCTYPE html>
@@ -123,7 +123,7 @@
                             <label style="font-weight: 600;" for="vstore" style="font-weight: 600;"><span
                                     class="text-danger">*</span>Tên V-Store</label>
                             <input class="form-control form-control-lg" required type="text" name="name"
-                                id="name" placeholder="Nhập tên nhà cung cấp" value="{{ old('name') }}">
+                                id="name" placeholder="Nhập V-Store" value="{{ old('name') }}">
                             @error('name')
                                 <p class="text-danger text-red-500">{{ $message }}</p>
                             @enderror

@@ -121,7 +121,6 @@ class ProductController extends Controller
             'height' => 'required|max:13',
             'packing_type' => 'required',
             'images' => 'required',
-            'video' => 'required',
             'with' => 'required|max:13',
             'volume' => 'max:15',
             'manufacturer_name' => 'max:255',
@@ -161,7 +160,6 @@ class ProductController extends Controller
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
             'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
-            'video.required' => 'Video sản phẩm bắt buộc chọn',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());
@@ -538,7 +536,6 @@ class ProductController extends Controller
             'description' => 'required',
             'short_content' => 'required|max:500',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'video' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -566,7 +563,6 @@ class ProductController extends Controller
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
             'images.image' => 'File nhập không phải định dạng ảnh',
             'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
-            'video.required' => 'Video sản phẩm bắt buộc chọn',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
@@ -589,7 +585,6 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ]);
         if ($validator->fails()) {
-            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
         try {
@@ -643,8 +638,9 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollback();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
+
         }
 
     }
