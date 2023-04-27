@@ -7,7 +7,7 @@
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
             <a class="navbar-brand" href="{{route('screens.vstore.dashboard.index')}}">
-                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
+                <img class="logo-img" style="height: 40px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
                      alt="logo">
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
@@ -450,7 +450,7 @@
                     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                          aria-labelledby="navbarDropdownMenuLink2">
                         <div class="nav-user-info">
-
+                            Tên user
                         </div>
                         <a class="dropdown-item" href=@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
                      "{{route('screens.storage.account.profile')}}"

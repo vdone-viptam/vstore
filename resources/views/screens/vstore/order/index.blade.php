@@ -2,10 +2,6 @@
 
 @section('modal')
     <div id="modal5"></div>
-@endsection
-
-@section('page_title','Tất cả đơn hàng')
-@section('page')
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <form action="" method="POST" id="form">
@@ -27,6 +23,30 @@
                 </div>
             </div>
         </form>
+    </div>
+@endsection
+
+@section('page_title','Tất cả đơn hàng')
+
+@section('page')
+    
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Tất cả đơn hàng</h2>
+
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('screens.vstore.order.index')}}"
+                                                           class="breadcrumb-link">Quản lý đơn hàng</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Tất cả đơn hàng</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('content')
@@ -57,8 +77,8 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-150">Mã đơn hàng</th>
-                            <th class="white-space-300">Tên sản phẩm
+                            <th style="min-width:100px;">Mã đơn hàng</th>
+                            <th style="min-width:150px">Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -71,7 +91,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-130">Ngành hàng
+                            <th class="white-space-100">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -203,11 +223,11 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->no}}</td>
-                                    <td class="white-space-300">{{$order->name}}</td>
-                                    <td class="white-space-130">{{$order->cate_name}}</td>
+                                    <td class="white-space-200">{{$order->name}}</td>
+                                    <td class="white-space-120">{{$order->cate_name}}</td>
                                     <td class="white-space-90 text-right">{{number_format($order->price,'0','.','.')}}</td>
-                                    <td class="white-space-90 text-right">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="white-space-90 text-right">{{number_format($order->total,'0','.','.')}}</td>
+                                    <td class="white-space-100 text-center">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="white-space-120 text-right">{{number_format($order->total,'0','.','.')}}</td>
                                     <td class="white-space-150"> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="white-space-130">
                                         @if($order->export_status == 4 && \Carbon\Carbon::parse($order->estimated_date)->diffInDays(\Carbon\Carbon::now()) >= 7)
@@ -216,13 +236,13 @@
                                             Đơn hàng chưa hoàn thành
                                         @endif
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-center">
                                         {{$order->discount}}
                                     </td>
                                     <td class="text-right">
                                         {{number_format($order->discount * $order->total / 100,0,'.','.')}}
                                     </td>
-                                    <td class="white-space-50"><a href="#" onclick="showDetail({{$order->id}})" class="btn btn-link">Chi
+                                    <td class="white-space-50"><a href="javascript:void(0)" onclick="showDetail({{$order->id}})" class="btn btn-link" style="text-decoration:underline">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
@@ -235,9 +255,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$orders->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

@@ -49,8 +49,8 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã giao dịch</th>
-                                    <th>Trạng thái</th>
+                                    <th style="min-width:100px">Mã giao dịch</th>
+                                    <th style="min-width:100px">Trạng thái</th>
                                     <th class="white-space-150">Số tiền (đ)
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
@@ -126,15 +126,15 @@
                                             <td>{{$history->code}}</td>
 
                                             @if($history->status == 0)
-                                                <td class="text-yellow-400">
+                                                <td class="text-warning font-medium">
                                                     Đang chờ duyệt
                                                 </td>
                                             @elseif($history->status == 1)
-                                                <td class="text-green-700">
+                                                <td class="text-success font-medium">
                                                     Thành công
                                                 </td>
                                             @else
-                                                <td class="text-red-600">
+                                                <td class="text-danger font-medium">
                                                     Thất bại
                                                 </td>
                                             @endif
@@ -170,9 +170,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$histories->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class="ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
                                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

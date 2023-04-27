@@ -82,7 +82,7 @@
                         <tr>
                             <th>Mã sản phẩm</th>
                             <th>Hình ảnh</th>
-                            <th>Tên sản phẩm
+                            <th >Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
 
@@ -270,9 +270,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$products->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
