@@ -400,11 +400,11 @@ select.form-control {
     color              : #71748d;
     -webkit-appearance : none;
     -moz-appearance    : none;
-    background-position: 95% 52%;
+    background-position: 96% 52%;
     background-size    : auto;
     background-repeat  : no-repeat;
     background-image   : url(./images/down-arrow.png);
-    padding-right      : 25px;
+    padding-right      : 40px;
     border             : 1px solid #d2d2e4;
     border-radius      : 2px;
 }

@@ -203,8 +203,8 @@
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
                          style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">
-                            <a href="#" class="">Sản phẩm đã xét duyệt
-                            </a>
+                            Sản phẩm đã xét duyệt
+                            
                         </h5>
                         <ul class="navbar-nav ">
                             <li class="nav-item">
@@ -212,7 +212,7 @@
                                     <form>
                                         <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                                type="search"
-                                               placeholder="Tìm kiếm..">
+                                               placeholder="Nhập từ khóa tìm kiếm..">
                                     </form>
 
                                 </div>
@@ -224,7 +224,7 @@
                             <table id="example" class="table table-striped table-bordered second"
                                    style="width:100%">
                                 <thead>
-                                <th>
+                                <th style="min-width:100px;">
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Mã sản phẩm
                                         <span style="float: right;cursor:pointer">
@@ -240,7 +240,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-400">
+                                <th class="white-space-400" style="min-width:150px">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Tên sản phẩm
@@ -257,7 +257,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th>
+                                <th style="min-width:100px;">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Ngành hàng
@@ -274,7 +274,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-90">
+                                <th class="white-space-110">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Giá bán (đ)
@@ -291,7 +291,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-150">
+                                <th class="white-space-110">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         V-Store niêm yết
@@ -308,7 +308,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-120">
+                                <th class="white-space-130">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Chiết khấu cho V-Store (%)
@@ -325,7 +325,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th>
+                                <th style="min-width:120px">
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Ngày xét duyệt
                                         <span style="float: right;cursor:pointer">
@@ -358,7 +358,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-90">
+                                <th class="white-space-120">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Số lượng trong kho
@@ -381,20 +381,20 @@
                                 @if(count($data) > 0)
                                     @foreach($data as $product)
                                         <tr>
-                                            <td>{{$product->publish_id}}</td>
+                                            <td class="text-center">{{$product->publish_id}}</td>
                                             <td style="white-space: pre-wrap">{{$product->name}}</td>
                                             <td>{{$product->cate_name}}</td>
                                             <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
-                                            <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
-                                            <td class="text-right">{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
+                                            <td class="text-center">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
+                                            <td class="text-center">{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
-                                            <td class="text-right">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
-                                            <td class="text-right">{{number_format($product->amount,0,'.','.')}}</td>
+                                            <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                            <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-link pl-0"
+                                                <a href="javascript:void(0)" class="btn btn-link pl-0" style="text-decoration:underline"
                                                         onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi
                                                     tiết
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

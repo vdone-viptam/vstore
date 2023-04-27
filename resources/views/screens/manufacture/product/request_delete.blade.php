@@ -33,7 +33,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Sản phẩm</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Yêu cầu hủy niêm yết sản phẩm</li>
                         </ol>
@@ -57,7 +57,7 @@
                             <form>
                                 <input name="key_search" value="" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -100,7 +100,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="6" class="text-center">Không có dữ liệu phù hợp</td>
+                            <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                         </tr>
                         </tbody>
                     </table>

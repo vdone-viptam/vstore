@@ -89,7 +89,7 @@
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
                                 <form >
-                                <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_users" value="{{$key_search_users}}">
+                                <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm..." name="key_search_users" value="{{$key_search_users}}">
                                 </form>
                             </div>
                         </li>
@@ -126,7 +126,7 @@
                                     <td class="text-center">{{$user->id_vdone}}</td>
                                     <td>
                                         @if($user->role_id == 2)
-                                            <span class="text-primary font-medium">Nhà cung cấp</span> </td>
+                                            <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($user->role_id == 1)
                                             Admin
                                         @elseif($user->role_id == 4)
@@ -188,7 +188,7 @@
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
                                 <form >
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_request" value="{{$key_search_request}}">
+                                    <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm..." name="key_search_request" value="{{$key_search_request}}">
                                 </form>
                             </div>
                         </li>
@@ -332,18 +332,6 @@
 
 
     })
-    $('.more-details').each(function (i, e) {
-        $(this).on('click', (o) => {
-            $.ajax({
-                url: '{{route('screens.admin.user.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&role_id=' + e.dataset.role,
-                success: function (result) {
-                    $('#modal1').html('');
-                    $('#modal1').append(result);
-                    $('.modal-details').toggleClass('show-modal')
-                },
-            });
-        });
-    });
 
     let limit_request = document.getElementById('limit_request');
     let limit_users = document.getElementById('limit_users');

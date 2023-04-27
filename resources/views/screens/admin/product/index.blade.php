@@ -152,10 +152,9 @@
                                             <td><span class="text-success">{{$request->discount_vShop}}%</span></td>
                                             <td><span>{{$request->vstore_name}}</span></td>
                                             <td>
-                                                @if($request->status == 2)
+                                                @if($request->status == 1)
                                                     <div class="bg-warning text-white font-medium px-4 py-2"
                                                          style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
-                                                        V-Store
                                                         duyệt
                                                     </div>
                                                 @elseif($request->status == 3)

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Liên kết V-Store</h2>
+                <h2 class="pageheader-title">Danh sách V-Store liên kết</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -35,7 +35,7 @@
                                 <input type="hidden" name="field" value="{{$field}}">
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                       type="search" placeholder="Tìm kiếm..">
+                                       type="search" placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>

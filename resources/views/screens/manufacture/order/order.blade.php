@@ -123,7 +123,7 @@
                                 <input type="hidden" name="field" value="{{$field}}">
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                       type="search" placeholder="Tìm kiếm..">
+                                       type="search" placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>

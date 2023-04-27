@@ -100,7 +100,7 @@
                                     <input type="hidden" name="type" value="{{$type}}">
                                     <input type="hidden" name="field" value="{{$field}}">
                                     <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                           type="search" placeholder="Tìm kiếm..">
+                                           type="search" placeholder="Nhập từ khóa tìm kiếm...">
                                 </form>
                             </div>
                         </li>
@@ -193,7 +193,17 @@
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td>{{$request->ncc_name}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
+
+                                    <td class="text-center">
+                                        @if($request->status == 1 )
+                                            {{\Carbon\Carbon::parse($request->updated_at)->format('d/m/Y H:i')}}
+                                        @else
+                                            -
+                                        @endif
+
+
+                                    </td>
+
                                     <td class="status{{$request->id}} text-center">
                                         @if($request->status == 0)
                                             <a href="javascript:void(0)"

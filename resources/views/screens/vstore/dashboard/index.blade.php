@@ -83,7 +83,7 @@
                                     <form>
                                         <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                                type="search"
-                                               placeholder="Tìm kiếm...">
+                                               placeholder="Nhập từ khóa tìm kiếm...">
                                     </form>
 
                                 </div>
@@ -214,7 +214,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th>
+                                <th style="min-width:100px;">
 
                                     Trạng thái
                                     
@@ -247,10 +247,10 @@
 
                                             <td>
                                                 <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                                   class="btn btn-success">Đồng ý</a>
+                                                   class="btn text-success px-2">Đồng ý</a>
                                                 <a href="#"
                                                    onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                                   class="btn btn-danger">Từ chối</a>
+                                                   class="btn text-danger px-2">Từ chối</a>
                                             </td>
                                         </tr>
                                     @endforeach

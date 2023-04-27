@@ -38,7 +38,7 @@
                         {{-- <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                    <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm...">
                                 </div>
                             </li>
                         </ul> --}}

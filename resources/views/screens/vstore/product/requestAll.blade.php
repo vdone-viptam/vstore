@@ -79,17 +79,17 @@
                             <th class="white-space-90">Mã yêu cầu</th>
                             <th class="white-space-90">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Nhà cung cấp
-                                <span style="float: right;cursor: pointer">
+                                    Nhà cung cấp
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="users.name"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="users.name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="users.name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="users.name"></i>
+                                            <i class="fas fa-sort sort" data-sort="users.name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="users.name"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
@@ -121,33 +121,33 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Giá sản phẩm chưa VAT
-                                <span style="float: right;cursor:pointer">
+                                    Giá sản phẩm chưa VAT
+                                    <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.price"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.price"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.price"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.price"></i>
+                                            <i class="fas fa-sort sort" data-sort="products.price"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.price"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu từ Nhà cung cấp
-                                <span style="float: right;cursor:pointer">
+                                    Chiết khấu từ Nhà cung cấp
+                                    <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="requests.discount"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="requests.discount"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="requests.discount"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="requests.discount"></i>
+                                            <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="requests.discount"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
@@ -268,15 +268,9 @@
                                                 Hệ thống đồng ý
                                             </div>
                                         @else
-                                            <div
-                                                class="alert alert-danger">
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-                                                        fill="white"/>
-                                                </svg>
-                                                Hệ thống từ chối
+                                            <div class="bg-danger text-white font-medium px-4 py-2"
+                                                 style="border-radius: 2px;"><i class="fas fa-times mr-2"></i> Hệ thống
+                                                từ chối
                                             </div>
                                         @endif
                                     </td>

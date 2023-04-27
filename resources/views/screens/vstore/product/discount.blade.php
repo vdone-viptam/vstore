@@ -64,7 +64,7 @@
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -188,7 +188,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>

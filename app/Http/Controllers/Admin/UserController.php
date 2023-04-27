@@ -41,6 +41,11 @@ class UserController extends Controller
 
     public function getListRegisterAccount(Request $request)
     {
+        $this->v['field'] = $request->field ?? 'users.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
             'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
         $limit = $request->limit ?? 10;
@@ -61,7 +66,7 @@ class UserController extends Controller
         $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
             ->where('order_service.status', 3)
             ->where('payment_status', 1)
-            ->orderBy('users.id', 'desc')
+            ->orderBy($this->v['field'], $this->v['type'])
             ->where('role_id', '!=', 1)->paginate($limit);
 
         $this->v['params'] = $request->all();
@@ -212,13 +217,15 @@ class UserController extends Controller
     public function detail(Request $request)
     {
         $user = User::select('name', 'email',
-            'id_vdone', 'phone_number', 'tax_code',
-            'address', 'created_at', 'storage_information')->where('id', $request->id)->first();
+            'id_vdone', 'phone_number', 'tax_code','role_id',
+            'address', 'created_at', 'storage_information','confirm_date','referral_code')->where('id', $request->id)->first();
+        return $user;
         if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
         }
         $this->v['user'] = json_decode($user->storage_information);
         $this->v['user']->created_at = $user->created_at;
+
         return view('screens.admin.user.detail_kho', $this->v);
     }
 
@@ -350,18 +357,20 @@ class UserController extends Controller
 
     public function historyPayment(Request $request)
     {
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
-        $this->v['key_word'] = trim($request->key_search) ?? '';
+        $this->v['field'] = $request->field ?? 'order_service.id';
         $this->v['histories'] = User::join('order_service', 'users.id', '=', 'order_service.user_id')
-            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'order_service.payment_status', 'order_service.created_at')
+            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'users.email', 'users.phone_number', 'users.company_name', 'order_service.payment_status', 'order_service.created_at')
             ->where('order_service.type', '!=', 'VSTORE');
-        if (strlen($this->v['key_word']) > 0) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['histories'] = $this->v['histories']->where(function ($query) {
                 $query->where('users.name', 'like', '%' . $this->v['key_word'] . '%')
                     ->orWhere('order_service.no', $this->v['key_word']);
             });
         }
-        $this->v['histories'] = $this->v['histories']->paginate($this->v['limit']);
+        $this->v['histories'] = $this->v['histories']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
         return view('screens.admin.user.payment', $this->v);
     }
 

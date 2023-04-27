@@ -13,164 +13,425 @@
 @endsection
 
 @section('modal')
-    <div id="modal1">
-
-    </div>
-@endsection
-@section('content')
-    <form action="" method="GET" id="form">
-        <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Tài khoản</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                      stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <a href="#" class="text-blueMain font-medium italic">Danh sách đơn đăng ký tài khoản</a>
-        </div>
-        <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
-
-
-            <div class="flex justify-start items-start gap-2 flex-wrap">
-                <input type="text" value="{{isset($params['keyword']) ? $params['keyword'] : ''}}"
-                       name="key_search" id="key_search"
-                       class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="Tìm kiếm">
-                <button type="submit" id="btnSearch"
-                        class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
-                >
-
-                    Tìm kiếm
-                </button>
-            </div>
-            <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
-                <div class="flex justify-between items-center flex-wrap gap-4">
-                    <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
-                        <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path opacity="0.4"
-                                  d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
-                                  fill="url(#paint0_linear_98_611)"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
-                                  fill="url(#paint1_linear_98_611)"/>
-                            <defs>
-                                <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449"
-                                                y2="24.5684" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                                <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
-                                                gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        Danh sách đơn đăng ký tài khoản
-                    </h2>
-
-                    {{--                    <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">--}}
-
-                    {{--                        <button--}}
-                    {{--                            class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">--}}
-                    {{--                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"--}}
-                    {{--                                 xmlns="http://www.w3.org/2000/svg">--}}
-                    {{--                                <g clip-path="url(#clip0_4_2870)">--}}
-                    {{--                                    <rect width="20" height="20" fill="white" fill-opacity="0.01"/>--}}
-                    {{--                                    <path--}}
-                    {{--                                        d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"--}}
-                    {{--                                        fill="white"/>--}}
-                    {{--                                </g>--}}
-                    {{--                                <defs>--}}
-                    {{--                                    <clipPath id="clip0_4_2870">--}}
-                    {{--                                        <rect width="20" height="20" fill="white"/>--}}
-                    {{--                                    </clipPath>--}}
-                    {{--                                </defs>--}}
-                    {{--                            </svg>--}}
-                    {{--                            <a href="{{route('screens.admin.category.create')}}">Thêm mới</a>--}}
-                    {{--                        </button>--}}
-
-                    {{--                    </div>--}}
-
+    <div class="modal fade" id="modalDetail">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="w-full overflow-scroll">
-                    @if(\Illuminate\Support\Facades\Session::has('success'))
-                        <p style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</p>
-                    @endif
-                    @if(\Illuminate\Support\Facades\Session::has('error'))
-                        <p style="color: red">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
-                    @endif
-                    <table class="order-s w-full dsth " style="text-align: center">
-                        <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>
-                                Tên
-                            </th>
-                            <th>
-                                Email
-                            </th>
-                            <th>ID người đại diện</th>
-                            <th>Tên công ty</th>
-                            <th>Số điện thoại</th>
-                            <th>Mã số thuế</th>
-                            <th>Địa chỉ</th>
-                            <th>Ngày đăng ký</th>
-                            <th>Ngày duyệt</th>
-                            <th>Vai trò</th>
-                            <th>Mã giới thiệu</th>
-                            <th>
-                                Hành động
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                <div class="modal-body md-content pt-0">
+                    <div class="card-body">
+                            <div class="row">
+                                {{-- <div class="col-12">
+                                    <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
+                                </div> --}}
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên</label>
+                                        <input type="text" class="form-control form-control-lg" disabled="" id="name" value="VN-3meknyCZGo" placeholder="Nhập tên sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Email</label>
+                                        <input type="text" class="form-control" disabled="" value="Đồng hồ nam Orient RA-AG0003S10B" id="email">
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Số điện thoại:</label>
+                                        <input type="text" class="form-control form-control-lg" id="phone" disabled="" value="Đồng hồ" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Mã số thuế</label>
+                                        <input type="text" disabled="" class="form-control form-control-lg" id="tax_code" value="10.000.000 đ" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Id P-Done người đại diện
+                                        </label>
+                                        <input type="text" class="form-control form-control-lg" disabled="" id="id_vdone" value="Chưa xác định" placeholder="Nhập tên thương hiệu">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Phân loại tài khoản</label>
+                                        <input type="text" disabled="" class="form-control form-control-lg" id="role_id" value="10" placeholder="Nhập xuất xứ">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Ngày đăng ký</label>
+                                        <input type="text" class="form-control form-control-lg" id="created_at" disabled="" value="4" placeholder="Nhập chất liệu sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Ngày xét duyệt</label>
+                                        <input type="text" class="form-control form-control-lg" id="confirm_date" disabled="" value="100" placeholder="Nhập chất liệu sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Mã người giới thiệu</label>
+                                        <input type="text" class="form-control form-control-lg" id="referral_code" disabled="" value="100" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Trạng thái</label>
+                                        <input type="text" class="form-control form-control-lg" id="status" disabled="" value="100" placeholder="Nhập chất liệu sản phẩm">
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="modal fade"
+        id="exampleModalCenter">
+        {{-- <form method="post" action="{{route('screens.manufacture.warehouse.addProduct')}}"> --}}
+            {{-- @csrf --}}
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelv2" style="font-size: 18px;">Thêm sản phẩm vào
+                            kho</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body md-content">
+
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chọn sản phẩm <span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" id="product_id" name="product_id">
+                                        <option value="" selected disabled>Lựa chọn sản phẩm thêm vào kho</option>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Nhập số lượng <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="quantity"
+                                           name="quantity"
+                                           value="{{old('quantity')}}" placeholder="Nhập Số lượng sản phẩm">
+                                </div>
+
+                            </div>
+                            <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Loại kho <span class="text-danger">*</span></label>
+                                    <div id="selectType" class="form-group row">
+                                        <p class="text-danger ml-4">Chọn kho để hiện thị thông tin loại kho</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnAddPro" type="submit" class="btn btn-success">Gửi yêu cầu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        {{-- </form> --}}
+    </div>
+
+@endsection
+
+@section('content')
+<div class="container-fluid dashboard-content pt-0">
+    <!-- ============================================================== -->
+    <!-- pageheader  -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Quản lý yêu cầu đăng ký tài khoản </h2>
+
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý tài
+                                    khoản</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu đăng
+                                ký tài khoản</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end pageheader  -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
+                    style="gap:10px">
+                    <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu đăng kí tài khoản
+                    </h5>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <form>
+                                    <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                           type="search"
+                                           placeholder="Nhập từ khóa tìm kiếm...">
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered second"
+                            style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Tên
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'users.name')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="users.name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="users.name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="users.name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Email
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'email')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="email"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="email"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="email"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Số điện thoại
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'phone_number')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="phone_number"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="phone_number"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="phone_number"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Tên công ty
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'company_name')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="company_name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="company_name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="company_name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Mã số thuế
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'tax_code')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="tax_code"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="tax_code"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="tax_code"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Id P-Done người đại diện
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'id_vdone')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="id_vdone"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="id_vdone"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="id_vdone"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Phân loại tài khoản
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'users.role_id')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="users.role_id"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="users.role_id"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="users.role_id"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Ngày đăng ký
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'users.created_at')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="users.created_at"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="users.created_at"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="users.created_at"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Ngày xét duyệt
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'confirm_date')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="confirm_date"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="confirm_date"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="confirm_date"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Mã người giới thiệu
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field == 'users.referral_code')
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="users.referral_code"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="users.referral_code"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="users.referral_code"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Trạng thái
+                                        </div>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
                         @if(count($users) > 0)
                             @foreach($users as $user)
                                 <tr>
-                                    <td>{{ $loop->iteration}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{ Str::limit($user->email, 15) }}</td>
-                                    <td>{{$user->id_vdone}}</td>
+                                    <td class="text-center">{{$user->phone_number}}</td>
                                     <td>{{$user->company_name}}</td>
-                                    <td>{{$user->phone_number}}</td>
-                                    <td>{{$user->tax_code}}</td>
-                                    <td>{{$user->address}}</td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i A')}}</td>
-                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i A') : 'Chưa được duyệt'}}</td>
+                                    <td class="text-center">{{$user->tax_code}}</td>
+                                    <td class="text-center">{{$user->id_vdone}}</td>
                                     <td>
                                         @if($user->role_id == 2)
-                                            Nhà cung cấp
+                                            <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($user->role_id == 1)
                                             Admin
                                         @elseif($user->role_id == 4)
-                                            Kho
+                                            <span class="text-danger font-medium">Kho</span>
                                         @else
-                                            Nhà phân phối
+                                            <span class="text-success font-medium">V-Store</span>
                                         @endif
                                     </td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i A')}}</td>
+                                    <td class="text-center">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i A') : ''}}</td>
                                     <td>
-                                        {{strlen($user->referral_code) > 0 ? $user->referral_code : 'Không có'}}
+                                        {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>
                                     <td>
-
+                                        @if(!empty($user->confirm_date))
+                                            <div class="bg-success text-white font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
+                                        @else
+                                            <div class="bg-warning text-white font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
                                         @if($user->confirm_date)
-                                            <span
-                                                class="min-w-[94px] inline-block min-w-[94px] bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">Đã duyệt</span>
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
-                                               class="more-details text-primary underline ml-4">
+                                                onclick="showDetail({{$user->id}})"
+                                            class="more-details text-primary">
                                                 Chi tiết</a>
                                         @else
+                                            {{-- <button class="btn btn-primary">Duyệt</button> --}}
                                             <a data-abc="{{$loop->iteration - 1}}"
-                                               data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
-                                               class="duyet min-w-[94px] inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                                               href="#">Duyệt
+                                            data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
+                                            class="duyet btn btn-primary"
+                                            href="#">Duyệt
                                             </a>
-
                                             <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
-                                               class="more-details text-primary underline ml-4">
-                                                Chi tiết</a>
+                                            onclick="showDetail({{$user->id}})"
+                                            class="more-details text-primary underline">
+                                            Chi tiết</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -180,41 +441,258 @@
                                 <td colspan="12" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
-                        </tbody>
-                    </table>
-                </div>
-                <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">{{$users->total()}}</strong></span>
-                    {{$users->withQueryString()->links('layouts.custom.paginator')}}
-                    {{--                    @include('layouts.custom.paginator', ['paginator' => ])--}}
-                    <div class="flex justify-start items-center gap-2 flex-wrap">
-                        <select name="limit" id="limit"
-                                class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option value="10" {{ isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>
-                                10
-                                hàng / trang
-                            </option>
-                            <option value="25" {{ isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>
-                                25
-                                hàng / trang
-                            </option>
-                            <option value="50" {{ isset($params['limit']) && $params['limit'] == 50 ? 'selected' : ''}}>
-                                50
-                                hàng / trang
-                            </option>
-                        </select>
+                            </tbody>
+                        </table>
                     </div>
+                    <div class="d-flex align-items-end justify-content-end mt-4">
+                        {{$users->withQueryString()->links('layouts.custom.paginator')}}
+                        <div class="mt-4 ml-4">
+                            <div class="form-group">
+                                <select class="form-control" id="limit">
+                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div></div>
-
         </div>
-    </form>
+        <!-- ============================================================== -->
+        <!-- end data table  -->
+        <!-- ============================================================== -->
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-size: 20px;">Thông tin chi tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Tên sản phẩm <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập tên sản phẩm">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chọn ngành hàng <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg">
+                                        <option>10 phần tử / trang</option>
+                                        <option>25 phần tử / trang</option>
+                                        <option>50 phần tử / trang</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Giá bán sản phẩm (Chưa VAT):</label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name"> Mã SKU sản phẩm<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chi tiết sản phẩm <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="" class="form-control form-control-lg" id=""
+                                        cols="30" rows="10"
+                                        placeholder="Nhập chi tiết sản phẩm"></textarea>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Tóm tắt sản phẩm <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="" class="form-control form-control-lg" id=""
+                                        cols="30" rows="4"
+                                        placeholder="Nhập tóm tắt sản phẩm"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label for="">Hình ảnh sản phẩm:</label>
+                                <div class="mb-3  d-flex flex-lg-wrap flex-xl-nowrap w-100">
+                                    <div class="col-xl-4 col-sm-6 ">
+                                        <img src="./assets/images/card-img-1.jpg" class="w-100 " alt=""
+                                            style="object-fit: cover; height: 200px;">
+                                    </div>
+                                    <div class="col-xl-4 col-sm-6  ">
+                                        <img src="./assets/images/card-img-2.jpg" class="w-100 " alt=""
+                                            style="object-fit: cover; height: 200px;">
+                                    </div>
+                                    <div class="col-xl-4 col-sm-6  ">
+                                        <img src="./assets/images/card-img-2.jpg" class="w-100 " alt=""
+                                            style="object-fit: cover; height: 200px;">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3 col-xl-12">
+                                <div class="form-group">
+                                    <label for="name">Video sản phẩm</label>
+                                    <iframe height="300"
+                                        src="https://www.youtube.com/watch?v=gKqGZKo5fVs&list=RDMM5zLhk-HvXsw&index=2"
+                                        frameborder="0" style="width: 100%;"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <h3 style="font-size: 18px;">Thông tin chi tiết</h3>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Tên thương hiệu <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập tên thương hiệu">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Xuất xứ <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập xuất xứ">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Chất liệu <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập chất liệu sản phẩm">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Kích cỡ (Cm) <span
+                                            class="text-danger">*</span></label>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-12">
+                                            <input type="text" class="form-control form-control-lg"
+                                                id="name" value="${data.data.name}"
+                                                placeholder="Nhập chiều dài (Cm)">
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-12 ">
+                                            <input type="text" class="form-control form-control-lg"
+                                                id="name" value="${data.data.name}"
+                                                placeholder="Nhập chiều rộng (Cm)">
+                                        </div>
+                                        <div class="col-xl-4  col-lg-4 col-12">
+                                            <input type="text" class="form-control form-control-lg"
+                                                id="name" value="${data.data.name}"
+                                                placeholder="Nhập chiều cao (Cm)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Trọng lượng (Gram) <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}"
+                                        placeholder="Nhập trọng lượng sản phẩm (Gram)">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Thể tích (Ml)</label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập thể tích sản phẩm">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Tên tổ chức chịu trách nhiệm sản xuất </label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập tên tổ chức">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Địa chỉ tổ chức chịu trách nhiệm sản xuất</label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập địa chỉ tổ chức">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu/thương
+                                        nhân</label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập tên địa chỉ đơn vị">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu</label>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập tên địa chỉ đơn vị">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Ngày sản xuất</label>
+                                    <input type="date" class="form-control form-control-lg" id="name"
+                                        value="${data.data.name}" placeholder="Nhập tên thương hiệu">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Kiểu đóng gói <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg">
+                                        <option>10 phần tử / trang</option>
+                                        <option>25 phần tử / trang</option>
+                                        <option>50 phần tử / trang</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                        lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('custom_js')
     <script>
+
         document.querySelectorAll('.duyet').forEach((item, index3) => {
             const index = +item.dataset.abc
             item.addEventListener('click', (e) => {
@@ -228,20 +706,42 @@
                     }
                 });
             })
-
-
         })
 
         const name = document.getElementById('name');
         const id = document.getElementById('id');
         const limit = document.getElementById('limit');
         const form = document.getElementById('form');
-        document.getElementById('btnSearch').addEventListener('click', () => {
-                form.submit();
-            }
-        )
-        limit.addEventListener('change', (e) => {
-            form.submit();
+
+        $(document).ready(function () {
+            @if(Session::has('success'))
+            const textSuccess = '{{ Session::get('success')}}';
+            swalNoti('center', 'success', 'Duyệt tài khoản thành công','', 500, true, 2200);
+            @endif
+
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.admin.user.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort + '&limit=' + limit.value
+                    })
+                });
+            });
+
+            limit.addEventListener('change', (e) => {
+                setTimeout(() => {
+                    document.location = '{{route('screens.admin.user.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                        '&field=' + '{{$field}}' + '&limit=' + e.target.value
+                }, 200)
+            })
+
         });
 
         $('.more-details').each(function (i, e) {
@@ -256,7 +756,69 @@
                 });
             });
         });
+        let product = {};
+        function formatDate (input) {
+            var datePart = input.match(/\d+/g),
+            year = datePart[0], // get only two digits
+            // year = datePart[0].substring(2), // get only two digits
+            month = datePart[1], day = datePart[2];
 
+            return day+'/'+month+'/'+year;
+        }
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.admin.user.detail')}}?id=` + id + '&product=true',
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    $('#requestModal').modal('hide')
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+
+                if (data) {
+                    $('#modalDetail').modal('show');
+                    $('#name').val(data.name);
+                    $('#email').val(data.email);
+                    $('#phone_number').val(data.phone_number);
+                    $('#id_vdone').val(data.id_vdone);
+                    $('#tax_code').val(data.tax_code);
+                    $('#created_at').val( formatDate( (data.created_at).slice(0, 10)));
+                    $('#confirm_date').val( formatDate( (data.confirm_date).slice(0, 10)));
+                    $('#referral_code').val(data.referral_code);
+
+
+                    if(data.role_id == 2){
+                        $('#role_id').val('Nhà cung cấp');
+                    }else if(data.role_id == 1){
+                        $('#role_id').val('Admin');
+                    }else if(data.role_id == 4){
+                        $('#role_id').val('Kho');
+                    }else{
+                        $('#role_id').val('V-Store');
+                    }
+                    if(data.confirm_date){
+                        $('#status').val('Đã duyệt');
+                    }else{
+                        $('#status').val('Chờ duyệt');
+                    }
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('#modalDetail .md-content').html('Chưa có dữ liệu của sản phẩm!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+
+
+        }
 
     </script>
     <script !src="">
