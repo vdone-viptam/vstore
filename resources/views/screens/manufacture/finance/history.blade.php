@@ -64,6 +64,9 @@
                                             @endif
                                         </span>
                                     </th>
+                                    <th>Số tài khoản</th>
+                                    <th>Tên chủ tài khoản</th>
+                                    <th>Ngân hàng</th>
                                     <th>Nội dung</th>
                                     <th>Ngày tạo yêu cầu
                                         <span style="float: right;cursor: pointer">
@@ -101,6 +104,15 @@
                                             @endif
                                             <td class="white-space-150 text-right">
                                                 {{number_format($history->amount,0,'.','.')}}
+                                            </td>
+                                            <td>
+                                                {{ $history->account_number }}
+                                            </td>
+                                            <td>
+                                                {{ $history->name }}bank_name
+                                            </td>
+                                            <td>
+                                                {{ $history->bank_name }}
                                             </td>
                                             <td>
                                                 Chuyển khoản ra ngoài

@@ -109,7 +109,7 @@
                                 </span>
                             </th>
 
-                            <th>Ngày bắt đầu
+                            <th>Thời gian bắt đầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.start_date')
                                         @if($type == 'desc')
@@ -122,7 +122,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày kết thúc
+                            <th>Thời gian kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')
@@ -135,7 +135,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày tạo
+                            <th>Thời gian tạo
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
                                         @if($type == 'desc')
@@ -160,9 +160,9 @@
                                     <td class="white-space-50 text-center">{{$loop->iteration}}</td>
                                     <td class="white-space-500">{{$discount->name}}</td>
                                     <td class="text-center">{{$discount->discount}}</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="white-space-100 text-center"><a href="#" data-id="{{$discount->id}}"
                                                                                class="btn btn-warning more-details"
                                                                                onclick="edit({{$discount->id}})">Sửa</a>

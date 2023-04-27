@@ -1,18 +1,18 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Danh sách V-store liên kết')
+@section('page_title','Danh sách V-Store liên kết')
 
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Liên kết V-store</h2>
+                <h2 class="pageheader-title">Liên kết V-Store</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết V-store</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết V-Store</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách V-store liên kết</li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách V-Store liên kết</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Danh sách V-store liên kết</h5>
+                <h5 class="mb-0" style="font-size:18px;">Danh sách V-Store liên kết</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
