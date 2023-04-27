@@ -7,7 +7,8 @@ use App\Models\Province;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
-function getLatLongByAddress($address) {
+function getLatLongByAddress($address)
+{
     $response = Http::get('https://api.opencagedata.com/geocode/v1/json', [
         'q' => $address,
         'limit' => 1,
@@ -15,7 +16,7 @@ function getLatLongByAddress($address) {
         'key' => config('opencagedata.key')
     ]);
     $response = $response->json();
-    if($response['status']['code'] === 200) {
+    if ($response['status']['code'] === 200) {
         return $response['results'][0]['geometry'];
     }
     return false;
@@ -150,7 +151,7 @@ function getWarehouse($province_id, $district_id, $product_id)
 function getDiscountAndDepositMoney($quantity, $arr)
 {
     foreach ($arr as $item) {
-        if ($quantity >= $item['start'] && $quantity < $item['end']) {
+        if ($quantity >= $item->start && $quantity < $item->end && $item->end != 0) {
             return [
                 "discount" => $item['discount'],
                 "deposit_money" => $item['deposit_money']

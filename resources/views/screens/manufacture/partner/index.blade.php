@@ -48,30 +48,30 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-200">Mã V-Store</th>
-                            <th class="white-space-600">Tên V-Store
+                            <th class="white-space-100">Mã V-Store</th>
+                            <th class="white-space-100">Tên V-Store
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
+                                    @if($field == 'vstore_name')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
+                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                     @endif
                                 </span>
                             </th>
                             <th>Số điện thoại V-Store
                                 <span style="float: right;cursor:pointer">
-                                    @if($field == 'price')
+                                    @if($field == 'phone_number')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="phone_number"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="phone_number"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="price"></i>
+                                        <i class="fas fa-sort sort" data-sort="phone_number"></i>
                                     @endif
                                 </span>
                             </th>
@@ -79,33 +79,32 @@
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Tổng số sản phẩm niêm yết trên V-Store
                                     <span style="float: right;cursor: pointer">
-                                        @if($field == 'vstore_name')
+                                        @if($field == 'total_product')
                                             @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                                <i class="fa-solid fa-sort-down sort" data-sort="total_product"></i>
                                             @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                                <i class="fa-solid fa-sort-up sort" data-sort="total_product"></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="vstore_name"></i>
+                                            <i class="fas fa-sort sort" data-sort="total_product"></i>
                                         @endif
                                     </span>
                                 </div>
                             </th>
                             <th class="white-space-200">Số loại sản phẩm niêm yết
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'discount')
+                                    @if($field == 'total_category')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="total_category"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="total_category"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="discount"></i>
+                                        <i class="fas fa-sort sort" data-sort="total_category"></i>
                                     @endif
                                 </span>
                             </th>
                             <th class="white-space-100">Chức năng
-                                </span>
                             </th>
                         </tr>
                         </thead>
