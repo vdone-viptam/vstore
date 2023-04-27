@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-6">
                     <input disabled name="buy_more" id="buy_more"
-                           class="form-control-lg form-control" value="{{$product1->discount}}">
+                           class="form-control-lg form-control" value="{{$product1->buy_more}}">
                 </div>
                 <div class="col-6">
                     <input type="text" class="form-control form-control-lg" id="moneyMore" disabled
