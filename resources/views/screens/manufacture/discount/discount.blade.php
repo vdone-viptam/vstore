@@ -240,7 +240,7 @@
                 if (data.view) {
                     htmlData += data.view;
                     $('.md-content').html(htmlData)
-                    $('#exampleModalLabel').html('Tạo mới giảm giá');
+                    $('#exampleModalLabel').html('Thêm mới giảm giá');
                     document.getElementById('form-AC').setAttribute('action', '{{route('screens.manufacture.product.createDis')}}')
                     $("#btnAC").html('Thêm mới');
                     $('#modalDetail').modal('show');
@@ -275,7 +275,7 @@
 
                 if (data.view) {
                     htmlData += data.view;
-                    $('#exampleModalLabel').html('Cập nhật giảm giá');
+                    $('#exampleModalLabel').html('Sửa giảm giá');
 
                     $('.md-content').html(htmlData)
                     $("#btnAC").html('Lưu thay đổi');
