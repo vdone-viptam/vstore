@@ -87,7 +87,7 @@
                                 <th class="white-space-150">Nhà cung cấp</th>
                                 <th class="white-space-300">Tên sản phẩm</th>
                                 <th>Ngành hàng</th>
-                                <th class="white-space-150">Giá sản phẩm (đ) chưa VAT</th>
+                                <th class="white-space-150">Giá sản phẩm chưa VAT</th>
                                 <th class="white-space-150">Chiết khấu từ Nhà cung cấp (%)</th>
                                 <th>Ngày yêu cầu</th>
                                 <th>Trạng thái</th>
