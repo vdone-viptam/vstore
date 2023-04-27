@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.admin.main')
 @section('page_title','Danh mục ngành hàng')
 
 
