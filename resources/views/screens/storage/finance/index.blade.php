@@ -160,15 +160,15 @@
                     <div class="row m-4 py-4" style="border-bottom: 1px solid;">
                         <div class="fiNumber" style="width:100%; max-width:780px; background-color: #E6F7FF; border: 1px solid #69C0FF; border-radius: 10px; padding: 10px 40px; display: flex; justify-content: space-between;align-items: center;">
                             <div class="number-cost">
-                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{\Illuminate\Support\Facades\Auth::user()->money +  $waiting}}đ</h3>
+                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(round(\Illuminate\Support\Facades\Auth::user()->money ,0) + round($waiting,0),0,',','.') }} đ</h3>
                                 <span style="color: black; font-size: 14px;">Tổng số dư</span>
                             </div>
                             <div class="number-cost" style="border-left: 1px solid; border-right: 1px solid;">
-                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{\Illuminate\Support\Facades\Auth::user()->money}} đ</h3>
+                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,',','.')}} đ</h3>
                                 <span style="color: black; font-size: 14px;">Số dư khả dụng</span>
                             </div>
                             <div class="number-cost">
-                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{$waiting}} đ</h3>
+                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format($waiting,0,',','.') }} đ</h3>
                                 <span style="color: black; font-size: 14px;">Chờ rút</span>
                             </div>
                         </div>
@@ -256,16 +256,7 @@
                                     @endif
                                 </div>
 
-                                <a href="javascript:void(0)" class="d-flex items-center" style="cursor: pointer; gap: 12px;">
-                                    <div style="width: 25px; cursor: pointer;">
-                                        <svg width="24" height="24" style="cursor: pointer;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#999999"/>
-                                            <rect x="1" y="1" width="22" height="22" rx="3" stroke="#999999" stroke-width="2" stroke-dasharray="244 248 252 256"/>
-                                        </svg>
 
-                                    </div>
-                                    <span>Thêm tài khoản ngân hàng</span>
-                                </a>
                                 <div class="text-center md:text-right w-100 my-4">
                                     <button type="submit"
                                             class="btn btn-primary rounded-6 btnGra btn-withdrawl bg-primary withdraw-money">
