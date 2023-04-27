@@ -148,7 +148,7 @@ class OrderController extends Controller
                 'RECEIVER_PROVINCE' => $provinceId,
 
                 'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
-                'PRODUCT_WEIGHT' => ($product->weight / 1000) * $quantity,
+                'PRODUCT_WEIGHT' => ($product->weight) * $quantity,
                 'PRODUCT_PRICE' => $order->total,
                 'MONEY_COLLECTION' => $methodPayment === 'COD' ? $order->total : 0,
                 'TYPE' => config('viettelPost.nationalType.domesticType'),
@@ -180,7 +180,7 @@ class OrderController extends Controller
                 "ORDER_SERVICE" => $ORDER_SERVICE,
 
                 'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
-                'PRODUCT_WEIGHT' => ($product->weight / 1000) * $quantity,
+                'PRODUCT_WEIGHT' => ($product->weight) * $quantity,
                 'PRODUCT_PRICE' => $order->total,
                 'MONEY_COLLECTION' => $methodPayment === 'COD' ? $order->total : 0,
                 'NATIONAL_TYPE' => config('viettelPost.nationlType.domesticType'),
@@ -298,7 +298,7 @@ class OrderController extends Controller
                 $price = 0;
                 $weight = 0;
                 foreach ($item['products'] as $pro) {
-                    $weight += ($pro->weight / 1000) * $pro->quantity;
+                    $weight += ($pro->weight) * $pro->quantity;
                     $priceDiscount = $pro->price * $pro->quantity;
                     $totalDiscountSuppliersAndVStore = 0;
                     if ($pro->discount_ncc) {
