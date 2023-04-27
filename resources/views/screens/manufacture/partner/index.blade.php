@@ -48,8 +48,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã V-Store</th>
-                            <th>Tên V-Store
+                            <th class="white-space-200">Mã V-Store</th>
+                            <th class="white-space-600">Tên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -75,18 +75,21 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">Tổng số sản phẩm niêm yết trên V-Store
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'vstore_name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                            <th class="white-space-200">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Tổng số sản phẩm niêm yết trên V-Store
+                                    <span style="float: right;cursor: pointer">
+                                        @if($field == 'vstore_name')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
-                                    @endif
-                                </span>
+                                    </span>
+                                </div>
                             </th>
                             <th class="white-space-200">Số loại sản phẩm niêm yết
                                 <span style="float: right;cursor: pointer">
@@ -101,7 +104,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-80">Chức <năng></năng>
+                            <th class="white-space-100">Chức năng
+                                </span>
                             </th>
                         </tr>
                         </thead>
@@ -109,12 +113,12 @@
                         @if(count($products) > 0)
                             @foreach($products as $value)
                                 <tr>
-                                    <td class="white-space-300">{{$value->account_code}}</td>
-                                    <td class="white-space-400">{{$value->vstore_name}}</td>
-                                    <td>{{$value->phone_number}}</td>
-                                    <td class="text-right">{{$value->total_product}}</td>
-                                    <td class="text-right">{{$value->total_category}}</td>
-                                    <td><a href="#" data-toggle="modal"
+                                    <td class="white-space-200">{{$value->account_code}}</td>
+                                    <td class="white-space-600">{{$value->vstore_name}}</td>
+                                    <td class="text-center">{{$value->phone_number}}</td>
+                                    <td class="text-center">{{$value->total_product}}</td>
+                                    <td class="text-center">{{$value->total_category}}</td>
+                                    <td class="text-center"><a href="#" data-toggle="modal"
                                            data-target=".bd-example-modal-lg"
                                            data-account_code="{{$value->account_code}}"
                                            data-vstore_name="{{$value->vstore_name}}"

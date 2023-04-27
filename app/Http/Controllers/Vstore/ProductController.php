@@ -101,6 +101,14 @@ class ProductController extends Controller
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,products.vstore_confirm_date')
             ->where('requests.vstore_id', Auth::id());
+        if (strlen($this->v['key_search'])) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) {
+                $query->where('requests.code', $this->v['key_search'])
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
         $this->v['requests'] = $this->v['requests']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
 
         return view('screens.vstore.product.requestAll', $this->v);

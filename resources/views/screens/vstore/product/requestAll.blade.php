@@ -76,8 +76,10 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-100">Mã yêu cầu</th>
-                            <th class="white-space-80">Nhà cung cấp
+                            <th class="white-space-90">Mã yêu cầu</th>
+                            <th class="white-space-90">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -89,6 +91,7 @@
                                         <i class="fas fa-sort sort" data-sort="users.name"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
@@ -103,7 +106,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-110">Ngành hàng
+                            <th class="white-space-100">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -116,7 +119,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">Giá sản phẩm (đ) chưa VAT
+                            <th class="white-space-120">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Giá sản phẩm chưa VAT
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -128,8 +133,11 @@
                                         <i class="fas fa-sort sort" data-sort="products.price"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
-                            <th class="white-space-120">Chiết khấu từ Nhà cung cấp
+                            <th class="white-space-120">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Chiết khấu từ Nhà cung cấp
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                         @if($type == 'desc')
@@ -141,6 +149,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th class="white-space-120">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
@@ -193,18 +202,18 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td class="white-space-100">
+                                    <td class="white-space-90">
                                         {{$product->code}}
                                     </td>
-                                    <td class="white-space-80">
+                                    <td class="white-space-90">
                                         {{$product->user_name}}
                                     </td>
                                     <td class="white-space-300">
                                         {{$product->name}}
                                     </td>
-                                    <td class="white-space-110">{{$product->cate_name}}</td>
+                                    <td class="white-space-100">{{$product->cate_name}}</td>
                                     <td class="white-space-120 text-right">
-                                        {{number_format($product->price,0,'.','.')}}
+                                        {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="white-space-120 text-right">
                                         {{$product->discount}}
@@ -284,7 +293,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="10" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>

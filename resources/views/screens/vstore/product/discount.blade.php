@@ -243,6 +243,7 @@
                 var htmlData = ``;
 
                 if (data.view) {
+                    $('#exampleModalLabel').html('Thêm mới giảm giá');
                     htmlData += data.view;
                     $('.md-content').html(htmlData)
                     document.getElementById('form-AC').setAttribute('action', '{{route('screens.vstore.product.createDis')}}')
@@ -279,6 +280,8 @@
 
                 if (data.view) {
                     htmlData += data.view;
+                    $('#exampleModalLabel').html('Sửa giảm giá');
+
                     $('.md-content').html(htmlData)
                     $("#btnAC").html('Lưu thay đổi');
                     $('#modalDetail').modal('show');

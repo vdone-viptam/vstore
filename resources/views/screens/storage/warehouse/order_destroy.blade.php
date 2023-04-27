@@ -127,7 +127,7 @@
                                     <td>{{$request->no}}</td>
                                     <td>{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
-                                    <td>{{$request->quantity}}</td>
+                                    <td class="text-center">{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
                                     <td>
                                         @if($request->cancel_status == 1)
@@ -138,7 +138,7 @@
                                             <p class="text-danger">Hàng chưa xuất kho</p>
                                         @endif
                                     </td>
-                                    <td><a href="#"
+                                    <td class="text-center"><a href="#"
                                            onclick="showDetail({{$request->order_id}},{{$request->cancel_status}})"
                                            class="btn btn-link">Chi tiết</a></td>
                                 </tr>

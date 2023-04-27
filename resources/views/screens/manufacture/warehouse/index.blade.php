@@ -161,12 +161,12 @@
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr>
-                                <th>Tên kho hàng</th>
+                                <th class="white-space-400">Tên kho hàng</th>
                                 <th>Số điện thoại</th>
-                                <th class="th th_product_name">Địa chỉ
+                                <th class="white-space-400">Địa chỉ
 
                                 </th>
-                                <th class="th th_ncc_name ">Tổng số mặt hàng
+                                <th >Tổng số mặt hàng
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                             @if($type == 'desc')
@@ -197,14 +197,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                        @if(count($warehouses) > 0)
                             @foreach($warehouses as $val)
                                 <tr>
                                     <td class="white-space-400">{{$val->ware_name}}</td>
-                                    <td>{{$val->phone_number}}</td>
+                                    <td class="text-center">{{$val->phone_number}}</td>
                                     <td class="white-space-400">{{$val->address}}</td>
-                                    <td class="text-right">{{$val->amount ?? 0}}</td>
-                                    <td class="text-right">{{$val->amount_product ?? 0}}</td>
-                                    <td>
+                                    <td class="text-center">{{$val->amount ?? 0}}</td>
+                                    <td class="text-center">{{$val->amount_product ?? 0}}</td>
+                                    <td class="text-center">
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$val->id}})">Chi tiết
                                         </button>
@@ -212,6 +213,11 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
+                        @endif
 
                             </tbody>
                         </table>

@@ -153,8 +153,8 @@
                                     <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->in_stock ?? 0}}</td>
-                                    <td>{{$product->pause_product}}</td>
+                                    <td class="text-center">{{$product->in_stock ?? 0}}</td>
+                                    <td class="text-center">{{$product->pause_product}}</td>
                                     <td><a href="#" onclick="showDetail({{$product->product_id}})" class="btn btn-link">Chi
                                             tiết</a></td>
                                 </tr>

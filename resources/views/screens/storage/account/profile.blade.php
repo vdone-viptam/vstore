@@ -248,7 +248,7 @@
                                                         @endforeach
                                                     @else
                                                         <tr>
-                                                            <td colspan="6">Không có dữ liệu phù hợp</td>
+                                                            <td colspan="6" class="text-center">Không có dữ liệu phù hợp</td>
                                                         </tr>
                                                     @endif
                                                     </tbody>

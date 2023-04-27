@@ -107,7 +107,7 @@
                                             </td>
 
 
-                                            <td>
+                                            <td class="text-center">
                                                 {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
                                             </td>
                                         </tr>

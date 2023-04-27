@@ -1,5 +1,5 @@
 @php
-    
+
     if ($order && $user) {
         $isOrder = true;
     } else {
@@ -7,7 +7,7 @@
         $order = \Illuminate\Support\Facades\Session::get('order');
         $user = \Illuminate\Support\Facades\Session::get('user');
     }
-    
+
 @endphp
 
 <!DOCTYPE html>
@@ -84,7 +84,7 @@
             </div>
         </div>
     @endif
-   
+
     <form class="splash-container splash-register" action="{{ route('post_register', ['role_id' => 2]) }}"
         id="formRegister-V" enctype="multipart/form-data" method="POST">
         @csrf
@@ -119,7 +119,7 @@
                             <label style="font-weight: 600;" for="email" style="font-weight: 600;"><span
                                     class="text-danger">*</span>Số điện thoại công
                                 ty </label>
-                            <input required type="text" name="phone_number" id="phone_number"
+                            <input required type="number" name="phone_number" id="phone_number"
                                 placeholder="Nhập số điện thoại công ty" value="{{ old('phone_number') }}"
                                 pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" class="form-control form-control-lg">
                             @error('phone_number')
@@ -162,21 +162,22 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="form-group">
-                            <label style="font-weight: 600;" for="company"><span class="text-danger">
-
-                            </span>
-                            &ensp;ID P-Done người đại diện (khác)</label>
-                            <input class="form-control form-control-lg" type="text" name="id_vdone_diff"
-                                id="id_vdone_diff" placeholder="Nhập ID P-Done người đại diện (khác)"
-                                value="{{ old('id_vdone_diff') }}">
-                        </div>
+                   <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="idpDonemore">&nbsp;ID P-Done người đại diện (khác)</label>
+                        <input class="only-number form-control form-control-lg" type="text"
+                               name="id_vdone_diff" id="id_vdone_diff"
+                               value="{{old('id_vdone_diff')}}"
+                               placeholder="Nhập ID P-Done người đại diện khác ">
+                        @error('id_vdone_diff')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                     </div>
+                </div>
                     <div class="col-xl-6 col-lg-6">
                         <div class="form-group">
-                            <label style="font-weight: 600;" for="idpDonemore"><span class="text-danger">*</span>Mã số thuế</label>
-                            <input class="form-control form-control-lg"required type="text" name="tax_code"
+                            <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số thuế</label>
+                            <input class="only-number form-control form-control-lg"required type="number" name="tax_code"
                                 id="tax_code" placeholder="Nhập mã số thuế" pattern="^[0-9]{10,13}$"
                                 title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số" value="{{ old('tax_code') }}">
                             @error('tax_code')
@@ -233,8 +234,8 @@
                             @enderror
                         </div>
                     </div>
-    
-                   
+
+
                 </div>
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12">
@@ -431,15 +432,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                                 Chi tiết sản phẩm</h3>
                                         </div>
                                         @php
-                                            
+
                                             $price = (float) config('constants.orderService.price_ncc');
                                             $priceFormat = number_format($price, 0, '', '.');
                                             $vat = ((float) config('constants.orderService.price_ncc') * 10) / 100;
                                             $vatFormat = number_format($vat, 0, '', '.');
-                                            
+
                                             $total = $price + $vat;
                                             $totalFormat = number_format($total, 0, '', '.');
-                                            
+
                                             $chiTietThanhToan = [
                                                 [
                                                     'title' => 'Ngày tạo',
@@ -867,8 +868,14 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         function checkEmpty(inputs) {
             let check1 = true
             inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 != 8 && index1 != 9) {
+                if (!item1.value && index1 > 0 && index1 != 8 && index1 != 6 ) {
                     check1 = false;
+                }
+                if(index1 == 6){
+                    if ( !item1.checked ){
+                        check1 = true;
+                    }
+
                 }
             });
 
@@ -876,8 +883,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         }
 
         const inputs = document.querySelectorAll('input');
-        console.log(inputs);
-       
+
         inputs.forEach((item, index) => {
             item.setAttribute('autocomplete', 'off')
             item.addEventListener('change', (e) => {
@@ -886,7 +892,6 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     document.querySelector('.active').removeAttribute('disabled');
                     document.querySelector('.active').classList.remove('bg-slate-300');
                 } else {
-                    console.log(1);
                     document.querySelector('.active').setAttribute('disabled', 'true');
                     document.querySelector('.active').classList.add('bg-slate-300');
                 }
@@ -921,6 +926,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 setValueById("address", infoNCC.address);
                 setValueById("phone_number", infoNCC.phone_number);
                 setValueById("id_vdone", infoNCC.id_vdone);
+                setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
+
                 setValueById("referral_code", infoNCC.referral_code);
 
                 loadAddress(infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);
@@ -963,7 +970,6 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 .map(item =>
                                     `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`
                                     );
-                            console.log(1);
                         } else {
                             divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
                         }

@@ -145,7 +145,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th >Tên sản phẩm
+                            <th class="white-space-350">Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -249,8 +249,8 @@
                                     <td>{{$order->no}}</td>
                                     <td class="white-space-350">{{$order->product->name}}</td>
                                     <td class="text-right">{{number_format($order->product->price,0,'.','.')}}</td>
-                                    <td class="text-right">{{(int)$order->discount}}</td>
-                                    <td class="text-right">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="text-center">{{(int)$order->discount}}</td>
+                                    <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
                                     <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}}</td>
                                     <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}</td>
                                     <td>
@@ -264,7 +264,7 @@
                                             <span class="text-red-600">Hủy</span>
                                         @endif
                                     </td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
                                         <a href="#" data-toggle="modal"
                                         data-target=".bd-example-modal-lg" data-id="{{$order->id}}" class="btn btn-link more-details">Chi tiết</a>
