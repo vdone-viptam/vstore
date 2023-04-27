@@ -104,7 +104,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-80">Chức năng
+                            <th class="white-space-100">Chức năng
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')

@@ -136,7 +136,7 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-100">Mã đơn hàng
+                            <th class="white-space-110">Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
                                         @if($type == 'desc')

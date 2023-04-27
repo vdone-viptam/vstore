@@ -197,6 +197,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                        @if(count($warehouses) > 0)
                             @foreach($warehouses as $val)
                                 <tr>
                                     <td class="white-space-400">{{$val->ware_name}}</td>
@@ -212,6 +213,11 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
+                        @endif
 
                             </tbody>
                         </table>

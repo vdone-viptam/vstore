@@ -142,6 +142,7 @@
                                     </span>
                             </th>
                             <th class="white-space-130">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Ngày dự kiến giao hàng
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.estimated_date')
@@ -154,8 +155,10 @@
                                         <i class="fas fa-sort sort" data-sort="order.estimated_date"></i>
                                     @endif
                                     </span>
+                                </div>
                             </th>
                             <th class="white-space-110">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Giá trị đơn hàng (đ)
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.total')
@@ -168,11 +171,13 @@
                                         <i class="fas fa-sort sort" data-sort="order.total"></i>
                                     @endif
                                     </span>
+                                </div>
                             </th>
                             <th class="white-space-150">
                                 V-Shop bán hàng
                             </th>
                             <th class="white-space-120">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Giá trị trừ chiết khấu (đ)
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'money')
@@ -185,6 +190,7 @@
                                         <i class="fas fa-sort sort" data-sort="money"></i>
                                     @endif
                                     </span>
+                                </div>
                             </th>
                         </tr>
                         </thead>
