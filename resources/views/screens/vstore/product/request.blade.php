@@ -182,7 +182,7 @@
                                     </td>
                                     <td>{{$product->cate_name}}</td>
                                     <td class="text-right">
-                                        {{number_format($product->price,0,'.','.')}}
+                                        {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="text-center">
                                         {{$product->discount}}

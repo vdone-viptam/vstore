@@ -213,7 +213,7 @@
                                     </td>
                                     <td class="white-space-100">{{$product->cate_name}}</td>
                                     <td class="white-space-120 text-right">
-                                        {{number_format($product->price,0,'.','.')}}
+                                        {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="white-space-120 text-right">
                                         {{$product->discount}}
@@ -293,7 +293,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="10" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
