@@ -343,7 +343,7 @@
                             if (result) {
                                 $("#no").val(result.no);
                                 $("#name").val(result.product.name);
-                                $("#price").val(result.product.price);
+                                $("#price").val(convertVND(result.product.price));
                                 const deposits = (result.total - (result.total * result.discount / 100)) * (result.deposit_money / 100);
                                 const total = result.total - (result.total * result.discount / 100);
                                 const today = (datetimeLocal(result.created_at));
