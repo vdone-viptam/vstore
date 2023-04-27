@@ -31,12 +31,12 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="name">Thuế giá trị gia tăng (%)</label>
+    <label for="name">Thuế giá trị gia tăng</label>
     <input type="text" class="form-control form-control-lg" disabled id="name"
-           value="{{$product->vat}}" placeholder="Nhập tên sản phẩm">
+           value="{{$product->vat.' %'}}" placeholder="Nhập tên sản phẩm">
 </div>
 <div class="form-group">
-    <label for="name">Mô tả ngắn sản phẩm (%)</label>
+    <label for="name">Mô tả ngắn sản phẩm</label>
     <textarea disabled class="form-control">{{$product->short_content}}</textarea>
 </div>
 <div class="col-12">
@@ -52,7 +52,7 @@
     @endforeach
 </div>
 <div class="form-group">
-    <label for="name">Video sản phẩm (%)</label>
+    <label for="name">Video sản phẩm</label>
     <video width="320" height="240" controls class="form-control">
         <source src="{{asset($product->video)}}" type="video/mp4">
 
