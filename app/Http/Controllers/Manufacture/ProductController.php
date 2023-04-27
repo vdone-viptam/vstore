@@ -121,7 +121,6 @@ class ProductController extends Controller
             'height' => 'required|max:13',
             'packing_type' => 'required',
             'images' => 'required',
-            'video' => 'required',
             'with' => 'required|max:13',
             'volume' => 'max:15',
             'manufacturer_name' => 'max:255',
@@ -161,7 +160,6 @@ class ProductController extends Controller
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
             'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
-            'video.required' => 'Video sản phẩm bắt buộc chọn',
         ]);
         if ($validator->fails()) {
 //            dd($validator->errors());

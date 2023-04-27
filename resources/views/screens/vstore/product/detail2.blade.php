@@ -53,10 +53,13 @@
 </div>
 <div class="form-group">
     <label for="name">Video sản phẩm</label>
-    <video width="320" height="240" controls    class="form-control">
-        <source src="{{asset($product->video)}}" type="video/mp4">
-
-    </video>
+    @if(strlen($product->video) > 0)
+        <video width="320" height="240" controls class="form-control">
+            <source src="{{asset($product->video)}}" type="video/mp4">
+        </video>
+    @else
+        <p>Không có video liên quan đến sản phẩm</p>
+    @endif
 </div>
 <div class="row">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
