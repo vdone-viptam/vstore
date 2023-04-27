@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\Chart\ChartRepositoryInterface;
 use App\Models\RequestChangeTaxCode;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -58,8 +59,8 @@ class DashboardController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-
-            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at');
+            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at,requests.code, requests.discount_vshop, products.discount')
+            ->selectSub('select name from users where id = requests.vstore_id', 'vstore_name');
 
         if (isset($request->key_search)) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {

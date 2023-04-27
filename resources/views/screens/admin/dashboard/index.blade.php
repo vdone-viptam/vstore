@@ -139,10 +139,9 @@
                                     </td>
                                     <td class="text-center">
                                         @if($user->confirm_date)
-                                        
+
                                         @else
                                         <button data-abc="{{$loop->iteration - 1}}" data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn btn-primary">Duyệt</button>
-
                                         @endif
                                     </td>
                                 </tr>
@@ -208,36 +207,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="line-clamp3" >
-                                    <td>Ms123123</td>
-                                    <td>Giày dép Acv</td>
-                                    <td>Giày thể thao </td>
-                                    <td>ACV Deep</td>
-                                    <td><span class="text-primary">10%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td><button class="btn btn-primary"> Duyệt</button></td>
+                            @if(count($requests) > 0)
+                            @foreach($requests as $request)
+                                <tr>
+                                    <td>
+                                        {{$request->code}}
+                                    </td>
+                                    <td>
+                                        {{$request->product_name}}
+                                    </td>
+                                    <td class="">
+                                        {{$request->name}}
+                                    </td>
+                                    <td class="">
+                                        {{$request->user_name}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{$request->discount}}
+                                    </td>
+                                    <td class="">
+                                        {{$request->vstore_name}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{$request->discount_vshop}}
+                                    </td>
+                                    <td class="text-center">
+                                        <button data-abc="{{$loop->iteration - 1}}" data-href="{{route('screens.admin.user.confirm',['id' => $request->id])}}" class="duyet btn btn-primary">Duyệt</button>
+                                    </td>
+                                    </tr>
+                            @endforeach
+
+                            @else
+                                <tr>
+                                    <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
                                 </tr>
-                                <tr class="line-clamp3">
-                                    <td>Ms123123</td>
-                                    <td>Áo dài Việt Jung</td>
-                                    <td>Áo quần</td>
-                                    <td>Việt Jung compose</td>
-                                    <td><span class="text-primary">3%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td><button class="btn btn-primary"> Duyệt</button></td>
-                                </tr>
-                                <tr class="line-clamp3">
-                                    <td>Ms123123</td>
-                                    <td>Hộp đựng bút Nav</td>
-                                    <td> Dụng cụ học tập </td>
-                                    <td> Nav National</td>
-                                    <td><span class="text-primary">5%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td><button class="btn btn-primary">Duyệt</button></td>
-                                </tr>
+                            @endif
                             </tbody>
                         </table>
                     </div>
