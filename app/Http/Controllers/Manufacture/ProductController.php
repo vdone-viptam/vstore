@@ -362,6 +362,7 @@ class ProductController extends Controller
                 'discountA' => 'required',
                 'role' => 'min:1',
                 'prepay' => 'required',
+                'images' => 'required',
                 'vat' => 'required|min:1|max:99',
                 'moneyv' => 'array',
                 'moneyv.*' => function ($attribute, $value, $fail) use ($request) {
@@ -374,6 +375,7 @@ class ProductController extends Controller
                 'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
                 'discountA.required' => 'Chiết khấu bắt buộc nhập',
                 'role.min' => 'Vai trò với sản phẩm bắt buộc chọn',
+                'images.required' => 'Tải liệu sản phẩm bắt buộc chọn',
                 'prepay.required' => 'Phương thức thanh toán bắt buộc chọn',
                 'vat.required' => 'VAT bắt buộc nhâp',
                 'vat.min' => 'VAT nhỏ nhất 1',
@@ -413,24 +415,8 @@ class ProductController extends Controller
 
             }
             $object->code = $code;
-            $images = [];
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $file) {
-                    $filenameWithExt = $file->getClientOriginalName();
-                    //Get just filename
-                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    // Get just ext
-                    $extension = $file->getClientOriginalExtension();
-                    // Filename to store
-                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                    $path = $file->storeAs('public/products', str_replace(' ', '', $fileNameToStore));
 
-                    $path = str_replace('public/', '', $path);
-                    $images[] = 'storage/' . $path;
-                }
-            }
-
-            $object->images = json_encode($images);
+            $object->images = $request->images;
 //            return $object;
             $object->save();
 
