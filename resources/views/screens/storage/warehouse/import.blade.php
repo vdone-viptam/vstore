@@ -169,8 +169,8 @@
                                     <td>{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td>{{$request->ncc_name}}</td>
-                                    <td>{{$request->quantity}}</td>
-                                    <td>{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{$request->quantity}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$request->id}}">
                                         @if($request->status == 5 || $request->status == 7)
                                             <div style="display:flex; justify-content:center; gap:10px"><a

@@ -171,7 +171,7 @@
                                     <td>{{$ord->no}}</td>
                                     <td>{{$ord->publish_id}}</td>
                                     <td title="{{$ord->name}}">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
-                                    <td>{{$ord->quantity}}</td>
+                                    <td class="text-center">{{$ord->quantity}}</td>
                                     <td>
                                         @if($ord->method_payment == 'COD')
                                             <span class="text-danger">Chưa thanh toán</span>
@@ -179,7 +179,7 @@
                                             <span class="text-success">Đã thanh toán</span>
                                         @endif
                                     </td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$ord->id}}">
                                         @if($ord->export_status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a

@@ -421,7 +421,7 @@ address {}
 
 table thead th{
     vertical-align: middle !important;
-    text-align: center;
+    text-align: center !important;
 }
 
 .white-space-50{

@@ -110,7 +110,7 @@
                                                     <p class="text-green-600">Đang chờ duyệt</p>
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 @if($history->type == 1)
                                                     <p class="text-green-600">
                                                         +{{number_format($history->money_history,0,'.','.')}}
@@ -121,7 +121,7 @@
                                                 @endif
                                             </td>
                                             <th>{{$history->title}}</th>
-                                            <td>
+                                            <td class="text-center">
                                                 {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>
