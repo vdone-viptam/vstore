@@ -179,4 +179,17 @@ class ProductController extends Controller
 
         }
     }
+    public function allProduct(Request $request){
+        $limit= $request->limit;
+        $this->v['field'] = $request->field ?? 'amount_product_sold';
+        $type = $request->type ?? 'asc';
+        $this->v['products'] = Product::join('users','products.user_id','=','users.id')
+            ->select('products.publish_id','products.category_id','products.user_id','products.discount','products.discount_vShop',
+                'products.amount_product_sold','products.vstore_id','products.admin_confirm_date','users.name')
+            ->selectSub('select name from users where id =  products.vstore_id','vstore_name' )
+            ->selectSub('select name from categories where id =  products.category_id','category_name' )
+        ->where('products.status',2)->paginate($limit);
+//        return $this->v;
+        return view('screens.admin.product.all-product', $this->v);
+    }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.admin.main')
-@section('page_title','Yêu cầu rút tiền')
+@section('page_title','Tất cả sản phẩm')
 
 @section('content')
 
@@ -10,15 +10,14 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Quản lý yêu cầu rút tiền </h2>
+                    <h2 class="pageheader-title">Quản lý sản phẩm</h2>
 
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý tài
-                                        chính</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu rút
-                                    tiền</li>
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm
+                                    </li>
                             </ol>
                         </nav>
                     </div>
@@ -32,7 +31,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                        <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu rút tiền
+                        <h5 class="mb-0" style="font-size:18px;">Tất cả sản phẩm
                         </h5>
                         <ul class="navbar-nav ">
                             <li class="nav-item">
@@ -50,7 +49,7 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã yêu cầu
+                                    <th>Mã sản phẩm
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'deposits.code')
                                                 @if($type == 'desc')
@@ -63,7 +62,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Tài khoản yêu cầu
+                                    <th>Ngành hàng
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'users.account_code')
                                                 @if($type == 'desc')
@@ -76,7 +75,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số tiền
+                                    <th>Nhà cung cấp
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -89,31 +88,32 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số tài khoản</th>
-                                    <th>Tên tài khoản</th>
-                                    <th>Ngân hàng</th>
-                                    <th>Nội dung</th>
-                                    <th>Ngày yêu cầu</th>
+                                    <th>Chiết khấu cho V-Store</th>
+                                    <th>V-Store xét duyệt</th>
+                                    <th>Chiết khấu cho V-Shop</th>
+                                    <th>Số lượng trong kho</th>
+                                    <th>Số lượng đã bán</th>
+                                    <th>Ngày niêm yết</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($histories as $his)
+                                @foreach($products as $pro)
                                     <tr class="line-clamp3">
-                                        <td>{{$his->code}}</td>
-                                        <td>{{$his->account_code}}</td>
-                                        <td class="font-medium">{{$his->amount}}</td>
-                                        <td>{{$his->account_number}}</td>
-                                        <td style="text-transform: uppercase;">{{$his->name}}</td>
-                                        <td>{{$his->bank->name}}</td>
-                                        <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
-                                        <td>{{$his->created_at}}</td>
+                                        <td>{{$pro->publish_id}}</td>
+                                        <td>{{$pro->category_name}}</td>
+                                        <td class="font-medium">{{$pro->amount}}</td>
+                                        <td>{{$pro->account_number}}</td>
+                                        <td style="text-transform: uppercase;">{{$pro->name}}</td>
+                                        <td>{{$pro->bank->name}}</td>
+                                        <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$pro->account_number}}</td>
+                                        <td>{{$pro->created_at}}</td>
                                         <td>
-                                            @if($his->status == 0)
-                                            <span class="text-warning font-medium">Chờ xác nhận</span>
-                                            @elseif($his->status == 1)
+                                            @if($pro->status == 0)
+                                                <span class="text-warning font-medium">Chờ xác nhận</span>
+                                            @elseif($pro->status == 1)
                                                 <span class="text-success font-medium">Thành công</span>
-                                            @elseif($his->status == 2)
+                                            @elseif($pro->status == 2)
                                                 <span class="text-success font-medium">Từ chối</span>
                                             @endif
 
@@ -122,23 +122,23 @@
                                 @endforeach
 
 
-{{--                                <tr class="line-clamp3">--}}
-{{--                                    <td>G1231232</td>--}}
-{{--                                    <td>VN123123123</td>--}}
-{{--                                    <td class="font-medium">1.000.000đ</td>--}}
-{{--                                    <td>19038334966011</td>--}}
-{{--                                    <td style="text-transform: uppercase;">TRAN THANH KHOA</td>--}}
-{{--                                    <td>Techcombank</td>--}}
-{{--                                    <td style="min-width: 400px; white-space: pre-wrap;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse dolor ratione et perspiciatis, maxime veniam earum soluta illo quae impedit eveniet adipisci fuga fugit a. Beatae suscipit totam nobis corrupti!</td>--}}
-{{--                                    <td>10/04/2023</td>--}}
-{{--                                    <td><span class="text-success font-medium">Thành công</span></td>--}}
-{{--                                </tr>--}}
+                                {{--                                <tr class="line-clamp3">--}}
+                                {{--                                    <td>G1231232</td>--}}
+                                {{--                                    <td>VN123123123</td>--}}
+                                {{--                                    <td class="font-medium">1.000.000đ</td>--}}
+                                {{--                                    <td>19038334966011</td>--}}
+                                {{--                                    <td style="text-transform: uppercase;">TRAN THANH KHOA</td>--}}
+                                {{--                                    <td>Techcombank</td>--}}
+                                {{--                                    <td style="min-width: 400px; white-space: pre-wrap;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse dolor ratione et perspiciatis, maxime veniam earum soluta illo quae impedit eveniet adipisci fuga fugit a. Beatae suscipit totam nobis corrupti!</td>--}}
+                                {{--                                    <td>10/04/2023</td>--}}
+                                {{--                                    <td><span class="text-success font-medium">Thành công</span></td>--}}
+                                {{--                                </tr>--}}
 
                                 </tbody>
                             </table>
                         </div>
                         <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                            {{$histories->withQueryString()->links('layouts.custom.paginator')}}
+                            {{$protories->withQueryString()->links('layouts.custom.paginator')}}
                             <div class="mt-4 ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
@@ -149,8 +149,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -164,51 +162,51 @@
 
 @section('custom_js')
 
-{{--    <script>--}}
+    {{--    <script>--}}
 
-{{--        document.getElementsByName('start_date')[0].addEventListener('change', (e) => {--}}
-{{--            document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);--}}
-{{--        });--}}
-{{--        const name = document.getElementById('name');--}}
-{{--        const id = document.getElementById('id');--}}
-{{--        const limit = document.getElementById('limit');--}}
-{{--        const form = document.getElementById('form');--}}
-{{--        $(document).keypress(function (event) {--}}
-{{--            var keycode = (event.keyCode ? event.keyCode : event.which);--}}
-{{--            if (keycode == '13') {--}}
-{{--                location.href = "{{route('screens.admin.finance.index')}}?start_date=" + $('#start_date').val() + '&end_date=' + $('#end_date').val();--}}
-{{--            }--}}
-{{--        });--}}
-{{--        limit.addEventListener('change', (e) => {--}}
-{{--            form.submit();--}}
-{{--        });--}}
-{{--    </script>--}}
+    {{--        document.getElementsByName('start_date')[0].addEventListener('change', (e) => {--}}
+    {{--            document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);--}}
+    {{--        });--}}
+    {{--        const name = document.getElementById('name');--}}
+    {{--        const id = document.getElementById('id');--}}
+    {{--        const limit = document.getElementById('limit');--}}
+    {{--        const form = document.getElementById('form');--}}
+    {{--        $(document).keypress(function (event) {--}}
+    {{--            var keycode = (event.keyCode ? event.keyCode : event.which);--}}
+    {{--            if (keycode == '13') {--}}
+    {{--                location.href = "{{route('screens.admin.finance.index')}}?start_date=" + $('#start_date').val() + '&end_date=' + $('#end_date').val();--}}
+    {{--            }--}}
+    {{--        });--}}
+    {{--        limit.addEventListener('change', (e) => {--}}
+    {{--            form.submit();--}}
+    {{--        });--}}
+    {{--    </script>--}}
 
-<script>
-    $(document).ready(function () {
-        let limit = document.getElementById('limit');
-        document.querySelectorAll('.sort').forEach(item => {
-            const {sort} = item.dataset;
-            item.addEventListener('click', () => {
-                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
-                if (orderBy === 'asc') {
-                    localStorage.setItem('orderBy', JSON.stringify('desc'));
-                } else {
-                    localStorage.setItem('orderBy', JSON.stringify('asc'));
-                }
-                setTimeout(() => {
-                    document.location = '{{route('screens.admin.finance.index')}}?type=' + orderBy +
-                        '&field=' + sort + '&limit=' + limit.value
-                }, 200)
+    <script>
+        $(document).ready(function () {
+            let limit = document.getElementById('limit');
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.admin.finance.index')}}?type=' + orderBy +
+                            '&field=' + sort + '&limit=' + limit.value
+                    }, 200)
+                });
             });
+            limit.addEventListener('change', (e) => {
+                setTimeout(() => {
+                    document.location = '{{route('screens.admin.finance.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                        '&field=' + '{{$field}}' + '&limit=' + e.target.value
+                }, 200)
+            })
         });
-        limit.addEventListener('change', (e) => {
-            setTimeout(() => {
-                document.location = '{{route('screens.admin.finance.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
-                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
-            }, 200)
-        })
-    });
 
-</script>
+    </script>
 @endsection
