@@ -538,7 +538,6 @@ class ProductController extends Controller
             'description' => 'required',
             'short_content' => 'required|max:500',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'video' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -566,7 +565,6 @@ class ProductController extends Controller
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
             'images.image' => 'File nhập không phải định dạng ảnh',
             'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
-            'video.required' => 'Video sản phẩm bắt buộc chọn',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
@@ -643,8 +641,9 @@ class ProductController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollback();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
+
         }
 
     }
