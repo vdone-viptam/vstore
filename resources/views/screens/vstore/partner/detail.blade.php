@@ -17,7 +17,7 @@
 
         </div>
         <div class="form-group">
-            <label for="name">Tổng số sản phẩm:</label>
+            <label for="name">Tổng số sản phẩm: {{number_format($user->countProduct,0,'.','.')}}</label>
 
         </div>
         <div class="form-group">

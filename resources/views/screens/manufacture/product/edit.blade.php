@@ -142,7 +142,7 @@
                             </div>
                             <div class="col-12 mb-3 col-xl-6">
                                 <div class="form-group" id="file-input">
-                                    <label for="name">Video sản phẩm<span class="text-danger">*</span></label>
+                                    <label for="name">Video sản phẩm</label>
                                     <input type="file" id="pickfiles" class="form-control form-control-lg"
                                            accept="video/mp4">
                                     <div id="filelist"></div>
