@@ -49,7 +49,7 @@
 @section('content')
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="    gap:10px">
                 <h5 class="mb-0" style="font-size:18px;">Quản lý xuất - nhập sản phẩm</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">

@@ -88,7 +88,7 @@ class OrderController extends Controller
         $this->v['field'] = $request->field ?? 'pre_order_vshop.id';
         $this->v['type'] = $request->type ?? 'desc';
 
-        $this->v['limit'] = $request->limit ?? 1;
+        $this->v['limit'] = $request->limit ?? 6    ;
         $this->v['key_search'] = $request->key_search ?? '';
 
         $this->v['orders'] = PreOrderVshop::with(['product'])
