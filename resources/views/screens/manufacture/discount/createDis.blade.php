@@ -18,60 +18,66 @@
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
-            {{-- <input disabled name="discount_ncc" id="discount_ncc"
-                   class="form-control-lg form-control"> --}}
-            <div class="input-group mb-3">
-                <input disabled name="discount_ncc" id="discount_ncc"
-                   class="form-control-lg form-control">
-                <span class="input-group-text percent-to-vnd">0</span>
+            <div class="row">
+                <div class="col-6">
+                    <input disabled name="discount_ncc" id="discount_ncc"
+                           class="form-control-lg form-control">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="moneyDis" placeholder="Chiết khấu V-Store thành tiền" disabled
+                           class="form-control form-control-lg percent-to-vnd">
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
-            {{-- <input disabled name="buy_more" id="buy_more"
-                   class="form-control form-control-lg"> --}}
-            <div class="input-group mb-3">
-                <input disabled name="buy_more" id="buy_more"
-                   class="form-control form-control-lg">
-                <span class="input-group-text percent-to-vnd">0</span>
+            <div class="row">
+                <div class="col-6">
+                    <input disabled name="buy_more" id="buy_more"
+                           class="form-control form-control-lg">
+                </div>
+                <div class="col-6">
+                    <input type="text" placeholder="Chiết khấu mua nhiều thành tiền" disabled
+                           class="form-control form-control-lg percent-to-vnd" id="moneyMore">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            {{--                        <span class="text-title font-medium  ">Phần trăm chiết khấu cho Vshop:</span>--}}
-            <input disabled name="buy_more" id="buy_more" type="hidden"
-                   class="form-control-lg form-control">
         </div>
         <div class="form-group">
             <label class="">Phần trăm giảm giá (%):</label>
-            {{-- <input name="discount" id="discount1" type="number"
-                   class="form-control form-control-lg"> --}}
-            <div class="input-group mb-3">
-                <input name="discount" id="discount1" type="text"
-                   class="form-control form-control-lg number">
-                <span class="input-group-text percent-to-vnd">0</span>
+            <div class="row">
+                <div class="col-6">
+                    <input name="discount" id="discount1" type="text"
+                           class="form-control form-control-lg number">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="moneyPrice" placeholder="Giảm giá thành tiền"
+                           class="form-control form-control-lg percent-to-vnd" disabled>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6 form-group">
-                <span class="">Ngày bắt đầu:</span>
-                <input type="datetime-local" name="start_date" id="start_date"
-                       required
-                       min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
-                       class="form-control-lg form-control ">
-                @error('start_date')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="col-6 form-group">
-                <span class="">Ngày kết thúc:</span>
-                <input type="datetime-local" id="end_date" name="end_date"
-                       required
-                       min="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}"
-                       class="form-control-lg form-control">
-                @error('end_date')
-                <p class="text-red-600">{{$message}}</p>
-                @enderror
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <span class="">Ngày bắt đầu:</span>
+                    <input type="datetime-local" name="start_date" id="start_date"
+                           required
+                           min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
+                           class="form-control-lg form-control ">
+                    @error('start_date')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-6">
+                    <span class="">Ngày kết thúc:</span>
+                    <input type="datetime-local" id="end_date" name="end_date"
+                           required
+                           min="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}"
+                           class="form-control-lg form-control">
+                    @error('end_date')
+                    <p class="text-red-600">{{$message}}</p>
+                    @enderror
 
+                </div>
             </div>
 
         </div>
@@ -205,9 +211,9 @@
 
         const price1 = $('#price').val();
         const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
-        if(priceTrue > 0){
+        if (priceTrue > 0) {
             let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
-            $('#discount1').siblings(".percent-to-vnd").html(subMoney1);
+            $('#moneyPrice').val(subMoney1);
         }
     });
     document.querySelector('.choose-product').addEventListener('change', (e) => {
@@ -223,15 +229,15 @@
                     document.querySelector('#price').value = result.pro.price;
                     document.querySelector('#discount_ncc').value = result.pro.discount;
                     document.querySelector('#buy_more').value = result.pro.buy_more;
-                    if(result.pro.discount > 0){
+                    if (result.pro.discount > 0) {
                         const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
                         let subMoney1 = VND.format(priceTrue * result.pro.discount / 100) || 0 + ' đ';
-                        $('#discount_ncc').siblings(".percent-to-vnd").html(subMoney1);
+                        $('#moneyDis').val(subMoney1);
                     }
-                    if(result.pro.buy_more > 0){
+                    if (result.pro.buy_more > 0) {
                         const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
                         let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + ' đ';
-                        $('#buy_more').siblings(".percent-to-vnd").html(subMoney2);
+                        $('#moneyMore').val(subMoney2);
                     }
 
                 } else {

@@ -164,8 +164,9 @@
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
                                     <td class="white-space-100 text-center"><a href="#" data-id="{{$discount->id}}"
-                                           class="btn btn-warning more-details"
-                                           onclick="edit({{$discount->id}})">Sửa</a></td>
+                                                                               class="btn btn-warning more-details"
+                                                                               onclick="edit({{$discount->id}})">Sửa</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
@@ -239,6 +240,7 @@
                 if (data.view) {
                     htmlData += data.view;
                     $('.md-content').html(htmlData)
+                    $('#exampleModalLabel').html('Tạo mới giảm giá');
                     document.getElementById('form-AC').setAttribute('action', '{{route('screens.manufacture.product.createDis')}}')
                     $("#btnAC").html('Thêm mới');
                     $('#modalDetail').modal('show');
@@ -273,6 +275,8 @@
 
                 if (data.view) {
                     htmlData += data.view;
+                    $('#exampleModalLabel').html('Cập nhật giảm giá');
+
                     $('.md-content').html(htmlData)
                     $("#btnAC").html('Lưu thay đổi');
                     $('#modalDetail').modal('show');
