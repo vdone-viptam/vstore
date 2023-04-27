@@ -33,7 +33,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Kho hàng</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý kho hàng</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Quản lý xuất - nhập sản phẩm</li>
                         </ol>
