@@ -72,7 +72,7 @@
                         <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href=""
                            data-toggle="collapse" aria-expanded="{{ (request()->is('partners*')) ? 'true' : 'false' }}"
                            data-target="#submenu-4" aria-controls="submenu-4"><i
-                                class="fab fa-fw fas fa-users"></i>Đốt tác</a>
+                                class="fab fa-fw fas fa-users"></i>Đối tác</a>
                         <div id="submenu-4"
                              class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
