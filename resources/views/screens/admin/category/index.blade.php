@@ -1,185 +1,271 @@
-@extends('layouts.admin.main')
-@section('page_title','Danh sách ngành hàng')
+@extends('layouts.vstore.main')
+@section('page_title','Danh mục ngành hàng')
 
-@section('content')
 
-    <form action="" method="GET" id="form">
-        <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-            <span class="text-secondary">Ngành hàng</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
-                      stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <a href="#" class="text-blueMain font-medium italic">Danh sách ngành hàng</a>
-        </div>
-        <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
 
-            <div class="flex justify-start items-start gap-2 flex-wrap">
-                <input type="text" value="{{isset($params['key_search']) ? $params['key_search'] : ''}}"
-                       name="key_search" id="key_search"
-                       class="outline-none rounded-xl border-[1px] border-[#EBEBEB] px-4 py-[5px] focus:border-primary transition-all duration-200"
-                       placeholder="Tìm kiếm">
-                <button type="submit"
-                        class="btnA flex items-center gap-2 cursor-pointer transition-all duration-200 hover:opacity-70 rounded-xl outline-none border-[1px] bg-[#40BAFF] text-[#FFF] px-4 py-[5px] "
-                >
-
-                    Tìm kiếm
-                </button>
-            </div>
-            <div class="box flex flex-col gap-6 p-4 xl:p-10 w-full">
-
-                <div class="flex justify-between items-center flex-wrap gap-4">
-                    <h2 class="text-xl md:text-3xl font-medium flex items-center gap-4">
-                        <svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path opacity="0.4"
-                                  d="M9.98897 20.501L1.87431 24.4191C1.26151 24.7407 0.497103 24.526 0.154355 23.9361C0.0542551 23.7506 0.0013219 23.5445 0 23.3349V14.5648C0 15.4343 0.507167 15.971 1.84123 16.5722L9.98897 20.501Z"
-                                  fill="url(#paint0_linear_98_611)"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M6.11907 0.416626H13.8368C17.2216 0.416626 19.9669 1.70477 20 5.00028V23.3349C19.9986 23.541 19.9457 23.7437 19.8456 23.9253C19.6849 24.2216 19.4074 24.4415 19.0768 24.5347C18.7462 24.6278 18.391 24.5861 18.0926 24.4191L9.98897 20.501L1.84123 16.5721C0.507167 15.971 0 15.4343 0 14.5648V5.00028C0 1.70477 2.74531 0.416626 6.11907 0.416626ZM5.28115 9.62687H14.6858C15.2277 9.62687 15.667 9.19913 15.667 8.67149C15.667 8.14386 15.2277 7.71612 14.6858 7.71612H5.28115C4.73921 7.71612 4.29989 8.14386 4.29989 8.67149C4.29989 9.19913 4.73921 9.62687 5.28115 9.62687Z"
-                                  fill="url(#paint1_linear_98_611)"/>
-                            <defs>
-                                <linearGradient id="paint0_linear_98_611" x1="4.99449" y1="14.5648" x2="4.99449"
-                                                y2="24.5684" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                                <linearGradient id="paint1_linear_98_611" x1="10" y1="0.416626" x2="10" y2="24.5833"
-                                                gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#7280FD"/>
-                                    <stop offset="0.0001" stop-color="#1E90FF"/>
-                                    <stop offset="1" stop-color="#4062FF"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        Danh sách ngành hàng
-                    </h2>
-                    <div class="flex justify-start md:justify-end items-center gap-2 flex-wrap md:flex-nowrap">
-
-                        <button
-                            class="bg-primary border-primary hover:opacity-70 transition-all duration-300 shadow-lg rounded-[10px] py-[6px] px-[15px] text-[#FFF] flex justify-start items-center gap-3">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_4_2870)">
-                                    <rect width="20" height="20" fill="white" fill-opacity="0.01"/>
-                                    <path
-                                        d="M10 1.25C5.16797 1.25 1.25 5.16797 1.25 10C1.25 14.832 5.16797 18.75 10 18.75C14.832 18.75 18.75 14.832 18.75 10C18.75 5.16797 14.832 1.25 10 1.25ZM13.75 10.4688C13.75 10.5547 13.6797 10.625 13.5938 10.625H10.625V13.5938C10.625 13.6797 10.5547 13.75 10.4688 13.75H9.53125C9.44531 13.75 9.375 13.6797 9.375 13.5938V10.625H6.40625C6.32031 10.625 6.25 10.5547 6.25 10.4688V9.53125C6.25 9.44531 6.32031 9.375 6.40625 9.375H9.375V6.40625C9.375 6.32031 9.44531 6.25 9.53125 6.25H10.4688C10.5547 6.25 10.625 6.32031 10.625 6.40625V9.375H13.5938C13.6797 9.375 13.75 9.44531 13.75 9.53125V10.4688Z"
-                                        fill="white"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4_2870">
-                                        <rect width="20" height="20" fill="white"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <a href="{{route('screens.admin.category.create')}}">Thêm mới</a>
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="" enctype="multipart/form-data" id="form-AC" method="POST">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Cập nhật danh mục ngành
+                            hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
+                    </div>
+                    <div class="modal-body md-content">
 
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button class="btn btn-primary btnSubmit">Lưu thay đổi</button>
 
+                    </div>
                 </div>
-                <div class="w-full overflow-scroll">
-                    @if(\Illuminate\Support\Facades\Session::has('success'))
-                        <p style="color: green">{{\Illuminate\Support\Facades\Session::get('success')}}</p>
-                    @endif
-                    @if(\Illuminate\Support\Facades\Session::has('error'))
-                        <p style="color: red">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
-                    @endif
-                    <table class="w-full dsth" style="text-align: center">
+            </div>
+        </form>
+    </div>
+@endsection
+@section('page')
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Danh mục ngành hàng</h2>
+
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Ngành hàng</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh mục ngành hàng</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
+
+@section('content')
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                <h5 class="mb-0" style="font-size:18px;">Danh mục ngành hàng</h5>
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <div id="custom-search" class="top-search-bar">
+                            <form>
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input name="key_search" value="" class="form-control"
+                                       type="search"
+                                       placeholder="Tìm kiếm..">
+                            </form>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <button type="button" onclick="create()" id="btnA" class="btn btn-success my-2">
+                        Thêm mới danh mục ngành hàng
+                    </button>
+                    <table id="example" class="table table-striped table-bordered second    "
+                    >
                         <thead>
                         <tr>
-                            <th>STT</th>
-                            <th>
-                                Tên danh mục
+                            <th class="white-space-400">Ngành hàng
+                            </th>
+                            <th>Ảnh hiện thị
                             </th>
                             <th>
-                                Ảnh mô tả
+                                Ngày tạo
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'categories.created_at')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="categories.created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="categories.created_at"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="categories.created_at"></i>
+                                    @endif
+                             </span>
                             </th>
-                            <th>
-                                Hành động
+                            <th>Số loại sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'count_product')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="count_product"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="count_product"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="count_product"></i>
+                                    @endif
+                             </span>
                             </th>
+                            <th>Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <tr>
                         @if(count($categories) > 0)
                             @foreach($categories as $category)
                                 <tr>
-                                    <td>{{ $limit_limit ++}}</td>
                                     <td>{{$category->name}}</td>
-                                    <td>
-                                        <img style="margin: auto;width: 125px"
-                                             src="{{asset($category->img)}}" alt="">
+                                    <td class="text-center"><img src="{{asset($category->img)}}"
+                                                                 style="width: 75px;height: 75px" alt="">
                                     </td>
-                                    <td><a href="{{route('screens.admin.category.edit',['id' => $category->id])}}"
-                                           class="">Cập
+                                    <td>{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td>{{number_format($category->count_product,0,'.','.')}}</td>
+                                    <td>
+                                        <a href="#" onclick="edit({{$category->id}})" class="btn btn-primary">Cập
                                             nhật</a>
                                     </td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="4" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="5" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
+
                 </div>
-                <div class="flex justify-end items-center gap-4 flex-wrap">
-                    <span class="text-sm text-title">Tổng: <strong
-                            class="font-bold">{{$categories->total()}}</strong></span>
+                <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$categories->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="flex justify-start items-center gap-2 flex-wrap">
-                        <select name="limit" id="limit"
-                                class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-4 py-[6px] focus:border-primary transition-all duration-200">
-                            <option value="10" {{ isset($params['limit']) && $params['limit'] == 10 ? 'selected' : ''}}>
-                                10
-                                hàng / trang
-                            </option>
-                            <option value="25" {{ isset($params['limit']) && $params['limit'] == 25 ? 'selected' : ''}}>
-                                25
-                                hàng / trang
-                            </option>
-                            <option value="50" {{ isset($params['limit']) && $params['limit'] == 50 ? 'selected' : ''}}>
-                                50
-                                hàng / trang
-                            </option>
-                        </select>
-                        {{--                        <div class="flex justify-start items-center gap-2">--}}
-                        {{--                            <span class="text-title text-sm">Đi đến</span>--}}
-                        {{--                            <input type="number" name="page1" id="page"--}}
-                        {{--                                   value="{{isset($params['page']) && $params['page'] ? $params['page'] : ''}}"--}}
-                        {{--                                   class="outline-none rounded-sm border-[1px] border-[#D9D9D9] px-2 py-[6px] w-[60px] focus:border-primary transition-all duration-200"--}}
-                        {{--                                   min="1">--}}
-                        {{--                        </div>--}}
-                    </div>
                 </div>
+                <div class="form-group col-2 float-right">
+                    <select class="form-control" id="limit">
+                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                    </select>
+                </div>
+
             </div>
-            <div></div>
 
         </div>
-    </form>
+    </div>
+
 @endsection
 
 @section('custom_js')
     <script>
-        const name = document.getElementById('name');
-        const id = document.getElementById('id');
-        const limit = document.getElementById('limit');
-        const page = document.getElementById('page');
-        const form = document.getElementById('form');
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.admin.category.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort + '&limit={{$limit}}'
+                    })
+                });
+            });
+        });
+
+        let limit = document.getElementById('limit');
         limit.addEventListener('change', (e) => {
-            // alert(1);
-            form.submit();
-        });
-        document.getElementById('btnSearch').addEventListener('click', () => {
-                form.submit();
-            }
-        )
+            setTimeout(() => {
+                document.location = '{{route('screens.admin.category.index',['key_search' => $key_search])}}&limit=' + e.target.value
+            }, 200)
+        })
+        const create = async () => {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.admin.category.create')}}`,
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    $('#requestModal').modal('hide')
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thêm danh mục thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = ``;
+                htmlData += data.view;
+                $('.btnSubmit').attr('disabled', true);
 
-        page.addEventListener('change', (e) => {
-            form.submit();
-        });
+                $('.btnSubmit').html('Thêm mới');
+                $('.md-content').html(htmlData)
+                $('#exampleModalLabel').html('Thêm mới danh mục nghành hàng');
+                $('#modalDetail').modal('show');
+                document.getElementById('form-AC').setAttribute('action', '{{route('screens.admin.category.store')}}')
+            })
+        };
+        const edit = async (id) => {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.admin.category.edit')}}/` + id,
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    $('#requestModal').modal('hide')
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Sửa danh mục thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = ``;
 
+                if (data.view) {
+                    htmlData += data.view;
+                    $('.md-content').html(htmlData)
+                    $('.btnSubmit').html('Lưu thay đổi');
 
+                    $('#exampleModalLabel').html('Cập nhật danh mục ngành hàng');
+                    $('#modalDetail').modal('show');
+                    document.getElementById('form-AC').setAttribute('action', '{{route('screens.admin.category.update')}}/' + id)
+                } else {
+                    $('#modalDetail').modal('show');
+                    $('.md-content').html('Chưa có dữ liệu của danh mục ngành hàng!')
+                    setTimeout(() => {
+                        $('#modalDetail').modal('hide');
+                    }, 1000);
+                }
+            })
+        };
     </script>
+
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{\Illuminate\Support\Facades\Session::get('success')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{\Illuminate\Support\Facades\Session::get('error')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
 @endsection

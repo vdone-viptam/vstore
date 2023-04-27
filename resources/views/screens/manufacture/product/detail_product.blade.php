@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="name">Giá sản phẩm <span class="text-danger">*</span></label>
                     <input type="text" disabled class="form-control form-control-lg" id="name"
-                           value="{{number_format((int)$product->price,0,'.','.')}}" placeholder="">
+                           value="{{number_format((int)$product->price,0,'.','.')}} đ" placeholder="">
                 </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -64,10 +64,13 @@
             <div class="col-12 mb-3 col-xl-12">
                 <div class="form-group">
                     <label for="name">Video sản phẩm</label>
-                    <video width="320" height="240" controls class="form-control">
-                        <source src="{{asset($product->video)}}" type="video/mp4">
-
-                    </video>
+                    @if(strlen($product->video) > 0)
+                        <video width="320" height="240" controls class="form-control">
+                            <source src="{{asset($product->video)}}" type="video/mp4">
+                        </video>
+                    @else
+                        <p>Không có video liên quan đến sản phẩm</p>
+                    @endif
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">

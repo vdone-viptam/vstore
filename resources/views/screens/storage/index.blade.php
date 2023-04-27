@@ -67,7 +67,7 @@ if($order && $user) {
                 <div class="modal-header">
                     <div class="d-flex flex-column" style="gap:6px">
                         <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
-                        <h5 class="modal-title" style="font-size: 20px;">Chi tiết thanh toán</h5>
+                        <h5 class="modal-title" style="font-size: 20px; font-weight: 600">Chi tiết thanh toán</h5>
                     </div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -82,7 +82,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên công ty</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
@@ -93,7 +93,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã số thuế</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->tax_code}}</span>
@@ -104,7 +104,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->name}}</span>
@@ -115,7 +115,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->id_vdone}}</span>
@@ -126,7 +126,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Số điện thoại công ty</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->phone_number}}</span>
@@ -137,7 +137,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Email</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->email}}</span>
@@ -149,7 +149,7 @@ if($order && $user) {
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">ID P-Done người giới thiệu</h4>
+                                        <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người giới thiệu</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->referral_code}}</span>
@@ -211,7 +211,7 @@ if($order && $user) {
                                     @foreach($chiTietThanhToan as $value)
                                         <div class="row">
                                             <div class="col-6">
-                                                <h4 style="font-size:18px;">{{$value['title']}}</h4>
+                                                <h4 style="font-size:18px; margin-bottom:15px; font-weight:600;">{{$value['title']}}</h4>
                                             </div>
                                             <div class="col-6">
                                                 <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -224,7 +224,7 @@ if($order && $user) {
                         <div class="col-12 my-3">
                             <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                 <div class="col-12">
-                                    <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">Phương thức thanh toán</h3>
+                                    <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:18px;">Phương thức thanh toán</h3>
                                 </div>
                                 <div class="col-12" style="padding-bottom:15px ;">
                                                     <span>
@@ -536,7 +536,7 @@ if($order && $user) {
                 <div class="modal-header">
                     <div class="d-flex flex-column" style="gap:6px">
                         <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
-                        <h5 class="modal-title" style="font-size: 20px;">Chi tiết thanh toán</h5>
+                        <h5 class="modal-title" style="font-size: 20px; font-weight: 600">Chi tiết thanh toán</h5>
                     </div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -551,7 +551,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Tên công ty</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên công ty</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
@@ -562,7 +562,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Mã số thuế</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã số thuế</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->tax_code}}</span>
@@ -573,7 +573,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Tên Nhà cung cấp</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->name}}</span>
@@ -584,7 +584,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">ID P-Done người đại diện</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->id_vdone}}</span>
@@ -595,7 +595,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Số điện thoại công ty</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Số điện thoại công ty</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->phone_number}}</span>
@@ -606,7 +606,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-size:18px;font-weight: 600;">Email</h4>
+                                    <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Email</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->email}}</span>
@@ -618,7 +618,7 @@ if($order && $user) {
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px;font-weight: 600;">ID P-Done người giới thiệu</h4>
+                                        <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người giới thiệu</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->referral_code}}</span>
@@ -680,7 +680,7 @@ if($order && $user) {
                                     @foreach($chiTietThanhToan as $value)
                                         <div class="row">
                                             <div class="col-6">
-                                                <h4 style="font-size:18px;">{{$value['title']}}</h4>
+                                                <h4 style="font-size:18px; margin-bottom:15px; font-weight:600">{{$value['title']}}</h4>
                                             </div>
                                             <div class="col-6">
                                                 <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -693,7 +693,7 @@ if($order && $user) {
                         <div class="col-12 mb-3">
                             <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                 <div class="col-12">
-                                    <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">Phương thức thanh toán</h3>
+                                    <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:18px;">Phương thức thanh toán</h3>
                                 </div>
                                 <div class="col-12" style="padding-bottom:15px ;">
                                                     <span>
@@ -718,9 +718,9 @@ if($order && $user) {
                         <div class="col-12 mb-3">
                             <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                 <div class="col-12">
-                                    <h3 style="font-weight: 600; padding-top: 15px;">Bạn đã gửi thông tin đăng ký thành công</h3>
+                                    <h3 style="font-size:18px; font-weight: 600; padding-top: 15px;">Bạn đã gửi thông tin đăng ký thành công</h3>
                                 </div>
-                                <div class="col-12" style="padding-bottom:15px ;">
+                                <div class="col-12 text-success" style="padding-bottom:15px ;">
                                     Thông tin đăng ký của bạn đang chờ duyệt. Vui lòng chờ kết quả trong vòng (24 giờ)
                                 </div>
                             </div>

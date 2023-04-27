@@ -185,7 +185,7 @@
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="text-center">
-                                        {{$product->discount}}
+                                        {{$product->discount}} %
                                     </td>
 
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>

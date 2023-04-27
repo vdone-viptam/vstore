@@ -4,54 +4,105 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\Chart\ChartRepositoryInterface;
+use App\Models\RequestChangeTaxCode;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     private ChartRepositoryInterface $chartRepository;
+    private $v;
 
     public function __construct(ChartRepositoryInterface $chartRepository)
     {
         $this->chartRepository = $chartRepository;
+        $this->v = [];
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
-        $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
-        $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
-        $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
+        $this->v['key_search_users'] = $request->key_search_users ?? '';
+        $this->v['type_users'] = $request->type_users ?? '';
+        $this->v['field_users'] = $request->field_users ?? '';
+        $this->v['limit_users'] = $request->limit_users ?? 10;
 
-        $dataRevenueToday = $this->chartRepository->revenueToday();
-        $dataRequestProductToday = $this->chartRepository->requestProductToday();
-        $dataRequestTaxCodeToday = $this->chartRepository->requestTaxCodeToday();
-        $dataRegisterMonth = $this->chartRepository->registerMonth();
-        $dataRegisterYear = $this->chartRepository->registerYear();
-        $requestProductMonth = $this->chartRepository->requestProductMonth();
-        $requestProductYear = $this->chartRepository->requestProductYear();
+        // Yêu cầu đăng ký tài khoản chờ xét duyệt
+        $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
+            'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
+        $limit = $request->limit ?? 10;
+        if (isset($request->key_search_users)) {
+            $this->v['users'] = $this->v['users']
+                ->where(function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('company_name', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('email', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('tax_code', '=', $request->key_search_users)
+                        ->orwhere('account_code', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('address', 'like', '%' . $request->key_search_users . '%');
+                });
+        }
+        $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
+        ->where('order_service.status', 3)
+        ->where('payment_status', 1)
+        ->whereNull('confirm_date')
+        ->orderBy('users.id', 'desc')
+        ->where('role_id', '!=', 1)->paginate($this->v['limit_users']);
+        
+        $this->v['countRegisterAccountPending'] = $this->v['users']->count();
 
-        $dataOrderToday = $this->chartRepository->orderToday();
-        $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
-        $dataRegisterToday = $this->chartRepository->registerToday();
+        // Sản phẩm xét duyệt lên V-Store chưa xác nhận
 
-        return view('screens.admin.dashboard.index', [
-            'dataRevenueChartMonth' => $dataRevenueChartMonth,
-            'dataRevenueChartYear' => $dataRevenueChartYear,
-            'dataOrderChartMonth' => $dataOrderChartMonth,
-            'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+        $this->v['key_search_request'] = $request->key_search_request ?? '';
+        $this->v['type_request'] = $request->type_request ?? '';
+        $this->v['field_request'] = $request->field_request ?? '';
+        $this->v['limit_request'] = $request->limit_request ?? 10;
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
 
-            'dataRevenueToday' => $dataRevenueToday,
-            'dataRequestTaxCodeToday' => $dataRequestTaxCodeToday,
-            'dataRequestProductToday' => $dataRequestProductToday,
-            'dataRegisterMonth' => $dataRegisterMonth,
-            'dataRegisterYear' => $dataRegisterYear,
-            'requestProductMonth' => $requestProductMonth,
-            'requestProductYear' => $requestProductYear,
+        $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+            ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->join('users', 'requests.user_id', '=', 'users.id')
+            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at,requests.code, requests.discount_vshop, products.discount')
+            ->selectSub('select name from users where id = requests.vstore_id', 'vstore_name');
 
-            'dataOrderToday' => $dataOrderToday,
-            'dataOrderSuccessToday' => $dataOrderSuccessToday,
-            'dataRegisterToday' => $dataRegisterToday,
-        ]);
+        if (isset($request->key_search_request)) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
+                $query->orWhere('products.name', 'like', '%' . $request->key_search_request . '%')
+                    ->orWhere('publish_id', $request->keyword)
+                    ->orWhere('categories.name', 'like', '%' . $request->key_search_request . '%')
+                    ->orWhere('users.name', 'like', '%' . $request->key_search_request . '%');
+            });
+        }
+        $this->v['requests'] = $this->v['requests']->where('requests.status', 1)->orderBy('requests.id', 'desc')
+            ->paginate($this->v['limit_request']);
+        $countRequestProductToday = $this->v['requests']->total();
+        foreach ($this->v['requests'] as $key => $val) {
+            if (!in_array((int)$val->status, [1, 3, 4])) {
+                unset($this->v['requests'][$key]);
+                $countRequestProductToday -= 1;
+            }
+        }
+        if ($request->keyword) {
+            $this->v['total'] = $countRequestProductToday;
+        }
+
+        $this->v['limit'] = $limit;
+        $this->v['params'] = $request->all();
+
+
+        $countRequestTaxCodeToday = $this->chartRepository->requestTaxCodeToday();
+
+
+        $this->v['countRequestTaxCodeToday'] = $countRequestTaxCodeToday;
+        $this->v['countRequestProductToday'] = $countRequestProductToday;
+
+
+        return view('screens.admin.dashboard.index', $this->v );
     }
 }

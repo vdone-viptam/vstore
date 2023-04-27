@@ -159,7 +159,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        Copyright © 2023, được vận hành bởi đội nhóm Aneed 
+                        Copyright © 2023, được vận hành bởi đội nhóm Aneed
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="text-md-right footer-links d-none d-sm-block">
@@ -190,13 +190,13 @@
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/charts-bundle/Chart.bundle.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/charts-bundle/chartjs.js')}}"></script>
-<script src="{{asset('assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
+{{-- <script src="{{asset('asset/assets/vendor/charts/charts-bundle/Chart.bundle.js')}}"></script> --}}
+{{-- <script src="{{asset('asset/assets/vendor/charts/charts-bundle/chartjs.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script> --}}
 
-<script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
+{{-- <script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script> --}}
+{{-- <script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script> --}}
+{{-- <script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script> --}}
 @yield('custom_js')
 
 <script>

@@ -236,7 +236,7 @@
                                     <td class="text-center"><img style="height: 125px;"
                                                                  src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>
                                     </td>
-                                    <td class="td_name">{{$product->name}}</td>
+                                    <td class="white-space-100">{{$product->name}}</td>
                                     <td>{{$product->cate_name}}</td>
                                     <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
                                     <td class="text-center">{{$product->vat}}</td>

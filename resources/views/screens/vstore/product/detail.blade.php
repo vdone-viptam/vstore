@@ -31,12 +31,12 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="name">Thuế giá trị gia tăng (%)</label>
+    <label for="name">Thuế giá trị gia tăng</label>
     <input type="text" class="form-control form-control-lg" disabled id="name"
-           value="{{$product->vat}}" placeholder="Nhập tên sản phẩm">
+           value="{{$product->vat.' %'}}" placeholder="Nhập tên sản phẩm">
 </div>
 <div class="form-group">
-    <label for="name">Mô tả ngắn sản phẩm (%)</label>
+    <label for="name">Mô tả ngắn sản phẩm</label>
     <textarea disabled class="form-control">{{$product->short_content}}</textarea>
 </div>
 <div class="col-12">
@@ -52,11 +52,15 @@
     @endforeach
 </div>
 <div class="form-group">
-    <label for="name">Video sản phẩm (%)</label>
-    <video width="320" height="240" controls class="form-control">
-        <source src="{{asset($product->video)}}" type="video/mp4">
+    <label for="name">Video sản phẩm</label>
+    @if(strlen($product->video) > 0)
+        <video width="320" height="240" controls class="form-control">
+            <source src="{{asset($product->video)}}" type="video/mp4">
+        </video>
+    @else
+        <p>Không có video liên quan đến sản phẩm</p>
+    @endif
 
-    </video>
 </div>
 <div class="row">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -157,9 +161,9 @@
         document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
             if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                 document.getElementById('messageDis').style.display = 'none';
-                if($('#appect').is(":checked")){
+                if ($('#appect').is(":checked")) {
                     document.getElementById('btnConfirm').style.display = 'block';
-                }else{
+                } else {
                     document.getElementById('btnConfirm').style.display = 'none';
 
                 }
