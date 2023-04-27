@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <label class="">Phần trăm giảm giá (%):</label>>
+            <label class="">Phần trăm giảm giá (%):</label>
             <div class="row">
                 <div class="col-6">
                     <input name="discount" id="discount1"
