@@ -216,7 +216,7 @@
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="white-space-120 text-right">
-                                        {{$product->discount}}
+                                        {{$product->discount}} %
                                     </td>
                                     <td class="white-space-120">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
                                     <td class="white-space-120">{{$product->vstore_confirm_date ?
