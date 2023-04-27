@@ -311,9 +311,9 @@ class ChartRepository implements ChartRepositoryInterface
         return $data;
     }
 
-    public function registerToday()
+    public function registerAccountPending()
     {
-        $data = User::whereDate('created_at', date('Y-m-d'))->count();
+        $data = User::whereNull('confirm_date')->count();
         return $data;
     }
 

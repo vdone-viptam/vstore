@@ -190,13 +190,13 @@
 <script src="{{asset('asset/assets/libs/js/main-js.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/sweetalert2/sweetalert2.all.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/charts-bundle/Chart.bundle.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/charts-bundle/chartjs.js')}}"></script>
-<script src="{{asset('assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
+{{-- <script src="{{asset('asset/assets/vendor/charts/charts-bundle/Chart.bundle.js')}}"></script> --}}
+{{-- <script src="{{asset('asset/assets/vendor/charts/charts-bundle/chartjs.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script> --}}
 
-<script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
+{{-- <script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script> --}}
+{{-- <script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script> --}}
+{{-- <script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script> --}}
 @yield('custom_js')
 
 <script>
