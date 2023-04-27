@@ -1,6 +1,32 @@
 @extends('layouts.admin.main')
 @section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
 
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="" method="POST" id="form">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @csrf
+                    <div class="modal-body md-content">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnConfirm" class="btn btn-success">Cập nhật yêu cầu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+@endsection
+
 @section('content')
 
     <div class="container-fluid dashboard-content ">
@@ -17,7 +43,8 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản phẩm
+                                <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản
+                                    phẩm
 
                                 </li>
                             </ol>
@@ -38,9 +65,17 @@
                         </h5>
                         <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <div id="custom-search" class="top-search-bar">
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm..">
-                                </div>
+                                <form action="">
+                                    <div id="custom-search" class="top-search-bar">
+                                        <input type="hidden" name="type" value="{{$type}}">
+                                        <input type="hidden" name="field" value="{{$field}}">
+                                        <input type="hidden" name="limit" value="{{$limit}}">
+                                        <input type="search" name="key_search" value="{{$key_search}}"
+                                               class="form-control"
+                                               placeholder="Nhập từ khóa tìm kiếm">
+
+                                    </div>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -53,131 +88,131 @@
                                     <th>Tên sản phẩm</th>
                                     <th>Ngành hàng</th>
                                     <th>Nhà cung cấp</th>
-                                    <th>Chiết khấu cho V-Store</th>
-                                    <th>V-Store xét duyệt</th>
-                                    <th>Chiết khấu cho V-Shop</th>
-                                    <th>Trạng thái</th>
+                                    <th style="min-width: 200px">Chiết khấu cho V-Store
+                                        <span style="float: right;cursor: pointer">
+                                                 @if($field == 'requests.discount')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="requests.discount"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="requests.discount"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="requests.discount"></i>
+                                            @endif
+                                </span>
+                                    </th>
+
+                                    <th style="min-width: 200px">Chiết khấu cho V-Shop
+                                        <span style="float: right;cursor: pointer">
+                                                 @if($field == 'requests.discount_vShop')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="requests.discount_vShop"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="requests.discount_vShop"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="requests.discount_vShop"></i>
+                                            @endif
+                                </span>
+                                    </th>
+                                    <th style="min-width: 200px">V-Store xét duyệt</th>
+                                    <th>Trạng thái
+                                        <span style="float: right;cursor: pointer">
+                                                 @if($field == 'requests.status')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="requests.status"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="requests.status"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="requests.status"></i>
+                                            @endif
+                                </span>
+                                    </th>
                                     <th>Thao tác</th>
                                     <th></th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="line-clamp3">
-                                    <td>SP123123123</td>
-                                    <td>Giày nam Nike</td>
-                                    <td>Giày dép</td>
-                                    <td>ACV Deep</td>
-                                    <td><span class="text-primary">10%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td>
-                                        <div class="bg-warning text-white font-medium px-4 py-2"
-                                             style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ V-Store
-                                            duyệt
-                                        </div>
-                                    </td>
-                                    <td class="flex justify-content-center align-items-center" style="gap:6px">
-                                        <button class="btn btn-primary">Duyệt</button>
-                                        <button class="btn btn-danger">Từ chối</button>
-                                    </td>
-                                    <td><a href="javascript:void(0)" style="text-decoration: underline;"
-                                           data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a></td>
-                                </tr>
-                                <tr class="line-clamp3">
-                                    <td>SP123123123</td>
-                                    <td>Giày nam Nike</td>
-                                    <td>Giày dép</td>
-                                    <td>ACV Deep</td>
-                                    <td><span class="text-primary">10%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td>
-                                        <div class="bg-warning text-white font-medium px-4 py-2"
-                                             style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>V-Store từ
-                                            chối
-                                        </div>
-                                    </td>
-                                    <td class="flex justify-content-center align-items-center" style="gap:6px">
-                                        <button class="btn btn-primary">Duyệt</button>
-                                        <button class="btn btn-danger">Từ chối</button>
-                                    </td>
-                                    <td><a href="javascript:void(0)" style="text-decoration: underline;"
-                                           data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a></td>
-                                </tr>
-                                <tr class="line-clamp3">
-                                    <td>SP123123123</td>
-                                    <td>Giày nam Nike</td>
-                                    <td>Giày dép</td>
-                                    <td>ACV Deep</td>
-                                    <td><span class="text-primary">10%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td>
-                                        <div class="bg-warning text-white font-medium px-4 py-2"
-                                             style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ hệ thống
-                                            duyệt
-                                        </div>
-                                    </td>
-                                    <td class="flex justify-content-center align-items-center" style="gap:6px">
-                                        <button class="btn btn-primary">Duyệt</button>
-                                        <button class="btn btn-danger">Từ chối</button>
-                                    </td>
-                                    <td><a href="javascript:void(0)" style="text-decoration: underline;"
-                                           data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a></td>
-                                </tr>
-                                <tr class="line-clamp3">
-                                    <td>SP123123123</td>
-                                    <td>Giày nam Nike</td>
-                                    <td>Giày dép</td>
-                                    <td>ACV Deep</td>
-                                    <td><span class="text-primary">10%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td>
-                                        <div class="bg-success text-white font-medium px-4 py-2"
-                                             style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Hệ thống đã
-                                            duyệt
-                                        </div>
-                                    </td>
-                                    <td class="flex justify-content-center align-items-center" style="gap:6px">
-                                    </td>
-                                    <td><a href="javascript:void(0)" style="text-decoration: underline;"
-                                           data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a></td>
-                                </tr>
-                                <tr class="line-clamp3">
-                                    <td>SP123123123</td>
-                                    <td>Giày nam Nike</td>
-                                    <td>Giày dép</td>
-                                    <td>ACV Deep</td>
-                                    <td><span class="text-primary">10%</span></td>
-                                    <td><span class="text-success">5%</span></td>
-                                    <td><span class="text-success">3%</span></td>
-                                    <td>
-                                        <div class="bg-danger text-white font-medium px-4 py-2"
-                                             style="border-radius: 2px;"><i class="fas fa-times mr-2"></i>Hệ thống từ
-                                            chối
-                                        </div>
-                                    </td>
-                                    <td class="flex justify-content-center align-items-center" style="gap:6px">
+                                @if(count($requests) > 0)
+                                    @foreach($requests as $request)
+                                        <tr class="line-clamp3">
+                                            <td>{{$request->code}}</td>
+                                            <td>{{$request->product_name}}</td>
+                                            <td>{{$request->name}}</td>
+                                            <td>{{$request->user_name}}</td>
+                                            <td><span class="text-primary">{{$request->discount}}%</span></td>
+                                            <td><span class="text-success">{{$request->discount_vShop}}%</span></td>
+                                            <td><span>{{$request->vstore_name}}</span></td>
+                                            <td>
+                                                @if($request->status == 2)
+                                                    <div class="bg-warning text-white font-medium px-4 py-2"
+                                                         style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
+                                                        V-Store
+                                                        duyệt
+                                                    </div>
+                                                @elseif($request->status == 3)
+                                                    <div class="bg-success text-white font-medium px-4 py-2"
+                                                         style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Hệ
+                                                        thống đã
+                                                        duyệt
+                                                    </div>
+                                                @else
+                                                    <div class="bg-danger text-white font-medium px-4 py-2"
+                                                         style="border-radius: 2px;"><i class="fas fa-times mr-2"></i>Hệ
+                                                        thống từ
+                                                        chối
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td class="flex justify-content-center align-items-center text-center"
+                                                style="gap:6px">
 
-                                    </td>
-                                    <td><a href="javascript:void(0)" style="text-decoration: underline;"
-                                           data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a></td>
-                                </tr>
+                                                @if($request->status == 2)
+                                                    <button type="button"
+                                                            onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
+                                                            class="btn btn-primary">Duyệt
+                                                    </button>
+                                                    <button type="button"
+                                                            onclick="unAppect({{$request->id}},{{$request->discount}},4,{{$request->discount_vShop}})"
+                                                            class="btn btn-danger">Từ chối
+                                                    </button>
+                                                @else
+                                                    <p class="text-success"><i class="fas fa-check mr-2"></i>Đã xét
+                                                        duyệt</p>
+                                                @endif
+                                            </td>
+                                            <td><a href="javascript:void(0)" style="text-decoration: underline;"
+                                                   data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td class="text-center" colspan="10">Không có dữ liệu phù hợp</td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                            <form>
+                        <div class="d-flex align-items-end justify-content-end mt-4">
+                            {{$requests->withQueryString()->links('layouts.custom.paginator')}}
+                            <div class="mt-4 ml-4">
                                 <div class="form-group">
-                                    <select class="form-control form-control-lg">
-                                        <option>10 phần tử / trang</option>
-                                        <option>25 phần tử / trang</option>
-                                        <option>50 phần tử / trang</option>
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
                                     </select>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
 
@@ -193,27 +228,24 @@
 @endsection
 
 @section('custom_js')
-
-    {{--    <script>--}}
-
-    {{--        document.getElementsByName('start_date')[0].addEventListener('change', (e) => {--}}
-    {{--            document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);--}}
-    {{--        });--}}
-    {{--        const name = document.getElementById('name');--}}
-    {{--        const id = document.getElementById('id');--}}
-    {{--        const limit = document.getElementById('limit');--}}
-    {{--        const form = document.getElementById('form');--}}
-    {{--        $(document).keypress(function (event) {--}}
-    {{--            var keycode = (event.keyCode ? event.keyCode : event.which);--}}
-    {{--            if (keycode == '13') {--}}
-    {{--                location.href = "{{route('screens.admin.finance.index')}}?start_date=" + $('#start_date').val() + '&end_date=' + $('#end_date').val();--}}
-    {{--            }--}}
-    {{--        });--}}
-    {{--        limit.addEventListener('change', (e) => {--}}
-    {{--            form.submit();--}}
-    {{--        });--}}
-    {{--    </script>--}}
-
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{\Illuminate\Support\Facades\Session::get('success')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{\Illuminate\Support\Facades\Session::get('error')}}',
+                text: 'Click vào nút bên dưới để đóng',
+            })
+        </script>
+    @endif
     <script>
         $(document).ready(function () {
             let limit = document.getElementById('limit');
@@ -227,18 +259,49 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.admin.product.all')}}?type=' + orderBy +
+                        document.location = '{{route('screens.admin.product.index')}}?type=' + orderBy +
                             '&field=' + sort + '&limit=' + limit.value
                     }, 200)
                 });
             });
             limit.addEventListener('change', (e) => {
                 setTimeout(() => {
-                    document.location = '{{route('screens.admin.product.all',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    document.location = '{{route('screens.admin.product.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
                         '&field=' + '{{$field}}' + '&limit=' + e.target.value
                 }, 200)
             })
         });
+        document.getElementById('btnConfirm').style.display = 'none';
 
+        function appect(id, discount, status, discount_vShop) {
+            $('.md-content').html(`
+ <div class="form-group">
+               <label>Chiết khấu được từ nhà cung cấp</label>
+<input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
+            </div>
+            <div class="form-group">
+               <label>Chiết khấu cho V-Shop</label>
+<input class="form-control number-percent" name="discount_vShop" id="discount_vShop" value="${discount_vShop}" disabled>
+            </div>
+            `);
+            document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
+            $('#modalDetail').modal('show');
+            document.querySelector('#btnConfirm').style.display = 'block';
+
+        }
+
+        function unAppect(id, discount, status) {
+            $('.md-content').html(`
+ <div class="form-group">
+              <label for="name">Lý do từ chối</label>
+<textarea name="note" placeholder="Lý do từ chối"
+                             class="form-control" ></textarea>
+            </div>
+            `);
+            document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
+            $('#modalDetail').modal('show');
+            document.getElementById('btnConfirm').style.display = 'block';
+
+        }
     </script>
 @endsection

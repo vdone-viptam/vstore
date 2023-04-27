@@ -34,35 +34,28 @@ class ProductController extends Controller
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $limit = $request->limit ?? 10;
+        $this->v['field'] = $request->field ?? 'requests.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at');
+            ->selectSub('select name from users where id=products.vstore_id limit 1', 'vstore_name')
+            ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at,requests.discount,requests.discount_vShop,requests.code');
 
 
         if (isset($request->key_search)) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
-                $query->orWhere('products.name', 'like', '%' . $request->key_search . '%')
-                    ->orWhere('publish_id', $request->keyword)
-                    ->orWhere('categories.name', 'like', '%' . $request->key_search . '%')
-                    ->orWhere('users.name', 'like', '%' . $request->key_search . '%');
+                $query->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('requests.code', $this->v['key_search'])
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
             });
 
         }
-        $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy('requests.id', 'desc')
-            ->paginate($limit);
-        $a = $this->v['requests']->total();
-        foreach ($this->v['requests'] as $key => $val) {
-            if (!in_array((int)$val->status, [1, 3, 4])) {
-                unset($this->v['requests'][$key]);
-                $a -= 1;
-            }
-        }
-        if ($request->keyword) {
-            $this->v['total'] = $a;
-        }
-        $this->v['params'] = $request->all();
+        $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy($this->v['field'], $this->v['type'])
+            ->paginate($this->v['limit']);
         return view('screens.admin.product.index', $this->v);
 
     }
@@ -95,16 +88,16 @@ class ProductController extends Controller
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
             if ($request->status == 3) {
-                $vstore = User::join('products','users.id','=','products.vstore_id')->where('products.vstore_id',$currentRequest->vstore_id)
-                    ->where('products.id',$currentRequest->product_id)
-                ->select('products.id','products.publish_id','users.account_code')->first();
+                $vstore = User::join('products', 'users.id', '=', 'products.vstore_id')->where('products.vstore_id', $currentRequest->vstore_id)
+                    ->where('products.id', $currentRequest->product_id)
+                    ->select('products.id', 'products.publish_id', 'users.account_code')->first();
 
-                $repon = Http::post(config('domain.domain_vdone').'notifications/send-all',
-                [
-                    "message"=> "Sản phẩm ".$vstore->publish_id ." đã được niêm yết tại V-Store ".$vstore->account_code,
-                     "productId"=> $vstore->id,
-                      "type"=> 9
-                ]
+                $repon = Http::post(config('domain.domain_vdone') . 'notifications/send-all',
+                    [
+                        "message" => "Sản phẩm " . $vstore->publish_id . " đã được niêm yết tại V-Store " . $vstore->account_code,
+                        "productId" => $vstore->id,
+                        "type" => 9
+                    ]
                 );
 
 
@@ -143,7 +136,7 @@ class ProductController extends Controller
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại !');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
 
         }
     }
@@ -179,22 +172,24 @@ class ProductController extends Controller
 
         }
     }
-    public function allProduct(Request $request){
-        $this->v['key_search']= $request->key_search ??'';
-        $this->v['type']= $request->type ??'desc';
-        $this->v['limit']= $request->limit;
+
+    public function allProduct(Request $request)
+    {
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit;
         $this->v['field'] = $request->field ?? 'amount_product_sold';
         $type = $request->type ?? 'asc';
-        $this->v['products'] = Product::join('users','products.user_id','=','users.id')
-            ->select('products.publish_id','products.category_id','products.user_id','products.discount','products.discount_vShop',
-                'products.amount_product_sold','products.vstore_id','products.admin_confirm_date','users.name','products.id')
-            ->selectSub('select name from users where id =  products.vstore_id','vstore_name' )
-            ->selectSub('select name from categories where id =  products.category_id','category_name' )
-            ->selectSub('select sum(amount - export ) from product_warehouses where product_id =  products.id','amount' )
-        ->where('products.status',2)
-        ->orderBy($this->v['field'],$this->v['type']);
-        if ($this->v['key_search'] !=''){
-            $this->v['products'] = $this->v['products']->where('products.publish_id',$this->v['key_search']);
+        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
+            ->select('products.publish_id', 'products.category_id', 'products.user_id', 'products.discount', 'products.discount_vShop',
+                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id')
+            ->selectSub('select name from users where id =  products.vstore_id', 'vstore_name')
+            ->selectSub('select name from categories where id =  products.category_id', 'category_name')
+            ->selectSub('select sum(amount - export ) from product_warehouses where product_id =  products.id', 'amount')
+            ->where('products.status', 2)
+            ->orderBy($this->v['field'], $this->v['type']);
+        if ($this->v['key_search'] != '') {
+            $this->v['products'] = $this->v['products']->where('products.publish_id', $this->v['key_search']);
         }
 
         $this->v['products'] = $this->v['products']->paginate($this->v['limit']);
