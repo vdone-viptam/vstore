@@ -156,7 +156,12 @@
                                         <td class="text-center">{{$pro->discount}}</td>
                                         <td style="text-transform: uppercase;">{{$pro->vstore_name}}</td>
                                         <td class="text-center">{{$pro->discount_vShop ??0}}</td>
-                                        <td style=" white-space: pre-wrap;">{{$pro->account_number}}</td>
+                                        @if($pro->amount >= 0 )
+                                            <td style=" white-space: pre-wrap;">{{$pro->amount}}</td>
+                                        @else
+                                            <td style=" white-space: pre-wrap;">0</td>
+                                        @endif
+
                                         <td class="text-center">{{$pro->amount_product_sold ??0}}</td>
                                         <td>
                                             {{ Carbon\Carbon::parse($pro->admin_confirm_date)->format('i:H d-m-Y')  }}
