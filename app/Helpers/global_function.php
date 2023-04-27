@@ -151,14 +151,19 @@ function getWarehouse($province_id, $district_id, $product_id)
 function getDiscountAndDepositMoney($quantity, $arr)
 {
     foreach ($arr as $item) {
-        if ($quantity >= $item->start && $quantity < $item->end && $item->end != 0) {
+        if ($quantity >= $item['start'] && $quantity < $item['end'] && $item['end'] != 0) {
             return [
                 "discount" => $item['discount'],
                 "deposit_money" => $item['deposit_money']
             ];
-        } elseif ($item['end'] == 0) {
+        } elseif ($quantity >= $item['start'] && $quantity && $item['end'] == 0) {
             return [
                 "discount" => $item['discount'],
+                "deposit_money" => $item['deposit_money']
+            ];
+        } else {
+            return [
+                "discount" => 0,
                 "deposit_money" => $item['deposit_money']
             ];
         }
