@@ -162,7 +162,6 @@
                                     <td class="text-center">{{$discount->discount}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
-                                    <th>
                                     <td>
                                         @if($discount->start_date < \Carbon\Carbon::now() && $discount->end_date > \Carbon\Carbon::now())
                                             <span class="text-success">Đang áp dụng</span>
@@ -170,7 +169,6 @@
                                             <span class="text-danger">Không áp dụng</span>
                                         @endif
                                     </td>
-                                    </th>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
                                     <td class="white-space-100 text-center"><a href="#" data-id="{{$discount->id}}"
                                                                                class="btn btn-warning more-details"
