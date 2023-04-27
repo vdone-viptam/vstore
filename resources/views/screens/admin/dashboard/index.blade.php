@@ -303,7 +303,7 @@
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data : {id : id},
+                    data : {id : id,status :3},
                     success: function (result) {
                         swalNoti('center', 'success', 'Duyệt sản phẩm thành công','', 500, true, 2200);
                         setInterval(function () {

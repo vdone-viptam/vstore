@@ -81,7 +81,6 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-50">STT</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -135,6 +134,8 @@
                                     @endif
                                 </span>
                             </th>
+                            <th>Trạng thái
+                            </th>
                             <th>Ngày tạo
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
@@ -157,11 +158,17 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td class="white-space-50 text-center">{{$loop->iteration}}</td>
                                     <td class="white-space-500">{{$discount->name}}</td>
                                     <td class="text-center">{{$discount->discount}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
+                                    <td>
+                                        @if($discount->start_date < \Carbon\Carbon::now() && $discount->end_date > \Carbon\Carbon::now())
+                                            <span class="text-success">Đang áp dụng</span>
+                                        @else
+                                            <span class="text-danger">Không áp dụng</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
                                     <td class="white-space-100 text-center"><a href="#" data-id="{{$discount->id}}"
                                                                                class="btn btn-warning more-details"

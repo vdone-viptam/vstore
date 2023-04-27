@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-6">
                     <input disabled name="buy_more" id="buy_more"
-                           class="form-control-lg form-control" value="{{$product1->discount}}">
+                           class="form-control-lg form-control" value="{{$product1->buy_more}}">
                 </div>
                 <div class="col-6">
                     <input type="text" class="form-control form-control-lg" id="moneyMore" disabled
@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <label class="">Phần trăm giảm giá (%):</label>>
+            <label class="">Phần trăm giảm giá (%):</label>
             <div class="row">
                 <div class="col-6">
                     <input name="discount" id="discount1"
@@ -54,7 +54,7 @@
                 <div class="col-6">
                     <input type="text" class="form-control form-control-lg" id="moneyPrice" disabled
                            placeholder="Chiết khấu cho V-Store thành tiền"
-                           value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ đ">
+                           value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ">
                 </div>
             </div>
         </div>

@@ -175,7 +175,8 @@ class AccountController extends Controller
 
         return redirect()->back()->with('success', 'Cập nhật thông tin kho thành công');
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
+            // dd($exception->getMessage());
+            return redirect()->back()->with('error', 'Ảnh kho chưa có');
         }
     }
     protected function saveImgBase64($param, $folder)
