@@ -33,17 +33,17 @@ class DashboardController extends Controller
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
             'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
         $limit = $request->limit ?? 10;
-        if (isset($request->key_search)) {
+        if (isset($request->key_search_users)) {
             $this->v['users'] = $this->v['users']
                 ->where(function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('company_name', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('email', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('tax_code', '=', $request->key_search)
-                        ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('address', 'like', '%' . $request->key_search . '%');
+                    $query->where('name', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('company_name', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('email', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('tax_code', '=', $request->key_search_users)
+                        ->orwhere('account_code', 'like', '%' . $request->key_search_users . '%')
+                        ->orwhere('address', 'like', '%' . $request->key_search_users . '%');
                 });
         }
         $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
@@ -51,7 +51,8 @@ class DashboardController extends Controller
         ->where('payment_status', 1)
         ->whereNull('confirm_date')
         ->orderBy('users.id', 'desc')
-        ->where('role_id', '!=', 1)->paginate($limit);
+        ->where('role_id', '!=', 1)->paginate($this->v['limit_users']);
+        
         $this->v['countRegisterAccountPending'] = $this->v['users']->count();
 
         // Sản phẩm xét duyệt lên V-Store chưa xác nhận
@@ -89,7 +90,7 @@ class DashboardController extends Controller
         }
         if ($request->keyword) {
             $this->v['total'] = $countRequestProductToday;
-        }   
+        }
 
         $this->v['limit'] = $limit;
         $this->v['params'] = $request->all();

@@ -88,7 +88,9 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                <form >
+                                <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_users" value="{{$key_search_users}}">
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -158,10 +160,10 @@
                         {{$users->withQueryString()->links('layouts.custom.paginator')}}
                         <div class="mt-4 ml-4">
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                <select class="form-control" id="limit_users">
+                                    <option value="10" {{$limit_users == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit_users == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit_users == 50 ? 'selected' : ''}}>50 hàng / trang</option>
                                 </select>
                             </div>
                         </div>
@@ -344,6 +346,7 @@
     });
 
     let limit_request = document.getElementById('limit_request');
+    let limit_users = document.getElementById('limit_users');
 
     $(document).ready(function () {
         document.querySelectorAll('.sort').forEach(item => {
@@ -364,8 +367,14 @@
     });
     limit_request.addEventListener('change', (e) => {
         setTimeout(() => {
-            document.location = '{{route('screens.admin.dashboard.index',['key_search_request' => $key_search_request])}}&type=' + '{{$type_request}}' +
+            document.location = '{{route('screens.admin.dashboard.index',['key_search_request' => $key_search_request])}}&type_request=' + '{{$type_request}}' +
                 '&field_request=' + '{{$field_request}}' + '&limit_request=' + e.target.value
+        }, 200)
+    })
+    limit_users.addEventListener('change', (e) => {
+        setTimeout(() => {
+            document.location = '{{route('screens.admin.dashboard.index',['key_search_users' => $key_search_users])}}&type_users=' + '{{$type_request}}' +
+                '&field_users=' + '{{$field_users}}' + '&limit_users=' + e.target.value
         }, 200)
     })
 
