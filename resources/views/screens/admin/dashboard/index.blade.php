@@ -252,10 +252,10 @@
                         {{$requests->withQueryString()->links('layouts.custom.paginator')}}
                         <div class="mt-4 ml-4">
                             <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                <select class="form-control" id="limit_request">
+                                    <option value="10" {{$limit_request == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit_request == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit_request == 50 ? 'selected' : ''}}>50 hàng / trang</option>
                                 </select>
                             </div>
                         </div>
@@ -343,7 +343,7 @@
         });
     });
 
-    let limit = document.getElementById('limit');
+    let limit_request = document.getElementById('limit_request');
 
     $(document).ready(function () {
         document.querySelectorAll('.sort').forEach(item => {
@@ -362,7 +362,7 @@
             });
         });
     });
-    limit.addEventListener('change', (e) => {
+    limit_request.addEventListener('change', (e) => {
         setTimeout(() => {
             document.location = '{{route('screens.admin.dashboard.index',['key_search_request' => $key_search_request])}}&type=' + '{{$type_request}}' +
                 '&field_request=' + '{{$field_request}}' + '&limit_request=' + e.target.value
