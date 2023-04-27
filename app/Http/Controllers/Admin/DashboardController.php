@@ -24,7 +24,11 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        $limit = $request->limit ?? 10;
+        $this->v['key_search_users'] = $request->key_search_users ?? '';
+        $this->v['type_users'] = $request->type_users ?? '';
+        $this->v['field_users'] = $request->field_users ?? '';
+        $this->v['limit_users'] = $request->limit_users ?? 10;
+
         // Yêu cầu đăng ký tài khoản chờ xét duyệt
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
             'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
@@ -52,6 +56,10 @@ class DashboardController extends Controller
 
         // Sản phẩm xét duyệt lên V-Store chưa xác nhận
 
+        $this->v['key_search_request'] = $request->key_search_request ?? '';
+        $this->v['type_request'] = $request->type_request ?? '';
+        $this->v['field_request'] = $request->field_request ?? '';
+        $this->v['limit_request'] = $request->limit_request ?? 10;
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
@@ -62,16 +70,16 @@ class DashboardController extends Controller
             ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at,requests.code, requests.discount_vshop, products.discount')
             ->selectSub('select name from users where id = requests.vstore_id', 'vstore_name');
 
-        if (isset($request->key_search)) {
+        if (isset($request->key_search_request)) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
-                $query->orWhere('products.name', 'like', '%' . $request->key_search . '%')
+                $query->orWhere('products.name', 'like', '%' . $request->key_search_request . '%')
                     ->orWhere('publish_id', $request->keyword)
-                    ->orWhere('categories.name', 'like', '%' . $request->key_search . '%')
-                    ->orWhere('users.name', 'like', '%' . $request->key_search . '%');
+                    ->orWhere('categories.name', 'like', '%' . $request->key_search_request . '%')
+                    ->orWhere('users.name', 'like', '%' . $request->key_search_request . '%');
             });
         }
         $this->v['requests'] = $this->v['requests']->where('requests.status', 1)->orderBy('requests.id', 'desc')
-            ->paginate($limit);
+            ->paginate($this->v['limit_request']);
         $countRequestProductToday = $this->v['requests']->total();
         foreach ($this->v['requests'] as $key => $val) {
             if (!in_array((int)$val->status, [1, 3, 4])) {
@@ -81,7 +89,7 @@ class DashboardController extends Controller
         }
         if ($request->keyword) {
             $this->v['total'] = $countRequestProductToday;
-        }
+        }   
 
         $this->v['limit'] = $limit;
         $this->v['params'] = $request->all();
