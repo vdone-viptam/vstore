@@ -64,11 +64,47 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số tài khoản</th>
-                                    <th>Tên chủ tài khoản</th>
-                                    <th>Ngân hàng</th>
+                                    <th class="white-space-150">Số tài khoản
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'account_number')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="account_number"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="account_number"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="account_number"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-150">Tên chủ tài khoản
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-150">Ngân hàng
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'bank_name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="bank_name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="bank_name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="bank_name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
                                     <th>Nội dung</th>
-                                    <th>Ngày tạo yêu cầu
+                                    <th>Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -120,7 +156,7 @@
 
 
                                             <td class="text-center">
-                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
+                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>
                                     @endforeach
