@@ -76,7 +76,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <button type="button" onclick="create()" id="btnA" class="btn btn-success my-2">
-                        Thêm mới giảm giá
+                        Thêm mới danh mục ngành hàng
                     </button>
                     <table id="example" class="table table-striped table-bordered second    "
                     >
