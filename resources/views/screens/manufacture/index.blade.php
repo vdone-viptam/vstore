@@ -450,8 +450,8 @@
 <div class="bg-[#D4F0FF]">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
         <div class="flex flex-col gap-6">
-            <h2 class="text-[#034D82] font-bold text-4xl text-center">Nhà cung cấp nói gì khi hợp tác với <br> V-Store</h2>
-            <span class="text-[#90A3B4]">V-Store đang hợp tác với hơn 1000 nhà cung cấp ở đa dạng ngành hàng. Phối hợp cung ứng hàng hoá mang lại doanh thu vượt trội so với các nền tảng thương mại điện tử thông thường.</span>
+            <h2 class="text-[#034D82] font-bold text-4xl text-center">Nhà cung cấp nói gì khi tham gia hệ thống  V-Store</h2>
+            <span class="text-[#90A3B4]">V-Store đang hợp tác với rất nhiều Nhà cung cấp ở đa dạng ngành hàng. Phối hợp cung ứng hàng hoá mang lại doanh thu vượt trội so với các nền tảng thương mại điện tử thông thường.</span>
         </div>
         <div class="slider">
             <section>

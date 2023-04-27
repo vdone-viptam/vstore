@@ -47,9 +47,7 @@
             class="flex flex-col justify-center gap-3 items-center md:items-start w-full md:justify-start lg:max-w-[650px] text-center lg:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[60px] md:leading-[75px] text-2xl ">"Cổng thương mại điện tử
                 <strong class="text-[#1e65ff] font-semibold">V-Store"</strong></h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
-                    class="text-[#1e65ff]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
-                    class="text-[#1e65ff]"> V-Store.</strong></span>
+
         </div>
         <div
             class="bg-bannerV w-full md:max-w-[655px] relative flex flex-col justify-end items-end mx-auto lg:mx-0 my-3">
@@ -252,19 +250,7 @@
         class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
         <div class="flex flex-col justify-start items-center md:items-start gap-8 order-last xl:order-first">
             <div class="flex flex-col gap-2 md:whitespace-nowrap">
-                <div class="flex justify-center items-start gap-2 ">
-                    <div class="w-[21px]">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                            <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                            <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                            <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                        </svg>
-                    </div>
 
-
-                    <span class=" text-[#4F4F4F] font-medium ">Hoàn toàn ủy quyền cho 1000+ doanh nghiệp, dễ dàng xác minh nguồn gốc sản phẩm. </span>
-                </div>
 
                 <div class="flex justify-start items-start gap-2">
                     <div class="w-[21px]">
@@ -348,7 +334,7 @@
                             <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
                         </svg>
                     </div>
-                    <span class="text-[#4F4F4F] font-medium">Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm. </span>
+                    <span class="text-[#4F4F4F] font-medium">Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 3 năm. </span>
                 </div>
 
             </div>
@@ -365,7 +351,7 @@
     <div class="bnbot">
         <div
             class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-            <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000 <strong
+            <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center md:text-left"> <strong
                     class="text-[#1e65ff] font-semibold">V-Store </strong> nổi bật</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
                 <div class="box flex flex-col justify-center items-center gap-2 p-5">
