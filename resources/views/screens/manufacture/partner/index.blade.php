@@ -93,7 +93,7 @@
                             </th>
                             <th class="white-space-200">Số loại sản phẩm niêm yết
                             </th>
-                            <th class="white-space-100">Chức năng
+                            <th class="white-space-100">
                             </th>
                         </tr>
                         </thead>
