@@ -13,7 +13,7 @@ interface ChartRepositoryInterface
     //amdin
     public function requestProductToday();
     public function requestTaxCodeToday();
-    public function registerToday();
+    public function registerAccountPending();
 
     public function registerMonth();
     public function registerYear();
