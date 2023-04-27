@@ -69,9 +69,9 @@
                              class="{{ (request()->is('products*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link"
+                                    <a class="nav-link {{ (request()->is('products/all-product*')) ? 'active1' : '' }}"
                                        id="proIn"
-                                       href="#">Tất cả sản phẩm</a>
+                                       href="{{route('screens.admin.product.all')}}">Tất cả sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/index*')) ? 'active1' : '' }}"
@@ -128,7 +128,7 @@
                              class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('finances/request-deposit*')) ? 'active1' : '' }}""
+                                    <a class="nav-link {{ (request()->is('finances/request-deposit*')) ? 'active1' : '' }}"
                                        href="{{route('screens.admin.finance.index')}}">Quản lý yêu cầu rút tiền</a>
                                 </li>
                             </ul>
@@ -137,21 +137,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"
                            data-toggle="collapse" aria-expanded="false"
-                           data-target="#submenu-7" aria-controls="submenu-7"><i
+                           data-target="#submenu-8" aria-controls="submenu-8"><i
                                 class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
-                        <div id="submenu-7"
+                        <div id="submenu-8"
                              class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link"
-                                       href="{{route('screens.admin.account.profile')}}">Đổi mật khẩu</a>
+                                       href="{{route('screens.admin.account.changePassword')}}">Đổi mật khẩu</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link logout" href="{{route('logout')}}" aria-expanded="false"
-                           data-target="#submenu-8"
+                           data-target="#submenu-9"
                            aria-controls="submenu-8" style="color:#FF4D4F"><i class="fas fa-fw fa-sign-out-alt"
                                                                               style="color:#FF4D4F"></i>Đăng xuất</a>
                     </li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\BuyMoreDiscount;
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\AppNotification;
@@ -214,7 +215,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name')
+        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name','discounts.status')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->where('discounts.user_id', Auth::id());
         if (strlen($this->v['key_search'])) {
@@ -223,7 +224,7 @@ class ProductController extends Controller
             });
         }
         $this->v['discounts'] = $this->v['discounts']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
-
+         $this->onDiscount();
         return view('screens.vstore.product.discount', $this->v);
 
     }
@@ -318,5 +319,22 @@ class ProductController extends Controller
             return redirect()->route('screens.vstore.product.discount')->with('error', 'Cập nhật giảm giá thất bại');
 
         }
+    }
+    public  function onDiscount(){
+        $discount = Discount::where('start_date','<=', Carbon::now())
+            ->where('end_date','>=', Carbon::now())
+            ->where('discounts.user_id',Auth::id())
+            ->get()
+        ;
+        if (count($discount)>0){
+            foreach ($discount as $val){
+                $update_discount = Discount::find($val->id);
+                if ($update_discount){
+                    $update_discount->status = 1;
+                    $update_discount->save();
+                }
+            }
+        }
+
     }
 }

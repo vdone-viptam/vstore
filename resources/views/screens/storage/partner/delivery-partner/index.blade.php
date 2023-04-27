@@ -70,17 +70,7 @@
                                 <tr>
                                     <th>Mã đối tác</th>
                                     <th>Tên đối tác
-                                        <span style="float: right;cursor: pointer">
-                                            @if($field == 'name_partner')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="name_partner"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="name_partner"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="name_partner"></i>
-                                            @endif
-                                        </span>
+                            
                                     </th>
                                     <th>Tổng đơn hàng đã giao
                                         <span style="float: right;cursor: pointer">

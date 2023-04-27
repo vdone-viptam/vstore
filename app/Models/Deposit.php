@@ -13,4 +13,8 @@ class Deposit extends Model
     {
         return $this->belongsTo(Bank::class, 'bank_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

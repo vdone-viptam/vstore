@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use const http\Client\Curl\AUTH_ANY;
 
 class PartnerController extends Controller
 {
@@ -41,7 +43,7 @@ class PartnerController extends Controller
                     ->orWhere('users.phone_number', 'like', '%' . $this->v['key_search'] . '%');
             });
         }
-        $this->v['products'] = $this->v['products']->paginate($this->v['limit']);
+        $this->v['products'] = $this->v['products']->paginate( $this->v['limit']);
 
         foreach ($this->v['products'] as $d) {
             $countCategory = Product::where('products.user_id', Auth::id())

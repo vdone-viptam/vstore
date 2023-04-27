@@ -24,19 +24,17 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $limit = $request->limit ?? 10;
-        $page = $request->page ?? 1;
-        $this->v['categories'] = Category::select('id', 'name', 'img');
-        if (isset($request->key_search)) {
-            $this->v['categories'] = $this->v['categories']->orwhere('name', 'like', '%' . $request->key_search . '%');
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['field'] = $request->field ?? 'id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['categories'] = Category::query()->
+        select('id', 'name', 'img', 'created_at')
+            ->selectSub('select IFNULL(count(id),0) from products where category_id=id', 'count_product');
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['categories'] = $this->v['categories']->where('name', 'like', '%' . $this->v['key_search'] . '%');
         }
-        $this->v['params'] = $request->all();
-        $this->v['categories'] = $this->v['categories']->paginate($limit);
-        if ($page > 1) {
-            $this->v['limit_limit'] = $limit * ($page - 1) + 1;
-        } else {
-            $this->v['limit_limit'] = 1;
-        }
+        $this->v['categories'] = $this->v['categories']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
 
 
 //        return $this->v['categories'];
@@ -46,7 +44,7 @@ class CategoryController extends Controller
     public function create()
     {
         $this->v['categories'] = Category::select('id', 'name')->orderBy('id', 'desc')->get();
-        return view('screens.admin.category.create', $this->v);
+        return response()->json(['view' => view('screens.admin.category.create', $this->v)->render()]);
     }
 
     public function store(Request $request)
@@ -76,15 +74,17 @@ class CategoryController extends Controller
             $file->move(public_path('image/category'), $filename);
             $category->img = 'image/category/' . $filename;
             $category->save();
-            $elasticsearchController = new ElasticsearchController();
-            try {
-                $res = $elasticsearchController->createDocCategory((string)$category->id, $request->name);
-                DB::commit();
-            } catch (ClientResponseException $exception) {
-                DB::rollBack();
-                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
-            }
+//            $elasticsearchController = new ElasticsearchController();
+//            try {
+//                $res = $elasticsearchController->createDocCategory((string)$category->id, $request->name);
+//                DB::commit();
+//            } catch (ClientResponseException $exception) {
+//                DB::rollBack();
+//                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+//            }
             DB::commit();
+            return redirect()->back()->with('success', 'Thêm mới danh mục ngành hàng thành công');
+
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
@@ -96,9 +96,9 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $this->v['categories'] = Category::select('id', 'name')->orderBy('id', 'desc')->get();
+        $this->v['categories'] = Category::select('id', 'name', 'img')->orderBy('name', 'asc')->get();
         $this->v['currentCategory'] = Category::find($id);
-        return view('screens.admin.category.edit', $this->v);
+        return response()->json(['view' => view('screens.admin.category.edit', $this->v)->render()]);
     }
 
     public function update(Request $request, $id)
@@ -127,22 +127,22 @@ class CategoryController extends Controller
                 $category->img = 'image/category/' . $filename;
             }
             $category->save();
-            $elasticsearchController = new ElasticsearchController();
-
-            try {
-                $res = $elasticsearchController->updateDocCategory((string)$category->id, $request->name);
-                DB::commit();
-            } catch (ClientResponseException $exception) {
-                DB::rollBack();
-                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
-            }
+//            $elasticsearchController = new ElasticsearchController();
+//
+////            try {
+////                $res = $elasticsearchController->updateDocCategory((string)$category->id, $request->name);
+////                DB::commit();
+////            } catch (ClientResponseException $exception) {
+////                DB::rollBack();
+////                return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+////            }
             DB::commit();
+            return redirect()->back()->with('success', 'Cập nhật danh mục sản phẩm thành công');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
 
         }
-        return redirect()->back()->with('success', 'Cập nhật danh mục sản phẩm thành công');
 
     }
 //

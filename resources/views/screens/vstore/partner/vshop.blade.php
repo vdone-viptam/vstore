@@ -49,8 +49,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã V-Shop</th>
-                            <th>Tên V-Shop
+                            <th class="white-space-100">Mã V-Shop</th>
+                            <th class="white-space-200">Tên V-Shop
 
                             </th>
                             <th class="white-space-200">Số sản phẩm tiếp thị

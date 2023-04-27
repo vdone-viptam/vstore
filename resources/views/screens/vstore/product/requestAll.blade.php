@@ -193,7 +193,7 @@
                                 </span>
                             </th>
 
-                            <th style="min-width: 250px">
+                            <th class="white-space-50">
                                 Chức năng
                             </th>
                         </tr>
@@ -216,7 +216,7 @@
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="white-space-120 text-right">
-                                        {{$product->discount}}
+                                        {{$product->discount}} %
                                     </td>
                                     <td class="white-space-120">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
                                     <td class="white-space-120">{{$product->vstore_confirm_date ?
@@ -279,13 +279,14 @@
                                         @endif
                                     </td>
 
-                                    <td>
+                                    <td class="text-center">
                                         @if($product->status == 0)
                                             <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
                                                class="btn btn-success">Đồng ý</a>
                                             <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                                class="btn btn-danger">Từ chối</a>
                                         @endif
+
                                         <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link">Chi
                                             tiết</a>
                                     </td>

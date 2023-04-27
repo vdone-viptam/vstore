@@ -134,7 +134,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái</th>
+                            <th>Trạng thái
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discounts.status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discounts.status"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th style="min-width: 250px">Thời gian tạo giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
@@ -162,7 +174,7 @@
                                     <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
                                     <td>
-                                        @if($discount->start_date < \Carbon\Carbon::now() && $discount->end_date > \Carbon\Carbon::now())
+                                        @if($discount->status == 1 )
                                             <span class="text-success">Đang áp dụng</span>
                                         @else
                                             <span class="text-danger">Không áp dụng</span>

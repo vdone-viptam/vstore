@@ -28,9 +28,10 @@ class FinanceController extends Controller
     public function index()
     {
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
-        $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
+        $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())->first();
+            $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->first()->amount ??0;
 //            ->where('type', 2)
-            ->first();
+//            return $this->v['waiting'];
         return view('screens.vstore.finance.index', $this->v);
     }
 

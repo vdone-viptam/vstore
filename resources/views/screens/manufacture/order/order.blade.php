@@ -23,87 +23,90 @@
 
 
 @section('modal')
-<div class="modal-order">
-</div>
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-order-oder">
-    <form action="" method="POST">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" style="font-size: 20px;">Thông tin đơn hàng nhập sẵn</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="card-body">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Mã đơn nhập sẵn: </label>
-                                <input type="text" class="form-control form-control-lg" id="no" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tên sản phẩm:</label>
-                                <input type="text" class="form-control form-control-lg" id="name" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Giá sản phẩm:</label>
-                                <input type="text" class="form-control form-control-lg" id="price" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Chiết khấu nhập sẵn (nếu có):</label>
-                                <input type="text" class="form-control form-control-lg" id="discount" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Số lượng sản phẩm</label>
-                                <input type="text" class="form-control form-control-lg" id="quantity" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tiền cọc trước đơn nhập sãn (nếu có):</label>
-                                <input type="text" class="form-control form-control-lg" id="deposits" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Tổng tiền:</label>
-                                <input type="text" class="form-control form-control-lg" id="total" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Trạng thái:</label>
-                                <input type="text" class="form-control form-control-lg" id="status" readonly>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Ngày tạo đơn:</label>
-                                <input type="datetime-local" class="form-control form-control-lg" id="created_at" readonly>
-                            </div>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
-                    lại</button>
-            </div>
-        </div>
+    <div class="modal-order">
     </div>
-    </form>
-</div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true" id="modal-order-oder">
+        <form action="" method="POST">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-size: 20px;">Thông tin đơn hàng nhập sẵn</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Mã đơn nhập sẵn: </label>
+                                        <input type="text" class="form-control form-control-lg" id="no" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên sản phẩm:</label>
+                                        <input type="text" class="form-control form-control-lg" id="name" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Giá sản phẩm:</label>
+                                        <input type="text" class="form-control form-control-lg" id="price" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chiết khấu nhập sẵn (nếu có):</label>
+                                        <input type="text" class="form-control form-control-lg" id="discount" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Số lượng sản phẩm</label>
+                                        <input type="text" class="form-control form-control-lg" id="quantity" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tiền cọc trước đơn nhập sãn (nếu có):</label>
+                                        <input type="text" class="form-control form-control-lg" id="deposits" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tổng tiền:</label>
+                                        <input type="text" class="form-control form-control-lg" id="total" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Trạng thái:</label>
+                                        <input type="text" class="form-control form-control-lg" id="status" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Ngày tạo đơn:</label>
+                                        <input type="datetime-local" class="form-control form-control-lg"
+                                               id="created_at" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                            lại
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @section('content')
@@ -176,9 +179,11 @@
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.discount')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.discount"></i>
+                                            <i class="fa-solid fa-sort-down sort"
+                                               data-sort="pre_order_vshop.discount"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.discount"></i>
+                                            <i class="fa-solid fa-sort-up sort"
+                                               data-sort="pre_order_vshop.discount"></i>
                                         @endif
                                     @else
                                         <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
@@ -190,9 +195,11 @@
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.quantity')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.quantity"></i>
+                                            <i class="fa-solid fa-sort-down sort"
+                                               data-sort="pre_order_vshop.quantity"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.quantity"></i>
+                                            <i class="fa-solid fa-sort-up sort"
+                                               data-sort="pre_order_vshop.quantity"></i>
                                         @endif
                                     @else
                                         <i class="fas fa-sort sort" data-sort="pre_order_vshop.quantity"></i>
@@ -230,9 +237,11 @@
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.created_at"></i>
+                                            <i class="fa-solid fa-sort-down sort"
+                                               data-sort="pre_order_vshop.created_at"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.created_at"></i>
+                                            <i class="fa-solid fa-sort-up sort"
+                                               data-sort="pre_order_vshop.created_at"></i>
                                         @endif
                                     @else
                                         <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
@@ -251,8 +260,8 @@
                                     <td class="text-right">{{number_format($order->product->price,0,'.','.')}}</td>
                                     <td class="text-center">{{(int)$order->discount}}</td>
                                     <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}</td>
+                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
+                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
                                     <td>
                                         @if($order->status == 1)
                                             <span class="text-green-600"> Đã hoàn thành</span>
@@ -267,7 +276,8 @@
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td>
                                         <a href="#" data-toggle="modal"
-                                        data-target=".bd-example-modal-lg" data-id="{{$order->id}}" class="btn btn-link more-details">Chi tiết</a>
+                                           data-target=".bd-example-modal-lg" data-id="{{$order->id}}"
+                                           class="btn btn-link more-details">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -303,7 +313,7 @@
     <script>
         let limit = document.getElementById('limit');
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {
@@ -317,7 +327,7 @@
                         document.location =
                             '{{ route('screens.manufacture.order.order', ['key_search' => $key_search]) }}&type=' +
                             orderBy +
-                            '&field=' + sort+'&limit={{$limit}}'
+                            '&field=' + sort + '&limit={{$limit}}'
                     })
                 });
             });
@@ -334,7 +344,7 @@
                     $.ajax({
                         url: '{{ route('screens.manufacture.order.detail') }}/' + item
                             .dataset.id,
-                        success: function(result) {
+                        success: function (result) {
                             console.log(result);
                             if (result) {
                                 $("#no").val(result.no);
@@ -347,10 +357,10 @@
                                 const today = (datetimeLocal(result.created_at));
                                 const status = result.status == 1 ? 'Đã hoàn thành' :
                                     result.status == 3 ? 'Đơn hàng mới' : result
-                                    .status == 4 ? 'Đang giao hàng' : 'Hủy';
+                                        .status == 4 ? 'Đang giao hàng' : 'Hủy';
 
                                 $("#discount").val(parseInt(result.discount) + ' %');
-                                $("#quantity").val(result.quantity);
+                                $("#quantity").val(Intl.NumberFormat().format(result.quantity).replaceAll(',', '.'));
                                 $("#deposits").val(convertVND(deposits));
                                 $("#total").val(convertVND(total));
                                 $("#status").val(status);
@@ -360,6 +370,7 @@
                     });
                 })
             })
+
             function datetimeLocal(datetime) {
                 const dt = new Date(datetime);
                 dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());

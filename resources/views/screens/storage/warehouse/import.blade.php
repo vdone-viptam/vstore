@@ -94,17 +94,7 @@
                             <th>Mã nhập kho</th>
                             <th>Mã sản phẩm</th>
                             <th>Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'product_name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
-                                    @endif
-                                </span>
+                               
                             </th>
                             <th>Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
