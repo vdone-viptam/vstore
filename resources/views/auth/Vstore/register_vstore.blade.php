@@ -123,7 +123,7 @@
                             <label style="font-weight: 600;" for="vstore" style="font-weight: 600;"><span
                                     class="text-danger">*</span>Tên V-Store</label>
                             <input class="form-control form-control-lg" required type="text" name="name"
-                                id="name" placeholder="Nhập tên nhà cung cấp" value="{{ old('name') }}">
+                                id="name" placeholder="Nhập tên V-Store" value="{{ old('name') }}">
                             @error('name')
                                 <p class="text-danger text-red-500">{{ $message }}</p>
                             @enderror
@@ -233,7 +233,7 @@
                             <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi tiết
                             </label>
                             <input class="form-control form-control-lg" type="text" name="address" required=""
-                                placeholder="Nhập địa chỉ chi tiết (VD:Số nhà 89, phố Tô Vĩnh Diễn, phường Khương Trung, quận Thanh Xuân, thành phố Hà Nội)" value="{{ old('address') }}"> @error('address')
+                                placeholder="VD: Số nhà, ngõ, ngách, hẻm, tòa nhà, thôn..." value="{{ old('address') }}"> @error('address')
                                 <p class="text-danger text-red-500">{{ $message }}</p>
                             @enderror
                         </div>

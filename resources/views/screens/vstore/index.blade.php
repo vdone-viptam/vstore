@@ -46,10 +46,8 @@
         <div
             class="flex flex-col justify-center gap-3 items-center md:items-start w-full md:justify-start lg:max-w-[650px] text-center lg:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[60px] md:leading-[75px] text-2xl ">"Cổng thương mại điện tử
-                <strong class="text-[#1e65ff] font-semibold">V-Store"</strong></h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium">Hãy đồng hành cùng <strong
-                    class="text-[#1e65ff]">20.000+</strong> người kinh doanh và thương hiệu bậc nhất tại Việt Nam đang tin dùng<strong
-                    class="text-[#1e65ff]"> V-Store.</strong></span>
+                <strong class="text-[#1e65ff] font-semibold">V-Store</strong>"</h2>
+           </span>
         </div>
         <div
             class="bg-bannerV w-full md:max-w-[655px] relative flex flex-col justify-end items-end mx-auto lg:mx-0 my-3">
@@ -146,7 +144,7 @@
             <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
         </div>
         <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
-            <h2 class="font-semibold text-lg sm:text-3xl text-[#1D293F]">Cổng thương mại điện tử <br><strong
+            <h2 class="font-semibold text-lg sm:text-3xl text-[#1D293F]">Cổng thương mại điện tử<strong
                     class="text-[#1e65ff] font-semibold">V-Store </strong> là gì?</h2>
             <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội VDone thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng VDone. </span>
         </div>
@@ -169,7 +167,7 @@
         </div>
     </div>
     <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
-        <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center ">Quy trình trở thành <br><strong
+        <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center ">Quy trình trở thành <strong
                 class="text-[#1e65ff] font-semibold">V-Store </strong></h2>
         <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
         <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
@@ -243,7 +241,7 @@
         </div>
     </div>
     <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
-        <h2 class="text-[16px] sm:text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia <br><strong
+        <h2 class="text-[16px] sm:text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia<strong
                 class="text-[#1e65ff] font-semibold">V-Store </strong></h2>
         <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
 
@@ -253,17 +251,10 @@
         <div class="flex flex-col justify-start items-center md:items-start gap-8 order-last xl:order-first">
             <div class="flex flex-col gap-2 md:whitespace-nowrap">
                 <div class="flex justify-center items-start gap-2 ">
-                    <div class="w-[21px]">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.67 0L0 9.67H9.67V0Z" fill="#80DDE9"/>
-                            <path d="M19.34 9.67L9.66998 0V9.67H19.34Z" fill="#00BAD3"/>
-                            <path d="M9.66998 9.66998V19.34L19.34 9.66998H9.66998Z" fill="#00ABBF"/>
-                            <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
-                        </svg>
-                    </div>
+                    
 
 
-                    <span class=" text-[#4F4F4F] font-medium ">Hoàn toàn ủy quyền cho 1000+ doanh nghiệp, dễ dàng xác minh nguồn gốc sản phẩm. </span>
+                   
                 </div>
 
                 <div class="flex justify-start items-start gap-2">
@@ -348,7 +339,7 @@
                             <path d="M0 9.66998L9.67 19.34V9.66998H0Z" fill="#4DCFE1"/>
                         </svg>
                     </div>
-                    <span class="text-[#4F4F4F] font-medium">Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 20 năm. </span>
+                    <span class="text-[#4F4F4F] font-medium">Được quyền hỗ trợ bảo hành nâng cấp hệ thống miễn phí trong 3 năm. </span>
                 </div>
 
             </div>
@@ -365,7 +356,7 @@
     <div class="bnbot">
         <div
             class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
-            <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center md:text-left">1,000 <strong
+            <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center md:text-left"> <strong
                     class="text-[#1e65ff] font-semibold">V-Store </strong> nổi bật</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
                 <div class="box flex flex-col justify-center items-center gap-2 p-5">
