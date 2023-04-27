@@ -81,6 +81,7 @@
                     >
                         <thead>
                         <tr>
+                            <th class="white-space-50">STT</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -108,7 +109,7 @@
                                 </span>
                             </th>
 
-                            <th>Ngày bắt đầu
+                            <th>Thời gian bắt đầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.start_date')
                                         @if($type == 'desc')
@@ -121,20 +122,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'discounts.status')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.status"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.status"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="discounts.status"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>Ngày kết thúc
+                            <th>Thời gian kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')

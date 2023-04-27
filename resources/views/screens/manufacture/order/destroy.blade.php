@@ -142,7 +142,7 @@ Tìm kiếm</button>
                             </td>
                             <td>10.000.000</td>
                             <td>
-                             Aneed V-store
+                             Aneed V-Store
                             </td>
                             <td>
                                15%
@@ -161,7 +161,7 @@ Tìm kiếm</button>
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-store
+                              Aneed V-Store
                              </td>
                              <td>
                                 15%
@@ -180,7 +180,7 @@ Tìm kiếm</button>
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-store
+                              Aneed V-Store
                              </td>
                              <td>
                                 15%
@@ -199,7 +199,7 @@ Tìm kiếm</button>
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-store
+                              Aneed V-Store
                              </td>
                              <td>
                                 15%
@@ -218,7 +218,7 @@ Tìm kiếm</button>
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-store
+                              Aneed V-Store
                              </td>
                              <td>
                                 15%

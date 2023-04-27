@@ -77,21 +77,149 @@
                         <h5 class="mb-0" style="font-size:18px;">
                             <a href="{{route('screens.vstore.product.request')}}" class="">Sản phẩm chờ duyệt</a>
                         </h5>
+                        <ul class="navbar-nav ">
+                            <li class="nav-item">
+                                <div id="custom-search" class="top-search-bar">
+                                    <form>
+                                        <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                               type="search"
+                                               placeholder="Tìm kiếm..">
+                                    </form>
+
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered second"
                                    style="width:100%">
                                 <thead>
-                                <th class="white-space-120">Mã yêu cầu</th>
-                                <th class="white-space-150">Nhà cung cấp</th>
-                                <th class="white-space-300">Tên sản phẩm</th>
-                                <th>Ngành hàng</th>
-                                <th class="white-space-150">Giá sản phẩm chưa VAT</th>
-                                <th class="white-space-150">Chiết khấu từ Nhà cung cấp (%)</th>
-                                <th>Ngày yêu cầu</th>
-                                <th>Trạng thái</th>
-                                <th>Chức năng</th>
+                                <th class="white-space-120">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Mã yêu cầu
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'requests.code')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="requests.code"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="requests.code"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="requests.code"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-150">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Nhà cung cấp
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'users.name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="users.name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="users.name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="users.name"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-300">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Tên sản phẩm
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'products.name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="products.name"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th>
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Ngành hàng
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'categories.name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="categories.name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="categories.name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="categories.name"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-150">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Giá sản phẩm chưa VAT
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'price')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="price"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-150">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Chiết khấu từ Nhà cung cấp (%)
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'requests.discount')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="requests.discount"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="requests.discount"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="requests.discount"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th>
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Ngày yêu cầu
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'requests.created_at')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="requests.created_at"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="requests.created_at"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th>
+
+                                    Trạng thái
+                                    
+                                </th>
+                                <th></th>
                                 </thead>
                                 <tbody>
                                 @if(count($data) > 0)
@@ -133,6 +261,18 @@
                                 @endif
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="d-flex align-items-end justify-content-end mt-4">
+                            {{$data->withQueryString()->links('layouts.custom.paginator')}}
+                            <div class="mt-4 ml-4">
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,20 +335,47 @@
     @endif
     <script>
 
+        let limit = document.getElementById('limit');
+        let product = {};
+        limit.addEventListener('change', (e) => {
+            setTimeout(() => {
+                document.location = '{{route('screens.vstore.dashboard.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
+            }, 200)
+        })
+
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.vstore.dashboard.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort + '&limit=' + limit.value
+                    }, 200)
+                });
+            });
+        });
+
         document.getElementById('btnConfirm').style.display = 'none';
 
         function appect(id, discount, status) {
-            $('.md-content').html(`
-        <div class="form-group">
-            <label>Chiết khấu được từ nhà cung cấp</label>
-        <input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
-            </div>
+                $('.md-content').html(`
             <div class="form-group">
-            <label>Chiết khấu cho V-Shop</label>
-        <input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
-        <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
-        </div>
-    `);
+                <label>Chiết khấu được từ nhà cung cấp</label>
+            <input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
+                </div>
+                <div class="form-group">
+                <label>Chiết khấu cho V-Shop</label>
+            <input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
+            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
+            </div>
+        `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
 
             document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {

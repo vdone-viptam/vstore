@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $user->email = 'nhh.hoang@gmail.com.vn';
         $user->password = Hash::make('123456');
         $user->id_vdone = '123';
-        $user->company_name = 'Thương mại điện tử V-store';
+        $user->company_name = 'Thương mại điện tử V-Store';
         $user->phone_number = '0325500080';
         $user->tax_code = '10000';
         $user->address = 'Việt Nam';

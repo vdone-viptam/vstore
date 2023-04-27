@@ -100,10 +100,10 @@
                 <div class="table-responsive">
                     <table id="partner-datatables" class="table table-striped table-bordered second" style="width:100%">
                         <thead class="bg-light">
-                        <tr class="border-0">
-                            <th class="border-0">Mã đơn hàng/Mã yêu cầu</th>
-                            <th class="border-0">Mã sản phẩm</th>
-                            <th class="border-0">Tên sản phẩm
+                        <tr>
+                            <th>Mã đơn hàng/Mã yêu cầu</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
                                         @if($type == 'desc')
@@ -116,7 +116,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="border-0">Nhà cung cấp
+                            <th>Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'ncc_name')
                                         @if($type == 'desc')
@@ -129,7 +129,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="border-0">Số lượng
+                            <th>Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -142,8 +142,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="border-0">Chiết khấu</th>
-                            <th class="border-0">Thời gian
+                            <th>Chiết khấu</th>
+                            <th>Thời gian
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -156,7 +156,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="border-0">Phân loại
+                            <th>Phân loại
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'type')
                                         @if($type == 'desc')
@@ -169,10 +169,11 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="border-0">Xác nhận/từ chối</th>
+                            <th>Xác nhận/từ chối</th>
                         </tr>
                         </thead>
                         <tbody>
+                            @if(count($products) > 0)
                         @foreach($products as $product)
                             <tr>
                                 <td> {{$product->code}}</td>
@@ -220,6 +221,11 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @else
+                            <tr>
+                                <td colspan="9" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                            </tr>
+                        @endif
 
                         </tbody>
                     </table>

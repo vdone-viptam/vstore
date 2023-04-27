@@ -71,6 +71,10 @@ class UserController extends Controller
     public function getListUser(Request $request)
     {
         $this->v['users'] = User::select();
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['field'] = $request->field ?? 'id';
+        $this->v['limit'] = $request->limit ?? 10;
         $limit = $request->limit ?? 10;
         if (isset($request->key_search)) {
             $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->key_search . '%')
@@ -82,7 +86,7 @@ class UserController extends Controller
                 ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
                 ->orwhere('address', 'like', '%' . $request->key_search . '%');
         }
-        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
+        $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
 //        return  $this->v['users'];
         return view('screens.admin.user.list_user', $this->v);

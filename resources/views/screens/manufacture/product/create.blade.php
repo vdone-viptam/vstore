@@ -197,7 +197,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Phần trăm cọc nhập hàng sẵn</label>
+                                    <label for="name">Tỉ lệ cọc nhập hàng sẵn (%)</label>
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]" required
                                            name="deposit_money[]"
@@ -248,7 +248,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Phần trăm cọc nhập hàng sẵn</label>
+                                    <label for="name">Tỉ lệ cọc nhập hàng sẵn (%)</label>
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
                                            name="deposit_money[]"
@@ -298,7 +298,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Phần trăm cọc nhập hàng sẵn</label>
+                                    <label for="name">Tỉ lệ cọc nhập hàng sẵn (%)</label>
                                     <input type="text" class="form-control form-control-lg number discountA sp"
                                            id="deposit_money[]"
                                            pattern="^[1-9][0-9]?$|^100$"
