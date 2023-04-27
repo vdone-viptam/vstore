@@ -50,32 +50,62 @@
                                 <thead>
                                 <tr>
                                     <th>Mã sản phẩm
-                                        <span style="float: right;cursor: pointer">
-                                            @if($field == 'deposits.code')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="deposits.code"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="deposits.code"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="deposits.code"></i>
-                                            @endif
-                                        </span>
+
                                     </th>
                                     <th>Ngành hàng
                                         <span style="float: right;cursor: pointer">
-                                            @if($field == 'users.account_code')
+                                            @if($field == 'category_name')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="users.account_code"></i>
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="category_name"></i>
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="users.account_code"></i>
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="category_name"></i>
                                                 @endif
                                             @else
-                                                <i class="fas fa-sort sort" data-sort="users.account_code"></i>
+                                                <i class="fas fa-sort sort" data-sort="category_name"></i>
                                             @endif
                                         </span>
                                     </th>
                                     <th>Nhà cung cấp
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-200">Chiết khấu cho V-Store
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'discount')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="discount"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th>V-Store xét duyệt</th>
+                                    <th class="white-space-200">Chiết khấu cho V-Shop
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'discount_vShop')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="discount_vShop"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="discount_vShop"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="discount_vShop"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th>Số lượng trong kho
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -88,34 +118,51 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Chiết khấu cho V-Store</th>
-                                    <th>V-Store xét duyệt</th>
-                                    <th>Chiết khấu cho V-Shop</th>
-                                    <th>Số lượng trong kho</th>
-                                    <th>Số lượng đã bán</th>
-                                    <th>Ngày niêm yết</th>
-                                    <th>Trạng thái</th>
+                                    <th>Số lượng đã bán
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'amount_product_sold')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th>Ngày niêm yết
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'admin_confirm_date')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th>Thao tác</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($products as $pro)
                                     <tr class="line-clamp3">
                                         <td>{{$pro->publish_id}}</td>
-                                        <td>{{$pro->category_name}}</td>
-                                        <td class="font-medium">{{$pro->amount}}</td>
-                                        <td>{{$pro->account_number}}</td>
-                                        <td style="text-transform: uppercase;">{{$pro->name}}</td>
-                                        <td>{{$pro->bank->name}}</td>
-                                        <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$pro->account_number}}</td>
-                                        <td>{{$pro->created_at}}</td>
+                                        <td >{{$pro->category_name}}</td>
+                                        <td class="font-medium">{{$pro->name}}</td>
+                                        <td class="text-center">{{$pro->discount}}</td>
+                                        <td style="text-transform: uppercase;">{{$pro->vstore_name}}</td>
+                                        <td class="text-center">{{$pro->discount_vShop ??0}}</td>
+                                        <td style=" white-space: pre-wrap;">{{$pro->account_number}}</td>
+                                        <td class="text-center">{{$pro->amount_product_sold ??0}}</td>
                                         <td>
-                                            @if($pro->status == 0)
-                                                <span class="text-warning font-medium">Chờ xác nhận</span>
-                                            @elseif($pro->status == 1)
-                                                <span class="text-success font-medium">Thành công</span>
-                                            @elseif($pro->status == 2)
-                                                <span class="text-success font-medium">Từ chối</span>
-                                            @endif
+                                            {{ Carbon\Carbon::parse($pro->admin_confirm_date)->format('i:H d-m-Y')  }}
+                                        </td>
+                                        <td>
+
 
                                         </td>
                                     </tr>
@@ -137,8 +184,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 float-right mt-4">
-                            {{$protories->withQueryString()->links('layouts.custom.paginator')}}
+                        <div class="d-flex align-items-end justify-content-end mt-4">
+                            {{$products->withQueryString()->links('layouts.custom.paginator')}}
                             <div class="mt-4 ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
@@ -195,14 +242,14 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.admin.finance.index')}}?type=' + orderBy +
+                        document.location = '{{route('screens.admin.product.all')}}?type=' + orderBy +
                             '&field=' + sort + '&limit=' + limit.value
                     }, 200)
                 });
             });
             limit.addEventListener('change', (e) => {
                 setTimeout(() => {
-                    document.location = '{{route('screens.admin.finance.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    document.location = '{{route('screens.admin.product.all',['key_search' => $key_search])}}&type=' + '{{$type}}' +
                         '&field=' + '{{$field}}' + '&limit=' + e.target.value
                 }, 200)
             })
