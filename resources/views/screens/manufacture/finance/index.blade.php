@@ -125,8 +125,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn_save_add btn btn-primary bg-primary">Save changes</button>
-                            <button type="button" class="btn btn-secondary bg-secondary" data-dismiss="modal">Close
+                            <button type="submit" class="btn_save_add btn btn-primary bg-primary">Lưu lại</button>
+                            <button type="button" class="btn btn-secondary bg-secondary" data-dismiss="modal">Đóng
                             </button>
                         </div>
                     </form>
