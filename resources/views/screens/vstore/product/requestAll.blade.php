@@ -193,7 +193,7 @@
                                 </span>
                             </th>
 
-                            <th style="min-width: 250px">
+                            <th class="white-space-50">
                                 Chức năng
                             </th>
                         </tr>
@@ -281,11 +281,12 @@
 
                                     <td>
                                         @if($product->status == 0)
+
+                                        @endif
                                             <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
                                                class="btn btn-success">Đồng ý</a>
                                             <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                                class="btn btn-danger">Từ chối</a>
-                                        @endif
                                         <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link">Chi
                                             tiết</a>
                                     </td>
