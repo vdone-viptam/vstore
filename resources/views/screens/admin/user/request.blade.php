@@ -80,18 +80,29 @@
                             <th class="white-space-400">Mã yêu cầu
                             </th>
                             <th>Vai trò
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'role_id')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="role_id"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="role_id"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="role_id"></i>
+                                    @endif
+                          </span>
                             </th>
                             <th>
                                 Tên
-                                </span>
                             </th>
                             <th>Email
+                          </span>
                             </th>
                             <th>Id P-Done người đại diện</th>
                             <th>Tên công ty</th>
                             <th>Mã số thuế cũ</th>
                             <th>Mã số thuế mới</th>
-                            <th>Thao tác</th>
+                            <th>Thao tác / Trạng thái</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -114,7 +125,6 @@
                                     <td>{{$request->id_vdone}}</td>
                                     <td>{{$request->company_name}}</td>
                                     <td>{{$request->old_tax}}</td>
-                                    4
                                     <td>{{$request->tax_code}}</td>
                                     <td class="text-center">
                                         @if($request->status == 0)
@@ -127,8 +137,8 @@
                                             <p class="text-danger"><i class="fas fa-times mr-2"></i>Từ chối</p>
 
                                         @else
-                                                <p class="text-success"><i class="fas fa-check mr-2"></i>Đồng ý</p>
-                                            @endif
+                                            <p class="text-success"><i class="fas fa-check mr-2"></i>Đồng ý</p>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

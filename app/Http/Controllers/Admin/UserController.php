@@ -243,15 +243,28 @@ class UserController extends Controller
             'request_change_taxcode.id',
             'request_change_taxcode.code',
             'request_change_taxcode.tax_code',
-            'request_change_taxcode.status', 'users.role_id',
+            'request_change_taxcode.status',
+            'users.role_id',
             'users.email',
             'users.id_vdone',
             'users.name',
             'company_name',
             'users.tax_code as old_tax')
             ->orderBy($this->v['field'], $this->v['type'])
-            ->join('users', 'request_change_taxcode.user_id', '=', 'users.id')
-            ->paginate($this->v['limit']);
+            ->join('users', 'request_change_taxcode.user_id', '=', 'users.id');
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) {
+                $query->where('request_change_taxcode.code', $this->v['key_search'])
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.email', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.id_vdone', $this->v['key_search'])
+                    ->orWhere('users.email', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.company_name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.tax_code', $this->v['key_search'])
+                    ->orWhere('request_change_taxcode.tax_code', $this->v['key_search']);;
+            });
+        }
+        $this->v['requests'] = $this->v['requests']->paginate($this->v['limit']);
         return view('screens.admin.user.request', $this->v);
     }
 
