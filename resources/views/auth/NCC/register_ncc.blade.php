@@ -119,7 +119,7 @@
                             <label style="font-weight: 600;" for="email" style="font-weight: 600;"><span
                                     class="text-danger">*</span>Số điện thoại công
                                 ty </label>
-                            <input required type="text" name="phone_number" id="phone_number"
+                            <input required type="number" name="phone_number" id="phone_number"
                                 placeholder="Nhập số điện thoại công ty" value="{{ old('phone_number') }}"
                                 pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" class="form-control form-control-lg">
                             @error('phone_number')
@@ -162,21 +162,22 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="form-group">
-                            <label style="font-weight: 600;" for="company"><span class="text-danger">
-
-                            </span>
-                            &ensp;ID P-Done người đại diện (khác)</label>
-                            <input class="form-control form-control-lg" type="text" name="id_vdone_diff"
-                                id="id_vdone_diff" placeholder="Nhập ID P-Done người đại diện (khác)"
-                                value="{{ old('id_vdone_diff') }}">
-                        </div>
+                   <div class="col-xl-6 col-lg-6">
+                    <div class="form-group">
+                        <label style="font-weight: 600;" for="idpDonemore">&nbsp;ID P-Done người đại diện (khác)</label>
+                        <input class="only-number form-control form-control-lg" type="text"
+                               name="id_vdone_diff" id="id_vdone_diff"
+                               value="{{old('id_vdone_diff')}}"
+                               placeholder="Nhập ID P-Done người đại diện khác ">
+                        @error('id_vdone_diff')
+                        <p class="text-red-600">{{$message}}</p>
+                        @enderror
                     </div>
+                </div>
                     <div class="col-xl-6 col-lg-6">
                         <div class="form-group">
-                            <label style="font-weight: 600;" for="idpDonemore"><span class="text-danger">*</span>Mã số thuế</label>
-                            <input class="form-control form-control-lg"required type="text" name="tax_code"
+                            <label style="font-weight: 600;" for="code"><span class="text-danger">*</span>Mã số thuế</label>
+                            <input class="only-number form-control form-control-lg"required type="number" name="tax_code"
                                 id="tax_code" placeholder="Nhập mã số thuế" pattern="^[0-9]{10,13}$"
                                 title="Mã số thuế phải có độ dài từ 10 hoặc 13 chữ số" value="{{ old('tax_code') }}">
                             @error('tax_code')
@@ -870,6 +871,12 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 if (!item1.value && index1 > 0 && index1 != 8 && index1 != 6 ) {
                     check1 = false;
                 }
+                if(index1 == 6){
+                    if ( !item1.checked ){
+                        check1 = true;
+                    }
+
+                }
             });
 
             return check1;
@@ -919,6 +926,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 setValueById("address", infoNCC.address);
                 setValueById("phone_number", infoNCC.phone_number);
                 setValueById("id_vdone", infoNCC.id_vdone);
+                setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
+
                 setValueById("referral_code", infoNCC.referral_code);
 
                 loadAddress(infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);
