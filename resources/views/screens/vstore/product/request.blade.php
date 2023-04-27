@@ -39,7 +39,8 @@
                             <li class="breadcrumb-item"><a href="{{route('screens.vstore.product.request')}}"
                                                            class="breadcrumb-link">Sản phẩm</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu chưa xét duyệt sản phẩm
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu chưa xét duyệt sản
+                                phẩm
                             </li>
                         </ol>
                     </nav>
@@ -55,15 +56,17 @@
                 <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu chưa xét duyệt sản phẩm</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <div id="custom-search" class="top-search-bar">
-                            <input type="hidden" name="type" value="{{$type}}">
-                            <input type="hidden" name="field" value="{{$field}}">
-                            <input type="hidden" name="limit" value="{{$limit}}">
-                            <input type="search" name="key_search" value="{{$key_search}}"
-                                   class="form-control"
-                                   placeholder="Nhập từ khóa tìm kiếm">
+                        <form action="">
+                            <div id="custom-search" class="top-search-bar">
+                                <input type="hidden" name="type" value="{{$type}}">
+                                <input type="hidden" name="field" value="{{$field}}">
+                                <input type="hidden" name="limit" value="{{$limit}}">
+                                <input type="search" name="key_search" value="{{$key_search}}"
+                                       class="form-control"
+                                       placeholder="Nhập từ khóa tìm kiếm">
 
-                        </div>
+                            </div>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -116,33 +119,33 @@
                             </th>
                             <th class="white-space-140">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Giá sản phẩm chưa VAT
-                                <span style="float: right;cursor:pointer">
+                                    Giá sản phẩm chưa VAT
+                                    <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.price"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.price"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.price"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.price"></i>
+                                            <i class="fas fa-sort sort" data-sort="products.price"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.price"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
                             <th class="white-space-150">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu từ Nhà cung cấp (%)
-                                <span style="float: right;cursor:pointer">
+                                    Chiết khấu từ Nhà cung cấp (%)
+                                    <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="requests.discount"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="requests.discount"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="requests.discount"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="requests.discount"></i>
+                                            <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="requests.discount"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
@@ -198,7 +201,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="9" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
@@ -292,7 +295,7 @@
 
         }
 
-        function unAppect(id, discount, status){
+        function unAppect(id, discount, status) {
             $('.md-content').html(`
  <div class="form-group">
               <label for="name">Lý do từ chối</label>
