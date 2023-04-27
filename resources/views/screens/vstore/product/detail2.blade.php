@@ -33,7 +33,7 @@
     <div class="form-group">
         <label for="name">Thuế giá trị gia tăng</label>
         <input type="text" class="form-control form-control-lg" disabled id="name"
-               value="{{$product->vat}}" placeholder="Nhập tên sản phẩm">
+               value="{{$product->vat}} %" placeholder="Nhập tên sản phẩm">
     </div>
 <div class="form-group">
     <label for="name">Mô tả ngắn sản phẩm</label>

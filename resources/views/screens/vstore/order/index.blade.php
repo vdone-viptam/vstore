@@ -164,7 +164,7 @@
                             </th>
                             <th class="white-space-130">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Phần trăm chiết khấu nhận được
+                                    Phần trăm chiết khấu nhận được(%)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'products.discount')
                                         @if($type == 'desc')
@@ -180,7 +180,7 @@
                             </th>
                             <th class="white-space-140">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu nhận được (thành tiền)
+                                    Chiết khấu nhận được (đ)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
                                         @if($type == 'desc')
@@ -228,7 +228,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="10" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="11" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
