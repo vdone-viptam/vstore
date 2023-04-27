@@ -54,7 +54,7 @@
                 <div class="col-6">
                     <input type="text" class="form-control form-control-lg" id="moneyPrice" disabled
                            placeholder="Chiết khấu cho V-Store thành tiền"
-                           value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ đ">
+                           value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ">
                 </div>
             </div>
         </div>
