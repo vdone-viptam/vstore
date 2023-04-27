@@ -252,7 +252,7 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('all-product', [\App\Http\Controllers\Admin\ProductController::class, 'allProduct'])->name('screens.admin.product.all');
         Route::get('index', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('screens.admin.product.index');
         Route::get('/detail', [\App\Http\Controllers\Admin\ProductController::class, 'detail'])->name('screens.admin.product.detail');
-        Route::post('/confirm/{id}}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
+        Route::post('/confirm/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'confirm'])->name('screens.admin.product.confirm');
         Route::get('gen-code/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'genderCodeProduct'])->name('screens.admin.product.code');
         Route::prefix('categories')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('screens.admin.category.index');

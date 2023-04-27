@@ -4,7 +4,7 @@
 
     </style>
 @endsection
-@section('page_title','Dashboard')
+@section('page_title','Tổng quan')
 
 @section('modal')
     <div id="modal1">
@@ -88,7 +88,9 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                <form >
+                                <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_users" value="{{$key_search_users}}">
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -108,7 +110,7 @@
                                     <th>Phân loại tài khoản</th>
                                     <th class="white-space-120">Ngày đăng ký</th>
                                     <th>Mã người giới thiệu</th>
-                                    <th>Thao tác</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,10 +160,10 @@
                         {{$users->withQueryString()->links('layouts.custom.paginator')}}
                         <div class="mt-4 ml-4">
                             <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                <select class="form-control" id="limit_users">
+                                    <option value="10" {{$limit_users == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit_users == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit_users == 50 ? 'selected' : ''}}>50 hàng / trang</option>
                                 </select>
                             </div>
                         </div>
@@ -185,7 +187,9 @@
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                <form >
+                                    <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_request" value="{{$key_search_request}}">
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -203,7 +207,7 @@
                                     <th>Chiết khấu cho V-Store</th>
                                     <th>V-Store xét duyệt</th>
                                     <th>Chiết khấu cho V-Shop</th>
-                                    <th>Thao tác</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -232,20 +236,32 @@
                                         {{$request->discount_vshop}}
                                     </td>
                                     <td class="text-center">
-                                        <button data-abc="{{$loop->iteration - 1}}" data-href="{{route('screens.admin.user.confirm',['id' => $request->id])}}" class="duyet btn btn-primary">Duyệt</button>
+                                        <button data-toggle="modal" data-target="#exampleModal" data-id="{{ $request->id }}" class="update-request btn btn-primary">Duyệt</button>
+
                                     </td>
                                     </tr>
                             @endforeach
 
                             @else
                                 <tr>
-                                    <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
+                                    <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                                 </tr>
                             @endif
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="d-flex align-items-end justify-content-end mt-4">
+                        {{$requests->withQueryString()->links('layouts.custom.paginator')}}
+                        <div class="mt-4 ml-4">
+                            <div class="form-group">
+                                <select class="form-control" id="limit_request">
+                                    <option value="10" {{$limit_request == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                    <option value="25" {{$limit_request == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                    <option value="50" {{$limit_request == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -257,6 +273,7 @@
     </div>
 
 </div>
+
 @endsection
 @section('custom_js')
 <script>
@@ -266,6 +283,39 @@
         swalNoti('center', 'success', 'Duyệt tài khoản thành công','', 500, true, 2200);
         @endif
     });
+    $('.update-request').click(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Xác nhận duyệt?',
+            text: "Bạn có chắc chắn muốn đồng ý ?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Huỷ bỏ'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                let id = $(this).attr('data-id')
+
+                var url = '{{ route("screens.admin.product.confirm", ":id") }}';
+                url = url.replace(':id', id);
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data : {id : id},
+                    success: function (result) {
+                        swalNoti('center', 'success', 'Duyệt sản phẩm thành công','', 500, true, 2200);
+                        setInterval(function () {
+                            location.reload();
+                        }, 1500);
+                    },
+                });
+            }
+        })
+    });
+
+
     document.querySelectorAll('.duyet').forEach((item, index3) => {
         const index = +item.dataset.abc
         item.addEventListener('click', (e) => {
@@ -283,24 +333,55 @@
 
     })
     $('.more-details').each(function (i, e) {
-            $(this).on('click', (o) => {
-                $.ajax({
-                    url: '{{route('screens.admin.user.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&role_id=' + e.dataset.role,
-                    success: function (result) {
-                        $('#modal1').html('');
-                        $('#modal1').append(result);
-                        $('.modal-details').toggleClass('show-modal')
-                    },
-                });
+        $(this).on('click', (o) => {
+            $.ajax({
+                url: '{{route('screens.admin.user.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&role_id=' + e.dataset.role,
+                success: function (result) {
+                    $('#modal1').html('');
+                    $('#modal1').append(result);
+                    $('.modal-details').toggleClass('show-modal')
+                },
             });
         });
+    });
+
+    let limit_request = document.getElementById('limit_request');
+    let limit_users = document.getElementById('limit_users');
+
+    $(document).ready(function () {
+        document.querySelectorAll('.sort').forEach(item => {
+            const {sort} = item.dataset;
+            item.addEventListener('click', () => {
+                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                if (orderBy === 'asc') {
+                    localStorage.setItem('orderBy', JSON.stringify('desc'));
+                } else {
+                    localStorage.setItem('orderBy', JSON.stringify('asc'));
+                }
+                setTimeout(() => {
+                    document.location = '{{route('screens.admin.dashboard.index',['key_search_request' => $key_search_request])}}&type_request=' + orderBy +
+                        '&field_request=' + sort
+                })
+            });
+        });
+    });
+    limit_request.addEventListener('change', (e) => {
+        setTimeout(() => {
+            document.location = '{{route('screens.admin.dashboard.index',['key_search_request' => $key_search_request])}}&type_request=' + '{{$type_request}}' +
+                '&field_request=' + '{{$field_request}}' + '&limit_request=' + e.target.value
+        }, 200)
+    })
+    limit_users.addEventListener('change', (e) => {
+        setTimeout(() => {
+            document.location = '{{route('screens.admin.dashboard.index',['key_search_users' => $key_search_users])}}&type_users=' + '{{$type_request}}' +
+                '&field_users=' + '{{$field_users}}' + '&limit_users=' + e.target.value
+        }, 200)
+    })
+
 </script>
 <script !src="">
     $('.duyet').click(function (e) {
-        // alert(1);
-        // $('.duyet').attr("href", "#")
         e.preventDefault()
-
     })
 
 </script>
