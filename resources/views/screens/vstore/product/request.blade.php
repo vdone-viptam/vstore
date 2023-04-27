@@ -114,7 +114,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-140">Giá sản phẩm (đ) chưa VAT
+                            <th class="white-space-140">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Giá sản phẩm chưa VAT
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -126,8 +128,11 @@
                                         <i class="fas fa-sort sort" data-sort="products.price"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
-                            <th class="white-space-140">Chiết khấu từ Nhà cung cấp (%)
+                            <th class="white-space-150">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Chiết khấu từ Nhà cung cấp (%)
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                         @if($type == 'desc')
@@ -139,6 +144,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
                             <th class="white-space-120">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
@@ -175,7 +181,7 @@
                                     <td class="text-right">
                                         {{number_format($product->price,0,'.','.')}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-center">
                                         {{$product->discount}}
                                     </td>
 

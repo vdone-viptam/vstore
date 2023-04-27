@@ -122,8 +122,8 @@
                                             <td>{{$supplier->account_code}}</td>
                                             <td> {{$supplier->name}}</td>
                                             <td>{{$supplier->province_name}}</td>
-                                            <td>{{$supplier->count_product}}</td>
-                                            <td>{{$supplier->amount_product}}</td>
+                                            <td class="text-center">{{$supplier->count_product}}</td>
+                                            <td class="text-center">{{$supplier->amount_product}}</td>
                                             <td><a class="text-primary underline" href="#"
                                                    onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
                                         </tr>

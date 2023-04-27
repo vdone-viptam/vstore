@@ -157,20 +157,20 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td class="white-space-50">{{$loop->iteration}}</td>
+                                    <td class="white-space-50 text-center">{{$loop->iteration}}</td>
                                     <td class="white-space-500">{{$discount->name}}</td>
-                                    <td class="text-right">{{$discount->discount}}</td>
-                                    <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
-                                    <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
-                                    <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
-                                    <td class="white-space-100"><a href="#" data-id="{{$discount->id}}"
+                                    <td class="text-center">{{$discount->discount}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
+                                    <td class="white-space-100 text-center"><a href="#" data-id="{{$discount->id}}"
                                            class="btn btn-warning more-details"
                                            onclick="edit({{$discount->id}})">Sửa</a></td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6">Không có dữ liệu phù hợp</td>
+                                <td colspan="6" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>

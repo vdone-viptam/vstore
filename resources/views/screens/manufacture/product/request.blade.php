@@ -231,7 +231,7 @@
                             <tr>
                                 <td colspan="9">Không có dữ liệu phù hợp</td>
                             </tr>
-                        @endif7
+                        @endif
                         </tbody>
                     </table>
 

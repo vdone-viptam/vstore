@@ -166,7 +166,7 @@
                                 <tr>
                                     <td>{{$product->code}}</td>
                                     <td class="white-space-300">{{$product->ware_name}}</td>
-                                    <td class="white-space-300">{{$product->name}}</td>
+                                    <td class="white-space-400">{{$product->name}}</td>
                                     <td>
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>
@@ -193,8 +193,8 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td class="text-right">{{number_format($product->quantity,0,'.','.')}}</td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{number_format($product->quantity,0,'.','.')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 </tr>
                             @endforeach
                         @else
