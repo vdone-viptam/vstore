@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('tax_code');
             $table->integer('user_id');
+            $table->string('code')->default('ABC');
             $table->integer('status')->default(0);
             $table->timestamps();
         });

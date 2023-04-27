@@ -272,7 +272,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu</label>
+                                    <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu/ thương nhân</label>
                                     <input type="text" class="form-control form-control-lg" id="import_unit"
                                            name="import_unit"
                                            value="{{$product->import_unit}}" placeholder="Nhập tên địa chỉ đơn vị">
@@ -283,7 +283,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu</label>
+                                    <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu/ thương nhân</label>
                                     <input type="text" class="form-control form-control-lg" id="import_address"
                                            name="import_address"
                                            value="{{$product->import_address}}" placeholder="Nhập tên địa chỉ đơn vị">
@@ -311,8 +311,8 @@
                                         <option disabled selected>Lựa chọn kiểu đóng gói</option>
                                         <option value="1" {{$product->packing_type == 1 ? 'selected' : ''}}>Túi</option>
                                         <option value="2" {{$product->packing_type == 2 ? 'selected' : ''}}>Hộp</option>
-                                        <option value="3" {{$product->packing_type == 3 ? 'selected' : ''}}>Thùng
-                                        </option>
+                                        <option value="3" {{$product->packing_type == 3 ? 'selected' : ''}}>Thùng</option>
+                                        <option value="4" {{$product->packing_type == 4 ? 'selected' : ''}}>Bao Bì</option>
                                     </select>
                                     @error('packing_type')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>

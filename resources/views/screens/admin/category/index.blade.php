@@ -1,4 +1,4 @@
-@extends('layouts.vstore.main')
+@extends('layouts.admin.main')
 @section('page_title','Danh mục ngành hàng')
 
 
@@ -63,7 +63,7 @@
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input type="hidden" name="field" value="{{$field}}">
                                 <input type="hidden" name="type" value="{{$type}}">
-                                <input name="key_search" value="" class="form-control"
+                                <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
                                        placeholder="Tìm kiếm..">
                             </form>

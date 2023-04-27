@@ -71,6 +71,10 @@ class UserController extends Controller
     public function getListUser(Request $request)
     {
         $this->v['users'] = User::select();
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['field'] = $request->field ?? 'id';
+        $this->v['limit'] = $request->limit ?? 10;
         $limit = $request->limit ?? 10;
         if (isset($request->key_search)) {
             $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->key_search . '%')
@@ -82,7 +86,7 @@ class UserController extends Controller
                 ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
                 ->orwhere('address', 'like', '%' . $request->key_search . '%');
         }
-        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
+        $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
 //        return  $this->v['users'];
         return view('screens.admin.user.list_user', $this->v);
@@ -228,20 +232,49 @@ class UserController extends Controller
         return redirect()->route('screens.admin.user.list_user');
     }
 
-    public function requestChangeTaxCode()
+    public function requestChangeTaxCode(Request $request)
     {
-//        return 1;
-        $this->v['requests'] = RequestChangeTaxCode::select('id', 'user_id', 'tax_code', 'status')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['field'] = $request->field ?? 'request_change_taxcode.id';
+        $this->v['requests'] = RequestChangeTaxCode::select
+        (
+            'request_change_taxcode.id',
+            'request_change_taxcode.code',
+            'request_change_taxcode.tax_code',
+            'request_change_taxcode.status',
+            'users.role_id',
+            'users.email',
+            'users.id_vdone',
+            'users.name',
+            'company_name',
+            'users.tax_code as old_tax')
+            ->orderBy($this->v['field'], $this->v['type'])
+            ->join('users', 'request_change_taxcode.user_id', '=', 'users.id');
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) {
+                $query->where('request_change_taxcode.code', $this->v['key_search'])
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.email', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.id_vdone', $this->v['key_search'])
+                    ->orWhere('users.email', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.company_name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.tax_code', $this->v['key_search'])
+                    ->orWhere('request_change_taxcode.tax_code', $this->v['key_search']);;
+            });
+        }
+        $this->v['requests'] = $this->v['requests']->paginate($this->v['limit']);
         return view('screens.admin.user.request', $this->v);
     }
 
-    public function confirmRequest(Request $request, $id, $status)
+    public function confirmRequest(Request $request)
     {
         DB::beginTransaction();
         try {
-            $request = RequestChangeTaxCode::where('id', $id)->first();
+
+            $status = $request->status;
+            $request = RequestChangeTaxCode::where('id', $request->id)->first();
             $user = User::where('id', $request->user_id)->first();
             if ($status == 1) {
                 if ($user->role_id == 3) {
@@ -301,10 +334,12 @@ class UserController extends Controller
 
             $user->notify(new AppNotification($data));
             DB::commit();
-            return redirect()->back()->with('success', 'Cập nhật yêu cầu cập nhật mã số thuế thành công');
+
+            return response()->json(['message' => 'Cập nhật yêu cầu cập nhật mã số thuế thành công'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return response()->json(['message' => 'Có lỗi xảy ra vui lòng thử lại'], 500);
+
         }
     }
 

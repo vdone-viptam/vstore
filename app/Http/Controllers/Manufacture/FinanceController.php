@@ -28,6 +28,7 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')
             ->where('type', 1)
             ->where('user_id', Auth::id())->first();
+        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->first()->amount ??0;
         return view('screens.manufacture.finance.index', $this->v);
     }
 
@@ -54,7 +55,7 @@ class FinanceController extends Controller
             'user_id' => Auth::id(),
             'name' => $request->name
         ]);
-
+            
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
     }
 
@@ -109,6 +110,7 @@ class FinanceController extends Controller
         $key_search = $request->key_search ?? '';
 
         $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->selectSub('select name from banks where id = deposits.bank_id', 'bank_name')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate($limit);

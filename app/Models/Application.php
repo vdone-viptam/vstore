@@ -10,7 +10,7 @@ class Application extends Model
     use HasFactory;
 
     protected $table = 'requests';
-
+    protected $fillable= ['id', 'product_id', 'discount', 'role','prepay','payment_on_delivery','images','status','type_pay','user_id','vstore_id','discount_vshop','note','code','vat'];
 
     public function product()
     {

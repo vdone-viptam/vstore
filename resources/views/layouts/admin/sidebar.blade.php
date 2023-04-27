@@ -69,7 +69,7 @@
                              class="{{ (request()->is('products*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link"
+                                    <a class="nav-link {{ (request()->is('products/all-product*')) ? 'active1' : '' }}"
                                        id="proIn"
                                        href="{{route('screens.admin.product.all')}}">Tất cả sản phẩm</a>
                                 </li>

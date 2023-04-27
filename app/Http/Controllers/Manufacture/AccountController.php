@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
+use App\Models\RequestChangeTaxCode;
 use App\Models\User;
 use App\Models\Warehouses;
 use App\Models\WarehouseType;
@@ -305,10 +306,18 @@ class AccountController extends Controller
             if (DB::table('request_change_taxcode')->where('tax_code', $request->tax_code)->where('status', 0)->first()) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
+            while (true) {
+                $id = RequestChangeTaxCode::where('code', $code)->count();
+                if ($id == 0) {
+                    break;
+                }
+                $code = rand(10000000, 99999999);
+            }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),
                 'tax_code' => $request->tax_code,
                 'status' => 0,
+                'code' => $code,
                 'created_at' => Carbon::now()
             ]);
             return redirect()->back()->with('success', 'Gửi yêu cầu thay đổi mã số thuế thành công');

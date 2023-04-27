@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
 use App\Models\BuyMoreDiscount;
+use App\Models\Discount;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -26,7 +27,7 @@ class DiscountController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount',
-            'products.name', 'discounts.created_at', 'start_date', 'end_date')
+            'products.name', 'discounts.created_at', 'start_date', 'end_date','discounts.status')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->orderBy($this->v['field'], $this->v['type'])
             ->where('discounts.user_id', Auth::id());
@@ -37,6 +38,7 @@ class DiscountController extends Controller
         }
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['discounts'] = $this->v['discounts']->paginate($this->v['limit']);
+         $this->onDiscount();
         return view('screens.manufacture.discount.discount', $this->v);
 
     }
@@ -126,5 +128,23 @@ class DiscountController extends Controller
             return redirect()->route('screens.manufacture.product.discount')->with('error', 'Cập nhật giảm giá thất bại');
 
         }
+    }
+
+    public  function onDiscount(){
+        $discount = Discount::where('start_date','<=', Carbon::now())
+            ->where('end_date','>=',Carbon::now())
+            ->where('discounts.user_id',Auth::id())
+            ->get()
+        ;
+        if (count($discount)>0){
+            foreach ($discount as $val){
+                $update_discount = Discount::find($val->id);
+                if ($update_discount){
+                    $update_discount->status = 1;
+                    $update_discount->save();
+                }
+            }
+        }
+
     }
 }

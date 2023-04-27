@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\BuyMoreDiscount;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Vshop;
@@ -41,21 +42,27 @@ class ProductController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectSub('select name from users where id=products.vstore_id limit 1', 'vstore_name')
+            ->selectSub('select name from users where id=requests.vstore_id limit 1', 'vstore_name')
             ->selectRaw('products.name as product_name,publish_id,categories.name as name,requests.id,requests.status,users.name as user_name,requests.created_at,requests.discount,requests.discount_vShop,requests.code');
 
 
-        if (isset($request->key_search)) {
-            $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
-                $query->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
-                    ->orWhere('requests.code', $this->v['key_search'])
-                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
-                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
-            });
-
+        if (strlen($this->v['key_search']) > 0) {
+            $user = User::select('id')->where('name', 'like', '%' . $this->v['key_search'] . '%')->where('role_id', 3)->first();
+            if ($user) {
+                $this->v['requests'] = $this->v['requests']->where('requests.vstore_id', $user->id);
+            } else {
+                $this->v['requests'] = $this->v['requests']->where(function ($query) use ($request) {
+                    $query->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orWhere('requests.code', $this->v['key_search'])
+                        ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
+                });
+            }
         }
+
         $this->v['requests'] = $this->v['requests']->whereNotIn('requests.status', [2, 0])->orderBy($this->v['field'], $this->v['type'])
             ->paginate($this->v['limit']);
+
         return view('screens.admin.product.index', $this->v);
 
     }
@@ -175,25 +182,33 @@ class ProductController extends Controller
 
     public function allProduct(Request $request)
     {
-        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['type'] = $request->type ?? 'desc';
-        $this->v['limit'] = $request->limit;
+        $this->v['limit'] = $request->limit ?? 10;
         $this->v['field'] = $request->field ?? 'amount_product_sold';
         $type = $request->type ?? 'asc';
-        $this->v['products'] = Product::join('users', 'products.user_id', '=', 'users.id')
+        $this->v['products'] = Category::join('products', 'categories.id', '=', 'products.category_id')->join('users', 'products.user_id', '=', 'users.id')
             ->select('products.publish_id', 'products.category_id', 'products.user_id', 'products.discount', 'products.discount_vShop',
-                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id')
+                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id', 'categories.name as category_name')
             ->selectSub('select name from users where id =  products.vstore_id', 'vstore_name')
-            ->selectSub('select name from categories where id =  products.category_id', 'category_name')
-            ->selectSub('select sum(amount - export ) from product_warehouses where product_id =  products.id', 'amount')
+            ->selectSub('select IFNULL(sum(amount - export ),0) from product_warehouses where product_id =  products.id', 'amount')
             ->where('products.status', 2)
             ->orderBy($this->v['field'], $this->v['type']);
         if ($this->v['key_search'] != '') {
-            $this->v['products'] = $this->v['products']->where('products.publish_id', $this->v['key_search']);
+            $user = User::select('id')->where('name', 'like', '%' . $this->v['key_search'] . '%')->where('role_id', 3)->first();
+            if ($user) {
+                $this->v['products'] = $this->v['products']->where('products.vstore_id', $user->id);
+            } else {
+                $this->v['products'] = $this->v['products']->where(function ($query) {
+                    $query->where('products.publish_id', $this->v['key_search'])
+                        ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%');
+                });
+            }
+
         }
 
         $this->v['products'] = $this->v['products']->paginate($this->v['limit']);
-//        return $this->v;
         return view('screens.admin.product.all-product', $this->v);
     }
 }

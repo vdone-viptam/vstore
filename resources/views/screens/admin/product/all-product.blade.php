@@ -15,9 +15,10 @@
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a>
+                                </li>
                                 <li class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm
-                                    </li>
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -30,15 +31,19 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
+                    <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
+                         style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">Tất cả sản phẩm
                         </h5>
                         <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <form>
-                                    <div id="custom-search" class="top-search-bar">
-                                        <input class="form-control" type="search" name="key_search" placeholder="Tìm kiếm..">
-                                    </div>
+                                    <input type="hidden" name="type" value="{{$type}}">
+                                    <input type="hidden" name="field" value="{{$field}}">
+                                    <input type="hidden" name="limit" value="{{$limit}}">
+                                    <input type="search" name="key_search" value="{{$key_search}}"
+                                           class="form-control"
+                                           placeholder="Nhập từ khóa tìm kiếm">
                                 </form>
 
                             </li>
@@ -96,7 +101,8 @@
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'discount_vShop')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="discount_vShop"></i>
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="discount_vShop"></i>
                                                 @else
                                                     <i class="fa-solid fa-sort-up sort" data-sort="discount_vShop"></i>
                                                 @endif
@@ -122,9 +128,11 @@
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount_product_sold')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="amount_product_sold"></i>
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="amount_product_sold"></i>
                                                 @endif
                                             @else
                                                 <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
@@ -135,9 +143,11 @@
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'admin_confirm_date')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="admin_confirm_date"></i>
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="admin_confirm_date"></i>
                                                 @endif
                                             @else
                                                 <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
@@ -151,7 +161,7 @@
                                 @foreach($products as $pro)
                                     <tr class="line-clamp3">
                                         <td>{{$pro->publish_id}}</td>
-                                        <td >{{$pro->category_name}}</td>
+                                        <td>{{$pro->category_name}}</td>
                                         <td class="font-medium">{{$pro->name}}</td>
                                         <td class="text-center">{{$pro->discount}}</td>
                                         <td style="text-transform: uppercase;">{{$pro->vstore_name}}</td>
@@ -213,27 +223,6 @@
 @endsection
 
 @section('custom_js')
-
-    {{--    <script>--}}
-
-    {{--        document.getElementsByName('start_date')[0].addEventListener('change', (e) => {--}}
-    {{--            document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);--}}
-    {{--        });--}}
-    {{--        const name = document.getElementById('name');--}}
-    {{--        const id = document.getElementById('id');--}}
-    {{--        const limit = document.getElementById('limit');--}}
-    {{--        const form = document.getElementById('form');--}}
-    {{--        $(document).keypress(function (event) {--}}
-    {{--            var keycode = (event.keyCode ? event.keyCode : event.which);--}}
-    {{--            if (keycode == '13') {--}}
-    {{--                location.href = "{{route('screens.admin.finance.index')}}?start_date=" + $('#start_date').val() + '&end_date=' + $('#end_date').val();--}}
-    {{--            }--}}
-    {{--        });--}}
-    {{--        limit.addEventListener('change', (e) => {--}}
-    {{--            form.submit();--}}
-    {{--        });--}}
-    {{--    </script>--}}
-
     <script>
         $(document).ready(function () {
             let limit = document.getElementById('limit');
@@ -247,7 +236,7 @@
                         localStorage.setItem('orderBy', JSON.stringify('asc'));
                     }
                     setTimeout(() => {
-                        document.location = '{{route('screens.admin.product.all')}}?type=' + orderBy +
+                        document.location = '{{route('screens.admin.product.all',['key_search' => $key_search])}}&type=' + orderBy +
                             '&field=' + sort + '&limit=' + limit.value
                     }, 200)
                 });

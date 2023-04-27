@@ -228,7 +228,7 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         Route::get('/chi-tiet', [\App\Http\Controllers\Admin\UserController::class, 'detail'])->name('screens.admin.user.detail');
         Route::get('/up/{id}', [\App\Http\Controllers\Admin\UserController::class, 'up'])->name('screens.admin.user.up');
         Route::get('request-change-tax-code', [\App\Http\Controllers\Admin\UserController::class, 'requestChangeTaxCode'])->name('screens.admin.user.tax_code');
-        Route::get('request-change-tax-code/{id}/{status}', [\App\Http\Controllers\Admin\UserController::class, 'confirmRequest'])->name('screens.admin.user.confirm1');
+        Route::post('request-change-tax-code', [\App\Http\Controllers\Admin\UserController::class, 'confirmRequest'])->name('screens.admin.user.confirm1');
         Route::get('/export', [\App\Http\Controllers\Admin\UserController::class, 'exportUser'])->name('screens.admin.user.export');
     });
 

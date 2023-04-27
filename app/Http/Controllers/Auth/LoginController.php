@@ -293,8 +293,8 @@ class LoginController extends Controller
             ], [
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
-                'name.required' => 'Tên nhà V-store bắt buộc nhập',
-                'name.max' => 'Tên nhà V-store tối đa 30 ký tự',
+                'name.required' => 'Tên nhà V-Store bắt buộc nhập',
+                'name.max' => 'Tên nhà V-Store tối đa 30 ký tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'company_name.max' => 'Tên công ty tối đa 50 kí tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',

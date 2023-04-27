@@ -143,7 +143,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thòi gian
+                            <th>Thời gian
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'request_warehouses.created_at')
                                         @if($type == 'desc')

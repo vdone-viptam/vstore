@@ -194,7 +194,6 @@
                             </th>
 
                             <th class="white-space-50">
-                                Chức năng
                             </th>
                         </tr>
                         </thead>

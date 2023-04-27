@@ -94,7 +94,7 @@
                                 </span>
                             </th>
                             <th>
-                                Chức năng
+                                
                             </th>
                         </tr>
                         </thead>

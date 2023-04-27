@@ -31,6 +31,9 @@ class CategoryController extends Controller
         $this->v['categories'] = Category::query()->
         select('id', 'name', 'img', 'created_at')
             ->selectSub('select IFNULL(count(id),0) from products where category_id=id', 'count_product');
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['categories'] = $this->v['categories']->where('name', 'like', '%' . $this->v['key_search'] . '%');
+        }
         $this->v['categories'] = $this->v['categories']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
 
 
