@@ -96,7 +96,6 @@
                                 Tên
                             </th>
                             <th>Email
-                          </span>
                             </th>
                             <th>Id P-Done người đại diện</th>
                             <th>Tên công ty</th>
