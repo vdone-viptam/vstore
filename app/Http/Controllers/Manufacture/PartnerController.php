@@ -27,39 +27,35 @@ class PartnerController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['limit'] = $request->limit ?? 10;
-        $this->v['products'] = Category::query()
-            ->join('products', 'categories.id', '=', 'products.category_id')
-            ->join('users', 'products.vstore_id', '=', 'users.id')
+        $this->v['products'] = Product::join('users', 'products.vstore_id', '=', 'users.id')
             ->where('products.user_id', Auth::id())
             ->where('products.status', 2);
         $this->v['products'] = $this->v['products']
-//            ->select('users.name as vstore_name', 'users.account_code', 'users.phone_number', 'vstore_id', 'users.company_name', 'users.address', 'categories.name'
-//            )
-////            ->selectSub('select count(products.id) from products join categories on products.category_id = categories.id where products.vstore_id = ' . Auth::id() . ' group by categories.id', 'total_category')
-//            ->groupBy('vstore_name', 'users.account_code', 'users.phone_number')
+            ->select('users.name as vstore_name', 'users.account_code', 'users.phone_number', 'vstore_id', 'users.company_name', 'users.address',
+                DB::raw('COUNT(products.id) as total_product'),
+            )
+            ->groupBy('vstore_name', 'users.account_code', 'users.phone_number')
             ->orderBy($this->v['field'], $this->v['type']);
-//        if (strlen($this->v['key_search']) > 0) {
-//            $this->v['products'] = $this->v['products']->where(function ($query) {
-//                $query->where('users.account_code', $this->v['key_search'])
-//                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
-//                    ->orWhere('users.phone_number', 'like', '%' . $this->v['key_search'] . '%');
-//            });
-//        }
-        $this->v['products'] = $this->v['products']->paginate($this->v['limit']);
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['products'] = $this->v['products']->where(function ($query) {
+                $query->where('users.account_code', $this->v['key_search'])
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.phone_number', 'like', '%' . $this->v['key_search'] . '%');
+            });
+        }
+        $this->v['products'] = $this->v['products']->paginate( $this->v['limit']);
 
-
-
-//        foreach ($this->v['products'] as $d) {
-//            $countCategory = Product::where('products.user_id', Auth::id())
-//                ->where('products.vstore_id', $d->vstore_id)
-//                ->where('products.status', 2)
-//                ->select(
-//                    DB::raw('COUNT(products.category_id) as total_category'),
-//                    'products.category_id'
-//                )->groupBy('category_id')
-//                ->get()->toArray();
-//            $d->total_category = count($countCategory);
-//        }
+        foreach ($this->v['products'] as $d) {
+            $countCategory = Product::where('products.user_id', Auth::id())
+                ->where('products.vstore_id', $d->vstore_id)
+                ->where('products.status', 2)
+                ->select(
+                    DB::raw('COUNT(products.category_id) as total_category'),
+                    'products.category_id'
+                )->groupBy('category_id')
+                ->get()->toArray();
+            $d->total_category = count($countCategory);
+        }
 
         return view('screens.manufacture.partner.index', $this->v);
     }

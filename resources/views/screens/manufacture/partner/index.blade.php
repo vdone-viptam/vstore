@@ -49,7 +49,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-100">Mã V-Store</th>
-                            <th class="white-space-100">Tên V-Store
+                            <th class="white-space-150">Tên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -62,7 +62,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số điện thoại V-Store
+                            <th class="white-space-150">Số điện thoại V-Store
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'phone_number')
                                         @if($type == 'desc')
@@ -92,17 +92,6 @@
                                 </div>
                             </th>
                             <th class="white-space-200">Số loại sản phẩm niêm yết
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'total_category')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="total_category"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="total_category"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="total_category"></i>
-                                    @endif
-                                </span>
                             </th>
                             <th class="white-space-100">Chức năng
                             </th>
@@ -113,7 +102,7 @@
                             @foreach($products as $value)
                                 <tr>
                                     <td class="white-space-200">{{$value->account_code}}</td>
-                                    <td class="white-space-600">{{$value->vstore_name}}</td>
+                                    <td class="white-space-150">{{$value->vstore_name}}</td>
                                     <td class="text-center">{{$value->phone_number}}</td>
                                     <td class="text-center">{{$value->total_product}}</td>
                                     <td class="text-center">{{$value->total_category}}</td>
