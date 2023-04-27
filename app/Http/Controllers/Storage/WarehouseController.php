@@ -80,7 +80,8 @@ class WarehouseController extends Controller
                 'request_warehouses.created_at',
                 'request_warehouses.id',
                 'request_warehouses.order_number',
-                'order.id as order_id'
+                'order.id as order_id',
+                'request_warehouses.updated_at'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
