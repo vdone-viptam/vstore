@@ -91,10 +91,7 @@
                                     </span>
                                 </div>
                             </th>
-<<<<<<< HEAD
-                            <th class="white-space-200 text-center">Số loại sản phẩm niêm yết
-=======
-                            <th class="white-space-200">
+                            <th class="white-space-200 text-center">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Số loại sản phẩm niêm yết
                                     <span style="float: right;cursor: pointer">
@@ -109,7 +106,6 @@
                                         @endif
                                     </span>
                                 </div>
->>>>>>> a3fd8f0ff09892606b95afbbbd9234d1394d07f2
                             </th>
                             <th class="white-space-100">
                             </th>
