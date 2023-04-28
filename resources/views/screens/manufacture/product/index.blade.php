@@ -85,18 +85,6 @@
                             <th style="min-width:200px !important;">
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
-
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                </span>
                             </div>
                             </th>
 
@@ -115,7 +103,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Giá bán 
+                                    Giá bán
                                     <span style="float: right;cursor:pointer">
                                         @if($field == 'price')
                                             @if($type == 'desc')
@@ -132,7 +120,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Thuế giá trị gia tăng 
+                                Thuế giá trị gia tăng
                                 <span style="float: right;cursor:pointer">
                                 @if($field == 'vat')
                                         @if($type == 'desc')
@@ -181,7 +169,7 @@
                             </th>
                             <th class="white-space-130">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu cho V-Store 
+                                Chiết khấu cho V-Store
                                 <span style="float: right;cursor: pointer">
                                         @if($field == 'products.discount')
                                         @if($type == 'desc')
