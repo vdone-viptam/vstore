@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="#" class="item-dash">
+                <a href="{{route('screens.vstore.order.index')}}" class="item-dash">
                     <div class="card border-3 border-top border-top-primary">
                         <div class="card-body">
                             <h5 class="text-muted">Đơn hàng trong ngày</h5>
@@ -55,10 +55,10 @@
             </div>
 
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="#" class="item-dash">
+                <a href="{{route('screens.vstore.product.requestAll')}}" class="item-dash">
                     <div class="card border-3 border-top border-top-primary">
                         <div class="card-body">
-                            <h5 class="text-muted">Yêu cầu xét duyệt sản phẩm</h5>
+                            <h5 class="text-muted">Yêu cầu xét duyệt sản phẩm trong ngày</h5>
                             <div class="metric-value d-inline-block">
                                 <h1 class="mb-1">{{number_format($countRequestProductReview,0,'.','.')}}</h1>
                             </div>
@@ -75,7 +75,8 @@
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
                          style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">
-                            <a href="{{route('screens.vstore.product.request')}}" class="">Sản phẩm chờ duyệt</a>
+                            <a href="{{route('screens.vstore.product.request')}}" class="">Quản lý yêu cầu chưa xét duyệt sản phẩm
+                            </a>
                         </h5>
                         <ul class="navbar-nav ">
                             <li class="nav-item">

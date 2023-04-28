@@ -46,10 +46,12 @@ class DashboardController extends Controller
         $countRequestProductReview = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->where('requests.vstore_id', Auth::id())
-            ->where('requests.status', 0)
+            ->whereDate('requests.created_at', date('Y-m-d'))
+            // ->where('requests.status', 0)
             ->count();
 
         $vshop  = [];
+
 
         // $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
         // $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
