@@ -38,7 +38,7 @@
                         {{-- <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                    <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm...">
                                 </div>
                             </li>
                         </ul> --}}
@@ -64,8 +64,47 @@
                                             @endif
                                         </span>
                                     </th>
+                                    <th class="white-space-150">Số tài khoản
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'account_number')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="account_number"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="account_number"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="account_number"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-150">Tên chủ tài khoản
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-150">Ngân hàng
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'bank_name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="bank_name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="bank_name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="bank_name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
                                     <th>Nội dung</th>
-                                    <th>Ngày tạo yêu cầu
+                                    <th>Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -103,12 +142,21 @@
                                                 {{number_format($history->amount,0,'.','.')}}
                                             </td>
                                             <td>
+                                                {{ $history->account_number }}
+                                            </td>
+                                            <td>
+                                                {{ $history->name }}bank_name
+                                            </td>
+                                            <td>
+                                                {{ $history->bank_name }}
+                                            </td>
+                                            <td>
                                                 Chuyển khoản ra ngoài
                                             </td>
 
 
                                             <td class="text-center">
-                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
+                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -122,9 +170,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$histories->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class=" ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
                                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

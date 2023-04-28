@@ -60,7 +60,7 @@
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -143,7 +143,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thòi gian
+                            <th>Thời gian
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'request_warehouses.created_at')
                                         @if($type == 'desc')
@@ -206,9 +206,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$products->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class="ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

@@ -203,44 +203,198 @@
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
                          style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">
-                            <a href="#" class="">Sản phẩm đã xét duyệt
-                            </a>
+                            Sản phẩm đã xét duyệt
+                            
                         </h5>
+                        <ul class="navbar-nav ">
+                            <li class="nav-item">
+                                <div id="custom-search" class="top-search-bar">
+                                    <form>
+                                        <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
+                                               type="search"
+                                               placeholder="Nhập từ khóa tìm kiếm..">
+                                    </form>
+
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered second"
                                    style="width:100%">
                                 <thead>
-                                <th>Mã sản phẩm</th>
-                                <th class="white-space-400">Tên sản phẩm</th>
-                                <th>Ngành hàng</th>
-                                <th class="white-space-90">Giá bán (đ)</th>
-                                <th class="white-space-150">V-Store niêm yết</th>
-                                <th class="white-space-120">Chiết khấu cho V-Store (%)</th>
-                                <th>Ngày xét duyệt</th>
-                                <th class="white-space-90">Số lượng đã bán</th>
-                                <th class="white-space-90">Số lượng trong kho</th>
+                                <th style="min-width:100px;">
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Mã sản phẩm
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'publish_id')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="publish_id"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="publish_id"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="publish_id"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-400" style="min-width:150px">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Tên sản phẩm
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'products.name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="products.name"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th style="min-width:100px;">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Ngành hàng
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'categories.name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="categories.name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="categories.name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="categories.name"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-110">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Giá bán (đ)
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'price')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="price"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-110">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        V-Store niêm yết
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'vstore_name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="vstore_name"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-130">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Chiết khấu cho V-Store (%)
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'discount')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="discount"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="discount"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="discount"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th style="min-width:120px">
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Ngày xét duyệt
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'admin_confirm_date')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-90">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Số lượng đã bán
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'amount_product_sold')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
+                                <th class="white-space-120">
+
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        Số lượng trong kho
+                                        <span style="float: right;cursor:pointer">
+                                            @if($field == 'amount')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="amount"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="amount"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="amount"></i>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </th>
                                 <th class="white-space-100"></th>
                                 </thead>
                                 <tbody>
                                 @if(count($data) > 0)
                                     @foreach($data as $product)
                                         <tr>
-                                            <td>{{$product->publish_id}}</td>
+                                            <td class="text-center">{{$product->publish_id}}</td>
                                             <td style="white-space: pre-wrap">{{$product->name}}</td>
                                             <td>{{$product->cate_name}}</td>
                                             <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
-                                            <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
-                                            <td class="text-right">{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
+                                            <td class="text-center">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
+                                            <td class="text-center">{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
-                                            <td class="text-right">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
-                                            <td class="text-right">{{number_format($product->amount,0,'.','.')}}</td>
+                                            <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                            <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-link pl-0"
+                                                <a href="javascript:void(0)" class="btn btn-link pl-0" style="text-decoration:underline"
                                                         onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi
                                                     tiết
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -252,9 +406,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$data->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class=" ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
                                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
@@ -300,9 +454,28 @@
         let product = {};
         limit.addEventListener('change', (e) => {
             setTimeout(() => {
-                document.location = '{{route('screens.manufacture.dashboard.index',[])}}?limit=' + e.target.value
+                document.location = '{{route('screens.manufacture.dashboard.index',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                    '&field=' + '{{$field}}' + '&limit=' + e.target.value
             }, 200)
         })
+
+        $(document).ready(function () {
+            document.querySelectorAll('.sort').forEach(item => {
+                const {sort} = item.dataset;
+                item.addEventListener('click', () => {
+                    let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                    if (orderBy === 'asc') {
+                        localStorage.setItem('orderBy', JSON.stringify('desc'));
+                    } else {
+                        localStorage.setItem('orderBy', JSON.stringify('asc'));
+                    }
+                    setTimeout(() => {
+                        document.location = '{{route('screens.manufacture.dashboard.index',['key_search' => $key_search])}}&type=' + orderBy +
+                            '&field=' + sort + '&limit=' + limit.value
+                    }, 200)
+                });
+            });
+        });
 
         async function showDetail(id, name) {
             await $.ajax({

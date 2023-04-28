@@ -79,7 +79,7 @@
                             <div id="custom-search" class="top-search-bar">
                                 <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </div>
                         </li>
                     </ul>

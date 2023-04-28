@@ -7,7 +7,7 @@
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
             <a class="navbar-brand" href="{{route('screens.vstore.dashboard.index')}}">
-                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
+                <img class="logo-img" style="height: 40px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
                      alt="logo">
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
@@ -17,7 +17,7 @@
             </a>
         @else
             <a class="navbar-brand" href="{{route('screens.manufacture.dashboard.index')}}">
-                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"
+                <img class="logo-img" style="height: 40px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"
                      alt="logo">
             </a>
         @endif
@@ -30,7 +30,7 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <div id="custom-search" class="top-search">
-                        <input class="form-control" id="search" type="search" placeholder="Tìm kiếm..">
+                        <input class="form-control" id="search" type="search" placeholder="Nhập từ khóa tìm kiếm..">
                     </div>
                 </li>
             </ul>
@@ -450,7 +450,7 @@
                     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                          aria-labelledby="navbarDropdownMenuLink2">
                         <div class="nav-user-info">
-
+                            Tên user
                         </div>
                         <a class="dropdown-item" href=@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
                      "{{route('screens.storage.account.profile')}}"

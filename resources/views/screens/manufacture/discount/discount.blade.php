@@ -37,7 +37,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Sản phẩm</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Quản lý giảm giá</li>
                         </ol>
@@ -64,7 +64,7 @@
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -81,6 +81,7 @@
                     >
                         <thead>
                         <tr>
+                            <th class="white-space-50">STT</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -108,7 +109,7 @@
                                 </span>
                             </th>
 
-                            <th>Ngày bắt đầu
+                            <th>Thời gian bắt đầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.start_date')
                                         @if($type == 'desc')
@@ -121,20 +122,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'discounts.status')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.status"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.status"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="discounts.status"></i>
-                                    @endif
-                                </span>
-                            </th>
-                            <th>Ngày kết thúc
+                            <th>Thời gian kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')
@@ -171,19 +159,13 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
+                                    <td class="white-space-50 text-center">{{$loop->iteration}}</td>
                                     <td class="white-space-500">{{$discount->name}}</td>
                                     <td class="text-center">{{$discount->discount}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
-                                    <td>
-                                        @if($discount->status == 1 )
-                                            <span class="text-success">Đang áp dụng</span>
-                                        @else
-                                            <span class="text-danger">Không áp dụng</span>
-                                        @endif
-                                    </td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
                                     <td>
-                                        @if($discount->start_date < \Carbon\Carbon::now() && $discount->end_date > \Carbon\Carbon::now())
+                                        @if($discount->status == 1 )
                                             <span class="text-success">Đang áp dụng</span>
                                         @else
                                             <span class="text-danger">Không áp dụng</span>
@@ -198,16 +180,16 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="8" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$discounts->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

@@ -7,7 +7,7 @@
     <title>Trang chủ V-Store</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-    <meta property="og:title" content="V-store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:title" content="V-Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
     <meta property="og:url" content="{{asset('')}}"/>
@@ -46,8 +46,8 @@
         <div
             class="flex flex-col justify-center gap-3 items-center md:items-start w-full md:justify-start lg:max-w-[650px] text-center lg:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[60px] md:leading-[75px] text-2xl ">"Cổng thương mại điện tử
-                <strong class="text-[#1e65ff] font-semibold">V-Store</strong>"</h2>
-           </span>
+                <strong class="text-[#1e65ff] font-semibold">V-Store"</strong></h2>
+
         </div>
         <div
             class="bg-bannerV w-full md:max-w-[655px] relative flex flex-col justify-end items-end mx-auto lg:mx-0 my-3">
@@ -250,12 +250,7 @@
         class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
         <div class="flex flex-col justify-start items-center md:items-start gap-8 order-last xl:order-first">
             <div class="flex flex-col gap-2 md:whitespace-nowrap">
-                <div class="flex justify-center items-start gap-2 ">
-                    
 
-
-                   
-                </div>
 
                 <div class="flex justify-start items-start gap-2">
                     <div class="w-[21px]">
@@ -346,7 +341,7 @@
 
             <a href="{{route('register_vstore')}}"
                class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng
-                ký thành viên</a>
+                ký mua</a>
         </div>
         <div class="order-first xl:order-last">
             <img src="{{asset('home/img/bnn.png')}}" class="w-full" alt="">

@@ -89,7 +89,7 @@
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
                                 <form >
-                                <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_users" value="{{$key_search_users}}">
+                                <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm..." name="key_search_users" value="{{$key_search_users}}">
                                 </form>
                             </div>
                         </li>
@@ -126,7 +126,7 @@
                                     <td class="text-center">{{$user->id_vdone}}</td>
                                     <td>
                                         @if($user->role_id == 2)
-                                            <span class="text-primary font-medium">Nhà cung cấp</span> </td>
+                                            <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($user->role_id == 1)
                                             Admin
                                         @elseif($user->role_id == 4)
@@ -156,9 +156,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex align-items-end justify-content-end mt-4">
+                    <div class="d-flex align-items-center justify-content-end mt-4">
                         {{$users->withQueryString()->links('layouts.custom.paginator')}}
-                        <div class="mt-4 ml-4">
+                        <div class=" ml-4">
                             <div class="form-group">
                                 <select class="form-control" id="limit_users">
                                     <option value="10" {{$limit_users == 10 ? 'selected' : ''}}>10 hàng / trang</option>
@@ -188,7 +188,7 @@
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
                                 <form >
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_request" value="{{$key_search_request}}">
+                                    <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm..." name="key_search_request" value="{{$key_search_request}}">
                                 </form>
                             </div>
                         </li>
@@ -250,9 +250,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex align-items-end justify-content-end mt-4">
+                    <div class="d-flex align-items-center justify-content-end mt-4">
                         {{$requests->withQueryString()->links('layouts.custom.paginator')}}
-                        <div class="mt-4 ml-4">
+                        <div class=" ml-4">
                             <div class="form-group">
                                 <select class="form-control" id="limit_request">
                                     <option value="10" {{$limit_request == 10 ? 'selected' : ''}}>10 hàng / trang</option>
@@ -332,18 +332,6 @@
 
 
     })
-    $('.more-details').each(function (i, e) {
-        $(this).on('click', (o) => {
-            $.ajax({
-                url: '{{route('screens.admin.user.detail')}}?id=' + e.dataset.id + '&_token={{csrf_token()}}&role_id=' + e.dataset.role,
-                success: function (result) {
-                    $('#modal1').html('');
-                    $('#modal1').append(result);
-                    $('.modal-details').toggleClass('show-modal')
-                },
-            });
-        });
-    });
 
     let limit_request = document.getElementById('limit_request');
     let limit_users = document.getElementById('limit_users');

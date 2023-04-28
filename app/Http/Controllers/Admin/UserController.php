@@ -41,6 +41,11 @@ class UserController extends Controller
 
     public function getListRegisterAccount(Request $request)
     {
+        $this->v['field'] = $request->field ?? 'users.id';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
             'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
         $limit = $request->limit ?? 10;
@@ -61,7 +66,7 @@ class UserController extends Controller
         $this->v['users'] = $this->v['users']->join('order_service', 'users.id', '=', 'order_service.user_id')
             ->where('order_service.status', 3)
             ->where('payment_status', 1)
-            ->orderBy('users.id', 'desc')
+            ->orderBy($this->v['field'], $this->v['type'])
             ->where('role_id', '!=', 1)->paginate($limit);
 
         $this->v['params'] = $request->all();
@@ -71,6 +76,10 @@ class UserController extends Controller
     public function getListUser(Request $request)
     {
         $this->v['users'] = User::select();
+        $this->v['key_search'] = $request->key_search ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['field'] = $request->field ?? 'id';
+        $this->v['limit'] = $request->limit ?? 10;
         $limit = $request->limit ?? 10;
         if (isset($request->key_search)) {
             $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->key_search . '%')
@@ -82,7 +91,7 @@ class UserController extends Controller
                 ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
                 ->orwhere('address', 'like', '%' . $request->key_search . '%');
         }
-        $this->v['users'] = $this->v['users']->orderBy('id', 'desc')->where('confirm_date', '!=', null)->paginate($limit);
+        $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('confirm_date', '!=', null)->paginate($limit);
         $this->v['params'] = $request->all();
 //        return  $this->v['users'];
         return view('screens.admin.user.list_user', $this->v);
@@ -208,13 +217,15 @@ class UserController extends Controller
     public function detail(Request $request)
     {
         $user = User::select('name', 'email',
-            'id_vdone', 'phone_number', 'tax_code',
-            'address', 'created_at', 'storage_information')->where('id', $request->id)->first();
+            'id_vdone', 'phone_number', 'tax_code','role_id',
+            'address', 'created_at', 'storage_information','confirm_date','referral_code')->where('id', $request->id)->first();
+        return $user;
         if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
         }
         $this->v['user'] = json_decode($user->storage_information);
         $this->v['user']->created_at = $user->created_at;
+
         return view('screens.admin.user.detail_kho', $this->v);
     }
 
@@ -228,20 +239,49 @@ class UserController extends Controller
         return redirect()->route('screens.admin.user.list_user');
     }
 
-    public function requestChangeTaxCode()
+    public function requestChangeTaxCode(Request $request)
     {
-//        return 1;
-        $this->v['requests'] = RequestChangeTaxCode::select('id', 'user_id', 'tax_code', 'status')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['limit'] = $request->limit ?? 10;
+        $this->v['field'] = $request->field ?? 'request_change_taxcode.id';
+        $this->v['requests'] = RequestChangeTaxCode::select
+        (
+            'request_change_taxcode.id',
+            'request_change_taxcode.code',
+            'request_change_taxcode.tax_code',
+            'request_change_taxcode.status',
+            'users.role_id',
+            'users.email',
+            'users.id_vdone',
+            'users.name',
+            'company_name',
+            'users.tax_code as old_tax')
+            ->orderBy($this->v['field'], $this->v['type'])
+            ->join('users', 'request_change_taxcode.user_id', '=', 'users.id');
+        if (strlen($this->v['key_search']) > 0) {
+            $this->v['requests'] = $this->v['requests']->where(function ($query) {
+                $query->where('request_change_taxcode.code', $this->v['key_search'])
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.email', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.id_vdone', $this->v['key_search'])
+                    ->orWhere('users.email', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.company_name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.tax_code', $this->v['key_search'])
+                    ->orWhere('request_change_taxcode.tax_code', $this->v['key_search']);;
+            });
+        }
+        $this->v['requests'] = $this->v['requests']->paginate($this->v['limit']);
         return view('screens.admin.user.request', $this->v);
     }
 
-    public function confirmRequest(Request $request, $id, $status)
+    public function confirmRequest(Request $request)
     {
         DB::beginTransaction();
         try {
-            $request = RequestChangeTaxCode::where('id', $id)->first();
+
+            $status = $request->status;
+            $request = RequestChangeTaxCode::where('id', $request->id)->first();
             $user = User::where('id', $request->user_id)->first();
             if ($status == 1) {
                 if ($user->role_id == 3) {
@@ -301,10 +341,12 @@ class UserController extends Controller
 
             $user->notify(new AppNotification($data));
             DB::commit();
-            return redirect()->back()->with('success', 'Cập nhật yêu cầu cập nhật mã số thuế thành công');
+
+            return response()->json(['message' => 'Cập nhật yêu cầu cập nhật mã số thuế thành công'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return response()->json(['message' => 'Có lỗi xảy ra vui lòng thử lại'], 500);
+
         }
     }
 
@@ -315,18 +357,20 @@ class UserController extends Controller
 
     public function historyPayment(Request $request)
     {
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
-        $this->v['key_word'] = trim($request->key_search) ?? '';
+        $this->v['field'] = $request->field ?? 'order_service.id';
         $this->v['histories'] = User::join('order_service', 'users.id', '=', 'order_service.user_id')
-            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'order_service.payment_status', 'order_service.created_at')
+            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'users.email', 'users.phone_number', 'users.company_name', 'order_service.payment_status', 'order_service.created_at')
             ->where('order_service.type', '!=', 'VSTORE');
-        if (strlen($this->v['key_word']) > 0) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['histories'] = $this->v['histories']->where(function ($query) {
                 $query->where('users.name', 'like', '%' . $this->v['key_word'] . '%')
                     ->orWhere('order_service.no', $this->v['key_word']);
             });
         }
-        $this->v['histories'] = $this->v['histories']->paginate($this->v['limit']);
+        $this->v['histories'] = $this->v['histories']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
         return view('screens.admin.user.payment', $this->v);
     }
 

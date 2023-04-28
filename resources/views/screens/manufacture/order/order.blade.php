@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Ngày tạo đơn:</label>
+                                        <label for="name">Thời gian tạo đơn:</label>
                                         <input type="datetime-local" class="form-control form-control-lg"
                                                id="created_at" readonly>
                                     </div>
@@ -114,7 +114,7 @@
 
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý đơn hàng</h5>
+                <h5 class="mb-0" style="font-size:18px;">Đơn hàng nhập sẵn</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -123,7 +123,7 @@
                                 <input type="hidden" name="field" value="{{$field}}">
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                       type="search" placeholder="Tìm kiếm..">
+                                       type="search" placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -233,7 +233,7 @@
                                 </span>
                             </th>
                             <th class="white-space-120">Trạng thái</th>
-                            <th>Ngày tạo đơn
+                            <th>Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
                                         @if($type == 'desc')
@@ -290,9 +290,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$orders->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

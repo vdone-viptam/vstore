@@ -34,7 +34,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Sản phẩm</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>
                         </ol>
@@ -271,7 +271,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu</label>
+                                    <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu/ thương nhân</label>
                                     <input type="text" class="form-control form-control-lg" id="import_unit"
                                            name="import_unit"
                                            value="{{old('import_unit')}}" placeholder="Nhập tên địa chỉ đơn vị">
@@ -282,7 +282,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu</label>
+                                    <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu/ thương nhân</label>
                                     <input type="text" class="form-control form-control-lg" id="import_address"
                                            name="import_address"
                                            value="{{old('import_address')}}" placeholder="Nhập tên địa chỉ đơn vị">
@@ -310,6 +310,7 @@
                                         <option value="1" {{old('packing_type') == 1 ? 'selected' : ''}}>Túi</option>
                                         <option value="2" {{old('packing_type') == 2 ? 'selected' : ''}}>Hộp</option>
                                         <option value="3" {{old('packing_type') == 3 ? 'selected' : ''}}>Thùng</option>
+                                        <option value="4" {{old('packing_type') == 4 ? 'selected' : ''}}>Bao Bì</option>
                                     </select>
                                     @error('packing_type')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
@@ -446,7 +447,7 @@
                         plupload.each(files, function (file) {
                             console.log('FilesAdded');
                             console.log(file);
-                            document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                            document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                         });
                         uploader.start();
                     },
@@ -473,14 +474,14 @@
                         if (result.status != 200) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Upload video không thành công !',
+                                title: 'Upload file không thành công !',
                                 text: '',
                             })
                         }
                         if (responseResult.ok == 1 && result.status == 200) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Upload video thành công !',
+                                title: 'Upload file thành công !',
                                 text: '',
                             })
                             document.querySelector('#btnSave').removeAttribute('disabled');
@@ -495,7 +496,7 @@
                         // DO YOUR ERROR HANDLING!
                         Swal.fire({
                             icon: 'error',
-                            title: 'Upload video không thành công !',
+                            title: 'Upload file không thành công !',
                             text: '',
                         })
                         console.log(err);

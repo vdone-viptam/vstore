@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
 use App\Models\District;
+use App\Models\RequestChangeTaxCode;
 use App\Models\User;
 use App\Models\Warehouses;
 use App\Models\WarehouseType;
@@ -33,32 +34,33 @@ class AccountController extends Controller
             'data' => $this->v['infoAccount']
         ]);
     }
+
     public function detailProfileWarehouse(Request $request)
     {
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
-        $this->v['infoWarehouse'] = WarehouseType::select('type', 'acreage', 'volume', 'length', 'width', 'height','image_storage','image_pccc')
-                                    ->where('user_id', Auth::id())->get();
+        $this->v['infoWarehouse'] = WarehouseType::select('type', 'acreage', 'volume', 'length', 'width', 'height', 'image_storage', 'image_pccc')
+            ->where('user_id', Auth::id())->get();
         // dd(Auth::id());
-        if(!empty($this->v['infoWarehouse'])){
+        if (!empty($this->v['infoWarehouse'])) {
             foreach ($this->v['infoWarehouse'] as $key => $value) {
-                if(!empty($value->image_storage)){
-                    $imageStorage = json_decode( $value->image_storage );
+                if (!empty($value->image_storage)) {
+                    $imageStorage = json_decode($value->image_storage);
                     $arrImgStorage = [];
-                    if(!empty($imageStorage)){
+                    if (!empty($imageStorage)) {
                         foreach ($imageStorage as $keyImg => $valueImg) {
-                            $arrImgStorage[] = asset('storage/'.$valueImg);
+                            $arrImgStorage[] = asset('storage/' . $valueImg);
                         }
                     }
                     $this->v['infoWarehouse'][$key]['image_storage'] = $arrImgStorage;
                 }
-                if(!empty($value->image_pccc)){
-                    $imageStorage = json_decode( $value->image_pccc );
+                if (!empty($value->image_pccc)) {
+                    $imageStorage = json_decode($value->image_pccc);
                     $arrImgStorage = [];
-                    if(!empty($imageStorage)){
+                    if (!empty($imageStorage)) {
                         foreach ($imageStorage as $keyImg => $valueImg) {
-                            $arrImgStorage[] = asset('storage/'.$valueImg);
+                            $arrImgStorage[] = asset('storage/' . $valueImg);
                         }
                     }
                     $this->v['infoWarehouse'][$key]['image_pccc'] = $arrImgStorage;
@@ -68,6 +70,7 @@ class AccountController extends Controller
         // dd($this->v);
         return view('screens.storage.account.profile-warehouse', $this->v);
     }
+
     public function updateProfileWarehouse(Request $request)
     {
         // dd($request->all());
@@ -86,99 +89,100 @@ class AccountController extends Controller
         }
         try {
 
-        $pathNormalImageStorage = 'image/users/storage/normal/image_storage/'. Auth::id();
-        $pathNormalImagePccc = 'image/users/storage/normal/image_pccc/'. Auth::id();
-        $pathColdImageStorage = 'image/users/storage/cold/image_storage/'. Auth::id();
-        $pathColdImagePccc = 'image/users/storage/cold/image_pccc/'. Auth::id();
-        $pathWarehouseImageStorage = 'image/users/storage/warehouse/image_storage/'. Auth::id();
-        $pathWarehouseImagePccc = 'image/users/storage/warehouse/image_pccc/'. Auth::id();
+            $pathNormalImageStorage = 'image/users/storage/normal/image_storage/' . Auth::id();
+            $pathNormalImagePccc = 'image/users/storage/normal/image_pccc/' . Auth::id();
+            $pathColdImageStorage = 'image/users/storage/cold/image_storage/' . Auth::id();
+            $pathColdImagePccc = 'image/users/storage/cold/image_pccc/' . Auth::id();
+            $pathWarehouseImageStorage = 'image/users/storage/warehouse/image_storage/' . Auth::id();
+            $pathWarehouseImagePccc = 'image/users/storage/warehouse/image_pccc/' . Auth::id();
 
 
-        $arrNormalImageStorage = [];
-        $arrNormalImagePccc = [];
-        $arrColdImageStorage = [];
-        $arrColdImagePccc = [];
-        $arrWarehouseImageStorage = [];
-        $arrWarehouseImagePccc = [];
+            $arrNormalImageStorage = [];
+            $arrNormalImagePccc = [];
+            $arrColdImageStorage = [];
+            $arrColdImagePccc = [];
+            $arrWarehouseImageStorage = [];
+            $arrWarehouseImagePccc = [];
 
-        if(!empty($request->normalImageStorage)){
-            foreach (json_decode($request->normalImageStorage) as $image) {
-                $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
+            if (!empty($request->normalImageStorage)) {
+                foreach (json_decode($request->normalImageStorage) as $image) {
+                    $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
+                }
             }
-        }
-        if(!empty($request->normalImagePccc)){
-            foreach (json_decode($request->normalImagePccc) as $image) {
-                $arrNormalImagePccc[] = $this->saveImgBase64($image, $pathNormalImagePccc);
+            if (!empty($request->normalImagePccc)) {
+                foreach (json_decode($request->normalImagePccc) as $image) {
+                    $arrNormalImagePccc[] = $this->saveImgBase64($image, $pathNormalImagePccc);
+                }
             }
-        }
-        if(!empty($request->coldImageStorage)){
-            foreach (json_decode($request->coldImageStorage) as $image) {
-                $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
+            if (!empty($request->coldImageStorage)) {
+                foreach (json_decode($request->coldImageStorage) as $image) {
+                    $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
+                }
             }
-        }
-        if(!empty($request->coldImagePccc)){
-            foreach (json_decode($request->coldImagePccc) as $image) {
-                $arrColdImagePccc[] = $this->saveImgBase64($image, $pathColdImagePccc);
+            if (!empty($request->coldImagePccc)) {
+                foreach (json_decode($request->coldImagePccc) as $image) {
+                    $arrColdImagePccc[] = $this->saveImgBase64($image, $pathColdImagePccc);
+                }
             }
-        }
-        if(!empty($request->warehouseImageStorage)){
-            foreach (json_decode($request->warehouseImageStorage) as $image) {
-                $arrWarehouseImageStorage[] = $this->saveImgBase64($image, $pathWarehouseImageStorage);
+            if (!empty($request->warehouseImageStorage)) {
+                foreach (json_decode($request->warehouseImageStorage) as $image) {
+                    $arrWarehouseImageStorage[] = $this->saveImgBase64($image, $pathWarehouseImageStorage);
+                }
             }
-        }
-        if(!empty($request->warehouseImagePccc)){
-            foreach (json_decode($request->warehouseImagePccc) as $image) {
-                $arrWarehouseImagePccc[] = $this->saveImgBase64($image, $pathWarehouseImagePccc);
+            if (!empty($request->warehouseImagePccc)) {
+                foreach (json_decode($request->warehouseImagePccc) as $image) {
+                    $arrWarehouseImagePccc[] = $this->saveImgBase64($image, $pathWarehouseImagePccc);
+                }
             }
-        }
 
-        $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(
-                                        [
-                                            'acreage' => $request->acreage,
-                                            'volume' => $request->volume,
-                                            'length' => $request->length,
-                                            'width' => $request->width,
-                                            'height' => $request->height,
-                                        ]);
-        if(!empty($arrNormalImageStorage)){
             $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(['image_storage' => $arrNormalImageStorage ?? null]);
-        }
-        if(!empty($arrNormalImagePccc)){
-            $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(['image_pccc' => $arrNormalImagePccc ?? null]);
-        }
-        if(!empty($arrColdImageStorage)){
-            $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(['image_storage' => $arrColdImageStorage ?? null]);
-        }
-        if(!empty($arrColdImagePccc)){
-            $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(['image_pccc' => $arrColdImagePccc ?? null]);
-        }
-        if(!empty($arrWarehouseImageStorage)){
-            $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(['image_storage' => $arrWarehouseImageStorage ?? null]);
-        }
-        if(!empty($arrWarehouseImagePccc)){
-            $dataUpdate = WarehouseType::where('user_id', Auth::id())
-                                    ->where('type',$request->type)
-                                    ->update(['image_pccc' => $arrWarehouseImagePccc ?? null]);
-        }
+                ->where('type', $request->type)
+                ->update(
+                    [
+                        'acreage' => $request->acreage,
+                        'volume' => $request->volume,
+                        'length' => $request->length,
+                        'width' => $request->width,
+                        'height' => $request->height,
+                    ]);
+            if (!empty($arrNormalImageStorage)) {
+                $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                    ->where('type', $request->type)
+                    ->update(['image_storage' => $arrNormalImageStorage ?? null]);
+            }
+            if (!empty($arrNormalImagePccc)) {
+                $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                    ->where('type', $request->type)
+                    ->update(['image_pccc' => $arrNormalImagePccc ?? null]);
+            }
+            if (!empty($arrColdImageStorage)) {
+                $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                    ->where('type', $request->type)
+                    ->update(['image_storage' => $arrColdImageStorage ?? null]);
+            }
+            if (!empty($arrColdImagePccc)) {
+                $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                    ->where('type', $request->type)
+                    ->update(['image_pccc' => $arrColdImagePccc ?? null]);
+            }
+            if (!empty($arrWarehouseImageStorage)) {
+                $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                    ->where('type', $request->type)
+                    ->update(['image_storage' => $arrWarehouseImageStorage ?? null]);
+            }
+            if (!empty($arrWarehouseImagePccc)) {
+                $dataUpdate = WarehouseType::where('user_id', Auth::id())
+                    ->where('type', $request->type)
+                    ->update(['image_pccc' => $arrWarehouseImagePccc ?? null]);
+            }
 
-        return redirect()->back()->with('success', 'Cập nhật thông tin kho thành công');
+            return redirect()->back()->with('success', 'Cập nhật thông tin kho thành công');
         } catch (\Exception $exception) {
             // dd($exception->getMessage());
             return redirect()->back()->with('error', 'Ảnh kho chưa có');
         }
     }
+
     protected function saveImgBase64($param, $folder)
     {
         list($extension, $content) = explode(';', $param);
@@ -196,7 +200,7 @@ class AccountController extends Controller
 
         $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
 
-        return $folder . '/' .$fileName;
+        return $folder . '/' . $fileName;
     }
 
     public function profile(Request $request)
@@ -403,10 +407,19 @@ class AccountController extends Controller
             if (DB::table('request_change_taxcode')->where('tax_code', $request->tax_code)->where('status', 0)->first()) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
+            $code = rand(10000000, 99999999);
+            while (true) {
+                $id = RequestChangeTaxCode::where('code', $code)->count();
+                if ($id == 0) {
+                    break;
+                }
+                $code = rand(10000000, 99999999);
+            }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),
                 'tax_code' => $request->tax_code,
                 'status' => 0,
+                'code' => $code,
                 'created_at' => Carbon::now()
             ]);
             return redirect()->back()->with('success', 'Gửi yêu cầu thay đổi mã số thuế thành công');

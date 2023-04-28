@@ -94,6 +94,7 @@ class FinanceController extends Controller
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->selectSub('select name from banks where id = deposits.bank_id', 'bank_name')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate($this->v['limit']);

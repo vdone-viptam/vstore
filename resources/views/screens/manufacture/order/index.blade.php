@@ -54,7 +54,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Danh sách đơn hàng </h5>
+                <h5 class="mb-0" style="font-size:18px;">Danh sách đơn hàng khách mua sản phẩm </h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -64,7 +64,7 @@
                                 <input type="hidden" name="limit" value="{{ $limit }}">
                                 <input name="key_search" value="{{ $key_search ?? '' }}" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
 
@@ -247,9 +247,9 @@
 
                 </div>
 
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$orders->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class="ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

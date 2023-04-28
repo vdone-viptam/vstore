@@ -400,11 +400,11 @@ select.form-control {
     color              : #71748d;
     -webkit-appearance : none;
     -moz-appearance    : none;
-    background-position: 99% 52%;
+    background-position: 96% 52%;
     background-size    : auto;
     background-repeat  : no-repeat;
-    background-image   : url(/images/down-arrow.png);
-    padding-right      : 15px;
+    background-image   : url(./images/down-arrow.png);
+    padding-right      : 40px;
     border             : 1px solid #d2d2e4;
     border-radius      : 2px;
 }
@@ -443,8 +443,8 @@ button.btn-primary {}
 
 address {}
 
-.form-group {
-    margin-bottom: 12px;
+.ml-4 .form-group {
+    margin-bottom: 0 !important;
 }
 
 .form-control-lg {
@@ -7942,6 +7942,10 @@ input[type=number] {
 
 .pagination li.active {
     border: 1px solid #1890FF !important;
+}
+
+.pagination{
+    margin: 0 !important;
 }
 
 .pagination li.active a {

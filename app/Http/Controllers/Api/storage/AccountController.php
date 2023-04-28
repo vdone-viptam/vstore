@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\RequestChangeTaxCode;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Warehouses;
@@ -227,10 +228,18 @@ class AccountController extends Controller
                     'errors' => ['tax_code' => 'Mã số thuế đã được đăng ký']
                 ], 400);
             }
+            while (true) {
+                $id = RequestChangeTaxCode::where('code', $code)->count();
+                if ($id == 0) {
+                    break;
+                }
+                $code = rand(10000000, 99999999);
+            }
             DB::table('request_change_taxcode')->insert([
                 'user_id' => Auth::id(),
                 'tax_code' => $request->tax_code,
                 'status' => 0,
+                'code' => $code,
                 'created_at' => Carbon::now()
             ]);
             return response()->json([

@@ -280,7 +280,6 @@ if($order && $user) {
                     <img src="{{asset('home/img/titleK.png')}}" class="w-full object-contain" alt="">
                 </div>
             </h2>
-            <span class="text-grayRgb text-base md:text-lg font-medium max-w-[550px]"></span>
                     <div class="max-w-[525px] relative">
                         <img src="{{asset('home/img/bannerK.png')}}" alt="" class="w-full object-contain">
                         <div class="absolute top-1/2 md:-translate-y-[40px] -translate-y-[30px] left-[70px] md:left-[100px] font-bold text-2xl md:text-4xl text-[#FFF]">

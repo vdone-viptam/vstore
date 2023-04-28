@@ -57,7 +57,7 @@
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -121,15 +121,15 @@
                                     {{--                                    <td>{{$value->discount}}</td>--}}
                                     {{--                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>--}}
                                     {{--                                    <td></td>--}}
-                                    <td>{{$value->account_code}}</td>
-                                    <td class="td_name">{{$value->name}}</td>
-                                    <td>{{$value->phone_number}}</td>
-                                    <td>{{$value->khu_vuc }}</td>
+                                    <td class="text-center" style="min-width:150px">{{$value->account_code}}</td>
+                                    <td class="td_name" style="min-width:150px;">{{$value->name}}</td>
+                                    <td class="text-center">{{$value->phone_number}}</td>
+                                    <td class="text-center">{{$value->khu_vuc }}</td>
                                     <td class="text-right"> {{number_format($value->amount,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($value->countProduct,0,'.','.')}}</td>
+                                    <td class="text-center">{{number_format($value->countProduct,0,'.','.')}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link"
-                                                onclick="showDetail({{$value->id}})">Chi tiết
+                                                onclick="showDetail({{$value->id}})" style="text-decoration:underline">Chi tiết
                                         </button>
                                     </td>
                                     </td>
@@ -144,9 +144,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$users->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
