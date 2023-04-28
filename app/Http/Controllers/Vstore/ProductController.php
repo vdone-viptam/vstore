@@ -101,6 +101,7 @@ class ProductController extends Controller
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,products.vstore_confirm_date')
+            ->where('requests.status','<>','0')
             ->where('requests.vstore_id', Auth::id());
         if (strlen($this->v['key_search']) > 0) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) {
