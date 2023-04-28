@@ -162,7 +162,7 @@
                         <div class="card-body">
                             <h5 class="text-muted">Doanh thu trong tháng</h5>
                             <div class="metric-value d-inline-block">
-                                <h1 class="mb-1">{{number_format($dataRevenueToday,0,'.','.')}}</h1>
+                                <h1 class="mb-1">{{number_format($revenue30Day,0,'.','.')}}</h1>
                             </div>
                         </div>
                     </div>
@@ -170,12 +170,12 @@
             </div>
 
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="#" class="item-dash">
+                <a href="{{route('screens.manufacture.product.index')}}" class="item-dash">
                     <div class="card border-3 border-top border-top-primary">
                         <div class="card-body">
                             <h5 class="text-muted">Số lượng sản phẩm sắp hết</h5>
                             <div class="metric-value d-inline-block">
-                                <h1 class="mb-1">{{number_format($dataOrderToday,0,'.','.')}}</h1>
+                                <h1 class="mb-1">{{number_format($productRunningOut,0,'.','.')}}</h1>
                             </div>
 
                         </div>
@@ -184,12 +184,12 @@
             </div>
 
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="#" class="item-dash">
+                <a href="{{route('screens.manufacture.order.request')}}" class="item-dash">
                     <div class="card border-3 border-top border-top-primary">
                         <div class="card-body">
                             <h5 class="text-muted">Đơn hàng nhập sẵn mới</h5>
                             <div class="metric-value d-inline-block">
-                                <h1 class="mb-1">{{number_format($dataOrderSuccessToday,0,'.','.')}}</h1>
+                                <h1 class="mb-1">{{number_format($unapprovedOrder,0,'.','.')}}</h1>
                             </div>
 
                         </div>
@@ -204,7 +204,7 @@
                          style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">
                             Sản phẩm đã xét duyệt
-                            
+
                         </h5>
                         <ul class="navbar-nav ">
                             <li class="nav-item">

@@ -59,14 +59,14 @@ class DashboardController extends Controller
             ->whereIn('warehouses.user_id', $warehouse_aff)
             ->paginate(10);
 
-        $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
-        $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
-        $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
-        $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
+        // $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
+        // $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
+        // $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
+        // $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
-        $dataRevenueToday = $this->chartRepository->revenue30Day();
-        $dataOrderToday = $this->chartRepository->productRunningOut();
-        $dataOrderSuccessToday = $this->chartRepository->unapprovedOrder();
+        $revenue30Day = $this->chartRepository->revenue30Day();
+        $productRunningOut = $this->chartRepository->productRunningOut();
+        $unapprovedOrder = $this->chartRepository->unapprovedOrder();
 
         return view('screens.manufacture.dashboard.index', [
             'data' => $data,
@@ -76,14 +76,14 @@ class DashboardController extends Controller
             'key_search' => $this->v['key_search'],
             'warehouses' => $warehouses,
 
-            'dataRevenueChartMonth' => $dataRevenueChartMonth,
-            'dataRevenueChartYear' => $dataRevenueChartYear,
-            'dataOrderChartMonth' => $dataOrderChartMonth,
-            'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+            // 'dataRevenueChartMonth' => $dataRevenueChartMonth,
+            // 'dataRevenueChartYear' => $dataRevenueChartYear,
+            // 'dataOrderChartMonth' => $dataOrderChartMonth,
+            // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
-            'dataRevenueToday' => $dataRevenueToday,
-            'dataOrderToday' => $dataOrderToday,
-            'dataOrderSuccessToday' => $dataOrderSuccessToday,
+            'revenue30Day' => $revenue30Day,
+            'productRunningOut' => $productRunningOut,
+            'unapprovedOrder' => $unapprovedOrder,
         ]);
     }
 }
