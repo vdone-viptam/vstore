@@ -170,10 +170,12 @@
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-cemter">
-                                        @if($discount->status == 1 )
+                                        @if($discount->status == 0 )
+                                            <span class="text-warning font-medium">Chưa áp dụng</span>
+                                        @elseif($discount->status == 1)
                                             <span class="text-success font-medium">Đang áp dụng</span>
                                         @else
-                                            <span class="text-danger font-medium">Không áp dụng</span>
+                                            <span class="text-danger font-medium">Đã hết hạn</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
