@@ -26,12 +26,12 @@
     </div>
 @endsection
 
-@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
+@section('page_title','Yêu cầu xét duyệt sản phẩm đã xác nhận')
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Quản lý yêu cầu xét duyệt sản phẩm</h2>
+                <h2 class="pageheader-title">Yêu cầu xét duyệt sản phẩm đã xác nhận</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -39,7 +39,7 @@
                             <li class="breadcrumb-item"><a href="{{route('screens.vstore.product.request')}}"
                                                            class="breadcrumb-link">Sản phẩm</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản phẩm
+                            <li class="breadcrumb-item active" aria-current="page">Yêu cầu xét duyệt sản phẩm đã xác nhận
                             </li>
                         </ol>
                     </nav>
@@ -52,7 +52,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt sản phẩm</h5>
+                <h5 class="mb-0" style="font-size:18px;">Yêu cầu xét duyệt sản phẩm đã xác nhận</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -77,7 +77,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-90">Mã yêu cầu</th>
-                            <th class="white-space-90">
+                            <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Nhà cung cấp
                                     <span style="float: right;cursor: pointer">
@@ -93,7 +93,9 @@
                                 </span>
                                 </div>
                             </th>
-                            <th>Tên sản phẩm
+                            <th>
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -105,6 +107,7 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+                            </div>
                             </th>
                             <th class="white-space-120">Ngành hàng
                                 <span style="float: right;cursor: pointer">
@@ -151,7 +154,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120" style="min-width:130px !important;">Ngày yêu cầu
+                            <th class="white-space-120 text-center" style="min-width:130px !important;">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'products.price')
@@ -164,7 +167,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120" style="min-width:130px !important;">Ngày xét duyệt
+                            <th class="white-space-120 text-center" style="min-width:130px !important;">Ngày xét duyệt
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.vstore_confirm_date')
                                         @if($type == 'products.vstore_confirm_date')
@@ -179,7 +182,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái
+                            <th class="text-center">Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.status')
                                         @if($type == 'products.price')
@@ -193,6 +196,7 @@
                                 </span>
                             </th>
 
+                            <th>Thao tác</th>
                             <th class="white-space-50">
                             </th>
                         </tr>
@@ -215,7 +219,7 @@
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="white-space-120 text-center">
-                                        {{$product->discount}} %
+                                        {{$product->discount}}%
                                     </td>
                                     <td class="white-space-120 text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
                                     <td class="white-space-120 text-center">{{$product->vstore_confirm_date ?
@@ -243,7 +247,7 @@
                                                         fill="#ffc107"/>
                                                 </svg>
                                             </div>
-                                           
+
                                                 Đã duyệt - chờ hệ thống duyệt
                                             </div>
                                         @elseif($product->status == 2)
@@ -275,15 +279,17 @@
                                         @endif
                                     </td>
 
-                                    <td class="text-center">
-                                        @if($product->status == 0)
+                                    <td class="text-center" style="min-width:140px !important;">
+                                    @if($product->status == 0)
                                             <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                               class="btn text-success">Đồng ý</a>
+                                               class="btn text-success px-2" style="text-decoration:underline">Đồng ý</a>
                                             <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                               class="btn text-danger">Từ chối</a>
+                                               class="btn text-danger px-2" style="text-decoration:underline">Từ chối</a>
                                         @endif
-
-                                        <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link" style="text-decoration:underline;">Chi
+                                    </td>
+                                    <td class="text-center" style="min-width:80px !important;">
+                                    
+                                        <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link px-2" style="text-decoration:underline;">Chi
                                             tiết</a>
                                     </td>
                                 </tr>

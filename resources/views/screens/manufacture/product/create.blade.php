@@ -113,14 +113,14 @@
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Giá (đồng) </label>
+                                    <label for="name">Giá sản phẩm (đồng) </label>
                                     <input type="text" class="form-control form-control-lg" id="price" name="price"
                                            value="{{old('price')}}" placeholder="0 đ" readonly>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Mức chiết khấu (Thành tiền) </label>
+                                    <label for="name">Mức chiết khấu (đ) </label>
                                     <input type="text" class="form-control form-control-lg" id="money_discountA"
                                            name="money_discountA"
                                            value="{{old('money_discountA')}}" placeholder="0 đ" readonly>
@@ -192,7 +192,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <label for="name">Số tiền</label>
+                                            <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
                                                    value="0 đ" disabled readonly style="pointer-events: none">
                                         </div>
@@ -242,7 +242,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <label for="name">Số tiền</label>
+                                            <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
                                                    value="0 đ" disabled readonly style="pointer-events: none">
                                         </div>
@@ -293,7 +293,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <label for="name">Số tiền</label>
+                                            <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
                                                    value="0 đ" disabled readonly style="pointer-events: none">
                                         </div>

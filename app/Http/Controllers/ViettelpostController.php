@@ -51,7 +51,7 @@ class ViettelpostController extends Controller
                                 'avatar' => asset('home/img/NCC.png') ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                                 'message' => 'Đơn hàng ' . $order->no . ' đã giao thành công',
                                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
-                                'href' => route('screens.manufacture.order.index',)
+                                'href' => route('screens.manufacture.order.index', ['key_search' => $order->no])
                             ];
                             $ncc->notify(new AppNotification($data));
                         }
@@ -63,7 +63,7 @@ class ViettelpostController extends Controller
                                 'avatar' => asset('home/img/Logo.png') ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                                 'message' => 'Đơn hàng ' . $order->no . ' đã giao thành công',
                                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
-                                'href' => route('screens.vstore.order.index',)
+                                'href' => route('screens.vstore.order.index', ['key_search' => $order->no])
                             ];
                             $vstore->notify(new AppNotification($data_vstore));
 

@@ -49,8 +49,8 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã giao dịch</th>
-                                    <th>
+                                    <th class="white-space-150 text-center">Mã giao dịch</th>
+                                    <th class="white-space-150 text-center">
                                         Trạng thái
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'status')
@@ -64,7 +64,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>
+                                    <th class="text-center white-space-200">
                                         Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'money_history')
@@ -78,10 +78,10 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>
+                                    <th class="text-center">
                                         Nội dung
                                     </th>
-                                    <th>
+                                    <th class="text-center white-space-150">
                                         Thời gian
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
@@ -102,22 +102,22 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td>{{$histories->code ?? 0012020233}}</td>
-                                            <td>
+                                            <td class="text-center">{{$histories->code ?? 0012020233}}</td>
+                                            <td class="text-center">
                                                 @if($history->status == 0)
-                                                    <p class="text-red-600">Thất bại</p>
+                                                    <p class="text-danger font-medium">Thất bại</p>
                                                 @else
-                                                    <p class="text-green-600">Đang chờ duyệt</p>
+                                                    <p class="text-success font-medium">Thành công</p>
                                                 @endif
                                             </td>
                                             <td class="text-right">
                                                 @if($history->type == 1)
-                                                    <p class="text-green-600">
-                                                        +{{number_format($history->money_history,0,'.','.')}}
+                                                    <p class="text-success">
+                                                        +{{number_format($history->money_history,0,'.','.')}} đ
                                                         đ</p>
                                                 @else
-                                                    <p class="text-red-600">
-                                                        -{{number_format($history->money_history,0,'.','.')}}</p>
+                                                    <p class="text-danger">
+                                                        -{{number_format($history->money_history,0,'.','.')}} đ</p>
                                                 @endif
                                             </td>
                                             <th>{{$history->title}}</th>

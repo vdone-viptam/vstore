@@ -69,9 +69,9 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã nhà cung cấp</th>
-                                    <th>Tên nhà cung cấp</th>
-                                    <th>Khu vực
+                                    <th class="text-center" style="min-width:180px !important;">Mã nhà cung cấp</th>
+                                    <th class="text-center" style="min-width:180px !important;">Tên nhà cung cấp</th>
+                                    <th class="text-center">Khu vực
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'province_name')
                                                 @if($type == 'desc')
@@ -84,7 +84,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số loại sản phẩm
+                                    <th class="text-center" style="min-width:180px !important;">Số loại sản phẩm
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'count_product')
                                                 @if($type == 'desc')
@@ -97,7 +97,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số lượng tồn
+                                    <th class="white-space-150 text-center">Số lượng tồn
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'amount_product')
                                                 @if($type == 'desc')
@@ -112,19 +112,19 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Chi tiết</th>
+                                    <th class="white-space-100"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @if(count($suppliers) > 0)
                                     @foreach($suppliers as $supplier)
                                         <tr>
-                                            <td>{{$supplier->account_code}}</td>
-                                            <td> {{$supplier->name}}</td>
-                                            <td>{{$supplier->province_name}}</td>
+                                            <td class="text-center">{{$supplier->account_code}}</td>
+                                            <td class="text-center"> {{$supplier->name}}</td>
+                                            <td class="text-center">{{$supplier->province_name}}</td>
                                             <td class="text-center">{{$supplier->count_product}}</td>
                                             <td class="text-center">{{$supplier->amount_product}}</td>
-                                            <td><a class="text-primary underline" href="#"
+                                            <td class="white-space-100 text-center"><a class="text-primary" href="javascript:void(0)" style="text-decoration:underline;"
                                                    onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
                                         </tr>
                                     @endforeach

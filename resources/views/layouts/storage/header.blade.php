@@ -29,9 +29,11 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <div id="custom-search" class="top-search">
-                        <input class="form-control" id="search" type="search" placeholder="Nhập từ khóa tìm kiếm..">
-                    </div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+                        <div id="custom-search" class="top-search">
+                            <input class="form-control" id="search" type="search" placeholder="Nhập từ khóa tìm kiếm..">
+                        </div>
+                    @endif
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto navbar-right-top">
@@ -489,7 +491,7 @@
                         <img style="width: 32px;height: 32px"
                              src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png">
                         {{$notification['data']['message']}}
-                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem
+                        <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}" class="text-primary">Xem
                             chi tiết</a>
 
                     </p>

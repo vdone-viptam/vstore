@@ -49,9 +49,9 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã giao dịch</th>
-                                    <th>Trạng thái</th>
-                                    <th class="white-space-150">Số tiền (đ)
+                                    <th class="white-space-120 text-center">Mã giao dịch</th>
+                                    <th class="white-space-150 text-center">Trạng thái</th>
+                                    <th class="white-space-150 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -64,7 +64,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150">Số tài khoản
+                                    <th class="white-space-150 text-center">Số tài khoản
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'account_number')
                                                 @if($type == 'desc')
@@ -77,7 +77,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150">Tên chủ tài khoản
+                                    <th class="white-space-150 text-center">Tên chủ tài khoản
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'name')
                                                 @if($type == 'desc')
@@ -90,7 +90,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150">Ngân hàng
+                                    <th class="white-space-150 text-center">Ngân hàng
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'bank_name')
                                                 @if($type == 'desc')
@@ -103,8 +103,8 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Nội dung</th>
-                                    <th>Thời gian yêu cầu
+                                    <th class="text-center">Nội dung</th>
+                                    <th class="text-center white-space-150">Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -123,28 +123,28 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td>{{$history->code}}</td>
+                                            <td class="white-space-120">{{$history->code}}</td>
 
                                             @if($history->status == 0)
-                                                <td class="text-yellow-400">
+                                                <td class="text-warning font-medium">
                                                     Đang chờ duyệt
                                                 </td>
                                             @elseif($history->status == 1)
-                                                <td class="text-green-700">
+                                                <td class="text-success font-medium">
                                                     Thành công
                                                 </td>
                                             @else
-                                                <td class="text-red-600">
+                                                <td class="text-danger font-medium">
                                                     Thất bại
                                                 </td>
                                             @endif
                                             <td class="white-space-150 text-right">
-                                                {{number_format($history->amount,0,'.','.')}}
+                                                {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
                                             <td>
                                                 {{ $history->account_number }}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 {{ $history->name }}bank_name
                                             </td>
                                             <td>

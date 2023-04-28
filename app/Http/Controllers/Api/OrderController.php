@@ -153,11 +153,14 @@ class OrderController extends Controller
                 'MONEY_COLLECTION' => $methodPayment === 'COD' ? $order->total : 0,
                 'TYPE' => config('viettelPost.nationalType.domesticType'),
             ];
-
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+            ]);
             $getPriceAll = Http::withHeaders(
                 [
                     'Content-Type' => ' application/json',
-                    'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                    'Token' => $login['data']['token']
                 ]
             )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
 
@@ -189,7 +192,7 @@ class OrderController extends Controller
             $getPrice = Http::withHeaders(
                 [
                     'Content-Type' => ' application/json',
-                    'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                    'Token' => $login['data']['token']
                 ]
             )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
             if ($getPrice['status'] !== 200) {
@@ -227,12 +230,11 @@ class OrderController extends Controller
         $product->images = json_decode($product->images);
 
         $order->total_vat = $totalVat;
-
         return response()->json([
             'status_code' => 200,
             'order' => $order,
             'product' => $product,
-            'method_payment' => $methodPayment
+            'method_payment' => $methodPayment,
         ]);
     }
 
@@ -358,41 +360,39 @@ class OrderController extends Controller
                 }
                 $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
 
-//                $body = [
-//                    // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-//                    'SENDER_DISTRICT' => $warehouse->district_id, // Cầu giấy
-//                    'SENDER_PROVINCE' => $warehouse->city_id, // Hà Nội
-//                    'RECEIVER_DISTRICT' => $districtId,
-//                    'RECEIVER_PROVINCE' => $provinceId,
-//                    "ORDER_SERVICE_ADD" => "",
-//                    "ORDER_SERVICE" => $ORDER_SERVICE,
-//                    'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
-//                    'PRODUCT_WEIGHT' => $weight,
-//                    'PRODUCT_PRICE' => $price,
-//                    'MONEY_COLLECTION' => $methodPayment === 'COD' ? $price : 0,
-//                    'NATIONAL_TYPE' => config('viettelPost.nationalType.domesticType'),
-//                ];
-//                $getPrice = Http::withHeaders(
-//                    [
-//                        'Content-Type' => ' application/json',
-//                        'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
-//                    ]
-//                )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
-//                if ($getPrice['status'] !== 200) {
-//                    return response()->json([
-//                        "status_code" => 400,
-//                        "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
-//                    ], 400);
-//                }
-                $transportFee = $getPriceAll[0]['GIA_CUOC'];
-//                $transportFee = $getPrice['data']['MONEY_TOTAL_OLD'];
+                $body = [
+                    // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
+                    'SENDER_DISTRICT' => $warehouse->district_id, // Cầu giấy
+                    'SENDER_PROVINCE' => $warehouse->city_id, // Hà Nội
+                    'RECEIVER_DISTRICT' => $districtId,
+                    'RECEIVER_PROVINCE' => $provinceId,
+                    "ORDER_SERVICE_ADD" => "",
+                    "ORDER_SERVICE" => $ORDER_SERVICE,
+                    'PRODUCT_TYPE' => config('viettelPost.productType.commodity'),
+                    'PRODUCT_WEIGHT' => $weight,
+                    'PRODUCT_PRICE' => $price,
+                    'MONEY_COLLECTION' => $methodPayment === 'COD' ? $price : 0,
+                    'NATIONAL_TYPE' => config('viettelPost.nationalType.domesticType'),
+                ];
 
-
-//                $kpiHt = $getPrice['data']['KPI_HT'];
+                $getPrice = Http::withHeaders(
+                    [
+                        'Content-Type' => ' application/json',
+                        'Token' => $login['data']['token']
+                    ]
+                )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
+                if ($getPrice['status'] !== 200) {
+                    return response()->json([
+                        "status_code" => 400,
+                        "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
+                    ], 400);
+                }
+                $transportFee = $getPrice['data']['MONEY_TOTAL_OLD'];
+                $kpiHt = $getPrice['data']['KPI_HT'];
 
                 $item['transport_fee'] = $transportFee;
                 $totalShipping += $transportFee;
-//                $item['delivery_time'] = $kpiHt;
+                $item['delivery_time'] = $kpiHt;
                 $total += $price + $totalShipping;
             }
             $order->shipping = $totalShipping;
@@ -406,7 +406,7 @@ class OrderController extends Controller
         return response()->json([
             'status_code' => 200,
             'order' => $order,
-            'method_payment' => $methodPayment
+            'method_payment' => $methodPayment,
         ]);
     } // BỎ
 

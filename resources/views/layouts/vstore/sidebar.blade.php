@@ -35,13 +35,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/request-confirm*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.vstore.product.request')}}">Quản lý yêu cầu chưa xét duyệt sản phẩm</a>
+                                       href="{{route('screens.vstore.product.request')}}">Yêu cầu xét duyệt sản phẩm chưa xác nhận</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/requestAll*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.vstore.product.requestAll')}}">Quản lý yêu cầu xét duyệt
-                                        sản phẩm</a>
+                                       href="{{route('screens.vstore.product.requestAll')}}">Yêu cầu xét duyệt sản phẩm đã xác nhận</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('discount*')) ? 'active1' : '' }}"

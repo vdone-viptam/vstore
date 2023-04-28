@@ -374,7 +374,25 @@ class ProductController extends Controller
 
             $product = Product::where('id', $order_item->product_id)->first();
             RequestWarehouse::destroy($order->request_warehouse_id);
+            $priceDiscount = $product->price;
 
+            $totalDiscountSuppliersAndVStore = 0;
+            if ($order_item->discount_ncc) {
+                $totalDiscountSuppliersAndVStore += $order_item->discount_ncc;
+            }
+            if ($order_item->discount_vstore) {
+                $totalDiscountSuppliersAndVStore += $order_item->discount_vstore;
+            }
+            if ($totalDiscountSuppliersAndVStore > 0) {
+                $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore / 100);
+            }
+            if ($order_item->discount_vshop) {
+                $priceDiscount = $priceDiscount - $priceDiscount * ($order_item->discount_vshop / 100);
+            }
+            $price = $priceDiscount;
+            //Tính VAT
+            $vat = $priceDiscount * ($product->vat / 100);
+            $priceDiscount = $priceDiscount + $vat;
             if ($status == 1) {
 //            return $order->total;
                 if ($order->method_payment == 'COD') {
@@ -416,10 +434,9 @@ class ProductController extends Controller
                 $list_item[] = [
                     'PRODUCT_NAME' => $product->name,
                     'PRODUCT_QUANTITY' => $order_item['quantity'],
-                    'PRODUCT_PRICE' => $product->price,
+                    'PRODUCT_PRICE' => $priceDiscount,
                     'PRODUCT_WEIGHT' => $product->weight * $order_item['quantity']
                 ];
-
                 $taodon = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -431,7 +448,7 @@ class ProductController extends Controller
                     "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
                     "SENDER_PHONE" => $warehouse->phone_number,
                     "RECEIVER_FULLNAME" => $order->fullname,
-                    "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
+                    "RECEIVER_ADDRESS" => $order->address,
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $product->name,
                     "PRODUCT_DESCRIPTION" => $order_item['quantity'] . " x " . $product->name,
@@ -451,14 +468,14 @@ class ProductController extends Controller
 
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
-                $request = new RequestWarehouse();
+                $requestEX = new RequestWarehouse();
 
-                $request->ncc_id = 0;
-                $request->product_id = $product->id;
-                $request->status = 0;
-                $request->type = 2;
-                $request->ware_id = $order->warehouse_id;
-                $request->quantity = $order_item->quantity;
+                $requestEX->ncc_id = 0;
+                $requestEX->product_id = $product->id;
+                $requestEX->status = 0;
+                $requestEX->type = 2;
+                $requestEX->ware_id = $order->warehouse_id;
+                $requestEX->quantity = $order_item->quantity;
                 $code = 'YCX' . rand(100000000, 999999999);
 
                 while (true) {
@@ -468,10 +485,10 @@ class ProductController extends Controller
                     }
                     $code = 'YCX' . rand(100000000, 999999999);
                 }
-                $request->order_number = json_decode($taodon)->data->ORDER_NUMBER;
-                $request->code = $code;
-                $request->note = 'Yêu cầu xuất kho';
-                $request->save();
+                $requestEX->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+                $requestEX->code = $code;
+                $requestEX->note = 'Yêu cầu xuất kho';
+                $requestEX->save();
             }
             if ($status == 3 && $order->order_number !== '') {
                 $order->note = $request->note;

@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Quản lý yêu cầu chưa xét duyệt sản phẩm</h2>
+                <h2 class="pageheader-title">Yêu cầu xét duyệt sản phẩm chưa xác nhận</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -53,7 +53,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu chưa xét duyệt sản phẩm</h5>
+                <h5 class="mb-0" style="font-size:18px;">Yêu cầu xét duyệt sản phẩm chưa xác nhận</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <form action="">
@@ -77,7 +77,7 @@
                     >
                         <thead>
                         <tr>
-                            <th style="min-width:100px !important;" >Mã yêu cầu</th>
+                            <th style="min-width:100px !important;">Mã yêu cầu</th>
                             <th style="min-width:120px !important;">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -135,7 +135,7 @@
                             </th>
                             <th class="white-space-150">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Chiết khấu từ Nhà cung cấp (%)
+                                    Chiết khấu từ Nhà cung cấp
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                             @if($type == 'desc')
@@ -149,7 +149,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120">Ngày yêu cầu
+                            <th class="white-space-120 text-center">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'products.price')
@@ -162,7 +162,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100">Trạng thái</th>
+                            <th class="white-space-100 text-center">Trạng thái</th>
                             <th>
                             </th>
                         </tr>
@@ -174,7 +174,7 @@
                                     <td class="white-space-150" style="min-width: 100px !important;">
                                         {{$product->code}}
                                     </td>
-                                    <td >
+                                    <td>
                                         {{$product->user_name}}
                                     </td>
                                     <td class="white-space-400" style="min-width:140px !important;">
@@ -185,17 +185,18 @@
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="text-center">
-                                        {{$product->discount}} %
+                                        {{$product->discount}}%
                                     </td>
 
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="white-space-120 text-center"><span class="text-warning ">Yêu cầu mới</span></td>
+                                    <td class="white-space-120 text-center"><span
+                                            class="font-medium ">Yêu cầu mới</span></td>
 
-                                    <td>
+                                    <td style="min-width:150px !important;">
                                         <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn px-2 text-success">Đồng ý</a>
+                                           class="btn px-2 text-success" style="text-decoration:underline">Đồng ý</a>
                                         <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                           class="btn px-2 text-danger" >Từ chối</a>
+                                           class="btn px-2 text-danger" style="text-decoration:underline">Từ chối</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -264,7 +265,7 @@
             <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
             </div>
 <div class="form-group text-left mt-3">
-    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
+    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
         <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
             class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
     </label>
@@ -274,9 +275,13 @@
 
             document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
                 if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
-                    document.getElementById('messageDis').style.display = 'none';
-                    document.getElementById('btnConfirm').style.display = 'block';
-
+                    if ($('#appect').is(":checked")) {
+                        document.getElementById('messageDis').style.display = 'none';
+                        document.getElementById('btnConfirm').style.display = 'block';
+                    } else {
+                        document.getElementById('messageDis').style.display = 'block';
+                        document.getElementById('btnConfirm').style.display = 'none';
+                    }
                 } else {
                     document.getElementById('messageDis').style.display = 'block';
                     document.getElementById('btnConfirm').style.display = 'none';
@@ -295,6 +300,17 @@
 
         }
 
+        $('#appect').on('change', (e) => {
+            if (Number(document.getElementById('discount').dataset.discount) &&
+                +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2 && $('#appect').is(":checked")) {
+                document.getElementById('messageDis').style.display = 'none';
+                document.getElementById('btnConfirm').style.display = 'block';
+            } else {
+                document.getElementById('messageDis').style.display = 'block';
+                document.getElementById('btnConfirm').style.display = 'none';
+            }
+        })
+
         function unAppect(id, discount, status) {
             $('.md-content').html(`
  <div class="form-group">
@@ -303,7 +319,7 @@
                              class="form-control" ></textarea>
             </div>
 <div class="form-group text-left mt-3">
-    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
+    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
         <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
             class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
     </label>

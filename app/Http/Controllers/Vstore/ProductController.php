@@ -74,7 +74,7 @@ class ProductController extends Controller
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount')
             ->where('requests.vstore_id', Auth::id());
-        if (strlen($this->v['key_search'])) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) {
                 $query->where('requests.code', $this->v['key_search'])
                     ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
@@ -101,8 +101,9 @@ class ProductController extends Controller
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,products.vstore_confirm_date')
+            ->where('requests.status','<>','0')
             ->where('requests.vstore_id', Auth::id());
-        if (strlen($this->v['key_search'])) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) {
                 $query->where('requests.code', $this->v['key_search'])
                     ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
@@ -172,13 +173,13 @@ class ProductController extends Controller
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $message = $request->status == 2 ? $userLogin->name . ' đã đồng yêu cầu niêm yết sản phẩm đến bạn và gửi yêu cầu tới quản trị viên' : $userLogin->name . ' đã từ chối yêu cầu niêm yết sản phẩm của bạn';
-
+            $product = Product::select('publish_id')->where('id', $currentRequest->product_id)->first();
             $data = [
                 'title' => 'Bạn vừa có 1 thông báo mới',
                 'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.manufacture.product.request')
+                'href' => route('screens.manufacture.product.request', ['key_search' => $product->publish_id])
             ];
             $user->notify(new AppNotification($data));
 
@@ -190,7 +191,7 @@ class ProductController extends Controller
                     'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                     'message' => $currentRequest->NCC->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                     'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                    'href' => route('screens.admin.product.index')
+                    'href' => route('screens.admin.product.index', ['key_search' => $product->publish_id])
                 ];
 
                 $user->notify(new AppNotification($data));
@@ -215,7 +216,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name','discounts.status')
+        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name', 'discounts.status')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->where('discounts.user_id', Auth::id());
         if (strlen($this->v['key_search'])) {
@@ -224,7 +225,7 @@ class ProductController extends Controller
             });
         }
         $this->v['discounts'] = $this->v['discounts']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
-         $this->onDiscount();
+        $this->onDiscount();
         return view('screens.vstore.product.discount', $this->v);
 
     }
@@ -269,7 +270,8 @@ class ProductController extends Controller
                 'end_date' => $request->end_date,
                 'type' => 2,
                 'user_id' => Auth::id(),
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
+                'status' => 0
             ]);
 
             return redirect()->route('screens.vstore.product.discount')->with('success', 'Thêm mới giảm giá thành công');
@@ -320,21 +322,19 @@ class ProductController extends Controller
 
         }
     }
-    public  function onDiscount(){
-        $discount = Discount::where('start_date','<=', Carbon::now())
-            ->where('end_date','>=', Carbon::now())
-            ->where('discounts.user_id',Auth::id())
-            ->get()
-        ;
-        if (count($discount)>0){
-            foreach ($discount as $val){
-                $update_discount = Discount::find($val->id);
-                if ($update_discount){
-                    $update_discount->status = 1;
-                    $update_discount->save();
-                }
-            }
-        }
+
+    public function onDiscount()
+    {
+        Discount::where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->where('status', 0)
+            ->where('discounts.user_id', Auth::id())
+            ->update(['status' => 1]);
+
+        Discount::where('end_date', '<', Carbon::now())
+            ->where('status', 1)
+            ->where('discounts.user_id', Auth::id())
+            ->update(['status' => 2]);
 
     }
 }

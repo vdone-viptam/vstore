@@ -243,7 +243,7 @@
                             <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ
                                 chi tiết</label>
                             <input class="form-control form-control-lg" type="text" name="address" required=""
-                                placeholder="Nhập địa chỉ chi tiết (VD: Số nhà 89, phố Tô Vĩnh Diễn, phường Khương Trung, quận Thanh Xuân, thành phố Hà Nội)" value="{{ old('address') }}"> @error('address')
+                                placeholder="Nhập địa chỉ chi tiết (VD: Số nhà, tòa nhà, thôn...)" value="{{ old('address') }}"> @error('address')
                                 <p class="text-danger text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
@@ -255,7 +255,7 @@
                             ý với <span style="text-decoration: underline;cursor: pointer;"  class="underline text-blue-700" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
                     </label>
                     <div class="form-group pt-2">
-                        <button type="submit" class="active btn btn-block btn-primary" >Mua ngay</button>
+                        <button type="submit" class="active btn btn-block btn-primary" >Đăng ký mua</button>
                     </div>
                 </div>
 
@@ -322,7 +322,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                         <div class="modal-header">
                             <div class="d-flex flex-column" style="gap:6px">
                                 <img src="{{ asset('home/img/NCC.png') }}" alt=""
-                                    style="object-fit: contain; height: 40px;">
+                                    style="object-fit: contain; height: 40px !important;">
                                 <h5 class="modal-title" style="font-size: 20px;">Thông tin thanh toán</h5>
                             </div>
 
@@ -340,7 +340,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên công
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">Tên công
                                                 ty</h4>
                                         </div>
                                         <div class="col-6">
@@ -353,7 +353,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã số thuế
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">Mã số thuế
                                             </h4>
                                         </div>
                                         <div class="col-6">
@@ -365,7 +365,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên Nhà
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">Tên Nhà
                                                 cung cấp</h4>
                                         </div>
                                         <div class="col-6">
@@ -377,7 +377,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">ID P-Done
                                                 người đại diện</h4>
                                         </div>
                                         <div class="col-6">
@@ -389,7 +389,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Số điện
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">Số điện
                                                 thoại công ty</h4>
                                         </div>
                                         <div class="col-6">
@@ -401,7 +401,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Email</h4>
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">Email</h4>
                                         </div>
                                         <div class="col-6">
                                             <span style="font-size: 16px;">{{ $user->email }}</span>
@@ -412,7 +412,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã P-Done người
+                                            <h4 style="font-weight: 600; margin-bottom:15px;">Mã P-Done người
                                                 giới thiệu</h4>
                                         </div>
                                         <div class="col-6">
@@ -479,7 +479,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <h4
-                                                            style="font-size:18px; margin-bottom:15px; font-weight:500">
+                                                            style=" margin-bottom:15px; font-weight:600">
                                                             {{ $value['title'] }}</h4>
                                                     </div>
                                                     <div class="col-6 text-right">

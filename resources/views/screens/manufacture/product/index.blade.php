@@ -80,21 +80,12 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Hình ảnh</th>
-                            <th >Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
-
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                </span>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
+                            <th class="text-center" style="min-width:150px !important;">Hình ảnh</th>
+                            <th style="min-width:200px !important;">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Tên sản phẩm
+                                </div>
                             </th>
 
                             <th>Ngành hàng
@@ -129,102 +120,103 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Thuế giá trị gia tăng (%)
-                                <span style="float: right;cursor:pointer">
+                                    Thuế giá trị gia tăng (%)
+                                    <span style="float: right;cursor:pointer">
                                 @if($field == 'vat')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vat"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="vat"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="vat"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vat"></i>
+                                            <i class="fas fa-sort sort" data-sort="vat"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="vat"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-100">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Trạng thái
-                                <span style="float: right;cursor:pointer">
+                            <th class="white-space-150">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    Trạng thái
+                                    <span style="float: right;cursor:pointer">
                                     @if($field == 'status')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
+                                            <i class="fas fa-sort sort" data-sort="status"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="status"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
 
-                            <th class="white-space-100">
+                            <th class="white-space-150">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                V-Store niêm yết
-                                <span style="float: right;cursor: pointer">
+                                    V-Store niêm yết
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="vstore_name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="vstore_name"></i>
+                                            <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="vstore_name"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
                             <th class="white-space-130">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu cho V-Store (%)
-                                <span style="float: right;cursor: pointer">
+                                    Chiết khấu cho V-Store (%)
+                                    <span style="float: right;cursor: pointer">
                                         @if($field == 'products.discount')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.discount"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.discount"></i>
+                                            <i class="fas fa-sort sort" data-sort="products.discount"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.discount"></i>
-                                    @endif
                                     </span>
                                 </div>
                             </th>
                             <th class="white-space-100">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Số lượng đã bán
-                                <span style="float: right;cursor: pointer">
+                                    Số lượng đã bán
+                                    <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort"
+                                                   data-sort="amount_product_sold"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                            <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
-                                    @endif
                                     </span>
                                 </div>
                             </th>
                             <th class="white-space-100">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Số lượng trong kho
-                                <span style="float: right;cursor: pointer">
+                                    Số lượng trong kho
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="amount"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="amount"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="amount"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="amount"></i>
+                                            <i class="fas fa-sort sort" data-sort="amount"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="amount"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
-                            <th style="min-width: 70px">
+                            <th style="min-width: 100px !important; ">
                             </th>
                         </tr>
                         </thead>
@@ -232,18 +224,23 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="white-space-100">{{$product->publish_id}}</td>
-                                    <td class="text-center"><img style="height: 125px;"
-                                                                 src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>
+                                    <td class="white-space-150 text-center" >{{$product->publish_id}}</td>
+                                    <td class="text-center white-space-150">
+                                        <div style="width:125px;">
+                                            <img style="height: 125px;"
+                                                 src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>
+                                        </div>
                                     </td>
-                                    <td class="white-space-150">{{$product->name}}</td>
-                                    <td>{{$product->cate_name}}</td>
+                                    <td class="white-space-150"
+                                        style="min-width:200px !important;">{{$product->name}}</td>
+                                    <td style="min-width:120px !important;">{{$product->cate_name}}</td>
                                     <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
-                                    <td class="text-center">{{$product->vat}}</td>
-                                    <td class="white-space-100 text-center">
+                                    <td class="text-center">{{$product->vat ?? 0}}</td>
+                                    <td class="text-center" style="min-width:155px !important;">
                                         @if($product->status == 0)
-                                        <div
-                                            class="text-danger d-flex align-items-center font-medium" style="gap:6px;">
+                                            <div
+                                                class="text-danger d-flex align-items-center font-medium"
+                                                style="gap:6px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -253,8 +250,9 @@
                                                 Chưa xét duyệt
                                             </div>
                                         @elseif($product->status == 1)
-                                        <div
-                                                class="text-warning d-flex align-items-center font-medium" style="gap:6px;">
+                                            <div
+                                                class="text-warning d-flex align-items-center font-medium"
+                                                style="gap:6px;">
                                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -264,8 +262,9 @@
                                                 Đang chờ xét duyệt
                                             </div>
                                         @elseif($product->status == 2)
-                                        <div
-                                            class="text-success d-flex align-items-center font-medium" style="gap:6px;">
+                                            <div
+                                                class="text-success d-flex align-items-center font-medium"
+                                                style="gap:6px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
@@ -276,14 +275,16 @@
                                         @endif
                                     </td>
                                     <td>{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : ''}}</td>
-                                    <td class="text-center">{{$product->discount != null ? $product->discount : ''}}</td>
+                                    <td class="text-center">{{$product->discount != null ? $product->discount : ''}}%
+                                    </td>
 
                                     <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                     <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
-                                    <td style="min-width: 70px">
-                                        <button type="button" class="btn btn-link pl-0"
-                                                onclick="showDetail({{$product->id}})">Chi tiết
-                                        </button>
+                                    <td style="min-width: 100px !important;">
+                                        <a href="javascript:void(0)" class="btn btn-link pl-0"
+                                           style="text-decoration:underline;"
+                                           onclick="showDetail({{$product->id}})">Chi tiết
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -358,11 +359,7 @@
                     htmlData = data.data;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.availability_status == 1) {
-                        document.querySelector('.btnDestroy').innerHTML =
-                            `<button class="btn btn-danger">Hủy niêm yết</button>
-
-`;
+                    if (data.status == 2) {
                         $(".btnDelete").html('');
                     } else {
                         document.querySelector('.btnDestroy').innerHTML = ``;

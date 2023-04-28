@@ -49,9 +49,9 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã giao dịch</th>
-                                    <th>Trạng thái</th>
-                                    <th>Số tiền
+                                    <th class="white-space-150 text-center">Mã giao dịch</th>
+                                    <th class="white-space-150 text-center">Trạng thái</th>
+                                    <th class="text-center white-space-400">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -64,8 +64,8 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Nội dung</th>
-                                    <th>Ngày tạo yêu cầu
+                                    <th class=" text-center">Nội dung</th>
+                                    <th class="white-space-200 text-center">Ngày tạo yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -84,23 +84,23 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td>{{$history->code}}</td>
+                                            <td class="text-center">{{$history->code}}</td>
 
                                             @if($history->status == 0)
-                                                <td class="text-yellow-400">
+                                                <td class="text-warning font-medium text-center">
                                                     Đang chờ duyệt
                                                 </td>
                                             @elseif($history->status == 1)
-                                                <td class="text-green-700">
-                                                    Đang chờ duyệt
+                                                <td class="text-success font-medium text-center">
+                                                    Đã duyệt
                                                 </td>
                                             @else
-                                                <td class="text-red-600">
+                                                <td class="text-danger font-medium text-center">
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class="text-right">
-                                                {{number_format($history->amount,0,'.','.')}}
+                                            <td class="text-right white-space-400">
+                                                {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
                                             <td>
                                                 Chuyển khoản ra ngoài
