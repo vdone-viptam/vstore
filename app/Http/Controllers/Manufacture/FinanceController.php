@@ -164,7 +164,7 @@ class FinanceController extends Controller
                 'money_history' => (double)$request->money,
                 'created_at' => Carbon::now()
             ]);
-            $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.$request->money. '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
+            $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
             $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
 
@@ -179,7 +179,7 @@ class FinanceController extends Controller
                 "bankLogo"=> $bank->image,
                 "bankHolder"=> $wallet->name,
                 "bankNumber"=> $wallet->account_number,
-                "value"=> $request->money,
+                "value"=> round($request->money,0),
                 "signature"=> $sig
             ]);
 
