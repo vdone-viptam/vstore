@@ -217,10 +217,6 @@
                                 </th>
                                 <th style="min-width:100px;">
                                     Trạng thái
-<<<<<<< HEAD
-=======
-
->>>>>>> a3fd8f0ff09892606b95afbbbd9234d1394d07f2
                                 </th>
                                 <th></th>
                                 </thead>

@@ -51,7 +51,7 @@
                                 <tr>
                                     <th class="white-space-150 text-center">Mã giao dịch</th>
                                     <th class="white-space-150 text-center">Trạng thái</th>
-                                    <th class="text-center">Số tiền
+                                    <th class="text-center white-space-400">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -64,7 +64,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-400 text-center">Nội dung</th>
+                                    <th class=" text-center">Nội dung</th>
                                     <th class="white-space-200 text-center">Ngày tạo yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
@@ -84,7 +84,7 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td class="text-cennter">{{$history->code}}</td>
+                                            <td class="text-center">{{$history->code}}</td>
 
                                             @if($history->status == 0)
                                                 <td class="text-warning font-medium text-center">
@@ -99,7 +99,7 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class="text-right">
+                                            <td class="text-right white-space-400">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
                                             <td>

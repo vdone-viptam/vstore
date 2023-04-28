@@ -153,7 +153,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-150">Ngày tạo
+                            <th class="text-center white-space-150">Thời gian tạo giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
                                         @if($type == 'desc')
