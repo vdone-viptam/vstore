@@ -36,10 +36,8 @@
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group">
-                    <label for="name">Thuế giá trị gia tăng</label>
-                    <div>
-                        {{$product->vat ?? 0}} %
-                    </div>
+                    <label for="name">Thuế giá trị gia tăng (%)</label>
+                    <input type="text" class="form-control form-control-lg" value=" {{$product->vat ?? 0}}">
 
                 </div>
                 <div class="form-group">
