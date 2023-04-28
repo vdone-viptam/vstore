@@ -74,7 +74,7 @@ class ProductController extends Controller
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount')
             ->where('requests.vstore_id', Auth::id());
-        if (strlen($this->v['key_search'])) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) {
                 $query->where('requests.code', $this->v['key_search'])
                     ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
@@ -102,7 +102,7 @@ class ProductController extends Controller
             ->join('users', 'requests.user_id', '=', 'users.id')
             ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,products.vstore_confirm_date')
             ->where('requests.vstore_id', Auth::id());
-        if (strlen($this->v['key_search'])) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) {
                 $query->where('requests.code', $this->v['key_search'])
                     ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
@@ -215,7 +215,7 @@ class ProductController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
-        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name','discounts.status')
+        $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount', 'products.name', 'discounts.created_at', 'start_date', 'end_date', 'products.name', 'discounts.status')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->where('discounts.user_id', Auth::id());
         if (strlen($this->v['key_search'])) {
@@ -224,7 +224,7 @@ class ProductController extends Controller
             });
         }
         $this->v['discounts'] = $this->v['discounts']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
-         $this->onDiscount();
+        $this->onDiscount();
         return view('screens.vstore.product.discount', $this->v);
 
     }
@@ -320,16 +320,17 @@ class ProductController extends Controller
 
         }
     }
-    public  function onDiscount(){
-        $discount = Discount::where('start_date','<=', Carbon::now())
-            ->where('end_date','>=', Carbon::now())
-            ->where('discounts.user_id',Auth::id())
-            ->get()
-        ;
-        if (count($discount)>0){
-            foreach ($discount as $val){
+
+    public function onDiscount()
+    {
+        $discount = Discount::where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->where('discounts.user_id', Auth::id())
+            ->get();
+        if (count($discount) > 0) {
+            foreach ($discount as $val) {
                 $update_discount = Discount::find($val->id);
-                if ($update_discount){
+                if ($update_discount) {
                     $update_discount->status = 1;
                     $update_discount->save();
                 }
