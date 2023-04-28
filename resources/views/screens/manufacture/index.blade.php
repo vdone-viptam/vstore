@@ -260,7 +260,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên công ty</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">Tên công ty</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
@@ -271,7 +271,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Mã số thuế</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">Mã số thuế</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->tax_code}}</span>
@@ -282,7 +282,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->name}}</span>
@@ -293,7 +293,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->id_vdone}}</span>
@@ -304,7 +304,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Số điện thoại công ty</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">Số điện thoại công ty</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->phone_number}}</span>
@@ -315,7 +315,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">Email</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">Email</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->email}}</span>
@@ -327,7 +327,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-size:18px;font-weight: 600; margin-bottom:15px;">ID P-Done người giới thiệu</h4>
+                                <h4 style="font-weight: 600; margin-bottom:15px;">ID P-Done người giới thiệu</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->referral_code}}</span>
@@ -389,7 +389,7 @@
                                 @foreach($chiTietThanhToan as $value)
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-size:18px; margin-bottom:15px; font-weight:600">{{$value['title']}}</h4>
+                                        <h4 style=" margin-bottom:15px; font-weight:600">{{$value['title']}}</h4>
                                     </div>
                                     <div class="col-6">
                                         <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -427,7 +427,7 @@
                     <div class="col-12 mb-3">
                         <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                             <div class="col-12">
-                                <h3 style="font-size:18px; font-weight: 600; padding-top: 15px; margin-bottom:15px;">Bạn đã gửi thông tin đăng ký thành công</h3>
+                                <h3 style=" font-weight: 600; padding-top: 15px; margin-bottom:15px;">Bạn đã gửi thông tin đăng ký thành công</h3>
                             </div>
                             <div class="col-12 text-success" style="padding-bottom:15px;">
                                 Thông tin đăng ký của bạn đang chờ duyệt. Vui lòng chờ kết quả trong vòng (24 giờ)
