@@ -452,14 +452,16 @@
                         <div class="nav-user-info">
                             {{\Illuminate\Support\Facades\Auth::user()->name}}
                         </div>
-                        <a class="dropdown-item" href=@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
-                     "{{route('screens.storage.account.profile')}}"
+                        @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+                            <a class="dropdown-item" href=
+                                "{{route('screens.storage.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
-                            "{{route('screens.vstore.account.profile')}}"
+                            <a class="dropdown-item" href=
+                                "{{route('screens.vstore.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id ==2 )
-                            "{{route('screens.manufacture.account.profile')}}"
-                        @endif><i class="fas fa-user mr-2"></i>Hồ sơ</a>
-                        <!-- <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Cài đặt</a> -->
+                            <a href="{{route('screens.manufacture.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ
+                                sơ</a>
+                        @endif
                         <a class="dropdown-item logout" href="{{route('logout')}}" style="color:#FF4D4F"><i
                                 class="fas fa-power-off mr-2"></i>Đăng
                             xuất</a>
