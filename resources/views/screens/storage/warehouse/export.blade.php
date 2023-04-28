@@ -168,6 +168,7 @@
                                 </span>
                             </th>
                             <th>Ngày tạo yêu cầu
+                                <span style="float: right;cursor: pointer">
                                 @if($field == 'created_at')
                                     @if($type == 'desc')
                                         <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
@@ -177,6 +178,7 @@
                                 @else
                                     <i class="fas fa-sort sort" data-sort="created_at"></i>
                                 @endif
+                                </span>
                             </th>
                             <th>Thao tác/Trạng thái
                                 <span style="float: right;cursor: pointer">
