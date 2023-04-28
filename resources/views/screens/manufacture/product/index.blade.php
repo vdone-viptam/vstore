@@ -359,7 +359,7 @@
                     htmlData = data.data;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.availability_status == 1) {
+                    if (data.status == 2) {
                         document.querySelector('.btnDestroy').innerHTML =
                             `<button class="btn btn-danger">Hủy niêm yết</button>
 
