@@ -25,8 +25,8 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $this->v['key_search_users'] = $request->key_search_users ?? '';
-        $this->v['type_users'] = $request->type_users ?? '';
-        $this->v['field_users'] = $request->field_users ?? '';
+        $this->v['type_users'] = $request->type_users ?? 'desc';
+        $this->v['field_users'] = $request->field_users ?? 'users.id';
         $this->v['limit_users'] = $request->limit_users ?? 10;
 
         // Yêu cầu đăng ký tài khoản chờ xét duyệt
@@ -50,16 +50,16 @@ class DashboardController extends Controller
         ->where('order_service.status', 3)
         ->where('payment_status', 1)
         ->whereNull('confirm_date')
-        ->orderBy('users.id', 'desc')
+        ->orderBy($this->v['field_users'], $this->v['type_users'])
         ->where('role_id', '!=', 1)->paginate($this->v['limit_users']);
-        
+
         $this->v['countRegisterAccountPending'] = $this->v['users']->count();
 
         // Sản phẩm xét duyệt lên V-Store chưa xác nhận
 
         $this->v['key_search_request'] = $request->key_search_request ?? '';
-        $this->v['type_request'] = $request->type_request ?? '';
-        $this->v['field_request'] = $request->field_request ?? '';
+        $this->v['type_request'] = $request->type_request ?? 'desc';
+        $this->v['field_request'] = $request->field_request ?? 'categories.id';
         $this->v['limit_request'] = $request->limit_request ?? 10;
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
@@ -79,7 +79,8 @@ class DashboardController extends Controller
                     ->orWhere('users.name', 'like', '%' . $request->key_search_request . '%');
             });
         }
-        $this->v['requests'] = $this->v['requests']->where('requests.status', 1)->orderBy('requests.id', 'desc')
+        $this->v['requests'] = $this->v['requests']->where('requests.status', 1)
+            ->orderBy($this->v['field_request'], $this->v['type_request'])
             ->paginate($this->v['limit_request']);
         $countRequestProductToday = $this->v['requests']->total();
         foreach ($this->v['requests'] as $key => $val) {

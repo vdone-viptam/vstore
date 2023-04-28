@@ -146,15 +146,28 @@
                             </th>
                             <th>Ngày xuất hàng
                                 <span style="float: right;cursor: pointer">
-                                    @if($field == 'created_at')
+                                    @if($field == 'updated_at')
                                         @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                            <i class="fa-solid fa-sort-down sort" data-sort="updated_at"></i>
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="updated_at"></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
+                                        <i class="fas fa-sort sort" data-sort="updated_at"></i>
                                     @endif
+                                </span>
+                            </th>
+                            <th>Ngày tạo yêu cầu
+                                <span style="float: right;cursor: pointer">
+                                @if($field == 'created_at')
+                                    @if($type == 'desc')
+                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                    @endif
+                                @else
+                                    <i class="fas fa-sort sort" data-sort="created_at"></i>
+                                @endif
                                 </span>
                             </th>
                             <th>Thao tác/Trạng thái
@@ -193,6 +206,7 @@
 
 
                                     </td>
+                                    <td class="text-center"> {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
 
                                     <td class="status{{$request->id}} text-center">
                                         @if($request->status == 0)
@@ -335,7 +349,7 @@
                                     data.message,
                                     'Click vào nút bên dưới để đóng',
                                     'success'
-                                )
+                                ).then(() => location.reload())
                                 $('#requestModal').modal('hide')
                                 $('.status' + id).html(`
                        <div
