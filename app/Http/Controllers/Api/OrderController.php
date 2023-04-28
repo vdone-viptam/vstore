@@ -375,6 +375,7 @@ class OrderController extends Controller
                     'MONEY_COLLECTION' => $methodPayment === 'COD' ? $price : 0,
                     'NATIONAL_TYPE' => config('viettelPost.nationalType.domesticType'),
                 ];
+
                 $getPrice = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -401,6 +402,7 @@ class OrderController extends Controller
             $order->method_payment = $methodPayment;
             $order->pay = config('constants.payStatus.pay');
             $order->save();
+            dd($getPrice['data']);
         }
         $order->total_vat = $totalVat;
         return response()->json([
