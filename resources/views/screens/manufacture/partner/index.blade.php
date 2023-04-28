@@ -91,7 +91,21 @@
                                     </span>
                                 </div>
                             </th>
-                            <th class="white-space-200">Số loại sản phẩm niêm yết
+                            <th class="white-space-200">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Số loại sản phẩm niêm yết
+                                    <span style="float: right;cursor: pointer">
+                                        @if($field == 'users.id')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="users.id"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="users.id"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="users.id"></i>
+                                        @endif
+                                    </span>
+                                </div>
                             </th>
                             <th class="white-space-100">
                             </th>
