@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Sản phẩm</h2>
+                <h2 class="pageheader-title">Quản lý yêu cầu chưa xét duyệt sản phẩm</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -77,8 +77,8 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-150">Mã yêu cầu</th>
-                            <th>Nhà cung cấp
+                            <th style="min-width:100px !important;" >Mã yêu cầu</th>
+                            <th style="min-width:120px !important;">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -171,13 +171,13 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td class="white-space-150">
+                                    <td class="white-space-150" style="min-width: 100px !important;">
                                         {{$product->code}}
                                     </td>
-                                    <td>
+                                    <td >
                                         {{$product->user_name}}
                                     </td>
-                                    <td class="white-space-400">
+                                    <td class="white-space-400" style="min-width:140px !important;">
                                         {{$product->name}}
                                     </td>
                                     <td>{{$product->cate_name}}</td>
@@ -189,13 +189,13 @@
                                     </td>
 
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="white-space-100"><span class="text-warning">Yêu cầu mới</span></td>
+                                    <td class="white-space-120 text-center"><span class="text-warning ">Yêu cầu mới</span></td>
 
                                     <td>
                                         <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn btn-success">Đồng ý</a>
+                                           class="btn px-2 text-success">Đồng ý</a>
                                         <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                           class="btn btn-danger">Từ chối</a>
+                                           class="btn px-2 text-danger" >Từ chối</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -208,9 +208,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$requests->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class="ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
@@ -263,7 +263,7 @@
 <input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
             <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
             </div>
-<div class="form-group text-center mt-4">
+<div class="form-group text-left mt-3">
     <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
         <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
             class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
@@ -302,7 +302,7 @@
 <textarea name="note" placeholder="Lý do từ chối"
                              class="form-control" ></textarea>
             </div>
-<div class="form-group text-center mt-4">
+<div class="form-group text-left mt-3">
     <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
         <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
             class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>

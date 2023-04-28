@@ -96,26 +96,26 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td>{{$histories->code ?? 0012020233}}</td>
-                                            <td>
+                                            <td class="text-center">{{$histories->code ?? 0012020233}}</td>
+                                            <td class="text-center">
                                                 @if($history->status == 0)
-                                                    <p class="text-red-600">Thất bại</p>
+                                                    <p class="text-danger font-medium">Thất bại</p>
                                                 @else
-                                                    <p class="text-green-600">Chưa xử lý</p>
+                                                    <p class="text-success font-medium">Chưa xử lý</p>
                                                 @endif
                                             </td>
-                                            <td class="white-space-150 text-right">
+                                            <td class="white-space-150 text-center">
                                                 @if($history->type == 1)
-                                                    <p class="text-green-600">
+                                                    <p class="text-success">
                                                         +{{number_format($history->money_history,0,'.','.')}}
                                                         </p>
                                                 @else
-                                                    <p class="text-red-600">
+                                                    <p class="text-danger">
                                                         -{{number_format($history->money_history,0,'.','.')}}</p>
                                                 @endif
                                             </td>
                                             <th>{{$history->title}}</th>
-                                            <td>
+                                            <td class="text-center">
                                                 {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>
@@ -129,9 +129,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$histories->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class=" ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
                                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

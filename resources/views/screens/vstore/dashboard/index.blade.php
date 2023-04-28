@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Trang chủ </h2>
+                    <h2 class="pageheader-title">Tổng quan </h2>
 
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
@@ -83,7 +83,7 @@
                                     <form>
                                         <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                                type="search"
-                                               placeholder="Tìm kiếm..">
+                                               placeholder="Nhập từ khóa tìm kiếm...">
                                     </form>
 
                                 </div>
@@ -214,7 +214,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th>
+                                <th style="min-width:100px;">
 
                                     Trạng thái
                                     
@@ -238,19 +238,19 @@
                                             <td class="white-space-150 text-right">
                                                 {{number_format($product->price,0,'.','.')}}
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-center">
                                                 {{$product->discount}}
                                             </td>
 
-                                            <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                            <td><span class="text-warning">Yêu cầu mới</span></td>
+                                            <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                            <td class="text-center"><span class=" text-warning">Yêu cầu mới</span></td>
 
                                             <td>
                                                 <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                                   class="btn btn-success">Đồng ý</a>
+                                                   class="btn text-success px-2">Đồng ý</a>
                                                 <a href="#"
                                                    onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                                   class="btn btn-danger">Từ chối</a>
+                                                   class="btn text-danger px-2">Từ chối</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -262,9 +262,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$data->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class="ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
                                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

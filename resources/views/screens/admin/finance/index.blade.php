@@ -38,7 +38,7 @@
                             <li class="nav-item">
                                 <form>
                                     <div id="custom-search" class="top-search-bar">
-                                        <input class="form-control" type="search" name="key_search" placeholder="Tìm kiếm..">
+                                        <input class="form-control" type="search" name="key_search" placeholder="Nhập từ khóa tìm kiếm...">
                                     </div>
                                 </form>
 
@@ -137,9 +137,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$histories->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class=" ml-4">
 
                             </div>
                         </div>
