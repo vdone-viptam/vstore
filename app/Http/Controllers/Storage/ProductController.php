@@ -341,7 +341,6 @@ class ProductController extends Controller
     {
 
 
-
         try {
 
             $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
@@ -403,7 +402,6 @@ class ProductController extends Controller
                     'TYPE' => 1,
 
                 ]);
-
 
                 $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
                 $order->estimated_date = \Illuminate\Support\Carbon::now()->addHours((int)$date);

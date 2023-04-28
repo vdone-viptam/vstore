@@ -345,7 +345,7 @@
                                     data.message,
                                     'Click vào nút bên dưới để đóng',
                                     'success'
-                                )
+                                ).then(() => location.reload())
                                 $('#requestModal').modal('hide')
                                 $('.status' + id).html(`
                        <div
