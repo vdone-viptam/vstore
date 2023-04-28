@@ -137,30 +137,10 @@
                         <thead>
                         <tr>
                             <th class="white-space-110">Mã đơn hàng
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'pre_order_vshop.no')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.no"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.no"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.no"></i>
-                                    @endif
-                                </span>
+                                
                             </th>
                             <th class="white-space-400">Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'products.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
-                                </span>
+                               
                             </th>
                             <th class="white-space-140">
                                 Giá sản phẩm (đ)
@@ -233,7 +213,21 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-140">Trạng thái</th>
+                            <th class="white-space-140">Trạng thái
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort"
+                                               data-sort="pre_order_vshop.status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort"
+                                               data-sort="pre_order_vshop.status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.status"></i>
+                                    @endif
+                                </span>
+                            </th>
                             <th class="white-space-140">Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
