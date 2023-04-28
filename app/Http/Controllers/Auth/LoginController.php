@@ -558,7 +558,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_normal_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/normal/image_storage/'.$user->id.'/'), $filestorage);
-                                $file[] = 'public/image/users/storage/normal/image_storage/'.$user->id.'/' . $filestorage;
+                                $file[] = 'storage/image/users/storage/normal/image_storage/'.$user->id.'/' . $filestorage;
                             }
                         }
                         $file1 = [];
@@ -566,7 +566,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_pccc_normal_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/normal/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file1[] = 'public/image/users/storage/normal/image_pccc/'.$user->id.'/' . $filestorage;
+                                $file1[] = 'storage/image/users/storage/normal/image_pccc/'.$user->id.'/' . $filestorage;
                             }
                         }
 
@@ -593,7 +593,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/cold/image_storage/'.$user->id.'/'), $filestorage);
-                                $file2[] = 'public/image/users/storage/cold/image_storage/'.$user->id.'/' . $filestorage;
+                                $file2[] = 'storage/image/users/storage/cold/image_storage/'.$user->id.'/' . $filestorage;
                             }
                         }
                         $file3 = [];
@@ -601,7 +601,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_pccc_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/cold/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file3[] = 'public/image/users/storage/cold/image_pccc/'.$user->id.'/' . $filestorage;
+                                $file3[] = 'storage/image/users/storage/cold/image_pccc/'.$user->id.'/' . $filestorage;
                             }
                         }
 
@@ -628,7 +628,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_warehouse') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/warehouse/image_storage/'.$user->id.'/'), $filestorage);
-                                $file4[] = 'public/image/users/storage/warehouse/image_storage/'.$user->id.'/' . $filestorage;
+                                $file4[] = 'storage/image/users/storage/warehouse/image_storage/'.$user->id.'/' . $filestorage;
                             }
                         }
                         $file5 = [];
@@ -636,7 +636,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_pccc_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/warehouse/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file5[] = 'public/image/users/storage/warehouse/image_pccc/'.$user->id.'/' . $filestorage;
+                                $file5[] = 'storage/image/users/storage/warehouse/image_pccc/'.$user->id.'/' . $filestorage;
                             }
                         }
 

@@ -36,6 +36,46 @@
         <div class="row ">
             <div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 col-12">
                 <div class="card profile">
+                    <form action="{{route('screens.storage.account.upload',['id' => $infoAccount->id])}}"
+                          id="form" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="user-avatar text-center d-block mx-auto"
+                                     style="position: relative; width: 128px; height: 128px; border-radius: 100%;">
+                                    <img id="img-avatar"
+                                         src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
+                                         alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                    <label for="upload-avatar">
+                                        <i class="fas fa-image upAvatar" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer; z-index: 10
+                                ;"></i>
+                                    </label>
+                                    <input type="file" id="upload-avatar" hidden name="img" onchange="form.submit()"
+                                           accept="image/png, image/gif, image/jpeg">
+                                </div>
+                                <h2 class="font-24 mb-0">{{$infoAccount->name}}</h2>
+                                <p>{{$infoAccount->account_code}}</p>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-body border-top">
+                        <h3 class="font-16">Thông tin liên hệ</h3>
+                        <div class="">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>{{$infoAccount->phone_number}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body border-top">
+
+                        <h4>Ngày kích hoạt:
+                            <strong>{{\Illuminate\Support\Carbon::parse($infoAccount->confirm_date)->format('d/m/Y')}}</strong>
+                        </h4>
+                        <h4>Ngày hết hạn: <strong
+                                style="color:#DC2626">{{\Illuminate\Support\Carbon::parse($infoAccount->expiration_date)->format('d/m/Y')}}</strong>
+                        </h4>
+                    </div>
 
                 </div>
             </div>
@@ -237,6 +277,10 @@
 @section('custom_js')
     <script>
         $(document).ready(function () {
+            setTimeout(() => {
+                $("#alert-succ").hide('fade');
+            }, 1000);
+            
             function convertDate(inputFormat) {
                 function pad(s) {
                     return (s < 10) ? '0' + s : s;
@@ -246,98 +290,6 @@
                 return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
             }
 
-            async function getUser() {
-                await $.ajax({
-                    type: "GET",
-                    url: '{{ route('screens.storage.account.profile.detail') }}',
-                    dataType: "json",
-                    data: {},
-                    encode: true,
-                }).done(function (data) {
-                    if (data.data) {
-                        var htmlData = '';
-                        var htmlDataForm = '';
-                        htmlData += ` <div class="card-body">
-                                    <div class="text-center">
-                                        <h2 class="font-24 mb-0">${data.data.name}</h2>
-                                        <p> ${data.data.account_code}</p>
-                                    </div>
-                                </div>
-                                <div class="card-body border-top">
-                                    <h3 class="font-16">Thông tin liên hệ</h3>
-                                    <div class="">
-                                        <ul class="list-unstyled mb-0">
-                                        <li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>${data.data.phone_number}</li>
-                                    </ul>
-                                    </div>
-                                </div>
-                                <div class="card-body border-top">
-
-                                    <h4>Ngày kích hoạt: <strong>${convertDate(data.data.confirm_date)}</strong></h4>
-                                    <h4>Ngày hết hạn: <strong style="color:#DC2626"> ${convertDate(data.data.expiration_date)}</strong></h4>
-                                </div>
-                                        `;
-                        htmlDataForm += `  <div class="form-group">
-                                                            <label for="name">Tên V-Kho:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="name" value="${data.data.name}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="company_name">Tên công ty:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="company_name" value="${data.data.company_name}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="tax_code">Mã số thuế:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="tax_code" value="${data.data.tax_code}" readonly>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="addres">Địa chỉ:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="address" value="${data.data.address}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="phone_number">Số điện thoại:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="phone_number" value="${data.data.phone_number}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="id_vdone">ID Người đại diện:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="id_vdone" value="${data.data.id_vdone}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="id_vdone_diff">ID Người đại diện (khác):</label>
-                                                            <input type="text" class="form-control form-control-lg" id="id_vdone_diff" value="${data.data.id_vdone_diff ? data.data.id_vdone_diff : 'Không có'}">
-                                                        </div>
-                                                        <span style="font-size:18px; font-weight:600">Thông tin kho:</span>
-                                                        <div class="form-group">
-                                                            <label for="floor_area">Diện tích sàn:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="floor_area" value="${data.data.storage_information.floor_area}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="volume">Thể tích:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="volume" value="${data.data.storage_information.volume ? data.data.storage_information.volume : 'Không có'}">
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="cold_storage">Diện tích kho lạnh (m2):</label>
-                                                            <input type="text" class="form-control form-control-lg" id="cold_storage" value="${data.data.storage_information.cold_storage ? data.data.storage_information.cold_storage : 'Không có'}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="warehouse">Diện tích kho bãi (m2):</label>
-                                                            <input type="text" class="form-control form-control-lg" id="warehouse" value="${data.data.storage_information.warehouse ? data.data.storage_information.warehouse : 'Không có'}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="normal_storage">Diện tích kho thường:</label>
-                                                            <input type="text" class="form-control form-control-lg" id="normal_storage" value="${data.data.storage_information.normal_storage ? data.data.storage_information.normal_storage : 'Không có'}">
-                                                        </div>`
-                        $('.profile').html(htmlData);
-                        // $('.form-g').html(htmlDataForm);
-
-                    } else {
-                        $('.profile').html('')
-                        $('.form-g').html('');
-                    }
-                })
-            }
-
-            getUser();
         });
 
         // tinh thanh pho
