@@ -65,8 +65,8 @@ class DashboardController extends Controller
         // $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
         $dataRevenueToday = $this->chartRepository->revenue30Day();
-        $dataOrderToday = $this->chartRepository->productRunningOut();
-        $dataOrderSuccessToday = $this->chartRepository->unapprovedOrder();
+        $productRunningOut = $this->chartRepository->productRunningOut();
+        $unapprovedOrder = $this->chartRepository->unapprovedOrder();
 
         return view('screens.manufacture.dashboard.index', [
             'data' => $data,
@@ -82,8 +82,8 @@ class DashboardController extends Controller
             // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
             'dataRevenueToday' => $dataRevenueToday,
-            'dataOrderToday' => $dataOrderToday,
-            'dataOrderSuccessToday' => $dataOrderSuccessToday,
+            'productRunningOut' => $productRunningOut,
+            'unapprovedOrder' => $unapprovedOrder,
         ]);
     }
 }
