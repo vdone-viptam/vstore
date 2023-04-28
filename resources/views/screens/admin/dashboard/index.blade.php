@@ -101,15 +101,150 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Tên</th>
-                                    <th>Email</th>
-                                    <th class="white-space-120">Số điện thoại</th>
-                                    <th>Tên công ty</th>
-                                    <th class="white-space-120">Mã số thuế</th>
-                                    <th>Id P-Done người đại diện</th>
-                                    <th>Phân loại tài khoản</th>
-                                    <th class="white-space-120">Ngày đăng ký</th>
-                                    <th>Mã người giới thiệu</th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Tên
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'users.name')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="users.name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="users.name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="users.name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Email
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'email')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="email"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="email"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="email"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th class="white-space-120">
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Số điện thoại
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'phone_number')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="phone_number"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="phone_number"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="phone_number"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Tên công ty
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'company_name')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="company_name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="company_name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="company_name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th class="white-space-120">
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Mã số thuế
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'tax_code')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="tax_code"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="tax_code"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="tax_code"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Id P-Done người đại diện
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'id_vdone')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="id_vdone"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="id_vdone"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="id_vdone"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Phân loại tài khoản
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'users.role_id')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="users.role_id"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="users.role_id"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="users.role_id"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th class="white-space-120">
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Ngày đăng ký
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'users.created_at')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="users.created_at"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="users.created_at"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="users.created_at"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Mã người giới thiệu
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'users.referral_code')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-users" data-sort="users.referral_code"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-users" data-sort="users.referral_code"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-users" data-sort="users.referral_code"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -200,13 +335,120 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Mã yêu cầu</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Ngành hàng</th>
-                                    <th>Nhà cung cấp</th>
-                                    <th>Chiết khấu cho V-Store</th>
-                                    <th>V-Store xét duyệt</th>
-                                    <th>Chiết khấu cho V-Shop</th>
+                                    <th>
+
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Mã yêu cầu
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'requests.code')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="requests.code"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="requests.code"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="requests.code"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Tên sản phẩm
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'products.name')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="products.name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="products.name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="products.name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Ngành hàng
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'categories.name')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="categories.name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="categories.name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="categories.name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Nhà cung cấp
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'users.name')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="users.name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="users.name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="users.name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Chiết khấu cho V-Store
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'products.discount')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="products.discount"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="products.discount"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="products.discount"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            V-Store xét duyệt
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'vstore_name')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="vstore_name"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="vstore_name"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="vstore_name"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Chiết khấu cho V-Shop
+                                            <span style="float: right;cursor:pointer">
+                                                @if($field_request == 'requests.discount_vshop')
+                                                    @if($type_request == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort-request" data-sort="requests.discount_vshop"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort-request" data-sort="requests.discount_vshop"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort-request" data-sort="requests.discount_vshop"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -337,7 +579,7 @@
     let limit_users = document.getElementById('limit_users');
 
     $(document).ready(function () {
-        document.querySelectorAll('.sort').forEach(item => {
+        document.querySelectorAll('.sort-request').forEach(item => {
             const {sort} = item.dataset;
             item.addEventListener('click', () => {
                 let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
@@ -349,6 +591,21 @@
                 setTimeout(() => {
                     document.location = '{{route('screens.admin.dashboard.index',['key_search_request' => $key_search_request])}}&type_request=' + orderBy +
                         '&field_request=' + sort
+                })
+            });
+        });
+        document.querySelectorAll('.sort-users').forEach(item => {
+            const {sort} = item.dataset;
+            item.addEventListener('click', () => {
+                let orderBy = JSON.parse(localStorage.getItem('orderBy')) || 'asc';
+                if (orderBy === 'asc') {
+                    localStorage.setItem('orderBy', JSON.stringify('desc'));
+                } else {
+                    localStorage.setItem('orderBy', JSON.stringify('asc'));
+                }
+                setTimeout(() => {
+                    document.location = '{{route('screens.admin.dashboard.index',['key_search_users' => $key_search_users])}}&type_users=' + orderBy +
+                        '&field_users=' + sort
                 })
             });
         });
