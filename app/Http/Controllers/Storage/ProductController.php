@@ -466,7 +466,7 @@ class ProductController extends Controller
                     "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
-                dd($taodon);
+
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
                 $request = new RequestWarehouse();
