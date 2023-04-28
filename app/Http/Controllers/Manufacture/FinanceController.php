@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use App\Models\BlanceChange;
 use App\Models\Deposit;
 use App\Models\Wallet;
@@ -142,6 +143,7 @@ class FinanceController extends Controller
             if ($request->money > Auth::user()->money) {
                 return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
             }
+            $bank = Bank::where('id',$wallet->bank_id)->first();
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
                 'code' => $code,
@@ -162,19 +164,24 @@ class FinanceController extends Controller
                 'money_history' => (double)$request->money,
                 'created_at' => Carbon::now()
             ]);
+            $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.$request->money. '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
+//                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
+            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
 
 
+
+//            userId=${dto.userId}&code=${dto.code}&value=${dto.value}&bankNumber=${dto.bankNumber}&bankHolder=${dto.bankHolder}
 
             $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop',[
-                "code"=> "VN722PFXBPVR",
-                "userId"=> "1",
-                "bankName"=> "Techcombank",
-                "bankLogo"=> "https://res.cloudinary.com/dnixuyeyz/image/upload/v1679892139/vdone/image/lm1kqatzfmcvj9eqwich.jpg",
-                "bankHolder"=> "NGUYEN DUY THANH",
-                "bankNumber"=> "VN722PFXBPVR",
-                "value"=> 500000
+                "code"=> $code,
+                "userId"=> Auth::id(),
+                "bankName"=> $bank->name,
+                "bankLogo"=> $bank->image,
+                "bankHolder"=> $wallet->name,
+                "bankNumber"=> $wallet->account_number,
+                "value"=> $request->money,
+                "signature"=> $sig
             ]);
-
 
 
             DB::table('users')->where('id', Auth::id())->update(['money' => Auth::user()->money - $request->money]);
