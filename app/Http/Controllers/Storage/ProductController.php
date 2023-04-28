@@ -374,7 +374,7 @@ class ProductController extends Controller
 
             $product = Product::where('id', $order_item->product_id)->first();
             RequestWarehouse::destroy($order->request_warehouse_id);
-            $priceDiscount = $product->price * $order_item->quantity;
+            $priceDiscount = $product->price;
 
             $totalDiscountSuppliersAndVStore = 0;
             if ($order_item->discount_ncc) {
@@ -434,7 +434,7 @@ class ProductController extends Controller
                 $list_item[] = [
                     'PRODUCT_NAME' => $product->name,
                     'PRODUCT_QUANTITY' => $order_item['quantity'],
-                    'PRODUCT_PRICE' => $product->price,
+                    'PRODUCT_PRICE' => $priceDiscount,
                     'PRODUCT_WEIGHT' => $product->weight * $order_item['quantity']
                 ];
 
