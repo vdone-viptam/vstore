@@ -94,9 +94,11 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th class="text-center white-space-120">Mã đơn hàng</th>
+                            <th class="text-center white-space-120">Mã sản phẩm</th>
+                            <th class="white-space-300">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'name')
                                         @if($type == 'desc')
@@ -108,8 +110,9 @@
                                         <i class="fas fa-sort sort" data-sort="name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -122,7 +125,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái thanh toán
+                            <th class="text-center" style="min-width:180px !important;">Trạng thái thanh toán
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'method_payment')
                                         @if($type == 'desc')
@@ -135,7 +138,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày đặt hàng
+                            <th class="text-center white-space-150">Ngày đặt hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -148,7 +151,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Xác nhận / Từ chối
+                            <th class="text-center" style="min-width:180px !important;">Xác nhận / Từ chối
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'export_status')
                                         @if($type == 'desc')
@@ -161,36 +164,36 @@
                                     @endif
                                 </span>
                             </th>
-                            <th></th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($order) > 0)
                             @foreach($order as $ord)
                                 <tr>
-                                    <td>{{$ord->no}}</td>
-                                    <td>{{$ord->publish_id}}</td>
+                                    <td class="text-center white-space-120">{{$ord->no}}</td>
+                                    <td class="text-center white-space-120">{{$ord->publish_id}}</td>
                                     <td title="{{$ord->name}}">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
                                     <td class="text-center">{{$ord->quantity}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($ord->method_payment == 'COD')
-                                            <span class="text-danger">Chưa thanh toán</span>
+                                            <span class="text-danger font-medium">Chưa thanh toán</span>
                                         @else
-                                            <span class="text-success">Đã thanh toán</span>
+                                            <span class="text-success font-medium">Đã thanh toán</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="status{{$ord->id}}">
+                                    <td class="status{{$ord->id}} text-center" style="min-width:180px !important;">
                                         @if($ord->export_status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a
                                                     href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},1)"
                                                     style="text-decoration:underline"
-                                                    class="text-primary  text-white font-medium  rounded">
+                                                    class="text-success  ">
                                                     Đồng ý
                                                 </a>
                                                 <a href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},3)"
                                                    style="text-decoration:underline"
-                                                   class="text-danger  text-white font-medium  rounded">
+                                                   class="text-danger  ">
                                                     Từ chối
                                                 </a></div>
                                         @elseif($ord->export_status == 1)
@@ -219,7 +222,7 @@
 
                                         @endif
                                     </td>
-                                    <td><a href="#" class="btn btn-link" onclick="showDetail({{$ord->id}})">Chi tiết</a>
+                                    <td><a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" onclick="showDetail({{$ord->id}})">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach

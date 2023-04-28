@@ -77,7 +77,7 @@
                                 <i class="fas fa-sort sort" data-sort="products.name"></i>
                                 </span>
                             </th>
-                            <th>Ngành hàng
+                            <th class="text-center">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                           <i class="fas fa-sort sort" data-sort="brand"></i>
                                 </span>

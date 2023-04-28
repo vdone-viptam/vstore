@@ -74,8 +74,10 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã yêu cầu</th>
-                            <th>Tên kho hàng
+                            <th class="text-center white-space-120">Mã yêu cầu</th>
+                            <th class="text-center">
+                                
+                                Tên kho hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'warehouses.name')
                                         @if($type == 'desc')
@@ -88,7 +90,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tên sản phẩm
+                            <th>
+                            <div class="white-space-400 d-flex justify-content-between align-items-center" style="gap:6px">    
+                                Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -100,8 +104,11 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Loại yêu cầu
+                            <th>
+                            <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">        
+                            Loại yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'type')
                                         @if($type == 'desc')
@@ -114,8 +121,11 @@
                                         <i class="fas fa-sort sort" data-sort="request_warehouses.type"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Tình trạng
+                            <th>
+                            <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">        
+                            Tình trạng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'request_warehouses.status')
                                         @if($type == 'desc')
@@ -129,8 +139,9 @@
                                         <i class="fas fa-sort sort" data-sort="request_warehouses.status"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th class="white-space-100">Số lượng
+                            <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -143,7 +154,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thời gian
+                            <th>  <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">    
+                                Thời gian
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'request_warehouses.created_at')
                                         @if($type == 'desc')
@@ -157,6 +169,7 @@
                                         <i class="fas fa-sort sort" data-sort="request_warehouses.created_at"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
                         </tr>
                         </thead>
@@ -164,17 +177,17 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{$product->code}}</td>
+                                    <td class="white-space-120">{{$product->code}}</td>
                                     <td class="white-space-300">{{$product->ware_name}}</td>
                                     <td class="white-space-400">{{$product->name}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>
                                         @else
                                             <span class="text-danger">Xuất kho</span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($product->type == 1)
                                             @if($product->status == 0)
                                                 <span class="text-secondary">Đang chờ kho duyệt</span>

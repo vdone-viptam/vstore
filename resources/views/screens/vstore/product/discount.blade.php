@@ -81,7 +81,9 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-400">Tên sản phẩm
+                            <th class="white-space-400" style="min-width:200px !important;">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -93,6 +95,7 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
                             <th>Phần trăm giảm giá
                                 <span style="float: right;cursor: pointer">
@@ -108,7 +111,7 @@
                                 </span>
                             </th>
 
-                            <th>Ngày bắt đầu
+                            <th style="text-center">Ngày bắt đầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.start_date')
                                         @if($type == 'desc')
@@ -121,7 +124,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày kết thúc
+                            <th style="text-center">Ngày kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')
@@ -134,7 +137,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Trạng thái
+                            <th class="text-center">Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.status')
                                         @if($type == 'desc')
@@ -170,19 +173,19 @@
                             @foreach($discounts as $discount)
                                 <tr>
                                     <td class="white-space-400">{{$discount->name}}</td>
-                                    <td class="text-right">{{$discount->discount}}</td>
+                                    <td class="text-center">{{$discount->discount}}%</td>
                                     <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($discount->status == 1 )
                                             <span class="text-success">Đang áp dụng</span>
                                         @else
                                             <span class="text-danger">Không áp dụng</span>
                                         @endif
                                     </td>
-                                    <td>{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td><a href="#" data-id="{{$discount->id}}"
-                                           class="btn btn-warning more-details"
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center" style="min-width:80px !important;"><a href="javascript:void(0)" data-id="{{$discount->id}}"
+                                           class="btn btn-link more-details"
                                            onclick="edit({{$discount->id}})">Sửa</a></td>
                                 </tr>
                             @endforeach

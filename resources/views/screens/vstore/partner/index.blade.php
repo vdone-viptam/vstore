@@ -107,7 +107,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thao Tác</th>
+                            <th class="text-center">Thao Tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -127,7 +127,7 @@
                                     <td class="text-center">{{$value->khu_vuc }}</td>
                                     <td class="text-right"> {{number_format($value->amount,0,'.','.')}}</td>
                                     <td class="text-center">{{number_format($value->countProduct,0,'.','.')}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <button type="button" class="btn btn-link"
                                                 onclick="showDetail({{$value->id}})" style="text-decoration:underline">Chi tiết
                                         </button>

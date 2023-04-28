@@ -113,9 +113,11 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã xuất hàng</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-120 text-center">Mã xuất hàng</th>
+                            <th class="white-space-120 text-center">Mã sản phẩm</th>
+                            <th>
+                            <div class="white-space-300 d-flex justify-content-between align-items-center" style="gap:6px">       
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
                                         @if($type == 'desc')
@@ -127,8 +129,9 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Nhà cung cấp
+                            <th class="white-space-150 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'ncc_name')
                                         @if($type == 'desc')
@@ -141,7 +144,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-120 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -154,7 +157,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày xuất hàng
+                            <th class="white-space-150 text-center">Ngày xuất hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -167,7 +170,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Thao tác/Trạng thái
+                            <th class="text-center" style="min-width:180px !important;">Thao tác/Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'status')
                                         @if($type == 'desc')
@@ -180,18 +183,18 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Xuất hóa đơn</th>
-                            <th></th>
+                            <th class="text-center white-space-150">Xuất hóa đơn</th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>{{$request->code}}</td>
-                                    <td>{{$request->publish_id}}</td>
+                                    <td class="text-center white-space-120">{{$request->code}}</td>
+                                    <td class="text0center white-space-120">{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
-                                    <td>{{$request->ncc_name}}</td>
+                                    <td class="text-center">{{$request->ncc_name}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
 
                                     <td class="text-center">
@@ -225,7 +228,7 @@
 
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_number}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">
@@ -233,7 +236,7 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td><a href="#" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi
+                                    <td class="white-space-100"><a href="javascript:void(0)" onclick="showDetail({{$request->id}})" class="btn btn-link px-2" style="text-decoration:underline">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach

@@ -77,8 +77,10 @@
                     >
                         <thead>
                         <tr>
-                            <th style="min-width:100px;">Mã đơn hàng</th>
-                            <th style="min-width:150px">Tên sản phẩm
+                            <th class="text-center" style="min-width:100px;">Mã đơn hàng</th>
+                            <th style="min-width:150px">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -90,8 +92,9 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th class="white-space-100">Ngành hàng
+                            <th class="white-space-150 text-center">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -104,9 +107,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-90">
+                            <th class="white-space-150">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Giá sản phẩm (đ)
+                                Giá sản phẩm
 
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
@@ -134,7 +137,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th class="white-space-90">
+                            <th class="white-space-150" >
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Giá trị đơn hàng
                                 <span style="float: right;cursor:pointer">
@@ -151,7 +154,7 @@
                                 </div>
                             </th>
                             <th class="white-space-130">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                 Thời gian đặt hàng
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'order.created_at')
@@ -166,8 +169,8 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-130">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th class="white-space-90">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                 Thời gian hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'order.estimated_date')
@@ -182,9 +185,9 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-130">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Phần trăm chiết khấu nhận được(%)
+                            <th class="white-space-150">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    Phần trăm chiết khấu nhận được
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'products.discount')
                                         @if($type == 'desc')
@@ -198,9 +201,9 @@
                              </span>
                                 </div>
                             </th>
-                            <th class="white-space-140">
+                            <th class="white-space-120" style="min-width:130px !important;">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Chiết khấu nhận được (đ)
+                                    Chiết khấu nhận được
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
                                         @if($type == 'desc')
@@ -225,11 +228,11 @@
                                     <td>{{$order->no}}</td>
                                     <td class="white-space-200">{{$order->name}}</td>
                                     <td class="white-space-120">{{$order->cate_name}}</td>
-                                    <td class="white-space-90 text-right">{{number_format($order->price,'0','.','.')}}</td>
+                                    <td class="white-space-90 text-right">{{number_format($order->price,'0','.','.')}} đ</td>
                                     <td class="white-space-100 text-center">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="white-space-120 text-right">{{number_format($order->total,'0','.','.')}}</td>
-                                    <td class="white-space-150"> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="white-space-130">
+                                    <td class="white-space-120 text-right">{{number_format($order->total,'0','.','.')}}đ</td>
+                                    <td class="white-space-150 text-center"> {{\Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="white-space-120 text-center">
                                         @if($order->export_status == 4 && \Carbon\Carbon::parse($order->estimated_date)->diffInDays(\Carbon\Carbon::now()) >= 7)
                                             {{\Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i')}}
                                         @else
@@ -237,12 +240,12 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        {{$order->discount}}
+                                        {{$order->discount}}%
                                     </td>
                                     <td class="text-right">
-                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}}
+                                        {{number_format($order->discount * $order->total / 100,0,'.','.')}} đ
                                     </td>
-                                    <td class="white-space-50"><a href="javascript:void(0)" onclick="showDetail({{$order->id}})" class="btn btn-link" style="text-decoration:underline">Chi
+                                    <td class="white-space-100 text-center"><a href="javascript:void(0)" onclick="showDetail({{$order->id}})" class="btn btn-link" style="text-decoration:underline">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach

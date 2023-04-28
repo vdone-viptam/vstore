@@ -135,7 +135,7 @@
                             </th>
                             <th class="white-space-150">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Chiết khấu từ Nhà cung cấp (%)
+                                    Chiết khấu từ Nhà cung cấp 
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                             @if($type == 'desc')
@@ -149,7 +149,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120">Ngày yêu cầu
+                            <th class="white-space-120 text-center">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'products.price')
@@ -162,7 +162,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100">Trạng thái</th>
+                            <th class="white-space-100 text-center">Trạng thái</th>
                             <th>
                             </th>
                         </tr>
@@ -185,17 +185,17 @@
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="text-center">
-                                        {{$product->discount}} %
+                                        {{$product->discount}}%
                                     </td>
 
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="white-space-120 text-center"><span class="text-warning ">Yêu cầu mới</span></td>
+                                    <td class="white-space-120 text-center"><span class="font-medium ">Yêu cầu mới</span></td>
 
-                                    <td>
+                                    <td style="min-width:150px !important;">
                                         <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn px-2 text-success">Đồng ý</a>
+                                           class="btn px-2 text-success" style="text-decoration:underline">Đồng ý</a>
                                         <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                           class="btn px-2 text-danger" >Từ chối</a>
+                                           class="btn px-2 text-danger" style="text-decoration:underline">Từ chối</a>
                                     </td>
                                 </tr>
                             @endforeach

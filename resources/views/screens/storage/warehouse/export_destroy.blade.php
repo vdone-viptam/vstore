@@ -97,9 +97,11 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã xuất hủy</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-120 text-center">Mã xuất hủy</th>
+                            <th class="white-space-120 text-center">Mã sản phẩm</th>
+                            <th>
+                            <div class="white-space-300 d-flex justify-content-between align-items-center" style="gap:6px">       
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
                                         @if($type == 'desc')
@@ -111,8 +113,9 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-120 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -125,20 +128,20 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Lý do hủy</th>
-                            <th></th>
+                            <th class="white-space-300 text-center">Lý do hủy</th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>{{$request->code}}</td>
-                                    <td>{{$request->publish_id}}</td>
+                                    <td class="text-center white-space-120">{{$request->code}}</td>
+                                    <td class="text-center white-space-120">{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
-                                    <td><a href="#" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi
+                                    <td class="white-space-120 text-center"><a href="javascript:void(0)" style="text-decoration:underline;" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
