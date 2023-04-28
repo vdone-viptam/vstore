@@ -194,7 +194,7 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                   value="0 đ" readonly style="pointer-events: none">
+                                                   value="0 đ" disabled readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +244,7 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                   value="0 đ" readonly style="pointer-events: none">
+                                                   value="0 đ" disabled readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +295,7 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                   value="0 đ" readonly style="pointer-events: none">
+                                                   value="0 đ" disabled readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -538,7 +538,7 @@
                         plupload.each(files, function (file) {
                             console.log('FilesAdded');
                             console.log(file);
-                            document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                            document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                         });
                         uploader.start();
                     },

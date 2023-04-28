@@ -81,7 +81,8 @@ class WarehouseController extends Controller
                 'request_warehouses.id',
                 'request_warehouses.order_number',
                 'order.id as order_id',
-                'request_warehouses.updated_at'
+                'request_warehouses.updated_at',
+                'request_warehouses.created_at'
             )
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->join('order', 'request_warehouses.order_number', '=', 'order.order_number')
@@ -207,7 +208,6 @@ class WarehouseController extends Controller
             ->join('request_warehouses', 'products.id', '=', 'request_warehouses.product_id')
             ->where('request_warehouses.id', $request->id)
             ->orWhere('request_warehouses.code', $request->id)
-
             ->first();
         if ($requests->type == 2) {
             $requests->order_number = RequestWarehouse::select('order_number')

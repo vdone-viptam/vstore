@@ -94,10 +94,11 @@ class ProductController extends Controller
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
             $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
+            $vstore = User::join('products', 'users.id', '=', 'products.vstore_id')->where('products.vstore_id', $currentRequest->vstore_id)
+                ->where('products.id', $currentRequest->product_id)
+                ->select('products.id', 'products.publish_id', 'users.account_code')->first();
             if ($request->status == 3) {
-                $vstore = User::join('products', 'users.id', '=', 'products.vstore_id')->where('products.vstore_id', $currentRequest->vstore_id)
-                    ->where('products.id', $currentRequest->product_id)
-                    ->select('products.id', 'products.publish_id', 'users.account_code')->first();
+
 
                 $repon = Http::post(config('domain.domain_vdone') . 'notifications/send-all',
                     [
@@ -133,11 +134,11 @@ class ProductController extends Controller
                 'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.manufacture.product.request')
+                'href' => route('screens.manufacture.product.request', ['key_search' => $vstore->publish_id])
             ];
             $user->notify(new AppNotification($data));
             $userVstore = User::find($currentRequest->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $data['href'] = route('screens.vstore.product.request');
+            $data['href'] = route('screens.vstore.product.request', ['key_search' => $vstore->publish_id]);
             $userVstore->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');

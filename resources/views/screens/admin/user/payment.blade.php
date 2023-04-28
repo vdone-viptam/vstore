@@ -123,7 +123,7 @@
                                         @if($history->status == 3 && $history->payment_status == 1)
                                             <p class="text-success"><i class="fas fa-check mr-2"></i>Thành công</p>
                                         @else
-                                            <p class="text-danger"><i class="fas fa-times mr-2"></i>Từ chối</p>
+                                            <p class="text-danger"><i class="fas fa-times mr-2"></i>Thất bại</p>
                                         @endif
                                     </td>
                                     <td><a href="#" onclick="checkPayment({{$history->id}})" class="btn btn-link">Chi

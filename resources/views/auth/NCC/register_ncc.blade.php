@@ -243,7 +243,7 @@
                             <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ
                                 chi tiết</label>
                             <input class="form-control form-control-lg" type="text" name="address" required=""
-                                placeholder="Nhập địa chỉ chi tiết (VD: Số nhà 89, phố Tô Vĩnh Diễn, phường Khương Trung, quận Thanh Xuân, thành phố Hà Nội)" value="{{ old('address') }}"> @error('address')
+                                placeholder="Nhập địa chỉ chi tiết (VD: Số nhà, tòa nhà, thôn...)" value="{{ old('address') }}"> @error('address')
                                 <p class="text-danger text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
@@ -255,7 +255,7 @@
                             ý với <span style="text-decoration: underline;cursor: pointer;"  class="underline text-blue-700" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
                     </label>
                     <div class="form-group pt-2">
-                        <button type="submit" class="active btn btn-block btn-primary" >Mua ngay</button>
+                        <button type="submit" class="active btn btn-block btn-primary" >Đăng ký mua</button>
                     </div>
                 </div>
 

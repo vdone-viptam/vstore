@@ -43,20 +43,29 @@ class PartnerController extends Controller
                     ->orWhere('users.phone_number', 'like', '%' . $this->v['key_search'] . '%');
             });
         }
-        $this->v['products'] = $this->v['products']->paginate( $this->v['limit']);
+        $this->v['products'] = $this->v['products']
+            ->paginate( $this->v['limit']);
 
-        foreach ($this->v['products'] as $d) {
+        $this->v['products']->map(function ($item) {
             $countCategory = Product::where('products.user_id', Auth::id())
-                ->where('products.vstore_id', $d->vstore_id)
+                ->where('products.vstore_id', $item->vstore_id)
                 ->where('products.status', 2)
                 ->select(
                     DB::raw('COUNT(products.category_id) as total_category'),
                     'products.category_id'
                 )->groupBy('category_id')
                 ->get()->toArray();
-            $d->total_category = count($countCategory);
+            $item->total_category = count($countCategory);
+            return $item;
+        });
+        if( $this->v['field'] == 'users.id'){
+            if( $this->v['type'] == 'desc'){
+                $sortedResult = $this->v['products']->getCollection()->sortByDesc('total_category')->values();
+            }else{
+                $sortedResult = $this->v['products']->getCollection()->sortBy('total_category')->values();
+            }
+            $this->v['products']->setCollection($sortedResult);
         }
-
         return view('screens.manufacture.partner.index', $this->v);
     }
 

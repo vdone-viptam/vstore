@@ -620,7 +620,7 @@ aria-hidden="true">
                     </div>
 
                 </div>`)
-                    if (arrImage.length == 5) {
+                    if (arrImage.length >= 5) {
                         //   document.querySelector('.add-img-SP').classList.add('hidden');
                         $(this).addClass("hidden");
                     }
@@ -656,15 +656,53 @@ aria-hidden="true">
         elementInput.find('.countImage').html( data.length +'/5');
         elementInput.siblings('.input-image').val(JSON.stringify(data));
 
-        document.querySelectorAll('.delete-one-image').forEach(item => {
+        let checkArr = elementInput.attr('data-arrImg');
+        let arrImage;
+        
+
+        document.querySelectorAll('.delete-one-image').forEach((item, indexDelete) => {
             const {index} = item.dataset;
             item.addEventListener('click', (e) => {
-                data = data.filter((item1, index1) => index1 !== +index);
-                if (data.length < 5) {
-                    document.querySelector('.add-img-SP').classList.remove('hidden');
-                    $(this).removeClass("hidden");
+
+                // hafm xoá ảnh từ arr
+                switch (checkArr) {
+                    case '1':
+                        arrImage1 = data.filter((item1, index1) =>{ return index1 !== +index});
+                        arrImage = arrImage1;
+                        break;
+                    case '2':
+                        arrImage2 = data.filter((item1, index1) =>{ return index1 !== +index});
+                        arrImage = arrImage2;
+                        break;
+                    case '3':
+                        arrImage3 = data.filter((item1, index1) =>{ return index1 !== +index});
+                        arrImage = arrImage3;
+                        break;
+                    case '4':
+                        arrImage4 = data.filter((item1, index1) =>{ return index1 !== +index});
+                        arrImage = arrImage4;
+                        break;
+                    case '5':
+                        arrImage5 = data.filter((item1, index1) =>{ return index1 !== +index});
+                        arrImage = arrImage5;
+                        break;
+                    case '6':
+                        arrImage6 = data.filter((item1, index1) =>{ return index1 !== +index});
+                        arrImage = arrImage6;
+                        break;
+                    default:
+                        break;
                 }
-                render(data,elementInput);
+                // arrImage = data.filter((item1, index1) =>{ return index1 !== +index});
+
+
+                // hien the them anh
+                var div = e.target.closest('.align-items-start');
+                let addImgspElement = div.querySelector('.add-imgSP');
+                if (arrImage.length < 5) {
+                    addImgspElement.classList.remove('hidden');
+                }
+                render(arrImage,elementInput);
             })
         })
     }
@@ -717,6 +755,10 @@ aria-hidden="true">
                 let base64String = c.toDataURL();
                 arrImg.push(base64String);
                 document.getElementsByName(nameInput)[0].value = JSON.stringify(arrImg);
+
+                if( index >=4){
+                    $(elementOldImage).closest('.img-sp').siblings('.add-imgSP').addClass('hidden');
+                }
             });
 
         }

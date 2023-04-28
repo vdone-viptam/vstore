@@ -217,8 +217,8 @@ class UserController extends Controller
     public function detail(Request $request)
     {
         $user = User::select('name', 'email',
-            'id_vdone', 'phone_number', 'tax_code','role_id',
-            'address', 'created_at', 'storage_information','confirm_date','referral_code')->where('id', $request->id)->first();
+            'id_vdone', 'phone_number', 'tax_code', 'role_id',
+            'address', 'created_at', 'storage_information', 'confirm_date', 'referral_code')->where('id', $request->id)->first();
         return $user;
         if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
@@ -336,7 +336,7 @@ class UserController extends Controller
                 'avatar' => 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => $href . '?'
+                'href' => $href
             ];
 
             $user->notify(new AppNotification($data));
