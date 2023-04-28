@@ -141,6 +141,17 @@
                                 </span>
                             </th>
                             <th class="text-center white-space-120">Trạng thái
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'discounts.status')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="discounts.status"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="discounts.status"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="discounts.status"></i>
+                                    @endif
+                                </span>
                             </th>
                             <th class="text-center white-space-150">Ngày tạo
                                 <span style="float: right;cursor: pointer">
