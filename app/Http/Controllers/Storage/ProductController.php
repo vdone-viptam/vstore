@@ -437,7 +437,29 @@ class ProductController extends Controller
                     'PRODUCT_PRICE' => $priceDiscount,
                     'PRODUCT_WEIGHT' => $product->weight * $order_item['quantity']
                 ];
-
+                dd([
+                    "ORDER_NUMBER" => '',
+                    "SENDER_FULLNAME" => $warehouse->name,
+                    "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
+                    "SENDER_PHONE" => $warehouse->phone_number,
+                    "RECEIVER_FULLNAME" => $order->fullname,
+                    "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
+                    "RECEIVER_PHONE" => $order->phone,
+                    "PRODUCT_NAME" => $product->name,
+                    "PRODUCT_DESCRIPTION" => $order_item['quantity'] . " x " . $product->name,
+                    "PRODUCT_QUANTITY" => $order_item->quantity,
+                    "PRODUCT_PRICE" => $order->total - $order->shipping,
+                    "PRODUCT_WEIGHT" => $product->weight * $order_item['quantity'],
+                    "PRODUCT_LENGTH" => null,
+                    "PRODUCT_WIDTH" => null,
+                    "PRODUCT_HEIGHT" => null,
+                    "ORDER_PAYMENT" => $order_payment,
+                    "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+                    "ORDER_SERVICE_ADD" => null,
+                    "ORDER_NOTE" => $order_item['quantity'] . " x " . $product->name,
+                    "MONEY_COLLECTION" => $money_colection,
+                    "LIST_ITEM" => $list_item,
+                ]);
                 $taodon = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -466,7 +488,7 @@ class ProductController extends Controller
                     "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
-                dd($taodon);
+
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
                 $request = new RequestWarehouse();
