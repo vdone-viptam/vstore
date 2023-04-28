@@ -302,7 +302,7 @@
         })
         $(document).ready(function () {
 
-            const money = {{ Auth::user()->money}};
+            const money = {{ Auth::user()->money ?? 0 }};
             if( money < 100000 ){
                 document.querySelector('.withdraw-money').setAttribute('disabled', 'true');
                 document.querySelector('.withdraw-money').classList.add('opacity-70');
