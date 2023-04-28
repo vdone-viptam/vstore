@@ -295,7 +295,7 @@ class ProductController extends Controller
 
                 try {
                     $product = Product::query()->select('products.id', 'products.name', 'categories.name as cate_name',
-                        'products.price', 'short_content', 'images', 'video', 'availability_status', 'discount', 'discount_vShop', 'amount_product_sold', 'publish_id', 'admin_confirm_date')
+                        'products.price', 'short_content', 'images', 'video', 'availability_status', 'discount', 'discount_vShop', 'amount_product_sold', 'publish_id', 'admin_confirm_date', 'products.vat')
                         ->join('categories', 'products.category_id', '=', 'categories.id')
                         ->where('products.id', $request->product_id)
                         ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id=' . $request->product_id, 'amount')
