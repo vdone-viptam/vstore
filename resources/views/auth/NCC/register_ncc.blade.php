@@ -255,7 +255,7 @@
                             ý với <span style="text-decoration: underline;cursor: pointer;"  class="underline text-blue-700" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
                     </label>
                     <div class="form-group pt-2">
-                        <button type="submit" class="active btn btn-block btn-primary" >Mua ngay</button>
+                        <button type="submit" class="active btn btn-block btn-primary" >Đăng ký mua</button>
                     </div>
                 </div>
 
