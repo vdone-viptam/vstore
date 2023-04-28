@@ -444,6 +444,11 @@ class OrderController extends Controller
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
+                if ($status == 5){
+                    $order->is_complete= true;
+                }else{
+                    $order->is_complete= false;
+                }
                 $order->orderItem = $order->orderItem()
                     ->select(
                         'id as order_item_id',
@@ -619,6 +624,11 @@ class OrderController extends Controller
             $orders = $orders->paginate($limit);
 //            return $orders;
             foreach ($orders as $order) {
+                if ($status == 5){
+                    $order->is_complete= true;
+                }else{
+                    $order->is_complete= false;
+                }
                 $product = $order->product()->select('name', 'images')->first();
                 $order->productInfo = null;
                 $order->productInfo = [
