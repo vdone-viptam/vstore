@@ -489,7 +489,7 @@
                         <img style="width: 32px;height: 32px"
                              src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png">
                         {{$notification['data']['message']}}
-                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem
+                        <a href="{{$notification['data']['href']}}&noti_id={{$notification->id}}" class="text-primary">Xem
                             chi tiết</a>
 
                     </p>
