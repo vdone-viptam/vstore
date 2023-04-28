@@ -113,7 +113,7 @@
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
-            <h2 class="pageheader-title">Quản lý kho hàng</h2>
+            <h2 class="pageheader-title">Danh sách kho hàng</h2>
 
             <div class="page-breadcrumb">
                 <nav aria-label="breadcrumb">
@@ -143,30 +143,31 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <button class="btn btn-primary" id="btnAffWa" type="button" onclick="affWarehouse()">
+                                <button class="btn btn-success" id="btnAffWa" type="button" onclick="affWarehouse()">
                                     Thêm kho
                                 </button>
-                                <button class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"
-                                        type="button">
-                                    Thêm sản phẩm vào kho
-                                </button>
+                              
                             </li>
                         </ul>
                     </form>
 
                 </div>
                 <div class="card-body">
+                <button class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModalCenter"
+                                        type="button">
+                                    Thêm sản phẩm vào kho
+                                </button>
                     <div class="table-responsive">
 
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr>
-                                <th class="white-space-400">Tên kho hàng</th>
-                                <th>Số điện thoại</th>
-                                <th class="white-space-400">Địa chỉ
+                                <th class="white-space-400 text-center">Tên kho hàng</th>
+                                <th class="text-center">Số điện thoại</th>
+                                <th class="white-space-400 text-center">Địa chỉ
 
                                 </th>
-                                <th >Tổng số mặt hàng
+                                <th class="text-center" >Tổng số mặt hàng
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                             @if($type == 'desc')
@@ -179,7 +180,7 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th class="th th_quantity">Sản phẩm có trong kho
+                                <th class="th th_quantity text-center">Sản phẩm có trong kho
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                             @if($type == 'desc')
@@ -205,10 +206,10 @@
                                     <td class="white-space-400">{{$val->address}}</td>
                                     <td class="text-center">{{$val->amount ?? 0}}</td>
                                     <td class="text-center">{{$val->amount_product ?? 0}}</td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-link"
+                                    <td class="text-center white-space-100">
+                                        <a href="javascript:void(0)" style="text-decoration:underline" class="btn btn-link px-2"
                                                 onclick="showDetail({{$val->id}})">Chi tiết
-                                        </button>
+                                        </a>
 
                                     </td>
                                 </tr>

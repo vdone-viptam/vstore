@@ -74,8 +74,9 @@
                     >
                         <thead>
                         <tr>
-                            <th>Mã yêu cầu</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-120">Mã yêu cầu</th>
+                            <th>   <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -87,8 +88,11 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Ngành hàng
+                            <th class="white-space-150 text-center">
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'brand')
                                         @if($type == 'desc')
@@ -100,9 +104,12 @@
                                         <i class="fas fa-sort sort" data-sort="brand"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
 
-                            <th>Ngày yêu cầu
+                            <th>
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'desc')
@@ -114,8 +121,11 @@
                                         <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>V-Store niêm yết
+                            <th>
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
+                            V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -127,8 +137,11 @@
                                         <i class="fas fa-sort sort" data-sort="users.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Trạng thái yêu cầu
+                            <th>
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.status')
                                         @if($type == 'desc')
@@ -140,61 +153,57 @@
                                         <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                     @endif
                                 </span>
+    `                       </div>
                             </th>
-                            <th class="white-space-90"></th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>
+                                    <td class="white-space-120">
                                         {{$request->code}}
                                     </td>
-                                    <td class="white-space-400">
+                                    <td class="white-space-400" style="min-width:200px !important;">
                                         {{$request->product_name}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-150">
                                         {{$request->name}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y')}}
                                     </td>
                                     <td>
                                         {{$request->user_name}}
                                     </td>
-                                    <td class="w-[200px]">
+                                    <td class="text-center" style="min-width:150px !important;">
                                         @if($request->status == 0)
-                                            <div class="bg-warning text-white font-medium px-4 py-2"
-                                                 style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
-                                                Đang xét duyệt lên V-Store
+                                            <div class="text-warning font-medium"><i class="fas fa-clock mr-2 text-warning"></i>
+                                                Đang chờ xét duyệt lên V-Store
                                             </div>
                                         @elseif($request->status == 1)
-                                            <div class="bg-warning text-white font-medium px-4 py-2"
-                                                 style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
+                                            <div class="text-warning font-medium"><i class="fas fa-clock mr-2 text-warning"></i>Chờ
                                                 V-Store đồng ý - chờ hệ thống duyệt
                                             </div>
                                         @elseif($request->status == 2)
-                                            <div class="bg-danger text-white font-medium px-4 py-2"
-                                                 style="border-radius: 2px;"><i class="fas fa-times mr-2"></i>V-Store từ
+                                            <div class="text-danger font-medium"><i class="fas fa-times mr-2 text-danger"></i>V-Store từ
                                                 chối
                                             </div>
                                         @elseif($request->status == 3)
-                                            <div class="bg-success text-white font-medium px-4 py-2"
-                                                 style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Hệ thống
+                                            <div class="text-success font-medium"><i class="fas fa-check mr-2 text-success"></i>Hệ thống
                                                 đã duyệt
                                             </div>
                                         @else
-                                            <div class="bg-danger text-white font-medium px-4 py-2"
-                                                 style="border-radius: 2px;"><i class="fas fa-times mr-2"></i>Hệ thống
+                                            <div class="text-danger font-medium"><i class="fas fa-times mr-2 text-danger"></i>Hệ thống
                                                 từ chối
                                             </div>
                                         @endif
                                     </td>
-                                    <td>
-                                        <button class="btn btn-link" type="button"
+                                    <td class="white-space-100">
+                                        <a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" 
                                                 onclick="showDetail({{$request->id}})">Chi tiết
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

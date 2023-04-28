@@ -136,14 +136,46 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
+<<<<<<< HEAD
                             <th class="white-space-110">Mã đơn hàng
                                 
                             </th>
                             <th class="white-space-400">Tên sản phẩm
                                
+=======
+                            <th class="white-space-110 text-center">Mã đơn hàng
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'pre_order_vshop.no')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="pre_order_vshop.no"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="pre_order_vshop.no"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.no"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th class="white-space-400">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
+                            Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'products.name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
+                                    @endif
+                                </span>
+</div>
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="white-space-140">
-                                Giá sản phẩm (đ)
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                                Giá sản phẩm
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
                                         @if($type == 'desc')
@@ -155,8 +187,11 @@
                                         <i class="fas fa-sort sort" data-sort="price"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th class="white-space-120">Giảm giá (%)
+                            <th class="white-space-120">
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            Giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.discount')
                                         @if($type == 'desc')
@@ -170,8 +205,9 @@
                                         <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-100 text-center">
                                 Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.quantity')
@@ -187,7 +223,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">Tiền đặt cọc
+                            <th class="white-space-120 text-center">Tiền đặt cọc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'deposit_money')
                                         @if($type == 'desc')
@@ -200,7 +236,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">Tổng tiền
+                            <th class="white-space-120 text-center">Tổng tiền
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.money')
                                         @if($type == 'desc')
@@ -213,6 +249,7 @@
                                     @endif
                                 </span>
                             </th>
+<<<<<<< HEAD
                             <th class="white-space-140">Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.status')
@@ -229,6 +266,12 @@
                                 </span>
                             </th>
                             <th class="white-space-140">Thời gian tạo đơn
+=======
+                            <th class="white-space-140 text-center">Trạng thái</th>
+                            <th class="white-space-140">
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            Thời gian tạo đơn
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
                                         @if($type == 'desc')
@@ -242,8 +285,9 @@
                                         <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th class="white-space-80"></th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -252,27 +296,27 @@
                                 <tr>
                                     <td class="white-space-100">{{$order->no}}</td>
                                     <td class="white-space-400">{{$order->product->name}}</td>
-                                    <td class="white-space-140 text-right">{{number_format($order->product->price,0,'.','.')}}</td>
-                                    <td class="text-center">{{(int)$order->discount}}</td>
+                                    <td class="white-space-140 text-right">{{number_format($order->product->price,0,'.','.')}} đ</td>
+                                    <td class="text-center">{{(int)$order->discount}}%</td>
                                     <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}</td>
-                                    <td>
+                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
+                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
+                                    <td class="text-center">
                                         @if($order->status == 1)
-                                            <span class="text-green-600"> Đã hoàn thành</span>
+                                            <span class="text-success font-medium"> Đã hoàn thành</span>
                                         @elseif($order->status == 3)
-                                            <span class="text-blue-600">Đơn hàng mới</span>
+                                            <span class="text-primary font-medium">Đơn hàng mới</span>
                                         @elseif($order->status == 4)
-                                            <span class="text-yellow-400">Đang giao hàng</span>
+                                            <span class="text-warning font-medium">Đang giao hàng</span>
                                         @else
-                                            <span class="text-red-600">Hủy</span>
+                                            <span class="text-danger font-medium">Hủy</span>
                                         @endif
                                     </td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">
-                                        <a href="#" data-toggle="modal"
+                                        <a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg" data-id="{{$order->id}}"
-                                           class="text-blue-600 more-details">Chi tiết</a>
+                                           class="btn btn-link more-details" style="text-decoration:underline">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach

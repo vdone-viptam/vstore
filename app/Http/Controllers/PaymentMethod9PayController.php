@@ -34,7 +34,8 @@ use Illuminate\Support\Str;
 class PaymentMethod9PayController extends Controller
 {
 
-    public function historyPayment9Pay() {
+    public function historyPayment9Pay()
+    {
         $merchantKey = config('payment9Pay.merchantKey');
         $merchantKeySecret = config('payment9Pay.merchantKeySecret');
         $merchantEndPoint = config('payment9Pay.merchantEndPoint');
@@ -332,7 +333,7 @@ class PaymentMethod9PayController extends Controller
                     ]);
                 }
             }
-            if($order) {
+            if ($order) {
                 $user = User::find($order->user_id);
                 return redirect()->route('register_ncc', [
                     "order" => $order,
@@ -418,7 +419,7 @@ class PaymentMethod9PayController extends Controller
                     ]);
                 }
             }
-            if($order) {
+            if ($order) {
                 $user = User::find($order->user_id);
                 return redirect()->route('register_storage', [
                     "order" => $order,
@@ -609,7 +610,7 @@ class PaymentMethod9PayController extends Controller
             $order->save();
             $cart = CartV2::where('user_id', $order->user_id)
                 ->first();
-            if($cart) {
+            if ($cart) {
                 CartItemV2::where('cart_id', $cart->id)
                     ->where('product_id', $orderItems->product_id)
                     ->delete();
@@ -718,37 +719,38 @@ class PaymentMethod9PayController extends Controller
         }
     }
 
-    public function noti($order_id){
-        $order = Order::join('order_item','order.id','=','order_item.order_id')
-            ->select('order.id','order_item.vshop_id','order.no','order_item.product_id')
-            ->where('order.id',$order_id)
+    public function noti($order_id)
+    {
+        $order = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
+            ->select('order.id', 'order_item.vshop_id', 'order.no', 'order_item.product_id')
+            ->where('order.id', $order_id)
             ->first();
-        $vshop = Vshop::where('id',$order->vshop_id)->first();
+        $vshop = Vshop::where('id', $order->vshop_id)->first();
         $product = Product::find($order->product_id)->first();
-        $ncc = User::where('id',$product->user_id)->first();
-        $vstore = User::where('id',$product->vstore_id)->first();
-        if ($vshop){
-            $mess_vshop = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id ,[
-            'message'=>'Đơn hàng '.$order->no . ' đã được tạo mới ',
-            'orderId'=> $order->id,
-            'type'=>10
-        ]);
+        $ncc = User::where('id', $product->user_id)->first();
+        $vstore = User::where('id', $product->vstore_id)->first();
+        if ($vshop) {
+            $mess_vshop = Http::post(config('domain.domain_vdone') . 'notifications/' . $vshop->pdone_id, [
+                'message' => 'Đơn hàng ' . $order->no . ' đã được tạo mới ',
+                'orderId' => $order->id,
+                'type' => 10
+            ]);
         }
 
 
         $data_ncc = [
             'title' => 'Bạn vừa có 1 thông báo mới',
             'avatar' => '',
-            'message' => 'Đơn hàng '.$order->no . ' đã được tạo mới ',
+            'message' => 'Đơn hàng ' . $order->no . ' đã được tạo mới ',
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-            'href' => route('screens.manufacture.order.order')
+            'href' => route('screens.manufacture.order.order', ['key_search' => $order->no])
         ];
         $ncc->notify(new AppNotification($data_ncc));
 
         $data_vstore = [
             'title' => 'Bạn vừa có 1 thông báo mới',
             'avatar' => '',
-            'message' => 'Đơn hàng '.$order->no . ' đã được tạo mới ',
+            'message' => 'Đơn hàng ' . $order->no . ' đã được tạo mới ',
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
             'href' => route('screens.vstore.order.index')
         ];

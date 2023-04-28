@@ -68,11 +68,27 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
+<<<<<<< HEAD
                                     <th>Mã đối tác</th>
                                     <th>Tên đối tác
                             
+=======
+                                    <th class="white-space-120 text-center">Mã đối tác</th>
+                                    <th class="white-space-120 text-center">Tên đối tác
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name_partner')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name_partner"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name_partner"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="name_partner"></i>
+                                            @endif
+                                        </span>
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                                     </th>
-                                    <th>Tổng đơn hàng đã giao
+                                    <th class="text-center white-space-200">Tổng đơn hàng đã giao
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'count_product')
                                                 @if($type == 'desc')
@@ -85,7 +101,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số đơn hàng không hoàn thành
+                                    <th class="text-center white-space-300">Số đơn hàng không hoàn thành
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'destroy_order')
                                                 @if($type == 'desc')
@@ -98,18 +114,18 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th></th>
+                                    <th class="white-space-100"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @if(count($deliveryPartners) > 0)
                                     @foreach($deliveryPartners as $deliveryPartners)
                                         <tr>
-                                            <td>{{$deliveryPartners->code_partner}}</td>
-                                            <td>{{$deliveryPartners->name_partner}}</td>
+                                            <td class="text-center">{{$deliveryPartners->code_partner}}</td>
+                                            <td class="text-center">{{$deliveryPartners->name_partner}}</td>
                                             <td class="text-center">{{$deliveryPartners->count_product}}</td>
                                             <td class="text-center">{{$deliveryPartners->destroy_order}}</td>
-                                            <td><a class="text-primary underline" href="#"
+                                            <td class="text-center white-space-100"><a class="text-primary" href="javascript:void(0)" style="text-decoration:underline;"
                                                 onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
                                                     tiết</a></td>
                                         </tr>

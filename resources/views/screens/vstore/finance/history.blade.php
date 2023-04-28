@@ -49,9 +49,9 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th style="min-width:100px">Mã giao dịch</th>
-                                    <th style="min-width:100px">Trạng thái</th>
-                                    <th class="white-space-150">Số tiền (đ)
+                                    <th class="text-center" style="min-width:100px">Mã giao dịch</th>
+                                    <th class="text-center" style="min-width:100px">Trạng thái</th>
+                                    <th class="white-space-150 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -90,7 +90,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150">Ngân hàng
+                                    <th class="white-space-150 text-center">Ngân hàng
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'bank_name')
                                                 @if($type == 'desc')
@@ -103,8 +103,8 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Nội dung</th>
-                                    <th>Thời gian yêu cầu
+                                    <th class="text-center">Nội dung</th>
+                                    <th class="text-center">Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -139,7 +139,7 @@
                                                 </td>
                                             @endif
                                             <td class="white-space-150 text-right">
-                                                {{number_format($history->amount,0,'.','.')}}
+                                                {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
                                             <td>
                                                 {{ $history->account_number }}

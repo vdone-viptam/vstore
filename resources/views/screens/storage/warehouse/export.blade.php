@@ -113,12 +113,26 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã xuất hàng</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
-                               
+                            <th class="white-space-120 text-center">Mã xuất hàng</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
+                            <th>
+                                <div class="white-space-300 d-flex justify-content-between align-items-center"
+                                     style="gap:6px">
+                                    Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                        @endif
+                                </span>
+                                </div>
                             </th>
-                            <th>Nhà cung cấp
+                            <th class="white-space-150 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'ncc_name')
                                         @if($type == 'desc')
@@ -131,7 +145,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-120 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -144,7 +158,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày xuất hàng
+                            <th class="white-space-150 text-center">Ngày xuất hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'updated_at')
                                         @if($type == 'desc')
@@ -160,14 +174,14 @@
                             <th>Ngày tạo yêu cầu
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'created_at')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="created_at"></i>
-                                @endif
                                 </span>
                             </th>
                             <th>Thao tác/Trạng thái
@@ -183,18 +197,18 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Xuất hóa đơn</th>
-                            <th></th>
+                            <th class="text-center white-space-150">Xuất hóa đơn</th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>{{$request->code}}</td>
-                                    <td>{{$request->publish_id}}</td>
+                                    <td class="text-center white-space-120">{{$request->code}}</td>
+                                    <td class="text-center white-space-150">{{$request->publish_id}}</td>
                                     <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
-                                    <td>{{$request->ncc_name}}</td>
+                                    <td class="text-center">{{$request->ncc_name}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
 
                                     <td class="text-center">
@@ -229,7 +243,7 @@
 
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_number}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">
@@ -237,7 +251,10 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td><a href="#" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi
+                                    <td class="white-space-100"><a href="javascript:void(0)"
+                                                                   onclick="showDetail({{$request->id}})"
+                                                                   class="btn btn-link px-2"
+                                                                   style="text-decoration:underline">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
@@ -351,18 +368,6 @@
                                     'success'
                                 ).then(() => location.reload())
                                 $('#requestModal').modal('hide')
-                                $('.status' + id).html(`
-                       <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
-                                                style="gap:14px;">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                Đã xuất hàng
-                                            </div>
-                    `);
                             })
                         })
 
@@ -402,20 +407,8 @@
                         data.message,
                         'Click vào nút bên dưới để đóng',
                         'success'
-                    )
+                    ).then(() => location.reload())
                     $('#requestModal').modal('hide')
-                    $('.status' + id).html(`
-                       <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
-                                                style="gap:14px;">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                Đồng ý
-                                            </div>
-                    `);
                 })
 
             }

@@ -115,7 +115,7 @@
     @endif
 
 </div>
-<div class="form-group text-left mt-3">
+<div class="form-group text-left mt-3" id="check" style="display: none">
     <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
         <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
             class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
@@ -159,6 +159,7 @@
     });
     if (document.getElementsByName('discount_vShop')[0]) {
         document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
+            document.querySelector('#check').style.dispay = 'block';
             if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                 document.getElementById('messageDis').style.display = 'none';
                 if ($('#appect').is(":checked")) {

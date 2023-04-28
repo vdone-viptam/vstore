@@ -75,11 +75,25 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th class="text-center white-space-120">Mã đơn hàng</th>
+                            <th class="text-center white-space-150">Mã sản phẩm</th>
+                            <th >
+                            <div class=" d-flex justify-content-between align-items-center" style="gap:6px">       
+                            Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
+                                    @if($field == 'product_name')
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                        @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
+                                    @endif
+                                </span>
+</div>
                             </th>
-                            <th>Số lượng
+                            <th class="white-space-120 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -92,8 +106,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Lý do hủy</th>
-                            <th>Trạng thái
+                            <th class="text-center">Lý do hủy</th>
+                            <th class="white-space-150 text-center">Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'cancel_status')
                                         @if($type == 'desc')
@@ -106,19 +120,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th></th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($orders) > 0)
                             @foreach($orders as $request)
                                 <tr>
-                                    <td>{{$request->no}}</td>
-                                    <td>{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td class="white-space-120 text-center">{{$request->no}}</td>
+                                    <td class="white-space-150 text-center">{{$request->publish_id}}</td>
+                                    <td title="{{$request->product_name}} ">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($request->cancel_status == 1)
                                             <p class="text-primary">Chưa hoàn hàng</p>
                                         @elseif($request->cancel_status == 3)
@@ -127,7 +141,7 @@
                                             <p class="text-danger">Hàng chưa xuất kho</p>
                                         @endif
                                     </td>
-                                    <td class="text-center"><a href="#"
+                                    <td class="text-center white-space-100"><a href="javascript:void(0)" style="text-decoration:underline;"
                                            onclick="showDetail({{$request->order_id}},{{$request->cancel_status}})"
                                            class="btn btn-link">Chi tiết</a></td>
                                 </tr>

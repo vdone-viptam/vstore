@@ -235,7 +235,6 @@ class OrderController extends Controller
             'order' => $order,
             'product' => $product,
             'method_payment' => $methodPayment,
-            'body' => $body
         ]);
     }
 
@@ -408,7 +407,6 @@ class OrderController extends Controller
             'status_code' => 200,
             'order' => $order,
             'method_payment' => $methodPayment,
-            'body' => $body
         ]);
     } // BỎ
 

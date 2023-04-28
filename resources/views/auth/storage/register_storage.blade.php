@@ -247,7 +247,7 @@
                         <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi tiết</label>
                         <input class="form-control form-control-lg" type="text" name="address" id="address" required=""
                             value="{{old('address')}}"
-                            placeholder="VD: Số nhà, ngõ, ngách, hẻm, tòa nhà, thôn...">
+                            placeholder="Nhập địa chỉ chi tiết (VD:Số nhà, tòa nhà, thôn...)">
                         @error('address')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror

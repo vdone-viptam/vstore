@@ -67,11 +67,10 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered second    "
-                    >
+                    <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-150">Mã sản phẩm</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -101,7 +100,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Giá sản phẩm chưa VAT
+                                Giá sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.price')
                                         @if($type == 'desc')
@@ -117,7 +116,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Thuế giá trị gia tăng (%)
+                                Thuế giá trị gia tăng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vat')
                                         @if($type == 'desc')
@@ -146,7 +145,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu từ NCC (%)
+                                Chiết khấu từ NCC
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -160,7 +159,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120">
+                            <th class="white-space-120 text-center">
                                 Ngày xét duyệt
                                 <span style="float: right;cursor: pointer">
 
@@ -177,7 +176,7 @@
                             </th>
                             <th class="white-space-130">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                Chiết khấu cho V-SHOP (%)
+                                Chiết khấu cho V-SHOP
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
                                         @if($type == 'desc')
@@ -199,30 +198,31 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="white-space-150">
+                                    <td class="white-space-150 text-center">
                                         {{$product->publish_id}}
                                     </td>
                                     <td class="white-space-350" style="min-width:180px !important;">
                                         {{$product->name}}
                                     </td>
-                                    <td class="white-space-150">{{$product->cate_name}}</td>
+                                    <td class="white-space-150 text-center">{{$product->cate_name}}</td>
                                     <td class="text-right">
-                                        {{number_format($product->price,0,'.','.')}}
+                                        {{number_format($product->price,0,'.','.')}} đ
                                     </td>
-                                    <td class="text-center">{{$product->vat}}</td>
+                                    <td class="text-center">{{$product->vat}}%</td>
                                     <td>
                                         {{$product->user_name}}
                                     </td>
                                     <td class="text-center">
-                                        {{$product->discount}}
+                                        {{$product->discount}}%
                                     </td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">
-                                        {{$product->discount_vShop}}
+                                        {{$product->discount_vShop}}%
                                     </td>
-                                    <td>
-                                        <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link" style="text-decoration:underline">Chi
-                                            tiết</a>
+                                    <td style="min-width:100px !important;">
+                                        <a href="javascript:void(0)" onclick="showDetail({{$product->id}})" class="btn btn-link" style="text-decoration:underline">Chi
+                                            tiết</a> 
+                                            
                                     </td>
                                 </tr>
                             @endforeach
