@@ -19,7 +19,12 @@ class ViettelpostController extends Controller
 {
     public function index(Request $request)
     {
+        if (config('domain.key_viettelpost') !=$request->all()['TOKEN'] ){
+            return response()->json([
+                'success' => false,
 
+            ], 500);
+        }
         $all = $request->all()['DATA']['ORDER_STATUS'];
         \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
         $data = $request->DATA;
