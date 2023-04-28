@@ -118,11 +118,13 @@
                                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 p-4">
                                     <h3 style="margin-bottom:15px; font-weight:600; font-size:20px;color:#a6afce;">Lưu ý về mật khẩu</h3>
                                     <div class="d-flex flex-column " style="gap:10px; ">
-                                    <span style="color:#a6afce;">- Tối thiểu 8 kí tự</span>
-                                    <span style="color:#a6afce;">- Có ít nhất một kí tự viết hoa</span>
-                                    <span style="color:#a6afce;">- Có ít nhất một chữ số</span>
+                                        <span style="color:#a6afce;">- Tối thiểu 8 kí tự</span>
+                                        <span style="color:#a6afce;">- Có ít nhất một chữ cái viết hoa</span>
+                                        <span style="color:#a6afce;">- Có ít nhất một chữ cái viết thường</span>
+                                        <span style="color:#a6afce;">- Có ít nhất một chữ số</span>
+                                        <span style="color:#a6afce;">- Có ít nhất một kí tự đặc biệt</span>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </form>
