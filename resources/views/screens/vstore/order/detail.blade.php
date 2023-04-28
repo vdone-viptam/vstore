@@ -72,7 +72,7 @@
         <div class="form-group">
             <label for="name">Chiết khấu nhận được (thành tiền)</label>
             <input type="text" class="form-control form-control-lg" disabled id="name"
-                   value="{{number_format($order->total * $order->discount / 100,0,'.','.')}} đ"
+                   value="{{number_format($order->money / 100,0,'.','.')}} đ"
                    placeholder="Nhập tên sản phẩm">
         </div>
     </div>

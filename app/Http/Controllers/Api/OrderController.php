@@ -230,12 +230,11 @@ class OrderController extends Controller
         $product->images = json_decode($product->images);
 
         $order->total_vat = $totalVat;
-
         return response()->json([
             'status_code' => 200,
             'order' => $order,
             'product' => $product,
-            'method_payment' => $methodPayment
+            'method_payment' => $methodPayment,
         ]);
     }
 
@@ -375,6 +374,7 @@ class OrderController extends Controller
                     'MONEY_COLLECTION' => $methodPayment === 'COD' ? $price : 0,
                     'NATIONAL_TYPE' => config('viettelPost.nationalType.domesticType'),
                 ];
+
                 $getPrice = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
@@ -406,7 +406,7 @@ class OrderController extends Controller
         return response()->json([
             'status_code' => 200,
             'order' => $order,
-            'method_payment' => $methodPayment
+            'method_payment' => $methodPayment,
         ]);
     } // BỎ
 

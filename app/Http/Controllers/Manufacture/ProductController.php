@@ -295,7 +295,7 @@ class ProductController extends Controller
 
                 try {
                     $product = Product::query()->select('products.id', 'products.name', 'categories.name as cate_name',
-                        'products.price', 'short_content', 'images', 'video', 'availability_status', 'discount', 'discount_vShop', 'amount_product_sold', 'publish_id')
+                        'products.price', 'short_content', 'images', 'video', 'products.status', 'discount', 'discount_vShop', 'amount_product_sold', 'publish_id', 'admin_confirm_date', 'products.vat')
                         ->join('categories', 'products.category_id', '=', 'categories.id')
                         ->where('products.id', $request->product_id)
                         ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id=' . $request->product_id, 'amount')
@@ -305,7 +305,7 @@ class ProductController extends Controller
                         view('screens.manufacture.product.detail_product',
                             ['product' => $product])->render(),
                         'id' => $product->id,
-                        'availability_status' => $product->availability_status,
+                        'status' => $product->status,
                     ]);
                 } catch (\Exception $exception) {
                     return response()->json([
@@ -473,7 +473,7 @@ class ProductController extends Controller
                 'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
-                'href' => route('screens.vstore.product.request',)
+                'href' => route('screens.vstore.product.request', ['key_search' => $product->publish_id])
             ];
             $user->notify(new AppNotification($data));
             DB::commit();

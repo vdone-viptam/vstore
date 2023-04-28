@@ -48,8 +48,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-100">Mã V-Store</th>
-                            <th class="white-space-150">Tên V-Store
+                            <th class="white-space-100 text-center">Mã V-Store</th>
+                            <th class="white-space-150 text-center">Tên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -62,7 +62,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150">Số điện thoại V-Store
+                            <th class="white-space-150 text-center">Số điện thoại V-Store
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'phone_number')
                                         @if($type == 'desc')
@@ -75,7 +75,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">
+                            <th class="white-space-200 text-center">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Tổng số sản phẩm niêm yết trên V-Store
                                     <span style="float: right;cursor: pointer">
@@ -91,7 +91,7 @@
                                     </span>
                                 </div>
                             </th>
-                            <th class="white-space-200">
+                            <th class="white-space-200 text-center">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Số loại sản phẩm niêm yết
                                     <span style="float: right;cursor: pointer">
@@ -115,12 +115,12 @@
                         @if(count($products) > 0)
                             @foreach($products as $value)
                                 <tr>
-                                    <td class="white-space-200">{{$value->account_code}}</td>
-                                    <td class="white-space-150">{{$value->vstore_name}}</td>
+                                    <td class="white-space-200 text-center">{{$value->account_code}}</td>
+                                    <td class="white-space-150 text-center">{{$value->vstore_name}}</td>
                                     <td class="text-center">{{$value->phone_number}}</td>
                                     <td class="text-center">{{$value->total_product}}</td>
                                     <td class="text-center">{{$value->total_category}}</td>
-                                    <td class="text-center"><a href="#" data-toggle="modal"
+                                    <td class="text-center white-space-100"><a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg"
                                            data-account_code="{{$value->account_code}}"
                                            data-vstore_name="{{$value->vstore_name}}"
@@ -129,7 +129,7 @@
                                            data-address="{{$value->address}}"
                                            data-total_product="{{$value->total_product}}"
                                            data-total_category="{{$value->total_category}}"
-                                           data-id="{{$value->vstore_id}}" class="btn btn-link more-details">Chi
+                                           data-id="{{$value->vstore_id}}" class="btn btn-link more-details" style="text-decoration:underline">Chi
                                             tiết</a>
                                     </td>
 

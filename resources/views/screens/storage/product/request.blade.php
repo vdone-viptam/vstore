@@ -97,9 +97,11 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th>Mã yêu cầu</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-120 text-center">Mã yêu cầu</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
+                            <th>
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">     
+                                Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
                                         @if($type == 'desc')
@@ -111,8 +113,9 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
+                                </div>
                             </th>
-                            <th>Nhà cung cấp
+                            <th class="white-space-150 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'ncc_name')
                                         @if($type == 'desc')
@@ -125,7 +128,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Số lượng nhập
+                            <th class="white-space-150 text-center">Số lượng nhập
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -138,7 +141,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Chiết khấu
+                            <th class="white-space-120 text-center">Chiết khấu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'code')
                                         @if($type == 'desc')
@@ -151,7 +154,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Ngày yêu cầu
+                            <th class="text-center white-space-150">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -164,7 +167,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Xác nhận / từ chối
+                            <th class="text-center" style="min-width:180px !important;">Xác nhận / từ chối
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'status')
                                         @if($type == 'desc')
@@ -177,31 +180,31 @@
                                     @endif
                                 </span>
                             </th>
-                            <th></th>
+                            <th class="white-space-100"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td>{{$product->code}}</td>
-                                    <td>{{$product->publish_id}}</td>
+                                    <td class="text-center white-space-120">{{$product->code}}</td>
+                                    <td class="text-center white-space-150">{{$product->publish_id}}</td>
                                     <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
-                                    <td>{{$product->ncc_name}}</td>
+                                    <td class="text-center ">{{$product->ncc_name}}</td>
                                     <td class="text-center">{{$product->quantity}}</td>
                                     <td class="text-center">0</td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
-                                    <td class="status{{$product->id}}">
+                                    <td class="status{{$product->id}} text-center" style="min-width:180px !important;">
                                         @if($product->status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a
                                                     href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5)"
                                                     style="text-decoration:underline"
-                                                    class="text-primary  text-white font-medium  rounded">
+                                                    class="text-success">
                                                     Đồng ý
                                                 </a>
                                                 <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10)"
                                                    style="text-decoration:underline"
-                                                   class="text-danger  text-white font-medium  rounded">
+                                                   class="text-danger">
                                                     Từ chối
                                                 </a></div>
                                         @elseif($product->status == 5 || $product->status == 1 ||  $product->status == 7)
@@ -229,7 +232,7 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td><a href="#" class="btn btn-link" onclick="showDetail({{$product->id}})">Chi
+                                    <td class="white-space-100 text-center"><a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" onclick="showDetail({{$product->id}})">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach

@@ -32,7 +32,7 @@ class OrderController extends Controller
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('no', 'products.name', 'categories.name as cate_name', 'order.id',
                 'order_item.price', 'quantity', 'total', 'order.created_at',
-                'estimated_date', 'products.discount', 'export_status', DB::raw('(products.discount * total) as money'))->where('order.status', '!=', 2);
+                'estimated_date', 'products.discount', 'export_status', DB::raw('products.discount * (order_item.price * order_item.quantity) as money'))->where('order.status', '!=', 2);
         if (strlen($this->v['key_search']) > 0) {
             $this->v['orders'] = $this->v['orders']->where(function ($query) {
                 $query->where('products.name', 'like', '%' . $this->v['key_search'] . '%')
@@ -53,7 +53,7 @@ class OrderController extends Controller
             ->where('order.id', $request->id)
             ->select('no', 'products.name', 'categories.name as cate_name', 'warehouses.name as ware_name',
                 'order_item.price', 'quantity', 'total', 'order.created_at',
-                'estimated_date', 'products.discount', 'export_status', DB::raw('(products.discount * total) as money'))->where('order.status', '!=', 2)->first();
+                'estimated_date', 'products.discount', 'export_status', DB::raw('products.discount * (order_item.price * order_item.quantity) as money'))->where('order.status', '!=', 2)->first();
 
         return response()->json(['view' => view('screens.vstore.order.detail', $this->v)->render()]);
     }

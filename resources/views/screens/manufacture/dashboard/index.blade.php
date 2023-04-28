@@ -138,7 +138,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Trang chủ </h2>
+                    <h2 class="pageheader-title">Tổng quan </h2>
 
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
@@ -225,7 +225,7 @@
                                    style="width:100%">
                                 <thead>
                                 <th style="min-width:100px;">
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Mã sản phẩm
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'publish_id')
@@ -240,8 +240,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-400" style="min-width:150px">
-
+                                <th class="white-space-400" style="min-width:200px">
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Tên sản phẩm
                                         <span style="float: right;cursor:pointer">
@@ -258,13 +257,13 @@
                                     </div>
                                 </th>
                                 <th style="min-width:100px;">
-
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="categories.name"></i>
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="categories.name"></i>
                                                 @else
                                                     <i class="fa-solid fa-sort-up sort" data-sort="categories.name"></i>
                                                 @endif
@@ -277,7 +276,7 @@
                                 <th class="white-space-110">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                        Giá bán (đ)
+                                        Giá bán
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'price')
                                                 @if($type == 'desc')
@@ -326,14 +325,16 @@
                                     </div>
                                 </th>
                                 <th style="min-width:120px">
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Ngày xét duyệt
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'admin_confirm_date')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="admin_confirm_date"></i>
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="admin_confirm_date"></i>
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="admin_confirm_date"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="admin_confirm_date"></i>
                                                 @endif
                                             @else
                                                 <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
@@ -343,14 +344,16 @@
                                 </th>
                                 <th class="white-space-90">
 
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Số lượng đã bán
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'amount_product_sold')
                                                 @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="amount_product_sold"></i>
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="amount_product_sold"></i>
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="amount_product_sold"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="amount_product_sold"></i>
                                                 @endif
                                             @else
                                                 <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
@@ -360,7 +363,7 @@
                                 </th>
                                 <th class="white-space-120">
 
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Số lượng trong kho
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'amount')
@@ -382,17 +385,18 @@
                                     @foreach($data as $product)
                                         <tr>
                                             <td class="text-center">{{$product->publish_id}}</td>
-                                            <td style="white-space: pre-wrap">{{$product->name}}</td>
+                                            <td style="white-space: pre-wrap; min-width:200px;">{{$product->name}}</td>
                                             <td>{{$product->cate_name}}</td>
-                                            <td class="text-right">{{number_format($product->price,0,'.','.')}}</td>
+                                            <td class="text-right">{{number_format($product->price,0,'.','.')}} đ</td>
                                             <td class="text-center">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
                                             <td class="text-center">{{$product->discount != null ? $product->discount : 'Chưa niêm yết'}}</td>
-                                            <td>{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
+                                            <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
                                             <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                             <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
                                             <td>
-                                                <a href="javascript:void(0)" class="btn btn-link pl-0" style="text-decoration:underline"
-                                                        onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi
+                                                <a href="javascript:void(0)" class="btn btn-link pl-0"
+                                                   style="text-decoration:underline"
+                                                   onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi
                                                     tiết
                                                 </a>
                                             </td>
