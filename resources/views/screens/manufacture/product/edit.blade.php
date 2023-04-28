@@ -435,7 +435,10 @@
                 chunk_size: '1MB', // 1 MB
                 max_retries: 2,
                 filters: {
-                    max_file_size: '200mb'
+                    max_file_size: '200mb',
+                    mime_types : [
+                        { title : "Video files", extensions : "AVI,MP4,MKV,WMV,VOB,FLV" },
+                    ],
                 },
                 multipart_params: {
                     // Extra Parameter
@@ -496,12 +499,14 @@
                     },
                     Error: function (up, err) {
                         // DO YOUR ERROR HANDLING!
+                        let stringError = 'Upload video không thành công !';
+                        if( err.message == 'File extension error.')
+                            stringError = "Hãy chọn video hợp lệ !";
                         Swal.fire({
                             icon: 'error',
-                            title: 'Upload video không thành công !',
+                            title: stringError,
                             text: '',
                         })
-                        console.log(err);
                     }
                 }
             });
