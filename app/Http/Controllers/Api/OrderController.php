@@ -235,7 +235,7 @@ class OrderController extends Controller
             'order' => $order,
             'product' => $product,
             'method_payment' => $methodPayment,
-            'body' => $getPrice['data']
+            'body' => $body
         ]);
     }
 
