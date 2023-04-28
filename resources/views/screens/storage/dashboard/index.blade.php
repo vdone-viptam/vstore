@@ -102,7 +102,7 @@
                         <thead class="bg-light">
                         <tr>
                             <th class="text-center" style="min-width:180px !important">Mã đơn hàng/Mã yêu cầu</th>
-                            <th class="white-space-120 text-center">Mã sản phẩm</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th class="white-space-400">
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
                             Tên sản phẩm
@@ -180,13 +180,13 @@
                         @foreach($products as $product)
                             <tr>
                                 <td class="text-center"> {{$product->code}}</td>
-                                <td class="text-center">{{$product->publish_id}}</td>
+                                <td class="text-center white-space-150">{{$product->publish_id}}</td>
                                 <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                 <td class="text-center">{{$product->ncc_name}}</td>
                                 <td class="text-center">{{$product->quantity}}</td>
                                 <td class="text-center">0</td>
                                 <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                <td>
+                                <td class="text-center ">
                                     @if($product->type == 1)
                                         <span class="text-warning">Yêu cầu nhập kho</span>
                                     @else

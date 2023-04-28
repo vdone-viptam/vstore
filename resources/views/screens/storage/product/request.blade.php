@@ -98,7 +98,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-120 text-center">Mã yêu cầu</th>
-                            <th class="white-space-120 text-center">Mã sản phẩm</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">     
                                 Tên sản phẩm
@@ -188,7 +188,7 @@
                             @foreach($requests as $product)
                                 <tr>
                                     <td class="text-center white-space-120">{{$product->code}}</td>
-                                    <td class="text-center white-space-120">{{$product->publish_id}}</td>
+                                    <td class="text-center white-space-150">{{$product->publish_id}}</td>
                                     <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td class="text-center ">{{$product->ncc_name}}</td>
                                     <td class="text-center">{{$product->quantity}}</td>

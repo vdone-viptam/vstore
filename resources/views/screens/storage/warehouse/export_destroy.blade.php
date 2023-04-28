@@ -98,9 +98,9 @@
                         <thead>
                         <tr>
                             <th class="white-space-120 text-center">Mã xuất hủy</th>
-                            <th class="white-space-120 text-center">Mã sản phẩm</th>
-                            <th>
-                            <div class="white-space-300 d-flex justify-content-between align-items-center" style="gap:6px">       
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
+                            <th class="white-space-300">
+                            <div class=" d-flex justify-content-between align-items-center" style="gap:6px">       
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -137,8 +137,8 @@
                             @foreach($requests as $request)
                                 <tr>
                                     <td class="text-center white-space-120">{{$request->code}}</td>
-                                    <td class="text-center white-space-120">{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td class="text-center white-space-150">{{$request->publish_id}}</td>
+                                    <td title="{{$request->product_name}} white-space-300">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
                                     <td class="white-space-120 text-center"><a href="javascript:void(0)" style="text-decoration:underline;" onclick="showDetail({{$request->id}})" class="btn btn-link">Chi

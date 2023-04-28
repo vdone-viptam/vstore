@@ -95,8 +95,8 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã đơn hàng</th>
-                            <th class="text-center white-space-120">Mã sản phẩm</th>
-                            <th class="white-space-300">
+                            <th class="text-center white-space-150">Mã sản phẩm</th>
+                            <th>
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
@@ -172,10 +172,10 @@
                             @foreach($order as $ord)
                                 <tr>
                                     <td class="text-center white-space-120">{{$ord->no}}</td>
-                                    <td class="text-center white-space-120">{{$ord->publish_id}}</td>
+                                    <td class="text-center white-space-150">{{$ord->publish_id}}</td>
                                     <td title="{{$ord->name}}">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
                                     <td class="text-center">{{$ord->quantity}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center" style="min-width:180px !important;">
                                         @if($ord->method_payment == 'COD')
                                             <span class="text-danger font-medium">Chưa thanh toán</span>
                                         @else
@@ -222,7 +222,7 @@
 
                                         @endif
                                     </td>
-                                    <td><a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" onclick="showDetail({{$ord->id}})">Chi tiết</a>
+                                    <td class="white-space-100"><a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" onclick="showDetail({{$ord->id}})">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach

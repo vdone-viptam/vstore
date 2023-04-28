@@ -73,7 +73,7 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã sản phẩm</th>
-                            <th class="text-center white-space-100">Mã SKU</th>
+                            <th class="text-center" style="min-width:180px !important;">Mã SKU sản phẩm</th>
                             <th>
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
                                 Tên sản phẩm
@@ -117,7 +117,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100 text-center">Tồn kho
+                            <th class="white-space-200 text-center">Số lượng hàng tồn kho
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'in_stock')
                                         @if($type == 'desc')
@@ -152,12 +152,12 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td class="white-space-150 text-center">{{$product->publish_id}}</td>
-                                    <td class="white-space-100 text-center">{{$product->sku_id}}</td>
+                                    <td class="text-center" style="min-width:180px !important;">{{$product->sku_id}}</td>
                                     <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td class="text-center">{{$product->cate_name}}</td>
                                     <td class="text-center">{{$product->name}}</td>
                                     <td class="text-center">{{$product->in_stock ?? 0}}</td>
-                                    <td class="text-center">{{$product->pause_product}}</td>
+                                    <td class="text-center white-space-200">{{$product->pause_product}}</td>
                                     <td><a href="javascript:void(0)" onclick="showDetail({{$product->product_id}})" class="btn btn-link px-2" style="text-decoration:underline;">Chi
                                             tiết</a></td>
                                 </tr>

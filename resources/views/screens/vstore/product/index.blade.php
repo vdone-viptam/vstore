@@ -70,7 +70,7 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-120">Mã sản phẩm</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -198,13 +198,13 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="white-space-150">
+                                    <td class="white-space-150 text-center">
                                         {{$product->publish_id}}
                                     </td>
                                     <td class="white-space-350" style="min-width:180px !important;">
                                         {{$product->name}}
                                     </td>
-                                    <td class="white-space-150">{{$product->cate_name}}</td>
+                                    <td class="white-space-150 text-center">{{$product->cate_name}}</td>
                                     <td class="text-right">
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>

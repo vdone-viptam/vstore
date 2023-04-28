@@ -80,7 +80,7 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-120 text-center">Mã sản phẩm</th>
+                            <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th class="text-center" style="min-width:150px !important;">Hình ảnh</th>
                             <th style="min-width:200px !important;">
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">
@@ -235,7 +235,7 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="white-space-120">{{$product->publish_id}}</td>
+                                    <td class="white-space-150 text-center" >{{$product->publish_id}}</td>
                                     <td class="text-center white-space-150">
                                         <div style="width:125px;">
                                             <img style="height: 125px;" src="{{strlen(json_decode($product->images)[0]) > 0 ?  asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'}}"/>

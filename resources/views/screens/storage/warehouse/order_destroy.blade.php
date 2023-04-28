@@ -76,9 +76,9 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã đơn hàng</th>
-                            <th class="text-center white-space-120">Mã sản phẩm</th>
-                            <th>
-                            <div class="white-space-300 d-flex justify-content-between align-items-center" style="gap:6px">       
+                            <th class="text-center white-space-150">Mã sản phẩm</th>
+                            <th >
+                            <div class=" d-flex justify-content-between align-items-center" style="gap:6px">       
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -106,7 +106,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-300 text-center">Lý do hủy</th>
+                            <th class="text-center">Lý do hủy</th>
                             <th class="white-space-150 text-center">Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'cancel_status')
@@ -128,8 +128,8 @@
                             @foreach($orders as $request)
                                 <tr>
                                     <td class="white-space-120 text-center">{{$request->no}}</td>
-                                    <td class="white-space-120 text-center">{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td class="white-space-150 text-center">{{$request->publish_id}}</td>
+                                    <td title="{{$request->product_name}} ">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
                                     <td>{{$request->note}}</td>
                                     <td class="text-center">
