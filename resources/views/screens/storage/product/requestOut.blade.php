@@ -97,20 +97,20 @@
                             <th class="text-center white-space-120">Mã đơn hàng</th>
                             <th class="text-center white-space-150">Mã sản phẩm</th>
                             <th>
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
-                            Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                            <i class="fas fa-sort sort" data-sort="name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="name"></i>
-                                    @endif
                                 </span>
-</div>
+                                </div>
                             </th>
                             <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -196,7 +196,7 @@
                                                    class="text-danger  ">
                                                     Từ chối
                                                 </a></div>
-                                        @elseif($ord->export_status == 1)
+                                        @elseif($ord->export_status != 3 && $ord->export_status != 5)
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
                                                 style="gap:14px;">
@@ -206,6 +206,18 @@
                                                           stroke-linecap="round"/>
                                                 </svg>
                                                 Đồng ý
+                                            </div>
+                                        @elseif($ord->export_status == 5)
+                                            <div
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                style="gap:14px;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                        fill="#ef172c"/>
+                                                </svg>
+                                                Khách hủy đơn
                                             </div>
                                         @else
                                             <div
@@ -222,7 +234,9 @@
 
                                         @endif
                                     </td>
-                                    <td class="white-space-100"><a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" onclick="showDetail({{$ord->id}})">Chi tiết</a>
+                                    <td class="white-space-100"><a href="javascript:void(0)" class="btn btn-link px-2"
+                                                                   style="text-decoration:underline"
+                                                                   onclick="showDetail({{$ord->id}})">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
