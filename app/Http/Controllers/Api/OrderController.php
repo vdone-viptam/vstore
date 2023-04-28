@@ -402,13 +402,13 @@ class OrderController extends Controller
             $order->method_payment = $methodPayment;
             $order->pay = config('constants.payStatus.pay');
             $order->save();
-            dd($getPrice['data']);
         }
         $order->total_vat = $totalVat;
         return response()->json([
             'status_code' => 200,
             'order' => $order,
-            'method_payment' => $methodPayment
+            'method_payment' => $methodPayment,
+            'body' => $getPrice['data']
         ]);
     } // BỎ
 
