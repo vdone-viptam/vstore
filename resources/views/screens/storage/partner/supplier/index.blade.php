@@ -124,7 +124,7 @@
                                             <td class="text-center">{{$supplier->province_name}}</td>
                                             <td class="text-center">{{$supplier->count_product}}</td>
                                             <td class="text-center">{{$supplier->amount_product}}</td>
-                                            <td class="white-space-100 text-center"><a class="text-primary underline" href="javascript:void(0)" style="text-decoration:underline;"
+                                            <td class="white-space-100 text-center"><a class="text-primary" href="javascript:void(0)" style="text-decoration:underline;"
                                                    onclick="showDetail({{$supplier->user_id}})">Chi tiết</a></td>
                                         </tr>
                                     @endforeach
