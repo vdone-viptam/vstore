@@ -468,14 +468,14 @@ class ProductController extends Controller
 
                 $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
                 $order->save();
-                $request = new RequestWarehouse();
+                $requestEX = new RequestWarehouse();
 
-                $request->ncc_id = 0;
-                $request->product_id = $product->id;
-                $request->status = 0;
-                $request->type = 2;
-                $request->ware_id = $order->warehouse_id;
-                $request->quantity = $order_item->quantity;
+                $requestEX->ncc_id = 0;
+                $requestEX->product_id = $product->id;
+                $requestEX->status = 0;
+                $requestEX->type = 2;
+                $requestEX->ware_id = $order->warehouse_id;
+                $requestEX->quantity = $order_item->quantity;
                 $code = 'YCX' . rand(100000000, 999999999);
 
                 while (true) {
@@ -485,10 +485,10 @@ class ProductController extends Controller
                     }
                     $code = 'YCX' . rand(100000000, 999999999);
                 }
-                $request->order_number = json_decode($taodon)->data->ORDER_NUMBER;
-                $request->code = $code;
-                $request->note = 'Yêu cầu xuất kho';
-                $request->save();
+                $requestEX->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+                $requestEX->code = $code;
+                $requestEX->note = 'Yêu cầu xuất kho';
+                $requestEX->save();
             }
             if ($status == 3 && $order->order_number !== '') {
                 $order->note = $request->note;
