@@ -230,7 +230,7 @@ class OrderController extends Controller
         $product->images = json_decode($product->images);
 
         $order->total_vat = $totalVat;
-
+        dd($getPrice['data']);
         return response()->json([
             'status_code' => 200,
             'order' => $order,
