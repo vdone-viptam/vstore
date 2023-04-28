@@ -538,7 +538,7 @@
                         plupload.each(files, function (file) {
                             console.log('FilesAdded');
                             console.log(file);
-                            document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                            document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                         });
                         uploader.start();
                     },

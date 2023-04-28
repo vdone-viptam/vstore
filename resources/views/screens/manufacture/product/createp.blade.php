@@ -447,7 +447,7 @@
                         plupload.each(files, function (file) {
                             console.log('FilesAdded');
                             console.log(file);
-                            document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                            document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                         });
                         uploader.start();
                     },
@@ -474,14 +474,14 @@
                         if (result.status != 200) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Upload video không thành công !',
+                                title: 'Upload file không thành công !',
                                 text: '',
                             })
                         }
                         if (responseResult.ok == 1 && result.status == 200) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Upload video thành công !',
+                                title: 'Upload file thành công !',
                                 text: '',
                             })
                             document.querySelector('#btnSave').removeAttribute('disabled');
@@ -496,7 +496,7 @@
                         // DO YOUR ERROR HANDLING!
                         Swal.fire({
                             icon: 'error',
-                            title: 'Upload video không thành công !',
+                            title: 'Upload file không thành công !',
                             text: '',
                         })
                         console.log(err);
