@@ -360,10 +360,6 @@
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
                     if (data.status == 2) {
-                        document.querySelector('.btnDestroy').innerHTML =
-                            `<button class="btn btn-danger">Hủy niêm yết</button>
-
-`;
                         $(".btnDelete").html('');
                     } else {
                         document.querySelector('.btnDestroy').innerHTML = ``;
