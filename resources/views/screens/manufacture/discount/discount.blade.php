@@ -71,7 +71,7 @@
                     </li>
                 </ul>
             </div>
-+
+            +
 
             <div class="card-body">
                 <div class="table-responsive">
@@ -83,19 +83,19 @@
                         <thead>
                         <tr>
                             <th class="white-space-50">STT</th>
-                            <th style="min-width:200px !important;">   
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
-                                Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
+                            <th style="min-width:200px !important;">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
                                 </span>
                                 </div>
                             </th>
@@ -165,10 +165,10 @@
                             @foreach($discounts as $discount)
                                 <tr>
                                     <td class="white-space-50 text-center">{{$loop->iteration}}</td>
-                                    <td class="white-space-300" >{{$discount->name}}</td>
+                                    <td class="white-space-300">{{$discount->name}}</td>
                                     <td class="text-center">{{$discount->discount}}%</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-cemter">
                                         @if($discount->status == 1 )
                                             <span class="text-success font-medium">Đang áp dụng</span>
@@ -177,7 +177,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
-                                    <td class="white-space-100 text-center"><a href="javascript:void(0)" data-id="{{$discount->id}}"
+                                    <td class="white-space-100 text-center"><a href="javascript:void(0)"
+                                                                               data-id="{{$discount->id}}"
                                                                                class="btn btn-link more-details"
                                                                                onclick="edit({{$discount->id}})">Sửa</a>
                                     </td>

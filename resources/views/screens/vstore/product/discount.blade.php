@@ -82,20 +82,20 @@
                         <thead>
                         <tr>
                             <th class="white-space-400" style="min-width:200px !important;">
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                            Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
+                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
+                                            <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                    @endif
                                 </span>
-</div>
+                                </div>
                             </th>
                             <th>Phần trăm giảm giá
                                 <span style="float: right;cursor: pointer">
@@ -174,8 +174,8 @@
                                 <tr>
                                     <td class="white-space-400">{{$discount->name}}</td>
                                     <td class="text-center">{{$discount->discount}}%</td>
-                                    <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y')}}</td>
-                                    <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">
                                         @if($discount->status == 1 )
                                             <span class="text-success">Đang áp dụng</span>
@@ -184,9 +184,10 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center" style="min-width:80px !important;"><a href="javascript:void(0)" data-id="{{$discount->id}}"
-                                           class="btn btn-link more-details"
-                                           onclick="edit({{$discount->id}})">Sửa</a></td>
+                                    <td class="text-center" style="min-width:80px !important;"><a
+                                            href="javascript:void(0)" data-id="{{$discount->id}}"
+                                            class="btn btn-link more-details"
+                                            onclick="edit({{$discount->id}})">Sửa</a></td>
                                 </tr>
                             @endforeach
                         @else
