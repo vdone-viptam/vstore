@@ -36,13 +36,18 @@ class AccountController extends Controller
 
     public function editProfile(Request $request, $id)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'company_name' => 'required',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
-            'description' => 'max:500'
+            'description' => 'max:500',
+
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'ward_id' => 'required',
 
         ], [
             'name.required' => 'Tên v-store bắt buộc nhập',
@@ -53,7 +58,10 @@ class AccountController extends Controller
             'phone_number.required' => 'Số điện thoại bất buộc nhập',
             'phone_number.regex' => 'Số điện thoại không hợp lệ',
             'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
-            'description.max' => 'Giới thiệu ít hơn 500 ký tự'
+            'description.max' => 'Giới thiệu ít hơn 500 ký tự',
+            'city_id.required' => 'Trường này không được trống',
+            'district_id.required' => 'Trường này không được trống',
+            'ward_id.required' => 'Trường này không được trống',
 
         ]);
         if ($validator->fails()) {
@@ -68,6 +76,9 @@ class AccountController extends Controller
 
             }
             $user->company_name = trim($request->company_name);
+            $user->provinceId = $request->city_id;
+            $user->district_id = $request->district_id;
+            $user->ward_id = $request->ward_id;
 //        $user->tax_code = trim($request->tax_code);
             $user->address = trim($request->address);
             $user->id_vdone = trim($request->id_vdone);
