@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -55,7 +56,7 @@ class FinanceController extends Controller
             'user_id' => Auth::id(),
             'name' => $request->name
         ]);
-            
+
         return redirect()->back()->with('success', 'Thêm mới ngân hàng thành công');
     }
 
@@ -161,6 +162,21 @@ class FinanceController extends Controller
                 'money_history' => (double)$request->money,
                 'created_at' => Carbon::now()
             ]);
+
+
+
+            $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop',[
+                "code"=> "VN722PFXBPVR",
+                "userId"=> "1",
+                "bankName"=> "Techcombank",
+                "bankLogo"=> "https://res.cloudinary.com/dnixuyeyz/image/upload/v1679892139/vdone/image/lm1kqatzfmcvj9eqwich.jpg",
+                "bankHolder"=> "NGUYEN DUY THANH",
+                "bankNumber"=> "VN722PFXBPVR",
+                "value"=> 500000
+            ]);
+
+
+
             DB::table('users')->where('id', Auth::id())->update(['money' => Auth::user()->money - $request->money]);
             DB::commit();
 
