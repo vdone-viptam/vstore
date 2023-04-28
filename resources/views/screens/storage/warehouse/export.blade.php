@@ -116,20 +116,21 @@
                             <th class="white-space-120 text-center">Mã xuất hàng</th>
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>
-                            <div class="white-space-300 d-flex justify-content-between align-items-center" style="gap:6px">       
-                            Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
+                                <div class="white-space-300 d-flex justify-content-between align-items-center"
+                                     style="gap:6px">
+                                    Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                            @if($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="product_name"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="product_name"></i>
+                                            <i class="fas fa-sort sort" data-sort="product_name"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="product_name"></i>
-                                    @endif
                                 </span>
-</div>
+                                </div>
                             </th>
                             <th class="white-space-150 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -173,14 +174,14 @@
                             <th>Ngày tạo yêu cầu
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'created_at')
-                                    @if($type == 'desc')
-                                        <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="created_at"></i>
+                                        @else
+                                            <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        @endif
                                     @else
-                                        <i class="fa-solid fa-sort-up sort" data-sort="created_at"></i>
+                                        <i class="fas fa-sort sort" data-sort="created_at"></i>
                                     @endif
-                                @else
-                                    <i class="fas fa-sort sort" data-sort="created_at"></i>
-                                @endif
                                 </span>
                             </th>
                             <th>Thao tác/Trạng thái
@@ -250,7 +251,10 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="white-space-100"><a href="javascript:void(0)" onclick="showDetail({{$request->id}})" class="btn btn-link px-2" style="text-decoration:underline">Chi
+                                    <td class="white-space-100"><a href="javascript:void(0)"
+                                                                   onclick="showDetail({{$request->id}})"
+                                                                   class="btn btn-link px-2"
+                                                                   style="text-decoration:underline">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
@@ -364,18 +368,6 @@
                                     'success'
                                 ).then(() => location.reload())
                                 $('#requestModal').modal('hide')
-                                $('.status' + id).html(`
-                       <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
-                                                style="gap:14px;">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                Đã xuất hàng
-                                            </div>
-                    `);
                             })
                         })
 
@@ -415,20 +407,8 @@
                         data.message,
                         'Click vào nút bên dưới để đóng',
                         'success'
-                    )
+                    ).then(() => location.reload())
                     $('#requestModal').modal('hide')
-                    $('.status' + id).html(`
-                       <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
-                                                style="gap:14px;">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
-                                                          stroke-linecap="round"/>
-                                                </svg>
-                                                Đồng ý
-                                            </div>
-                    `);
                 })
 
             }

@@ -49,17 +49,17 @@ class UserController extends Controller
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
             'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
         $limit = $request->limit ?? 10;
-        if (isset($request->key_search)) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['users'] = $this->v['users']
                 ->where(function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('company_name', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('email', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('tax_code', '=', $request->key_search)
-                        ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
-                        ->orwhere('address', 'like', '%' . $request->key_search . '%');
+                    $query->where('name', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orwhere('company_name', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orwhere('email', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orwhere('phone_number', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orwhere('tax_code', '=', $this->v['key_search'])
+                        ->orwhere('account_code', 'like', '%' . $this->v['key_search'] . '%')
+                        ->orwhere('address', 'like', '%' . $this->v['key_search'] . '%');
                 });
         }
         $this->v['count'] = $this->v['users']->count();
@@ -91,8 +91,7 @@ class UserController extends Controller
                 ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
                 ->orwhere('address', 'like', '%' . $request->key_search . '%');
         }
-        $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('confirm_date', '!=', null)->paginate($limit);
-        $this->v['params'] = $request->all();
+        $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('account_code', '!=', null)->where('confirm_date', '!=', null)->paginate($limit);
 //        return  $this->v['users'];
         return view('screens.admin.user.list_user', $this->v);
     }
@@ -219,7 +218,6 @@ class UserController extends Controller
         $user = User::select('name', 'email',
             'id_vdone', 'phone_number', 'tax_code', 'role_id',
             'address', 'created_at', 'storage_information', 'confirm_date', 'referral_code')->where('id', $request->id)->first();
-        return $user;
         if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
         }

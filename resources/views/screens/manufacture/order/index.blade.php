@@ -38,7 +38,9 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý đơn hàng </a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng khách mua sản phẩm</li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng khách mua sản
+                                phẩm
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -102,14 +104,14 @@
                                 Giá bán
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order_item.price')
-                                            @if ($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="order_item.price"></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="order_item.price"></i>
-                                            @endif
+                                        @if ($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="order_item.price"></i>
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="order_item.price"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="order_item.price"></i>
                                         @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="order_item.price"></i>
+                                    @endif
 
                                     </span>
                             </th>
@@ -143,33 +145,35 @@
                             </th>
                             <th class="white-space-130" style="min-width:160px !important;">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
-                                Ngày dự kiến giao hàng
-                                <span style="float: right;cursor: pointer">
+                                    Ngày dự kiến giao hàng
+                                    <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.estimated_date')
-                                        @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="order.estimated_date"></i>
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort"
+                                                   data-sort="order.estimated_date"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort"
+                                                   data-sort="order.estimated_date"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="order.estimated_date"></i>
+                                            <i class="fas fa-sort sort" data-sort="order.estimated_date"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="order.estimated_date"></i>
-                                    @endif
                                     </span>
                                 </div>
                             </th>
                             <th class="white-space-110">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
-                                Giá trị đơn hàng
-                                <span style="float: right;cursor: pointer">
+                                    Giá trị đơn hàng
+                                    <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.total')
-                                        @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="order.total"></i>
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="order.total"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="order.total"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="order.total"></i>
+                                            <i class="fas fa-sort sort" data-sort="order.total"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="order.total"></i>
-                                    @endif
                                     </span>
                                 </div>
                             </th>
@@ -178,17 +182,17 @@
                             </th>
                             <th class="white-space-150">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
-                                Giá trị trừ chiết khấu 
-                                <span style="float: right;cursor: pointer">
+                                    Giá trị trừ chiết khấu
+                                    <span style="float: right;cursor: pointer">
                                         @if ($field == 'money')
-                                        @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                            @if ($type == 'desc')
+                                                <i class="fa-solid fa-sort-down sort" data-sort="money"></i>
+                                            @else
+                                                <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                            @endif
                                         @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="money"></i>
+                                            <i class="fas fa-sort sort" data-sort="money"></i>
                                         @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="money"></i>
-                                    @endif
                                     </span>
                                 </div>
                             </th>
@@ -212,13 +216,15 @@
                                             <span class="text-success font-medium">Hoàn thành</span>
                                         @endif
                                     </td>
-                                    <td class="white-space-100 text-right">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }} đ</td>
+                                    <td class="white-space-100 text-right">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }}
+                                        đ
+                                    </td>
                                     <td class="text-center">{{ $order->orderItem[0]->quantity }}</td>
                                     <td class="white-space-100">{{ $order->orderItem[0]->warehouse->name }}</td>
-                                    <td class="white-space-120 text-center">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                                    <td class="white-space-120 text-center">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
                                     <td class="text-center">
                                         @if($order->export_status == 2 || $order->export_status == 4)
-                                            {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y') }}
+                                            {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i') }}
                                         @else
                                             Chưa xác định
                                         @endif

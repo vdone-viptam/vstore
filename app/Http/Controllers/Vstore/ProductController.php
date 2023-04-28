@@ -269,7 +269,8 @@ class ProductController extends Controller
                 'end_date' => $request->end_date,
                 'type' => 2,
                 'user_id' => Auth::id(),
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
+                'status' => 0
             ]);
 
             return redirect()->route('screens.vstore.product.discount')->with('success', 'Thêm mới giảm giá thành công');
@@ -323,19 +324,16 @@ class ProductController extends Controller
 
     public function onDiscount()
     {
-        $discount = Discount::where('start_date', '<=', Carbon::now())
+        Discount::where('start_date', '<=', Carbon::now())
             ->where('end_date', '>=', Carbon::now())
+            ->where('status', 0)
             ->where('discounts.user_id', Auth::id())
-            ->get();
-        if (count($discount) > 0) {
-            foreach ($discount as $val) {
-                $update_discount = Discount::find($val->id);
-                if ($update_discount) {
-                    $update_discount->status = 1;
-                    $update_discount->save();
-                }
-            }
-        }
+            ->update(['status' => 1]);
+
+        Discount::where('end_date', '<', Carbon::now())
+            ->where('status', 1)
+            ->where('discounts.user_id', Auth::id())
+            ->update(['status' => 2]);
 
     }
 }
