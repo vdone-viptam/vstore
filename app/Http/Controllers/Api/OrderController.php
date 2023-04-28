@@ -408,7 +408,7 @@ class OrderController extends Controller
             'status_code' => 200,
             'order' => $order,
             'method_payment' => $methodPayment,
-            'body' => $getPrice['data']
+            'body' => $body
         ]);
     } // BỎ
 
