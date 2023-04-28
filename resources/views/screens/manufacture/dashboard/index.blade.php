@@ -227,51 +227,19 @@
                                 <th style="min-width:100px;">
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Mã sản phẩm
-                                        <span style="float: right;cursor:pointer">
-                                            @if($field == 'publish_id')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="publish_id"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="publish_id"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="publish_id"></i>
-                                            @endif
-                                        </span>
                                     </div>
                                 </th>
                                 <th class="white-space-400" style="min-width:150px">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Tên sản phẩm
-                                        <span style="float: right;cursor:pointer">
-                                            @if($field == 'products.name')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="products.name"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="products.name"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="products.name"></i>
-                                            @endif
-                                        </span>
                                     </div>
                                 </th>
                                 <th style="min-width:100px;">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Ngành hàng
-                                        <span style="float: right;cursor:pointer">
-                                            @if($field == 'categories.name')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="categories.name"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="categories.name"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="categories.name"></i>
-                                            @endif
-                                        </span>
+                                        
                                     </div>
                                 </th>
                                 <th class="white-space-110">
