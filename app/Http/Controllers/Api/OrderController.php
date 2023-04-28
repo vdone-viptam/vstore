@@ -153,11 +153,14 @@ class OrderController extends Controller
                 'MONEY_COLLECTION' => $methodPayment === 'COD' ? $order->total : 0,
                 'TYPE' => config('viettelPost.nationalType.domesticType'),
             ];
-
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+            ]);
             $getPriceAll = Http::withHeaders(
                 [
                     'Content-Type' => ' application/json',
-                    'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                    'Token' => $login['data']['token']
                 ]
             )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
 
@@ -189,7 +192,7 @@ class OrderController extends Controller
             $getPrice = Http::withHeaders(
                 [
                     'Content-Type' => ' application/json',
-                    'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                    'Token' => $login['data']['token']
                 ]
             )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
             if ($getPrice['status'] !== 200) {
@@ -326,6 +329,10 @@ class OrderController extends Controller
                         "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
                     ], 400);
                 }
+                $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                    'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                    'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+                ]);
                 $body = [
                     // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
                     'SENDER_DISTRICT' => $warehouse->district_id, // Cầu giấy
@@ -343,7 +350,7 @@ class OrderController extends Controller
                 $getPriceAll = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
-                        'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                        'Token' => $login['data']['token']
                     ]
                 )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', $body);
                 if ($getPriceAll->status() !== 200) {
@@ -371,7 +378,7 @@ class OrderController extends Controller
                 $getPrice = Http::withHeaders(
                     [
                         'Content-Type' => ' application/json',
-                        'Token' => 'eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwODEzNjM1ODY4IiwiVXNlcklkIjoxMjU3NzU2NSwiRnJvbVNvdXJjZSI6NSwiVG9rZW4iOiIzWFk1OFFFSFA1N0pLUzBIVSIsImV4cCI6MTY3ODYwODgwNCwiUGFydG5lciI6MTI1Nzc1NjV9.C3rYwtrUN5uCiIA4DF7xLUUgTwOA0Lp4DM1JtKJxv52uhF6lgHx7OmoPDVlkTb8dxJei-YCq2a0Rq7StlRMBVA' //$login['data']['token']
+                        'Token' => $login['data']['token']
                     ]
                 )->post('https://partner.viettelpost.vn/v2/order/getPrice', $body);
                 if ($getPrice['status'] !== 200) {

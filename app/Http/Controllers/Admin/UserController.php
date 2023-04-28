@@ -357,18 +357,20 @@ class UserController extends Controller
 
     public function historyPayment(Request $request)
     {
+        $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
-        $this->v['key_word'] = trim($request->key_search) ?? '';
+        $this->v['field'] = $request->field ?? 'order_service.id';
         $this->v['histories'] = User::join('order_service', 'users.id', '=', 'order_service.user_id')
-            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'order_service.payment_status', 'order_service.created_at')
+            ->select('order_service.id', 'no', 'total', 'type', 'users.name', 'method_payment', 'order_service.status', 'users.email', 'users.phone_number', 'users.company_name', 'order_service.payment_status', 'order_service.created_at')
             ->where('order_service.type', '!=', 'VSTORE');
-        if (strlen($this->v['key_word']) > 0) {
+        if (strlen($this->v['key_search']) > 0) {
             $this->v['histories'] = $this->v['histories']->where(function ($query) {
                 $query->where('users.name', 'like', '%' . $this->v['key_word'] . '%')
                     ->orWhere('order_service.no', $this->v['key_word']);
             });
         }
-        $this->v['histories'] = $this->v['histories']->paginate($this->v['limit']);
+        $this->v['histories'] = $this->v['histories']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
         return view('screens.admin.user.payment', $this->v);
     }
 

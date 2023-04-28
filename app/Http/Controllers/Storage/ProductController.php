@@ -341,7 +341,6 @@ class ProductController extends Controller
     {
 
 
-
         try {
 
             $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
@@ -375,7 +374,25 @@ class ProductController extends Controller
 
             $product = Product::where('id', $order_item->product_id)->first();
             RequestWarehouse::destroy($order->request_warehouse_id);
+            $priceDiscount = $product->price * $order_item->quantity;
 
+            $totalDiscountSuppliersAndVStore = 0;
+            if ($order_item->discount_ncc) {
+                $totalDiscountSuppliersAndVStore += $order_item->discount_ncc;
+            }
+            if ($order_item->discount_vstore) {
+                $totalDiscountSuppliersAndVStore += $order_item->discount_vstore;
+            }
+            if ($totalDiscountSuppliersAndVStore > 0) {
+                $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore / 100);
+            }
+            if ($order_item->discount_vshop) {
+                $priceDiscount = $priceDiscount - $priceDiscount * ($order_item->discount_vshop / 100);
+            }
+            $price = $priceDiscount;
+            //Tính VAT
+            $vat = $priceDiscount * ($product->vat / 100);
+            $priceDiscount = $priceDiscount + $vat;
             if ($status == 1) {
 //            return $order->total;
                 if ($order->method_payment == 'COD') {
@@ -403,7 +420,6 @@ class ProductController extends Controller
                     'TYPE' => 1,
 
                 ]);
-
 
                 $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
                 $order->estimated_date = \Illuminate\Support\Carbon::now()->addHours((int)$date);

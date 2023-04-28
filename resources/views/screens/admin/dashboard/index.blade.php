@@ -89,7 +89,7 @@
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
                                 <form >
-                                <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_users" value="{{$key_search_users}}">
+                                <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm..." name="key_search_users" value="{{$key_search_users}}">
                                 </form>
                             </div>
                         </li>
@@ -291,9 +291,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex align-items-end justify-content-end mt-4">
+                    <div class="d-flex align-items-center justify-content-end mt-4">
                         {{$users->withQueryString()->links('layouts.custom.paginator')}}
-                        <div class="mt-4 ml-4">
+                        <div class=" ml-4">
                             <div class="form-group">
                                 <select class="form-control" id="limit_users">
                                     <option value="10" {{$limit_users == 10 ? 'selected' : ''}}>10 hàng / trang</option>
@@ -323,7 +323,7 @@
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
                                 <form >
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm.." name="key_search_request" value="{{$key_search_request}}">
+                                    <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm..." name="key_search_request" value="{{$key_search_request}}">
                                 </form>
                             </div>
                         </li>
@@ -492,9 +492,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex align-items-end justify-content-end mt-4">
+                    <div class="d-flex align-items-center justify-content-end mt-4">
                         {{$requests->withQueryString()->links('layouts.custom.paginator')}}
-                        <div class="mt-4 ml-4">
+                        <div class=" ml-4">
                             <div class="form-group">
                                 <select class="form-control" id="limit_request">
                                     <option value="10" {{$limit_request == 10 ? 'selected' : ''}}>10 hàng / trang</option>

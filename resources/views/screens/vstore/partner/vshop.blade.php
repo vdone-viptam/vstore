@@ -36,7 +36,7 @@
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -79,7 +79,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">Doanh thu (đ)
+                            <th class="white-space-200 ">Doanh thu (đ)
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'doanh_thu')
                                         @if($type == 'desc')
@@ -99,11 +99,11 @@
                             @foreach($vshop as $value)
                                 <tr>
 
-                                    <td>{{$value->vshop_id}}</td>
+                                    <td class="text-center">{{$value->vshop_id}}</td>
                                     <td class="td_name">{{$value->nick_name}}</td>
-                                    <td>{{number_format($value->amount_product,0,'.','.')}}</td>
-                                    <td>{{number_format($value->count_order,0,'.','.') }}</td>
-                                    <td>{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
+                                    <td class="text-center">{{number_format($value->amount_product,0,'.','.')}}</td>
+                                    <td class="text-center">{{number_format($value->count_order,0,'.','.') }}</td>
+                                    <td class="text-right">{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
                                 </tr>
                             @endforeach
                         @else
@@ -115,9 +115,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$vshop->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                             <div class="form-group">
                                 <select class="form-control" id="limit">
                                     <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

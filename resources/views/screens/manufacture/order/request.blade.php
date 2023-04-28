@@ -124,7 +124,7 @@
                                 <input type="hidden" name="field" value="{{$field}}">
                                 <input type="hidden" name="limit" value="{{$limit}}">
                                 <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                       type="search" placeholder="Tìm kiếm..">
+                                       type="search" placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -291,9 +291,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$orders->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Sản phẩm</h2>
+                <h2 class="pageheader-title">Tất cả sản phẩm</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -131,7 +131,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120">Nhà cung cấp
+                            <th class="white-space-120" style="min-width:130px !important;">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -202,26 +202,26 @@
                                     <td class="white-space-150">
                                         {{$product->publish_id}}
                                     </td>
-                                    <td class="white-space-350">
+                                    <td class="white-space-350" style="min-width:180px !important;">
                                         {{$product->name}}
                                     </td>
                                     <td class="white-space-150">{{$product->cate_name}}</td>
                                     <td class="text-right">
                                         {{number_format($product->price,0,'.','.')}}
                                     </td>
-                                    <td class="text-right">{{$product->vat}}</td>
+                                    <td class="text-center">{{$product->vat}}</td>
                                     <td>
                                         {{$product->user_name}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-center">
                                         {{$product->discount}}
                                     </td>
-                                    <td>{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-right">
+                                    <td class="text-center">{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">
                                         {{$product->discount_vShop}}
                                     </td>
                                     <td>
-                                        <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link">Chi
+                                        <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link" style="text-decoration:underline">Chi
                                             tiết</a>
                                     </td>
                                 </tr>
@@ -235,9 +235,9 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$products->withQueryString()->links('layouts.custom.paginator')}}
-                    <div class="mt-4 ml-4">
+                    <div class=" ml-4">
                         <div class="form-group">
                             <select class="form-control" id="limit">
                                 <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>

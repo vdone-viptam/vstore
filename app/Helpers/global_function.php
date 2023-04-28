@@ -26,6 +26,7 @@ function calculateShippingByProductID($productID, $districtId, $provinceId, $war
 {
     $products = \App\Models\Product::where('products.id', $productID)
         ->where('products.status', 2)
+        ->where('warehouses.is_off', 1)
         ->join('product_warehouses', 'product_warehouses.product_id', 'products.id')
         ->join('warehouses', 'product_warehouses.ware_id', 'warehouses.id')
         ->select(

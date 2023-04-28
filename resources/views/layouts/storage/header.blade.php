@@ -7,7 +7,7 @@
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
             <a class="navbar-brand" href="{{route('screens.vstore.dashboard.index')}}">
-                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
+                <img class="logo-img" style="height: 40px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
                      alt="logo">
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
@@ -17,7 +17,7 @@
             </a>
         @else
             <a class="navbar-brand" href="{{route('screens.manufacture.dashboard.index')}}">
-                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"
+                <img class="logo-img" style="height: 40px; object-fit: contain;" src="{{asset('home/img/NCC.png')}}"
                      alt="logo">
             </a>
         @endif
@@ -30,7 +30,7 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <div id="custom-search" class="top-search">
-                        <input class="form-control" id="search" type="search" placeholder="Tìm kiếm..">
+                        <input class="form-control" id="search" type="search" placeholder="Nhập từ khóa tìm kiếm..">
                     </div>
                 </li>
             </ul>
@@ -450,17 +450,20 @@
                     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                          aria-labelledby="navbarDropdownMenuLink2">
                         <div class="nav-user-info">
-
+                            {{\Illuminate\Support\Facades\Auth::user()->name}}
                         </div>
-                        <a class="dropdown-item" href=@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
-                     "{{route('screens.storage.account.profile')}}"
+                        @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+                            <a class="dropdown-item" href=
+                                "{{route('screens.storage.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 3)
-                            "{{route('screens.vstore.account.profile')}}"
+                            <a class="dropdown-item" href=
+                                "{{route('screens.vstore.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id ==2 )
-                            "{{route('screens.manufacture.account.profile')}}"
-                        @endif><i class="fas fa-user mr-2"></i>Hồ sơ</a>
-                        <!-- <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Cài đặt</a> -->
-                        <a class="dropdown-item logout" style="color:#FF4D4F"><i class="fas fa-power-off mr-2"></i>Đăng
+                            <a href="{{route('screens.manufacture.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ
+                                sơ</a>
+                        @endif
+                        <a class="dropdown-item logout" href="{{route('logout')}}" style="color:#FF4D4F"><i
+                                class="fas fa-power-off mr-2"></i>Đăng
                             xuất</a>
 
                     </div>
@@ -486,7 +489,8 @@
                         <img style="width: 32px;height: 32px"
                              src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png">
                         {{$notification['data']['message']}}
-                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem chi tiết</a>
+                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem
+                            chi tiết</a>
 
                     </p>
                     <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y H:i')}}</span>

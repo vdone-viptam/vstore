@@ -12,7 +12,7 @@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Sản phẩm</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Yêu cầu xét duyệt sản phẩm</li>
                         </ol>
@@ -141,16 +141,20 @@
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group" id="file-input">
                                     <label for="name">Tài liệu sản phẩm<span class="text-danger">*</span></label>
-                                    <input type="file" required accept=
-                                        "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-                                        text/plain, application/pdf, image/*" class="form-control form-control-lg"
-                                           id="images" name="images[]" multiple>
-                                    @error('images')
-                                    <p class="text-danger ml-1 mt-2">{{$message}}</p>
-                                    @enderror
+                                    <input type="file" id="pickfiles"
+                                           class="form-control form-control-lg"  accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                                        text/plain, application/pdf, image/*">
+                                    <div id="filelist"></div>
                                 </div>
+                                <input type="hidden" name="images" id="videoSuccess">
+                                @error('images')
+                                <p class="text-danger mt-2 ml-1">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group" id="filelist">
+
                             </div>
                             @csrf
                             <div class="col-12">
@@ -333,7 +337,7 @@
                                 <button type="button" class="btn btn-secondary" onClick="window.location.reload();">Hủy
                                     bỏ
                                 </button>
-                                <button type="submit" class="btn btn-primary ml-2" id="appect">Tạo yêu cầu</button>
+                                <button type="submit" class="btn btn-primary ml-2 btnSave" id="appect">Tạo yêu cầu</button>
                             </div>
 
                         </div>
@@ -347,6 +351,8 @@
 @endsection
 
 @section('custom_js')
+    <script src="{{ asset('plupload/js/plupload.full.min.js') }}"></script>
+
     @if(\Illuminate\Support\Facades\Session::has('success'))
         <script>
             Swal.fire({
@@ -505,6 +511,90 @@
         //     evt.preventDefault();
         //     window.history.back();
         // });
-    </script>
 
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var path = "{{ asset('/plupload/js/') }}";
+
+            var uploader = new plupload.Uploader({
+                browse_button: 'pickfiles',
+                container: document.getElementById('file-input'),
+                url: '{{ route("chunk.store") }}',
+                chunk_size: '1MB', // 1 MB
+                max_retries: 2,
+                filters: {
+                    max_file_size: '200mb'
+                },
+                multipart_params: {
+                    // Extra Parameter
+                    "_token": "{{ csrf_token() }}"
+                },
+                init: {
+                    PostInit: function () {
+                        document.getElementById('filelist').innerHTML = '';
+                    },
+                    FilesAdded: function (up, files) {
+                        plupload.each(files, function (file) {
+                            console.log('FilesAdded');
+                            console.log(file);
+                            document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                        });
+                        uploader.start();
+                    },
+                    UploadProgress: function (up, file) {
+                        console.log('UploadProgress');
+                        console.log(file);
+                        document.querySelector('.btnSave').setAttribute('disabled', 'true');
+                        document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                    },
+                    FileUploaded: function (up, file, result) {
+
+                        console.log('FileUploaded');
+                        console.log(file);
+                        console.log(JSON.parse(result.response));
+                        responseResult = JSON.parse(result.response);
+
+                        if (responseResult.ok == 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Xem chi tiết sản phẩm thất bại !',
+                                text: responseResult.info,
+                            })
+                        }
+                        if (result.status != 200) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Upload video không thành công !',
+                                text: '',
+                            })
+                        }
+                        if (responseResult.ok == 1 && result.status == 200) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Upload video thành công !',
+                                text: '',
+                            })
+                            document.querySelector('.btnSave').removeAttribute('disabled');
+                            $('#videoSuccess').val("storage/products/" + JSON.parse(result.response).video)
+
+                        }
+                    },
+                    UploadComplete: function (up, file) {
+                        // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {timeOut: 5000});
+                    },
+                    Error: function (up, err) {
+                        // DO YOUR ERROR HANDLING!
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Upload video không thành công !',
+                            text: '',
+                        })
+                        console.log(err);
+                    }
+                }
+            });
+            uploader.init();
+        });
+    </script>
 @endsection

@@ -63,7 +63,7 @@
                                 <input type="hidden" name="type" value="{{$type}}">
                                 <input name="key_search" value="{{$key_search ?? ''}}" class="form-control"
                                        type="search"
-                                       placeholder="Tìm kiếm..">
+                                       placeholder="Nhập từ khóa tìm kiếm...">
                             </form>
 
                         </div>
@@ -96,7 +96,6 @@
                                 Tên
                             </th>
                             <th>Email
-                          </span>
                             </th>
                             <th>Id P-Done người đại diện</th>
                             <th>Tên công ty</th>

@@ -38,7 +38,7 @@
                         {{-- <ul class="navbar-nav ">
                             <li class="nav-item">
                                 <div id="custom-search" class="top-search-bar">
-                                    <input class="form-control" type="search" placeholder="Tìm kiếm..">
+                                    <input class="form-control" type="search" placeholder="Nhập từ khóa tìm kiếm...">
                                 </div>
                             </li>
                         </ul> --}}
@@ -170,9 +170,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end mt-4">
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$histories->withQueryString()->links('layouts.custom.paginator')}}
-                            <div class="mt-4 ml-4">
+                            <div class=" ml-4">
                                 <div class="form-group">
                                     <select class="form-control" id="limit">
                                         <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
