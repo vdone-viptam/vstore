@@ -450,7 +450,7 @@
                     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                          aria-labelledby="navbarDropdownMenuLink2">
                         <div class="nav-user-info">
-                            Tên user
+                            {{\Illuminate\Support\Facades\Auth::user()->name}}
                         </div>
                         <a class="dropdown-item" href=@if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
                      "{{route('screens.storage.account.profile')}}"
@@ -460,7 +460,8 @@
                             "{{route('screens.manufacture.account.profile')}}"
                         @endif><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         <!-- <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Cài đặt</a> -->
-                        <a class="dropdown-item logout" style="color:#FF4D4F"><i class="fas fa-power-off mr-2"></i>Đăng
+                        <a class="dropdown-item logout" href="{{route('logout')}}" style="color:#FF4D4F"><i
+                                class="fas fa-power-off mr-2"></i>Đăng
                             xuất</a>
 
                     </div>
@@ -486,7 +487,8 @@
                         <img style="width: 32px;height: 32px"
                              src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png">
                         {{$notification['data']['message']}}
-                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem chi tiết</a>
+                        <a href="{{$notification['data']['href']}}?&noti_id={{$notification->id}}" class="text-primary">Xem
+                            chi tiết</a>
 
                     </p>
                     <span>{{\Illuminate\Support\Carbon::parse($notification->created_at)->format('d/m/Y H:i')}}</span>
