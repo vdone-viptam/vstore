@@ -29,9 +29,11 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <div id="custom-search" class="top-search">
-                        <input class="form-control" id="search" type="search" placeholder="Nhập từ khóa tìm kiếm..">
-                    </div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role_id == 4)
+                        <div id="custom-search" class="top-search">
+                            <input class="form-control" id="search" type="search" placeholder="Nhập từ khóa tìm kiếm..">
+                        </div>
+                    @endif
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto navbar-right-top">
