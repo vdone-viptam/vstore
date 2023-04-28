@@ -448,23 +448,16 @@
                     },
                     FilesAdded: function (up, files) {
                         plupload.each(files, function (file) {
-                            console.log('FilesAdded');
-                            console.log(file);
                             document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                         });
                         uploader.start();
                     },
                     UploadProgress: function (up, file) {
-                        console.log('UploadProgress');
-                        console.log(file);
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
                         document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
                     },
                     FileUploaded: function (up, file, result) {
 
-                        console.log('FileUploaded');
-                        console.log(file);
-                        console.log(JSON.parse(result.response));
                         responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
