@@ -35,7 +35,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/request-confirm*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.vstore.product.request')}}">Yêu cầu chưa xét duyệt sản phẩm chưa xác nhận</a>
+                                       href="{{route('screens.vstore.product.request')}}">Yêu cầu xét duyệt sản phẩm chưa xác nhận</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('products/requestAll*')) ? 'active1' : '' }}"
