@@ -243,7 +243,7 @@ aria-hidden="true">
                                                         </div>
                                                 </div>
                                                 <div class="mx-auto">
-                                                    <button class="btn btn-primary">Cập nhập</button>
+                                                    <button class="btn btn-primary">Cập nhật</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -392,7 +392,7 @@ aria-hidden="true">
                                                     </div>
                                             </div>
                                             <div class="mx-auto">
-                                                <button class="btn btn-primary">Cập nhập</button>
+                                                <button class="btn btn-primary">Cập nhật</button>
                                             </div>
                                         </div>
                                     </form>
@@ -541,7 +541,7 @@ aria-hidden="true">
                                                     </div>
                                             </div>
                                             <div class="mx-auto">
-                                                <button class="btn btn-primary">Cập nhập</button>
+                                                <button class="btn btn-primary">Cập nhật</button>
                                             </div>
                                         </div>
                                     </form>
@@ -658,7 +658,7 @@ aria-hidden="true">
 
         let checkArr = elementInput.attr('data-arrImg');
         let arrImage;
-        
+
 
         document.querySelectorAll('.delete-one-image').forEach((item, indexDelete) => {
             const {index} = item.dataset;

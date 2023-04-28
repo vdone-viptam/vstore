@@ -289,6 +289,10 @@
 @section('custom_js')
     <script>
         $(document).ready(function () {
+            setTimeout(() => {
+                $("#alert-succ").hide('fade');
+            }, 1000);
+            
             function convertDate(inputFormat) {
                 function pad(s) {
                     return (s < 10) ? '0' + s : s;
