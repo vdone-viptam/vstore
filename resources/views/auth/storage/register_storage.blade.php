@@ -141,7 +141,7 @@
                                     d="M6.24976 4.25C6.24976 4.44891 6.32877 4.63968 6.46943 4.78033C6.61008 4.92098 6.80084 5 6.99976 5C7.19867 5 7.38943 4.92098 7.53009 4.78033C7.67074 4.63968 7.74976 4.44891 7.74976 4.25C7.74976 4.05109 7.67074 3.86032 7.53009 3.71967C7.38943 3.57902 7.19867 3.5 6.99976 3.5C6.80084 3.5 6.61008 3.57902 6.46943 3.71967C6.32877 3.86032 6.24976 4.05109 6.24976 4.25ZM7.37476 6H6.62476C6.55601 6 6.49976 6.05625 6.49976 6.125V10.375C6.49976 10.4438 6.55601 10.5 6.62476 10.5H7.37476C7.44351 10.5 7.49976 10.4438 7.49976 10.375V6.125C7.49976 6.05625 7.44351 6 7.37476 6Z"
                                     fill="black" fill-opacity="0.45"></path>
                             </svg></label>
-                        <input class="only-number form-control form-control-lg" required="" type="text"
+                        <input class="form-control form-control-lg" required="" type="text"
                                name="id_vdone" id="id_vdone"
                                value="{{old('id_vdone')}}"
                                placeholder="Nhập ID P-Done người đại diện (VD: VN1234567891)">
@@ -166,7 +166,7 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
                         <label style="font-weight: 600;" for="idpDonemore">&nbsp;ID P-Done người đại diện (khác)</label>
-                        <input class="only-number form-control form-control-lg" type="text"
+                        <input class="form-control form-control-lg" type="text"
                                name="id_vdone_diff" id="id_vdone_diff"
                                value="{{old('id_vdone_diff')}}"
                                placeholder="Nhập ID P-Done người đại diện khác (VD: VN12345678)">
