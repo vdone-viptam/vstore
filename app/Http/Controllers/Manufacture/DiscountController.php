@@ -27,7 +27,7 @@ class DiscountController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['key_search'] = $request->key_search ?? '';
         $this->v['discounts'] = DB::table('discounts')->select('discounts.id', 'discounts.discount',
-            'products.name', 'discounts.created_at', 'start_date', 'end_date','discounts.status')
+            'products.name', 'discounts.created_at', 'start_date', 'end_date', 'discounts.status')
             ->join('products', 'discounts.product_id', '=', 'products.id')
             ->orderBy($this->v['field'], $this->v['type'])
             ->where('discounts.user_id', Auth::id());
@@ -38,7 +38,7 @@ class DiscountController extends Controller
         }
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['discounts'] = $this->v['discounts']->paginate($this->v['limit']);
-         $this->onDiscount();
+        $this->onDiscount();
         return view('screens.manufacture.discount.discount', $this->v);
 
     }
@@ -86,7 +86,8 @@ class DiscountController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'type' => 1,
-                'user_id' => Auth::id()
+                'user_id' => Auth::id(),
+                'created_at' => Carbon::now()
             ]);
 
             return redirect()->route('screens.manufacture.product.discount')->with('success', 'Thêm mới giảm giá thành công');
@@ -130,16 +131,16 @@ class DiscountController extends Controller
         }
     }
 
-    public  function onDiscount(){
-        $discount = Discount::where('start_date','<=', Carbon::now())
-            ->where('end_date','>=',Carbon::now())
-            ->where('discounts.user_id',Auth::id())
-            ->get()
-        ;
-        if (count($discount)>0){
-            foreach ($discount as $val){
+    public function onDiscount()
+    {
+        $discount = Discount::where('start_date', '<=', Carbon::now())
+            ->where('end_date', '>=', Carbon::now())
+            ->where('discounts.user_id', Auth::id())
+            ->get();
+        if (count($discount) > 0) {
+            foreach ($discount as $val) {
                 $update_discount = Discount::find($val->id);
-                if ($update_discount){
+                if ($update_discount) {
                     $update_discount->status = 1;
                     $update_discount->save();
                 }
