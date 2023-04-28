@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use App\Models\BlanceChange;
 use App\Models\Deposit;
 use App\Models\Wallet;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -26,7 +28,8 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
             ->where('type', 1)
             ->first();
-        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->first()->amount ??0;
+        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->where('status',0)->first()->amount ??0;
+
         return view('screens.storage.finance.index', $this->v);
     }
 
@@ -147,6 +150,25 @@ class FinanceController extends Controller
                 'status' => 1,
                 'money_history' => (double)$request->money,
                 'created_at' => Carbon::now()
+            ]);
+            $bank = Bank::where('id',$wallet->bank_id)->first();
+            $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.$request->money. '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
+//                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
+            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+
+
+
+//            userId=${dto.userId}&code=${dto.code}&value=${dto.value}&bankNumber=${dto.bankNumber}&bankHolder=${dto.bankHolder}
+
+            $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop',[
+                "code"=> $code,
+                "userId"=> Auth::id(),
+                "bankName"=> $bank->name,
+                "bankLogo"=> $bank->image,
+                "bankHolder"=> $wallet->name,
+                "bankNumber"=> $wallet->account_number,
+                "value"=> $request->money,
+                "signature"=> $sig
             ]);
             DB::table('users')->where('id', Auth::id())->update(['money' => Auth::user()->money - $request->money]);
             DB::commit();

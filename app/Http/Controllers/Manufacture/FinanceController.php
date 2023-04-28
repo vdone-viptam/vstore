@@ -30,7 +30,7 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')
             ->where('type', 1)
             ->where('user_id', Auth::id())->first();
-        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->first()->amount ??0;
+        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->where('status',0)->first()->amount ??0;
         return view('screens.manufacture.finance.index', $this->v);
     }
 
