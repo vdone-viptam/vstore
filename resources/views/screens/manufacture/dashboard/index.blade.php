@@ -162,7 +162,7 @@
                         <div class="card-body">
                             <h5 class="text-muted">Doanh thu trong tháng</h5>
                             <div class="metric-value d-inline-block">
-                                <h1 class="mb-1">{{number_format($dataRevenueToday,0,'.','.')}}</h1>
+                                <h1 class="mb-1">{{number_format($revenue30Day,0,'.','.')}}</h1>
                             </div>
                         </div>
                     </div>
