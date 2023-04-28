@@ -384,7 +384,7 @@
                                             <td>{{$product->cate_name}}</td>
                                             <td class="text-right">{{number_format($product->price,0,'.','.')}} đ</td>
                                             <td class="text-center">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
-                                            <td class="text-center">{{$product->discount != null ? $product->discount+'%' : 'Chưa niêm yết'}}</td>
+                                            <td class="text-center">{{$product->discount != null ? $product->discount.' %' : 'Chưa niêm yết'}}</td>
                                             <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
                                             <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                             <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
