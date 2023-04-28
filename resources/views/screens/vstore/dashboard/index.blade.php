@@ -58,9 +58,9 @@
                 <a href="#" class="item-dash">
                     <div class="card border-3 border-top border-top-primary">
                         <div class="card-body">
-                            <h5 class="text-muted">Đơn hàng giao thành công trong ngày</h5>
+                            <h5 class="text-muted">Yêu cầu xét duyệt sản phẩm</h5>
                             <div class="metric-value d-inline-block">
-                                <h1 class="mb-1">{{number_format($dataOrderSuccessToday,0,'.','.')}}</h1>
+                                <h1 class="mb-1">{{number_format($countRequestProductReview,0,'.','.')}}</h1>
                             </div>
 
                         </div>
@@ -217,7 +217,7 @@
                                 <th style="min-width:100px;">
 
                                     Trạng thái
-                                    
+
                                 </th>
                                 <th></th>
                                 </thead>

@@ -42,16 +42,23 @@ class DashboardController extends Controller
         }
         $data = $data->orderBy($this->v['field'], $this->v['type'])
             ->paginate($this->v['limit']);
-            $vshop  = [];
 
-        $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
-        $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
-        $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
-        $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
+        $countRequestProductReview = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+            ->join('requests', 'products.id', '=', 'requests.product_id')
+            ->where('requests.vstore_id', Auth::id())
+            ->where('requests.status', 0)
+            ->count();
+
+        $vshop  = [];
+
+        // $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
+        // $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
+        // $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
+        // $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
         $dataRevenueToday = $this->chartRepository->revenueToday();
         $dataOrderToday = $this->chartRepository->orderToday();
-        $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
+        // $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
 
         return view('screens.vstore.dashboard.index',
         [
@@ -62,14 +69,14 @@ class DashboardController extends Controller
             'key_search' => $this->v['key_search'],
 
             'vshop' => $vshop,
-            'dataRevenueChartMonth' => $dataRevenueChartMonth,
-            'dataRevenueChartYear' => $dataRevenueChartYear,
-            'dataOrderChartMonth' => $dataOrderChartMonth,
-            'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+            // 'dataRevenueChartMonth' => $dataRevenueChartMonth,
+            // 'dataRevenueChartYear' => $dataRevenueChartYear,
+            // 'dataOrderChartMonth' => $dataOrderChartMonth,
+            // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
             'dataRevenueToday' => $dataRevenueToday,
             'dataOrderToday' => $dataOrderToday,
-            'dataOrderSuccessToday' => $dataOrderSuccessToday,
+            'countRequestProductReview' => $countRequestProductReview,
         ]);
 
     }
