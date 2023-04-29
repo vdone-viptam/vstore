@@ -80,7 +80,7 @@ class ManufactureController extends Controller
 
         if ($user) {
             foreach ($user as $value) {
-                $value->avatar = strlen($value->avatar) == 0 ? asset('home/img/ncc11.png') : asset('image/users/' . $value->avatar);
+                $value->avatar = strlen($value->avatar) == 0 ? asset('home/img/ncc-vuong.png') : asset('image/users/' . $value->avatar);
             }
         }
         return response()->json([
