@@ -559,6 +559,11 @@ class  VShopController extends Controller
     {
         $limit = $request->limit ?? 10;
         $vshop = Vshop::select('id', 'pdone_id', 'phone_number', 'vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
+        foreach ($vshop as $val){
+            if ($val->avatar == null) {
+                $val->avatar = asset('home/img/vshop-vuong.png');
+            }
+        }
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
