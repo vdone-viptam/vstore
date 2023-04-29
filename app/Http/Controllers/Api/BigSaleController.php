@@ -75,7 +75,7 @@ class BigSaleController extends Controller
 //                ->selectSub("SELECT SUM(discounts.discount /100)
 //                        FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
 //                                        AND product_id = products.id AND type != 3 GROUP BY product_id",'discount')
-                ->having('discount','>',30)
+                ->having('discount','>=',30)
                 ->paginate($limit);
             foreach ($products as $product) {
 //                $product->discount = round(DB::table('discounts')
