@@ -93,7 +93,7 @@ class AffOrder extends Command
                         $new_vstore_blance->status=1;
                         $new_vstore_blance->money_history=$price_vstore;
                         $new_vstore_blance->save();
-                        $vstore->money +=$price_ncc;
+                        $vstore->money +=$price_vstore;
                         $vstore->save();
                     }
 //                        chia vshop
