@@ -1032,12 +1032,10 @@ class  VShopController extends Controller
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
         }
-        foreach ($vshop as $v){
-            if ($v->avatar == ""){
-                $v->avatar=  asset('home/img/vshop-vuong.png');
-            }
+        if ($vshop->avatar == null){
+            $vshop->avatar = $vshop->avatar = asset('home/img/vshop-vuong.png');
         }
-{}        $vshop->total_product = $total_product;
+        $vshop->total_product = $total_product;
         $cate = Category::select('categories.name')
             ->join('products', 'categories.id', '=', 'products.category_id')
             ->join('vshop_products', 'products.id', '=', 'vshop_products.product_id')

@@ -673,6 +673,11 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
         $vshop = Vshop::select('name', 'id', 'nick_name', 'avatar', 'pdone_id')->where('pdone_id', $pdone_id)->first();
+
+            if ($vshop->avatar == ""){
+                $vshop->avatar = asset('home/img/vshop-vuong.png');
+            }
+
         $cate = [];
 
         $products = DB::table('vshop')
