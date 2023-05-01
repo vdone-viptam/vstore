@@ -765,7 +765,7 @@ class ProductController extends Controller
     function getProductAvailableByVshop(Request $request, $pdone_id)
     {
         $limit = $request->limit ?? 10;
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $data = null;
         $products = DB::table('vshop')
             ->selectRaw('products.name as product_name,vshop_products.delivery_off,vshop_products.status as vstatus,publish_id,price,
