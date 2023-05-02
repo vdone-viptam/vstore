@@ -559,6 +559,11 @@ class  VShopController extends Controller
     {
         $limit = $request->limit ?? 10;
         $vshop = Vshop::select('id', 'pdone_id', 'phone_number', 'vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
+        foreach ($vshop as $val){
+            if ($val->avatar == null) {
+                $val->avatar = asset('home/img/vshop-vuong.png');
+            }
+        }
         return response()->json([
             'status_code' => 200,
             'message' => 'Lấy thông tin thành công',
@@ -1026,6 +1031,9 @@ class  VShopController extends Controller
                 'status_code' => 400,
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
+        }
+        if ($vshop->avatar == null){
+            $vshop->avatar = $vshop->avatar = asset('home/img/vshop-vuong.png');
         }
         $vshop->total_product = $total_product;
         $cate = Category::select('categories.name')

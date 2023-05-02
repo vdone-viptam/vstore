@@ -673,6 +673,11 @@ class ProductController extends Controller
     {
         $limit = $request->limit ?? 10;
         $vshop = Vshop::select('name', 'id', 'nick_name', 'avatar', 'pdone_id')->where('pdone_id', $pdone_id)->first();
+
+            if ($vshop->avatar == ""){
+                $vshop->avatar = asset('home/img/vshop-vuong.png');
+            }
+
         $cate = [];
 
         $products = DB::table('vshop')
@@ -760,7 +765,7 @@ class ProductController extends Controller
     function getProductAvailableByVshop(Request $request, $pdone_id)
     {
         $limit = $request->limit ?? 10;
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $data = null;
         $products = DB::table('vshop')
             ->selectRaw('products.name as product_name,vshop_products.delivery_off,vshop_products.status as vstatus,publish_id,price,

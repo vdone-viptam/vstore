@@ -99,7 +99,7 @@ class VstoreController extends Controller
         if ($user) {
             foreach ($user as $value) {
                 if ($value->avatar == null) {
-                    $value->avatar = asset('home/img/logo-06.png');
+                    $value->avatar = asset('home/img/vstore-vuong.png');
                 } else
                     $value->avatar = asset('image/users/' . $value->avatar);
 
@@ -165,7 +165,7 @@ class VstoreController extends Controller
         try {
             $user = User::select('name', 'id', 'account_code', 'description', 'phone_number', 'avatar')->where('role_id', 3)->where('id', $id)->first();
             if ($user->avatar == null) {
-                $user->avatar = asset('home/img/logo-06.png');
+                $user->avatar = asset('home/img/vstore-vuong.png');
             } else {
                 $user->avatar = asset('image/users/' . $user->avatar);
             }

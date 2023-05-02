@@ -107,7 +107,7 @@
                                                 @if($history->status == 0)
                                                     <p class="text-danger font-medium">Thất bại</p>
                                                 @else
-                                                    <p class="text-success font-medium">Đang chờ duyệt</p>
+                                                    <p class="text-success font-medium">Thành công</p>
                                                 @endif
                                             </td>
                                             <td class="text-right">

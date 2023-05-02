@@ -59,7 +59,7 @@ Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostC
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
-//    Route::post('wallet-update',[\App\Http\Controllers\Api\WalletController::class,'updateStatus']);
+    Route::post('wallet-update/{code}',[\App\Http\Controllers\AccountingController::class,'confirmed']);
 
     Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
     Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);

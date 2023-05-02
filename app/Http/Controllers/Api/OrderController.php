@@ -444,6 +444,11 @@ class OrderController extends Controller
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
+                if ($status == 5){
+                    $order->is_complete= true;
+                }else{
+                    $order->is_complete= false;
+                }
                 $order->orderItem = $order->orderItem()
                     ->select(
                         'id as order_item_id',
@@ -456,38 +461,40 @@ class OrderController extends Controller
                     )
                     ->get();
                 $product = null;
-                foreach ($order->orderItem as $item) {
-                    $product = $item->product()->select('name', 'price', 'images')->first();
-                    $item->product_name = $product->name;
-                    $item->price = $product->price;
-                    $item->image = asset(json_decode($product->images)[0]);
+                if (count($order->orderItem) >0){
+                    foreach ($order->orderItem as $item) {
+                        $product = $item->product()->select('name', 'price', 'images')->first();
+                        $item->product_name = $product->name;
+                        $item->price = $product->price;
+                        $item->image = asset(json_decode($product->images)[0]);
 
+                    }
+
+                    $rating = Point::where('customer_id', $id)
+                        ->where('order_item_id', $order->orderItem[0]->order_item_id)
+                        ->join('products', 'points.product_id', '=', 'products.id')
+                        ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images', 'points.created_at')
+                        ->first();
+                    if ($rating) {
+                        $order->rating = $rating;
+                        $order->rating->image = $product->images ? asset(json_decode($product->images)[0]) : '';
+                        $order->rating->content_image = $rating->images;
+                        $order->rating->total = $order->total;
+
+                        $order->rating->quantity = $order->orderItem[0]->quantity;
+                        $order->rating->product_price = $product->price;
+                        // unset($order->rating->images);
+                    } else {
+                        $order->rating = null;
+
+                    }
+
+                    $order->total_product = count($order->orderItem);
                 }
 
-                $rating = Point::where('customer_id', $id)
-                    ->where('order_item_id', $order->orderItem[0]->order_item_id)
-                    ->join('products', 'points.product_id', '=', 'products.id')
-                    ->select('points.id', 'products.name as product_name', 'point_evaluation', 'descriptions', 'points.images', 'points.created_at')
-                    ->first();
-                if ($rating) {
-                    $order->rating = $rating;
-                    $order->rating->image = $product->images ? asset(json_decode($product->images)[0]) : '';
-                    $order->rating->content_image = $rating->images;
-                    $order->rating->total = $product->price - ($product->price * ($order->orderItem[0]->discount_ncc +
-                                $order->orderItem[0]->discount_vstore
-                                + $order->orderItem[0]->discount_vshop) / 100);
-
-                    $order->rating->quantity = $order->orderItem[0]->quantity;
-                    $order->rating->product_price = $product->price;
-                    // unset($order->rating->images);
-                } else {
-                    $order->rating = null;
-
-                }
-
-                $order->total_product = count($order->orderItem);
 
             }
+
             return response()->json([
                 'success' => true,
                 'data' => $orders
@@ -617,6 +624,11 @@ class OrderController extends Controller
             $orders = $orders->paginate($limit);
 //            return $orders;
             foreach ($orders as $order) {
+                if ($status == 5){
+                    $order->is_complete= true;
+                }else{
+                    $order->is_complete= false;
+                }
                 $product = $order->product()->select('name', 'images')->first();
                 $order->productInfo = null;
                 $order->productInfo = [
