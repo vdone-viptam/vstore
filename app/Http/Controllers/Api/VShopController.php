@@ -1032,7 +1032,7 @@ class  VShopController extends Controller
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
         }
-        if ($vshop->avatar == null){
+        if ($vshop->avatar == ""){
             $vshop->avatar = $vshop->avatar = asset('home/img/vshop-vuong.png');
         }
         $vshop->total_product = $total_product;
