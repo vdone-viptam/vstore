@@ -60,7 +60,7 @@ class  VShopController extends Controller
         $user = $user->paginate($limit);
         if ($user) {
             foreach ($user as $value) {
-                if ($value->avatar == null) {
+                if ($value->avatar == "") {
                     $value->avatar = asset('home/img/logo-06.png');
                 } else
                     $value->avatar = $value->avatar;
