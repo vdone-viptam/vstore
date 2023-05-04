@@ -91,8 +91,9 @@ class AffUser extends Command
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return $e->getMessage();
             Log::error($e->getMessage());
+            return $e->getMessage();
+
         }
     }
 }
