@@ -396,11 +396,14 @@ function convertTimeVN(inputTime) {
     let year = dateTime.getFullYear().toString(); // Lấy năm
     let hour = dateTime.getHours();
     let minute = dateTime.getMinutes();
-    let ampm = hour >= 12 ? 'PM' : 'AM'; // Xác định giờ AM hay PM
-    hour = hour % 12;
-    hour = hour ? hour : 12;
+
+    // let ampm = hour >= 12 ? 'PM' : 'AM'; // Xác định giờ AM hay PM
+    // hour = hour % 12;
+    // hour = hour ? hour : 12;
+
+    hour = hour < 10 ? '0' + hour : hour;
     minute = minute < 10 ? '0' + minute : minute;
-    let time = hour + ':' + minute + ' ' + ampm;
+    let time = hour + ':' + minute;
 
     let formattedDateTime = day + '/' + month + '/' + year + ' ' + time;
     return formattedDateTime;
