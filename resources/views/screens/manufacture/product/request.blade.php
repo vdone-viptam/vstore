@@ -91,7 +91,7 @@
 </div>
                             </th>
                             <th class="white-space-150 text-center">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'brand')
@@ -108,7 +108,7 @@
                             </th>
 
                             <th>
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
@@ -124,7 +124,7 @@
 </div>
                             </th>
                             <th>
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                             V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -140,7 +140,7 @@
 </div>
                             </th>
                             <th>
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.status')
@@ -153,7 +153,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                     @endif
                                 </span>
-    `                       </div>
+                            </div>
                             </th>
                             <th class="white-space-100"></th>
                         </tr>
@@ -201,7 +201,7 @@
                                         @endif
                                     </td>
                                     <td class="white-space-100">
-                                        <a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline" 
+                                        <a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline"
                                                 onclick="showDetail({{$request->id}})">Chi tiết
                                         </a>
                                     </td>

@@ -170,7 +170,7 @@
                                     </th>
                                     <th class="white-space-150">
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Chiết khấu từ Nhà cung cấp (%)
+                                            Chiết khấu từ Nhà cung cấp
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'requests.discount')
                                                     @if ($type == 'desc')
@@ -221,78 +221,49 @@
                                         </span>
                                     </div>
                                 </th>
-                                
 
 
-                                <th></th>
+
+                                <th>Thao tác</th>
                                 </thead>
                                 <tbody>
                                     @if (count($data) > 0)
                                         @foreach ($data as $product)
                                             <tr>
                                                 <td class="white-space-120">
-                                                    {{ $product->code }}
+                                                    {{$product->code}}
                                                 </td>
                                                 <td class="white-space-150">
-                                                    {{ $product->user_name }}
+                                                    {{$product->user_name}}
                                                 </td>
-                                                <td class="white-space-300">
-                                                    {{ $product->name }}
+                                                <td class="white-space-300" style="min-width:200px !important;">
+                                                    {{$product->name}}
                                                 </td>
-                                                <td class="white-space-150">{{ $product->cate_name }}</td>
+                                                <td class="white-space-150">{{$product->cate_name}}</td>
                                                 <td class="white-space-150 text-right">
-                                                    {{ number_format($product->price, 0, '.', '.') }}
+                                                    {{number_format($product->price,0,'.','.')}} đ
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $product->discount }}
+                                                    {{$product->discount}}%
                                                 </td>
 
-                                                <td class="text-center">
-                                                    {{ \Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i') }}
-                                                </td>
-                                                <td class="text-center"><span class=" text-warning">Yêu cầu mới</span>
-                                                </td>
+                                                <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                                <td class="text-center"><span class="font-medium" >Sản phẩm mới</span></td>
 
-                                                <td>
+                                                <td style="min-width:150px;">
+                                                    <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
+                                                    class="btn text-primary font-medium px-2" style="text-decoration:underline;">Đồng ý</a>
                                                     <a href="#"
-                                                        onclick="appect({{ $product->id }},{{ $product->discount }},1)"
-                                                        class="btn text-success px-2">Đồng ý</a>
-                                                    <a href="#"
-                                                        onclick="unAppect({{ $product->id }},{{ $product->discount }},2)"
-                                                        class="btn text-danger px-2">Từ chối</a>
+                                                    onclick="unAppect({{$product->id}},{{$product->discount}},2)"
+                                                    class="btn text-danger font-medium px-2" style="text-decoration:underline;">Từ chối</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td class="white-space-120">
-                                                {{$product->code}}
-                                            </td>
-                                            <td class="white-space-150">
-                                                {{$product->user_name}}
-                                            </td>
-                                            <td class="white-space-300" style="min-width:200px !important;">
-                                                {{$product->name}}
-                                            </td>
-                                            <td class="white-space-150">{{$product->cate_name}}</td>
-                                            <td class="white-space-150 text-right">
-                                                {{number_format($product->price,0,'.','.')}} đ
-                                            </td>
-                                            <td class="text-center">
-                                                {{$product->discount}}%
-                                            </td>
-
-                                            <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                            <td class="text-center"><span class="font-medium" >Sản phẩm mới</span></td>
-
-                                            <td style="min-width:150px;">
-                                                <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                                   class="btn text-success px-2" style="text-decoration:underline;">Đồng ý</a>
-                                                <a href="#"
-                                                   onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                                   class="btn text-danger px-2" style="text-decoration:underline;">Từ chối</a>
-                                            </td>
+                                            <td colspan="9" class="text-center">Không có dữ liệu phù hợp</td>
                                         </tr>
+
                                     @endif
                                 </tbody>
                             </table>
