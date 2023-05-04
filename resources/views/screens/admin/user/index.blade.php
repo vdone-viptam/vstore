@@ -420,7 +420,7 @@
                                         @if(!$user->confirm_date)
                                             <a data-abc="{{$loop->iteration - 1}}"
                                             href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
-                                            class="duyet btn btn-primary"
+                                            class="duyet btn text-primary font-medium px-2" style="text-decoration:underline;"
                                             href="#">Duyệt
                                             </a>
                                         @endif
