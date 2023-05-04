@@ -135,15 +135,15 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"
-                           data-toggle="collapse" aria-expanded="false"
+                        <a class="nav-link {{ (request()->is('account*')) ? 'active' : '' }}" href="#"
+                            data-toggle="collapse" aria-expanded="{{ (request()->is('account*')) ? 'true' : 'false' }}"
                            data-target="#submenu-8" aria-controls="submenu-8"><i
                                 class="fa fa-fw fa-user-circle"></i>Tài khoản</a>
                         <div id="submenu-8"
-                             class="collapse submenu" style="">
+                                class="{{ (request()->is('account*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link"
+                                    <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}"
                                        href="{{route('screens.admin.account.changePassword')}}">Đổi mật khẩu</a>
                                 </li>
                             </ul>

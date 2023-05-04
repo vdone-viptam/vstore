@@ -200,7 +200,7 @@ class AccountController extends Controller
 
         $storage->put($folder . '/' . $fileName, base64_decode($content), 'public');
 
-        return $folder . '/' . $fileName;
+        return 'storage/'.$folder . '/' . $fileName;
     }
 
     public function profile(Request $request)
