@@ -263,11 +263,11 @@
                                 <tr>
                                     <td class="white-space-150">{{$order->no}}</td>
                                     <td class="white-space-350">{{$order->product->name}}</td>
-                                    <td class="text-right">{{number_format($order->product->price,0,'.','.')}} đ</td>
+                                    <td class="text-right">{{number_format($order->product->price,0,'.','.')}}</td>
                                     <td class="text-center">{{(int)$order->discount}}%</td>
                                     <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
-                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
+                                    <td class="text-right white-space-150">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
+                                    <td class="text-right white-space-150">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
                                     <td class="text-center">
                                         @if($order->status == 1)
                                             <span class="text-success font-medium"> Đã hoàn thành</span>

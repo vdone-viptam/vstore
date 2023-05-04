@@ -24,7 +24,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $this->v['field'] = $request->field ?? 'products.name';
+        $this->v['field'] = $request->field ?? 'order.export_status';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
@@ -98,7 +98,7 @@ class OrderController extends Controller
                 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id', DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
-            ->whereIn('pre_order_vshop.status', [1,4])
+            ->whereIn('pre_order_vshop.status', [1, 4])
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if (strlen($this->v['key_search']) > 0) {

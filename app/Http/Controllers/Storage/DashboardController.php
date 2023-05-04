@@ -138,7 +138,7 @@ class DashboardController extends Controller
                 'message' => 'Không tim thấy kết quả phù hợp'
             ], 404);
 
-        } else if (strpos($key_search, 'VN-') !== false) {
+        } else if (strpos($key_search, 'vn') !== false) {
             $query = Warehouses::join('product_warehouses', 'warehouses.id', '=', 'product_warehouses.ware_id')
                 ->join('products', 'product_warehouses.product_id', '=', 'products.id')
                 ->where('product_warehouses.status', 1)
