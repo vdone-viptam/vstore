@@ -306,6 +306,7 @@ class AccountController extends Controller
             if (DB::table('request_change_taxcode')->where('tax_code', $request->tax_code)->where('status', 0)->first()) {
                 return redirect()->back()->withErrors(['tax_code' => 'Mã số thuế đã được đăng ký'])->withInput($request->all());
             }
+            $code = rand(10000000, 99999999);
             while (true) {
                 $id = RequestChangeTaxCode::where('code', $code)->count();
                 if ($id == 0) {
