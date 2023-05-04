@@ -143,7 +143,7 @@
                                 
 =======
                             <th class="white-space-150">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
@@ -159,7 +159,7 @@
 </div>
                             </th>
                             <th class="white-space-350">
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -290,20 +290,20 @@
                                 <tr>
                                     <td class="white-space-150">{{$order->no}}</td>
                                     <td class="white-space-350">{{$order->product->name}}</td>
-                                    <td class="text-right">{{number_format($order->product->price,0,'.','.')}} đ</td>
+                                    <td class="text-right">{{number_format($order->product->price,0,'.','.')}}</td>
                                     <td class="text-center">{{(int)$order->discount}}%</td>
                                     <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
-                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
+                                    <td class="text-right white-space-150">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
+                                    <td class="text-right white-space-150">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
                                     <td class="text-center">
                                         @if($order->status == 1)
                                             <span class="text-success font-medium"> Đã hoàn thành</span>
                                         @elseif($order->status == 3)
-                                            <span class="text-primary font-medium">Đơn hàng mới</span>
+                                            <span class="text-primary font-medium">Chờ xác nhận</span>
                                         @elseif($order->status == 4)
                                             <span class="text-warning font-medium">Đang giao hàng</span>
                                         @else
-                                            <span class="text-danger font-medium">Hủy</span>
+                                            <span class="text-danger font-medium">Từ chối</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
