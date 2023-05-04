@@ -148,8 +148,8 @@
                                             <td>{{$request->product_name}}</td>
                                             <td>{{$request->name}}</td>
                                             <td>{{$request->user_name}}</td>
-                                            <td><span class="text-primary">{{$request->discount}}%</span></td>
-                                            <td><span class="text-success">{{$request->discount_vShop}}%</span></td>
+                                            <td><span>{{$request->discount}}%</span></td>
+                                            <td><span>{{$request->discount_vShop}}%</span></td>
                                             <td><span>{{$request->vstore_name}}</span></td>
                                             <td>
                                                 @if($request->status == 1)

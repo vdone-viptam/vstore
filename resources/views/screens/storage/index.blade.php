@@ -59,7 +59,8 @@ if($order && $user) {
     @vite('resources/css/app.css')
 </head>
 <body>
-@if($isOrder && $isUser)
+
+{{-- @if($isOrder && $isUser)
     <div class="modal fade modal-details-tt" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -257,7 +258,7 @@ if($order && $user) {
             </div>
         </div>
     </div>
-@endif
+@endif --}}
 
 <div class="bg-kho w-full relative h-auto ">
     <div
@@ -570,7 +571,7 @@ if($order && $user) {
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4 style="font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
+                                    <h4 style="font-weight: 600; margin-bottom:15px;">Tên Kho</h4>
                                 </div>
                                 <div class="col-6">
                                     <span style="font-size: 16px;">{{$user->name}}</span>
