@@ -217,7 +217,8 @@ class TestController extends Controller
     }
     public function testchia()
     {
-
+        try {
+            DB::beginTransaction();
         $user_re = UserReferral::where('is_split','!=',1)
             ->where('created_at','<=',Carbon::now()->addDay(-5))
             ->get();
@@ -250,16 +251,6 @@ class TestController extends Controller
 
 //                    representativePDoneId=VN1234598760&accountCode=gf3d34r34hg6&accountId=111&pDoneId=VN2678123123&userId=63&value=600000&type=1
                     $sig = hash_hmac('sha256',$string_hmac,config('domain.key_split'));
-                    $data = [
-                        'representativePDoneId'=>$user->id_vdone,
-                        'accountCode'=>$user->account_code,
-                        'accountId'=>$user->id,
-                        'pDoneId'=>$vshop->vshop_id,
-                        'userId'=>(int)$vshop->pdone_id,
-                        'value'=>$money,
-                        'type'=>$type,
-                        'signature'=>$sig
-                    ];
                     $respon =  Http::post(config('domain.domain_vdone').'vnd-wallet/v-shop/register-commission',
                         [
 //
@@ -278,6 +269,13 @@ class TestController extends Controller
                     $val->save();
                 }
             }
+        }
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $e->getMessage();
+            Log::error($e->getMessage());
         }
     }
 }

@@ -215,7 +215,7 @@
                                                 <div class="form-group">
                                                     <label for="link_website">
                                                         <a class="text-secondary"
-                                                           href="{{route('intro',['slug'=> $infoAccount->slug])}}">Slug</a>
+                                                           href="{{route('intro_vstore',['slug'=> $infoAccount->slug])}}">Slug</a>
                                                     </label>
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="link_website" name="link_website"

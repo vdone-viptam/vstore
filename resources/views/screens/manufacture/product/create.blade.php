@@ -572,7 +572,7 @@
                         if (responseResult.ok == 1 && result.status == 200) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Upload video thành công !',
+                                title: 'Upload file thành công !',
                                 text: '',
                             })
                             document.querySelector('.btnSave').removeAttribute('disabled');
