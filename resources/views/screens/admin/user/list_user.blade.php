@@ -178,7 +178,7 @@
                                 </th>
                                 <th>
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                        Ngày xét duyệt
+                                        Thời gian xét duyệt
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'confirm_date')
                                             @if($type == 'desc')
@@ -218,7 +218,7 @@
                                     <td>{{$user->company_name}}</td>
                                     <td>{{$user->tax_code}}</td>
                                     <td>{{$user->id_vdone}}</td>
-                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
+                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
                                     <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
                                             <a onclick="return confirm('Vui lòng xác nhận')"
