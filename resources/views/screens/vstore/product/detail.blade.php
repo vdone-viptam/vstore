@@ -86,7 +86,7 @@
             <label for="name">Trạng thái yêu cầu</label>
             <select name="status" id="status" class="form-control form-control-lg"
                     @if($product->status != 0) disabled @endif>
-                <option value="1" {{$product->status != 0 && $product->status != 2 ? 'selected' : ''}}>Đống ý</option>
+                <option value="1" {{$product->status != 0 && $product->status != 2 ? 'selected' : ''}}>Đồng ý</option>
                 <option value="2" {{$product->status == 2 ? 'selected' : ''}}>Từ chối</option>
             </select>
         </div>
