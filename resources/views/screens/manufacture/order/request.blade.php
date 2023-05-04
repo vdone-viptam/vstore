@@ -150,7 +150,7 @@
                                 </span>
                             </th>
                             <th class="white-space-400">
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -166,7 +166,7 @@
 </div>
                             </th>
                             <th class="white-space-140">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">    
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                 Giá sản phẩm
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
@@ -182,7 +182,7 @@
 </div>
                             </th>
                             <th class="white-space-120">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.discount')
@@ -243,7 +243,7 @@
                             </th>
                             <th class="white-space-140 text-center">Trạng thái</th>
                             <th class="white-space-140">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
@@ -282,7 +282,7 @@
                                         @elseif($order->status == 4)
                                             <span class="text-warning font-medium">Đang giao hàng</span>
                                         @else
-                                            <span class="text-danger font-medium">Hủy</span>
+                                            <span class="text-danger font-medium">Từ chối</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
