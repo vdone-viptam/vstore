@@ -278,7 +278,7 @@
                                         @if($user->confirm_date)
 
                                         @else
-                                        <button data-abc="{{$loop->iteration - 1}}" data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn btn-primary">Duyệt</button>
+                                        <a data-abc="{{$loop->iteration - 1}}" href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn btn-primary">Duyệt</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -556,24 +556,26 @@
             }
         })
     });
+    $('.duyet').click(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Xác nhận duyệt?',
+            text: "Bạn có chắc chắn muốn đồng ý ?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Huỷ bỏ'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = $(this).attr('href');
+                $(".duyet").attr("href", "javascript:void(0)");
 
-
-    document.querySelectorAll('.duyet').forEach((item, index3) => {
-        const index = +item.dataset.abc
-        item.addEventListener('click', (e) => {
-            document.querySelectorAll('.duyet').forEach((item2, index2) => {
-                if (item2.dataset.abc == index) {
-                    if (item2.dataset.href) {
-                        document.location = item2.dataset.href;
-                    }
-                } else {
-                    item2.removeAttribute('data-href');
-                }
-            });
+            }
         })
+    });
 
-
-    })
 
     let limit_request = document.getElementById('limit_request');
     let limit_users = document.getElementById('limit_users');
@@ -621,12 +623,6 @@
             document.location = '{{route('screens.admin.dashboard.index',['key_search_users' => $key_search_users])}}&type_users=' + '{{$type_request}}' +
                 '&field_users=' + '{{$field_users}}' + '&limit_users=' + e.target.value
         }, 200)
-    })
-
-</script>
-<script !src="">
-    $('.duyet').click(function (e) {
-        e.preventDefault()
     })
 
 </script>
