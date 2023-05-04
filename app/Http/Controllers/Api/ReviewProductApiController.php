@@ -162,14 +162,16 @@ class ReviewProductApiController extends Controller
      *
      * @param Request $request
      * @param $product_id ID product
-     * @bodyParam limit tổng số review / 1 trang
-     * @bodyParam point_evaluation điểm đánh giá
+     * @bodyParam limit (int) tổng số review / 1 trang
+     * @bodyParam point_evaluation (int) điểm đánh giá
+     * @bodyParam filter_image (boolean) điểm đánh giá
      * @return \Illuminate\Http\JsonResponse
      */
     public function showListReviewProduct(Request $request,$product_id){
         try {
             $validator = Validator::make($request->all(), [
                 'point_evaluation' => 'integer|between:1,5',
+                'filter_image' => 'boolean',
                 'limit' => 'numeric|min:1',
             ]);
             if ($validator->fails()) {
@@ -179,6 +181,7 @@ class ReviewProductApiController extends Controller
             }
 
             $point_evaluation = $request->point_evaluation;
+            $filterImage = $request->filter_image;
             $limit = $request->limit ?? 3;
 
             $totalReviews = Point::query()
@@ -186,7 +189,11 @@ class ReviewProductApiController extends Controller
                             ->where('product_id', $product_id)
                             ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id','status')
                             ->orderBy('updated_at', 'desc');
-            if(isset($point_evaluation)){
+            if(isset($filterImage)){
+                if( $filterImage){
+                    $totalReviews = $totalReviews->whereNotNull('images');
+                }
+            }else if(isset($point_evaluation)){
                 $totalReviews = $totalReviews->where('point_evaluation',$point_evaluation);
             }
             $totalReviews = $totalReviews->paginate($limit);
