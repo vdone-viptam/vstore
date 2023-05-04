@@ -81,7 +81,7 @@
                 {{--                    <input type="checkbox" class="w-4 h-4 accent-primary">--}}
                 {{--                    <span>Duy trì đăng nhập</span>--}}
                 {{--                </div>--}}
-                <a href="{{route('form_forgot_password',['type' => 3])}}" class="font-medium text-[#096DD9]">Quên mật
+                <a href="{{route('form_forgot_password',['type' => 4])}}" class="font-medium text-[#096DD9]">Quên mật
                     khẩu?</a></div>
             {{--            bg-sky-500/100--}}
             <div class="mt-24 text-center w-full flex flex-col justify-center items-center gap-10">

@@ -136,6 +136,13 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
+<<<<<<< HEAD
+                            <th class="white-space-110">Mã đơn hàng
+                                
+                            </th>
+                            <th class="white-space-400">Tên sản phẩm
+                               
+=======
                             <th class="white-space-110 text-center">Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
@@ -164,6 +171,7 @@
                                         @endif
                                 </span>
                                 </div>
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="white-space-140">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -241,25 +249,11 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-140 text-center">Trạng thái
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'pre_order_vshop.status')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort"
-                                               data-sort="pre_order_vshop.status"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort"
-                                               data-sort="pre_order_vshop.status"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="pre_order_vshop.status"></i>
-                                    @endif
-                                </span>
-                            </th>
+                            <th class="white-space-140 text-center">Trạng thái</th>
                             <th class="white-space-140">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
-                                    Thời gian tạo đơn
-                                    <span style="float: right;cursor: pointer">
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            Thời gian tạo đơn
+                                <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
                                             @if($type == 'desc')
                                                 <i class="fa-solid fa-sort-down sort"

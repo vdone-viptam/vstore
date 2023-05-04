@@ -72,6 +72,11 @@
                            style="width:100%">
                         <thead>
                         <tr>
+<<<<<<< HEAD
+                            <th>Mã sản phẩm</th>
+                            <th>Mã SKU</th>
+                            <th>Tên sản phẩm
+=======
                             <th class="text-center white-space-120">Mã sản phẩm</th>
                             <th class="text-center" style="min-width:180px !important;">Mã SKU sản phẩm</th>
                             <th>
@@ -89,6 +94,7 @@
                                     @endif
                                 </span>
                             </div>
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="white-space-120 text-center">Danh mục
                                 <span style="float: right;cursor: pointer">

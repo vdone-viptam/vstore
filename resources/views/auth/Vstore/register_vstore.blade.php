@@ -428,7 +428,9 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     if ( !item1.checked ){
                         check1 = true;
                     }
-
+                }
+                if (divWard.value ==0) {
+                    check1=false;
                 }
             });
 

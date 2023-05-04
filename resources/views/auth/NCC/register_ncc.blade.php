@@ -759,16 +759,16 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.length > 0) {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data
+                        divDistrict.innerHTML = `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>` + data
                             .map(item =>
                                 `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{ old('district_id') }}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`
                                 );
 
                     } else {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                        divDistrict.innerHTML = `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>`;
                     }
                 })
-                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`);
+                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>`);
         </script>
     @endif
     @if ($isOrder)
@@ -800,7 +800,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
             .then((response) => response.json())
             .then((data) => {
                 document.getElementById('city_id').innerHTML =
-                    `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item =>
+                    `<option value="0" disabled selected >Lựa chọn tỉnh (thành phố)</option>` + data.map(item =>
                         `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{ old('city_id') }}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`
                         );
             })
@@ -831,11 +831,11 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 
                     } else {
                         divDistrict.innerHTML =
-                            `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                            `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>`;
                     }
                 })
                 .catch(() => divDistrict.innerHTML =
-                    `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                    `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>`
                 )
         });
         divDistrict.addEventListener('change', (e) => {
@@ -854,15 +854,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                             document.querySelector('.active').setAttribute('disabled', 'true');
                             document.querySelector('.active').classList.add('bg-slate-300');
                         }
-                        divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item =>
+                        divWard.innerHTML = `<option value="0"  disabled selected >Lựa chọn phường (xã)</option>` + data.map(item =>
                             `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`
                             );
 
                     } else {
-                        divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`;
+                        divWard.innerHTML = `<option value="0" disabled selected >Lựa chọn phường (xã)</option>`;
                     }
                 })
-                .catch(() => divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`)
+                .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`)
         });
 
         function checkEmpty(inputs) {
@@ -875,7 +875,9 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     if ( !item1.checked ){
                         check1 = true;
                     }
-
+                }
+                if (divWard.value ==0) {
+                    check1 = false;
                 }
             });
 
@@ -888,6 +890,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
             item.setAttribute('autocomplete', 'off')
             item.addEventListener('change', (e) => {
                 const check = checkEmpty(inputs);
+
                 if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked) {
                     document.querySelector('.active').removeAttribute('disabled');
                     document.querySelector('.active').classList.remove('bg-slate-300');
@@ -940,7 +943,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     .then((response) => response.json())
                     .then((data) => {
                         document.getElementById('city_id').innerHTML =
-                            `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item =>
+                            `<option value="0" disabled selected >Lựa chọn tỉnh (thành phố)</option>` + data.map(item =>
                                 `<option ${item.PROVINCE_ID == provinceId ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`
                                 );
                     })
@@ -951,13 +954,13 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.length > 0) {
-                            divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` +
+                            divDistrict.innerHTML = `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>` +
                                 data.map(item =>
                                     `<option ${item.DISTRICT_ID == district_id ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`
                                     );
 
                         } else {
-                            divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                            divDistrict.innerHTML = `<option value="0" disabled selected >Lựa chọn quận (huyện)</option>`;
                         }
                     })
                     .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`);
@@ -966,15 +969,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     }).then((response) => response.json())
                     .then((data) => {
                         if (data.length > 0) {
-                            divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data
+                            divWard.innerHTML = `<option value="0" disabled selected >Lựa chọn phường (xã)</option>` + data
                                 .map(item =>
                                     `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`
                                     );
                         } else {
-                            divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
+                            divWard.innerHTML = `<option value="0" disabled selected >Lựa chọn phường (xã)</option>`;
                         }
                     })
-                    .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`);
+                    .catch(() => divWard.innerHTML = `<option value="0" disabled selected >Lựa chọn phường (xã)</option>`);
             }
         </script>
     @endif

@@ -97,6 +97,12 @@
                            style="width:100%">
                         <thead>
                         <tr>
+<<<<<<< HEAD
+                            <th>Mã yêu cầu</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm
+                                
+=======
                             <th class="white-space-120 text-center">Mã yêu cầu</th>
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>
@@ -114,6 +120,7 @@
                                     @endif
                                 </span>
                                 </div>
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="white-space-150 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -141,6 +148,10 @@
                                     @endif
                                 </span>
                             </th>
+<<<<<<< HEAD
+                            <th>Chiết khấu
+                                
+=======
                             <th class="white-space-120 text-center">Chiết khấu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'code')
@@ -153,6 +164,7 @@
                                         <i class="fas fa-sort sort" data-sort="code"></i>
                                     @endif
                                 </span>
+>>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="text-center white-space-150">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
