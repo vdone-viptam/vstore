@@ -68,11 +68,6 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-<<<<<<< HEAD
-                                    <th>Mã đối tác</th>
-                                    <th>Tên đối tác
-                            
-=======
                                     <th class="white-space-120 text-center">Mã đối tác</th>
                                     <th class="white-space-120 text-center">Tên đối tác
                                         <span style="float: right;cursor: pointer">
@@ -86,7 +81,6 @@
                                                 <i class="fas fa-sort sort" data-sort="name_partner"></i>
                                             @endif
                                         </span>
->>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                                     </th>
                                     <th class="text-center white-space-200">Tổng đơn hàng đã giao
                                         <span style="float: right;cursor: pointer">

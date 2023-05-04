@@ -136,13 +136,6 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-<<<<<<< HEAD
-                            <th class="white-space-110">Mã đơn hàng
-                                
-                            </th>
-                            <th class="white-space-400">Tên sản phẩm
-                               
-=======
                             <th class="white-space-110 text-center">Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
@@ -171,7 +164,6 @@
                                         @endif
                                 </span>
                                 </div>
->>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="white-space-140">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -251,7 +243,7 @@
                             </th>
                             <th class="white-space-140 text-center">Trạng thái</th>
                             <th class="white-space-140">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')

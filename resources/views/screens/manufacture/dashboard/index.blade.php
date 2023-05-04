@@ -237,9 +237,6 @@
                                 <th style="min-width:100px;">
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Ngành hàng
-<<<<<<< HEAD
-                                        
-=======
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
                                                 @if($type == 'desc')
@@ -252,7 +249,6 @@
                                                 <i class="fas fa-sort sort" data-sort="categories.name"></i>
                                             @endif
                                         </span>
->>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                                     </div>
                                 </th>
                                 <th class="white-space-110">

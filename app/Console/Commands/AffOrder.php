@@ -79,7 +79,7 @@ class AffOrder extends Command
 //                        chia vsore
                     $vstore = User::where('id',$product->vstore_id)->first();
                     if ($vstore){
-                        $phan_tram_con_lai= $product->discount -($product->discount_vShop +$item->discount_vstore);
+                        $phan_tram_con_lai= $product->discount -($product->discount_vShop + $item->discount_vstore);
                         if ($phan_tram_con_lai >0){
                             $price_vstore = $total /100 * $phan_tram_con_lai;
 //                                tong_tien /100 * (chiet_khau_vstore - (chhiet_khau_vshop + giam_gia_vstore))
@@ -93,7 +93,7 @@ class AffOrder extends Command
                         $new_vstore_blance->status=1;
                         $new_vstore_blance->money_history=$price_vstore;
                         $new_vstore_blance->save();
-                        $vstore->money +=$price_vstore;
+                        $vstore->money += $price_vstore;
                         $vstore->save();
                     }
 //                        chia vshop
