@@ -215,7 +215,7 @@
                                     </th>
                                     <th class="white-space-120">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
-                                            Ngày đăng ký
+                                            Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'users.created_at')
                                                     @if($type_request == 'desc')
@@ -245,7 +245,7 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-100"></th>
+                                    <th class="white-space-100">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -278,7 +278,7 @@
                                         @if($user->confirm_date)
 
                                         @else
-                                        <a data-abc="{{$loop->iteration - 1}}" href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn btn-primary">Duyệt</a>
+                                        <a href="javascript:void(0)" data-abc="{{$loop->iteration - 1}}" href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn text-primary font-medium px-2" style="text-decoration:underline;">Duyệt</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -449,7 +449,7 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-100"></th>
+                                    <th class="white-space-100">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -478,7 +478,8 @@
                                         {{$request->discount_vshop}}
                                     </td>
                                     <td class="text-center white-space-100">
-                                        <button data-toggle="modal" data-target="#exampleModal" data-id="{{ $request->id }}" class="update-request btn btn-primary">Duyệt</button>
+                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-id="{{ $request->id }}"
+                                            class="update-request btn text-primary font-medium px-2" style="text-decoration:underline;">Duyệt</a>
 
                                     </td>
                                     </tr>
