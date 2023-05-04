@@ -270,8 +270,6 @@
                 }, 200)
             })
         });
-        document.getElementById('btnConfirm').style.display = 'none';
-
         function appect(id, discount, status, discount_vShop) {
             $('.md-content').html(`
  <div class="form-group">
