@@ -272,7 +272,7 @@
                                         @if($order->status == 1)
                                             <span class="text-success font-medium"> Đã hoàn thành</span>
                                         @elseif($order->status == 3)
-                                            <span class="text-primary font-medium">Đơn hàng mới</span>
+                                            <span class="text-primary font-medium">Chờ xác nhận</span>
                                         @elseif($order->status == 4)
                                             <span class="text-warning font-medium">Đang giao hàng</span>
                                         @else
