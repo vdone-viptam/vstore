@@ -98,6 +98,7 @@ class OrderController extends Controller
                 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id', DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
+            ->whereIn('pre_order_vshop.status', [1,4])
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if (strlen($this->v['key_search']) > 0) {
@@ -128,7 +129,7 @@ class OrderController extends Controller
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
-            ->where('pre_order_vshop.status', 3)
+            ->whereIn('pre_order_vshop.status', [3, 5])
             ->orderBy($this->v['field'], $this->v['type']);
         if (strlen(($this->v['key_search']) > 0)) {
             $this->v['orders'] = $this->v['orders']->where(function ($sub) {
