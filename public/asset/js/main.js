@@ -296,6 +296,25 @@ onlyNumberVer1.forEach(item => {
                 evt.preventDefault();
             }
         });
+
+        item.addEventListener("paste", function (e) {
+        // inputElement.onpaste = function(e) {
+            // Ngăn chặn việc paste
+            e.preventDefault();
+
+            // Lấy dữ liệu từ clipboard
+            let clipboardData = e.clipboardData || window.clipboardData;
+            let pastedData = clipboardData.getData('text');
+
+            // Kiểm tra nếu dữ liệu paste vào không phải là số, thì không cho phép paste
+            if (isNaN(pastedData)) {
+              return;
+            }
+
+            // Nếu dữ liệu paste vào là số, thì set giá trị cho input
+
+            e.target.value += pastedData;
+        });
     }
 })
 var numberPercent = document.querySelector('.number-percent');
@@ -307,6 +326,24 @@ if(numberPercent){
             event.preventDefault();
             return false;
         }
+    });
+    numberPercent.addEventListener("paste", function (e) {
+    // inputElement.onpaste = function(e) {
+        // Ngăn chặn việc paste
+        e.preventDefault();
+
+        // Lấy dữ liệu từ clipboard
+        let clipboardData = e.clipboardData || window.clipboardData;
+        let pastedData = clipboardData.getData('text');
+
+        // Kiểm tra nếu dữ liệu paste vào không phải là số, thì không cho phép paste
+        if (isNaN(pastedData)) {
+            return;
+        }
+
+        // Nếu dữ liệu paste vào là số, thì set giá trị cho input
+
+        e.target.value += pastedData;
     });
 }
 
@@ -325,6 +362,24 @@ document.querySelectorAll('.only-text').forEach(item => {
             event.preventDefault();
             return false;
         }
+    });
+    numberPercent.addEventListener("paste", function (e) {
+    // inputElement.onpaste = function(e) {
+        // Ngăn chặn việc paste
+        e.preventDefault();
+
+        // Lấy dữ liệu từ clipboard
+        let clipboardData = e.clipboardData || window.clipboardData;
+        let pastedData = clipboardData.getData('text');
+
+        // Kiểm tra nếu dữ liệu paste vào không phải là chữ, thì không cho phép paste
+        if (!isNaN(pastedData)) {
+            return;
+        }
+
+        // Nếu dữ liệu paste vào là chữ, thì set giá trị cho input
+
+        e.target.value += pastedData;
     });
 })
 
