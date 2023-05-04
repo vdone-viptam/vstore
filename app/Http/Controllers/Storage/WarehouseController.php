@@ -274,7 +274,7 @@ class WarehouseController extends Controller
 
             $product = Product::find($requestEx->product_id);
 
-            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
+//            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
 
             $product->save();
 
@@ -289,13 +289,13 @@ class WarehouseController extends Controller
             $order->cancel_status = 1;
             $order->save();
             $product = Product::find($requestEx->product_id);
-            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
+//            $product->amount_product_sold = $product->amount_product_sold + $requestEx->quantity;
             $product->save();
 
             $vshop_Id = OrderItem::select('vshop_id')->where('order_id', $order->id)->first();
 
             $vshop_product = VshopProduct::where('vshop_id', $vshop_Id->vshop_id)->where('product_id', $requestEx->product_id)->first();
-            $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $requestEx->quantity;
+//            $vshop_product->amount_product_sold = $vshop_product->amount_product_sold + $requestEx->quantity;
 
             $vshop_product->save();
 

@@ -80,7 +80,7 @@ class ManufactureController extends Controller
 
         if ($user) {
             foreach ($user as $value) {
-                $value->avatar = strlen($value->avatar) == 0 ? asset('home/img/ncc11.png') : asset('image/users/' . $value->avatar);
+                $value->avatar = strlen($value->avatar) == 0 ? asset('home/img/ncc-vuong.png') : asset('image/users/' . $value->avatar);
             }
         }
         return response()->json([
@@ -107,7 +107,7 @@ class ManufactureController extends Controller
             $user = User::select('avatar', 'name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
             if ($user) {
                 $user->total_product = $user->products()->where('status', 2)->count();
-                $user->avatar = ($user->avatar != '') ? asset('image/users/' . $user->avatar) : asset('home/img/NCC.png');
+                $user->avatar = ($user->avatar != '') ? asset('image/users/' . $user->avatar) : asset('home/img/ncc-vuong.png');
                 $cate = Category::select('categories.name')
                     ->join('products', 'categories.id', '=', 'products.category_id')
                     ->where('user_id', $ncc_id)

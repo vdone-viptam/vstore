@@ -142,9 +142,15 @@ class ReviewProductApiController extends Controller
                 if(!empty($request->images))
                     $newPoint -> images = json_encode($request->images);
                 $newPoint -> save();
+
+                if($newPoint){
+                    $newPoint->created_at_iso = Carbon::parse($newPoint->created_at);
+                    $newPoint->updated_at_iso = Carbon::parse($newPoint->updated_at);
+                };
                 return response()->json([
                     'status_code' => 201,
-                    'message' => 'Đánh giá sản phẩm thành công'
+                    'message' => 'Đánh giá sản phẩm thành công',
+                    'data' => $newPoint,
                 ], 201);
             }
         } catch (\Exception $e) {

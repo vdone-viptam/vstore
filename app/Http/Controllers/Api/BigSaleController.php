@@ -69,7 +69,7 @@ class BigSaleController extends Controller
             join('discounts', 'products.id', '=', 'discounts.product_id')
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
-                ->where('type', '!=', 3)
+                ->whereIn('type', [1,2])
                 ->groupBy( 'products.id')
                 ->where('products.status', 2)
 //                ->selectSub("SELECT SUM(discounts.discount /100)

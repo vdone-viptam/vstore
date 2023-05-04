@@ -483,7 +483,7 @@ class OrderController extends Controller
 
                         $order->rating->quantity = $order->orderItem[0]->quantity;
                         $order->rating->product_price = $product->price;
-                        unset($order->rating->images);
+                        // unset($order->rating->images);
                     } else {
                         $order->rating = null;
 
