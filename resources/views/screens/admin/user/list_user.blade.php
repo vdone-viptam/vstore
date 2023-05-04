@@ -48,8 +48,8 @@
                         style="width:100%">
                         <thead>
                             <tr>
-                                <th>
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <th class="white-space-150">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Mã tài khoản
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'account_code')
@@ -64,8 +64,8 @@
                                     </span>
                                     </div>
                                 </th>
-                                <th>
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <th class="white-space-120">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Vai trò
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'role_id')
@@ -112,8 +112,8 @@
                                     </span>
                                     </div>
                                 </th>
-                                <th>
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <th class="white-space-150">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Số điện thoại
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'phone_number')
@@ -144,8 +144,8 @@
                                     </span>
                                     </div>
                                 </th>
-                                <th>
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <th class="white-space-120">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Mã số thuế
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'tax_code')
@@ -160,7 +160,7 @@
                                     </span>
                                     </div>
                                 </th>
-                                <th>
+                                <th class="white-space-200">
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Id P-Done người đại diện
                                     <span style="float: right;cursor: pointer">
@@ -178,7 +178,7 @@
                                 </th>
                                 <th>
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                        Thời gian xét duyệt
+                                        Ngày xét duyệt
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'confirm_date')
                                             @if($type == 'desc')
@@ -192,7 +192,7 @@
                                     </span>
                                     </div>
                                 </th>
-                                <th></th>
+                                <th class="white-space-120"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -200,8 +200,8 @@
                         @if(count($users) > 0)
                             @foreach($users as $user)
                                 <tr>
-                                    <td>{{$user->account_code}}</td>
-                                    <td>
+                                    <td class="text-center">{{$user->account_code}}</td>
+                                    <td class="text-center">
                                         @if($user->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span> </td>
                                         @elseif($user->role_id == 1)
@@ -214,14 +214,15 @@
                                     </td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->phone_number}}</td>
+                                    <td class="text-center">{{$user->phone_number}}</td>
                                     <td>{{$user->company_name}}</td>
-                                    <td>{{$user->tax_code}}</td>
+                                    <td class="text-center">{{$user->tax_code}}</td>
                                     <td>{{$user->id_vdone}}</td>
-                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
+                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
                                     <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
-                                            <a class="check-yes-no bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                            <a onclick="return confirm('Vui lòng xác nhận')"
+                                            class="btn btn-primary px-4 py-2"
                                             href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>

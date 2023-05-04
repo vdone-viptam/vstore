@@ -1,6 +1,31 @@
 @extends('layouts.admin.main')
 @section('page_title','Tất cả sản phẩm')
 
+@section('modal')
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="" method="POST" id="form">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @csrf
+                    <div class="modal-body md-content">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+@endsection
+
 @section('content')
 
     <div class="container-fluid dashboard-content ">
@@ -176,9 +201,9 @@
                                         <td>
                                             {{ Carbon\Carbon::parse($pro->admin_confirm_date)->format('d/m/Y H:i')  }}
                                         </td>
-                                        <td>
-
-
+                                        <td class="text-center"><a href="javascript:void(0)" style="text-decoration: underline;"
+                                               onclick="showDetail({{$pro->id}})"
+                                               data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -224,6 +249,30 @@
 
 @section('custom_js')
     <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.admin.product.detail')}}?id=` + id + '&type=2',
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = `${data.view}`;
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
+                document.querySelector('#form').setAttribute('action', '#')
+            })
+
+
+        }
+
         $(document).ready(function () {
             let limit = document.getElementById('limit');
             document.querySelectorAll('.sort').forEach(item => {

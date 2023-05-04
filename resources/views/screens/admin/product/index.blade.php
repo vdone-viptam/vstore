@@ -18,7 +18,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button id="btnConfirm" class="btn btn-success"></button>
+                        <button id="btnConfirm" class="btn btn-success">Duyệt sản phẩm</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
@@ -189,6 +189,7 @@
                                                 @endif
                                             </td>
                                             <td><a href="javascript:void(0)" style="text-decoration: underline;"
+                                                   onclick="showDetail({{$request->id}})"
                                                    data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
                                             </td>
                                         </tr>
@@ -246,7 +247,32 @@
         </script>
     @endif
     <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.admin.product.detail')}}?id=` + id,
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = `${data.view}`;
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
+                document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id)
+            })
+
+
+        }
         $(document).ready(function () {
+
+
             let limit = document.getElementById('limit');
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
@@ -270,6 +296,7 @@
                 }, 200)
             })
         });
+
         function appect(id, discount, status, discount_vShop) {
             $('.md-content').html(`
  <div class="form-group">
