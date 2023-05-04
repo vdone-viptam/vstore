@@ -18,7 +18,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button id="btnConfirm" class="btn btn-success">Cập nhật yêu cầu</button>
+                        <button id="btnConfirm" class="btn btn-success"></button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                                             <td class="flex justify-content-center align-items-center text-center"
                                                 style="gap:6px">
 
-                                                @if($request->status == 2)
+                                                @if($request->status == 1)
                                                     <button type="button"
                                                             onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
                                                             class="btn btn-primary">Duyệt
@@ -270,8 +270,6 @@
                 }, 200)
             })
         });
-        document.getElementById('btnConfirm').style.display = 'none';
-
         function appect(id, discount, status, discount_vShop) {
             $('.md-content').html(`
  <div class="form-group">
@@ -284,8 +282,8 @@
             </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
+            $('#btnConfirm').html('Duyệt')
             $('#modalDetail').modal('show');
-            document.querySelector('#btnConfirm').style.display = 'block';
 
         }
 
@@ -297,9 +295,10 @@
                              class="form-control" ></textarea>
             </div>
             `);
+            $('#btnConfirm').html('Từ chối')
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
             $('#modalDetail').modal('show');
-            document.getElementById('btnConfirm').style.display = 'block';
+
 
         }
     </script>
