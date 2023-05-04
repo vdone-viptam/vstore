@@ -50,7 +50,7 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã yêu cầu
+                                    <th class="white-space-150 text-center">Mã yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'deposits.code')
                                                 @if($type == 'desc')
@@ -63,7 +63,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Tài khoản yêu cầu
+                                    <th class="white-space-200 text-center">Tài khoản yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'users.account_code')
                                                 @if($type == 'desc')
@@ -76,7 +76,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số tiền
+                                    <th class="white-space-150 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -89,26 +89,26 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số tài khoản</th>
-                                    <th>Tên tài khoản</th>
-                                    <th>Ngân hàng</th>
-                                    <th>Nội dung</th>
-                                    <th>Ngày yêu cầu</th>
-                                    <th>Trạng thái</th>
+                                    <th class="white-space-150 text-center">Số tài khoản</th>
+                                    <th class="white-space-150 text-center">Tên tài khoản</th>
+                                    <th class="white-space-120 text-center">Ngân hàng</th>
+                                    <th class="white-space-150 text-center">Nội dung</th>
+                                    <th class="white-space-150 text-center">Ngày yêu cầu</th>
+                                    <th class="white-space-150 text-center">Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($histories as $his)
                                     <tr class="line-clamp3">
-                                        <td>{{$his->code}}</td>
-                                        <td>{{$his->account_code}}</td>
-                                        <td class="font-medium">{{$his->amount}}</td>
+                                        <td class="white-space-150 text-center">{{$his->code}}</td>
+                                        <td class="white-space-200 text-center">{{$his->account_code}}</td>
+                                        <td class="text-right font-medium">{{$his->amount}} đ</td>
                                         <td>{{$his->account_number}}</td>
                                         <td style="text-transform: uppercase;">{{$his->name}}</td>
                                         <td>{{$his->bank->name}}</td>
                                         <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
-                                        <td>{{$his->created_at}}</td>
-                                        <td>
+                                        <td class="white-space-150 text-center">{{$his->created_at}}</td>
+                                        <td class="white-space-150 text-center">
                                             @if($his->status == 0)
                                             <span class="text-warning font-medium">Chờ xác nhận</span>
                                             @elseif($his->status == 1)

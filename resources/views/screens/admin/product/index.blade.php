@@ -84,11 +84,11 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã yêu cầu</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Ngành hàng</th>
-                                    <th>Nhà cung cấp</th>
-                                    <th style="min-width: 200px">Chiết khấu cho V-Store
+                                    <th  class="white-space-150 text-center">Mã yêu cầu</th>
+                                    <th  class="white-space-200 text-center">Tên sản phẩm</th>
+                                    <th  class="white-space-150 text-center">Ngành hàng</th>
+                                    <th  class="white-space-150 text-center">Nhà cung cấp</th>
+                                    <th class="text-center" style="min-width: 200px">Chiết khấu cho V-Store
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount')
                                                 @if($type == 'desc')
@@ -104,7 +104,7 @@
                                 </span>
                                     </th>
 
-                                    <th style="min-width: 200px">Chiết khấu cho V-Shop
+                                    <th class="text-center" style="min-width: 200px">Chiết khấu cho V-Shop
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount_vShop')
                                                 @if($type == 'desc')
@@ -119,8 +119,8 @@
                                             @endif
                                 </span>
                                     </th>
-                                    <th style="min-width: 200px">V-Store xét duyệt</th>
-                                    <th>Trạng thái
+                                    <th class="text-center" style="min-width: 200px">V-Store xét duyệt</th>
+                                    <th class="white-space-150 text-center">Trạng thái
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.status')
                                                 @if($type == 'desc')
@@ -135,8 +135,8 @@
                                             @endif
                                 </span>
                                     </th>
-                                    <th>Thao tác</th>
-                                    <th></th>
+                                    <th class="text-center white-space-150">Thao tác</th>
+                                    <th class="white-space-100 text-center"></th>
 
                                 </tr>
                                 </thead>
@@ -144,34 +144,34 @@
                                 @if(count($requests) > 0)
                                     @foreach($requests as $request)
                                         <tr class="line-clamp3">
-                                            <td>{{$request->code}}</td>
+                                            <td class="text-center">{{$request->code}}</td>
                                             <td>{{$request->product_name}}</td>
-                                            <td>{{$request->name}}</td>
-                                            <td>{{$request->user_name}}</td>
-                                            <td><span class="text-primary">{{$request->discount}}%</span></td>
-                                            <td><span class="text-success">{{$request->discount_vShop}}%</span></td>
-                                            <td><span>{{$request->vstore_name}}</span></td>
+                                            <td class="text-center">{{$request->name}}</td>
+                                            <td class="text-center font-medium">{{$request->user_name}}</td>
+                                            <td class="text-center"><span class="text-primary">{{$request->discount}}%</span></td>
+                                            <td class="text-center"><span class="text-success">{{$request->discount_vShop}}%</span></td>
+                                            <td class="text-center"><span>{{$request->vstore_name}}</span></td>
                                             <td>
                                                 @if($request->status == 1)
-                                                    <div class="bg-warning text-white font-medium px-4 py-2"
+                                                    <div class="text-warning font-medium "
                                                          style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
                                                         duyệt
                                                     </div>
                                                 @elseif($request->status == 3)
-                                                    <div class="bg-success text-white font-medium px-4 py-2"
+                                                    <div class="text-success font-medium "
                                                          style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Hệ
                                                         thống đã
                                                         duyệt
                                                     </div>
                                                 @else
-                                                    <div class="bg-danger text-white font-medium px-4 py-2"
+                                                    <div class="text-danger font-medium"
                                                          style="border-radius: 2px;"><i class="fas fa-times mr-2"></i>Hệ
                                                         thống từ
                                                         chối
                                                     </div>
                                                 @endif
                                             </td>
-                                            <td class="flex justify-content-center align-items-center text-center"
+                                            <td class="white-space-150 flex justify-content-center align-items-center text-center"
                                                 style="gap:6px">
 
                                                 @if($request->status == 1)
@@ -188,7 +188,7 @@
                                                         duyệt</p>
                                                 @endif
                                             </td>
-                                            <td><a href="javascript:void(0)" style="text-decoration: underline;"
+                                            <td><a href="javascript:void(0)" class="btn btn-link" style="text-decoration: underline;"
                                                    data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
                                             </td>
                                         </tr>

@@ -54,10 +54,10 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>Mã sản phẩm
+                                    <th  class="white-space-150 text-center">Mã sản phẩm
 
                                     </th>
-                                    <th>Ngành hàng
+                                    <th class="white-space-150 text-center">Ngành hàng
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'category_name')
                                                 @if($type == 'desc')
@@ -70,7 +70,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Nhà cung cấp
+                                    <th class="white-space-150 text-center">Nhà cung cấp
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'name')
                                                 @if($type == 'desc')
@@ -83,7 +83,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-200">Chiết khấu cho V-Store
+                                    <th class="white-space-200 text-center">Chiết khấu cho V-Store
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'discount')
                                                 @if($type == 'desc')
@@ -96,8 +96,8 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>V-Store xét duyệt</th>
-                                    <th class="white-space-200">Chiết khấu cho V-Shop
+                                    <th class="white-space-150 text-center">V-Store xét duyệt</th>
+                                    <th class="white-space-200 text-center">Chiết khấu cho V-Shop
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'discount_vShop')
                                                 @if($type == 'desc')
@@ -111,7 +111,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số lượng trong kho
+                                    <th  class="white-space-200 text-center">Số lượng trong kho
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -124,7 +124,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Số lượng đã bán
+                                    <th  class="white-space-200 text-center">Số lượng đã bán
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount_product_sold')
                                                 @if($type == 'desc')
@@ -139,7 +139,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Ngày niêm yết
+                                    <th  class="white-space-150 text-center">Ngày niêm yết
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'admin_confirm_date')
                                                 @if($type == 'desc')
@@ -154,29 +154,29 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th>Thao tác</th>
+                                    <th  class="white-space-100">Thao tác</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($products as $pro)
                                     <tr class="line-clamp3">
-                                        <td>{{$pro->publish_id}}</td>
-                                        <td>{{$pro->category_name}}</td>
-                                        <td class="font-medium">{{$pro->name}}</td>
-                                        <td class="text-center">{{$pro->discount}}</td>
-                                        <td style="text-transform: uppercase;">{{$pro->vstore_name}}</td>
-                                        <td class="text-center">{{$pro->discount_vShop ??0}}</td>
+                                        <td class="text-center">{{$pro->publish_id}}</td>
+                                        <td class="text-center">{{$pro->category_name}}</td>
+                                        <td class="font-medium text-center">{{$pro->name}}</td>
+                                        <td class="text-center">{{$pro->discount}}%</td>
+                                        <td class="text-center" style="text-transform: uppercase;">{{$pro->vstore_name}}</td>
+                                        <td class="text-center">{{$pro->discount_vShop ??0}}%</td>
                                         @if($pro->amount >= 0 )
-                                            <td style=" white-space: pre-wrap;">{{number_format($pro->amount,0,'.','.')}}</td>
+                                            <td class="text-center" style=" white-space: pre-wrap;">{{number_format($pro->amount,0,'.','.')}}</td>
                                         @else
-                                            <td style=" white-space: pre-wrap;">0</td>
+                                            <td class="text-center" style=" white-space: pre-wrap;">0</td>
                                         @endif
 
                                         <td class="text-center">{{number_format($pro->amount_product_sold,0,'.','.')}}</td>
-                                        <td>
+                                        <td class="text-center">
                                             {{ Carbon\Carbon::parse($pro->admin_confirm_date)->format('d/m/Y H:i')  }}
                                         </td>
-                                        <td>
+                                        <td class="white-space-100 text-center">
 
 
                                         </td>

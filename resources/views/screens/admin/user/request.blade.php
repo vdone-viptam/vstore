@@ -1,5 +1,5 @@
 @extends('layouts.admin.main')
-@section('page_title','Quản lý yêu cầu nhập mã số thuế')
+@section('page_title','Quản lý yêu cầu cập nhật mã số thuế')
 
 
 
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Quản lý yêu cầu nhập mã số thuế</h2>
+                <h2 class="pageheader-title">Quản lý yêu cầu cập nhật mã số thuế</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -38,7 +38,7 @@
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý tài khoản
                                 </a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu nhập mã số thuế</li>
+                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu cập nhật mã số thuế</li>
                         </ol>
                     </nav>
                 </div>
@@ -53,7 +53,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu nhập mã số thuế</h5>
+                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu cập nhật mã số thuế</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -77,9 +77,9 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-400">Mã yêu cầu
+                            <th class="white-space-150 text-center">Mã yêu cầu
                             </th>
-                            <th>Vai trò
+                            <th class="white-space-150 text-center">Vai trò
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'role_id')
                                         @if($type == 'desc')
@@ -92,16 +92,16 @@
                                     @endif
                           </span>
                             </th>
-                            <th>
+                            <th class="white-space-200">
                                 Tên
                             </th>
-                            <th>Email
+                            <th class="white-space-200">Email
                             </th>
-                            <th>Id P-Done người đại diện</th>
-                            <th>Tên công ty</th>
-                            <th>Mã số thuế cũ</th>
-                            <th>Mã số thuế mới</th>
-                            <th>Thao tác / Trạng thái</th>
+                            <th class="white-space-200 text-center">Id P-Done người đại diện</th>
+                            <th class="white-space-200 text-center">Tên công ty</th>
+                            <th class="white-space-200 text-center">Mã số thuế cũ</th>
+                            <th class="white-space-200 text-center">Mã số thuế mới</th>
+                            <th class="white-space-200 text-center">Thao tác / Trạng thái</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -109,8 +109,8 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>{{$request->code ?? 'Chưa có mã'}}</td>
-                                    <td>
+                                    <td class="text-center">{{$request->code ?? 'Chưa có mã'}}</td>
+                                    <td class="text-center">
                                         @if($request->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($request->role_id == 3)
@@ -119,13 +119,13 @@
                                             <span class="text-danger font-medium">Kho</span>
                                         @endif
                                     </td>
-                                    <td>{{$request->name}}</td>
-                                    <td>{{$request->email}}</td>
-                                    <td>{{$request->id_vdone}}</td>
-                                    <td>{{$request->company_name}}</td>
-                                    <td>{{$request->old_tax}}</td>
-                                    <td>{{$request->tax_code}}</td>
-                                    <td class="text-center">
+                                    <td class="white-space-200">{{$request->name}}</td>
+                                    <td class="white-space-200">{{$request->email}}</td>
+                                    <td class="white-space-200 text-center">{{$request->id_vdone}}</td>
+                                    <td class="white-space-200">{{$request->company_name}}</td>
+                                    <td class="white-space-150 text-center">{{$request->old_tax}}</td>
+                                    <td class="white-space-150 text-center">{{$request->tax_code}}</td>
+                                    <td class="text-center white-space-200">
                                         @if($request->status == 0)
                                             <a href="#" onclick="upDateStatus({{$request->id}},1)"
                                                class="btn btn-primary ">Đồng
@@ -150,16 +150,20 @@
                     </table>
 
                 </div>
-                <div class="d-flex align-items-end justify-content-end mt-4">
+            
+                <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$requests->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="ml-4">
+                    <div class="form-group ">
+                        <select class="form-control" id="limit">
+                            <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                            <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                            <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-2 float-right">
-                    <select class="form-control" id="limit">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
-                    </select>
                 </div>
+              
 
             </div>
 
