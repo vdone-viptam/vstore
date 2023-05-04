@@ -781,7 +781,6 @@
                     })
                 }
             }).done(function (data) {
-
                 if (data) {
                     $('#modalDetail').modal('show');
                     $('#name').val(data.name);
