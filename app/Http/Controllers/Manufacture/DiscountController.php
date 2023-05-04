@@ -23,6 +23,7 @@ class DiscountController extends Controller
 
     public function discount(Request $request)
     {
+        $this->onDiscount();
         $this->v['field'] = $request->field ?? 'discounts.id';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['key_search'] = $request->key_search ?? '';
@@ -38,7 +39,7 @@ class DiscountController extends Controller
         }
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['discounts'] = $this->v['discounts']->paginate($this->v['limit']);
-        $this->onDiscount();
+
         return view('screens.manufacture.discount.discount', $this->v);
 
     }

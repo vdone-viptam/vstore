@@ -212,6 +212,7 @@ class ProductController extends Controller
 
     public function discount(Request $request)
     {
+        $this->onDiscount();
         $this->v['field'] = $request->field ?? 'discounts.id';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
@@ -225,7 +226,7 @@ class ProductController extends Controller
             });
         }
         $this->v['discounts'] = $this->v['discounts']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
-        $this->onDiscount();
+
         return view('screens.vstore.product.discount', $this->v);
 
     }
