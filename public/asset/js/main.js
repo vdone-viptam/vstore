@@ -296,6 +296,25 @@ onlyNumberVer1.forEach(item => {
                 evt.preventDefault();
             }
         });
+
+        item.addEventListener("paste", function (e) {
+        // inputElement.onpaste = function(e) {
+            // Ngăn chặn việc paste
+            e.preventDefault();
+
+            // Lấy dữ liệu từ clipboard
+            let clipboardData = e.clipboardData || window.clipboardData;
+            let pastedData = clipboardData.getData('text');
+
+            // Kiểm tra nếu dữ liệu paste vào không phải là số, thì không cho phép paste
+            if (isNaN(pastedData)) {
+              return;
+            }
+
+            // Nếu dữ liệu paste vào là số, thì set giá trị cho input
+
+            e.target.value += pastedData;
+        });
     }
 })
 var numberPercent = document.querySelector('.number-percent');
@@ -307,6 +326,24 @@ if(numberPercent){
             event.preventDefault();
             return false;
         }
+    });
+    numberPercent.addEventListener("paste", function (e) {
+    // inputElement.onpaste = function(e) {
+        // Ngăn chặn việc paste
+        e.preventDefault();
+
+        // Lấy dữ liệu từ clipboard
+        let clipboardData = e.clipboardData || window.clipboardData;
+        let pastedData = clipboardData.getData('text');
+
+        // Kiểm tra nếu dữ liệu paste vào không phải là số, thì không cho phép paste
+        if (isNaN(pastedData)) {
+            return;
+        }
+
+        // Nếu dữ liệu paste vào là số, thì set giá trị cho input
+
+        e.target.value += pastedData;
     });
 }
 
@@ -326,7 +363,52 @@ document.querySelectorAll('.only-text').forEach(item => {
             return false;
         }
     });
+    numberPercent.addEventListener("paste", function (e) {
+    // inputElement.onpaste = function(e) {
+        // Ngăn chặn việc paste
+        e.preventDefault();
+
+        // Lấy dữ liệu từ clipboard
+        let clipboardData = e.clipboardData || window.clipboardData;
+        let pastedData = clipboardData.getData('text');
+
+        // Kiểm tra nếu dữ liệu paste vào không phải là chữ, thì không cho phép paste
+        if (!isNaN(pastedData)) {
+            return;
+        }
+
+        // Nếu dữ liệu paste vào là chữ, thì set giá trị cho input
+
+        e.target.value += pastedData;
+    });
 })
+
+function convertTimeVN(inputTime) {
+    // d/m/Y H:i A
+    if(!inputTime) return ' ';
+    let dateTimeString = 'js ' + inputTime;
+
+    // console.log(dateTimeString);
+    let dateTime = new Date(dateTimeString.slice(3)); // Bỏ đi 3 ký tự đầu tiên "js "
+
+    let day = dateTime.getDate().toString().padStart(2, '0'); // Lấy ngày và thêm '0' nếu ngày < 10
+    let month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Lấy tháng và thêm '0' nếu tháng < 10
+    let year = dateTime.getFullYear().toString(); // Lấy năm
+    let hour = dateTime.getHours();
+    let minute = dateTime.getMinutes();
+
+    // let ampm = hour >= 12 ? 'PM' : 'AM'; // Xác định giờ AM hay PM
+    // hour = hour % 12;
+    // hour = hour ? hour : 12;
+
+    hour = hour < 10 ? '0' + hour : hour;
+    minute = minute < 10 ? '0' + minute : minute;
+    let time = hour + ':' + minute;
+
+    let formattedDateTime = day + '/' + month + '/' + year + ' ' + time;
+    return formattedDateTime;
+}
+
 
 // MENU
 

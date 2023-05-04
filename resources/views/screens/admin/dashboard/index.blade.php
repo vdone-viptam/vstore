@@ -215,7 +215,7 @@
                                     </th>
                                     <th class="white-space-120">
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Ngày đăng ký
+                                            Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'users.created_at')
                                                     @if($type_request == 'desc')
@@ -270,7 +270,7 @@
                                             <span class="text-success font-medium">V-Store</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">
                                         {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>
