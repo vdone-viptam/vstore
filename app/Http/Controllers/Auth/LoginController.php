@@ -300,7 +300,7 @@ class LoginController extends Controller
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
-                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'phone_number.required' => 'Số điện thoại bắt buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
@@ -372,9 +372,44 @@ class LoginController extends Controller
                 'company_name.max' => 'Tên công ty tối đa 100 ký tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
-                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'phone_number.required' => 'Số điện thoại bắt buộc nhập',
                 'id_vdone.required' => 'ID P-Done người đại điện bắt buộc nhập',
 
+                'acreage_normal_storage.integer' => 'Diện tích kho bắt buộc nhập',
+                'length_normal_storage.integer' => 'Chiều dài kho bắt buộc nhập',
+                'width_normal_storage.integer' => 'Chiều rộng kho bắt buộc nhập',
+                'height_normal_storage.integer' => 'Chiều cao kho bắt buộc nhập',
+                'volume_normal_storage.integer' => 'Thể tích kho bắt buộc nhập',
+
+                'acreage_cold_storage.integer' => 'Diện tích kho bắt buộc nhập',
+                'length_cold_storage.integer' => 'Chiều dài kho bắt buộc nhập',
+                'width_cold_storage.integer' => 'Chiều rộng kho bắt buộc nhập',
+                'height_cold_storage.integer' => 'Chiều cao kho bắt buộc nhập',
+                'volume_cold_storage.integer' => 'Thể tích kho bắt buộc nhập',
+
+                'acreage_warehouse.integer' => 'Diện tích kho bắt buộc nhập',
+                'length_warehouse.integer' => 'Chiều dài kho bắt buộc nhập',
+                'width_warehouse.integer' => 'Chiều rộng kho bắt buộc nhập',
+                'height_warehouse.integer' => 'Chiều cao kho bắt buộc nhập',
+                'volume_warehouse.integer' => 'Thể tích kho bắt buộc nhập',
+
+                'acreage_normal_storage.min' => 'Diện tích kho phải lớn hơn 1',
+                'length_normal_storage.min' => 'Chiều dài kho phải lớn hơn 1',
+                'width_normal_storage.min' => 'Chiều rộng kho phải lớn hơn 1',
+                'height_normal_storage.min' => 'Chiều cao kho phải lớn hơn 1',
+                'volume_normal_storage.min' => 'Thể tích kho phải lớn hơn 1',
+
+                'acreage_cold_storage.min' => 'Diện tích kho phải lớn hơn 1',
+                'length_cold_storage.min' => 'Chiều dài kho phải lớn hơn 1',
+                'width_cold_storage.min' => 'Chiều rộng kho phải lớn hơn 1',
+                'height_cold_storage.min' => 'Chiều cao kho phải lớn hơn 1',
+                'volume_cold_storage.min' => 'Thể tích kho phải lớn hơn 1',
+
+                'acreage_warehouse.min' => 'Diện tích kho phải lớn hơn 1',
+                'length_warehouse.min' => 'Chiều dài kho phải lớn hơn 1',
+                'width_warehouse.min' => 'Chiều rộng kho phải lớn hơn 1',
+                'height_warehouse.min' => 'Chiều cao kho phải lớn hơn 1',
+                'volume_warehouse.min' => 'Thể tích kho phải lớn hơn 1',
 
                 'acreage_normal_storage.required_with' => 'Hãy thêm diện tích kho thường!',
                 'acreage_cold_storage.required_with' => 'Hãy thêm diện tích kho lạnh!',
@@ -438,7 +473,7 @@ class LoginController extends Controller
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
-                'phone_number.required' => 'Số điện thoại bất buộc nhập',
+                'phone_number.required' => 'Số điện thoại bắt buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
@@ -558,7 +593,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_normal_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/normal/image_storage/'.$user->id.'/'), $filestorage);
-                                $file[] = 'public/image/users/storage/normal/image_storage/'.$user->id.'/' . $filestorage;
+                                $file[] = 'storage/image/users/storage/normal/image_storage/'.$user->id.'/' . $filestorage;
                             }
                         }
                         $file1 = [];
@@ -566,7 +601,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_pccc_normal_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/normal/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file1[] = 'public/image/users/storage/normal/image_pccc/'.$user->id.'/' . $filestorage;
+                                $file1[] = 'storage/image/users/storage/normal/image_pccc/'.$user->id.'/' . $filestorage;
                             }
                         }
 
@@ -593,7 +628,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/cold/image_storage/'.$user->id.'/'), $filestorage);
-                                $file2[] = 'public/image/users/storage/cold/image_storage/'.$user->id.'/' . $filestorage;
+                                $file2[] = 'storage/image/users/storage/cold/image_storage/'.$user->id.'/' . $filestorage;
                             }
                         }
                         $file3 = [];
@@ -601,7 +636,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_pccc_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/cold/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file3[] = 'public/image/users/storage/cold/image_pccc/'.$user->id.'/' . $filestorage;
+                                $file3[] = 'storage/image/users/storage/cold/image_pccc/'.$user->id.'/' . $filestorage;
                             }
                         }
 
@@ -628,7 +663,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_warehouse') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/warehouse/image_storage/'.$user->id.'/'), $filestorage);
-                                $file4[] = 'public/image/users/storage/warehouse/image_storage/'.$user->id.'/' . $filestorage;
+                                $file4[] = 'storage/image/users/storage/warehouse/image_storage/'.$user->id.'/' . $filestorage;
                             }
                         }
                         $file5 = [];
@@ -636,7 +671,7 @@ class LoginController extends Controller
                             foreach ($request->file('image_pccc_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
                                 $img->storeAs(('public/image/users/storage/warehouse/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file5[] = 'public/image/users/storage/warehouse/image_pccc/'.$user->id.'/' . $filestorage;
+                                $file5[] = 'storage/image/users/storage/warehouse/image_pccc/'.$user->id.'/' . $filestorage;
                             }
                         }
 

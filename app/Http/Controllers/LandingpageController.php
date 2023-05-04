@@ -7,8 +7,10 @@ use App\Models\Discount;
 use App\Models\OrderService;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vshop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 class LandingpageController extends Controller
@@ -86,6 +88,22 @@ class LandingpageController extends Controller
         $order = false;
         if($request->order && $request->user) {
             $user = User::find($request->user);
+            if ($user){
+                if ($user->referral_code !=''){
+                    $vshop = Vshop::where('pdone_id',$user->referral_code)->orWhere('vshop_id',$user->referral_code)->first();
+                    if ($vshop){
+                        $respn = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id,[
+                            'message'=> $user->name.' đã mua tài khoản thành công',
+                            'productId'=>1,
+                            'orderId'=>1,
+                            'type'=>9,
+
+                        ]);
+                    }
+
+                }
+            }
+
             $order = OrderService::find($request->order);
         }
 
@@ -98,6 +116,21 @@ class LandingpageController extends Controller
         $order = false;
         if($request->order && $request->user) {
             $user = User::find($request->user);
+            if ($user){
+                if ($user->referral_code !=''){
+                    $vshop = Vshop::where('pdone_id',$user->referral_code)->orWhere('vshop_id',$user->referral_code)->first();
+                    if ($vshop){
+                        $respn = Http::post(config('domain.domain_vdone').'notifications/'.$vshop->pdone_id,[
+                            'message'=> $user->name.' đã mua tài khoản thành công',
+                            'productId'=>1,
+                            'orderId'=>1,
+                            'type'=>9,
+
+                        ]);
+                    }
+
+                }
+            }
             $order = OrderService::find($request->order);
         }
 

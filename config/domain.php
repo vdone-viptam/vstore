@@ -10,5 +10,6 @@ return [
     'TK_VAN_CHUYEN'=>env('TK_VAN_CHUYEN'),
     'MK_VAN_CHUYEN'=>env('MK_VAN_CHUYEN'),
     'domain_vdone'=>env('DOMAIN_VDONE'),
-    'key_split'=>env('KEY_SPLIT')
+    'key_split'=>env('KEY_SPLIT'),
+    'key_viettelpost'=>env('KEY_VIETTELPOST')
 ];

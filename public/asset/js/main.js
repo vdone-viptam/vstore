@@ -317,6 +317,17 @@ function setValueById(id,value) {
     }
 
 }
+document.querySelectorAll('.only-text').forEach(item => {
+    item.addEventListener("keypress", (e) => {
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+})
+
 // MENU
 
 

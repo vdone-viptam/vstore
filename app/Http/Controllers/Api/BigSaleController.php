@@ -35,7 +35,7 @@ class BigSaleController extends Controller
             $limit = $request->limit ?? 12;
             $products = DB::table('products')
                 ->where('availability_status', 1);
-            $selected = [DB::raw('SUM(discounts.discount) as discount'),'products.id', 'images', 'publish_id', 'price', 'products.name',DB::raw("price - (price * IFNULL((SELECT SUM(discount /100) as dis
+            $selected = [DB::raw('SUM(discounts.discount) as discount'), 'products.id', 'images', 'publish_id', 'price', 'products.name', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100) as dis
                         FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
                                         AND product_id = products.id AND type != 3 GROUP BY product_id ),0)) as order_price")];
             if ($request->pdone_id) {
@@ -69,13 +69,13 @@ class BigSaleController extends Controller
             join('discounts', 'products.id', '=', 'discounts.product_id')
                 ->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now())
-                ->where('type', '!=', 3)
-                ->groupBy('discount_vShop')
+                ->whereIn('type', [1,2])
+                ->groupBy( 'products.id')
                 ->where('products.status', 2)
 //                ->selectSub("SELECT SUM(discounts.discount /100)
 //                        FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
 //                                        AND product_id = products.id AND type != 3 GROUP BY product_id",'discount')
-                ->having('discount','>',30)
+                ->having('discount', '>=', 30)
                 ->paginate($limit);
             foreach ($products as $product) {
 //                $product->discount = round(DB::table('discounts')
@@ -90,7 +90,7 @@ class BigSaleController extends Controller
                     $product->is_affiliate = DB::table('vshop_products')
                         ->join('vshop', 'vshop_products.vshop_id', '=', 'vshop.id')
                         ->where('product_id', $product->id)
-                        ->whereIn('vshop_products.status', [1,2])
+                        ->whereIn('vshop_products.status', [1, 2])
                         ->where('vshop.pdone_id', $request->pdone_id)
                         ->count();
                     $more_dis = DB::table('buy_more_discount')->selectRaw('MAX(discount) as max')->where('product_id', $product->id)->first()->max;

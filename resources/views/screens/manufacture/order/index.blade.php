@@ -212,8 +212,14 @@
                                             <span class="text-primary font-medium">Chờ giao hàng</span>
                                         @elseif($order->export_status == 2)
                                             <span class="text-primary font-medium">Đang giao hàng</span>
+                                        @elseif($order->export_status == 3)
+                                            <span class="text-danger font-medium">Kho từ chối</span>
+                                        @elseif($order->export_status == 4)
+                                            <span class="text-success font-medium">Đã giao hàng</span>
+                                        @elseif($order->export_status == 4 && \Carbon\Carbon::parse($order->updated_at)->diffInDays(\Illuminate\Support\Carbon::now()) && \Illuminate\Support\Carbon::now() > $order->updated_at)
+                                            <span class="text-success font-medium">Đã hoàn thành</span>
                                         @else
-                                            <span class="text-success font-medium">Hoàn thành</span>
+                                            <span class="text-danger font-medium">Khách từ chối</span>
                                         @endif
                                     </td>
                                     <td class="white-space-100 text-right">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }}

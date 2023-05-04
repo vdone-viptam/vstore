@@ -26,12 +26,12 @@
     </div>
 @endsection
 
-@section('page_title','Quản lý yêu cầu xét duyệt sản phẩm')
+@section('page_title','Yêu cầu xét duyệt sản phẩm đã xác nhận')
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Quản lý yêu cầu xét duyệt sản phẩm</h2>
+                <h2 class="pageheader-title">Yêu cầu xét duyệt sản phẩm đã xác nhận</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
@@ -39,7 +39,7 @@
                             <li class="breadcrumb-item"><a href="{{route('screens.vstore.product.request')}}"
                                                            class="breadcrumb-link">Sản phẩm</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Quản lý yêu cầu xét duyệt sản phẩm
+                            <li class="breadcrumb-item active" aria-current="page">Yêu cầu xét duyệt sản phẩm đã xác nhận
                             </li>
                         </ol>
                     </nav>
@@ -52,7 +52,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Quản lý yêu cầu xét duyệt sản phẩm</h5>
+                <h5 class="mb-0" style="font-size:18px;">Yêu cầu xét duyệt sản phẩm đã xác nhận</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -247,7 +247,7 @@
                                                         fill="#ffc107"/>
                                                 </svg>
                                             </div>
-                                           
+
                                                 Đã duyệt - chờ hệ thống duyệt
                                             </div>
                                         @elseif($product->status == 2)

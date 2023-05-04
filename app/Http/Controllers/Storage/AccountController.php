@@ -50,7 +50,7 @@ class AccountController extends Controller
                     $arrImgStorage = [];
                     if (!empty($imageStorage)) {
                         foreach ($imageStorage as $keyImg => $valueImg) {
-                            $arrImgStorage[] = asset('storage/' . $valueImg);
+                            $arrImgStorage[] = asset($valueImg);
                         }
                     }
                     $this->v['infoWarehouse'][$key]['image_storage'] = $arrImgStorage;
@@ -60,7 +60,7 @@ class AccountController extends Controller
                     $arrImgStorage = [];
                     if (!empty($imageStorage)) {
                         foreach ($imageStorage as $keyImg => $valueImg) {
-                            $arrImgStorage[] = asset('storage/' . $valueImg);
+                            $arrImgStorage[] = asset($valueImg);
                         }
                     }
                     $this->v['infoWarehouse'][$key]['image_pccc'] = $arrImgStorage;
@@ -269,13 +269,13 @@ class AccountController extends Controller
             $user->id_vdone = trim($request->id_vdone);
             $user->id_vdone_diff = trim($request->id_vdone_diff);
             $user->phone_number = trim($request->phone_number);
-            $old_info = json_decode($user->storage_information);
-            $old_info->floor_area = $request->floor_area;
-            $old_info->volume = $request->volume;
-            $old_info->cold_storage = $request->cold_storage;
-            $old_info->warehouse = $request->warehouse;
-            $old_info->normal_storage = $request->normal_storage;
-            $user->storage_information = json_encode($old_info);
+            // $old_info = json_decode($user->storage_information);
+            // $old_info->floor_area = $request->floor_area;
+            // $old_info->volume = $request->volume;
+            // $old_info->cold_storage = $request->cold_storage;
+            // $old_info->warehouse = $request->warehouse;
+            // $old_info->normal_storage = $request->normal_storage;
+            // $user->storage_information = json_encode($old_info);
             $user->save();
 
 

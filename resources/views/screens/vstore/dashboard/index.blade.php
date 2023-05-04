@@ -74,7 +74,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
                         <h5 class="mb-0" style="font-size:18px;">
-                            <a href="{{route('screens.vstore.product.request')}}" class="">Quản lý yêu cầu chưa xét duyệt sản phẩm
+                            <a href="{{route('screens.vstore.product.request')}}" class="">Yêu cầu xét duyệt sản phẩm chưa xác nhận
                             </a>
                         </h5>
                         <ul class="navbar-nav ">
