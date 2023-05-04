@@ -78,19 +78,12 @@
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered second    ">
                         <thead>
-                        <<<<<<< HEAD
                         <tr>
                             <th>Mã sản phẩm</th>
                             <th>Hình ảnh</th>
                             <th>Tên sản phẩm
                             </th>
                             <th>Ngành hàng
-                                <span style="float: right;cursor: pointer">
-                                        @if ($field == 'cate_name')
-                                        @if ($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="cate_name"></i>
-                                            =======
-                        <tr>
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th class="text-center" style="min-width:150px !important;">Hình ảnh</th>
                             <th style="min-width:200px !important;">
@@ -98,7 +91,6 @@
                                     Tên sản phẩm
                                 </div>
                             </th>
-
                             <th>Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'cate_name')
@@ -119,7 +111,6 @@
                                         @if($field == 'price')
                                             @if($type == 'desc')
                                                 <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
-                                                >>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                                             @else
                                                 <i class="fa-solid fa-sort-up sort" data-sort="cate_name"></i>
                                             @endif
@@ -144,7 +135,6 @@
                                         </span>
                                 </div>
 
-                                <<<<<<< HEAD
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
