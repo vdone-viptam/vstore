@@ -322,8 +322,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                         <div class="modal-header">
                             <div class="d-flex flex-column" style="gap:6px">
                                 <img src="{{ asset('home/img/NCC.png') }}" alt=""
-                                    style="object-fit: fill; height: 50px !important;">
-                                <h5 class="modal-title" style="font-size: 20px;">Thông tin thanh toán</h5>
+                                    style="object-fit: contain;width:fit-content; height: 40px !important;">
+                                <h3 class="modal-title" style="font-size: 22px; font-weight:700;">Thông tin thanh toán</h3>
                             </div>
 
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -470,7 +470,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                                 [
                                                     'title' => 'Tổng số tiền',
                                                     'value' => $totalFormat . 'đ',
-                                                    'class' => 'text-danger',
+                                                    'class' => 'text-danger font-medium',
                                                 ],
                                             ];
                                         @endphp

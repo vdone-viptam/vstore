@@ -244,8 +244,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex flex-column" style="gap:6px">
-                    <img src="{{asset('home/img/NCC.png')}}" alt="" style="object-fit: fill; height: 50px;">
-                    <h5 class="modal-title" style="font-size: 20px; font-weight: 600">Chi tiết thanh toán</h5>
+                    <img src="{{asset('home/img/NCC.png')}}" alt="" style="object-fit: contain; width:fit-content ;height: 50px;">
+                    <h3 class="modal-title" style="font-size: 22px; font-weight: 700">Chi tiết thanh toán</h3>
                 </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -260,7 +260,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">Tên công ty</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">Tên công ty</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-weight: 600; font-size: 16px;">{{$user->company_name}}</span>
@@ -271,7 +271,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">Mã số thuế</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">Mã số thuế</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->tax_code}}</span>
@@ -282,7 +282,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">Tên Nhà cung cấp</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">Tên Nhà cung cấp</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->name}}</span>
@@ -293,7 +293,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">ID P-Done người đại diện</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->id_vdone}}</span>
@@ -304,7 +304,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">Số điện thoại công ty</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">Số điện thoại công ty</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->phone_number}}</span>
@@ -315,7 +315,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">Email</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">Email</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->email}}</span>
@@ -327,7 +327,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6">
-                                <h4 style="font-weight: 600; margin-bottom:15px;">ID P-Done người giới thiệu</h4>
+                                <h4 style="font-weight: 700; margin-bottom:15px;">ID P-Done người giới thiệu</h4>
                             </div>
                             <div class="col-6">
                                 <span style="font-size: 16px;">{{$user->referral_code}}</span>
@@ -382,14 +382,14 @@
                                     [
                                         "title" => "Tổng số tiền",
                                         "value" => $totalFormat . "đ",
-                                        "class" => "text-danger"
+                                        "class" => "text-danger font-bold"
                                     ]);
                             @endphp
                             <div class="col-12">
                                 @foreach($chiTietThanhToan as $value)
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style=" margin-bottom:15px; font-weight:600">{{$value['title']}}</h4>
+                                        <h4 style=" margin-bottom:15px; font-weight:700">{{$value['title']}}</h4>
                                     </div>
                                     <div class="col-6">
                                         <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
@@ -437,10 +437,10 @@
                 </div>
             </div>
             <div class="modal-footer ">
-                <div class="mx-auto w-100">
-                <button type="button" class="btn btn-cust font-medium mx-3 text-white" style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; " data-dismiss="modal">Đóng
+                <div class="mx-auto ">
+                <button type="button" class="btn btn-cust font-medium text-white" style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; " data-dismiss="modal">Đóng
                                 </button>
-                    
+
                 </div>
             </div>
         </div>

@@ -636,8 +636,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="d-flex flex-column" style="gap:6px">
-                            <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
-                            <h5 class="modal-title" style="font-size: 20px;">Thông tin thanh toán</h5>
+                            <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; width:fit-content; height: 40px !important;">
+                            <h3 class="modal-title" style="font-size: 22px; font-weight:700;">Thông tin thanh toán</h3>
                         </div>
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -848,9 +848,9 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     </div>
                     <div class="modal-footer ">
                         <div class="w-100 mx-auto text-center">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                            <button type="button" class="btn font-medium mx-3" style="font-size:18px; color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; " data-dismiss="modal">Đóng
                             </button>
-                            <button type="submit" class="btn btn-primary" >Thanh toán
+                            <button type="submit" class="btn font-medium text-white mx-3" style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; ">Thanh toán
                             </button>
                         </div>
                     </div>
