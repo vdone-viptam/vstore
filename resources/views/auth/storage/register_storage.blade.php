@@ -674,7 +674,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 style="font-weight: 600;margin-bottom:15px;">Tên Nhà cung cấp</h4>
+                                        <h4 style="font-weight: 600;margin-bottom:15px;">Tên Kho</h4>
                                     </div>
                                     <div class="col-6">
                                         <span style="font-size: 16px;">{{$user->name}}</span>
@@ -951,7 +951,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 
                 // check phải ít nhất 1 trong 3 loại kho !
                 const condition2 = checkThreeCondition();
-                
+
                 if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 >0) {
                     btnSubmit.removeAttribute('disabled');
                     btnSubmit.classList.remove('btn-secondary');
