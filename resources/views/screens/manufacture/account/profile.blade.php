@@ -202,14 +202,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="link_website">
-                                                    <a class="text-secondary" href="{{route('intro',['slug'=> $infoAccount->slug])}}">Slug</a>
+                                                    Slug: <a href="{{route('intro',['slug'=> $infoAccount->slug])}}" style="text-decoration:underline;">{{route('intro',['slug'=> $infoAccount->slug])}}</a>
                                                 </label>
                                                 <input type="text" class="form-control form-control-lg"
-                                                       id="link_website" name="link_website"
-                                                       value="{{$infoAccount->slug}}">
+                                                       id="link_website" name=""
+                                                       value="{{route('intro',['slug'=> $infoAccount->slug])}}" oncopy="return false" oncut="return false" onpaste="return false" autocomplete="off">
                                                        @error('link_website')
                                                        <p class="text-danger">{{$message}}</p>
                                                        @enderror
+                                                <input type="hidden" name="link_website" >
                                             </div>
 
                                             <div class="form-group">
@@ -306,6 +307,19 @@
                 const textError = '{{ $errors->first('img') }}';
                 swalNoti('center', 'error', 'Định dạng ảnh không hợp lệ',textError, 500, true, 3000);
             @endif
+
+            $('#link_website').on('keydown', function(e){
+                var text = e.target.value.replace("http://nha_cung_cap.ngo/p/", "")
+
+                if($(this).val().length == 26){
+                    if(e.keyCode ===  8 || e.keyCode === 32 || e.keyCode === 46){
+                        e.preventDefault()
+                        return false;
+                    }
+                    
+                }              
+                $('input[name="link_website"]').val(text)
+            })
         });
 
         // tinh thanh pho
@@ -392,6 +406,8 @@
                 .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
                 );
         });
+
+       
 
     </script>
 @endsection
