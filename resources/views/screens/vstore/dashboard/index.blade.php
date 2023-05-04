@@ -100,111 +100,7 @@
 
                                         </div>
                                     </th>
-                                    <th class="white-space-150">
 
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Nhà cung cấp
-
-                                        </div>
-                                    </th>
-                                    <th class="white-space-300">
-
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Tên sản phẩm
-
-                                        </div>
-                                    </th>
-                                    <th>
-
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Ngành hàng
-                                            <span style="float: right;cursor:pointer">
-                                                @if ($field == 'categories.name')
-                                                    @if ($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                            data-sort="categories.name"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="categories.name"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fas fa-sort sort" data-sort="categories.name"></i>
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th class="white-space-150">
-
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Giá sản phẩm chưa VAT
-                                            <span style="float: right;cursor:pointer">
-                                                @if ($field == 'price')
-                                                    @if ($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fas fa-sort sort" data-sort="price"></i>
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th class="white-space-150">
-
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Chiết khấu từ Nhà cung cấp (%)
-                                            <span style="float: right;cursor:pointer">
-                                                @if ($field == 'requests.discount')
-                                                    @if ($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                            data-sort="requests.discount"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort"
-                                                            data-sort="requests.discount"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fas fa-sort sort" data-sort="requests.discount"></i>
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th>
-
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Ngày yêu cầu
-                                            <span style="float: right;cursor:pointer">
-                                                @if ($field == 'requests.created_at')
-                                                    @if ($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                            data-sort="requests.created_at"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort"
-                                                            data-sort="requests.created_at"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th style="min-width:100px;">
-
-                                        Trạng thái
-                                        <span style="float: right;cursor:pointer">
-                                            @if ($field == 'requests.status')
-                                                @if ($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort"
-                                                        data-sort="requests.status"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort"
-                                                        data-sort="requests.status"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="requests.status"></i>
-                                            @endif
-                                        </span>
-                                    </div>
-                                </th>
                                 <th class="white-space-120">
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
@@ -256,60 +152,78 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-150">
-
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                        Giá sản phẩm chưa VAT
-                                        <span style="float: right;cursor:pointer">
-                                            @if($field == 'price')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                    <th class="white-space-150">
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Giá sản phẩm chưa VAT
+                                            <span style="float: right;cursor:pointer">
+                                                @if ($field == 'price')
+                                                    @if ($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                                    @endif
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="price"></i>
+                                                    <i class="fas fa-sort sort" data-sort="price"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th class="white-space-150">
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Chiết khấu từ Nhà cung cấp (%)
+                                            <span style="float: right;cursor:pointer">
+                                                @if ($field == 'requests.discount')
+                                                    @if ($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort"
+                                                            data-sort="requests.discount"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort"
+                                                            data-sort="requests.discount"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="requests.discount"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                            Ngày yêu cầu
+                                            <span style="float: right;cursor:pointer">
+                                                @if ($field == 'requests.created_at')
+                                                    @if ($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort"
+                                                            data-sort="requests.created_at"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort"
+                                                            data-sort="requests.created_at"></i>
+                                                    @endif
+                                                @else
+                                                    <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th style="min-width:100px;">
+                                        Trạng thái
+                                        <span style="float: right;cursor:pointer">
+                                            @if ($field == 'requests.status')
+                                                @if ($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                        data-sort="requests.status"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                        data-sort="requests.status"></i>
                                                 @endif
                                             @else
-                                                <i class="fas fa-sort sort" data-sort="price"></i>
+                                                <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                             @endif
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-150 text-center">
+                                
 
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                        Chiết khấu từ Nhà cung cấp
-                                        <span style="float: right;cursor:pointer">
-                                            @if($field == 'requests.discount')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="requests.discount"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="requests.discount"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="requests.discount"></i>
-                                            @endif
-                                        </span>
-                                    </div>
-                                </th>
-                                <th class="text-center white-space-120">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
-                                        Ngày yêu cầu
-                                        <span style="float: right;cursor:pointer">
-                                            @if($field == 'requests.created_at')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="requests.created_at"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="requests.created_at"></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
-                                            @endif
-                                        </span>
-                                    </div>
-                                </th>
-                                <th style="min-width:100px;">
-                                    Trạng thái
-                                </th>
                                 <th></th>
                                 </thead>
                                 <tbody>
