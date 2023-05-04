@@ -316,7 +316,6 @@
                         e.preventDefault()
                         return false;
                     }
-                    
                 }              
                 $('input[name="link_website"]').val(text)
             })

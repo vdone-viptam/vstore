@@ -143,7 +143,7 @@
                             <a class="dropdown-item" href=
                                 "{{route('screens.vstore.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ sơ</a>
                         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id ==2 )
-                            <a href="{{route('screens.manufacture.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ
+                            <a class="dropdown-item" href="{{route('screens.manufacture.account.profile')}}"><i class="fas fa-user mr-2"></i>Hồ
                                 sơ</a>
                         @endif
                         <a class="dropdown-item logout" href="{{route('logout')}}" style="color:#FF4D4F"><i
