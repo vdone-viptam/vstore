@@ -94,7 +94,7 @@
                                 </div>
                             </th>
                             <th>
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -221,9 +221,9 @@
                                     <td class="white-space-120 text-center">
                                         {{$product->discount}}%
                                     </td>
-                                    <td class="white-space-120 text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
+                                    <td class="white-space-120 text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="white-space-120 text-center">{{$product->vstore_confirm_date ?
-\Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y') : 'Chưa xét duyệt'}}</td>
+\Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y H:i') : 'Chưa xét duyệt'}}</td>
                                     <td class="white-space-200" style="min-width:155px !important;">
                                         @if($product->status == 0)
                                             <div
@@ -288,7 +288,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center" style="min-width:80px !important;">
-                                    
+
                                         <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link px-2" style="text-decoration:underline;">Chi
                                             tiết</a>
                                     </td>

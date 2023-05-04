@@ -41,7 +41,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('users/request-change-tax-code*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.admin.user.tax_code')}}">Quản lý yêu cầu cập nhật mã sô
+                                       href="{{route('screens.admin.user.tax_code')}}">Quản lý yêu cầu cập nhật mã số
                                         thuế</a>
                                 </li>
                                 <li class="nav-item">

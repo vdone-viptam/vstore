@@ -214,12 +214,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="link_website">
-                                                        <a class="text-secondary"
-                                                           href="{{route('intro_vstore',['slug'=> $infoAccount->slug])}}">Slug</a>
+                                                        Slug: <a target="_blank" href="{{route('intro',['slug'=> $infoAccount->slug])}}"
+                                                                 style="text-decoration:underline;">{{route('intro',['slug'=> $infoAccount->slug])}}</a>
                                                     </label>
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="link_website" name="link_website"
-                                                           value="{{$infoAccount->slug}}">
+                                                           value="{{$infoAccount->slug}}"
+                                                           oncopy="return false" oncut="return false"
+                                                           onpaste="return false">
                                                     @error('link_website')
                                                     <p class="text-danger">{{$message}}</p>
                                                     @enderror
@@ -303,6 +305,16 @@
 @endsection
 @section('custom_js')
     <script>
+        document.getElementsByName('link_website').forEach(item => {
+            item.addEventListener("keypress", (e) => {
+                var regex = new RegExp("^[a-zA-Z]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        })
         $(document).ready(function () {
 
             setTimeout(() => {

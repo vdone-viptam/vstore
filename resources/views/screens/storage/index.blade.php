@@ -67,7 +67,7 @@ if($order && $user) {
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column" style="gap:6px">
-                        <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
+                        <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: fill; height: 50px;">
                         <h5 class="modal-title" style="font-size: 20px; font-weight: 600">Chi tiết thanh toán</h5>
                     </div>
 
@@ -250,9 +250,9 @@ if($order && $user) {
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <div class="w-100 mx-auto text-right">
-                        <button type="button" class="btn-cust" data-dismiss="modal">Đóng
-                        </button>
+                    <div class="w-100 mx-auto">
+                    <button type="button" class="btn btn-cust font-medium mx-3 text-white" style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; " data-dismiss="modal">Đóng
+                                </button>
                     </div>
                 </div>
             </div>
@@ -534,7 +534,7 @@ if($order && $user) {
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column" style="gap:6px">
-                        <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; height: 40px;">
+                        <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: fill; height: 50px;">
                         <h5 class="modal-title" style="font-size: 20px; font-weight: 600">Chi tiết thanh toán</h5>
                     </div>
 
@@ -727,9 +727,9 @@ if($order && $user) {
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <div class="mx-auto">
-                        <button type="button" class="btn-cust" data-dismiss="modal">Đóng
-                        </button>
+                    <div class="w-100 mx-auto">
+                    <button type="button" class="btn btn-cust font-medium mx-3 text-white" style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; " data-dismiss="modal">Đóng
+                                </button>
                     </div>
                 </div>
             </div>
