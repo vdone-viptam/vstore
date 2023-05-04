@@ -141,7 +141,7 @@ class SearchController extends Controller
 
 
         $vshop = Vshop::whereIn('id', $vshop)
-            ->select('id', 'nick_name', 'avatar')->get();
+            ->select('pdone_id as id', 'nick_name', 'avatar')->get();
 
         if ($vshop) {
             foreach ($vshop as $value) {
