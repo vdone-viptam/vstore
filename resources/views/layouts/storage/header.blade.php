@@ -12,7 +12,7 @@
             </a>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
             <a class="navbar-brand" href="{{route('screens.vstore.dashboard.index')}}">
-                <img class="logo-img" style="height: 50px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
+                <img class="logo-img" style="height: 40px; object-fit: contain;" src="{{asset('home/img/Logo.png')}}"
                      alt="logo">
             </a>
         @else
