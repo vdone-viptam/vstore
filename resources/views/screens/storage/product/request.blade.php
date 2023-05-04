@@ -97,16 +97,10 @@
                            style="width:100%">
                         <thead>
                         <tr>
-<<<<<<< HEAD
-                            <th>Mã yêu cầu</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm
-                                
-=======
                             <th class="white-space-120 text-center">Mã yêu cầu</th>
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">     
+                            <div class="white-space-400 text-center" style="gap:6px">
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -120,7 +114,6 @@
                                     @endif
                                 </span>
                                 </div>
->>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="white-space-150 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -148,23 +141,6 @@
                                     @endif
                                 </span>
                             </th>
-<<<<<<< HEAD
-                            <th>Chiết khấu
-                                
-=======
-                            <th class="white-space-120 text-center">Chiết khấu
-                                <span style="float: right;cursor: pointer">
-                                    @if($field == 'code')
-                                        @if($type == 'desc')
-                                            <i class="fa-solid fa-sort-down sort" data-sort="code"></i>
-                                        @else
-                                            <i class="fa-solid fa-sort-up sort" data-sort="code"></i>
-                                        @endif
-                                    @else
-                                        <i class="fas fa-sort sort" data-sort="code"></i>
-                                    @endif
-                                </span>
->>>>>>> c36d54820faf9e016ad9ccf047d232457aae641e
                             </th>
                             <th class="text-center white-space-150">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
@@ -201,10 +177,9 @@
                                 <tr>
                                     <td class="text-center white-space-120">{{$product->code}}</td>
                                     <td class="text-center white-space-150">{{$product->publish_id}}</td>
-                                    <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
+                                    <td title="{{$product->product_name}}" class="white-space-400">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td class="text-center ">{{$product->ncc_name}}</td>
                                     <td class="text-center">{{$product->quantity}}</td>
-                                    <td class="text-center">0</td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
                                     <td class="status{{$product->id}} text-center" style="min-width:180px !important;">
                                         @if($product->status == 0)

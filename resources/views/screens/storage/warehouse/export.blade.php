@@ -207,7 +207,7 @@
                                 <tr>
                                     <td class="text-center white-space-120">{{$request->code}}</td>
                                     <td class="text-center white-space-150">{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td title="{{$request->product_name}}" class="white-space-300">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td class="text-center">{{$request->ncc_name}}</td>
                                     <td class="text-center">{{$request->quantity}}</td>
 
@@ -233,7 +233,7 @@
                                             <div
                                                 class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
                                                 style="gap:14px;">
-                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
+                                                <svg width="14" height="9" viewBox="0 0 14 9" fill="transparent"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
                                                           stroke-linecap="round"/>

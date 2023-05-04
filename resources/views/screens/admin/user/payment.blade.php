@@ -94,7 +94,7 @@
                             <th class="white-space-100 text-center">Số tiền</th>
                             <th class="white-space-120 text-center">Thời gian</th>
                             <th class="white-space-150 text-center">Trạng thái</th>
-                            <th class="white-space-100 text-center">Thao tác</th>
+                            <th class="white-space-100 text-center"></th>
                         </tr>
                         </thead>
                         <tbody>

@@ -79,11 +79,6 @@
                     <table id="example" class="table table-striped table-bordered second    ">
                         <thead>
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Hình ảnh</th>
-                            <th>Tên sản phẩm
-                            </th>
-                            <th>Ngành hàng
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th class="text-center" style="min-width:150px !important;">Hình ảnh</th>
                             <th style="min-width:200px !important;">
@@ -103,21 +98,6 @@
                                         <i class="fas fa-sort sort" data-sort="cate_name"></i>
                                     @endif
                                 </span>
-                            </th>
-                            <th class="white-space-120">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Giá bán (đ)
-                                    <span style="float: right;cursor:pointer">
-                                        @if($field == 'price')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="price"></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="cate_name"></i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort sort" data-sort="cate_name"></i>
-                                        @endif
-                                    </span>
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">

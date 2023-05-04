@@ -93,7 +93,7 @@
                                     <th class="white-space-150 text-center">Tên tài khoản</th>
                                     <th class="white-space-120 text-center">Ngân hàng</th>
                                     <th class="white-space-150 text-center">Nội dung</th>
-                                    <th class="white-space-150 text-center">Ngày yêu cầu</th>
+                                    <th class="white-space-150 text-center">Thời gian yêu cầu</th>
                                     <th class="white-space-150 text-center">Trạng thái</th>
                                 </tr>
                                 </thead>
@@ -107,7 +107,7 @@
                                         <td style="text-transform: uppercase;">{{$his->name}}</td>
                                         <td>{{$his->bank->name}}</td>
                                         <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
-                                        <td class="white-space-150 text-center">{{$his->created_at}}</td>
+                                        <td class="white-space-150 text-center">{{\Carbon\Carbon::parse($his->created_at)->format('d/m/Y H:i')}}</td>
                                         <td class="white-space-150 text-center">
                                             @if($his->status == 0)
                                             <span class="text-warning font-medium">Chờ xác nhận</span>

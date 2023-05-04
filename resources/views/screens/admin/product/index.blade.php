@@ -151,7 +151,7 @@
                                             <td class="text-center"><span class="text-primary">{{$request->discount}}%</span></td>
                                             <td class="text-center"><span class="text-success">{{$request->discount_vShop}}%</span></td>
                                             <td class="text-center"><span>{{$request->vstore_name}}</span></td>
-                                            <td>
+                                            <td class="text-center">
                                                 @if($request->status == 1)
                                                     <div class="text-warning font-medium "
                                                          style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
@@ -171,18 +171,18 @@
                                                     </div>
                                                 @endif
                                             </td>
-                                            <td class="white-space-150 flex justify-content-center align-items-center text-center"
+                                            <td class="white-space-180 flex justify-content-center align-items-center text-center"
                                                 style="gap:6px">
 
                                                 @if($request->status == 1)
-                                                    <button type="button"
+                                                    <a href="javascript:void(0)"
                                                             onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
-                                                            class="btn btn-primary">Duyệt
-                                                    </button>
-                                                    <button type="button"
+                                                            class="btn text-primary font-medium px-2 " style="text-decoration:underline;">Duyệt
+                                                    </a>
+                                                    <a href="javascript:void(0)"
                                                             onclick="unAppect({{$request->id}},{{$request->discount}},4,{{$request->discount_vShop}})"
-                                                            class="btn btn-danger">Từ chối
-                                                    </button>
+                                                            class="btn text-danger font-medium px-2 " style="text-decoration:underline;">Từ chối
+                                                    </a>
                                                 @else
                                                     <p class="text-success"><i class="fas fa-check mr-2"></i>Đã xét
                                                         duyệt</p>

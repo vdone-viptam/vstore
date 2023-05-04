@@ -378,6 +378,7 @@
                                             Trạng thái
                                         </div>
                                     </th>
+                                    <th class="white-space-100">Thao tác</th>
                                     <th class="white-space-100"></th>
                                 </tr>
                             </thead>
@@ -416,23 +417,19 @@
                                         @endif
                                     </td>
                                     <td class="text-center white-space-100">
-                                        @if($user->confirm_date)
-                                            <a href="javascript:void(0)" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
-                                                onclick="showDetail({{$user->id}})"
-                                            class="more-details text-primary" style="text-decoration:underline">
-                                                Chi tiết</a>
-                                        @else
-                                            {{-- <button class="btn btn-primary">Duyệt</button> --}}
+                                        @if(!$user->confirm_date)
                                             <a data-abc="{{$loop->iteration - 1}}"
                                             href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
                                             class="duyet btn btn-primary"
                                             href="#">Duyệt
                                             </a>
-                                            <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
-                                            onclick="showDetail({{$user->id}})"
-                                            class="more-details text-primary underline">
-                                            Chi tiết</a>
                                         @endif
+                                    </td>
+                                    <td class="text-center white-space-100">
+                                            <a href="javascript:void(0)" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
+                                                onclick="showDetail({{$user->id}})"
+                                            class="more-details text-primary" style="text-decoration:underline">
+                                                Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
