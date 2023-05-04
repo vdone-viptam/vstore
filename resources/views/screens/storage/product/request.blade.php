@@ -100,7 +100,7 @@
                             <th class="white-space-120 text-center">Mã yêu cầu</th>
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th>
-                            <div class="white-space-150 text-center" style="gap:6px">
+                            <div class="white-space-400 text-center" style="gap:6px">
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -177,7 +177,7 @@
                                 <tr>
                                     <td class="text-center white-space-120">{{$product->code}}</td>
                                     <td class="text-center white-space-150">{{$product->publish_id}}</td>
-                                    <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
+                                    <td title="{{$product->product_name}}" class="white-space-400">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td class="text-center ">{{$product->ncc_name}}</td>
                                     <td class="text-center">{{$product->quantity}}</td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
