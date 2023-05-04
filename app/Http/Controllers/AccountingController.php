@@ -46,7 +46,7 @@ class AccountingController extends Controller
         }
         return response()->json([
             'status_code' => 201,
-            'message' => 'Cập nhập trạng thái rút tiền thành công',
+            'message' => 'Cập nhật trạng thái rút tiền thành công',
         ],200);
     }
 }
