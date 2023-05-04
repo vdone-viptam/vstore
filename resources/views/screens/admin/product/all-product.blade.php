@@ -167,14 +167,14 @@
                                         <td style="text-transform: uppercase;">{{$pro->vstore_name}}</td>
                                         <td class="text-center">{{$pro->discount_vShop ??0}}</td>
                                         @if($pro->amount >= 0 )
-                                            <td style=" white-space: pre-wrap;">{{$pro->amount}}</td>
+                                            <td style=" white-space: pre-wrap;">{{number_format($pro->amount,0,'.','.')}}</td>
                                         @else
                                             <td style=" white-space: pre-wrap;">0</td>
                                         @endif
 
-                                        <td class="text-center">{{$pro->amount_product_sold ??0}}</td>
+                                        <td class="text-center">{{number_format($pro->amount_product_sold,0,'.','.')}}</td>
                                         <td>
-                                            {{ Carbon\Carbon::parse($pro->admin_confirm_date)->format('i:H d-m-Y')  }}
+                                            {{ Carbon\Carbon::parse($pro->admin_confirm_date)->format('d/m/Y H:i')  }}
                                         </td>
                                         <td>
 

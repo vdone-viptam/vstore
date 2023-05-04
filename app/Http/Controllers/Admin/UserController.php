@@ -218,6 +218,7 @@ class UserController extends Controller
         $user = User::select('name', 'email',
             'id_vdone', 'phone_number', 'tax_code', 'role_id',
             'address', 'created_at', 'storage_information', 'confirm_date', 'referral_code')->where('id', $request->id)->first();
+        return $user;
         if ($request->role_id != 4) {
             return view('screens.admin.user.detail', ['user' => $user]);
         }

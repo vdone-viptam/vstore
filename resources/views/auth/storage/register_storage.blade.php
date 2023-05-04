@@ -877,7 +877,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         })
             .then((response) => response.json())
             .then((data) => {
-                document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
+                document.getElementById('city_id').innerHTML = `<option value="" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
             })
             .catch(console.error);
 
@@ -890,21 +890,19 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 
                 .then((data) => {
                     if (data.length > 0) {
-                        const check = checkEmpty(inputs);
-                        if (check && divCity.value && divDistrict.value && divWard.value) {
-                            btnSubmit.removeAttribute('disabled');
-                            btnSubmit.classList.remove('btn-secondary');
-                        } else {
-                            btnSubmit.setAttribute('disabled', 'true');
-                            btnSubmit.classList.add('btn-secondary');
-                        }
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
+
+                        btnSubmit.setAttribute('disabled', 'true');
+                        btnSubmit.classList.add('btn-secondary');
+
+                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
+
 
                     } else {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
                     }
+
                 })
-                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                .catch(() => divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`
                 )
         });
         divDistrict.addEventListener('change', (e) => {
@@ -915,21 +913,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.length > 0) {
-                        const check = checkEmpty(inputs);
-                        if (check && divCity.value && divDistrict.value && divWard.value) {
-                            btnSubmit.removeAttribute('disabled');
-                            btnSubmit.classList.remove('btn-secondary');
-                        } else {
-                            btnSubmit.setAttribute('disabled', 'true');
-                            btnSubmit.classList.add('btn-secondary');
-                        }
-                        divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+                        btnSubmit.setAttribute('disabled', 'true');
+                        btnSubmit.classList.add('btn-secondary');
+                        divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>` + data.map(item => `<option data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
 
                     } else {
-                        divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`;
+                        divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`;
                     }
                 })
-                .catch(() => divWard.innerHTML = `<option value="0">Lựa chọn phường (xã)</option>`
+                .catch(() => divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`
                 )
         });
 
@@ -959,6 +951,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 
                 // check phải ít nhất 1 trong 3 loại kho !
                 const condition2 = checkThreeCondition();
+                
                 if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 >0) {
                     btnSubmit.removeAttribute('disabled');
                     btnSubmit.classList.remove('btn-secondary');
@@ -1091,13 +1084,13 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.length > 0) {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
+                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
 
                     } else {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
                     }
                 })
-                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                .catch(() => divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`
                 );
         </script>
     @endif
@@ -1153,7 +1146,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 })
                     .then((response) => response.json())
                     .then((data) => {
-                        document.getElementById('city_id').innerHTML = `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == provinceId ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
+                        document.getElementById('city_id').innerHTML = `<option value="" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option ${item.PROVINCE_ID == provinceId ? 'selected' : ''}  data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}">${item.PROVINCE_NAME.toUpperCase()}</option>`);
                     })
                     .catch(console.error);
                 fetch('{{route('get_city')}}?type=2&value=' + provinceId, {
@@ -1162,25 +1155,25 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.length > 0) {
-                            divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == district_id ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
+                            divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option ${item.DISTRICT_ID == district_id ? 'selected' : ''} data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}">${item.DISTRICT_NAME}</option>`);
 
                         } else {
-                            divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
+                            divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
                         }
                     })
-                    .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`
+                    .catch(() => divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`
                     );
                 fetch('{{route('get_city')}}?type=3&value=' + district_id, {
                     mode: 'no-cors',
                 }).then((response) => response.json())
                     .then((data) => {
                         if (data.length > 0) {
-                            divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
+                            divWard.innerHTML = `<option value="" disabled selected>Lựa chọn phường (xã)</option>` + data.map(item => `<option ${item.WARDS_ID == ward_id ? 'selected' : ''} data-name="${item.WARDS_NAME}" value="${item.WARDS_ID}">${item.WARDS_NAME}</option>`);
                         } else {
-                            divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`;
+                            divWard.innerHTML = `<option value="" disabled selected>Lựa chọn phường (xã)</option>`;
                         }
                     })
-                    .catch(() => divWard.innerHTML = `<option value="0" disabled selected>Lựa chọn phường (xã)</option>`
+                    .catch(() => divWard.innerHTML = `<option value="" disabled selected>Lựa chọn phường (xã)</option>`
                     );
             }
 

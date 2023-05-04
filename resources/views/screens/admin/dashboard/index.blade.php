@@ -270,7 +270,7 @@
                                             <span class="text-success font-medium">V-Store</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">
                                         {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>

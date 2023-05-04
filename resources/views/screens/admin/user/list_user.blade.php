@@ -176,8 +176,8 @@
                                     </span>
                                     </div>
                                 </th>
-                                <th class="white-space-150">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                <th>
+                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Ngày xét duyệt
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'confirm_date')
@@ -218,8 +218,8 @@
                                     <td>{{$user->company_name}}</td>
                                     <td class="text-center">{{$user->tax_code}}</td>
                                     <td>{{$user->id_vdone}}</td>
-                                    <td class="text-center">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
-                                    <td class="text-center white-space-120">
+                                    <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
+                                    <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
                                             <a onclick="return confirm('Vui lòng xác nhận')"
                                             class="btn btn-primary px-4 py-2"
