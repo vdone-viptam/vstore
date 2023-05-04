@@ -18,7 +18,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button id="btnConfirm" class="btn btn-success">Cập nhật yêu cầu</button>
+                        <button id="btnConfirm" class="btn btn-success"></button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
@@ -284,8 +284,8 @@
             </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
+            $('#btnConfirm').html('Duyệt')
             $('#modalDetail').modal('show');
-            document.querySelector('#btnConfirm').style.display = 'block';
 
         }
 
@@ -297,9 +297,10 @@
                              class="form-control" ></textarea>
             </div>
             `);
+            $('#btnConfirm').html('Từ chối')
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
             $('#modalDetail').modal('show');
-            document.getElementById('btnConfirm').style.display = 'block';
+
 
         }
     </script>
