@@ -60,7 +60,7 @@ class  VShopController extends Controller
         $user = $user->paginate($limit);
         if ($user) {
             foreach ($user as $value) {
-                if ($value->avatar == null) {
+                if ($value->avatar == "") {
                     $value->avatar = asset('home/img/logo-06.png');
                 } else
                     $value->avatar = $value->avatar;
@@ -1032,7 +1032,7 @@ class  VShopController extends Controller
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
         }
-        if ($vshop->avatar == null){
+        if ($vshop->avatar == ""){
             $vshop->avatar = $vshop->avatar = asset('home/img/vshop-vuong.png');
         }
         $vshop->total_product = $total_product;
