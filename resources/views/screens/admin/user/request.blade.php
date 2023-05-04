@@ -127,11 +127,11 @@
                                     <td class="white-space-150 text-center">{{$request->tax_code}}</td>
                                     <td class="text-center white-space-200">
                                         @if($request->status == 0)
-                                            <a href="#" onclick="upDateStatus({{$request->id}},1)"
-                                               class="btn btn-primary ">Đồng
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$request->id}},1)"
+                                               class="btn text-primary font-medium px-2" style="text-decoration:underline;">Đồng
                                                 ý</a>
-                                            <a href="#" onclick="upDateStatus({{$request->id}},2)"
-                                               class="btn btn-danger">Từ chối</a>
+                                            <a href="javascript:void(0)" onclick="upDateStatus({{$request->id}},2)"
+                                               class="btn text-danger font-medium px-2" style="text-decoration:underline;">Từ chối</a>
                                         @elseif($request->status == 2)
                                             <p class="text-danger"><i class="fas fa-times mr-2"></i>Từ chối</p>
 
