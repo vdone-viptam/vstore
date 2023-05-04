@@ -1,7 +1,8 @@
 @if ($paginator->hasPages())
     <ul class="pagination pagination">
         @if ($paginator->onFirstPage())
-            <li class="disabled"><span>«</span></li>
+            <li class="disabled @if($paginator->currentPage() == 1) bg-secondary @endif"
+                @if($paginator->currentPage() == 1) style="cursor: default" @endif><span>«</span></li>
         @else
             <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">«</a></li>
         @endif
@@ -39,7 +40,8 @@
                     href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a></li>
         @endif
         @if ($paginator->hasMorePages())
-            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">»</a></li>
+            <li class="disabled @if($paginator->currentPage() == $paginator->lastPage()) bg-secondary @endif"
+                @if($paginator->currentPage() == $paginator->lastPage()) style="cursor: default" @endif><span>»</span></li>
         @else
             <li class="disabled"><span>»</span></li>
         @endif
