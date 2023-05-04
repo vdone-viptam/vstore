@@ -179,7 +179,7 @@
                                     <td class="text-center">{{$discount->discount}}%</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-cemter">
+                                    <td class="text-center">
                                         @if($discount->status == 0 )
                                             <span class="text-warning font-medium">Chưa áp dụng</span>
                                         @elseif($discount->status == 1)
