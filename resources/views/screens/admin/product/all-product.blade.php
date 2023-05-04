@@ -179,7 +179,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th  class="white-space-100">Thao tác</th>
+                                    <th  class="white-space-100"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -204,7 +204,7 @@
                                         <td class=" white-space-100 text-center"><a href="javascript:void(0)" class="btn btn-link" style="text-decoration: underline;"
                                                onclick="showDetail({{$pro->id}})"
                                                data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
-                                     
+
                                     </tr>
                                 @endforeach
 
