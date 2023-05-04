@@ -174,7 +174,7 @@
                                             <td class="flex justify-content-center align-items-center text-center"
                                                 style="gap:6px">
 
-                                                @if($request->status == 2)
+                                                @if($request->status == 1)
                                                     <button type="button"
                                                             onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
                                                             class="btn btn-primary">Duyệt
