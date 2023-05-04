@@ -51,7 +51,7 @@ class AccountController extends Controller
             'city_id' => 'required',
             'district_id' => 'required',
             'ward_id' => 'required',
-            'link_website' => 'unique:users,slug,' . $id,
+            'link_website' => 'required|unique:users,slug,' . $id,
 
         ], [
             'name.required' => 'Tên  bắt buộc nhập',
@@ -67,6 +67,7 @@ class AccountController extends Controller
             'district_id.required' => 'Trường này không được trống',
             'ward_id.required' => 'Trường này không được trống',
             'link_website.unique' => 'Slug đã tồn tại',
+            'link_website.required' => 'Slug bắt buộc nhập'
 
         ]);
         if ($validator->fails()) {
@@ -89,14 +90,14 @@ class AccountController extends Controller
             $user->slug = trim($request->link_website);
         }
         // dd(1);
-        $elasticsearchController = new ElasticsearchController();
-        try {
-            $res = $elasticsearchController->updateDocNCC((string)$user->id, $request->name);
-            DB::commit();
-        } catch (ClientResponseException $exception) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
-        }
+//        $elasticsearchController = new ElasticsearchController();
+//        try {
+//            $res = $elasticsearchController->updateDocNCC((string)$user->id, $request->name);
+//            DB::commit();
+//        } catch (ClientResponseException $exception) {
+//            DB::rollBack();
+//            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+//        }
         $user->description = $request->description;
         $user->save();
 

@@ -44,7 +44,7 @@ class AccountController extends Controller
             'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
             'id_vdone' => 'required',
             'description' => 'max:500',
-
+            'link_website' => 'required|unique:users,slug,' . $id,
             'city_id' => 'required',
             'district_id' => 'required',
             'ward_id' => 'required',
@@ -62,6 +62,8 @@ class AccountController extends Controller
             'city_id.required' => 'Trường này không được trống',
             'district_id.required' => 'Trường này không được trống',
             'ward_id.required' => 'Trường này không được trống',
+            'link_website.unique' => 'Slug đã tồn tại',
+            'link_website.required' => 'Slug bắt buộc nhập'
 
         ]);
         if ($validator->fails()) {
