@@ -328,11 +328,13 @@ class ProductController extends Controller
         Discount::where('start_date', '<=', Carbon::now())
             ->where('end_date', '>=', Carbon::now())
             ->where('status', 0)
+            ->where('type',2)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 1]);
 
         Discount::where('end_date', '<', Carbon::now())
             ->where('status', 1)
+            ->where('type',2)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 2]);
 

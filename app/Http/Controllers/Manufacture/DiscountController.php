@@ -136,12 +136,14 @@ class DiscountController extends Controller
     {
         Discount::where('start_date', '<=', \Carbon\Carbon::now())
             ->where('end_date', '>=', Carbon::now())
+            ->where('type',1)
             ->where('status', 0)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 1]);
 
         Discount::where('end_date', '<', Carbon::now())
             ->where('status', 1)
+            ->where('type',1)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 2]);
 
