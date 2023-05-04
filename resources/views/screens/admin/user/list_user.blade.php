@@ -221,8 +221,7 @@
                                     <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
                                     <td>
                                         @if($user->role_id==3 && $user->branch !=2 )
-                                            <a onclick="return confirm('Vui lòng xác nhận')"
-                                            class="bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                            <a class="check-yes-no bg-transparent hover:bg-blue-500 text-blue-700  hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                                             href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng cấp</a>
                                         @endif
                                     </td>
@@ -292,6 +291,24 @@
                         '&field=' + '{{$field}}' + '&limit=' + e.target.value
                 }, 200)
             })
+            $('.check-yes-no').click(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Xác nhận nâng cấp?',
+                    text: "Bạn có chắc chắn muốn đồng ý ?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Huỷ bỏ'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = $(this).attr('href');
+                        $(".check-yes-no").attr("href", "javascript:void(0)");
+                    }
+                })
+            });
         });
 
     </script>
