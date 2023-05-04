@@ -70,13 +70,13 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Ngày đăng ký</label>
+                                        <label for="name">Thời gian đăng ký</label>
                                         <input type="text" class="form-control form-control-lg" id="created_at" disabled="" value="4" placeholder="Nhập chất liệu sản phẩm">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Ngày xét duyệt</label>
+                                        <label for="name">Thời gian xét duyệt</label>
                                         <input type="text" class="form-control form-control-lg" id="confirm_date" disabled="" value="100" placeholder="Nhập chất liệu sản phẩm">
                                     </div>
                                 </div>
@@ -327,7 +327,7 @@
                                     </th>
                                     <th>
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Ngày đăng ký
+                                            Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.created_at')
                                                     @if($type == 'desc')
@@ -343,7 +343,7 @@
                                     </th>
                                     <th>
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Ngày xét duyệt
+                                            Thời gian xét duyệt
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'confirm_date')
                                                     @if($type == 'desc')
@@ -558,7 +558,7 @@
                                 <div class="form-group">
                                     <label for="name">Video sản phẩm</label>
                                     <iframe height="300"
-                                        src="https://www.youtube.com/watch?v=gKqGZKo5fVs&list=RDMM5zLhk-HvXsw&index=2"
+                                        {{-- src="https://www.youtube.com/watch?v=gKqGZKo5fVs&list=RDMM5zLhk-HvXsw&index=2" --}}
                                         frameborder="0" style="width: 100%;"></iframe>
                                 </div>
                             </div>
@@ -788,9 +788,10 @@
                     $('#phone_number').val(data.phone_number);
                     $('#id_vdone').val(data.id_vdone);
                     $('#tax_code').val(data.tax_code);
-                    $('#created_at').val( formatDate( (data.created_at).slice(0, 10)));
-                    $('#confirm_date').val( formatDate( (data.confirm_date).slice(0, 10)));
+                    $('#created_at').val( convertTimeVN(data.created_at));
+                    $('#confirm_date').val(  convertTimeVN(data.confirm_date));
                     $('#referral_code').val(data.referral_code);
+
 
 
                     if(data.role_id == 2){

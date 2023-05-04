@@ -328,6 +328,30 @@ document.querySelectorAll('.only-text').forEach(item => {
     });
 })
 
+function convertTimeVN(inputTime) {
+    // d/m/Y H:i A
+    if(!inputTime) return ' ';
+    let dateTimeString = 'js ' + inputTime;
+
+    // console.log(dateTimeString);
+    let dateTime = new Date(dateTimeString.slice(3)); // Bỏ đi 3 ký tự đầu tiên "js "
+
+    let day = dateTime.getDate().toString().padStart(2, '0'); // Lấy ngày và thêm '0' nếu ngày < 10
+    let month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Lấy tháng và thêm '0' nếu tháng < 10
+    let year = dateTime.getFullYear().toString(); // Lấy năm
+    let hour = dateTime.getHours();
+    let minute = dateTime.getMinutes();
+    let ampm = hour >= 12 ? 'PM' : 'AM'; // Xác định giờ AM hay PM
+    hour = hour % 12;
+    hour = hour ? hour : 12;
+    minute = minute < 10 ? '0' + minute : minute;
+    let time = hour + ':' + minute + ' ' + ampm;
+
+    let formattedDateTime = day + '/' + month + '/' + year + ' ' + time;
+    return formattedDateTime;
+}
+
+
 // MENU
 
 
