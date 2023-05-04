@@ -281,11 +281,7 @@
                         })
                     }
                 }).done(function (data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: data.message,
-                        text: 'Click vào nút bên dưới để đóng',
-                    }).then(() => location.reload())
+                    location.reload()
                 })
             } else {
                 location.reload()

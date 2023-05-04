@@ -309,7 +309,7 @@
             @endif
 
             $('#link_website').on('keydown', function(e){
-                var text = $(this).val().replace("http://nha_cung_cap.ngo/p/", "")
+                var text = e.target.value.replace("http://nha_cung_cap.ngo/p/", "")
 
                 if($(this).val().length == 26){
                     if(e.keyCode ===  8 || e.keyCode === 32 || e.keyCode === 46){
@@ -318,8 +318,7 @@
                     }
                     
                 }              
-                console.log(text); 
-                return $('input[name="link_website"]').val(text);
+                $('input[name="link_website"]').val(text)
             })
         });
 

@@ -364,8 +364,8 @@ class UserController extends Controller
             ->where('order_service.type', '!=', 'VSTORE');
         if (strlen($this->v['key_search']) > 0) {
             $this->v['histories'] = $this->v['histories']->where(function ($query) {
-                $query->where('users.name', 'like', '%' . $this->v['key_word'] . '%')
-                    ->orWhere('order_service.no', $this->v['key_word']);
+                $query->where('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('order_service.no', $this->v['key_search']);
             });
         }
         $this->v['histories'] = $this->v['histories']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);

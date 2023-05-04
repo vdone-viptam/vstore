@@ -24,14 +24,14 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $this->v['field'] = $request->field ?? 'products.name';
+        $this->v['field'] = $request->field ?? 'order.export_status';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['orders'] = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
             ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total', DB::raw('order_item.price * order_item.quantity * (100 - products.discount - products.discount_vShop) / 100 as money'))
-            ->where('order.status', '!=', 2)->groupBy('order.id')
+            ->where('order.status', '!=', 2)
             ->where('products.user_id', Auth::id())
             ->where('products.discount', '!=', null)
             ->where('products.discount_vShop', '!=', null)
@@ -98,6 +98,7 @@ class OrderController extends Controller
                 'pre_order_vshop.created_at', 'product_id', 'pre_order_vshop.id', DB::raw('total - (total * pre_order_vshop.discount / 100) * (pre_order_vshop.deposit_money / 100) as money'))
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
+            ->whereIn('pre_order_vshop.status', [1, 4])
             ->where('products.user_id', Auth::id())
             ->orderBy($this->v['field'], $this->v['type']);
         if (strlen($this->v['key_search']) > 0) {
@@ -128,7 +129,7 @@ class OrderController extends Controller
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')
             ->where('products.user_id', Auth::id())
-            ->where('pre_order_vshop.status', 3)
+            ->whereIn('pre_order_vshop.status', [3, 5])
             ->orderBy($this->v['field'], $this->v['type']);
         if (strlen(($this->v['key_search']) > 0)) {
             $this->v['orders'] = $this->v['orders']->where(function ($sub) {
