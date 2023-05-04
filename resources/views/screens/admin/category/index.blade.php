@@ -87,7 +87,7 @@
                             <th>Ảnh hiển thị
                             </th>
                             <th>
-                                Ngày tạo
+                                Thời gian tạo
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.created_at')
                                         @if($type == 'desc')

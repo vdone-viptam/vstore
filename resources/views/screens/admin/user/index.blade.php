@@ -424,7 +424,7 @@
                                         @else
                                             {{-- <button class="btn btn-primary">Duyệt</button> --}}
                                             <a data-abc="{{$loop->iteration - 1}}"
-                                            data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
+                                            href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
                                             class="duyet btn btn-primary"
                                             href="#">Duyệt
                                             </a>
@@ -693,21 +693,6 @@
 @section('custom_js')
     <script>
 
-        document.querySelectorAll('.duyet').forEach((item, index3) => {
-            const index = +item.dataset.abc
-            item.addEventListener('click', (e) => {
-                document.querySelectorAll('.duyet').forEach((item2, index2) => {
-                    if (item2.dataset.abc == index) {
-                        if (item2.dataset.href) {
-                            document.location = item2.dataset.href;
-                        }
-                    } else {
-                        item2.removeAttribute('data-href');
-                    }
-                });
-            })
-        })
-
         const name = document.getElementById('name');
         const id = document.getElementById('id');
         const limit = document.getElementById('limit');
@@ -742,6 +727,25 @@
                 }, 200)
             })
 
+            $('.duyet').click(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Xác nhận duyệt?',
+                    text: "Bạn có chắc chắn muốn đồng ý ?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Huỷ bỏ'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = $(this).attr('href');
+                        $(".duyet").attr("href", "javascript:void(0)");
+
+                    }
+                })
+            });
         });
 
         $('.more-details').each(function (i, e) {
@@ -822,12 +826,6 @@
 
     </script>
     <script !src="">
-        $('.duyet').click(function (e) {
-            // alert(1);
-            // $('.duyet').attr("href", "#")
-            e.preventDefault()
-
-        })
 
     </script>
 @endsection
