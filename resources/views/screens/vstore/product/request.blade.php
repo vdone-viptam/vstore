@@ -17,7 +17,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button id="btnConfirm" class="btn btn-success">Cập nhật yêu cầu</button>
+                        <button id="btnConfirm" class="btn btn-success">Duyệt sản phẩm</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
@@ -271,7 +271,7 @@
     </label>
 </div>
             `);
-            document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
+            document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
 
             document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
                 if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {

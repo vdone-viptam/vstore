@@ -212,7 +212,7 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="white-space-200">
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Tên
                                             <span style="float: right;cursor:pointer">
@@ -228,7 +228,7 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th class="white-space-200">
 
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Email
@@ -245,8 +245,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-150">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'phone_number')
@@ -261,7 +261,7 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th class="white-space-200">
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
@@ -277,8 +277,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-150">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'tax_code')
@@ -293,7 +293,7 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th class="white-space-200">
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Id P-Done người đại diện
                                             <span style="float: right;cursor:pointer">
@@ -309,8 +309,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Phân loại tài khoản
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.role_id')
@@ -325,8 +325,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.created_at')
@@ -341,8 +341,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Thời gian xét duyệt
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'confirm_date')
@@ -357,8 +357,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Mã người giới thiệu
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.referral_code')
@@ -373,12 +373,12 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-150">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Trạng thái
                                         </div>
                                     </th>
-                                    <th></th>
+                                    <th class="white-space-100"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -386,13 +386,13 @@
                         @if(count($users) > 0)
                             @foreach($users as $user)
                                 <tr>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{ Str::limit($user->email, 15) }}</td>
-                                    <td class="text-center">{{$user->phone_number}}</td>
-                                    <td>{{$user->company_name}}</td>
+                                    <td class="white-space-200">{{$user->name}}</td>
+                                    <td class="white-space-200">{{ Str::limit($user->email, 15) }}</td>
+                                    <td class="text-center white-space-150">{{$user->phone_number}}</td>
+                                    <td class="white-space-200">{{$user->company_name}}</td>
                                     <td class="text-center">{{$user->tax_code}}</td>
                                     <td class="text-center">{{$user->id_vdone}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($user->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($user->role_id == 1)
@@ -405,26 +405,26 @@
                                     </td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @if(!empty($user->confirm_date))
-                                            <div class="bg-success text-white font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
+                                            <div class=" text-success font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
                                         @else
-                                            <div class="bg-warning text-white font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
+                                            <div class=" text-warning font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-100">
                                         @if($user->confirm_date)
-                                            <a href="#" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
+                                            <a href="javascript:void(0)" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
                                                 onclick="showDetail({{$user->id}})"
-                                            class="more-details text-primary">
+                                            class="more-details text-primary" style="text-decoration:underline">
                                                 Chi tiết</a>
                                         @else
                                             {{-- <button class="btn btn-primary">Duyệt</button> --}}
                                             <a data-abc="{{$loop->iteration - 1}}"
-                                            data-href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
+                                            href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
                                             class="duyet btn btn-primary"
                                             href="#">Duyệt
                                             </a>
@@ -444,18 +444,18 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex align-items-end justify-content-end mt-4">
-                        {{$users->withQueryString()->links('layouts.custom.paginator')}}
-                        <div class="mt-4 ml-4">
-                            <div class="form-group">
-                                <select class="form-control" id="limit">
-                                    <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                                    <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                                    <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
-                                </select>
+                    <div class="d-flex align-items-center justify-content-end mt-4">
+                            {{$users->withQueryString()->links('layouts.custom.paginator')}}
+                            <div class="ml-4">
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                 </div>
             </div>
@@ -693,21 +693,6 @@
 @section('custom_js')
     <script>
 
-        document.querySelectorAll('.duyet').forEach((item, index3) => {
-            const index = +item.dataset.abc
-            item.addEventListener('click', (e) => {
-                document.querySelectorAll('.duyet').forEach((item2, index2) => {
-                    if (item2.dataset.abc == index) {
-                        if (item2.dataset.href) {
-                            document.location = item2.dataset.href;
-                        }
-                    } else {
-                        item2.removeAttribute('data-href');
-                    }
-                });
-            })
-        })
-
         const name = document.getElementById('name');
         const id = document.getElementById('id');
         const limit = document.getElementById('limit');
@@ -742,6 +727,25 @@
                 }, 200)
             })
 
+            $('.duyet').click(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Xác nhận duyệt?',
+                    text: "Bạn có chắc chắn muốn đồng ý ?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Huỷ bỏ'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = $(this).attr('href');
+                        $(".duyet").attr("href", "javascript:void(0)");
+
+                    }
+                })
+            });
         });
 
         $('.more-details').each(function (i, e) {
@@ -822,12 +826,6 @@
 
     </script>
     <script !src="">
-        $('.duyet').click(function (e) {
-            // alert(1);
-            // $('.duyet').attr("href", "#")
-            e.preventDefault()
-
-        })
 
     </script>
 @endsection

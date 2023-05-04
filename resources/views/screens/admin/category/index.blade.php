@@ -82,11 +82,11 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-400">Ngành hàng
+                            <th class="white-space-400 text-center">Ngành hàng
                             </th>
-                            <th>Ảnh hiện thị
+                            <th class="text-center white-space-150">Ảnh hiện thị
                             </th>
-                            <th>
+                            <th class="text-center white-space-150">
                                 Ngày tạo
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.created_at')
@@ -100,7 +100,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th>Số loại sản phẩm
+                            <th class="text-center white-space-200">Số loại sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'count_product')
                                         @if($type == 'desc')
@@ -113,7 +113,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th>Thao tác</th>
+                            <th class="white-space-120 text-center">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -125,10 +125,10 @@
                                     <td class="text-center"><img src="{{asset($category->img)}}"
                                                                  style="width: 75px;height: 75px" alt="">
                                     </td>
-                                    <td>{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td>{{number_format($category->count_product,0,'.','.')}}</td>
-                                    <td>
-                                        <a href="#" onclick="edit({{$category->id}})" class="btn btn-primary">Cập
+                                    <td class="text-center">{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center">{{number_format($category->count_product,0,'.','.')}}</td>
+                                    <td class="white-space-120 text-center">
+                                        <a href="javascript:void(0)" onclick="edit({{$category->id}})" class="btn btn-primary">Cập
                                             nhật</a>
                                     </td>
                                 </tr>
@@ -144,14 +144,18 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-end mt-4">
                     {{$categories->withQueryString()->links('layouts.custom.paginator')}}
+                    <div class="ml-4">
+                    <div class="form-group ">
+                        <select class="form-control" id="limit">
+                            <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                            <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                            <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-2 float-right">
-                    <select class="form-control" id="limit">
-                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
-                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
-                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
-                    </select>
                 </div>
+          
+            
 
             </div>
 

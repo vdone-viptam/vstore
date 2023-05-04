@@ -22,7 +22,7 @@
                            href="{{route('screens.admin.user.list_user')}}" data-toggle="collapse"
                            aria-expanded="{{ (request()->is('products*')) ? 'true' : 'false' }}"
                            data-target="#submenu-2" aria-controls="submenu-2"><i
-                                class="fab fa-product-hunt"></i>Quản lý tài khoản
+                                class="fab fa-fw fas fa-users"></i>Quản lý tài khoản
                         </a>
                         <div id="submenu-2"
                              class="{{ (request()->is('users*')) ? 'collapshow' : 'collapse' }} submenu" style="">
@@ -41,7 +41,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('users/request-change-tax-code*')) ? 'active1' : '' }}"
                                        id="addSp"
-                                       href="{{route('screens.admin.user.tax_code')}}">Quản lý yêu cầu cập nhật mã sô
+                                       href="{{route('screens.admin.user.tax_code')}}">Quản lý yêu cầu cập nhật mã số
                                         thuế</a>
                                 </li>
                                 <li class="nav-item">
@@ -64,7 +64,7 @@
                            data-toggle="collapse"
                            aria-expanded="{{ (request()->is('products*')) ? 'true' : 'false' }}"
                            data-target="#submenu-3" aria-controls="submenu-3"><i
-                                class="fas fa-fw fas fa-warehouse"></i>Quản lý sản phẩm</a>
+                                class="fab fa-product-hunt"></i>Quản lý sản phẩm</a>
                         <div id="submenu-3"
                              class="{{ (request()->is('products*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
@@ -91,8 +91,8 @@
                         <a class="nav-link" href="#"
                            data-toggle="collapse" aria-expanded="false"
                            data-target="#submenu-6" aria-controls="submenu-6"><i
-                                class="fas fa-fw fa-dollar-sign"></i>
-                            Quản lý gian lận,bất thường</a>
+                                class="fas fa-thumbs-down"></i>
+                            Quản lý gian lận, bất <br> thường</a>
                         <div id="submenu-6"
                              class="collapse submenu" style="">
                             <ul class="nav flex-column">
@@ -123,7 +123,7 @@
                         <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#"
                            data-toggle="collapse" aria-expanded="{{ (request()->is('finances*')) ? 'true' : 'false' }}"
                            data-target="#submenu-7" aria-controls="submenu-7"><i
-                                class="fa fa-fw fa-user-circle"></i>Quản lý tài chính</a>
+                                class="fas fa-fw fa-dollar-sign"></i>Quản lý tài chính</a>
                         <div id="submenu-7"
                              class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
