@@ -21,7 +21,7 @@
                     @endif
                 @endif
             @else
-                @if($i >= $paginator->currentPage() - 1 && $i <= $paginator->currentPage() + 1)
+                @if($i >= $paginator->currentPage() - 2 && $i <= $paginator->currentPage() + 2)
                     @if ($i == $paginator->currentPage())
                         <li class="active"><span>{{ $i }}</span></li>
                     @else
@@ -42,8 +42,7 @@
             <li class="disabled"><span>»</span>
             </li>
         @else
-            <li class="disabled">
-                <span>»</span>
+            <li class="disabled" @if($paginator->currentPage() == $paginator->lastPage() - 1) style="cursor: default" @endif><span>»</span>
             </li>
         @endif
     </ul>
