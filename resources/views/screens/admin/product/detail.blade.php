@@ -1,95 +1,133 @@
-<form action="{{route('screens.admin.product.confirm',['id' => $request->id])}}" method="POST">
-    @csrf
-    <div class="modal modal-details">
-        <div class="over-lay-modal" onclick="$('.modal-details').toggleClass('show-modal')"></div>
-        <div
-            class="information flex flex-col bg-[#FFFF] w-full max-w-[300px] md:max-w-[750px]  shadow-xl px-3 py-6 md:p-6 mx-auto mt-4">
-            <div class="flex justify-between items-center border-b-[1px] border-grey pb-3">
-                <h2 class="text-base text-title font-medium">Thông tin chi tiết</h2>
-                <svg width="16" height="16" class="cursor-pointer hover:opacity-70"
-                     onclick="$('.modal-details').toggleClass('show-modal')" viewBox="0 0 16 16" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8.92473 7.99916L13.6122 2.41166C13.6908 2.31881 13.6247 2.17773 13.5033 2.17773H12.0783C11.9944 2.17773 11.914 2.21523 11.8587 2.27952L7.99258 6.88845L4.12651 2.27952C4.07294 2.21523 3.99258 2.17773 3.90687 2.17773H2.48187C2.36044 2.17773 2.29437 2.31881 2.37294 2.41166L7.06044 7.99916L2.37294 13.5867C2.35534 13.6074 2.34405 13.6327 2.3404 13.6596C2.33676 13.6865 2.34092 13.7139 2.35239 13.7386C2.36386 13.7632 2.38216 13.784 2.40511 13.7985C2.42806 13.8131 2.4547 13.8207 2.48187 13.8206H3.90687C3.9908 13.8206 4.07115 13.7831 4.12651 13.7188L7.99258 9.10988L11.8587 13.7188C11.9122 13.7831 11.9926 13.8206 12.0783 13.8206H13.5033C13.6247 13.8206 13.6908 13.6795 13.6122 13.5867L8.92473 7.99916Z"
-                        fill="black" fill-opacity="0.45"/>
-                </svg>
-            </div>
-            <div class="content  max-h-[600px] overflow-y-auto">
-                <div class="flex flex-col justify-start items-start gap-4 py-3 w-full">
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Mã sản phẩm:</span>
-                        <span class="text-title ">{{$request->publish_id}}</span>
-                    </div>
-
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Tên sản phẩm:</span>
-                        <span class="text-title ">{{$request->product_name}}</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Nhà cung cấp:</span>
-                        <span class="text-title ">{{$request->user_name}}</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Giá bán:</span>
-                        <span class="text-title ">{{number_format($request->price,0,'.','.')}}</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">VAT:</span>
-                        <span class="text-title ">{{$request->vat}} %</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Chiết khấu cho V-Store:</span>
-                        <span class="text-title ">{{$request->discount}}%</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Chiết khấu V-Shop:</span>
-                        <span class="text-title ">{{$request->discount_vshop}}%</span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full">
-                        <span class="text-title font-medium w-[200px]">Số lượng hàng trong kho:</span>
-                        <span class="text-title ">{{$request->amount_product}}</span>
-                    </div>
-                    <label for="">Trạng thái đơn đăng ký</label>
-                    <div class="flex items-center gap-4 w-full">
-
-                        <select name="status" id="status" @if($request->status ==3  || $request->status ==4) disabled
-                                @endif
-                                class="text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full">
-                            <option value="3" {{$request->status ==3 ? 'selected' : ''}}>Duyệt</option>
-                            <option value="4" {{$request->status ==4 ? 'selected' : ''}}>Từ chối</option>
-                        </select>
-                    </div>
-                    <div class="flex justify-start items-center gap-2 w-full" id="note">
-
-                    </div>
-                </div>
-                <div class="flex justify-end items-center gap-4 ">
-                    {{--                    <button--}}
-                    {{--                        type="button"--}}
-                    {{--                        class="text-blue-700 cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70"--}}
-                    {{--                        onclick="$('.modal-details').toggleClass('show-modal')">Đóng lại--}}
-                    {{--                    </button>--}}
-                    @if($request->status == 1)
-                        <button
-                            class="cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 border-[1px] border-primary text-center text-[#FFFFFF] hover:opacity-70">
-                            Lưu thay đổi
-                        </button>
-                    @endif
-
-                </div>
-            </div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="name">Mã yêu cầu</label>
+            <input type="text" class="form-control form-control-lg" disabled id="name"
+                   value="{{$product->code}}" placeholder="Nhập tên sản phẩm">
         </div>
     </div>
-</form>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control form-control-lg" disabled id="name"
+                   value="{{$product->name}}" placeholder="Nhập tên sản phẩm">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="name">Ngành hàng</label>
+            <input type="text" class="form-control form-control-lg" disabled id="name"
+                   value="{{$product->cate_name}}" placeholder="Nhập tên sản phẩm">
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="name">Giá sản phẩm</label>
+            <input type="text" class="form-control form-control-lg" disabled id="name"
+                   value="{{number_format($product->price,0,'.','.')}} đ" placeholder="Nhập tên sản phẩm">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="name">Thuế giá trị gia tăng</label>
+    <input type="text" class="form-control form-control-lg" disabled id="name"
+           value="{{$product->vat.' %'}}" placeholder="Nhập tên sản phẩm">
+</div>
+<div class="form-group">
+    <label for="name">Mô tả ngắn sản phẩm</label>
+    <textarea disabled class="form-control">{{$product->short_content}}</textarea>
+</div>
+<div class="col-12">
+    <label for="name">Hình ảnh sản phẩm</label>
+</div>
+<div class="mb-3 col-12 d-flex flex-lg-wrap flex-xl-nowrap w-100">
+
+    @foreach(json_decode($product->images) as $image)
+        <div class="col-xl-4 col-sm-6 ">
+            <img src="{{asset($image)}}" class="w-100 " alt=""
+                 style="object-fit: cover; height: 200px;">
+        </div>
+    @endforeach
+</div>
+<div class="form-group">
+    <label for="name">Video sản phẩm</label>
+    @if(strlen($product->video) > 0)
+        <video width="320" height="240" controls class="form-control">
+            <source src="{{asset($product->video)}}" type="video/mp4">
+        </video>
+    @else
+        <p>Không có video liên quan đến sản phẩm</p>
+    @endif
+
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="name">Nhà cung cấp</label>
+            <input type="text" class="form-control form-control-lg" disabled id="name"
+                   value="{{$product->user_name}}" placeholder="Nhập tên sản phẩm">
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="form-group">
+            <label for="name">Chiết khấu từ nhà cung cấp</label>
+            <input type="text" class="form-control form-control-lg" disabled id="discount"
+                   data-discount="{{$product->discount}}"
+                   value="{{$product->discount}} %" placeholder="Nhập tên sản phẩm">
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div
+        class=" @if($product->status == 3) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
+        <div class="form-group">
+            <label for="name">Chiết khấu cho V-Shop</label>
+            <input type="text" disabled class="form-control form-control-lg" value="{{$product->discount_vshop}}">
+        </div>
+    </div>
+    <div
+        class=" @if($product->status == 3) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
+        <div class="form-group">
+            <label for="name">Trạng thái yêu cầu</label>
+            <select name="status" id="status" class="form-control form-control-lg" @if($product->status != 1) disabled @endif>
+                <option value="3" {{$product->status == 3 ? 'selected' : ''}}>Đống ý</option>
+                <option value="4" {{$product->status == 4 ? 'selected' : ''}}>Từ chối</option>
+            </select>
+        </div>
+    </div>
+    @if($product->status == 4)
+        <div class="col-12">
+            <div class="form-group">
+                <label for="name">Lý do từ chối</label>
+                <textarea name="" disabled class="form-control form-control-lg" id="">{{$product->note}}</textarea>
+            </div>
+        </div>
+    @endif
+    <div id="note" class="col-12">
+
+    </div>
+</div>
+
+@if($product->status != 1)
+    <script>
+        document.querySelector('#btnConfirm').style.display = 'none'
+    </script>
+@endif
 
 <script>
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 4) {
-
-            document.querySelector('#note').innerHTML = `  <textarea name="note" placeholder="Lý do từ chối"
-                               class="w-full text-title outline-none py-[7px] px-3 border-[1px] border-[#D9D9D9] bg-[#FFFFFF] focus:border-primary transition-all duration-200 rounded-sm w-full"></textarea>`
+            document.querySelector('#note').innerHTML = `
+            <div class="form-group">
+                <label for="name">Lý do từ chối</label>
+                <textarea name="note" class="form-control form-control-lg"></textarea>
+            </div>`;
         } else {
             document.querySelector('#note').innerHTML = ``;
+
         }
     })
 </script>

@@ -69,16 +69,46 @@ class ProductController extends Controller
 
     public function detail(Request $request)
     {
-        $this->v['request'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
-            ->join('requests', 'products.id', '=', 'requests.product_id')
-            ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,price,requests.discount,
-            requests.discount_vshop,requests.status,products.name as product_name,
-            users.name as user_name,requests.note,publish_id,products.id as pro_id,requests.vat')
-            ->where('requests.id', $request->id)
-            ->first();
-        $this->v['request']->amount_product = (int)DB::select(DB::raw("SELECT SUM(amount) as amount FROM product_warehouses where status = 3 AND product_id = " . $this->v['request']->pro_id))[0]->amount;
-        return view('screens.admin.product.detail', $this->v);
+        if ($request->type == 2) {
+            try {
+
+                $product = Product::query()->select('products.id', 'products.name', 'categories.name as cate_name',
+                    'products.price', 'short_content', 'images', 'video', 'products.status', 'discount', 'discount_vShop', 'amount_product_sold', 'publish_id', 'admin_confirm_date', 'products.vat')
+                    ->join('categories', 'products.category_id', '=', 'categories.id')
+                    ->where('products.id', $request->id)
+                    ->selectSub('select IFNULL(SUM(amount - export),0) from product_warehouses where product_id=' . $request->id, 'amount')
+                    ->first();
+
+                return response()->json(['view' =>
+                    view('screens.admin.product.detail_product',
+                        ['product' => $product])->render(),
+                ]);
+            } catch (\Exception $exception) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $exception->getMessage()
+                ], 500);
+            }
+        } else {
+            $this->v['product'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
+                ->join('requests', 'products.id', '=', 'requests.product_id')
+                ->join('users', 'requests.user_id', '=', 'users.id')
+                ->selectRaw('requests.code,
+                requests.id,price,
+                requests.discount,
+                requests.discount_vshop,
+                requests.status,
+                products.name,
+                products.images,products.video,
+                categories.name as cate_name,
+                users.name as user_name,
+                short_content,
+                requests.note,
+                requests.vat')
+                ->where('requests.id', $request->id)
+                ->first();
+            return response()->json(['view' => view('screens.admin.product.detail', $this->v)->render()]);
+        }
     }
 
     public function confirm($id, Request $request)
@@ -144,7 +174,7 @@ class ProductController extends Controller
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return redirect()->back()->with('error', $e->getMessage());
 
         }
     }

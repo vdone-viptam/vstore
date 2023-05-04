@@ -292,6 +292,24 @@
                         '&field=' + '{{$field}}' + '&limit=' + e.target.value
                 }, 200)
             })
+            $('.check-yes-no').click(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Xác nhận nâng cấp?',
+                    text: "Bạn có chắc chắn muốn đồng ý ?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Huỷ bỏ'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = $(this).attr('href');
+                        $(".check-yes-no").attr("href", "javascript:void(0)");
+                    }
+                })
+            });
         });
 
     </script>
