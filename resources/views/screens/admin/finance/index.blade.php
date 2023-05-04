@@ -93,7 +93,7 @@
                                     <th>Tên tài khoản</th>
                                     <th>Ngân hàng</th>
                                     <th>Nội dung</th>
-                                    <th>Ngày yêu cầu</th>
+                                    <th>Thời gian yêu cầu</th>
                                     <th>Trạng thái</th>
                                 </tr>
                                 </thead>
