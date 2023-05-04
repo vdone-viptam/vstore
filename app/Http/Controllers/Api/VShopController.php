@@ -55,7 +55,7 @@ class  VShopController extends Controller
         }
 
         $user = Vshop::whereIn('id', $res)
-            ->select('id', 'nick_name', 'avatar');
+            ->select('pdone_id as id', 'nick_name', 'avatar');
 
         $user = $user->paginate($limit);
         if ($user) {
