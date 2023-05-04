@@ -84,7 +84,7 @@
                         <tr>
                             <th class="white-space-400">Ngành hàng
                             </th>
-                            <th>Ảnh hiện thị
+                            <th>Ảnh hiển thị
                             </th>
                             <th>
                                 Ngày tạo
