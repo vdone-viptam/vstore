@@ -177,7 +177,7 @@ class ReviewProductApiController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'point_evaluation' => 'integer|between:1,5',
-                'filter_image' => 'boolean',
+                'filter_image' => 'numeric',
                 'limit' => 'numeric|min:1',
             ]);
             if ($validator->fails()) {
@@ -196,7 +196,7 @@ class ReviewProductApiController extends Controller
                             ->select('customer_id', 'product_id', 'point_evaluation', 'created_at', 'updated_at','descriptions','points.images','id','status')
                             ->orderBy('updated_at', 'desc');
             if(isset($filterImage)){
-                if( $filterImage){
+                if( $filterImage == 1){
                     $totalReviews = $totalReviews->whereNotNull('images');
                 }
             }else if(isset($point_evaluation)){
