@@ -86,7 +86,7 @@
                                                 </a>
                                             @endforeach
                                         @else
-                                            <a href="#">
+                                            <a href="#" class="text-center">
                                                 Bạn chưa có thông báo mới nào !
 
                                             </a>
