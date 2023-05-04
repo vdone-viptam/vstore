@@ -57,6 +57,7 @@ Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostC
 //    return config('domain.api');
 //});
 //Route::group(['domain' => config('domain.api')], function () {
+//Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
     Route::post('wallet-update/{code}',[\App\Http\Controllers\AccountingController::class,'confirmed']);
