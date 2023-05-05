@@ -119,7 +119,7 @@ class ManufactureController extends Controller
                 for ($i = 0; $i < count($products); $i++) {
                     $images[] = asset(json_decode($products[$i]->images)[0]);
                 }
-                $arr_user = [];
+                $arr_product = [];
                 for ($i = 0; $i < count($products); $i++) {
                     $arr_product[] = $products[$i]->id;
                 }
