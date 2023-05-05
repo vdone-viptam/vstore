@@ -82,7 +82,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-200">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -95,7 +95,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                 </span>
-                                </div>
+                              
                             </th>
                             <th class="white-space-180 text-center">Phần trăm giảm giá
                                 <span style="float: right;cursor: pointer">

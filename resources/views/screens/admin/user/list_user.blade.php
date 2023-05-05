@@ -83,8 +83,8 @@
                                     </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="text-center">
+                                     
                                             Tên
                                             <span style="float: right;cursor: pointer">
                                         @if($field == 'name')
@@ -97,10 +97,10 @@
                                                     <i class="fas fa-sort sort" data-sort="name"></i>
                                                 @endif
                                     </span>
-                                        </div>
+                                    
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="text-center">
+                                    
                                             Email
                                             <span style="float: right;cursor: pointer">
                                         @if($field == 'email')
@@ -113,7 +113,7 @@
                                                     <i class="fas fa-sort sort" data-sort="email"></i>
                                                 @endif
                                     </span>
-                                        </div>
+                                     
                                     </th>
                                     <th class="white-space-150">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -133,8 +133,8 @@
                                     </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="text-center">
+                                   
                                             Tên công ty
                                             <span style="float: right;cursor: pointer">
                                         @if($field == 'company_name')
@@ -149,7 +149,7 @@
                                                     <i class="fas fa-sort sort" data-sort="company_name"></i>
                                                 @endif
                                     </span>
-                                        </div>
+                                     
                                     </th>
                                     <th class="white-space-120">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -167,8 +167,8 @@
                                     </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                        
                                             Id P-Done người đại diện
                                             <span style="float: right;cursor: pointer">
                                         @if($field == 'id_vdone')
@@ -181,10 +181,10 @@
                                                     <i class="fas fa-sort sort" data-sort="id_vdone"></i>
                                                 @endif
                                     </span>
-                                        </div>
+                                      
                                     </th>
                                     <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                        
                                             Ngày xét duyệt
                                             <span style="float: right;cursor: pointer">
                                         @if($field == 'confirm_date')
@@ -199,7 +199,7 @@
                                                     <i class="fas fa-sort sort" data-sort="confirm_date"></i>
                                                 @endif
                                     </span>
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-120"></th>
                                 </tr>

@@ -3121,6 +3121,7 @@ table.dataTable thead .sorting_desc_disabled:after {
 .table td,
 .table th {
     white-space: nowrap;
+    text-align: center;
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active,

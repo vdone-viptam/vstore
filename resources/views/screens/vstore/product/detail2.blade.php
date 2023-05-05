@@ -73,7 +73,7 @@
         <div class="form-group">
             <label for="name">Chiết khấu từ nhà cung cấp</label>
             <input type="text" class="form-control form-control-lg" readonly id="discount" data-discount="{{$product->discount}}"
-                   value="{{$product->discount}} %" placeholder="Nhập tên sản phẩm">
+                   value="{{$product->discount}}%" placeholder="Nhập tên sản phẩm">
         </div>
     </div>
 </div>
@@ -89,7 +89,7 @@
         <div class="form-group">
             <label for="name">Chiết khấu cho V-Shop</label>
             <input type="text" class="form-control form-control-lg" disabled id="name"
-                   value="{{$product->discount_vShop}} %" placeholder="Nhập tên sản phẩm">
+                   value="{{$product->discount_vShop}}%" placeholder="Nhập tên sản phẩm">
         </div>
     </div>
 </div>

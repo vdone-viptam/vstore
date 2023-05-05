@@ -18,8 +18,8 @@
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Phần trăm chiết khấu từ nhà cung cấp (%):</label>
-                    <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}"
+                    <label class="">Phần trăm chiết khấu từ nhà cung cấp:</label>
+                    <input disabled name="discount_ncc" id="discount_ncc" value="{{$product1->discount}}%"
                            class="form-control-lg form-control">
                 </div>
                 <div class="col-6">

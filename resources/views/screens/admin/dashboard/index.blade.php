@@ -101,8 +101,8 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                       
                                             Tên
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.name')
@@ -115,10 +115,10 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.name"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                        
                                             Email
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'email')
@@ -131,7 +131,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="email"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-120">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -149,8 +149,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                       
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'company_name')
@@ -163,7 +163,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="company_name"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                     
                                     </th>
                                     <th class="white-space-120">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -181,8 +181,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                        
                                             Id P-Done người đại diện
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'id_vdone')
@@ -195,7 +195,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="id_vdone"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                        
                                     </th>
                                     <th class="white-space-150">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -229,8 +229,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-150">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-150 text-center">
+                                       
                                             Mã người giới thiệu
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.referral_code')
@@ -243,7 +243,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.referral_code"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-100">Thao tác</th>
                                 </tr>
@@ -351,8 +351,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                        
                                             Tên sản phẩm
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'products.name')
@@ -365,7 +365,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="products.name"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                  
                                     </th>
                                     <th class="white-space-150">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -384,8 +384,8 @@
                                         </div>
 
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                      
                                             Nhà cung cấp
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'users.name')
@@ -398,7 +398,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="users.name"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-200">
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -416,8 +416,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-150">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-150 text-center">
+                                        
                                             V-Store xét duyệt
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'vstore_name')
@@ -430,10 +430,10 @@
                                                     <i class="fas fa-sort sort-request" data-sort="vstore_name"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                     
                                     </th>
-                                    <th class="white-space-200">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200 text-center">
+                                        
                                             Chiết khấu cho V-Shop
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'requests.discount_vshop')
@@ -446,7 +446,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="requests.discount_vshop"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-100">Thao tác</th>
                                 </tr>

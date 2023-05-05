@@ -75,7 +75,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-120">Mã yêu cầu</th>
-                            <th>   <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th>   
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -88,7 +88,7 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th class="white-space-150 text-center">
                             <div class="d-flex justify-content-center align-items-center" style="gap:6px">
@@ -124,7 +124,7 @@
 </div>
                             </th>
                             <th>
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                          
                             V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -137,7 +137,7 @@
                                         <i class="fas fa-sort sort" data-sort="users.name"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th>
                             <div class="d-flex justify-content-center align-items-center" style="gap:6px">

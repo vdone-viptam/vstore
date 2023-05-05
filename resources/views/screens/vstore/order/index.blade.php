@@ -79,7 +79,7 @@
                         <tr>
                             <th class="text-center white-space-120">Mã đơn hàng</th>
                             <th class="white-space-200">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                              
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -92,7 +92,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                 </span>
-                                </div>
+                              
                             </th>
                             <th class="white-space-120 text-center">Ngành hàng
                                 <span style="float: right;cursor: pointer">
@@ -138,7 +138,7 @@
                              </span>
                             </th>
                             <th class="white-space-150">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                              
                                     Giá trị đơn hàng
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'total')
@@ -151,7 +151,7 @@
                                             <i class="fas fa-sort sort" data-sort="total"></i>
                                         @endif
                                 </span>
-                                </div>
+                             
                             </th>
                             <th class="white-space-150">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">

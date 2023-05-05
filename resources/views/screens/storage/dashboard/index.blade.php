@@ -104,7 +104,7 @@
                             <th class="text-center white-space-180">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th class="white-space-250">
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
+                            
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -117,7 +117,7 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th class="white-space-130 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
