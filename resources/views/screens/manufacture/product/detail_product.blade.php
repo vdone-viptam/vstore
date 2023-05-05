@@ -37,7 +37,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group">
                     <label for="name">Thuế giá trị gia tăng (%)</label>
-                    <input type="text" class="form-control form-control-lg" disabled value=" {{$product->vat ?? 0}}">
+                    <input type="text" class="form-control form-control-lg" disabled value=" {{isset($product->vat) ? $product->vat ? '_'}}">
 
                 </div>
                 <div class="form-group">
