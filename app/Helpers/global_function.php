@@ -173,7 +173,7 @@ function getDiscountAndDepositMoney($quantity, $arr)
     if (count($data) == 0) {
         $data = [
             "discount" => 0,
-            "deposit_money" => 0
+            "deposit_money" => 100
         ];
     }
     return $data;
