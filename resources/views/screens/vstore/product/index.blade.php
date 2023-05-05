@@ -163,7 +163,7 @@
                                 </div>
                             </th>
                             <th class="white-space-120 text-center">
-                                Ngày xét duyệt
+                                Thời gian xét duyệt
                                 <span style="float: right;cursor: pointer">
 
                                 @if($field == 'admin_confirm_date')
@@ -224,8 +224,8 @@
                                     </td>
                                     <td class="white-space-100 text-center">
                                         <a href="javascript:void(0)" onclick="showDetail({{$product->id}})" class="btn btn-link" style="text-decoration:underline">Chi
-                                            tiết</a> 
-                                            
+                                            tiết</a>
+
                                     </td>
                                 </tr>
                             @endforeach

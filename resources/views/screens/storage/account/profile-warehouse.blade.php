@@ -127,6 +127,7 @@ aria-hidden="true">
                                             <div class="row">
                                                 <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                                                     <div class="form-group">
+                                                        <span class="text-danger">*</span>
                                                         <label style="font-weight: 600;" for="dts">Diện tích
                                                             (m2)</label>
                                                         <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
@@ -168,6 +169,7 @@ aria-hidden="true">
 
                                                 </div>
                                                 <div class="col-12">
+                                                    <span class="text-danger">*</span>
                                                     <label style="font-weight: 600;" for="tts">Hình ảnh
                                                         kho</label>
 
@@ -276,6 +278,7 @@ aria-hidden="true">
                                         <div class="row">
                                             <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                                                 <div class="form-group">
+                                                    <span class="text-danger">*</span>
                                                     <label style="font-weight: 600;" for="dts">Diện tích
                                                         (m2)</label>
                                                     <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
@@ -317,6 +320,7 @@ aria-hidden="true">
 
                                             </div>
                                             <div class="col-12">
+                                                <span class="text-danger">*</span>
                                                 <label style="font-weight: 600;" for="tts">Hình ảnh
                                                     kho</label>
 
@@ -425,6 +429,7 @@ aria-hidden="true">
                                         <div class="row">
                                             <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                                                 <div class="form-group">
+                                                    <span class="text-danger">*</span>
                                                     <label style="font-weight: 600;" for="dts">Diện tích
                                                         (m2)</label>
                                                     <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
@@ -466,6 +471,7 @@ aria-hidden="true">
 
                                             </div>
                                             <div class="col-12">
+                                                <span class="text-danger">*</span>
                                                 <label style="font-weight: 600;" for="tts">Hình ảnh
                                                     kho</label>
 
@@ -716,26 +722,6 @@ aria-hidden="true">
         swalNoti('center', 'error', 'Ảnh kho chưa có ','', 500, true, 2200);
         @endif
 
-        function getBase64Image(img) {
-            var canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            var ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-            var dataURL = canvas.toDataURL("image/png");
-            // return dataURL;
-            return dataURL.replace(/^data:image\/?[A-z]*;base64,/);
-        }
-        function getBase64Imagev2(img) {
-            var c = document.createElement('canvas');
-            var img = document.getElementById('Img1');
-            c.height = img.naturalHeight;
-            c.width = img.naturalWidth;
-            var ctx = c.getContext('2d');
-
-            ctx.drawImage(img, 0, 0, c.width, c.height);
-            var base64String = c.toDataURL();
-        }
         oldImage('.img-old-1',arrImage1, 'normalImageStorage');
         oldImage('.img-old-2',arrImage2,'normalImagePccc');
         oldImage('.img-old-3',arrImage3, 'coldImageStorage');

@@ -275,10 +275,17 @@
                                     <td class="text-center">
                                         {{ number_format($product->amount_product_sold, 0, '.', '.') }}</td>
                                     <td class="text-center">{{ number_format($product->amount, 0, '.', '.') }}</td>
+<<<<<<< HEAD
                                     <td class="white-space-100 text-center" >
                                         <a href="javascript:void(0)" class="btn btn-link "
                                                 onclick="showDetail({{ $product->id }})" style="text-decoration:underline;">Chi tiết
                                         </a>
+=======
+                                    <td style="min-width: 70px">
+                                        <button type="button" class="btn btn-link pl-0" style="text-decoration:underline"
+                                                onclick="showDetail({{ $product->id }})">Chi tiết
+                                        </button>
+>>>>>>> ada289537ccbe3bf35dd4b14f81a7f8e66a76fa5
                                     </td>
                                 </tr>
                             @endforeach

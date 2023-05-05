@@ -74,6 +74,9 @@ class AccountController extends Controller
     public function updateProfileWarehouse(Request $request)
     {
         // dd($request->all());
+        // dd(
+        //     json_decode($request->normalImageStorage)
+        // );
         $validator = Validator::make($request->all(), [
             'type' => 'required|integer|between:1,3',
             // 'normalImageStorage' => 'required_if:type,1|array|min:1',
@@ -105,31 +108,37 @@ class AccountController extends Controller
             $arrWarehouseImagePccc = [];
 
             if (!empty($request->normalImageStorage)) {
+                Storage::deleteDirectory('public/'.$pathNormalImageStorage);
                 foreach (json_decode($request->normalImageStorage) as $image) {
                     $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
                 }
             }
             if (!empty($request->normalImagePccc)) {
+                Storage::deleteDirectory('public/'.$pathNormalImagePccc);
                 foreach (json_decode($request->normalImagePccc) as $image) {
                     $arrNormalImagePccc[] = $this->saveImgBase64($image, $pathNormalImagePccc);
                 }
             }
             if (!empty($request->coldImageStorage)) {
+                Storage::deleteDirectory('public/'.$pathColdImageStorage);
                 foreach (json_decode($request->coldImageStorage) as $image) {
                     $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
                 }
             }
             if (!empty($request->coldImagePccc)) {
+                Storage::deleteDirectory('public/'.$pathColdImagePccc);
                 foreach (json_decode($request->coldImagePccc) as $image) {
                     $arrColdImagePccc[] = $this->saveImgBase64($image, $pathColdImagePccc);
                 }
             }
             if (!empty($request->warehouseImageStorage)) {
+                Storage::deleteDirectory('public/'.$pathWarehouseImageStorage);
                 foreach (json_decode($request->warehouseImageStorage) as $image) {
                     $arrWarehouseImageStorage[] = $this->saveImgBase64($image, $pathWarehouseImageStorage);
                 }
             }
             if (!empty($request->warehouseImagePccc)) {
+                Storage::deleteDirectory('public/'.$pathWarehouseImagePccc);
                 foreach (json_decode($request->warehouseImagePccc) as $image) {
                     $arrWarehouseImagePccc[] = $this->saveImgBase64($image, $pathWarehouseImagePccc);
                 }

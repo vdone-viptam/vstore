@@ -82,7 +82,7 @@
         <div class="form-group">
             <label for="name">Ngày xét duyệt</label>
             <input type="text" class="form-control form-control-lg" disabled id="name"
-                   value="{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y')}}" placeholder="Nhập tên sản phẩm">
+                   value="{{\Carbon\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}" placeholder="Nhập tên sản phẩm">
         </div>
     </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">

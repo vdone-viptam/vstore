@@ -45,7 +45,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">Số điện thoại:</label>
-                                        <input type="text" class="form-control form-control-lg" id="phone" disabled="" value="Đồng hồ" placeholder="0">
+                                        <input type="text" class="form-control form-control-lg" id="phone_number" disabled="" value="Đồng hồ" placeholder="0">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">

@@ -105,8 +105,8 @@
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Tên
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'users.name')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'users.name')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="users.name"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="users.name"></i>
@@ -121,8 +121,8 @@
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Email
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'email')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'email')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="email"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="email"></i>
@@ -137,8 +137,8 @@
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'phone_number')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'phone_number')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="phone_number"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="phone_number"></i>
@@ -153,8 +153,8 @@
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'company_name')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'company_name')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="company_name"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="company_name"></i>
@@ -169,8 +169,8 @@
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'tax_code')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'tax_code')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="tax_code"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="tax_code"></i>
@@ -185,8 +185,8 @@
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Id P-Done người đại diện
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'id_vdone')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'id_vdone')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="id_vdone"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="id_vdone"></i>
@@ -201,8 +201,8 @@
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Phân loại tài khoản
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'users.role_id')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'users.role_id')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="users.role_id"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="users.role_id"></i>
@@ -217,8 +217,8 @@
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'users.created_at')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'users.created_at')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="users.created_at"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="users.created_at"></i>
@@ -233,8 +233,8 @@
                                         <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                             Mã người giới thiệu
                                             <span style="float: right;cursor:pointer">
-                                                @if($field_request == 'users.referral_code')
-                                                    @if($type_request == 'desc')
+                                                @if($field_users == 'users.referral_code')
+                                                    @if($type_users == 'desc')
                                                         <i class="fa-solid fa-sort-down sort-users" data-sort="users.referral_code"></i>
                                                     @else
                                                         <i class="fa-solid fa-sort-up sort-users" data-sort="users.referral_code"></i>
@@ -336,7 +336,6 @@
                             <thead>
                                 <tr>
                                     <th class="white-space-150">
-
                                         <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Mã yêu cầu
                                             <span style="float: right;cursor:pointer">

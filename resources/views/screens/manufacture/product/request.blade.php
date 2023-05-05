@@ -172,7 +172,7 @@
                                         {{$request->name}}
                                     </td>
                                     <td class="text-center">
-                                        {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y')}}
+                                        {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}
                                     </td>
                                     <td class="text-center">
                                         {{$request->user_name}}
