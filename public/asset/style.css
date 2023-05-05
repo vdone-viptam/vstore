@@ -189,7 +189,7 @@
         min-width: 375px;
     }
 }
-.pagination li {
+.pagination li a,.pagination li span{
  padding: .75rem;
 }
 .indicato{

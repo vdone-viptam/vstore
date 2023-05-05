@@ -43,7 +43,7 @@
                                        href="{{route('screens.vstore.product.requestAll')}}">Yêu cầu xét duyệt sản phẩm đã xác nhận</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('discount*')) ? 'active1' : '' }}"
+                                    <a class="nav-link {{ (request()->is('products/discount*')) ? 'active1' : '' }}"
                                        id="addSp"
                                        href="{{route('screens.vstore.product.discount')}}">Quản lý giảm giá</a>
                                 </li>

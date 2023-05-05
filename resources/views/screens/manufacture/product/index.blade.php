@@ -276,7 +276,7 @@
                                         {{ number_format($product->amount_product_sold, 0, '.', '.') }}</td>
                                     <td class="text-center">{{ number_format($product->amount, 0, '.', '.') }}</td>
                                     <td style="min-width: 70px">
-                                        <button type="button" class="btn btn-link pl-0"
+                                        <button type="button" class="btn btn-link pl-0" style="text-decoration:underline"
                                                 onclick="showDetail({{ $product->id }})">Chi tiết
                                         </button>
                                     </td>

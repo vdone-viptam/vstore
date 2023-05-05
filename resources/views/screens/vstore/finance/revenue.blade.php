@@ -104,7 +104,7 @@
                                                     <p class="text-success font-medium">Chưa xử lý</p>
                                                 @endif
                                             </td>
-                                            <td class="white-space-150 text-center">
+                                            <td class="white-space-150 text-right">
                                                 @if($history->type == 1)
                                                     <p class="text-success">
                                                         +{{number_format($history->money_history,0,'.','.')}} đ
