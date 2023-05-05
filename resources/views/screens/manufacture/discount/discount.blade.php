@@ -188,7 +188,7 @@
                                             <span class="text-danger font-medium">Đã hết hạn</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y')}}</td>
+                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="white-space-100 text-center"><a href="javascript:void(0)"
                                                                                data-id="{{$discount->id}}"
                                                                                class="btn btn-link more-details"

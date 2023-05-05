@@ -230,8 +230,8 @@
                                             <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
                                             <td>
                                                 @if($user->role_id==3 && $user->branch !=2 )
-                                                    <a onclick="return confirm('Vui lòng xác nhận')"
-                                                       class="btn btn-primary px-4 py-2"
+                                                    <a
+                                                       class="btn btn-primary px-4 py-2 check-yes-no"
                                                        href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng
                                                         cấp</a>
                                                 @endif
