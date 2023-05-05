@@ -212,30 +212,30 @@
                                             <td class="text-center">{{$user->account_code}}</td>
                                             <td class="text-center">
                                                 @if($user->role_id == 2)
-                                                    <span class="text-primary font-medium">Nhà cung cấp</span></td>
-                                            @elseif($user->role_id == 1)
-                                                Admin
-                                            @elseif($user->role_id == 4)
-                                                <span class="text-danger font-medium">Kho</span>
-                                            @else
-                                                <span class="text-success font-medium">V-Store</span>
+                                                    <span class="text-primary font-medium">Nhà cung cấp</span>
+                                                @elseif($user->role_id == 1)
+                                                    Admin
+                                                @elseif($user->role_id == 4)
+                                                    <span class="text-danger font-medium">Kho</span>
+                                                @else
+                                                    <span class="text-success font-medium">V-Store</span>
                                                 @endif
-                                                </td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->email}}</td>
-                                                <td class="text-center">{{$user->phone_number}}</td>
-                                                <td>{{$user->company_name}}</td>
-                                                <td class="text-center">{{$user->tax_code}}</td>
-                                                <td>{{$user->id_vdone}}</td>
-                                                <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
-                                                <td>
-                                                    @if($user->role_id==3 && $user->branch !=2 )
-                                                        <a onclick="return confirm('Vui lòng xác nhận')"
-                                                           class="btn btn-primary px-4 py-2"
-                                                           href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng
-                                                            cấp</a>
-                                                    @endif
-                                                </td>
+                                            </td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td class="text-center">{{$user->phone_number}}</td>
+                                            <td>{{$user->company_name}}</td>
+                                            <td class="text-center">{{$user->tax_code}}</td>
+                                            <td>{{$user->id_vdone}}</td>
+                                            <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y') : ''}}</td>
+                                            <td>
+                                                @if($user->role_id==3 && $user->branch !=2 )
+                                                    <a onclick="return confirm('Vui lòng xác nhận')"
+                                                       class="btn btn-primary px-4 py-2"
+                                                       href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng
+                                                        cấp</a>
+                                                @endif
+                                            </td>
 
                                         </tr>
                                     @endforeach
