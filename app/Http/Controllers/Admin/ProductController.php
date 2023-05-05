@@ -168,7 +168,7 @@ class ProductController extends Controller
             ];
             $user->notify(new AppNotification($data));
             $userVstore = User::find($currentRequest->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $data['href'] = route('screens.vstore.product.request', ['key_search' => $currentRequest->code]);
+            $data['href'] = route('screens.vstore.product.requestAll', ['key_search' => $currentRequest->code]);
             $userVstore->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
