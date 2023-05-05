@@ -195,8 +195,6 @@
                                     @endif
                                 </span>
                             </th>
-
-                            <th>Thao tác</th>
                             <th class="white-space-50">
                             </th>
                         </tr>
@@ -224,7 +222,7 @@
                                     <td class="white-space-120 text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="white-space-120 text-center">{{$product->vstore_confirm_date ?
 \Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y H:i') : 'Chưa xét duyệt'}}</td>
-                                    <td class="white-space-200" style="min-width:155px !important;">
+                                    <td class="white-space-200 text-center" style="min-width:155px !important;">
                                         @if($product->status == 0)
                                             <div
                                                 class="text-warning d-flex align-items-center font-medium" style="gap:6px;">
@@ -279,18 +277,6 @@
                                         @endif
                                     </td>
 
-                                    <td class="text-center" style="min-width:140px !important;">
-                                        @if($product->status == 0)
-                                            <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                               class="btn text-success px-2" style="text-decoration:underline">Đồng ý</a>
-                                            <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                               class="btn text-danger px-2" style="text-decoration:underline">Từ chối</a>
-                                        @else
-                                            <div class="text-success font-medium "
-                                                 style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã xét duyệt
-                                            </div>
-                                        @endif
-                                    </td>
                                     <td class="text-center" style="min-width:80px !important;">
 
                                         <a href="#" onclick="showDetail({{$product->id}})" class="btn btn-link px-2" style="text-decoration:underline;">Chi
