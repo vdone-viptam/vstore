@@ -114,10 +114,10 @@ class ManufactureController extends Controller
                     ->where('products.status', 2)
                     ->groupBy('categories.name')
                     ->get();
-                $products = Product::select('images','user_id')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
+                $products = Product::select('id','images','user_id')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
                 $images = [];
                 for ($i = 0; $i < count($products); $i++) {
-                    $images[$products[$i]->user_id] = asset(json_decode($products[$i]->images)[0]);
+                    $images[$products[$i]->id] = asset(json_decode($products[$i]->images)[0]);
                 }
                 $data = [];
                 foreach ($cate as $c) {
