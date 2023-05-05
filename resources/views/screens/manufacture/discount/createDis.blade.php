@@ -17,40 +17,46 @@
                    class="form-control form-control-lg">
         </div>
         <div class="form-group">
-            <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
+
             <div class="row">
                 <div class="col-6">
+                    <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
                     <input disabled name="discount_ncc" id="discount_ncc"
                            class="form-control-lg form-control">
                 </div>
                 <div class="col-6">
-                    <input type="text" id="moneyDis" placeholder="Chiết khấu V-Store thành tiền" disabled
+                    <label class="">Phần trăm chiết khấu cho V-Store (thành tiền):</label>
+                    <input type="text" id="moneyDis" placeholder="" disabled
                            class="form-control form-control-lg percent-to-vnd">
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
+
             <div class="row">
                 <div class="col-6">
+                    <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
                     <input disabled name="buy_more" id="buy_more"
                            class="form-control form-control-lg">
                 </div>
                 <div class="col-6">
-                    <input type="text" placeholder="Chiết khấu mua nhiều thành tiền" disabled
+                    <label class="">Phần trăm chiết khấu mua nhiều (thành tiền):</label>
+                    <input type="text" placeholder="" disabled
                            class="form-control form-control-lg percent-to-vnd" id="moneyMore">
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="">Phần trăm giảm giá (%):</label>
+
             <div class="row">
                 <div class="col-6">
+                    <label class="">Phần trăm giảm giá (%):</label>
                     <input name="discount" id="discount1" type="text"
                            class="form-control form-control-lg number">
                 </div>
                 <div class="col-6">
-                    <input type="text" id="moneyPrice" placeholder="Giảm giá thành tiền"
+                    <label class="">Phần trăm giảm giá (thành tiền):</label>
+                    <input type="text" id="moneyPrice" placeholder=""
                            class="form-control form-control-lg percent-to-vnd" disabled>
                 </div>
             </div>

@@ -16,44 +16,49 @@
                    class="form-control form-control-lg" value="{{number_format($product1->price,0,'.','.')}}">
         </div>
         <div class="form-group">
-            <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
+
             <div class="row">
                 <div class="col-6">
+                    <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
                     <input disabled name="discount_ncc" id="discount_ncc"
                            class="form-control-lg form-control" value="{{$product1->discount}}">
                 </div>
                 <div class="col-6">
+                    <label class="">Phần trăm chiết khấu cho V-Store (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyDis" disabled
-                           placeholder="Chiết khấu cho V-Store thành tiền"
+                           placeholder=""
                            value="{{number_format($product1->price * ($product1->discount / 100),0,'.','.') }} đ">
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
+
             <div class="row">
                 <div class="col-6">
+                    <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
                     <input disabled name="buy_more" id="buy_more"
                            class="form-control-lg form-control" value="{{$product1->buy_more}}">
                 </div>
                 <div class="col-6">
+                    <label class="">Phần trăm chiết khấu mua nhiều (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyMore" disabled
-                           placeholder="Chiết khấu mua nhiều thành tiền"
+                           placeholder=""
                            value="{{number_format($product1->price * ($product1->buy_more / 100),0,'.','.') }} đ">
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="">Phần trăm giảm giá (%):</label>
+
             <div class="row">
                 <div class="col-6">
+                    <label class="">Phần trăm giảm giá (%):</label>
                     <input name="discount" id="discount1"
                            class="form-control-lg form-control" value="{{$discount->discount}}">
                 </div>
                 <div class="col-6">
+                    <label class="">Phần trăm giảm giá (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyPrice" disabled
-                           placeholder="Chiết khấu cho V-Store thành tiền"
                            value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ">
                 </div>
             </div>
