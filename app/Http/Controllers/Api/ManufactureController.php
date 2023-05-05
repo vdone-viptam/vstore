@@ -117,7 +117,11 @@ class ManufactureController extends Controller
                 $products = Product::select('id','images','user_id')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
                 $images = [];
                 for ($i = 0; $i < count($products); $i++) {
-                    $images[$products[$i]->id] = asset(json_decode($products[$i]->images)[0]);
+                    $images[] = asset(json_decode($products[$i]->images)[0]);
+                }
+                $arr_user = [];
+                for ($i = 0; $i < count($products); $i++) {
+                    $arr_product[] = $products[$i]->id;
                 }
                 $data = [];
                 foreach ($cate as $c) {
@@ -125,7 +129,8 @@ class ManufactureController extends Controller
                 }
                 $user->description = [
                     'text' => $user->description,
-                    'images' => $images
+                    'images' => $images,
+                    'arr_product'=>$arr_product
                 ];
                 $user->categories = implode(', ', $data);
 
