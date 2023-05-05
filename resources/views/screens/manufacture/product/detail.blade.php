@@ -19,7 +19,6 @@
             <label>V-Store xét duyệt:</label>
             <input class="form-control form-control-lg" disabled value="{{$product->user_name}}">
         </div>
-        <label>Chiết khấu V-Store :</label>
         <div class="row">
             <div class="col-6">
                 <label for="">Chiết khấu cho V-Store</label>
