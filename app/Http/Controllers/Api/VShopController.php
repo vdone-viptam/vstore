@@ -474,7 +474,7 @@ class  VShopController extends Controller
             'avatar' => asset('image/users' . $user->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
             'message' => 'Bạn vừa có đơn hàng nhập sẵn mới ',
             'created_at' => \Carbon\Carbon::now()->format('h:i A d / m / Y'),
-            'href' => route('screens.vstore.product.request', ['key_search' => $order->no])
+            'href' => route('screens.manufacture.order.request', ['key_search' => $order->no])
         ];
         $user->notify(new AppNotification($data));
         return response()->json([
