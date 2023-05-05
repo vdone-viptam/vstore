@@ -57,6 +57,7 @@
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <form action="">
+                            @csrf
                             <div id="custom-search" class="top-search-bar">
                                 <input type="hidden" name="type" value="{{$type}}">
                                 <input type="hidden" name="field" value="{{$field}}">
@@ -271,7 +272,8 @@
                     </label>
                 </div>
             `);
-            document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
+            document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
+            document.querySelector('#form').setAttribute('name', '_csrf');
 
             document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
                 if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
@@ -328,6 +330,8 @@
                 </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
+            document.querySelector('#form').setAttribute('name', '_csrf');
+
             $('#modalDetail').modal('show');
             document.getElementById('btnConfirm').style.display = 'block';
 
