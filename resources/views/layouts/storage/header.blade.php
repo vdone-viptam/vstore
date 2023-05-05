@@ -65,7 +65,7 @@
                             <div class="notification-title"> Thông báo</div>
                             <div class="slimScrollDiv"
                                  style="position: relative; overflow: scroll; width: auto; height: 300px;">
-                                <div class="notification-list" style="overflow: hidden; width: auto;">
+                                <div class="notification-list">
                                     <div class="list-group">
                                         @if(count(Auth::user()->unreadNotifications) > 0)
                                             @foreach (Auth::user()->unreadNotifications as $index =>$notification)
