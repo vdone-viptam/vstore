@@ -122,7 +122,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-180">
+                            <th class="white-space-200">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Giá sản phẩm chưa VAT
                                     <span style="float: right;cursor:pointer">
@@ -138,7 +138,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-180">
+                            <th class="white-space-200" style="min-width:220px !important;">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Chiết khấu từ Nhà cung cấp
                                     <span style="float: right;cursor:pointer">
