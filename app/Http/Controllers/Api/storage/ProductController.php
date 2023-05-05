@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Warehouses;
+use App\Notifications\AppNotification;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -271,6 +272,15 @@ class ProductController extends Controller
             $ware->amount = $ware->amount + $requestIm->quantity;
             $ware->save();
             $vshop = Vshop::where('pdone_id', 262)->first();
+            $user = User::find($requestIm->ncc_id);
+            $data_vstore = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => '#',
+                'message' => 'Đã đồng ý yêu cầu thêm sản phẩm của bạn',
+                'created_at' => \Carbon\Carbon::now()->format('h:i A d/m/Y'),
+                'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
+            ];
+            $user->notify(new AppNotification($data_vstore));
             if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->where('status', 1)->first()) {
                 $vshop_product = new VshopProduct();
                 $vshop_product->vshop_id = $vshop->id;
@@ -313,6 +323,17 @@ class ProductController extends Controller
 
         $requestIm->status = $status;
         $requestIm->save();
+        if ($status == 10) {
+            $user = User::find($requestIm->ncc_id);
+            $data_vstore = [
+                'title' => 'Bạn vừa có 1 thông báo mới',
+                'avatar' => '#',
+                'message' => 'Đã từ chối yêu cầu thêm sản phẩm của bạn',
+                'created_at' => \Carbon\Carbon::now()->format('h:i A d/m/Y'),
+                'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
+            ];
+            $user->notify(new AppNotification($data_vstore));
+        }
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật đơn gửi hàng thành công',
