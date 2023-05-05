@@ -79,14 +79,14 @@
                     <table id="example" class="table table-striped table-bordered second    ">
                         <thead>
                         <tr>
-                            <th class="white-space-150 text-center">Mã sản phẩm</th>
-                            <th class="text-center" style="min-width:150px !important;">Hình ảnh</th>
-                            <th style="min-width:200px !important;">
+                            <th class="white-space-100 text-center">Mã sản phẩm</th>
+                            <th class="text-center white-space-100">Hình ảnh</th>
+                            <th class="white-space-250 text-center">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Tên sản phẩm
                                 </div>
                             </th>
-                            <th>Ngành hàng
+                            <th class="white-space-120 text-center">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'cate_name')
                                         @if($type == 'desc')
@@ -99,8 +99,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th class="white-space-100">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Giá bán
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'price')
@@ -116,7 +116,7 @@
                                 </div>
 
                             </th>
-                            <th class="white-space-120">
+                            <th class="white-space-180">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Thuế giá trị gia tăng
                                     <span style="float: right;cursor:pointer">
@@ -133,7 +133,7 @@
                                 </div>
                             </th>
                             <th class="white-space-100">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Trạng thái
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'status')
@@ -149,7 +149,7 @@
                                 </div>
                             </th>
 
-                            <th class="white-space-100">
+                            <th class="white-space-140">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     V-Store niêm yết
                                     <span style="float: right;cursor: pointer">
@@ -165,7 +165,7 @@
                                         </span>
                                 </div>
                             </th>
-                            <th class="white-space-130">
+                            <th class="white-space-180">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Chiết khấu cho V-Store
                                     <span style="float: right;cursor: pointer">
@@ -182,7 +182,7 @@
                                         </span>
                                 </div>
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-140">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Số lượng đã bán
                                     <span style="float: right;cursor: pointer">
@@ -200,7 +200,7 @@
                                         </span>
                                 </div>
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-160">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Số lượng trong kho
                                     <span style="float: right;cursor: pointer">
@@ -216,7 +216,7 @@
                                         </span>
                                 </div>
                             </th>
-                            <th style="min-width: 70px">
+                            <th class="white-space-100">
                             </th>
                         </tr>
                         </thead>
@@ -224,17 +224,17 @@
                         @if (count($products) > 0)
                             @foreach ($products as $product)
                                 <tr>
-                                    <td class="white-space-100">{{ $product->publish_id }}</td>
+                                    <td class="text-center">{{ $product->publish_id }}</td>
                                     <td class="text-center"><img style="height: 125px;"
                                                                  src="{{ strlen(json_decode($product->images)[0]) > 0 ? asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png' }}"/>
                                     </td>
-                                    <td class="white-space-150">{{ $product->name }}</td>
-                                    <td>{{ $product->cate_name }}</td>
+                                    <td class="white-space-250">{{ $product->name }}</td>
+                                    <td class="text-center">{{ $product->cate_name }}</td>
                                     <td class="text-right">{{ number_format($product->price, 0, '.', '.') }} đ</td>
                                     <td class="text-center">{{ isset($product->vat) ? $product->vat.'%' : '_'}}</td>
-                                    <td class="white-space-100 text-center">
+                                    <td class="text-center">
                                         @if ($product->status == 0)
-                                            <div class="text-danger d-flex align-items-center font-medium"
+                                            <div class="text-danger d-flex justify-content-center align-items-center font-medium"
                                                  style="gap:6px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12"
                                                      fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -245,7 +245,7 @@
                                                 Chưa xét duyệt
                                             </div>
                                         @elseif($product->status == 1)
-                                            <div class="text-warning d-flex align-items-center font-medium"
+                                            <div class="text-warning d-flex justify-content-center align-items-center font-medium"
                                                  style="gap:6px;">
                                                 <svg width="14" height="14" viewBox="0 0 14 14"
                                                      fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -256,7 +256,7 @@
                                                 Đang chờ xét duyệt
                                             </div>
                                         @elseif($product->status == 2)
-                                            <div class="text-success d-flex align-items-center font-medium"
+                                            <div class="text-success d-flex justify-content-center align-items-center font-medium"
                                                  style="gap:6px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -267,7 +267,7 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td>{{ $product->vstore_name && $product->status == 2 ? $product->vstore_name : '' }}
+                                    <td class="text-center">{{ $product->vstore_name && $product->status == 2 ? $product->vstore_name : '' }}
                                     </td>
                                     <td class="text-center">{{ $product->discount != null ? $product->discount.'%' : '_' }}
                                     </td>
@@ -275,10 +275,10 @@
                                     <td class="text-center">
                                         {{ number_format($product->amount_product_sold, 0, '.', '.') }}</td>
                                     <td class="text-center">{{ number_format($product->amount, 0, '.', '.') }}</td>
-                                    <td style="min-width: 70px">
-                                        <button type="button" class="btn btn-link pl-0"
-                                                onclick="showDetail({{ $product->id }})">Chi tiết
-                                        </button>
+                                    <td class="white-space-100 text-center" >
+                                        <a href="javascript:void(0)" class="btn btn-link "
+                                                onclick="showDetail({{ $product->id }})" style="text-decoration:underline;">Chi tiết
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

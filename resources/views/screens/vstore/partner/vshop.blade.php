@@ -49,11 +49,11 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-100">Mã V-Shop</th>
-                            <th class="white-space-200">Tên V-Shop
+                            <th class="white-space-100 text-center">Mã V-Shop</th>
+                            <th class="white-space-300 text-center">Tên V-Shop
 
                             </th>
-                            <th class="white-space-200">Số sản phẩm tiếp thị
+                            <th class="white-space-200 text-center">Số sản phẩm tiếp thị
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                         @if($type == 'desc')
@@ -66,7 +66,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">Đơn hàng hoàn thành
+                            <th class="white-space-200 text-center">Đơn hàng hoàn thành
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'count_order')
                                         @if($type == 'desc')
@@ -79,7 +79,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200 ">Doanh thu
+                            <th class="white-space-200 text-center">Doanh thu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'doanh_thu')
                                         @if($type == 'desc')

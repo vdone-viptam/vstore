@@ -82,7 +82,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-50">STT</th>
-                            <th style="min-width:200px !important;">
+                            <th class="white-space-250">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
@@ -152,7 +152,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-150">Thời gian tạo giảm giá
+                            <th class="text-center white-space-200">Thời gian tạo giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
                                         @if($type == 'desc')
@@ -174,8 +174,8 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td class="white-space-50 text-center">{{$loop->iteration}}</td>
-                                    <td class="white-space-300">{{$discount->name}}</td>
+                                    <td class="text-center">{{$loop->iteration}}</td>
+                                    <td class="white-space-250">{{$discount->name}}</td>
                                     <td class="text-center">{{$discount->discount}}%</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>

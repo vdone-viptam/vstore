@@ -101,9 +101,9 @@
                     <table id="partner-datatables" class="table table-striped table-bordered second" style="width:100%">
                         <thead class="bg-light">
                         <tr>
-                            <th class="text-center" style="min-width:180px !important">Mã đơn hàng/Mã yêu cầu</th>
-                            <th class="white-space-150 text-center">Mã sản phẩm</th>
-                            <th class="white-space-400">
+                            <th class="text-center white-space-180">Mã đơn hàng/Mã yêu cầu</th>
+                            <th class="white-space-130 text-center">Mã sản phẩm</th>
+                            <th class="white-space-250">
                             <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
@@ -119,7 +119,7 @@
                                 </span>
 </div>
                             </th>
-                            <th class="white-space-150 text-center">Nhà cung cấp
+                            <th class="white-space-130 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'ncc_name')
                                         @if($type == 'desc')
@@ -132,7 +132,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120 text-center">Số lượng
+                            <th class="white-space-90 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -146,7 +146,7 @@
                                 </span>
                             </th>
                             <th class="white-space-100 text-center">Chiết khấu</th>
-                            <th class="white-space-150 text-center">Thời gian
+                            <th class="white-space-120 text-center">Thời gian
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -159,7 +159,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150 text-center">Phân loại
+                            <th class="white-space-130 text-center">Phân loại
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'type')
                                         @if($type == 'desc')
@@ -172,7 +172,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center" style="min-width:180px !important;">Xác nhận/từ chối</th>
+                            <th class="text-center white-space-180">Xác nhận/từ chối</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -180,8 +180,8 @@
                         @foreach($products as $product)
                             <tr>
                                 <td class="text-center"> {{$product->code}}</td>
-                                <td class="text-center white-space-150">{{$product->publish_id}}</td>
-                                <td title="{{$product->product_name}}">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
+                                <td class="text-center">{{$product->publish_id}}</td>
+                                <td title="{{$product->product_name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                 <td class="text-center">{{$product->ncc_name}}</td>
                                 <td class="text-center">{{$product->quantity}}</td>
                                 <td class="text-center">0</td>
@@ -193,17 +193,17 @@
                                         <span style="color:#005d1d;">Đơn hàng mới</span>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if($product->type == 1)
                                         <div style="display:flex; justify-content:center; gap:10px"><a
                                                 href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"
                                                 style="text-decoration:underline"
-                                                class="text-success  ">
+                                                class="text-success font-medium  ">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10,1)"
                                                style="text-decoration:underline"
-                                               class="text-danger  ">
+                                               class="text-danger font-medium ">
                                                 Từ chối
                                             </a></div>
                                     @else
@@ -211,13 +211,13 @@
                                                 href="javascript:void(0)"
                                                 onclick="upDateStatus('{{$product->code}}',1,7)"
                                                 style="text-decoration:underline"
-                                                class="text-success  ">
+                                                class="text-success font-medium ">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)"
                                                onclick="upDateStatus('{{$product->code}}',3,7)"
                                                style="text-decoration:underline"
-                                               class="text-danger">
+                                               class="text-danger  font-medium ">
                                                 Từ chối
                                             </a></div>
                                     @endif

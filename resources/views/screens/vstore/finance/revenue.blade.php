@@ -43,8 +43,8 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Mã giao dịch</th>
-                                    <th class="text-center">
+                                    <th class="text-center white-space-120">Mã giao dịch</th>
+                                    <th class="text-center white-space-120">
                                         Trạng thái
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'status')
@@ -58,7 +58,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-center white-space-120">
                                         Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'money_history')
@@ -72,10 +72,10 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-center white-space-300">
                                         Nội dung
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-center white-space-120">
                                         Thời gian
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
@@ -104,7 +104,7 @@
                                                     <p class="text-success font-medium">Chưa xử lý</p>
                                                 @endif
                                             </td>
-                                            <td class="white-space-150 text-center">
+                                            <td class=" text-right">
                                                 @if($history->type == 1)
                                                     <p class="text-success">
                                                         +{{number_format($history->money_history,0,'.','.')}} đ
@@ -114,7 +114,7 @@
                                                         -{{number_format($history->money_history,0,'.','.')}} đ</p>
                                                 @endif
                                             </td>
-                                            <th>{{$history->title}}</th>
+                                            <th class="white-space-300">{{$history->title}}</th>
                                             <td class="text-center">
                                                 {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>

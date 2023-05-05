@@ -168,13 +168,13 @@
                                     <td class="white-space-400" style="min-width:200px !important;">
                                         {{$request->product_name}}
                                     </td>
-                                    <td class="white-space-150">
+                                    <td class="white-space-150 text-center">
                                         {{$request->name}}
                                     </td>
                                     <td class="text-center">
                                         {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y')}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{$request->user_name}}
                                     </td>
                                     <td class="text-center" style="min-width:150px !important;">
@@ -200,7 +200,7 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td class="white-space-100">
+                                    <td class="white-space-100 text-center">
                                         <a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline"
                                                 onclick="showDetail({{$request->id}})">Chi tiết
                                         </a>

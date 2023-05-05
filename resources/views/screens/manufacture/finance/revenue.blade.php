@@ -45,8 +45,8 @@
                                            style="width:100%">
                                         <thead>
                                         <tr>
-                                            <th class="white-space-120 text-center">Mã giao dịch</th>
-                                            <th class="white-space-150 text-center">
+                                            <th class="white-space-100 text-center">Mã giao dịch</th>
+                                            <th class="white-space-120 text-center">
                                                 Trạng thái
                                                 <span style="float: right;cursor: pointer">
                                                 @if($field == 'status')
@@ -61,7 +61,7 @@
                                                 @endif
                                         </span>
                                             </th>
-                                            <th class="text-center white-space-200">
+                                            <th class="text-center white-space-150">
                                                 Số tiền
                                                 <span style="float: right;cursor: pointer">
                                             @if($field == 'money_history')
@@ -103,8 +103,8 @@
                                         @if(count($histories) > 0)
                                             @foreach($histories as $history)
                                                 <tr>
-                                                    <td class="white-space-120 text-center">{{$histories->code ?? 0012020233}}</td>
-                                                    <td>
+                                                    <td class="text-center">{{$histories->code ?? 0012020233}}</td>
+                                                    <td class="text-center">
                                                         @if($history->status == 0)
                                                             <p class="text-danger font-medium">Thất bại</p>
                                                         @else
@@ -121,7 +121,7 @@
                                                                 -{{number_format($history->money_history,0,'.','.')}} đ</p>
                                                         @endif
                                                     </td>
-                                                    <th>{{$history->title}}</th>
+                                                    <th class="white-space-400">{{$history->title}}</th>
                                                     <td class="text-center">
                                                         {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                                     </td>

@@ -75,8 +75,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200 text-center">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th class="white-space-250 text-center">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Tổng số sản phẩm niêm yết trên V-Store
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'total_product')
@@ -92,7 +92,7 @@
                                 </div>
                             </th>
                             <th class="white-space-200 text-center">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Số loại sản phẩm niêm yết
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'users.id')
@@ -115,10 +115,10 @@
                         @if(count($products) > 0)
                             @foreach($products as $value)
                                 <tr>
-                                    <td class="white-space-200 text-center">{{$value->account_code}}</td>
+                                    <td class="white-space-100 text-center">{{$value->account_code}}</td>
                                     <td class="white-space-150 text-center">{{$value->vstore_name}}</td>
-                                    <td class="text-center">{{$value->phone_number}}</td>
-                                    <td class="text-center">{{$value->total_product}}</td>
+                                    <td class="text-center white-space-150">{{$value->phone_number}}</td>
+                                    <td class="text-center white-space-250">{{$value->total_product}}</td>
                                     <td class="text-center">{{$value->total_category}}</td>
                                     <td class="text-center white-space-100"><a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg"

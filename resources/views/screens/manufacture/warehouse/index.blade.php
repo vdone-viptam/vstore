@@ -162,12 +162,12 @@
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr>
-                                <th class="white-space-400 text-center">Tên kho hàng</th>
-                                <th class="text-center">Số điện thoại</th>
-                                <th class="white-space-400 text-center">Địa chỉ
+                                <th class="white-space-300 text-center">Tên kho hàng</th>
+                                <th class="text-center white-space-120">Số điện thoại</th>
+                                <th class="white-space-200 text-center">Địa chỉ
 
                                 </th>
-                                <th class="text-center" >Tổng số mặt hàng
+                                <th class="text-center white-space-200" >Tổng số mặt hàng
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                             @if($type == 'desc')
@@ -180,7 +180,7 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th class="th th_quantity text-center">Sản phẩm có trong kho
+                                <th class="th th_quantity text-center white-space-200">Sản phẩm có trong kho
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                             @if($type == 'desc')
@@ -194,16 +194,16 @@
                                 </span>
                                 </th>
 
-                                <th class="th th_status"></th>
+                                <th class="th th_status white-space-100"></th>
                             </tr>
                             </thead>
                             <tbody>
                         @if(count($warehouses) > 0)
                             @foreach($warehouses as $val)
                                 <tr>
-                                    <td class="white-space-400">{{$val->ware_name}}</td>
+                                    <td class=" white-space-300">{{$val->ware_name}}</td>
                                     <td class="text-center">{{$val->phone_number}}</td>
-                                    <td class="white-space-400">{{$val->address}}</td>
+                                    <td class="white-space-200">{{$val->address}}</td>
                                     <td class="text-center">{{$val->amount ?? 0}}</td>
                                     <td class="text-center">{{$val->amount_product ?? 0}}</td>
                                     <td class="text-center white-space-100">

@@ -69,9 +69,9 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" style="min-width:180px !important;">Mã nhà cung cấp</th>
-                                    <th class="text-center" style="min-width:180px !important;">Tên nhà cung cấp</th>
-                                    <th class="text-center">Khu vực
+                                    <th class="text-center white-space-150">Mã nhà cung cấp</th>
+                                    <th class="text-center white-space-300">Tên nhà cung cấp</th>
+                                    <th class="text-center white-space-200">Khu vực
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'province_name')
                                                 @if($type == 'desc')
@@ -84,7 +84,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center" style="min-width:180px !important;">Số loại sản phẩm
+                                    <th class="text-center white-space-180">Số loại sản phẩm
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'count_product')
                                                 @if($type == 'desc')
@@ -97,7 +97,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150 text-center">Số lượng tồn
+                                    <th class="white-space-130 text-center">Số lượng tồn
                                         <span style="float: right;cursor: pointer">
                                         @if($field == 'amount_product')
                                                 @if($type == 'desc')
@@ -120,8 +120,8 @@
                                     @foreach($suppliers as $supplier)
                                         <tr>
                                             <td class="text-center">{{$supplier->account_code}}</td>
-                                            <td class="text-center"> {{$supplier->name}}</td>
-                                            <td class="text-center">{{$supplier->province_name}}</td>
+                                            <td class="text-center white-space-300"> {{$supplier->name}}</td>
+                                            <td class="text-center white-space-200">{{$supplier->province_name}}</td>
                                             <td class="text-center">{{number_format($supplier->count_product,0,'.','.')}}</td>
                                             <td class="text-center">{{number_format($supplier->amount_product,0,'.','.')}}</td>
                                             <td class="white-space-100 text-center"><a class="text-primary" href="javascript:void(0)" style="text-decoration:underline;"

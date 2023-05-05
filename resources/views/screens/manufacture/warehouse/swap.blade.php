@@ -75,7 +75,7 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã yêu cầu</th>
-                            <th class="text-center">
+                            <th class="text-center white-space-200">
                                 
                                 Tên kho hàng
                                 <span style="float: right;cursor: pointer">
@@ -90,8 +90,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>
-                            <div class="white-space-400 d-flex justify-content-between align-items-center" style="gap:6px">    
+                            <th class="white-space-300 ">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">    
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -106,8 +106,8 @@
                                 </span>
 </div>
                             </th>
-                            <th>
-                            <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">        
+                            <th class="white-space-150 ">
+                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
                             Loại yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'type')
@@ -178,8 +178,8 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td class="white-space-120">{{$product->code}}</td>
-                                    <td class="white-space-300">{{$product->ware_name}}</td>
-                                    <td class="white-space-400">{{$product->name}}</td>
+                                    <td class="white-space-200">{{$product->ware_name}}</td>
+                                    <td class="white-space-300">{{$product->name}}</td>
                                     <td class="text-center">
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>

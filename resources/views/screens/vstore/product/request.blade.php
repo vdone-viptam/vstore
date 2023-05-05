@@ -77,8 +77,8 @@
                     >
                         <thead>
                         <tr>
-                            <th style="min-width:100px !important;">Mã yêu cầu</th>
-                            <th style="min-width:120px !important;">Nhà cung cấp
+                            <th class="white-space-100 text-center">Mã yêu cầu</th>
+                            <th class="white-space-120 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -91,7 +91,9 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-200">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -103,8 +105,9 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>Ngành hàng
+                            <th class="text-center white-space-120">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -117,8 +120,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-140">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th class="white-space-180">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Giá sản phẩm chưa VAT
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
@@ -133,8 +136,8 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-150">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th class="white-space-200" style="min-width:220px !important;">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Chiết khấu từ Nhà cung cấp
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
@@ -163,7 +166,7 @@
                                 </span>
                             </th>
                             <th class="white-space-100 text-center">Trạng thái</th>
-                            <th>
+                            <th class="white-space-150">
                             </th>
                         </tr>
                         </thead>
@@ -171,16 +174,16 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td class="white-space-150" style="min-width: 100px !important;">
+                                    <td class="text-center" >
                                         {{$product->code}}
                                     </td>
                                     <td>
                                         {{$product->user_name}}
                                     </td>
-                                    <td class="white-space-400" style="min-width:140px !important;">
+                                    <td class="white-space-200" >
                                         {{$product->name}}
                                     </td>
-                                    <td>{{$product->cate_name}}</td>
+                                    <td class="text-center">{{$product->cate_name}}</td>
                                     <td class="text-right">
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
@@ -188,15 +191,15 @@
                                         {{$product->discount}}%
                                     </td>
 
-                                    <td>{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="white-space-120 text-center"><span
+                                    <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class=" text-center"><span
                                             class="font-medium ">Yêu cầu mới</span></td>
 
-                                    <td style="min-width:150px !important;">
+                                    <td class="text-center">
                                         <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn px-2 text-success" style="text-decoration:underline">Đồng ý</a>
+                                           class="btn px-2 text-success font-medium" style="text-decoration:underline">Đồng ý</a>
                                         <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                           class="btn px-2 text-danger" style="text-decoration:underline">Từ chối</a>
+                                           class="btn px-2 text-danger font-medium" style="text-decoration:underline">Từ chối</a>
                                     </td>
                                 </tr>
                             @endforeach

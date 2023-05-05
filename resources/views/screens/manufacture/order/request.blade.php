@@ -149,7 +149,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-400">
+                            <th class="white-space-200">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
@@ -165,7 +165,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-140">
+                            <th class="white-space-120">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Giá sản phẩm
                                     <span style="float: right;cursor:pointer">
@@ -181,7 +181,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120">
+                            <th class="white-space-100">
                                 <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                     Giảm giá
                                     <span style="float: right;cursor: pointer">
@@ -215,7 +215,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120 text-center">Tiền đặt cọc
+                            <th class="white-space-110 text-center">Tiền đặt cọc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'deposit_money')
                                         @if($type == 'desc')
@@ -228,7 +228,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120 text-center">Tổng tiền
+                            <th class="white-space-100 text-center">Tổng tiền
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.money')
                                         @if($type == 'desc')
@@ -241,8 +241,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-140 text-center">Trạng thái</th>
-                            <th class="white-space-140">
+                            <th class="white-space-100 text-center">Trạng thái</th>
+                            <th class="white-space-150">
                             <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                             Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
@@ -267,13 +267,13 @@
                         @if(count($orders) > 0)
                             @foreach($orders as $order)
                                 <tr>
-                                    <td class="white-space-100">{{$order->no}}</td>
-                                    <td class="white-space-400">{{$order->product->name}}</td>
-                                    <td class="white-space-140 text-right">{{number_format($order->product->price,0,'.','.')}}
+                                    <td class="white-space-100 text-center">{{$order->no}}</td>
+                                    <td class="white-space-200">{{$order->product->name}}</td>
+                                    <td class="white-space-120 text-right">{{number_format($order->product->price,0,'.','.')}}
                                         đ
                                     </td>
-                                    <td class="text-center">{{(int)$order->discount}}%</td>
-                                    <td class="text-center">{{number_format($order->quantity,0,'.','.')}}</td>
+                                    <td class="text-center white-space-100">{{(int)$order->discount}}%</td>
+                                    <td class="text-center white-space-100">{{number_format($order->quantity,0,'.','.')}}</td>
                                     <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
                                     <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}
                                         đ
@@ -290,7 +290,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-100">
                                         <a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg" data-id="{{$order->id}}"
                                            class="btn btn-link more-details" style="text-decoration:underline">Chi

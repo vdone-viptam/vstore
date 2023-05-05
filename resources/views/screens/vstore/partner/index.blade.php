@@ -70,17 +70,17 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th>Mã nhà cung cấp</th>
-                            <th>Tên nhà cung cấp
+                            <th class="white-space-130 text-center">Mã nhà cung cấp</th>
+                            <th class="white-space-250 text-center">Tên nhà cung cấp
 
                             </th>
-                            <th>Số điện thoại
+                            <th class="white-space-120 text-center">Số điện thoại
 
                             </th>
-                            <th>Khu vực
+                            <th class="white-space-200 text-center">Khu vực
 
                             </th>
-                            <th class="white-space-150">Tổng số sản phẩm
+                            <th class="white-space-150 text-center">Tổng số sản phẩm
 
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
@@ -94,7 +94,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150">Sản phẩm liên kết
+                            <th class="white-space-150 text-center">Sản phẩm liên kết
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'amount_product_sold')
                                         @if($type == 'desc')
@@ -107,7 +107,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center">Thao Tác</th>
+                            <th class="text-center white-space-100">Thao Tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -121,16 +121,16 @@
                                     {{--                                    <td>{{$value->discount}}</td>--}}
                                     {{--                                    <td>{{$value->amount_product_sold != null ? $value->amount_product_sold: '-'}}</td>--}}
                                     {{--                                    <td></td>--}}
-                                    <td class="text-center" style="min-width:150px">{{$value->account_code}}</td>
-                                    <td class="td_name" style="min-width:150px;">{{$value->name}}</td>
+                                    <td class="text-center" >{{$value->account_code}}</td>
+                                    <td class="td_name white-space-250">{{$value->name}}</td>
                                     <td class="text-center">{{$value->phone_number}}</td>
-                                    <td class="text-center">{{$value->khu_vuc }}</td>
-                                    <td class="text-right"> {{number_format($value->amount,0,'.','.')}}</td>
+                                    <td class="text-center white-space-200">{{$value->khu_vuc }}</td>
+                                    <td class="text-center"> {{number_format($value->amount,0,'.','.')}}</td>
                                     <td class="text-center">{{number_format($value->countProduct,0,'.','.')}}</td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-link"
+                                    <td class="text-center white-space-100">
+                                        <a href="javascript:void(0)" class="btn btn-link"
                                                 onclick="showDetail({{$value->id}})" style="text-decoration:underline">Chi tiết
-                                        </button>
+                                        </a>
                                     </td>
                                     </td>
                                 </tr>

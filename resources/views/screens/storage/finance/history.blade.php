@@ -49,9 +49,9 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="white-space-150 text-center">Mã giao dịch</th>
-                                    <th class="white-space-150 text-center">Trạng thái</th>
-                                    <th class="text-center white-space-400">Số tiền
+                                    <th class="white-space-130 text-center">Mã giao dịch</th>
+                                    <th class="white-space-120 text-center">Trạng thái</th>
+                                    <th class="text-center white-space-150">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -64,8 +64,8 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class=" text-center">Nội dung</th>
-                                    <th class="white-space-200 text-center">Ngày tạo yêu cầu
+                                    <th class=" text-center white-space-300">Nội dung</th>
+                                    <th class="white-space-150 text-center">Ngày tạo yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -99,10 +99,10 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class="text-right white-space-400">
+                                            <td class="text-right ">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
-                                            <td>
+                                            <td class="white-space-300">
                                                 Chuyển khoản ra ngoài
                                             </td>
 

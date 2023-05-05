@@ -70,8 +70,10 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-150 text-center">Mã sản phẩm</th>
-                            <th>Tên sản phẩm
+                            <th class="white-space-100 text-center">Mã sản phẩm</th>
+                            <th class="white-space-250">
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -83,8 +85,9 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th>
+                            <th class="white-space-120">
                                 Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
@@ -114,7 +117,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120">
+                            <th class="white-space-180">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Thuế giá trị gia tăng
                                 <span style="float: right;cursor: pointer">
@@ -130,7 +133,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-120" style="min-width:130px !important;">Nhà cung cấp
+                            <th class="white-space-120" >Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -143,8 +146,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-120">
-                                <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                            <th class="white-space-150" style="min-width:160px !important;">
+                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                 Chiết khấu từ NCC
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
@@ -174,7 +177,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-130">
+                            <th class="white-space-180">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                 Chiết khấu cho V-SHOP
                                 <span style="float: right;cursor: pointer">
@@ -190,7 +193,7 @@
                                 </span>
                                 </div>
                             </th>
-                            <th class="white-space-80">
+                            <th class="white-space-100">
                             </th>
                         </tr>
                         </thead>
@@ -198,18 +201,18 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="white-space-150 text-center">
+                                    <td class="text-center">
                                         {{$product->publish_id}}
                                     </td>
-                                    <td class="white-space-350" style="min-width:180px !important;">
+                                    <td class="white-space-250">
                                         {{$product->name}}
                                     </td>
-                                    <td class="white-space-150 text-center">{{$product->cate_name}}</td>
+                                    <td class="text-center">{{$product->cate_name}}</td>
                                     <td class="text-right">
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
                                     <td class="text-center">{{$product->vat}}%</td>
-                                    <td>
+                                    <td class="text-center">
                                         {{$product->user_name}}
                                     </td>
                                     <td class="text-center">
@@ -219,7 +222,7 @@
                                     <td class="text-center">
                                         {{$product->discount_vShop}}%
                                     </td>
-                                    <td style="min-width:100px !important;">
+                                    <td class="white-space-100 text-center">
                                         <a href="javascript:void(0)" onclick="showDetail({{$product->id}})" class="btn btn-link" style="text-decoration:underline">Chi
                                             tiết</a> 
                                             

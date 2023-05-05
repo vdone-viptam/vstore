@@ -93,17 +93,12 @@
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
-                                <th class="white-space-120 text-center">
-
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                            Mã yêu cầu
-
-                                        </div>
+                                <th class="white-space-100 text-center">
+                                       Mã yêu cầu
                                     </th>
 
                                 <th class="white-space-120">
-
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Nhà cung cấp
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'users.name')
@@ -118,7 +113,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th class="white-space-300" style="min-width:200px !important;">
+                                <th class="white-space-200" >
 
                                     <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                                         Tên sản phẩm
@@ -135,9 +130,9 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th>
+                                <th class="white-space-100">
 
-                                    <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
@@ -152,8 +147,8 @@
                                         </span>
                                     </div>
                                 </th>
-                                    <th class="white-space-150">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Giá sản phẩm chưa VAT
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'price')
@@ -168,8 +163,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th class="white-space-150">
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-200" style="min-width:220px !important;">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Chiết khấu từ Nhà cung cấp
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'requests.discount')
@@ -186,8 +181,8 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th>
-                                        <div class="d-flex justify-content-between align-items-center" style="gap:6px">
+                                    <th class="white-space-120">
+                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
                                             Ngày yêu cầu
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'requests.created_at')
@@ -204,7 +199,7 @@
                                             </span>
                                         </div>
                                     </th>
-                                    <th style="min-width:100px;">
+                                    <th class="white-space-120 text-center">
                                         Trạng thái
                                         <span style="float: right;cursor:pointer">
                                             @if ($field == 'requests.status')
@@ -224,23 +219,23 @@
 
 
 
-                                <th>Thao tác</th>
+                                <th class="white-space-100 text-center">Thao tác</th>
                                 </thead>
                                 <tbody>
                                     @if (count($data) > 0)
                                         @foreach ($data as $product)
                                             <tr>
-                                                <td class="white-space-120">
+                                                <td class="text-center">
                                                     {{$product->code}}
                                                 </td>
-                                                <td class="white-space-150">
+                                                <td class="text-center">
                                                     {{$product->user_name}}
                                                 </td>
-                                                <td class="white-space-300" style="min-width:200px !important;">
+                                                <td class="white-space-200" >
                                                     {{$product->name}}
                                                 </td>
-                                                <td class="white-space-150">{{$product->cate_name}}</td>
-                                                <td class="white-space-150 text-right">
+                                                <td class="text-center">{{$product->cate_name}}</td>
+                                                <td class="text-right">
                                                     {{number_format($product->price,0,'.','.')}} đ
                                                 </td>
                                                 <td class="text-center">
@@ -250,10 +245,10 @@
                                                 <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                                 <td class="text-center"><span class="font-medium" >Sản phẩm mới</span></td>
 
-                                                <td style="min-width:150px;">
-                                                    <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                                    class="btn text-primary font-medium px-2" style="text-decoration:underline;">Đồng ý</a>
-                                                    <a href="#"
+                                                <td class="text-center">
+                                                    <a href="javascript:void(0)" onclick="appect({{$product->id}},{{$product->discount}},1)"
+                                                    class="btn text-success font-medium px-2" style="text-decoration:underline;">Đồng ý</a>
+                                                    <a href="javascript:void(0)"
                                                     onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                                     class="btn text-danger font-medium px-2" style="text-decoration:underline;">Từ chối</a>
                                                 </td>
