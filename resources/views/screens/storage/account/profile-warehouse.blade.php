@@ -127,6 +127,7 @@ aria-hidden="true">
                                             <div class="row">
                                                 <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                                                     <div class="form-group">
+                                                        <span class="text-danger">*</span>
                                                         <label style="font-weight: 600;" for="dts">Diện tích
                                                             (m2)</label>
                                                         <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
@@ -168,6 +169,7 @@ aria-hidden="true">
 
                                                 </div>
                                                 <div class="col-12">
+                                                    <span class="text-danger">*</span>
                                                     <label style="font-weight: 600;" for="tts">Hình ảnh
                                                         kho</label>
 
@@ -276,6 +278,7 @@ aria-hidden="true">
                                         <div class="row">
                                             <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                                                 <div class="form-group">
+                                                    <span class="text-danger">*</span>
                                                     <label style="font-weight: 600;" for="dts">Diện tích
                                                         (m2)</label>
                                                     <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
@@ -317,6 +320,7 @@ aria-hidden="true">
 
                                             </div>
                                             <div class="col-12">
+                                                <span class="text-danger">*</span>
                                                 <label style="font-weight: 600;" for="tts">Hình ảnh
                                                     kho</label>
 
@@ -425,6 +429,7 @@ aria-hidden="true">
                                         <div class="row">
                                             <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 ">
                                                 <div class="form-group">
+                                                    <span class="text-danger">*</span>
                                                     <label style="font-weight: 600;" for="dts">Diện tích
                                                         (m2)</label>
                                                     <input class="form-control form-control-lg only-number" value="{{ $value['acreage'] }}" type="text" name="acreage" required placeholder="Nhập diện tích">
@@ -466,6 +471,7 @@ aria-hidden="true">
 
                                             </div>
                                             <div class="col-12">
+                                                <span class="text-danger">*</span>
                                                 <label style="font-weight: 600;" for="tts">Hình ảnh
                                                     kho</label>
 
