@@ -192,6 +192,7 @@
                                             </td>
                                             <td><a href="javascript:void(0)" class="btn btn-link"
                                                    style="text-decoration: underline;"
+                                                   onclick="showDetail({{$request->id}})"
                                                    data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
                                             </td>
                                         </tr>
