@@ -324,13 +324,8 @@
                             <label for="name">Lý do từ chối</label>
                 <textarea name="note" placeholder="Lý do từ chối"
                                             class="form-control" ></textarea>
-                            </div>
-                <div class="form-group text-left mt-3">
-                    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
-                        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input" onclick="checkHideShow();"><span
-                            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
-                    </label>
                 </div>
+
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
             document.querySelector('#form').setAttribute('name', '_csrf');

@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Ward;
+use App\Notifications\AppNotification;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Http\Client\Exception;
 use Illuminate\Http\Request;
@@ -466,7 +467,16 @@ class  VShopController extends Controller
 
         $order->order_value_minus_discount = $order->total - $order->total * ($order->discount / 100);
         $order->deposit_payable = $order->total - $order->total * ($buyMoreDiscount['deposit_money'] / 100);
+        $user = User::find($ncc->id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
 
+        $data = [
+            'title' => 'Bạn vừa có 1 thông báo mới',
+            'avatar' => asset('image/users' . $user->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
+            'message' => 'Bạn vừa có đơn hàng nhập sẵn mới ',
+            'created_at' => \Carbon\Carbon::now()->format('h:i A d / m / Y'),
+            'href' => route('screens.vstore.product.request', ['key_search' => $order->no])
+        ];
+        $user->notify(new AppNotification($data));
         return response()->json([
             "order" => $order,
             "product" => $product
@@ -559,7 +569,7 @@ class  VShopController extends Controller
     {
         $limit = $request->limit ?? 10;
         $vshop = Vshop::select('id', 'pdone_id', 'phone_number', 'vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
-        foreach ($vshop as $val){
+        foreach ($vshop as $val) {
             if ($val->avatar == null) {
                 $val->avatar = asset('home/img/vshop-vuong.png');
             }
@@ -1032,7 +1042,7 @@ class  VShopController extends Controller
                 'message' => 'Không tìm thấy Vshop',
             ], 400);
         }
-        if ($vshop->avatar == ""){
+        if ($vshop->avatar == "") {
             $vshop->avatar = $vshop->avatar = asset('home/img/vshop-vuong.png');
         }
         $vshop->total_product = $total_product;
