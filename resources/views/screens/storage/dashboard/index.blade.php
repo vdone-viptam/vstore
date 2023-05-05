@@ -104,7 +104,7 @@
                             <th class="text-center" style="min-width:180px !important">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="white-space-150 text-center">Mã sản phẩm</th>
                             <th class="white-space-400">
-                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">        
+                            <div class="d-flex justify-content-between align-items-center" style="gap:6px">
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -211,13 +211,13 @@
                                                 href="javascript:void(0)"
                                                 onclick="upDateStatus('{{$product->code}}',1,7)"
                                                 style="text-decoration:underline"
-                                                class="text-success  ">
+                                                class="text-primary font-medium px-2">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)"
                                                onclick="upDateStatus('{{$product->code}}',3,7)"
                                                style="text-decoration:underline"
-                                               class="text-danger">
+                                               class="text-danger font-medium px-2">
                                                 Từ chối
                                             </a></div>
                                     @endif
