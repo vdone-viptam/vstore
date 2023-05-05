@@ -235,7 +235,7 @@ class UserController extends Controller
             $user->branch = 2;
             $user->save();
         }
-        return redirect()->route('screens.admin.user.list_user');
+        return redirect()->route('screens.admin.user.list_user')->with('success', 'Nâng cấp tài khoản thành công');
     }
 
     public function requestChangeTaxCode(Request $request)

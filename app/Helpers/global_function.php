@@ -157,7 +157,7 @@ function getDiscountAndDepositMoney($quantity, $arr)
                 "discount" => $item['discount'],
                 "deposit_money" => $item['deposit_money']
             ];
-        } elseif ($quantity >= $item['start'] && $quantity && $item['end'] == 0) {
+        } elseif ($quantity >= $item['start'] && $item['end'] == 0) {
             return [
                 "discount" => $item['discount'],
                 "deposit_money" => $item['deposit_money']

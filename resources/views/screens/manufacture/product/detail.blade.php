@@ -19,11 +19,14 @@
             <label>V-Store xét duyệt:</label>
             <input class="form-control form-control-lg" disabled value="{{$product->user_name}}">
         </div>
-        <label>Chiết khấu V-Store :</label>
         <div class="row">
-            <div class="col-6"><input class="form-control form-control-lg" disabled value="{{$product->discount}} %">
+            <div class="col-6">
+                <label for="">Chiết khấu cho V-Store</label>
+                <input class="form-control form-control-lg" disabled value="{{$product->discount}} %">
             </div>
-            <div class="col-6"><input class="form-control form-control-lg" disabled
+            <div class="col-6">
+                <label for="">Chiết khấu cho V-Store (thành tiền)</label>
+                <input class="form-control form-control-lg" disabled
                                       value="{{number_format($product->discount * $product->price / 100,0,'.','.')}} đ"></div>
         </div>
     </div>
