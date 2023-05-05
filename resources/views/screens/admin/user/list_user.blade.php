@@ -227,7 +227,7 @@
                                             <td>{{$user->company_name}}</td>
                                             <td class="text-center">{{$user->tax_code}}</td>
                                             <td>{{$user->id_vdone}}</td>
-                                            <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:I') : ''}}</td>
+                                            <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
                                             <td>
                                                 @if($user->role_id==3 && $user->branch !=2 )
                                                     <a
