@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PreOrderVshop;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -114,6 +115,9 @@ class OrderController extends Controller
     // clone from order
     public function requestOrders(Request $request)
     {
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
         // kiểm tra thêm status = 3 là đơn hàng mới và cần duyệt
         $this->v['field'] = $request->field ?? 'pre_order_vshop.id';
         $this->v['type'] = $request->type ?? 'desc';
