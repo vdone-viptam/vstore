@@ -101,7 +101,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Giá bán (đ)
+                                    Giá bán
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'price')
                                             @if ($type == 'desc')
@@ -118,7 +118,7 @@
                             </th>
                             <th class="white-space-120">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Thuế giá trị gia tăng (%)
+                                    Thuế giá trị gia tăng
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'vat')
                                             @if ($type == 'desc')
@@ -167,7 +167,7 @@
                             </th>
                             <th class="white-space-130">
                                 <div class="d-flex justify-content-between align-items-center" style="gap:6px">
-                                    Chiết khấu cho V-Store (%)
+                                    Chiết khấu cho V-Store
                                     <span style="float: right;cursor: pointer">
                                             @if ($field == 'products.discount')
                                             @if ($type == 'desc')
@@ -230,8 +230,8 @@
                                     </td>
                                     <td class="white-space-150">{{ $product->name }}</td>
                                     <td>{{ $product->cate_name }}</td>
-                                    <td class="text-right">{{ number_format($product->price, 0, '.', '.') }}</td>
-                                    <td class="text-center">{{ $product->vat }}</td>
+                                    <td class="text-right">{{ number_format($product->price, 0, '.', '.') }} đ</td>
+                                    <td class="text-center">{{ isset($product->vat) ? $product->vat.'%' : '_'}}</td>
                                     <td class="white-space-100 text-center">
                                         @if ($product->status == 0)
                                             <div class="text-danger d-flex align-items-center font-medium"
@@ -269,7 +269,7 @@
                                     </td>
                                     <td>{{ $product->vstore_name && $product->status == 2 ? $product->vstore_name : '' }}
                                     </td>
-                                    <td class="text-center">{{ $product->discount != null ? $product->discount : '' }}
+                                    <td class="text-center">{{ $product->discount != null ? $product->discount.'%' : '_' }}
                                     </td>
 
                                     <td class="text-center">
