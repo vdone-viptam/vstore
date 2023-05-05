@@ -255,21 +255,21 @@
 
         function appect(id, discount, status) {
             $('.md-content').html(`
- <div class="form-group">
-               <label>Chiết khấu được từ nhà cung cấp</label>
-<input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
-            </div>
-            <div class="form-group">
-               <label>Chiết khấu cho V-Shop</label>
-<input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
-            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
-            </div>
-<div class="form-group text-left mt-3">
-    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
-        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
-            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
-    </label>
-</div>
+                <div class="form-group">
+                            <label>Chiết khấu được từ nhà cung cấp</label>
+                <input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
+                            </div>
+                            <div class="form-group">
+                            <label>Chiết khấu cho V-Shop</label>
+                <input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
+                            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
+                            </div>
+                <div class="form-group text-left mt-3">
+                    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
+                        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input" onclick="checkHideShow();"><span
+                            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+                    </label>
+                </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
 
@@ -300,30 +300,32 @@
 
         }
 
-        $('#appect').on('change', (e) => {
+        function checkHideShow(){
             if (Number(document.getElementById('discount').dataset.discount) &&
-                +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2 && $('#appect').is(":checked")) {
+                $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) &&
+                $('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2 &&
+                $('#appect').is(":checked")) {
                 document.getElementById('messageDis').style.display = 'none';
                 document.getElementById('btnConfirm').style.display = 'block';
             } else {
                 document.getElementById('messageDis').style.display = 'block';
                 document.getElementById('btnConfirm').style.display = 'none';
             }
-        })
+        }
 
         function unAppect(id, discount, status) {
             $('.md-content').html(`
- <div class="form-group">
-              <label for="name">Lý do từ chối</label>
-<textarea name="note" placeholder="Lý do từ chối"
-                             class="form-control" ></textarea>
-            </div>
-<div class="form-group text-left mt-3">
-    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
-        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
-            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
-    </label>
-</div>
+                <div class="form-group">
+                            <label for="name">Lý do từ chối</label>
+                <textarea name="note" placeholder="Lý do từ chối"
+                                            class="form-control" ></textarea>
+                            </div>
+                <div class="form-group text-left mt-3">
+                    <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">
+                        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input" onclick="checkHideShow();"><span
+                            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+                    </label>
+                </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
             $('#modalDetail').modal('show');
