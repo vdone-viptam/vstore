@@ -84,10 +84,10 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th  class="white-space-150 text-center">Mã yêu cầu</th>
-                                    <th  class="white-space-200 text-center">Tên sản phẩm</th>
-                                    <th  class="white-space-150 text-center">Ngành hàng</th>
-                                    <th  class="white-space-150 text-center">Nhà cung cấp</th>
+                                    <th class="white-space-150 text-center">Mã yêu cầu</th>
+                                    <th class="white-space-200 text-center">Tên sản phẩm</th>
+                                    <th class="white-space-150 text-center">Ngành hàng</th>
+                                    <th class="white-space-150 text-center">Nhà cung cấp</th>
                                     <th class="text-center" style="min-width: 200px">Chiết khấu cho V-Store
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount')
@@ -148,8 +148,8 @@
                                             <td>{{$request->product_name}}</td>
                                             <td class="text-center">{{$request->name}}</td>
                                             <td class="text-center font-medium">{{$request->user_name}}</td>
-                                            <td class="text-center"><span class="text-primary">{{$request->discount}}%</span></td>
-                                            <td class="text-center"><span class="text-success">{{$request->discount_vShop}}%</span></td>
+                                            <td class="text-center">{{$request->discount}}%</td>
+                                            <td class="text-center">{{$request->discount_vShop}}%</td>
                                             <td class="text-center"><span>{{$request->vstore_name}}</span></td>
                                             <td class="text-center">
                                                 @if($request->status == 1)
@@ -176,19 +176,22 @@
 
                                                 @if($request->status == 1)
                                                     <a href="javascript:void(0)"
-                                                            onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
-                                                            class="btn text-primary font-medium px-2 " style="text-decoration:underline;">Duyệt
+                                                       onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
+                                                       class="btn text-primary font-medium px-2 "
+                                                       style="text-decoration:underline;">Duyệt
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                            onclick="unAppect({{$request->id}},{{$request->discount}},4,{{$request->discount_vShop}})"
-                                                            class="btn text-danger font-medium px-2 " style="text-decoration:underline;">Từ chối
+                                                       onclick="unAppect({{$request->id}},{{$request->discount}},4,{{$request->discount_vShop}})"
+                                                       class="btn text-danger font-medium px-2 "
+                                                       style="text-decoration:underline;">Từ chối
                                                     </a>
                                                 @else
                                                     <p class="text-success"><i class="fas fa-check mr-2"></i>Đã xét
                                                         duyệt</p>
                                                 @endif
                                             </td>
-                                            <td><a href="javascript:void(0)" class="btn btn-link" style="text-decoration: underline;"
+                                            <td><a href="javascript:void(0)" class="btn btn-link"
+                                                   style="text-decoration: underline;"
                                                    data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
                                             </td>
                                         </tr>
@@ -269,6 +272,7 @@
 
 
         }
+
         $(document).ready(function () {
 
 
