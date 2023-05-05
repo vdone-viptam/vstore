@@ -743,7 +743,7 @@ class PaymentMethod9PayController extends Controller
             'avatar' => '',
             'message' => 'Đơn hàng ' . $order->no . ' đã được tạo mới ',
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-            'href' => route('screens.manufacture.order.order', ['key_search' => $order->no])
+            'href' => route('screens.manufacture.order.index', ['key_search' => $order->no])
         ];
         $ncc->notify(new AppNotification($data_ncc));
 
@@ -752,7 +752,7 @@ class PaymentMethod9PayController extends Controller
             'avatar' => '',
             'message' => 'Đơn hàng ' . $order->no . ' đã được tạo mới ',
             'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-            'href' => route('screens.vstore.order.index')
+            'href' => route('screens.vstore.order.index', ['key_search' => $order->no])
         ];
         $vstore->notify(new AppNotification($data_vstore));
 

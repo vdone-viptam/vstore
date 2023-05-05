@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
 use App\Models\Warehouses;
+use App\Notifications\AppNotification;
 use Carbon\Carbon;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Http\Request;
@@ -155,6 +156,15 @@ class ProductController extends Controller
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
                 $vshop = Vshop::where('pdone_id', 262)->first();
+                $user = User::find($requestIm->ncc_id);
+                $data_vstore = [
+                    'title' => 'Bạn vừa có 1 thông báo mới',
+                    'avatar' => '#',
+                    'message' => 'Đã đồng ý yêu cầu thêm sản phẩm của bạn',
+                    'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                    'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
+                ];
+                $user->notify(new AppNotification($data_vstore));
                 if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
                     $vshop_product = new VshopProduct();
                     $vshop_product->vshop_id = $vshop->id;
@@ -197,6 +207,17 @@ class ProductController extends Controller
 
             $requestIm->status = $status;
             $requestIm->save();
+            if ($status == 10) {
+                $user = User::find($requestIm->ncc_id);
+                $data_vstore = [
+                    'title' => 'Bạn vừa có 1 thông báo mới',
+                    'avatar' => '#',
+                    'message' => 'Đã từ chối yêu cầu thêm sản phẩm của bạn',
+                    'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                    'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
+                ];
+                $user->notify(new AppNotification($data_vstore));
+            }
             DB::commit();
             return response()->json([
                 'success' => true,

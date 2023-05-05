@@ -33,7 +33,7 @@
 <div class="form-group">
     <label for="name">Thuế giá trị gia tăng</label>
     <input type="text" class="form-control form-control-lg" disabled id="name"
-           value="{{$product->vat.' %'}}" placeholder="Nhập tên sản phẩm">
+           value="{{$product->vat.'%'}}" placeholder="Nhập tên sản phẩm">
 </div>
 <div class="form-group">
     <label for="name">Mô tả ngắn sản phẩm</label>
@@ -76,6 +76,7 @@
             <input type="text" class="form-control form-control-lg" disabled id="discount"
                    data-discount="{{$product->discount}}"
                    value="{{$product->discount}}%" placeholder="Nhập tên sản phẩm">
+                   value="{{$product->discount}}%" placeholder="Nhập tên sản phẩm">
         </div>
     </div>
 </div>
@@ -85,7 +86,7 @@
         class=" @if($product->status == 3) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
         <div class="form-group">
             <label for="name">Chiết khấu cho V-Shop</label>
-            <input type="text" disabled class="form-control form-control-lg" value="{{$product->discount_vshop}}%">
+            <input type="text" disabled class="form-control form-control-lg" value="{{$product->discount_vshop.'%'}}">
         </div>
     </div>
     <div

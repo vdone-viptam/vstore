@@ -191,7 +191,9 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
 
     public function swap(Request $request)
     {
-
+        if (isset($request->noti_id)) {
+            DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
+        }
         $this->v['field'] = $request->field ?? 'request_warehouses.id';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;

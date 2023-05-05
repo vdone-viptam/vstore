@@ -35,8 +35,8 @@
         </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div class="form-group">
-                <label for="name">Thuế giá trị gia tăng (%)</label>
-                <input type="text" class="form-control form-control-lg" disabled value=" {{$product->vat ?? 0}}">
+                <label for="name">Thuế giá trị gia tăng</label>
+                <input type="text" class="form-control form-control-lg" disabled value=" {{$product->vat.'%' ?? 0}}">
 
             </div>
             <div class="form-group">
@@ -80,9 +80,9 @@
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <div class="form-group">
-                <label for="name">Chiết khấu V-Shop <span class="text-danger">*</span></label>
+                <label for="name">Chiết khấu V-Shop<span class="text-danger">*</span></label>
                 <input type="text" disabled class="form-control form-control-lg" id="name"
-                       value="{{$product->discount_vShop != null ? $product->discount_vShop : 'Chưa niêm yết'}}"
+                       value="{{$product->discount_vShop != null ? $product->discount_vShop.'%' : 'Chưa niêm yết'}}"
                        placeholder="Nhập xuất xứ">
             </div>
         </div>

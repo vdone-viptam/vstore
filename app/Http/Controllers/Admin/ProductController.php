@@ -123,7 +123,7 @@ class ProductController extends Controller
             $currentRequest->save();
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm đến bạn';
+            $message = 'Quản trị viên đã từ chối yêu cầu niêm yết sản phẩm của bạn';
             $vstore = User::join('products', 'users.id', '=', 'products.vstore_id')->where('products.vstore_id', $currentRequest->vstore_id)
                 ->where('products.id', $currentRequest->product_id)
                 ->select('products.id', 'products.publish_id', 'users.account_code')->first();
@@ -139,7 +139,7 @@ class ProductController extends Controller
                 );
 
 
-                $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm đến bạn';
+                $message = 'Quản trị viên đã đồng ý yêu cầu niêm yết sản phẩm của bạn';
                 DB::table('products')->where('id', $currentRequest->product_id)->update([
                     'admin_confirm_date' => Carbon::now(),
                     'status' => 2,
@@ -164,11 +164,11 @@ class ProductController extends Controller
                 'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.manufacture.product.request', ['key_search' => $vstore->publish_id])
+                'href' => route('screens.manufacture.product.request', ['key_search' => $currentRequest->code])
             ];
             $user->notify(new AppNotification($data));
             $userVstore = User::find($currentRequest->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $data['href'] = route('screens.vstore.product.request', ['key_search' => $vstore->publish_id]);
+            $data['href'] = route('screens.vstore.product.requestAll', ['key_search' => $currentRequest->code]);
             $userVstore->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');

@@ -468,7 +468,7 @@ class ProductController extends Controller
                 'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $userLogin->name . ' đã gửi yêu cầu niêm yết sản phẩm đến bạn',
                 'created_at' => Carbon::now()->format('h:i A d / m / Y'),
-                'href' => route('screens.vstore.product.request', ['key_search' => $product->publish_id])
+                'href' => route('screens.vstore.product.request', ['key_search' => $object->code])
             ];
             $user->notify(new AppNotification($data));
             DB::commit();
