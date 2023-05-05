@@ -151,24 +151,34 @@ function getWarehouse($province_id, $district_id, $product_id)
 
 function getDiscountAndDepositMoney($quantity, $arr)
 {
-    foreach ($arr as $item) {
-        if ($quantity >= $item['start'] && $quantity < $item['end'] && $item['end'] != 0) {
-            return [
-                "discount" => $item['discount'],
-                "deposit_money" => $item['deposit_money']
+    $data = [];
+    for ($i = 0; $i < count($arr); $i++) {
+        if ($quantity >= $arr[$i]['start'] && $quantity < $arr[$i]['end'] && $arr[$i]['end'] != 0) {
+            $data = [
+                "discount" => $arr[$i]['discount'],
+                "deposit_money" => $arr[$i]['deposit_money']
             ];
-        } elseif ($quantity >= $item['start'] && $item['end'] == 0) {
-            return [
-                "discount" => $item['discount'],
-                "deposit_money" => $item['deposit_money']
+            break;
+
+
+        } else if ($quantity >= $arr[$i]['start'] && $arr[$i]['end'] == 0) {
+            $data = [
+                "discount" => $arr[$i]['discount'],
+                "deposit_money" => $arr[$i]['deposit_money']
             ];
+            break;
+
         } else {
-            return [
+            $data = [
                 "discount" => 0,
-                "deposit_money" => $item['deposit_money']
+                "deposit_money" => $arr[$i]['deposit_money']
             ];
+
+
         }
     }
+
+    return $data;
 }
 
 function getDiscountProduct($id, $idVshop)
