@@ -280,11 +280,15 @@
                                     </td>
 
                                     <td class="text-center" style="min-width:140px !important;">
-                                    @if($product->status == 0)
+                                        @if($product->status == 0)
                                             <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
                                                class="btn text-success px-2" style="text-decoration:underline">Đồng ý</a>
                                             <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                                class="btn text-danger px-2" style="text-decoration:underline">Từ chối</a>
+                                        @else
+                                            <div class="text-success font-medium "
+                                                 style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã xét duyệt
+                                            </div>
                                         @endif
                                     </td>
                                     <td class="text-center" style="min-width:80px !important;">
