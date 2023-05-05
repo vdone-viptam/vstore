@@ -231,7 +231,7 @@
                                     <td class="white-space-150">{{ $product->name }}</td>
                                     <td>{{ $product->cate_name }}</td>
                                     <td class="text-right">{{ number_format($product->price, 0, '.', '.') }} đ</td>
-                                    <td class="text-center">{{ $product->vat.'%' ?? '_'}}</td>
+                                    <td class="text-center">{{ isset($product->vat) ? $product->vat.'%' : '_'}}</td>
                                     <td class="white-space-100 text-center">
                                         @if ($product->status == 0)
                                             <div class="text-danger d-flex align-items-center font-medium"
