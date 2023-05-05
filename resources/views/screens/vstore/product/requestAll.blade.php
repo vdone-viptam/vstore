@@ -72,8 +72,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered second    "
-                    >
+                    <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
                             <th class="white-space-100">Mã yêu cầu</th>
@@ -123,7 +122,7 @@
                                 </span>
                             </th>
                             <th class="white-space-200">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                           
                                     Giá sản phẩm chưa VAT
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
@@ -136,10 +135,10 @@
                                             <i class="fas fa-sort sort" data-sort="products.price"></i>
                                         @endif
                                 </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-200" style="min-width:220px !important;">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                              
                                     Chiết khấu từ Nhà cung cấp
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
@@ -152,7 +151,7 @@
                                             <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                         @endif
                                 </span>
-                                </div>
+                               
                             </th>
                             <th class="white-space-120 text-center">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">

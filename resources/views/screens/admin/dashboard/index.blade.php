@@ -134,7 +134,7 @@
                                        
                                     </th>
                                     <th class="white-space-120">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'phone_number')
@@ -147,7 +147,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="phone_number"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                     
                                     </th>
                                     <th class="white-space-200 text-center">
                                        
@@ -166,7 +166,7 @@
                                      
                                     </th>
                                     <th class="white-space-120">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'tax_code')
@@ -179,7 +179,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="tax_code"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-200 text-center">
                                         
@@ -198,7 +198,7 @@
                                         
                                     </th>
                                     <th class="white-space-150">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Phân loại tài khoản
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.role_id')
@@ -211,10 +211,10 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.role_id"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-120">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.created_at')
@@ -227,7 +227,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.created_at"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-150 text-center">
                                        
@@ -336,7 +336,7 @@
                             <thead>
                                 <tr>
                                     <th class="white-space-150">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                
                                             Mã yêu cầu
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'requests.code')
@@ -349,7 +349,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="requests.code"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                  
                                     </th>
                                     <th class="white-space-200 text-center">
                                         
@@ -368,7 +368,7 @@
                                   
                                     </th>
                                     <th class="white-space-150">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                  
                                             Ngành hàng
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'categories.name')
@@ -381,7 +381,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="categories.name"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                    
 
                                     </th>
                                     <th class="white-space-200 text-center">
@@ -401,7 +401,7 @@
                                       
                                     </th>
                                     <th class="white-space-200">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                       
                                             Chiết khấu cho V-Store
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'products.discount')
@@ -414,7 +414,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="products.discount"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-150 text-center">
                                         

@@ -3118,7 +3118,9 @@ table.dataTable thead .sorting_desc_disabled:after {
     display: none !important;
 }
 
-.table td,
+.table td{
+    white-space: nowrap;
+}
 .table th {
     white-space: nowrap;
     text-align: center;

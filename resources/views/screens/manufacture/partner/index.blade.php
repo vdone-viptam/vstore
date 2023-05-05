@@ -76,7 +76,7 @@
                                 </span>
                             </th>
                             <th class="white-space-250 text-center">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                
                                     Tổng số sản phẩm niêm yết trên V-Store
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'total_product')
@@ -89,10 +89,10 @@
                                             <i class="fas fa-sort sort" data-sort="total_product"></i>
                                         @endif
                                     </span>
-                                </div>
+                           
                             </th>
                             <th class="white-space-200 text-center">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                            
                                     Số loại sản phẩm niêm yết
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'users.id')
@@ -105,7 +105,7 @@
                                             <i class="fas fa-sort sort" data-sort="users.id"></i>
                                         @endif
                                     </span>
-                                </div>
+                               
                             </th>
                             <th class="white-space-100">
                             </th>

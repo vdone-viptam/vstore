@@ -98,7 +98,7 @@
                                     </th>
 
                                 <th class="white-space-120">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                  
                                         Nhà cung cấp
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'users.name')
@@ -111,7 +111,7 @@
                                                 <i class="fas fa-sort sort" data-sort="users.name"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                
                                 </th>
                                 <th class="white-space-200" >
 
@@ -132,7 +132,7 @@
                                 </th>
                                 <th class="white-space-100">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
@@ -145,10 +145,10 @@
                                                 <i class="fas fa-sort sort" data-sort="categories.name"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                   
                                 </th>
                                     <th class="white-space-200">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                      
                                             Giá sản phẩm chưa VAT
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'price')
@@ -161,10 +161,10 @@
                                                     <i class="fas fa-sort sort" data-sort="price"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                     
                                     </th>
                                     <th class="white-space-200" style="min-width:220px !important;">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Chiết khấu từ Nhà cung cấp
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'requests.discount')
@@ -179,10 +179,10 @@
                                                     <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                        
                                     </th>
                                     <th class="white-space-120">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Ngày yêu cầu
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'requests.created_at')
@@ -197,7 +197,7 @@
                                                     <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                        
                                     </th>
                                     <th class="white-space-120 text-center">
                                         Trạng thái

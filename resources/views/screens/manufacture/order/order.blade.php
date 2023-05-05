@@ -136,7 +136,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-120">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                           
                             Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
@@ -149,7 +149,7 @@
                                         <i class="fas fa-sort sort" data-sort="pre_order_vshop.no"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th class="white-space-200">
                          

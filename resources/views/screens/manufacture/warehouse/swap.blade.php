@@ -107,7 +107,7 @@
 
                             </th>
                             <th class="white-space-150 ">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">        
+                      
                             Loại yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'type')
@@ -121,7 +121,7 @@
                                         <i class="fas fa-sort sort" data-sort="request_warehouses.type"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th>
                             <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">        

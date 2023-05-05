@@ -91,7 +91,7 @@
 
                             </th>
                             <th class="white-space-150 text-center">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                          
                             Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'brand')
@@ -104,11 +104,11 @@
                                         <i class="fas fa-sort sort" data-sort="brand"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
 
                             <th>
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                    
                             Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
@@ -121,7 +121,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.created_at"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th>
                           
@@ -140,7 +140,7 @@
 
                             </th>
                             <th>
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                         
                             Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.status')
@@ -153,7 +153,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                     @endif
                                 </span>
-                            </div>
+                            
                             </th>
                             <th class="white-space-100"></th>
                         </tr>
