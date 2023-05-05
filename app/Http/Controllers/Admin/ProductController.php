@@ -164,11 +164,11 @@ class ProductController extends Controller
                 'avatar' => asset('image/users' . $userLogin->avatar) ?? 'https://phunugioi.com/wp-content/uploads/2022/03/Avatar-Tet-ngau.jpg',
                 'message' => $message,
                 'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.manufacture.product.request', ['key_search' => $vstore->publish_id])
+                'href' => route('screens.manufacture.product.request', ['key_search' => $currentRequest->code])
             ];
             $user->notify(new AppNotification($data));
             $userVstore = User::find($currentRequest->vstore_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
-            $data['href'] = route('screens.vstore.product.request', ['key_search' => $vstore->publish_id]);
+            $data['href'] = route('screens.vstore.product.request', ['key_search' => $currentRequest->code]);
             $userVstore->notify(new AppNotification($data));
             DB::commit();
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
