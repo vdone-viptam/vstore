@@ -162,6 +162,7 @@ class  VShopController extends Controller
                 "products.name",
                 "products.price",
                 "products.vat",
+                "products.publish_id",
                 "province.province_name",
                 "district.district_name",
                 "wards.wards_name"
@@ -191,7 +192,8 @@ class  VShopController extends Controller
                 "name" => $value->name,
                 "images" => json_decode($value->images),
                 "price" => $value->price,
-                "vat" => $value->vat
+                "vat" => $value->vat,
+                "publish_id"=>$value->publish_id
             ];
 
             unset($value->name);
