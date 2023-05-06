@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use PHPUnit\Exception;
 use SKAgarwal\GoogleApi\PlacesApi;
 
@@ -329,6 +330,21 @@ class TestController extends Controller
             DB::rollBack();
             return $e->getMessage();
             Log::error($e->getMessage());
+        }
+    }
+
+    public function ma(){
+        $products = Product::all();
+        foreach ($products as $val){
+            while (true) {
+                $code = 'vns' . Str::lower(Str::random(10));
+                if (!Product::where('publish_id', $code)->first()) {
+                    $pro = Product::find($val->id);
+                    $pro->publish_id= $code;
+                    $pro->save();
+                    break;
+                }
+            }
         }
     }
 }

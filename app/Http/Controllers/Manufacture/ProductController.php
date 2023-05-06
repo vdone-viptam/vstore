@@ -190,7 +190,7 @@ class ProductController extends Controller
             $product->video = $request->video;
 
             while (true) {
-                $code = 'vn' . Str::lower(Str::random(10));
+                $code = 'vns' . Str::lower(Str::random(10));
                 if (!Product::where('publish_id', $code)->first()) {
                     $product->publish_id = $code;
                     break;
