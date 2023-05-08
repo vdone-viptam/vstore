@@ -160,7 +160,7 @@ class ProductController extends Controller
                 $data_vstore = [
                     'title' => 'Bạn vừa có 1 thông báo mới',
                     'avatar' => '#',
-                    'message' => 'Đã đồng ý yêu cầu thêm sản phẩm của bạn',
+                    'message' => Auth::user()->name . ' đã đồng ý yêu cầu thêm sản phẩm của bạn',
                     'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                     'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
                 ];
@@ -212,7 +212,7 @@ class ProductController extends Controller
                 $data_vstore = [
                     'title' => 'Bạn vừa có 1 thông báo mới',
                     'avatar' => '#',
-                    'message' => 'Đã từ chối yêu cầu thêm sản phẩm của bạn',
+                    'message' => Auth::user()->name . ' đã từ chối yêu cầu thêm sản phẩm của bạn',
                     'created_at' => Carbon::now()->format('h:i A d/m/Y'),
                     'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
                 ];
@@ -364,7 +364,10 @@ class ProductController extends Controller
 
         try {
 
-            $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
+            $order = Order::where('id', $request->id)->first();
+            if (!$order) {
+                $order = Order::where('no', $request->id)->first();
+            }
 
             if (!$order) {
                 return response()->json([
@@ -394,7 +397,7 @@ class ProductController extends Controller
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
             $product = Product::where('id', $order_item->product_id)->first();
-            RequestWarehouse::destroy($order->request_warehouse_id);
+            DB::table('request_warehouses')->where('id', $order->request_warehouse_id)->delete();
             $priceDiscount = $product->price;
 
             $totalDiscountSuppliersAndVStore = 0;
