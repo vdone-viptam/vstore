@@ -188,7 +188,7 @@
                                 @foreach($products as $pro)
                                     <tr class="line-clamp3">
                                         <td class="text-center">{{$pro->publish_id}}</td>
-                                        <td class="text-center">{{$pro->product_name}}</td>
+                                        <td class="">{{$pro->product_name}}</td>
                                         <td class="text-center">{{$pro->category_name}}</td>
                                         <td class="font-medium text-center">{{$pro->name}}</td>
                                         <td class="text-center">{{$pro->discount}}%</td>

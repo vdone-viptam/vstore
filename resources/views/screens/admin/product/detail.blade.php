@@ -92,7 +92,8 @@
         class=" @if($product->status == 3) col-xl-12 col-lg-12 col-md-12 @else col-xl-6 col-lg-6 col-md-6 @endif  col-sm-12">
         <div class="form-group">
             <label for="name">Trạng thái yêu cầu</label>
-            <select name="status" id="status" class="form-control form-control-lg" @if($product->status != 1) disabled @endif>
+            <select name="status" id="status" class="form-control form-control-lg"
+                    @if($product->status != 1) disabled @endif>
                 <option value="3" {{$product->status == 3 ? 'selected' : ''}}>Đồng ý</option>
                 <option value="4" {{$product->status == 4 ? 'selected' : ''}}>Từ chối</option>
             </select>
