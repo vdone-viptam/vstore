@@ -26,8 +26,10 @@ return new class extends Migration {
             $table->integer('vstore_id')->nullable();
             $table->double('discount_vshop');
             $table->string('note')->nullable();
+            $table->dateTime('vstore_confirm_date')->nullable();
+            $table->dateTime('admin_confirm_date')->nullable();
             $table->string('code');
-            $table->float('vat',20,2);
+            $table->float('vat', 20, 2);
             $table->timestamps();
         });
     }
