@@ -409,6 +409,11 @@ function convertTimeVN(inputTime) {
     return formattedDateTime;
 }
 
+// prevent spam form
+$("#form").submit(function (e) {
+    $("#btnConfirm").attr("disabled", true);
+    return true;
+});
 
 // MENU
 
