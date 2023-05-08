@@ -105,6 +105,24 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $imageRules = array(
+            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        );
+        $imageMessage = array(
+            'images.image' => 'Upload file không đúng định dạng',
+            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
+            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+        );
+        foreach ($request->images as $image) {
+            $image = array('images' => $image);
+
+            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
+
+            if ($imageValidator->fails()) {
+                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
+        }
+
         $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
@@ -157,28 +175,14 @@ class ProductController extends Controller
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ];
-        $imageRules = array(
-            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
-        );
-        $imageMessage = array(
-            'images.image' => 'Upload file không đúng định dạng',
-            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
-            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
-        );
+
         DB::beginTransaction();
         $validator = Validator::make($request->all(), $error, $message);
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
-        foreach ($request->images as $image) {
-            $image = array('images' => $image);
 
-            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
-
-            if ($imageValidator->fails()) {
-                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
-            }
-        }
         DB::beginTransaction();
 
         try {
@@ -510,6 +514,7 @@ class ProductController extends Controller
 
     public function edit($id = null)
     {
+
         $categories = Category::all();
         $product = Product::find($id);
 
@@ -526,7 +531,23 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        // dd($request->all(),$id);
+        $imageRules = array(
+            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        );
+        $imageMessage = array(
+            'images.image' => 'Upload file không đúng định dạng',
+            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
+            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+        );
+        foreach ($request->images as $image) {
+            $image = array('images' => $image);
+
+            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
+
+            if ($imageValidator->fails()) {
+                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
+        }
         $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
@@ -579,27 +600,10 @@ class ProductController extends Controller
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ];
-        $imageRules = array(
-            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
-        );
-        $imageMessage = array(
-            'images.image' => 'Upload file không đúng định dạng',
-            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
-            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
-        );
         DB::beginTransaction();
         $validator = Validator::make($request->all(), $error, $message);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
-        }
-        foreach ($request->images as $image) {
-            $image = array('images' => $image);
-
-            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
-
-            if ($imageValidator->fails()) {
-                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
-            }
         }
         try {
 
