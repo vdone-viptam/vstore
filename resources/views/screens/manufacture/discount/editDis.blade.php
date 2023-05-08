@@ -11,20 +11,20 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="">Giá sản phẩm (đ):</label>
+            <label class="">Giá sản phẩm:</label>
             <input disabled name="price" id="price"
-                   class="form-control form-control-lg" value="{{number_format($product1->price,0,'.','.')}}">
+                   class="form-control form-control-lg" value="{{number_format($product1->price,0,'.','.')}} đ">
         </div>
         <div class="form-group">
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Phần trăm chiết khấu cho V-Store (%):</label>
+                    <label class="">Chiết khấu cho V-Store:</label>
                     <input disabled name="discount_ncc" id="discount_ncc"
-                           class="form-control-lg form-control" value="{{$product1->discount}}">
+                           class="form-control-lg form-control" value="{{$product1->discount}}%">
                 </div>
                 <div class="col-6">
-                    <label class="">Phần trăm chiết khấu cho V-Store (thành tiền):</label>
+                    <label class="">Chiết khấu cho V-Store (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyDis" disabled
                            placeholder=""
                            value="{{number_format($product1->price * ($product1->discount / 100),0,'.','.') }} đ">
@@ -35,12 +35,12 @@
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Phần trăm chiết khấu mua nhiều (%):</label>
+                    <label class="">Chiết khấu mua nhiều:</label>
                     <input disabled name="buy_more" id="buy_more"
-                           class="form-control-lg form-control" value="{{$product1->buy_more}}">
+                           class="form-control-lg form-control" value="{{$product1->buy_more}}%">
                 </div>
                 <div class="col-6">
-                    <label class="">Phần trăm chiết khấu mua nhiều (thành tiền):</label>
+                    <label class="">Chiết khấu mua nhiều (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyMore" disabled
                            placeholder=""
                            value="{{number_format($product1->price * ($product1->buy_more / 100),0,'.','.') }} đ">
@@ -52,12 +52,12 @@
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Phần trăm giảm giá (%):</label>
+                    <label class="">Phần trăm giảm giá:</label>
                     <input name="discount" id="discount1"
                            class="form-control-lg form-control" value="{{$discount->discount}}">
                 </div>
                 <div class="col-6">
-                    <label class="">Phần trăm giảm giá (thành tiền):</label>
+                    <label class="">Giảm giá (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyPrice" disabled
                            value=" {{number_format($product1->price * ($discount->discount / 100),0,'.','.')}} đ">
                 </div>
@@ -66,7 +66,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-6">
-                    <span class="">Ngày bắt đầu:</span>
+                    <span class="">Thời gian bắt đầu:</span>
                     <input type="datetime-local" name="start_date" id="start_date"
                            required value="{{$discount->start_date}}"
                            min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
@@ -76,7 +76,7 @@
                     @enderror
                 </div>
                 <div class="col-6">
-                    <span class="">Ngày kết thúc:</span>
+                    <span class="">Thời gian kết thúc:</span>
                     <input type="datetime-local" id="end_date" name="end_date"
                            required value="{{$discount->end_date}}"
                            min="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}"
@@ -113,6 +113,8 @@
         style: 'currency',
         currency: 'VND',
     });
+    var discount_ncc = {{$product1->discount}};
+    var buy_more = {{$product1->buy_more}};
     document.getElementsByName('start_date')[0].addEventListener('change', (e) => {
         document.getElementsByName('end_date')[0].setAttribute('min', e.target.value);
     });
@@ -123,7 +125,6 @@
             url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
             success: function (result) {
                 if (result.validated === false) {
-                    console.log(result)
                     document.getElementById('message').innerHTML = result.error.end_date;
                     document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
@@ -138,14 +139,14 @@
                                     document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                                     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                                 } else {
-                                    if (document.getElementById('discount1').value && document.getElementById('discount1').value < 100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value) {
+                                    if (document.getElementById('discount1').value && document.getElementById('discount1').value < 100 - buy_more - discount_ncc) {
                                         document.querySelector('.btnSubmit').removeAttribute('disabled');
                                         document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                                         document.getElementById('message').innerHTML = '';
                                     } else {
                                         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                                         document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                                        document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
+                                        document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - buy_more - discount_ncc}`;
 
                                     }
 
@@ -167,14 +168,14 @@
                         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                         document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     } else {
-                        if (document.getElementById('discount1').value && document.getElementById('discount1').value < 100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value) {
+                        if (document.getElementById('discount1').value && document.getElementById('discount1').value < 100 - buy_more - discount_ncc) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                             document.getElementById('message').innerHTML = '';
                         } else {
                             document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
+                            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - buy_more - discount_ncc}`;
 
                         }
 
@@ -186,7 +187,7 @@
     document.getElementById('discount1').addEventListener('keyup', (o) => {
         const value = +o.target.value;
 
-        if (value < 100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value && value > 0 && document.getElementById('end_date').value && document.getElementById('start_date').value) {
+        if (value < 100 - buy_more - discount_ncc && value > 0 && document.getElementById('end_date').value && document.getElementById('start_date').value) {
             $.ajax({
                 url: '{{route('check_date')}}?_token={{csrf_token()}}&end_date=' + document.getElementById('end_date').value + '&start_date=' + document.getElementById('start_date').value,
                 success: function (result) {
@@ -195,14 +196,14 @@
                         document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                         document.querySelector('.btnSubmit').classList.add('bg-slate-300');
                     } else {
-                        if (value && value < 100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value) {
+                        if (value && value < 100 - buy_more - discount_ncc) {
                             document.querySelector('.btnSubmit').removeAttribute('disabled');
                             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
                             document.getElementById('message').innerHTML = ``;
                         } else {
                             document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
+                            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - buy_more - discount_ncc}`;
 
                         }
 
@@ -211,56 +212,20 @@
             });
             document.querySelector('.btnSubmit').removeAttribute('disabled');
             document.querySelector('.btnSubmit').classList.remove('bg-slate-300');
-            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
+            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - buy_more - discount_ncc}`;
         } else {
             document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
             document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
+            document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - buy_more - discount_ncc}`;
 
         }
 
         const price1 = $('#price').val();
-        const priceTrue = price1.replaceAll('.', '').replaceAll(',', '');
+        const priceTrue = price1.replaceAll('.', '').replaceAll(',', '').replaceAll(' ', '').replaceAll('đ', '');
         if (priceTrue > 0) {
-            let subMoney1 = VND.format(priceTrue * value / 100) || 0 + ' đ';
+            let subMoney1 = VND.format(priceTrue * value / 100) || 0 + 'đ';
             $('#moneyPrice').val(subMoney1);
         }
-    });
-    document.querySelector('.choose-product').addEventListener('change', (e) => {
-        const value = e.target.value;
-        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-
-        $.ajax({
-            url: '{{route('screens.manufacture.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
-            success: function (result) {
-                if (result) {
-                    console.log(result)
-                    document.querySelector('#price').value = result.pro.price;
-                    document.querySelector('#discount_ncc').value = result.pro.discount;
-                    document.querySelector('#buy_more').value = result.pro.buy_more;
-                    if (result.pro.discount > 0) {
-                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
-                        let subMoney1 = VND.format(priceTrue * result.pro.discount / 100) || 0 + ' đ';
-                        $('#moneyDis').val(subMoney1);
-                    }
-                    if (result.pro.buy_more > 0) {
-                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
-                        let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + ' đ';
-                        $('#moneyMore').val(subMoney2);
-                    }
-
-                } else {
-                    document.querySelector('#price').value = 0 + ' đ';
-                    document.querySelector('#buy_more').value = ''
-                    document.querySelector('#discount_ncc').value = ''
-                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                    document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - document.querySelector('#buy_more').value - document.querySelector('#discount_ncc').value}`;
-                }
-                // console.log(result);
-            },
-        });
     });
 
 </script>

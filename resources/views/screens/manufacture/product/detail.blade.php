@@ -7,18 +7,20 @@
     <div class="form-group">
         <label>Mã sản phẩm :</label>
         <input class="form-control form-control-lg" disabled value="{{$product->publish_id}}"/>
-        <div class="form-group">
-            <label>Tên sản phẩm :</label>
-            <input class="form-control form-control-lg" disabled value="{{$product->product_name}}">
-        </div>
-        <div class="form-group">
-            <label>Giá bán :</label>
-            <input class="form-control form-control-lg" disabled value="{{number_format($product->price,0,'.','.')}} đ">
-        </div>
-        <div class="form-group">
-            <label>V-Store xét duyệt:</label>
-            <input class="form-control form-control-lg" disabled value="{{$product->user_name}}">
-        </div>
+    </div>
+    <div class="form-group">
+        <label>Tên sản phẩm :</label>
+        <input class="form-control form-control-lg" disabled value="{{$product->product_name}}">
+    </div>
+    <div class="form-group">
+        <label>Giá bán :</label>
+        <input class="form-control form-control-lg" disabled value="{{number_format($product->price,0,'.','.')}} đ">
+    </div>
+    <div class="form-group">
+        <label>V-Store xét duyệt:</label>
+        <input class="form-control form-control-lg" disabled value="{{$product->user_name}}">
+    </div>
+    <div class="form-group">
         <div class="row">
             <div class="col-6">
                 <label for="">Chiết khấu cho V-Store</label>
