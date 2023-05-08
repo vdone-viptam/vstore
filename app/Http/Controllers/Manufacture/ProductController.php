@@ -105,14 +105,14 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        //    dd( $request->all());
-        $validator = Validator::make($request->all(), [
+        $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255|unique:products,sku_id',
+            'sku_id' => 'required|max:255|unique:products',
             'description' => 'required',
             'short_content' => 'required|max:500',
+            'images' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -120,17 +120,15 @@ class ProductController extends Controller
             'length' => 'required|max:13',
             'height' => 'required|max:13',
             'packing_type' => 'required',
-            'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
             'manufacturer_name' => 'max:255',
             'manufacturer_address' => 'max:255',
             'import_unit' => 'max:255',
             'import_address' => 'max:255',
-        ], [
+        ];
+
+        $message = [
             'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
-            'images.image' => 'Yêu cầu upload file ảnh',
-            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
-            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+            'images.required' => 'Ảnh bắt buộc upload',
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
@@ -158,11 +156,28 @@ class ProductController extends Controller
             'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
-            'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
-        ]);
+        ];
+        $imageRules = array(
+            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        );
+        $imageMessage = array(
+            'images.image' => 'Upload file không đúng định dạng',
+            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
+            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+        );
+        DB::beginTransaction();
+        $validator = Validator::make($request->all(), $error, $message);
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+        foreach ($request->images as $image) {
+            $image = array('images' => $image);
+
+            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
+
+            if ($imageValidator->fails()) {
+                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
         }
         DB::beginTransaction();
 
@@ -512,8 +527,7 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
         // dd($request->all(),$id);
-        DB::beginTransaction();
-        $validator = Validator::make($request->all(), [
+        $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
@@ -521,7 +535,6 @@ class ProductController extends Controller
             'description' => 'required',
             'short_content' => 'required|max:500',
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -533,12 +546,12 @@ class ProductController extends Controller
             'manufacturer_address' => 'max:255',
             'import_unit' => 'max:255',
             'import_address' => 'max:255',
-        ], [
+        ];
+
+        $message = [
             'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
+            'images.required' => 'Ảnh bắt buôc upload',
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
-            'images.image' => 'Yêu cầu upload file ảnh',
-            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
-            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
@@ -565,9 +578,28 @@ class ProductController extends Controller
             'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
-        ]);
+        ];
+        $imageRules = array(
+            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        );
+        $imageMessage = array(
+            'images.image' => 'Upload file không đúng định dạng',
+            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
+            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+        );
+        DB::beginTransaction();
+        $validator = Validator::make($request->all(), $error, $message);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+        }
+        foreach ($request->images as $image) {
+            $image = array('images' => $image);
+
+            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
+
+            if ($imageValidator->fails()) {
+                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
         }
         try {
 
