@@ -97,7 +97,7 @@
                             <th class="text-center white-space-120">Mã đơn hàng</th>
                             <th class="text-center white-space-130">Mã sản phẩm</th>
                             <th class="white-space-250">
-                            
+
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'name')
@@ -110,7 +110,7 @@
                                             <i class="fas fa-sort sort" data-sort="name"></i>
                                         @endif
                                 </span>
-                            
+
                             </th>
                             <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -138,7 +138,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-150">Ngày đặt hàng
+                            <th class="text-center white-space-150">Thời gian đặt hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -370,8 +370,8 @@
                             <input type="text" class="form-control form-control-lg" id="id_vdone" value="0" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="created_at">Ngày yêu cầu: </label>
-                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertDate(data.data.created_at)}" readonly>
+                            <label for="created_at">Thời gian yêu cầu: </label>
+                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertTimeVN(data.data.created_at)}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="id_vdone">Trạng thái</label>

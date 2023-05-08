@@ -65,7 +65,7 @@
                                         </span>
                                     </th>
                                     <th class=" text-center white-space-300">Nội dung</th>
-                                    <th class="white-space-150 text-center">Ngày tạo yêu cầu
+                                    <th class="white-space-150 text-center">Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -108,7 +108,7 @@
 
 
                                             <td class="text-center">
-                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
+                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y  H:i')}}
                                             </td>
                                         </tr>
                                     @endforeach
