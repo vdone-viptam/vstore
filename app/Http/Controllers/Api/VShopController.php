@@ -534,7 +534,7 @@ class  VShopController extends Controller
                 DB::commit();
                 return response()->json([
                     'status_code' => 200,
-                    'message' => 'Tạo Vshop Thành công',
+                    'message' => 'Cập nhật Thành công',
                     'data' => $vshop
                 ], 200);
             } catch (ClientResponseException $exception) {
