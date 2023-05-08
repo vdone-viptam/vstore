@@ -387,7 +387,7 @@
                    </form>     `;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.data.status == 1) {
+                    if (data.data.export_status != 0) {
                         $('.btn-update').addClass('hidden');
                     } else {
                         $('.btn-update').removeClass('hidden');
