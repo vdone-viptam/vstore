@@ -145,7 +145,7 @@
                                                 {{ $history->account_number }}
                                             </td>
                                             <td>
-                                                {{ $history->name }}bank_name
+                                                {{ $history->name }}
                                             </td>
                                             <td>
                                                 {{ $history->bank_name }}

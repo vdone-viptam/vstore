@@ -187,6 +187,8 @@
                                                 class="text-[#FF4D4F]">*</strong></label>
                                         <input required type="number" class="only-number form-control only-number"
                                                name="money" id="money"
+                                               oninvalid="this.setCustomValidity('Giá trị lớn hơn 100.000 và nhỏ hơn {{ number_format(Auth::user()->money, '0', '.', '.') }}')"
+                                               oninput="this.setCustomValidity('')"
                                                data-value="0" min="100000" placeholder="0đ" max="{{Auth::user()->money}}">
                                     </div>
                                 </div>
