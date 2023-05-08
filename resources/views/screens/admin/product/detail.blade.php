@@ -76,7 +76,6 @@
             <input type="text" class="form-control form-control-lg" disabled id="discount"
                    data-discount="{{$product->discount}}"
                    value="{{$product->discount}}%" placeholder="Nhập tên sản phẩm">
-                   value="{{$product->discount}}%" placeholder="Nhập tên sản phẩm">
         </div>
     </div>
 </div>
