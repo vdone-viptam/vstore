@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     private ChartRepositoryInterface $chartRepository;
+
     public function __construct(ChartRepositoryInterface $chartRepository)
     {
         $this->chartRepository = $chartRepository;
@@ -37,7 +38,9 @@ class DashboardController extends Controller
             $data = $data->where(function ($query) {
                 $query->where('products.publish_id', $this->v['key_search'])
                     ->orWhere('products.name', 'like', '%' . $this->v['key_search'] . '%')
-                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%');
+                    ->orWhere('categories.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('users.name', 'like', '%' . $this->v['key_search'] . '%')
+                    ->orWhere('requests.code', $this->v['key_search']);
             });
         }
         $data = $data->orderBy($this->v['field'], $this->v['type'])
@@ -50,7 +53,7 @@ class DashboardController extends Controller
             // ->where('requests.status', 0)
             ->count();
 
-        $vshop  = [];
+        $vshop = [];
 
 
         // $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
@@ -63,23 +66,23 @@ class DashboardController extends Controller
         // $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
 
         return view('screens.vstore.dashboard.index',
-        [
-            'data' => $data,
-            'limit' => $limit,
-            'field' => $this->v['field'],
-            'type' => $this->v['type'],
-            'key_search' => $this->v['key_search'],
+            [
+                'data' => $data,
+                'limit' => $limit,
+                'field' => $this->v['field'],
+                'type' => $this->v['type'],
+                'key_search' => $this->v['key_search'],
 
-            'vshop' => $vshop,
-            // 'dataRevenueChartMonth' => $dataRevenueChartMonth,
-            // 'dataRevenueChartYear' => $dataRevenueChartYear,
-            // 'dataOrderChartMonth' => $dataOrderChartMonth,
-            // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
+                'vshop' => $vshop,
+                // 'dataRevenueChartMonth' => $dataRevenueChartMonth,
+                // 'dataRevenueChartYear' => $dataRevenueChartYear,
+                // 'dataOrderChartMonth' => $dataOrderChartMonth,
+                // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
-            'dataRevenueToday' => $dataRevenueToday,
-            'dataOrderToday' => $dataOrderToday,
-            'countRequestProductReview' => $countRequestProductReview,
-        ]);
+                'dataRevenueToday' => $dataRevenueToday,
+                'dataOrderToday' => $dataOrderToday,
+                'countRequestProductReview' => $countRequestProductReview,
+            ]);
 
     }
 }

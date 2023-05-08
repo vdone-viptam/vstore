@@ -185,14 +185,14 @@ class ProductController extends Controller
         try {
             $product = Product::find($id);
 
-            $code = 'VN-' . Str::random(10);
+            $code = 'vns' . Str::lower(Str::random(10));
             $check = true;
             while ($check) {
                 $checkProduct = Product::where('publish_id', $code)->count();
                 if (!$checkProduct || $checkProduct < 1) {
                     $check = false;
                 }
-                $code = 'VN' . rand(1000000000, 9999999999);
+                $code = 'vns' . Str::lower(Str::random(10));
             }
             $product->publish_id = $code;
             $product->save();
@@ -220,7 +220,7 @@ class ProductController extends Controller
         $type = $request->type ?? 'asc';
         $this->v['products'] = Category::join('products', 'categories.id', '=', 'products.category_id')->join('users', 'products.user_id', '=', 'users.id')
             ->select('products.publish_id', 'products.category_id', 'products.user_id', 'products.discount', 'products.discount_vShop',
-                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id', 'categories.name as category_name')
+                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id', 'categories.name as category_name','products.name as product_name')
             ->selectSub('select name from users where id =  products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(sum(amount - export ),0) from product_warehouses where product_id =  products.id', 'amount')
             ->where('products.status', 2)
