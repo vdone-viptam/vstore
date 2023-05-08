@@ -526,7 +526,7 @@ class  VShopController extends Controller
                 $vshop->vshop_name = $request->nick_name;
                 $vshop->save();
                 $res = $elasticsearchController->searchDocVShop($request->nick_name);
-                if (count($res) == 0) {
+                if (count($res) == 0 || !in_array($vshop->id, $res)) {
                     $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
                 } else {
                     $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
