@@ -89,10 +89,10 @@
                                             <i class="fas fa-sort sort" data-sort="users.name"></i>
                                         @endif
                                 </span>
-                            
+
                             </th>
                             <th>
-                           
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -105,7 +105,7 @@
                                         <i class="fas fa-sort sort" data-sort="products.name"></i>
                                     @endif
                                 </span>
-                        
+
                             </th>
                             <th class="white-space-110">Ngành hàng
                                 <span style="float: right;cursor: pointer">
@@ -155,7 +155,7 @@
                                         @endif
                                 </span>
 </div>
-                               
+
                             </th>
                             <th class="white-space-130">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
@@ -199,7 +199,7 @@
                                 </span>
                             </th>
 
-                           
+
                             <th class="white-space-80">
                             </th>
                         </tr>
@@ -225,7 +225,7 @@
                                         {{$product->discount}}%
                                     </td>
                                     <td class="text-center white-space-130">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class=" text-center white-space-130">{{$product->vstore_confirm_date ?
+                                    <td class=" text-center white-space-130">{{$product->vstore_confirm_date !== null ?
 \Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y H:i') : 'Chưa xét duyệt'}}</td>
                                     <td class="text-center">
                                         @if($product->status == 0)
