@@ -125,7 +125,6 @@
             url: '{{route('check_date')}}?_token={{csrf_token()}}&start_date=' + e.target.value,
             success: function (result) {
                 if (result.validated === false) {
-                    console.log(result)
                     document.getElementById('message').innerHTML = result.error.end_date;
                     document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
                     document.querySelector('.btnSubmit').classList.add('bg-slate-300');
@@ -227,42 +226,6 @@
             let subMoney1 = VND.format(priceTrue * value / 100) || 0 + 'đ';
             $('#moneyPrice').val(subMoney1);
         }
-    });
-    document.querySelector('.choose-product').addEventListener('change', (e) => {
-        const value = e.target.value;
-        document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-        document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-
-        $.ajax({
-            url: '{{route('screens.manufacture.product.chooseProduct')}}?_token={{csrf_token()}}&product_id=' + value,
-            success: function (result) {
-                if (result) {
-                    document.querySelector('#price').value = result.pro.price;
-                    console.log(result);
-                    discount_ncc = result.pro.discount;
-                    buy_more = result.pro.buy_more;
-                    if (result.pro.discount > 0) {
-                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
-                        let subMoney1 = VND.format(priceTrue * result.pro.discount / 100) || 0 + 'đ';
-                        $('#moneyDis').val(subMoney1);
-                    }
-                    if (result.pro.buy_more > 0) {
-                        const priceTrue = (result.pro.price).replaceAll('.', '').replaceAll(',', '');
-                        let subMoney2 = VND.format(priceTrue * result.pro.buy_more / 100) || 0 + 'đ';
-                        $('#moneyMore').val(subMoney2);
-                    }
-
-                } else {
-                    document.querySelector('#price').value = 0 + 'đ';
-                    document.querySelector('#buy_more').value = '';
-                    document.querySelector('#discount_ncc').value = '';
-                    document.querySelector('.btnSubmit').setAttribute('disabled', 'true');
-                    document.querySelector('.btnSubmit').classList.add('bg-slate-300');
-                    document.getElementById('message').innerHTML = `Phần trăm giảm giá phải nhỏ hơn ${100 - buy_more - discount_ncc}`;
-                }
-                // console.log(result);
-            },
-        });
     });
 
 </script>
