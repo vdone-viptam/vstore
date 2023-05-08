@@ -408,7 +408,9 @@ function convertTimeVN(inputTime) {
     let formattedDateTime = day + '/' + month + '/' + year + ' ' + time;
     return formattedDateTime;
 }
-
+function convertNumberVN(numberString) {
+    return numberString.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // '1.234.567'
+}
 // prevent spam form
 $("#form").submit(function (e) {
     $("#btnConfirm").attr("disabled", true);

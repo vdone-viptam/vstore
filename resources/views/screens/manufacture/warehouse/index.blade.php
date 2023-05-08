@@ -146,7 +146,7 @@
                                 <button class="btn btn-success" id="btnAffWa" type="button" onclick="affWarehouse()">
                                     Thêm kho
                                 </button>
-                              
+
                             </li>
                         </ul>
                     </form>
@@ -204,8 +204,8 @@
                                     <td class=" white-space-300">{{$val->ware_name}}</td>
                                     <td class="text-center">{{$val->phone_number}}</td>
                                     <td class="white-space-200">{{$val->address}}</td>
-                                    <td class="text-center">{{$val->amount ?? 0}}</td>
-                                    <td class="text-center">{{$val->amount_product ?? 0}}</td>
+                                    <td class="text-center"> {{  $val->amount ? number_format($val->amount, 0, '.', '.') : 0 }}</td>
+                                    <td class="text-center"> {{  $val->amount_product ? number_format($val->amount_product, 0, '.', '.') : 0 }}</td>
                                     <td class="text-center white-space-100">
                                         <a href="javascript:void(0)" style="text-decoration:underline" class="btn btn-link px-2"
                                                 onclick="showDetail({{$val->id}})">Chi tiết
@@ -375,7 +375,7 @@
                             htmlData += `
 <tr role="row" class="odd">
                                 <td class="text-nowrap" >${value.name}</td>
-                                <td>${value.amount_product}</td>
+                                <td>${ convertNumberVN(value.amount_product)}</td>
 
                             </tr>
 
