@@ -158,7 +158,7 @@
                 <form action="{{route('screens.manufacture.finance.deposit')}}" class="w-100" method="POST">
                     @csrf
 
-                    <div class="row m-4 py-4" style="border-bottom: 1px solid;">
+                    <div class="row m-4 py-4" style="border-bottom: 1px solid #d2d2e4;">
                         <div class="fiNumber"
                              style="width:100%; max-width:780px; background-color: #E6F7FF; border: 1px solid #69C0FF; border-radius: 10px; padding: 10px 40px; display: flex; justify-content: space-between;align-items: center;">
                             <div class="number-cost">
@@ -166,7 +166,7 @@
                                     đ</h3>
                                 <span style="color: black; font-size: 14px;">Tổng số dư</span>
                             </div>
-                            <div class="number-cost" style="border-left: 1px solid; border-right: 1px solid;">
+                            <div class="number-cost" style="border-left: 1px solid #d2d2e4; border-right: 1px solid #d2d2e4;">
                                 <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,',','.')}}
                                     đ</h3>
                                 <span style="color: black; font-size: 14px;">Số dư khả dụng</span>

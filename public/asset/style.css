@@ -177,8 +177,8 @@
     }
 
     .fiNumber div:nth-child(2) {
-        border-top: 1px solid;
-        border-bottom: 1px solid;
+        border-top: 1px solid #d2d2e4;
+        border-bottom: 1px solid #d2d2e4;
         border-left: none !important;
         border-right: none !important;
         padding: 10px 0;
