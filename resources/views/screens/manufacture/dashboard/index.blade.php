@@ -227,12 +227,12 @@
                                 <th class="white-space-130">
                                   
                                         Mã sản phẩm
-                                    
+
                                 </th>
                                 <th >
                                     
                                         Tên sản phẩm
-                                   
+
                                 </th>
                                 <th class="white-space-130">
                                     
@@ -249,11 +249,11 @@
                                                 <i class="fas fa-sort sort" data-sort="categories.name"></i>
                                             @endif
                                         </span>
-                                 
+
                                 </th>
                                 <th class="white-space-100">
 
-                                    
+
                                         Giá bán
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'price')
@@ -266,7 +266,7 @@
                                                 <i class="fas fa-sort sort" data-sort="price"></i>
                                             @endif
                                         </span>
-                                   
+
                                 </th>
                                 <th class="white-space-150">        
                                         V-Store niêm yết
@@ -281,7 +281,7 @@
                                                 <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                             @endif
                                         </span>
-                                    
+
                                 </th>
                                 <th class="white-space-130">
 
@@ -303,7 +303,7 @@
                                         </div>
                                 </th>
                                 <th class="white-space-120">
-                                    
+
                                         Ngày xét duyệt
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'admin_confirm_date')
@@ -318,7 +318,7 @@
                                                 <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
                                             @endif
                                         </span>
-                                  
+
                                 </th>
                                 <th class="white-space-130">
                                 <div class="d-flex align-items-center justify-content-around">
@@ -552,7 +552,6 @@
                     } else {
                         checked = 'disabled';
                     }
-                    console.log(checked);
                     return `
                         <div class="col-4">
                         <label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">

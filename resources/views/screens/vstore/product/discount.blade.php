@@ -95,7 +95,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                 </span>
-                              
+
                             </th>
                             <th class="white-space-180 text-center">Phần trăm giảm giá
                                 <span style="float: right;cursor: pointer">

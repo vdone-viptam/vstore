@@ -64,8 +64,47 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th >Nội dung</th>
-                                    <th class="white-space-150 text-center">Ngày tạo yêu cầu
+                                    <th class="white-space-150 text-center">Số tài khoản
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'account_number')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="account_number"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="account_number"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="account_number"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-200 text-center">Tên chủ tài khoản
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class="white-space-120 text-center">Ngân hàng
+                                        <span style="float: right;cursor: pointer">
+                                            @if($field == 'bank_name')
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="bank_name"></i>
+                                                @else
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="bank_name"></i>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="bank_name"></i>
+                                            @endif
+                                        </span>
+                                    </th>
+                                    <th class=" text-center white-space-300">Nội dung</th>
+                                    <th class="white-space-150 text-center">Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
                                                 @if($type == 'desc')
@@ -102,7 +141,16 @@
                                             <td class="text-right white-space-130">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
-                                            <td class="white-space-400">
+                                            <td>
+                                                {{ $history->account_number }}
+                                            </td>
+                                            <td class="white-space-200 text-center">
+                                                {{ $history->name }}
+                                            </td>
+                                            <td>
+                                                {{ $history->bank_name }}
+                                            </td>
+                                            <td class="white-space-300">
                                                 Chuyển khoản ra ngoài
                                             </td>
 

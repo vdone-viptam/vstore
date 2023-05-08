@@ -89,6 +89,7 @@ class FinanceController extends Controller
         $type = $request->type ?? 'asc';
         $field = $request->field ?? 'id';
         $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+            ->selectSub('select name from banks where id = deposits.bank_id', 'bank_name')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
@@ -129,6 +130,8 @@ class FinanceController extends Controller
                     break;
                 }
             }
+            $request->money = str_replace('.', '', $request->money);
+
             if ($request->money > Auth::user()->money) {
                 return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }

@@ -198,7 +198,7 @@
                                         <div style="display:flex; justify-content:center; gap:10px"><a
                                                 href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"
                                                 style="text-decoration:underline"
-                                                class="text-success font-medium  ">
+                                                class="text-primary font-medium  ">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10,1)"
@@ -211,7 +211,7 @@
                                                 href="javascript:void(0)"
                                                 onclick="upDateStatus('{{$product->code}}',1,7)"
                                                 style="text-decoration:underline"
-                                                class="text-success font-medium ">
+                                                class="text-primary font-medium ">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)"

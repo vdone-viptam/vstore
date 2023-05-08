@@ -115,7 +115,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Số thẻ:</label>
-                                    <input required type="text" name="account_number" value="" class="stk0 form-control only-number"
+                                    <input required type="text" name="account_number" value=""
+                                           class="stk0 form-control only-number"
                                            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                                     @error('account_number')
                                     <p class="text-red-600 mt-2">{{$message}}</p>
@@ -158,17 +159,21 @@
                     @csrf
 
                     <div class="row m-4 py-4" style="border-bottom: 1px solid;">
-                        <div class="fiNumber" style="width:100%; max-width:780px; background-color: #E6F7FF; border: 1px solid #69C0FF; border-radius: 10px; padding: 10px 40px; display: flex; justify-content: space-between;align-items: center;">
+                        <div class="fiNumber"
+                             style="width:100%; max-width:780px; background-color: #E6F7FF; border: 1px solid #69C0FF; border-radius: 10px; padding: 10px 40px; display: flex; justify-content: space-between;align-items: center;">
                             <div class="number-cost">
-                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(round(\Illuminate\Support\Facades\Auth::user()->money ,0) + round($waiting,0),0,',','.') }} đ</h3>
+                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(round(\Illuminate\Support\Facades\Auth::user()->money ,0) + round($waiting,0),0,',','.') }}
+                                    đ</h3>
                                 <span style="color: black; font-size: 14px;">Tổng số dư</span>
                             </div>
                             <div class="number-cost" style="border-left: 1px solid; border-right: 1px solid;">
-                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,',','.')}} đ</h3>
+                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,',','.')}}
+                                    đ</h3>
                                 <span style="color: black; font-size: 14px;">Số dư khả dụng</span>
                             </div>
                             <div class="number-cost">
-                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format($waiting,0,',','.') }} đ</h3>
+                                <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format($waiting,0,',','.') }}
+                                    đ</h3>
                                 <span style="color: black; font-size: 14px;">Chờ rút</span>
                             </div>
                         </div>
@@ -185,9 +190,12 @@
                                     <div class="form-group">
                                         <label for="val-username">Số tiền cần rút <strong
                                                 class="text-[#FF4D4F]">*</strong></label>
-                                        <input required type="number" class="only-number form-control only-number"
+                                        <input required type="text" class="only-number form-control number"
                                                name="money" id="money"
-                                               data-value="0" min="100000" placeholder="0đ" max="{{Auth::user()->money}}">
+                                               oninvalid="this.setCustomValidity('Giá trị lớn hơn 100.000 và nhỏ hơn {{ number_format(Auth::user()->money, '0', '.', '.') }}')"
+                                               oninput="this.setCustomValidity('')"
+                                               data-value="0" min="100000" placeholder="0đ"
+                                               max="{{Auth::user()->money}}">
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column items-start w-100 flex-wrap md:flex-nowrap my-4">
@@ -233,8 +241,9 @@
                                                    class="btn-add-bank w-100">
                                                     <div class="add"
                                                          style="border: 1px dashed #1E90FF; border-radius: 0.25rem; padding: 0.375rem 0.75rem; margin-top: 20px; margin-bottom: 20px;">
-                                                        <div class="d-flex justify-content-start align-items-center w-100"
-                                                             style="gap: 20px;">
+                                                        <div
+                                                            class="d-flex justify-content-start align-items-center w-100"
+                                                            style="gap: 20px;">
                                                             <svg width="20" height="20" viewBox="0 0 20 20"
                                                                  fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -294,7 +303,7 @@
         $(document).ready(function () {
 
             const money = {{ Auth::user()->money}};
-            if( money < 100000 ){
+            if (money < 100000) {
                 document.querySelector('.withdraw-money').setAttribute('disabled', 'true');
                 document.querySelector('.withdraw-money').classList.add('opacity-70');
             }

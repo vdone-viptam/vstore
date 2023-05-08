@@ -75,7 +75,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-120">Mã yêu cầu</th>
-                            <th>   
+                            <th>
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -153,7 +153,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                     @endif
                                 </span>
-                            
+
                             </th>
                             <th class="white-space-80"></th>
                         </tr>
@@ -263,7 +263,6 @@
         }
 
         let limit = document.getElementById('limit');
-        console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

@@ -101,16 +101,16 @@
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'name')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
-                                            @endif
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="name"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
                                         @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="name"></i>
+                                    @endif
                                 </span>
-                            
+
                             </th>
                             <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -138,7 +138,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-130">Ngày đặt hàng
+                            <th class="text-center white-space-160">Thời gian đặt hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -362,7 +362,7 @@
 
 
                         <div class="form-group">
-                            <label for="quantity">Số lượng nhập:</label>
+                            <label for="quantity">Số lượng xuất:</label>
                             <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
                         </div>
                         <div class="form-group">
@@ -370,8 +370,8 @@
                             <input type="text" class="form-control form-control-lg" id="id_vdone" value="0" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="created_at">Ngày yêu cầu: </label>
-                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertDate(data.data.created_at)}" readonly>
+                            <label for="created_at">Thời gian yêu cầu: </label>
+                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertTimeVN(data.data.created_at)}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="id_vdone">Trạng thái</label>
@@ -386,7 +386,7 @@
                    </form>     `;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.data.status == 1) {
+                    if (data.data.export_status != 0) {
                         $('.btn-update').addClass('hidden');
                     } else {
                         $('.btn-update').removeClass('hidden');

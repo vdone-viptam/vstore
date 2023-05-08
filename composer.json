@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-curl": "*",
+        "ext-http": "*",
+        "cloudinary-labs/cloudinary-laravel": "*",
         "elasticsearch/elasticsearch": "^8.7",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",

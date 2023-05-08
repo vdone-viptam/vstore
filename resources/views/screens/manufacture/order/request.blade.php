@@ -90,7 +90,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">Thời gian tạo đơn:</label>
-                                        <input type="datetime-local" class="form-control form-control-lg"
+                                        <input type="text" class="form-control form-control-lg"
                                                id="created_at" readonly>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                 </span>
-                              
+
                             </th>
                             <th class="white-space-130">
                              
@@ -179,7 +179,7 @@
                                             <i class="fas fa-sort sort" data-sort="price"></i>
                                         @endif
                                 </span>
-                              
+
                             </th>
                             <th class="white-space-110 ">
                                 
@@ -197,7 +197,7 @@
                                             <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
                                         @endif
                                 </span>
-                                
+
                             </th>
                             <th class="white-space-100 text-center">
                                 Số lượng
@@ -243,7 +243,7 @@
                             </th>
                             <th class="white-space-120 text-center">Trạng thái</th>
                             <th class="white-space-150">
-                            
+
                             Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
@@ -258,7 +258,7 @@
                                             <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
                                         @endif
                                 </span>
-                                
+
                             </th>
                             <th class="white-space-80"></th>
                         </tr>
@@ -362,7 +362,7 @@
                                 $("#price").val(convertVND(result.product.price));
                                 const deposits = (result.total - (result.total * result.discount / 100)) * (result.deposit_money / 100);
                                 const total = result.total - (result.total * result.discount / 100);
-                                const today = (datetimeLocal(result.created_at));
+
                                 const status = result.status == 1 ? 'Đã hoàn thành' : result.status == 3 ? 'Đơn hàng mới' : result.status == 4 ? 'Đang giao hàng' : 'Hủy';
 
                                 $("#discount").val(parseInt(result.discount) + ' %');
@@ -370,7 +370,8 @@
                                 $("#deposits").val(convertVND(deposits));
                                 $("#total").val(convertVND(total));
                                 $("#status").val(status);
-                                $("#created_at").val(today);
+
+                                $("#created_at").val(convertTimeVN(result.created_at));
 
                                 $(".update-request").attr('data-id', result.id);
 
