@@ -164,6 +164,7 @@ class WarehouseController extends Controller
         $limit = $request->limit ?? 10;
 
         $warehouse_aff = json_decode(Auth::user()->warehouse_aff) ?? [];
+        // dd(Auth::id());
         $this->v['field'] = $request->field ?? 'amount_product';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
@@ -222,14 +223,21 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
 
     public function detail(Request $request)
     {
-        $kho = ProductWarehouses::select('products.name as name', 'product_id', DB::raw('(amount -export) as amount_product'))
-            ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+        $warehouse_aff = json_decode(Auth::user()->warehouse_aff) ?? [];
+        $kho = ProductWarehouses::select(
+            'products.name as name', 'product_id',
+            DB::raw('(amount -export) as amount_product'))
+            // ->join('products', 'product_warehouses.product_id', '=', 'products.id')
+            ->leftJoin('products', 'product_warehouses.product_id', '=', 'products.id')
+            ->join('warehouses', 'product_warehouses.ware_id', '=', 'warehouses.id')
             ->groupBy(['product_id', 'products.name']
             )->where('ware_id', $request->id)
-            ->where('products.user_id', Auth::id())
+            // ->where('products.user_id', Auth::id())
+            ->whereIn('warehouses.user_id', $warehouse_aff)
             ->where('product_warehouses.status', 1)
             ->get();
 
+        // dd($kho->toArray());
 
         return response()->json(['success' => true, 'data' => $kho]);
 //        return view('screens.manufacture.warehouse.detail', ['products1' => $kho]);

@@ -133,9 +133,10 @@
                             <div class="mb-3 col-12 col-xl-6">
                                 <label for="formFileMultiple" class="form-label">Hình ảnh sản phẩm<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control form-control-lg" accept="image/*" type="file" name="images[]"
+                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png" type="file" name="images[]"
                                        id="images"
                                        multiple>
+                                <p class="text-danger mt-2 ml-1" id="error"></p>
                                 @error('images')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                 @enderror
@@ -434,8 +435,8 @@
                 max_retries: 2,
                 filters: {
                     max_file_size: '200mb',
-                    mime_types : [
-                        { title : "Video files", extensions : "AVI,MP4,MKV,WMV,VOB,FLV" },
+                    mime_types: [
+                        {title: "Video files", extensions: "AVI,MP4,MKV,WMV,VOB,FLV"},
                     ],
                 },
                 multipart_params: {
@@ -491,7 +492,7 @@
                     Error: function (up, err) {
                         // DO YOUR ERROR HANDLING!
                         let stringError = 'Upload video không thành công !';
-                        if( err.message == 'File extension error.')
+                        if (err.message == 'File extension error.')
                             stringError = "Hãy chọn video hợp lệ !";
                         Swal.fire({
                             icon: 'error',
@@ -503,5 +504,35 @@
             });
             uploader.init();
         });
+
+
+        document.querySelector('#images').addEventListener('change',(e) => {
+            let error = document.querySelector("#error");
+
+            error.innerHTML = "";
+            if (e.target.files) {
+                console.log(e.target.files)
+                for (let i = 0; i < e.target.files.length; i++) {
+                    let file = e.target.files[i];
+                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png"];
+                    if (!allowedImageTypes.includes(file.type)) {
+                        error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
+                        document.querySelector('#btnSave').setAttribute('disabled', 'true');
+                        return false;
+                    }
+                    if (file.size > 1024 * 1024 * 5) {
+                        error.innerHTML = "File ảnh upload không quá 5MB";
+                        document.querySelector('#btnSave').setAttribute('disabled', 'true');
+                        return false;
+                    }
+
+
+
+                    document.querySelector('#btnSave').removeAttribute('disabled');
+
+                }
+
+            }
+        })
     </script>
 @endsection

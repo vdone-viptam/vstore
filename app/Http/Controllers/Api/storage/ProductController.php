@@ -351,7 +351,10 @@ class ProductController extends Controller
 
         try {
 
-            $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
+            $order = Order::where('id', $request->id)->first();
+            if (!$order) {
+                $order = Order::where('no', $request->id)->first();
+            }
             if (!$order) {
                 return response()->json([
                     'success' => false,
@@ -380,8 +383,7 @@ class ProductController extends Controller
             $order_item = OrderItem::where('order_id', $order->id)->first();
 
             $product = Product::where('id', $order_item->product_id)->first();
-            RequestWarehouse::destroy($order->request_warehouse_id);
-
+            DB::table('request_warehouses')->where('id', $order->request_warehouse_id)->delete();
             if ($status == 1) {
 //            return $order->total;
                 if ($order->method_payment == 'COD') {

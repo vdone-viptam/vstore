@@ -94,7 +94,7 @@
                             <th class="white-space-120 text-center">Mã nhập kho</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th class="white-space-250">
-                            <div class=" d-flex justify-content-between align-items-center" style="gap:6px">       
+                            <div class=" d-flex justify-content-between align-items-center" style="gap:6px">
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -135,7 +135,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150 text-center">Ngày nhập hàng
+                            <th class="white-space-150 text-center">Thời gian nhập hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -268,8 +268,8 @@
                             <input type="text" class="form-control form-control-lg" id="id_vdone" value="0" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="created_at">Ngày yêu cầu: </label>
-                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertDate(data.data.created_at)}" readonly>
+                            <label for="created_at">Thời gian nhập hàng: </label>
+                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertTimeVN(data.data.created_at)}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="id_vdone">Trạng thái</label>

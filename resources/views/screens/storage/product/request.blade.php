@@ -142,7 +142,7 @@
                                 </span>
                             </th>
                             </th>
-                            <th class="text-center white-space-130">Ngày yêu cầu
+                            <th class="text-center white-space-130">Thời gian yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -180,7 +180,7 @@
                                     <td title="{{$product->product_name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                     <td class="text-center ">{{$product->ncc_name}}</td>
                                     <td class="text-center">{{$product->quantity}}</td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)}}</td>
+                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="status{{$product->id}} text-center">
                                         @if($product->status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a
@@ -358,8 +358,8 @@
                             <input type="text" class="form-control form-control-lg" id="id_vdone" value="0" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="created_at">Ngày yêu cầu: </label>
-                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertDate(data.data.created_at)}" readonly>
+                            <label for="created_at">Thời gian yêu cầu: </label>
+                            <input type="text" class="form-control form-control-lg" id="created_at" value="${convertTimeVN(data.data.created_at)}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="id_vdone">Trạng thái</label>

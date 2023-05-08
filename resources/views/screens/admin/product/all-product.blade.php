@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Quản lý sản phẩm</h2>
+                    <h2 class="pageheader-title">Tất cả sản phẩm</h2>
 
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
@@ -188,7 +188,7 @@
                                 @foreach($products as $pro)
                                     <tr class="line-clamp3">
                                         <td class="text-center">{{$pro->publish_id}}</td>
-                                        <td class="text-center">{{$pro->product_name}}</td>
+                                        <td class="">{{$pro->product_name}}</td>
                                         <td class="text-center">{{$pro->category_name}}</td>
                                         <td class="font-medium text-center">{{$pro->name}}</td>
                                         <td class="text-center">{{$pro->discount}}%</td>

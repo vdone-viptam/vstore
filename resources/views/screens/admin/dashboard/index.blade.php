@@ -197,7 +197,7 @@
                                             </span>
                                         
                                     </th>
-                                    <th class="white-space-150">
+                                    <th class="white-space-150" style="min-width: 160px !important;">
                                         
                                             Phân loại tài khoản
                                             <span style="float: right;cursor:pointer">
@@ -213,7 +213,7 @@
                                             </span>
                                       
                                     </th>
-                                    <th class="white-space-120">
+                                    <th class="white-space-150">
                                         
                                             Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
@@ -229,7 +229,7 @@
                                             </span>
                                        
                                     </th>
-                                    <th class="white-space-150 text-center">
+                                    <th class="white-space-150 text-center" style="min-width:170px !important;">
                                        
                                             Mã người giới thiệu
                                             <span style="float: right;cursor:pointer">
@@ -255,10 +255,10 @@
                                 <tr>
                                     <td class="white-space-200">{{$user->name}}</td>
                                     <td class="white-space-200">{{ Str::limit($user->email, 15) }}</td>
-                                    <td class="text-center white-space-120">{{$user->phone_number}}</td>
+                                    <td class="text-center ">{{$user->phone_number}}</td>
                                     <td class="white-space-200">{{$user->company_name}}</td>
-                                    <td class="text-center white-space-120">{{$user->tax_code}}</td>
-                                    <td class="text-center white-space-150">{{$user->id_vdone}}</td>
+                                    <td class="text-center ">{{$user->tax_code}}</td>
+                                    <td class="text-center ">{{$user->id_vdone}}</td>
                                     <td class="text-center">
                                         @if($user->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>

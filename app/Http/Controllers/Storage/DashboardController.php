@@ -183,9 +183,38 @@ class DashboardController extends Controller
         $warehouse = Warehouses::where('user_id', Auth::id())->first();
         $warehouse->is_off = $warehouse->is_off == 1 ? 0 : 1;
         $warehouse->save();
-        if ($request->value == 'on') {
+
+        if ($warehouse->is_off == 1) {
+            $products = ProductWarehouses::where('ware_id', $warehouse->id)->where('status', 1)->get();
+            foreach ($products as $product) {
+                $check = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+                    ->select('product_warehouses.product_id')
+                    ->where('product_id', $product->product_id)
+                    ->where('product_warehouses.status', 1)
+                    ->where('availability_status', 10)
+                    ->where('ware_id', $warehouse->id)
+                    ->get();
+
+                foreach ($check as $ck) {
+                    DB::table('products')->where('id', $ck->product_id)->update(['availability_status' => 1]);
+                }
+            }
+
             return response()->json(['message' => 'Bật trạng thái hoạt động kho thành công']);
         } else {
+            $products = ProductWarehouses::where('ware_id', $warehouse->id)->where('status', 1)->get();
+            foreach ($products as $product) {
+                $check = Product::join('product_warehouses', 'products.id', '=', 'product_warehouses.product_id')
+                    ->select('product_warehouses.product_id')
+                    ->where('product_id', $product->product_id)
+                    ->where('product_warehouses.status', 1)
+                    ->where('availability_status', 1)
+                    ->where('ware_id', '!=', $warehouse->id)
+                    ->get();
+                if (count($check) === 0) {
+                    DB::table('products')->where('id', $product->product_id)->update(['availability_status' => 10]);
+                }
+            }
             return response()->json(['message' => 'Tắt trạng thái hoạt động kho thành công']);
         }
 

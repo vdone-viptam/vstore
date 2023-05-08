@@ -105,14 +105,32 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        //    dd( $request->all());
-        $validator = Validator::make($request->all(), [
+        $imageRules = array(
+            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        );
+        $imageMessage = array(
+            'images.image' => 'Upload file không đúng định dạng',
+            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
+            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+        );
+        foreach ($request->images as $image) {
+            $image = array('images' => $image);
+
+            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
+
+            if ($imageValidator->fails()) {
+                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
+        }
+
+        $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255|unique:products,sku_id',
+            'sku_id' => 'required|max:255|unique:products',
             'description' => 'required',
             'short_content' => 'required|max:500',
+            'images' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -120,13 +138,15 @@ class ProductController extends Controller
             'length' => 'required|max:13',
             'height' => 'required|max:13',
             'packing_type' => 'required',
-            'images' => 'required',
             'manufacturer_name' => 'max:255',
             'manufacturer_address' => 'max:255',
             'import_unit' => 'max:255',
             'import_address' => 'max:255',
-        ], [
+        ];
+
+        $message = [
             'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
+            'images.required' => 'Ảnh bắt buộc upload',
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
@@ -154,12 +174,15 @@ class ProductController extends Controller
             'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
-            'images.required' => 'Ảnh sản phẩm bắt buộc chọn',
-        ]);
+        ];
+
+        DB::beginTransaction();
+        $validator = Validator::make($request->all(), $error, $message);
+
         if ($validator->fails()) {
-//            dd($validator->errors());
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
+
         DB::beginTransaction();
 
         try {
@@ -491,6 +514,7 @@ class ProductController extends Controller
 
     public function edit($id = null)
     {
+
         $categories = Category::all();
         $product = Product::find($id);
 
@@ -507,16 +531,31 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        // dd($request->all(),$id);
-        DB::beginTransaction();
-        $validator = Validator::make($request->all(), [
+        $imageRules = array(
+            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+        );
+        $imageMessage = array(
+            'images.image' => 'Upload file không đúng định dạng',
+            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
+            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
+        );
+        foreach ($request->images as $image) {
+            $image = array('images' => $image);
+
+            $imageValidator = Validator::make($image, $imageRules, $imageMessage);
+
+            if ($imageValidator->fails()) {
+                return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
+            }
+        }
+        $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
             'sku_id' => 'required|max:255|unique:products,sku_id,' . $id,
             'description' => 'required',
             'short_content' => 'required|max:500',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'images' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -528,8 +567,11 @@ class ProductController extends Controller
             'manufacturer_address' => 'max:255',
             'import_unit' => 'max:255',
             'import_address' => 'max:255',
-        ], [
+        ];
+
+        $message = [
             'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
+            'images.required' => 'Ảnh bắt buôc upload',
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
@@ -540,8 +582,6 @@ class ProductController extends Controller
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
-            'images.image' => 'File nhập không phải định dạng ảnh',
-            'images.mimes' => 'Đuôi file không được hô trợ upload (chỉ hỗ trợ các đuôi jpeg,png,jpg,gif,svg)',
             'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
             'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
@@ -559,7 +599,9 @@ class ProductController extends Controller
             'manufacturer_address.max' => 'Địa chỉ nhà cung cấp 255 ký tự',
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
-        ]);
+        ];
+        DB::beginTransaction();
+        $validator = Validator::make($request->all(), $error, $message);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }

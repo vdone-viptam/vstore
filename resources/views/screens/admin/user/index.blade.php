@@ -213,7 +213,7 @@
                             <thead>
                                 <tr>
                                     <th class="white-space-200 text-center">
-                                      
+
                                             Tên
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.name')
@@ -226,11 +226,11 @@
                                                     <i class="fas fa-sort sort" data-sort="users.name"></i>
                                                 @endif
                                             </span>
-                               
+
                                     </th>
                                     <th class="white-space-200 text-center">
 
-                                     
+
                                             Email
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'email')
@@ -243,10 +243,10 @@
                                                     <i class="fas fa-sort sort" data-sort="email"></i>
                                                 @endif
                                             </span>
-                                      
+
                                     </th>
                                     <th class="white-space-150">
-                                     
+
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'phone_number')
@@ -259,10 +259,10 @@
                                                     <i class="fas fa-sort sort" data-sort="phone_number"></i>
                                                 @endif
                                             </span>
-                                        
+
                                     </th>
                                     <th class="white-space-200 text-center">
-                                    
+
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'company_name')
@@ -275,10 +275,10 @@
                                                     <i class="fas fa-sort sort" data-sort="company_name"></i>
                                                 @endif
                                             </span>
-                                      
+
                                     </th>
                                     <th class="white-space-150">
-                                        
+
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'tax_code')
@@ -291,10 +291,10 @@
                                                     <i class="fas fa-sort sort" data-sort="tax_code"></i>
                                                 @endif
                                             </span>
-                                       
+
                                     </th>
                                     <th class="white-space-200 text-center">
-                                     
+
                                             Id P-Done người đại diện
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'id_vdone')
@@ -307,10 +307,10 @@
                                                     <i class="fas fa-sort sort" data-sort="id_vdone"></i>
                                                 @endif
                                             </span>
-                                   
+
                                     </th>
                                     <th class="white-space-200">
-                                       
+
                                             Phân loại tài khoản
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.role_id')
@@ -323,10 +323,10 @@
                                                     <i class="fas fa-sort sort" data-sort="users.role_id"></i>
                                                 @endif
                                             </span>
-                                      
+
                                     </th>
                                     <th class="white-space-200">
-                                      
+
                                             Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.created_at')
@@ -339,10 +339,10 @@
                                                     <i class="fas fa-sort sort" data-sort="users.created_at"></i>
                                                 @endif
                                             </span>
-                                       
+
                                     </th>
                                     <th class="white-space-200">
-                                     
+
                                             Thời gian xét duyệt
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'confirm_date')
@@ -355,10 +355,10 @@
                                                     <i class="fas fa-sort sort" data-sort="confirm_date"></i>
                                                 @endif
                                             </span>
-                                        
+
                                     </th>
                                     <th class="white-space-200">
-                                      
+
                                             Mã người giới thiệu
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.referral_code')
@@ -371,12 +371,12 @@
                                                     <i class="fas fa-sort sort" data-sort="users.referral_code"></i>
                                                 @endif
                                             </span>
-                                       
+
                                     </th>
                                     <th class="white-space-150">
-                                 
+
                                             Trạng thái
-                                      
+
                                     </th>
                                     <th class="white-space-100">Thao tác</th>
                                     <th class="white-space-100"></th>
@@ -388,7 +388,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td class="white-space-200">{{$user->name}}</td>
-                                    <td class="white-space-200">{{ Str::limit($user->email, 15) }}</td>
+                                    <td class="white-space-200">{{ $user->email}}</td>
                                     <td class="text-center white-space-150">{{$user->phone_number}}</td>
                                     <td class="white-space-200">{{$user->company_name}}</td>
                                     <td class="text-center">{{$user->tax_code}}</td>
