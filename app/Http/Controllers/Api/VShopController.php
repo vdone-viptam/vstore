@@ -193,7 +193,7 @@ class  VShopController extends Controller
                 "images" => json_decode($value->images),
                 "price" => $value->price,
                 "vat" => $value->vat,
-                "publish_id"=>$value->publish_id
+                "publish_id" => $value->publish_id
             ];
 
             unset($value->name);
@@ -525,7 +525,12 @@ class  VShopController extends Controller
                 $vshop->vshop_id = $request->vshop_id;
                 $vshop->vshop_name = $request->nick_name;
                 $vshop->save();
-                $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
+                $res = $elasticsearchController->searchDocVShop($request->nick_name);
+                if (count($res) == 0) {
+                    $res = $elasticsearchController->createDocVShop((string)$vshop->id, $request->nick_name);
+                } else {
+                    $res = $elasticsearchController->updateDocVShop((string)$vshop->id, $request->nick_name);
+                }
                 DB::commit();
                 return response()->json([
                     'status_code' => 200,
