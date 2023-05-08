@@ -225,17 +225,17 @@
                                    style="width:100%">
                                 <thead>
                                 <th class="white-space-100">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                  
                                         Mã sản phẩm
-                                    </div>
+                                    
                                 </th>
                                 <th class="white-space-200 text-center">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Tên sản phẩm
-                                    </div>
+                                   
                                 </th>
                                 <th class="white-space-100">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
@@ -249,11 +249,11 @@
                                                 <i class="fas fa-sort sort" data-sort="categories.name"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                 
                                 </th>
                                 <th class="white-space-80">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Giá bán
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'price')
@@ -266,11 +266,11 @@
                                                 <i class="fas fa-sort sort" data-sort="price"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                   
                                 </th>
                                 <th class="white-space-150">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         V-Store niêm yết
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'vstore_name')
@@ -283,11 +283,11 @@
                                                 <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                    
                                 </th>
                                 <th class="white-space-180">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Chiết khấu cho V-Store
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'discount')
@@ -300,10 +300,10 @@
                                                 <i class="fas fa-sort sort" data-sort="discount"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                   
                                 </th>
                                 <th class="white-space-120">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Ngày xét duyệt
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'admin_confirm_date')
@@ -318,11 +318,11 @@
                                                 <i class="fas fa-sort sort" data-sort="admin_confirm_date"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                  
                                 </th>
                                 <th class="white-space-150">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Số lượng đã bán
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'amount_product_sold')
@@ -337,11 +337,11 @@
                                                 <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                  
                                 </th>
                                 <th class="white-space-160">
 
-                                    <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                    
                                         Số lượng trong kho
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'amount')
@@ -354,7 +354,7 @@
                                                 <i class="fas fa-sort sort" data-sort="amount"></i>
                                             @endif
                                         </span>
-                                    </div>
+                                   
                                 </th>
                                 <th class="white-space-100"></th>
                                 </thead>

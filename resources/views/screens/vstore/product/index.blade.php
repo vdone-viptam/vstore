@@ -118,7 +118,7 @@
                            
                             </th>
                             <th class="white-space-180">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                              
                                 Thuế giá trị gia tăng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vat')
@@ -131,7 +131,7 @@
                                         <i class="fas fa-sort sort" data-sort="vat"></i>
                                     @endif
                                 </span>
-                                </div>
+                              
                             </th>
                             <th class="white-space-120" >Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -147,7 +147,7 @@
                                 </span>
                             </th>
                             <th class="white-space-150" style="min-width:160px !important;">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                               
                                 Chiết khấu từ NCC
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discount')
@@ -160,7 +160,7 @@
                                         <i class="fas fa-sort sort" data-sort="discount"></i>
                                     @endif
                                 </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-150 text-center">
                                 Thời gian xét duyệt

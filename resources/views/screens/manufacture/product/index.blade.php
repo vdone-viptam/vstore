@@ -100,7 +100,7 @@
                                 </span>
                             </th>
                             <th class="white-space-100">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                               
                                     Giá bán
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'price')
@@ -113,7 +113,7 @@
                                             <i class="fas fa-sort sort" data-sort="price"></i>
                                         @endif
                                         </span>
-                                </div>
+                             
 
                             </th>
                             <th class="white-space-180">
@@ -133,7 +133,7 @@
                             
                             </th>
                             <th class="white-space-100">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                
                                     Trạng thái
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'status')
@@ -146,7 +146,7 @@
                                             <i class="fas fa-sort sort" data-sort="status"></i>
                                         @endif
                                         </span>
-                                </div>
+                               
                             </th>
 
                             <th class="white-space-140">

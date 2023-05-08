@@ -246,7 +246,7 @@
                                       
                                     </th>
                                     <th class="white-space-150">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                     
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'phone_number')
@@ -259,7 +259,7 @@
                                                     <i class="fas fa-sort sort" data-sort="phone_number"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                        
                                     </th>
                                     <th class="white-space-200 text-center">
                                     
@@ -278,7 +278,7 @@
                                       
                                     </th>
                                     <th class="white-space-150">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                        
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'tax_code')
@@ -291,7 +291,7 @@
                                                     <i class="fas fa-sort sort" data-sort="tax_code"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-200 text-center">
                                      
@@ -310,7 +310,7 @@
                                    
                                     </th>
                                     <th class="white-space-200">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                       
                                             Phân loại tài khoản
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.role_id')
@@ -323,10 +323,10 @@
                                                     <i class="fas fa-sort sort" data-sort="users.role_id"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-200">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                      
                                             Thời gian đăng ký
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.created_at')
@@ -339,10 +339,10 @@
                                                     <i class="fas fa-sort sort" data-sort="users.created_at"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-200">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                     
                                             Thời gian xét duyệt
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'confirm_date')
@@ -355,10 +355,10 @@
                                                     <i class="fas fa-sort sort" data-sort="confirm_date"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                        
                                     </th>
                                     <th class="white-space-200">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                      
                                             Mã người giới thiệu
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.referral_code')
@@ -371,12 +371,12 @@
                                                     <i class="fas fa-sort sort" data-sort="users.referral_code"></i>
                                                 @endif
                                             </span>
-                                        </div>
+                                       
                                     </th>
                                     <th class="white-space-150">
-                                        <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                 
                                             Trạng thái
-                                        </div>
+                                      
                                     </th>
                                     <th class="white-space-100">Thao tác</th>
                                     <th class="white-space-100"></th>
