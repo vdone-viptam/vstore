@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-curl": "*",
+        "ext-http": "*",
+        "cloudinary-labs/cloudinary-laravel": "*",
         "elasticsearch/elasticsearch": "^8.7",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
@@ -13,9 +16,7 @@
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
         "skagarwal/google-places-api": "^2.1",
-        "toin0u/geocoder-laravel": "^4.6",
-        "ext-http": "*",
-      "ext-curl": "*"
+        "toin0u/geocoder-laravel": "^4.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

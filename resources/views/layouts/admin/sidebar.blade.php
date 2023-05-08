@@ -131,6 +131,10 @@
                                     <a class="nav-link {{ (request()->is('finances/request-deposit*')) ? 'active1' : '' }}"
                                        href="{{route('screens.admin.finance.index')}}">Quản lý yêu cầu rút tiền</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('bank/index')) ? 'active1' : '' }}"
+                                       href="{{route('screens.admin.bank.index')}}">Danh sách ngân hàng</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
