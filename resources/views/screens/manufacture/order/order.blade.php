@@ -90,7 +90,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">Thời gian tạo đơn:</label>
-                                        <input type="datetime-local" class="form-control form-control-lg"
+                                        <input type="text" class="form-control form-control-lg"
                                                id="created_at" readonly>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-120">
-                           
+
                             Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
@@ -152,7 +152,7 @@
 
                             </th>
                             <th class="white-space-200">
-                         
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -365,7 +365,6 @@
                         url: '{{ route('screens.manufacture.order.detail') }}/' + item
                             .dataset.id,
                         success: function (result) {
-                            console.log(result);
                             if (result) {
                                 $("#no").val(result.no);
                                 $("#name").val(result.product.name);
@@ -374,7 +373,7 @@
                                     .discount / 100)) * (result.deposit_money / 100);
                                 const total = result.total - (result.total * result
                                     .discount / 100);
-                                const today = (datetimeLocal(result.created_at));
+
                                 const status = result.status == 1 ? 'Đã hoàn thành' :
                                     result.status == 3 ? 'Đơn hàng mới' : result
                                         .status == 4 ? 'Đang giao hàng' : 'Hủy';
@@ -384,7 +383,8 @@
                                 $("#deposits").val(convertVND(deposits));
                                 $("#total").val(convertVND(total));
                                 $("#status").val(status);
-                                $("#created_at").val(today);
+
+                                $("#created_at").val(convertTimeVN(result.created_at));
                             }
                         },
                     });

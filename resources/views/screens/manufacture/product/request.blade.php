@@ -75,7 +75,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-120">Mã yêu cầu</th>
-                            <th>   
+                            <th>
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -91,7 +91,7 @@
 
                             </th>
                             <th class="white-space-150 text-center">
-                          
+
                             Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'brand')
@@ -108,8 +108,8 @@
                             </th>
 
                             <th>
-                    
-                            Ngày yêu cầu
+
+                            Thời gian yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'desc')
@@ -124,7 +124,7 @@
 
                             </th>
                             <th>
-                          
+
                             V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -140,7 +140,7 @@
 
                             </th>
                             <th>
-                         
+
                             Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.status')
@@ -153,7 +153,7 @@
                                         <i class="fas fa-sort sort" data-sort="requests.status"></i>
                                     @endif
                                 </span>
-                            
+
                             </th>
                             <th class="white-space-100"></th>
                         </tr>
@@ -263,7 +263,6 @@
         }
 
         let limit = document.getElementById('limit');
-        console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

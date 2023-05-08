@@ -33,8 +33,8 @@
         </div>
     </div>
     <div class="form-group">
-        <label>Ngày xét duyệt :</label>
-        <input class="form-control form-control-lg" disabled value="{{$product->created_at}}">
+        <label>Thời gian xét duyệt :</label>
+        <input class="form-control form-control-lg" disabled value="{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}">
     </div>
     <div class="form-group">
         <label>Trạng thái :</label>
