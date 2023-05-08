@@ -100,17 +100,6 @@
                                 <tbody>
                                 @foreach($histories as $his)
                                     <tr class="line-clamp3">
-<<<<<<< HEAD
-                                        <td class="white-space-140 text-center">{{$his->code}}</td>
-                                        <td class="white-space-160 text-center">{{$his->account_code}}</td>
-                                        <td class="text-right font-medium white-space-130">{{$his->amount}} đ</td>
-                                        <td class="white-space-150">{{$his->account_number}}</td>
-                                        <td style="text-transform: uppercase;" class="white-space-160">{{$his->name}}</td>
-                                        <td class="white-space-180">{{$his->bank->name}}</td>
-                                        <td class="white-space-250">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
-                                        <td class="white-space-130 text-center">{{\Carbon\Carbon::parse($his->created_at)->format('d/m/Y H:i')}}</td>
-                                        <td class="white-space-130 text-center">
-=======
                                         <td class="white-space-150 text-center">{{$his->code}}</td>
                                         <td class="white-space-200 text-center">{{$his->account_code}}</td>
                                         <td class="text-right font-medium">
@@ -122,7 +111,6 @@
                                         <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
                                         <td class="white-space-150 text-center">{{\Carbon\Carbon::parse($his->created_at)->format('d/m/Y H:i')}}</td>
                                         <td class="white-space-150 text-center">
->>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             @if($his->status == 0)
                                             <span class="text-warning font-medium">Chờ xác nhận</span>
                                             @elseif($his->status == 1)
