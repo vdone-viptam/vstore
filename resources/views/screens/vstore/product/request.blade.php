@@ -93,7 +93,7 @@
                                 </span>
                             </th>
                             <th class="white-space-200">
-                         
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -198,7 +198,7 @@
 
                                     <td class="text-center">
                                         <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn px-2 text-success font-medium" style="text-decoration:underline">Đồng ý</a>
+                                           class="btn px-2 text-primary font-medium" style="text-decoration:underline">Đồng ý</a>
                                         <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
                                            class="btn px-2 text-danger font-medium" style="text-decoration:underline">Từ chối</a>
                                     </td>
