@@ -255,6 +255,15 @@ Route::group(['domain' => config('domain.admin'), 'middleware' => 'admin'], func
         return view('layouts.admin.all_noti', []);
     })->name('admin_all_noti');
 
+    Route::prefix('bank')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\Admin\BankController::class, 'index'])->name('screens.admin.bank.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\BankController::class, 'create'])->name('screens.admin.bank.create');
+        Route::post('/create', [\App\Http\Controllers\Admin\BankController::class, 'store'])->name('screens.admin.bank.store');
+        Route::get('/edit/{id?}', [\App\Http\Controllers\Admin\BankController::class, 'edit'])->name('screens.admin.bank.edit');
+        Route::post('/edit/{id?}', [\App\Http\Controllers\Admin\BankController::class, 'update'])->name('screens.admin.bank.update');
+
+    });
+
 });
 //Quyền nhà cung cấp
 

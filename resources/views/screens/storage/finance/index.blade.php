@@ -185,7 +185,7 @@
                                     <div class="form-group">
                                         <label for="val-username">Số tiền cần rút <strong
                                                 class="text-[#FF4D4F]">*</strong></label>
-                                        <input required type="number" class="only-number form-control only-number"
+                                        <input required type="text" class="only-number form-control number"
                                                name="money" id="money"
                                                oninvalid="this.setCustomValidity('Giá trị lớn hơn 100.000 và nhỏ hơn {{ number_format(Auth::user()->money, '0', '.', '.') }}')"
                                                oninput="this.setCustomValidity('')"

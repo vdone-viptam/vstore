@@ -30,7 +30,7 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')
             ->where('type', 1)
             ->where('user_id', Auth::id())->first();
-        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->where('status',0)->first()->amount ??0;
+        $this->v['waiting'] = Deposit::select(DB::raw('SUM(amount) as amount'))->groupBy('user_id')->where('user_id', Auth::id())->where('status', 0)->first()->amount ?? 0;
         return view('screens.manufacture.finance.index', $this->v);
     }
 
@@ -140,10 +140,11 @@ class FinanceController extends Controller
                     break;
                 }
             }
+            $request->money = str_replace('.', '', $request->money);
             if ($request->money > Auth::user()->money) {
-                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }
-            $bank = Bank::where('id',$wallet->bank_id)->first();
+            $bank = Bank::where('id', $wallet->bank_id)->first();
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
                 'code' => $code,
@@ -164,23 +165,22 @@ class FinanceController extends Controller
                 'money_history' => (double)$request->money,
                 'created_at' => Carbon::now()
             ]);
-            $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
+            $hmac = 'userId=' . Auth::id() . '&code=' . $code . '&value=' . round($request->money, 0) . '&bankNumber=' . $wallet->account_number . '&bankHolder=' . $wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
-
+            $sig = hash_hmac('sha256', $hmac, config('domain.key_split'));
 
 
 //            userId=${dto.userId}&code=${dto.code}&value=${dto.value}&bankNumber=${dto.bankNumber}&bankHolder=${dto.bankHolder}
 
-            $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop',[
-                "code"=> $code,
-                "userId"=> Auth::id(),
-                "bankName"=> $bank->name,
-                "bankLogo"=> $bank->image,
-                "bankHolder"=> $wallet->name,
-                "bankNumber"=> $wallet->account_number,
-                "value"=> round($request->money,0),
-                "signature"=> $sig
+            $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop', [
+                "code" => $code,
+                "userId" => Auth::id(),
+                "bankName" => $bank->name,
+                "bankLogo" => $bank->image,
+                "bankHolder" => $wallet->name,
+                "bankNumber" => $wallet->account_number,
+                "value" => round($request->money, 0),
+                "signature" => $sig
             ]);
 
 
