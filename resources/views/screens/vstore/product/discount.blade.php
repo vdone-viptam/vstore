@@ -82,7 +82,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-200">
-                            
+
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -95,7 +95,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                 </span>
-                              
+
                             </th>
                             <th class="white-space-180 text-center">Phần trăm giảm giá
                                 <span style="float: right;cursor: pointer">
@@ -111,7 +111,7 @@
                                 </span>
                             </th>
 
-                            <th style="white-space-120 text-center">Ngày bắt đầu
+                            <th style="white-space-120 text-center">Thời gian bắt đầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.start_date')
                                         @if($type == 'desc')
@@ -124,7 +124,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space-120 text-center">Ngày kết thúc
+                            <th style="white-space-120 text-center">Thời gian kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')
